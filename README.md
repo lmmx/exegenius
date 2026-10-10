@@ -78,11 +78,48 @@ sources or the other pages.
 
 | outline | groups the final pages into parts, folds minor terminology pages into a glossary, and writes the front page overview and part intros | every page in exactly one part or the glossary, the target not in the glossary, no page in a part before one of its prerequisites, links only to pages |
 | notation | lists the symbols a reader has to track across pages, with their meaning and the page that introduces each | every symbol appears in the mathematics of the page named for it |
+| goals | writes goal questions with key points, testing whether the wiki teaches its reader (never shown in the wiki) | pages exist; transfer key points are not copied from a page |
+| read | a simulated reader explores the wiki through `exegenius read` and `exegenius search` to answer one goal, and records where it got stuck | the page budget; every citation and stuck point quotes a page it opened |
+| baseline | answers a goal from the reader's background alone, with no wiki | non-empty |
+| grade | scores all answers to a goal blind against the key points | every answer graded once, key points exist |
 
 Rounds of write and audit repeat until an audit round finds no gaps, or `rounds` rounds have
 run. Only pages whose audit input changed are audited again. Then the outline and notation
 tasks are handed out together, and `next` builds `docs/` and creates or updates
 `zensical.toml`.
+
+## Simulated readers
+
+Once the wiki is written, exegenius plays it as a game against simulated readers. A goals
+task writes 3 to 6 goal questions with key points. In each round, every goal goes to a
+fresh subagent per reader profile and starting point (the front page, or a deep link to
+the goal's last page, as if from a search engine). The reader sees the wiki only through
+`exegenius read <task> <page>` and `exegenius search <task> <words>`, which serve pages by
+opaque handles, enforce a page budget and log every step:
+
+- With `nonce` on (the default), concepts the wiki teaches carry invented names, so recall
+  tied to a name is cut off; a real name in an answer is recorded as a possible leak.
+- The reader is told it knows exactly its stated background, and that everything else must
+  come from the wiki.
+- Citations and stuck points must quote pages the reader opened.
+
+A no-wiki baseline answers each question, and a blind grader scores every answer against
+the key points. After each round but the last, stuck points, give-ups and key points no
+reader managed become rewrite notes, and the pages are rewritten before the next round.
+`exegenius/report.md` has the results: coverage per round against the baseline, each
+reader's path, searches, answer and stuck points, and the pages readers got stuck on most.
+The goals and the report stay out of `docs/`.
+
+```toml
+[simulation]
+rounds = 2     # 0 turns it off
+budget = 15    # most pages per reader per goal
+nonce = true
+
+[[readers]]    # further profiles beside [reader]
+name = "newcomer"
+knows = "High-school algebra"
+```
 
 ## The wiki
 
@@ -102,6 +139,11 @@ tasks are handed out together, and `next` builds `docs/` and creates or updates
   they look like names (DFT, FFT), so ordinary words are never linked. Every link to a page
   carries its one-line definition as a tooltip.
 - **Navigation:** breadcrumbs, previous and next links in reading order, and search.
+- **Source references:** writers can back a claim with
+  `<cite data-source="id">source text</cite>`, which submit checks word for word. Pages
+  show it as "(see §3.2 Gaussian resampling, p. 5)", located by the source's section
+  headings and form-feed page breaks (as `pdftotext` writes them), hidden until a reader
+  presses "Show sources" (`[site] citations = "shown"` makes them visible by default).
 - MathJax for `$...$` mathematics.
 
 `build` sets the theme features in `zensical.toml` only when it has none, so settings
@@ -118,7 +160,8 @@ adds `vercel.json` (Vercel installs zensical and builds the site into `site/`) a
 [vercel.com/new](https://vercel.com/new); every push redeploys.
 
 Other commands: `exegenius status` (progress), `exegenius plan` (reading order),
-`exegenius build` (build from the pages written so far).
+`exegenius build` (build from the pages written so far), and `exegenius read` /
+`exegenius search` (used by simulated readers, for their own pending task only).
 
 ## Project layout
 
@@ -132,6 +175,9 @@ exegenius/pages/      page bodies
 exegenius/audit.json  audit results, one record per round
 exegenius/outline.json parts, glossary and front page
 exegenius/notation.json symbols for the notation page
+exegenius/simulation.json simulated readers: goals, runs, grades
+exegenius/trails/     pages each pending simulated reader has opened
+exegenius/report.md   how the simulated readers did
 docs/, zensical.toml  build output
 ```
 
