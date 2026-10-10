@@ -76,11 +76,13 @@ sources or the other pages.
 | audit | told exactly what the reader knows at that page, lists every term, symbol or step they cannot follow | every quote is on the page; drops terms the reader knows; turns the rest into prerequisite edges, candidate concepts or rewrite notes |
 | extend | resolves the candidate concepts audits found into existing or new concepts | same checks as extract; adds the edges and queues the pages for rewriting |
 
-| outline | groups the final pages into parts and writes the front page overview and part intros | every page in exactly one part, no page in a part before one of its prerequisites, links only to pages |
+| outline | groups the final pages into parts, folds minor terminology pages into a glossary, and writes the front page overview and part intros | every page in exactly one part or the glossary, the target not in the glossary, no page in a part before one of its prerequisites, links only to pages |
+| notation | lists the symbols a reader has to track across pages, with their meaning and the page that introduces each | every symbol appears in the mathematics of the page named for it |
 
 Rounds of write and audit repeat until an audit round finds no gaps, or `rounds` rounds have
-run. Only pages whose audit input changed are audited again. Then one outline task groups
-the pages into parts, and `next` builds `docs/` and creates or updates `zensical.toml`.
+run. Only pages whose audit input changed are audited again. Then the outline and notation
+tasks are handed out together, and `next` builds `docs/` and creates or updates
+`zensical.toml`.
 
 ## The wiki
 
@@ -91,8 +93,15 @@ the pages into parts, and `next` builds `docs/` and creates or updates `zensical
 - **Pages:** a "before this page" note linking the prerequisites (and naming what is
   assumed known), the body, a clickable diagram of the page's prerequisites and the pages
   that use it, and the source quotes the page rests on, folded away.
-- **Navigation:** breadcrumbs, previous and next links in reading order, search, and a
-  tooltip with the one-line definition on every link to a page.
+- **Glossary:** minor pages the outline folds away become entries on one glossary page,
+  outside the reading order; links to them lead to their entry.
+- **Notation:** the symbols, in the order they are introduced, each with its meaning and
+  a link to the page that introduces it.
+- **Links:** the first unlinked mention of an earlier page or a glossary term in a body is
+  linked at build time. Names of several words match in any case; single words only if
+  they look like names (DFT, FFT), so ordinary words are never linked. Every link to a page
+  carries its one-line definition as a tooltip.
+- **Navigation:** breadcrumbs, previous and next links in reading order, and search.
 - MathJax for `$...$` mathematics.
 
 `build` sets the theme features in `zensical.toml` only when it has none, so settings
@@ -121,7 +130,8 @@ exegenius/state.json  task state: pending tasks, audit round, audited pages
 exegenius/tasks/      task files and answer files
 exegenius/pages/      page bodies
 exegenius/audit.json  audit results, one record per round
-exegenius/outline.json parts and front page
+exegenius/outline.json parts, glossary and front page
+exegenius/notation.json symbols for the notation page
 docs/, zensical.toml  build output
 ```
 

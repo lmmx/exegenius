@@ -108,6 +108,8 @@ fn task_loop_end_to_end() {
     for t in &batch {
         let body = if page(t) == "chirp-identity" {
             "Combine the [DFT](dft.md) and [convolution](convolution.md) with dyadic scaling."
+        } else if page(t) == "convolution" {
+            "Convolution is what the discrete Fourier transform makes pointwise, as in $x^2$."
         } else {
             "# Title to strip\n\nA short explanation with $x^2$."
         };
@@ -191,54 +193,106 @@ fn task_loop_end_to_end() {
         submit(&project, &t.id).unwrap();
     }
 
-    // Outline: a part order that puts a page before its prerequisite is rejected, as is a
-    // missing page; then the pages are grouped into two parts.
+    // Outline and notation, handed out together.
     let batch = tasks(next(&project).unwrap());
-    assert_eq!(batch.len(), 1);
-    assert_eq!(batch[0].kind, Kind::Outline);
-    let file = read(&project, batch[0].file());
+    let kinds: Vec<&Kind> = batch.iter().map(|t| &t.kind).collect();
+    assert_eq!(kinds, vec![&Kind::Outline, &Kind::Notation]);
+    let (outline_task, notation_task) = (&batch[0], &batch[1]);
+
+    // Outline: a page before its prerequisite's part, the target in the glossary and a page
+    // left out are rejected; then two parts, with the dyadic page folded into the glossary.
+    let file = read(&project, outline_task.file());
     assert!(file.contains("`chirp-identity`") && file.contains("Needs: dft, convolution"));
-    let outline = |first: &[&str], second: &[&str]| {
+    assert!(file.contains("words, used by 1)"));
+    let outline = |first: &[&str], second: &[&str], glossary: &[&str]| {
         json!({
             "overview": "The [chirp identity](chirp-identity.md) turns a DFT into a convolution.",
             "parts": [
                 {"title": "Background", "intro": "Transforms and products.", "pages": first},
                 {"title": "The identity", "intro": "Uses the [DFT](dft.md).", "pages": second},
             ],
+            "glossary": glossary,
         })
         .to_string()
     };
     answer(
         &project,
-        &batch[0],
-        &outline(&["chirp-identity"], &["dft", "convolution"]),
+        outline_task,
+        &outline(
+            &["chirp-identity"],
+            &["dft", "convolution"],
+            &["chirp-identity"],
+        ),
     );
-    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    let err = submit(&project, &outline_task.id).unwrap_err().to_string();
     assert!(
         err.contains("needs `dft`, which is in a later part"),
         "{err}"
     );
-    assert!(err.contains("pages in no part: dyadic-rational"), "{err}");
+    assert!(
+        err.contains("is the target and cannot go in the glossary"),
+        "{err}"
+    );
+    assert!(
+        err.contains("pages in no part and not in the glossary: dyadic-rational"),
+        "{err}"
+    );
     answer(
         &project,
-        &batch[0],
+        outline_task,
         &outline(
-            &["dyadic-rational", "convolution", "dft"],
+            &["convolution", "dft"],
             &["chirp-identity"],
+            &["dyadic-rational"],
         ),
     );
-    submit(&project, &batch[0].id).unwrap();
+    submit(&project, &outline_task.id).unwrap();
 
-    // Done: the docs are built, grouped into the two parts.
+    // Notation: a symbol missing from its page's mathematics is rejected.
+    let symbols = |second: &str| {
+        json!({"symbols": [
+            {"symbol": "2^k", "meaning": "a power of two", "page": "dyadic-rational"},
+            {"symbol": second, "meaning": "the exponent", "page": "chirp-identity"},
+        ]})
+        .to_string()
+    };
+    answer(&project, notation_task, &symbols("\\omega"));
+    let err = submit(&project, &notation_task.id).unwrap_err().to_string();
+    assert!(
+        err.contains("`\\omega` does not appear in the mathematics of `chirp-identity`"),
+        "{err}"
+    );
+    answer(&project, notation_task, &symbols("n k"));
+    submit(&project, &notation_task.id).unwrap();
+
+    // Done: the docs are built, grouped into the two parts, with a glossary and notation.
     let Next::Done(report) = next(&project).unwrap() else {
         panic!("expected done");
     };
     assert_eq!(report.pages.len(), 4);
     assert_eq!(report.parts, Some(2));
+    assert_eq!((report.glossary, report.symbols), (1, 2));
     let chirp = read(&project, "docs/chirp-identity.md");
     assert!(chirp.starts_with("# Chirp identity\n\n!!! info \"Before this page\""));
-    assert!(chirp.contains("[Dyadic rational](dyadic-rational.md \"What Dyadic rational is.\")"));
-    assert!(chirp.contains("[dyadic](dyadic-rational.md \"What Dyadic rational is.\")"));
+    let dyadic = "(glossary.md#dyadic-rational \"What Dyadic rational is.\")";
+    assert!(
+        chirp.contains(&format!("[Dyadic rational]{dyadic}")),
+        "{chirp}"
+    );
+    assert!(chirp.contains(&format!("[dyadic]{dyadic}")));
+    assert!(chirp.contains("click n2 href \"../glossary/#dyadic-rational\""));
+    assert!(!project.root.join("docs/dyadic-rational.md").exists());
+    let glossary = read(&project, "docs/glossary.md");
+    assert!(glossary.contains("## Dyadic rational { #dyadic-rational }\n\nA number of the form"));
+    assert!(glossary.contains("Used by [Chirp identity](chirp-identity.md"));
+    let convolution = read(&project, "docs/convolution.md");
+    assert!(convolution.contains(
+        "the [discrete Fourier transform](dft.md \"What Discrete Fourier transform is.\")"
+    ));
+    let notation = read(&project, "docs/notation.md");
+    assert!(notation.contains(&format!(
+        "- $2^k$ — a power of two — [Dyadic rational]{dyadic}"
+    )));
     assert!(chirp.contains("```mermaid\nflowchart LR\n"));
     assert!(chirp.contains("    > — [Notes](https://example.org/notes)"));
     let dft = read(&project, "docs/dft.md");
@@ -254,12 +308,15 @@ fn task_loop_end_to_end() {
     assert!(index.contains("The [chirp identity](chirp-identity.md \"What Chirp identity is.\")"));
     assert!(index.contains("### 2. [The identity](the-identity/index.md)"));
     assert!(index.contains("p0 --> p1"));
+    assert!(index.contains("the [glossary](glossary.md) defines minor terms"));
+    assert!(index.contains("### [Notation](notation.md)"));
     let toml = read(&project, "zensical.toml");
     assert!(
         toml.contains("{ Background = [\n    \"background/index.md\","),
         "{toml}"
     );
     assert!(toml.contains("navigation.indexes"));
+    assert!(toml.contains("{ Glossary = \"glossary.md\" }") && toml.contains("Notation"));
     let audit = read(&project, "exegenius/audit.json");
     assert!(audit.contains("\"round\": 2") && audit.contains("candidate concept"));
     assert!(matches!(next(&project).unwrap(), Next::Done(_)));
@@ -296,11 +353,13 @@ fn last_round_fixes_are_written_then_built() {
         answer(&project, t, "A clearer explanation.");
         submit(&project, &t.id).unwrap();
     }
-    let outline = tasks(next(&project).unwrap());
-    assert_eq!(outline[0].kind, Kind::Outline);
+    let last = tasks(next(&project).unwrap());
+    assert_eq!(last[0].kind, Kind::Outline);
     let parts = json!({"overview": "o", "parts": [{"title": "All", "intro": "i",
                        "pages": ["dft", "convolution", "chirp-identity"]}]});
-    answer(&project, &outline[0], &parts.to_string());
-    submit(&project, &outline[0].id).unwrap();
+    answer(&project, &last[0], &parts.to_string());
+    submit(&project, &last[0].id).unwrap();
+    answer(&project, &last[1], "{\"symbols\": []}");
+    submit(&project, &last[1].id).unwrap();
     assert!(matches!(next(&project).unwrap(), Next::Done(_)));
 }

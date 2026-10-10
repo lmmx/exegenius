@@ -8,7 +8,8 @@
 //! exegenius/tasks/       task files and their answer files
 //! exegenius/pages/       page bodies
 //! exegenius/audit.json   audit results, one record per round
-//! exegenius/outline.json parts and front page
+//! exegenius/outline.json parts, glossary and front page
+//! exegenius/notation.json symbols for the notation page
 //! docs/, zensical.toml   build output
 //! ```
 
@@ -117,6 +118,10 @@ impl Project {
 
     pub fn outline_path(&self) -> PathBuf {
         self.state_dir().join("outline.json")
+    }
+
+    pub fn notation_path(&self) -> PathBuf {
+        self.state_dir().join("notation.json")
     }
 
     pub fn manifest_path(&self) -> PathBuf {
