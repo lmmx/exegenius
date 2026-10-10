@@ -34,11 +34,18 @@ use crate::extract::{
     EXTEND_INSTRUCTIONS, EXTRACT_INSTRUCTIONS, ExtendAnswer, ExtractAnswer, apply_extend,
     apply_extract, extend_task, extract_task,
 };
+use crate::grade::{GRADE_INSTRUCTIONS, GradeAnswer, apply_grade, grade_task, repair, to_grade};
 use crate::graph::Graph;
 use crate::notation::{NOTATION_INSTRUCTIONS, NotationAnswer, apply_notation, notation_task};
 use crate::outline::{OUTLINE_INSTRUCTIONS, OutlineAnswer, apply_outline, outline_task};
 use crate::plan::{Plan, plan};
 use crate::project::Project;
+use crate::simulate::{
+    self, BASELINE_INSTRUCTIONS, Baseline, BaselineAnswer, GOALS_INSTRUCTIONS, GoalsAnswer, HOME,
+    Lens, READ_INSTRUCTIONS, ReadAnswer, apply_goals, apply_read, baseline_task, deep_start,
+    goals_task, read_task,
+};
+use crate::text::slug;
 use crate::write::{WRITE_INSTRUCTIONS, apply_write, needs_write, write_task};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -46,10 +53,30 @@ use crate::write::{WRITE_INSTRUCTIONS, apply_write, needs_write, write_task};
 pub enum Kind {
     Extract,
     Extend,
-    Write { page: String },
-    Audit { page: String, input: String },
+    Write {
+        page: String,
+    },
+    Audit {
+        page: String,
+        input: String,
+    },
     Outline,
     Notation,
+    Goals,
+    Read {
+        goal: usize,
+        persona: String,
+        start: String,
+    },
+    Baseline {
+        goal: usize,
+        persona: String,
+    },
+    Grade {
+        goal: usize,
+        /// The answers' task ids, in the order the grader sees them.
+        tasks: Vec<String>,
+    },
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -68,6 +95,10 @@ impl Task {
             Kind::Audit { .. } => "audit",
             Kind::Outline => "outline",
             Kind::Notation => "notation",
+            Kind::Goals => "goals",
+            Kind::Read { .. } => "read",
+            Kind::Baseline { .. } => "baseline",
+            Kind::Grade { .. } => "grade",
         }
     }
 
@@ -185,6 +216,10 @@ fn render(project: &Project, task: &Task, instructions: &str, input: &str) -> St
         Kind::Audit { .. } => json_format::<AuditAnswer>(),
         Kind::Outline => json_format::<OutlineAnswer>(),
         Kind::Notation => json_format::<NotationAnswer>(),
+        Kind::Goals => json_format::<GoalsAnswer>(),
+        Kind::Read { .. } => json_format::<ReadAnswer>(),
+        Kind::Baseline { .. } => json_format::<BaselineAnswer>(),
+        Kind::Grade { .. } => json_format::<GradeAnswer>(),
         Kind::Write { .. } => "The answer is the page body as markdown (not JSON).".to_string(),
     };
     format!(
@@ -201,6 +236,126 @@ fn render(project: &Project, task: &Task, instructions: &str, input: &str) -> St
 fn json_format<T: JsonSchema>() -> String {
     let schema = serde_json::to_string_pretty(&schema_of::<T>()).unwrap_or_default();
     format!("The answer is one JSON object following this schema:\n\n```json\n{schema}\n```")
+}
+
+/// Stands for the task's id in task input, which is written before the id is known.
+const TASK_ID: &str = "{{task-id}}";
+
+enum Step {
+    Issue(Vec<(Kind, &'static str, String)>),
+    /// A round ended and its repairs were queued: hand out the rewrites.
+    Repaired,
+    Finished,
+}
+
+/// The next step of the simulation, once the wiki is written: goals, then for each round
+/// the reader tasks (with the baselines in the first round), then the grade tasks; when a
+/// round is graded, repairs are queued unless it was the last round.
+fn simulation_step(project: &Project, graph: &mut Graph, plan: &Plan) -> Result<Step> {
+    let rounds = project.config.simulation.rounds;
+    if rounds == 0 {
+        return Ok(Step::Finished);
+    }
+    let mut sim = simulate::load(project)?;
+    if sim.goals.is_empty() {
+        let input = goals_task(project, graph, plan);
+        return Ok(Step::Issue(vec![(Kind::Goals, GOALS_INSTRUCTIONS, input)]));
+    }
+    if sim.round > rounds {
+        return Ok(Step::Finished);
+    }
+    let outline = crate::outline::current(project, plan)?;
+    let lens = Lens::new(project, graph, plan, outline.as_ref())?;
+    let personas = project.config.personas();
+    if sim.round_runs(sim.round).next().is_none() {
+        let mut items = Vec::new();
+        for (g, goal) in sim.goals.iter().enumerate() {
+            for persona in &personas {
+                for start in [HOME.to_string(), deep_start(&lens, goal)] {
+                    let input = read_task(project, &lens, TASK_ID, goal, persona, &start);
+                    items.push((
+                        Kind::Read {
+                            goal: g,
+                            persona: persona.name.clone(),
+                            start,
+                        },
+                        READ_INSTRUCTIONS,
+                        input,
+                    ));
+                }
+                if sim.baselines.iter().all(|b| b.goal != g) {
+                    items.push((
+                        Kind::Baseline {
+                            goal: g,
+                            persona: persona.name.clone(),
+                        },
+                        BASELINE_INSTRUCTIONS,
+                        baseline_task(&lens, goal, persona),
+                    ));
+                }
+            }
+        }
+        return Ok(Step::Issue(items));
+    }
+    let mut items = Vec::new();
+    for (g, goal) in sim.goals.iter().enumerate() {
+        let tasks = to_grade(&sim, g);
+        if !tasks.is_empty() {
+            let input = grade_task(&sim, goal, &tasks);
+            items.push((Kind::Grade { goal: g, tasks }, GRADE_INSTRUCTIONS, input));
+        }
+    }
+    if !items.is_empty() {
+        return Ok(Step::Issue(items));
+    }
+    let round = sim.round;
+    sim.round += 1;
+    let repaired = round < rounds && !repair(&sim, graph, round).is_empty();
+    if repaired {
+        project.save_graph(graph)?;
+    }
+    simulate::save(project, &sim)?;
+    Ok(if repaired {
+        Step::Repaired
+    } else {
+        Step::Finished
+    })
+}
+
+/// Lens and trail access for a pending reader task.
+fn reader(project: &Project, id: &str) -> Result<()> {
+    let state = load_state(project)?;
+    match state.pending.iter().find(|t| t.id == id) {
+        Some(Task {
+            kind: Kind::Read { .. },
+            ..
+        }) => Ok(()),
+        _ => Err(Error::Invalid(format!(
+            "`{id}` is not a pending read task (run `exegenius next` to see the pending tasks)"
+        ))),
+    }
+}
+
+/// `exegenius read`: open a page for a pending reader task.
+pub fn read_page(project: &Project, id: &str, handle: &str) -> Result<String> {
+    let _lock = Lock::acquire(project)?;
+    reader(project, id)?;
+    let graph = require(project.load_graph()?)?;
+    let plan = plan(&graph, &project.sources)?;
+    let outline = crate::outline::current(project, &plan)?;
+    let lens = Lens::new(project, &graph, &plan, outline.as_ref())?;
+    simulate::read(project, &lens, id, handle)
+}
+
+/// `exegenius search`: search the wiki for a pending reader task.
+pub fn search_pages(project: &Project, id: &str, query: &str) -> Result<String> {
+    let _lock = Lock::acquire(project)?;
+    reader(project, id)?;
+    let graph = require(project.load_graph()?)?;
+    let plan = plan(&graph, &project.sources)?;
+    let outline = crate::outline::current(project, &plan)?;
+    let lens = Lens::new(project, &graph, &plan, outline.as_ref())?;
+    simulate::search(project, &lens, id, query)
 }
 
 /// What `next` hands out.
@@ -220,12 +375,26 @@ fn issue(project: &Project, state: &mut State, items: Vec<(Kind, &str, String)>)
             Kind::Audit { page, .. } => format!("audit-{page}"),
             Kind::Outline => "outline".to_string(),
             Kind::Notation => "notation".to_string(),
+            Kind::Goals => "goals".to_string(),
+            Kind::Read {
+                goal,
+                persona,
+                start,
+            } => {
+                let start = if start == HOME { "home" } else { "deep" };
+                format!("read-g{}-{}-{start}", goal + 1, slug(persona))
+            }
+            Kind::Baseline { goal, persona } => {
+                format!("baseline-g{}-{}", goal + 1, slug(persona))
+            }
+            Kind::Grade { goal, .. } => format!("grade-g{}", goal + 1),
         };
         let task = Task {
             id: format!("{:04}-{label}", state.next_id),
             kind,
         };
         state.next_id += 1;
+        let input = input.replace(TASK_ID, &task.id);
         write(
             &project.root.join(task.file()),
             &render(project, &task, instructions, &input),
@@ -251,7 +420,7 @@ pub fn next(project: &Project) -> Result<Next> {
         });
     }
     loop {
-        let Some(graph) = project.load_graph()? else {
+        let Some(mut graph) = project.load_graph()? else {
             let input = extract_task(project);
             return issue(
                 project,
@@ -293,6 +462,11 @@ pub fn next(project: &Project) -> Result<Next> {
             }
             if !items.is_empty() {
                 return issue(project, &mut state, items);
+            }
+            match simulation_step(project, &mut graph, &plan)? {
+                Step::Issue(items) => return issue(project, &mut state, items),
+                Step::Repaired => continue,
+                Step::Finished => {}
             }
             write_json(&project.state_path(), &state)?;
             return Ok(Next::Done(build(project, &graph, &plan)?));
@@ -403,6 +577,74 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
             let graph = require(graph)?;
             let plan = plan(&graph, &project.sources)?;
             apply_notation(project, &plan, parse(&path, &text)?)?;
+            Vec::new()
+        }
+        Kind::Goals => {
+            let graph = require(graph)?;
+            let plan = plan(&graph, &project.sources)?;
+            let mut sim = simulate::load(project)?;
+            sim.goals = apply_goals(project, &plan, parse(&path, &text)?)?;
+            simulate::save(project, &sim)?;
+            Vec::new()
+        }
+        Kind::Read {
+            goal,
+            persona,
+            start,
+        } => {
+            let graph = require(graph)?;
+            let plan = plan(&graph, &project.sources)?;
+            let outline = crate::outline::current(project, &plan)?;
+            let lens = Lens::new(project, &graph, &plan, outline.as_ref())?;
+            let mut sim = simulate::load(project)?;
+            let answer: ReadAnswer = parse(&path, &text)?;
+            let assignment = simulate::Assignment {
+                task: &task.id,
+                round: sim.round,
+                goal: *goal,
+                persona,
+                start,
+            };
+            let mut run = apply_read(project, &lens, assignment, answer)?;
+            if run.outcome == simulate::Outcome::GaveUp {
+                run.covered = Some(Vec::new());
+            }
+            let leaks = run.leaks.clone();
+            sim.runs.push(run);
+            simulate::save(project, &sim)?;
+            leaks
+                .iter()
+                .map(|id| format!("the answer names `{id}` by its real name, not the one shown"))
+                .collect()
+        }
+        Kind::Baseline { goal, .. } => {
+            let graph = require(graph)?;
+            let plan = plan(&graph, &project.sources)?;
+            let outline = crate::outline::current(project, &plan)?;
+            let lens = Lens::new(project, &graph, &plan, outline.as_ref())?;
+            let answer: BaselineAnswer = parse(&path, &text)?;
+            if answer.answer.trim().is_empty() {
+                return Err(Error::Invalid(
+                    "answer rejected: the answer is empty; say so if the background does not \
+                     cover the question"
+                        .into(),
+                ));
+            }
+            let mut sim = simulate::load(project)?;
+            sim.baselines.push(Baseline {
+                task: task.id.clone(),
+                goal: *goal,
+                answer: lens.unrename(answer.answer.trim()),
+                covered: None,
+                wrong: Vec::new(),
+            });
+            simulate::save(project, &sim)?;
+            Vec::new()
+        }
+        Kind::Grade { goal, tasks } => {
+            let mut sim = simulate::load(project)?;
+            apply_grade(&mut sim, *goal, tasks, parse(&path, &text)?)?;
+            simulate::save(project, &sim)?;
             Vec::new()
         }
     };

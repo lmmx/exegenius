@@ -70,6 +70,21 @@ enum Command {
         /// Task id, as printed by `next`
         id: String,
     },
+    /// Open a wiki page for a pending simulated-reader task
+    Read {
+        /// Task id, as printed by `next`
+        id: String,
+        /// Page handle, from a link or a search result, or `home`
+        page: String,
+    },
+    /// Search the wiki for a pending simulated-reader task
+    Search {
+        /// Task id, as printed by `next`
+        id: String,
+        /// Words that must all appear on the page
+        #[arg(required = true)]
+        words: Vec<String>,
+    },
     /// Show progress
     Status,
     /// Print the pages needed to reach the target, in reading order
@@ -184,6 +199,9 @@ fn print_build(project: &Project, report: &BuildReport) {
     } else {
         format!(" ({})", extras.join(", "))
     };
+    if let Some(path) = &report.report {
+        println!("simulated readers: see {}", path.display());
+    }
     println!(
         "wrote {} pages{extras} to {} and {}; view with `zensical serve`",
         report.pages.len(),
@@ -230,12 +248,22 @@ fn next(project: &Project) -> anyhow::Result<()> {
             } else {
                 "Give the prompt to a subagent, or do the task yourself. "
             };
-            let fresh = if matches!(tasks[0].kind, Kind::Audit { .. }) {
-                "Each audit task needs a fresh subagent that has seen nothing else. Do not do \
-                 audits yourself: you have read the sources and the pages, so you cannot stand \
-                 in for the reader. "
-            } else {
-                ""
+            let fresh = match tasks[0].kind {
+                Kind::Audit { .. } => {
+                    "Each audit task needs a fresh subagent that has seen nothing else. Do not \
+                     do audits yourself: you have read the sources and the pages, so you cannot \
+                     stand in for the reader. "
+                }
+                Kind::Read { .. } | Kind::Baseline { .. } => {
+                    "These are simulated readers: each needs a fresh subagent that has seen \
+                     nothing else, on the smallest model available (in Claude Code: model \
+                     haiku), since a less capable reader is a closer stand-in for someone new \
+                     to the subject. Never do them yourself. "
+                }
+                Kind::Grade { .. } => {
+                    "Each grade task needs a fresh subagent that has seen nothing else. "
+                }
+                _ => "",
             };
             println!("{parallel}{fresh}When all are accepted, run `exegenius next` again.");
         }
@@ -296,6 +324,23 @@ fn status(project: &Project) -> anyhow::Result<()> {
     match &notation {
         Some(notation) => println!("notation: {} symbols", notation.symbols.len()),
         None => println!("notation: not yet (handed out once the pages are final)"),
+    }
+    let simulation = exegenius_core::simulate::load(project)?;
+    if !simulation.goals.is_empty() {
+        println!("simulated readers: {} goals", simulation.goals.len());
+        let mut rounds: Vec<u32> = simulation.runs.iter().map(|r| r.round).collect();
+        rounds.dedup();
+        for round in rounds {
+            let runs = simulation.round_runs(round).count();
+            let covered = exegenius_core::report::round_coverage(&simulation, round)
+                .map_or("ungraded".to_string(), |c| {
+                    format!("{:.0}% of key points", 100.0 * c)
+                });
+            println!("  round {round}: {runs} runs, {covered}");
+        }
+        if let Some(c) = exegenius_core::report::baseline_coverage(&simulation) {
+            println!("  baseline (no wiki): {:.0}% of key points", 100.0 * c);
+        }
     }
     if state.done && outline.is_some() && notation.is_some() {
         println!("state: done (docs/ and zensical.toml are built)");
@@ -358,6 +403,10 @@ fn run(cli: Cli) -> anyhow::Result<()> {
             for warning in warnings {
                 println!("warning: {warning}");
             }
+        }
+        Command::Read { id, page } => print!("{}", task::read_page(&project, &id, &page)?),
+        Command::Search { id, words } => {
+            println!("{}", task::search_pages(&project, &id, &words.join(" "))?)
         }
         Command::Status => status(&project)?,
         Command::Plan => {

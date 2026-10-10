@@ -10,6 +10,9 @@
 //! exegenius/audit.json   audit results, one record per round
 //! exegenius/outline.json parts, glossary and front page
 //! exegenius/notation.json symbols for the notation page
+//! exegenius/simulation.json simulated readers: goals, runs, grades
+//! exegenius/trails/      pages each simulated reader opened
+//! exegenius/report.md    how the simulated readers did
 //! docs/, zensical.toml   build output
 //! ```
 
@@ -122,6 +125,19 @@ impl Project {
 
     pub fn notation_path(&self) -> PathBuf {
         self.state_dir().join("notation.json")
+    }
+
+    pub fn simulation_path(&self) -> PathBuf {
+        self.state_dir().join("simulation.json")
+    }
+
+    /// Steps of a pending reader task.
+    pub fn trail_path(&self, task: &str) -> PathBuf {
+        self.state_dir().join("trails").join(format!("{task}.json"))
+    }
+
+    pub fn report_path(&self) -> PathBuf {
+        self.state_dir().join("report.md")
     }
 
     pub fn manifest_path(&self) -> PathBuf {

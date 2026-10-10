@@ -89,6 +89,8 @@ pub struct BuildReport {
     pub glossary: usize,
     /// Entries on the notation page.
     pub symbols: usize,
+    /// The simulation report, if simulated readers have run.
+    pub report: Option<PathBuf>,
     /// Files from a previous build that were removed.
     pub removed: Vec<PathBuf>,
     pub warnings: Vec<String>,
@@ -639,15 +641,27 @@ fn part_slugs(outline: &Outline, pages: &HashSet<String>) -> Vec<String> {
     slugs
 }
 
-pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildReport> {
-    let docs = project.docs_dir();
-    let mut report = BuildReport::default();
-    let mut written: BTreeSet<String> = BTreeSet::new();
+/// Page bodies as the site shows them.
+pub struct Prepared<'a> {
+    /// Pages with a body, in reading order and then the glossary entries.
+    pub pages: Vec<(&'a Concept, String)>,
+    /// Pages folded into the glossary.
+    pub glossary: HashSet<&'a str>,
+    /// Planned pages with no body yet.
+    pub missing: Vec<String>,
+    pub warnings: Vec<String>,
+}
+
+/// The page bodies in the order the site shows them, with links to pages no longer planned
+/// turned into text and the first mentions of earlier pages linked.
+pub fn prepare<'a>(
+    project: &Project,
+    graph: &'a Graph,
+    plan: &Plan,
+    outline: Option<&Outline>,
+) -> Result<Prepared<'a>> {
     let planned: HashSet<String> = plan.order.iter().cloned().collect();
-    let outline = crate::outline::current(project, plan)?;
-    let notation = crate::notation::current(project, plan)?;
-    // The reading order, then the glossary entries.
-    let order = match &outline {
+    let order: Vec<String> = match outline {
         Some(o) => o.order().into_iter().chain(o.glossary.clone()).collect(),
         None => plan.order.clone(),
     };
@@ -655,56 +669,76 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
         .iter()
         .flat_map(|o| o.glossary.iter().map(String::as_str))
         .collect();
-
-    let mut bodies = Vec::new();
+    let mut prepared = Prepared {
+        pages: Vec::new(),
+        glossary: HashSet::new(),
+        missing: Vec::new(),
+        warnings: Vec::new(),
+    };
     for id in &order {
         let Some(body) = project.page_body(id)? else {
-            report.missing.push(id.clone());
+            prepared.missing.push(id.clone());
             continue;
         };
         // Bodies were written against an earlier plan; drop links to pages no longer in it.
         let (body, removed, _) = fix_links(&body, &planned);
         for dest in removed {
-            report.warnings.push(format!(
+            prepared.warnings.push(format!(
                 "`{id}`: link to \"{dest}\" rendered as text (not a page)"
             ));
         }
-        bodies.push((graph.get(id).expect("planned pages are concepts"), body));
+        let c = graph.get(id).expect("planned pages are concepts");
+        if folded.contains(id.as_str()) {
+            prepared.glossary.insert(c.id.as_str());
+        }
+        prepared.pages.push((c, body));
     }
-    let site = Site {
-        project,
-        graph,
-        pages: bodies.iter().map(|(c, _)| *c).collect(),
-        built: bodies.iter().map(|(c, _)| c.id.as_str()).collect(),
-        glossary: bodies
-            .iter()
-            .map(|(c, _)| c.id.as_str())
-            .filter(|id| folded.contains(id))
-            .collect(),
-    };
     // Autolinks point back in the reading order (or to the glossary): a mention of a page
     // the reader has not reached yet is informal use, and often of a different sense.
-    let terms = autolink::terms(site.pages.iter().copied(), |c| format!("{}.md", c.id));
-    let position: HashMap<&str, usize> = site
+    let terms = autolink::terms(prepared.pages.iter().map(|(c, _)| *c), |c| {
+        format!("{}.md", c.id)
+    });
+    let position: HashMap<String, usize> = prepared
         .pages
         .iter()
         .enumerate()
-        .map(|(i, c)| (c.id.as_str(), i))
+        .map(|(i, (c, _))| (c.id.clone(), i))
         .collect();
-    let mut entries = Vec::new();
-    for (c, body) in &bodies {
+    for (c, body) in prepared.pages.iter_mut() {
         let earlier: Vec<autolink::Term> = terms
             .iter()
             .filter(|t| {
-                site.glossary.contains(t.id.as_str())
-                    || position[t.id.as_str()] < position[c.id.as_str()]
+                prepared.glossary.contains(t.id.as_str()) || position[&t.id] < position[&c.id]
             })
             .cloned()
             .collect();
-        let body = autolink(body, &c.id, &earlier);
+        *body = autolink(body, &c.id, &earlier);
+    }
+    Ok(prepared)
+}
+
+pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildReport> {
+    let docs = project.docs_dir();
+    let mut report = BuildReport::default();
+    let mut written: BTreeSet<String> = BTreeSet::new();
+    let planned: HashSet<String> = plan.order.iter().cloned().collect();
+    let outline = crate::outline::current(project, plan)?;
+    let notation = crate::notation::current(project, plan)?;
+    let prepared = prepare(project, graph, plan, outline.as_ref())?;
+    report.missing = prepared.missing;
+    report.warnings = prepared.warnings;
+    let site = Site {
+        project,
+        graph,
+        pages: prepared.pages.iter().map(|(c, _)| *c).collect(),
+        built: prepared.pages.iter().map(|(c, _)| c.id.as_str()).collect(),
+        glossary: prepared.glossary,
+    };
+    let mut entries = Vec::new();
+    for (c, body) in prepared.pages {
         report.pages.push(c.id.clone());
         if site.glossary.contains(c.id.as_str()) {
-            entries.push((*c, body));
+            entries.push((c, body));
             continue;
         }
         let file = format!("{}.md", c.id);
@@ -788,6 +822,16 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
         }
     }
     write_json(&manifest, &written.iter().collect::<Vec<_>>())?;
+
+    let simulation = crate::simulate::load(project)?;
+    if !simulation.runs.is_empty() {
+        let path = project.report_path();
+        write(
+            &path,
+            &crate::report::report(&project.config, graph, &simulation),
+        )?;
+        report.report = Some(path);
+    }
 
     let path = project.zensical_path();
     let existing = if path.exists() {
@@ -980,6 +1024,8 @@ mod tests {
                 rounds: 1,
                 reader: crate::config::Reader { knows: "k".into() },
                 sources: vec![],
+                simulation: Default::default(),
+                readers: vec![],
             },
             sources: vec![],
         };
