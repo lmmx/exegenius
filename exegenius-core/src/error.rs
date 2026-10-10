@@ -2,25 +2,25 @@ use std::path::{Path, PathBuf};
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
-    #[error("{}: {source}", path.display())]
+    #[error("{}", path.display())]
     Io {
         path: PathBuf,
         #[source]
         source: std::io::Error,
     },
-    #[error("{}: {source}", path.display())]
+    #[error("{}", path.display())]
     Json {
         path: PathBuf,
         #[source]
         source: serde_json::Error,
     },
-    #[error("{}: {source}", path.display())]
+    #[error("{}", path.display())]
     Config {
         path: PathBuf,
         #[source]
         source: toml::de::Error,
     },
-    #[error("{}: {source}", path.display())]
+    #[error("{}", path.display())]
     Zensical {
         path: PathBuf,
         #[source]

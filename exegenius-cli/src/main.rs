@@ -18,14 +18,28 @@ const SKILL_PATH: &str = ".claude/skills/exegenius/SKILL.md";
 /// exegenius makes no model calls. It hands out tasks (`next`) for an agent such as Claude
 /// Code to do, and checks and applies the answers (`submit`).
 #[derive(Parser)]
-#[command(name = "exegenius", version)]
+#[command(name = "exegenius", version, after_help = AGENTS)]
 struct Cli {
     /// Project directory, containing exegenius.toml
     #[arg(short = 'C', long = "dir", default_value = ".", global = true)]
     dir: PathBuf,
     #[command(subcommand)]
-    command: Command,
+    command: Option<Command>,
 }
+
+const AGENTS: &str = "\
+For agents: run `exegenius next` in the folder to turn into a wiki, do what it prints, and \
+repeat until it prints `done`. It sets the project up first if needed.";
+
+const SETUP: &str = "\
+No exegenius.toml here yet. Set up the project, then run `exegenius next` again:
+
+1. Run `exegenius init`.
+2. Put the source material in sources/ as text or markdown, moving or converting the files
+   already in this folder.
+3. Edit exegenius.toml: `target` (what the wiki should explain), `reader.knows` (what the
+   reader already knows) and one [[sources]] entry per source file. If the user did not say,
+   infer the target and reader from the material.";
 
 #[derive(Subcommand)]
 enum Command {
@@ -61,7 +75,7 @@ fn init(dir: &Path) -> anyhow::Result<()> {
     println!("wrote {}", skill.display());
     println!(
         "next: put the sources in sources/, set target, reader and [[sources]] in {}, then \
-         ask Claude Code in this directory to run exegenius until complete",
+         run `exegenius next` and follow what it prints until it prints `done`",
         config::FILE_NAME
     );
     Ok(())
@@ -200,11 +214,30 @@ fn status(project: &Project) -> anyhow::Result<()> {
 }
 
 fn run(cli: Cli) -> anyhow::Result<()> {
-    if let Command::Init = cli.command {
-        return init(&cli.dir);
+    let Some(command) = cli.command else {
+        println!("{AGENTS}");
+        return Ok(());
+    };
+    match command {
+        Command::Init => return init(&cli.dir),
+        Command::Next if !cli.dir.join(config::FILE_NAME).exists() => {
+            println!("{SETUP}");
+            return Ok(());
+        }
+        _ => {}
     }
-    let project = Project::load(&cli.dir)?;
-    match cli.command {
+    let project = Project::load(&cli.dir)
+        .context("fix exegenius.toml: target, reader.knows, and [[sources]] paths to text files")?;
+    if let Command::Next = command
+        && project.config.target == config::TEMPLATE_TARGET
+    {
+        println!(
+            "exegenius.toml still has the template target: set target, reader.knows and \
+                  [[sources]] for this material, then run `exegenius next` again."
+        );
+        return Ok(());
+    }
+    match command {
         Command::Init => unreachable!("handled above"),
         Command::Next => next(&project)?,
         Command::Submit { id } => {

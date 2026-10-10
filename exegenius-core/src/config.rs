@@ -9,6 +9,9 @@ use crate::error::{Error, Result, read};
 
 pub const FILE_NAME: &str = "exegenius.toml";
 
+/// The `target` in [`TEMPLATE`], which `exegenius next` refuses to start from.
+pub const TEMPLATE_TARGET: &str = "The main result of the paper";
+
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Config {
