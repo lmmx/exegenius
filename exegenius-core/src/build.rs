@@ -1,20 +1,32 @@
-//! Step 5: write the docs tree and `zensical.toml`.
+//! Write the docs tree and `zensical.toml`.
 //!
-//! Pages are plain markdown with no frontmatter. The title, prerequisites, backlinks and
-//! sources sections come from the graph; only the body comes from the model. Files written
-//! by a previous build that are no longer part of the plan are removed (tracked in
+//! Pages are plain markdown with no frontmatter. Everything around the body comes from the
+//! graph and the outline: the title, a "before this page" note linking the prerequisites, a
+//! diagram of the page's connections, the pages that use it, and the source quotes. Links
+//! to pages carry the target's gloss as their title, which the theme shows as a tooltip.
+//!
+//! With an outline, the pages are grouped into parts: each part gets a landing page and a
+//! section in the nav, and the front page carries the overview and a map of the parts.
+//! Without one (`exegenius build` before the outline task), the nav is the flat reading
+//! order.
+//!
+//! Files written by a previous build that are no longer generated are removed (tracked in
 //! `exegenius/built.json`); other files in `docs/` are left alone.
 
-use std::collections::{BTreeSet, HashSet};
+use std::collections::{BTreeSet, HashMap, HashSet};
+use std::ops::Range;
 use std::path::PathBuf;
 
+use pulldown_cmark::{Event, LinkType, Options, Parser, Tag};
 use toml_edit::{Array, DocumentMut, InlineTable, Item, Table, Value};
 
 use crate::error::{Error, Result, read, read_json, write, write_json};
 use crate::graph::{Concept, Graph};
+use crate::outline::{Outline, Part};
 use crate::plan::Plan;
 use crate::project::{Project, find_source};
-use crate::write::{fix_links, link};
+use crate::text::slug;
+use crate::write::{fix_links, link_target};
 
 pub const MATHJAX_CONFIG: &str = "javascripts/mathjax.js";
 pub const MATHJAX_CDN: &str = "https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js";
@@ -40,14 +52,46 @@ document$.subscribe(() => {
 })
 "#;
 
+/// Theme features set when `zensical.toml` has none: section landing pages, breadcrumbs,
+/// previous/next links in reading order, and tooltips for link titles.
+pub const FEATURES: &[&str] = &[
+    "content.tooltips",
+    "navigation.footer",
+    "navigation.indexes",
+    "navigation.instant",
+    "navigation.instant.progress",
+    "navigation.path",
+    "navigation.sections",
+    "navigation.top",
+    "navigation.tracking",
+    "search.highlight",
+    "toc.follow",
+];
+
 #[derive(Debug, Default)]
 pub struct BuildReport {
     pub pages: Vec<String>,
     /// Planned pages with no body yet (run `write`).
     pub missing: Vec<String>,
+    /// Number of parts, if the pages have an outline.
+    pub parts: Option<usize>,
     /// Files from a previous build that were removed.
     pub removed: Vec<PathBuf>,
     pub warnings: Vec<String>,
+}
+
+/// One entry of the nav: a page, or a part with its landing page and pages.
+#[derive(Debug, Clone, PartialEq)]
+pub enum NavItem {
+    Page {
+        name: String,
+        file: String,
+    },
+    Section {
+        title: String,
+        index: String,
+        pages: Vec<(String, String)>,
+    },
 }
 
 pub fn title(project: &Project, graph: &Graph) -> String {
@@ -59,37 +103,464 @@ pub fn title(project: &Project, graph: &Graph) -> String {
         .unwrap_or_else(|| "exegenius".to_string())
 }
 
+/// What rendering needs: the graph, the pages that have a body, and where links point.
+struct Site<'a> {
+    project: &'a Project,
+    graph: &'a Graph,
+    /// Pages with a body, in reading order.
+    pages: Vec<&'a Concept>,
+    built: HashSet<&'a str>,
+}
+
+impl Site<'_> {
+    fn dependents(&self, id: &str) -> Vec<&Concept> {
+        self.pages
+            .iter()
+            .copied()
+            .filter(|d| d.requires.iter().any(|r| r == id))
+            .collect()
+    }
+
+    fn prerequisites(&self, c: &Concept) -> (Vec<&Concept>, Vec<&Concept>) {
+        c.requires
+            .iter()
+            .filter_map(|r| self.graph.get(r))
+            .filter(|p| p.known || self.built.contains(p.id.as_str()))
+            .partition(|p| !p.known)
+    }
+}
+
+/// A markdown link to a page, with the gloss as its title. `prefix` leads from the linking
+/// file's directory to `docs/`.
+fn titled(c: &Concept, prefix: &str) -> String {
+    format!(
+        "[{}]({prefix}{}.md \"{}\")",
+        c.name,
+        c.id,
+        attribute(&c.gloss)
+    )
+}
+
+fn attribute(text: &str) -> String {
+    text.split_whitespace()
+        .collect::<Vec<_>>()
+        .join(" ")
+        .replace('"', "'")
+}
+
+/// Give every inline link to a page its gloss as title, and prefix relative `.md` links
+/// with `prefix`.
+fn decorate(body: &str, graph: &Graph, prefix: &str) -> String {
+    let mut edits: Vec<(Range<usize>, String)> = Vec::new();
+    for (event, range) in Parser::new_ext(body, Options::ENABLE_MATH).into_offset_iter() {
+        let Event::Start(Tag::Link {
+            link_type: LinkType::Inline,
+            dest_url,
+            ..
+        }) = event
+        else {
+            continue;
+        };
+        let Some(id) = link_target(&dest_url).filter(|id| !id.is_empty()) else {
+            continue;
+        };
+        let source = &body[range.clone()];
+        let Some(split) = source.rfind("](") else {
+            continue;
+        };
+        let title = graph
+            .get(id)
+            .map(|c| format!(" \"{}\"", attribute(&c.gloss)))
+            .unwrap_or_default();
+        edits.push((
+            range,
+            format!("{}]({prefix}{dest_url}{title})", &source[..split]),
+        ));
+    }
+    let mut out = body.to_string();
+    for (range, text) in edits.into_iter().rev() {
+        out.replace_range(range, &text);
+    }
+    out
+}
+
+/// A mermaid flowchart of `nodes` and the edges among them; nodes link to their pages.
+/// `prefix` leads from the rendered page's URL to the site root: generated pages are one
+/// directory deep with directory URLs, the front page is at the root.
+fn diagram(
+    nodes: &[&Concept],
+    edges: &[(usize, usize)],
+    current: Option<usize>,
+    prefix: &str,
+) -> String {
+    let mut out = String::from("```mermaid\nflowchart LR\n");
+    for (i, c) in nodes.iter().enumerate() {
+        out.push_str(&format!("  n{i}[\"{}\"]\n", c.name.replace('"', "#quot;")));
+        if current == Some(i) {
+            out.push_str(&format!("  class n{i} current\n"));
+        } else {
+            out.push_str(&format!(
+                "  click n{i} href \"{prefix}{}/\" \"{}\"\n",
+                c.id,
+                attribute(&c.gloss)
+            ));
+        }
+    }
+    for (a, b) in edges {
+        out.push_str(&format!("  n{a} --> n{b}\n"));
+    }
+    if current.is_some() {
+        out.push_str("  classDef current stroke-width:3px,font-weight:bold\n");
+    }
+    out.push_str("```\n");
+    out
+}
+
+/// Edges among `nodes` from each node's prerequisites.
+fn edges_among(nodes: &[&Concept]) -> Vec<(usize, usize)> {
+    let index: HashMap<&str, usize> = nodes
+        .iter()
+        .enumerate()
+        .map(|(i, c)| (c.id.as_str(), i))
+        .collect();
+    let mut edges = Vec::new();
+    for (b, c) in nodes.iter().enumerate() {
+        for r in &c.requires {
+            if let Some(&a) = index.get(r.as_str()) {
+                edges.push((a, b));
+            }
+        }
+    }
+    edges
+}
+
+fn list(items: &[String]) -> String {
+    match items {
+        [] => String::new(),
+        [one] => one.clone(),
+        [init @ .., last] => format!("{} and {last}", init.join(", ")),
+    }
+}
+
+fn indent(text: &str) -> String {
+    text.lines()
+        .map(|l| {
+            if l.is_empty() {
+                String::new()
+            } else {
+                format!("    {l}")
+            }
+        })
+        .collect::<Vec<_>>()
+        .join("\n")
+}
+
+fn render_page(site: &Site, c: &Concept, body: &str) -> String {
+    let mut out = format!("# {}\n\n", c.name);
+    let (pages, known) = site.prerequisites(c);
+    if !pages.is_empty() || !known.is_empty() {
+        let mut note = Vec::new();
+        if !pages.is_empty() {
+            let links: Vec<String> = pages.iter().map(|p| titled(p, "")).collect();
+            note.push(format!("This page builds on {}.", list(&links)));
+        }
+        if !known.is_empty() {
+            let names: Vec<String> = known.iter().map(|k| k.name.clone()).collect();
+            note.push(format!("Assumed known: {}.", list(&names)));
+        }
+        out.push_str(&format!(
+            "!!! info \"Before this page\"\n\n    {}\n\n",
+            note.join(" ")
+        ));
+    }
+    out.push_str(&decorate(body.trim(), site.graph, ""));
+    out.push('\n');
+
+    let used_by = site.dependents(&c.id);
+    if !pages.is_empty() || !used_by.is_empty() {
+        let mut nodes: Vec<&Concept> = pages.clone();
+        nodes.push(c);
+        let me = nodes.len() - 1;
+        nodes.extend(used_by.iter().copied());
+        let edges: Vec<(usize, usize)> = (0..me)
+            .map(|i| (i, me))
+            .chain((me + 1..nodes.len()).map(|i| (me, i)))
+            .collect();
+        out.push_str("\n## Connections\n\n");
+        out.push_str(&diagram(&nodes, &edges, Some(me), "../"));
+        if !used_by.is_empty() {
+            out.push_str("\nUsed by:\n\n");
+            for d in &used_by {
+                out.push_str(&format!("- {} — {}\n", titled(d, ""), d.gloss));
+            }
+        }
+    }
+    if !c.evidence.is_empty() {
+        let mut quotes = Vec::new();
+        for e in &c.evidence {
+            let cite = find_source(&site.project.sources, &e.source)
+                .map(|s| s.citation())
+                .unwrap_or_else(|| e.source.clone());
+            quotes.push(format!("> {}\n>\n> — {cite}", e.quote.trim()));
+        }
+        out.push_str(&format!(
+            "\n??? quote \"From the sources\"\n\n{}\n",
+            indent(&quotes.join("\n\n"))
+        ));
+    }
+    out
+}
+
+fn render_part(site: &Site, part: &Part, pages: &[&Concept]) -> String {
+    let mut out = format!(
+        "# {}\n\n{}\n\n## Pages\n\n",
+        part.title,
+        decorate(&part.intro, site.graph, "../")
+    );
+    for (i, c) in pages.iter().enumerate() {
+        out.push_str(&format!("{}. {} — {}\n", i + 1, titled(c, "../"), c.gloss));
+    }
+    let edges = edges_among(pages);
+    if !edges.is_empty() {
+        out.push_str("\n## Map\n\nArrows point from a page to the pages that build on it.\n\n");
+        out.push_str(&diagram(pages, &edges, None, "../"));
+    }
+    out
+}
+
+/// Part-level edges, reduced to those not implied by others: part `a` precedes part `b`
+/// if a page in `b` requires a page in `a`.
+fn part_edges(site: &Site, outline: &Outline) -> Vec<(usize, usize)> {
+    let part_of: HashMap<&str, usize> = outline
+        .parts
+        .iter()
+        .enumerate()
+        .flat_map(|(i, p)| p.pages.iter().map(move |id| (id.as_str(), i)))
+        .collect();
+    let n = outline.parts.len();
+    let mut direct = vec![vec![false; n]; n];
+    for c in &site.pages {
+        let Some(&b) = part_of.get(c.id.as_str()) else {
+            continue;
+        };
+        for r in &c.requires {
+            if let Some(&a) = part_of.get(r.as_str())
+                && a < b
+            {
+                direct[a][b] = true;
+            }
+        }
+    }
+    // Parts are in reading order, so every edge goes forward: reachability in one pass
+    // from the last part back.
+    let mut reach = direct.clone();
+    for a in (0..n).rev() {
+        for b in a + 1..n {
+            if direct[a][b] {
+                let further = reach[b].clone();
+                for (r, f) in reach[a].iter_mut().zip(further) {
+                    *r |= f;
+                }
+            }
+        }
+    }
+    let mut edges = Vec::new();
+    for a in 0..n {
+        for b in a + 1..n {
+            let implied = (a + 1..b).any(|k| reach[a][k] && reach[k][b]);
+            if direct[a][b] && !implied {
+                edges.push((a, b));
+            }
+        }
+    }
+    edges
+}
+
+fn render_index(site: &Site, outline: Option<(&Outline, &[String])>) -> String {
+    let project = site.project;
+    let graph = site.graph;
+    let mut out = format!("# {}\n\n", title(project, graph));
+    let target = graph.get(&graph.target);
+    let knows = project.config.reader.knows.trim().trim_end_matches('.');
+    let Some((outline, slugs)) = outline else {
+        if let Some(target) = target {
+            out.push_str(&format!(
+                "This wiki explains {}. {}\n\n",
+                titled(target, ""),
+                target.gloss
+            ));
+        }
+        out.push_str(&format!(
+            "It is written for a reader who knows: {knows}.\n\n## Reading order\n\n"
+        ));
+        for (i, c) in site.pages.iter().enumerate() {
+            out.push_str(&format!("{}. {} — {}\n", i + 1, titled(c, ""), c.gloss));
+        }
+        return finish_index(site, out);
+    };
+
+    out.push_str(&decorate(&outline.overview, graph, ""));
+    out.push_str("\n\n");
+    let goal = target
+        .map(|t| format!(" lead to {}", titled(t, "")))
+        .unwrap_or_default();
+    out.push_str(&format!(
+        "!!! tip \"How to read this wiki\"\n\n    Written for a reader who knows: {knows}. \
+         The {} pages, in {} parts,{goal}. Read them in order with the links at the bottom \
+         of each page, or start anywhere: each page opens with what it builds on. Hover \
+         over a link to see a one-line definition.\n\n## Contents\n\n",
+        site.pages.len(),
+        outline.parts.len(),
+    ));
+    let built: HashMap<&str, &Concept> = site.pages.iter().map(|c| (c.id.as_str(), *c)).collect();
+    for (i, (part, slug)) in outline.parts.iter().zip(slugs).enumerate() {
+        out.push_str(&format!(
+            "### {}. [{}]({slug}/index.md)\n\n{}\n\n",
+            i + 1,
+            part.title,
+            decorate(&part.intro, graph, "")
+        ));
+        let links: Vec<String> = part
+            .pages
+            .iter()
+            .filter_map(|id| built.get(id.as_str()))
+            .map(|c| titled(c, ""))
+            .collect();
+        out.push_str(&format!("{}\n\n", links.join(" · ")));
+    }
+    let edges = part_edges(site, outline);
+    if !edges.is_empty() {
+        out.push_str("## Map of the parts\n\n```mermaid\nflowchart LR\n");
+        for (i, (part, slug)) in outline.parts.iter().zip(slugs).enumerate() {
+            out.push_str(&format!(
+                "  p{i}[\"{}. {}\"]\n  click p{i} href \"{slug}/\"\n",
+                i + 1,
+                part.title.replace('"', "#quot;")
+            ));
+        }
+        for (a, b) in edges {
+            out.push_str(&format!("  p{a} --> p{b}\n"));
+        }
+        out.push_str("```\n\n");
+    }
+    finish_index(site, out)
+}
+
+fn finish_index(site: &Site, mut out: String) -> String {
+    let assumed: Vec<&Concept> = site
+        .graph
+        .concepts
+        .iter()
+        .filter(|k| k.known && site.pages.iter().any(|p| p.requires.contains(&k.id)))
+        .collect();
+    if !assumed.is_empty() {
+        out.push_str("\n## Assumed known\n\n");
+        for k in assumed {
+            out.push_str(&format!("- {} — {}\n", k.name, k.gloss));
+        }
+    }
+    out.push_str("\n## Sources\n\n");
+    for s in &site.project.sources {
+        out.push_str(&format!("- {}\n", s.citation()));
+    }
+    out
+}
+
+/// Directory names for the parts' landing pages: slugs of the titles, made unique and
+/// distinct from page ids (a part directory and a page would share a URL).
+fn part_slugs(outline: &Outline, pages: &HashSet<String>) -> Vec<String> {
+    let mut taken: HashSet<String> = pages.clone();
+    taken.insert("index".into());
+    taken.insert("javascripts".into());
+    let mut slugs = Vec::new();
+    for (i, part) in outline.parts.iter().enumerate() {
+        let base = match slug(&part.title) {
+            s if s.is_empty() => format!("part-{}", i + 1),
+            s => s,
+        };
+        let mut candidate = base.clone();
+        let mut n = 2;
+        while taken.contains(&candidate) {
+            candidate = format!("{base}-{n}");
+            n += 1;
+        }
+        taken.insert(candidate.clone());
+        slugs.push(candidate);
+    }
+    slugs
+}
+
 pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildReport> {
     let docs = project.docs_dir();
     let mut report = BuildReport::default();
     let mut written: BTreeSet<String> = BTreeSet::new();
-    let pages: HashSet<String> = plan.order.iter().cloned().collect();
+    let planned: HashSet<String> = plan.order.iter().cloned().collect();
+    let outline = crate::outline::current(project, plan)?;
+    let order = outline
+        .as_ref()
+        .map(Outline::order)
+        .unwrap_or_else(|| plan.order.clone());
 
-    for id in &plan.order {
+    let mut bodies = Vec::new();
+    for id in &order {
         let Some(body) = project.page_body(id)? else {
             report.missing.push(id.clone());
             continue;
         };
         // Bodies were written against an earlier plan; drop links to pages no longer in it.
-        let (body, removed, _) = fix_links(&body, &pages);
+        let (body, removed, _) = fix_links(&body, &planned);
         for dest in removed {
             report.warnings.push(format!(
                 "`{id}`: link to \"{dest}\" rendered as text (not a page)"
             ));
         }
-        let c = graph.get(id).expect("planned pages are concepts");
-        let file = format!("{id}.md");
-        write(
-            &docs.join(&file),
-            &render_page(project, graph, plan, c, &body),
-        )?;
-        written.insert(file);
-        report.pages.push(id.clone());
+        bodies.push((graph.get(id).expect("planned pages are concepts"), body));
     }
-    write(
-        &docs.join("index.md"),
-        &render_index(project, graph, plan, &report.pages),
-    )?;
+    let site = Site {
+        project,
+        graph,
+        pages: bodies.iter().map(|(c, _)| *c).collect(),
+        built: bodies.iter().map(|(c, _)| c.id.as_str()).collect(),
+    };
+    for (c, body) in &bodies {
+        let file = format!("{}.md", c.id);
+        write(&docs.join(&file), &render_page(&site, c, body))?;
+        written.insert(file);
+        report.pages.push(c.id.clone());
+    }
+
+    let entry = |c: &Concept| (c.name.clone(), format!("{}.md", c.id));
+    let mut nav = Vec::new();
+    let slugs = outline
+        .as_ref()
+        .map(|o| part_slugs(o, &planned))
+        .unwrap_or_default();
+    if let Some(outline) = &outline {
+        report.parts = Some(outline.parts.len());
+        for (part, slug) in outline.parts.iter().zip(&slugs) {
+            let pages: Vec<&Concept> = site
+                .pages
+                .iter()
+                .copied()
+                .filter(|c| part.pages.contains(&c.id))
+                .collect();
+            let file = format!("{slug}/index.md");
+            write(&docs.join(&file), &render_part(&site, part, &pages))?;
+            written.insert(file.clone());
+            nav.push(NavItem::Section {
+                title: part.title.clone(),
+                index: file,
+                pages: pages.iter().map(|c| entry(c)).collect(),
+            });
+        }
+    } else {
+        for c in &site.pages {
+            let (name, file) = entry(c);
+            nav.push(NavItem::Page { name, file });
+        }
+    }
+    let index = render_index(&site, outline.as_ref().map(|o| (o, slugs.as_slice())));
+    write(&docs.join("index.md"), &index)?;
     written.insert("index.md".to_string());
 
     let mathjax = docs.join(MATHJAX_CONFIG);
@@ -113,12 +584,6 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
     }
     write_json(&manifest, &written.iter().collect::<Vec<_>>())?;
 
-    let nav: Vec<(String, String)> = report
-        .pages
-        .iter()
-        .filter_map(|id| graph.get(id))
-        .map(|c| (c.name.clone(), format!("{}.md", c.id)))
-        .collect();
     let path = project.zensical_path();
     let existing = if path.exists() {
         Some(read(&path)?)
@@ -135,96 +600,53 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
     Ok(report)
 }
 
-fn render_page(project: &Project, graph: &Graph, plan: &Plan, c: &Concept, body: &str) -> String {
-    let mut out = format!("# {}\n\n{}\n", c.name, body.trim());
-    let prerequisites: Vec<String> = c
-        .requires
-        .iter()
-        .filter_map(|r| graph.get(r))
-        .map(|p| {
-            if plan.contains(&p.id) {
-                format!("- {}", link(p))
-            } else {
-                format!("- {} (assumed known)", p.name)
+fn nav_array(items: &[NavItem]) -> Array {
+    let page = |name: &str, file: &str| {
+        let mut entry = InlineTable::new();
+        entry.insert(name, Value::from(file));
+        Value::from(entry)
+    };
+    let mut entries = Array::new();
+    entries.push("index.md");
+    for item in items {
+        match item {
+            NavItem::Page { name, file } => entries.push(page(name, file)),
+            NavItem::Section {
+                title,
+                index,
+                pages,
+            } => {
+                let mut children = Array::new();
+                children.push(index.as_str());
+                for (name, file) in pages {
+                    children.push(page(name, file));
+                }
+                for child in children.iter_mut() {
+                    child.decor_mut().set_prefix("\n    ");
+                }
+                children.set_trailing_comma(true);
+                children.set_trailing("\n  ");
+                let mut section = InlineTable::new();
+                section.insert(title, Value::from(children));
+                entries.push(section);
             }
-        })
-        .collect();
-    if !prerequisites.is_empty() {
-        out.push_str(&format!(
-            "\n## Prerequisites\n\n{}\n",
-            prerequisites.join("\n")
-        ));
-    }
-    let used_by: Vec<String> = plan
-        .order
-        .iter()
-        .filter_map(|id| graph.get(id))
-        .filter(|d| d.requires.contains(&c.id))
-        .map(|d| format!("- {}", link(d)))
-        .collect();
-    if !used_by.is_empty() {
-        out.push_str(&format!("\n## Used by\n\n{}\n", used_by.join("\n")));
-    }
-    if !c.evidence.is_empty() {
-        out.push_str("\n## Sources\n");
-        for e in &c.evidence {
-            let cite = find_source(&project.sources, &e.source)
-                .map(|s| s.citation())
-                .unwrap_or_else(|| e.source.clone());
-            out.push_str(&format!("\n> {}\n>\n> — {cite}\n", e.quote.trim()));
         }
     }
-    out
+    for entry in entries.iter_mut() {
+        entry.decor_mut().set_prefix("\n  ");
+    }
+    entries.set_trailing_comma(true);
+    entries.set_trailing("\n");
+    entries
 }
 
-fn render_index(project: &Project, graph: &Graph, plan: &Plan, pages: &[String]) -> String {
-    let mut out = format!("# {}\n\n", title(project, graph));
-    if let Some(target) = graph.get(&graph.target) {
-        out.push_str(&format!(
-            "This wiki explains {}. {}\n\n",
-            link(target),
-            target.gloss
-        ));
-    }
-    out.push_str(&format!(
-        "It is written for a reader who knows: {}\n\n## Reading order\n\n",
-        project.config.reader.knows.trim()
-    ));
-    for (i, c) in pages.iter().filter_map(|id| graph.get(id)).enumerate() {
-        out.push_str(&format!("{}. {} — {}\n", i + 1, link(c), c.gloss));
-    }
-    let assumed: Vec<&Concept> = graph
-        .concepts
-        .iter()
-        .filter(|k| {
-            k.known
-                && plan
-                    .order
-                    .iter()
-                    .filter_map(|id| graph.get(id))
-                    .any(|p| p.requires.contains(&k.id))
-        })
-        .collect();
-    if !assumed.is_empty() {
-        out.push_str("\n## Assumed known\n\n");
-        for k in assumed {
-            out.push_str(&format!("- {} — {}\n", k.name, k.gloss));
-        }
-    }
-    out.push_str("\n## Sources\n\n");
-    for s in &project.sources {
-        out.push_str(&format!("- {}\n", s.citation()));
-    }
-    out
-}
-
-/// Create or update `zensical.toml`: set `project.nav` to the reading order, add the
-/// MathJax scripts to `project.extra_javascript`, and fill in `site_name` and `docs_dir`
+/// Create or update `zensical.toml`: set `project.nav`, add the MathJax scripts to
+/// `project.extra_javascript`, and fill in `site_name`, `docs_dir` and the theme features
 /// only if they are missing. Everything else in an existing file is kept as written.
 pub fn zensical_toml(
     existing: Option<&str>,
     site_name: &str,
-    nav: &[(String, String)],
+    nav: &[NavItem],
 ) -> std::result::Result<(String, Vec<String>), toml_edit::TomlError> {
     let mut doc: DocumentMut = existing.unwrap_or("").parse()?;
     let mut warnings = Vec::new();
@@ -243,20 +665,7 @@ pub fn zensical_toml(
             "zensical.toml sets docs_dir = \"{other}\", but exegenius writes to \"docs\""
         )),
     }
-
-    let mut entries = Array::new();
-    entries.push("index.md");
-    for (name, file) in nav {
-        let mut entry = InlineTable::new();
-        entry.insert(name, Value::from(file.as_str()));
-        entries.push(entry);
-    }
-    for entry in entries.iter_mut() {
-        entry.decor_mut().set_prefix("\n  ");
-    }
-    entries.set_trailing_comma(true);
-    entries.set_trailing("\n");
-    project["nav"] = toml_edit::value(entries);
+    project["nav"] = toml_edit::value(nav_array(nav));
 
     let scripts = project
         .entry("extra_javascript")
@@ -273,6 +682,18 @@ pub fn zensical_toml(
             "zensical.toml extra_javascript is not an array; MathJax scripts not added".into(),
         ),
     }
+
+    let theme = project.entry("theme").or_insert(Item::Table(Table::new()));
+    match theme.as_table_like_mut() {
+        Some(theme) if !theme.contains_key("features") => {
+            theme.insert(
+                "features",
+                toml_edit::value(Array::from_iter(FEATURES.iter().copied())),
+            );
+        }
+        Some(_) => {}
+        None => warnings.push("zensical.toml theme is not a table; features not set".into()),
+    }
     Ok((doc.to_string(), warnings))
 }
 
@@ -280,10 +701,17 @@ pub fn zensical_toml(
 mod tests {
     use super::*;
 
-    fn nav() -> Vec<(String, String)> {
+    fn nav() -> Vec<NavItem> {
         vec![
-            ("Chirp identity".into(), "chirp-identity.md".into()),
-            ("DFT".into(), "dft.md".into()),
+            NavItem::Page {
+                name: "Chirp identity".into(),
+                file: "chirp-identity.md".into(),
+            },
+            NavItem::Section {
+                title: "Background".into(),
+                index: "background/index.md".into(),
+                pages: vec![("DFT".into(), "dft.md".into())],
+            },
         ]
     }
 
@@ -298,7 +726,12 @@ mod tests {
         let nav = project["nav"].as_array().unwrap();
         assert_eq!(nav[0].as_str(), Some("index.md"));
         assert_eq!(nav[1]["Chirp identity"].as_str(), Some("chirp-identity.md"));
+        let section = nav[2]["Background"].as_array().unwrap();
+        assert_eq!(section[0].as_str(), Some("background/index.md"));
+        assert_eq!(section[1]["DFT"].as_str(), Some("dft.md"));
         assert_eq!(project["extra_javascript"].as_array().unwrap().len(), 2);
+        let features = project["theme"]["features"].as_array().unwrap();
+        assert_eq!(features.len(), FEATURES.len());
     }
 
     #[test]
@@ -319,6 +752,47 @@ mod tests {
             .filter_map(|v| v.as_str())
             .collect();
         assert_eq!(scripts, vec!["javascripts/mathjax.js", "x.js", MATHJAX_CDN]);
-        assert!(project["theme"]["features"].is_array());
+        assert_eq!(project["theme"]["features"].as_array().unwrap().len(), 1);
+    }
+
+    #[test]
+    fn links_get_glosses_and_prefixes() {
+        let graph: Graph = serde_json::from_value(serde_json::json!({
+            "target": "dft",
+            "concepts": [{"id": "dft", "name": "DFT", "aliases": [], "known": false,
+                          "gloss": "A \"linear\" map.", "requires": [], "evidence": []}],
+        }))
+        .unwrap();
+        let body = "See [the DFT](dft.md#def), [home](index.md), [web](https://x.org) and \
+                    `[code](dft.md)`.";
+        assert_eq!(
+            decorate(body, &graph, "../"),
+            "See [the DFT](../dft.md#def \"A 'linear' map.\"), [home](../index.md), \
+             [web](https://x.org) and `[code](dft.md)`."
+        );
+    }
+
+    #[test]
+    fn part_slugs_avoid_pages_and_each_other() {
+        let part = |title: &str| Part {
+            title: title.into(),
+            intro: "i".into(),
+            pages: vec![],
+        };
+        let outline = Outline {
+            planned: vec![],
+            overview: String::new(),
+            parts: vec![
+                part("Background"),
+                part("Background"),
+                part("DFT"),
+                part("∑"),
+            ],
+        };
+        let pages: HashSet<String> = ["dft".to_string()].into();
+        assert_eq!(
+            part_slugs(&outline, &pages),
+            vec!["background", "background-2", "dft-2", "part-4"]
+        );
     }
 }

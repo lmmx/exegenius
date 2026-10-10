@@ -13,13 +13,20 @@ and writing it asks for, task by task, until it reports done.
 
 1. Run `exegenius next` in this directory. It prints either a batch of tasks or `done`.
 2. The tasks in a batch are independent of each other. Hand each one to its own subagent,
-   all in parallel, using the prompt `exegenius next` prints for it. Each subagent writes
-   its answer file and runs `exegenius submit <id>` until the answer is accepted.
+   all in parallel (one Agent tool call per task, all in a single message), using the
+   prompt `exegenius next` prints for it. Each subagent writes its answer file and runs
+   `exegenius submit <id>` until the answer is accepted.
 3. Audit tasks must each go to a fresh subagent that has seen nothing else: the auditor
-   stands in for a reader who has not read the sources or the other pages.
+   stands in for a reader who has not read the sources or the other pages. Do not do
+   audits yourself.
 4. When every task in the batch is accepted, go back to step 1.
-5. When `exegenius next` prints `done`, the wiki is in `docs/` with a `zensical.toml`.
+5. Once the pages are final, `exegenius next` hands out one outline task: group the pages
+   into parts and write the front page.
+6. When `exegenius next` prints `done`, the wiki is in `docs/` with a `zensical.toml`.
    Run `exegenius status` and report it.
+7. If the user wants the wiki online, run `exegenius init --vercel`: it adds `vercel.json`
+   and `.gitignore` entries, so a GitHub repository of this folder imported into Vercel
+   builds and deploys the site on every push.
 
 ## Rules
 

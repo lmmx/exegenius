@@ -17,11 +17,14 @@ use crate::text::key;
 pub struct Concept {
     /// Lowercase slug, unique across the graph, e.g. "chirp-identity".
     pub id: String,
-    /// Display name, e.g. "Chirp identity".
+    /// Display name in plain text, e.g. "Chirp identity". Write symbols in Unicode (κ, ω,
+    /// ≤, n log n), not LaTeX or spelled-out Greek: names appear in the navigation, which
+    /// does not render mathematics.
     pub name: String,
     /// Other names and abbreviations the sources use for this concept.
     pub aliases: Vec<String>,
-    /// One precise sentence saying what the concept is.
+    /// One precise sentence saying what the concept is, in plain text with Unicode symbols
+    /// (it is shown as a tooltip on links to the concept).
     pub gloss: String,
     /// Ids of the concepts a reader must understand before this one.
     pub requires: Vec<String>,

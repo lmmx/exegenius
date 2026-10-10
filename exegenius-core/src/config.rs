@@ -12,6 +12,10 @@ pub const FILE_NAME: &str = "exegenius.toml";
 /// The `target` in [`TEMPLATE`], which `exegenius next` refuses to start from.
 pub const TEMPLATE_TARGET: &str = "The main result of the paper";
 
+/// The `reader.knows` in [`TEMPLATE`], which `exegenius next` also refuses.
+pub const TEMPLATE_KNOWS: &str =
+    "Undergraduate computer science: big-O notation, polynomials, complex numbers";
+
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Config {
@@ -110,6 +114,8 @@ mod tests {
         let config: Config = toml::from_str(TEMPLATE).unwrap();
         config.check(Path::new(FILE_NAME)).unwrap();
         assert_eq!(config.rounds, 3);
+        assert_eq!(config.target, TEMPLATE_TARGET);
+        assert_eq!(config.reader.knows, TEMPLATE_KNOWS);
         assert_eq!(config.sources[0].path, PathBuf::from("sources/paper.txt"));
     }
 

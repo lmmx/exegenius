@@ -6,12 +6,25 @@ use exegenius_core::audit::load_rounds;
 use exegenius_core::build::{BuildReport, build};
 use exegenius_core::config;
 use exegenius_core::graph::Graph;
+use exegenius_core::outline;
 use exegenius_core::plan::{Plan, plan};
 use exegenius_core::project::Project;
 use exegenius_core::task::{self, Kind, Next};
 
 const SKILL: &str = include_str!("skill.md");
 const SKILL_PATH: &str = ".claude/skills/exegenius/SKILL.md";
+
+/// Vercel project settings that build the zensical site from a GitHub repository.
+const VERCEL_JSON: &str = r#"{
+  "framework": null,
+  "installCommand": "python3 -m venv .venv && .venv/bin/python -m pip install zensical",
+  "buildCommand": ".venv/bin/python -m zensical build",
+  "outputDirectory": "site"
+}
+"#;
+
+/// Build output that does not belong in the repository.
+const GITIGNORE: &[&str] = &["site/", ".venv/"];
 
 /// Turn source documents into a wiki of linked explanatory pages for a stated reader.
 ///
@@ -35,8 +48,8 @@ const SETUP: &str = "\
 No exegenius.toml here yet. Set up the project, then run `exegenius next` again:
 
 1. Run `exegenius init`.
-2. Put the source material in sources/ as text or markdown, moving or converting the files
-   already in this folder.
+2. Move the source material into sources/ as text or markdown: move (do not copy) the files
+   already in this folder, converting PDFs to text.
 3. Edit exegenius.toml: `target` (what the wiki should explain), `reader.knows` (what the
    reader already knows) and one [[sources]] entry per source file. If the user did not say,
    infer the target and reader from the material.";
@@ -44,7 +57,12 @@ No exegenius.toml here yet. Set up the project, then run `exegenius next` again:
 #[derive(Subcommand)]
 enum Command {
     /// Create exegenius.toml and sources/ if missing, and (re)write the Claude Code skill
-    Init,
+    Init {
+        /// Also add vercel.json and .gitignore entries, so a GitHub repository of this
+        /// folder deploys the wiki on Vercel
+        #[arg(long)]
+        vercel: bool,
+    },
     /// Print the current batch of tasks, or build the docs when nothing is left
     Next,
     /// Check and apply the answer to a task
@@ -58,6 +76,44 @@ enum Command {
     Plan,
     /// Write docs/ and zensical.toml from the pages written so far
     Build,
+}
+
+fn vercel(dir: &Path) -> anyhow::Result<()> {
+    let path = dir.join("vercel.json");
+    if path.exists() {
+        println!("kept {}", path.display());
+    } else {
+        std::fs::write(&path, VERCEL_JSON)?;
+        println!("created {}", path.display());
+    }
+    let path = dir.join(".gitignore");
+    let existing = if path.exists() {
+        std::fs::read_to_string(&path)?
+    } else {
+        String::new()
+    };
+    let missing: Vec<&str> = GITIGNORE
+        .iter()
+        .copied()
+        .filter(|entry| !existing.lines().any(|l| l.trim() == *entry))
+        .collect();
+    if !missing.is_empty() {
+        let mut text = existing;
+        if !text.is_empty() && !text.ends_with('\n') {
+            text.push('\n');
+        }
+        for entry in missing {
+            text.push_str(entry);
+            text.push('\n');
+        }
+        std::fs::write(&path, text)?;
+        println!("updated {}", path.display());
+    }
+    println!(
+        "to deploy: push this folder to a GitHub repository, import it at \
+         https://vercel.com/new, and deploy; every push then redeploys the wiki"
+    );
+    Ok(())
 }
 
 fn init(dir: &Path) -> anyhow::Result<()> {
@@ -113,8 +169,12 @@ fn print_build(project: &Project, report: &BuildReport) {
             report.missing.join(", ")
         );
     }
+    let parts = match report.parts {
+        Some(n) => format!(" in {n} parts"),
+        None => String::new(),
+    };
     println!(
-        "wrote {} pages to {} and {}; view with `zensical serve`",
+        "wrote {} pages{parts} to {} and {}; view with `zensical serve`",
         report.pages.len(),
         project.docs_dir().display(),
         project.zensical_path().display()
@@ -126,6 +186,12 @@ fn next(project: &Project) -> anyhow::Result<()> {
         Next::Done(report) => {
             println!("done");
             print_build(project, &report);
+            if !project.root.join("vercel.json").exists() {
+                println!(
+                    "to publish on Vercel: run `exegenius init --vercel`, push this folder to \
+                     a GitHub repository, and import it at https://vercel.com/new"
+                );
+            }
         }
         Next::Tasks { round, tasks } => {
             let label = tasks[0].label();
@@ -147,12 +213,15 @@ fn next(project: &Project) -> anyhow::Result<()> {
                 );
             }
             let parallel = if tasks.len() > 1 {
-                "The tasks are independent: give each prompt to its own subagent, in parallel. "
+                "The tasks are independent: give each prompt to its own subagent, all at once \
+                 (in Claude Code: one Agent tool call per task, all in a single message). "
             } else {
                 "Give the prompt to a subagent, or do the task yourself. "
             };
             let fresh = if matches!(tasks[0].kind, Kind::Audit { .. }) {
-                "Each audit task needs a fresh subagent that has seen nothing else. "
+                "Each audit task needs a fresh subagent that has seen nothing else. Do not do \
+                 audits yourself: you have read the sources and the pages, so you cannot stand \
+                 in for the reader. "
             } else {
                 ""
             };
@@ -202,7 +271,12 @@ fn status(project: &Project) -> anyhow::Result<()> {
         graph.candidates.len(),
         graph.rewrite.len()
     );
-    if state.done {
+    let outline = outline::current(project, &plan)?;
+    match &outline {
+        Some(outline) => println!("outline: {} parts", outline.parts.len()),
+        None => println!("outline: not yet (handed out once the pages are final)"),
+    }
+    if state.done && outline.is_some() {
         println!("state: done (docs/ and zensical.toml are built)");
     } else if !state.pending.is_empty() {
         let ids: Vec<&str> = state.pending.iter().map(|t| t.id.as_str()).collect();
@@ -219,7 +293,11 @@ fn run(cli: Cli) -> anyhow::Result<()> {
         return Ok(());
     };
     match command {
-        Command::Init => return init(&cli.dir),
+        Command::Init { vercel: false } => return init(&cli.dir),
+        Command::Init { vercel: true } => {
+            init(&cli.dir)?;
+            return vercel(&cli.dir);
+        }
         Command::Next if !cli.dir.join(config::FILE_NAME).exists() => {
             println!("{SETUP}");
             return Ok(());
@@ -228,17 +306,30 @@ fn run(cli: Cli) -> anyhow::Result<()> {
     }
     let project = Project::load(&cli.dir)
         .context("fix exegenius.toml: target, reader.knows, and [[sources]] paths to text files")?;
+    // The template values matter only before the extract task, which bakes them in.
     if let Command::Next = command
-        && project.config.target == config::TEMPLATE_TARGET
+        && !project.graph_path().exists()
     {
-        println!(
-            "exegenius.toml still has the template target: set target, reader.knows and \
-                  [[sources]] for this material, then run `exegenius next` again."
-        );
-        return Ok(());
+        let mut template = Vec::new();
+        if project.config.target == config::TEMPLATE_TARGET {
+            template.push("target");
+        }
+        if project.config.reader.knows == config::TEMPLATE_KNOWS {
+            template.push("reader.knows");
+        }
+        if !template.is_empty() {
+            println!(
+                "exegenius.toml still has the template {}: set target (what the wiki should \
+                 explain) and reader.knows (what its reader already knows) for this material, \
+                 asking the user if they said nothing about the reader, then run \
+                 `exegenius next` again.",
+                template.join(" and ")
+            );
+            return Ok(());
+        }
     }
     match command {
-        Command::Init => unreachable!("handled above"),
+        Command::Init { .. } => unreachable!("handled above"),
         Command::Next => next(&project)?,
         Command::Submit { id } => {
             let warnings = task::submit(&project, &id)?;

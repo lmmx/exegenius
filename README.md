@@ -76,9 +76,37 @@ sources or the other pages.
 | audit | told exactly what the reader knows at that page, lists every term, symbol or step they cannot follow | every quote is on the page; drops terms the reader knows; turns the rest into prerequisite edges, candidate concepts or rewrite notes |
 | extend | resolves the candidate concepts audits found into existing or new concepts | same checks as extract; adds the edges and queues the pages for rewriting |
 
+| outline | groups the final pages into parts and writes the front page overview and part intros | every page in exactly one part, no page in a part before one of its prerequisites, links only to pages |
+
 Rounds of write and audit repeat until an audit round finds no gaps, or `rounds` rounds have
-run; then `next` builds `docs/` and creates or updates `zensical.toml` (nav in reading order,
-MathJax). Only pages whose audit input changed are audited again.
+run. Only pages whose audit input changed are audited again. Then one outline task groups
+the pages into parts, and `next` builds `docs/` and creates or updates `zensical.toml`.
+
+## The wiki
+
+- **Front page:** the overview, a note on who the wiki is for and how to read it, the
+  contents part by part, and a clickable map of how the parts depend on each other.
+- **Parts:** each part is a section in the navigation with its own landing page: the
+  intro, its pages, and a map of the prerequisite edges among them.
+- **Pages:** a "before this page" note linking the prerequisites (and naming what is
+  assumed known), the body, a clickable diagram of the page's prerequisites and the pages
+  that use it, and the source quotes the page rests on, folded away.
+- **Navigation:** breadcrumbs, previous and next links in reading order, search, and a
+  tooltip with the one-line definition on every link to a page.
+- MathJax for `$...$` mathematics.
+
+`build` sets the theme features in `zensical.toml` only when it has none, so settings
+you choose are kept.
+
+## Publish
+
+```sh
+exegenius init --vercel
+```
+
+adds `vercel.json` (Vercel installs zensical and builds the site into `site/`) and
+`site/`, `.venv/` to `.gitignore`. Push the folder to a GitHub repository and import it at
+[vercel.com/new](https://vercel.com/new); every push redeploys.
 
 Other commands: `exegenius status` (progress), `exegenius plan` (reading order),
 `exegenius build` (build from the pages written so far).
@@ -93,6 +121,7 @@ exegenius/state.json  task state: pending tasks, audit round, audited pages
 exegenius/tasks/      task files and answer files
 exegenius/pages/      page bodies
 exegenius/audit.json  audit results, one record per round
+exegenius/outline.json parts and front page
 docs/, zensical.toml  build output
 ```
 
