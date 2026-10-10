@@ -1,0 +1,48 @@
+[profile.dev]
+codegen-units = 256
+debug = false
+lto = false
+opt-level = 0
+panic = "unwind"
+strip = "debuginfo"
+
+[profile.release]
+codegen-units = 1
+debug = false
+lto = "thin"
+opt-level = 2
+panic = "unwind"
+strip = "symbols"
+
+[workspace]
+members = ["exegenius-cli", "exegenius-core"]
+resolver = "3"
+
+[workspace.dependencies]
+# Internal crates
+exegenius-core = { path = "exegenius-core", version = "0.1.0" }
+
+anyhow = "1"
+clap = { features = ["derive"], version = "4" }
+petgraph = { default-features = false, features = ["graphmap", "std"], version = "0.8" }
+pulldown-cmark = { default-features = false, version = "0.13" }
+schemars = "1"
+serde = { features = ["derive"], version = "1" }
+serde_json = "1"
+sha2 = "0.10"
+tempfile = "3"
+thiserror = "2"
+toml = "0.9"
+toml_edit = "0.23"
+ureq = { features = ["json"], version = "3" }
+
+[workspace.package]
+authors = ["Louis Maddox <louismmx@gmail.com>"]
+description = "Build evidence linked knowledge graphs and optimise explanation paths through simulated readers"
+edition = "2024"
+homepage = "https://github.com/lmmx/exegenius"
+keywords = ["documentation", "knowledge-graph", "llm", "wiki"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/lmmx/exegenius"
+version = "0.1.0"
