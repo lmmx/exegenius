@@ -1,5 +1,7 @@
 # 2026-10-10: Ideas bank
 
+> Superseded in part by 2026-10-10-revised-v1-design, which wins where the two conflict.
+
 Every idea raised in the design rounds (R1, R2, R3; see 2026-10-10-origin) and in the other
 2026-10-10 entries, each with a stable ID for steering ("drop I-34", "pull I-38 into v1").
 The **From** column records provenance. "new" marks an idea first written down in these

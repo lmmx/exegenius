@@ -1,5 +1,7 @@
 # 2026-10-10: Reader model, entry contracts and path planning
 
+> Superseded in part by 2026-10-10-revised-v1-design, which wins where the two conflict.
+
 What the system takes a reader to be, what a page promises, and what "shortest hop"
 means. R1, R2 and R3 are the three design rounds described in 2026-10-10-origin.
 

@@ -1,5 +1,7 @@
 # 2026-10-10: Simulation validity
 
+> Superseded in part by 2026-10-10-revised-v1-design, which wins where the two conflict.
+
 How a simulated reader can produce evidence about a page, and not just reflect what the
 model already knew. R1, R2 and R3 are the three design rounds described in
 2026-10-10-origin.

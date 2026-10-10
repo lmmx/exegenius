@@ -1,5 +1,7 @@
 # 2026-10-10: Lint rules, term grounding and author moves
 
+> Superseded in part by 2026-10-10-revised-v1-design, which wins where the two conflict.
+
 The deterministic layer: what it checks, what authority its rules carry, how terms get
 grounded, how factual claims are tracked, and how a finding becomes an edit. R1, R2 and
 R3 are the three design rounds described in 2026-10-10-origin.
