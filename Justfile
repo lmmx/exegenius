@@ -32,5 +32,9 @@ prepush: precommit test
 install:
     cargo install --path exegenius-cli --locked
 
+# Publish both crates to crates.io (core first; cargo orders them)
+publish:
+    cargo publish --workspace
+
 docs:
     cargo doc --workspace --no-deps --document-private-items

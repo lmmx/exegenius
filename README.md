@@ -15,14 +15,14 @@ applying it.
 ## Install
 
 ```sh
-cargo install exegenius-cli
+cargo install exegenius
 ```
 
 ## For agents
 
 Run `exegenius next` in the folder to turn into a wiki, do what it prints, and repeat until
 it prints `done`. In a folder with no `exegenius.toml` it prints the setup steps first. So
-telling a coding agent "install exegenius-cli and use exegenius on this folder" is enough.
+telling a coding agent "install exegenius and use it on this folder" is enough.
 
 ## Use
 
