@@ -1,5 +1,6 @@
 //! The task loop end to end, with scripted answers standing in for the agent: extract,
-//! write, audit (finding an unknown term), extend, rewrite, a clean audit round, build.
+//! write, audit (finding an unknown term), extend, rewrite, a clean audit round, outline,
+//! build.
 
 use std::path::Path;
 
@@ -190,21 +191,75 @@ fn task_loop_end_to_end() {
         submit(&project, &t.id).unwrap();
     }
 
-    // Done: the docs are built.
+    // Outline: a part order that puts a page before its prerequisite is rejected, as is a
+    // missing page; then the pages are grouped into two parts.
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch.len(), 1);
+    assert_eq!(batch[0].kind, Kind::Outline);
+    let file = read(&project, batch[0].file());
+    assert!(file.contains("`chirp-identity`") && file.contains("Needs: dft, convolution"));
+    let outline = |first: &[&str], second: &[&str]| {
+        json!({
+            "overview": "The [chirp identity](chirp-identity.md) turns a DFT into a convolution.",
+            "parts": [
+                {"title": "Background", "intro": "Transforms and products.", "pages": first},
+                {"title": "The identity", "intro": "Uses the [DFT](dft.md).", "pages": second},
+            ],
+        })
+        .to_string()
+    };
+    answer(
+        &project,
+        &batch[0],
+        &outline(&["chirp-identity"], &["dft", "convolution"]),
+    );
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains("needs `dft`, which is in a later part"),
+        "{err}"
+    );
+    assert!(err.contains("pages in no part: dyadic-rational"), "{err}");
+    answer(
+        &project,
+        &batch[0],
+        &outline(
+            &["dyadic-rational", "convolution", "dft"],
+            &["chirp-identity"],
+        ),
+    );
+    submit(&project, &batch[0].id).unwrap();
+
+    // Done: the docs are built, grouped into the two parts.
     let Next::Done(report) = next(&project).unwrap() else {
         panic!("expected done");
     };
     assert_eq!(report.pages.len(), 4);
+    assert_eq!(report.parts, Some(2));
     let chirp = read(&project, "docs/chirp-identity.md");
-    assert!(chirp.starts_with("# Chirp identity\n\n"));
-    assert!(chirp.contains("- [Dyadic rational](dyadic-rational.md)"));
-    assert!(chirp.contains("> — [Notes](https://example.org/notes)"));
+    assert!(chirp.starts_with("# Chirp identity\n\n!!! info \"Before this page\""));
+    assert!(chirp.contains("[Dyadic rational](dyadic-rational.md \"What Dyadic rational is.\")"));
+    assert!(chirp.contains("[dyadic](dyadic-rational.md \"What Dyadic rational is.\")"));
+    assert!(chirp.contains("```mermaid\nflowchart LR\n"));
+    assert!(chirp.contains("    > — [Notes](https://example.org/notes)"));
     let dft = read(&project, "docs/dft.md");
-    assert!(dft.contains("- Complex numbers (assumed known)"));
-    assert!(dft.contains("## Used by\n\n- [Chirp identity](chirp-identity.md)"));
+    assert!(dft.contains("Assumed known: Complex numbers."));
+    assert!(dft.contains("Used by:\n\n- [Chirp identity](chirp-identity.md"));
+    let part = read(&project, "docs/background/index.md");
+    assert!(part.starts_with(
+        "# Background\n\nTransforms and products.\n\n## Pages\n\n1. [Discrete Fourier transform]"
+    ));
+    let intro = read(&project, "docs/the-identity/index.md");
+    assert!(intro.contains("Uses the [DFT](../dft.md \"What Discrete Fourier transform is.\")"));
+    let index = read(&project, "docs/index.md");
+    assert!(index.contains("The [chirp identity](chirp-identity.md \"What Chirp identity is.\")"));
+    assert!(index.contains("### 2. [The identity](the-identity/index.md)"));
+    assert!(index.contains("p0 --> p1"));
+    let toml = read(&project, "zensical.toml");
     assert!(
-        read(&project, "zensical.toml").contains("{ \"Chirp identity\" = \"chirp-identity.md\" }")
+        toml.contains("{ Background = [\n    \"background/index.md\","),
+        "{toml}"
     );
+    assert!(toml.contains("navigation.indexes"));
     let audit = read(&project, "exegenius/audit.json");
     assert!(audit.contains("\"round\": 2") && audit.contains("candidate concept"));
     assert!(matches!(next(&project).unwrap(), Next::Done(_)));
@@ -241,5 +296,11 @@ fn last_round_fixes_are_written_then_built() {
         answer(&project, t, "A clearer explanation.");
         submit(&project, &t.id).unwrap();
     }
+    let outline = tasks(next(&project).unwrap());
+    assert_eq!(outline[0].kind, Kind::Outline);
+    let parts = json!({"overview": "o", "parts": [{"title": "All", "intro": "i",
+                       "pages": ["dft", "convolution", "chirp-identity"]}]});
+    answer(&project, &outline[0], &parts.to_string());
+    submit(&project, &outline[0].id).unwrap();
     assert!(matches!(next(&project).unwrap(), Next::Done(_)));
 }

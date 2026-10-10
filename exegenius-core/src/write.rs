@@ -18,6 +18,9 @@ pub const WRITE_INSTRUCTIONS: &str = "\
 Write one page of an explanatory wiki. The wiki explains a target result from source \
 documents to a specific reader, one concept per page, in reading order.
 
+- Open with one or two sentences that say what the concept is and what it is for on the way \
+to the target (the pages that build on it are listed below), so a reader arriving from a link \
+knows at once why the page matters.
 - Explain the page's concept so that this reader can follow it using only what they already \
 understand (listed below), what this page itself explains, and the linked prerequisite pages.
 - Define any other technical term or symbol on this page, where it is first used.
@@ -89,6 +92,19 @@ pub fn write_task(project: &Project, graph: &Graph, plan: &Plan, i: usize) -> Re
         task.push_str(&format!(
             "\n## Prerequisite pages (link each on first use, exactly as written)\n\n{}\n",
             linked.join("\n")
+        ));
+    }
+    let dependents: Vec<String> = plan
+        .order
+        .iter()
+        .filter_map(|id| graph.get(id))
+        .filter(|d| d.requires.contains(&c.id))
+        .map(|d| format!("- {}: {}", d.name, d.gloss))
+        .collect();
+    if !dependents.is_empty() {
+        task.push_str(&format!(
+            "\n## Pages that build on this one\n\n{}\n",
+            dependents.join("\n")
         ));
     }
     let others: Vec<String> = plan
@@ -187,7 +203,7 @@ fn strip_title(body: &str) -> &str {
 
 /// The page id a link destination points to, `Some("")` for an external or same-page link,
 /// and `None` for a relative link that is not a page.
-fn link_target(dest: &str) -> Option<&str> {
+pub(crate) fn link_target(dest: &str) -> Option<&str> {
     if dest.contains("://") || dest.starts_with("mailto:") || dest.starts_with('#') {
         return Some("");
     }

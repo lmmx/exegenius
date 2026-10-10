@@ -11,8 +11,9 @@
 //!    when its last audit is submitted, and the loop stops after a round with no gaps or
 //!    after `rounds` rounds
 //!
-//! When nothing is left, `next` builds the docs. Writes queued by the last audit round are
-//! still handed out (and not audited) before the build.
+//! When nothing is left, `next` hands out one outline task (parts and front page) if the
+//! pages have no current outline, and then builds the docs. Writes queued by the last audit
+//! round are still handed out (and not audited) before the outline.
 
 use std::collections::BTreeMap;
 use std::fs::OpenOptions;
@@ -33,6 +34,7 @@ use crate::extract::{
     apply_extract, extend_task, extract_task,
 };
 use crate::graph::Graph;
+use crate::outline::{OUTLINE_INSTRUCTIONS, OutlineAnswer, apply_outline, outline_task};
 use crate::plan::{Plan, plan};
 use crate::project::Project;
 use crate::write::{WRITE_INSTRUCTIONS, apply_write, needs_write, write_task};
@@ -44,6 +46,7 @@ pub enum Kind {
     Extend,
     Write { page: String },
     Audit { page: String, input: String },
+    Outline,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -60,6 +63,7 @@ impl Task {
             Kind::Extend => "extend",
             Kind::Write { .. } => "write",
             Kind::Audit { .. } => "audit",
+            Kind::Outline => "outline",
         }
     }
 
@@ -175,6 +179,7 @@ fn render(project: &Project, task: &Task, instructions: &str, input: &str) -> St
         Kind::Extract => json_format::<ExtractAnswer>(),
         Kind::Extend => json_format::<ExtendAnswer>(),
         Kind::Audit { .. } => json_format::<AuditAnswer>(),
+        Kind::Outline => json_format::<OutlineAnswer>(),
         Kind::Write { .. } => "The answer is the page body as markdown (not JSON).".to_string(),
     };
     format!(
@@ -208,6 +213,7 @@ fn issue(project: &Project, state: &mut State, items: Vec<(Kind, &str, String)>)
             Kind::Extend => "extend".to_string(),
             Kind::Write { page } => format!("write-{page}"),
             Kind::Audit { page, .. } => format!("audit-{page}"),
+            Kind::Outline => "outline".to_string(),
         };
         let task = Task {
             id: format!("{:04}-{label}", state.next_id),
@@ -270,6 +276,14 @@ pub fn next(project: &Project) -> Result<Next> {
             return issue(project, &mut state, items);
         }
         if state.done {
+            if crate::outline::current(project, &plan)?.is_none() {
+                let input = outline_task(project, &graph, &plan);
+                return issue(
+                    project,
+                    &mut state,
+                    vec![(Kind::Outline, OUTLINE_INSTRUCTIONS, input)],
+                );
+            }
             write_json(&project.state_path(), &state)?;
             return Ok(Next::Done(build(project, &graph, &plan)?));
         }
@@ -367,6 +381,12 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
             state.audited.insert(page.clone(), input.clone());
             record(project, state.round, audit)?;
             project.save_graph(&graph)?;
+            Vec::new()
+        }
+        Kind::Outline => {
+            let graph = require(graph)?;
+            let plan = plan(&graph, &project.sources)?;
+            apply_outline(project, &graph, &plan, parse(&path, &text)?)?;
             Vec::new()
         }
     };

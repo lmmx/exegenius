@@ -8,6 +8,7 @@
 //! exegenius/tasks/       task files and their answer files
 //! exegenius/pages/       page bodies
 //! exegenius/audit.json   audit results, one record per round
+//! exegenius/outline.json parts and front page
 //! docs/, zensical.toml   build output
 //! ```
 
@@ -112,6 +113,10 @@ impl Project {
 
     pub fn tasks_dir(&self) -> PathBuf {
         self.state_dir().join("tasks")
+    }
+
+    pub fn outline_path(&self) -> PathBuf {
+        self.state_dir().join("outline.json")
     }
 
     pub fn manifest_path(&self) -> PathBuf {
