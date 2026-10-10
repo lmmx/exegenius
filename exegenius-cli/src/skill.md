@@ -20,8 +20,9 @@ and writing it asks for, task by task, until it reports done.
    stands in for a reader who has not read the sources or the other pages. Do not do
    audits yourself.
 4. When every task in the batch is accepted, go back to step 1.
-5. Once the pages are final, `exegenius next` hands out one outline task: group the pages
-   into parts and write the front page.
+5. Once the pages are final, `exegenius next` hands out the outline task (group the pages
+   into parts, fold minor pages into a glossary, write the front page) and the notation
+   task (list the symbols), as one batch of two independent tasks.
 6. When `exegenius next` prints `done`, the wiki is in `docs/` with a `zensical.toml`.
    Run `exegenius status` and report it.
 7. If the user wants the wiki online, run `exegenius init --vercel`: it adds `vercel.json`

@@ -1,9 +1,12 @@
-//! Outline task: once the pages are final, group them into parts and write the front page.
+//! Outline task: once the pages are final, group them into parts, fold minor pages into a
+//! glossary, and write the front page.
 //!
-//! The agent proposes the parts and writes the overview and part intros. Code checks that
-//! every page is in exactly one part and that no page comes before a part holding one of
-//! its prerequisites, then orders each part's pages by the plan, so the outline's order
-//! (part by part) is a valid reading order.
+//! The agent proposes the parts and the glossary and writes the overview and part intros.
+//! Code checks that every page is in exactly one part or the glossary and that no page in a
+//! part comes before a part holding one of its prerequisites, then orders each part's pages
+//! by the plan, so the outline's order (part by part) is a valid reading order. Glossary
+//! entries are reference material: they sit outside the reading order, and links to them
+//! lead to their entry on the glossary page.
 
 use std::collections::{HashMap, HashSet};
 
@@ -23,9 +26,15 @@ wiki explains a target result to a specific reader, one concept per page.
 - Group the pages into parts that the reader works through in order, each a coherent stage \
 of the explanation (for example: background, the main construction, the analysis). Aim for \
 3 to 8 parts; a small wiki may need fewer.
-- Put every page in exactly one part. Each page's prerequisites (listed below) must be in \
-the same part or an earlier one; submit rejects an outline that breaks this. Pages within a \
-part are shown in reading order automatically, so their order in your list does not matter.
+- Put every page in exactly one part, or in the glossary. Each page's prerequisites (listed \
+below) must be in the glossary, the same part or an earlier one; submit rejects an outline \
+that breaks this. Pages within a part are shown in reading order automatically, so their \
+order in your list does not matter.
+- Glossary: minor pages that define a term in a few sentences rather than explain an idea, \
+such as a short page on a piece of terminology that one or two other pages use. They move \
+to a glossary page, out of the reading order; links to them still work. Keep every page that \
+explains a method, construction, result or argument in a part. Never put the target in the \
+glossary. The word count and the number of pages using each page are listed to help.
 - Part titles: 2 to 5 words, plain text, no numbering.
 - Part intros: 2 to 4 sentences on what the part covers and why the reader needs it for what \
 comes next. Link pages as `[Name](id.md)`.
@@ -43,6 +52,9 @@ pub struct OutlineAnswer {
     pub overview: String,
     /// The parts, in reading order.
     pub parts: Vec<Part>,
+    /// Ids of minor pages to move to the glossary.
+    #[serde(default)]
+    pub glossary: Vec<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -63,6 +75,9 @@ pub struct Outline {
     pub planned: Vec<String>,
     pub overview: String,
     pub parts: Vec<Part>,
+    /// Pages folded into the glossary, in plan order.
+    #[serde(default)]
+    pub glossary: Vec<String>,
 }
 
 impl Outline {
@@ -93,7 +108,7 @@ pub fn current(project: &Project, plan: &Plan) -> Result<Option<Outline>> {
     Ok(outline.is_current(plan).then_some(outline))
 }
 
-pub fn outline_task(project: &Project, graph: &Graph, plan: &Plan) -> String {
+pub fn outline_task(project: &Project, graph: &Graph, plan: &Plan) -> Result<String> {
     let mut task = String::new();
     if let Some(target) = graph.get(&graph.target) {
         task.push_str(&format!(
@@ -118,13 +133,27 @@ pub fn outline_task(project: &Project, graph: &Graph, plan: &Plan) -> String {
         } else {
             format!(" Needs: {}.", needs.join(", "))
         };
-        task.push_str(&format!("- `{}`: {} — {}{needs}\n", c.id, link(c), c.gloss));
+        let words = project
+            .page_body(id)?
+            .map_or(0, |b| b.split_whitespace().count());
+        let used_by = plan
+            .order
+            .iter()
+            .filter_map(|d| graph.get(d))
+            .filter(|d| d.requires.contains(id))
+            .count();
+        task.push_str(&format!(
+            "- `{}`: {} — {}{needs} ({words} words, used by {used_by})\n",
+            c.id,
+            link(c),
+            c.gloss
+        ));
     }
     task.push_str(
         "\nThe page bodies are in `exegenius/pages/<id>.md`; read them if the glosses are \
          not enough to write the overview.\n",
     );
-    task
+    Ok(task)
 }
 
 /// Check an outline and store it.
@@ -165,14 +194,34 @@ pub fn apply_outline(
             }
         }
     }
+    let mut glossary: HashSet<&str> = HashSet::new();
+    for page in &answer.glossary {
+        if !pages.contains(page) {
+            errors.push(format!("glossary: `{page}` is not a page of this wiki"));
+        } else if *page == graph.target {
+            errors.push(format!(
+                "`{page}` is the target and cannot go in the glossary"
+            ));
+        } else if let Some(i) = part_of.get(page.as_str()) {
+            errors.push(format!(
+                "`{page}` is in part {} and the glossary; put it in one",
+                i + 1
+            ));
+        } else if !glossary.insert(page) {
+            errors.push(format!("`{page}` is in the glossary twice"));
+        }
+    }
     let missing: Vec<&str> = plan
         .order
         .iter()
-        .filter(|p| !part_of.contains_key(p.as_str()))
+        .filter(|p| !part_of.contains_key(p.as_str()) && !glossary.contains(p.as_str()))
         .map(String::as_str)
         .collect();
     if !missing.is_empty() {
-        errors.push(format!("pages in no part: {}", missing.join(", ")));
+        errors.push(format!(
+            "pages in no part and not in the glossary: {}",
+            missing.join(", ")
+        ));
     }
     for (page, &i) in &part_of {
         let c = graph.get(page).expect("planned pages are concepts");
@@ -230,10 +279,13 @@ pub fn apply_outline(
             part
         })
         .collect();
+    let mut glossary = answer.glossary;
+    glossary.sort_by_key(|p| position[p.as_str()]);
     let outline = Outline {
         planned: sorted(plan),
         overview: answer.overview.trim().to_string(),
         parts,
+        glossary,
     };
     write_json(&project.outline_path(), &outline)?;
     Ok(outline)

@@ -169,12 +169,23 @@ fn print_build(project: &Project, report: &BuildReport) {
             report.missing.join(", ")
         );
     }
-    let parts = match report.parts {
-        Some(n) => format!(" in {n} parts"),
-        None => String::new(),
+    let mut extras = Vec::new();
+    if let Some(n) = report.parts {
+        extras.push(format!("{n} parts"));
+    }
+    if report.glossary > 0 {
+        extras.push(format!("{} in the glossary", report.glossary));
+    }
+    if report.symbols > 0 {
+        extras.push(format!("{} symbols on the notation page", report.symbols));
+    }
+    let extras = if extras.is_empty() {
+        String::new()
+    } else {
+        format!(" ({})", extras.join(", "))
     };
     println!(
-        "wrote {} pages{parts} to {} and {}; view with `zensical serve`",
+        "wrote {} pages{extras} to {} and {}; view with `zensical serve`",
         report.pages.len(),
         project.docs_dir().display(),
         project.zensical_path().display()
@@ -194,10 +205,11 @@ fn next(project: &Project) -> anyhow::Result<()> {
             }
         }
         Next::Tasks { round, tasks } => {
-            let label = tasks[0].label();
+            let mut labels: Vec<&str> = tasks.iter().map(|t| t.label()).collect();
+            labels.dedup();
             let phase = match tasks[0].kind {
                 Kind::Audit { .. } => format!("audit round {round}"),
-                _ => label.to_string(),
+                _ => labels.join(" and "),
             };
             println!("{} pending task(s): {phase}\n", tasks.len());
             for t in &tasks {
@@ -273,10 +285,19 @@ fn status(project: &Project) -> anyhow::Result<()> {
     );
     let outline = outline::current(project, &plan)?;
     match &outline {
-        Some(outline) => println!("outline: {} parts", outline.parts.len()),
+        Some(outline) => println!(
+            "outline: {} parts, {} pages in the glossary",
+            outline.parts.len(),
+            outline.glossary.len()
+        ),
         None => println!("outline: not yet (handed out once the pages are final)"),
     }
-    if state.done && outline.is_some() {
+    let notation = exegenius_core::notation::current(project, &plan)?;
+    match &notation {
+        Some(notation) => println!("notation: {} symbols", notation.symbols.len()),
+        None => println!("notation: not yet (handed out once the pages are final)"),
+    }
+    if state.done && outline.is_some() && notation.is_some() {
         println!("state: done (docs/ and zensical.toml are built)");
     } else if !state.pending.is_empty() {
         let ids: Vec<&str> = state.pending.iter().map(|t| t.id.as_str()).collect();

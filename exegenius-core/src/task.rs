@@ -11,8 +11,9 @@
 //!    when its last audit is submitted, and the loop stops after a round with no gaps or
 //!    after `rounds` rounds
 //!
-//! When nothing is left, `next` hands out one outline task (parts and front page) if the
-//! pages have no current outline, and then builds the docs. Writes queued by the last audit
+//! When nothing is left, `next` hands out the outline task (parts, glossary and front page)
+//! and the notation task, each if the pages have no current answer for it, in one batch,
+//! and then builds the docs. Writes queued by the last audit
 //! round are still handed out (and not audited) before the outline.
 
 use std::collections::BTreeMap;
@@ -34,6 +35,7 @@ use crate::extract::{
     apply_extract, extend_task, extract_task,
 };
 use crate::graph::Graph;
+use crate::notation::{NOTATION_INSTRUCTIONS, NotationAnswer, apply_notation, notation_task};
 use crate::outline::{OUTLINE_INSTRUCTIONS, OutlineAnswer, apply_outline, outline_task};
 use crate::plan::{Plan, plan};
 use crate::project::Project;
@@ -47,6 +49,7 @@ pub enum Kind {
     Write { page: String },
     Audit { page: String, input: String },
     Outline,
+    Notation,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -64,6 +67,7 @@ impl Task {
             Kind::Write { .. } => "write",
             Kind::Audit { .. } => "audit",
             Kind::Outline => "outline",
+            Kind::Notation => "notation",
         }
     }
 
@@ -180,6 +184,7 @@ fn render(project: &Project, task: &Task, instructions: &str, input: &str) -> St
         Kind::Extend => json_format::<ExtendAnswer>(),
         Kind::Audit { .. } => json_format::<AuditAnswer>(),
         Kind::Outline => json_format::<OutlineAnswer>(),
+        Kind::Notation => json_format::<NotationAnswer>(),
         Kind::Write { .. } => "The answer is the page body as markdown (not JSON).".to_string(),
     };
     format!(
@@ -214,6 +219,7 @@ fn issue(project: &Project, state: &mut State, items: Vec<(Kind, &str, String)>)
             Kind::Write { page } => format!("write-{page}"),
             Kind::Audit { page, .. } => format!("audit-{page}"),
             Kind::Outline => "outline".to_string(),
+            Kind::Notation => "notation".to_string(),
         };
         let task = Task {
             id: format!("{:04}-{label}", state.next_id),
@@ -276,13 +282,17 @@ pub fn next(project: &Project) -> Result<Next> {
             return issue(project, &mut state, items);
         }
         if state.done {
+            let mut items = Vec::new();
             if crate::outline::current(project, &plan)?.is_none() {
-                let input = outline_task(project, &graph, &plan);
-                return issue(
-                    project,
-                    &mut state,
-                    vec![(Kind::Outline, OUTLINE_INSTRUCTIONS, input)],
-                );
+                let input = outline_task(project, &graph, &plan)?;
+                items.push((Kind::Outline, OUTLINE_INSTRUCTIONS, input));
+            }
+            if crate::notation::current(project, &plan)?.is_none() {
+                let input = notation_task(&graph, &plan);
+                items.push((Kind::Notation, NOTATION_INSTRUCTIONS, input));
+            }
+            if !items.is_empty() {
+                return issue(project, &mut state, items);
             }
             write_json(&project.state_path(), &state)?;
             return Ok(Next::Done(build(project, &graph, &plan)?));
@@ -387,6 +397,12 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
             let graph = require(graph)?;
             let plan = plan(&graph, &project.sources)?;
             apply_outline(project, &graph, &plan, parse(&path, &text)?)?;
+            Vec::new()
+        }
+        Kind::Notation => {
+            let graph = require(graph)?;
+            let plan = plan(&graph, &project.sources)?;
+            apply_notation(project, &plan, parse(&path, &text)?)?;
             Vec::new()
         }
     };
