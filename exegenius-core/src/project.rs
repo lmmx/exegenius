@@ -1,13 +1,14 @@
-//! A project directory: configuration, sources, and the state exegenius keeps between steps.
+//! A project directory: configuration, sources, and the state exegenius keeps.
 //!
 //! ```text
-//! exegenius.toml        configuration
-//! sources/              source documents (paths given in exegenius.toml)
-//! exegenius/graph.json  concept graph
-//! exegenius/pages/      model-written page bodies
-//! exegenius/audit.json  audit results, one record per round
-//! exegenius/cache/      model responses keyed by request hash
-//! docs/, zensical.toml  build output
+//! exegenius.toml         configuration
+//! sources/               source documents (paths given in exegenius.toml)
+//! exegenius/graph.json   concept graph, candidate concepts, queued rewrites
+//! exegenius/state.json   task state: issued tasks, audit round, audited pages
+//! exegenius/tasks/       task files and their answer files
+//! exegenius/pages/       page bodies
+//! exegenius/audit.json   audit results, one record per round
+//! docs/, zensical.toml   build output
 //! ```
 
 use std::path::{Path, PathBuf};
@@ -23,19 +24,20 @@ pub struct Source {
     pub id: String,
     pub title: String,
     pub url: Option<String>,
-    pub text: String,
-    /// `text` passed through [`normalise`], for verbatim quote checks.
+    /// Path relative to the project directory.
+    pub path: PathBuf,
+    /// The text passed through [`normalise`], for verbatim quote checks.
     pub normalised: String,
 }
 
 impl Source {
-    pub fn new(id: &str, title: Option<&str>, url: Option<&str>, text: String) -> Self {
+    pub fn new(id: &str, title: Option<&str>, url: Option<&str>, path: &Path, text: &str) -> Self {
         Self {
             id: id.to_string(),
             title: title.unwrap_or(id).to_string(),
             url: url.map(str::to_string),
-            normalised: normalise(&text),
-            text,
+            path: path.to_path_buf(),
+            normalised: normalise(text),
         }
     }
 
@@ -61,6 +63,11 @@ pub struct Project {
 
 impl Project {
     pub fn load(root: &Path) -> Result<Self> {
+        // Absolute, so task files work from any working directory.
+        let root = &std::fs::canonicalize(root).map_err(|source| crate::error::Error::Io {
+            path: root.to_path_buf(),
+            source,
+        })?;
         let config = Config::load(&root.join(config::FILE_NAME))?;
         let sources = config
             .sources
@@ -71,7 +78,8 @@ impl Project {
                     &spec.id,
                     spec.title.as_deref(),
                     spec.url.as_deref(),
-                    text,
+                    &spec.path,
+                    &text,
                 ))
             })
             .collect::<Result<_>>()?;
@@ -90,12 +98,20 @@ impl Project {
         self.state_dir().join("graph.json")
     }
 
+    pub fn state_path(&self) -> PathBuf {
+        self.state_dir().join("state.json")
+    }
+
+    pub fn lock_path(&self) -> PathBuf {
+        self.state_dir().join("lock")
+    }
+
     pub fn audit_path(&self) -> PathBuf {
         self.state_dir().join("audit.json")
     }
 
-    pub fn cache_dir(&self) -> PathBuf {
-        self.state_dir().join("cache")
+    pub fn tasks_dir(&self) -> PathBuf {
+        self.state_dir().join("tasks")
     }
 
     pub fn manifest_path(&self) -> PathBuf {
@@ -140,17 +156,19 @@ impl Project {
         write(&self.page_path(id), body)
     }
 
-    /// The sources as one block of model context, each wrapped in a `<source>` element.
-    pub fn sources_context(&self) -> String {
-        let mut out = String::new();
-        for source in &self.sources {
-            out.push_str(&format!(
-                "<source id=\"{}\" title=\"{}\">\n{}\n</source>\n\n",
-                source.id,
-                source.title,
-                source.text.trim()
-            ));
-        }
-        out
+    /// The sources as a markdown list of files to read.
+    pub fn sources_listing(&self) -> String {
+        self.sources
+            .iter()
+            .map(|s| {
+                format!(
+                    "- `{}`: source id `{}`, \"{}\"",
+                    s.path.display(),
+                    s.id,
+                    s.title
+                )
+            })
+            .collect::<Vec<_>>()
+            .join("\n")
     }
 }

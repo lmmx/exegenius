@@ -10,8 +10,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::text::key;
 
-/// One concept. This is also the shape the model returns from extraction, so the field
-/// docs double as instructions to the model.
+/// One concept. This is also the shape of a concept in an extract answer, so the field
+/// docs double as instructions in the task file.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
 pub struct Concept {

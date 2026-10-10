@@ -34,14 +34,13 @@ tempfile = "3"
 thiserror = "2"
 toml = "0.9"
 toml_edit = "0.23"
-ureq = { features = ["json"], version = "3" }
 
 [workspace.package]
 authors = ["Louis Maddox <louismmx@gmail.com>"]
 description = "Build evidence linked knowledge graphs and optimise explanation paths through simulated readers"
 edition = "2024"
 homepage = "https://github.com/lmmx/exegenius"
-keywords = ["documentation", "knowledge-graph", "llm", "wiki"]
+keywords = ["claude-code", "documentation", "knowledge-graph", "wiki"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/lmmx/exegenius"

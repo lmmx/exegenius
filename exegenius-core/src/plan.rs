@@ -149,7 +149,8 @@ mod tests {
             "s",
             None,
             None,
-            "alpha beta gamma delta".into(),
+            std::path::Path::new("s.txt"),
+            "alpha beta gamma delta",
         )];
         let g = graph(
             "t",

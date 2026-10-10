@@ -74,7 +74,7 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
         let (body, removed, _) = fix_links(&body, &pages);
         for dest in removed {
             report.warnings.push(format!(
-                "`{id}`: link to {dest:?} rendered as text (not a page)"
+                "`{id}`: link to \"{dest}\" rendered as text (not a page)"
             ));
         }
         let c = graph.get(id).expect("planned pages are concepts");
@@ -181,7 +181,7 @@ fn render_index(project: &Project, graph: &Graph, plan: &Plan, pages: &[String])
     let mut out = format!("# {}\n\n", title(project, graph));
     if let Some(target) = graph.get(&graph.target) {
         out.push_str(&format!(
-            "This wiki explains {}: {}\n\n",
+            "This wiki explains {}. {}\n\n",
             link(target),
             target.gloss
         ));
@@ -240,7 +240,7 @@ pub fn zensical_toml(
         None => project["docs_dir"] = toml_edit::value("docs"),
         Some("docs") => {}
         Some(other) => warnings.push(format!(
-            "zensical.toml sets docs_dir = {other:?}, but exegenius writes to \"docs\""
+            "zensical.toml sets docs_dir = \"{other}\", but exegenius writes to \"docs\""
         )),
     }
 

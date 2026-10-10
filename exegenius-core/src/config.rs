@@ -17,10 +17,15 @@ pub struct Config {
     pub title: Option<String>,
     /// What the wiki should explain, in plain words.
     pub target: String,
+    /// Maximum number of audit rounds.
+    #[serde(default = "default_rounds")]
+    pub rounds: u32,
     pub reader: Reader,
     pub sources: Vec<SourceSpec>,
-    #[serde(default)]
-    pub model: ModelConfig,
+}
+
+fn default_rounds() -> u32 {
+    3
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -40,27 +45,6 @@ pub struct SourceSpec {
     pub title: Option<String>,
     #[serde(default)]
     pub url: Option<String>,
-}
-
-#[derive(Debug, Clone, Deserialize)]
-#[serde(default, deny_unknown_fields)]
-pub struct ModelConfig {
-    pub name: String,
-    pub effort: String,
-    pub max_tokens: u32,
-    /// Opt into server-side fallback on refusals (`fallbacks: "default"`).
-    pub fallbacks: bool,
-}
-
-impl Default for ModelConfig {
-    fn default() -> Self {
-        Self {
-            name: "claude-opus-5-5".to_string(),
-            effort: "high".to_string(),
-            max_tokens: 128000,
-            fallbacks: true,
-        }
-    }
 }
 
 impl Config {
@@ -99,6 +83,9 @@ pub const TEMPLATE: &str = r#"# exegenius project configuration
 # What the wiki should explain, in plain words
 target = "The main result of the paper"
 
+# Maximum number of audit rounds
+rounds = 3
+
 [reader]
 # What the reader already knows, in plain words
 knows = "Undergraduate computer science: big-O notation, polynomials, complex numbers"
@@ -109,12 +96,6 @@ id = "paper"
 path = "sources/paper.txt"
 # title = "Paper title"
 # url = "https://example.org/paper"
-
-[model]
-name = "claude-opus-5-5"
-effort = "high"
-max_tokens = 128000
-fallbacks = true
 "#;
 
 #[cfg(test)]
@@ -125,16 +106,16 @@ mod tests {
     fn template_parses() {
         let config: Config = toml::from_str(TEMPLATE).unwrap();
         config.check(Path::new(FILE_NAME)).unwrap();
-        assert_eq!(config.model.name, "claude-opus-5-5");
+        assert_eq!(config.rounds, 3);
         assert_eq!(config.sources[0].path, PathBuf::from("sources/paper.txt"));
     }
 
     #[test]
-    fn model_section_is_optional() {
+    fn rounds_default_to_three() {
         let config: Config = toml::from_str(
             "target = \"t\"\n[reader]\nknows = \"k\"\n[[sources]]\nid = \"a\"\npath = \"a.txt\"\n",
         )
         .unwrap();
-        assert_eq!(config.model.max_tokens, 128000);
+        assert_eq!(config.rounds, 3);
     }
 }
