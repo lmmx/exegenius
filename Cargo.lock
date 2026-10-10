@@ -177,7 +177,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "exegenius-cli"
+name = "exegenius"
 version = "0.1.0"
 dependencies = [
  "anyhow",

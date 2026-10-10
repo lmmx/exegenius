@@ -10,12 +10,12 @@ exegenius-core = { workspace = true }
 [package]
 authors.workspace = true
 categories = ["command-line-utilities", "text-processing"]
-description = "Command-line interface for exegenius"
+description = "Turn source documents into a wiki of linked explanatory pages for a stated reader, driven by a coding agent"
 edition.workspace = true
 homepage.workspace = true
 keywords.workspace = true
 license.workspace = true
-name = "exegenius-cli"
+name = "exegenius"
 readme = "../README.md"
 repository.workspace = true
 version = "0.1.0"
