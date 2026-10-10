@@ -200,7 +200,7 @@ pub fn report(config: &Config, graph: &Graph, simulation: &Simulation) -> String
             if !run.leaks.is_empty() {
                 let leaks: Vec<&str> = run.leaks.iter().map(|id| name(graph, id)).collect();
                 out.push_str(&format!(
-                    "\nLeaks (real names the reader could not have read): {}\n",
+                    "\nPossible leaks (real names the reader was not shown): {}\n",
                     leaks.join(", ")
                 ));
             }

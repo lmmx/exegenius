@@ -182,8 +182,16 @@ fn task_loop_end_to_end() {
         let body = if page(t) == "chirp-identity" {
             let file = read(&project, t.file());
             assert!(file.contains("Previous version") && file.contains("now a prerequisite"));
+            answer(
+                &project,
+                t,
+                "Exact <cite data-source=\"notes\">made up</cite>.",
+            );
+            let err = submit(&project, &t.id).unwrap_err().to_string();
+            assert!(err.contains("\"made up\" is not in that source"), "{err}");
             "Combine the [DFT](dft.md) and [convolution](convolution.md); values are \
-             [dyadic](dyadic-rational.md), so $nk$ is exact."
+             [dyadic](dyadic-rational.md), so $nk$ is exact \
+             <cite data-source=\"notes\">exact on dyadic real and imaginary parts</cite>."
         } else {
             "A number of the form $m/2^k$."
         };
@@ -280,6 +288,12 @@ fn task_loop_end_to_end() {
     assert_eq!((report.glossary, report.symbols), (1, 2));
     let chirp = read(&project, "docs/chirp-identity.md");
     assert!(chirp.starts_with("# Chirp identity\n\n!!! info \"Before this page\""));
+    assert!(
+        chirp.contains("is exact<cite class=\"exegenius-ref\" data-source=\"notes\"")
+            && chirp.contains("> (see Notes)</cite>."),
+        "{chirp}"
+    );
+    assert!(project.root.join("docs/stylesheets/exegenius.css").exists());
     let dyadic = "(glossary.md#dyadic-rational \"What Dyadic rational is.\")";
     assert!(
         chirp.contains(&format!("[Dyadic rational]{dyadic}")),
@@ -562,6 +576,8 @@ fn simulated_readers_end_to_end() {
     assert!(report.contains("| baseline (no wiki) | 1 | | | 0% | |"));
     assert!(report.contains("Path: Front page → Chirp identity → Front page"));
     assert!(report.contains("- Stuck on Chirp identity: \"using the\" — what the DFT does here"));
-    assert!(report.contains("Leaks (real names the reader could not have read): Chirp identity"));
+    assert!(
+        report.contains("Possible leaks (real names the reader was not shown): Chirp identity")
+    );
     assert!(!project.root.join("docs/report.md").exists());
 }

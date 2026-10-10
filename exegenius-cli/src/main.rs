@@ -223,8 +223,12 @@ fn next(project: &Project) -> anyhow::Result<()> {
             }
         }
         Next::Tasks { round, tasks } => {
-            let mut labels: Vec<&str> = tasks.iter().map(|t| t.label()).collect();
-            labels.dedup();
+            let mut labels: Vec<&str> = Vec::new();
+            for t in &tasks {
+                if !labels.contains(&t.label()) {
+                    labels.push(t.label());
+                }
+            }
             let phase = match tasks[0].kind {
                 Kind::Audit { .. } => format!("audit round {round}"),
                 _ => labels.join(" and "),

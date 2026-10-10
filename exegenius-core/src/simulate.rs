@@ -5,7 +5,8 @@
 //! sees the wiki only through `exegenius read` and `exegenius search`, which serve pages
 //! by opaque handles and log every step, so its path through the wiki is recorded rather
 //! than reported. With `nonce`, the concepts the wiki teaches carry invented names in
-//! everything the reader sees, so recall that depends on a concept's name is cut off, and
+//! everything the reader sees (names of several words and name-like words such as
+//! acronyms; single ordinary words are left alone), so recall that depends on a concept's name is cut off, and
 //! a reader that uses a real name in its answer has shown knowledge from outside the wiki.
 //!
 //! A matched baseline answers each question with no wiki at all. A blind grader then
@@ -59,8 +60,9 @@ does not. When a page relies on something outside that background, the reader ha
 it in the wiki: follow a link, search, or go back to an earlier page.
 - The wiki may give the concepts it teaches invented names. Treat them as new words: do not \
 guess which real terms they stand for, and do not use real names for them in your answer.
-- See the wiki only through the two commands below. Do not open files, search the web or \
-use any other tool to learn about the subject.
+- See the wiki only through the two commands below. Use no other tools except to write \
+your answer file and run `exegenius submit`: do not open files, search the web, or start \
+sessions or agents.
 - Record every place you got stuck: the page, a short quote copied from it, and what you \
 could not follow. Include places you got past only by guessing.
 - Answer from the pages alone. Support each step of the answer with a quote copied exactly \
@@ -75,7 +77,8 @@ wiki are compared against.
 
 - Use only what that background covers. Everything else you know, the reader does not.
 - Some names in the question may be invented: do not guess what they stand for.
-- Do not open files, search the web or use any tool. If the background does not let the \
+- Use no tools except to write your answer file and run `exegenius submit`: do not open \
+files, search the web, or start sessions or agents. If the background does not let the \
 reader answer, say so plainly instead of guessing.";
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
@@ -330,9 +333,13 @@ impl<'a> Lens<'a> {
                     n += 1;
                 }
                 taken.insert(word.clone());
+                // A single ordinary word ("Record", "row") is left alone: renaming it would
+                // also rename its everyday uses ("records" as a verb), and it gives little
+                // away.
                 for name in std::iter::once(&c.name).chain(&c.aliases) {
-                    if name.trim().chars().count() >= 2 {
-                        renames.push((name.trim().to_string(), word.clone()));
+                    let name = name.trim();
+                    if name.split_whitespace().count() > 1 || crate::autolink::is_name_like(name) {
+                        renames.push((name.to_string(), word.clone()));
                     }
                 }
                 nonces.insert(word, c.id.clone());
@@ -507,7 +514,7 @@ impl<'a> Lens<'a> {
         if !known.is_empty() {
             out.push_str(&format!("Assumes: {}.\n", known.join(", ")));
         }
-        out.push_str(&format!("\n{}\n", body.trim()));
+        out.push_str(&format!("\n{}\n", crate::cite::strip(body).trim()));
         let used_by: Vec<String> = self
             .pages
             .iter()

@@ -38,6 +38,61 @@ use crate::write::{fix_links, link_target};
 const GLOSSARY: &str = "glossary.md";
 const NOTATION: &str = "notation.md";
 
+pub const STYLESHEET: &str = "stylesheets/exegenius.css";
+pub const SCRIPT: &str = "javascripts/exegenius.js";
+
+const CSS: &str = r#".exegenius-ref {
+  display: none;
+  font-size: 0.85em;
+  color: var(--md-default-fg-color--light);
+  font-style: normal;
+}
+.exegenius-refs-shown .exegenius-ref {
+  display: inline;
+}
+.exegenius-ref-toggle {
+  float: right;
+  font-size: 0.7rem;
+  cursor: pointer;
+  color: var(--md-default-fg-color--light);
+  background: none;
+  border: none;
+}
+"#;
+
+/// Shows a toggle on pages with source references; the choice is remembered.
+fn script(shown: bool) -> String {
+    format!(
+        r#"(() => {{
+  const key = "exegenius-refs";
+  const apply = shown => document.body.classList.toggle("exegenius-refs-shown", shown);
+  const stored = () => {{
+    try {{ return localStorage.getItem(key); }} catch (e) {{ return null; }}
+  }};
+  const isShown = () => (stored() ?? "{default}") === "shown";
+  const setup = () => {{
+    apply(isShown());
+    const article = document.querySelector("article");
+    if (!article || !article.querySelector(".exegenius-ref")) return;
+    const button = document.createElement("button");
+    button.className = "exegenius-ref-toggle";
+    const label = () => button.textContent = isShown() ? "Hide sources" : "Show sources";
+    label();
+    button.addEventListener("click", () => {{
+      try {{ localStorage.setItem(key, isShown() ? "hidden" : "shown"); }} catch (e) {{}}
+      apply(isShown());
+      label();
+    }});
+    article.prepend(button);
+  }};
+  if (typeof document$ !== "undefined") document$.subscribe(setup);
+  else document.addEventListener("DOMContentLoaded", setup);
+}})();
+"#,
+        default = if shown { "shown" } else { "hidden" }
+    )
+}
+
 pub const MATHJAX_CONFIG: &str = "javascripts/mathjax.js";
 pub const MATHJAX_CDN: &str = "https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js";
 
@@ -317,7 +372,8 @@ fn render_page(site: &Site, c: &Concept, body: &str) -> String {
             note.join(" ")
         ));
     }
-    out.push_str(&decorate(body.trim(), site, ""));
+    let body = crate::cite::render(body.trim(), &site.project.sources);
+    out.push_str(&decorate(&body, site, ""));
     out.push('\n');
 
     let used_by = site.dependents(&c.id);
@@ -403,7 +459,11 @@ fn render_glossary(site: &Site, entries: &[(&Concept, String)]) -> String {
             "\n## {} {{ #{} }}\n\n{}\n",
             c.name,
             c.id,
-            decorate(&demote(body.trim()), site, "")
+            decorate(
+                &demote(&crate::cite::render(body.trim(), &site.project.sources)),
+                site,
+                ""
+            )
         ));
         let used_by: Vec<String> = site
             .dependents(&c.id)
@@ -802,6 +862,11 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
     write(&docs.join("index.md"), &index)?;
     written.insert("index.md".to_string());
 
+    write(&docs.join(STYLESHEET), CSS)?;
+    written.insert(STYLESHEET.to_string());
+    let shown = project.config.site.citations == crate::config::Visibility::Shown;
+    write(&docs.join(SCRIPT), &script(shown))?;
+    written.insert(SCRIPT.to_string());
     let mathjax = docs.join(MATHJAX_CONFIG);
     if !mathjax.exists() {
         write(&mathjax, MATHJAX_JS)?;
@@ -921,7 +986,7 @@ pub fn zensical_toml(
         .or_insert(toml_edit::value(Array::new()));
     match scripts.as_array_mut() {
         Some(array) => {
-            for script in [MATHJAX_CONFIG, MATHJAX_CDN] {
+            for script in [MATHJAX_CONFIG, MATHJAX_CDN, SCRIPT] {
                 if !array.iter().any(|v| v.as_str() == Some(script)) {
                     array.push(script);
                 }
@@ -930,6 +995,18 @@ pub fn zensical_toml(
         None => warnings.push(
             "zensical.toml extra_javascript is not an array; MathJax scripts not added".into(),
         ),
+    }
+
+    let styles = project
+        .entry("extra_css")
+        .or_insert(toml_edit::value(Array::new()));
+    match styles.as_array_mut() {
+        Some(array) => {
+            if !array.iter().any(|v| v.as_str() == Some(STYLESHEET)) {
+                array.push(STYLESHEET);
+            }
+        }
+        None => warnings.push("zensical.toml extra_css is not an array; styles not added".into()),
     }
 
     let theme = project.entry("theme").or_insert(Item::Table(Table::new()));
@@ -978,7 +1055,8 @@ mod tests {
         let section = nav[2]["Background"].as_array().unwrap();
         assert_eq!(section[0].as_str(), Some("background/index.md"));
         assert_eq!(section[1]["DFT"].as_str(), Some("dft.md"));
-        assert_eq!(project["extra_javascript"].as_array().unwrap().len(), 2);
+        assert_eq!(project["extra_javascript"].as_array().unwrap().len(), 3);
+        assert_eq!(project["extra_css"].as_array().unwrap().len(), 1);
         let features = project["theme"]["features"].as_array().unwrap();
         assert_eq!(features.len(), FEATURES.len());
     }
@@ -1000,7 +1078,10 @@ mod tests {
             .iter()
             .filter_map(|v| v.as_str())
             .collect();
-        assert_eq!(scripts, vec!["javascripts/mathjax.js", "x.js", MATHJAX_CDN]);
+        assert_eq!(
+            scripts,
+            vec!["javascripts/mathjax.js", "x.js", MATHJAX_CDN, SCRIPT]
+        );
         assert_eq!(project["theme"]["features"].as_array().unwrap().len(), 1);
     }
 
@@ -1026,6 +1107,7 @@ mod tests {
                 sources: vec![],
                 simulation: Default::default(),
                 readers: vec![],
+                site: Default::default(),
             },
             sources: vec![],
         };

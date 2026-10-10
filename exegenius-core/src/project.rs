@@ -33,17 +33,90 @@ pub struct Source {
     pub path: PathBuf,
     /// The text passed through [`normalise`], for verbatim quote checks.
     pub normalised: String,
+    /// Offsets in `normalised` where each page starts, if the text has page breaks
+    /// (form feeds, as `pdftotext` writes them).
+    pages: Vec<usize>,
+    /// Offsets in `normalised` of section headings, with the heading.
+    sections: Vec<(usize, String)>,
+}
+
+/// A section heading line: a markdown heading, or a numbered heading such as
+/// "3.2 Gaussian resampling".
+fn heading(line: &str) -> Option<String> {
+    if let Some(rest) = line.strip_prefix('#') {
+        let title = rest.trim_start_matches('#').trim();
+        return (!title.is_empty()).then(|| title.to_string());
+    }
+    let (number, title) = line.split_once(' ')?;
+    let number = number.trim_end_matches('.');
+    let numbered = !number.is_empty()
+        && number
+            .split('.')
+            .all(|n| !n.is_empty() && n.chars().all(|c| c.is_ascii_digit()));
+    let title = title.trim();
+    (numbered
+        && line.chars().count() <= 80
+        && title.chars().next().is_some_and(char::is_uppercase)
+        && !title.ends_with('.'))
+    .then(|| format!("§{number} {title}"))
 }
 
 impl Source {
     pub fn new(id: &str, title: Option<&str>, url: Option<&str>, path: &Path, text: &str) -> Self {
+        // `normalise` collapses all whitespace, so the normalised text is the normalised
+        // lines (pieces between newlines and form feeds) joined by single spaces.
+        let mut pieces = Vec::new();
+        let mut pages = vec![0];
+        let mut sections = Vec::new();
+        let mut offset = 0;
+        for (p, page) in text.split('\u{c}').enumerate() {
+            if p > 0 {
+                pages.push(offset);
+            }
+            for line in page.lines() {
+                let piece = normalise(line);
+                if piece.is_empty() {
+                    continue;
+                }
+                if let Some(h) = heading(&piece) {
+                    sections.push((offset, h));
+                }
+                offset += piece.len() + 1;
+                pieces.push(piece);
+            }
+        }
+        if pages.len() == 1 {
+            pages.clear();
+        }
         Self {
             id: id.to_string(),
             title: title.unwrap_or(id).to_string(),
             url: url.map(str::to_string),
             path: path.to_path_buf(),
-            normalised: normalise(text),
+            normalised: pieces.join(" "),
+            pages,
+            sections,
         }
+    }
+
+    /// Where `quote` is in the source: `None` if it is not there word for word, otherwise
+    /// a locator such as "§3.2 Gaussian resampling, p. 5", if the source has sections or
+    /// page breaks.
+    pub fn locate(&self, quote: &str) -> Option<Option<String>> {
+        let quote = normalise(quote);
+        if quote.is_empty() {
+            return None;
+        }
+        let at = self.normalised.find(&quote)?;
+        let mut parts = Vec::new();
+        if let Some((_, h)) = self.sections.iter().rev().find(|(o, _)| *o <= at) {
+            parts.push(h.clone());
+        }
+        if !self.pages.is_empty() {
+            let page = self.pages.iter().filter(|&&o| o <= at).count();
+            parts.push(format!("p. {page}"));
+        }
+        Some((!parts.is_empty()).then(|| parts.join(", ")))
     }
 
     /// Markdown citation: a link when the source has a URL.

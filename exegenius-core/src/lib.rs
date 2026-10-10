@@ -21,6 +21,7 @@
 pub mod audit;
 pub mod autolink;
 pub mod build;
+pub mod cite;
 pub mod config;
 pub mod error;
 pub mod extract;

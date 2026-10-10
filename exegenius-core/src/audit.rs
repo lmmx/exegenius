@@ -120,7 +120,7 @@ pub fn audit_task(project: &Project, graph: &Graph, plan: &Plan, i: usize, body:
         names(&plan.known_at(graph, i)),
         pages.join("\n"),
         c.name,
-        body.trim()
+        crate::cite::strip(body).trim()
     )
 }
 
@@ -133,7 +133,7 @@ pub fn apply_audit(
     answer: AuditAnswer,
 ) -> Result<PageAudit> {
     let page = &plan.order[i];
-    let normalised = normalise(body);
+    let normalised = normalise(&crate::cite::strip(body));
     let missing: Vec<String> = answer
         .gaps
         .iter()

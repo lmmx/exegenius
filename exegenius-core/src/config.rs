@@ -35,6 +35,26 @@ pub struct Config {
     /// Further reader profiles for the simulation, beside `reader`.
     #[serde(default)]
     pub readers: Vec<Persona>,
+    #[serde(default)]
+    pub site: Site,
+}
+
+/// Settings for the built site.
+#[derive(Debug, Clone, Default, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Site {
+    /// Whether source references on pages start out shown or hidden; readers can toggle
+    /// them either way.
+    #[serde(default)]
+    pub citations: Visibility,
+}
+
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum Visibility {
+    #[default]
+    Hidden,
+    Shown,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -183,6 +203,10 @@ path = "sources/paper.txt"
 # rounds = 2      # 0 turns the simulation off
 # budget = 15     # most pages a reader may open per goal
 # nonce = true    # invented names for the concepts the wiki teaches
+
+# Source references on pages ("see p. 5"): hidden until a reader shows them, or shown
+# [site]
+# citations = "hidden"
 
 # Further reader profiles to simulate, beside [reader]
 # [[readers]]
