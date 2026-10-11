@@ -235,14 +235,22 @@ fn next(project: &Project) -> anyhow::Result<()> {
             };
             println!("{} pending task(s): {phase}\n", tasks.len());
             for t in &tasks {
+                let answer = project.root.join(t.answer());
+                let answer = match t.fields() {
+                    Some(fields) => format!(
+                        "{} and {}",
+                        answer.display(),
+                        project.root.join(fields).display()
+                    ),
+                    None => answer.display().to_string(),
+                };
                 println!(
                     "{id}\n  prompt: Do the exegenius task in {file}: follow its instructions, \
                      write the answer to {answer}, then run `exegenius submit {id}` in {root}. \
-                     If submit rejects the answer, fix the answer file and submit again until \
-                     it is accepted. Reply with only \"accepted\" or the last error.\n",
+                     If submit rejects the answer, fix the answer and submit again until it is \
+                     accepted. Reply with only \"accepted\" or the last error.\n",
                     id = t.id,
                     file = project.root.join(t.file()).display(),
-                    answer = project.root.join(t.answer()).display(),
                     root = project.root.display(),
                 );
             }
@@ -324,11 +332,14 @@ fn status(project: &Project) -> anyhow::Result<()> {
         ),
         None => println!("outline: not yet (handed out once the pages are final)"),
     }
-    let notation = exegenius_core::notation::current(project, &plan)?;
-    match &notation {
-        Some(notation) => println!("notation: {} symbols", notation.symbols.len()),
-        None => println!("notation: not yet (handed out once the pages are final)"),
-    }
+    let bound: usize = graph.bindings.values().map(Vec::len).sum();
+    let judged = exegenius_core::notation::load(project)?.judged;
+    let unjudged = exegenius_core::notation::unjudged(project, &graph, &plan)?.len();
+    println!(
+        "symbols: {bound} bound on pages; letters with two meanings: {} confirmed, {unjudged} \
+         awaiting a verdict",
+        judged.iter().filter(|j| !j.same).count()
+    );
     let simulation = exegenius_core::simulate::load(project)?;
     if !simulation.goals.is_empty() {
         println!("simulated readers: {} goals", simulation.goals.len());
@@ -353,7 +364,7 @@ fn status(project: &Project) -> anyhow::Result<()> {
         println!("pending tasks: {}", ids.join(", "));
     } else if state.done
         && outline.is_some()
-        && notation.is_some()
+        && unjudged == 0
         && simulated
         && graph.rewrite.is_empty()
     {

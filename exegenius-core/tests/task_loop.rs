@@ -1,5 +1,6 @@
 //! The task loop end to end, with scripted answers standing in for the agent: extract,
-//! write, audit (finding an unknown term), extend, rewrite, a clean audit round, outline,
+//! write (with the symbols each page binds), audit (finding an unknown term, and accounting
+//! for every symbol), extend, rewrite, a clean audit round, outline and an overload verdict,
 //! build; and the simulated readers: goals, reading through the CLI, a blind grade, repairs
 //! and a second round.
 
@@ -70,8 +71,28 @@ fn tasks(next: Next) -> Vec<Task> {
     }
 }
 
+/// An audit answer with no gaps and no symbols.
+const CLEAN: &str = "{\"symbols\": [], \"gaps\": []}";
+
 fn answer(project: &Project, task: &Task, text: &str) {
     std::fs::write(project.root.join(task.answer()), text).unwrap();
+    // Write tasks also take the symbols the page binds: none, unless the test gave some.
+    if let Some(fields) = task.fields() {
+        let path = project.root.join(fields);
+        if !path.exists() {
+            std::fs::write(path, "{\"symbols\": []}").unwrap();
+        }
+    }
+}
+
+fn bindings(project: &Project, task: &Task, symbols: serde_json::Value) {
+    let path = project.root.join(task.fields().unwrap());
+    std::fs::write(path, json!({ "symbols": symbols }).to_string()).unwrap();
+}
+
+fn binding(symbol: &str, name: &str, quote: &str) -> serde_json::Value {
+    json!({"symbol": symbol, "name": name, "meaning": format!("The {name}."),
+           "relation": "direct", "quote": quote})
 }
 
 fn page(task: &Task) -> &str {
@@ -107,7 +128,8 @@ fn task_loop_end_to_end() {
     );
     submit(&project, "0001-extract").unwrap();
 
-    // Write: three independent tasks; a link to a missing page is rejected.
+    // Write: three independent tasks; a link to a missing page is rejected, and so are a
+    // missing symbols file and a binding whose quote does not contain its symbol.
     let batch = tasks(next(&project).unwrap());
     let pages: Vec<&str> = batch.iter().map(page).collect();
     assert_eq!(pages, vec!["dft", "convolution", "chirp-identity"]);
@@ -117,12 +139,33 @@ fn task_loop_end_to_end() {
         } else if page(t) == "convolution" {
             "Convolution is what the discrete Fourier transform makes pointwise, as in $x^2$."
         } else {
-            "# Title to strip\n\nA short explanation with $x^2$."
+            "# Title to strip\n\nHere $x$ is the input sequence, so $x^2$ is its square."
         };
         if page(t) == "chirp-identity" {
             answer(&project, t, "See [elsewhere](bogus.md).");
             let err = submit(&project, &t.id).unwrap_err().to_string();
             assert!(err.contains("bogus.md"), "{err}");
+        }
+        if page(t) == "dft" {
+            std::fs::write(project.root.join(t.answer()), body).unwrap();
+            let err = submit(&project, &t.id).unwrap_err().to_string();
+            assert!(err.contains("write the symbols the page binds"), "{err}");
+            bindings(
+                &project,
+                t,
+                json!([binding("x", "input sequence", "its square")]),
+            );
+            let err = submit(&project, &t.id).unwrap_err().to_string();
+            assert!(
+                err.contains("`x`: the quote must cover the symbol"),
+                "{err}"
+            );
+            let quote = "Here $x$ is the input sequence";
+            bindings(
+                &project,
+                t,
+                json!([binding("$x$", "input sequence", quote)]),
+            );
         }
         answer(&project, t, body);
         submit(&project, &t.id).unwrap();
@@ -135,42 +178,65 @@ fn task_loop_end_to_end() {
             .contains("Title to strip")
     );
 
-    // Audit round 1, submitted concurrently: one unknown term on the chirp page.
+    // Audit round 1, submitted concurrently: one unknown term on the chirp page. The dft
+    // audit must account for the symbol its writer bound.
     let batch = tasks(next(&project).unwrap());
     assert_eq!(batch.len(), 3);
     assert!(batch.iter().all(|t| matches!(t.kind, Kind::Audit { .. })));
     let audit_file = read(&project, batch[2].file());
     assert!(audit_file.contains("with dyadic scaling") && audit_file.contains("- Complex numbers"));
+    answer(&project, &batch[0], CLEAN);
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(err.contains("missing: x"), "{err}");
+    let x_here = json!({"symbol": "x", "anchor": {"kind": "here",
+                        "quote": "Here $x$ is the input sequence"}});
     std::thread::scope(|s| {
         for t in &batch {
             let project = &project;
+            let x_here = &x_here;
             s.spawn(move || {
-                let gaps = if page(t) == "chirp-identity" {
-                    json!({"gaps": [{"term": "dyadic", "quote": "dyadic scaling",
-                                     "kind": "term", "note": "not defined"}]})
-                } else {
-                    json!({"gaps": []})
+                let audit = match page(t) {
+                    "chirp-identity" => json!({"symbols": [], "gaps": [{"term": "dyadic",
+                        "quote": "dyadic scaling", "kind": "term", "note": "not defined"}]}),
+                    "dft" => json!({"symbols": [x_here], "gaps": []}),
+                    _ => json!({"symbols": [], "gaps": []}),
                 };
-                answer(project, t, &gaps.to_string());
+                answer(project, t, &audit.to_string());
                 submit(project, &t.id).unwrap();
             });
         }
     });
 
-    // Extend: the candidate becomes a concept and a prerequisite of the chirp page.
+    // Extend: the candidate becomes a concept and a prerequisite of the chirp page. Its
+    // title has mathematics, whose symbols the concept binds; a symbol not in the title is
+    // rejected.
     let batch = tasks(next(&project).unwrap());
     assert_eq!(batch[0].kind, Kind::Extend);
     assert!(read(&project, batch[0].file()).contains("\"dyadic\""));
-    answer(
-        &project,
-        &batch[0],
-        &json!({
-            "concepts": [concept("dyadic-rational", "Dyadic rational", &[], false,
-                Some("exact on dyadic real and imaginary parts"))],
+    let extend = |symbol: &str| {
+        let mut dyadic = concept(
+            "dyadic-rational",
+            "Dyadic rational",
+            &[],
+            false,
+            Some("exact on dyadic real and imaginary parts"),
+        );
+        dyadic["title"] = json!("Dyadic rational $m/2^k$");
+        dyadic["symbols"] = json!([{"symbol": symbol, "name": "exponent",
+            "meaning": "The power of two in the denominator.", "relation": "direct"}]);
+        json!({
+            "concepts": [dyadic],
             "resolutions": [{"term": "dyadic", "concept": "dyadic-rational"}],
         })
-        .to_string(),
+        .to_string()
+    };
+    answer(&project, &batch[0], &extend("q"));
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains("`q` does not occur in the mathematics of the title"),
+        "{err}"
     );
+    answer(&project, &batch[0], &extend("k"));
     submit(&project, &batch[0].id).unwrap();
 
     // Write: the new page and the rewrite of the chirp page, which sees the audit notes.
@@ -178,10 +244,23 @@ fn task_loop_end_to_end() {
     let mut pages: Vec<&str> = batch.iter().map(page).collect();
     pages.sort();
     assert_eq!(pages, vec!["chirp-identity", "dyadic-rational"]);
+    // The chirp writer sees the symbols already bound: in the dyadic concept's name, and on
+    // the dft page. It binds k again, with another meaning.
     for t in &batch {
         let body = if page(t) == "chirp-identity" {
             let file = read(&project, t.file());
             assert!(file.contains("Previous version") && file.contains("now a prerequisite"));
+            assert!(
+                file.contains("- Dyadic rational (also: dyadic)\n  - $k$ (exponent): The power")
+            );
+            assert!(
+                file.contains(
+                    "## Symbols already bound on earlier pages\n\nThe symbols in the names"
+                )
+            );
+            assert!(file.contains(
+                "- $x$ (input sequence), bound on [Discrete Fourier transform](dft.md): The input"
+            ));
             answer(
                 &project,
                 t,
@@ -189,9 +268,12 @@ fn task_loop_end_to_end() {
             );
             let err = submit(&project, &t.id).unwrap_err().to_string();
             assert!(err.contains("\"made up\" is not in that source"), "{err}");
-            "Combine the [DFT](dft.md) and [convolution](convolution.md); values are \
+            let k = "Here $k$ is the frequency index.";
+            bindings(&project, t, json!([binding("k", "frequency index", k)]));
+            "Combine the [DFT](dft.md) and [convolution](convolution.md); values of $x$ are \
              [dyadic](dyadic-rational.md), so $nk$ is exact \
-             <cite data-source=\"notes\">exact on dyadic real and imaginary parts</cite>."
+             <cite data-source=\"notes\">exact on dyadic real and imaginary parts</cite>. \
+             Here $k$ is the frequency index."
         } else {
             "A number of the form $m/2^k$."
         };
@@ -199,19 +281,53 @@ fn task_loop_end_to_end() {
         submit(&project, &t.id).unwrap();
     }
 
-    // Audit round 2: every page's input changed (a page was added); no gaps.
+    // Audit round 2: every page's input changed (a page was added); no gaps. The chirp
+    // audit lists the bindings of its symbols from earlier pages, and its evidence for x
+    // must name the page that binds it.
     let batch = tasks(next(&project).unwrap());
     assert_eq!(batch.len(), 4);
+    let chirp = batch.iter().find(|t| page(t) == "chirp-identity").unwrap();
+    let file = read(&project, chirp.file());
+    assert!(
+        file.contains("## Symbols bound on earlier pages\n\n- $x$ (input sequence)"),
+        "{file}"
+    );
+    let chirp_audit = |x_page: &str| {
+        json!({"symbols": [
+            {"symbol": "x", "anchor": {"kind": "page", "page": x_page}},
+            {"symbol": "k", "anchor": {"kind": "here", "quote": "Here $k$ is the frequency index."}},
+            {"symbol": "n", "anchor": {"kind": "background", "note": "a count"}},
+        ], "gaps": []})
+        .to_string()
+    };
+    answer(&project, chirp, &chirp_audit("convolution"));
+    let err = submit(&project, &chirp.id).unwrap_err().to_string();
+    assert!(
+        err.contains("`convolution` is not an earlier page that binds it"),
+        "{err}"
+    );
     for t in &batch {
-        answer(&project, t, "{\"gaps\": []}");
+        let audit = match page(t) {
+            "chirp-identity" => chirp_audit("dft"),
+            "dft" => json!({"symbols": [x_here], "gaps": []}).to_string(),
+            _ => CLEAN.to_string(),
+        };
+        answer(&project, t, &audit);
         submit(&project, &t.id).unwrap();
     }
 
-    // Outline and notation, handed out together.
+    // Outline and overloads, handed out together: the chirp page binds k, which the name
+    // of the dyadic concept it builds on also binds.
     let batch = tasks(next(&project).unwrap());
     let kinds: Vec<&Kind> = batch.iter().map(|t| &t.kind).collect();
-    assert_eq!(kinds, vec![&Kind::Outline, &Kind::Notation]);
-    let (outline_task, notation_task) = (&batch[0], &batch[1]);
+    assert_eq!(kinds, vec![&Kind::Outline, &Kind::Overloads]);
+    let (outline_task, overloads_task) = (&batch[0], &batch[1]);
+    let file = read(&project, overloads_task.file());
+    assert!(
+        file.contains("1. $k$\n   - on `chirp-identity`: $k$ (frequency index)")
+            && file.contains("   - in the name of Dyadic rational: $k$ (exponent)"),
+        "{file}"
+    );
 
     // Outline: a page before its prerequisite's part, the target in the glossary and a page
     // left out are rejected; then two parts, with the dyadic page folded into the glossary.
@@ -262,22 +378,45 @@ fn task_loop_end_to_end() {
     );
     submit(&project, &outline_task.id).unwrap();
 
-    // Notation: a symbol missing from its page's mathematics is rejected.
-    let symbols = |second: &str| {
-        json!({"symbols": [
-            {"symbol": "2^k", "meaning": "a power of two", "page": "dyadic-rational"},
-            {"symbol": second, "meaning": "the exponent", "page": "chirp-identity"},
-        ]})
-        .to_string()
-    };
-    answer(&project, notation_task, &symbols("\\omega"));
-    let err = submit(&project, &notation_task.id).unwrap_err().to_string();
+    // Overloads: every candidate needs a verdict. A letter with two meanings becomes a
+    // rewrite note, and the rewrite is handed out (not audited) before the build.
+    answer(&project, overloads_task, "{\"verdicts\": []}");
+    let err = submit(&project, &overloads_task.id)
+        .unwrap_err()
+        .to_string();
+    assert!(err.contains("no verdict on candidate 1"), "{err}");
+    let verdict = json!({"verdicts": [{"candidate": 1, "same": false,
+                                       "note": "use j for the frequency index"}]});
+    answer(&project, overloads_task, &verdict.to_string());
+    submit(&project, &overloads_task.id).unwrap();
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(page(&batch[0]), "chirp-identity");
+    let file = read(&project, batch[0].file());
     assert!(
-        err.contains("`\\omega` does not appear in the mathematics of `chirp-identity`"),
-        "{err}"
+        file.contains(
+            "$k$ means frequency index here, but exponent in the name of Dyadic rational, \
+             which this page builds on: use j for the frequency index"
+        ),
+        "{file}"
     );
-    answer(&project, notation_task, &symbols("n k"));
-    submit(&project, &notation_task.id).unwrap();
+    bindings(
+        &project,
+        &batch[0],
+        json!([binding(
+            "j",
+            "frequency index",
+            "Here $j$ is the frequency index."
+        )]),
+    );
+    answer(
+        &project,
+        &batch[0],
+        "Combine the [DFT](dft.md) and [convolution](convolution.md); values of $x$ are \
+         [dyadic](dyadic-rational.md), so $nj$ is exact \
+         <cite data-source=\"notes\">exact on dyadic real and imaginary parts</cite>. \
+         Here $j$ is the frequency index.",
+    );
+    submit(&project, &batch[0].id).unwrap();
 
     // Done: the docs are built, grouped into the two parts, with a glossary and notation.
     let Next::Done(report) = next(&project).unwrap() else {
@@ -285,9 +424,18 @@ fn task_loop_end_to_end() {
     };
     assert_eq!(report.pages.len(), 4);
     assert_eq!(report.parts, Some(2));
-    assert_eq!((report.glossary, report.symbols), (1, 2));
+    assert_eq!((report.glossary, report.symbols), (1, 1));
     let chirp = read(&project, "docs/chirp-identity.md");
     assert!(chirp.starts_with("# Chirp identity\n\n!!! info \"Before this page\""));
+    // x is shown with its meaning; k, which the page no longer uses, is not.
+    let dft_link = "[Discrete Fourier transform](dft.md \"What Discrete Fourier transform is.\")";
+    assert!(
+        chirp.contains(&format!(
+            "??? note \"Symbols from earlier pages\"\n\n    - $x$ — input sequence: The input \
+             sequence. (on {dft_link})\n\n"
+        )),
+        "{chirp}"
+    );
     assert!(
         chirp.contains("is exact<cite class=\"exegenius-ref\" data-source=\"notes\"")
             && chirp.contains("> (see Notes)</cite>."),
@@ -303,16 +451,23 @@ fn task_loop_end_to_end() {
     assert!(chirp.contains("click n2 href \"../glossary/#dyadic-rational\""));
     assert!(!project.root.join("docs/dyadic-rational.md").exists());
     let glossary = read(&project, "docs/glossary.md");
-    assert!(glossary.contains("## Dyadic rational { #dyadic-rational }\n\nA number of the form"));
+    assert!(
+        glossary
+            .contains("## Dyadic rational $m/2^k$ { #dyadic-rational }\n\nA number of the form")
+    );
     assert!(glossary.contains("Used by [Chirp identity](chirp-identity.md"));
     let convolution = read(&project, "docs/convolution.md");
     assert!(convolution.contains(
         "the [discrete Fourier transform](dft.md \"What Discrete Fourier transform is.\")"
     ));
     let notation = read(&project, "docs/notation.md");
-    assert!(notation.contains(&format!(
-        "- $2^k$ — a power of two — [Dyadic rational]{dyadic}"
-    )));
+    assert!(
+        notation.contains(&format!(
+            "- $x$ — **input sequence**: The input sequence. Bound on {dft_link}; used on \
+             [Chirp identity](chirp-identity.md \"What Chirp identity is.\")."
+        )),
+        "{notation}"
+    );
     assert!(chirp.contains("```mermaid\nflowchart LR\n"));
     assert!(chirp.contains("    > — [Notes](https://example.org/notes)"));
     let dft = read(&project, "docs/dft.md");
@@ -355,7 +510,7 @@ fn last_round_fixes_are_written_then_built() {
         submit(&project, &t.id).unwrap();
     }
     for t in tasks(next(&project).unwrap()) {
-        let gaps = json!({"gaps": [{"term": "step", "quote": "Some explanation",
+        let gaps = json!({"symbols": [], "gaps": [{"term": "step", "quote": "Some explanation",
                                     "kind": "step", "note": "too vague"}]});
         answer(&project, &t, &gaps.to_string());
         submit(&project, &t.id).unwrap();
@@ -379,8 +534,6 @@ fn last_round_fixes_are_written_then_built() {
                        "pages": ["dft", "convolution", "chirp-identity"]}]});
     answer(&project, &last[0], &parts.to_string());
     submit(&project, &last[0].id).unwrap();
-    answer(&project, &last[1], "{\"symbols\": []}");
-    submit(&project, &last[1].id).unwrap();
     assert!(matches!(next(&project).unwrap(), Next::Done(_)));
 }
 
@@ -410,19 +563,17 @@ fn simulated_readers_end_to_end() {
         submit(&project, &t.id).unwrap();
     }
     for t in tasks(next(&project).unwrap()) {
-        answer(&project, &t, "{\"gaps\": []}");
+        answer(&project, &t, CLEAN);
         submit(&project, &t.id).unwrap();
     }
-    for t in tasks(next(&project).unwrap()) {
-        let text = match t.kind {
-            Kind::Outline => json!({"overview": "The [chirp identity](chirp-identity.md).",
-                "parts": [{"title": "All", "intro": "i",
-                           "pages": ["dft", "convolution", "chirp-identity"]}]}),
-            _ => json!({"symbols": []}),
-        };
-        answer(&project, &t, &text.to_string());
-        submit(&project, &t.id).unwrap();
-    }
+    // No page binds a symbol twice, so the outline comes alone.
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch.len(), 1);
+    let outline = json!({"overview": "The [chirp identity](chirp-identity.md).",
+        "parts": [{"title": "All", "intro": "i",
+                   "pages": ["dft", "convolution", "chirp-identity"]}]});
+    answer(&project, &batch[0], &outline.to_string());
+    submit(&project, &batch[0].id).unwrap();
 
     // Goals: a transfer key point copied from a page is rejected.
     let batch = tasks(next(&project).unwrap());

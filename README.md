@@ -71,22 +71,28 @@ sources or the other pages.
 
 | Task | The agent | exegenius checks and applies |
 |---|---|---|
-| extract | decomposes the sources into concepts with prerequisites and verbatim quotes | slug ids, unique ids, known `requires`, a target, no cycles, every quote found verbatim in its source |
-| write | writes one page body, in reading order, using only what the reader knows, terms it defines, and the prerequisite pages it links | no links to anything that is not a page; adds title, prerequisites, used-by and sources from the graph |
-| audit | told exactly what the reader knows at that page, lists every term, symbol or step they cannot follow | every quote is on the page; drops terms the reader knows; turns the rest into prerequisite edges, candidate concepts or rewrite notes |
+| extract | decomposes the sources into concepts with prerequisites and verbatim quotes; a name with mathematics in it also gets a title in LaTeX and a binding for each symbol (display name, meaning, direct or count) | slug ids, unique ids, known `requires`, a target, no cycles, every quote found verbatim in its source, every bound symbol in the title's mathematics |
+| write | writes one page body, in reading order, using only what the reader knows, terms it defines, and the prerequisite pages it links; lists the symbols the page binds, each with the sentence that says what it denotes | no links to anything that is not a page; each bound symbol in the page's mathematics, its quote on the page and containing it; adds title, prerequisites, used-by and sources from the graph |
+| audit | told exactly what the reader knows at that page, lists every term or step they cannot follow, and accounts for every symbol in the page's mathematics: bound on the page, on an earlier page, in a known concept's name, by the reader's background, or unbound | every quote is on the page and holds its symbol; every named page or concept binds the symbol; every symbol the writer bound is accounted for; drops terms the reader knows; turns the rest into prerequisite edges, candidate concepts or rewrite notes |
 | extend | resolves the candidate concepts audits found into existing or new concepts | same checks as extract; adds the edges and queues the pages for rewriting |
 
 | outline | groups the final pages into parts, folds minor terminology pages into a glossary, and writes the front page overview and part intros | every page in exactly one part or the glossary, the target not in the glossary, no page in a part before one of its prerequisites, links only to pages |
-| notation | lists the symbols a reader has to track across pages, with their meaning and the page that introduces each | every symbol appears in the mathematics of the page named for it |
+| overloads | for each letter a page binds that a page or concept name it builds on already binds, says whether the two denote the same thing | every candidate judged once; a letter with two meanings becomes a rewrite note on the later page |
 | goals | writes goal questions with key points, testing whether the wiki teaches its reader (never shown in the wiki) | pages exist; transfer key points are not copied from a page |
 | read | a simulated reader explores the wiki through `exegenius read` and `exegenius search` to answer one goal, and records where it got stuck | the page budget; every citation and stuck point quotes a page it opened |
 | baseline | answers a goal from the reader's background alone, with no wiki | non-empty |
 | grade | scores all answers to a goal blind against the key points | every answer graded once, key points exist |
 
 Rounds of write and audit repeat until an audit round finds no gaps, or `rounds` rounds have
-run. Only pages whose audit input changed are audited again. Then the outline and notation
-tasks are handed out together, and `next` builds `docs/` and creates or updates
-`zensical.toml`.
+run. Only pages whose audit input changed are audited again. Then the outline task, and the
+overloads task if any page rebinds a letter, are handed out together, and `next` builds
+`docs/` and creates or updates `zensical.toml`.
+
+The write and audit tasks never parse mathematics for meaning: the agents read it, and code
+checks only that each symbol they name occurs in the LaTeX they quote, as whole TeX tokens.
+An audit that says nothing about a symbol does not pass a page: a symbol the writer bound
+must be accounted for, and a symbol in a known concept's name counts as known only if that
+concept binds it.
 
 ## Simulated readers
 
@@ -100,7 +106,8 @@ opaque handles, enforce a page budget and log every step:
 - With `nonce` on (the default), concepts the wiki teaches carry invented names, so recall
   tied to a name is cut off; a real name in an answer is recorded as a possible leak.
 - The reader is told it knows exactly its stated background, and that everything else must
-  come from the wiki.
+  come from the wiki. Pages show it the same note of symbols from earlier pages as the
+  site does.
 - Citations and stuck points must quote pages the reader opened.
 
 A no-wiki baseline answers each question, and a blind grader scores every answer against
@@ -128,12 +135,17 @@ knows = "High-school algebra"
 - **Parts:** each part is a section in the navigation with its own landing page: the
   intro, its pages, and a map of the prerequisite edges among them.
 - **Pages:** a "before this page" note linking the prerequisites (and naming what is
-  assumed known), the body, a clickable diagram of the page's prerequisites and the pages
-  that use it, and the source quotes the page rests on, folded away.
+  assumed known), a folded note of the symbols the page takes from earlier pages and
+  concept names (each with its display name, meaning and where it is bound), the body, a
+  clickable diagram of the page's prerequisites and the pages that use it, and the source
+  quotes the page rests on, folded away. A concept whose name has mathematics in it has
+  that mathematics rendered in its page heading.
 - **Glossary:** minor pages the outline folds away become entries on one glossary page,
   outside the reading order; links to them lead to their entry.
-- **Notation:** the symbols, in the order they are introduced, each with its meaning and
-  a link to the page that introduces it.
+- **Notation:** the symbols more than one page uses, in the order they are bound, each
+  with its display name, meaning, the page or concept name that binds it, and the pages
+  that use it. It is derived from the writers' bindings and the audits, with no agent of
+  its own.
 - **Links:** the first unlinked mention of an earlier page or a glossary term in a body is
   linked at build time. Names of several words match in any case; single words only if
   they look like names (DFT, FFT), so ordinary words are never linked. Every link to a page
@@ -168,13 +180,13 @@ Other commands: `exegenius status` (progress), `exegenius plan` (reading order),
 ```
 exegenius.toml        configuration
 sources/              source documents
-exegenius/graph.json  concept graph, candidate concepts, queued rewrites
+exegenius/graph.json  concept graph, symbols each page binds, candidate concepts, queued rewrites
 exegenius/state.json  task state: pending tasks, audit round, audited pages
 exegenius/tasks/      task files and answer files
 exegenius/pages/      page bodies
 exegenius/audit.json  audit results, one record per round
 exegenius/outline.json parts, glossary and front page
-exegenius/notation.json symbols for the notation page
+exegenius/overloads.json verdicts on letters bound to two meanings
 exegenius/simulation.json simulated readers: goals, runs, grades
 exegenius/trails/     pages each pending simulated reader has opened
 exegenius/report.md   how the simulated readers did

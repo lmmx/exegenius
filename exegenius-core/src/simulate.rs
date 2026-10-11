@@ -289,6 +289,8 @@ pub struct Lens<'a> {
     nonces: HashMap<String, String>,
     title: String,
     home: String,
+    /// Each page's symbol accounting from its latest audit, for the inherited symbols.
+    uses: HashMap<String, Vec<crate::audit::SymbolUse>>,
 }
 
 impl<'a> Lens<'a> {
@@ -357,6 +359,7 @@ impl<'a> Lens<'a> {
             nonces,
             title,
             home: String::new(),
+            uses: crate::audit::latest_symbols(project)?,
         };
         lens.home = lens.render_home(project, outline);
         Ok(lens)
@@ -513,6 +516,29 @@ impl<'a> Lens<'a> {
         }
         if !known.is_empty() {
             out.push_str(&format!("Assumes: {}.\n", known.join(", ")));
+        }
+        let uses = self.uses.get(id).map(Vec::as_slice).unwrap_or_default();
+        let symbols: Vec<String> = crate::notation::inherited(self.graph, uses, body)
+            .iter()
+            .map(|b| {
+                let from = b.origin.concept();
+                let from = match self.handles.get(&from.id) {
+                    Some(_) => self.link(from),
+                    None => from.name.clone(),
+                };
+                format!(
+                    "- ${}$ ({}): {} From {from}.",
+                    b.symbol,
+                    b.name,
+                    b.meaning.trim()
+                )
+            })
+            .collect();
+        if !symbols.is_empty() {
+            out.push_str(&format!(
+                "Symbols from earlier pages:\n{}\n",
+                symbols.join("\n")
+            ));
         }
         out.push_str(&format!("\n{}\n", crate::cite::strip(body).trim()));
         let used_by: Vec<String> = self

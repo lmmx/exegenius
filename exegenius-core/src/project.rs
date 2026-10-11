@@ -3,13 +3,14 @@
 //! ```text
 //! exegenius.toml         configuration
 //! sources/               source documents (paths given in exegenius.toml)
-//! exegenius/graph.json   concept graph, candidate concepts, queued rewrites
+//! exegenius/graph.json   concept graph, symbols each page binds, candidate concepts,
+//!                        queued rewrites
 //! exegenius/state.json   task state: issued tasks, audit round, audited pages
 //! exegenius/tasks/       task files and their answer files
 //! exegenius/pages/       page bodies
 //! exegenius/audit.json   audit results, one record per round
 //! exegenius/outline.json parts, glossary and front page
-//! exegenius/notation.json symbols for the notation page
+//! exegenius/overloads.json verdicts on letters bound to two meanings
 //! exegenius/simulation.json simulated readers: goals, runs, grades
 //! exegenius/trails/      pages each simulated reader opened
 //! exegenius/report.md    how the simulated readers did
@@ -196,8 +197,8 @@ impl Project {
         self.state_dir().join("outline.json")
     }
 
-    pub fn notation_path(&self) -> PathBuf {
-        self.state_dir().join("notation.json")
+    pub fn overloads_path(&self) -> PathBuf {
+        self.state_dir().join("overloads.json")
     }
 
     pub fn simulation_path(&self) -> PathBuf {

@@ -60,6 +60,14 @@ known concepts `requires: []`.
 sentence), with the id of the source they come from. Submit rejects any quote it cannot find \
 in that source (it ignores differences in whitespace and in typographic quotes and dashes). \
 Every concept the reader does not know needs at least one quote; known concepts may have none.
+- A name with mathematics in it (\"Polynomial ring modulo y^r + 1\") needs a `title`: the \
+name with the mathematics in LaTeX (\"Polynomial ring modulo $y^r + 1$\"), and in `symbols` a \
+binding for every symbol in that mathematics: a display name of one to four words (\"record \
+length\"), its meaning in one sentence, and whether it denotes something directly or counts \
+instances of something (for a count, say what it counts: \"the number of complex \
+coefficients in a record\", not \"a power of two\"). A reader who knows the concept is shown \
+these bindings and no other explanation of its symbols. Names without mathematics need \
+neither.
 - `target` is the id of the concept for the target result.";
 
 pub const EXTEND_INSTRUCTIONS: &str = "\
@@ -73,6 +81,8 @@ id that is not already used.
 - Mark `known: true` if the reader profile already covers the concept, with `requires: []`.
 - `evidence` quotes must be copied from the sources character for character, with their \
 source id. A concept that does not appear in the sources may have no quotes.
+- A name with mathematics in it needs a `title` with the mathematics in LaTeX and a binding \
+in `symbols` for every symbol in it, as in the extract task.
 - Give a resolution for every term.";
 
 fn describe(project: &Project) -> String {
@@ -123,6 +133,7 @@ fn clean(
                 Some(_) => {}
             }
         }
+        errors.extend(crate::symbols::check_name(c));
         if !c.known && c.evidence.is_empty() {
             warnings.push(format!("`{id}`: no supporting quote from the sources"));
         }

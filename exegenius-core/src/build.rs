@@ -6,9 +6,13 @@
 //! to pages carry the target's gloss as their title, which the theme shows as a tooltip,
 //! and the first unlinked mention of an earlier page is linked (see [`crate::autolink`]).
 //!
+//! A page whose concept has a title (its name with the mathematics in LaTeX) uses it as its
+//! heading. The symbols a page takes from earlier pages and concept names, per its latest
+//! audit, are listed in a folded note with their display names and meanings, and the
+//! bindings that several pages share make up `docs/notation.md` (see [`crate::notation`]).
+//!
 //! The outline may fold minor pages into a glossary: they are rendered as entries of
-//! `docs/glossary.md`, and links to them lead to their entry. The notation task's symbols
-//! become `docs/notation.md`.
+//! `docs/glossary.md`, and links to them lead to their entry.
 //!
 //! With an outline, the pages are grouped into parts: each part gets a landing page and a
 //! section in the nav, and the front page carries the overview and a map of the parts.
@@ -25,13 +29,15 @@ use std::path::PathBuf;
 use pulldown_cmark::{Event, LinkType, Options, Parser, Tag};
 use toml_edit::{Array, DocumentMut, InlineTable, Item, Table, Value};
 
+use crate::audit::SymbolUse;
 use crate::autolink::{self, autolink};
 use crate::error::{Error, Result, read, read_json, write, write_json};
 use crate::graph::{Concept, Graph};
-use crate::notation::Notation;
+use crate::notation::{self, Entry};
 use crate::outline::{Outline, Part};
 use crate::plan::Plan;
 use crate::project::{Project, find_source};
+use crate::symbols::Origin;
 use crate::text::slug;
 use crate::write::{fix_links, link_target};
 
@@ -183,6 +189,8 @@ struct Site<'a> {
     built: HashSet<&'a str>,
     /// Pages folded into the glossary.
     glossary: HashSet<&'a str>,
+    /// Each page's symbol accounting from its latest audit.
+    uses: HashMap<String, Vec<SymbolUse>>,
 }
 
 impl Site<'_> {
@@ -215,6 +223,23 @@ impl Site<'_> {
             self.href(&c.id),
             attribute(&c.gloss)
         )
+    }
+
+    /// A link to a page if it is built, else the concept's name.
+    fn mention(&self, c: &Concept, prefix: &str) -> String {
+        if self.built.contains(c.id.as_str()) {
+            self.titled(c, prefix)
+        } else {
+            c.name.clone()
+        }
+    }
+
+    /// Where a binding comes from, as a phrase: "on [Page]" or "in the name of [Page]".
+    fn origin(&self, origin: Origin, prefix: &str) -> String {
+        match origin {
+            Origin::Page(c) => format!("on {}", self.mention(c, prefix)),
+            Origin::Name(c) => format!("in the name of {}", self.mention(c, prefix)),
+        }
     }
 
     fn dependents(&self, id: &str) -> Vec<&Concept> {
@@ -354,8 +379,37 @@ fn indent(text: &str) -> String {
         .join("\n")
 }
 
+/// The page heading: the title with its mathematics, or the name.
+fn heading(c: &Concept) -> &str {
+    c.title.as_deref().unwrap_or(&c.name)
+}
+
+/// A folded note listing the symbols a page takes from earlier pages and concept names.
+fn symbols_note(site: &Site, c: &Concept, body: &str) -> String {
+    let uses = site.uses.get(&c.id).map(Vec::as_slice).unwrap_or_default();
+    let lines: Vec<String> = notation::inherited(site.graph, uses, body)
+        .iter()
+        .map(|b| {
+            format!(
+                "- ${}$ — {}: {} ({})",
+                b.symbol,
+                b.name,
+                b.meaning.trim(),
+                site.origin(b.origin, "")
+            )
+        })
+        .collect();
+    if lines.is_empty() {
+        return String::new();
+    }
+    format!(
+        "??? note \"Symbols from earlier pages\"\n\n{}\n\n",
+        indent(&lines.join("\n"))
+    )
+}
+
 fn render_page(site: &Site, c: &Concept, body: &str) -> String {
-    let mut out = format!("# {}\n\n", c.name);
+    let mut out = format!("# {}\n\n", heading(c));
     let (pages, known) = site.prerequisites(c);
     if !pages.is_empty() || !known.is_empty() {
         let mut note = Vec::new();
@@ -372,6 +426,7 @@ fn render_page(site: &Site, c: &Concept, body: &str) -> String {
             note.join(" ")
         ));
     }
+    out.push_str(&symbols_note(site, c, body));
     let body = crate::cite::render(body.trim(), &site.project.sources);
     out.push_str(&decorate(&body, site, ""));
     out.push('\n');
@@ -456,9 +511,10 @@ fn render_glossary(site: &Site, entries: &[(&Concept, String)]) -> String {
     );
     for (c, body) in entries {
         out.push_str(&format!(
-            "\n## {} {{ #{} }}\n\n{}\n",
-            c.name,
+            "\n## {} {{ #{} }}\n\n{}{}\n",
+            heading(c),
             c.id,
+            symbols_note(site, c, body),
             decorate(
                 &demote(&crate::cite::render(body.trim(), &site.project.sources)),
                 site,
@@ -477,29 +533,21 @@ fn render_glossary(site: &Site, entries: &[(&Concept, String)]) -> String {
     out
 }
 
-fn render_notation(site: &Site, notation: &Notation) -> String {
+fn render_notation(site: &Site, entries: &[Entry]) -> String {
     let mut out = String::from(
-        "# Notation\n\nThe symbols used across the pages, in the order they are introduced.\n\n",
+        "# Notation\n\nThe symbols that more than one page uses, in the order they are bound. \
+         Each is bound once, on a page or in a concept's name, and used on the pages listed. A \
+         symbol used on one page only is explained on that page and is not listed here.\n\n",
     );
-    let position: HashMap<&str, usize> = site
-        .pages
-        .iter()
-        .enumerate()
-        .map(|(i, c)| (c.id.as_str(), i))
-        .collect();
-    let mut symbols: Vec<_> = notation.symbols.iter().collect();
-    symbols.sort_by_key(|s| position.get(s.page.as_str()).copied().unwrap_or(usize::MAX));
-    for symbol in symbols {
-        let page = site
-            .graph
-            .get(&symbol.page)
-            .filter(|c| site.built.contains(c.id.as_str()))
-            .map(|c| format!(" — {}", site.titled(c, "")))
-            .unwrap_or_default();
+    for e in entries {
+        let users: Vec<String> = e.users.iter().map(|u| site.mention(u, "")).collect();
         out.push_str(&format!(
-            "- ${}$ — {}{page}\n",
-            symbol.symbol.trim(),
-            symbol.meaning.trim()
+            "- ${}$ — **{}**: {} Bound {}; used on {}.\n",
+            e.bound.symbol,
+            e.bound.name,
+            e.bound.meaning.trim(),
+            site.origin(e.bound.origin, ""),
+            list(&users)
         ));
     }
     out
@@ -783,7 +831,8 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
     let mut written: BTreeSet<String> = BTreeSet::new();
     let planned: HashSet<String> = plan.order.iter().cloned().collect();
     let outline = crate::outline::current(project, plan)?;
-    let notation = crate::notation::current(project, plan)?;
+    let uses = crate::audit::latest_symbols(project)?;
+    let shared = notation::entries(graph, plan, &uses);
     let prepared = prepare(project, graph, plan, outline.as_ref())?;
     report.missing = prepared.missing;
     report.warnings = prepared.warnings;
@@ -793,6 +842,7 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
         pages: prepared.pages.iter().map(|(c, _)| *c).collect(),
         built: prepared.pages.iter().map(|(c, _)| c.id.as_str()).collect(),
         glossary: prepared.glossary,
+        uses,
     };
     let mut entries = Vec::new();
     for (c, body) in prepared.pages {
@@ -845,9 +895,9 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
             file: GLOSSARY.into(),
         });
     }
-    if let Some(notation) = notation.as_ref().filter(|n| !n.symbols.is_empty()) {
-        report.symbols = notation.symbols.len();
-        write(&docs.join(NOTATION), &render_notation(&site, notation))?;
+    if !shared.is_empty() {
+        report.symbols = shared.len();
+        write(&docs.join(NOTATION), &render_notation(&site, &shared))?;
         written.insert(NOTATION.to_string());
         nav.push(NavItem::Page {
             name: "Notation".into(),
@@ -1117,6 +1167,7 @@ mod tests {
             pages: graph.concepts.iter().collect(),
             built: ["dft", "row"].into(),
             glossary: ["row"].into(),
+            uses: HashMap::new(),
         };
         let body = "See [the DFT](dft.md#def), [a row](row.md), [home](index.md), \
                     [web](https://x.org) and `[code](dft.md)`.";

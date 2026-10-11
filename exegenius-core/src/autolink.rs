@@ -169,6 +169,8 @@ mod tests {
         Concept {
             id: id.into(),
             name: name.into(),
+            title: None,
+            symbols: vec![],
             aliases: aliases.iter().map(|a| a.to_string()).collect(),
             gloss: String::new(),
             requires: vec![],

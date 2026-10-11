@@ -21,8 +21,9 @@ and writing it asks for, task by task, until it reports done.
    audits yourself.
 4. When every task in the batch is accepted, go back to step 1.
 5. Once the pages are final, `exegenius next` hands out the outline task (group the pages
-   into parts, fold minor pages into a glossary, write the front page) and the notation
-   task (list the symbols), as one batch of two independent tasks.
+   into parts, fold minor pages into a glossary, write the front page) and, if a page
+   reuses a letter an earlier page bound, the overloads task (judge whether each reused
+   letter keeps its meaning), as one batch of independent tasks.
 6. Then come the simulated readers: a goals task, then rounds of read and baseline tasks
    (each read task explores the wiki with `exegenius read` and `exegenius search`), grade
    tasks, and rewrites of the pages readers got stuck on. Every read, baseline and grade

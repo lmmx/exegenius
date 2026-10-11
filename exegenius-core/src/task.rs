@@ -12,9 +12,10 @@
 //!    after `rounds` rounds
 //!
 //! When nothing is left, `next` hands out the outline task (parts, glossary and front page)
-//! and the notation task, each if the pages have no current answer for it, in one batch,
-//! and then builds the docs. Writes queued by the last audit
-//! round are still handed out (and not audited) before the outline.
+//! if the pages have no current outline, and the overloads task if pages rebind letters
+//! with no verdict yet, in one batch, and then builds the docs. Writes queued by the last
+//! audit round, or by overload verdicts, are still handed out (and not audited) before the
+//! outline.
 
 use std::collections::BTreeMap;
 use std::fs::OpenOptions;
@@ -36,7 +37,7 @@ use crate::extract::{
 };
 use crate::grade::{GRADE_INSTRUCTIONS, GradeAnswer, apply_grade, grade_task, repair, to_grade};
 use crate::graph::Graph;
-use crate::notation::{NOTATION_INSTRUCTIONS, NotationAnswer, apply_notation, notation_task};
+use crate::notation::{OVERLOADS_INSTRUCTIONS, OverloadsAnswer, apply_overloads, overloads_task};
 use crate::outline::{OUTLINE_INSTRUCTIONS, OutlineAnswer, apply_outline, outline_task};
 use crate::plan::{Plan, plan};
 use crate::project::Project;
@@ -46,7 +47,7 @@ use crate::simulate::{
     goals_task, read_task,
 };
 use crate::text::slug;
-use crate::write::{WRITE_INSTRUCTIONS, apply_write, needs_write, write_task};
+use crate::write::{WRITE_INSTRUCTIONS, WriteAnswer, apply_write, needs_write, write_task};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "lowercase")]
@@ -61,7 +62,7 @@ pub enum Kind {
         input: String,
     },
     Outline,
-    Notation,
+    Overloads,
     Goals,
     Read {
         goal: usize,
@@ -94,7 +95,7 @@ impl Task {
             Kind::Write { .. } => "write",
             Kind::Audit { .. } => "audit",
             Kind::Outline => "outline",
-            Kind::Notation => "notation",
+            Kind::Overloads => "overloads",
             Kind::Goals => "goals",
             Kind::Read { .. } => "read",
             Kind::Baseline { .. } => "baseline",
@@ -114,6 +115,13 @@ impl Task {
             _ => "json",
         };
         PathBuf::from("exegenius/tasks").join(format!("{}.answer.{ext}", self.id))
+    }
+
+    /// For a write task, the JSON file with the answer's structured fields (the body is
+    /// the markdown answer file), relative to the project directory.
+    pub fn fields(&self) -> Option<PathBuf> {
+        matches!(self.kind, Kind::Write { .. })
+            .then(|| PathBuf::from("exegenius/tasks").join(format!("{}.answer.json", self.id)))
     }
 }
 
@@ -215,21 +223,33 @@ fn render(project: &Project, task: &Task, instructions: &str, input: &str) -> St
         Kind::Extend => json_format::<ExtendAnswer>(),
         Kind::Audit { .. } => json_format::<AuditAnswer>(),
         Kind::Outline => json_format::<OutlineAnswer>(),
-        Kind::Notation => json_format::<NotationAnswer>(),
+        Kind::Overloads => json_format::<OverloadsAnswer>(),
         Kind::Goals => json_format::<GoalsAnswer>(),
         Kind::Read { .. } => json_format::<ReadAnswer>(),
         Kind::Baseline { .. } => json_format::<BaselineAnswer>(),
         Kind::Grade { .. } => json_format::<GradeAnswer>(),
-        Kind::Write { .. } => "The answer is the page body as markdown (not JSON).".to_string(),
+        Kind::Write { .. } => format!(
+            "The answer is two files: the page body as markdown (not JSON), and a JSON object \
+             with the symbols the page binds. In JSON strings, write each backslash of LaTeX \
+             twice (`\"\\\\kappa\"`). The JSON follows this schema:\n\n```json\n{}\n```",
+            serde_json::to_string_pretty(&schema_of::<WriteAnswer>()).unwrap_or_default()
+        ),
+    };
+    let files = match task.fields() {
+        Some(fields) => format!(
+            "the body to `{}` and the JSON to `{}`",
+            answer.display(),
+            fields.display()
+        ),
+        None => format!("the answer to `{}`", answer.display()),
     };
     format!(
         "# exegenius task {id}\n\nProject directory: `{root}` (paths below are relative to it)\n\n\
-         {instructions}\n\n{input}\n## Answer\n\n{format}\n\nWrite the answer to `{answer}`, \
-         then run `exegenius submit {id}` in the project directory. If submit rejects the \
-         answer, fix the answer file and submit again.\n",
+         {instructions}\n\n{input}\n## Answer\n\n{format}\n\nWrite {files}, then run \
+         `exegenius submit {id}` in the project directory. If submit rejects the answer, fix \
+         the answer and submit again.\n",
         id = task.id,
         root = project.root.display(),
-        answer = answer.display(),
     )
 }
 
@@ -374,7 +394,7 @@ fn issue(project: &Project, state: &mut State, items: Vec<(Kind, &str, String)>)
             Kind::Write { page } => format!("write-{page}"),
             Kind::Audit { page, .. } => format!("audit-{page}"),
             Kind::Outline => "outline".to_string(),
-            Kind::Notation => "notation".to_string(),
+            Kind::Overloads => "overloads".to_string(),
             Kind::Goals => "goals".to_string(),
             Kind::Read {
                 goal,
@@ -456,9 +476,10 @@ pub fn next(project: &Project) -> Result<Next> {
                 let input = outline_task(project, &graph, &plan)?;
                 items.push((Kind::Outline, OUTLINE_INSTRUCTIONS, input));
             }
-            if crate::notation::current(project, &plan)?.is_none() {
-                let input = notation_task(&graph, &plan);
-                items.push((Kind::Notation, NOTATION_INSTRUCTIONS, input));
+            let candidates = crate::notation::unjudged(project, &graph, &plan)?;
+            if !candidates.is_empty() {
+                let input = overloads_task(&graph, &candidates);
+                items.push((Kind::Overloads, OVERLOADS_INSTRUCTIONS, input));
             }
             if !items.is_empty() {
                 return issue(project, &mut state, items);
@@ -551,7 +572,20 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
             let mut graph = require(graph)?;
             let plan = plan(&graph, &project.sources)?;
             find_page(&plan, page)?;
-            let warnings = apply_write(project, &mut graph, &plan, page, &text)?;
+            let fields_path = project
+                .root
+                .join(task.fields().expect("write tasks have a fields file"));
+            if !fields_path.exists() {
+                return Err(Error::Invalid(format!(
+                    "no answer yet: write the symbols the page binds to {} (an empty list if \
+                     it binds none)",
+                    task.fields()
+                        .expect("write tasks have a fields file")
+                        .display()
+                )));
+            }
+            let fields = parse(&fields_path, &read(&fields_path)?)?;
+            let warnings = apply_write(project, &mut graph, &plan, page, &text, fields)?;
             project.save_graph(&graph)?;
             warnings
         }
@@ -573,10 +607,12 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
             apply_outline(project, &graph, &plan, parse(&path, &text)?)?;
             Vec::new()
         }
-        Kind::Notation => {
-            let graph = require(graph)?;
+        Kind::Overloads => {
+            let mut graph = require(graph)?;
             let plan = plan(&graph, &project.sources)?;
-            apply_notation(project, &plan, parse(&path, &text)?)?;
+            let candidates = crate::notation::unjudged(project, &graph, &plan)?;
+            apply_overloads(project, &mut graph, &candidates, parse(&path, &text)?)?;
+            project.save_graph(&graph)?;
             Vec::new()
         }
         Kind::Goals => {

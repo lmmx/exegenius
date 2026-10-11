@@ -1,18 +1,34 @@
 //! Write tasks: one page body per needed concept, in reading order.
 //!
-//! The agent writes the body only. Code rejects links to anything that is not a page, and
-//! later adds the title, prerequisites, backlinks and sources from the graph (see
-//! [`crate::build`]).
+//! The agent writes the body as markdown, and lists in a JSON file the symbols the page
+//! binds (see [`crate::symbols`]). The two are separate files because LaTeX inside JSON
+//! strings is easily mangled without an error: `\frac` in a JSON string is a form feed
+//! followed by "rac". Code rejects links to anything that is not a page and bindings it
+//! cannot find on the page, and later adds the title, prerequisites, backlinks and sources
+//! from the graph (see [`crate::build`]).
 
 use std::collections::HashSet;
 use std::ops::Range;
 
 use pulldown_cmark::{Event, Options, Parser, Tag, TagEnd};
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 
 use crate::error::{Error, Result};
 use crate::graph::{Concept, Graph};
 use crate::plan::Plan;
 use crate::project::Project;
+use crate::symbols::{self, PageBinding};
+
+/// The structured part of a write answer; the body is the markdown answer file.
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(deny_unknown_fields)]
+pub struct WriteAnswer {
+    /// Every symbol the page binds: each symbol it introduces and says what it denotes.
+    /// Leave out symbols listed as already bound, unless the page gives them a new meaning.
+    /// Empty if the page introduces no symbols.
+    pub symbols: Vec<PageBinding>,
+}
 
 pub const WRITE_INSTRUCTIONS: &str = "\
 Write one page of an explanatory wiki. The wiki explains a target result from source \
@@ -23,7 +39,13 @@ to the target (the pages that build on it are listed below), so a reader arrivin
 knows at once why the page matters.
 - Explain the page's concept so that this reader can follow it using only what they already \
 understand (listed below), what this page itself explains, and the linked prerequisite pages.
-- Define any other technical term or symbol on this page, where it is first used.
+- Define any other technical term on this page, where it is first used.
+- Say what each symbol denotes where you introduce it: what it stands for, and for a size or \
+count, what it counts (\"$r$, the number of complex coefficients in a record\", not \"a power \
+of two $r$\"). A use in an example (\"take $r = 4$\") does not say what $r$ denotes. Symbols \
+listed as already bound can be used without restating them: the page shows the reader their \
+meanings. Using one of those letters with another meaning confuses readers: pick another \
+letter, or say on the page that the letter changes meaning here.
 - Link each prerequisite page the first time you rely on it, using the exact markdown link \
 given. You may also link the other pages listed. Submit rejects links to anything else in \
 the wiki; external URLs are allowed.
@@ -45,15 +67,21 @@ pub fn link(c: &Concept) -> String {
     format!("[{}]({}.md)", c.name, c.id)
 }
 
+/// Concepts as a markdown list of names and aliases, with what the symbols in each name
+/// denote.
 pub(crate) fn names(concepts: &[&Concept]) -> String {
     concepts
         .iter()
         .map(|c| {
-            if c.aliases.is_empty() {
+            let mut line = if c.aliases.is_empty() {
                 format!("- {}", c.name)
             } else {
                 format!("- {} (also: {})", c.name, c.aliases.join(", "))
+            };
+            for b in symbols::of_name(c) {
+                line.push_str(&format!("\n  - {}", b.describe()));
             }
+            line
         })
         .collect::<Vec<_>>()
         .join("\n")
@@ -85,6 +113,38 @@ pub fn write_task(project: &Project, graph: &Graph, plan: &Plan, i: usize) -> Re
     ));
     if !c.aliases.is_empty() {
         task.push_str(&format!("Also called: {}\n", c.aliases.join(", ")));
+    }
+    if let Some(title) = &c.title {
+        task.push_str(&format!("Heading: {title}\n"));
+    }
+    let own: Vec<String> = symbols::of_name(c)
+        .map(|b| format!("- {}", b.describe()))
+        .collect();
+    if !own.is_empty() {
+        task.push_str(&format!(
+            "\nThe symbols in this page's heading denote (say so on the page):\n\n{}\n",
+            own.join("\n")
+        ));
+    }
+    let bound: Vec<String> = symbols::in_force(graph, plan, i)
+        .iter()
+        .filter(|b| matches!(b.origin, symbols::Origin::Page(_)))
+        .map(|b| {
+            let on = link(b.origin.concept());
+            format!(
+                "- ${}$ ({}), bound on {on}: {}",
+                b.symbol,
+                b.name,
+                b.meaning.trim()
+            )
+        })
+        .collect();
+    if !bound.is_empty() {
+        task.push_str(&format!(
+            "\n## Symbols already bound on earlier pages\n\nThe symbols in the names of the \
+             concepts the reader knows are listed with those concepts above.\n\n{}\n",
+            bound.join("\n")
+        ));
     }
     let linked: Vec<String> = c
         .requires
@@ -157,13 +217,14 @@ pub fn write_task(project: &Project, graph: &Graph, plan: &Plan, i: usize) -> Re
     Ok(task)
 }
 
-/// Check a page body and store it. Returns warnings.
+/// Check a page body and the symbols it binds, and store them. Returns warnings.
 pub fn apply_write(
     project: &Project,
     graph: &mut Graph,
     plan: &Plan,
     page: &str,
     answer: &str,
+    mut fields: WriteAnswer,
 ) -> Result<Vec<String>> {
     let body = strip_title(answer);
     if body.trim().is_empty() {
@@ -171,9 +232,10 @@ pub fn apply_write(
             "answer rejected: the page body is empty".into(),
         ));
     }
-    let cites = crate::cite::check(body, &project.sources);
-    if !cites.is_empty() {
-        let list = cites
+    let mut errors = crate::cite::check(body, &project.sources);
+    errors.extend(symbols::check_page(body, &mut fields.symbols));
+    if !errors.is_empty() {
+        let list = errors
             .iter()
             .map(|e| format!("- {e}"))
             .collect::<Vec<_>>()
@@ -203,6 +265,11 @@ pub fn apply_write(
     }
     project.save_page_body(page, &format!("{}\n", body.trim()))?;
     graph.rewrite.remove(page);
+    if fields.symbols.is_empty() {
+        graph.bindings.remove(page);
+    } else {
+        graph.bindings.insert(page.to_string(), fields.symbols);
+    }
     Ok(warnings)
 }
 
