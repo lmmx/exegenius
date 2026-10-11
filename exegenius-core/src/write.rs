@@ -171,7 +171,7 @@ fn argument_section(argument: &crate::argument::Argument, graph: &Graph, id: &st
                 let how = a
                     .method
                     .as_deref()
-                    .map_or(String::new(), |m| format!(", by: {m}"));
+                    .map_or(String::new(), |m| format!("; how: {m}"));
                 format!("- {}{how}{}", a.claim, on(a))
             })
             .collect();

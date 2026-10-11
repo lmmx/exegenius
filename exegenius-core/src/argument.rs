@@ -178,7 +178,7 @@ pub fn trail(argument: &Argument, id: &str, link: &dyn Fn(&str) -> Option<String
                     let how = a
                         .method
                         .as_deref()
-                        .map_or(String::new(), |m| format!(" — by {m}"));
+                        .map_or(String::new(), |m| format!(" — how: {m}"));
                     format!("{}. {}{how}{}", i + 1, a.claim, on(a))
                 })
                 .collect();
@@ -210,7 +210,7 @@ pub fn overview(argument: &Argument, link: &dyn Fn(&str) -> Option<String>) -> S
         let how = child
             .method
             .as_deref()
-            .map_or(String::new(), |m| format!(" — by {m}"));
+            .map_or(String::new(), |m| format!(" — how: {m}"));
         let on = child
             .page
             .as_deref()
@@ -649,7 +649,7 @@ mod tests {
         assert_eq!(
             trail(&argument, "b", &link),
             vec![
-                "1. claim S0 with $T$ — by split ([t](t.md))",
+                "1. claim S0 with $T$ — how: split ([t](t.md))",
                 "2. **This page:** claim S1 with $T$"
             ]
         );
