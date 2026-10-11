@@ -56,7 +56,7 @@ pub fn terms<'a>(
 }
 
 /// An acronym or a word with digits or inner capitals, at least two characters long.
-fn is_name_like(word: &str) -> bool {
+pub(crate) fn is_name_like(word: &str) -> bool {
     word.chars().count() >= 2
         && word.chars().any(char::is_alphabetic)
         && word
@@ -123,6 +123,9 @@ pub fn autolink(body: &str, own: &str, terms: &[Term]) -> String {
         match event {
             Event::Start(Tag::Link { .. } | Tag::Image { .. } | Tag::Heading { .. }) => skip += 1,
             Event::Start(Tag::CodeBlock(_) | Tag::HtmlBlock) => skip += 1,
+            // Citation marks hold source text, which must stay as written.
+            Event::InlineHtml(html) if html.starts_with("<cite") => skip += 1,
+            Event::InlineHtml(html) if html.starts_with("</cite") => skip = skip.saturating_sub(1),
             Event::End(
                 TagEnd::Link
                 | TagEnd::Image

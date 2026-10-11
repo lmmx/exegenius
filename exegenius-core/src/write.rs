@@ -30,6 +30,11 @@ the wiki; external URLs are allowed.
 - Stay accurate to the sources: read the parts you need (search for the evidence quotes). \
 State only what the sources support or what is standard background; do not invent results, \
 constants or attributions.
+- Back each specific claim taken from a source (a result, a constant, a construction step) \
+with the source text it rests on, right after the claim: \
+`<cite data-source=\"id\">text copied word for word from that source</cite>`. Readers see \
+these as \"(see p. 5)\"-style references, hidden until they ask for them. Submit rejects \
+text not found in the named source. Do not cite common background.
 - Be concrete and specific. Give a small worked example where it makes the idea clearer. \
 No filler, no rhetorical flourishes, no announcing what the page will do.
 - Write mathematics in LaTeX: $...$ inline, $$...$$ on its own lines for display.
@@ -165,6 +170,15 @@ pub fn apply_write(
         return Err(Error::Invalid(
             "answer rejected: the page body is empty".into(),
         ));
+    }
+    let cites = crate::cite::check(body, &project.sources);
+    if !cites.is_empty() {
+        let list = cites
+            .iter()
+            .map(|e| format!("- {e}"))
+            .collect::<Vec<_>>()
+            .join("\n");
+        return Err(Error::Invalid(format!("answer rejected:\n{list}")));
     }
     let pages: HashSet<String> = plan.order.iter().cloned().collect();
     let (_, removed, linked) = fix_links(body, &pages);

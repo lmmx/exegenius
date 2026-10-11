@@ -29,6 +29,79 @@ pub struct Config {
     pub rounds: u32,
     pub reader: Reader,
     pub sources: Vec<SourceSpec>,
+    /// Simulated readers run once the wiki is written.
+    #[serde(default)]
+    pub simulation: Simulation,
+    /// Further reader profiles for the simulation, beside `reader`.
+    #[serde(default)]
+    pub readers: Vec<Persona>,
+    #[serde(default)]
+    pub site: Site,
+}
+
+/// Settings for the built site.
+#[derive(Debug, Clone, Default, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Site {
+    /// Whether source references on pages start out shown or hidden; readers can toggle
+    /// them either way.
+    #[serde(default)]
+    pub citations: Visibility,
+}
+
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum Visibility {
+    #[default]
+    Hidden,
+    Shown,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Simulation {
+    /// Rounds of simulated reading: each round but the last is followed by repairs.
+    /// 0 turns the simulation off.
+    #[serde(default = "default_simulation_rounds")]
+    pub rounds: u32,
+    /// Most pages a simulated reader may open for one goal.
+    #[serde(default = "default_budget")]
+    pub budget: u32,
+    /// Give the concepts the wiki teaches invented names in what simulated readers see.
+    #[serde(default = "default_true")]
+    pub nonce: bool,
+}
+
+impl Default for Simulation {
+    fn default() -> Self {
+        Self {
+            rounds: default_simulation_rounds(),
+            budget: default_budget(),
+            nonce: true,
+        }
+    }
+}
+
+fn default_simulation_rounds() -> u32 {
+    2
+}
+
+fn default_budget() -> u32 {
+    15
+}
+
+fn default_true() -> bool {
+    true
+}
+
+/// A reader profile for the simulation.
+#[derive(Debug, Clone, PartialEq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Persona {
+    /// Short name, used in task ids and the report.
+    pub name: String,
+    /// What this reader already knows, in plain words.
+    pub knows: String,
 }
 
 fn default_rounds() -> u32 {
@@ -55,6 +128,16 @@ pub struct SourceSpec {
 }
 
 impl Config {
+    /// The simulated readers: the configured reader, then any further profiles.
+    pub fn personas(&self) -> Vec<Persona> {
+        let mut personas = vec![Persona {
+            name: "reader".into(),
+            knows: self.reader.knows.clone(),
+        }];
+        personas.extend(self.readers.iter().cloned());
+        personas
+    }
+
     pub fn load(path: &Path) -> Result<Self> {
         let config: Config = toml::from_str(&read(path)?).map_err(|source| Error::Config {
             path: path.to_path_buf(),
@@ -76,6 +159,16 @@ impl Config {
         for source in &self.sources {
             if !seen.insert(source.id.as_str()) {
                 return Err(invalid(format!("duplicate source id `{}`", source.id)));
+            }
+        }
+        let mut names = HashSet::new();
+        for persona in self.personas() {
+            let name = crate::text::slug(&persona.name);
+            if name.is_empty() || !names.insert(name) {
+                return Err(invalid(format!(
+                    "reader names must be distinct and non-empty: `{}`",
+                    persona.name
+                )));
             }
         }
         Ok(())
@@ -103,6 +196,22 @@ id = "paper"
 path = "sources/paper.txt"
 # title = "Paper title"
 # url = "https://example.org/paper"
+
+# Simulated readers, run once the wiki is written: each tries to answer goal questions
+# using only the wiki, and what they get stuck on is repaired before the next round.
+# [simulation]
+# rounds = 2      # 0 turns the simulation off
+# budget = 15     # most pages a reader may open per goal
+# nonce = true    # invented names for the concepts the wiki teaches
+
+# Source references on pages ("see p. 5"): hidden until a reader shows them, or shown
+# [site]
+# citations = "hidden"
+
+# Further reader profiles to simulate, beside [reader]
+# [[readers]]
+# name = "newcomer"
+# knows = "High-school algebra"
 "#;
 
 #[cfg(test)]

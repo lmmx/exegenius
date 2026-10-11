@@ -1,11 +1,12 @@
 //! The task loop end to end, with scripted answers standing in for the agent: extract,
 //! write, audit (finding an unknown term), extend, rewrite, a clean audit round, outline,
-//! build.
+//! build; and the simulated readers: goals, reading through the CLI, a blind grade, repairs
+//! and a second round.
 
 use std::path::Path;
 
 use exegenius_core::project::Project;
-use exegenius_core::task::{Kind, Next, Task, next, submit};
+use exegenius_core::task::{Kind, Next, Task, next, read_page, search_pages, submit};
 use serde_json::json;
 
 const SOURCE: &str = "The discrete Fourier transform maps a sequence to its spectrum.\n\
@@ -14,13 +15,18 @@ The algorithm converts these through a chirp identity to convolution.\n\
 Intermediate arithmetic is exact on dyadic real and imaginary parts.\n";
 
 fn setup(dir: &Path, rounds: u32) -> Project {
+    setup_with(dir, rounds, "[simulation]\nrounds = 0\n")
+}
+
+fn setup_with(dir: &Path, rounds: u32, extra: &str) -> Project {
     std::fs::create_dir_all(dir.join("sources")).unwrap();
     std::fs::write(
         dir.join("exegenius.toml"),
         format!(
             "title = \"Chirp test\"\ntarget = \"The chirp identity\"\nrounds = {rounds}\n\
              [reader]\nknows = \"Complex numbers\"\n[[sources]]\nid = \"notes\"\n\
-             path = \"sources/notes.txt\"\ntitle = \"Notes\"\nurl = \"https://example.org/notes\"\n"
+             path = \"sources/notes.txt\"\ntitle = \"Notes\"\nurl = \"https://example.org/notes\"\n\
+             {extra}"
         ),
     )
     .unwrap();
@@ -176,8 +182,16 @@ fn task_loop_end_to_end() {
         let body = if page(t) == "chirp-identity" {
             let file = read(&project, t.file());
             assert!(file.contains("Previous version") && file.contains("now a prerequisite"));
+            answer(
+                &project,
+                t,
+                "Exact <cite data-source=\"notes\">made up</cite>.",
+            );
+            let err = submit(&project, &t.id).unwrap_err().to_string();
+            assert!(err.contains("\"made up\" is not in that source"), "{err}");
             "Combine the [DFT](dft.md) and [convolution](convolution.md); values are \
-             [dyadic](dyadic-rational.md), so $nk$ is exact."
+             [dyadic](dyadic-rational.md), so $nk$ is exact \
+             <cite data-source=\"notes\">exact on dyadic real and imaginary parts</cite>."
         } else {
             "A number of the form $m/2^k$."
         };
@@ -274,6 +288,12 @@ fn task_loop_end_to_end() {
     assert_eq!((report.glossary, report.symbols), (1, 2));
     let chirp = read(&project, "docs/chirp-identity.md");
     assert!(chirp.starts_with("# Chirp identity\n\n!!! info \"Before this page\""));
+    assert!(
+        chirp.contains("is exact<cite class=\"exegenius-ref\" data-source=\"notes\"")
+            && chirp.contains("> (see Notes)</cite>."),
+        "{chirp}"
+    );
+    assert!(project.root.join("docs/stylesheets/exegenius.css").exists());
     let dyadic = "(glossary.md#dyadic-rational \"What Dyadic rational is.\")";
     assert!(
         chirp.contains(&format!("[Dyadic rational]{dyadic}")),
@@ -362,4 +382,202 @@ fn last_round_fixes_are_written_then_built() {
     answer(&project, &last[1], "{\"symbols\": []}");
     submit(&project, &last[1].id).unwrap();
     assert!(matches!(next(&project).unwrap(), Next::Done(_)));
+}
+
+/// Handles of the links in a page as a simulated reader sees it.
+fn handles(page: &str) -> Vec<String> {
+    page.split("](")
+        .skip(1)
+        .filter_map(|rest| rest.split(')').next())
+        .map(str::to_string)
+        .collect()
+}
+
+#[test]
+fn simulated_readers_end_to_end() {
+    let temp = tempfile::tempdir().unwrap();
+    let project = setup_with(temp.path(), 1, "[simulation]\nrounds = 2\nbudget = 3\n");
+    let batch = tasks(next(&project).unwrap());
+    answer(&project, &batch[0], &extract_answer("a chirp identity"));
+    submit(&project, &batch[0].id).unwrap();
+    for t in tasks(next(&project).unwrap()) {
+        let body = match page(&t) {
+            "chirp-identity" => "The chirp identity splits $nk$ using the [DFT](dft.md).",
+            "dft" => "The discrete Fourier transform evaluates at roots of unity.",
+            _ => "Convolution adds products along diagonals.",
+        };
+        answer(&project, &t, body);
+        submit(&project, &t.id).unwrap();
+    }
+    for t in tasks(next(&project).unwrap()) {
+        answer(&project, &t, "{\"gaps\": []}");
+        submit(&project, &t.id).unwrap();
+    }
+    for t in tasks(next(&project).unwrap()) {
+        let text = match t.kind {
+            Kind::Outline => json!({"overview": "The [chirp identity](chirp-identity.md).",
+                "parts": [{"title": "All", "intro": "i",
+                           "pages": ["dft", "convolution", "chirp-identity"]}]}),
+            _ => json!({"symbols": []}),
+        };
+        answer(&project, &t, &text.to_string());
+        submit(&project, &t.id).unwrap();
+    }
+
+    // Goals: a transfer key point copied from a page is rejected.
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch[0].kind, Kind::Goals);
+    let goals = |point: &str| {
+        json!({"goals": [{"question": "How does the chirp identity use the DFT?",
+            "kind": "transfer", "key_points": [point, "It is about roots of unity"],
+            "pages": ["chirp-identity", "dft"]}]})
+        .to_string()
+    };
+    answer(
+        &project,
+        &batch[0],
+        &goals("The discrete Fourier transform evaluates at roots"),
+    );
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(err.contains("appears word for word on `dft`"), "{err}");
+    answer(&project, &batch[0], &goals("It rewrites the product nk"));
+    submit(&project, &batch[0].id).unwrap();
+
+    // Round 1: a reader from the front page, one deep-linked, and the baseline.
+    let batch = tasks(next(&project).unwrap());
+    let ids: Vec<&str> = batch.iter().map(|t| t.id.as_str()).collect();
+    assert!(ids[0].ends_with("read-g1-reader-home") && ids[1].ends_with("read-g1-reader-deep"));
+    assert!(ids[2].ends_with("baseline-g1-reader"));
+    let file = read(&project, batch[0].file());
+    assert!(
+        !file.contains("chirp identity"),
+        "the question is renamed: {file}"
+    );
+    assert!(file.contains(&format!("exegenius read {} home", batch[0].id)));
+
+    // The reader sees invented names and handles, within its budget.
+    let home = read_page(&project, &batch[0].id, "home").unwrap();
+    assert!(!home.to_lowercase().contains("chirp identity"), "{home}");
+    let chirp = handles(&home)[0].clone();
+    let seen = read_page(&project, &batch[0].id, &chirp).unwrap();
+    assert!(
+        seen.contains("splits $nk$") && !seen.contains("dft.md"),
+        "{seen}"
+    );
+    let nonce = seen
+        .lines()
+        .next()
+        .unwrap()
+        .trim_start_matches("# ")
+        .to_string();
+    assert!(!nonce.to_lowercase().contains("chirp"));
+    assert!(
+        search_pages(&project, &batch[0].id, "chirp")
+            .unwrap()
+            .starts_with("no pages")
+    );
+    assert!(
+        search_pages(&project, &batch[0].id, &nonce)
+            .unwrap()
+            .contains(&chirp)
+    );
+    read_page(&project, &batch[0].id, "home").unwrap();
+    let err = read_page(&project, &batch[0].id, &chirp)
+        .unwrap_err()
+        .to_string();
+    assert!(err.contains("page budget spent"), "{err}");
+    assert!(read_page(&project, &batch[2].id, "home").is_err());
+
+    // A citation must be on a page the reader opened; naming a real name is a leak.
+    let quote = format!("The {} splits", nonce.to_lowercase());
+    let reader = |cite_page: &str| {
+        json!({"outcome": "answered", "answer": "The chirp identity rewrites nk.",
+            "citations": [{"page": cite_page, "quote": quote}],
+            "stuck": [{"page": chirp, "quote": "using the", "note": "what the DFT does here"}],
+            "reason": "fairly sure"})
+        .to_string()
+    };
+    answer(&project, &batch[0], &reader("home"));
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(err.contains("is not on `home` word for word"), "{err}");
+    answer(&project, &batch[0], &reader(&chirp));
+    let warnings = submit(&project, &batch[0].id).unwrap();
+    assert!(
+        warnings[0].contains("names `chirp-identity` by its real name"),
+        "{warnings:?}"
+    );
+    let deep = read_page(&project, &batch[1].id, &chirp).unwrap();
+    assert!(deep.contains("Builds on"));
+    let gave_up = json!({"outcome": "gave_up", "answer": "", "citations": [], "stuck": [],
+                         "reason": "never found what nk is"});
+    answer(&project, &batch[1], &gave_up.to_string());
+    submit(&project, &batch[1].id).unwrap();
+    answer(
+        &project,
+        &batch[2],
+        "{\"answer\": \"The background does not cover this.\"}",
+    );
+    submit(&project, &batch[2].id).unwrap();
+
+    // Grading: two answers, blind; a grade for a missing key point is rejected.
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch.len(), 1);
+    let file = read(&project, batch[0].file());
+    assert!(file.contains("### Answer A") && file.contains("### Answer B"));
+    assert!(file.contains("The chirp identity rewrites nk."));
+    let reader_first = file.find("rewrites nk").unwrap() < file.find("does not cover").unwrap();
+    let (r, b) = if reader_first { ("A", "B") } else { ("B", "A") };
+    let grades = |n: usize| {
+        json!({"grades": [{"label": r, "covered": [n], "wrong": []},
+                          {"label": b, "covered": [], "wrong": []}]})
+        .to_string()
+    };
+    answer(&project, &batch[0], &grades(3));
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(err.contains("key point 3 does not exist"), "{err}");
+    answer(&project, &batch[0], &grades(1));
+    submit(&project, &batch[0].id).unwrap();
+
+    // Repairs: the stuck point, the give-up and the missed key point become rewrite notes.
+    let batch = tasks(next(&project).unwrap());
+    assert!(batch.iter().all(|t| matches!(t.kind, Kind::Write { .. })));
+    let chirp_write = batch.iter().find(|t| page(t) == "chirp-identity").unwrap();
+    let file = read(&project, chirp_write.file());
+    assert!(
+        file.contains("got stuck at \"using the\": what the DFT does here"),
+        "{file}"
+    );
+    assert!(file.contains("gave up on this page: never found what nk is"));
+    assert!(file.contains("could not work out: It is about roots of unity"));
+    for t in &batch {
+        answer(
+            &project,
+            t,
+            "A clearer page, with the [DFT](dft.md) where needed.",
+        );
+        submit(&project, &t.id).unwrap();
+    }
+
+    // Round 2: readers only (the baseline is kept); both give up; then done.
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch.len(), 2);
+    assert!(batch.iter().all(|t| matches!(t.kind, Kind::Read { .. })));
+    for t in &batch {
+        read_page(&project, &t.id, "home").unwrap();
+        answer(&project, t, &gave_up.to_string());
+        submit(&project, &t.id).unwrap();
+    }
+    assert!(matches!(next(&project).unwrap(), Next::Done(_)));
+    let simulation = read(&project, "exegenius/simulation.json");
+    assert_eq!(simulation.matches("\"task\":").count(), 5);
+    let report = read(&project, "exegenius/report.md");
+    assert!(report.contains("| 1 | 2 | 1 | 1 | 25% | 1 |"), "{report}");
+    assert!(report.contains("| 2 | 2 | 0 | 2 | 0% | 0 |"), "{report}");
+    assert!(report.contains("| baseline (no wiki) | 1 | | | 0% | |"));
+    assert!(report.contains("Path: Front page → Chirp identity → Front page"));
+    assert!(report.contains("- Stuck on Chirp identity: \"using the\" — what the DFT does here"));
+    assert!(
+        report.contains("Possible leaks (real names the reader was not shown): Chirp identity")
+    );
+    assert!(!project.root.join("docs/report.md").exists());
 }
