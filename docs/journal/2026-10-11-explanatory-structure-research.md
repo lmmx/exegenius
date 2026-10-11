@@ -136,7 +136,7 @@ The dependencies, as edges:
 1. **Symbol anchoring comes first.**
    - It is deterministic, and every failure it targets is documented in the demo, with quotes.
    - It needs nothing from the other entries.
-   - Its first experiment costs no agent runs: run an identifier tokenizer over the 45 demo pages and count what it would reject.
+   - Its root cause is already found, at no agent cost, in the demo project's own records: r reached the writer and the auditor inside the known concept name "Polynomial ring modulo y^r + 1", so the audit never reported it.
 2. **Signalled edges come before proof plans.**
    - An edge's role involves one page and its prerequisites, so it fits inside the existing write task.
    - A plan involves the whole argument and needs a vocabulary for its methods, which the connectives supply.
@@ -151,11 +151,13 @@ The dependencies, as edges:
 
 ### The question each entry has to settle first
 
+The first three were settled after steering on 2026-10-11, and the entries record how.
+
 | Entry | Question | How it is settled |
 |---|---|---|
-| symbol-anchoring | Should unaccounted symbols reject the submission, or only warn? | The tokenizer's false-positive rate on the demo pages |
-| signalled-edges | A coarse relation plus a free connective, or the connective only? | Steering. eRST's low agreement on fine labels argues for coarse or none. |
-| proof-plans | Is the plan written before the pages, to shape them, or after, to describe them? | Steering |
+| symbol-anchoring | Settled: an agent accounts for every symbol with evidence, and code checks the evidence; no tokenizer | The demo's audit records (`exegenius/audit.json` in lmmx/openai-nlogn-wiki) |
+| signalled-edges | Settled: a relation is a natural-language predicate, with no fixed set of types | Steering |
+| proof-plans | Settled: before the pages, as a top-down reading of the source; infer-leaves follow the source's order; pages are a choice of modules | Hamami & Morris, as derived in the entry's section "How Hamami & Morris's account determines the design" |
 | comprehension-goals | Which goal kinds come first, and how are goals split into held-out and repair goals? | Steering, then one demo round |
 | aha-moments | Where is the salient feature recorded, and is ablation done by sentence or by paragraph? | Steering. The lens change is the same either way. |
 | fragmentation-and-collapse | Which page chrome folds by default, and is the significance view public? | Steering, after 1–3 render |

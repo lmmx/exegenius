@@ -97,18 +97,16 @@ In information foraging theory (Pirolli 2005, 2007), a link's text is the proxim
 
 ### The edge record
 
-Each concept gains a map from prerequisite id to a role, stored in `exegenius/graph.json` with `#[serde(default)]` so existing graphs load unchanged. `requires` itself does not change.
+An edge is a triple: page, relation, prerequisite. The relation is a natural-language predicate, as in an ordinary knowledge graph whose relations are text rather than types from a fixed schema. Each concept gains a map from prerequisite id to its relation, stored in `exegenius/graph.json` with `#[serde(default)]` so existing graphs load unchanged. `requires` itself does not change.
 
 ```json
-"roles": {
+"relations": {
   "cyclic-convolution": {
-    "relation": "reduction",
-    "connective": "reduced to",
+    "predicate": "is reduced to",
     "quote": "the product of the digit sequences is reduced to a cyclic convolution of length S"
   },
   "discrete-fourier-transform": {
-    "relation": "means",
-    "connective": "by",
+    "predicate": "is computed by",
     "quote": "computed by a discrete Fourier transform, a pointwise product and an inverse transform"
   }
 }
@@ -116,41 +114,37 @@ Each concept gains a map from prerequisite id to a role, stored in `exegenius/gr
 
 The quotes above are illustrations, not demo text.
 
-The relation set is small and coarse, taken from the GUM inventory with one mathematical addition. Each relation says what the prerequisite does for this page:
+The predicate reads as a sentence with the two page names: "Radix-digit convolution *is reduced to* Cyclic convolution", "Cyclic convolution *is computed by* Discrete Fourier transform". Read in a chain, the predicates make the author's chain, "↬via … ↬reduced to … ↬by".
 
-| Relation | The prerequisite... | eRST counterpart |
-|---|---|---|
-| `term` | supplies a term or object this page uses | CONTEXT-BACKGROUND |
-| `means` | is how a step on this page is carried out | MODE-MEANS |
-| `reduction` | is the problem this page's problem is reduced to | none; a mathematical method in Hamami & Morris's sense |
-| `justification` | is why a claim on this page holds | EXPLANATION-JUSTIFY, EXPLANATION-EVIDENCE |
-| `generalisation` | is the general case this page specialises, or the reverse | ELABORATION |
-| `restatement` | says the same thing in another form | RESTATEMENT |
+There is no fixed relation set:
+- **Coarse labels add nothing a reader needs.** A label like `means` or `reduction` is what the predicate already says.
+- **Fine labels are unreliable.** eRST's annotators agree at only .412 on the relation of edges outside the tree.
+- **Labels can be derived later.** If grouping is ever needed, for reporting or for the plan's methods, the predicates can be clustered afterwards, by an agent, without changing what is stored.
 
-The connective is free text of one to four words, in the writer's own words, and carries the nuance the coarse relation loses. The low agreement on fine labels in eRST is the reason for keeping the relation coarse and letting the connective carry the detail.
+The predicate vocabulary that eRST's signals suggest (by, using, based on, so, because, that is) is given to writers as examples, not as a list to choose from.
 
 ### Who writes it, and the check
 
-The writer states roles in the JSON write answer that 2026-10-11-symbol-anchoring introduces, one per prerequisite page. At submit:
+The writer states relations in the JSON write answer that 2026-10-11-symbol-anchoring introduces, one per prerequisite page. At submit:
 
-1. **Every prerequisite page has a role.** `apply_write` already warns when a prerequisite is not linked (exegenius-core/src/write.rs:193-200). The warning becomes part of this check.
+1. **Every prerequisite page has a relation.** `apply_write` already warns when a prerequisite is not linked (exegenius-core/src/write.rs:193-200). The warning becomes part of this check.
 2. **The quote occurs in the page body**, word for word after whitespace normalisation, with `<cite>` marks stripped.
 3. **The quote is the signal.**
    - It links the prerequisite page, or names it.
-   - It contains the connective.
+   - It contains the predicate's main word: the predicate minus auxiliaries such as "is".
    - Both are deterministic string checks on the quoted sentence.
 
 Check 3 is eRST's licensing rule applied to the wiki: an edge is accepted only with a textual signal. A writer who cannot produce a quote has written a page that relies on a prerequisite without saying what for, and that is where a hop goes unexplained. The writer then adds the connecting sentence.
 
-The check verifies that the role is anchored, not that the relation label is right. A wrong label with a right quote shows the reader the right sentence anyway.
+The check verifies that the relation is anchored in the page's text, not that the predicate is apt. An apt predicate is the writer's job, and readers test it.
 
-Edges to concepts the reader already knows (`known: true`) need no role. Those concepts get no page, and the "Assumed known" line covers them.
+Edges to concepts the reader already knows (`known: true`) need no relation. Those concepts get no page, and the "Assumed known" line covers them.
 
 ### Rendering
 
-- **"Before this page"** lists each prerequisite with its connective. In the demo's terms: "This page builds on [Cyclic convolution] (reduced to) and [Discrete Fourier transform] (by)." The quote goes in the link's title attribute, which the `content.tooltips` feature already shows on hover.
-- **The Connections diagram** labels each edge with its connective. Mermaid supports edge labels (`A -- by --> B`), and the diagram already emits mermaid (exegenius-core/src/build.rs:288).
-- **A chain view.** The chain view for the front page and the part intros, "A ↬via B ↬reduced to C ↬by D", needs a choice of path. That choice belongs to the plan tree (2026-10-11-proof-plans). With roles alone, the path can be the one through the transitive reduction that follows the outline's parts, using the edges `part_edges` already computes (exegenius-core/src/build.rs).
+- **"Before this page"** lists each prerequisite with its predicate. In the demo's terms: "This page is reduced to [Cyclic convolution], which is computed by [Discrete Fourier transform]." The quote goes in the link's title attribute, which the `content.tooltips` feature already shows on hover.
+- **The Connections diagram** labels each edge with its predicate. Mermaid supports edge labels (`A -- by --> B`), and the diagram already emits mermaid (exegenius-core/src/build.rs:288).
+- **A chain view.** The chain view for the front page and the part intros, "A ↬via B ↬reduced to C ↬by D", needs a choice of path. That choice belongs to the plan tree (2026-10-11-proof-plans). With relations alone, the path can be the one through the transitive reduction that follows the outline's parts, using the edges `part_edges` already computes (exegenius-core/src/build.rs).
 
 ### A writer-side diagnostic
 
@@ -162,39 +156,40 @@ Together they map where the wiki relies on a page without saying why. That map c
 
 ## How the simulation tests it
 
-1. **Hypothesis H1.** With connectives rendered, readers answer "how does X relate to Y" goals with fewer pages opened.
+1. **Hypothesis H1.** With predicates rendered, readers answer "how does X relate to Y" goals with fewer pages opened.
    - Mejía-Ramos et al. have a matching template, "Identify the logical relation between modules".
    - It becomes a goal kind in 2026-10-11-comprehension-goals.
 2. **Hypothesis H2.** Stuck points whose note asks why a page is needed, or what it contributes, fall.
 3. **Scent.**
    - **Measure:** reader trails record the order of pages opened (`exegenius/trails/`).
-   - **Prediction:** with connectives in "Before this page", fewer opened pages are abandoned at once without a citation from them.
-4. **No leakage.** Connectives are short and generic ("by", "reduced to"). The nonce lens renames the linked page names, so the connectives do not leak the renamed concepts.
+   - **Prediction:** with predicates in "Before this page", fewer opened pages are abandoned at once without a citation from them.
+4. **Leakage.** Predicates are short and generic ("is computed by", "is reduced to"). The nonce lens renames the linked page names, so the predicates do not reveal the renamed concepts.
 
 ## Risks
 
-- **Taxonomy disputes.** A six-way relation set invites argument over labels. The check does not look at labels, and the connective is what readers see.
+- **Vague predicates.** Free predicates can drift to "uses" or "relates to". The report counts predicates by frequency, so vague ones show up, and the writer instructions ask for the predicate the sentence actually uses.
 - **Formulaic sentences.** A writer could satisfy check 3 with a template sentence ("This page uses X by X"). Counting duplicate quote shapes across pages would show it. The reader tests show whether such sentences help.
 - **Agent cost.** One extra structured field per prerequisite, which is small next to the page itself.
 
 ## Open questions for steering
 
-1. **The relation field.** Keep a coarse relation alongside the free connective, or only the connective, with any typing derived later from a lexicon?
-2. **Who writes roles.** The writer at submit, or a separate pass after all pages are written, which would see both pages of an edge?
-3. **The signal check.** Must the quote contain the link itself, or is naming the prerequisite enough? Autolinking makes the link appear at build time for earlier pages anyway (exegenius-core/src/autolink.rs).
-4. **Optional secondary edges.** Should eRST's secondary edges have an analogue? That would be cross-links that are not prerequisites but carry CAUSAL-RESULT or JUSTIFY relations, which the single tree loses in Table 10. In the demo, `gaussian-dyadic` explains why `simultaneous-butterfly-layer` stays exact. That link runs against the prerequisite direction, and a signalled cross-link would record it.
+Settled after steering: a relation is a natural-language predicate, with no fixed set of types.
+
+1. **Who writes relations.** The writer at submit, or a separate pass after all pages are written, which would see both pages of an edge?
+2. **The signal check.** Must the quote contain the link itself, or is naming the prerequisite enough? Autolinking makes the link appear at build time for earlier pages anyway (exegenius-core/src/autolink.rs).
+3. **Optional secondary edges.** Should eRST's secondary edges have an analogue? That would be cross-links that are not prerequisites but carry CAUSAL-RESULT or JUSTIFY relations, which the single tree loses in Table 10. In the demo, `gaussian-dyadic` explains why `simultaneous-butterfly-layer` stays exact. That link runs against the prerequisite direction, and a signalled cross-link would record it.
 
 ## Current State
 - Concept prerequisites are an untyped list of concept ids (exegenius-core/src/graph.rs:30)
-- `render_page` writes "This page builds on A, B" in the "Before this page" admonition, with no connective or relation (exegenius-core/src/build.rs:357-373)
+- `render_page` writes "This page builds on A, B" in the "Before this page" admonition, with no predicate (exegenius-core/src/build.rs:357-373)
 - The Connections diagram draws edges as index pairs with no labels (exegenius-core/src/build.rs:288, exegenius-core/src/build.rs:379-390)
 - `apply_write` warns when a prerequisite page is not linked in the body, and does not ask what the prerequisite contributes (exegenius-core/src/write.rs:193-200)
 - Typed relations `motivates`, `illustrates`, `formalizes` and `proves` (I-09) are recorded as superseded in docs/journal/2026-10-10-revised-v1-design.md
 
 ## Missing
-- No role (relation, connective, anchor quote) on prerequisite edges
+- No relation (predicate and anchor quote) on prerequisite edges
 - No check that a page states what each prerequisite contributes
-- No connectives in "Before this page" or on diagram edges
+- No predicates in "Before this page" or on diagram edges
 - No chain view on the front page or part intros
 - No report of unsignalled prerequisite edges
 - No cross-links outside the prerequisite relation

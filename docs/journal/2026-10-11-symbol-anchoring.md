@@ -111,83 +111,128 @@ The 🚅 idea asks for more than a definition: an introduction that says what pa
   - Carried over to derivations, this suggests that a symbol stays available while the argument is working on the object it belongs to, and fades when the argument moves away, however recently it was mentioned.
   - The work is on narrative. The carry-over to technical text is an untested analogy.
 
+## Why the existing audit missed r
+
+Exegenius already asks an agent to find unanchored symbols. The audit task reports "symbol: notation used without being defined on the page" (exegenius-core/src/audit.rs:95-100). `apply_audit` turns each such report into a rewrite note asking the writer to define the symbol (exegenius-core/src/audit.rs:184-193).
+
+The demo project's own records show why that did not catch r. They are in the public repository lmmx/openai-nlogn-wiki, under `exegenius/`.
+
+- **No gap was ever reported.**
+  - `exegenius/audit.json` holds three audit rounds: 24, 36 and 43 pages audited. The rounds reported 8, 9 and 2 symbol gaps.
+  - `synthetic-transform` was audited in all three rounds. Round 1 reported two step gaps; rounds 2 and 3 reported nothing.
+  - The only symbol gaps on the pages in section 1 are q on `cyclic-convolution` and ∗ on `multiplication-algorithm`.
+- **r arrived inside a concept name.**
+  - The last audit task for the page (`exegenius/tasks/0153-audit-synthetic-transform.md`) lists among the reader's known concepts "Polynomial ring modulo y^r + 1 (also: negacyclic ring)".
+  - The audit instructions count a symbol as followable "if the reader knows it". An earlier page's concept was known by construction (`Plan::known_at`, exegenius-core/src/plan.rs), and r was part of that concept's name.
+- **The writer was told the same.** The write task for the page (`exegenius/tasks/0006-write-synthetic-transform.md`) lists the same known concept. Its gloss reads "reduced modulo y^r + 1 for a power of two r".
+- **The gloss binds r to a range, not to what it counts.**
+  - "For a power of two r" says what values r takes, not what it is the size of.
+  - In Symlink's terms, the gloss makes no COUNT relation. The COUNT, "a list of \(r\) complex coefficients", is only in the body of the prerequisite page, which neither the writer nor the auditor of `synthetic-transform` sees.
+- **The pattern is common in the demo.** Seven of the demo's 50 concept names contain a symbol or symbol-like token, for example "Polynomial ring modulo y^r + 1" and "Deterministic O(n (lg n)^(1-kappa)) multiplication".
+
+So the failure does not need a tokenizer to fix, and an agent was already looking. Three properties of the current design let r through:
+1. **Knowledge is per concept, not per symbol.** Knowing a concept implied knowing every symbol in its name.
+2. **The audit reports only failures.** An auditor that notices nothing reports nothing, and the empty answer passes. ARC found omission to be the dominant error of LLMs over long inputs ("salient information is more often omitted than misrepresented"). An empty gap list is the form omission takes here.
+3. **Meanings travel as glosses.** A gloss is one line, written at extraction, and can bind a symbol to a range without binding it to what it counts.
+
 ## Design
 
-### Bindings, stated by the writer (I-90)
+The design keeps the division the revised v1 design set (2026-10-10-revised-v1-design): the model reads and proposes, and code checks the evidence it gives. An agent does all the reading of mathematics. Code never parses LaTeX for meaning; it only checks that quoted text exists and that a named symbol occurs in it.
 
-The write answer becomes JSON. Today it is a markdown body (exegenius-core/src/write.rs:161-168). The JSON holds the body and the symbols the page introduces:
+### Concept names are decomposed (I-90)
+
+Each concept gains a `symbols` list: the symbols its name contains, each with a binding. Extraction proposes the list, and code checks that each symbol occurs in the name.
 
 ```json
-{
-  "body": "...markdown...",
-  "symbols": [
-    {"symbol": "r", "meaning": "number of complex coefficients in a record",
-     "relation": "count", "role": "a power of two, so multiplying by a power of y is a shift with sign changes"},
-    {"symbol": "y", "meaning": "the polynomial indeterminate", "relation": "direct"}
-  ]
-}
+{"id": "polynomial-ring-mod-yr-plus-1",
+ "name": "Polynomial ring modulo y^r + 1",
+ "symbols": [
+   {"symbol": "y", "name": "indeterminate", "meaning": "the polynomial variable", "relation": "direct"},
+   {"symbol": "r", "name": "record length", "meaning": "the number of complex coefficients in a record, a power of two", "relation": "count"}
+ ]}
 ```
 
-The fields:
-- **`symbol`**: the LaTeX as written, matched with spacing removed, as `apply_notation` does now (exegenius-core/src/notation.rs:96-104, :136).
-- **`relation`**: `direct`, `count`, or `local` for a variable bound inside one formula, such as a summation index.
-- **`role`**: optional. The writer instructions ask for it on symbols that later pages will use.
+Every list of known concepts the tasks show, in write, audit, read and outline tasks, then prints a concept's symbol bindings under its name. A writer or auditor who meets "Polynomial ring modulo y^r + 1" sees "r: record length, the number of complex coefficients in a record". It no longer sees an undefined letter that it is told the reader knows.
 
-Frontmatter stays out of the pages (2026-10-10-revised-v1-design): the bindings live in `exegenius/graph.json` beside the page, as evidence quotes do.
+### Display names for symbols
 
-### The check
+Each binding carries a `name`: a display name of one to four words ("record length", "digit count", "transform length"). The `meaning` is the full sentence.
 
-At submit, every identifier in the page's mathematics has to be accounted for in one of four ways:
+The display name is what the page chrome shows next to a symbol:
+- the inherited-symbols note;
+- tooltips;
+- the notation page;
+- the decomposed concept names in tasks.
 
-1. **Bound on this page**, by an entry in `symbols`.
-2. **Inherited.** It is bound on a page in this page's prerequisite closure, and no nearer page binds the same letter to something else.
-3. **Assumed known.** It is standard notation the reader profile covers. A short per-project list of conventional symbols is kept in `exegenius.toml`, for example `O`, `\log`, `\sum`, `i` as the imaginary unit.
-4. **`local`.** It is bound inside the formula, which the writer marks with `local`.
+In each place it reads "r (record length)", not a sentence. It is also the natural-language handle a reader can search for: "record length" finds the page that binds r, where a search for "r" finds nothing useful. The demo's goal 4 searches that found nothing, "half" and "2κ", were searches for a symbol's role without a name to search by (2026-10-11-checkpoint-held-work).
 
-Anything else rejects the submission with the symbol and the formula it sits in. That catches failure 1 when the binding page is not a prerequisite, and failure 3.
+Concept titles that contain mathematics render it as mathematics: "Polynomial ring modulo \(y^r + 1\)", with the plain name kept for the slug, the nav and search.
 
-For failure 2, a wiki-wide pass flags a letter bound to two meanings on two pages where one page is in the other's prerequisite closure. A reader who follows the link meets the letter changing meaning. The writer of the later page either renames the letter or states the switch in the text ("here y is the imaginary part, not the indeterminate"). The statement is checked by requiring the old meaning's page to be linked in the same paragraph.
+### Pages account for every symbol
 
-Letters reused on pages unrelated by prerequisites are allowed. Asakura et al. show that meanings switching with scope is ordinary.
+The audit's symbol check changes from reporting gaps to accounting for every symbol. For each symbol in the page's mathematics, the auditor gives one of four kinds of evidence:
 
-Picking identifiers out of LaTeX needs a small tokenizer:
-- single letters with their subscripts and primes;
-- Greek commands;
-- `\mathcal{…}`-style letters;
-- with operator commands (`\log`, `\exp`) and LaTeX structure skipped.
+1. **Bound here.** A quote from this page that states what the symbol denotes. A use in a worked example ("Take \(r = 4\)") is not a statement of what r denotes, and the instructions say so.
+2. **Inherited.** The page id of an earlier page or a prerequisite, with the quote there that binds it.
+3. **In a known concept's name.** The concept, whose `symbols` list must then bind it.
+4. **Reader background.** Standard notation the reader profile covers, named.
 
-The tokenizer will have false positives. Each one costs a writer one resubmission. Whether to reject or warn at first is an open question below.
+Code checks each piece of evidence:
+- quotes occur word for word on the named page;
+- the symbol occurs in the quote, with spacing removed, as `apply_notation` compares symbols now (exegenius-core/src/notation.rs:96-104);
+- an inherited binding comes from a page earlier in reading order;
+- a concept-name binding exists in that concept's `symbols` list.
+
+A symbol with no valid evidence becomes a rewrite note, as now.
+
+The difference from today is that silence no longer passes. An auditor has to say how each symbol is anchored, and "anchored by a concept the reader knows" now needs the binding to exist.
+
+Completeness, meaning whether the auditor listed every symbol, is not checked in code. That would need parsing. Two cheap controls stand in for it:
+- **Second audit.** A second, independent audit of a sample of pages; symbols one audit lists and the other does not go to the report.
+- **Cross-checks.** The writer's own bindings and the inherited-symbols note give the auditor a list to check against.
+
+### Writers state bindings
+
+The write answer becomes JSON: the body, plus the symbols the page introduces, with `symbol`, `name`, `meaning`, `relation` (`direct` or `count`) and an optional `role`. Code checks each symbol occurs in the body's mathematics.
+
+The writer task already lists the bindings in force from prerequisites and concept names. So the writer knows which symbols arrive bound and which it introduces.
+
+### Overloaded letters
+
+Bindings are stored per page, so letters bound to different meanings on two pages linked by a prerequisite edge are a mechanical join. In the demo that is q, y, w, z and b.
+
+Whether two meanings differ is a judgement. "Number of digits" and "digit count" are the same meaning; "radix" and "digit count" are not. So the join produces candidate pairs, and the notation task, which already reads all pages, confirms or dismisses each one.
+
+A confirmed overload becomes a rewrite note on the later page: rename the letter, or say in the text that it changes meaning, linking the page with the other meaning.
+
+### Scope from the plan
+
+Asakura et al.'s scope switches and the accessibility finding both ask where a binding holds. Hamami & Morris answer it inside their own framework:
+- **Definitions are hypotheses.** A definition introduced during a proof is added to the hypotheses of the current proving intention. Of Pólya's c_i: "he now adds this definition of the ci sequence as a new hypothesis" (Review of Symbolic Logic, preprint p. 16). Footnote 14 counts definitions among the hypotheses.
+- **Hypotheses pass down the plan.** They pass to the children of the node where they are added.
+
+So a symbol bound at a plan node is in scope in that node's subtree. A use outside the subtree is a use out of scope, even if an earlier page bound it. With a plan (2026-10-11-proof-plans), the inherited-symbols note can show exactly the bindings in scope for the page's node. That replaces the question of how many pages back a binding may be.
 
 ### Inherited symbols shown on the page
 
-For every inherited symbol a page uses, the build writes a folded "Symbols on this page" note under "Before this page". Each line gives the symbol, its meaning, its role if stated, and a link to the page that binds it.
+For every inherited symbol a page uses, the build writes a folded "Symbols on this page" note under "Before this page". Each line gives the symbol, its display name, its meaning, and a link to the binding page.
 
-This is deterministic, and it carries the meaning to the point of use without adding words to the body. ScholarPhi's readers used symbol tooltips more than anything else, and Elhadad's definitions are links rather than inline text for the same reason.
+The note carries the meaning to the point of use without adding words to the body (2026-10-11-fragmentation-and-collapse).
 
-The note is the collapse-safe form of "restate it": the body stays as written (2026-10-11-fragmentation-and-collapse).
+### Tooltips and the notation page (I-91)
 
-### Position-sensitive tooltips (I-91)
+A later step puts the display name on the symbol itself. MathJax's `action` extension provides `\texttip`. Whether the bundle the build loads includes it is unchecked (exegenius-core/src/build.rs:96-118).
 
-A second step puts the meaning on the symbol itself. The build would rewrite the first occurrence of each bound or inherited symbol in each formula to carry a tooltip.
+The notation page is generated from the stored bindings, without an agent:
+- symbols used on more than one page, in reading order;
+- one entry per meaning;
+- display name and full meaning on each entry.
 
-The pages already load MathJax 3 (exegenius-core/src/build.rs:96-118). MathJax's `action` extension provides `\texttip`. Whether the CDN bundle the build loads includes that extension, and how it looks with zensical's theme, is unchecked.
-
-Rewriting LaTeX is the riskiest part of this entry, so it comes after the note above.
-
-### The notation page, derived
-
-With bindings stored, the notation page can be generated without an agent:
-- symbols bound with scope beyond one page, or used on more than one page;
-- in reading order;
-- one entry per meaning, each linked to its binding page.
-
-The notation task (exegenius-core/src/notation.rs) would then be removed.
-
-The page states what it lists: "symbols used on more than one page". ScholarPhi's T failure shows that a list which looks complete and is not is worse than none.
+The page says it lists cross-page symbols only, so it never implies completeness (ScholarPhi's T failure).
 
 ### Actors
 
-A symbol bound on one page and used on three or more is an actor in this sense. For actors the writer instructions require a `role`, and the role goes into the inherited-symbols note on every page that uses the symbol. Whether a role says what part the symbol plays cannot be checked deterministically. It is left to readers.
+A symbol bound once and used on three or more pages needs a `role`, which goes into the note on every page that uses it. Whether the role says what part the symbol plays is left to readers.
 
 ## How the simulation tests it
 
@@ -201,18 +246,21 @@ A symbol bound on one page and used on three or more is an actor in this sense. 
 
 ## Risks
 
-- **Tokenizer noise.** Too many false rejections would teach writers to bind everything as `local`. Counting `local` bindings per page shows whether that is happening.
-- **Overload strictness.** i, j, k and n recur everywhere with stable conventional meanings. They belong on the conventional list, not under the overload rule.
+- **Auditor omission.** An auditor can still leave a symbol out of its accounting. The sample of second audits measures how often this happens.
+- **Overload strictness.** i, j, k and n recur everywhere with stable conventional meanings. The notation task dismisses such overload candidates, and an auditor can anchor them to the reader's background.
 - **Role prose.** A required role invites filler. Keeping it to one clause, and not checking it, keeps the cost low.
 
 ## Open questions for steering
 
-1. **Reject or warn.** Should unaccounted symbols reject the submission, or start as rewrite notes until the tokenizer's false-positive rate on the demo pages is known? Running the tokenizer over the 45 demo pages first would answer this cheaply.
-2. **The notation task.** Generate the notation page from bindings and drop the notation task?
-3. **When to show the note.** Always on pages that use inherited symbols, or only when the binding page is more than k pages back in reading order? The accessibility finding suggests distance is the wrong measure, and the plan tree (2026-10-11-proof-plans) could supply the argument's focus instead. Until that exists, "always" is the simple rule.
-4. **Conventional symbols.** A project list in `exegenius.toml`, or a list derived from the reader profile's `knows` text by an agent?
+1. **Who decomposes concept names.** Is it extraction alone, or is decomposition rechecked when a page is written?
+2. **Notation task.** Keep it to confirm overload candidates, or fold that judgement into the audit?
+3. **Auditing coverage.** Is a second audit on a sample of pages enough to estimate how many symbols auditors miss?
+
+Settled after steering: symbols are read by an agent, not tokenised in code. Code checks only the quotes the agent gives and that the symbol occurs in them.
 
 ## Current State
+- The audit reports symbols used without definition, and `apply_audit` turns each report into a rewrite note (exegenius-core/src/audit.rs:95-100, exegenius-core/src/audit.rs:184-193)
+- Known concepts are listed in audit tasks by name and aliases only, and in write tasks with a gloss for linked pages, so a symbol inside a known concept's name reaches the agent as known (exegenius-core/src/plan.rs, exegenius-core/src/audit.rs:106)
 - The write answer is a markdown body with no structured fields (exegenius-core/src/write.rs:161-168)
 - The write instructions ask the writer to define every term or symbol on the page where it is first used, and no check enforces the instruction (exegenius-core/src/write.rs:26)
 - `notation::math` collects a page's inline and display mathematics as one string, with spacing removed for comparison (exegenius-core/src/notation.rs:96-104)
@@ -223,8 +271,8 @@ A symbol bound on one page and used on three or more is an actor in this sense. 
 
 ## Missing
 - No symbol bindings in write answers or in `exegenius/graph.json`
-- No tokenizer for identifiers in page mathematics
-- No check that a page's symbols are bound, inherited, conventional or local
+- No decomposition of concept names into symbol bindings, and no display names for symbols
+- No accounting of every symbol on a page with evidence; the audit reports only the symbols it notices
 - No check for one letter bound to two meanings across a prerequisite link
 - No inherited-symbols note on pages
 - No tooltips on symbols
