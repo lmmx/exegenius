@@ -265,16 +265,35 @@ Kinds: J = peer-reviewed journal, C = peer-reviewed conference, W = workshop, P 
 | Morris, R. L. (2020). Motivated proofs: What they are, why they matter and how to write them. *Review of Symbolic Logic* 13(1):23–46. doi:10.1017/S1755020319000583 | J | metadata (cited via Hamami & Morris) | proof-plans |
 | Leron, U. (1983). Structuring mathematical proofs. *American Mathematical Monthly* 90(3):174–185. doi:10.1080/00029890.1983.11971184 | J | metadata (cited via Hamami & Morris) | proof-plans |
 
+## 7. Implementation
+
+The seven research entries were implemented in the order of section 4, each recorded in its own entry with where the build departs from the research and what a check on the demo showed:
+
+| # | Research entry | Implementation entry | Demo check |
+|---|---|---|---|
+| 1 | symbol-anchoring | 2026-10-11-symbol-bindings | four fresh audits of demo pages; `r` on `synthetic-transform` reported unbound, with the two reasons section 1 found |
+| 2 | signalled-edges | 2026-10-11-relations | three rewrites; the first showed predicates that did not read as triples, which changed the instructions |
+| 3 | proof-plans | 2026-10-11-argument-plan | two plans; the first confounded by an ordering file, the second from the seminar notes alone |
+| 4 | comprehension-goals | 2026-10-11-goal-kinds | repair and held-out goals; one held-out goal overlapped a repair goal |
+| 5 | aha-moments | 2026-10-11-aha-candidates | none; tested end to end with scripted answers |
+| 6 | fragmentation-and-collapse | 2026-10-11-layering | none; tested end to end with scripted answers |
+| 7 | evidence-layers | 2026-10-11-citation-support | none; the demo's published pages carry no citation marks |
+
+A review of this entry (ChatGPT, 2026-10-11) was folded in along the way: motivations in the plan are typed by provenance; a binding stated after a symbol's first use does not count as binding it there; and the aha-moments entry now separates key steps, payoffs and reconnections, and three outcomes of a deletion against a matched control.
+
+The review's last point stands: the next milestone is an empirical baseline, a full simulation round on a wiki built with all of this, showing which failures occur, how often, and whether the checks catch them. No such round has run yet.
+
 ## Current State
-- Proposals I-85 to I-95 are recorded in docs/journal/2026-10-11-symbol-anchoring.md, docs/journal/2026-10-11-signalled-edges.md, docs/journal/2026-10-11-proof-plans.md, docs/journal/2026-10-11-comprehension-goals.md, docs/journal/2026-10-11-aha-moments.md, docs/journal/2026-10-11-fragmentation-and-collapse.md and docs/journal/2026-10-11-evidence-layers.md, and no source file implements them
+- Proposals I-85 to I-95 are recorded in docs/journal/2026-10-11-symbol-anchoring.md, docs/journal/2026-10-11-signalled-edges.md, docs/journal/2026-10-11-proof-plans.md, docs/journal/2026-10-11-comprehension-goals.md, docs/journal/2026-10-11-aha-moments.md, docs/journal/2026-10-11-fragmentation-and-collapse.md and docs/journal/2026-10-11-evidence-layers.md, and implemented as recorded in the seven entries of section 7
 - The deployed demo at https://openai-nlogn-wiki.vercel.app was built with v0.1, before the glossary and notation pages — /notation/ and /glossary/ return 404
-- Crates are at version 0.4.0 (Cargo.toml)
+- Crates are at version 0.5.0 (Cargo.toml)
 
 ## Missing
-- No symbol bindings or symbol checks (2026-10-11-symbol-anchoring)
-- No roles on prerequisite edges (2026-10-11-signalled-edges)
-- No plan tree (2026-10-11-proof-plans)
-- No goal kinds beyond recall and transfer, and no held-out goals (2026-10-11-comprehension-goals)
-- No detection or confirmation of aha sentences (2026-10-11-aha-moments)
-- No breadcrumb, mechanism view, significance view or crowding measures (2026-10-11-fragmentation-and-collapse)
-- No claim-support check (2026-10-11-evidence-layers)
+- No full simulation round with agents on a wiki built with symbol bindings, relations, an argument plan, the new goal kinds, attribution and support checks
+- No symbol tooltips, no symbol scope by plan node, and no roles on symbols (2026-10-11-symbol-bindings)
+- No edge labels on diagrams and no chain view (2026-10-11-relations)
+- No check of outline parts against the argument's subtrees (2026-10-11-argument-plan)
+- No check that held-out goals differ from repair goals (2026-10-11-goal-kinds)
+- No run of attribution, key ideas or ablation with agents (2026-10-11-aha-candidates)
+- No redundancy measure across pages (2026-10-11-layering)
+- No support check of concept evidence quotes (2026-10-11-citation-support)
