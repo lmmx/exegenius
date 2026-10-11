@@ -55,9 +55,9 @@ The author pushed the run's `exegenius/` directory to the `tmp-v0.5-build-record
 
 Term gaps fell each round. Step and symbol gaps hardly fell.
 
-**Rewrites replace step gaps rather than remove them.** On pages audited in two consecutive rounds:
-- **Rounds 1 to 2:** the 32 pages carried 131 step gaps before their rewrites and 171 after. Only 8 of the 171 quote a passage reported before.
-- **Rounds 2 to 3:** the 82 pages carried 320 before and 321 after, 19 of them seen before.
+**Rewrites replace step gaps rather than remove them.** On pages audited in two consecutive rounds, as `exegenius status` now computes it (exegenius-core/src/convergence.rs): a gap counts as seen before when its kind matches and its passage equals, or contains, or is contained in, a passage reported on the page the round before, the shorter at least 20 characters.
+- **Rounds 1 to 2:** the 32 pages carried 131 step gaps before their rewrites and 171 after. Only 7 of the 171 quote a passage reported before.
+- **Rounds 2 to 3:** the 82 pages carried 320 before and 321 after, 15 of them seen before.
 
 The rewrites removed the steps they were told about and added about as many new ones.
 
@@ -100,7 +100,7 @@ In the 0.5.0 run, 1,699 verdicts said "different", more than the 912 page bindin
 Explanations 1 to 3 are supported by the records. Explanation 5 is not separated from them: every task of the run used Haiku.
 
 ## Current State
-- In the 0.5.0 run, rewrites replaced the step gaps reported on a page with as many new ones: on pages audited in consecutive rounds, step gaps went 131 to 171 and 320 to 321, with 8 and 19 of the later ones quoting a passage reported before (lmmx/openai-nlogn-wiki at fa6c804, exegenius/audit.json)
+- In the 0.5.0 run, rewrites replaced the step gaps reported on a page with as many new ones: on pages audited in consecutive rounds, step gaps went 131 to 171 and 320 to 321, with 7 and 15 of the later ones quoting a passage reported before (lmmx/openai-nlogn-wiki at fa6c804, exegenius/audit.json)
 - 0.5.0 pages first audited in round 1 have a median of 589 words, against 289 for pages never audited and 221 for the 0.1 run
 - 234 of the 0.5.0 run's 771 citation marks follow a word or colon that makes the sentence need the quoted text, and audit tasks and the site both remove that text from the sentence (exegenius-core/src/audit.rs:191, exegenius-core/src/cite.rs:97-99)
 - The 0.5.0 run on the n log n paper ended its audit rounds with 142 pages from 157 concepts and 836 gaps over the 119 pages audited in round 3, against 45 pages and 4 gaps in round 3 of the 0.1 run with the same target, reader profile and rounds

@@ -5,13 +5,13 @@ The 0.5.0 run on the n log n paper did not converge, and nothing in exegenius no
 - a pilot run small enough to use as an eval before a full run, and between versions;
 - the fixes for the three causes the run's records support.
 
-Nothing here is implemented yet.
+Changes 1 (the report, not yet the stop rule) and 6 are implemented; the rest are not.
 
 ## The audit loop as an iteration
 
 Each audit round maps a wiki to a wiki: audits report gaps, rewrites and extend act on them. The loop is meant to reach a fixed point with no gaps. Two numbers say whether it is getting there:
 - **The rate:** gaps per audited page, by kind, each round. In the 0.1 run it fell by more than half each round, for every kind. In the 0.5.0 run, step gaps went 4.1, 3.9, 3.4.
-- **Renewal:** of the gaps on pages audited in two consecutive rounds, the share whose quote was not reported before. A rewrite that fixes what it was told about and adds nothing scores near zero on the second round. In the 0.5.0 run, renewal of step gaps was 163 of 171 and 302 of 321.
+- **Renewal:** of the gaps on pages audited in two consecutive rounds, the share whose quote was not reported before. A rewrite that fixes what it was told about and adds nothing scores near zero on the second round. In the 0.5.0 run, renewal of step gaps was 164 of 171 and 306 of 321; in the 0.1 run, 2 of 2 and none of 0, the step gaps on repeated pages having fallen from 20 to 2 and from 7 to 0.
 
 Term gaps also grow the graph. The growth factor is the pages extend adds per page audited. In the 0.5.0 run, the 32 pages of round 1 led to 50 new pages.
 
@@ -21,7 +21,7 @@ Term gaps also grow the graph. The growth factor is the pages extend adds per pa
 
 ### 1. A convergence report and a stop rule
 
-`status` and the report would give, per round and kind, the gap rate, and the renewal on pages audited in the round before. `audit.json` already holds every gap with its page and quote, so this needs no new task.
+`status` gives, per round, the gaps per page by kind and, on the pages also audited the round before, each kind's count before and after and how many are new (exegenius-core/src/convergence.rs, exegenius-cli/src/main.rs). It reads `audit.json`, so it needs no new task, and works on the records of earlier versions: on the 0.1 run it prints step gaps on repeated pages falling 20 to 2 (2 new) and 7 to 0, and on the 0.5.0 run rising 131 to 171 (164 new) and 320 to 321 (306 new). The report does not include it yet.
 
 `next` would stop the audit rounds early, saying why in `status`, when after a round either:
 - the step or symbol gap rate on pages audited in both rounds fell by less than half; or
@@ -53,7 +53,9 @@ Submit would reject a rewrite over budget. The budget is the previous version's 
 
 ### 6. A pilot as an eval
 
-`[pilot] pages = n` in `exegenius.toml` would limit the plan to the target and its n − 1 nearest prerequisites, taken breadth first. Concepts outside it are left out of the plan, and extend may add no pages beyond n.
+`[pilot] pages = n` in `exegenius.toml` makes the run explain, in place of the target, the concept on the way to it whose page and unknown prerequisites are most numerous without exceeding n, the one read latest among equals (exegenius-core/src/plan.rs). `next` chooses it once the graph exists and records it in `graph.json` as `pilot`, so it stays fixed as extend adds concepts; the pilot's plan may then grow past n, and that growth is part of what the pilot measures. Every use of the target goes through `Graph::goal` (exegenius-core/src/graph.rs). Removing `[pilot]` from the configuration drops the recorded pilot on load, and the run goes on to the full target (exegenius-core/src/project.rs).
+
+A pilot is a whole wiki with a smaller target, rather than a slice of the full plan, so the argument, outline and build need no special case: a slice would leave pages whose prerequisites have no page.
 
 With `rounds = 2` and the simulation off, a pilot of 8 pages costs about:
 - 8 writes and 8 audits;
@@ -77,15 +79,16 @@ The pilot measures the loop, not the explanations. The simulated readers still j
 5. The wall-time and token work of 2026-10-11-wall-time.
 
 ## Current State
+- `exegenius status` prints, per audit round, gaps per page by kind and, on pages also audited the round before, each kind's count before and after and how many are new (exegenius-core/src/convergence.rs, exegenius-cli/src/main.rs)
+- `[pilot] pages = n` makes the run explain the concept with the most unknown prerequisites that fit in n pages, recorded as `pilot` in `graph.json` and used through `Graph::goal` (exegenius-core/src/plan.rs, exegenius-core/src/graph.rs, exegenius-core/src/task.rs)
 - `rounds` limits the number of audit rounds and nothing tests whether a round reduced gaps (exegenius-core/src/task.rs:647-650)
 - `audit.json` records every gap with its page, kind and quote for every round, which the rate and renewal can be computed from (exegenius-core/src/audit.rs)
 - Overload rounds have no limit; support checks stop at two per page (exegenius-core/src/support.rs:29)
 - The rewrite length budget warns and does not reject (exegenius-core/src/write.rs)
 
 ## Missing
-- No gap rate or renewal in `status` or the report
+- No convergence figures in the report
 - No stop rule on convergence
-- No pilot setting
 - No limit on overload rounds
 - No check that a sentence reads complete without its citation mark
 - No acceptance of steps checkable by reference
