@@ -30,6 +30,7 @@ use std::path::PathBuf;
 use pulldown_cmark::{Event, LinkType, Options, Parser, Tag};
 use toml_edit::{Array, DocumentMut, InlineTable, Item, Table, Value};
 
+use crate::argument::{self, Argument};
 use crate::audit::SymbolUse;
 use crate::autolink::{self, autolink};
 use crate::error::{Error, Result, read, read_json, write, write_json};
@@ -193,6 +194,8 @@ struct Site<'a> {
     glossary: HashSet<&'a str>,
     /// Each page's symbol accounting from its latest audit.
     uses: HashMap<String, Vec<SymbolUse>>,
+    /// The plan of the argument, if it was made for these pages.
+    argument: Option<Argument>,
 }
 
 impl Site<'_> {
@@ -396,6 +399,28 @@ fn heading(c: &Concept) -> &str {
     c.title.as_deref().unwrap_or(&c.name)
 }
 
+/// A note on where a page fits in the argument: the steps from the main result down to the
+/// one the page presents, or the steps that rely on it.
+fn trail_note(site: &Site, c: &Concept) -> String {
+    let Some(argument) = &site.argument else {
+        return String::new();
+    };
+    let link = |id: &str| {
+        site.graph
+            .get(id)
+            .filter(|p| site.built.contains(p.id.as_str()))
+            .map(|p| site.titled(p, ""))
+    };
+    let lines = argument::trail(argument, &c.id, &link);
+    if lines.is_empty() {
+        return String::new();
+    }
+    format!(
+        "!!! abstract \"Where this fits\"\n\n{}\n\n",
+        indent(&lines.join("\n"))
+    )
+}
+
 /// A folded note listing the symbols a page takes from earlier pages and concept names.
 fn symbols_note(site: &Site, c: &Concept, body: &str) -> String {
     let uses = site.uses.get(&c.id).map(Vec::as_slice).unwrap_or_default();
@@ -446,6 +471,7 @@ fn render_page(site: &Site, c: &Concept, body: &str) -> String {
             note.join(" ")
         ));
     }
+    out.push_str(&trail_note(site, c));
     out.push_str(&symbols_note(site, c, body));
     let body = crate::cite::render(body.trim(), &site.project.sources);
     out.push_str(&decorate(&body, site, ""));
@@ -644,8 +670,10 @@ fn render_index(site: &Site, outline: Option<(&Outline, &[String])>, notation: b
             ));
         }
         out.push_str(&format!(
-            "It is written for a reader who knows: {knows}.\n\n## Reading order\n\n"
+            "It is written for a reader who knows: {knows}.\n\n"
         ));
+        out.push_str(&argument_section(site));
+        out.push_str("## Reading order\n\n");
         for (i, c) in site.pages.iter().enumerate() {
             out.push_str(&format!(
                 "{}. {} — {}\n",
@@ -677,10 +705,12 @@ fn render_index(site: &Site, outline: Option<(&Outline, &[String])>, notation: b
         "!!! tip \"How to read this wiki\"\n\n    Written for a reader who knows: {knows}. \
          The {} pages, in {} parts,{goal}. Read them in order with the links at the bottom \
          of each page, or start anywhere: each page opens with what it builds on. Hover \
-         over a link to see a one-line definition.{reference}\n\n## Contents\n\n",
+         over a link to see a one-line definition.{reference}\n\n",
         site.pages.len() - site.glossary.len(),
         outline.parts.len(),
     ));
+    out.push_str(&argument_section(site));
+    out.push_str("## Contents\n\n");
     let built: HashMap<&str, &Concept> = site.pages.iter().map(|c| (c.id.as_str(), *c)).collect();
     for (i, (part, slug)) in outline.parts.iter().zip(slugs).enumerate() {
         out.push_str(&format!(
@@ -731,6 +761,23 @@ fn render_index(site: &Site, outline: Option<(&Outline, &[String])>, notation: b
         out.push_str("```\n\n");
     }
     finish_index(site, out)
+}
+
+/// The front page's summary of the argument, if there is one.
+fn argument_section(site: &Site) -> String {
+    let Some(argument) = &site.argument else {
+        return String::new();
+    };
+    let link = |id: &str| {
+        site.graph
+            .get(id)
+            .filter(|p| site.built.contains(p.id.as_str()))
+            .map(|p| site.titled(p, ""))
+    };
+    format!(
+        "## The argument\n\n{}\n",
+        argument::overview(argument, &link)
+    )
 }
 
 fn finish_index(site: &Site, mut out: String) -> String {
@@ -871,6 +918,7 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
         built: prepared.pages.iter().map(|(c, _)| c.id.as_str()).collect(),
         glossary: prepared.glossary,
         uses,
+        argument: argument::current(project, plan)?,
     };
     let mut entries = Vec::new();
     for (c, body) in prepared.pages {
@@ -1196,6 +1244,7 @@ mod tests {
             built: ["dft", "row"].into(),
             glossary: ["row"].into(),
             uses: HashMap::new(),
+            argument: None,
         };
         let body = "See [the DFT](dft.md#def), [a row](row.md), [home](index.md), \
                     [web](https://x.org) and `[code](dft.md)`.";

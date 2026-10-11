@@ -291,6 +291,8 @@ pub struct Lens<'a> {
     home: String,
     /// Each page's symbol accounting from its latest audit, for the inherited symbols.
     uses: HashMap<String, Vec<crate::audit::SymbolUse>>,
+    /// The plan of the argument, if it was made for these pages.
+    argument: Option<crate::argument::Argument>,
 }
 
 impl<'a> Lens<'a> {
@@ -360,6 +362,7 @@ impl<'a> Lens<'a> {
             title,
             home: String::new(),
             uses: crate::audit::latest_symbols(project)?,
+            argument: crate::argument::current(project, plan)?,
         };
         lens.home = lens.render_home(project, outline);
         Ok(lens)
@@ -448,6 +451,14 @@ impl<'a> Lens<'a> {
         format!("[{}]({})", c.name, self.handles[&c.id])
     }
 
+    /// A link to a page by id, if the page is shown.
+    fn link_id(&self, id: &str) -> Option<String> {
+        self.graph
+            .get(id)
+            .filter(|c| self.handles.contains_key(&c.id))
+            .map(|c| self.link(c))
+    }
+
     fn render_home(&self, project: &Project, outline: Option<&Outline>) -> String {
         let mut out = format!("# {}\n\n", self.title);
         let built: HashMap<&str, &Concept> = self
@@ -462,9 +473,16 @@ impl<'a> Lens<'a> {
                 .collect::<Vec<_>>()
                 .join("\n")
         };
+        let argument = self.argument.as_ref().map_or(String::new(), |a| {
+            let link = |id: &str| self.link_id(id);
+            format!(
+                "## The argument\n\n{}\n",
+                crate::argument::overview(a, &link)
+            )
+        });
         match outline {
             Some(o) => {
-                out.push_str(&format!("{}\n\n## Contents\n", o.overview));
+                out.push_str(&format!("{}\n\n{argument}## Contents\n", o.overview));
                 for part in &o.parts {
                     out.push_str(&format!(
                         "\n### {}\n\n{}\n\n{}\n",
@@ -480,7 +498,7 @@ impl<'a> Lens<'a> {
             None => {
                 let ids: Vec<String> = self.pages.iter().map(|(c, _)| c.id.clone()).collect();
                 out.push_str(&format!(
-                    "Written for a reader who knows: {}\n\n## Pages\n\n{}\n",
+                    "Written for a reader who knows: {}\n\n{argument}## Pages\n\n{}\n",
                     project.config.reader.knows.trim(),
                     list(&ids)
                 ));
@@ -522,6 +540,13 @@ impl<'a> Lens<'a> {
         }
         if !known.is_empty() {
             out.push_str(&format!("Assumes: {}.\n", known.join(", ")));
+        }
+        if let Some(argument) = &self.argument {
+            let link = |id: &str| self.link_id(id);
+            let trail = crate::argument::trail(argument, id, &link);
+            if !trail.is_empty() {
+                out.push_str(&format!("Where this fits:\n{}\n", trail.join("\n")));
+            }
         }
         let uses = self.uses.get(id).map(Vec::as_slice).unwrap_or_default();
         let symbols: Vec<String> = crate::notation::inherited(self.graph, uses, body)

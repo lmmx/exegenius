@@ -40,8 +40,11 @@ Write one page of an explanatory wiki. The wiki explains a target result from so
 documents to a specific reader, one concept per page, in reading order.
 
 - Open with one or two sentences that say what the concept is and what it is for on the way \
-to the target (the pages that build on it are listed below), so a reader arriving from a link \
-knows at once why the page matters.
+to the target (the step of the argument it presents, and the pages that build on it, are \
+listed below), so a reader arriving from a link knows at once why the page matters.
+- If the page presents a step of the argument, explain how its method shows its claim. Give \
+the reader every motivation the task marks as not stated by the sources: the sources will \
+not.
 - Explain the page's concept so that this reader can follow it using only what they already \
 understand (listed below), what this page itself explains, and the linked prerequisite pages.
 - Define any other technical term on this page, where it is first used.
@@ -102,6 +105,84 @@ pub(crate) fn names(concepts: &[&Concept]) -> String {
         .join("\n")
 }
 
+/// What the writer of page `id` is told about the argument: the step the page presents,
+/// and where it sits, or the steps that rely on the page's concept.
+fn argument_section(argument: &crate::argument::Argument, graph: &Graph, id: &str) -> String {
+    use crate::argument::{Intention, Provenance};
+    let on = |n: &crate::argument::Node| {
+        n.page
+            .as_deref()
+            .and_then(|p| graph.get(p))
+            .map_or(String::new(), |p| format!(" (on {})", link(p)))
+    };
+    let Some((path, node)) = argument.module(id) else {
+        let users: Vec<String> = argument
+            .users(id)
+            .iter()
+            .map(|n| format!("- {}{}", n.claim, on(n)))
+            .collect();
+        if users.is_empty() {
+            return String::new();
+        }
+        return format!(
+            "\n## Where the argument relies on this page\n\n{}\n",
+            users.join("\n")
+        );
+    };
+    let mut out = format!(
+        "\n## This page in the argument\n\nThe step: {}\n",
+        node.claim
+    );
+    if node.intention == Intention::Show {
+        if let Some(method) = &node.method {
+            out.push_str(&format!("How: {method}\n"));
+        }
+        if let Some(m) = &node.motivation {
+            let source = match (m.source, &m.quote) {
+                (Provenance::Explicit, Some(q)) => {
+                    format!("the sources say so: \"{}\" ({})", q.quote, q.source)
+                }
+                (Provenance::Explicit, None) => "the sources say so".to_string(),
+                (Provenance::Recoverable, _) => {
+                    "the sources leave this for the reader to work out: spell it out".to_string()
+                }
+                (Provenance::Reconstructed, _) => {
+                    "the sources do not say this: give the reader the reason".to_string()
+                }
+            };
+            out.push_str(&format!("Why: {} ({source})\n", m.text.trim()));
+        }
+        if !node.children.is_empty() {
+            let steps: Vec<String> = node
+                .children
+                .iter()
+                .map(|c| format!("- {}{}", c.claim, on(c)))
+                .collect();
+            out.push_str(&format!(
+                "\nIts sub-steps, in order:\n\n{}\n",
+                steps.join("\n")
+            ));
+        }
+    }
+    if !path.is_empty() {
+        let chain: Vec<String> = path
+            .iter()
+            .map(|a| {
+                let how = a
+                    .method
+                    .as_deref()
+                    .map_or(String::new(), |m| format!(", by: {m}"));
+                format!("- {}{how}{}", a.claim, on(a))
+            })
+            .collect();
+        out.push_str(&format!(
+            "\nIt serves these steps, from the main result down:\n\n{}\n",
+            chain.join("\n")
+        ));
+    }
+    out
+}
+
 /// Planned pages with no body yet or queued for rewriting, in reading order.
 pub fn needs_write(project: &Project, graph: &Graph, plan: &Plan) -> Result<Vec<String>> {
     let mut pages = Vec::new();
@@ -140,6 +221,9 @@ pub fn write_task(project: &Project, graph: &Graph, plan: &Plan, i: usize) -> Re
             "\nThe symbols in this page's heading denote (say so on the page):\n\n{}\n",
             own.join("\n")
         ));
+    }
+    if let Some(argument) = crate::argument::current(project, plan)? {
+        task.push_str(&argument_section(&argument, graph, &c.id));
     }
     let bound: Vec<String> = symbols::in_force(graph, plan, i)
         .iter()

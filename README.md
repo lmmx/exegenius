@@ -72,6 +72,7 @@ sources or the other pages.
 | Task | The agent | exegenius checks and applies |
 |---|---|---|
 | extract | decomposes the sources into concepts with prerequisites and verbatim quotes; a name with mathematics in it also gets a title in LaTeX and a binding for each symbol (display name, meaning, direct or count) | slug ids, unique ids, known `requires`, a target, no cycles, every quote found verbatim in its source, every bound symbol in the title's mathematics |
+| argument | reconstructs the plan of the sources' argument as a tree of steps: each step to show a claim has a method, a motivation (stated by the sources, recoverable from them, or supplied) and sub-steps; each step to infer quotes the sources; each page presents one step or is a concept some step relies on | the root shows the target on the target page; infer steps quote the sources word for word, in depth-first order unless marked out of order; explicit motivations quote the sources; hypotheses are known or earlier pages; every page is used |
 | write | writes one page body, in reading order, using only what the reader knows, terms it defines, and the prerequisite pages it links; lists the symbols the page binds, each with the sentence that says what it denotes, and for each prerequisite page a relation: a predicate ("is reduced to") and the sentence that states it | no links to anything that is not a page; each bound symbol in the page's mathematics, its quote on the page, covering the symbol and not after its first use; a relation for every prerequisite page, its sentence on the page, linking or naming the prerequisite and containing the predicate's words; adds title, prerequisites, used-by and sources from the graph |
 | audit | told exactly what the reader knows at that page, lists every term or step they cannot follow, and accounts for every symbol in the page's mathematics: bound on the page, on an earlier page, in a known concept's name, by the reader's background, or unbound | every quote is on the page and holds its symbol; every named page or concept binds the symbol; every symbol the writer bound is accounted for; drops terms the reader knows; turns the rest into prerequisite edges, candidate concepts or rewrite notes |
 | extend | resolves the candidate concepts audits found into existing or new concepts | same checks as extract; adds the edges and queues the pages for rewriting |
@@ -82,6 +83,12 @@ sources or the other pages.
 | read | a simulated reader explores the wiki through `exegenius read` and `exegenius search` to answer one goal, and records where it got stuck | the page budget; every citation and stuck point quotes a page it opened |
 | baseline | answers a goal from the reader's background alone, with no wiki | non-empty |
 | grade | scores all answers to a goal blind against the key points | every answer graded once, key points exist |
+
+Before the first write, and again whenever the planned pages change, an argument task plans
+the sources' argument (after Hamami and Morris's account of proofs as executed plans), so
+each writer is told which step its page presents, why the method suits it, and which
+motivations the sources leave unstated. The outline task is given the argument's main steps
+as candidate parts.
 
 Rounds of write and audit repeat until an audit round finds no gaps, or `rounds` rounds have
 run. Only pages whose audit input changed are audited again. Then the outline task, and the
@@ -131,10 +138,13 @@ knows = "High-school algebra"
 ## The wiki
 
 - **Front page:** the overview, a note on who the wiki is for and how to read it, the
-  contents part by part, and a clickable map of how the parts depend on each other.
+  argument's main claim, method and motivation with its main steps, the contents part by
+  part, and a clickable map of how the parts depend on each other.
 - **Parts:** each part is a section in the navigation with its own landing page: the
   intro, its pages, and a map of the prerequisite edges among them.
-- **Pages:** a "before this page" note linking the prerequisites under the predicates
+- **Pages:** a "where this fits" note giving the steps of the argument from the main result
+  down to the one the page presents (or the steps that rely on the page's concept); a
+  "before this page" note linking the prerequisites under the predicates
   their relations give ("Radix-digit convolution *is reduced to* Cyclic convolution", with
   the sentence that says so as the link's tooltip), and naming what is assumed known; a
   folded note of the symbols the page takes from earlier pages and
@@ -188,6 +198,7 @@ exegenius/state.json  task state: pending tasks, audit round, audited pages
 exegenius/tasks/      task files and answer files
 exegenius/pages/      page bodies
 exegenius/audit.json  audit results, one record per round
+exegenius/argument.json the plan of the sources' argument
 exegenius/outline.json parts, glossary and front page
 exegenius/overloads.json verdicts on letters bound to two meanings
 exegenius/simulation.json simulated readers: goals, runs, grades

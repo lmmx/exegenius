@@ -6,8 +6,9 @@
 //!
 //! 1. extract (no graph yet)
 //! 2. extend (audits left candidate concepts)
-//! 3. write (pages with no body, or queued for rewriting)
-//! 4. audit (pages whose audit input changed since they were last audited); a round ends
+//! 3. argument (no plan of the argument for the current pages)
+//! 4. write (pages with no body, or queued for rewriting)
+//! 5. audit (pages whose audit input changed since they were last audited); a round ends
 //!    when its last audit is submitted, and the loop stops after a round with no gaps or
 //!    after `rounds` rounds
 //!
@@ -28,6 +29,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use sha2::{Digest, Sha256};
 
+use crate::argument::{ARGUMENT_INSTRUCTIONS, ArgumentAnswer, apply_argument, argument_task};
 use crate::audit::{AUDIT_INSTRUCTIONS, AuditAnswer, apply_audit, audit_task, record};
 use crate::build::{BuildReport, build};
 use crate::error::{Error, Result, read, read_json, write, write_json};
@@ -54,6 +56,7 @@ use crate::write::{WRITE_INSTRUCTIONS, WriteAnswer, apply_write, needs_write, wr
 pub enum Kind {
     Extract,
     Extend,
+    Argument,
     Write {
         page: String,
     },
@@ -92,6 +95,7 @@ impl Task {
         match self.kind {
             Kind::Extract => "extract",
             Kind::Extend => "extend",
+            Kind::Argument => "argument",
             Kind::Write { .. } => "write",
             Kind::Audit { .. } => "audit",
             Kind::Outline => "outline",
@@ -221,6 +225,7 @@ fn render(project: &Project, task: &Task, instructions: &str, input: &str) -> St
     let format = match task.kind {
         Kind::Extract => json_format::<ExtractAnswer>(),
         Kind::Extend => json_format::<ExtendAnswer>(),
+        Kind::Argument => json_format::<ArgumentAnswer>(),
         Kind::Audit { .. } => json_format::<AuditAnswer>(),
         Kind::Outline => json_format::<OutlineAnswer>(),
         Kind::Overloads => json_format::<OverloadsAnswer>(),
@@ -392,6 +397,7 @@ fn issue(project: &Project, state: &mut State, items: Vec<(Kind, &str, String)>)
         let label = match &kind {
             Kind::Extract => "extract".to_string(),
             Kind::Extend => "extend".to_string(),
+            Kind::Argument => "argument".to_string(),
             Kind::Write { page } => format!("write-{page}"),
             Kind::Audit { page, .. } => format!("audit-{page}"),
             Kind::Outline => "outline".to_string(),
@@ -458,6 +464,14 @@ pub fn next(project: &Project) -> Result<Next> {
             );
         }
         let plan = plan(&graph, &project.sources)?;
+        if crate::argument::current(project, &plan)?.is_none() {
+            let input = argument_task(project, &graph, &plan)?;
+            return issue(
+                project,
+                &mut state,
+                vec![(Kind::Argument, ARGUMENT_INSTRUCTIONS, input)],
+            );
+        }
         let writes = needs_write(project, &graph, &plan)?;
         if !writes.is_empty() {
             let mut items = Vec::new();
@@ -568,6 +582,11 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
             let warnings = apply_extend(project, &mut graph, parse(&path, &text)?)?;
             project.save_graph(&graph)?;
             warnings
+        }
+        Kind::Argument => {
+            let graph = require(graph)?;
+            let plan = plan(&graph, &project.sources)?;
+            apply_argument(project, &graph, &plan, parse(&path, &text)?)?
         }
         Kind::Write { page } => {
             let mut graph = require(graph)?;

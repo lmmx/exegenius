@@ -9,6 +9,7 @@
 //! exegenius/tasks/       task files and their answer files
 //! exegenius/pages/       page bodies
 //! exegenius/audit.json   audit results, one record per round
+//! exegenius/argument.json the plan of the sources' argument
 //! exegenius/outline.json parts, glossary and front page
 //! exegenius/overloads.json verdicts on letters bound to two meanings
 //! exegenius/simulation.json simulated readers: goals, runs, grades
@@ -195,6 +196,10 @@ impl Project {
 
     pub fn outline_path(&self) -> PathBuf {
         self.state_dir().join("outline.json")
+    }
+
+    pub fn argument_path(&self) -> PathBuf {
+        self.state_dir().join("argument.json")
     }
 
     pub fn overloads_path(&self) -> PathBuf {

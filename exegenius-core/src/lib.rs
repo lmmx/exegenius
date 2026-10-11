@@ -9,17 +9,20 @@
 //!
 //! 1. [`extract`]: decompose the sources into a concept graph (and later resolve the
 //!    candidate concepts audits find).
-//! 2. [`write`]: write each page body, in the reading order from [`plan`], with the symbols
+//! 2. [`argument`]: reconstruct the plan of the sources' argument, saying what each page is
+//!    for.
+//! 3. [`write`]: write each page body, in the reading order from [`plan`], with the symbols
 //!    it binds (see [`symbols`]).
-//! 3. [`audit`]: list what the reader cannot follow on each page, given exactly what the
+//! 4. [`audit`]: list what the reader cannot follow on each page, given exactly what the
 //!    reader knows at that point, and account for every symbol on it.
-//! 4. [`outline`] and [`notation`]: once the pages are final, group them into parts (folding
+//! 5. [`outline`] and [`notation`]: once the pages are final, group them into parts (folding
 //!    minor pages into a glossary) and write the front page, and judge letters that pages
 //!    bind to two meanings.
 //!
 //! [`task`] decides what to hand out next and applies submitted answers; [`build`] writes
 //! the docs tree and `zensical.toml` once no task is left.
 
+pub mod argument;
 pub mod audit;
 pub mod autolink;
 pub mod build;

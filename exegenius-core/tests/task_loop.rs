@@ -64,6 +64,37 @@ fn extract_answer(chirp_quote: &str) -> String {
     .to_string()
 }
 
+/// The plan of the argument: to show the chirp identity, from its prerequisites, by two
+/// steps the notes report in this order (or the reverse).
+fn argument_answer(from: &[&str], reversed: bool) -> String {
+    let mut steps = vec![
+        json!({"id": "S1", "intention": "infer", "claim": "Convolution multiplies transforms.",
+               "quote": {"source": "notes", "quote": "Convolution of two sequences multiplies"}}),
+        json!({"id": "S2", "intention": "infer", "claim": "The chirp identity reaches a convolution.",
+               "quote": {"source": "notes", "quote": "through a chirp identity to convolution"}}),
+    ];
+    if reversed {
+        steps.reverse();
+    }
+    json!({"root": {
+        "id": "S0", "intention": "show", "page": "chirp-identity", "from": from,
+        "claim": "The chirp identity turns a DFT into a convolution.",
+        "method": "rewrite the transform as a convolution",
+        "motivation": {"text": "Convolutions are fast.", "source": "explicit",
+                       "quote": {"source": "notes", "quote": "converts these through a chirp identity"}},
+        "children": steps,
+    }})
+    .to_string()
+}
+
+/// Answer the argument task `next` hands out after an extract or extend.
+fn argue(project: &Project, from: &[&str]) {
+    let batch = tasks(next(project).unwrap());
+    assert_eq!(batch[0].kind, Kind::Argument);
+    answer(project, &batch[0], &argument_answer(from, false));
+    submit(project, &batch[0].id).unwrap();
+}
+
 fn tasks(next: Next) -> Vec<Task> {
     match next {
         Next::Tasks { tasks, .. } => tasks,
@@ -161,6 +192,26 @@ fn task_loop_end_to_end() {
         &extract_answer("through a chirp identity to convolution"),
     );
     submit(&project, "0001-extract").unwrap();
+
+    // Argument: steps out of the notes' order are rejected; then the plan is accepted.
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch[0].kind, Kind::Argument);
+    answer(
+        &project,
+        &batch[0],
+        &argument_answer(&["dft", "convolution"], true),
+    );
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains("step `S1` quotes the sources before step `S2`"),
+        "{err}"
+    );
+    answer(
+        &project,
+        &batch[0],
+        &argument_answer(&["dft", "convolution"], false),
+    );
+    submit(&project, &batch[0].id).unwrap();
 
     // Write: three independent tasks; a link to a missing page is rejected, and so are a
     // missing symbols file and a binding whose quote does not contain its symbol.
@@ -276,6 +327,27 @@ fn task_loop_end_to_end() {
     answer(&project, &batch[0], &extend("k"));
     submit(&project, &batch[0].id).unwrap();
 
+    // The pages changed, so the argument is planned again, covering the new page.
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch[0].kind, Kind::Argument);
+    assert!(read(&project, batch[0].file()).contains("## Previous plan"));
+    answer(
+        &project,
+        &batch[0],
+        &argument_answer(&["dft", "convolution"], false),
+    );
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains("present a step nor appear in a step's `from`: dyadic-rational"),
+        "{err}"
+    );
+    answer(
+        &project,
+        &batch[0],
+        &argument_answer(&["dft", "convolution", "dyadic-rational"], false),
+    );
+    submit(&project, &batch[0].id).unwrap();
+
     // Write: the new page and the rewrite of the chirp page, which sees the audit notes.
     let batch = tasks(next(&project).unwrap());
     let mut pages: Vec<&str> = batch.iter().map(page).collect();
@@ -287,6 +359,11 @@ fn task_loop_end_to_end() {
         let body = if page(t) == "chirp-identity" {
             let file = read(&project, t.file());
             assert!(file.contains("Previous version") && file.contains("now a prerequisite"));
+            assert!(file.contains(
+                "## This page in the argument\n\nThe step: The chirp identity turns a DFT into \
+                 a convolution.\nHow: rewrite the transform as a convolution\nWhy: Convolutions \
+                 are fast. (the sources say so: \"converts these through a chirp identity\""
+            ));
             assert!(
                 file.contains("- Dyadic rational (also: dyadic)\n  - $k$ (exponent): The power")
             );
@@ -532,6 +609,13 @@ fn task_loop_end_to_end() {
     assert!(chirp.contains("    > — [Notes](https://example.org/notes)"));
     let dft = read(&project, "docs/dft.md");
     assert!(dft.contains("Assumed known: Complex numbers."));
+    assert!(
+        dft.contains(
+            "!!! abstract \"Where this fits\"\n\n    - Relied on to show: The chirp identity \
+             turns a DFT into a convolution. ([Chirp identity](chirp-identity.md"
+        ),
+        "{dft}"
+    );
     assert!(dft.contains("Used by:\n\n- [Chirp identity](chirp-identity.md"));
     let part = read(&project, "docs/background/index.md");
     assert!(part.starts_with(
@@ -542,6 +626,12 @@ fn task_loop_end_to_end() {
     let index = read(&project, "docs/index.md");
     assert!(index.contains("The [chirp identity](chirp-identity.md \"What Chirp identity is.\")"));
     assert!(index.contains("### 2. [The identity](the-identity/index.md)"));
+    assert!(index.contains(
+        "## The argument\n\n**Main result:** The chirp identity turns a DFT into a convolution.\n\n\
+         **How:** rewrite the transform as a convolution **Why:** Convolutions are fast.\n\n\
+         1. Convolution multiplies transforms.\n2. The chirp identity reaches a convolution.\n"
+    ));
+    assert!(index.find("## The argument") < index.find("## Contents"));
     assert!(index.contains("p0 --> p1"));
     assert!(index.contains("the [glossary](glossary.md) defines minor terms"));
     assert!(index.contains("### [Notation](notation.md)"));
@@ -565,6 +655,7 @@ fn last_round_fixes_are_written_then_built() {
     let batch = tasks(next(&project).unwrap());
     answer(&project, &batch[0], &extract_answer("a chirp identity"));
     submit(&project, &batch[0].id).unwrap();
+    argue(&project, &["dft", "convolution"]);
     for t in tasks(next(&project).unwrap()) {
         if page(&t) == "chirp-identity" {
             fields(&project, &t, json!([]), json!(chirp_relations()));
@@ -627,6 +718,7 @@ fn simulated_readers_end_to_end() {
     let batch = tasks(next(&project).unwrap());
     answer(&project, &batch[0], &extract_answer("a chirp identity"));
     submit(&project, &batch[0].id).unwrap();
+    argue(&project, &["dft", "convolution"]);
     for t in tasks(next(&project).unwrap()) {
         if page(&t) == "chirp-identity" {
             let relations = json!([
@@ -750,6 +842,7 @@ fn simulated_readers_end_to_end() {
         "{warnings:?}"
     );
     let deep = read_page(&project, &batch[1].id, &chirp).unwrap();
+    assert!(home.contains("## The argument"), "{home}");
     assert!(deep.contains("*splits using* ["), "{deep}");
     let gave_up = json!({"outcome": "gave_up", "answer": "", "citations": [], "stuck": [],
                          "reason": "never found what nk is"});
