@@ -40,6 +40,7 @@ pub mod project;
 pub mod relations;
 pub mod report;
 pub mod simulate;
+pub mod support;
 pub mod symbols;
 pub mod task;
 pub mod text;

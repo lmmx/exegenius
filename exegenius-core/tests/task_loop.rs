@@ -441,12 +441,35 @@ fn task_loop_end_to_end() {
         submit(&project, &t.id).unwrap();
     }
 
-    // Outline and overloads, handed out together: the chirp page binds k, which the name
-    // of the dyadic concept it builds on also binds.
+    // Outline, overloads and support checks, handed out together: the chirp page binds k,
+    // which the name of the dyadic concept it builds on also binds, and has a citation mark,
+    // which two independent judges label, since it is the first page checked.
     let batch = tasks(next(&project).unwrap());
-    let kinds: Vec<&Kind> = batch.iter().map(|t| &t.kind).collect();
-    assert_eq!(kinds, vec![&Kind::Outline, &Kind::Overloads]);
+    let labels: Vec<&str> = batch.iter().map(|t| t.label()).collect();
+    assert_eq!(labels, vec!["outline", "overloads", "support", "support"]);
     let (outline_task, overloads_task) = (&batch[0], &batch[1]);
+    let file = read(&project, batch[2].file());
+    assert!(
+        file.contains("Claim: So $nk$ is exact\n\nQuotation, from Notes: \"exact on dyadic"),
+        "{file}"
+    );
+    let label = |verdict: &str, reason: &str| {
+        json!({"labels": [{"mark": 1, "label": verdict, "reason": reason}]}).to_string()
+    };
+    answer(&project, &batch[2], &label("unsupported", ""));
+    let err = submit(&project, &batch[2].id).unwrap_err().to_string();
+    assert!(
+        err.contains("quotation 1: say what is missing or wrong"),
+        "{err}"
+    );
+    answer(
+        &project,
+        &batch[2],
+        &label("unsupported", "the passage says nothing about nk."),
+    );
+    submit(&project, &batch[2].id).unwrap();
+    answer(&project, &batch[3], &label("supported", ""));
+    submit(&project, &batch[3].id).unwrap();
     let file = read(&project, overloads_task.file());
     assert!(
         file.contains("1. $k$\n   - on `chirp-identity`: $k$ (frequency index)")
@@ -524,6 +547,11 @@ fn task_loop_end_to_end() {
         ),
         "{file}"
     );
+    assert!(file.contains(
+        "The quotation does not support the claim it is attached to (unsupported): \"So $nk$ \
+         is exact\" cites \"exact on dyadic real and imaginary parts\": the passage says \
+         nothing about nk."
+    ));
     let mut relations = chirp_relations();
     relations.push(relation(
         "dyadic-rational",
@@ -549,6 +577,19 @@ fn task_loop_end_to_end() {
          <cite data-source=\"notes\">exact on dyadic real and imaginary parts</cite>.",
     );
     submit(&project, &batch[0].id).unwrap();
+
+    // The rewritten claim is a new mark, so the page gets its second and last check.
+    let batch = tasks(next(&project).unwrap());
+    let labels: Vec<&str> = batch.iter().map(|t| t.label()).collect();
+    assert_eq!(labels, vec!["support"]);
+    answer(
+        &project,
+        &batch[0],
+        &label("partial", "only the exactness."),
+    );
+    submit(&project, &batch[0].id).unwrap();
+    let support = read(&project, "exegenius/support.json");
+    assert!(support.contains("\"partial\"") && support.contains("\"second\""));
 
     // Done: the docs are built, grouped into the two parts, with a glossary and notation.
     let Next::Done(report) = next(&project).unwrap() else {

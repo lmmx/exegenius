@@ -348,6 +348,38 @@ fn status(project: &Project) -> anyhow::Result<()> {
          awaiting a verdict",
         judged.iter().filter(|j| !j.same).count()
     );
+    let support = exegenius_core::support::load(project)?;
+    if !support.judged.is_empty() {
+        let count = |v: exegenius_core::support::Verdict| {
+            support.judged.iter().filter(|j| j.label == v).count()
+        };
+        use exegenius_core::support::Verdict;
+        println!(
+            "citation support: {} marks judged: {} supported, {} partial, {} unsupported, {} \
+             contradicted",
+            support.judged.len(),
+            count(Verdict::Supported),
+            count(Verdict::Partial),
+            count(Verdict::Unsupported),
+            count(Verdict::Contradicted)
+        );
+        let (both, agree) = support.agreement();
+        if both > 0 {
+            println!("  a second judge agreed on {agree} of {both} marks");
+        }
+    }
+    let unlinked: Vec<&str> = project
+        .sources
+        .iter()
+        .filter(|s| s.url.is_none())
+        .map(|s| s.id.as_str())
+        .collect();
+    if !unlinked.is_empty() {
+        println!(
+            "sources with no url (a DOI, arXiv or stable URL lets readers check them): {}",
+            unlinked.join(", ")
+        );
+    }
     let simulation = exegenius_core::simulate::load(project)?;
     if !simulation.goals.is_empty() {
         let held_out = simulation.goals.iter().filter(|g| g.held_out).count();

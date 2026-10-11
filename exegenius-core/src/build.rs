@@ -1024,7 +1024,14 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
         let path = project.report_path();
         write(
             &path,
-            &crate::report::report(&project.config, graph, &simulation, &joining, &plan.order),
+            &crate::report::report(
+                &project.config,
+                graph,
+                &simulation,
+                &crate::support::load(project)?,
+                &joining,
+                &plan.order,
+            ),
         )?;
         report.report = Some(path);
     }

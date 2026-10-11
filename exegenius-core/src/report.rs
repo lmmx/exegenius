@@ -8,6 +8,7 @@ use crate::aha::Joining;
 use crate::config::Config;
 use crate::graph::Graph;
 use crate::simulate::{HOME, Level, Outcome, Role, Run, Simulation};
+use crate::support::{Support, Verdict};
 
 fn name<'a>(graph: &'a Graph, id: &'a str) -> &'a str {
     if id == HOME {
@@ -470,10 +471,51 @@ fn ablations(graph: &Graph, simulation: &Simulation, rounds: u32, order: &[Strin
     out
 }
 
+/// The marks a support judge did not label `supported`, and the agreement between judges.
+fn citations(graph: &Graph, support: &Support) -> String {
+    if support.judged.is_empty() {
+        return String::new();
+    }
+    let flagged: Vec<_> = support
+        .judged
+        .iter()
+        .filter(|j| j.label != Verdict::Supported)
+        .collect();
+    let mut out = format!(
+        "\n## Citation support\n\n{} of {} citation marks were judged not fully supported by \
+         their quotation. Unsupported and contradicted marks became rewrite notes; partial ones \
+         are listed here only.\n",
+        flagged.len(),
+        support.judged.len()
+    );
+    let (both, agree) = support.agreement();
+    if both > 0 {
+        out.push_str(&format!(
+            "\nA second, independent judge labelled {both} marks and gave the same label to \
+             {agree}: a measure of how far one judge's labels can be trusted.\n"
+        ));
+    }
+    if !flagged.is_empty() {
+        out.push('\n');
+    }
+    for j in flagged {
+        out.push_str(&format!(
+            "- {} ({}): \"{}\" cites \"{}\": {}\n",
+            name(graph, &j.mark.page),
+            j.label.name(),
+            j.mark.claim,
+            j.mark.quote,
+            j.reason
+        ));
+    }
+    out
+}
+
 pub fn report(
     config: &Config,
     graph: &Graph,
     simulation: &Simulation,
+    support: &Support,
     joining: &[Joining],
     order: &[String],
 ) -> String {
@@ -674,6 +716,7 @@ pub fn report(
         config.simulation.rounds,
         order,
     ));
+    out.push_str(&citations(graph, support));
     let predicates = crate::relations::predicates(graph);
     if !predicates.is_empty() {
         out.push_str(
@@ -754,5 +797,39 @@ mod tests {
         assert!(out.contains("| expert | 1 | 1 | 50% | 4.0 |"), "{out}");
         // Each run cites one page of the goal's two, and opened others without citing them.
         assert!(out.contains("| 1 | 3.0 | 67% | 2 of 2 |"), "{out}");
+    }
+
+    #[test]
+    fn citation_support_lists_flagged_marks_and_agreement() {
+        use crate::support::{Judgment, Mark};
+        let judgment = |claim: &str, label: Verdict| Judgment {
+            mark: Mark {
+                page: "p".into(),
+                source: "s".into(),
+                claim: claim.into(),
+                quote: "q".into(),
+                paragraph: String::new(),
+            },
+            label,
+            reason: "why".into(),
+        };
+        let support = Support {
+            judged: vec![
+                judgment("a", Verdict::Supported),
+                judgment("b", Verdict::Partial),
+            ],
+            second: vec![judgment("a", Verdict::Unsupported)],
+            checks: Default::default(),
+        };
+        let out = citations(&Graph::default(), &support);
+        assert!(out.contains("1 of 2 citation marks"), "{out}");
+        assert!(
+            out.contains("labelled 1 marks and gave the same label to 0"),
+            "{out}"
+        );
+        assert!(
+            out.contains("- p (partial): \"b\" cites \"q\": why"),
+            "{out}"
+        );
     }
 }

@@ -200,7 +200,7 @@ knows = "Undergraduate computer science: big-O notation, polynomials, complex nu
 id = "paper"
 path = "sources/paper.txt"
 # title = "Paper title"
-# url = "https://example.org/paper"
+# url = "https://example.org/paper"   # a DOI, arXiv or stable URL, so readers can check it
 
 # Simulated readers, run once the wiki is written: each tries to answer goal questions
 # using only the wiki, and what they get stuck on is repaired before the next round.

@@ -69,6 +69,14 @@ pub enum Kind {
     },
     Outline,
     Overloads,
+    Support {
+        page: String,
+        /// The second, independent judge of a sampled page.
+        #[serde(default)]
+        second: bool,
+        /// The marks to label, in the order the task lists them.
+        marks: Vec<crate::support::Mark>,
+    },
     Goals {
         /// Goals whose readers' results never feed repairs.
         #[serde(default)]
@@ -115,6 +123,7 @@ impl Task {
             Kind::Audit { .. } => "audit",
             Kind::Outline => "outline",
             Kind::Overloads => "overloads",
+            Kind::Support { .. } => "support",
             Kind::Goals { .. } => "goals",
             Kind::Read { .. } => "read",
             Kind::Baseline { .. } => "baseline",
@@ -245,6 +254,7 @@ fn render(project: &Project, task: &Task, instructions: &str, input: &str) -> St
         Kind::Audit { .. } => json_format::<AuditAnswer>(),
         Kind::Outline => json_format::<OutlineAnswer>(),
         Kind::Overloads => json_format::<OverloadsAnswer>(),
+        Kind::Support { .. } => json_format::<crate::support::SupportAnswer>(),
         Kind::Goals { .. } => json_format::<GoalsAnswer>(),
         Kind::Read { .. } => json_format::<ReadAnswer>(),
         Kind::Baseline { .. } => json_format::<BaselineAnswer>(),
@@ -496,6 +506,14 @@ fn issue(project: &Project, state: &mut State, items: Vec<(Kind, &str, String)>)
             Kind::Audit { page, .. } => format!("audit-{page}"),
             Kind::Outline => "outline".to_string(),
             Kind::Overloads => "overloads".to_string(),
+            Kind::Support {
+                page,
+                second: false,
+                ..
+            } => format!("support-{page}"),
+            Kind::Support {
+                page, second: true, ..
+            } => format!("support-{page}-second"),
             Kind::Goals { held_out: false } => "goals".to_string(),
             Kind::Goals { held_out: true } => "held-out-goals".to_string(),
             Kind::Read {
@@ -597,6 +615,23 @@ pub fn next(project: &Project) -> Result<Next> {
             if !candidates.is_empty() {
                 let input = overloads_task(&graph, &candidates);
                 items.push((Kind::Overloads, OVERLOADS_INSTRUCTIONS, input));
+            }
+            let pages = crate::support::unjudged(project, &plan)?;
+            for (i, (page, marks)) in pages.into_iter().enumerate() {
+                let input = crate::support::support_task(project, &marks);
+                let second = i == 0 && crate::support::sampled(project, &page)?;
+                let copies: &[bool] = if second { &[false, true] } else { &[false] };
+                for &second in copies {
+                    items.push((
+                        Kind::Support {
+                            page: page.clone(),
+                            second,
+                            marks: marks.clone(),
+                        },
+                        crate::support::SUPPORT_INSTRUCTIONS,
+                        input.clone(),
+                    ));
+                }
             }
             if !items.is_empty() {
                 return issue(project, &mut state, items);
@@ -734,6 +769,23 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
             let plan = plan(&graph, &project.sources)?;
             let candidates = crate::notation::unjudged(project, &graph, &plan)?;
             apply_overloads(project, &mut graph, &candidates, parse(&path, &text)?)?;
+            project.save_graph(&graph)?;
+            Vec::new()
+        }
+        Kind::Support {
+            page,
+            second,
+            marks,
+        } => {
+            let mut graph = require(graph)?;
+            crate::support::apply_support(
+                project,
+                &mut graph,
+                page,
+                marks,
+                *second,
+                parse(&path, &text)?,
+            )?;
             project.save_graph(&graph)?;
             Vec::new()
         }

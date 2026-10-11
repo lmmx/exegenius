@@ -12,6 +12,7 @@
 //! exegenius/argument.json the plan of the sources' argument
 //! exegenius/outline.json parts, glossary and front page
 //! exegenius/overloads.json verdicts on letters bound to two meanings
+//! exegenius/support.json labels on whether citation marks support their claims
 //! exegenius/simulation.json simulated readers: goals, runs, grades
 //! exegenius/trails/      pages each simulated reader opened
 //! exegenius/report.md    how the simulated readers did
@@ -200,6 +201,10 @@ impl Project {
 
     pub fn argument_path(&self) -> PathBuf {
         self.state_dir().join("argument.json")
+    }
+
+    pub fn support_path(&self) -> PathBuf {
+        self.state_dir().join("support.json")
     }
 
     pub fn overloads_path(&self) -> PathBuf {

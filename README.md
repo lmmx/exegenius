@@ -78,6 +78,7 @@ sources or the other pages.
 | extend | resolves the candidate concepts audits found into existing or new concepts | same checks as extract; adds the edges and queues the pages for rewriting |
 
 | outline | groups the final pages into parts, folds minor terminology pages into a glossary, and writes the front page overview and part intros | every page in exactly one part or the glossary, the target not in the glossary, no page in a part before one of its prerequisites, links only to pages |
+| support | for each citation mark on a page, labels whether its quotation supports the claim it follows: supported, partial, unsupported or contradicted, judged from the quotation alone; the first page checked is labelled by a second, independent judge | every mark labelled once, a reason for every label but supported; unsupported and contradicted marks become rewrite notes; a page is checked at most twice |
 | overloads | for each letter a page binds that a page or concept name it builds on already binds, says whether the two denote the same thing | every candidate judged once; a letter with two meanings becomes a rewrite note on the later page |
 | goals | writes goal questions of ten kinds (meaning, status, justification, summary, structure, transfer, example, motivation, non-routine, obvious-fails) with key points tagged by role (claim, reason, conclusion, background), testing whether the wiki teaches its reader (never shown in the wiki); a second, separate task writes held-out goals | pages exist; the goal count; key points of the kinds beyond meaning and status are not copied from a page |
 | read | a simulated reader explores the wiki through `exegenius read` and `exegenius search` to answer one goal, records where it got stuck and at what level (symbol, statement, step, chain, beyond), and names the key idea of the page it relied on most | the page budget; every citation, stuck point and key idea quotes a page it opened |
@@ -92,8 +93,9 @@ motivations the sources leave unstated. The outline task is given the argument's
 as candidate parts.
 
 Rounds of write and audit repeat until an audit round finds no gaps, or `rounds` rounds have
-run. Only pages whose audit input changed are audited again. Then the outline task, and the
-overloads task if any page rebinds a letter, are handed out together, and `next` builds
+run. Only pages whose audit input changed are audited again. Then the outline task, the
+overloads task if any page rebinds a letter, and a support task for each page with citation
+marks not yet judged, are handed out together, and `next` builds
 `docs/` and creates or updates `zensical.toml`.
 
 The write and audit tasks never parse mathematics for meaning: the agents read it, and code
@@ -204,7 +206,8 @@ adds `vercel.json` (Vercel installs zensical and builds the site into `site/`) a
 `site/`, `.venv/` to `.gitignore`. Push the folder to a GitHub repository and import it at
 [vercel.com/new](https://vercel.com/new); every push redeploys.
 
-Other commands: `exegenius status` (progress), `exegenius plan` (reading order),
+Other commands: `exegenius status` (progress, including citation-support labels and sources
+with no URL), `exegenius plan` (reading order),
 `exegenius build` (build from the pages written so far), and `exegenius read` /
 `exegenius search` (used by simulated readers, for their own pending task only).
 
@@ -221,6 +224,7 @@ exegenius/audit.json  audit results, one record per round
 exegenius/argument.json the plan of the sources' argument
 exegenius/outline.json parts, glossary and front page
 exegenius/overloads.json verdicts on letters bound to two meanings
+exegenius/support.json labels on whether citation marks support their claims
 exegenius/simulation.json simulated readers: goals, runs, grades
 exegenius/trails/     pages each pending simulated reader has opened
 exegenius/report.md   how the simulated readers did
