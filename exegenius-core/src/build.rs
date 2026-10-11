@@ -1,14 +1,19 @@
 //! Write the docs tree and `zensical.toml`.
 //!
 //! Pages are plain markdown with no frontmatter. Everything around the body comes from the
-//! graph and the outline: the title, a "before this page" note linking the prerequisites, a
+//! graph and the outline: the title, a "before this page" note linking the prerequisites
+//! under the predicates their relations give (see [`crate::relations`]), a
 //! diagram of the page's connections, the pages that use it, and the source quotes. Links
 //! to pages carry the target's gloss as their title, which the theme shows as a tooltip,
 //! and the first unlinked mention of an earlier page is linked (see [`crate::autolink`]).
 //!
+//! A page whose concept has a title (its name with the mathematics in LaTeX) uses it as its
+//! heading. The symbols a page takes from earlier pages and concept names, per its latest
+//! audit, are listed in a folded note with their display names and meanings, and the
+//! bindings that several pages share make up `docs/notation.md` (see [`crate::notation`]).
+//!
 //! The outline may fold minor pages into a glossary: they are rendered as entries of
-//! `docs/glossary.md`, and links to them lead to their entry. The notation task's symbols
-//! become `docs/notation.md`.
+//! `docs/glossary.md`, and links to them lead to their entry.
 //!
 //! With an outline, the pages are grouped into parts: each part gets a landing page and a
 //! section in the nav, and the front page carries the overview and a map of the parts.
@@ -25,13 +30,17 @@ use std::path::PathBuf;
 use pulldown_cmark::{Event, LinkType, Options, Parser, Tag};
 use toml_edit::{Array, DocumentMut, InlineTable, Item, Table, Value};
 
+use crate::argument::{self, Argument};
+use crate::audit::SymbolUse;
 use crate::autolink::{self, autolink};
 use crate::error::{Error, Result, read, read_json, write, write_json};
 use crate::graph::{Concept, Graph};
-use crate::notation::Notation;
+use crate::notation::{self, Entry};
 use crate::outline::{Outline, Part};
 use crate::plan::Plan;
 use crate::project::{Project, find_source};
+use crate::relations;
+use crate::symbols::Origin;
 use crate::text::slug;
 use crate::write::{fix_links, link_target};
 
@@ -183,6 +192,10 @@ struct Site<'a> {
     built: HashSet<&'a str>,
     /// Pages folded into the glossary.
     glossary: HashSet<&'a str>,
+    /// Each page's symbol accounting from its latest audit.
+    uses: HashMap<String, Vec<SymbolUse>>,
+    /// The plan of the argument, if it was made for these pages.
+    argument: Option<Argument>,
 }
 
 impl Site<'_> {
@@ -215,6 +228,33 @@ impl Site<'_> {
             self.href(&c.id),
             attribute(&c.gloss)
         )
+    }
+
+    /// A link to a page with a quote, as plain text, for its title.
+    fn quoted(&self, c: &Concept, quote: &str) -> String {
+        format!(
+            "[{}]({} \"{}\")",
+            c.name,
+            self.href(&c.id),
+            attribute(&relations::plain(quote))
+        )
+    }
+
+    /// A link to a page if it is built, else the concept's name.
+    fn mention(&self, c: &Concept, prefix: &str) -> String {
+        if self.built.contains(c.id.as_str()) {
+            self.titled(c, prefix)
+        } else {
+            c.name.clone()
+        }
+    }
+
+    /// Where a binding comes from, as a phrase: "on [Page]" or "in the name of [Page]".
+    fn origin(&self, origin: Origin, prefix: &str) -> String {
+        match origin {
+            Origin::Page(c) => format!("on {}", self.mention(c, prefix)),
+            Origin::Name(c) => format!("in the name of {}", self.mention(c, prefix)),
+        }
     }
 
     fn dependents(&self, id: &str) -> Vec<&Concept> {
@@ -333,7 +373,7 @@ fn edges_among(nodes: &[&Concept]) -> Vec<(usize, usize)> {
     edges
 }
 
-fn list(items: &[String]) -> String {
+pub(crate) fn list(items: &[String]) -> String {
     match items {
         [] => String::new(),
         [one] => one.clone(),
@@ -354,14 +394,73 @@ fn indent(text: &str) -> String {
         .join("\n")
 }
 
+/// The page heading: the title with its mathematics, or the name.
+fn heading(c: &Concept) -> &str {
+    c.title.as_deref().unwrap_or(&c.name)
+}
+
+/// A note on where a page fits in the argument: the steps from the main result down to the
+/// one the page presents, or the steps that rely on it.
+fn trail_note(site: &Site, c: &Concept) -> String {
+    let Some(argument) = &site.argument else {
+        return String::new();
+    };
+    let link = |id: &str| {
+        site.graph
+            .get(id)
+            .filter(|p| site.built.contains(p.id.as_str()))
+            .map(|p| site.titled(p, ""))
+    };
+    let lines = argument::trail(argument, &c.id, &link);
+    if lines.is_empty() {
+        return String::new();
+    }
+    format!(
+        "!!! abstract \"Where this fits\"\n\n{}\n\n",
+        indent(&lines.join("\n"))
+    )
+}
+
+/// A folded note listing the symbols a page takes from earlier pages and concept names.
+fn symbols_note(site: &Site, c: &Concept, body: &str) -> String {
+    let uses = site.uses.get(&c.id).map(Vec::as_slice).unwrap_or_default();
+    let lines: Vec<String> = notation::inherited(site.graph, uses, body)
+        .iter()
+        .map(|b| {
+            format!(
+                "- ${}$ — {}: {} ({})",
+                b.symbol,
+                b.name,
+                b.meaning.trim(),
+                site.origin(b.origin, "")
+            )
+        })
+        .collect();
+    if lines.is_empty() {
+        return String::new();
+    }
+    format!(
+        "??? note \"Symbols from earlier pages\"\n\n{}\n\n",
+        indent(&lines.join("\n"))
+    )
+}
+
 fn render_page(site: &Site, c: &Concept, body: &str) -> String {
-    let mut out = format!("# {}\n\n", c.name);
+    let mut out = format!("# {}\n\n", heading(c));
     let (pages, known) = site.prerequisites(c);
     if !pages.is_empty() || !known.is_empty() {
         let mut note = Vec::new();
         if !pages.is_empty() {
-            let links: Vec<String> = pages.iter().map(|p| site.titled(p, "")).collect();
-            note.push(format!("This page builds on {}.", list(&links)));
+            // A prerequisite with a relation is linked under its predicate, with the
+            // sentence that states the relation as the link's tooltip.
+            let links: Vec<(String, Option<&str>)> = pages
+                .iter()
+                .map(|p| match relations::find(site.graph, &c.id, &p.id) {
+                    Some(e) => (site.quoted(p, &e.quote), Some(e.predicate.as_str())),
+                    None => (site.titled(p, ""), None),
+                })
+                .collect();
+            note.push(relations::sentence(&c.name, &links));
         }
         if !known.is_empty() {
             let names: Vec<String> = known.iter().map(|k| k.name.clone()).collect();
@@ -372,6 +471,8 @@ fn render_page(site: &Site, c: &Concept, body: &str) -> String {
             note.join(" ")
         ));
     }
+    out.push_str(&trail_note(site, c));
+    out.push_str(&symbols_note(site, c, body));
     let body = crate::cite::render(body.trim(), &site.project.sources);
     out.push_str(&decorate(&body, site, ""));
     out.push('\n');
@@ -391,7 +492,15 @@ fn render_page(site: &Site, c: &Concept, body: &str) -> String {
         if !used_by.is_empty() {
             out.push_str("\nUsed by:\n\n");
             for d in &used_by {
-                out.push_str(&format!("- {} — {}\n", site.titled(d, ""), d.gloss));
+                match relations::find(site.graph, &d.id, &c.id) {
+                    Some(e) => out.push_str(&format!(
+                        "- {} *{}* {}\n",
+                        site.quoted(d, &e.quote),
+                        e.predicate,
+                        c.name
+                    )),
+                    None => out.push_str(&format!("- {} — {}\n", site.titled(d, ""), d.gloss)),
+                }
             }
         }
     }
@@ -456,9 +565,10 @@ fn render_glossary(site: &Site, entries: &[(&Concept, String)]) -> String {
     );
     for (c, body) in entries {
         out.push_str(&format!(
-            "\n## {} {{ #{} }}\n\n{}\n",
-            c.name,
+            "\n## {} {{ #{} }}\n\n{}{}\n",
+            heading(c),
             c.id,
+            symbols_note(site, c, body),
             decorate(
                 &demote(&crate::cite::render(body.trim(), &site.project.sources)),
                 site,
@@ -477,29 +587,21 @@ fn render_glossary(site: &Site, entries: &[(&Concept, String)]) -> String {
     out
 }
 
-fn render_notation(site: &Site, notation: &Notation) -> String {
+fn render_notation(site: &Site, entries: &[Entry]) -> String {
     let mut out = String::from(
-        "# Notation\n\nThe symbols used across the pages, in the order they are introduced.\n\n",
+        "# Notation\n\nThe symbols that more than one page uses, in the order they are bound. \
+         Each is bound once, on a page or in a concept's name, and used on the pages listed. A \
+         symbol used on one page only is explained on that page and is not listed here.\n\n",
     );
-    let position: HashMap<&str, usize> = site
-        .pages
-        .iter()
-        .enumerate()
-        .map(|(i, c)| (c.id.as_str(), i))
-        .collect();
-    let mut symbols: Vec<_> = notation.symbols.iter().collect();
-    symbols.sort_by_key(|s| position.get(s.page.as_str()).copied().unwrap_or(usize::MAX));
-    for symbol in symbols {
-        let page = site
-            .graph
-            .get(&symbol.page)
-            .filter(|c| site.built.contains(c.id.as_str()))
-            .map(|c| format!(" — {}", site.titled(c, "")))
-            .unwrap_or_default();
+    for e in entries {
+        let users: Vec<String> = e.users.iter().map(|u| site.mention(u, "")).collect();
         out.push_str(&format!(
-            "- ${}$ — {}{page}\n",
-            symbol.symbol.trim(),
-            symbol.meaning.trim()
+            "- ${}$ — **{}**: {} Bound {}; used on {}.\n",
+            e.bound.symbol,
+            e.bound.name,
+            e.bound.meaning.trim(),
+            site.origin(e.bound.origin, ""),
+            list(&users)
         ));
     }
     out
@@ -568,8 +670,10 @@ fn render_index(site: &Site, outline: Option<(&Outline, &[String])>, notation: b
             ));
         }
         out.push_str(&format!(
-            "It is written for a reader who knows: {knows}.\n\n## Reading order\n\n"
+            "It is written for a reader who knows: {knows}.\n\n"
         ));
+        out.push_str(&argument_section(site));
+        out.push_str("## Reading order\n\n");
         for (i, c) in site.pages.iter().enumerate() {
             out.push_str(&format!(
                 "{}. {} — {}\n",
@@ -601,10 +705,12 @@ fn render_index(site: &Site, outline: Option<(&Outline, &[String])>, notation: b
         "!!! tip \"How to read this wiki\"\n\n    Written for a reader who knows: {knows}. \
          The {} pages, in {} parts,{goal}. Read them in order with the links at the bottom \
          of each page, or start anywhere: each page opens with what it builds on. Hover \
-         over a link to see a one-line definition.{reference}\n\n## Contents\n\n",
+         over a link to see a one-line definition.{reference}\n\n",
         site.pages.len() - site.glossary.len(),
         outline.parts.len(),
     ));
+    out.push_str(&argument_section(site));
+    out.push_str("## Contents\n\n");
     let built: HashMap<&str, &Concept> = site.pages.iter().map(|c| (c.id.as_str(), *c)).collect();
     for (i, (part, slug)) in outline.parts.iter().zip(slugs).enumerate() {
         out.push_str(&format!(
@@ -655,6 +761,23 @@ fn render_index(site: &Site, outline: Option<(&Outline, &[String])>, notation: b
         out.push_str("```\n\n");
     }
     finish_index(site, out)
+}
+
+/// The front page's summary of the argument, if there is one.
+fn argument_section(site: &Site) -> String {
+    let Some(argument) = &site.argument else {
+        return String::new();
+    };
+    let link = |id: &str| {
+        site.graph
+            .get(id)
+            .filter(|p| site.built.contains(p.id.as_str()))
+            .map(|p| site.titled(p, ""))
+    };
+    format!(
+        "## The argument\n\n{}\n",
+        argument::overview(argument, &link)
+    )
 }
 
 fn finish_index(site: &Site, mut out: String) -> String {
@@ -783,7 +906,8 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
     let mut written: BTreeSet<String> = BTreeSet::new();
     let planned: HashSet<String> = plan.order.iter().cloned().collect();
     let outline = crate::outline::current(project, plan)?;
-    let notation = crate::notation::current(project, plan)?;
+    let uses = crate::audit::latest_symbols(project)?;
+    let shared = notation::entries(graph, plan, &uses);
     let prepared = prepare(project, graph, plan, outline.as_ref())?;
     report.missing = prepared.missing;
     report.warnings = prepared.warnings;
@@ -793,7 +917,14 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
         pages: prepared.pages.iter().map(|(c, _)| *c).collect(),
         built: prepared.pages.iter().map(|(c, _)| c.id.as_str()).collect(),
         glossary: prepared.glossary,
+        uses,
+        argument: argument::current(project, plan)?,
     };
+    let joining = site
+        .argument
+        .as_ref()
+        .map(|a| crate::aha::joining(a, &prepared.pages))
+        .unwrap_or_default();
     let mut entries = Vec::new();
     for (c, body) in prepared.pages {
         report.pages.push(c.id.clone());
@@ -845,9 +976,9 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
             file: GLOSSARY.into(),
         });
     }
-    if let Some(notation) = notation.as_ref().filter(|n| !n.symbols.is_empty()) {
-        report.symbols = notation.symbols.len();
-        write(&docs.join(NOTATION), &render_notation(&site, notation))?;
+    if !shared.is_empty() {
+        report.symbols = shared.len();
+        write(&docs.join(NOTATION), &render_notation(&site, &shared))?;
         written.insert(NOTATION.to_string());
         nav.push(NavItem::Page {
             name: "Notation".into(),
@@ -893,7 +1024,14 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
         let path = project.report_path();
         write(
             &path,
-            &crate::report::report(&project.config, graph, &simulation),
+            &crate::report::report(
+                &project.config,
+                graph,
+                &simulation,
+                &crate::support::load(project)?,
+                &joining,
+                &plan.order,
+            ),
         )?;
         report.report = Some(path);
     }
@@ -1117,6 +1255,8 @@ mod tests {
             pages: graph.concepts.iter().collect(),
             built: ["dft", "row"].into(),
             glossary: ["row"].into(),
+            uses: HashMap::new(),
+            argument: None,
         };
         let body = "See [the DFT](dft.md#def), [a row](row.md), [home](index.md), \
                     [web](https://x.org) and `[code](dft.md)`.";

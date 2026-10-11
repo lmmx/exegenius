@@ -1,5 +1,6 @@
-//! The concept graph: concepts, prerequisite edges, supporting quotes, and the work the
-//! audit has queued (candidate concepts and page rewrites).
+//! The concept graph: concepts, prerequisite edges, supporting quotes, the symbols each
+//! page binds and what it uses each prerequisite for, and the work the audit has queued
+//! (candidate concepts and page rewrites).
 
 use std::collections::{BTreeMap, HashMap, HashSet};
 
@@ -8,6 +9,8 @@ use petgraph::graphmap::DiGraphMap;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
+use crate::relations::Edge;
+use crate::symbols::{Binding, PageBinding};
 use crate::text::key;
 
 /// One concept. This is also the shape of a concept in an extract answer, so the field
@@ -21,6 +24,14 @@ pub struct Concept {
     /// ≤, n log n), not LaTeX or spelled-out Greek: names appear in the navigation, which
     /// does not render mathematics.
     pub name: String,
+    /// Only for a name with mathematics in it: the name with the mathematics in LaTeX, e.g.
+    /// "Polynomial ring modulo $y^r + 1$". It is the heading of the concept's page.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub title: Option<String>,
+    /// What each symbol in the title's mathematics denotes, one binding per symbol. A reader
+    /// who knows the concept is shown these, so give every symbol, however minor.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub symbols: Vec<Binding>,
     /// Other names and abbreviations the sources use for this concept.
     pub aliases: Vec<String>,
     /// One precise sentence saying what the concept is, in plain text with Unicode symbols
@@ -60,6 +71,12 @@ pub struct Graph {
     /// Pages queued for rewriting, with the notes to pass to the next write.
     #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     pub rewrite: BTreeMap<String, Vec<String>>,
+    /// The symbols each page binds, as its writer stated them.
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub bindings: BTreeMap<String, Vec<PageBinding>>,
+    /// What each page uses its prerequisite pages for, as its writer stated it.
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub relations: BTreeMap<String, Vec<Edge>>,
 }
 
 impl Graph {
@@ -200,6 +217,8 @@ pub(crate) mod tests {
         Concept {
             id: id.to_string(),
             name: id.replace('-', " "),
+            title: None,
+            symbols: vec![],
             aliases: vec![],
             gloss: format!("gloss of {id}"),
             requires: requires.iter().map(|s| s.to_string()).collect(),

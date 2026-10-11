@@ -3,9 +3,15 @@
 /// Normalise text for verbatim comparison: typographic quotes and dashes become ASCII,
 /// soft hyphens are removed, and whitespace runs collapse to one space.
 pub fn normalise(s: &str) -> String {
+    normalise_mapped(s).0
+}
+
+/// [`normalise`], with the byte offset in `s` that each byte of the result comes from.
+fn normalise_mapped(s: &str) -> (String, Vec<usize>) {
     let mut out = String::with_capacity(s.len());
-    let mut pending_space = false;
-    for c in s.chars() {
+    let mut from = Vec::with_capacity(s.len());
+    let mut pending_space = None;
+    for (i, c) in s.char_indices() {
         let c = match c {
             '\u{2018}' | '\u{2019}' | '\u{201B}' | '\u{2032}' => '\'',
             '\u{201C}' | '\u{201D}' | '\u{201F}' | '\u{2033}' => '"',
@@ -14,16 +20,33 @@ pub fn normalise(s: &str) -> String {
             c => c,
         };
         if c.is_whitespace() {
-            pending_space = true;
+            pending_space.get_or_insert(i);
             continue;
         }
-        if pending_space && !out.is_empty() {
+        if let Some(space) = pending_space.take()
+            && !out.is_empty()
+        {
             out.push(' ');
+            from.push(space);
         }
-        pending_space = false;
         out.push(c);
+        from.resize(out.len(), i);
     }
-    out
+    (out, from)
+}
+
+/// The byte range in `haystack` of the first verbatim match of `quote`, compared as by
+/// [`contains_quote`].
+pub fn locate(haystack: &str, quote: &str) -> Option<std::ops::Range<usize>> {
+    let quote = normalise(quote);
+    if quote.is_empty() {
+        return None;
+    }
+    let (normalised, from) = normalise_mapped(haystack);
+    let at = normalised.find(&quote)?;
+    let last = from[at + quote.len() - 1];
+    let end = last + haystack[last..].chars().next().map_or(0, char::len_utf8);
+    Some(from[at]..end)
 }
 
 /// Whether `quote` appears verbatim in `haystack`, which must already be normalised.
@@ -74,6 +97,14 @@ mod tests {
         assert!(contains_quote(&source, "through a chirp identity"));
         assert!(!contains_quote(&source, "through the chirp identity"));
         assert!(!contains_quote(&source, "   "));
+    }
+
+    #[test]
+    fn quotes_are_located_in_the_original_text() {
+        let text = "One  “two”\nthree four";
+        let range = locate(text, "\"two\" three").unwrap();
+        assert_eq!(&text[range], "“two”\nthree");
+        assert_eq!(locate(text, "five"), None);
     }
 
     #[test]

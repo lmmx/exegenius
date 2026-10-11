@@ -35,6 +35,9 @@ such as a short page on a piece of terminology that one or two other pages use. 
 to a glossary page, out of the reading order; links to them still work. Keep every page that \
 explains a method, construction, result or argument in a part. Never put the target in the \
 glossary. The word count and the number of pages using each page are listed to help.
+- If the argument's main steps are listed below, base the parts on them where the \
+prerequisites allow: a part per main step, with the pages that present its sub-steps, and \
+background parts for the concepts the steps rely on.
 - Part titles: 2 to 5 words, plain text, no numbering.
 - Part intros: 2 to 4 sentences on what the part covers and why the reader needs it for what \
 comes next. Link pages as `[Name](id.md)`.
@@ -148,6 +151,23 @@ pub fn outline_task(project: &Project, graph: &Graph, plan: &Plan) -> Result<Str
             link(c),
             c.gloss
         ));
+    }
+    if let Some(argument) = crate::argument::current(project, plan)? {
+        task.push_str("\n## The argument's main steps\n\n");
+        for step in &argument.root.children {
+            let pages: Vec<String> = step
+                .walk()
+                .iter()
+                .filter_map(|(_, n)| n.page.as_ref())
+                .map(|p| format!("`{p}`"))
+                .collect();
+            let pages = if pages.is_empty() {
+                String::new()
+            } else {
+                format!(" Pages: {}.", pages.join(", "))
+            };
+            task.push_str(&format!("- {}{pages}\n", step.claim));
+        }
     }
     task.push_str(
         "\nThe page bodies are in `exegenius/pages/<id>.md`; read them if the glosses are \

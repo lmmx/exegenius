@@ -1,5 +1,6 @@
 //! The task loop end to end, with scripted answers standing in for the agent: extract,
-//! write, audit (finding an unknown term), extend, rewrite, a clean audit round, outline,
+//! write (with the symbols each page binds), audit (finding an unknown term, and accounting
+//! for every symbol), extend, rewrite, a clean audit round, outline and an overload verdict,
 //! build; and the simulated readers: goals, reading through the CLI, a blind grade, repairs
 //! and a second round.
 
@@ -63,6 +64,37 @@ fn extract_answer(chirp_quote: &str) -> String {
     .to_string()
 }
 
+/// The plan of the argument: to show the chirp identity, from its prerequisites, by two
+/// steps the notes report in this order (or the reverse).
+fn argument_answer(from: &[&str], reversed: bool) -> String {
+    let mut steps = vec![
+        json!({"id": "S1", "intention": "infer", "claim": "Convolution multiplies transforms.",
+               "quote": {"source": "notes", "quote": "Convolution of two sequences multiplies"}}),
+        json!({"id": "S2", "intention": "infer", "claim": "The chirp identity reaches a convolution.",
+               "quote": {"source": "notes", "quote": "through a chirp identity to convolution"}}),
+    ];
+    if reversed {
+        steps.reverse();
+    }
+    json!({"root": {
+        "id": "S0", "intention": "show", "page": "chirp-identity", "from": from,
+        "claim": "The chirp identity turns a DFT into a convolution.",
+        "method": "rewrite the transform as a convolution",
+        "motivation": {"text": "Convolutions are fast.", "source": "explicit",
+                       "quote": {"source": "notes", "quote": "converts these through a chirp identity"}},
+        "children": steps,
+    }})
+    .to_string()
+}
+
+/// Answer the argument task `next` hands out after an extract or extend.
+fn argue(project: &Project, from: &[&str]) {
+    let batch = tasks(next(project).unwrap());
+    assert_eq!(batch[0].kind, Kind::Argument);
+    answer(project, &batch[0], &argument_answer(from, false));
+    submit(project, &batch[0].id).unwrap();
+}
+
 fn tasks(next: Next) -> Vec<Task> {
     match next {
         Next::Tasks { tasks, .. } => tasks,
@@ -70,8 +102,62 @@ fn tasks(next: Next) -> Vec<Task> {
     }
 }
 
+/// An audit answer with no gaps and no symbols.
+const CLEAN: &str = "{\"symbols\": [], \"gaps\": []}";
+
 fn answer(project: &Project, task: &Task, text: &str) {
     std::fs::write(project.root.join(task.answer()), text).unwrap();
+    // Write tasks also take the symbols the page binds and its relations: none, unless the
+    // test gave some.
+    if let Some(fields) = task.fields() {
+        let path = project.root.join(fields);
+        if !path.exists() {
+            std::fs::write(path, "{\"symbols\": [], \"relations\": []}").unwrap();
+        }
+    }
+}
+
+fn fields(
+    project: &Project,
+    task: &Task,
+    symbols: serde_json::Value,
+    relations: serde_json::Value,
+) {
+    let path = project.root.join(task.fields().unwrap());
+    let fields = json!({ "symbols": symbols, "relations": relations });
+    std::fs::write(path, fields.to_string()).unwrap();
+}
+
+fn bindings(project: &Project, task: &Task, symbols: serde_json::Value) {
+    fields(project, task, symbols, json!([]));
+}
+
+fn relation(prerequisite: &str, predicate: &str, quote: &str) -> serde_json::Value {
+    json!({"prerequisite": prerequisite, "predicate": predicate, "quote": quote})
+}
+
+/// The sentence a chirp page gives for its two first prerequisites, and their relations.
+const CHIRP_USES: &str =
+    "It is computed with the [DFT](dft.md) and reduced to [convolution](convolution.md)";
+
+fn chirp_relations() -> Vec<serde_json::Value> {
+    vec![
+        relation(
+            "dft",
+            "is computed with",
+            "It is computed with the [DFT](dft.md)",
+        ),
+        relation(
+            "convolution",
+            "is reduced to",
+            "reduced to [convolution](convolution.md)",
+        ),
+    ]
+}
+
+fn binding(symbol: &str, name: &str, quote: &str) -> serde_json::Value {
+    json!({"symbol": symbol, "name": name, "meaning": format!("The {name}."),
+           "relation": "direct", "quote": quote})
 }
 
 fn page(task: &Task) -> &str {
@@ -107,22 +193,67 @@ fn task_loop_end_to_end() {
     );
     submit(&project, "0001-extract").unwrap();
 
-    // Write: three independent tasks; a link to a missing page is rejected.
+    // Argument: steps out of the notes' order are rejected; then the plan is accepted.
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch[0].kind, Kind::Argument);
+    answer(
+        &project,
+        &batch[0],
+        &argument_answer(&["dft", "convolution"], true),
+    );
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains("step `S1` quotes the sources before step `S2`"),
+        "{err}"
+    );
+    answer(
+        &project,
+        &batch[0],
+        &argument_answer(&["dft", "convolution"], false),
+    );
+    submit(&project, &batch[0].id).unwrap();
+
+    // Write: three independent tasks; a link to a missing page is rejected, and so are a
+    // missing symbols file and a binding whose quote does not contain its symbol.
     let batch = tasks(next(&project).unwrap());
     let pages: Vec<&str> = batch.iter().map(page).collect();
     assert_eq!(pages, vec!["dft", "convolution", "chirp-identity"]);
     for t in &batch {
         let body = if page(t) == "chirp-identity" {
-            "Combine the [DFT](dft.md) and [convolution](convolution.md) with dyadic scaling."
+            "It is computed with the [DFT](dft.md) and reduced to [convolution](convolution.md), \
+             with dyadic scaling."
         } else if page(t) == "convolution" {
             "Convolution is what the discrete Fourier transform makes pointwise, as in $x^2$."
         } else {
-            "# Title to strip\n\nA short explanation with $x^2$."
+            "# Title to strip\n\nHere $x$ is the input sequence, so $x^2$ is its square."
         };
         if page(t) == "chirp-identity" {
             answer(&project, t, "See [elsewhere](bogus.md).");
             let err = submit(&project, &t.id).unwrap_err().to_string();
             assert!(err.contains("bogus.md"), "{err}");
+            assert!(err.contains("missing: `dft`, `convolution`"), "{err}");
+            fields(&project, t, json!([]), json!(chirp_relations()));
+        }
+        if page(t) == "dft" {
+            std::fs::write(project.root.join(t.answer()), body).unwrap();
+            let err = submit(&project, &t.id).unwrap_err().to_string();
+            assert!(err.contains("write the symbols the page binds"), "{err}");
+            bindings(
+                &project,
+                t,
+                json!([binding("x", "input sequence", "its square")]),
+            );
+            let err = submit(&project, &t.id).unwrap_err().to_string();
+            assert!(
+                err.contains("`x`: the quote must cover the symbol"),
+                "{err}"
+            );
+            let quote = "Here $x$ is the input sequence";
+            bindings(
+                &project,
+                t,
+                json!([binding("$x$", "input sequence", quote)]),
+            );
         }
         answer(&project, t, body);
         submit(&project, &t.id).unwrap();
@@ -135,41 +266,85 @@ fn task_loop_end_to_end() {
             .contains("Title to strip")
     );
 
-    // Audit round 1, submitted concurrently: one unknown term on the chirp page.
+    // Audit round 1, submitted concurrently: one unknown term on the chirp page. The dft
+    // audit must account for the symbol its writer bound.
     let batch = tasks(next(&project).unwrap());
     assert_eq!(batch.len(), 3);
     assert!(batch.iter().all(|t| matches!(t.kind, Kind::Audit { .. })));
     let audit_file = read(&project, batch[2].file());
     assert!(audit_file.contains("with dyadic scaling") && audit_file.contains("- Complex numbers"));
+    answer(&project, &batch[0], CLEAN);
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(err.contains("missing: x"), "{err}");
+    let x_here = json!({"symbol": "x", "anchor": {"kind": "here",
+                        "quote": "Here $x$ is the input sequence"}});
     std::thread::scope(|s| {
         for t in &batch {
             let project = &project;
+            let x_here = &x_here;
             s.spawn(move || {
-                let gaps = if page(t) == "chirp-identity" {
-                    json!({"gaps": [{"term": "dyadic", "quote": "dyadic scaling",
-                                     "kind": "term", "note": "not defined"}]})
-                } else {
-                    json!({"gaps": []})
+                let audit = match page(t) {
+                    "chirp-identity" => json!({"symbols": [], "gaps": [{"term": "dyadic",
+                        "quote": "dyadic scaling", "kind": "term", "note": "not defined"}]}),
+                    "dft" => json!({"symbols": [x_here], "gaps": []}),
+                    _ => json!({"symbols": [], "gaps": []}),
                 };
-                answer(project, t, &gaps.to_string());
+                answer(project, t, &audit.to_string());
                 submit(project, &t.id).unwrap();
             });
         }
     });
 
-    // Extend: the candidate becomes a concept and a prerequisite of the chirp page.
+    // Extend: the candidate becomes a concept and a prerequisite of the chirp page. Its
+    // title has mathematics, whose symbols the concept binds; a symbol not in the title is
+    // rejected.
     let batch = tasks(next(&project).unwrap());
     assert_eq!(batch[0].kind, Kind::Extend);
     assert!(read(&project, batch[0].file()).contains("\"dyadic\""));
+    let extend = |symbol: &str| {
+        let mut dyadic = concept(
+            "dyadic-rational",
+            "Dyadic rational",
+            &[],
+            false,
+            Some("exact on dyadic real and imaginary parts"),
+        );
+        dyadic["title"] = json!("Dyadic rational $m/2^k$");
+        dyadic["symbols"] = json!([{"symbol": symbol, "name": "exponent",
+            "meaning": "The power of two in the denominator.", "relation": "direct"}]);
+        json!({
+            "concepts": [dyadic],
+            "resolutions": [{"term": "dyadic", "concept": "dyadic-rational"}],
+        })
+        .to_string()
+    };
+    answer(&project, &batch[0], &extend("q"));
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains("`q` does not occur in the mathematics of the title"),
+        "{err}"
+    );
+    answer(&project, &batch[0], &extend("k"));
+    submit(&project, &batch[0].id).unwrap();
+
+    // The pages changed, so the argument is planned again, covering the new page.
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch[0].kind, Kind::Argument);
+    assert!(read(&project, batch[0].file()).contains("## Previous plan"));
     answer(
         &project,
         &batch[0],
-        &json!({
-            "concepts": [concept("dyadic-rational", "Dyadic rational", &[], false,
-                Some("exact on dyadic real and imaginary parts"))],
-            "resolutions": [{"term": "dyadic", "concept": "dyadic-rational"}],
-        })
-        .to_string(),
+        &argument_answer(&["dft", "convolution"], false),
+    );
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains("present a step nor appear in a step's `from`: dyadic-rational"),
+        "{err}"
+    );
+    answer(
+        &project,
+        &batch[0],
+        &argument_answer(&["dft", "convolution", "dyadic-rational"], false),
     );
     submit(&project, &batch[0].id).unwrap();
 
@@ -178,10 +353,28 @@ fn task_loop_end_to_end() {
     let mut pages: Vec<&str> = batch.iter().map(page).collect();
     pages.sort();
     assert_eq!(pages, vec!["chirp-identity", "dyadic-rational"]);
+    // The chirp writer sees the symbols already bound: in the dyadic concept's name, and on
+    // the dft page. It binds k again, with another meaning.
     for t in &batch {
         let body = if page(t) == "chirp-identity" {
             let file = read(&project, t.file());
             assert!(file.contains("Previous version") && file.contains("now a prerequisite"));
+            assert!(file.contains(
+                "## This page in the argument\n\nThe step: The chirp identity turns a DFT into \
+                 a convolution.\nHow: rewrite the transform as a convolution\nWhy: Convolutions \
+                 are fast. (the sources say so: \"converts these through a chirp identity\""
+            ));
+            assert!(
+                file.contains("- Dyadic rational (also: dyadic)\n  - $k$ (exponent): The power")
+            );
+            assert!(
+                file.contains(
+                    "## Symbols already bound on earlier pages\n\nThe symbols in the names"
+                )
+            );
+            assert!(file.contains(
+                "- $x$ (input sequence), bound on [Discrete Fourier transform](dft.md): The input"
+            ));
             answer(
                 &project,
                 t,
@@ -189,8 +382,22 @@ fn task_loop_end_to_end() {
             );
             let err = submit(&project, &t.id).unwrap_err().to_string();
             assert!(err.contains("\"made up\" is not in that source"), "{err}");
-            "Combine the [DFT](dft.md) and [convolution](convolution.md); values are \
-             [dyadic](dyadic-rational.md), so $nk$ is exact \
+            let k = "Here $k$ is the frequency index";
+            let mut relations = chirp_relations();
+            relations.push(relation(
+                "dyadic-rational",
+                "values are kept",
+                "values of $x$ are kept [dyadic]",
+            ));
+            fields(
+                &project,
+                t,
+                json!([binding("k", "frequency index", k)]),
+                json!(relations),
+            );
+            "It is computed with the [DFT](dft.md) and reduced to [convolution](convolution.md); \
+             values of $x$ are kept [dyadic](dyadic-rational.md). Here $k$ is the frequency \
+             index. So $nk$ is exact \
              <cite data-source=\"notes\">exact on dyadic real and imaginary parts</cite>."
         } else {
             "A number of the form $m/2^k$."
@@ -199,19 +406,76 @@ fn task_loop_end_to_end() {
         submit(&project, &t.id).unwrap();
     }
 
-    // Audit round 2: every page's input changed (a page was added); no gaps.
+    // Audit round 2: every page's input changed (a page was added); no gaps. The chirp
+    // audit lists the bindings of its symbols from earlier pages, and its evidence for x
+    // must name the page that binds it.
     let batch = tasks(next(&project).unwrap());
     assert_eq!(batch.len(), 4);
+    let chirp = batch.iter().find(|t| page(t) == "chirp-identity").unwrap();
+    let file = read(&project, chirp.file());
+    assert!(
+        file.contains("## Symbols bound on earlier pages\n\n- $x$ (input sequence)"),
+        "{file}"
+    );
+    let chirp_audit = |x_page: &str| {
+        json!({"symbols": [
+            {"symbol": "x", "anchor": {"kind": "page", "page": x_page}},
+            {"symbol": "k", "anchor": {"kind": "here", "quote": "Here $k$ is the frequency index"}},
+            {"symbol": "n", "anchor": {"kind": "background", "note": "a count"}},
+        ], "gaps": []})
+        .to_string()
+    };
+    answer(&project, chirp, &chirp_audit("convolution"));
+    let err = submit(&project, &chirp.id).unwrap_err().to_string();
+    assert!(
+        err.contains("`convolution` is not an earlier page that binds it"),
+        "{err}"
+    );
     for t in &batch {
-        answer(&project, t, "{\"gaps\": []}");
+        let audit = match page(t) {
+            "chirp-identity" => chirp_audit("dft"),
+            "dft" => json!({"symbols": [x_here], "gaps": []}).to_string(),
+            _ => CLEAN.to_string(),
+        };
+        answer(&project, t, &audit);
         submit(&project, &t.id).unwrap();
     }
 
-    // Outline and notation, handed out together.
+    // Outline, overloads and support checks, handed out together: the chirp page binds k,
+    // which the name of the dyadic concept it builds on also binds, and has a citation mark,
+    // which two independent judges label, since it is the first page checked.
     let batch = tasks(next(&project).unwrap());
-    let kinds: Vec<&Kind> = batch.iter().map(|t| &t.kind).collect();
-    assert_eq!(kinds, vec![&Kind::Outline, &Kind::Notation]);
-    let (outline_task, notation_task) = (&batch[0], &batch[1]);
+    let labels: Vec<&str> = batch.iter().map(|t| t.label()).collect();
+    assert_eq!(labels, vec!["outline", "overloads", "support", "support"]);
+    let (outline_task, overloads_task) = (&batch[0], &batch[1]);
+    let file = read(&project, batch[2].file());
+    assert!(
+        file.contains("Claim: So $nk$ is exact\n\nQuotation, from Notes: \"exact on dyadic"),
+        "{file}"
+    );
+    let label = |verdict: &str, reason: &str| {
+        json!({"labels": [{"mark": 1, "label": verdict, "reason": reason}]}).to_string()
+    };
+    answer(&project, &batch[2], &label("unsupported", ""));
+    let err = submit(&project, &batch[2].id).unwrap_err().to_string();
+    assert!(
+        err.contains("quotation 1: say what is missing or wrong"),
+        "{err}"
+    );
+    answer(
+        &project,
+        &batch[2],
+        &label("unsupported", "the passage says nothing about nk."),
+    );
+    submit(&project, &batch[2].id).unwrap();
+    answer(&project, &batch[3], &label("supported", ""));
+    submit(&project, &batch[3].id).unwrap();
+    let file = read(&project, overloads_task.file());
+    assert!(
+        file.contains("1. $k$\n   - on `chirp-identity`: $k$ (frequency index)")
+            && file.contains("   - in the name of Dyadic rational: $k$ (exponent)"),
+        "{file}"
+    );
 
     // Outline: a page before its prerequisite's part, the target in the glossary and a page
     // left out are rejected; then two parts, with the dyadic page folded into the glossary.
@@ -262,22 +526,70 @@ fn task_loop_end_to_end() {
     );
     submit(&project, &outline_task.id).unwrap();
 
-    // Notation: a symbol missing from its page's mathematics is rejected.
-    let symbols = |second: &str| {
-        json!({"symbols": [
-            {"symbol": "2^k", "meaning": "a power of two", "page": "dyadic-rational"},
-            {"symbol": second, "meaning": "the exponent", "page": "chirp-identity"},
-        ]})
-        .to_string()
-    };
-    answer(&project, notation_task, &symbols("\\omega"));
-    let err = submit(&project, &notation_task.id).unwrap_err().to_string();
+    // Overloads: every candidate needs a verdict. A letter with two meanings becomes a
+    // rewrite note, and the rewrite is handed out (not audited) before the build.
+    answer(&project, overloads_task, "{\"verdicts\": []}");
+    let err = submit(&project, &overloads_task.id)
+        .unwrap_err()
+        .to_string();
+    assert!(err.contains("no verdict on candidate 1"), "{err}");
+    let verdict = json!({"verdicts": [{"candidate": 1, "same": false,
+                                       "note": "use j for the frequency index"}]});
+    answer(&project, overloads_task, &verdict.to_string());
+    submit(&project, &overloads_task.id).unwrap();
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(page(&batch[0]), "chirp-identity");
+    let file = read(&project, batch[0].file());
     assert!(
-        err.contains("`\\omega` does not appear in the mathematics of `chirp-identity`"),
-        "{err}"
+        file.contains(
+            "$k$ means frequency index here, but exponent in the name of Dyadic rational, \
+             which this page builds on: use j for the frequency index"
+        ),
+        "{file}"
     );
-    answer(&project, notation_task, &symbols("n k"));
-    submit(&project, &notation_task.id).unwrap();
+    assert!(file.contains(
+        "The quotation does not support the claim it is attached to (unsupported): \"So $nk$ \
+         is exact\" cites \"exact on dyadic real and imaginary parts\": the passage says \
+         nothing about nk."
+    ));
+    let mut relations = chirp_relations();
+    relations.push(relation(
+        "dyadic-rational",
+        "values are kept",
+        "values of $x$ are kept [dyadic]",
+    ));
+    fields(
+        &project,
+        &batch[0],
+        json!([binding(
+            "j",
+            "frequency index",
+            "Here $j$ is the frequency index"
+        )]),
+        json!(relations),
+    );
+    answer(
+        &project,
+        &batch[0],
+        "It is computed with the [DFT](dft.md) and reduced to [convolution](convolution.md); \
+         values of $x$ are kept [dyadic](dyadic-rational.md). Here $j$ is the frequency \
+         index. So $nj$ is exact \
+         <cite data-source=\"notes\">exact on dyadic real and imaginary parts</cite>.",
+    );
+    submit(&project, &batch[0].id).unwrap();
+
+    // The rewritten claim is a new mark, so the page gets its second and last check.
+    let batch = tasks(next(&project).unwrap());
+    let labels: Vec<&str> = batch.iter().map(|t| t.label()).collect();
+    assert_eq!(labels, vec!["support"]);
+    answer(
+        &project,
+        &batch[0],
+        &label("partial", "only the exactness."),
+    );
+    submit(&project, &batch[0].id).unwrap();
+    let support = read(&project, "exegenius/support.json");
+    assert!(support.contains("\"partial\"") && support.contains("\"second\""));
 
     // Done: the docs are built, grouped into the two parts, with a glossary and notation.
     let Next::Done(report) = next(&project).unwrap() else {
@@ -285,9 +597,18 @@ fn task_loop_end_to_end() {
     };
     assert_eq!(report.pages.len(), 4);
     assert_eq!(report.parts, Some(2));
-    assert_eq!((report.glossary, report.symbols), (1, 2));
+    assert_eq!((report.glossary, report.symbols), (1, 1));
     let chirp = read(&project, "docs/chirp-identity.md");
     assert!(chirp.starts_with("# Chirp identity\n\n!!! info \"Before this page\""));
+    // x is shown with its meaning; k, which the page no longer uses, is not.
+    let dft_link = "[Discrete Fourier transform](dft.md \"What Discrete Fourier transform is.\")";
+    assert!(
+        chirp.contains(&format!(
+            "??? note \"Symbols from earlier pages\"\n\n    - $x$ — input sequence: The input \
+             sequence. (on {dft_link})\n\n"
+        )),
+        "{chirp}"
+    );
     assert!(
         chirp.contains("is exact<cite class=\"exegenius-ref\" data-source=\"notes\"")
             && chirp.contains("> (see Notes)</cite>."),
@@ -296,27 +617,46 @@ fn task_loop_end_to_end() {
     assert!(project.root.join("docs/stylesheets/exegenius.css").exists());
     let dyadic = "(glossary.md#dyadic-rational \"What Dyadic rational is.\")";
     assert!(
-        chirp.contains(&format!("[Dyadic rational]{dyadic}")),
+        chirp.contains(
+            "    Chirp identity *is computed with* [Discrete Fourier transform](dft.md \"It is \
+             computed with the DFT\"), *is reduced to* [Convolution](convolution.md \"reduced \
+             to convolution\") and *values are kept* [Dyadic rational](glossary.md#dyadic-rational \
+             \"values of $x$ are kept dyadic\")."
+        ),
         "{chirp}"
     );
     assert!(chirp.contains(&format!("[dyadic]{dyadic}")));
     assert!(chirp.contains("click n2 href \"../glossary/#dyadic-rational\""));
     assert!(!project.root.join("docs/dyadic-rational.md").exists());
     let glossary = read(&project, "docs/glossary.md");
-    assert!(glossary.contains("## Dyadic rational { #dyadic-rational }\n\nA number of the form"));
+    assert!(
+        glossary
+            .contains("## Dyadic rational $m/2^k$ { #dyadic-rational }\n\nA number of the form")
+    );
     assert!(glossary.contains("Used by [Chirp identity](chirp-identity.md"));
     let convolution = read(&project, "docs/convolution.md");
     assert!(convolution.contains(
         "the [discrete Fourier transform](dft.md \"What Discrete Fourier transform is.\")"
     ));
     let notation = read(&project, "docs/notation.md");
-    assert!(notation.contains(&format!(
-        "- $2^k$ — a power of two — [Dyadic rational]{dyadic}"
-    )));
+    assert!(
+        notation.contains(&format!(
+            "- $x$ — **input sequence**: The input sequence. Bound on {dft_link}; used on \
+             [Chirp identity](chirp-identity.md \"What Chirp identity is.\")."
+        )),
+        "{notation}"
+    );
     assert!(chirp.contains("```mermaid\nflowchart LR\n"));
     assert!(chirp.contains("    > — [Notes](https://example.org/notes)"));
     let dft = read(&project, "docs/dft.md");
     assert!(dft.contains("Assumed known: Complex numbers."));
+    assert!(
+        dft.contains(
+            "!!! abstract \"Where this fits\"\n\n    - Relied on to show: The chirp identity \
+             turns a DFT into a convolution. ([Chirp identity](chirp-identity.md"
+        ),
+        "{dft}"
+    );
     assert!(dft.contains("Used by:\n\n- [Chirp identity](chirp-identity.md"));
     let part = read(&project, "docs/background/index.md");
     assert!(part.starts_with(
@@ -327,6 +667,12 @@ fn task_loop_end_to_end() {
     let index = read(&project, "docs/index.md");
     assert!(index.contains("The [chirp identity](chirp-identity.md \"What Chirp identity is.\")"));
     assert!(index.contains("### 2. [The identity](the-identity/index.md)"));
+    assert!(index.contains(
+        "## The argument\n\n**Main result:** The chirp identity turns a DFT into a convolution.\n\n\
+         **How:** rewrite the transform as a convolution **Why:** Convolutions are fast.\n\n\
+         1. Convolution multiplies transforms.\n2. The chirp identity reaches a convolution.\n"
+    ));
+    assert!(index.find("## The argument") < index.find("## Contents"));
     assert!(index.contains("p0 --> p1"));
     assert!(index.contains("the [glossary](glossary.md) defines minor terms"));
     assert!(index.contains("### [Notation](notation.md)"));
@@ -350,12 +696,18 @@ fn last_round_fixes_are_written_then_built() {
     let batch = tasks(next(&project).unwrap());
     answer(&project, &batch[0], &extract_answer("a chirp identity"));
     submit(&project, &batch[0].id).unwrap();
+    argue(&project, &["dft", "convolution"]);
     for t in tasks(next(&project).unwrap()) {
-        answer(&project, &t, "Some explanation.");
+        if page(&t) == "chirp-identity" {
+            fields(&project, &t, json!([]), json!(chirp_relations()));
+            answer(&project, &t, &format!("Some explanation. {CHIRP_USES}."));
+        } else {
+            answer(&project, &t, "Some explanation.");
+        }
         submit(&project, &t.id).unwrap();
     }
     for t in tasks(next(&project).unwrap()) {
-        let gaps = json!({"gaps": [{"term": "step", "quote": "Some explanation",
+        let gaps = json!({"symbols": [], "gaps": [{"term": "step", "quote": "Some explanation",
                                     "kind": "step", "note": "too vague"}]});
         answer(&project, &t, &gaps.to_string());
         submit(&project, &t.id).unwrap();
@@ -370,7 +722,16 @@ fn last_round_fixes_are_written_then_built() {
             .all(|t| matches!(t.kind, Kind::Write { .. }))
     );
     for t in &rewrites {
-        answer(&project, t, "A clearer explanation.");
+        if page(t) == "chirp-identity" {
+            fields(&project, t, json!([]), json!(chirp_relations()));
+            answer(
+                &project,
+                t,
+                &format!("A clearer explanation. {CHIRP_USES}."),
+            );
+        } else {
+            answer(&project, t, "A clearer explanation.");
+        }
         submit(&project, &t.id).unwrap();
     }
     let last = tasks(next(&project).unwrap());
@@ -379,8 +740,6 @@ fn last_round_fixes_are_written_then_built() {
                        "pages": ["dft", "convolution", "chirp-identity"]}]});
     answer(&project, &last[0], &parts.to_string());
     submit(&project, &last[0].id).unwrap();
-    answer(&project, &last[1], "{\"symbols\": []}");
-    submit(&project, &last[1].id).unwrap();
     assert!(matches!(next(&project).unwrap(), Next::Done(_)));
 }
 
@@ -400,9 +759,28 @@ fn simulated_readers_end_to_end() {
     let batch = tasks(next(&project).unwrap());
     answer(&project, &batch[0], &extract_answer("a chirp identity"));
     submit(&project, &batch[0].id).unwrap();
+    argue(&project, &["dft", "convolution"]);
     for t in tasks(next(&project).unwrap()) {
+        if page(&t) == "chirp-identity" {
+            let relations = json!([
+                relation(
+                    "dft",
+                    "splits using",
+                    "The chirp identity splits $nk$ using the [DFT]"
+                ),
+                relation(
+                    "convolution",
+                    "is reduced to",
+                    "It is reduced to [convolution]"
+                ),
+            ]);
+            fields(&project, &t, json!([]), relations);
+        }
         let body = match page(&t) {
-            "chirp-identity" => "The chirp identity splits $nk$ using the [DFT](dft.md).",
+            "chirp-identity" => {
+                "The chirp identity splits $nk$ using the [DFT](dft.md). It is reduced to \
+                 [convolution](convolution.md)."
+            }
             "dft" => "The discrete Fourier transform evaluates at roots of unity.",
             _ => "Convolution adds products along diagonals.",
         };
@@ -410,27 +788,40 @@ fn simulated_readers_end_to_end() {
         submit(&project, &t.id).unwrap();
     }
     for t in tasks(next(&project).unwrap()) {
-        answer(&project, &t, "{\"gaps\": []}");
+        answer(&project, &t, CLEAN);
         submit(&project, &t.id).unwrap();
     }
-    for t in tasks(next(&project).unwrap()) {
-        let text = match t.kind {
-            Kind::Outline => json!({"overview": "The [chirp identity](chirp-identity.md).",
-                "parts": [{"title": "All", "intro": "i",
-                           "pages": ["dft", "convolution", "chirp-identity"]}]}),
-            _ => json!({"symbols": []}),
-        };
-        answer(&project, &t, &text.to_string());
-        submit(&project, &t.id).unwrap();
-    }
-
-    // Goals: a transfer key point copied from a page is rejected.
+    // No page binds a symbol twice, so the outline comes alone.
     let batch = tasks(next(&project).unwrap());
-    assert_eq!(batch[0].kind, Kind::Goals);
+    assert_eq!(batch.len(), 1);
+    let outline = json!({"overview": "The [chirp identity](chirp-identity.md).",
+        "parts": [{"title": "All", "intro": "i",
+                   "pages": ["dft", "convolution", "chirp-identity"]}]});
+    answer(&project, &batch[0], &outline.to_string());
+    submit(&project, &batch[0].id).unwrap();
+
+    // Goals: repair goals and held-out goals come from two tasks in one batch. A key point
+    // of a holistic kind copied from a page is rejected.
+    let batch = tasks(next(&project).unwrap());
+    let kinds: Vec<&Kind> = batch.iter().map(|t| &t.kind).collect();
+    assert_eq!(
+        kinds,
+        vec![
+            &Kind::Goals { held_out: false },
+            &Kind::Goals { held_out: true }
+        ]
+    );
+    assert!(read(&project, batch[1].file()).contains("## Held-out goals"));
+    assert!(read(&project, batch[0].file()).contains("## The argument's steps"));
     let goals = |point: &str| {
-        json!({"goals": [{"question": "How does the chirp identity use the DFT?",
-            "kind": "transfer", "key_points": [point, "It is about roots of unity"],
-            "pages": ["chirp-identity", "dft"]}]})
+        let goal = |question: &str| {
+            json!({"question": question, "kind": "transfer", "pages": ["chirp-identity", "dft"],
+                "key_points": [{"point": point, "role": "claim"},
+                               {"point": "It is about roots of unity", "role": "reason"}]})
+        };
+        json!({"goals": [goal("How does the chirp identity use the DFT?"),
+                         goal("What does the chirp identity need from the DFT?"),
+                         goal("Why does the chirp identity need the DFT?")]})
         .to_string()
     };
     answer(
@@ -439,15 +830,23 @@ fn simulated_readers_end_to_end() {
         &goals("The discrete Fourier transform evaluates at roots"),
     );
     let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(err.contains("transfer key point"), "{err}");
     assert!(err.contains("appears word for word on `dft`"), "{err}");
     answer(&project, &batch[0], &goals("It rewrites the product nk"));
     submit(&project, &batch[0].id).unwrap();
+    let held_out = json!({"goals": [{"question": "What does the chirp identity turn the DFT into?",
+        "kind": "meaning", "pages": ["chirp-identity"],
+        "key_points": [{"point": "A convolution", "role": "conclusion"}]}]});
+    answer(&project, &batch[1], &held_out.to_string());
+    submit(&project, &batch[1].id).unwrap();
 
-    // Round 1: a reader from the front page, one deep-linked, and the baseline.
+    // Round 1: for each goal, a reader from the front page, one deep-linked, and the
+    // baseline. The held-out goal is the last.
     let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch.len(), 12);
     let ids: Vec<&str> = batch.iter().map(|t| t.id.as_str()).collect();
     assert!(ids[0].ends_with("read-g1-reader-home") && ids[1].ends_with("read-g1-reader-deep"));
-    assert!(ids[2].ends_with("baseline-g1-reader"));
+    assert!(ids[2].ends_with("baseline-g1-reader") && ids[11].ends_with("baseline-g4-reader"));
     let file = read(&project, batch[0].file());
     assert!(
         !file.contains("chirp identity"),
@@ -493,7 +892,9 @@ fn simulated_readers_end_to_end() {
     let reader = |cite_page: &str| {
         json!({"outcome": "answered", "answer": "The chirp identity rewrites nk.",
             "citations": [{"page": cite_page, "quote": quote}],
-            "stuck": [{"page": chirp, "quote": "using the", "note": "what the DFT does here"}],
+            "stuck": [{"page": chirp, "quote": "using the", "note": "what the DFT does here",
+                       "level": "chain"}],
+            "key_idea": {"page": cite_page, "statement": "It splits nk.", "quote": quote},
             "reason": "fairly sure"})
         .to_string()
     };
@@ -507,7 +908,8 @@ fn simulated_readers_end_to_end() {
         "{warnings:?}"
     );
     let deep = read_page(&project, &batch[1].id, &chirp).unwrap();
-    assert!(deep.contains("Builds on"));
+    assert!(home.contains("## The argument"), "{home}");
+    assert!(deep.contains("*splits using* ["), "{deep}");
     let gave_up = json!({"outcome": "gave_up", "answer": "", "citations": [], "stuck": [],
                          "reason": "never found what nk is"});
     answer(&project, &batch[1], &gave_up.to_string());
@@ -518,24 +920,89 @@ fn simulated_readers_end_to_end() {
         "{\"answer\": \"The background does not cover this.\"}",
     );
     submit(&project, &batch[2].id).unwrap();
+    // Goals 2 and 3: the readers give up. The held-out goal: a reader gets stuck.
+    for t in &batch[3..] {
+        let text = match &t.kind {
+            Kind::Baseline { .. } => json!({"answer": "Not covered."}),
+            Kind::Read { goal: 3, .. } => {
+                read_page(&project, &t.id, &chirp).unwrap();
+                json!({"outcome": "gave_up", "answer": "", "citations": [], "reason": "lost",
+                    "stuck": [{"page": chirp, "quote": "using the", "level": "step",
+                               "note": "held-out confusion"}]})
+            }
+            _ => {
+                read_page(&project, &t.id, "home").unwrap();
+                gave_up.clone()
+            }
+        };
+        answer(&project, t, &text.to_string());
+        submit(&project, &t.id).unwrap();
+    }
 
-    // Grading: two answers, blind; a grade for a missing key point is rejected.
+    // Grading: one task per goal, blind; a grade for a missing key point, or a key point
+    // both covered and contradicted, is rejected.
     let batch = tasks(next(&project).unwrap());
-    assert_eq!(batch.len(), 1);
+    assert_eq!(batch.len(), 4);
+    for t in &batch[1..] {
+        let file = read(&project, t.file());
+        let labels: Vec<String> = file
+            .lines()
+            .filter_map(|l| l.strip_prefix("### Answer "))
+            .map(|l| {
+                json!({"label": l, "covered": [], "contradicted": [], "wrong": []}).to_string()
+            })
+            .collect();
+        answer(
+            &project,
+            t,
+            &format!("{{\"grades\": [{}]}}", labels.join(",")),
+        );
+        submit(&project, &t.id).unwrap();
+    }
+    let batch = &batch[..1];
     let file = read(&project, batch[0].file());
     assert!(file.contains("### Answer A") && file.contains("### Answer B"));
     assert!(file.contains("The chirp identity rewrites nk."));
     let reader_first = file.find("rewrites nk").unwrap() < file.find("does not cover").unwrap();
     let (r, b) = if reader_first { ("A", "B") } else { ("B", "A") };
-    let grades = |n: usize| {
-        json!({"grades": [{"label": r, "covered": [n], "wrong": []},
-                          {"label": b, "covered": [], "wrong": []}]})
+    let grades = |n: usize, contradicted: usize| {
+        json!({"grades": [{"label": r, "covered": [n], "contradicted": [contradicted], "wrong": []},
+                          {"label": b, "covered": [], "contradicted": [], "wrong": []}]})
         .to_string()
     };
-    answer(&project, &batch[0], &grades(3));
+    answer(&project, &batch[0], &grades(3, 1));
     let err = submit(&project, &batch[0].id).unwrap_err().to_string();
     assert!(err.contains("key point 3 does not exist"), "{err}");
-    answer(&project, &batch[0], &grades(1));
+    answer(&project, &batch[0], &grades(1, 1));
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains("key point 1 is both covered and contradicted"),
+        "{err}"
+    );
+    answer(&project, &batch[0], &grades(1, 2));
+    submit(&project, &batch[0].id).unwrap();
+
+    // Attribution: the covered key point gets the quotation that supports it; a key point
+    // the answer did not cover is rejected.
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch.len(), 1);
+    assert!(matches!(batch[0].kind, Kind::Attribute { goal: 0, .. }));
+    let file = read(&project, batch[0].file());
+    assert!(
+        file.contains("Covers key points: 1") && file.contains("1. \"The Chirp identity splits"),
+        "{file}"
+    );
+    let support = |point: usize| {
+        json!({"answers": [{"answer": 1, "support": [{"point": point, "quotation": 1}]}]})
+            .to_string()
+    };
+    answer(&project, &batch[0], &support(2));
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains("key point 2 is not listed as covered"),
+        "{err}"
+    );
+    answer(&project, &batch[0], &support(1));
     submit(&project, &batch[0].id).unwrap();
 
     // Repairs: the stuck point, the give-up and the missed key point become rewrite notes.
@@ -544,23 +1011,33 @@ fn simulated_readers_end_to_end() {
     let chirp_write = batch.iter().find(|t| page(t) == "chirp-identity").unwrap();
     let file = read(&project, chirp_write.file());
     assert!(
-        file.contains("got stuck at \"using the\": what the DFT does here"),
+        file.contains(
+            "got stuck at \"using the\": what the DFT does here (the reader followed the \
+             steps but not why they lead where they do: say what this step is for)"
+        ),
         "{file}"
     );
+    // Nothing from the held-out goal reaches the writer.
+    assert!(!file.contains("held-out confusion") && !file.contains("turn the DFT into"));
     assert!(file.contains("gave up on this page: never found what nk is"));
     assert!(file.contains("could not work out: It is about roots of unity"));
     for t in &batch {
-        answer(
-            &project,
-            t,
-            "A clearer page, with the [DFT](dft.md) where needed.",
-        );
+        if page(t) == "chirp-identity" {
+            fields(&project, t, json!([]), json!(chirp_relations()));
+            answer(&project, t, &format!("A clearer page. {CHIRP_USES}."));
+        } else {
+            answer(
+                &project,
+                t,
+                "A clearer page, with the [DFT](dft.md) where needed.",
+            );
+        }
         submit(&project, &t.id).unwrap();
     }
 
-    // Round 2: readers only (the baseline is kept); both give up; then done.
+    // Round 2: readers only (the baselines are kept); all give up; then done.
     let batch = tasks(next(&project).unwrap());
-    assert_eq!(batch.len(), 2);
+    assert_eq!(batch.len(), 8);
     assert!(batch.iter().all(|t| matches!(t.kind, Kind::Read { .. })));
     for t in &batch {
         read_page(&project, &t.id, "home").unwrap();
@@ -569,15 +1046,221 @@ fn simulated_readers_end_to_end() {
     }
     assert!(matches!(next(&project).unwrap(), Next::Done(_)));
     let simulation = read(&project, "exegenius/simulation.json");
-    assert_eq!(simulation.matches("\"task\":").count(), 5);
+    assert_eq!(simulation.matches("\"task\":").count(), 20);
     let report = read(&project, "exegenius/report.md");
-    assert!(report.contains("| 1 | 2 | 1 | 1 | 25% | 1 |"), "{report}");
-    assert!(report.contains("| 2 | 2 | 0 | 2 | 0% | 0 |"), "{report}");
-    assert!(report.contains("| baseline (no wiki) | 1 | | | 0% | |"));
+    assert!(
+        report.contains("| 1 | 8 | 1 | 7 | 8% | 0% | 1 |"),
+        "{report}"
+    );
+    assert!(
+        report.contains("| 2 | 8 | 0 | 8 | 0% | 0% | 0 |"),
+        "{report}"
+    );
+    assert!(report.contains("| baseline (no wiki) | 4 | | | 0% | | |"));
+    assert!(report.contains("| transfer | 3 | 4% | 0% |"), "{report}");
+    assert!(report.contains("| reason | 12 | 0% | 1 |"), "{report}");
+    assert!(report.contains("| step | 2 |\n| chain | 1 |"), "{report}");
+    assert!(report.contains("Kind: meaning, held out."));
     assert!(report.contains("Path: Front page → Chirp identity → Front page"));
-    assert!(report.contains("- Stuck on Chirp identity: \"using the\" — what the DFT does here"));
+    assert!(
+        report
+            .contains("- Stuck on Chirp identity [chain]: \"using the\" — what the DFT does here")
+    );
+    assert!(report.contains("- Contradicts key point 2: It is about roots of unity"));
+    assert!(report.contains("| 1 | 0.5 | 75% | 1 of 1 |"), "{report}");
+    assert!(
+        report.contains("| Round | Words | Pages |\n|---|---|---|\n| 1 | 27 | 3 |\n| 2 | 26 | 3 |")
+    );
+    // The scripted rewrites are shorter, so no page grew.
+    assert!(!report.contains("Pages that grew most"));
+    assert!(
+        report.contains("| Chirp identity | \"The Chirp identity splits\" | 1 | 1 |"),
+        "{report}"
+    );
+    assert!(report.contains(
+        "- **Chirp identity** (no agreement):\n  - It splits nk. (\"The Chirp identity splits\")"
+    ));
     assert!(
         report.contains("Possible leaks (real names the reader was not shown): Chirp identity")
     );
     assert!(!project.root.join("docs/report.md").exists());
+}
+
+#[test]
+fn ablation_hides_a_carrying_sentence_and_a_control() {
+    let temp = tempfile::tempdir().unwrap();
+    let extra = "[simulation]\nrounds = 1\nbudget = 3\nablations = 1\n";
+    let project = setup_with(temp.path(), 1, extra);
+    let batch = tasks(next(&project).unwrap());
+    answer(&project, &batch[0], &extract_answer("a chirp identity"));
+    submit(&project, &batch[0].id).unwrap();
+    argue(&project, &["dft", "convolution"]);
+    let chirp_body = "The chirp identity splits the product using the [DFT](dft.md). It is \
+                      reduced to [convolution](convolution.md). Nothing here is cited by \
+                      anyone at all.";
+    for t in tasks(next(&project).unwrap()) {
+        if page(&t) == "chirp-identity" {
+            let relations = json!([
+                relation(
+                    "dft",
+                    "splits the product using",
+                    "splits the product using the [DFT]"
+                ),
+                relation(
+                    "convolution",
+                    "is reduced to",
+                    "It is reduced to [convolution]"
+                ),
+            ]);
+            fields(&project, &t, json!([]), relations);
+            answer(&project, &t, chirp_body);
+        } else {
+            answer(&project, &t, "A page.");
+        }
+        submit(&project, &t.id).unwrap();
+    }
+    for t in tasks(next(&project).unwrap()) {
+        answer(&project, &t, CLEAN);
+        submit(&project, &t.id).unwrap();
+    }
+    let batch = tasks(next(&project).unwrap());
+    let outline = json!({"overview": "The [chirp identity](chirp-identity.md).", "parts": [{"title": "All", "intro": "i",
+                         "pages": ["dft", "convolution", "chirp-identity"]}]});
+    answer(&project, &batch[0], &outline.to_string());
+    submit(&project, &batch[0].id).unwrap();
+    let batch = tasks(next(&project).unwrap());
+    let goal = json!({"question": "Why does the chirp identity use the DFT?",
+        "kind": "justification", "pages": ["chirp-identity"],
+        "key_points": [{"point": "It uses the DFT", "role": "claim"},
+                       {"point": "Because the product splits", "role": "reason"}]});
+    answer(
+        &project,
+        &batch[0],
+        &json!({"goals": [goal, goal, goal]}).to_string(),
+    );
+    submit(&project, &batch[0].id).unwrap();
+    let mut held_out = goal.clone();
+    held_out["kind"] = json!("meaning");
+    answer(
+        &project,
+        &batch[1],
+        &json!({"goals": [held_out]}).to_string(),
+    );
+    submit(&project, &batch[1].id).unwrap();
+
+    // Round 1: on goal 1, the front-page reader cites the chirp page's first sentence.
+    let gave_up = json!({"outcome": "gave_up", "answer": "", "citations": [], "stuck": [],
+                         "reason": "lost"});
+    let batch = tasks(next(&project).unwrap());
+    let mut chirp = String::new();
+    for t in &batch {
+        let text = match &t.kind {
+            Kind::Baseline { .. } => json!({"answer": "Not covered."}),
+            Kind::Read { goal: 0, start, .. } if start == "home" => {
+                let home = read_page(&project, &t.id, "home").unwrap();
+                chirp = handles(&home)[0].clone();
+                let seen = read_page(&project, &t.id, &chirp).unwrap();
+                let quote = seen
+                    .lines()
+                    .find(|l| l.contains("splits") && !l.contains('*'))
+                    .unwrap()
+                    .to_string();
+                let quote = quote.split(". ").next().unwrap().to_string();
+                json!({"outcome": "answered", "answer": "Because the product splits.",
+                       "citations": [{"page": chirp, "quote": quote}], "stuck": [],
+                       "reason": "sure"})
+            }
+            _ => {
+                read_page(&project, &t.id, "home").unwrap();
+                gave_up.clone()
+            }
+        };
+        answer(&project, t, &text.to_string());
+        submit(&project, &t.id).unwrap();
+    }
+    for t in tasks(next(&project).unwrap()) {
+        let file = read(&project, t.file());
+        let grades: Vec<String> = file
+            .lines()
+            .filter_map(|l| l.strip_prefix("### Answer "))
+            .map(|label| {
+                let block = file
+                    .split(&format!("### Answer {label}\n"))
+                    .nth(1)
+                    .and_then(|rest| rest.split("### Answer").next())
+                    .unwrap_or_default();
+                let covered = if block.contains("product splits.") {
+                    json!([2])
+                } else {
+                    json!([])
+                };
+                json!({"label": label, "covered": covered, "contradicted": [], "wrong": []})
+                    .to_string()
+            })
+            .collect();
+        answer(
+            &project,
+            &t,
+            &format!("{{\"grades\": [{}]}}", grades.join(",")),
+        );
+        submit(&project, &t.id).unwrap();
+    }
+    let batch = tasks(next(&project).unwrap());
+    assert!(matches!(batch[0].kind, Kind::Attribute { .. }));
+    let support = json!({"answers": [{"answer": 1, "support": [{"point": 2, "quotation": 1}]}]});
+    answer(&project, &batch[0], &support.to_string());
+    submit(&project, &batch[0].id).unwrap();
+
+    // Ablation: goal 1 again, once without the cited sentence and once without a control
+    // sentence; each reader sees its page without its sentence.
+    let batch = tasks(next(&project).unwrap());
+    let ids: Vec<&str> = batch.iter().map(|t| t.id.as_str()).collect();
+    assert_eq!(batch.len(), 2, "{ids:?}");
+    assert!(
+        ids[0].ends_with("read-g1-reader-ablate") && ids[1].ends_with("read-g1-reader-control")
+    );
+    // The body line: the relation sentence above it uses the same words.
+    let body = |page: &str| {
+        page.lines()
+            .filter(|l| !l.contains('*') && !l.starts_with('#'))
+            .collect::<Vec<_>>()
+            .join("\n")
+    };
+    let without = read_page(&project, &batch[0].id, &chirp).unwrap();
+    assert!(
+        !body(&without).contains("splits") && body(&without).contains("reduced to"),
+        "{without}"
+    );
+    let control = read_page(&project, &batch[1].id, &chirp).unwrap();
+    assert!(
+        body(&control).contains("splits")
+            && !(body(&control).contains("reduced to") && body(&control).contains("cited by")),
+        "{control}"
+    );
+    answer(&project, &batch[0], &gave_up.to_string());
+    submit(&project, &batch[0].id).unwrap();
+    let quote = control
+        .lines()
+        .find(|l| l.contains("splits") && !l.contains('*'))
+        .unwrap();
+    let quote = quote.split(". ").next().unwrap();
+    let answered = json!({"outcome": "answered", "answer": "Because the product splits.",
+                          "citations": [{"page": chirp, "quote": quote}], "stuck": [],
+                          "reason": "sure"});
+    answer(&project, &batch[1], &answered.to_string());
+    submit(&project, &batch[1].id).unwrap();
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch.len(), 1);
+    let grade =
+        json!({"grades": [{"label": "A", "covered": [2], "contradicted": [], "wrong": []}]});
+    answer(&project, &batch[0], &grade.to_string());
+    submit(&project, &batch[0].id).unwrap();
+    assert!(matches!(next(&project).unwrap(), Next::Done(_)));
+    let report = read(&project, "exegenius/report.md");
+    assert!(report.contains("## Ablations"), "{report}");
+    assert!(
+        report.contains("## Key steps\n\nThe hidden sentences whose loss cost readers more")
+            && report.contains("- Chirp identity: \"The chirp identity splits the product using"),
+        "{report}"
+    );
 }

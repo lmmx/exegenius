@@ -235,14 +235,22 @@ fn next(project: &Project) -> anyhow::Result<()> {
             };
             println!("{} pending task(s): {phase}\n", tasks.len());
             for t in &tasks {
+                let answer = project.root.join(t.answer());
+                let answer = match t.fields() {
+                    Some(fields) => format!(
+                        "{} and {}",
+                        answer.display(),
+                        project.root.join(fields).display()
+                    ),
+                    None => answer.display().to_string(),
+                };
                 println!(
                     "{id}\n  prompt: Do the exegenius task in {file}: follow its instructions, \
                      write the answer to {answer}, then run `exegenius submit {id}` in {root}. \
-                     If submit rejects the answer, fix the answer file and submit again until \
-                     it is accepted. Reply with only \"accepted\" or the last error.\n",
+                     If submit rejects the answer, fix the answer and submit again until it is \
+                     accepted. Reply with only \"accepted\" or the last error.\n",
                     id = t.id,
                     file = project.root.join(t.file()).display(),
-                    answer = project.root.join(t.answer()).display(),
                     root = project.root.display(),
                 );
             }
@@ -324,36 +332,89 @@ fn status(project: &Project) -> anyhow::Result<()> {
         ),
         None => println!("outline: not yet (handed out once the pages are final)"),
     }
-    let notation = exegenius_core::notation::current(project, &plan)?;
-    match &notation {
-        Some(notation) => println!("notation: {} symbols", notation.symbols.len()),
-        None => println!("notation: not yet (handed out once the pages are final)"),
+    let edges: usize = plan
+        .order
+        .iter()
+        .filter_map(|id| graph.get(id))
+        .map(|c| c.requires.iter().filter(|r| plan.contains(r)).count())
+        .sum();
+    let related: usize = graph.relations.values().map(Vec::len).sum();
+    println!("relations: {related} of {edges} prerequisite edges between pages");
+    let bound: usize = graph.bindings.values().map(Vec::len).sum();
+    let judged = exegenius_core::notation::load(project)?.judged;
+    let unjudged = exegenius_core::notation::unjudged(project, &graph, &plan)?.len();
+    println!(
+        "symbols: {bound} bound on pages; letters with two meanings: {} confirmed, {unjudged} \
+         awaiting a verdict",
+        judged.iter().filter(|j| !j.same).count()
+    );
+    let support = exegenius_core::support::load(project)?;
+    if !support.judged.is_empty() {
+        let count = |v: exegenius_core::support::Verdict| {
+            support.judged.iter().filter(|j| j.label == v).count()
+        };
+        use exegenius_core::support::Verdict;
+        println!(
+            "citation support: {} marks judged: {} supported, {} partial, {} unsupported, {} \
+             contradicted",
+            support.judged.len(),
+            count(Verdict::Supported),
+            count(Verdict::Partial),
+            count(Verdict::Unsupported),
+            count(Verdict::Contradicted)
+        );
+        let (both, agree) = support.agreement();
+        if both > 0 {
+            println!("  a second judge agreed on {agree} of {both} marks");
+        }
+    }
+    let unlinked: Vec<&str> = project
+        .sources
+        .iter()
+        .filter(|s| s.url.is_none())
+        .map(|s| s.id.as_str())
+        .collect();
+    if !unlinked.is_empty() {
+        println!(
+            "sources with no url (a DOI, arXiv or stable URL lets readers check them): {}",
+            unlinked.join(", ")
+        );
     }
     let simulation = exegenius_core::simulate::load(project)?;
     if !simulation.goals.is_empty() {
-        println!("simulated readers: {} goals", simulation.goals.len());
+        let held_out = simulation.goals.iter().filter(|g| g.held_out).count();
+        println!(
+            "simulated readers: {} goals, {held_out} of them held out",
+            simulation.goals.len()
+        );
         let mut rounds: Vec<u32> = simulation.runs.iter().map(|r| r.round).collect();
         rounds.dedup();
         for round in rounds {
             let runs = simulation.round_runs(round).count();
-            let covered = exegenius_core::report::round_coverage(&simulation, round)
-                .map_or("ungraded".to_string(), |c| {
-                    format!("{:.0}% of key points", 100.0 * c)
-                });
-            println!("  round {round}: {runs} runs, {covered}");
+            let covered = |held_out| {
+                exegenius_core::report::round_coverage(&simulation, round, held_out)
+                    .map_or("ungraded".to_string(), |c| format!("{:.0}%", 100.0 * c))
+            };
+            println!(
+                "  round {round}: {runs} runs; key points covered: {} on repair goals, {} on \
+                 held-out goals",
+                covered(false),
+                covered(true)
+            );
         }
         if let Some(c) = exegenius_core::report::baseline_coverage(&simulation) {
             println!("  baseline (no wiki): {:.0}% of key points", 100.0 * c);
         }
     }
     let rounds = project.config.simulation.rounds;
-    let simulated = rounds == 0 || simulation.round > rounds;
+    let ablated = project.config.simulation.ablations == 0 || simulation.ablated;
+    let simulated = rounds == 0 || (simulation.round > rounds && ablated);
     if !state.pending.is_empty() {
         let ids: Vec<&str> = state.pending.iter().map(|t| t.id.as_str()).collect();
         println!("pending tasks: {}", ids.join(", "));
     } else if state.done
         && outline.is_some()
-        && notation.is_some()
+        && unjudged == 0
         && simulated
         && graph.rewrite.is_empty()
     {
