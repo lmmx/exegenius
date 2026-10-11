@@ -54,7 +54,10 @@ The changes below apply the principle on both sides. The writer gets the structu
 
 ### The loop: safety nets
 
-9. **A stop rule, on by default.** After an audit round, if step or symbol gaps on the pages audited in both rounds did not fall by at least half, the audit rounds end and `status` says why. The thresholds are those of 2026-10-11-convergence: the 0.1 run met them each round, and the 0.5.0 run and the baseline failed them in their first comparison.
+9. **A stop rule, on by default.** After an audit round, if step and symbol gaps together, on the pages audited in both rounds, did not fall to half or fewer, the audit rounds end and `status` says why. Each kind alone would not do: the 0.1 run's symbol gaps held at 8 from its round 1 to round 2. Taken together:
+   - the 0.1 run's went 28 to 10, then 16 to 2;
+   - the 0.5.0 run's went 202 to 282;
+   - the baseline pilot's went 34 to 34.
 10. **Overload rounds limited to two,** as support checks are.
 
 ### The agents
@@ -85,10 +88,37 @@ The pass works if, on the pages audited in both rounds:
 
 The risk on the other side is auditors that under-report once steps can be followed by reference. The pilot measures convergence, not teaching. The simulated readers measure teaching, on a later run.
 
+## Built
+
+The changes above are built at 8cff21f (0.6.0), with these details:
+- **Write instructions** (exegenius-core/src/write.rs) open with the next-uncertainty rule. They ask for the main motivation in a sentence, take the relation from the sentence that links the prerequisite, and cite results and constants with a sentence that reads complete without the quotation.
+- **Length.** `prose_words` counts the words of text outside mathematics and citation marks. Submit rejects a first draft over `FIRST_DRAFT_WORDS` (350) and a rewrite over its budget. The write task states the limit.
+- **Citations.** `cite::dangling` rejects a mark after "that", "as", "states", "says", "is", "are", "gives", "reads", "writes", "notes" or a colon (exegenius-core/src/cite.rs).
+- **Source passages.** The write task gives, under each evidence quote, its paragraph of the source, cut to about 1,500 bytes around the quote.
+- **Audit view.** Audits see each citation mark as "(cited)" (`cite::referenced`), so a cited step is visible as one, and quotes are checked against that view (exegenius-core/src/audit.rs). The step criterion excludes cited steps; references to the documents are not terms. A step's rewrite note offers reasoning or a citation, whichever needs fewer words.
+- **Safety nets.** `convergence::stalled` ends the audit rounds (exegenius-core/src/convergence.rs, exegenius-core/src/task.rs), and `status` prints the reason. `Overloads.rounds` counts overloads tasks, and none is issued after `notation::ROUNDS` (2).
+- **Subagents.** `init` writes `.claude/agents/exegenius-task.md` (model `inherit`) and `.claude/agents/exegenius-reader.md` (model `haiku`), both with `tools: Read, Write, Bash`. `next` prints the definition to use for each task (exegenius-cli/src/agents/, exegenius-cli/src/main.rs).
+
+**The free checks,** with the new rules run over recorded pages through the library's functions:
+
+| Pages | prose words | over 350 | citation marks rejected |
+|---|---|---|---|
+| 0.1 run, 45 pages | median 180 | 1 | none carried |
+| baseline pilot first drafts, 7 pages | mean 469 | 5 | 8 of 50 |
+| 0.5.0 run, 142 pages | median 365 | 75 | 234 of 771 |
+
+The limit leaves pages of the 0.1 kind alone and stops the drafts that grew.
+
+**Pilot choice.** On the 0.5.0 run's extract answer, `[pilot] pages = 5` explains `transform-identity`, with exact integer multiplication, radix-digit convolution, the discrete Fourier transform and Gaussian resampling as its other pages, four of them shared with the baseline pilot.
+
 ## Current State
-- The write instructions ask for every unstated motivation, a sentence per prerequisite and a citation per specific claim, with no length limit on first drafts (exegenius-core/src/write.rs)
-- The audit instructions count as a gap any claim the reader cannot check from the page, including steps the page cites from the source (exegenius-core/src/audit.rs)
-- The rewrite budget warns and does not reject (exegenius-core/src/write.rs)
+- Submit rejects a first draft over 350 words of prose and a rewrite over its budget, counting neither mathematics nor citation marks (exegenius-core/src/write.rs)
+- Submit rejects a citation mark that follows "that", "as", "states", "says", "is", "are", "gives", "reads", "writes", "notes" or a colon (exegenius-core/src/cite.rs)
+- Write tasks give the source paragraph around each evidence quote (exegenius-core/src/write.rs)
+- Audits see citation marks as "(cited)" and are told that cited steps are followable by reference and that references to the documents are not terms (exegenius-core/src/audit.rs, exegenius-core/src/cite.rs)
+- The audit rounds stop when step and symbol gaps on pages audited in two consecutive rounds do not fall to half or fewer, and overloads tasks stop after two (exegenius-core/src/convergence.rs, exegenius-core/src/task.rs, exegenius-core/src/notation.rs)
+- `exegenius init` writes the exegenius-task and exegenius-reader subagent definitions with their model and tools, and `next` names one for each task (exegenius-cli/src/main.rs, exegenius-cli/src/agents/)
 
 ## Missing
-- Every change listed above
+- No pilot run with these changes
+- No change to the reader-facing chrome

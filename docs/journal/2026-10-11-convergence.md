@@ -27,7 +27,7 @@ Term gaps also grow the graph. The growth factor is the pages extend adds per pa
 - the step or symbol gap rate on pages audited in both rounds fell by less than half; or
 - extend would add more new pages than there are pages in the plan.
 
-The thresholds come from the two runs: the 0.1 run met both every round, and the 0.5.0 run failed the first after round 2. Stopping early does not lose work: the pages stay written and audited, and the outline and simulation follow as usual.
+As planned, the first threshold was wrong: the 0.1 run's symbol gaps on repeated pages held at 8 from round 1 to round 2, so a rule on each kind alone would have stopped that converging run. The rule as built (2026-10-11-reduction) takes step and symbol gaps together. The 0.1 run's went 28 to 10 and 16 to 2; the 0.5.0 run's went 202 to 282, and the baseline pilot's 34 to 34. The second threshold was not built: the stop rule ends the rounds before growth compounds. Stopping early does not lose work: the pages stay written and audited, and the outline and simulation follow as usual.
 
 ### 2. A limit on overload rounds
 
