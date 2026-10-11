@@ -468,6 +468,9 @@ pub struct Simulation {
     /// Whether the ablation runs after the last round are done.
     #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub ablated: bool,
+    /// The word count of each page body when each round's readers set out, by round.
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub words: BTreeMap<u32, BTreeMap<String, usize>>,
 }
 
 impl Default for Simulation {
@@ -478,6 +481,7 @@ impl Default for Simulation {
             runs: Vec::new(),
             baselines: Vec::new(),
             ablated: false,
+            words: BTreeMap::new(),
         }
     }
 }

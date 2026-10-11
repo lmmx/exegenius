@@ -1026,6 +1026,12 @@ fn simulated_readers_end_to_end() {
             .contains("- Stuck on Chirp identity [chain]: \"using the\" — what the DFT does here")
     );
     assert!(report.contains("- Contradicts key point 2: It is about roots of unity"));
+    assert!(report.contains("| 1 | 0.5 | 75% | 1 of 1 |"), "{report}");
+    assert!(
+        report.contains("| Round | Words | Pages |\n|---|---|---|\n| 1 | 27 | 3 |\n| 2 | 26 | 3 |")
+    );
+    // The scripted rewrites are shorter, so no page grew.
+    assert!(!report.contains("Pages that grew most"));
     assert!(
         report.contains("| Chirp identity | \"The Chirp identity splits\" | 1 | 1 |"),
         "{report}"

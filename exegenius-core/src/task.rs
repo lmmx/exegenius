@@ -381,6 +381,19 @@ fn simulation_step(project: &Project, graph: &mut Graph, plan: &Plan) -> Result<
                 }
             }
         }
+        // Page lengths as this round's readers find them, to see whether repairs make pages
+        // grow round by round.
+        let mut words = BTreeMap::new();
+        for id in &plan.order {
+            if let Some(body) = project.page_body(id)? {
+                words.insert(
+                    id.clone(),
+                    crate::cite::strip(&body).split_whitespace().count(),
+                );
+            }
+        }
+        sim.words.insert(sim.round, words);
+        simulate::save(project, &sim)?;
         return Ok(Step::Issue(items));
     }
     let mut items = Vec::new();

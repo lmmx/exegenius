@@ -127,8 +127,12 @@ the key points. After each round but the last, stuck points, give-ups and key po
 reader managed become rewrite notes, and the pages are rewritten before the next round.
 `exegenius/report.md` has the results: coverage per round against the baseline, for repair
 and held-out goals apart; coverage by goal kind against the baseline and by key point role;
-stuck points by level; each reader's path, searches, answer, stuck points and contradicted
-key points; and the pages readers got stuck on most.
+stuck points by level; signs of fragmentation (pages opened per run, opened pages left
+uncited, multi-page goals answered from one page) and of collapse (page length round by
+round); with several reader profiles, a comparison across them; each reader's path,
+searches, answer, stuck points and contradicted key points; and the pages readers got stuck
+on most. Rewrite tasks give the writer a length budget of a quarter more than the previous
+version, and submit warns past it, so repairs restructure pages rather than append to them.
 The goals and the report stay out of `docs/`.
 
 The report also lists candidates for the sentences that close a chain of reasoning, each

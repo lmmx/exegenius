@@ -69,6 +69,146 @@ fn path(graph: &Graph, run: &Run) -> String {
     steps.join(" → ")
 }
 
+/// Signs of fragmentation and of collapse, round by round, and the comparison across reader
+/// profiles that shows whether explicitness for one reader costs another.
+fn layering(graph: &Graph, config: &Config, simulation: &Simulation) -> String {
+    let mut out = String::new();
+    let mut rounds: Vec<u32> = simulation.runs.iter().map(|r| r.round).collect();
+    rounds.sort();
+    rounds.dedup();
+    if !rounds.is_empty() {
+        out.push_str(
+            "\n## Navigation\n\nSigns of fragmentation: pages opened per run (the front page \
+             aside), the share of opened pages a reader left without citing, and runs on goals \
+             that need several pages that cited only one.\n\n\
+             | Round | Pages opened per run | Opened, not cited | Multi-page goals answered from one page |\n\
+             |---|---|---|---|\n",
+        );
+        for &round in &rounds {
+            let runs: Vec<&Run> = simulation
+                .round_runs(round)
+                .filter(|r| r.hidden.is_none())
+                .collect();
+            let opened: Vec<Vec<&str>> = runs
+                .iter()
+                .map(|r| {
+                    let mut pages: Vec<&str> = r
+                        .path
+                        .iter()
+                        .map(String::as_str)
+                        .filter(|p| *p != HOME)
+                        .collect();
+                    pages.sort();
+                    pages.dedup();
+                    pages
+                })
+                .collect();
+            let per_run: Vec<f64> = opened.iter().map(|p| p.len() as f64).collect();
+            let (mut total, mut uncited) = (0, 0);
+            for (run, pages) in runs.iter().zip(&opened) {
+                total += pages.len();
+                uncited += pages
+                    .iter()
+                    .filter(|p| !run.citations.iter().any(|(c, _)| c == *p))
+                    .count();
+            }
+            let multi: Vec<&&Run> = runs
+                .iter()
+                .filter(|r| r.outcome == Outcome::Answered)
+                .filter(|r| simulation.goals[r.goal].pages.len() > 1)
+                .collect();
+            let single = multi
+                .iter()
+                .filter(|r| {
+                    let mut cited: Vec<&str> =
+                        r.citations.iter().map(|(p, _)| p.as_str()).collect();
+                    cited.sort();
+                    cited.dedup();
+                    cited.len() == 1
+                })
+                .count();
+            out.push_str(&format!(
+                "| {round} | {} | {} | {single} of {} |\n",
+                mean(&per_run).map_or("–".into(), |m| format!("{m:.1}")),
+                percent(&[uncited as f64 / total.max(1) as f64]),
+                multi.len()
+            ));
+        }
+    }
+    if simulation.words.len() > 1 {
+        let (first, last) = (
+            simulation.words.iter().next().expect("two rounds"),
+            simulation.words.iter().next_back().expect("two rounds"),
+        );
+        out.push_str(
+            "\n## Page length by round\n\nA sign of collapse: page bodies growing as repairs \
+             add text, round by round.\n\n| Round | Words | Pages |\n|---|---|---|\n",
+        );
+        for (round, words) in &simulation.words {
+            out.push_str(&format!(
+                "| {round} | {} | {} |\n",
+                words.values().sum::<usize>(),
+                words.len()
+            ));
+        }
+        let mut growth: Vec<(&String, usize, usize)> = last
+            .1
+            .iter()
+            .filter_map(|(page, &after)| Some((page, *first.1.get(page)?, after)))
+            .filter(|(_, before, after)| after > before)
+            .collect();
+        growth.sort_by_key(|(_, before, after)| std::cmp::Reverse(after - before));
+        if !growth.is_empty() {
+            out.push_str(&format!(
+                "\nPages that grew most from round {} to round {}:\n\n",
+                first.0, last.0
+            ));
+            for (page, before, after) in growth.iter().take(5) {
+                out.push_str(&format!(
+                    "- {}: {before} → {after} words\n",
+                    name(graph, page)
+                ));
+            }
+        }
+    }
+    let personas = config.personas();
+    if personas.len() > 1 {
+        out.push_str(
+            "\n## By reader profile\n\nThe expertise-reversal test: if the wiki's explicitness \
+             helps one profile and slows another (more pages opened, fewer key points), it has \
+             gone too far for the second.\n\n\
+             | Reader | Runs | Answered | Key points covered | Pages opened per run |\n\
+             |---|---|---|---|---|\n",
+        );
+        for persona in &personas {
+            let runs: Vec<&Run> = simulation
+                .runs
+                .iter()
+                .filter(|r| r.persona == persona.name && r.hidden.is_none())
+                .collect();
+            let covered: Vec<f64> = runs
+                .iter()
+                .filter_map(|r| coverage(&r.covered, simulation.goals[r.goal].key_points.len()))
+                .collect();
+            let opened: Vec<f64> = runs
+                .iter()
+                .map(|r| r.path.iter().filter(|p| *p != HOME).count() as f64)
+                .collect();
+            out.push_str(&format!(
+                "| {} | {} | {} | {} | {} |\n",
+                persona.name,
+                runs.len(),
+                runs.iter()
+                    .filter(|r| r.outcome == Outcome::Answered)
+                    .count(),
+                percent(&covered),
+                mean(&opened).map_or("–".into(), |m| format!("{m:.1}"))
+            ));
+        }
+    }
+    out
+}
+
 /// Coverage by goal kind against the baseline, by key point role, and stuck points by level.
 fn profiles(simulation: &Simulation) -> String {
     let mut out = String::new();
@@ -406,6 +546,7 @@ pub fn report(
         percent(&baseline)
     ));
     out.push_str(&profiles(simulation));
+    out.push_str(&layering(graph, config, simulation));
 
     for (g, goal) in simulation.goals.iter().enumerate() {
         out.push_str(&format!(
@@ -546,4 +687,72 @@ pub fn report(
         }
     }
     out
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::simulate::{Goal, GoalKind, KeyPoint};
+
+    fn run(task: &str, persona: &str, path: &[&str], covered: Vec<usize>) -> Run {
+        Run {
+            task: task.into(),
+            round: 1,
+            goal: 0,
+            persona: persona.into(),
+            start: HOME.into(),
+            outcome: Outcome::Answered,
+            path: path.iter().map(|p| p.to_string()).collect(),
+            searches: vec![],
+            answer: "a".into(),
+            citations: vec![("p".into(), "q".into())],
+            stuck: vec![],
+            reason: "r".into(),
+            leaks: vec![],
+            covered: Some(covered),
+            contradicted: vec![],
+            wrong: vec![],
+            support: None,
+            key_idea: None,
+            hidden: None,
+        }
+    }
+
+    #[test]
+    fn reader_profiles_are_compared() {
+        let config: Config = toml::from_str(
+            "target = \"t\"\nsources = []\n[reader]\nknows = \"k\"\n\
+             [[readers]]\nname = \"expert\"\nknows = \"more\"\n",
+        )
+        .unwrap();
+        let graph = Graph::default();
+        let simulation = Simulation {
+            goals: vec![Goal {
+                question: "q".into(),
+                kind: GoalKind::Summary,
+                key_points: vec![
+                    KeyPoint {
+                        point: "a".into(),
+                        role: Role::Claim,
+                    },
+                    KeyPoint {
+                        point: "b".into(),
+                        role: Role::Reason,
+                    },
+                ],
+                pages: vec!["p".into(), "s".into()],
+                held_out: false,
+            }],
+            runs: vec![
+                run("1", "reader", &[HOME, "p", "s"], vec![0, 1]),
+                run("2", "expert", &[HOME, "p", "s", "u", "v"], vec![0]),
+            ],
+            ..Simulation::default()
+        };
+        let out = layering(&graph, &config, &simulation);
+        assert!(out.contains("| reader | 1 | 1 | 100% | 2.0 |"), "{out}");
+        assert!(out.contains("| expert | 1 | 1 | 50% | 4.0 |"), "{out}");
+        // Each run cites one page of the goal's two, and opened others without citing them.
+        assert!(out.contains("| 1 | 3.0 | 67% | 2 of 2 |"), "{out}");
+    }
 }

@@ -322,8 +322,13 @@ pub fn write_task(project: &Project, graph: &Graph, plan: &Plan, i: usize) -> Re
                 notes.join("\n")
             ));
         }
+        let words = crate::cite::strip(&previous).split_whitespace().count();
         task.push_str(&format!(
-            "\n## Previous version (revise it)\n\n{}\n",
+            "\n## Previous version (revise it)\n\nIt has {words} words. Fix the problems by \
+             restructuring rather than appending: keep the rewrite within {} words, a quarter \
+             more, unless a problem cannot be fixed without more. Pages that grow with every \
+             repair stop being self-contained explanations of one concept.\n\n{}\n",
+            budget(words),
             previous.trim()
         ));
     }
@@ -388,6 +393,20 @@ pub fn apply_write(
             )
         })
         .collect();
+    let mut warnings = warnings;
+    if let Some(previous) = project.page_body(page)? {
+        let (before, after) = (
+            crate::cite::strip(&previous).split_whitespace().count(),
+            crate::cite::strip(body).split_whitespace().count(),
+        );
+        if after > budget(before) {
+            warnings.push(format!(
+                "`{page}`: the rewrite has {after} words, over the budget of {} (the previous \
+                 version had {before})",
+                budget(before)
+            ));
+        }
+    }
     project.save_page_body(page, &format!("{}\n", body.trim()))?;
     graph.rewrite.remove(page);
     if fields.symbols.is_empty() {
@@ -401,6 +420,12 @@ pub fn apply_write(
         graph.relations.insert(page.to_string(), fields.relations);
     }
     Ok(warnings)
+}
+
+/// The most words a rewrite of a page of `words` words should have: a quarter more, and
+/// at least 50 more for short pages.
+fn budget(words: usize) -> usize {
+    words + (words / 4).max(50)
 }
 
 /// Drop a leading `# Title` line, which the build adds itself.
