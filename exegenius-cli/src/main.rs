@@ -493,7 +493,7 @@ fn status(project: &Project) -> anyhow::Result<()> {
         println!("pending tasks: {}", ids.join(", "));
     } else if state.done
         && outline.is_some()
-        && unjudged == 0
+        && (unjudged == 0 || overloads.rounds >= exegenius_core::notation::ROUNDS)
         && simulated
         && graph.rewrite.is_empty()
     {
