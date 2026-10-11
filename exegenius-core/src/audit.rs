@@ -147,8 +147,10 @@ pub const AUDIT_INSTRUCTIONS: &str = "\
 Audit one page of an explanatory wiki on behalf of a specific reader. Use only this task \
 file: do not read the sources, other pages or any other file.
 
-The reader knows exactly the concepts listed as known, together with what the reader profile \
-states. Everything else that you know, the reader does not know: treat it as unknown to them, \
+The reader knows the concepts listed as known, and everything the reader profile covers: \
+what anyone with that background has been taught, whether or not the profile names it (a \
+profile of undergraduate computer science covers logarithms and proof by induction without \
+naming them). Anything outside that, the reader does not know: treat it as unknown to them, \
 however elementary it seems to you. You are simulating that reader's lack of knowledge, so use \
 your own knowledge only to recognise what the reader is missing.
 

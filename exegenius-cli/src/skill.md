@@ -15,7 +15,9 @@ and writing it asks for, task by task, until it reports done.
 2. The tasks in a batch are independent of each other. Hand each one to its own subagent,
    all in parallel (one Agent tool call per task, all in a single message), using the
    prompt `exegenius next` prints for it. Each subagent writes its answer file and runs
-   `exegenius submit <id>` until the answer is accepted.
+   `exegenius submit <id>` until the answer is accepted. Claude Code runs at most 20
+   subagents at once by default: for a larger batch, start 20 and start another each time
+   one finishes.
 3. Audit tasks must each go to a fresh subagent that has seen nothing else: the auditor
    stands in for a reader who has not read the sources or the other pages. Do not do
    audits yourself.
@@ -38,6 +40,12 @@ and writing it asks for, task by task, until it reports done.
 
 ## Rules
 
+- Run the loop until `exegenius next` prints `done`. exegenius sets no budget of time, tasks
+  or tokens, and a batch of a hundred tasks is normal for a large wiki: do not stop to ask
+  whether to go on. (`budget` under `[simulation]` in `exegenius.toml` is the most pages a
+  simulated reader may open per goal, nothing else.) Stop early only if a command fails in
+  a way you cannot fix, and report anything that looks wrong, such as pages on concepts the
+  reader already knows, when you report the status at the end.
 - Only write answer files (`exegenius/tasks/*.answer.*`). Do not edit anything else under
   `exegenius/` or `docs/` by hand.
 - Without subagents, do the tasks yourself one at a time, and do each audit task using only

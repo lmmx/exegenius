@@ -71,10 +71,14 @@ neither.
 - `target` is the id of the concept for the target result.";
 
 pub const EXTEND_INSTRUCTIONS: &str = "\
-Extend a prerequisite graph of concepts built from source documents. An audit of the wiki \
-found terms that a specific reader cannot follow and that match no existing concept. For each \
-term, either point it at an existing concept that covers it, or add a new concept.
+Extend a prerequisite graph of concepts built from source documents. Audits of the wiki \
+reported terms that they judged a specific reader cannot follow and that match no existing \
+concept. For each term, either point it at an existing concept that covers it, or add a new \
+concept.
 
+- Auditors can misjudge what the reader profile covers. A term the profile covers, whether or \
+not it names it, is known to the reader: point it at a known concept, or add one with `known: \
+true`. Known concepts get no page.
 - Add a new concept only when no existing concept covers the term. Give each new concept an \
 id that is not already used.
 - New concepts may require existing concepts or each other; the graph must stay acyclic.

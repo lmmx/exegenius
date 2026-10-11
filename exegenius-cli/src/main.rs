@@ -13,6 +13,8 @@ use exegenius_core::task::{self, Kind, Next};
 
 const SKILL: &str = include_str!("skill.md");
 const SKILL_PATH: &str = ".claude/skills/exegenius/SKILL.md";
+/// Claude Code's default limit on subagents running at once; spawns past it are refused.
+const MAX_SUBAGENTS: usize = 20;
 
 /// Vercel project settings that build the zensical site from a GitHub repository.
 const VERCEL_JSON: &str = r#"{
@@ -254,11 +256,19 @@ fn next(project: &Project) -> anyhow::Result<()> {
                     root = project.root.display(),
                 );
             }
-            let parallel = if tasks.len() > 1 {
+            let parallel = if tasks.len() > MAX_SUBAGENTS {
+                format!(
+                    "The tasks are independent: give each prompt to its own subagent. Claude \
+                     Code runs at most {MAX_SUBAGENTS} subagents at once by default, so start \
+                     {MAX_SUBAGENTS} (one Agent tool call per task, in a single message) and \
+                     start another each time one finishes. "
+                )
+            } else if tasks.len() > 1 {
                 "The tasks are independent: give each prompt to its own subagent, all at once \
                  (in Claude Code: one Agent tool call per task, all in a single message). "
+                    .to_string()
             } else {
-                "Give the prompt to a subagent, or do the task yourself. "
+                "Give the prompt to a subagent, or do the task yourself. ".to_string()
             };
             let fresh = match tasks[0].kind {
                 Kind::Audit { .. } => {
