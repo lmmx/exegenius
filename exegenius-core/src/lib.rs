@@ -33,6 +33,7 @@ pub mod notation;
 pub mod outline;
 pub mod plan;
 pub mod project;
+pub mod relations;
 pub mod report;
 pub mod simulate;
 pub mod symbols;

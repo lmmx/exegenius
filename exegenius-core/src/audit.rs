@@ -156,7 +156,8 @@ Symbols: account for every symbol in the page's mathematics, each once, saying w
 reader learns what it denotes:
 - `here`: the page says what it denotes; quote the sentence that says it. A use in an \
 example (\"take $r = 4$\") or a range (\"a power of two $r$\") does not say what $r$ denotes \
-or counts.
+or counts. If the page uses the symbol before that sentence, submit records that the meaning \
+comes too late.
 - `page`: an earlier page binds it, as listed under \"Symbols bound on earlier pages\".
 - `concept`: the name of a known concept contains it and binds it, as listed under that \
 concept. A symbol in a known concept's name that is listed with no meaning is not known.
@@ -339,6 +340,26 @@ pub fn apply_audit(
     let known = TermIndex::new(plan.known_at(graph, i));
     let mut audit = apply_gaps(graph, page, &known, answer.gaps);
     for u in &answer.symbols {
+        if let Anchor::Here { quote } = &u.anchor
+            && symbols::quoted(&stripped, quote, &u.symbol) == symbols::Quoted::Late
+        {
+            // The page says what the symbol denotes, but only after using it.
+            graph.queue_rewrite(
+                page,
+                Some(format!(
+                    "Say what ${}$ denotes where it is first used: the page uses it before \
+                     saying so in \"{quote}\"",
+                    u.symbol
+                )),
+            );
+            audit.gaps.push(Outcome {
+                term: u.symbol.clone(),
+                kind: GapKind::Symbol,
+                quote: quote.clone(),
+                note: "used before the page says what it denotes".into(),
+                action: "rewrite: say what the symbol denotes at its first use".into(),
+            });
+        }
         if let Anchor::Unbound { quote, note } = &u.anchor {
             graph.queue_rewrite(
                 page,
@@ -709,5 +730,29 @@ mod tests {
         let audit = apply_audit(&mut g, &plan, 2, body, answer(good)).unwrap();
         assert!(audit.gaps.is_empty() && audit.symbols.len() == 4);
         assert!(!g.rewrite.contains_key("synthetic"));
+    }
+
+    #[test]
+    fn a_meaning_given_after_first_use_is_a_gap() {
+        let mut g = graph("page", vec![concept("page", &[], false)]);
+        let plan = Plan {
+            order: vec!["page".into()],
+        };
+        let body = "Take $r = 4$. Here $r$ is the record length.";
+        let answer = AuditAnswer {
+            symbols: vec![uses(
+                "r",
+                Anchor::Here {
+                    quote: "Here $r$ is the record length.".into(),
+                },
+            )],
+            gaps: vec![],
+        };
+        let audit = apply_audit(&mut g, &plan, 0, body, answer).unwrap();
+        assert_eq!(
+            audit.gaps[0].action,
+            "rewrite: say what the symbol denotes at its first use"
+        );
+        assert!(g.rewrite["page"][0].contains("uses it before saying so"));
     }
 }

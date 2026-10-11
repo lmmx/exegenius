@@ -1,7 +1,8 @@
 //! Write tasks: one page body per needed concept, in reading order.
 //!
 //! The agent writes the body as markdown, and lists in a JSON file the symbols the page
-//! binds (see [`crate::symbols`]). The two are separate files because LaTeX inside JSON
+//! binds (see [`crate::symbols`]) and what the page uses each prerequisite page for (see
+//! [`crate::relations`]). The two are separate files because LaTeX inside JSON
 //! strings is easily mangled without an error: `\frac` in a JSON string is a form feed
 //! followed by "rac". Code rejects links to anything that is not a page and bindings it
 //! cannot find on the page, and later adds the title, prerequisites, backlinks and sources
@@ -18,6 +19,7 @@ use crate::error::{Error, Result};
 use crate::graph::{Concept, Graph};
 use crate::plan::Plan;
 use crate::project::Project;
+use crate::relations::{self, Edge};
 use crate::symbols::{self, PageBinding};
 
 /// The structured part of a write answer; the body is the markdown answer file.
@@ -28,6 +30,9 @@ pub struct WriteAnswer {
     /// Leave out symbols listed as already bound, unless the page gives them a new meaning.
     /// Empty if the page introduces no symbols.
     pub symbols: Vec<PageBinding>,
+    /// One relation for each prerequisite page: what this page uses it for. Empty if the
+    /// page has no prerequisite pages.
+    pub relations: Vec<Edge>,
 }
 
 pub const WRITE_INSTRUCTIONS: &str = "\
@@ -49,6 +54,16 @@ letter, or say on the page that the letter changes meaning here.
 - Link each prerequisite page the first time you rely on it, using the exact markdown link \
 given. You may also link the other pages listed. Submit rejects links to anything else in \
 the wiki; external URLs are allowed.
+- For each prerequisite page, say in a sentence what this page uses it for, and give that \
+sentence as a relation: the prerequisite's id, a predicate, and the sentence copied exactly. \
+The page shows the relation as \"<this page's concept> *<predicate>* <prerequisite>\", so pick a \
+predicate that makes that a true sentence, with this page's concept as subject and the \
+prerequisite as object: \"is reduced to\", \"computes its transforms by\", \"is based on\", \
+\"follows from\", \"bounds the cost of\". If the sentence says \"the transforms are reduced by \
+X\", the predicate is \"reduces its transforms by\", not \"are reduced to\". Build the predicate \
+from the sentence's own words (other forms of a word count: \"reduces\" for \"reduced\"); the \
+sentence must link or name the prerequisite. Pick the predicate that says what the \
+prerequisite does for this page: \"uses\" says little.
 - Stay accurate to the sources: read the parts you need (search for the evidence quotes). \
 State only what the sources support or what is standard background; do not invent results, \
 constants or attributions.
@@ -151,11 +166,20 @@ pub fn write_task(project: &Project, graph: &Graph, plan: &Plan, i: usize) -> Re
         .iter()
         .filter_map(|r| graph.get(r))
         .filter(|p| plan.contains(&p.id))
-        .map(|p| format!("- {}: {}", link(p), p.gloss))
+        .map(|p| {
+            format!(
+                "- {}: {}\n  Shown as: {} *<predicate>* {}",
+                link(p),
+                p.gloss,
+                c.name,
+                p.name
+            )
+        })
         .collect();
     if !linked.is_empty() {
         task.push_str(&format!(
-            "\n## Prerequisite pages (link each on first use, exactly as written)\n\n{}\n",
+            "\n## Prerequisite pages (link each on first use, exactly as written, and give a \
+             relation for each)\n\n{}\n",
             linked.join("\n")
         ));
     }
@@ -232,8 +256,31 @@ pub fn apply_write(
             "answer rejected: the page body is empty".into(),
         ));
     }
-    let mut errors = crate::cite::check(body, &project.sources);
+    let c = graph.get(page).expect("planned pages are concepts");
+    let prerequisites: Vec<&Concept> = c
+        .requires
+        .iter()
+        .filter(|r| plan.contains(r))
+        .filter_map(|r| graph.get(r))
+        .collect();
+    let pages: HashSet<String> = plan.order.iter().cloned().collect();
+    let (_, removed, linked) = fix_links(body, &pages);
+    let mut errors: Vec<String> = removed
+        .iter()
+        .map(|d| {
+            format!(
+                "link to \"{d}\" is not a page of this wiki; link only the pages listed in \
+                 the task, or use plain text"
+            )
+        })
+        .collect();
+    errors.extend(crate::cite::check(body, &project.sources));
     errors.extend(symbols::check_page(body, &mut fields.symbols));
+    errors.extend(relations::check(
+        body,
+        &prerequisites,
+        &mut fields.relations,
+    ));
     if !errors.is_empty() {
         let list = errors
             .iter()
@@ -242,33 +289,27 @@ pub fn apply_write(
             .join("\n");
         return Err(Error::Invalid(format!("answer rejected:\n{list}")));
     }
-    let pages: HashSet<String> = plan.order.iter().cloned().collect();
-    let (_, removed, linked) = fix_links(body, &pages);
-    if !removed.is_empty() {
-        let list = removed
-            .iter()
-            .map(|d| format!("- link to \"{d}\" is not a page of this wiki"))
-            .collect::<Vec<_>>()
-            .join("\n");
-        return Err(Error::Invalid(format!(
-            "answer rejected:\n{list}\nLink only the pages listed in the task, or use plain text."
-        )));
-    }
-    let mut warnings = Vec::new();
-    let c = graph.get(page).expect("planned pages are concepts");
-    for r in &c.requires {
-        if pages.contains(r) && !linked.contains(r) {
-            warnings.push(format!(
-                "`{page}`: prerequisite `{r}` is not linked in the body"
-            ));
-        }
-    }
+    let warnings: Vec<String> = prerequisites
+        .iter()
+        .filter(|p| !linked.contains(&p.id))
+        .map(|p| {
+            format!(
+                "`{page}`: prerequisite `{}` is not linked in the body",
+                p.id
+            )
+        })
+        .collect();
     project.save_page_body(page, &format!("{}\n", body.trim()))?;
     graph.rewrite.remove(page);
     if fields.symbols.is_empty() {
         graph.bindings.remove(page);
     } else {
         graph.bindings.insert(page.to_string(), fields.symbols);
+    }
+    if fields.relations.is_empty() {
+        graph.relations.remove(page);
+    } else {
+        graph.relations.insert(page.to_string(), fields.relations);
     }
     Ok(warnings)
 }

@@ -76,18 +76,52 @@ const CLEAN: &str = "{\"symbols\": [], \"gaps\": []}";
 
 fn answer(project: &Project, task: &Task, text: &str) {
     std::fs::write(project.root.join(task.answer()), text).unwrap();
-    // Write tasks also take the symbols the page binds: none, unless the test gave some.
+    // Write tasks also take the symbols the page binds and its relations: none, unless the
+    // test gave some.
     if let Some(fields) = task.fields() {
         let path = project.root.join(fields);
         if !path.exists() {
-            std::fs::write(path, "{\"symbols\": []}").unwrap();
+            std::fs::write(path, "{\"symbols\": [], \"relations\": []}").unwrap();
         }
     }
 }
 
-fn bindings(project: &Project, task: &Task, symbols: serde_json::Value) {
+fn fields(
+    project: &Project,
+    task: &Task,
+    symbols: serde_json::Value,
+    relations: serde_json::Value,
+) {
     let path = project.root.join(task.fields().unwrap());
-    std::fs::write(path, json!({ "symbols": symbols }).to_string()).unwrap();
+    let fields = json!({ "symbols": symbols, "relations": relations });
+    std::fs::write(path, fields.to_string()).unwrap();
+}
+
+fn bindings(project: &Project, task: &Task, symbols: serde_json::Value) {
+    fields(project, task, symbols, json!([]));
+}
+
+fn relation(prerequisite: &str, predicate: &str, quote: &str) -> serde_json::Value {
+    json!({"prerequisite": prerequisite, "predicate": predicate, "quote": quote})
+}
+
+/// The sentence a chirp page gives for its two first prerequisites, and their relations.
+const CHIRP_USES: &str =
+    "It is computed with the [DFT](dft.md) and reduced to [convolution](convolution.md)";
+
+fn chirp_relations() -> Vec<serde_json::Value> {
+    vec![
+        relation(
+            "dft",
+            "is computed with",
+            "It is computed with the [DFT](dft.md)",
+        ),
+        relation(
+            "convolution",
+            "is reduced to",
+            "reduced to [convolution](convolution.md)",
+        ),
+    ]
 }
 
 fn binding(symbol: &str, name: &str, quote: &str) -> serde_json::Value {
@@ -135,7 +169,8 @@ fn task_loop_end_to_end() {
     assert_eq!(pages, vec!["dft", "convolution", "chirp-identity"]);
     for t in &batch {
         let body = if page(t) == "chirp-identity" {
-            "Combine the [DFT](dft.md) and [convolution](convolution.md) with dyadic scaling."
+            "It is computed with the [DFT](dft.md) and reduced to [convolution](convolution.md), \
+             with dyadic scaling."
         } else if page(t) == "convolution" {
             "Convolution is what the discrete Fourier transform makes pointwise, as in $x^2$."
         } else {
@@ -145,6 +180,8 @@ fn task_loop_end_to_end() {
             answer(&project, t, "See [elsewhere](bogus.md).");
             let err = submit(&project, &t.id).unwrap_err().to_string();
             assert!(err.contains("bogus.md"), "{err}");
+            assert!(err.contains("missing: `dft`, `convolution`"), "{err}");
+            fields(&project, t, json!([]), json!(chirp_relations()));
         }
         if page(t) == "dft" {
             std::fs::write(project.root.join(t.answer()), body).unwrap();
@@ -268,12 +305,23 @@ fn task_loop_end_to_end() {
             );
             let err = submit(&project, &t.id).unwrap_err().to_string();
             assert!(err.contains("\"made up\" is not in that source"), "{err}");
-            let k = "Here $k$ is the frequency index.";
-            bindings(&project, t, json!([binding("k", "frequency index", k)]));
-            "Combine the [DFT](dft.md) and [convolution](convolution.md); values of $x$ are \
-             [dyadic](dyadic-rational.md), so $nk$ is exact \
-             <cite data-source=\"notes\">exact on dyadic real and imaginary parts</cite>. \
-             Here $k$ is the frequency index."
+            let k = "Here $k$ is the frequency index";
+            let mut relations = chirp_relations();
+            relations.push(relation(
+                "dyadic-rational",
+                "values are kept",
+                "values of $x$ are kept [dyadic]",
+            ));
+            fields(
+                &project,
+                t,
+                json!([binding("k", "frequency index", k)]),
+                json!(relations),
+            );
+            "It is computed with the [DFT](dft.md) and reduced to [convolution](convolution.md); \
+             values of $x$ are kept [dyadic](dyadic-rational.md). Here $k$ is the frequency \
+             index. So $nk$ is exact \
+             <cite data-source=\"notes\">exact on dyadic real and imaginary parts</cite>."
         } else {
             "A number of the form $m/2^k$."
         };
@@ -295,7 +343,7 @@ fn task_loop_end_to_end() {
     let chirp_audit = |x_page: &str| {
         json!({"symbols": [
             {"symbol": "x", "anchor": {"kind": "page", "page": x_page}},
-            {"symbol": "k", "anchor": {"kind": "here", "quote": "Here $k$ is the frequency index."}},
+            {"symbol": "k", "anchor": {"kind": "here", "quote": "Here $k$ is the frequency index"}},
             {"symbol": "n", "anchor": {"kind": "background", "note": "a count"}},
         ], "gaps": []})
         .to_string()
@@ -399,22 +447,29 @@ fn task_loop_end_to_end() {
         ),
         "{file}"
     );
-    bindings(
+    let mut relations = chirp_relations();
+    relations.push(relation(
+        "dyadic-rational",
+        "values are kept",
+        "values of $x$ are kept [dyadic]",
+    ));
+    fields(
         &project,
         &batch[0],
         json!([binding(
             "j",
             "frequency index",
-            "Here $j$ is the frequency index."
+            "Here $j$ is the frequency index"
         )]),
+        json!(relations),
     );
     answer(
         &project,
         &batch[0],
-        "Combine the [DFT](dft.md) and [convolution](convolution.md); values of $x$ are \
-         [dyadic](dyadic-rational.md), so $nj$ is exact \
-         <cite data-source=\"notes\">exact on dyadic real and imaginary parts</cite>. \
-         Here $j$ is the frequency index.",
+        "It is computed with the [DFT](dft.md) and reduced to [convolution](convolution.md); \
+         values of $x$ are kept [dyadic](dyadic-rational.md). Here $j$ is the frequency \
+         index. So $nj$ is exact \
+         <cite data-source=\"notes\">exact on dyadic real and imaginary parts</cite>.",
     );
     submit(&project, &batch[0].id).unwrap();
 
@@ -444,7 +499,12 @@ fn task_loop_end_to_end() {
     assert!(project.root.join("docs/stylesheets/exegenius.css").exists());
     let dyadic = "(glossary.md#dyadic-rational \"What Dyadic rational is.\")";
     assert!(
-        chirp.contains(&format!("[Dyadic rational]{dyadic}")),
+        chirp.contains(
+            "    Chirp identity *is computed with* [Discrete Fourier transform](dft.md \"It is \
+             computed with the DFT\"), *is reduced to* [Convolution](convolution.md \"reduced \
+             to convolution\") and *values are kept* [Dyadic rational](glossary.md#dyadic-rational \
+             \"values of $x$ are kept dyadic\")."
+        ),
         "{chirp}"
     );
     assert!(chirp.contains(&format!("[dyadic]{dyadic}")));
@@ -506,7 +566,12 @@ fn last_round_fixes_are_written_then_built() {
     answer(&project, &batch[0], &extract_answer("a chirp identity"));
     submit(&project, &batch[0].id).unwrap();
     for t in tasks(next(&project).unwrap()) {
-        answer(&project, &t, "Some explanation.");
+        if page(&t) == "chirp-identity" {
+            fields(&project, &t, json!([]), json!(chirp_relations()));
+            answer(&project, &t, &format!("Some explanation. {CHIRP_USES}."));
+        } else {
+            answer(&project, &t, "Some explanation.");
+        }
         submit(&project, &t.id).unwrap();
     }
     for t in tasks(next(&project).unwrap()) {
@@ -525,7 +590,16 @@ fn last_round_fixes_are_written_then_built() {
             .all(|t| matches!(t.kind, Kind::Write { .. }))
     );
     for t in &rewrites {
-        answer(&project, t, "A clearer explanation.");
+        if page(t) == "chirp-identity" {
+            fields(&project, t, json!([]), json!(chirp_relations()));
+            answer(
+                &project,
+                t,
+                &format!("A clearer explanation. {CHIRP_USES}."),
+            );
+        } else {
+            answer(&project, t, "A clearer explanation.");
+        }
         submit(&project, &t.id).unwrap();
     }
     let last = tasks(next(&project).unwrap());
@@ -554,8 +628,26 @@ fn simulated_readers_end_to_end() {
     answer(&project, &batch[0], &extract_answer("a chirp identity"));
     submit(&project, &batch[0].id).unwrap();
     for t in tasks(next(&project).unwrap()) {
+        if page(&t) == "chirp-identity" {
+            let relations = json!([
+                relation(
+                    "dft",
+                    "splits using",
+                    "The chirp identity splits $nk$ using the [DFT]"
+                ),
+                relation(
+                    "convolution",
+                    "is reduced to",
+                    "It is reduced to [convolution]"
+                ),
+            ]);
+            fields(&project, &t, json!([]), relations);
+        }
         let body = match page(&t) {
-            "chirp-identity" => "The chirp identity splits $nk$ using the [DFT](dft.md).",
+            "chirp-identity" => {
+                "The chirp identity splits $nk$ using the [DFT](dft.md). It is reduced to \
+                 [convolution](convolution.md)."
+            }
             "dft" => "The discrete Fourier transform evaluates at roots of unity.",
             _ => "Convolution adds products along diagonals.",
         };
@@ -658,7 +750,7 @@ fn simulated_readers_end_to_end() {
         "{warnings:?}"
     );
     let deep = read_page(&project, &batch[1].id, &chirp).unwrap();
-    assert!(deep.contains("Builds on"));
+    assert!(deep.contains("*splits using* ["), "{deep}");
     let gave_up = json!({"outcome": "gave_up", "answer": "", "citations": [], "stuck": [],
                          "reason": "never found what nk is"});
     answer(&project, &batch[1], &gave_up.to_string());
@@ -701,11 +793,16 @@ fn simulated_readers_end_to_end() {
     assert!(file.contains("gave up on this page: never found what nk is"));
     assert!(file.contains("could not work out: It is about roots of unity"));
     for t in &batch {
-        answer(
-            &project,
-            t,
-            "A clearer page, with the [DFT](dft.md) where needed.",
-        );
+        if page(t) == "chirp-identity" {
+            fields(&project, t, json!([]), json!(chirp_relations()));
+            answer(&project, t, &format!("A clearer page. {CHIRP_USES}."));
+        } else {
+            answer(
+                &project,
+                t,
+                "A clearer page, with the [DFT](dft.md) where needed.",
+            );
+        }
         submit(&project, &t.id).unwrap();
     }
 

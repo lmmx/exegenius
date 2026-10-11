@@ -230,7 +230,8 @@ fn render(project: &Project, task: &Task, instructions: &str, input: &str) -> St
         Kind::Grade { .. } => json_format::<GradeAnswer>(),
         Kind::Write { .. } => format!(
             "The answer is two files: the page body as markdown (not JSON), and a JSON object \
-             with the symbols the page binds. In JSON strings, write each backslash of LaTeX \
+             with the symbols the page binds and its relations to its prerequisite pages. In \
+             JSON strings, write each backslash of LaTeX \
              twice (`\"\\\\kappa\"`). The JSON follows this schema:\n\n```json\n{}\n```",
             serde_json::to_string_pretty(&schema_of::<WriteAnswer>()).unwrap_or_default()
         ),

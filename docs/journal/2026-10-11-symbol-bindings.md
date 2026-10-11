@@ -45,6 +45,12 @@ Completeness, whether the auditor listed every symbol, cannot be checked without
 
 Each `unbound` symbol becomes a rewrite note asking the writer to say what it denotes, and for a size or count, what it counts. It is recorded as a gap of kind `symbol`, so it counts towards the round's gaps as before. Auditors can no longer report symbols as gaps: the schema leaves the `symbol` kind out, and submit rejects it.
 
+### A meaning given at first use
+
+A review of the hub entry made a point the build had not covered: what matters is whether the reader can tell what a symbol means where the reasoning first depends on it, not whether a definition exists somewhere on the page. Wolska & Grigore found that symbols in arXiv papers are sometimes declared only after their first use ("symbols are used before they have been introduced").
+
+So the quote check also reports when the page uses the symbol, in mathematics, before the quoted sentence (`Quoted::Late`, exegenius-core/src/symbols.rs). A writer's binding that comes after a first use is rejected, with a request to quote the sentence where the symbol is first used. An auditor's `here` anchor that comes after a first use is accepted, since it reports the page faithfully, and becomes a rewrite note and a `symbol` gap.
+
 ### Letters with two meanings
 
 The notation task no longer lists symbols. In its place, an overloads task judges candidates that code finds: a page binds a letter that a page or concept name it builds on also binds, with a different display name and meaning (exegenius-core/src/notation.rs:163). The agent says, for each candidate, whether the two denote the same thing. A letter with two meanings becomes a rewrite note on the later page. Verdicts are kept in `exegenius/overloads.json`, so each candidate is judged once. The task is handed out with the outline, and only when there are candidates with no verdict.
@@ -101,6 +107,7 @@ The check shows that the accounting catches the symbols the research entry found
 - Write tasks list known concepts with their name bindings, the page's own name bindings, and the page bindings in force (exegenius-core/src/write.rs:72, exegenius-core/src/write.rs:101)
 - Audit tasks list the page bindings in force whose symbol occurs in the audited page's mathematics, and the heading uses the title (exegenius-core/src/audit.rs:178)
 - `AuditAnswer` requires a `symbols` list of anchors (`here`, `page`, `concept`, `background`, `unbound`); `check_symbols` rejects symbols not in the page's mathematics, duplicates, quotes not on the page or without the symbol, `page` and `concept` anchors that bind nothing, and answers that leave out a symbol the writer bound (exegenius-core/src/audit.rs:224)
+- `symbols::quoted` returns `Late` when the page's mathematics uses the symbol before the quote; `check_page` rejects such a writer binding, and `apply_audit` turns such a `here` anchor into a rewrite note and a gap of kind `symbol` (exegenius-core/src/symbols.rs, exegenius-core/src/audit.rs)
 - `apply_audit` turns each `unbound` symbol into a rewrite note and a gap of kind `symbol`, and records the accepted anchors in `exegenius/audit.json` (exegenius-core/src/audit.rs:302)
 - `notation::candidates` lists page bindings that rebind a letter bound by the page's own name or by a page or name it builds on, skipping pairs with the same display name or meaning (exegenius-core/src/notation.rs:163)
 - The overloads task is issued with the outline when candidates lack a verdict; `apply_overloads` requires one verdict per candidate, queues a rewrite note for each letter with two meanings, and appends the verdicts to `exegenius/overloads.json` (exegenius-core/src/task.rs, exegenius-core/src/notation.rs:241)

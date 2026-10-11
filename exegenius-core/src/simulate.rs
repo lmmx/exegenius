@@ -497,12 +497,15 @@ impl<'a> Lens<'a> {
         let id = self.ids.get(handle)?;
         let (c, body) = self.pages.iter().find(|(c, _)| &c.id == id)?;
         let mut out = format!("# {}\n\n", c.name);
-        let before: Vec<String> = c
+        let before: Vec<(String, Option<&str>)> = c
             .requires
             .iter()
             .filter_map(|r| self.graph.get(r))
             .filter(|p| self.handles.contains_key(&p.id))
-            .map(|p| self.link(p))
+            .map(|p| {
+                let relation = crate::relations::find(self.graph, &c.id, &p.id);
+                (self.link(p), relation.map(|e| e.predicate.as_str()))
+            })
             .collect();
         let known: Vec<&str> = c
             .requires
@@ -512,7 +515,10 @@ impl<'a> Lens<'a> {
             .map(|p| p.name.as_str())
             .collect();
         if !before.is_empty() {
-            out.push_str(&format!("Builds on: {}.\n", before.join(", ")));
+            out.push_str(&format!(
+                "{}\n",
+                crate::relations::sentence(&c.name, &before)
+            ));
         }
         if !known.is_empty() {
             out.push_str(&format!("Assumes: {}.\n", known.join(", ")));

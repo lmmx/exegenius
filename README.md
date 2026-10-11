@@ -72,7 +72,7 @@ sources or the other pages.
 | Task | The agent | exegenius checks and applies |
 |---|---|---|
 | extract | decomposes the sources into concepts with prerequisites and verbatim quotes; a name with mathematics in it also gets a title in LaTeX and a binding for each symbol (display name, meaning, direct or count) | slug ids, unique ids, known `requires`, a target, no cycles, every quote found verbatim in its source, every bound symbol in the title's mathematics |
-| write | writes one page body, in reading order, using only what the reader knows, terms it defines, and the prerequisite pages it links; lists the symbols the page binds, each with the sentence that says what it denotes | no links to anything that is not a page; each bound symbol in the page's mathematics, its quote on the page and containing it; adds title, prerequisites, used-by and sources from the graph |
+| write | writes one page body, in reading order, using only what the reader knows, terms it defines, and the prerequisite pages it links; lists the symbols the page binds, each with the sentence that says what it denotes, and for each prerequisite page a relation: a predicate ("is reduced to") and the sentence that states it | no links to anything that is not a page; each bound symbol in the page's mathematics, its quote on the page, covering the symbol and not after its first use; a relation for every prerequisite page, its sentence on the page, linking or naming the prerequisite and containing the predicate's words; adds title, prerequisites, used-by and sources from the graph |
 | audit | told exactly what the reader knows at that page, lists every term or step they cannot follow, and accounts for every symbol in the page's mathematics: bound on the page, on an earlier page, in a known concept's name, by the reader's background, or unbound | every quote is on the page and holds its symbol; every named page or concept binds the symbol; every symbol the writer bound is accounted for; drops terms the reader knows; turns the rest into prerequisite edges, candidate concepts or rewrite notes |
 | extend | resolves the candidate concepts audits found into existing or new concepts | same checks as extract; adds the edges and queues the pages for rewriting |
 
@@ -134,10 +134,13 @@ knows = "High-school algebra"
   contents part by part, and a clickable map of how the parts depend on each other.
 - **Parts:** each part is a section in the navigation with its own landing page: the
   intro, its pages, and a map of the prerequisite edges among them.
-- **Pages:** a "before this page" note linking the prerequisites (and naming what is
-  assumed known), a folded note of the symbols the page takes from earlier pages and
-  concept names (each with its display name, meaning and where it is bound), the body, a
-  clickable diagram of the page's prerequisites and the pages that use it, and the source
+- **Pages:** a "before this page" note linking the prerequisites under the predicates
+  their relations give ("Radix-digit convolution *is reduced to* Cyclic convolution", with
+  the sentence that says so as the link's tooltip), and naming what is assumed known; a
+  folded note of the symbols the page takes from earlier pages and
+  concept names (each with its display name, meaning and where it is bound); the body; a
+  clickable diagram of the page's prerequisites and the pages that use it, each listed
+  under its predicate; and the source
   quotes the page rests on, folded away. A concept whose name has mathematics in it has
   that mathematics rendered in its page heading.
 - **Glossary:** minor pages the outline folds away become entries on one glossary page,

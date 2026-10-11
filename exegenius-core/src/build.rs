@@ -1,7 +1,8 @@
 //! Write the docs tree and `zensical.toml`.
 //!
 //! Pages are plain markdown with no frontmatter. Everything around the body comes from the
-//! graph and the outline: the title, a "before this page" note linking the prerequisites, a
+//! graph and the outline: the title, a "before this page" note linking the prerequisites
+//! under the predicates their relations give (see [`crate::relations`]), a
 //! diagram of the page's connections, the pages that use it, and the source quotes. Links
 //! to pages carry the target's gloss as their title, which the theme shows as a tooltip,
 //! and the first unlinked mention of an earlier page is linked (see [`crate::autolink`]).
@@ -37,6 +38,7 @@ use crate::notation::{self, Entry};
 use crate::outline::{Outline, Part};
 use crate::plan::Plan;
 use crate::project::{Project, find_source};
+use crate::relations;
 use crate::symbols::Origin;
 use crate::text::slug;
 use crate::write::{fix_links, link_target};
@@ -225,6 +227,16 @@ impl Site<'_> {
         )
     }
 
+    /// A link to a page with a quote, as plain text, for its title.
+    fn quoted(&self, c: &Concept, quote: &str) -> String {
+        format!(
+            "[{}]({} \"{}\")",
+            c.name,
+            self.href(&c.id),
+            attribute(&relations::plain(quote))
+        )
+    }
+
     /// A link to a page if it is built, else the concept's name.
     fn mention(&self, c: &Concept, prefix: &str) -> String {
         if self.built.contains(c.id.as_str()) {
@@ -358,7 +370,7 @@ fn edges_among(nodes: &[&Concept]) -> Vec<(usize, usize)> {
     edges
 }
 
-fn list(items: &[String]) -> String {
+pub(crate) fn list(items: &[String]) -> String {
     match items {
         [] => String::new(),
         [one] => one.clone(),
@@ -414,8 +426,16 @@ fn render_page(site: &Site, c: &Concept, body: &str) -> String {
     if !pages.is_empty() || !known.is_empty() {
         let mut note = Vec::new();
         if !pages.is_empty() {
-            let links: Vec<String> = pages.iter().map(|p| site.titled(p, "")).collect();
-            note.push(format!("This page builds on {}.", list(&links)));
+            // A prerequisite with a relation is linked under its predicate, with the
+            // sentence that states the relation as the link's tooltip.
+            let links: Vec<(String, Option<&str>)> = pages
+                .iter()
+                .map(|p| match relations::find(site.graph, &c.id, &p.id) {
+                    Some(e) => (site.quoted(p, &e.quote), Some(e.predicate.as_str())),
+                    None => (site.titled(p, ""), None),
+                })
+                .collect();
+            note.push(relations::sentence(&c.name, &links));
         }
         if !known.is_empty() {
             let names: Vec<String> = known.iter().map(|k| k.name.clone()).collect();
@@ -446,7 +466,15 @@ fn render_page(site: &Site, c: &Concept, body: &str) -> String {
         if !used_by.is_empty() {
             out.push_str("\nUsed by:\n\n");
             for d in &used_by {
-                out.push_str(&format!("- {} — {}\n", site.titled(d, ""), d.gloss));
+                match relations::find(site.graph, &d.id, &c.id) {
+                    Some(e) => out.push_str(&format!(
+                        "- {} *{}* {}\n",
+                        site.quoted(d, &e.quote),
+                        e.predicate,
+                        c.name
+                    )),
+                    None => out.push_str(&format!("- {} — {}\n", site.titled(d, ""), d.gloss)),
+                }
             }
         }
     }

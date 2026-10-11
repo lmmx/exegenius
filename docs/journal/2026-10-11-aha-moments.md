@@ -78,6 +78,20 @@ Chi et al. (1994) found that students prompted to explain each line to themselve
 
 The simulated readers are not learners, so the finding does not transfer directly. But it supports asking readers to explain a page's key idea (I-95) rather than to rate it.
 
+### The reconnection is not always the key step
+
+A review of the hub entry (ChatGPT, 2026-10-11) drew a distinction this entry needs. Three sentences can play different parts in one chain:
+- **the key step**: the sentence that does the decisive work, such as the claim that Gaussian dyadic values need no rounding;
+- **the payoff**: the sentence that says why the chain matters to the goal, such as the tape model needing exact intermediate values;
+- **the reconnection**: the sentence that makes an earlier idea intelligible, by showing how it bears on the goal.
+
+They may coincide, as in the demo's dyadic sentence, but need not. A detector that finds the most important claim finds key steps, not reconnections. The four methods below differ on this:
+- the structural method finds sentences that link distant plan nodes, which suits reconnections;
+- the salience method finds the explanation of a striking feature, which suits key steps;
+- attribution and agreement find whatever readers use or name.
+
+So candidates carry the method that found them, and the report keeps the three apart rather than merging them into one list.
+
 ## Four ways to find candidates
 
 ### 1. Structural: sentences that reach far up the plan
@@ -119,6 +133,15 @@ After answering, each reader names the key idea of the pages it relied on most, 
 The leave-one-out page ablation (I-51) hides a page from the reader's lens and reruns a goal. Credit is the drop in coverage.
 
 The same machinery can hide a single sentence instead: the lens serves the page with the candidate sentence removed. If coverage of the key points attributed to that sentence drops, the sentence carries them. If coverage holds, readers found the content elsewhere, and the sentence was merely convenient to quote.
+
+**Three outcomes, not one.** The same review distinguished what a deletion can do:
+1. **Deletion hurts.** The reader covers fewer key points.
+2. **Deletion breaks a connection.** The reader still states the individual facts but can no longer say how they fit together.
+3. **Deletion removes a payoff.** The reader follows the chain but no longer says why it matters to the goal.
+
+The second outcome is the closest test of the 🏹 idea: it shows a sentence doing relational work rather than carrying a fact. Telling the outcomes apart needs key points tagged by role, which 2026-10-11-comprehension-goals proposes (I-92): `fact` key points for the first outcome, `relation` key points for the second, `goal` key points for the third.
+
+**A matched control.** Removing a sentence can leave the text ungrammatical, or remove a fact that any answer trivially needs. So each candidate is compared with a control sentence from the same page, of similar length and carrying a fact, ablated in the same way. A candidate counts as pivotal only if its deletion costs more relation or goal key points than the control's.
 
 **Cost.** One reader run per candidate, per goal, per trial. Only the top candidates from methods 1–4 are ablated, a handful per wiki.
 

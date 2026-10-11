@@ -229,5 +229,17 @@ pub fn report(config: &Config, graph: &Graph, simulation: &Simulation) -> String
             ));
         }
     }
+    let predicates = crate::relations::predicates(graph);
+    if !predicates.is_empty() {
+        out.push_str(
+            "\n## Relations between pages\n\nThe predicates writers gave for what a page uses \
+             each prerequisite for, most frequent first. Vague predicates (\"uses\", \"relates \
+             to\") at the top mark pages that rely on a prerequisite without saying how.\n\n\
+             | Predicate | Edges |\n|---|---|\n",
+        );
+        for (predicate, n) in predicates {
+            out.push_str(&format!("| {predicate} | {n} |\n"));
+        }
+    }
     out
 }

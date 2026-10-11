@@ -332,6 +332,14 @@ fn status(project: &Project) -> anyhow::Result<()> {
         ),
         None => println!("outline: not yet (handed out once the pages are final)"),
     }
+    let edges: usize = plan
+        .order
+        .iter()
+        .filter_map(|id| graph.get(id))
+        .map(|c| c.requires.iter().filter(|r| plan.contains(r)).count())
+        .sum();
+    let related: usize = graph.relations.values().map(Vec::len).sum();
+    println!("relations: {related} of {edges} prerequisite edges between pages");
     let bound: usize = graph.bindings.values().map(Vec::len).sum();
     let judged = exegenius_core::notation::load(project)?.judged;
     let unjudged = exegenius_core::notation::unjudged(project, &graph, &plan)?.len();

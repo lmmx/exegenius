@@ -1,5 +1,6 @@
 //! The concept graph: concepts, prerequisite edges, supporting quotes, the symbols each
-//! page binds, and the work the audit has queued (candidate concepts and page rewrites).
+//! page binds and what it uses each prerequisite for, and the work the audit has queued
+//! (candidate concepts and page rewrites).
 
 use std::collections::{BTreeMap, HashMap, HashSet};
 
@@ -8,6 +9,7 @@ use petgraph::graphmap::DiGraphMap;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
+use crate::relations::Edge;
 use crate::symbols::{Binding, PageBinding};
 use crate::text::key;
 
@@ -72,6 +74,9 @@ pub struct Graph {
     /// The symbols each page binds, as its writer stated them.
     #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     pub bindings: BTreeMap<String, Vec<PageBinding>>,
+    /// What each page uses its prerequisite pages for, as its writer stated it.
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub relations: BTreeMap<String, Vec<Edge>>,
 }
 
 impl Graph {

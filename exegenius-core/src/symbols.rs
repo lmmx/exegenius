@@ -119,6 +119,8 @@ pub enum Quoted {
     Missing,
     /// The quote is on the page, but the symbol is not in the mathematics it covers.
     WithoutSymbol,
+    /// The quote covers the symbol, but the page uses the symbol before the quote.
+    Late,
     Found,
 }
 
@@ -129,17 +131,23 @@ pub fn quoted(page: &str, quote: &str, symbol: &str) -> Quoted {
         return Quoted::Missing;
     };
     let wanted = tokens(symbol);
-    let found = math_spans(page).into_iter().any(|span| {
+    let has = |slice: &str| {
+        tokens(slice)
+            .windows(wanted.len().max(1))
+            .any(|w| w == wanted)
+    };
+    let spans = math_spans(page);
+    let found = spans.iter().any(|span| {
         let (start, end) = (span.start.max(range.start), span.end.min(range.end));
-        start < end
-            && tokens(&page[start..end])
-                .windows(wanted.len().max(1))
-                .any(|w| w == wanted)
+        start < end && has(&page[start..end])
     });
-    if found {
-        Quoted::Found
-    } else {
-        Quoted::WithoutSymbol
+    let earlier = spans
+        .iter()
+        .any(|span| span.end <= range.start && has(&page[span.clone()]));
+    match (found, earlier) {
+        (false, _) => Quoted::WithoutSymbol,
+        (true, true) => Quoted::Late,
+        (true, false) => Quoted::Found,
     }
 }
 
@@ -174,7 +182,7 @@ pub fn describe(symbol: &str, name: &str, meaning: &str) -> String {
 /// The error for a quote that should be on the page and contain the symbol, if it does not.
 pub fn quote_error(page: &str, quote: &str, symbol: &str) -> Option<String> {
     match quoted(page, quote, symbol) {
-        Quoted::Found => None,
+        Quoted::Found | Quoted::Late => None,
         Quoted::Missing => Some(format!(
             "`{symbol}`: quote not found on the page: \"{quote}\""
         )),
@@ -251,6 +259,12 @@ pub fn check_page(body: &str, bindings: &mut [PageBinding]) -> Vec<String> {
         if !occurs(&symbol, &page_math) {
             errors.push(format!(
                 "`{symbol}` does not occur in the page's mathematics; give it as written there"
+            ));
+        } else if quoted(&page, &b.quote, &symbol) == Quoted::Late {
+            errors.push(format!(
+                "`{symbol}` is used before \"{}\"; say what it denotes where it is first used, \
+                 and quote that sentence",
+                b.quote
             ));
         } else {
             errors.extend(quote_error(&page, &b.quote, &symbol));
@@ -383,7 +397,7 @@ mod tests {
 
     #[test]
     fn page_bindings_need_the_symbol_in_a_quote_on_the_page() {
-        let body = "Fix a power of two $r$. Records hold $r$ complex coefficients. \
+        let body = "Records hold $r$ complex coefficients. It is a power of two $r$. \
                     Take $r = 4$ <cite data-source=\"s\">x</cite>.";
         let mut ok = vec![binding("$r$", "Records hold $r$ complex coefficients.")];
         assert!(check_page(body, &mut ok).is_empty());
@@ -392,12 +406,14 @@ mod tests {
             binding("q", "Records hold"),
             binding("r", "Records hold"),
             binding("r", "not on the page"),
+            binding("r", "It is a power of two $r$."),
         ];
         let errors = check_page(body, &mut bad);
         assert!(errors[0].contains("`q` does not occur"), "{errors:?}");
         assert!(errors[1].contains("must cover the symbol"), "{errors:?}");
         assert!(errors[2].contains("quote not found"), "{errors:?}");
         assert!(errors[3].contains("bound twice"), "{errors:?}");
+        assert!(errors[4].contains("`r` is used before"), "{errors:?}");
     }
 
     #[test]
@@ -408,6 +424,12 @@ mod tests {
         assert_eq!(quoted(page, "c_j = a_k", "l"), Quoted::WithoutSymbol);
         assert_eq!(quoted(page, "undoes it", "s"), Quoted::WithoutSymbol);
         assert_eq!(quoted(page, "not here", "s"), Quoted::Missing);
+        assert_eq!(quoted(page, "c_j = a_k", "a_k"), Quoted::Found);
+        let late = "Take $r = 4$. Here $r$ is the record length.";
+        assert_eq!(
+            quoted(late, "Here $r$ is the record length.", "r"),
+            Quoted::Late
+        );
     }
 
     #[test]
