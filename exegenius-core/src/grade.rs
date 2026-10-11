@@ -11,7 +11,7 @@ use sha2::{Digest, Sha256};
 
 use crate::error::Result;
 use crate::graph::Graph;
-use crate::simulate::{Goal, HOME, Outcome, Simulation, rejected};
+use crate::simulate::{Goal, HOME, Level, Outcome, Simulation, rejected};
 
 pub const GRADE_INSTRUCTIONS: &str = "\
 Grade answers to a question against its key points. Each answer was written by a different \
@@ -20,7 +20,10 @@ reader; grade each one on its own.
 - For each answer, list the numbers of the key points it makes, correctly, in its own words \
 or the key point's. Credit a key point only if the answer states it or clearly implies it; a \
 vague gesture towards it does not count.
-- List any claims in an answer that are wrong, briefly.
+- List the numbers of the key points an answer contradicts: it states the opposite, or \
+something incompatible. A key point an answer neither makes nor contradicts is missing; it \
+needs no list.
+- List any other claims in an answer that are wrong, briefly.
 - An answer that says it cannot answer covers no key points.
 - Grade what is written, not what the writer may have meant.";
 
@@ -37,7 +40,9 @@ pub struct Grade {
     pub label: String,
     /// Numbers of the key points the answer makes.
     pub covered: Vec<usize>,
-    /// Wrong claims in the answer.
+    /// Numbers of the key points the answer contradicts.
+    pub contradicted: Vec<usize>,
+    /// Wrong claims in the answer that contradict no key point.
     pub wrong: Vec<String>,
 }
 
@@ -92,7 +97,7 @@ fn answer_text(simulation: &Simulation, task: &str) -> String {
 pub fn grade_task(simulation: &Simulation, goal: &Goal, tasks: &[String]) -> String {
     let mut out = format!("## Question\n\n{}\n\n## Key points\n\n", goal.question);
     for (i, point) in goal.key_points.iter().enumerate() {
-        out.push_str(&format!("{}. {point}\n", i + 1));
+        out.push_str(&format!("{}. {}\n", i + 1, point.point));
     }
     out.push_str("\n## Answers\n");
     for (i, task) in tasks.iter().enumerate() {
@@ -126,7 +131,7 @@ pub fn apply_grade(
         if !labels.contains(&g.label) {
             errors.push(format!("there is no answer {}", g.label));
         }
-        for &n in &g.covered {
+        for &n in g.covered.iter().chain(&g.contradicted) {
             if n == 0 || n > points {
                 errors.push(format!(
                     "answer {}: key point {n} does not exist (1 to {points})",
@@ -134,20 +139,32 @@ pub fn apply_grade(
                 ));
             }
         }
+        if let Some(n) = g.covered.iter().find(|n| g.contradicted.contains(n)) {
+            errors.push(format!(
+                "answer {}: key point {n} is both covered and contradicted",
+                g.label
+            ));
+        }
     }
     if !errors.is_empty() {
         return Err(rejected(errors));
     }
     for g in answer.grades {
         let task = &tasks[labels.iter().position(|l| *l == g.label).expect("checked")];
-        let mut covered: Vec<usize> = g.covered.iter().map(|n| n - 1).collect();
-        covered.sort();
-        covered.dedup();
+        let indices = |numbers: &[usize]| {
+            let mut indices: Vec<usize> = numbers.iter().map(|n| n - 1).collect();
+            indices.sort();
+            indices.dedup();
+            indices
+        };
+        let (covered, contradicted) = (indices(&g.covered), indices(&g.contradicted));
         if let Some(run) = simulation.runs.iter_mut().find(|r| &r.task == task) {
             run.covered = Some(covered);
+            run.contradicted = contradicted;
             run.wrong = g.wrong;
         } else if let Some(b) = simulation.baselines.iter_mut().find(|b| &b.task == task) {
             b.covered = Some(covered);
+            b.contradicted = contradicted;
             b.wrong = g.wrong;
         }
     }
@@ -155,7 +172,9 @@ pub fn apply_grade(
 }
 
 /// Queue rewrite notes from a finished round: every stuck point, every page a reader gave
-/// up on, and, for each goal, the key points no reader managed. Returns the pages queued.
+/// up on, and, for each goal, the key points no reader managed. Runs on held-out goals are
+/// left out, so held-out goals keep measuring what the wiki teaches rather than what it was
+/// repaired to answer. Returns the pages queued.
 pub fn repair(simulation: &Simulation, graph: &mut Graph, round: u32) -> Vec<String> {
     let mut pages = Vec::new();
     let mut queue = |graph: &mut Graph, page: &str, note: String| {
@@ -167,15 +186,25 @@ pub fn repair(simulation: &Simulation, graph: &mut Graph, round: u32) -> Vec<Str
         }
     };
     for run in simulation.round_runs(round) {
-        let question = &simulation.goals[run.goal].question;
-        for (page, quote, note) in &run.stuck {
+        let goal = &simulation.goals[run.goal];
+        if goal.held_out {
+            continue;
+        }
+        let question = &goal.question;
+        for s in &run.stuck {
+            let level = s.level.map_or(String::new(), |l| match l {
+                Level::Chain => " (the reader followed the steps but not why they lead where \
+                                 they do: say what this step is for)"
+                    .to_string(),
+                l => format!(" (stuck at the {} level)", l.name()),
+            });
             queue(
                 graph,
-                page,
+                &s.page,
                 format!(
                     "A simulated reader ({}) trying to answer \"{question}\" got stuck at \
-                     \"{quote}\": {note}",
-                    run.persona
+                     \"{}\": {}{level}",
+                    run.persona, s.quote, s.note
                 ),
             );
         }
@@ -194,6 +223,9 @@ pub fn repair(simulation: &Simulation, graph: &mut Graph, round: u32) -> Vec<Str
         }
     }
     for (i, goal) in simulation.goals.iter().enumerate() {
+        if goal.held_out {
+            continue;
+        }
         let runs: Vec<_> = simulation
             .round_runs(round)
             .filter(|r| r.goal == i)
@@ -210,7 +242,7 @@ pub fn repair(simulation: &Simulation, graph: &mut Graph, round: u32) -> Vec<Str
                     .iter()
                     .any(|r| r.covered.as_ref().is_some_and(|c| c.contains(k)))
             })
-            .map(|(_, p)| p.as_str())
+            .map(|(_, p)| p.point.as_str())
             .collect();
         if missed.is_empty() {
             continue;

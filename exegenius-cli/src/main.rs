@@ -350,16 +350,25 @@ fn status(project: &Project) -> anyhow::Result<()> {
     );
     let simulation = exegenius_core::simulate::load(project)?;
     if !simulation.goals.is_empty() {
-        println!("simulated readers: {} goals", simulation.goals.len());
+        let held_out = simulation.goals.iter().filter(|g| g.held_out).count();
+        println!(
+            "simulated readers: {} goals, {held_out} of them held out",
+            simulation.goals.len()
+        );
         let mut rounds: Vec<u32> = simulation.runs.iter().map(|r| r.round).collect();
         rounds.dedup();
         for round in rounds {
             let runs = simulation.round_runs(round).count();
-            let covered = exegenius_core::report::round_coverage(&simulation, round)
-                .map_or("ungraded".to_string(), |c| {
-                    format!("{:.0}% of key points", 100.0 * c)
-                });
-            println!("  round {round}: {runs} runs, {covered}");
+            let covered = |held_out| {
+                exegenius_core::report::round_coverage(&simulation, round, held_out)
+                    .map_or("ungraded".to_string(), |c| format!("{:.0}%", 100.0 * c))
+            };
+            println!(
+                "  round {round}: {runs} runs; key points covered: {} on repair goals, {} on \
+                 held-out goals",
+                covered(false),
+                covered(true)
+            );
         }
         if let Some(c) = exegenius_core::report::baseline_coverage(&simulation) {
             println!("  baseline (no wiki): {:.0}% of key points", 100.0 * c);

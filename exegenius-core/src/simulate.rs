@@ -39,15 +39,22 @@ readers with the reader's background will each try to answer one question using 
 wiki, and a grader will check their answers against your key points. The questions are \
 never shown in the wiki.
 
-- Write 3 to 6 goals: at least one about the target result itself, the rest about the main \
-steps on the way to it.
-- `kind`: `recall` asks what something is or states; `transfer` asks the reader to apply or \
-explain: why a step works, what changes in a small new case, what a result implies. Make at \
-least half of the goals transfer goals.
+- Write the number of goals the task asks for: at least one about the target result itself, \
+the rest about the main steps on the way to it.
+- `kind`: one of the kinds in the schema, each a kind of understanding a reader of a proof \
+can show (after Mejía-Ramos et al.'s assessment model of proof comprehension, and Hamami and \
+Morris on why a proof proceeds as it does). `meaning` and `status` test single statements; \
+the rest test how statements fit together. Make at least half of the goals of the other \
+kinds, include at least one `summary`, `structure`, `transfer` or `example` goal, and at least \
+one `motivation` goal. Use the argument's steps below for `motivation`, `structure` and \
+`summary` goals: a motivation the argument marks as not stated by the sources is a good test \
+of whether the wiki supplies it.
 - `key_points`: 2 to 5 short, checkable statements that a full answer must make, accurate to \
-the sources. Phrase transfer key points in your own words: submit rejects a transfer key \
-point that appears word for word on a page, since a reader could copy it without \
-understanding.
+the sources, each with a `role`: the `claim` asserted, the `reason` it holds, the \
+`conclusion` that follows, or the `background` it rests on. A goal about why something holds \
+needs at least one `reason`. Phrase key points of the kinds other than `meaning` and \
+`status` in your own words: submit rejects such a key point if it appears word for word on a \
+page, since a reader could copy it without understanding.
 - `pages`: the ids of the pages a reader needs to answer the question.
 - Ask what this reader could answer after reading those pages well, not trivia.";
 
@@ -63,8 +70,11 @@ guess which real terms they stand for, and do not use real names for them in you
 - See the wiki only through the two commands below. Use no other tools except to write \
 your answer file and run `exegenius submit`: do not open files, search the web, or start \
 sessions or agents.
-- Record every place you got stuck: the page, a short quote copied from it, and what you \
-could not follow. Include places you got past only by guessing.
+- Record every place you got stuck: the page, a short quote copied from it, what you could \
+not follow, and its level: a symbol or term you could not decode, a statement whose status \
+you could not tell, a single step you could not follow, a chain whose steps you followed \
+without seeing why they lead where they do, or something you could not connect to anything \
+you know. Include places you got past only by guessing.
 - Answer from the pages alone. Support each step of the answer with a quote copied exactly \
 from a page you opened. If the pages do not get you to an answer within the page budget, \
 give up and say where it broke down.
@@ -81,11 +91,121 @@ wiki are compared against.
 files, search the web, or start sessions or agents. If the background does not let the \
 reader answer, say so plainly instead of guessing.";
 
+/// What a goal question asks of the reader.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
-#[serde(rename_all = "lowercase")]
+#[serde(rename_all = "kebab-case")]
 pub enum GoalKind {
-    Recall,
+    /// What a symbol or term denotes: "What does r count?"
+    Meaning,
+    /// What part a statement plays: a definition, an assumption, a condition, a claim.
+    Status,
+    /// Why a step or claim holds.
+    Justification,
+    /// Summarise an argument or construction in a few sentences.
+    Summary,
+    /// How parts of the argument relate: what one step contributes to another.
+    Structure,
+    /// Apply or extend: what changes in a new case, what a result implies.
     Transfer,
+    /// Work a small example through.
+    Example,
+    /// Why the argument takes this route: why this method or construction.
+    Motivation,
+    /// Where the argument stops being routine.
+    NonRoutine,
+    /// Why the obvious approach fails.
+    ObviousFails,
+    /// What something is or states: the kind goals had before the kinds above.
+    #[schemars(skip)]
+    Recall,
+}
+
+impl GoalKind {
+    /// Whether the goal tests how statements fit together, rather than single statements.
+    pub fn holistic(self) -> bool {
+        !matches!(
+            self,
+            GoalKind::Meaning | GoalKind::Status | GoalKind::Recall
+        )
+    }
+
+    pub fn name(self) -> &'static str {
+        match self {
+            GoalKind::Meaning => "meaning",
+            GoalKind::Status => "status",
+            GoalKind::Justification => "justification",
+            GoalKind::Summary => "summary",
+            GoalKind::Structure => "structure",
+            GoalKind::Transfer => "transfer",
+            GoalKind::Example => "example",
+            GoalKind::Motivation => "motivation",
+            GoalKind::NonRoutine => "non-routine",
+            GoalKind::ObviousFails => "obvious-fails",
+            GoalKind::Recall => "recall",
+        }
+    }
+}
+
+/// The part a key point plays in a full answer.
+#[derive(
+    Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, JsonSchema,
+)]
+#[serde(rename_all = "lowercase")]
+pub enum Role {
+    /// What is asserted.
+    Claim,
+    /// Why it holds.
+    Reason,
+    /// What follows from it.
+    Conclusion,
+    /// What it rests on.
+    Background,
+}
+
+impl Role {
+    pub fn name(self) -> &'static str {
+        match self {
+            Role::Claim => "claim",
+            Role::Reason => "reason",
+            Role::Conclusion => "conclusion",
+            Role::Background => "background",
+        }
+    }
+}
+
+/// A short checkable statement a full answer must make.
+#[derive(Debug, Clone, PartialEq, Serialize, JsonSchema)]
+#[serde(deny_unknown_fields)]
+pub struct KeyPoint {
+    pub point: String,
+    pub role: Role,
+}
+
+/// Key points were plain strings before they had roles; those read as claims.
+impl<'de> Deserialize<'de> for KeyPoint {
+    fn deserialize<D: serde::Deserializer<'de>>(
+        deserializer: D,
+    ) -> std::result::Result<Self, D::Error> {
+        #[derive(Deserialize)]
+        #[serde(deny_unknown_fields)]
+        struct Full {
+            point: String,
+            role: Role,
+        }
+        #[derive(Deserialize)]
+        #[serde(untagged)]
+        enum Stored {
+            Full(Full),
+            Text(String),
+        }
+        Ok(match Stored::deserialize(deserializer)? {
+            Stored::Full(Full { point, role }) => KeyPoint { point, role },
+            Stored::Text(point) => KeyPoint {
+                point,
+                role: Role::Claim,
+            },
+        })
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -93,10 +213,14 @@ pub enum GoalKind {
 pub struct Goal {
     pub question: String,
     pub kind: GoalKind,
-    /// Short checkable statements a full answer must make.
-    pub key_points: Vec<String>,
+    /// Short checkable statements a full answer must make, each with its role.
+    pub key_points: Vec<KeyPoint>,
     /// Ids of the pages needed to answer.
     pub pages: Vec<String>,
+    /// Set by code for goals from the held-out goals task, which never feed repairs.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    #[schemars(skip)]
+    pub held_out: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -130,6 +254,88 @@ pub struct Stuck {
     pub quote: String,
     /// What you could not follow.
     pub note: String,
+    pub level: Level,
+}
+
+/// Where understanding broke down, from Spratte's levels of proof comprehension.
+#[derive(
+    Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize, JsonSchema,
+)]
+#[serde(rename_all = "lowercase")]
+pub enum Level {
+    /// A symbol or term I could not decode.
+    Symbol,
+    /// I could not tell what a statement's status was: definition, assumption or claim.
+    Statement,
+    /// I could not follow one inference.
+    Step,
+    /// I followed the steps but not why they lead where they do.
+    Chain,
+    /// I could not connect it to anything I already know.
+    Beyond,
+}
+
+impl Level {
+    pub fn name(self) -> &'static str {
+        match self {
+            Level::Symbol => "symbol",
+            Level::Statement => "statement",
+            Level::Step => "step",
+            Level::Chain => "chain",
+            Level::Beyond => "beyond",
+        }
+    }
+}
+
+/// A place a reader got stuck, as recorded.
+#[derive(Debug, Clone, PartialEq, Serialize)]
+pub struct StuckPoint {
+    pub page: String,
+    pub quote: String,
+    pub note: String,
+    /// Missing for stuck points recorded before levels.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub level: Option<Level>,
+}
+
+/// Stuck points were (page, quote, note) triples before they had levels.
+impl<'de> Deserialize<'de> for StuckPoint {
+    fn deserialize<D: serde::Deserializer<'de>>(
+        deserializer: D,
+    ) -> std::result::Result<Self, D::Error> {
+        #[derive(Deserialize)]
+        struct Full {
+            page: String,
+            quote: String,
+            note: String,
+            level: Option<Level>,
+        }
+        #[derive(Deserialize)]
+        #[serde(untagged)]
+        enum Stored {
+            Full(Full),
+            Triple(String, String, String),
+        }
+        Ok(match Stored::deserialize(deserializer)? {
+            Stored::Full(Full {
+                page,
+                quote,
+                note,
+                level,
+            }) => StuckPoint {
+                page,
+                quote,
+                note,
+                level,
+            },
+            Stored::Triple(page, quote, note) => StuckPoint {
+                page,
+                quote,
+                note,
+                level: None,
+            },
+        })
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -184,13 +390,15 @@ pub struct Run {
     pub answer: String,
     /// (page id, quote)
     pub citations: Vec<(String, String)>,
-    /// (page id, quote, note)
-    pub stuck: Vec<(String, String, String)>,
+    pub stuck: Vec<StuckPoint>,
     pub reason: String,
     /// Ids of concepts the reader named by their real names, which it cannot have read.
     pub leaks: Vec<String>,
     /// Indices of the key points the grader found in the answer.
     pub covered: Option<Vec<usize>>,
+    /// Indices of the key points the answer contradicts.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub contradicted: Vec<usize>,
     pub wrong: Vec<String>,
 }
 
@@ -200,6 +408,8 @@ pub struct Baseline {
     pub goal: usize,
     pub answer: String,
     pub covered: Option<Vec<usize>>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub contradicted: Vec<usize>,
     pub wrong: Vec<String>,
 }
 
@@ -717,8 +927,30 @@ fn replace_terms(text: &str, terms: &[(String, String)], capitalise: bool) -> St
     out
 }
 
-pub fn goals_task(project: &Project, graph: &Graph, plan: &Plan) -> String {
-    let mut task = String::new();
+/// The goal count a goals task asks for: repair goals, or held-out goals, which are never
+/// used to repair the wiki.
+pub fn goal_count(held_out: bool) -> std::ops::RangeInclusive<usize> {
+    if held_out { 1..=3 } else { 3..=6 }
+}
+
+pub fn goals_task(project: &Project, graph: &Graph, plan: &Plan, held_out: bool) -> Result<String> {
+    let count = goal_count(held_out);
+    let mut task = if held_out {
+        format!(
+            "## Held-out goals\n\nWrite {} to {} goals. They are held out: readers' results on \
+             them are never used to repair the wiki, so they measure whether the wiki teaches \
+             rather than whether it was repaired to answer its own test questions. Another task \
+             writes the goals used for repairs; you do not see them.\n\n",
+            count.start(),
+            count.end()
+        )
+    } else {
+        format!(
+            "## Goals\n\nWrite {} to {} goals.\n\n",
+            count.start(),
+            count.end()
+        )
+    };
     if let Some(target) = graph.get(&graph.target) {
         task.push_str(&format!(
             "## Target\n\n{}: {}\n\n",
@@ -733,17 +965,55 @@ pub fn goals_task(project: &Project, graph: &Graph, plan: &Plan) -> String {
         let c = graph.get(id).expect("planned pages are concepts");
         task.push_str(&format!("- `{}`: {} — {}\n", c.id, c.name, c.gloss));
     }
+    if let Some(argument) = crate::argument::current(project, plan)? {
+        task.push_str("\n## The argument's steps\n\n");
+        for (path, n) in argument.root.walk() {
+            if n.intention != crate::argument::Intention::Show {
+                continue;
+            }
+            let indent = "  ".repeat(path.len());
+            let page = n
+                .page
+                .as_deref()
+                .map_or(String::new(), |p| format!(" (`{p}`)"));
+            task.push_str(&format!("{indent}- {}{page}\n", n.claim));
+            if let Some(method) = &n.method {
+                task.push_str(&format!("{indent}  - How: {method}\n"));
+            }
+            if let Some(m) = &n.motivation {
+                let source = match m.source {
+                    crate::argument::Provenance::Explicit => "stated by the sources",
+                    crate::argument::Provenance::Recoverable => "recoverable from the sources",
+                    crate::argument::Provenance::Reconstructed => "not stated by the sources",
+                };
+                task.push_str(&format!("{indent}  - Why ({source}): {}\n", m.text.trim()));
+            }
+        }
+    }
     task.push_str(&format!(
         "\nThe page bodies are in `exegenius/pages/<id>.md`.\n\n## Sources\n\n{}\n",
         project.sources_listing()
     ));
-    task
+    Ok(task)
 }
 
-pub fn apply_goals(project: &Project, plan: &Plan, answer: GoalsAnswer) -> Result<Vec<Goal>> {
+/// Check the goals from a goals task, and mark them held out if they are.
+pub fn apply_goals(
+    project: &Project,
+    plan: &Plan,
+    answer: GoalsAnswer,
+    held_out: bool,
+) -> Result<Vec<Goal>> {
     let mut errors = Vec::new();
-    if answer.goals.is_empty() || answer.goals.len() > 8 {
-        errors.push(format!("give 3 to 6 goals, not {}", answer.goals.len()));
+    let count = goal_count(held_out);
+    // One goal over the count is let through: the count is guidance for cost, not a rule.
+    if answer.goals.len() < *count.start() || answer.goals.len() > count.end() + 1 {
+        errors.push(format!(
+            "give {} to {} goals, not {}",
+            count.start(),
+            count.end(),
+            answer.goals.len()
+        ));
     }
     let mut bodies = Vec::new();
     for id in &plan.order {
@@ -756,7 +1026,7 @@ pub fn apply_goals(project: &Project, plan: &Plan, answer: GoalsAnswer) -> Resul
         if goal.question.trim().is_empty() {
             errors.push(format!("goal {n} has no question"));
         }
-        if goal.key_points.is_empty() || goal.key_points.iter().any(|k| k.trim().is_empty()) {
+        if goal.key_points.is_empty() || goal.key_points.iter().any(|k| k.point.trim().is_empty()) {
             errors.push(format!("goal {n} needs non-empty key points"));
         }
         if goal.pages.is_empty() {
@@ -767,15 +1037,21 @@ pub fn apply_goals(project: &Project, plan: &Plan, answer: GoalsAnswer) -> Resul
                 errors.push(format!("goal {n}: `{page}` is not a page of this wiki"));
             }
         }
-        if goal.kind == GoalKind::Transfer {
-            for point in &goal.key_points {
+        if goal.kind == GoalKind::Recall {
+            errors.push(format!(
+                "goal {n}: `recall` is no longer a kind; use `meaning` or `status`"
+            ));
+        }
+        if goal.kind.holistic() {
+            for point in goal.key_points.iter().map(|k| &k.point) {
                 if let Some((id, _)) = bodies
                     .iter()
                     .find(|(_, body)| point.trim().len() >= 20 && contains_quote(body, point))
                 {
                     errors.push(format!(
-                        "goal {n}: transfer key point \"{}\" appears word for word on `{id}`; \
+                        "goal {n}: {} key point \"{}\" appears word for word on `{id}`; \
                          phrase it in your own words",
+                        goal.kind.name(),
                         point.trim()
                     ));
                 }
@@ -785,7 +1061,11 @@ pub fn apply_goals(project: &Project, plan: &Plan, answer: GoalsAnswer) -> Resul
     if !errors.is_empty() {
         return Err(rejected(errors));
     }
-    Ok(answer.goals)
+    Ok(answer
+        .goals
+        .into_iter()
+        .map(|g| Goal { held_out, ..g })
+        .collect())
 }
 
 pub(crate) fn rejected(errors: Vec<String>) -> Error {
@@ -966,12 +1246,13 @@ pub fn apply_read(
     }
     let mut stuck = Vec::new();
     for s in &answer.stuck {
-        if let Some(id) = check("stuck point", &s.page, &s.quote) {
-            stuck.push((
-                id,
-                lens.unrename(s.quote.trim()),
-                lens.unrename(s.note.trim()),
-            ));
+        if let Some(page) = check("stuck point", &s.page, &s.quote) {
+            stuck.push(StuckPoint {
+                page,
+                quote: lens.unrename(s.quote.trim()),
+                note: lens.unrename(s.note.trim()),
+                level: Some(s.level),
+            });
         }
     }
     if !errors.is_empty() {
@@ -1003,12 +1284,28 @@ pub fn apply_read(
         reason: lens.unrename(answer.reason.trim()),
         leaks: lens.leaks(&said),
         covered: None,
+        contradicted: Vec::new(),
         wrong: Vec::new(),
     })
 }
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn records_from_before_roles_and_levels_still_load() {
+        let goal: Goal = serde_json::from_value(serde_json::json!({
+            "question": "q", "kind": "transfer", "key_points": ["old point"], "pages": ["p"]
+        }))
+        .unwrap();
+        assert_eq!(goal.key_points[0].role, Role::Claim);
+        assert!(!goal.held_out);
+        let stuck: StuckPoint = serde_json::from_value(serde_json::json!(["p", "q", "n"])).unwrap();
+        assert_eq!((stuck.page.as_str(), stuck.level), ("p", None));
+        let typed: std::result::Result<KeyPoint, _> =
+            serde_json::from_value(serde_json::json!({"point": "x", "role": "claim", "extra": 1}));
+        assert!(typed.is_err());
+    }
+
     use super::*;
 
     #[test]

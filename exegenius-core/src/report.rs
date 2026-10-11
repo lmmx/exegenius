@@ -6,7 +6,7 @@ use std::collections::BTreeMap;
 
 use crate::config::Config;
 use crate::graph::Graph;
-use crate::simulate::{HOME, Outcome, Run, Simulation};
+use crate::simulate::{HOME, Level, Outcome, Role, Run, Simulation};
 
 fn name<'a>(graph: &'a Graph, id: &'a str) -> &'a str {
     if id == HOME {
@@ -31,13 +31,19 @@ fn percent(values: &[f64]) -> String {
     )
 }
 
-/// Mean share of key points covered by the graded runs of `round`.
-pub fn round_coverage(simulation: &Simulation, round: u32) -> Option<f64> {
+fn mean(values: &[f64]) -> Option<f64> {
+    (!values.is_empty()).then(|| values.iter().sum::<f64>() / values.len() as f64)
+}
+
+/// Mean share of key points covered by the graded runs of `round` on repair goals, or on
+/// held-out goals.
+pub fn round_coverage(simulation: &Simulation, round: u32, held_out: bool) -> Option<f64> {
     let values: Vec<f64> = simulation
         .round_runs(round)
+        .filter(|r| simulation.goals[r.goal].held_out == held_out)
         .filter_map(|r| coverage(&r.covered, simulation.goals[r.goal].key_points.len()))
         .collect();
-    (!values.is_empty()).then(|| values.iter().sum::<f64>() / values.len() as f64)
+    mean(&values)
 }
 
 /// Mean share of key points the no-wiki baselines covered.
@@ -60,6 +66,87 @@ fn path(graph: &Graph, run: &Run) -> String {
         steps.push("(gave up)".into());
     }
     steps.join(" → ")
+}
+
+/// Coverage by goal kind against the baseline, by key point role, and stuck points by level.
+fn profiles(simulation: &Simulation) -> String {
+    let mut out = String::new();
+    let goal = |g: usize| &simulation.goals[g];
+    let mut kinds: BTreeMap<&str, (usize, Vec<f64>, Vec<f64>)> = BTreeMap::new();
+    for (g, goal) in simulation.goals.iter().enumerate() {
+        let entry = kinds.entry(goal.kind.name()).or_default();
+        entry.0 += 1;
+        let points = goal.key_points.len();
+        entry.1.extend(
+            simulation
+                .runs
+                .iter()
+                .filter(|r| r.goal == g)
+                .filter_map(|r| coverage(&r.covered, points)),
+        );
+        entry.2.extend(
+            simulation
+                .baselines
+                .iter()
+                .filter(|b| b.goal == g)
+                .filter_map(|b| coverage(&b.covered, points)),
+        );
+    }
+    if !kinds.is_empty() {
+        out.push_str(
+            "\n## By goal kind\n\nAll rounds. The gap between readers and the baseline shows \
+             what the wiki adds for each kind of understanding.\n\n\
+             | Kind | Goals | Readers | Baseline |\n|---|---|---|---|\n",
+        );
+        for (kind, (goals, readers, baseline)) in kinds {
+            out.push_str(&format!(
+                "| {kind} | {goals} | {} | {} |\n",
+                percent(&readers),
+                percent(&baseline)
+            ));
+        }
+    }
+    let mut roles: BTreeMap<Role, (usize, usize, usize)> = BTreeMap::new();
+    for run in simulation.runs.iter().filter(|r| r.covered.is_some()) {
+        for (k, point) in goal(run.goal).key_points.iter().enumerate() {
+            let entry = roles.entry(point.role).or_default();
+            entry.0 += 1;
+            if run.covered.as_ref().is_some_and(|c| c.contains(&k)) {
+                entry.1 += 1;
+            }
+            if run.contradicted.contains(&k) {
+                entry.2 += 1;
+            }
+        }
+    }
+    if !roles.is_empty() {
+        out.push_str(
+            "\n## By key point role\n\nGraded runs, all rounds. Readers who make claims and \
+             conclusions but miss reasons point to pages that state results without their \
+             justification.\n\n| Role | Graded | Covered | Contradicted |\n|---|---|---|---|\n",
+        );
+        for (role, (graded, covered, contradicted)) in roles {
+            out.push_str(&format!(
+                "| {} | {graded} | {} | {contradicted} |\n",
+                role.name(),
+                percent(&[covered as f64 / graded.max(1) as f64])
+            ));
+        }
+    }
+    let mut levels: BTreeMap<Option<Level>, usize> = BTreeMap::new();
+    for s in simulation.runs.iter().flat_map(|r| &r.stuck) {
+        *levels.entry(s.level).or_default() += 1;
+    }
+    if !levels.is_empty() {
+        out.push_str("\n## Stuck points by level\n\n| Level | Stuck points |\n|---|---|\n");
+        for (level, n) in levels {
+            out.push_str(&format!(
+                "| {} | {n} |\n",
+                level.map_or("not given", Level::name)
+            ));
+        }
+    }
+    out
 }
 
 pub fn report(config: &Config, graph: &Graph, simulation: &Simulation) -> String {
@@ -93,8 +180,12 @@ pub fn report(config: &Config, graph: &Graph, simulation: &Simulation) -> String
         r
     };
     out.push_str(
-        "\n## Summary\n\n| Round | Runs | Answered | Gave up | Key points covered | Leaks |\n\
-         |---|---|---|---|---|---|\n",
+        "\n## Summary\n\nKey points covered are reported separately for repair goals, whose \
+         results feed the rewrites, and held-out goals, whose results never do. Only the \
+         held-out figure measures whether the wiki teaches beyond the questions it was \
+         repaired against.\n\n\
+         | Round | Runs | Answered | Gave up | Key points covered | Held-out key points | Leaks |\n\
+         |---|---|---|---|---|---|---|\n",
     );
     for &round in &rounds {
         let runs: Vec<&Run> = simulation.round_runs(round).collect();
@@ -102,15 +193,18 @@ pub fn report(config: &Config, graph: &Graph, simulation: &Simulation) -> String
             .iter()
             .filter(|r| r.outcome == Outcome::Answered)
             .count();
-        let values: Vec<f64> = runs
-            .iter()
-            .filter_map(|r| coverage(&r.covered, simulation.goals[r.goal].key_points.len()))
-            .collect();
+        let values = |held_out: bool| -> Vec<f64> {
+            runs.iter()
+                .filter(|r| simulation.goals[r.goal].held_out == held_out)
+                .filter_map(|r| coverage(&r.covered, simulation.goals[r.goal].key_points.len()))
+                .collect()
+        };
         out.push_str(&format!(
-            "| {round} | {} | {answered} | {} | {} | {} |\n",
+            "| {round} | {} | {answered} | {} | {} | {} | {} |\n",
             runs.len(),
             runs.len() - answered,
-            percent(&values),
+            percent(&values(false)),
+            percent(&values(true)),
             runs.iter().filter(|r| !r.leaks.is_empty()).count()
         ));
     }
@@ -120,23 +214,27 @@ pub fn report(config: &Config, graph: &Graph, simulation: &Simulation) -> String
         .filter_map(|b| coverage(&b.covered, simulation.goals[b.goal].key_points.len()))
         .collect();
     out.push_str(&format!(
-        "| baseline (no wiki) | {} | | | {} | |\n",
+        "| baseline (no wiki) | {} | | | {} | | |\n",
         simulation.baselines.len(),
         percent(&baseline)
     ));
+    out.push_str(&profiles(simulation));
 
     for (g, goal) in simulation.goals.iter().enumerate() {
         out.push_str(&format!(
-            "\n## Goal {}: {}\n\n{} goal. Key points:\n\n",
+            "\n## Goal {}: {}\n\nKind: {}{}. Key points:\n\n",
             g + 1,
             goal.question,
-            match goal.kind {
-                crate::simulate::GoalKind::Recall => "Recall",
-                crate::simulate::GoalKind::Transfer => "Transfer",
-            }
+            goal.kind.name(),
+            if goal.held_out { ", held out" } else { "" }
         ));
         for (i, point) in goal.key_points.iter().enumerate() {
-            out.push_str(&format!("{}. {point}\n", i + 1));
+            out.push_str(&format!(
+                "{}. {} ({})\n",
+                i + 1,
+                point.point,
+                point.role.name()
+            ));
         }
         let pages: Vec<&str> = goal.pages.iter().map(|p| name(graph, p)).collect();
         out.push_str(&format!("\nPages it needs: {}.\n", pages.join(", ")));
@@ -182,19 +280,31 @@ pub fn report(config: &Config, graph: &Graph, simulation: &Simulation) -> String
                 out.push_str(&format!("\nAnswer: {}\n", run.answer.trim()));
             }
             out.push_str(&format!("\nReason: {}\n", run.reason.trim()));
-            for (page, quote, note) in &run.stuck {
+            for s in &run.stuck {
+                let level = s
+                    .level
+                    .map_or(String::new(), |l| format!(" [{}]", l.name()));
                 out.push_str(&format!(
-                    "\n- Stuck on {}: \"{quote}\" — {note}",
-                    name(graph, page)
+                    "\n- Stuck on {}{level}: \"{}\" — {}",
+                    name(graph, &s.page),
+                    s.quote,
+                    s.note
                 ));
             }
             if !run.stuck.is_empty() {
                 out.push('\n');
             }
+            for &k in &run.contradicted {
+                out.push_str(&format!(
+                    "\n- Contradicts key point {}: {}",
+                    k + 1,
+                    goal.key_points[k].point
+                ));
+            }
             for wrong in &run.wrong {
                 out.push_str(&format!("\n- Wrong: {wrong}"));
             }
-            if !run.wrong.is_empty() {
+            if !run.wrong.is_empty() || !run.contradicted.is_empty() {
                 out.push('\n');
             }
             if !run.leaks.is_empty() {
@@ -209,8 +319,8 @@ pub fn report(config: &Config, graph: &Graph, simulation: &Simulation) -> String
 
     let mut hotspots: BTreeMap<&str, (usize, usize)> = BTreeMap::new();
     for run in &simulation.runs {
-        for (page, _, _) in &run.stuck {
-            hotspots.entry(page).or_default().0 += 1;
+        for s in &run.stuck {
+            hotspots.entry(&s.page).or_default().0 += 1;
         }
         if run.outcome == Outcome::GaveUp
             && let Some(last) = run.path.last()

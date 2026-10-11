@@ -67,7 +67,7 @@ The demo project's repository does not include its source paper. A public write-
 - 4 infer steps marked as reported out of order;
 - motivations: 3 `explicit` with quotes from the notes, 2 `recoverable`, 2 `reconstructed`.
 
-The root's method is "reduce the product to a convolution, speed up both tape operations a transform needs, assemble the transform pipeline, and account for the cost". Its five main steps are the radix-digit reduction, exact recovery by rounding, the two tape procedures with their recursive network, the six-step algorithm, and the cost accounting. That is the chain the author traced through the demo in 2026-10-11-explanatory-structure-research.
+The root's method is "reduce the product to a convolution, speed up both tape operations a transform needs, assemble the transform pipeline, and account for the cost". Its five main steps are the radix-digit reduction, exact recovery by rounding, the two tape procedures with their recursive network, the six-step algorithm, and the cost accounting. Whether those are the right top level for this reader is a question for the simulated readers, not for the checks.
 
 One of the two `reconstructed` motivations is on the multiplication algorithm: "A transform of arbitrary length is awkward on tapes, so it is rewritten with power-of-two axes where shifts are cheap". Under the new write instructions, that page's writer would be told the sources do not give this reason, and to give it to the reader.
 

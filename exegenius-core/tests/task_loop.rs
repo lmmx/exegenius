@@ -759,13 +759,28 @@ fn simulated_readers_end_to_end() {
     answer(&project, &batch[0], &outline.to_string());
     submit(&project, &batch[0].id).unwrap();
 
-    // Goals: a transfer key point copied from a page is rejected.
+    // Goals: repair goals and held-out goals come from two tasks in one batch. A key point
+    // of a holistic kind copied from a page is rejected.
     let batch = tasks(next(&project).unwrap());
-    assert_eq!(batch[0].kind, Kind::Goals);
+    let kinds: Vec<&Kind> = batch.iter().map(|t| &t.kind).collect();
+    assert_eq!(
+        kinds,
+        vec![
+            &Kind::Goals { held_out: false },
+            &Kind::Goals { held_out: true }
+        ]
+    );
+    assert!(read(&project, batch[1].file()).contains("## Held-out goals"));
+    assert!(read(&project, batch[0].file()).contains("## The argument's steps"));
     let goals = |point: &str| {
-        json!({"goals": [{"question": "How does the chirp identity use the DFT?",
-            "kind": "transfer", "key_points": [point, "It is about roots of unity"],
-            "pages": ["chirp-identity", "dft"]}]})
+        let goal = |question: &str| {
+            json!({"question": question, "kind": "transfer", "pages": ["chirp-identity", "dft"],
+                "key_points": [{"point": point, "role": "claim"},
+                               {"point": "It is about roots of unity", "role": "reason"}]})
+        };
+        json!({"goals": [goal("How does the chirp identity use the DFT?"),
+                         goal("What does the chirp identity need from the DFT?"),
+                         goal("Why does the chirp identity need the DFT?")]})
         .to_string()
     };
     answer(
@@ -774,15 +789,23 @@ fn simulated_readers_end_to_end() {
         &goals("The discrete Fourier transform evaluates at roots"),
     );
     let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(err.contains("transfer key point"), "{err}");
     assert!(err.contains("appears word for word on `dft`"), "{err}");
     answer(&project, &batch[0], &goals("It rewrites the product nk"));
     submit(&project, &batch[0].id).unwrap();
+    let held_out = json!({"goals": [{"question": "What does the chirp identity turn the DFT into?",
+        "kind": "meaning", "pages": ["chirp-identity"],
+        "key_points": [{"point": "A convolution", "role": "conclusion"}]}]});
+    answer(&project, &batch[1], &held_out.to_string());
+    submit(&project, &batch[1].id).unwrap();
 
-    // Round 1: a reader from the front page, one deep-linked, and the baseline.
+    // Round 1: for each goal, a reader from the front page, one deep-linked, and the
+    // baseline. The held-out goal is the last.
     let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch.len(), 12);
     let ids: Vec<&str> = batch.iter().map(|t| t.id.as_str()).collect();
     assert!(ids[0].ends_with("read-g1-reader-home") && ids[1].ends_with("read-g1-reader-deep"));
-    assert!(ids[2].ends_with("baseline-g1-reader"));
+    assert!(ids[2].ends_with("baseline-g1-reader") && ids[11].ends_with("baseline-g4-reader"));
     let file = read(&project, batch[0].file());
     assert!(
         !file.contains("chirp identity"),
@@ -828,7 +851,8 @@ fn simulated_readers_end_to_end() {
     let reader = |cite_page: &str| {
         json!({"outcome": "answered", "answer": "The chirp identity rewrites nk.",
             "citations": [{"page": cite_page, "quote": quote}],
-            "stuck": [{"page": chirp, "quote": "using the", "note": "what the DFT does here"}],
+            "stuck": [{"page": chirp, "quote": "using the", "note": "what the DFT does here",
+                       "level": "chain"}],
             "reason": "fairly sure"})
         .to_string()
     };
@@ -854,24 +878,66 @@ fn simulated_readers_end_to_end() {
         "{\"answer\": \"The background does not cover this.\"}",
     );
     submit(&project, &batch[2].id).unwrap();
+    // Goals 2 and 3: the readers give up. The held-out goal: a reader gets stuck.
+    for t in &batch[3..] {
+        let text = match &t.kind {
+            Kind::Baseline { .. } => json!({"answer": "Not covered."}),
+            Kind::Read { goal: 3, .. } => {
+                read_page(&project, &t.id, &chirp).unwrap();
+                json!({"outcome": "gave_up", "answer": "", "citations": [], "reason": "lost",
+                    "stuck": [{"page": chirp, "quote": "using the", "level": "step",
+                               "note": "held-out confusion"}]})
+            }
+            _ => {
+                read_page(&project, &t.id, "home").unwrap();
+                gave_up.clone()
+            }
+        };
+        answer(&project, t, &text.to_string());
+        submit(&project, &t.id).unwrap();
+    }
 
-    // Grading: two answers, blind; a grade for a missing key point is rejected.
+    // Grading: one task per goal, blind; a grade for a missing key point, or a key point
+    // both covered and contradicted, is rejected.
     let batch = tasks(next(&project).unwrap());
-    assert_eq!(batch.len(), 1);
+    assert_eq!(batch.len(), 4);
+    for t in &batch[1..] {
+        let file = read(&project, t.file());
+        let labels: Vec<String> = file
+            .lines()
+            .filter_map(|l| l.strip_prefix("### Answer "))
+            .map(|l| {
+                json!({"label": l, "covered": [], "contradicted": [], "wrong": []}).to_string()
+            })
+            .collect();
+        answer(
+            &project,
+            t,
+            &format!("{{\"grades\": [{}]}}", labels.join(",")),
+        );
+        submit(&project, &t.id).unwrap();
+    }
+    let batch = &batch[..1];
     let file = read(&project, batch[0].file());
     assert!(file.contains("### Answer A") && file.contains("### Answer B"));
     assert!(file.contains("The chirp identity rewrites nk."));
     let reader_first = file.find("rewrites nk").unwrap() < file.find("does not cover").unwrap();
     let (r, b) = if reader_first { ("A", "B") } else { ("B", "A") };
-    let grades = |n: usize| {
-        json!({"grades": [{"label": r, "covered": [n], "wrong": []},
-                          {"label": b, "covered": [], "wrong": []}]})
+    let grades = |n: usize, contradicted: usize| {
+        json!({"grades": [{"label": r, "covered": [n], "contradicted": [contradicted], "wrong": []},
+                          {"label": b, "covered": [], "contradicted": [], "wrong": []}]})
         .to_string()
     };
-    answer(&project, &batch[0], &grades(3));
+    answer(&project, &batch[0], &grades(3, 1));
     let err = submit(&project, &batch[0].id).unwrap_err().to_string();
     assert!(err.contains("key point 3 does not exist"), "{err}");
-    answer(&project, &batch[0], &grades(1));
+    answer(&project, &batch[0], &grades(1, 1));
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains("key point 1 is both covered and contradicted"),
+        "{err}"
+    );
+    answer(&project, &batch[0], &grades(1, 2));
     submit(&project, &batch[0].id).unwrap();
 
     // Repairs: the stuck point, the give-up and the missed key point become rewrite notes.
@@ -880,9 +946,14 @@ fn simulated_readers_end_to_end() {
     let chirp_write = batch.iter().find(|t| page(t) == "chirp-identity").unwrap();
     let file = read(&project, chirp_write.file());
     assert!(
-        file.contains("got stuck at \"using the\": what the DFT does here"),
+        file.contains(
+            "got stuck at \"using the\": what the DFT does here (the reader followed the \
+             steps but not why they lead where they do: say what this step is for)"
+        ),
         "{file}"
     );
+    // Nothing from the held-out goal reaches the writer.
+    assert!(!file.contains("held-out confusion") && !file.contains("turn the DFT into"));
     assert!(file.contains("gave up on this page: never found what nk is"));
     assert!(file.contains("could not work out: It is about roots of unity"));
     for t in &batch {
@@ -899,9 +970,9 @@ fn simulated_readers_end_to_end() {
         submit(&project, &t.id).unwrap();
     }
 
-    // Round 2: readers only (the baseline is kept); both give up; then done.
+    // Round 2: readers only (the baselines are kept); all give up; then done.
     let batch = tasks(next(&project).unwrap());
-    assert_eq!(batch.len(), 2);
+    assert_eq!(batch.len(), 8);
     assert!(batch.iter().all(|t| matches!(t.kind, Kind::Read { .. })));
     for t in &batch {
         read_page(&project, &t.id, "home").unwrap();
@@ -910,13 +981,27 @@ fn simulated_readers_end_to_end() {
     }
     assert!(matches!(next(&project).unwrap(), Next::Done(_)));
     let simulation = read(&project, "exegenius/simulation.json");
-    assert_eq!(simulation.matches("\"task\":").count(), 5);
+    assert_eq!(simulation.matches("\"task\":").count(), 20);
     let report = read(&project, "exegenius/report.md");
-    assert!(report.contains("| 1 | 2 | 1 | 1 | 25% | 1 |"), "{report}");
-    assert!(report.contains("| 2 | 2 | 0 | 2 | 0% | 0 |"), "{report}");
-    assert!(report.contains("| baseline (no wiki) | 1 | | | 0% | |"));
+    assert!(
+        report.contains("| 1 | 8 | 1 | 7 | 8% | 0% | 1 |"),
+        "{report}"
+    );
+    assert!(
+        report.contains("| 2 | 8 | 0 | 8 | 0% | 0% | 0 |"),
+        "{report}"
+    );
+    assert!(report.contains("| baseline (no wiki) | 4 | | | 0% | | |"));
+    assert!(report.contains("| transfer | 3 | 4% | 0% |"), "{report}");
+    assert!(report.contains("| reason | 12 | 0% | 1 |"), "{report}");
+    assert!(report.contains("| step | 2 |\n| chain | 1 |"), "{report}");
+    assert!(report.contains("Kind: meaning, held out."));
     assert!(report.contains("Path: Front page → Chirp identity → Front page"));
-    assert!(report.contains("- Stuck on Chirp identity: \"using the\" — what the DFT does here"));
+    assert!(
+        report
+            .contains("- Stuck on Chirp identity [chain]: \"using the\" — what the DFT does here")
+    );
+    assert!(report.contains("- Contradicts key point 2: It is about roots of unity"));
     assert!(
         report.contains("Possible leaks (real names the reader was not shown): Chirp identity")
     );

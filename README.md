@@ -79,10 +79,10 @@ sources or the other pages.
 
 | outline | groups the final pages into parts, folds minor terminology pages into a glossary, and writes the front page overview and part intros | every page in exactly one part or the glossary, the target not in the glossary, no page in a part before one of its prerequisites, links only to pages |
 | overloads | for each letter a page binds that a page or concept name it builds on already binds, says whether the two denote the same thing | every candidate judged once; a letter with two meanings becomes a rewrite note on the later page |
-| goals | writes goal questions with key points, testing whether the wiki teaches its reader (never shown in the wiki) | pages exist; transfer key points are not copied from a page |
-| read | a simulated reader explores the wiki through `exegenius read` and `exegenius search` to answer one goal, and records where it got stuck | the page budget; every citation and stuck point quotes a page it opened |
+| goals | writes goal questions of ten kinds (meaning, status, justification, summary, structure, transfer, example, motivation, non-routine, obvious-fails) with key points tagged by role (claim, reason, conclusion, background), testing whether the wiki teaches its reader (never shown in the wiki); a second, separate task writes held-out goals | pages exist; the goal count; key points of the kinds beyond meaning and status are not copied from a page |
+| read | a simulated reader explores the wiki through `exegenius read` and `exegenius search` to answer one goal, and records where it got stuck and at what level (symbol, statement, step, chain, beyond) | the page budget; every citation and stuck point quotes a page it opened |
 | baseline | answers a goal from the reader's background alone, with no wiki | non-empty |
-| grade | scores all answers to a goal blind against the key points | every answer graded once, key points exist |
+| grade | scores all answers to a goal blind against the key points: covered, contradicted, or missing | every answer graded once, key points exist, none both covered and contradicted |
 
 Before the first write, and again whenever the planned pages change, an argument task plans
 the sources' argument (after Hamami and Morris's account of proofs as executed plans), so
@@ -104,7 +104,11 @@ concept binds it.
 ## Simulated readers
 
 Once the wiki is written, exegenius plays it as a game against simulated readers. A goals
-task writes 3 to 6 goal questions with key points. In each round, every goal goes to a
+task writes 3 to 6 goal questions with key points, of kinds taken from an assessment model of
+proof comprehension (Mejía-Ramos et al.) and from the argument plan's motivations. A second
+goals task, which does not see the first, writes 1 to 3 held-out goals: readers answer them
+like the rest, but nothing from them feeds the repairs, so their coverage measures whether
+the wiki teaches rather than whether it was repaired to answer its own questions. In each round, every goal goes to a
 fresh subagent per reader profile and starting point (the front page, or a deep link to
 the goal's last page, as if from a search engine). The reader sees the wiki only through
 `exegenius read <task> <page>` and `exegenius search <task> <words>`, which serve pages by
@@ -120,8 +124,10 @@ opaque handles, enforce a page budget and log every step:
 A no-wiki baseline answers each question, and a blind grader scores every answer against
 the key points. After each round but the last, stuck points, give-ups and key points no
 reader managed become rewrite notes, and the pages are rewritten before the next round.
-`exegenius/report.md` has the results: coverage per round against the baseline, each
-reader's path, searches, answer and stuck points, and the pages readers got stuck on most.
+`exegenius/report.md` has the results: coverage per round against the baseline, for repair
+and held-out goals apart; coverage by goal kind against the baseline and by key point role;
+stuck points by level; each reader's path, searches, answer, stuck points and contradicted
+key points; and the pages readers got stuck on most.
 The goals and the report stay out of `docs/`.
 
 ```toml

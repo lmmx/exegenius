@@ -66,7 +66,11 @@ pub enum Kind {
     },
     Outline,
     Overloads,
-    Goals,
+    Goals {
+        /// Goals whose readers' results never feed repairs.
+        #[serde(default)]
+        held_out: bool,
+    },
     Read {
         goal: usize,
         persona: String,
@@ -100,7 +104,7 @@ impl Task {
             Kind::Audit { .. } => "audit",
             Kind::Outline => "outline",
             Kind::Overloads => "overloads",
-            Kind::Goals => "goals",
+            Kind::Goals { .. } => "goals",
             Kind::Read { .. } => "read",
             Kind::Baseline { .. } => "baseline",
             Kind::Grade { .. } => "grade",
@@ -229,7 +233,7 @@ fn render(project: &Project, task: &Task, instructions: &str, input: &str) -> St
         Kind::Audit { .. } => json_format::<AuditAnswer>(),
         Kind::Outline => json_format::<OutlineAnswer>(),
         Kind::Overloads => json_format::<OverloadsAnswer>(),
-        Kind::Goals => json_format::<GoalsAnswer>(),
+        Kind::Goals { .. } => json_format::<GoalsAnswer>(),
         Kind::Read { .. } => json_format::<ReadAnswer>(),
         Kind::Baseline { .. } => json_format::<BaselineAnswer>(),
         Kind::Grade { .. } => json_format::<GradeAnswer>(),
@@ -283,9 +287,18 @@ fn simulation_step(project: &Project, graph: &mut Graph, plan: &Plan) -> Result<
         return Ok(Step::Finished);
     }
     let mut sim = simulate::load(project)?;
-    if sim.goals.is_empty() {
-        let input = goals_task(project, graph, plan);
-        return Ok(Step::Issue(vec![(Kind::Goals, GOALS_INSTRUCTIONS, input)]));
+    // Repair goals and held-out goals come from separate tasks, so neither sees the other.
+    // A simulation that started before held-out goals existed carries on without them.
+    let mut items = Vec::new();
+    for held_out in [false, true] {
+        let missing = !sim.goals.iter().any(|g| g.held_out == held_out);
+        if missing && sim.runs.is_empty() {
+            let input = goals_task(project, graph, plan, held_out)?;
+            items.push((Kind::Goals { held_out }, GOALS_INSTRUCTIONS, input));
+        }
+    }
+    if !items.is_empty() {
+        return Ok(Step::Issue(items));
     }
     if sim.round > rounds {
         return Ok(Step::Finished);
@@ -402,7 +415,8 @@ fn issue(project: &Project, state: &mut State, items: Vec<(Kind, &str, String)>)
             Kind::Audit { page, .. } => format!("audit-{page}"),
             Kind::Outline => "outline".to_string(),
             Kind::Overloads => "overloads".to_string(),
-            Kind::Goals => "goals".to_string(),
+            Kind::Goals { held_out: false } => "goals".to_string(),
+            Kind::Goals { held_out: true } => "held-out-goals".to_string(),
             Kind::Read {
                 goal,
                 persona,
@@ -635,11 +649,18 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
             project.save_graph(&graph)?;
             Vec::new()
         }
-        Kind::Goals => {
+        Kind::Goals { held_out } => {
             let graph = require(graph)?;
             let plan = plan(&graph, &project.sources)?;
             let mut sim = simulate::load(project)?;
-            sim.goals = apply_goals(project, &plan, parse(&path, &text)?)?;
+            let goals = apply_goals(project, &plan, parse(&path, &text)?, *held_out)?;
+            // Repair goals first, then held-out goals; no run refers to a goal yet.
+            sim.goals.retain(|g| g.held_out != *held_out);
+            if *held_out {
+                sim.goals.extend(goals);
+            } else {
+                sim.goals.splice(0..0, goals);
+            }
             simulate::save(project, &sim)?;
             Vec::new()
         }
@@ -692,6 +713,7 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
                 goal: *goal,
                 answer: lens.unrename(answer.answer.trim()),
                 covered: None,
+                contradicted: Vec::new(),
                 wrong: Vec::new(),
             });
             simulate::save(project, &sim)?;
