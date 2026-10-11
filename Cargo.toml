@@ -20,7 +20,7 @@ resolver = "3"
 
 [workspace.dependencies]
 # Internal crates
-exegenius-core = { path = "exegenius-core", version = "0.3.0" }
+exegenius-core = { path = "exegenius-core", version = "0.4.0" }
 
 anyhow = "1"
 clap = { features = ["derive"], version = "4" }
@@ -44,4 +44,4 @@ keywords = ["claude-code", "documentation", "knowledge-graph", "wiki"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/lmmx/exegenius"
-version = "0.3.0"
+version = "0.4.0"

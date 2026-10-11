@@ -346,11 +346,18 @@ fn status(project: &Project) -> anyhow::Result<()> {
             println!("  baseline (no wiki): {:.0}% of key points", 100.0 * c);
         }
     }
-    if state.done && outline.is_some() && notation.is_some() {
-        println!("state: done (docs/ and zensical.toml are built)");
-    } else if !state.pending.is_empty() {
+    let rounds = project.config.simulation.rounds;
+    let simulated = rounds == 0 || simulation.round > rounds;
+    if !state.pending.is_empty() {
         let ids: Vec<&str> = state.pending.iter().map(|t| t.id.as_str()).collect();
         println!("pending tasks: {}", ids.join(", "));
+    } else if state.done
+        && outline.is_some()
+        && notation.is_some()
+        && simulated
+        && graph.rewrite.is_empty()
+    {
+        println!("state: done (docs/ and zensical.toml are built)");
     } else {
         println!("state: in progress; run `exegenius next`");
     }
