@@ -212,7 +212,7 @@ pub fn audit_task(project: &Project, graph: &Graph, plan: &Plan, i: usize, body:
         "## Reader profile\n\n{}\n\n## Known concepts\n\n{}\n\n## Symbols bound on earlier \
          pages\n\n{bound}\n\n## Pages in the wiki\n\n{}\n\n## Page to audit (`{}`)\n\n\
          ````markdown\n# {}\n\n{}\n````\n",
-        project.config.reader.knows.trim(),
+        crate::background::profile(project, graph),
         names(&plan.known_at(graph, i)),
         pages.join("\n"),
         c.id,

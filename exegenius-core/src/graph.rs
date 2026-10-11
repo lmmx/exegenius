@@ -80,6 +80,9 @@ pub struct Graph {
     /// In a pilot, the concept the pilot explains in place of the target.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pilot: Option<String>,
+    /// What the reader profile covers for these sources, from the background task.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub background: Option<String>,
 }
 
 impl Graph {

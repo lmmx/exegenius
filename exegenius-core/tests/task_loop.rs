@@ -87,6 +87,15 @@ fn argument_answer(from: &[&str], reversed: bool) -> String {
     .to_string()
 }
 
+/// Answer the background task `next` hands out after the extract, adding no concepts.
+fn background(project: &Project) {
+    let batch = tasks(next(project).unwrap());
+    assert_eq!(batch[0].kind, Kind::Background);
+    let answer_text = json!({"summary": "Complex arithmetic.", "known": [], "covered": []});
+    answer(project, &batch[0], &answer_text.to_string());
+    submit(project, &batch[0].id).unwrap();
+}
+
 /// Answer the argument task `next` hands out after an extract or extend.
 fn argue(project: &Project, from: &[&str]) {
     let batch = tasks(next(project).unwrap());
@@ -193,6 +202,25 @@ fn task_loop_end_to_end() {
     );
     submit(&project, "0001-extract").unwrap();
 
+    // Background: the target cannot be known; a concept the sources rely on that the profile
+    // covers is added as known, and the summary goes with the profile into later tasks.
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch[0].kind, Kind::Background);
+    assert!(read(&project, batch[0].file()).contains("`dft`: Discrete Fourier transform"));
+    let known = |covered: &[&str]| {
+        json!({
+            "summary": "Complex arithmetic and sequences, as in a first course.",
+            "known": [{"name": "Sequence", "aliases": ["list"], "gloss": "An ordered list."}],
+            "covered": covered,
+        })
+        .to_string()
+    };
+    answer(&project, &batch[0], &known(&["chirp-identity"]));
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(err.contains("is what the wiki explains"), "{err}");
+    answer(&project, &batch[0], &known(&[]));
+    submit(&project, &batch[0].id).unwrap();
+
     // Argument: steps out of the notes' order are rejected; then the plan is accepted.
     let batch = tasks(next(&project).unwrap());
     assert_eq!(batch[0].kind, Kind::Argument);
@@ -221,7 +249,7 @@ fn task_loop_end_to_end() {
     for t in &batch {
         let body = if page(t) == "chirp-identity" {
             "It is computed with the [DFT](dft.md) and reduced to [convolution](convolution.md), \
-             with dyadic scaling."
+             with dyadic scaling of $n$ points."
         } else if page(t) == "convolution" {
             "Convolution is what the discrete Fourier transform makes pointwise, as in $x^2$."
         } else {
@@ -318,6 +346,19 @@ fn task_loop_end_to_end() {
         })
         .to_string()
     };
+    // Round 1 audited three pages, so extend may add one page.
+    assert!(read(&project, batch[0].file()).contains("does not know: at most 1,"));
+    let mut two: serde_json::Value = serde_json::from_str(&extend("k")).unwrap();
+    two["concepts"]
+        .as_array_mut()
+        .unwrap()
+        .push(concept("real", "Real part", &[], false, None));
+    answer(&project, &batch[0], &two.to_string());
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains("does not know: 2, over the limit of 1"),
+        "{err}"
+    );
     answer(&project, &batch[0], &extend("q"));
     let err = submit(&project, &batch[0].id).unwrap_err().to_string();
     assert!(
@@ -395,10 +436,22 @@ fn task_loop_end_to_end() {
                 json!([binding("k", "frequency index", k)]),
                 json!(relations),
             );
-            "It is computed with the [DFT](dft.md) and reduced to [convolution](convolution.md); \
-             values of $x$ are kept [dyadic](dyadic-rational.md). Here $k$ is the frequency \
-             index. So $nk$ is exact \
-             <cite data-source=\"notes\">exact on dyadic real and imaginary parts</cite>."
+            let body = |product: &str| {
+                format!(
+                    "It is computed with the [DFT](dft.md) and reduced to \
+                     [convolution](convolution.md); values of $x$ are kept \
+                     [dyadic](dyadic-rational.md). Here $k$ is the frequency index. So \
+                     ${product}$ is exact <cite data-source=\"notes\">exact on dyadic real and \
+                     imaginary parts</cite>."
+                )
+            };
+            // A letter the previous version did not use, in no binding, is rejected.
+            answer(&project, t, &body("mk"));
+            let err = submit(&project, &t.id).unwrap_err().to_string();
+            assert!(err.contains("did not: $m$"), "{err}");
+            answer(&project, t, &body("nk"));
+            submit(&project, &t.id).unwrap();
+            continue;
         } else {
             "A number of the form $m/2^k$."
         };
@@ -696,6 +749,7 @@ fn last_round_fixes_are_written_then_built() {
     let batch = tasks(next(&project).unwrap());
     answer(&project, &batch[0], &extract_answer("a chirp identity"));
     submit(&project, &batch[0].id).unwrap();
+    background(&project);
     argue(&project, &["dft", "convolution"]);
     for t in tasks(next(&project).unwrap()) {
         if page(&t) == "chirp-identity" {
@@ -759,6 +813,7 @@ fn simulated_readers_end_to_end() {
     let batch = tasks(next(&project).unwrap());
     answer(&project, &batch[0], &extract_answer("a chirp identity"));
     submit(&project, &batch[0].id).unwrap();
+    background(&project);
     argue(&project, &["dft", "convolution"]);
     for t in tasks(next(&project).unwrap()) {
         if page(&t) == "chirp-identity" {
@@ -1094,6 +1149,7 @@ fn ablation_hides_a_carrying_sentence_and_a_control() {
     let batch = tasks(next(&project).unwrap());
     answer(&project, &batch[0], &extract_answer("a chirp identity"));
     submit(&project, &batch[0].id).unwrap();
+    background(&project);
     argue(&project, &["dft", "convolution"]);
     let chirp_body = "The chirp identity splits the product using the [DFT](dft.md). It is \
                       reduced to [convolution](convolution.md). Nothing here is cited by \

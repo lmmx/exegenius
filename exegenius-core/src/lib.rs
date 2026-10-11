@@ -9,13 +9,14 @@
 //!
 //! 1. [`extract`]: decompose the sources into a concept graph (and later resolve the
 //!    candidate concepts audits find).
-//! 2. [`argument`]: reconstruct the plan of the sources' argument, saying what each page is
+//! 2. [`background`]: say what the reader profile covers, for these sources.
+//! 3. [`argument`]: reconstruct the plan of the sources' argument, saying what each page is
 //!    for.
-//! 3. [`write`]: write each page body, in the reading order from [`plan`], with the symbols
+//! 4. [`write`]: write each page body, in the reading order from [`plan`], with the symbols
 //!    it binds (see [`symbols`]).
-//! 4. [`audit`]: list what the reader cannot follow on each page, given exactly what the
+//! 5. [`audit`]: list what the reader cannot follow on each page, given exactly what the
 //!    reader knows at that point, and account for every symbol on it.
-//! 5. [`outline`] and [`notation`]: once the pages are final, group them into parts (folding
+//! 6. [`outline`] and [`notation`]: once the pages are final, group them into parts (folding
 //!    minor pages into a glossary) and write the front page, and judge letters that pages
 //!    bind to two meanings.
 //!
@@ -27,6 +28,7 @@ pub mod aha;
 pub mod argument;
 pub mod audit;
 pub mod autolink;
+pub mod background;
 pub mod build;
 pub mod cite;
 pub mod config;

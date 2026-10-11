@@ -1024,7 +1024,7 @@ pub fn goals_task(project: &Project, graph: &Graph, plan: &Plan, held_out: bool)
     }
     task.push_str(&format!(
         "## Reader\n\n{}\n\n## Pages, in reading order\n\n",
-        project.config.reader.knows.trim()
+        crate::background::profile(project, graph)
     ));
     for id in &plan.order {
         let c = graph.get(id).expect("planned pages are concepts");

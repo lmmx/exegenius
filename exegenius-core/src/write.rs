@@ -210,7 +210,7 @@ pub fn write_task(project: &Project, graph: &Graph, plan: &Plan, i: usize) -> Re
         .expect("planned pages are concepts");
     let mut task = format!(
         "## Reader\n\n{}\n\nThe reader already understands these concepts:\n\n{}\n\n",
-        project.config.reader.knows.trim(),
+        crate::background::profile(project, graph),
         names(&plan.known_at(graph, i)),
     );
     task.push_str(&format!(
@@ -338,7 +338,10 @@ pub fn write_task(project: &Project, graph: &Graph, plan: &Plan, i: usize) -> Re
             "\n## Previous version (revise it)\n\nIt has {words} words, not counting \
              mathematics and citations. Fix the problems by restructuring rather than \
              appending: submit rejects a rewrite over {} words. Pages that grow with every \
-             repair stop being self-contained explanations of one concept.\n\n{}\n",
+             repair stop being self-contained explanations of one concept. Submit also rejects \
+             letters in the mathematics that the previous version did not use, unless the \
+             symbols they make are bound: a new formula brings new symbols for the reader to \
+             learn.\n\n{}\n",
             budget(words),
             previous.trim()
         ));
@@ -387,7 +390,30 @@ pub fn apply_write(
     errors.extend(crate::cite::check(body, &project.sources));
     errors.extend(crate::cite::dangling(body));
     let words = prose_words(body);
-    match project.page_body(page)? {
+    let previous = project.page_body(page)?;
+    if let Some(previous) = &previous {
+        let i = plan.order.iter().position(|p| p == page).expect("planned");
+        let in_force = symbols::in_force(graph, plan, i);
+        let bound: Vec<&str> = in_force
+            .iter()
+            .map(|b| b.symbol)
+            .chain(symbols::of_name(c).map(|b| b.symbol))
+            .chain(fields.symbols.iter().map(|b| b.symbol.as_str()))
+            .collect();
+        let new = symbols::introduced(previous, body, &bound);
+        if !new.is_empty() {
+            errors.push(format!(
+                "the rewrite uses letters the previous version did not: {}. Bind each symbol \
+                 they make in `symbols`, with the sentence that says what it denotes, or make \
+                 the point without them",
+                new.iter()
+                    .map(|l| format!("${l}$"))
+                    .collect::<Vec<_>>()
+                    .join(", ")
+            ));
+        }
+    }
+    match previous {
         Some(previous) => {
             let before = prose_words(&previous);
             if words > budget(before) {

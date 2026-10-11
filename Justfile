@@ -30,7 +30,7 @@ prepush: precommit test
 
 # Install the `exegenius` binary from this checkout
 install:
-    cargo install --path exegenius-cli --locked
+    cargo install --path exegenius-cli --locked --target x86_64-unknown-linux-musl
 
 # Publish both crates to crates.io (core first; cargo orders them)
 publish:

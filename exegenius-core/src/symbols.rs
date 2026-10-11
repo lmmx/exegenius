@@ -119,7 +119,9 @@ pub enum Quoted {
     Missing,
     /// The quote is on the page, but the symbol is not in the mathematics it covers.
     WithoutSymbol,
-    /// The quote covers the symbol, but the page uses the symbol before the quote.
+    /// The quote covers the symbol, but the page uses the symbol in an earlier sentence. A
+    /// meaning given later in the sentence of the first use ("$s < t$, where $s$ is …"), or
+    /// in the sentence after a displayed formula, is in time.
     Late,
     Found,
 }
@@ -137,32 +139,183 @@ pub fn quoted(page: &str, quote: &str, symbol: &str) -> Quoted {
             .any(|w| w == wanted)
     };
     let spans = math_spans(page);
-    let found = spans.iter().any(|span| {
+    let found = spans.iter().any(|(span, _)| {
         let (start, end) = (span.start.max(range.start), span.end.min(range.end));
         start < end && has(&page[start..end])
     });
-    let earlier = spans
+    let first = spans
         .iter()
-        .any(|span| span.end <= range.start && has(&page[span.clone()]));
-    match (found, earlier) {
+        .find(|(span, _)| span.end <= range.start && has(&page[span.clone()]));
+    let late = first.is_some_and(|(span, display)| {
+        sentence_ends(page, &spans, span.end..range.start, *display)
+    });
+    match (found, late) {
         (false, _) => Quoted::WithoutSymbol,
         (true, true) => Quoted::Late,
         (true, false) => Quoted::Found,
     }
 }
 
-/// Byte ranges of the contents of each `$...$` and `$$...$$` in a markdown text.
-fn math_spans(text: &str) -> Vec<std::ops::Range<usize>> {
+/// Whether a sentence or paragraph ends in `gap` of `page`, leaving mathematics out. After
+/// a displayed formula the next sentence continues it, as in "$$…$$ where $s$ is …".
+fn sentence_ends(
+    page: &str,
+    spans: &[(std::ops::Range<usize>, bool)],
+    gap: std::ops::Range<usize>,
+    after_display: bool,
+) -> bool {
+    let mut text: Vec<u8> = page.as_bytes()[gap.clone()].to_vec();
+    for (span, _) in spans {
+        let (start, end) = (span.start.max(gap.start), span.end.min(gap.end));
+        if start < end {
+            text[start - gap.start..end - gap.start].fill(b' ');
+        }
+    }
+    let text = String::from_utf8_lossy(&text).replace('$', " ");
+    let text = if after_display {
+        text.trim_start()
+    } else {
+        &text
+    };
+    [". ", ".\n", "? ", "?\n", "! ", "!\n", "\n\n"]
+        .iter()
+        .any(|end| text.contains(end))
+}
+
+/// Byte ranges of the contents of each `$...$` and `$$...$$` in a markdown text, each with
+/// whether it is displayed.
+fn math_spans(text: &str) -> Vec<(std::ops::Range<usize>, bool)> {
     Parser::new_ext(text, Options::ENABLE_MATH)
         .into_offset_iter()
-        .filter_map(|(event, range)| match event {
-            Event::InlineMath(m) | Event::DisplayMath(m) => {
-                let start = range.start + text[range.clone()].find(&*m).unwrap_or(0);
-                Some(start..(start + m.len()).min(range.end))
-            }
-            _ => None,
+        .filter_map(|(event, range)| {
+            let (m, display) = match event {
+                Event::InlineMath(m) => (m, false),
+                Event::DisplayMath(m) => (m, true),
+                _ => return None,
+            };
+            let start = range.start + text[range.clone()].find(&*m).unwrap_or(0);
+            Some((start..(start + m.len()).min(range.end), display))
         })
         .collect()
+}
+
+/// Greek letters, as TeX control words.
+const GREEK: &[&str] = &[
+    "alpha",
+    "beta",
+    "gamma",
+    "delta",
+    "epsilon",
+    "varepsilon",
+    "zeta",
+    "eta",
+    "theta",
+    "vartheta",
+    "iota",
+    "kappa",
+    "lambda",
+    "mu",
+    "nu",
+    "xi",
+    "rho",
+    "varrho",
+    "sigma",
+    "varsigma",
+    "tau",
+    "upsilon",
+    "phi",
+    "varphi",
+    "chi",
+    "psi",
+    "omega",
+    "Gamma",
+    "Delta",
+    "Theta",
+    "Lambda",
+    "Xi",
+    "Pi",
+    "Sigma",
+    "Upsilon",
+    "Phi",
+    "Psi",
+    "Omega",
+    "ell",
+];
+
+/// Commands whose argument is a word or a standard set, not symbols: `\mathrm{bin}`,
+/// `\mathbb{Z}`.
+const WORDS: &[&str] = &["mathrm", "text", "textrm", "operatorname", "mathbb"];
+
+/// The letters in a piece of LaTeX: Latin letters and Greek control words, leaving out the
+/// arguments of [`WORDS`] and the constants $e$ and $\pi$. Symbols are built from these, so
+/// a letter not seen before is a symbol not seen before.
+pub fn letters(latex: &str) -> Vec<String> {
+    let mut out: Vec<String> = Vec::new();
+    let mut chars = latex.char_indices().peekable();
+    while let Some((i, c)) = chars.next() {
+        if c == '\\' {
+            let rest = &latex[i + 1..];
+            let word: String = rest
+                .chars()
+                .take_while(|x| x.is_ascii_alphabetic())
+                .collect();
+            if word.is_empty() {
+                chars.next();
+                continue;
+            }
+            for _ in 0..word.len() {
+                chars.next();
+            }
+            if WORDS.contains(&word.as_str()) {
+                while chars.peek().is_some_and(|(_, x)| x.is_whitespace()) {
+                    chars.next();
+                }
+                if chars.peek().is_some_and(|(_, x)| *x == '{') {
+                    let mut depth = 0;
+                    for (_, x) in chars.by_ref() {
+                        match x {
+                            '{' => depth += 1,
+                            '}' => depth -= 1,
+                            _ => {}
+                        }
+                        if depth == 0 {
+                            break;
+                        }
+                    }
+                } else {
+                    chars.next();
+                }
+            } else if GREEK.contains(&word.as_str()) {
+                out.push(format!("\\{word}"));
+            }
+        } else if c.is_ascii_alphabetic() && c != 'e' {
+            out.push(c.to_string());
+        }
+    }
+    out.sort();
+    out.dedup();
+    out
+}
+
+/// The letters in the mathematics of `body` that are in neither `previous`'s mathematics
+/// nor any of the `bound` symbols: letters a rewrite brings in without saying what the
+/// symbols they make denote.
+pub fn introduced(previous: &str, body: &str, bound: &[&str]) -> Vec<String> {
+    let all = |text: &str| -> Vec<String> {
+        math(&crate::cite::strip(text))
+            .iter()
+            .flat_map(|m| letters(m))
+            .collect()
+    };
+    let mut known = all(previous);
+    known.extend(bound.iter().flat_map(|b| letters(b)));
+    let mut new: Vec<String> = all(body)
+        .into_iter()
+        .filter(|l| !known.contains(l))
+        .collect();
+    new.sort();
+    new.dedup();
+    new
 }
 
 /// Whether `symbol` occurs as whole TeX tokens in one of the pieces of mathematics.
@@ -430,6 +583,33 @@ mod tests {
             quoted(late, "Here $r$ is the record length.", "r"),
             Quoted::Late
         );
+    }
+
+    #[test]
+    fn letters_leave_out_words_sets_and_constants() {
+        assert_eq!(
+            letters("F_s^+ u * \\alpha \\mathrm{bin}_k(z) \\in \\mathbb{Z}, e^{-\\pi x}"),
+            vec!["F", "\\alpha", "k", "s", "u", "x", "z"]
+        );
+        let previous = "Let $s$ be the length and $\\alpha$ the width.";
+        let body = "Write $F_s$ for the transform. Then $X \\otimes Y$ and $\\alpha s$.";
+        assert_eq!(introduced(previous, body, &["F_s"]), vec!["X", "Y"]);
+    }
+
+    #[test]
+    fn meanings_may_follow_in_the_same_sentence_or_after_a_display() {
+        let page = "The identity holds for coprime $s<t$, where $s$ is the source length.";
+        assert_eq!(
+            quoted(page, "where $s$ is the source length", "s"),
+            Quoted::Found
+        );
+        let display = "Subscripts are taken modulo the length:\n$$(P_s u)_j=u_{tj}.$$\n\
+                       Here $u$ has $s$ coordinates.";
+        assert_eq!(quoted(display, "Here $u$ has $s$", "u"), Quoted::Found);
+        let paragraph = "Use $q$ here.\n\nLater, $q$ is the modulus.";
+        assert_eq!(quoted(paragraph, "$q$ is the modulus", "q"), Quoted::Late);
+        let next = "$$a = b$$\n\nThis is short. Here $a$ is the sum.";
+        assert_eq!(quoted(next, "Here $a$ is the sum", "a"), Quoted::Late);
     }
 
     #[test]

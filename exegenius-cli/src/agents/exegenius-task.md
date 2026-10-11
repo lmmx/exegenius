@@ -1,6 +1,6 @@
 ---
 name: exegenius-task
-description: Does one exegenius task (extract, extend, argument, write, audit, outline, overloads, support, goals, grade, attribute) from its task file, submitting until the answer is accepted. Use for every exegenius task except simulated readers.
+description: Does one exegenius task (extract, background, extend, argument, write, audit, outline, overloads, support, goals, grade, attribute) from its task file, submitting until the answer is accepted. Use for every exegenius task except simulated readers.
 tools: Read, Write, Bash
 model: inherit
 ---

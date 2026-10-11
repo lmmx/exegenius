@@ -343,6 +343,9 @@ fn status(project: &Project) -> anyhow::Result<()> {
         let name = graph.get(pilot).map_or("", |c| c.name.as_str());
         println!("pilot: {pilot} ({name}), the part of the target this run explains");
     }
+    if let Some(background) = &graph.background {
+        println!("reader, for these sources: {background}");
+    }
     println!(
         "concepts: {} ({known} known to the reader); pages: {written} written of {} planned",
         graph.concepts.len(),

@@ -28,8 +28,12 @@ pub struct ExtractAnswer {
 pub struct ExtendAnswer {
     /// New concepts only; existing concepts must not be repeated.
     pub concepts: Vec<Concept>,
-    /// For every unresolved term, the id of the concept (existing or new) that covers it.
+    /// For every unresolved term not under `inline`, the id of the concept (existing or
+    /// new) that covers it.
     pub resolutions: Vec<Resolution>,
+    /// Unresolved terms to explain in a sentence where they are used, instead of on a page.
+    #[serde(default)]
+    pub inline: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
@@ -73,33 +77,35 @@ neither.
 pub const EXTEND_INSTRUCTIONS: &str = "\
 Extend a prerequisite graph of concepts built from source documents. Audits of the wiki \
 reported terms that they judged a specific reader cannot follow and that match no existing \
-concept. For each term, either point it at an existing concept that covers it, or add a new \
-concept.
+concept. For each term, point it at an existing concept that covers it, add a new concept, or \
+list it under `inline` to be explained in a sentence where it is used.
 
 - Auditors can misjudge what the reader profile covers. A term the profile covers, whether or \
 not it names it, is known to the reader: point it at a known concept, or add one with `known: \
 true`. Known concepts get no page.
-- Add a new concept only when no existing concept covers the term. Give each new concept an \
-id that is not already used.
+- Add a new concept only when no existing concept covers the term and the term needs a page \
+of its own; a term one sentence can explain goes under `inline`. The task gives the most new \
+concepts the reader does not know that this answer may add, and submit rejects more. Give \
+each new concept an id that is not already used.
 - New concepts may require existing concepts or each other; the graph must stay acyclic.
 - Mark `known: true` if the reader profile already covers the concept, with `requires: []`.
 - `evidence` quotes must be copied from the sources character for character, with their \
 source id. A concept that does not appear in the sources may have no quotes.
 - A name with mathematics in it needs a `title` with the mathematics in LaTeX and a binding \
 in `symbols` for every symbol in it, as in the extract task.
-- Give a resolution for every term.";
+- Give every term a resolution, or list it under `inline`.";
 
-fn describe(project: &Project) -> String {
+fn describe(project: &Project, profile: &str) -> String {
     format!(
-        "## Target\n\n{}\n\n## Reader profile\n\n{}\n\n## Sources (read them from disk)\n\n{}\n",
+        "## Target\n\n{}\n\n## Reader profile\n\n{profile}\n\n## Sources (read them from \
+         disk)\n\n{}\n",
         project.config.target.trim(),
-        project.config.reader.knows.trim(),
         project.sources_listing()
     )
 }
 
 pub fn extract_task(project: &Project) -> String {
-    describe(project)
+    describe(project, project.config.reader.knows.trim())
 }
 
 /// Slug ids and edges, drop self-edges and duplicate aliases; quotes not found verbatim
@@ -176,7 +182,18 @@ pub fn apply_extract(project: &Project, mut answer: ExtractAnswer) -> Result<(Gr
     }
 }
 
-pub fn extend_task(project: &Project, graph: &Graph) -> String {
+/// The most new concepts the reader does not know that an extend answer may add: half the
+/// pages audited in the latest round, and at least one. Each round's new pages are then
+/// fewer than the round's audited pages, whatever auditors judge the reader to know.
+pub fn new_pages(rounds: &[crate::audit::Round]) -> usize {
+    let audited = rounds
+        .iter()
+        .max_by_key(|r| r.round)
+        .map_or(0, |r| r.pages.len());
+    (audited / 2).max(1)
+}
+
+pub fn extend_task(project: &Project, graph: &Graph, limit: usize) -> String {
     // One entry per distinct term, with up to three example uses.
     let mut terms: BTreeMap<String, (String, Vec<String>)> = BTreeMap::new();
     for c in &graph.candidates {
@@ -208,8 +225,11 @@ pub fn extend_task(project: &Project, graph: &Graph) -> String {
         .collect::<Vec<_>>()
         .join("\n");
     format!(
-        "{}\n## Existing concepts\n\n{existing}\n\n## Unresolved terms\n\n{unresolved}\n",
-        describe(project)
+        "{}\n## Existing concepts\n\n{existing}\n\n## Unresolved terms\n\n{unresolved}\n\n\
+         ## New pages\n\nNew concepts the reader does not know: at most {limit}, and submit \
+         rejects more. Resolve the other terms to existing or known concepts, or list them \
+         under `inline`.\n",
+        describe(project, &crate::background::profile(project, graph))
     )
 }
 
@@ -219,6 +239,7 @@ pub fn apply_extend(
     project: &Project,
     graph: &mut Graph,
     mut answer: ExtendAnswer,
+    limit: usize,
 ) -> Result<Vec<String>> {
     let mut errors = Vec::new();
     let mut warnings = Vec::new();
@@ -233,6 +254,13 @@ pub fn apply_extend(
             errors.push(format!("new concept id `{}` is already used", c.id));
         }
     }
+    let unknown = answer.concepts.iter().filter(|c| !c.known).count();
+    if unknown > limit {
+        errors.push(format!(
+            "new concepts the reader does not know: {unknown}, over the limit of {limit}; \
+             resolve the other terms to existing or known concepts, or list them under `inline`"
+        ));
+    }
     let mut merged = graph.clone();
     merged.concepts.extend(answer.concepts);
     errors.extend(merged.check());
@@ -245,7 +273,13 @@ pub fn apply_extend(
         }
     }
     let asked: HashSet<String> = graph.candidates.iter().map(|c| key(&c.term)).collect();
-    let answered: HashSet<String> = answer.resolutions.iter().map(|r| key(&r.term)).collect();
+    let answered: HashSet<String> = answer
+        .resolutions
+        .iter()
+        .map(|r| &r.term)
+        .chain(&answer.inline)
+        .map(|t| key(t))
+        .collect();
     let mut missing: Vec<&String> = asked.difference(&answered).collect();
     missing.sort();
     for term in missing {
@@ -254,19 +288,31 @@ pub fn apply_extend(
     if !errors.is_empty() {
         return Err(rejected(errors));
     }
-    apply_resolutions(&mut merged, &answer.resolutions);
+    apply_resolutions(&mut merged, &answer.resolutions, &answer.inline);
     *graph = merged;
     Ok(warnings)
 }
 
 /// Turn each resolved candidate into an edge from its page (or a rewrite note when the
-/// edge would create a cycle), record the term as an alias, and clear the candidates.
-fn apply_resolutions(graph: &mut Graph, resolutions: &[Resolution]) {
+/// edge would create a cycle), record the term as an alias, turn each inline term into a
+/// rewrite note, and clear the candidates.
+fn apply_resolutions(graph: &mut Graph, resolutions: &[Resolution], inline: &[String]) {
     let resolved: BTreeMap<String, String> = resolutions
         .iter()
         .map(|r| (key(&r.term), slug(&r.concept)))
         .collect();
+    let inline: HashSet<String> = inline.iter().map(|t| key(t)).collect();
     for candidate in std::mem::take(&mut graph.candidates) {
+        if inline.contains(&key(&candidate.term)) {
+            graph.queue_rewrite(
+                &candidate.page,
+                Some(format!(
+                    "Explain \"{}\" in a sentence where it is first used.",
+                    candidate.term
+                )),
+            );
+            continue;
+        }
         let Some(concept_id) = resolved.get(&key(&candidate.term)) else {
             continue;
         };
@@ -312,8 +358,8 @@ mod tests {
     use std::path::Path;
 
     use super::*;
-    use crate::graph::Evidence;
-    use crate::graph::tests::concept;
+    use crate::graph::tests::{concept, graph};
+    use crate::graph::{Candidate, Evidence};
 
     #[test]
     fn clean_slugs_ids_and_rejects_unverified_quotes() {
@@ -346,5 +392,51 @@ mod tests {
         assert_eq!(concepts[0].requires, vec!["dft"]);
         assert_eq!(errors.len(), 2);
         assert!(warnings.is_empty());
+    }
+
+    #[test]
+    fn inline_terms_become_rewrite_notes() {
+        let mut g = graph(
+            "page",
+            vec![concept("page", &[], false), concept("ring", &[], false)],
+        );
+        for term in ["coprime", "ring"] {
+            g.candidates.push(Candidate {
+                term: term.into(),
+                page: "page".into(),
+                quote: "q".into(),
+            });
+        }
+        let ring = Resolution {
+            term: "ring".into(),
+            concept: "ring".into(),
+        };
+        apply_resolutions(&mut g, &[ring], &["coprime".into()]);
+        assert!(g.candidates.is_empty());
+        assert_eq!(g.get("page").unwrap().requires, vec!["ring"]);
+        assert!(
+            g.rewrite["page"]
+                .iter()
+                .any(|n| n.contains("Explain \"coprime\" in a sentence"))
+        );
+    }
+
+    #[test]
+    fn new_pages_are_at_most_half_the_pages_audited() {
+        use crate::audit::Round;
+        let round = |round, pages| Round {
+            round,
+            pages: (0..pages)
+                .map(|i| crate::audit::PageAudit {
+                    page: format!("p{i}"),
+                    gaps: Vec::new(),
+                    dropped: Vec::new(),
+                    symbols: Vec::new(),
+                })
+                .collect(),
+        };
+        assert_eq!(new_pages(&[]), 1);
+        assert_eq!(new_pages(&[round(1, 5)]), 2);
+        assert_eq!(new_pages(&[round(2, 11), round(1, 5)]), 5);
     }
 }

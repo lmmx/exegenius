@@ -52,7 +52,8 @@ pub struct Summary {
     pub before: Kinds,
     /// Gaps on those pages in this round.
     pub after: Kinds,
-    /// Of `after`, the gaps whose passage was not reported on the page the round before.
+    /// Of `after`, the gaps not reported on the page the round before: for a symbol, the
+    /// same symbol; for a term or step, the same passage.
     pub new: Kinds,
 }
 
@@ -88,11 +89,17 @@ fn same_passage(a: &str, b: &str) -> bool {
     short == long || (short.len() >= 20 && long.contains(short.as_str()))
 }
 
+/// Whether `gap` was reported on the page the round before. A symbol gap is the same gap
+/// whatever sentence the auditor quoted, since rewording the sentence does not explain the
+/// symbol.
 fn reported_before(gap: &Outcome, before: &PageAudit) -> bool {
-    before
-        .gaps
-        .iter()
-        .any(|b| b.kind == gap.kind && same_passage(&b.quote, &gap.quote))
+    before.gaps.iter().any(|b| {
+        b.kind == gap.kind
+            && match gap.kind {
+                GapKind::Symbol => crate::symbols::same(&b.term, &gap.term),
+                GapKind::Term | GapKind::Step => same_passage(&b.quote, &gap.quote),
+            }
+    })
 }
 
 /// A summary of every round, in round order.
@@ -262,6 +269,32 @@ mod tests {
         summary.repeated = 0;
         summary.after.step = 40;
         assert!(stalled(&summary).is_none());
+    }
+
+    #[test]
+    fn symbol_gaps_match_by_symbol() {
+        let symbol = |term: &str, quote: &str| Outcome {
+            term: term.into(),
+            ..gap(GapKind::Symbol, quote)
+        };
+        let rounds = vec![
+            Round {
+                round: 1,
+                pages: vec![page("a", vec![symbol("s", "where $s$ is the length")])],
+            },
+            Round {
+                round: 2,
+                pages: vec![page(
+                    "a",
+                    vec![
+                        symbol("{s}", "with $s$ the number of coordinates"),
+                        symbol("t", "where $s$ is the length"),
+                    ],
+                )],
+            },
+        ];
+        let second = &summarise(&rounds)[1];
+        assert_eq!((second.after.symbol, second.new.symbol), (2, 1));
     }
 
     #[test]

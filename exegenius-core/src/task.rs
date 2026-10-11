@@ -5,10 +5,11 @@
 //! the current one has been submitted. Precedence, highest first:
 //!
 //! 1. extract (no graph yet)
-//! 2. extend (audits left candidate concepts)
-//! 3. argument (no plan of the argument for the current pages)
-//! 4. write (pages with no body, or queued for rewriting)
-//! 5. audit (pages whose audit input changed since they were last audited); a round ends
+//! 2. background (no account yet of what the reader profile covers for these sources)
+//! 3. extend (audits left candidate concepts)
+//! 4. argument (no plan of the argument for the current pages)
+//! 5. write (pages with no body, or queued for rewriting)
+//! 6. audit (pages whose audit input changed since they were last audited); a round ends
 //!    when its last audit is submitted, and the loop stops after a round with no gaps or
 //!    after `rounds` rounds
 //!
@@ -34,6 +35,9 @@ use crate::aha::{
 };
 use crate::argument::{ARGUMENT_INSTRUCTIONS, ArgumentAnswer, apply_argument, argument_task};
 use crate::audit::{AUDIT_INSTRUCTIONS, AuditAnswer, apply_audit, audit_task, record};
+use crate::background::{
+    BACKGROUND_INSTRUCTIONS, BackgroundAnswer, apply_background, background_task,
+};
 use crate::build::{BuildReport, build};
 use crate::error::{Error, Result, read, read_json, write, write_json};
 use crate::extract::{
@@ -58,6 +62,7 @@ use crate::write::{WRITE_INSTRUCTIONS, WriteAnswer, apply_write, needs_write, wr
 #[serde(tag = "kind", rename_all = "lowercase")]
 pub enum Kind {
     Extract,
+    Background,
     Extend,
     Argument,
     Write {
@@ -117,6 +122,7 @@ impl Task {
     pub fn label(&self) -> &'static str {
         match self.kind {
             Kind::Extract => "extract",
+            Kind::Background => "background",
             Kind::Extend => "extend",
             Kind::Argument => "argument",
             Kind::Write { .. } => "write",
@@ -253,6 +259,7 @@ fn render(project: &Project, task: &Task, instructions: &str, input: &str) -> St
     let answer = task.answer();
     let format = match task.kind {
         Kind::Extract => json_format::<ExtractAnswer>(),
+        Kind::Background => json_format::<BackgroundAnswer>(),
         Kind::Extend => json_format::<ExtendAnswer>(),
         Kind::Argument => json_format::<ArgumentAnswer>(),
         Kind::Audit { .. } => json_format::<AuditAnswer>(),
@@ -335,7 +342,7 @@ fn simulation_step(project: &Project, graph: &mut Graph, plan: &Plan) -> Result<
     }
     let outline = crate::outline::current(project, plan)?;
     let lens = Lens::new(project, graph, plan, outline.as_ref())?;
-    let personas = project.config.personas();
+    let personas = crate::background::personas(project, graph);
     if ablating && sim.round_runs(sim.round).next().is_none() {
         let prepared = crate::build::prepare(project, graph, plan, outline.as_ref())?;
         let n = project.config.simulation.ablations as usize;
@@ -504,6 +511,7 @@ fn issue(project: &Project, state: &mut State, items: Vec<(Kind, &str, String)>)
     for (kind, instructions, input) in items {
         let label = match &kind {
             Kind::Extract => "extract".to_string(),
+            Kind::Background => "background".to_string(),
             Kind::Extend => "extend".to_string(),
             Kind::Argument => "argument".to_string(),
             Kind::Write { page } => format!("write-{page}"),
@@ -579,6 +587,16 @@ pub fn next(project: &Project) -> Result<Next> {
                 vec![(Kind::Extract, EXTRACT_INSTRUCTIONS, input)],
             );
         };
+        // The pilot is chosen once the background has settled which concepts the reader
+        // knows, since known concepts get no page.
+        if graph.background.is_none() {
+            let input = background_task(project, &graph);
+            return issue(
+                project,
+                &mut state,
+                vec![(Kind::Background, BACKGROUND_INSTRUCTIONS, input)],
+            );
+        }
         if let Some(pilot) = &project.config.pilot
             && graph.pilot.is_none()
         {
@@ -588,7 +606,8 @@ pub fn next(project: &Project) -> Result<Next> {
             }
         }
         if !graph.candidates.is_empty() {
-            let input = extend_task(project, &graph);
+            let limit = crate::extract::new_pages(&crate::audit::load_rounds(project)?);
+            let input = extend_task(project, &graph, limit);
             return issue(
                 project,
                 &mut state,
@@ -730,9 +749,16 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
             project.save_graph(&graph)?;
             warnings
         }
+        Kind::Background => {
+            let mut graph = require(graph)?;
+            apply_background(&mut graph, parse(&path, &text)?)?;
+            project.save_graph(&graph)?;
+            Vec::new()
+        }
         Kind::Extend => {
             let mut graph = require(graph)?;
-            let warnings = apply_extend(project, &mut graph, parse(&path, &text)?)?;
+            let limit = crate::extract::new_pages(&crate::audit::load_rounds(project)?);
+            let warnings = apply_extend(project, &mut graph, parse(&path, &text)?, limit)?;
             project.save_graph(&graph)?;
             warnings
         }
