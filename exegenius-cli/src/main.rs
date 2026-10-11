@@ -13,6 +13,17 @@ use exegenius_core::task::{self, Kind, Next};
 
 const SKILL: &str = include_str!("skill.md");
 const SKILL_PATH: &str = ".claude/skills/exegenius/SKILL.md";
+/// Claude Code subagent definitions: the model and the only tools each task may use.
+const SUBAGENTS: [(&str, &str); 2] = [
+    (
+        ".claude/agents/exegenius-task.md",
+        include_str!("agents/exegenius-task.md"),
+    ),
+    (
+        ".claude/agents/exegenius-reader.md",
+        include_str!("agents/exegenius-reader.md"),
+    ),
+];
 /// Claude Code's default limit on subagents running at once; spawns past it are refused.
 const MAX_SUBAGENTS: usize = 20;
 
@@ -146,6 +157,12 @@ fn init(dir: &Path) -> anyhow::Result<()> {
     std::fs::create_dir_all(skill.parent().expect("skill path has a parent"))?;
     std::fs::write(&skill, SKILL)?;
     println!("wrote {}", skill.display());
+    for (path, definition) in SUBAGENTS {
+        let path = dir.join(path);
+        std::fs::create_dir_all(path.parent().expect("agent path has a parent"))?;
+        std::fs::write(&path, definition)?;
+        println!("wrote {}", path.display());
+    }
     println!(
         "next: put the sources in sources/, set target, reader and [[sources]] in {}, then \
          run `exegenius next` and follow what it prints until it prints `done`",
@@ -246,11 +263,16 @@ fn next(project: &Project) -> anyhow::Result<()> {
                     ),
                     None => answer.display().to_string(),
                 };
+                let agent = match t.kind {
+                    Kind::Read { .. } | Kind::Baseline { .. } => "exegenius-reader",
+                    _ => "exegenius-task",
+                };
                 println!(
-                    "{id}\n  prompt: Do the exegenius task in {file}: follow its instructions, \
-                     write the answer to {answer}, then run `exegenius submit {id}` in {root}. \
-                     If submit rejects the answer, fix the answer and submit again until it is \
-                     accepted. Reply with only \"accepted\" or the last error.\n",
+                    "{id}\n  subagent: {agent}\n  prompt: Do the exegenius task in {file}: \
+                     follow its instructions, write the answer to {answer}, then run \
+                     `exegenius submit {id}` in {root}. If submit rejects the answer, fix the \
+                     answer and submit again until it is accepted. Reply with only \
+                     \"accepted\" or the last error.\n",
                     id = t.id,
                     file = project.root.join(t.file()).display(),
                     root = project.root.display(),
@@ -258,17 +280,20 @@ fn next(project: &Project) -> anyhow::Result<()> {
             }
             let parallel = if tasks.len() > MAX_SUBAGENTS {
                 format!(
-                    "The tasks are independent: give each prompt to its own subagent. Claude \
-                     Code runs at most {MAX_SUBAGENTS} subagents at once by default, so start \
+                    "The tasks are independent: give each prompt to its own subagent of the type \
+                     named (written to .claude/agents/ by `exegenius init`). Claude Code runs at \
+                     most {MAX_SUBAGENTS} subagents at once by default, so start \
                      {MAX_SUBAGENTS} (one Agent tool call per task, in a single message) and \
                      start another each time one finishes. "
                 )
             } else if tasks.len() > 1 {
-                "The tasks are independent: give each prompt to its own subagent, all at once \
-                 (in Claude Code: one Agent tool call per task, all in a single message). "
+                "The tasks are independent: give each prompt to its own subagent of the type \
+                 named (written to .claude/agents/ by `exegenius init`), all at once (one Agent \
+                 tool call per task, all in a single message). "
                     .to_string()
             } else {
-                "Give the prompt to a subagent, or do the task yourself. ".to_string()
+                "Give the prompt to a subagent of the type named, or do the task yourself. "
+                    .to_string()
             };
             let fresh = match tasks[0].kind {
                 Kind::Audit { .. } => {
@@ -277,10 +302,9 @@ fn next(project: &Project) -> anyhow::Result<()> {
                      stand in for the reader. "
                 }
                 Kind::Read { .. } | Kind::Baseline { .. } => {
-                    "These are simulated readers: each needs a fresh subagent that has seen \
-                     nothing else, on the smallest model available (in Claude Code: model \
-                     haiku), since a less capable reader is a closer stand-in for someone new \
-                     to the subject. Never do them yourself. "
+                    "These are simulated readers: each needs a fresh exegenius-reader subagent, \
+                     which runs on the smallest model, since a less capable reader is a closer \
+                     stand-in for someone new to the subject. Never do them yourself. "
                 }
                 Kind::Grade { .. } => {
                     "Each grade task needs a fresh subagent that has seen nothing else. "
@@ -350,6 +374,9 @@ fn status(project: &Project) -> anyhow::Result<()> {
             );
         }
     }
+    if let Some(reason) = &state.stopped {
+        println!("audit rounds stopped early: {reason}");
+    }
     println!(
         "candidate concepts: {}; pages queued for rewriting: {}",
         graph.candidates.len(),
@@ -373,12 +400,17 @@ fn status(project: &Project) -> anyhow::Result<()> {
     let related: usize = graph.relations.values().map(Vec::len).sum();
     println!("relations: {related} of {edges} prerequisite edges between pages");
     let bound: usize = graph.bindings.values().map(Vec::len).sum();
-    let judged = exegenius_core::notation::load(project)?.judged;
+    let overloads = exegenius_core::notation::load(project)?;
     let unjudged = exegenius_core::notation::unjudged(project, &graph, &plan)?.len();
+    let waiting = if overloads.rounds >= exegenius_core::notation::ROUNDS {
+        "left unjudged after the last overloads round"
+    } else {
+        "awaiting a verdict"
+    };
     println!(
         "symbols: {bound} bound on pages; letters with two meanings: {} confirmed, {unjudged} \
-         awaiting a verdict",
-        judged.iter().filter(|j| !j.same).count()
+         {waiting}",
+        overloads.judged.iter().filter(|j| !j.same).count()
     );
     let support = exegenius_core::support::load(project)?;
     if !support.judged.is_empty() {

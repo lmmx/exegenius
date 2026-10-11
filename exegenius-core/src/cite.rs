@@ -94,6 +94,52 @@ fn replace(body: &str, f: impl Fn(&Mark) -> String) -> String {
 }
 
 /// `body` without its citation marks.
+/// Words that, just before a citation mark, make the sentence need the quoted text: "the
+/// paper states the bound as <cite>…</cite>". Readers see the mark as a reference and
+/// audits see the page without it, so such a sentence reaches them unfinished.
+const LEADS: [&str; 10] = [
+    "that", "as", "states", "says", "is", "are", "gives", "reads", "writes", "notes",
+];
+
+/// An error for each citation mark whose sentence needs the quoted words to be complete:
+/// one that follows a colon or a word in [`LEADS`].
+pub fn dangling(body: &str) -> Vec<String> {
+    let (found, _) = marks(body);
+    let mut errors = Vec::new();
+    let mut from = 0;
+    for mark in found {
+        let before = body[from..mark.range.start].trim_end();
+        from = mark.range.end;
+        let last = before
+            .rsplit(|c: char| c.is_whitespace())
+            .next()
+            .unwrap_or("")
+            .to_lowercase();
+        if before.ends_with(':') || LEADS.contains(&last.as_str()) {
+            let tail: String = before
+                .chars()
+                .rev()
+                .take(40)
+                .collect::<Vec<_>>()
+                .into_iter()
+                .rev()
+                .collect();
+            errors.push(format!(
+                "the sentence ending \"…{tail}\" needs the quoted words of its citation to be \
+                 complete, but readers see a citation as a reference such as \"(see p. 5)\": \
+                 state the claim in your own words, then cite"
+            ));
+        }
+    }
+    errors
+}
+
+/// `body` with each citation mark shown as "(cited)", as an auditor sees it: the reader can
+/// tell a claim is backed by the source without seeing the quotation.
+pub fn referenced(body: &str) -> String {
+    replace(body, |_| " (cited)".to_string())
+}
+
 pub fn strip(body: &str) -> String {
     replace(body, |_| String::new())
 }
@@ -130,6 +176,23 @@ pub fn render(body: &str, sources: &[Source]) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn citations_must_not_carry_the_sentence() {
+        let whole = "The cost is $O(n)$ <cite data-source=\"p\">costs O(n)</cite>.";
+        assert!(dangling(whole).is_empty());
+        let states = "The paper states the bound as <cite data-source=\"p\">O(n)</cite>.";
+        assert_eq!(dangling(states).len(), 1);
+        let colon = "In short: <cite data-source=\"p\">it is exact</cite>. And so \
+                     <cite data-source=\"p\">so</cite>";
+        assert_eq!(dangling(colon).len(), 1);
+    }
+
+    #[test]
+    fn auditors_see_citations_as_references() {
+        let body = "The cost is linear <cite data-source=\"p\">costs O(n)</cite>.";
+        assert_eq!(referenced(body), "The cost is linear (cited).");
+    }
     use std::path::Path;
 
     fn sources() -> Vec<Source> {

@@ -156,7 +156,15 @@ pub struct Judged {
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct Overloads {
     pub judged: Vec<Judged>,
+    /// Overloads tasks applied so far. A rewrite that rewords a meaning makes a new
+    /// candidate, so verdicts could queue rewrites without end; after [`ROUNDS`], candidates
+    /// go unjudged.
+    #[serde(default)]
+    pub rounds: u32,
 }
+
+/// Most overloads tasks per wiki, as support checks are limited per page.
+pub const ROUNDS: u32 = 2;
 
 /// Overload candidates for the planned pages, in reading order. Pairs whose display names
 /// or meanings are the same words are left out.
@@ -294,6 +302,7 @@ pub fn apply_overloads(
             note: v.note.trim().to_string(),
         });
     }
+    overloads.rounds += 1;
     write_json(&project.overloads_path(), &overloads)
 }
 

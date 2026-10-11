@@ -162,11 +162,15 @@ concept. A symbol in a known concept's name that is listed with no meaning is no
 Submit checks that each symbol is in the page's mathematics, that each quote is on the page \
 and contains the symbol, and that the named page or concept binds it.
 
-Terms and steps: a term or step is followable if the reader knows it, the page explains it, \
-or the page links it to another wiki page. Report every term or step on the page that the \
-reader cannot follow:
-- term: a named concept the reader does not know, which the page neither explains nor links.
-- step: an inference, calculation or claim the reader cannot check from what the page gives.
+Terms and steps: report what would stop this reader at this point on the page. A term or \
+step is followable if the reader knows it, the page explains it, or the page links it to \
+another wiki page. A claim marked \"(cited)\" is attributed to the source, which the reader \
+can consult: it is followable by reference, so do not report it as a step.
+- term: a named concept the reader does not know, which the page neither explains nor links. \
+References to the documents themselves (the paper, the sources, the target result) are not \
+terms.
+- step: an inference, calculation or claim that the page presents as following from what it \
+gives, which the reader cannot check from what the page gives.
 
 Copy each quote from the page exactly, character for character, and keep it short: submit \
 rejects quotes it cannot find on the page. Do not report anything the reader can follow. \
@@ -182,7 +186,7 @@ pub fn audit_task(project: &Project, graph: &Graph, plan: &Plan, i: usize, body:
         .filter_map(|id| graph.get(id))
         .map(|p| format!("- {}", link(p)))
         .collect();
-    let page = crate::cite::strip(body);
+    let page = crate::cite::referenced(body);
     // Only the bindings whose symbol is on this page: the rest cannot help the auditor, and
     // leaving them out keeps this task unchanged when unrelated pages change.
     let page_math = symbols::math(&page);
@@ -304,7 +308,7 @@ pub fn apply_audit(
     mut answer: AuditAnswer,
 ) -> Result<PageAudit> {
     let page = &plan.order[i];
-    let stripped = crate::cite::strip(body);
+    let stripped = crate::cite::referenced(body);
     let normalised = normalise(&stripped);
     let mut errors: Vec<String> = answer
         .gaps
@@ -404,7 +408,9 @@ fn apply_gaps(graph: &mut Graph, page: &str, known: &TermIndex, gaps: Vec<Gap>) 
                 graph.queue_rewrite(
                     page,
                     Some(format!(
-                        "The reader cannot follow this step: \"{}\" ({})",
+                        "The reader cannot follow this step: \"{}\" ({}). Either give the \
+                         reasoning, or attribute the step to the source with a citation; \
+                         choose whichever needs fewer words.",
                         gap.quote, gap.note
                     )),
                 );

@@ -39,12 +39,16 @@ pub const WRITE_INSTRUCTIONS: &str = "\
 Write one page of an explanatory wiki. The wiki explains a target result from source \
 documents to a specific reader, one concept per page, in reading order.
 
-- Open with one or two sentences that say what the concept is and what it is for on the way \
-to the target (the step of the argument it presents, and the pages that build on it, are \
-listed below), so a reader arriving from a link knows at once why the page matters.
-- If the page presents a step of the argument, explain how its method shows its claim. Give \
-the reader every motivation the task marks as not stated by the sources: the sources will \
-not.
+- Write for this reader's next uncertainty: at each point, give what they need to follow, \
+and no more. The task lists the step of the argument this page presents, its motivations, \
+and the pages around it. They are material for deciding what to say, not a list to cover: \
+explain the transitions this reader would find hard, and leave familiar ones to ordinary \
+sentences.
+- Open with a sentence that says what the concept is and what it is for on the way to the \
+target.
+- If the page presents a step of the argument, say how its method shows its claim, and give \
+its main motivation in a sentence. Add another motivation only if the reader would be stuck \
+without it.
 - Explain the page's concept so that this reader can follow it using only what they already \
 understand (listed below), what this page itself explains, and the linked prerequisite pages.
 - Define any other technical term on this page, where it is first used.
@@ -57,26 +61,27 @@ letter, or say on the page that the letter changes meaning here.
 - Link each prerequisite page the first time you rely on it, using the exact markdown link \
 given. You may also link the other pages listed. Submit rejects links to anything else in \
 the wiki; external URLs are allowed.
-- For each prerequisite page, say in a sentence what this page uses it for, and give that \
-sentence as a relation: the prerequisite's id, a predicate, and the sentence copied exactly. \
-The page shows the relation as \"<this page's concept> *<predicate>* <prerequisite>\", so pick a \
-predicate that makes that a true sentence, with this page's concept as subject and the \
-prerequisite as object: \"is reduced to\", \"computes its transforms by\", \"is based on\", \
-\"follows from\", \"bounds the cost of\". If the sentence says \"the transforms are reduced by \
-X\", the predicate is \"reduces its transforms by\", not \"are reduced to\". Build the predicate \
-from the sentence's own words (other forms of a word count: \"reduces\" for \"reduced\"); the \
-sentence must link or name the prerequisite. Pick the predicate that says what the \
-prerequisite does for this page: \"uses\" says little.
-- Stay accurate to the sources: read the parts you need (search for the evidence quotes). \
-State only what the sources support or what is standard background; do not invent results, \
-constants or attributions.
-- Back each specific claim taken from a source (a result, a constant, a construction step) \
-with the source text it rests on, right after the claim: \
+- For each prerequisite page, give a relation: the prerequisite's id, a predicate, and the \
+sentence that links or names it, copied exactly. Use the sentence where the page relies on \
+it; do not add a sentence for the purpose. The page shows the relation as \"<this page's \
+concept> *<predicate>* <prerequisite>\", so pick a predicate that makes that a true \
+sentence, with this page's concept as subject: \"is reduced to\", \"computes its transforms \
+by\", \"is based on\", \"follows from\", \"bounds the cost of\". Build the predicate from the \
+sentence's own words (other forms of a word count: \"reduces\" for \"reduced\"), and pick one \
+that says what the prerequisite does for this page: \"uses\" says little.
+- Stay accurate to the sources. The paragraphs around the evidence are given below; read \
+further in the sources only if they are not enough. State only what the sources support or \
+what is standard background; do not invent results, constants or attributions.
+- Cite the results and constants a reader may want to check, right after the claim: \
 `<cite data-source=\"id\">text copied word for word from that source</cite>`. Readers see \
-these as \"(see p. 5)\"-style references, hidden until they ask for them. Submit rejects \
-text not found in the named source. Do not cite common background.
-- Be concrete and specific. Give a small worked example where it makes the idea clearer. \
-No filler, no rhetorical flourishes, no announcing what the page will do.
+these as \"(see p. 5)\"-style references, hidden until they ask for them, so the sentence \
+must read complete without the quoted words: write \"the cost is $O(n \\log n)$ <cite …>…\
+</cite>\", not \"the paper states the cost as <cite …>…</cite>\". Submit rejects a citation \
+right after \"that\", \"as\", \"states\", \"says\", \"is\", \"gives\", \"reads\" or a colon, \
+and text not found in the named source. Do not cite common background.
+- Keep the page short. The task gives its word limit, counted without mathematics and \
+citations, and submit rejects a longer page. Give a small worked example where it makes the \
+idea clearer. No filler, no rhetorical flourishes, no announcing what the page will do.
 - Write mathematics in LaTeX: $...$ inline, $$...$$ on its own lines for display.
 - Do not write a title heading, a prerequisites list or a sources section: those are added \
 automatically. Use ## subheadings only if the page is long.";
@@ -302,10 +307,16 @@ pub fn write_task(project: &Project, graph: &Graph, plan: &Plan, i: usize) -> Re
         let quotes: Vec<String> = c
             .evidence
             .iter()
-            .map(|e| format!("- \"{}\" ({})", e.quote, e.source))
+            .map(|e| {
+                let mut entry = format!("- \"{}\" ({})", e.quote, e.source);
+                if let Some(paragraph) = passage(project, &e.source, &e.quote) {
+                    entry.push_str(&format!("\n\n  > {paragraph}\n"));
+                }
+                entry
+            })
             .collect();
         task.push_str(&format!(
-            "\n## Evidence from the sources\n\n{}\n",
+            "\n## Evidence from the sources, with the paragraph around each quote\n\n{}\n",
             quotes.join("\n")
         ));
     }
@@ -322,14 +333,19 @@ pub fn write_task(project: &Project, graph: &Graph, plan: &Plan, i: usize) -> Re
                 notes.join("\n")
             ));
         }
-        let words = crate::cite::strip(&previous).split_whitespace().count();
+        let words = prose_words(&previous);
         task.push_str(&format!(
-            "\n## Previous version (revise it)\n\nIt has {words} words. Fix the problems by \
-             restructuring rather than appending: keep the rewrite within {} words, a quarter \
-             more, unless a problem cannot be fixed without more. Pages that grow with every \
+            "\n## Previous version (revise it)\n\nIt has {words} words, not counting \
+             mathematics and citations. Fix the problems by restructuring rather than \
+             appending: submit rejects a rewrite over {} words. Pages that grow with every \
              repair stop being self-contained explanations of one concept.\n\n{}\n",
             budget(words),
             previous.trim()
+        ));
+    } else {
+        task.push_str(&format!(
+            "\n## Length\n\nAt most {FIRST_DRAFT_WORDS} words, not counting mathematics and \
+             citations: submit rejects a longer page.\n"
         ));
     }
     Ok(task)
@@ -369,6 +385,26 @@ pub fn apply_write(
         })
         .collect();
     errors.extend(crate::cite::check(body, &project.sources));
+    errors.extend(crate::cite::dangling(body));
+    let words = prose_words(body);
+    match project.page_body(page)? {
+        Some(previous) => {
+            let before = prose_words(&previous);
+            if words > budget(before) {
+                errors.push(format!(
+                    "the rewrite has {words} words, over the budget of {} (the previous version \
+                     had {before}), not counting mathematics and citations: fix the problems by \
+                     restructuring, and cut what this reader does not need",
+                    budget(before)
+                ));
+            }
+        }
+        None if words > FIRST_DRAFT_WORDS => errors.push(format!(
+            "the page has {words} words, over the limit of {FIRST_DRAFT_WORDS}, not counting \
+             mathematics and citations: keep what this reader needs to follow the page"
+        )),
+        None => {}
+    }
     errors.extend(symbols::check_page(body, &mut fields.symbols));
     errors.extend(relations::check(
         body,
@@ -393,20 +429,6 @@ pub fn apply_write(
             )
         })
         .collect();
-    let mut warnings = warnings;
-    if let Some(previous) = project.page_body(page)? {
-        let (before, after) = (
-            crate::cite::strip(&previous).split_whitespace().count(),
-            crate::cite::strip(body).split_whitespace().count(),
-        );
-        if after > budget(before) {
-            warnings.push(format!(
-                "`{page}`: the rewrite has {after} words, over the budget of {} (the previous \
-                 version had {before})",
-                budget(before)
-            ));
-        }
-    }
     project.save_page_body(page, &format!("{}\n", body.trim()))?;
     graph.rewrite.remove(page);
     if fields.symbols.is_empty() {
@@ -422,10 +444,56 @@ pub fn apply_write(
     Ok(warnings)
 }
 
-/// The most words a rewrite of a page of `words` words should have: a quarter more, and
-/// at least 50 more for short pages.
+/// Most words of prose in a first draft. The 0.1 run's pages had a median of 221; the
+/// 0.5.0 run's first drafts, with no limit, had a median of 621.
+pub const FIRST_DRAFT_WORDS: usize = 350;
+
+/// The most words a rewrite of a page of `words` words may have: a quarter more, and at
+/// least 50 more for short pages.
 fn budget(words: usize) -> usize {
     words + (words / 4).max(50)
+}
+
+/// Words of prose in a page body: citation marks and mathematics are not counted.
+pub fn prose_words(body: &str) -> usize {
+    let text = crate::cite::strip(body);
+    Parser::new_ext(&text, Options::ENABLE_MATH)
+        .filter_map(|event| match event {
+            Event::Text(t) => Some(t.split_whitespace().count()),
+            _ => None,
+        })
+        .sum()
+}
+
+/// The longest passage given around an evidence quote, in bytes.
+const PASSAGE: usize = 1500;
+
+/// The paragraph of source `source` around `quote`, cut to about [`PASSAGE`] bytes around
+/// the quote when the paragraph is longer.
+fn passage(project: &Project, source: &str, quote: &str) -> Option<String> {
+    let s = project.sources.iter().find(|s| s.id == source)?;
+    let text = crate::error::read(&project.root.join(&s.path)).ok()?;
+    let at = crate::text::locate(&text, quote)?;
+    let mut start = text[..at.start].rfind("\n\n").map_or(0, |i| i + 2);
+    let mut end = text[at.end..]
+        .find("\n\n")
+        .map_or(text.len(), |i| at.end + i);
+    if end - start > PASSAGE {
+        let margin = PASSAGE.saturating_sub(at.len()) / 2;
+        start = start.max(at.start.saturating_sub(margin));
+        end = end.min(at.end + margin);
+        while !text.is_char_boundary(start) {
+            start += 1;
+        }
+        while !text.is_char_boundary(end) {
+            end -= 1;
+        }
+    }
+    let passage = text[start..end]
+        .split_whitespace()
+        .collect::<Vec<_>>()
+        .join(" ");
+    Some(passage)
 }
 
 /// Drop a leading `# Title` line, which the build adds itself.
@@ -505,6 +573,13 @@ pub fn fix_links(body: &str, pages: &HashSet<String>) -> (String, Vec<String>, H
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn prose_words_leave_out_mathematics_and_citations() {
+        let body = "Take $r = 4$ records.\n\n$$\\sum_{i=1}^{r} x_i$$\n\nThe sum is exact \
+                    <cite data-source=\"p\">the sum is exact for all inputs</cite>.";
+        assert_eq!(prose_words(body), 6);
+    }
 
     #[test]
     fn broken_links_become_text() {

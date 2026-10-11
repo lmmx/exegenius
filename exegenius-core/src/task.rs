@@ -166,6 +166,9 @@ pub struct State {
     /// For each page, the hash of the audit input it was last audited with.
     pub audited: BTreeMap<String, String>,
     pub done: bool,
+    /// Why the audit rounds ended before `rounds`, if rewrites stopped reducing gaps.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub stopped: Option<String>,
 }
 
 impl Default for State {
@@ -177,6 +180,7 @@ impl Default for State {
             pending: Vec::new(),
             audited: BTreeMap::new(),
             done: false,
+            stopped: None,
         }
     }
 }
@@ -619,7 +623,11 @@ pub fn next(project: &Project) -> Result<Next> {
                 let input = outline_task(project, &graph, &plan)?;
                 items.push((Kind::Outline, OUTLINE_INSTRUCTIONS, input));
             }
-            let candidates = crate::notation::unjudged(project, &graph, &plan)?;
+            let candidates = if crate::notation::load(project)?.rounds < crate::notation::ROUNDS {
+                crate::notation::unjudged(project, &graph, &plan)?
+            } else {
+                Vec::new()
+            };
             if !candidates.is_empty() {
                 let input = overloads_task(&graph, &candidates);
                 items.push((Kind::Overloads, OVERLOADS_INSTRUCTIONS, input));
@@ -888,9 +896,17 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
         .iter()
         .any(|t| matches!(t.kind, Kind::Audit { .. }));
     if matches!(task.kind, Kind::Audit { .. }) && !audits_left {
-        // The round is over: finish if it found nothing, else start the next one.
+        // The round is over: finish if it found nothing or rewrites stopped reducing gaps,
+        // else start the next one.
+        let stall = crate::convergence::summarise(&crate::audit::load_rounds(project)?)
+            .into_iter()
+            .find(|s| s.round == state.round)
+            .and_then(|s| crate::convergence::stalled(&s));
         if state.round_gaps == 0 {
             state.done = true;
+        } else if let Some(reason) = stall {
+            state.done = true;
+            state.stopped = Some(reason);
         } else {
             state.round += 1;
             state.round_gaps = 0;

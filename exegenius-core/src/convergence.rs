@@ -56,6 +56,26 @@ pub struct Summary {
     pub new: Kinds,
 }
 
+/// Why the audit rounds should end after `summary`'s round, if they should: on the pages
+/// audited in this round and the one before, rewrites did not at least halve the step and
+/// symbol gaps, the kinds a rewrite is meant to fix. Term gaps are left out, as extend
+/// resolves them into pages. The 0.1 run's rounds halved them (28 to 10, 16 to 2); the
+/// 0.5.0 run's and the baseline pilot's did not (202 to 282, 34 to 34).
+pub fn stalled(summary: &Summary) -> Option<String> {
+    let before = summary.before.step + summary.before.symbol;
+    let after = summary.after.step + summary.after.symbol;
+    (summary.repeated > 0 && before > 0 && after * 2 > before).then(|| {
+        format!(
+            "after audit round {}, step and symbol gaps on the {} pages also audited in round {} \
+             went from {before} to {after}, not to half or fewer, so rewrites were not \
+             converging",
+            summary.round,
+            summary.repeated,
+            summary.round - 1
+        )
+    })
+}
+
 /// Whether two reported passages are the same: equal once normalised, or one inside the
 /// other when the shorter is long enough not to match by chance.
 fn same_passage(a: &str, b: &str) -> bool {
@@ -205,6 +225,43 @@ mod tests {
         // The step's passage contains the earlier one, which is long enough to count; the
         // short term matches only exactly, which it does.
         assert_eq!(second.new, Kinds::default());
+    }
+
+    #[test]
+    fn rounds_stall_when_rewrites_do_not_halve_steps_and_symbols() {
+        let mut summary = Summary {
+            round: 2,
+            pages: 7,
+            gaps: Kinds::default(),
+            repeated: 7,
+            before: Kinds {
+                term: 12,
+                step: 23,
+                symbol: 11,
+            },
+            after: Kinds {
+                term: 6,
+                step: 21,
+                symbol: 13,
+            },
+            new: Kinds::default(),
+        };
+        assert!(stalled(&summary).is_some());
+        // The 0.1 run's first comparison: symbols held at 8, but steps fell from 20 to 2.
+        summary.before = Kinds {
+            term: 16,
+            step: 20,
+            symbol: 8,
+        };
+        summary.after = Kinds {
+            term: 5,
+            step: 2,
+            symbol: 8,
+        };
+        assert!(stalled(&summary).is_none());
+        summary.repeated = 0;
+        summary.after.step = 40;
+        assert!(stalled(&summary).is_none());
     }
 
     #[test]

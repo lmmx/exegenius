@@ -31,8 +31,10 @@ mkdir my-explainer && cd my-explainer
 exegenius init
 ```
 
-`init` writes `exegenius.toml`, a `sources/` directory, and a Claude Code skill at
-`.claude/skills/exegenius/SKILL.md`. Put the sources in `sources/` (plain text or markdown;
+`init` writes `exegenius.toml`, a `sources/` directory, a Claude Code skill at
+`.claude/skills/exegenius/SKILL.md`, and two subagent definitions in `.claude/agents/`:
+`exegenius-task` and `exegenius-reader` (on the smallest model, for simulated readers), each
+limited to the Read, Write and Bash tools. `next` names the definition to use for each task. Put the sources in `sources/` (plain text or markdown;
 convert PDFs to text first) and edit `exegenius.toml`:
 
 ```toml
@@ -73,8 +75,8 @@ sources or the other pages.
 |---|---|---|
 | extract | decomposes the sources into concepts with prerequisites and verbatim quotes; a name with mathematics in it also gets a title in LaTeX and a binding for each symbol (display name, meaning, direct or count) | slug ids, unique ids, known `requires`, a target, no cycles, every quote found verbatim in its source, every bound symbol in the title's mathematics |
 | argument | reconstructs the plan of the sources' argument as a tree of steps: each step to show a claim has a method, a motivation (stated by the sources, recoverable from them, or supplied) and sub-steps; each step to infer quotes the sources; each page presents one step or is a concept some step relies on | the root shows the target on the target page; infer steps quote the sources word for word, in depth-first order unless marked out of order; explicit motivations quote the sources; hypotheses are known or earlier pages; every page is used |
-| write | writes one page body, in reading order, using only what the reader knows, terms it defines, and the prerequisite pages it links; lists the symbols the page binds, each with the sentence that says what it denotes, and for each prerequisite page a relation: a predicate ("is reduced to") and the sentence that states it | no links to anything that is not a page; each bound symbol in the page's mathematics, its quote on the page, covering the symbol and not after its first use; a relation for every prerequisite page, its sentence on the page, linking or naming the prerequisite and containing the predicate's words; adds title, prerequisites, used-by and sources from the graph |
-| audit | told exactly what the reader knows at that page, lists every term or step they cannot follow, and accounts for every symbol in the page's mathematics: bound on the page, on an earlier page, in a known concept's name, by the reader's background, or unbound | every quote is on the page and holds its symbol; every named page or concept binds the symbol; every symbol the writer bound is accounted for; drops terms the reader knows; turns the rest into prerequisite edges, candidate concepts or rewrite notes |
+| write | writes one page body, in reading order, for the reader's next uncertainty: the argument step, motivations and neighbouring pages are material to choose from, not items to cover; given the paragraph of the sources around each evidence quote; lists the symbols the page binds, each with the sentence that says what it denotes, and for each prerequisite page a relation: a predicate ("is reduced to") and the sentence that states it | no links to anything that is not a page; each bound symbol in the page's mathematics, its quote on the page, covering the symbol and not after its first use; a relation for every prerequisite page, its sentence on the page, linking or naming the prerequisite and containing the predicate's words; at most 350 words of prose (mathematics and citations not counted) for a first draft, and a rewrite at most a quarter longer than the page it replaces; no citation mark the sentence needs to be complete (after "that", "as", "states" or a colon); adds title, prerequisites, used-by and sources from the graph |
+| audit | told exactly what the reader knows at that page, lists what would stop them at that point (a step the page cites from the sources is followable by reference, and references to the documents are not terms), and accounts for every symbol in the page's mathematics: bound on the page, on an earlier page, in a known concept's name, by the reader's background, or unbound | every quote is on the page and holds its symbol; every named page or concept binds the symbol; every symbol the writer bound is accounted for; drops terms the reader knows; turns the rest into prerequisite edges, candidate concepts or rewrite notes |
 | extend | resolves the candidate concepts audits found into existing or new concepts | same checks as extract; adds the edges and queues the pages for rewriting |
 
 | outline | groups the final pages into parts, folds minor terminology pages into a glossary, and writes the front page overview and part intros | every page in exactly one part or the glossary, the target not in the glossary, no page in a part before one of its prerequisites, links only to pages |
@@ -96,6 +98,9 @@ Rounds of write and audit repeat until an audit round finds no gaps, or `rounds`
 run. Only pages whose audit input changed are audited again. `exegenius status` shows, for
 each round, the gaps per page by kind and, on the pages also audited the round before, how
 many gaps remain and how many are new: a converging run has fewer each round, and few new.
+If rewrites do not at least halve the step and symbol gaps on the pages audited in two
+rounds running, the audit rounds stop there and `status` says why. Overloads tasks stop
+after two rounds.
 
 A pilot runs the same loop on a small part of the target, to see whether it converges
 before paying for a full run:
@@ -147,7 +152,8 @@ uncited, multi-page goals answered from one page) and of collapse (page length r
 round); with several reader profiles, a comparison across them; each reader's path,
 searches, answer, stuck points and contradicted key points; and the pages readers got stuck
 on most. Rewrite tasks give the writer a length budget of a quarter more than the previous
-version, and submit warns past it, so repairs restructure pages rather than append to them.
+version, and submit rejects a rewrite past it, so repairs restructure pages rather than
+append to them.
 The goals and the report stay out of `docs/`.
 
 The report also lists candidates for the sentences that close a chain of reasoning, each
@@ -200,7 +206,8 @@ knows = "High-school algebra"
   carries its one-line definition as a tooltip.
 - **Navigation:** breadcrumbs, previous and next links in reading order, and search.
 - **Source references:** writers can back a claim with
-  `<cite data-source="id">source text</cite>`, which submit checks word for word. Pages
+  `<cite data-source="id">source text</cite>`, which submit checks word for word; the
+  sentence must read complete without the quoted words. Pages
   show it as "(see §3.2 Gaussian resampling, p. 5)", located by the source's section
   headings and form-feed page breaks (as `pdftotext` writes them), hidden until a reader
   presses "Show sources" (`[site] citations = "shown"` makes them visible by default).

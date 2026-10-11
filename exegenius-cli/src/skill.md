@@ -18,9 +18,11 @@ and writing it asks for, task by task, until it reports done.
    `exegenius submit <id>` until the answer is accepted. Claude Code runs at most 20
    subagents at once by default: for a larger batch, start 20 and start another each time
    one finishes.
-3. Audit tasks must each go to a fresh subagent that has seen nothing else: the auditor
-   stands in for a reader who has not read the sources or the other pages. Do not do
-   audits yourself.
+3. Use the subagent type `exegenius next` names for each task: `exegenius-task`, or
+   `exegenius-reader` for simulated readers. `exegenius init` writes both to
+   `.claude/agents/`, each with its model and the only tools it may use. Audit tasks must
+   each go to a fresh subagent that has seen nothing else: the auditor stands in for a
+   reader who has not read the sources or the other pages. Do not do audits yourself.
 4. When every task in the batch is accepted, go back to step 1.
 5. Once the pages are final, `exegenius next` hands out the outline task (group the pages
    into parts, fold minor pages into a glossary, write the front page) and, if a page
@@ -29,8 +31,8 @@ and writing it asks for, task by task, until it reports done.
 6. Then come the simulated readers: a goals task, then rounds of read and baseline tasks
    (each read task explores the wiki with `exegenius read` and `exegenius search`), grade
    tasks, and rewrites of the pages readers got stuck on. Every read, baseline and grade
-   task needs its own fresh subagent, on the smallest model available (model haiku) for
-   read and baseline tasks. Never do them yourself: you have seen the sources and pages.
+   task needs its own fresh subagent, `exegenius-reader` for read and baseline tasks.
+   Never do them yourself: you have seen the sources and pages.
 7. When `exegenius next` prints `done`, the wiki is in `docs/` with a `zensical.toml`, and
    the simulated readers' results are in `exegenius/report.md`. Run `exegenius status`
    and report it.
