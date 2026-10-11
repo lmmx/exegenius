@@ -137,6 +137,26 @@ pub struct Round {
     pub pages: Vec<PageAudit>,
 }
 
+/// How a rewrite note for a step gap begins.
+pub const STEP_NOTE: &str = "The reader cannot follow this step:";
+
+/// The sentences of `body` that are not in `previous`, normalised, as audits see both
+/// (citation marks shown as "(cited)").
+pub fn added(previous: &str, body: &str) -> Vec<String> {
+    let sentences = |text: &str| -> Vec<String> {
+        let text = crate::cite::referenced(text);
+        text.split_inclusive(['.', '?', '!', '\n'])
+            .map(normalise)
+            .filter(|s| s.chars().any(char::is_alphanumeric))
+            .collect()
+    };
+    let before = sentences(previous);
+    sentences(body)
+        .into_iter()
+        .filter(|s| !before.contains(s))
+        .collect()
+}
+
 pub const AUDIT_INSTRUCTIONS: &str = "\
 Audit one page of an explanatory wiki on behalf of a specific reader. Use only this task \
 file: do not read the sources, other pages or any other file.
@@ -382,6 +402,10 @@ pub fn apply_audit(
     Ok(audit)
 }
 
+/// The action recorded for a step reported inside reasoning a rewrite added for an earlier
+/// step.
+pub const LEFT: &str = "left: a step inside reasoning a rewrite added for an earlier step";
+
 fn apply_gaps(graph: &mut Graph, page: &str, known: &TermIndex, gaps: Vec<Gap>) -> PageAudit {
     let mut audit = PageAudit {
         page: page.to_string(),
@@ -403,12 +427,20 @@ fn apply_gaps(graph: &mut Graph, page: &str, known: &TermIndex, gaps: Vec<Gap>) 
                 .push(outcome("dropped: the reader already knows this".into()));
             continue;
         }
+        let inside_added = graph
+            .added
+            .get(page)
+            .is_some_and(|added| added.iter().any(|s| contains_quote(s, &gap.quote)));
+        if gap.kind == GapKind::Step && inside_added {
+            audit.dropped.push(outcome(LEFT.into()));
+            continue;
+        }
         let action = match gap.kind {
             GapKind::Step => {
                 graph.queue_rewrite(
                     page,
                     Some(format!(
-                        "The reader cannot follow this step: \"{}\" ({}). Either give the \
+                        "{STEP_NOTE} \"{}\" ({}). Either give the \
                          reasoning, or attribute the step to the source with a citation; \
                          choose whichever needs fewer words.",
                         gap.quote, gap.note
@@ -756,5 +788,40 @@ mod tests {
             "rewrite: say what the symbol denotes at its first use"
         );
         assert!(g.rewrite["page"][0].contains("uses it before saying so"));
+    }
+
+    #[test]
+    fn added_sentences_are_those_not_in_the_previous_version() {
+        let previous = "It is even, so we halve it. Then we stop.";
+        let body = "It is even, so we halve it. One of $n$ and $n-1$ is even. Then we stop.";
+        assert_eq!(added(previous, body), vec!["One of $n$ and $n-1$ is even."]);
+    }
+
+    #[test]
+    fn steps_inside_added_reasoning_are_left() {
+        let mut g = graph("p", vec![concept("p", &[], false)]);
+        g.added.insert(
+            "p".into(),
+            vec!["One of two consecutive integers is even, so the product is even.".into()],
+        );
+        let step = |quote: &str| Gap {
+            term: "step".into(),
+            quote: quote.into(),
+            kind: GapKind::Step,
+            note: "why".into(),
+        };
+        let audit = apply_gaps(
+            &mut g,
+            "p",
+            &TermIndex::default(),
+            vec![
+                step("One of two consecutive integers is even"),
+                step("so we can halve it"),
+            ],
+        );
+        assert_eq!(audit.dropped.len(), 1);
+        assert_eq!(audit.dropped[0].action, LEFT);
+        assert_eq!(audit.gaps.len(), 1);
+        assert_eq!(g.rewrite["p"].len(), 1);
     }
 }

@@ -413,9 +413,9 @@ pub fn apply_write(
             ));
         }
     }
-    match previous {
+    match &previous {
         Some(previous) => {
-            let before = prose_words(&previous);
+            let before = prose_words(previous);
             if words > budget(before) {
                 errors.push(format!(
                     "the rewrite has {words} words, over the budget of {} (the previous version \
@@ -455,6 +455,20 @@ pub fn apply_write(
             )
         })
         .collect();
+    let answers_steps = graph
+        .rewrite
+        .get(page)
+        .is_some_and(|notes| notes.iter().any(|n| n.starts_with(crate::audit::STEP_NOTE)));
+    match &previous {
+        Some(previous) if answers_steps => {
+            graph
+                .added
+                .insert(page.to_string(), crate::audit::added(previous, body));
+        }
+        _ => {
+            graph.added.remove(page);
+        }
+    }
     project.save_page_body(page, &format!("{}\n", body.trim()))?;
     graph.rewrite.remove(page);
     if fields.symbols.is_empty() {

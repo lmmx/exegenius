@@ -80,6 +80,11 @@ pub struct Graph {
     /// In a pilot, the concept the pilot explains in place of the target.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pilot: Option<String>,
+    /// The sentences the latest rewrite of each page added in answer to step notes. A step
+    /// reported inside one is not sent back for more reasoning: each step is explained one
+    /// level deep, so explanations cannot regress without end.
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub added: BTreeMap<String, Vec<String>>,
     /// What the reader profile covers for these sources, from the background task.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub background: Option<String>,

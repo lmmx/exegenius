@@ -377,6 +377,18 @@ fn status(project: &Project) -> anyhow::Result<()> {
             );
         }
     }
+    let left = load_rounds(project)?
+        .iter()
+        .flat_map(|r| &r.pages)
+        .flat_map(|p| &p.dropped)
+        .filter(|g| g.action == exegenius_core::audit::LEFT)
+        .count();
+    if left > 0 {
+        println!(
+            "steps left unexplained because they are inside reasoning a rewrite added for an \
+             earlier step: {left}"
+        );
+    }
     if let Some(reason) = &state.stopped {
         println!("audit rounds stopped early: {reason}");
     }
