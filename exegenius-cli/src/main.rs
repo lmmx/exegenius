@@ -98,6 +98,13 @@ enum Command {
         #[arg(required = true)]
         words: Vec<String>,
     },
+    /// Give the background task again, with a correction of what it said the reader knows
+    /// (only right after `next` shows the background)
+    Background {
+        /// What to correct, in plain words
+        #[arg(long)]
+        redo: String,
+    },
     /// Show progress
     Status,
     /// Print the pages needed to reach the target, in reading order
@@ -241,6 +248,17 @@ fn next(project: &Project) -> anyhow::Result<()> {
                 );
             }
         }
+        Next::Background { profile, known } => {
+            println!(
+                "The reader, as every later task will be told:\n\n{profile}\n\nKnown to the \
+                 reader, so given no page: {}\n\nIf a person is following this run, show them \
+                 this and ask whether it describes the reader they mean. If they correct it, run \
+                 `exegenius background --redo \"<their correction>\"`, then `exegenius next`. \
+                 If no one is following the run (for example under `claude -p`), run `exegenius \
+                 next` now.",
+                known.join(", ")
+            );
+        }
         Next::Tasks { round, tasks } => {
             let mut labels: Vec<&str> = Vec::new();
             for t in &tasks {
@@ -344,7 +362,7 @@ fn status(project: &Project) -> anyhow::Result<()> {
         println!("pilot: {pilot} ({name}), the part of the target this run explains");
     }
     if let Some(background) = &graph.background {
-        println!("reader, for these sources: {background}");
+        println!("reader, for these sources: {}", background.summary);
     }
     println!(
         "concepts: {} ({known} known to the reader); pages: {written} written of {} planned",
@@ -391,6 +409,15 @@ fn status(project: &Project) -> anyhow::Result<()> {
     }
     if let Some(reason) = &state.stopped {
         println!("audit rounds stopped early: {reason}");
+    }
+    let last = exegenius_core::convergence::summarise(&load_rounds(project)?)
+        .last()
+        .map_or(0, |s| s.gaps.total());
+    if state.done && last > 0 {
+        println!(
+            "the last audit round's {last} gaps are left on the pages, since no audit would \
+             check rewrites for them; raise `rounds` to have them fixed"
+        );
     }
     println!(
         "candidate concepts: {}; pages queued for rewriting: {}",
@@ -558,6 +585,10 @@ fn run(cli: Cli) -> anyhow::Result<()> {
         Command::Read { id, page } => print!("{}", task::read_page(&project, &id, &page)?),
         Command::Search { id, words } => {
             println!("{}", task::search_pages(&project, &id, &words.join(" "))?)
+        }
+        Command::Background { redo } => {
+            task::redo_background(&project, &redo)?;
+            println!("the background task will be given again; run `exegenius next`");
         }
         Command::Status => status(&project)?,
         Command::Plan => {

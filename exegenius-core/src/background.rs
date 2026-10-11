@@ -9,12 +9,13 @@
 //!
 //! - a summary of the subjects and how far into each, shown with the profile wherever the
 //!   profile is shown;
-//! - known concepts, added to the graph, which audits drop as terms and extend resolves to;
-//! - existing concepts the profile covers, which become known.
+//! - known concepts, added to the graph, which audits drop as terms and extend resolves to.
 //!
-//! The level comes from the sources as well as the profile: what the sources use without
-//! explaining is what their own readers know, and the task decides which of it this reader
-//! knows too. Code checks ids, never what the profile covers.
+//! The task only adds background the graph lacks. It cannot mark a concept extraction
+//! planned a page for as known, so it can stop the graph growing but never shrink the wiki.
+//! Code checks names, never what the profile covers. `next` shows the result once before
+//! going on, so that a person following the run can correct it
+//! ([`crate::task::redo_background`]).
 
 use std::collections::HashSet;
 
@@ -35,8 +36,6 @@ pub struct BackgroundAnswer {
     pub summary: String,
     /// Concepts the reader knows that the sources rely on and no existing concept covers.
     pub known: Vec<KnownConcept>,
-    /// Ids of existing concepts the reader knows that are not yet marked known.
-    pub covered: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
@@ -48,6 +47,14 @@ pub struct KnownConcept {
     pub aliases: Vec<String>,
     /// One precise sentence saying what it is.
     pub gloss: String,
+}
+
+/// A background answer, as applied to the graph.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Background {
+    pub summary: String,
+    /// Ids of the known concepts it added.
+    pub added: Vec<String>,
 }
 
 pub const BACKGROUND_INSTRUCTIONS: &str = "\
@@ -62,20 +69,21 @@ has been taught it, in the profile's subject or in the subjects that subject res
 undergraduate degree in physics teaches linear algebra, Fourier series and probability as \
 well as mechanics, whether or not a profile names them).
 
-- The reader knows what their level of study standardly teaches. Do not withhold it because \
-the profile does not name it: a wiki that explains what its reader was taught is padded, and \
-every page it adds needs pages of its own.
-- The reader does not know what is taught only in later or specialist study, nor what the \
-sources introduce, define or prove: that is what the wiki explains.
+- The reader knows what their level of study teaches to everyone at that level. Do not \
+withhold it because the profile does not name it.
+- The reader does not know what is taught only in some courses, or in later or specialist \
+study, nor what the sources introduce, define or prove: that is what the wiki explains. When \
+unsure, count it as not known.
+- The existing concepts were planned by an earlier task and stay as they are: this answer \
+only adds background they lack.
 - `summary`: the subjects and how far into each this reader has gone, as they bear on the \
 sources. Everyone who writes or checks the wiki is shown it with the profile.
 - `known`: each concept from that background that the reader knows and no existing concept \
 covers, with the aliases a writer might use for it. Include what the sources use and what an \
-explanation of them would naturally use. Known concepts get no page.
-- `covered`: ids of existing concepts the reader knows that are not marked known. Leave out \
-the target and anything the sources introduce.";
+explanation of them would naturally use. Known concepts get no page.";
 
-pub fn background_task(project: &Project, graph: &Graph) -> String {
+/// The background task, with a person's correction of an earlier answer, if any.
+pub fn background_task(project: &Project, graph: &Graph, correction: Option<&str>) -> String {
     let concepts = graph
         .concepts
         .iter()
@@ -89,9 +97,16 @@ pub fn background_task(project: &Project, graph: &Graph) -> String {
         })
         .collect::<Vec<_>>()
         .join("\n");
+    let correction = correction.map_or(String::new(), |c| {
+        format!(
+            "## Correction\n\nA person following the run said this of an earlier answer; \
+             follow it:\n\n{}\n\n",
+            c.trim()
+        )
+    });
     format!(
-        "## Target\n\n{}\n\n## Reader profile\n\n{}\n\n## Existing concepts\n\n{concepts}\n\n\
-         ## Sources (read them from disk)\n\n{}\n",
+        "## Target\n\n{}\n\n## Reader profile\n\n{}\n\n{correction}## Existing concepts\n\n\
+         {concepts}\n\n## Sources (read them from disk)\n\n{}\n",
         project.config.target.trim(),
         project.config.reader.knows.trim(),
         project.sources_listing()
@@ -119,8 +134,7 @@ pub fn apply_background(graph: &mut Graph, answer: BackgroundAnswer) -> Result<(
             .find_map(|t| existing.lookup(t))
         {
             errors.push(format!(
-                "\"{}\" is the existing concept `{c}`: list its id under `covered` if the \
-                 reader knows it, and leave it out of `known`",
+                "\"{}\" is the existing concept `{c}`, which stays as planned: leave it out",
                 k.name
             ));
             continue;
@@ -141,18 +155,6 @@ pub fn apply_background(graph: &mut Graph, answer: BackgroundAnswer) -> Result<(
             evidence: Vec::new(),
         });
     }
-    let covered: Vec<String> = answer.covered.iter().map(|c| slug(c)).collect();
-    for id in &covered {
-        if graph.get(id).is_none() {
-            errors.push(format!(
-                "`{id}` under `covered` is not an existing concept id"
-            ));
-        } else if *id == graph.target || Some(id) == graph.pilot.as_ref() {
-            errors.push(format!(
-                "`{id}` is what the wiki explains, so the reader cannot know it"
-            ));
-        }
-    }
     if !errors.is_empty() {
         return Err(Error::Invalid(format!(
             "answer rejected:\n{}",
@@ -163,22 +165,26 @@ pub fn apply_background(graph: &mut Graph, answer: BackgroundAnswer) -> Result<(
                 .join("\n")
         )));
     }
-    for id in &covered {
-        if let Some(c) = graph.get_mut(id) {
-            c.known = true;
-            c.requires.clear();
-        }
-    }
+    graph.background = Some(Background {
+        summary: summary.to_string(),
+        added: added.iter().map(|c| c.id.clone()).collect(),
+    });
     graph.concepts.extend(added);
-    graph.background = Some(summary.to_string());
     Ok(())
+}
+
+/// Take a background answer out of the graph, so that the task can be given again.
+pub fn undo(graph: &mut Graph) {
+    if let Some(background) = graph.background.take() {
+        graph.concepts.retain(|c| !background.added.contains(&c.id));
+    }
 }
 
 /// The reader profile, with what the background task said it covers for these sources.
 pub fn profile(project: &Project, graph: &Graph) -> String {
     let knows = project.config.reader.knows.trim();
     match &graph.background {
-        Some(summary) => format!("{knows}\n\nFor these sources: {summary}"),
+        Some(b) => format!("{knows}\n\nFor these sources: {}", b.summary),
         None => knows.to_string(),
     }
 }
@@ -206,55 +212,46 @@ mod tests {
         }
     }
 
-    #[test]
-    fn background_adds_known_concepts_and_marks_covered_ones() {
-        let mut g = graph(
+    fn two() -> Graph {
+        graph(
             "target",
             vec![
                 concept("target", &["modular-arithmetic"], false),
                 concept("modular-arithmetic", &[], false),
             ],
-        );
+        )
+    }
+
+    #[test]
+    fn background_adds_known_concepts_and_can_be_undone() {
+        let mut g = two();
         let answer = BackgroundAnswer {
             summary: "Linear algebra and elementary number theory.".into(),
             known: vec![known("Linear map", &["linear transformation"])],
-            covered: vec!["modular-arithmetic".into()],
         };
         apply_background(&mut g, answer).unwrap();
         let map = g.get("linear-map").unwrap();
         assert!(map.known && map.requires.is_empty());
-        assert!(g.get("modular-arithmetic").unwrap().known);
-        assert_eq!(
-            g.background.as_deref(),
-            Some("Linear algebra and elementary number theory.")
-        );
+        assert!(!g.get("modular-arithmetic").unwrap().known);
+        assert_eq!(g.background.as_ref().unwrap().added, vec!["linear-map"]);
+        undo(&mut g);
+        assert!(g.background.is_none());
+        assert_eq!(g, two());
     }
 
     #[test]
-    fn background_rejects_the_target_and_concepts_already_in_the_graph() {
-        let mut g = graph(
-            "target",
-            vec![
-                concept("target", &["modular-arithmetic"], false),
-                concept("modular-arithmetic", &[], false),
-            ],
-        );
+    fn background_leaves_planned_concepts_as_they_are() {
+        let mut g = two();
         let answer = BackgroundAnswer {
             summary: " ".into(),
             known: vec![known("Clock arithmetic", &["modular arithmetic"])],
-            covered: vec!["target".into(), "nope".into()],
         };
         let error = apply_background(&mut g, answer).unwrap_err().to_string();
         assert!(error.contains("summary is empty"), "{error}");
         assert!(
-            error.contains("existing concept `modular-arithmetic`"),
+            error.contains("existing concept `modular-arithmetic`, which stays as planned"),
             "{error}"
         );
-        assert!(
-            error.contains("`target` is what the wiki explains"),
-            "{error}"
-        );
-        assert!(error.contains("`nope`"), "{error}");
-        assert!(g.background.is_none());
+        assert_eq!(g, two());
     }
 }

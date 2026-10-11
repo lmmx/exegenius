@@ -87,7 +87,7 @@ pub struct Graph {
     pub added: BTreeMap<String, Vec<String>>,
     /// What the reader profile covers for these sources, from the background task.
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub background: Option<String>,
+    pub background: Option<crate::background::Background>,
 }
 
 impl Graph {

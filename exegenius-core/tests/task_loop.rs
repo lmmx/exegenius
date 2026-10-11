@@ -7,7 +7,9 @@
 use std::path::Path;
 
 use exegenius_core::project::Project;
-use exegenius_core::task::{Kind, Next, Task, next, read_page, search_pages, submit};
+use exegenius_core::task::{
+    Kind, Next, Task, next, read_page, redo_background, search_pages, submit,
+};
 use serde_json::json;
 
 const SOURCE: &str = "The discrete Fourier transform maps a sequence to its spectrum.\n\
@@ -87,13 +89,15 @@ fn argument_answer(from: &[&str], reversed: bool) -> String {
     .to_string()
 }
 
-/// Answer the background task `next` hands out after the extract, adding no concepts.
+/// Answer the background task `next` hands out after the extract, adding no concepts, and
+/// pass the one `next` that shows it.
 fn background(project: &Project) {
     let batch = tasks(next(project).unwrap());
     assert_eq!(batch[0].kind, Kind::Background);
-    let answer_text = json!({"summary": "Complex arithmetic.", "known": [], "covered": []});
+    let answer_text = json!({"summary": "Complex arithmetic.", "known": []});
     answer(project, &batch[0], &answer_text.to_string());
     submit(project, &batch[0].id).unwrap();
+    assert!(matches!(next(project).unwrap(), Next::Background { .. }));
 }
 
 /// Answer the argument task `next` hands out after an extract or extend.
@@ -107,7 +111,7 @@ fn argue(project: &Project, from: &[&str]) {
 fn tasks(next: Next) -> Vec<Task> {
     match next {
         Next::Tasks { tasks, .. } => tasks,
-        Next::Done(_) => panic!("expected tasks"),
+        Next::Done(_) | Next::Background { .. } => panic!("expected tasks"),
     }
 }
 
@@ -202,24 +206,46 @@ fn task_loop_end_to_end() {
     );
     submit(&project, "0001-extract").unwrap();
 
-    // Background: the target cannot be known; a concept the sources rely on that the profile
-    // covers is added as known, and the summary goes with the profile into later tasks.
+    // Background: a planned concept cannot be made known; a concept the sources rely on that
+    // the profile covers is added as known. `next` then shows the reader once; a correction
+    // takes the answer back out and gives the task again with it.
     let batch = tasks(next(&project).unwrap());
     assert_eq!(batch[0].kind, Kind::Background);
     assert!(read(&project, batch[0].file()).contains("`dft`: Discrete Fourier transform"));
-    let known = |covered: &[&str]| {
+    let known = |name: &str| {
         json!({
             "summary": "Complex arithmetic and sequences, as in a first course.",
-            "known": [{"name": "Sequence", "aliases": ["list"], "gloss": "An ordered list."}],
-            "covered": covered,
+            "known": [{"name": name, "aliases": ["list"], "gloss": "An ordered list."}],
         })
         .to_string()
     };
-    answer(&project, &batch[0], &known(&["chirp-identity"]));
+    answer(&project, &batch[0], &known("Convolution"));
     let err = submit(&project, &batch[0].id).unwrap_err().to_string();
-    assert!(err.contains("is what the wiki explains"), "{err}");
-    answer(&project, &batch[0], &known(&[]));
+    assert!(err.contains("stays as planned"), "{err}");
+    answer(&project, &batch[0], &known("Sequence"));
     submit(&project, &batch[0].id).unwrap();
+    let Next::Background {
+        profile,
+        known: shown,
+    } = next(&project).unwrap()
+    else {
+        panic!("expected the background to be shown");
+    };
+    assert!(profile.starts_with("Complex numbers\n\nFor these sources: Complex arithmetic"));
+    assert_eq!(shown, vec!["Sequence"]);
+    redo_background(&project, "Sequences are not known.").unwrap();
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch[0].kind, Kind::Background);
+    let file = read(&project, batch[0].file());
+    assert!(file.contains("## Correction") && file.contains("Sequences are not known."));
+    assert!(
+        !file.contains("`sequence`"),
+        "the earlier answer is taken back out"
+    );
+    let none = json!({"summary": "Complex arithmetic only.", "known": []});
+    answer(&project, &batch[0], &none.to_string());
+    submit(&project, &batch[0].id).unwrap();
+    assert!(matches!(next(&project).unwrap(), Next::Background { .. }));
 
     // Argument: steps out of the notes' order are rejected; then the plan is accepted.
     let batch = tasks(next(&project).unwrap());
@@ -743,7 +769,7 @@ fn task_loop_end_to_end() {
 }
 
 #[test]
-fn last_round_fixes_are_written_then_built() {
+fn last_round_notes_are_dropped_then_built() {
     let temp = tempfile::tempdir().unwrap();
     let project = setup(temp.path(), 1);
     let batch = tasks(next(&project).unwrap());
@@ -766,28 +792,8 @@ fn last_round_fixes_are_written_then_built() {
         answer(&project, &t, &gaps.to_string());
         submit(&project, &t.id).unwrap();
     }
-    // The single round found gaps: the rewrites are handed out, then the docs are built
-    // without a second audit round.
-    let rewrites = tasks(next(&project).unwrap());
-    assert_eq!(rewrites.len(), 3);
-    assert!(
-        rewrites
-            .iter()
-            .all(|t| matches!(t.kind, Kind::Write { .. }))
-    );
-    for t in &rewrites {
-        if page(t) == "chirp-identity" {
-            fields(&project, t, json!([]), json!(chirp_relations()));
-            answer(
-                &project,
-                t,
-                &format!("A clearer explanation. {CHIRP_USES}."),
-            );
-        } else {
-            answer(&project, t, "A clearer explanation.");
-        }
-        submit(&project, &t.id).unwrap();
-    }
+    // The single round found gaps, but no audit would check rewrites for them: the notes
+    // are dropped, the pages stay as audited, and the outline comes next.
     let last = tasks(next(&project).unwrap());
     assert_eq!(last[0].kind, Kind::Outline);
     let parts = json!({"overview": "o", "parts": [{"title": "All", "intro": "i",

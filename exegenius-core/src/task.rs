@@ -5,7 +5,9 @@
 //! the current one has been submitted. Precedence, highest first:
 //!
 //! 1. extract (no graph yet)
-//! 2. background (no account yet of what the reader profile covers for these sources)
+//! 2. background (no account yet of what the reader profile covers for these sources); once
+//!    it is accepted, `next` shows it once instead of tasks, so a person following the run
+//!    can correct it with [`redo_background`]
 //! 3. extend (audits left candidate concepts)
 //! 4. argument (no plan of the argument for the current pages)
 //! 5. write (pages with no body, or queued for rewriting)
@@ -13,11 +15,12 @@
 //!    when its last audit is submitted, and the loop stops after a round with no gaps or
 //!    after `rounds` rounds
 //!
+//! When the audit rounds end, the last round's rewrite notes and candidate concepts are
+//! dropped: no audit would check the rewrites, so every page stays as it was last audited.
 //! When nothing is left, `next` hands out the outline task (parts, glossary and front page)
 //! if the pages have no current outline, and the overloads task if pages rebind letters
-//! with no verdict yet, in one batch, and then builds the docs. Writes queued by the last
-//! audit round, or by overload verdicts, are still handed out (and not audited) before the
-//! outline.
+//! with no verdict yet, in one batch, and then builds the docs. Writes queued by overload
+//! verdicts and support checks are still handed out.
 
 use std::collections::BTreeMap;
 use std::fs::OpenOptions;
@@ -175,6 +178,12 @@ pub struct State {
     /// Why the audit rounds ended before `rounds`, if rewrites stopped reducing gaps.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub stopped: Option<String>,
+    /// Whether `next` has shown the background answer.
+    #[serde(default)]
+    pub background_shown: bool,
+    /// A person's correction of the last background answer, for the task given again.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub correction: Option<String>,
 }
 
 impl Default for State {
@@ -187,6 +196,8 @@ impl Default for State {
             audited: BTreeMap::new(),
             done: false,
             stopped: None,
+            background_shown: false,
+            correction: None,
         }
     }
 }
@@ -502,7 +513,16 @@ pub fn search_pages(project: &Project, id: &str, query: &str) -> Result<String> 
 /// What `next` hands out.
 #[derive(Debug)]
 pub enum Next {
-    Tasks { round: u32, tasks: Vec<Task> },
+    Tasks {
+        round: u32,
+        tasks: Vec<Task>,
+    },
+    /// The background answer, shown once before the run goes on: the reader profile as it
+    /// will be given to every later task, and the known concepts it added.
+    Background {
+        profile: String,
+        known: Vec<String>,
+    },
     Done(BuildReport),
 }
 
@@ -589,13 +609,27 @@ pub fn next(project: &Project) -> Result<Next> {
         };
         // The pilot is chosen once the background has settled which concepts the reader
         // knows, since known concepts get no page.
-        if graph.background.is_none() {
-            let input = background_task(project, &graph);
+        let Some(background) = &graph.background else {
+            let input = background_task(project, &graph, state.correction.as_deref());
             return issue(
                 project,
                 &mut state,
                 vec![(Kind::Background, BACKGROUND_INSTRUCTIONS, input)],
             );
+        };
+        if !state.background_shown {
+            state.background_shown = true;
+            write_json(&project.state_path(), &state)?;
+            let known = background
+                .added
+                .iter()
+                .filter_map(|id| graph.get(id))
+                .map(|c| c.name.clone())
+                .collect();
+            return Ok(Next::Background {
+                profile: crate::background::profile(project, &graph),
+                known,
+            });
         }
         if let Some(pilot) = &project.config.pilot
             && graph.pilot.is_none()
@@ -922,17 +956,21 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
         .iter()
         .any(|t| matches!(t.kind, Kind::Audit { .. }));
     if matches!(task.kind, Kind::Audit { .. }) && !audits_left {
-        // The round is over: finish if it found nothing or rewrites stopped reducing gaps,
-        // else start the next one.
+        // The round is over: finish if it found nothing, if rewrites stopped reducing gaps,
+        // or if it was the last, else start the next one.
         let stall = crate::convergence::summarise(&crate::audit::load_rounds(project)?)
             .into_iter()
             .find(|s| s.round == state.round)
             .and_then(|s| crate::convergence::stalled(&s));
         if state.round_gaps == 0 {
             state.done = true;
-        } else if let Some(reason) = stall {
+        } else if stall.is_some() || state.round >= project.config.rounds {
             state.done = true;
-            state.stopped = Some(reason);
+            state.stopped = stall;
+            let mut graph = require(project.load_graph()?)?;
+            graph.rewrite.clear();
+            graph.candidates.clear();
+            project.save_graph(&graph)?;
         } else {
             state.round += 1;
             state.round_gaps = 0;
@@ -940,6 +978,36 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
     }
     write_json(&project.state_path(), &state)?;
     Ok(warnings)
+}
+
+/// `exegenius background --redo`: take the background answer back out of the graph and give
+/// the task again with a person's correction. Only before any later task has been handed out,
+/// since later tasks were given the answer.
+pub fn redo_background(project: &Project, correction: &str) -> Result<()> {
+    let _lock = Lock::acquire(project)?;
+    let mut state = load_state(project)?;
+    let mut graph = require(project.load_graph()?)?;
+    let later = !state.pending.is_empty()
+        || graph.pilot.is_some()
+        || project.argument_path().exists()
+        || project.audit_path().exists();
+    if graph.background.is_none() || later {
+        return Err(Error::Invalid(
+            "the background can be redone only right after `next` shows it, before any \
+             later task"
+                .into(),
+        ));
+    }
+    if correction.trim().is_empty() {
+        return Err(Error::Invalid(
+            "say what to correct in the background".into(),
+        ));
+    }
+    crate::background::undo(&mut graph);
+    project.save_graph(&graph)?;
+    state.background_shown = false;
+    state.correction = Some(correction.trim().to_string());
+    write_json(&project.state_path(), &state)
 }
 
 fn require(graph: Option<Graph>) -> Result<Graph> {

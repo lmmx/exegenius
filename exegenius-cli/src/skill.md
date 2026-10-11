@@ -24,6 +24,12 @@ and writing it asks for, task by task, until it reports done.
    each go to a fresh subagent that has seen nothing else: the auditor stands in for a
    reader who has not read the sources or the other pages. Do not do audits yourself.
 4. When every task in the batch is accepted, go back to step 1.
+   Once, early in the run, `exegenius next` prints the reader instead of tasks: the reader
+   profile as every later task will be told it, and the concepts counted as known. If the
+   user is following the session, show it to them and ask whether it describes the reader
+   they mean; if they correct it, run `exegenius background --redo "<their correction>"`.
+   If no one can answer (under `claude -p`, or told to run unattended), do not wait: go
+   back to step 1.
 5. Once the pages are final, `exegenius next` hands out the outline task (group the pages
    into parts, fold minor pages into a glossary, write the front page) and, if a page
    reuses a letter an earlier page bound, the overloads task (judge whether each reused
