@@ -22,6 +22,25 @@ At the end of the last round, `next` still runs extend on that round's terms and
 
 The strict wording was meant to stop an auditor assuming knowledge the reader lacks. That aim stands for terms outside the profile. What it got wrong was the line between "covered by the profile without being named" and "not covered".
 
+## What the earlier run shows
+
+The audit and extend wording above dates from the first commit (39d17ea), so the author's earlier run used it too. That run built the v0.1.0 wiki from the same paper, with the same target, reader profile and `rounds = 3`, and its audits converged:
+
+| Round | pages audited | term gaps | step gaps | symbol gaps |
+|---|---|---|---|---|
+| 1 | 24 | 16 | 20 | 8 |
+| 2 | 36 | 9 | 7 | 9 |
+| 3 | 43 | 2 | 0 | 2 |
+
+It finished with 45 pages, 10,634 words, and 198 tasks in all (`next_id` 199). The 0.5.0 run had 82 pages by round 2 and issued 119 writes after it, and its task ids passed 0814.
+
+So the wording lets the graph grow, but does not on its own make it grow: the same wording converged at 0.1. Something in 0.5 turns more of each page into reported terms. The change is not identified. The 0.5 run's own records would show it:
+- its initial concept count;
+- term gaps per round in `exegenius/audit.json`;
+- words per page.
+
+The suspects are the additions to the write task since 0.1, such as motivations, striking features, relation sentences and symbol meanings. They lengthen pages and bring more mathematics onto each one.
+
 ## What changed
 
 **Audit instructions** (exegenius-core/src/audit.rs:150-155). The first paragraph now reads:
@@ -82,8 +101,10 @@ The sample is two runs per cell on two pages, with the answer format cut down, s
 - The extend instructions present audited terms as judgements and direct terms the profile covers to known concepts, which get no page (exegenius-core/src/extract.rs:73-84)
 - The skill tells the session to run until `done`, states that exegenius sets no budget, and describes `[simulation] budget` (exegenius-cli/src/skill.md)
 - `next` advises starting 20 subagents and adding one as each finishes when a batch has more than 20 tasks (exegenius-cli/src/main.rs)
+- The v0.1.0 run, with the same audit and extend wording, target, reader profile and rounds, converged at 45 pages after 198 tasks, with term gaps falling from 16 to 9 to 2 over its three rounds (exegenius/audit.json of that run)
 - After the last audit round, extend still adds that round's terms and their pages are written without audit (exegenius-core/src/task.rs:578-585, exegenius-core/src/task.rs:647-650)
 
 ## Missing
+- No identification of the 0.5 change that turned the converging growth of 0.1 into diverging growth
 - No limit or warning on the number of concepts extend adds per round
 - No run of the changed instructions through a full wiki; the comparison covers two pages, two runs per wording, term and step gaps only
