@@ -80,9 +80,10 @@ sources or the other pages.
 | outline | groups the final pages into parts, folds minor terminology pages into a glossary, and writes the front page overview and part intros | every page in exactly one part or the glossary, the target not in the glossary, no page in a part before one of its prerequisites, links only to pages |
 | overloads | for each letter a page binds that a page or concept name it builds on already binds, says whether the two denote the same thing | every candidate judged once; a letter with two meanings becomes a rewrite note on the later page |
 | goals | writes goal questions of ten kinds (meaning, status, justification, summary, structure, transfer, example, motivation, non-routine, obvious-fails) with key points tagged by role (claim, reason, conclusion, background), testing whether the wiki teaches its reader (never shown in the wiki); a second, separate task writes held-out goals | pages exist; the goal count; key points of the kinds beyond meaning and status are not copied from a page |
-| read | a simulated reader explores the wiki through `exegenius read` and `exegenius search` to answer one goal, and records where it got stuck and at what level (symbol, statement, step, chain, beyond) | the page budget; every citation and stuck point quotes a page it opened |
+| read | a simulated reader explores the wiki through `exegenius read` and `exegenius search` to answer one goal, records where it got stuck and at what level (symbol, statement, step, chain, beyond), and names the key idea of the page it relied on most | the page budget; every citation, stuck point and key idea quotes a page it opened |
 | baseline | answers a goal from the reader's background alone, with no wiki | non-empty |
 | grade | scores all answers to a goal blind against the key points: covered, contradicted, or missing | every answer graded once, key points exist, none both covered and contradicted |
+| attribute | after grading, names the reader quotation that supports each covered key point (a separate task, since showing citations would break the blind grade) | every answer once, only covered key points, quotations exist |
 
 Before the first write, and again whenever the planned pages change, an argument task plans
 the sources' argument (after Hamami and Morris's account of proofs as executed plans), so
@@ -130,11 +131,20 @@ stuck points by level; each reader's path, searches, answer, stuck points and co
 key points; and the pages readers got stuck on most.
 The goals and the report stay out of `docs/`.
 
+The report also lists candidates for the sentences that close a chain of reasoning, each
+method apart: the sentences whose quotations carried most key points, the key ideas readers
+named per page (a page on which readers disagree gets a rewrite note), and the sentences that
+link pages under different main steps of the argument. With `ablations` set, a final round
+hides each of the top sentences, and a control sentence from the same page, and reruns the
+goals they supported; the sentences whose loss costs more reason and conclusion key points
+than their control's are listed as the wiki's key steps.
+
 ```toml
 [simulation]
 rounds = 2     # 0 turns it off
 budget = 15    # most pages per reader per goal
 nonce = true
+ablations = 0  # top sentences to hide, each with a control, after the last round
 
 [[readers]]    # further profiles beside [reader]
 name = "newcomer"

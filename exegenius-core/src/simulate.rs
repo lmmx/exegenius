@@ -47,8 +47,9 @@ Morris on why a proof proceeds as it does). `meaning` and `status` test single s
 the rest test how statements fit together. Make at least half of the goals of the other \
 kinds, include at least one `summary`, `structure`, `transfer` or `example` goal, and at least \
 one `motivation` goal. Use the argument's steps below for `motivation`, `structure` and \
-`summary` goals: a motivation the argument marks as not stated by the sources is a good test \
-of whether the wiki supplies it.
+`summary` goals. A motivation the argument marks as not stated by the sources is a good \
+test of whether the wiki supplies it, and each striking feature listed there calls for a \
+`justification` goal asking why it holds.
 - `key_points`: 2 to 5 short, checkable statements that a full answer must make, accurate to \
 the sources, each with a `role`: the `claim` asserted, the `reason` it holds, the \
 `conclusion` that follows, or the `background` it rests on. A goal about why something holds \
@@ -78,6 +79,8 @@ you know. Include places you got past only by guessing.
 - Answer from the pages alone. Support each step of the answer with a quote copied exactly \
 from a page you opened. If the pages do not get you to an answer within the page budget, \
 give up and say where it broke down.
+- If you answer, also name the key idea of the page you relied on most: say it in a \
+sentence, and quote the passage of the page that carries it.
 - An honest `gave_up` is worth more than a fluent answer the pages do not support.";
 
 pub const BASELINE_INSTRUCTIONS: &str = "\
@@ -350,6 +353,38 @@ pub struct ReadAnswer {
     pub stuck: Vec<Stuck>,
     /// Why you gave up, or how sure you are of the answer.
     pub reason: String,
+    /// If you answered: the key idea of the page you relied on most.
+    #[serde(default)]
+    pub key_idea: Option<KeyIdeaAnswer>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
+#[serde(deny_unknown_fields)]
+pub struct KeyIdeaAnswer {
+    /// Handle of the page you relied on most.
+    pub page: String,
+    /// The key idea of that page, in one sentence of your own.
+    pub statement: String,
+    /// The passage of the page that carries it, copied exactly.
+    pub quote: String,
+}
+
+/// A sentence hidden from a reader, to see what readers lose without it.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Hidden {
+    pub page: String,
+    pub sentence: String,
+    /// A control sentence: one from the same page that no reader relied on, hidden to show
+    /// what removing any sentence of that length costs.
+    pub control: bool,
+}
+
+/// A reader's statement of a page's key idea, with names and handles translated back.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct KeyIdea {
+    pub page: String,
+    pub statement: String,
+    pub quote: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -400,6 +435,15 @@ pub struct Run {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub contradicted: Vec<usize>,
     pub wrong: Vec<String>,
+    /// For each covered key point a citation supports: (key point, citation) indices, once
+    /// attributed.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub support: Option<Vec<(usize, usize)>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub key_idea: Option<KeyIdea>,
+    /// The sentence hidden from this reader, in an ablation run.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub hidden: Option<Hidden>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -421,6 +465,9 @@ pub struct Simulation {
     pub round: u32,
     pub runs: Vec<Run>,
     pub baselines: Vec<Baseline>,
+    /// Whether the ablation runs after the last round are done.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub ablated: bool,
 }
 
 impl Default for Simulation {
@@ -430,6 +477,7 @@ impl Default for Simulation {
             round: 1,
             runs: Vec::new(),
             baselines: Vec::new(),
+            ablated: false,
         }
     }
 }
@@ -503,6 +551,8 @@ pub struct Lens<'a> {
     uses: HashMap<String, Vec<crate::audit::SymbolUse>>,
     /// The plan of the argument, if it was made for these pages.
     argument: Option<crate::argument::Argument>,
+    /// A sentence left out of its page, for an ablation run.
+    hidden: Option<Hidden>,
 }
 
 impl<'a> Lens<'a> {
@@ -573,9 +623,16 @@ impl<'a> Lens<'a> {
             home: String::new(),
             uses: crate::audit::latest_symbols(project)?,
             argument: crate::argument::current(project, plan)?,
+            hidden: None,
         };
         lens.home = lens.render_home(project, outline);
         Ok(lens)
+    }
+
+    /// The same lens, with `hidden`'s sentence left out of its page.
+    pub fn hiding(mut self, hidden: Option<Hidden>) -> Self {
+        self.hidden = hidden;
+        self
     }
 
     pub fn handle(&self, id: &str) -> Option<&str> {
@@ -781,7 +838,11 @@ impl<'a> Lens<'a> {
                 symbols.join("\n")
             ));
         }
-        out.push_str(&format!("\n{}\n", crate::cite::strip(body).trim()));
+        let mut body = crate::cite::strip(body);
+        if let Some(h) = self.hidden.as_ref().filter(|h| &h.page == id) {
+            body = body.replacen(&h.sentence, "", 1);
+        }
+        out.push_str(&format!("\n{}\n", body.trim()));
         let used_by: Vec<String> = self
             .pages
             .iter()
@@ -979,6 +1040,9 @@ pub fn goals_task(project: &Project, graph: &Graph, plan: &Plan, held_out: bool)
             task.push_str(&format!("{indent}- {}{page}\n", n.claim));
             if let Some(method) = &n.method {
                 task.push_str(&format!("{indent}  - How: {method}\n"));
+            }
+            if let Some(feature) = &n.salient {
+                task.push_str(&format!("{indent}  - Striking feature: {feature}\n"));
             }
             if let Some(m) = &n.motivation {
                 let source = match m.source {
@@ -1179,6 +1243,7 @@ pub fn search(project: &Project, lens: &Lens, task: &str, query: &str) -> Result
 /// Which reader task an answer belongs to.
 pub struct Assignment<'a> {
     pub task: &'a str,
+    pub hidden: Option<&'a Hidden>,
     pub round: u32,
     pub goal: usize,
     pub persona: &'a str,
@@ -1194,6 +1259,7 @@ pub fn apply_read(
 ) -> Result<Run> {
     let Assignment {
         task,
+        hidden,
         round,
         goal,
         persona,
@@ -1255,6 +1321,13 @@ pub fn apply_read(
             });
         }
     }
+    let key_idea = answer.key_idea.as_ref().and_then(|k| {
+        check("key idea", &k.page, &k.quote).map(|page| KeyIdea {
+            page,
+            statement: lens.unrename(k.statement.trim()),
+            quote: lens.unrename(k.quote.trim()),
+        })
+    });
     if !errors.is_empty() {
         return Err(rejected(errors));
     }
@@ -1286,6 +1359,9 @@ pub fn apply_read(
         covered: None,
         contradicted: Vec::new(),
         wrong: Vec::new(),
+        support: None,
+        key_idea,
+        hidden: hidden.cloned(),
     })
 }
 

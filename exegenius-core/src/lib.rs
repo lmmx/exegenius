@@ -22,6 +22,7 @@
 //! [`task`] decides what to hand out next and applies submitted answers; [`build`] writes
 //! the docs tree and `zensical.toml` once no task is left.
 
+pub mod aha;
 pub mod argument;
 pub mod audit;
 pub mod autolink;

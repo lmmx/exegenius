@@ -920,6 +920,11 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
         uses,
         argument: argument::current(project, plan)?,
     };
+    let joining = site
+        .argument
+        .as_ref()
+        .map(|a| crate::aha::joining(a, &prepared.pages))
+        .unwrap_or_default();
     let mut entries = Vec::new();
     for (c, body) in prepared.pages {
         report.pages.push(c.id.clone());
@@ -1019,7 +1024,7 @@ pub fn build(project: &Project, graph: &Graph, plan: &Plan) -> Result<BuildRepor
         let path = project.report_path();
         write(
             &path,
-            &crate::report::report(&project.config, graph, &simulation),
+            &crate::report::report(&project.config, graph, &simulation, &joining, &plan.order),
         )?;
         report.report = Some(path);
     }

@@ -222,6 +222,26 @@ pub fn repair(simulation: &Simulation, graph: &mut Graph, round: u32) -> Vec<Str
             );
         }
     }
+    // A page whose readers named different key ideas, none quoting the same passage, has
+    // no clear key idea.
+    for ideas in crate::aha::key_ideas(simulation, Some(round), true) {
+        if ideas.ideas.len() >= 2 && !ideas.agree {
+            let named: Vec<String> = ideas
+                .ideas
+                .iter()
+                .map(|(statement, _)| format!("\"{statement}\""))
+                .collect();
+            queue(
+                graph,
+                ideas.page,
+                format!(
+                    "Simulated readers named different key ideas for this page ({}), and no two \
+                     quoted the same passage: say plainly what the page's key idea is.",
+                    named.join("; ")
+                ),
+            );
+        }
+    }
     for (i, goal) in simulation.goals.iter().enumerate() {
         if goal.held_out {
             continue;

@@ -29,6 +29,9 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use sha2::{Digest, Sha256};
 
+use crate::aha::{
+    ATTRIBUTE_INSTRUCTIONS, AttributeAnswer, apply_attribution, attribute_task, to_attribute,
+};
 use crate::argument::{ARGUMENT_INSTRUCTIONS, ArgumentAnswer, apply_argument, argument_task};
 use crate::audit::{AUDIT_INSTRUCTIONS, AuditAnswer, apply_audit, audit_task, record};
 use crate::build::{BuildReport, build};
@@ -75,6 +78,9 @@ pub enum Kind {
         goal: usize,
         persona: String,
         start: String,
+        /// For an ablation run: the sentence hidden from the reader.
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        hide: Option<simulate::Hidden>,
     },
     Baseline {
         goal: usize,
@@ -83,6 +89,11 @@ pub enum Kind {
     Grade {
         goal: usize,
         /// The answers' task ids, in the order the grader sees them.
+        tasks: Vec<String>,
+    },
+    Attribute {
+        goal: usize,
+        /// The runs' task ids, in the order they are listed.
         tasks: Vec<String>,
     },
 }
@@ -108,6 +119,7 @@ impl Task {
             Kind::Read { .. } => "read",
             Kind::Baseline { .. } => "baseline",
             Kind::Grade { .. } => "grade",
+            Kind::Attribute { .. } => "attribute",
         }
     }
 
@@ -237,6 +249,7 @@ fn render(project: &Project, task: &Task, instructions: &str, input: &str) -> St
         Kind::Read { .. } => json_format::<ReadAnswer>(),
         Kind::Baseline { .. } => json_format::<BaselineAnswer>(),
         Kind::Grade { .. } => json_format::<GradeAnswer>(),
+        Kind::Attribute { .. } => json_format::<AttributeAnswer>(),
         Kind::Write { .. } => format!(
             "The answer is two files: the page body as markdown (not JSON), and a JSON object \
              with the symbols the page binds and its relations to its prerequisite pages. In \
@@ -273,8 +286,9 @@ const TASK_ID: &str = "{{task-id}}";
 
 enum Step {
     Issue(Vec<(Kind, &'static str, String)>),
-    /// A round ended and its repairs were queued: hand out the rewrites.
-    Repaired,
+    /// A round ended: work out the next step again (the rewrites its repairs queued, or
+    /// the ablation round).
+    Again,
     Finished,
 }
 
@@ -300,12 +314,44 @@ fn simulation_step(project: &Project, graph: &mut Graph, plan: &Plan) -> Result<
     if !items.is_empty() {
         return Ok(Step::Issue(items));
     }
-    if sim.round > rounds {
+    // After the last round comes one ablation round, if configured.
+    let ablating = sim.round > rounds;
+    if ablating && (project.config.simulation.ablations == 0 || sim.ablated) {
         return Ok(Step::Finished);
     }
     let outline = crate::outline::current(project, plan)?;
     let lens = Lens::new(project, graph, plan, outline.as_ref())?;
     let personas = project.config.personas();
+    if ablating && sim.round_runs(sim.round).next().is_none() {
+        let prepared = crate::build::prepare(project, graph, plan, outline.as_ref())?;
+        let n = project.config.simulation.ablations as usize;
+        let targets = crate::aha::ablation_targets(&sim, &prepared.pages, n);
+        let mut items = Vec::new();
+        for target in &targets {
+            let lens = Lens::new(project, graph, plan, outline.as_ref())?
+                .hiding(Some(target.hidden.clone()));
+            for &g in &target.goals {
+                let goal = &sim.goals[g];
+                for persona in &personas {
+                    let start = deep_start(&lens, goal);
+                    let input = read_task(project, &lens, TASK_ID, goal, persona, &start);
+                    let kind = Kind::Read {
+                        goal: g,
+                        persona: persona.name.clone(),
+                        start,
+                        hide: Some(target.hidden.clone()),
+                    };
+                    items.push((kind, READ_INSTRUCTIONS, input));
+                }
+            }
+        }
+        if items.is_empty() {
+            sim.ablated = true;
+            simulate::save(project, &sim)?;
+            return Ok(Step::Finished);
+        }
+        return Ok(Step::Issue(items));
+    }
     if sim.round_runs(sim.round).next().is_none() {
         let mut items = Vec::new();
         for (g, goal) in sim.goals.iter().enumerate() {
@@ -317,6 +363,7 @@ fn simulation_step(project: &Project, graph: &mut Graph, plan: &Plan) -> Result<
                             goal: g,
                             persona: persona.name.clone(),
                             start,
+                            hide: None,
                         },
                         READ_INSTRUCTIONS,
                         input,
@@ -347,6 +394,25 @@ fn simulation_step(project: &Project, graph: &mut Graph, plan: &Plan) -> Result<
     if !items.is_empty() {
         return Ok(Step::Issue(items));
     }
+    if ablating {
+        sim.ablated = true;
+        simulate::save(project, &sim)?;
+        return Ok(Step::Finished);
+    }
+    for g in 0..sim.goals.len() {
+        let tasks = to_attribute(&sim, g);
+        if !tasks.is_empty() {
+            let input = attribute_task(&sim, g, &tasks);
+            items.push((
+                Kind::Attribute { goal: g, tasks },
+                ATTRIBUTE_INSTRUCTIONS,
+                input,
+            ));
+        }
+    }
+    if !items.is_empty() {
+        return Ok(Step::Issue(items));
+    }
     let round = sim.round;
     sim.round += 1;
     let repaired = round < rounds && !repair(&sim, graph, round).is_empty();
@@ -354,21 +420,23 @@ fn simulation_step(project: &Project, graph: &mut Graph, plan: &Plan) -> Result<
         project.save_graph(graph)?;
     }
     simulate::save(project, &sim)?;
-    Ok(if repaired {
-        Step::Repaired
+    let ablation = sim.round > rounds && project.config.simulation.ablations > 0;
+    Ok(if repaired || ablation {
+        Step::Again
     } else {
         Step::Finished
     })
 }
 
 /// Lens and trail access for a pending reader task.
-fn reader(project: &Project, id: &str) -> Result<()> {
+/// The sentence hidden from a pending reader task, if any; an error if `id` is not one.
+fn reader(project: &Project, id: &str) -> Result<Option<simulate::Hidden>> {
     let state = load_state(project)?;
     match state.pending.iter().find(|t| t.id == id) {
         Some(Task {
-            kind: Kind::Read { .. },
+            kind: Kind::Read { hide, .. },
             ..
-        }) => Ok(()),
+        }) => Ok(hide.clone()),
         _ => Err(Error::Invalid(format!(
             "`{id}` is not a pending read task (run `exegenius next` to see the pending tasks)"
         ))),
@@ -378,22 +446,22 @@ fn reader(project: &Project, id: &str) -> Result<()> {
 /// `exegenius read`: open a page for a pending reader task.
 pub fn read_page(project: &Project, id: &str, handle: &str) -> Result<String> {
     let _lock = Lock::acquire(project)?;
-    reader(project, id)?;
+    let hide = reader(project, id)?;
     let graph = require(project.load_graph()?)?;
     let plan = plan(&graph, &project.sources)?;
     let outline = crate::outline::current(project, &plan)?;
-    let lens = Lens::new(project, &graph, &plan, outline.as_ref())?;
+    let lens = Lens::new(project, &graph, &plan, outline.as_ref())?.hiding(hide);
     simulate::read(project, &lens, id, handle)
 }
 
 /// `exegenius search`: search the wiki for a pending reader task.
 pub fn search_pages(project: &Project, id: &str, query: &str) -> Result<String> {
     let _lock = Lock::acquire(project)?;
-    reader(project, id)?;
+    let hide = reader(project, id)?;
     let graph = require(project.load_graph()?)?;
     let plan = plan(&graph, &project.sources)?;
     let outline = crate::outline::current(project, &plan)?;
-    let lens = Lens::new(project, &graph, &plan, outline.as_ref())?;
+    let lens = Lens::new(project, &graph, &plan, outline.as_ref())?.hiding(hide);
     simulate::search(project, &lens, id, query)
 }
 
@@ -421,14 +489,21 @@ fn issue(project: &Project, state: &mut State, items: Vec<(Kind, &str, String)>)
                 goal,
                 persona,
                 start,
+                hide,
             } => {
-                let start = if start == HOME { "home" } else { "deep" };
+                let start = match (hide, start == HOME) {
+                    (Some(h), _) if h.control => "control",
+                    (Some(_), _) => "ablate",
+                    (None, true) => "home",
+                    (None, false) => "deep",
+                };
                 format!("read-g{}-{}-{start}", goal + 1, slug(persona))
             }
             Kind::Baseline { goal, persona } => {
                 format!("baseline-g{}-{}", goal + 1, slug(persona))
             }
             Kind::Grade { goal, .. } => format!("grade-g{}", goal + 1),
+            Kind::Attribute { goal, .. } => format!("attribute-g{}", goal + 1),
         };
         let task = Task {
             id: format!("{:04}-{label}", state.next_id),
@@ -515,7 +590,7 @@ pub fn next(project: &Project) -> Result<Next> {
             }
             match simulation_step(project, &mut graph, &plan)? {
                 Step::Issue(items) => return issue(project, &mut state, items),
-                Step::Repaired => continue,
+                Step::Again => continue,
                 Step::Finished => {}
             }
             write_json(&project.state_path(), &state)?;
@@ -668,15 +743,17 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
             goal,
             persona,
             start,
+            hide,
         } => {
             let graph = require(graph)?;
             let plan = plan(&graph, &project.sources)?;
             let outline = crate::outline::current(project, &plan)?;
-            let lens = Lens::new(project, &graph, &plan, outline.as_ref())?;
+            let lens = Lens::new(project, &graph, &plan, outline.as_ref())?.hiding(hide.clone());
             let mut sim = simulate::load(project)?;
             let answer: ReadAnswer = parse(&path, &text)?;
             let assignment = simulate::Assignment {
                 task: &task.id,
+                hidden: hide.as_ref(),
                 round: sim.round,
                 goal: *goal,
                 persona,
@@ -722,6 +799,12 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
         Kind::Grade { goal, tasks } => {
             let mut sim = simulate::load(project)?;
             apply_grade(&mut sim, *goal, tasks, parse(&path, &text)?)?;
+            simulate::save(project, &sim)?;
+            Vec::new()
+        }
+        Kind::Attribute { tasks, .. } => {
+            let mut sim = simulate::load(project)?;
+            apply_attribution(&mut sim, tasks, parse(&path, &text)?)?;
             simulate::save(project, &sim)?;
             Vec::new()
         }

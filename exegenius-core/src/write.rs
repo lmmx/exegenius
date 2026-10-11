@@ -152,6 +152,11 @@ fn argument_section(argument: &crate::argument::Argument, graph: &Graph, id: &st
             };
             out.push_str(&format!("Why: {} ({source})\n", m.text.trim()));
         }
+        if let Some(feature) = &node.salient {
+            out.push_str(&format!(
+                "Striking feature: {feature} (explain why it holds, from the method)\n"
+            ));
+        }
         if !node.children.is_empty() {
             let steps: Vec<String> = node
                 .children

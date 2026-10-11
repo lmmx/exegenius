@@ -52,7 +52,7 @@ Both answers were accepted on the first submit.
 - **Held-out goals (3):** `transfer`, `motivation` and `example`.
 - **Roles.** Every goal has a `reason` key point, and all four roles occur.
 - **Arithmetic.** The worked examples check out: 7 and 14 have radix-4 digits (3, 1) and (2, 3), their convolution is (6, 11, 3), and carrying gives digits (2, 0, 2, 1), which is 98. In the held-out example, s = 7 against W m = 8 satisfies the strict inequality, and 1.75³ ≈ 5.36 against 2³ = 8.
-- **The motivation goals drew on the plan.** Both took the `recoverable` motivation of the root and of the tape-procedures step: a tape transform pays for moving data at every layer, so saving arithmetic alone cannot beat n log n.
+- **The motivation goals drew on the plan.** Both took up the root's `recoverable` motivation and the tape-procedures step's `explicit` one: a tape transform pays for moving data at every layer, so saving arithmetic alone cannot beat n log n.
 
 The check also shows a weakness of the held-out design. Held-out goal 7 asks almost the same question as repair goal 3, why the tape operations must be sped up and not only the arithmetic, with overlapping key points. Keeping the two writers apart keeps the wording apart, not the topic. Both writers saw the same argument steps, and the instructions point both at the same motivations. Repairs driven by goal 3 would then teach goal 7, and the held-out figure would overstate what the wiki teaches beyond its repairs. Nothing yet detects the overlap.
 

@@ -4,6 +4,7 @@
 
 use std::collections::BTreeMap;
 
+use crate::aha::Joining;
 use crate::config::Config;
 use crate::graph::Graph;
 use crate::simulate::{HOME, Level, Outcome, Role, Run, Simulation};
@@ -149,7 +150,193 @@ fn profiles(simulation: &Simulation) -> String {
     out
 }
 
-pub fn report(config: &Config, graph: &Graph, simulation: &Simulation) -> String {
+/// The candidates for aha moments, each method apart: the sentences that carried key
+/// points, the key ideas readers named, and the sentences that join distant parts of the
+/// argument.
+fn moments(graph: &Graph, simulation: &Simulation, joining: &[Joining]) -> String {
+    let mut out = String::new();
+    let pivots = crate::aha::pivots(simulation);
+    if !pivots.is_empty() {
+        out.push_str(
+            "\n## Sentences that carried key points\n\nFrom the attribution tasks: the \
+             quotations that supported covered key points, most first. Citing a sentence is not \
+             learning from it, so these are candidates.\n\n\
+             | Page | Sentence | Key points | Runs |\n|---|---|---|---|\n",
+        );
+        for p in pivots.iter().take(15) {
+            out.push_str(&format!(
+                "| {} | \"{}\" | {} | {} |\n",
+                name(graph, &p.page),
+                p.quote.replace('|', "\\|"),
+                p.points,
+                p.runs
+            ));
+        }
+    }
+    let ideas = crate::aha::key_ideas(simulation, None, false);
+    if !ideas.is_empty() {
+        out.push_str(
+            "\n## Key ideas readers named\n\nPer page, the key ideas readers named, with \
+             whether two of them quoted the same passage.\n",
+        );
+        for page in ideas {
+            out.push_str(&format!(
+                "\n- **{}** ({}):",
+                name(graph, page.page),
+                if page.agree {
+                    "agreement"
+                } else {
+                    "no agreement"
+                }
+            ));
+            for (statement, quote) in page.ideas {
+                out.push_str(&format!("\n  - {statement} (\"{quote}\")"));
+            }
+            out.push('\n');
+        }
+    }
+    if !joining.is_empty() {
+        out.push_str(
+            "\n## Sentences that join distant parts of the argument\n\nSentences that link a \
+             page under a different main step of the argument from their own page: candidates \
+             for reconnections.\n\n",
+        );
+        for j in joining {
+            let links: Vec<&str> = j.links.iter().map(|l| name(graph, l)).collect();
+            out.push_str(&format!(
+                "- {}: \"{}\" (links {})\n",
+                name(graph, &j.page),
+                j.sentence,
+                links.join(", ")
+            ));
+        }
+    }
+    out
+}
+
+/// Shares of all key points, and of the reason and conclusion key points, covered by the
+/// graded runs on `goal` that `keep` selects.
+fn shares(simulation: &Simulation, goal: usize, keep: &dyn Fn(&Run) -> bool) -> Option<(f64, f64)> {
+    let points = &simulation.goals[goal].key_points;
+    let relational: Vec<usize> = points
+        .iter()
+        .enumerate()
+        .filter(|(_, p)| matches!(p.role, Role::Reason | Role::Conclusion))
+        .map(|(k, _)| k)
+        .collect();
+    let runs: Vec<&Run> = simulation
+        .runs
+        .iter()
+        .filter(|r| r.goal == goal && r.covered.is_some() && keep(r))
+        .collect();
+    let all: Vec<f64> = runs
+        .iter()
+        .filter_map(|r| coverage(&r.covered, points.len()))
+        .collect();
+    let rel: Vec<f64> = runs
+        .iter()
+        .map(|r| {
+            let covered = r.covered.as_deref().unwrap_or_default();
+            let hit = relational.iter().filter(|k| covered.contains(k)).count();
+            hit as f64 / relational.len().max(1) as f64
+        })
+        .collect();
+    Some((mean(&all)?, mean(&rel)?))
+}
+
+/// The ablation runs: for each hidden sentence and goal, coverage before (the last round)
+/// and after hiding it; and the candidates whose hiding cost more reason and conclusion
+/// key points than hiding their control did, in reading order.
+fn ablations(graph: &Graph, simulation: &Simulation, rounds: u32, order: &[String]) -> String {
+    let mut hidden: Vec<&crate::simulate::Hidden> = Vec::new();
+    for h in simulation.runs.iter().filter_map(|r| r.hidden.as_ref()) {
+        if !hidden.contains(&h) {
+            hidden.push(h);
+        }
+    }
+    if hidden.is_empty() {
+        return String::new();
+    }
+    let mut out = String::from(
+        "\n## Ablations\n\nAfter the last round, readers reran the goals that the sentences \
+         carrying most key points had supported, with one sentence hidden at a time, and with \
+         a control sentence of similar length from the same page that no reader cited. \
+         \"Relational\" counts reason and conclusion key points: a sentence doing relational \
+         work costs those more than its control does.\n\n\
+         | Page | Hidden sentence | Control | Goal | Covered before | after | Relational before | after |\n\
+         |---|---|---|---|---|---|---|---|\n",
+    );
+    // The relational drop for each hidden sentence, averaged over its goals.
+    let mut drops: Vec<(&crate::simulate::Hidden, f64)> = Vec::new();
+    for h in &hidden {
+        let mut goals: Vec<usize> = simulation
+            .runs
+            .iter()
+            .filter(|r| r.hidden.as_ref() == Some(*h))
+            .map(|r| r.goal)
+            .collect();
+        goals.dedup();
+        let mut drop = Vec::new();
+        for g in goals {
+            let before = shares(simulation, g, &|r| r.round == rounds && r.hidden.is_none());
+            let after = shares(simulation, g, &|r| r.hidden.as_ref() == Some(*h));
+            let cell = |v: Option<(f64, f64)>, rel: bool| {
+                v.map_or("–".to_string(), |(a, r)| {
+                    format!("{:.0}%", 100.0 * if rel { r } else { a })
+                })
+            };
+            out.push_str(&format!(
+                "| {} | \"{}\" | {} | {} | {} | {} | {} | {} |\n",
+                name(graph, &h.page),
+                h.sentence.replace('|', "\\|"),
+                if h.control { "yes" } else { "no" },
+                g + 1,
+                cell(before, false),
+                cell(after, false),
+                cell(before, true),
+                cell(after, true)
+            ));
+            if let (Some(b), Some(a)) = (before, after) {
+                drop.push(b.1 - a.1);
+            }
+        }
+        if let Some(d) = mean(&drop) {
+            drops.push((h, d));
+        }
+    }
+    let mut confirmed: Vec<&crate::simulate::Hidden> = drops
+        .iter()
+        .filter(|(h, d)| {
+            !h.control
+                && drops
+                    .iter()
+                    .find(|(c, _)| c.control && c.page == h.page)
+                    .is_some_and(|(_, control)| d > control)
+        })
+        .map(|(h, _)| *h)
+        .collect();
+    let position = |id: &str| order.iter().position(|o| o == id).unwrap_or(usize::MAX);
+    confirmed.sort_by_key(|h| position(&h.page));
+    out.push_str(
+        "\n## Key steps\n\nThe hidden sentences whose loss cost readers more reason and \
+         conclusion key points than their control's, in reading order.\n\n",
+    );
+    if confirmed.is_empty() {
+        out.push_str("None so far.\n");
+    }
+    for h in confirmed {
+        out.push_str(&format!("- {}: \"{}\"\n", name(graph, &h.page), h.sentence));
+    }
+    out
+}
+
+pub fn report(
+    config: &Config,
+    graph: &Graph,
+    simulation: &Simulation,
+    joining: &[Joining],
+    order: &[String],
+) -> String {
     let mut out = String::from("# Simulated readers\n\n");
     out.push_str(&format!(
         "Each simulated reader tried to answer one goal question using only the wiki, seen \
@@ -339,6 +526,13 @@ pub fn report(config: &Config, graph: &Graph, simulation: &Simulation) -> String
             ));
         }
     }
+    out.push_str(&moments(graph, simulation, joining));
+    out.push_str(&ablations(
+        graph,
+        simulation,
+        config.simulation.rounds,
+        order,
+    ));
     let predicates = crate::relations::predicates(graph);
     if !predicates.is_empty() {
         out.push_str(

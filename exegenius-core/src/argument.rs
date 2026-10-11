@@ -87,6 +87,11 @@ pub struct Node {
     /// For a show step: why that method suits the claim.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub motivation: Option<Motivation>,
+    /// For a step whose claim has a feature a reader would find striking (a symmetry, a
+    /// uniformity across cases, a surprising value or bound): that feature. The page should
+    /// explain why it holds, from a matching feature of the method.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub salient: Option<String>,
     /// Symbols the step introduces, in force in its sub-steps.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub adds: Vec<Binding>,
@@ -266,6 +271,10 @@ readers every reconstructed motivation, since the sources will not.
 - `from`: the concepts a step relies on, as ids: known concepts, or pages that come before \
 the step's page in the reading order below. A step's page is its own `page` or the nearest \
 ancestor's.
+- `salient`: for a step whose claim has a feature a reader would find striking (a symmetry, \
+a uniformity across cases, a surprising value or bound), that feature. A proof explains a \
+result only relative to such a feature (Lange), so its page is asked to explain why the \
+feature holds. Most steps have none.
 - `adds`: symbols a step introduces for its sub-steps, each occurring in the mathematics \
 ($...$) of the claims below it, with a display name, meaning and relation as for concept \
 names.
@@ -565,6 +574,7 @@ mod tests {
             from: vec![],
             method: None,
             motivation: None,
+            salient: None,
             adds: vec![],
             page: None,
             quote: quote(text),
@@ -585,6 +595,7 @@ mod tests {
                 source: Provenance::Reconstructed,
                 quote: None,
             }),
+            salient: None,
             adds: vec![],
             page: page.map(str::to_string),
             quote: None,

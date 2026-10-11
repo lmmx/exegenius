@@ -853,6 +853,7 @@ fn simulated_readers_end_to_end() {
             "citations": [{"page": cite_page, "quote": quote}],
             "stuck": [{"page": chirp, "quote": "using the", "note": "what the DFT does here",
                        "level": "chain"}],
+            "key_idea": {"page": cite_page, "statement": "It splits nk.", "quote": quote},
             "reason": "fairly sure"})
         .to_string()
     };
@@ -940,6 +941,29 @@ fn simulated_readers_end_to_end() {
     answer(&project, &batch[0], &grades(1, 2));
     submit(&project, &batch[0].id).unwrap();
 
+    // Attribution: the covered key point gets the quotation that supports it; a key point
+    // the answer did not cover is rejected.
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch.len(), 1);
+    assert!(matches!(batch[0].kind, Kind::Attribute { goal: 0, .. }));
+    let file = read(&project, batch[0].file());
+    assert!(
+        file.contains("Covers key points: 1") && file.contains("1. \"The Chirp identity splits"),
+        "{file}"
+    );
+    let support = |point: usize| {
+        json!({"answers": [{"answer": 1, "support": [{"point": point, "quotation": 1}]}]})
+            .to_string()
+    };
+    answer(&project, &batch[0], &support(2));
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains("key point 2 is not listed as covered"),
+        "{err}"
+    );
+    answer(&project, &batch[0], &support(1));
+    submit(&project, &batch[0].id).unwrap();
+
     // Repairs: the stuck point, the give-up and the missed key point become rewrite notes.
     let batch = tasks(next(&project).unwrap());
     assert!(batch.iter().all(|t| matches!(t.kind, Kind::Write { .. })));
@@ -1003,7 +1027,193 @@ fn simulated_readers_end_to_end() {
     );
     assert!(report.contains("- Contradicts key point 2: It is about roots of unity"));
     assert!(
+        report.contains("| Chirp identity | \"The Chirp identity splits\" | 1 | 1 |"),
+        "{report}"
+    );
+    assert!(report.contains(
+        "- **Chirp identity** (no agreement):\n  - It splits nk. (\"The Chirp identity splits\")"
+    ));
+    assert!(
         report.contains("Possible leaks (real names the reader was not shown): Chirp identity")
     );
     assert!(!project.root.join("docs/report.md").exists());
+}
+
+#[test]
+fn ablation_hides_a_carrying_sentence_and_a_control() {
+    let temp = tempfile::tempdir().unwrap();
+    let extra = "[simulation]\nrounds = 1\nbudget = 3\nablations = 1\n";
+    let project = setup_with(temp.path(), 1, extra);
+    let batch = tasks(next(&project).unwrap());
+    answer(&project, &batch[0], &extract_answer("a chirp identity"));
+    submit(&project, &batch[0].id).unwrap();
+    argue(&project, &["dft", "convolution"]);
+    let chirp_body = "The chirp identity splits the product using the [DFT](dft.md). It is \
+                      reduced to [convolution](convolution.md). Nothing here is cited by \
+                      anyone at all.";
+    for t in tasks(next(&project).unwrap()) {
+        if page(&t) == "chirp-identity" {
+            let relations = json!([
+                relation(
+                    "dft",
+                    "splits the product using",
+                    "splits the product using the [DFT]"
+                ),
+                relation(
+                    "convolution",
+                    "is reduced to",
+                    "It is reduced to [convolution]"
+                ),
+            ]);
+            fields(&project, &t, json!([]), relations);
+            answer(&project, &t, chirp_body);
+        } else {
+            answer(&project, &t, "A page.");
+        }
+        submit(&project, &t.id).unwrap();
+    }
+    for t in tasks(next(&project).unwrap()) {
+        answer(&project, &t, CLEAN);
+        submit(&project, &t.id).unwrap();
+    }
+    let batch = tasks(next(&project).unwrap());
+    let outline = json!({"overview": "The [chirp identity](chirp-identity.md).", "parts": [{"title": "All", "intro": "i",
+                         "pages": ["dft", "convolution", "chirp-identity"]}]});
+    answer(&project, &batch[0], &outline.to_string());
+    submit(&project, &batch[0].id).unwrap();
+    let batch = tasks(next(&project).unwrap());
+    let goal = json!({"question": "Why does the chirp identity use the DFT?",
+        "kind": "justification", "pages": ["chirp-identity"],
+        "key_points": [{"point": "It uses the DFT", "role": "claim"},
+                       {"point": "Because the product splits", "role": "reason"}]});
+    answer(
+        &project,
+        &batch[0],
+        &json!({"goals": [goal, goal, goal]}).to_string(),
+    );
+    submit(&project, &batch[0].id).unwrap();
+    let mut held_out = goal.clone();
+    held_out["kind"] = json!("meaning");
+    answer(
+        &project,
+        &batch[1],
+        &json!({"goals": [held_out]}).to_string(),
+    );
+    submit(&project, &batch[1].id).unwrap();
+
+    // Round 1: on goal 1, the front-page reader cites the chirp page's first sentence.
+    let gave_up = json!({"outcome": "gave_up", "answer": "", "citations": [], "stuck": [],
+                         "reason": "lost"});
+    let batch = tasks(next(&project).unwrap());
+    let mut chirp = String::new();
+    for t in &batch {
+        let text = match &t.kind {
+            Kind::Baseline { .. } => json!({"answer": "Not covered."}),
+            Kind::Read { goal: 0, start, .. } if start == "home" => {
+                let home = read_page(&project, &t.id, "home").unwrap();
+                chirp = handles(&home)[0].clone();
+                let seen = read_page(&project, &t.id, &chirp).unwrap();
+                let quote = seen
+                    .lines()
+                    .find(|l| l.contains("splits") && !l.contains('*'))
+                    .unwrap()
+                    .to_string();
+                let quote = quote.split(". ").next().unwrap().to_string();
+                json!({"outcome": "answered", "answer": "Because the product splits.",
+                       "citations": [{"page": chirp, "quote": quote}], "stuck": [],
+                       "reason": "sure"})
+            }
+            _ => {
+                read_page(&project, &t.id, "home").unwrap();
+                gave_up.clone()
+            }
+        };
+        answer(&project, t, &text.to_string());
+        submit(&project, &t.id).unwrap();
+    }
+    for t in tasks(next(&project).unwrap()) {
+        let file = read(&project, t.file());
+        let grades: Vec<String> = file
+            .lines()
+            .filter_map(|l| l.strip_prefix("### Answer "))
+            .map(|label| {
+                let block = file
+                    .split(&format!("### Answer {label}\n"))
+                    .nth(1)
+                    .and_then(|rest| rest.split("### Answer").next())
+                    .unwrap_or_default();
+                let covered = if block.contains("product splits.") {
+                    json!([2])
+                } else {
+                    json!([])
+                };
+                json!({"label": label, "covered": covered, "contradicted": [], "wrong": []})
+                    .to_string()
+            })
+            .collect();
+        answer(
+            &project,
+            &t,
+            &format!("{{\"grades\": [{}]}}", grades.join(",")),
+        );
+        submit(&project, &t.id).unwrap();
+    }
+    let batch = tasks(next(&project).unwrap());
+    assert!(matches!(batch[0].kind, Kind::Attribute { .. }));
+    let support = json!({"answers": [{"answer": 1, "support": [{"point": 2, "quotation": 1}]}]});
+    answer(&project, &batch[0], &support.to_string());
+    submit(&project, &batch[0].id).unwrap();
+
+    // Ablation: goal 1 again, once without the cited sentence and once without a control
+    // sentence; each reader sees its page without its sentence.
+    let batch = tasks(next(&project).unwrap());
+    let ids: Vec<&str> = batch.iter().map(|t| t.id.as_str()).collect();
+    assert_eq!(batch.len(), 2, "{ids:?}");
+    assert!(
+        ids[0].ends_with("read-g1-reader-ablate") && ids[1].ends_with("read-g1-reader-control")
+    );
+    // The body line: the relation sentence above it uses the same words.
+    let body = |page: &str| {
+        page.lines()
+            .filter(|l| !l.contains('*') && !l.starts_with('#'))
+            .collect::<Vec<_>>()
+            .join("\n")
+    };
+    let without = read_page(&project, &batch[0].id, &chirp).unwrap();
+    assert!(
+        !body(&without).contains("splits") && body(&without).contains("reduced to"),
+        "{without}"
+    );
+    let control = read_page(&project, &batch[1].id, &chirp).unwrap();
+    assert!(
+        body(&control).contains("splits")
+            && !(body(&control).contains("reduced to") && body(&control).contains("cited by")),
+        "{control}"
+    );
+    answer(&project, &batch[0], &gave_up.to_string());
+    submit(&project, &batch[0].id).unwrap();
+    let quote = control
+        .lines()
+        .find(|l| l.contains("splits") && !l.contains('*'))
+        .unwrap();
+    let quote = quote.split(". ").next().unwrap();
+    let answered = json!({"outcome": "answered", "answer": "Because the product splits.",
+                          "citations": [{"page": chirp, "quote": quote}], "stuck": [],
+                          "reason": "sure"});
+    answer(&project, &batch[1], &answered.to_string());
+    submit(&project, &batch[1].id).unwrap();
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch.len(), 1);
+    let grade =
+        json!({"grades": [{"label": "A", "covered": [2], "contradicted": [], "wrong": []}]});
+    answer(&project, &batch[0], &grade.to_string());
+    submit(&project, &batch[0].id).unwrap();
+    assert!(matches!(next(&project).unwrap(), Next::Done(_)));
+    let report = read(&project, "exegenius/report.md");
+    assert!(report.contains("## Ablations"), "{report}");
+    assert!(
+        report.contains("## Key steps\n\nThe hidden sentences whose loss cost readers more")
+            && report.contains("- Chirp identity: \"The chirp identity splits the product using"),
+        "{report}"
+    );
 }

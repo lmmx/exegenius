@@ -70,6 +70,10 @@ pub struct Simulation {
     /// Give the concepts the wiki teaches invented names in what simulated readers see.
     #[serde(default = "default_true")]
     pub nonce: bool,
+    /// After the last round, hide this many of the sentences that carried most key points,
+    /// each with a control sentence, and rerun the goals they supported. 0 skips it.
+    #[serde(default)]
+    pub ablations: u32,
 }
 
 impl Default for Simulation {
@@ -78,6 +82,7 @@ impl Default for Simulation {
             rounds: default_simulation_rounds(),
             budget: default_budget(),
             nonce: true,
+            ablations: 0,
         }
     }
 }
@@ -203,6 +208,7 @@ path = "sources/paper.txt"
 # rounds = 2      # 0 turns the simulation off
 # budget = 15     # most pages a reader may open per goal
 # nonce = true    # invented names for the concepts the wiki teaches
+# ablations = 0   # pivotal sentences to hide, each with a control, after the last round
 
 # Source references on pages ("see p. 5"): hidden until a reader shows them, or shown
 # [site]
