@@ -93,7 +93,20 @@ motivations the sources leave unstated. The outline task is given the argument's
 as candidate parts.
 
 Rounds of write and audit repeat until an audit round finds no gaps, or `rounds` rounds have
-run. Only pages whose audit input changed are audited again. Then the outline task, the
+run. Only pages whose audit input changed are audited again. `exegenius status` shows, for
+each round, the gaps per page by kind and, on the pages also audited the round before, how
+many gaps remain and how many are new: a converging run has fewer each round, and few new.
+
+A pilot runs the same loop on a small part of the target, to see whether it converges
+before paying for a full run:
+
+```toml
+[pilot]
+pages = 8      # the concept with the most prerequisites that fit in 8 pages is explained
+```
+
+With `rounds = 2` and `[simulation] rounds = 0`, a pilot of 8 pages takes about 35 tasks.
+Remove `[pilot]` to go on to the full wiki. Then the outline task, the
 overloads task if any page rebinds a letter, and a support task for each page with citation
 marks not yet judged, are handed out together, and `next` builds
 `docs/` and creates or updates `zensical.toml`.
@@ -206,8 +219,8 @@ adds `vercel.json` (Vercel installs zensical and builds the site into `site/`) a
 `site/`, `.venv/` to `.gitignore`. Push the folder to a GitHub repository and import it at
 [vercel.com/new](https://vercel.com/new); every push redeploys.
 
-Other commands: `exegenius status` (progress, including citation-support labels and sources
-with no URL), `exegenius plan` (reading order),
+Other commands: `exegenius status` (progress, including gaps per round and how many are
+new, citation-support labels and sources with no URL), `exegenius plan` (reading order),
 `exegenius build` (build from the pages written so far), and `exegenius read` /
 `exegenius search` (used by simulated readers, for their own pending task only).
 

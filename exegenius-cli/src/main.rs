@@ -315,18 +315,40 @@ fn status(project: &Project) -> anyhow::Result<()> {
         .map(|c| c.name.as_str())
         .unwrap_or("");
     println!("target: {} ({target})", graph.target);
+    if let Some(pilot) = &graph.pilot {
+        let name = graph.get(pilot).map_or("", |c| c.name.as_str());
+        println!("pilot: {pilot} ({name}), the part of the target this run explains");
+    }
     println!(
         "concepts: {} ({known} known to the reader); pages: {written} written of {} planned",
         graph.concepts.len(),
         plan.order.len()
     );
-    for round in load_rounds(project)? {
+    for round in exegenius_core::convergence::summarise(&load_rounds(project)?) {
+        let per_page = |n: usize| n as f64 / round.pages.max(1) as f64;
         println!(
-            "audit round {}: {} gaps over {} pages",
+            "audit round {}: {} gaps over {} pages (per page: term {:.1}, step {:.1}, symbol \
+             {:.1})",
             round.round,
-            round.gap_count(),
-            round.pages.len()
+            round.gaps.total(),
+            round.pages,
+            per_page(round.gaps.term),
+            per_page(round.gaps.step),
+            per_page(round.gaps.symbol)
         );
+        if round.repeated > 0 {
+            let change = |before: usize, after: usize, new: usize| {
+                format!("{before} -> {after} ({new} new)")
+            };
+            println!(
+                "  on the {} pages also audited in round {}: term {}, step {}, symbol {}",
+                round.repeated,
+                round.round - 1,
+                change(round.before.term, round.after.term, round.new.term),
+                change(round.before.step, round.after.step, round.new.step),
+                change(round.before.symbol, round.after.symbol, round.new.symbol)
+            );
+        }
     }
     println!(
         "candidate concepts: {}; pages queued for rewriting: {}",

@@ -113,7 +113,7 @@ pub fn current(project: &Project, plan: &Plan) -> Result<Option<Outline>> {
 
 pub fn outline_task(project: &Project, graph: &Graph, plan: &Plan) -> Result<String> {
     let mut task = String::new();
-    if let Some(target) = graph.get(&graph.target) {
+    if let Some(target) = graph.get(graph.goal()) {
         task.push_str(&format!(
             "## Target\n\n{}: {}\n\n",
             target.name, target.gloss
@@ -218,7 +218,7 @@ pub fn apply_outline(
     for page in &answer.glossary {
         if !pages.contains(page) {
             errors.push(format!("glossary: `{page}` is not a page of this wiki"));
-        } else if *page == graph.target {
+        } else if page == graph.goal() {
             errors.push(format!(
                 "`{page}` is the target and cannot go in the glossary"
             ));

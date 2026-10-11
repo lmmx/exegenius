@@ -575,6 +575,14 @@ pub fn next(project: &Project) -> Result<Next> {
                 vec![(Kind::Extract, EXTRACT_INSTRUCTIONS, input)],
             );
         };
+        if let Some(pilot) = &project.config.pilot
+            && graph.pilot.is_none()
+        {
+            graph.pilot = crate::plan::pilot(&graph, &project.sources, pilot.pages)?;
+            if graph.pilot.is_some() {
+                project.save_graph(&graph)?;
+            }
+        }
         if !graph.candidates.is_empty() {
             let input = extend_task(project, &graph);
             return issue(

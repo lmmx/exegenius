@@ -137,12 +137,6 @@ pub struct Round {
     pub pages: Vec<PageAudit>,
 }
 
-impl Round {
-    pub fn gap_count(&self) -> usize {
-        self.pages.iter().map(|p| p.gaps.len()).sum()
-    }
-}
-
 pub const AUDIT_INSTRUCTIONS: &str = "\
 Audit one page of an explanatory wiki on behalf of a specific reader. Use only this task \
 file: do not read the sources, other pages or any other file.

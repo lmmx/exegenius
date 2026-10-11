@@ -1016,7 +1016,7 @@ pub fn goals_task(project: &Project, graph: &Graph, plan: &Plan, held_out: bool)
             count.end()
         )
     };
-    if let Some(target) = graph.get(&graph.target) {
+    if let Some(target) = graph.get(graph.goal()) {
         task.push_str(&format!(
             "## Target\n\n{}: {}\n\n",
             target.name, target.gloss

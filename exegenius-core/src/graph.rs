@@ -77,9 +77,17 @@ pub struct Graph {
     /// What each page uses its prerequisite pages for, as its writer stated it.
     #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     pub relations: BTreeMap<String, Vec<Edge>>,
+    /// In a pilot, the concept the pilot explains in place of the target.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub pilot: Option<String>,
 }
 
 impl Graph {
+    /// The concept this run explains: the pilot's concept in a pilot, else the target.
+    pub fn goal(&self) -> &str {
+        self.pilot.as_deref().unwrap_or(&self.target)
+    }
+
     pub fn get(&self, id: &str) -> Option<&Concept> {
         self.concepts.iter().find(|c| c.id == id)
     }
@@ -152,6 +160,11 @@ impl Graph {
         }
         if !ids.contains(self.target.as_str()) {
             errors.push(format!("target `{}` is not a concept id", self.target));
+        }
+        if let Some(pilot) = &self.pilot
+            && !ids.contains(pilot.as_str())
+        {
+            errors.push(format!("pilot `{pilot}` is not a concept id"));
         }
         let mut g = DiGraphMap::<&str, ()>::new();
         for c in &self.concepts {

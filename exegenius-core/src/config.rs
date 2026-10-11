@@ -37,6 +37,17 @@ pub struct Config {
     pub readers: Vec<Persona>,
     #[serde(default)]
     pub site: Site,
+    /// A pilot: a run on the part of the target that fits in a few pages.
+    #[serde(default)]
+    pub pilot: Option<Pilot>,
+}
+
+/// A small run, to see whether the audit rounds converge before a full run.
+#[derive(Debug, Clone, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Pilot {
+    /// Most pages the pilot plans when it starts; extend may add more.
+    pub pages: usize,
 }
 
 /// Settings for the built site.
@@ -160,6 +171,9 @@ impl Config {
         if self.sources.is_empty() {
             return Err(invalid("no [[sources]] given".into()));
         }
+        if self.pilot.as_ref().is_some_and(|p| p.pages == 0) {
+            return Err(invalid("[pilot] pages must be at least 1".into()));
+        }
         let mut seen = HashSet::new();
         for source in &self.sources {
             if !seen.insert(source.id.as_str()) {
@@ -214,6 +228,12 @@ path = "sources/paper.txt"
 # [site]
 # citations = "hidden"
 
+# A pilot: a small run on the part of the target whose pages fit in `pages`, to see in
+# `exegenius status` whether the audit rounds converge before paying for a full run.
+# Remove it to go on to the full wiki.
+# [pilot]
+# pages = 8
+
 # Further reader profiles to simulate, beside [reader]
 # [[readers]]
 # name = "newcomer"
@@ -241,5 +261,15 @@ mod tests {
         )
         .unwrap();
         assert_eq!(config.rounds, 3);
+    }
+
+    #[test]
+    fn pilot_needs_a_page() {
+        let base =
+            "target = \"t\"\n[reader]\nknows = \"k\"\n[[sources]]\nid = \"a\"\npath = \"a.txt\"\n";
+        let config: Config = toml::from_str(&format!("{base}[pilot]\npages = 8\n")).unwrap();
+        assert_eq!(config.pilot.map(|p| p.pages), Some(8));
+        let empty: Config = toml::from_str(&format!("{base}[pilot]\npages = 0\n")).unwrap();
+        assert!(empty.check(Path::new(FILE_NAME)).is_err());
     }
 }

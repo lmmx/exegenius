@@ -283,7 +283,7 @@ presents no step must be in some step's `from`.";
 
 pub fn argument_task(project: &Project, graph: &Graph, plan: &Plan) -> Result<String> {
     let mut task = String::new();
-    if let Some(target) = graph.get(&graph.target) {
+    if let Some(target) = graph.get(graph.goal()) {
         task.push_str(&format!(
             "## Target\n\n`{}`: {}: {}\n\n",
             target.id, target.name, target.gloss
@@ -383,10 +383,10 @@ fn check(
     if root.intention != Intention::Show {
         errors.push("the root must be a `show` step".into());
     }
-    if root.page.as_deref() != Some(graph.target.as_str()) {
+    if root.page.as_deref() != Some(graph.goal()) {
         errors.push(format!(
             "the root's page must be the target page `{}`",
-            graph.target
+            graph.goal()
         ));
     }
 

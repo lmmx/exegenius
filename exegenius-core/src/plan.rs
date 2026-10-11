@@ -48,10 +48,48 @@ fn first_quote(c: &Concept, sources: &[Source]) -> (usize, usize) {
         .unwrap_or((usize::MAX, usize::MAX))
 }
 
+/// The pages needed to reach the concept this run explains ([`Graph::goal`]).
 pub fn plan(graph: &Graph, sources: &[Source]) -> Result<Plan> {
+    plan_to(graph, sources, graph.goal())
+}
+
+/// The concept a pilot of at most `pages` pages explains: the concept on the way to the
+/// target whose own page and unknown prerequisites are most numerous without exceeding
+/// `pages`, the one read latest among equals. None if the whole target fits.
+pub fn pilot(graph: &Graph, sources: &[Source], pages: usize) -> Result<Option<String>> {
+    let full = plan_to(graph, sources, &graph.target)?;
+    if full.order.len() <= pages {
+        return Ok(None);
+    }
+    let mut best: Option<(usize, usize)> = None;
+    for (position, id) in full.order.iter().enumerate() {
+        let size = closure(graph, id).len();
+        if size <= pages && best.is_none_or(|(s, p)| (size, position) > (s, p)) {
+            best = Some((size, position));
+        }
+    }
+    Ok(best.map(|(_, position)| full.order[position].clone()))
+}
+
+/// `id` and the concepts it builds on that the reader does not know.
+fn closure<'a>(graph: &'a Graph, id: &str) -> Vec<&'a Concept> {
+    let mut found: Vec<&Concept> = Vec::new();
+    let mut seen = HashSet::new();
+    let mut stack: Vec<&Concept> = graph.get(id).into_iter().collect();
+    while let Some(c) = stack.pop() {
+        if c.known || !seen.insert(c.id.as_str()) {
+            continue;
+        }
+        found.push(c);
+        stack.extend(c.requires.iter().filter_map(|r| graph.get(r)));
+    }
+    found
+}
+
+fn plan_to(graph: &Graph, sources: &[Source], goal: &str) -> Result<Plan> {
     let target = graph
-        .get(&graph.target)
-        .ok_or_else(|| Error::Invalid(format!("target `{}` is not a concept id", graph.target)))?;
+        .get(goal)
+        .ok_or_else(|| Error::Invalid(format!("target `{goal}` is not a concept id")))?;
     if target.known {
         return Err(Error::Invalid(format!(
             "target `{}` is marked as known to the reader, so there is nothing to explain",
@@ -65,16 +103,7 @@ pub fn plan(graph: &Graph, sources: &[Source]) -> Result<Plan> {
         .map(|(i, c)| (c.id.as_str(), i))
         .collect();
 
-    let mut closure: Vec<&Concept> = Vec::new();
-    let mut seen = HashSet::new();
-    let mut stack = vec![target];
-    while let Some(c) = stack.pop() {
-        if c.known || !seen.insert(c.id.as_str()) {
-            continue;
-        }
-        closure.push(c);
-        stack.extend(c.requires.iter().filter_map(|r| graph.get(r)));
-    }
+    let closure = closure(graph, &target.id);
     let members: HashSet<&str> = closure.iter().map(|c| c.id.as_str()).collect();
 
     let sort_key = |c: &Concept| {
@@ -141,6 +170,33 @@ mod tests {
             quote: quote.into(),
         });
         c
+    }
+
+    #[test]
+    fn pilot_explains_the_largest_part_that_fits() {
+        // t needs a and b; a needs c and d; b needs e. Closures: c, d, e: 1; b: 2; a: 3.
+        let g = graph(
+            "t",
+            vec![
+                concept("t", &["a", "b"], false),
+                concept("a", &["c", "d", "k"], false),
+                concept("b", &["e"], false),
+                concept("c", &[], false),
+                concept("d", &[], false),
+                concept("e", &[], false),
+                concept("k", &[], true),
+            ],
+        );
+        assert_eq!(pilot(&g, &[], 3).unwrap().as_deref(), Some("a"));
+        assert_eq!(pilot(&g, &[], 2).unwrap().as_deref(), Some("b"));
+        assert_eq!(pilot(&g, &[], 6).unwrap(), None);
+        let mut g = g;
+        g.pilot = Some("a".into());
+        assert_eq!(
+            plan(&g, &[]).unwrap().order.last().map(String::as_str),
+            Some("a")
+        );
+        assert_eq!(plan(&g, &[]).unwrap().order.len(), 3);
     }
 
     #[test]

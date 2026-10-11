@@ -20,7 +20,8 @@
 //!    bind to two meanings.
 //!
 //! [`task`] decides what to hand out next and applies submitted answers; [`build`] writes
-//! the docs tree and `zensical.toml` once no task is left.
+//! the docs tree and `zensical.toml` once no task is left; [`convergence`] summarises
+//! whether the audit rounds are reducing gaps.
 
 pub mod aha;
 pub mod argument;
@@ -29,6 +30,7 @@ pub mod autolink;
 pub mod build;
 pub mod cite;
 pub mod config;
+pub mod convergence;
 pub mod error;
 pub mod extract;
 pub mod grade;

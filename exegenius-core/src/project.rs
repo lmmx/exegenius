@@ -240,13 +240,18 @@ impl Project {
         self.state_dir().join("pages").join(format!("{id}.md"))
     }
 
+    /// The concept graph, if extracted. A pilot recorded in it is dropped when the
+    /// configuration no longer asks for one, so the run goes on to the full target.
     pub fn load_graph(&self) -> Result<Option<Graph>> {
         let path = self.graph_path();
-        if path.exists() {
-            Ok(Some(read_json(&path)?))
-        } else {
-            Ok(None)
+        if !path.exists() {
+            return Ok(None);
         }
+        let mut graph: Graph = read_json(&path)?;
+        if self.config.pilot.is_none() {
+            graph.pilot = None;
+        }
+        Ok(Some(graph))
     }
 
     pub fn save_graph(&self, graph: &Graph) -> Result<()> {

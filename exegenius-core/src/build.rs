@@ -179,7 +179,7 @@ pub fn title(project: &Project, graph: &Graph) -> String {
         .config
         .title
         .clone()
-        .or_else(|| graph.get(&graph.target).map(|c| c.name.clone()))
+        .or_else(|| graph.get(graph.goal()).map(|c| c.name.clone()))
         .unwrap_or_else(|| "exegenius".to_string())
 }
 
@@ -659,7 +659,7 @@ fn render_index(site: &Site, outline: Option<(&Outline, &[String])>, notation: b
     let project = site.project;
     let graph = site.graph;
     let mut out = format!("# {}\n\n", title(project, graph));
-    let target = graph.get(&graph.target);
+    let target = graph.get(graph.goal());
     let knows = project.config.reader.knows.trim().trim_end_matches('.');
     let Some((outline, slugs)) = outline else {
         if let Some(target) = target {
@@ -1246,6 +1246,7 @@ mod tests {
                 simulation: Default::default(),
                 readers: vec![],
                 site: Default::default(),
+                pilot: None,
             },
             sources: vec![],
         };
