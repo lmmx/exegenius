@@ -174,6 +174,32 @@ without the marks.
 - **Repairs.** After the 5 spurious notes were removed, 51 notes went to 11 pages. Haiku
   writers rewrote all 11, adding 47 `<cite>` marks between them, each of which passed the
   word-for-word check against the source.
+- **Round 2.** Ten fresh Haiku readers read the repaired wiki and five graders scored them:
+
+  | Goal | Readers, round 1 → 2 | Pages read, round 1 → 2 | Searches, round 1 → 2 |
+  |---|---|---|---|
+  | 1 | 3/3, 3/3 → 3/3, 3/3 | 10, 10 → 4, 5 | 2, 1 → 0, 0 |
+  | 2 | 3/3, 3/3 → 3/3, 3/3 | 4, 4 → 3, 3 | 0, 0 → 0, 0 |
+  | 3 | 1/3, 2/3 → 3/3, 3/3 | 11, 11 → 5, 11 | 11, 13 → 1, 3 |
+  | 4 | 1/3, 0/3 → 3/3, 3/3 | 10, 13 → 4, 3 | 12, 15 → 1, 0 |
+  | 5 | 3/3, 3/3 → 3/3, 3/3 | 2, 4 → 3, 4 | 0, 4 → 0, 0 |
+
+  - Mean coverage went from 73% to 100%, against the 53% baseline.
+  - Pages opened per run fell from 7.9 to 4.5, and searches from 5.8 to 0.5. Stuck points
+    stayed level, 51 and 50.
+  - The rewritten cost accounting page now says what round 1's readers asked for: with
+    κ = g_min/2 the spare exponent g_min − κ absorbs the leftover (log p)^a factor, and
+    with κ = g_min it would have nowhere to go.
+  - Possible leaks rose from 1 run to 4, all generic multi-word names ("exact integer
+    multiplication").
+- **What round 2 does not show.** The repair note for a missed key point quotes the key
+  point, so the writers put it on the page, and round 2 partly measures whether the repairs
+  landed rather than whether the wiki teaches. The repairs are legitimate, since each
+  missing step is one a reader with the stated background needs. But an independent
+  measure needs held-out goals that never feed repairs, or fresh goals written after them.
+  The stuck points staying level also says that the remaining confusion moved rather than
+  went away: "Signed coefficient packing" and the main theorem page now lead the table,
+  with 17 and 14 stuck points over both rounds.
 - **Agent hygiene.** Haiku subagents in this cloud session several times made stray calls
   to session tools: two empty remote sessions were created and archived, and other calls
   were refused. All of them self-reported. The reader and baseline instructions now limit
@@ -194,6 +220,7 @@ without the marks.
 - Possible leaks are matched by name only, so generic multi-word names ("multiplication algorithm") flag readers who never needed the wiki's name for them (exegenius-core/src/simulate.rs)
 
 ## Missing
+- No held-out goals: every goal feeds repairs, so later rounds are not an independent measure
 - No ablation (I-51) or per-page credit; the report attributes stuck points to pages, not answers to pages
 - No adversarial misreader (I-57, I-58)
 - No check that a reader subagent used only the read and search commands; the trail shows what it opened through them, nothing more
