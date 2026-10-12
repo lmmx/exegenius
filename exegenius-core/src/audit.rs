@@ -403,8 +403,8 @@ pub fn apply_audit(
 }
 
 /// The action recorded for a step reported inside reasoning a rewrite added for an earlier
-/// step.
-pub const LEFT: &str = "left: a step inside reasoning a rewrite added for an earlier step";
+/// step: it is sent back to be cited or cut, not explained further.
+pub const CITE_OR_CUT: &str = "rewrite: cite or cut a step inside added reasoning";
 
 fn apply_gaps(graph: &mut Graph, page: &str, known: &TermIndex, gaps: Vec<Gap>) -> PageAudit {
     let mut audit = PageAudit {
@@ -432,7 +432,17 @@ fn apply_gaps(graph: &mut Graph, page: &str, known: &TermIndex, gaps: Vec<Gap>) 
             .get(page)
             .is_some_and(|added| added.iter().any(|s| contains_quote(s, &gap.quote)));
         if gap.kind == GapKind::Step && inside_added {
-            audit.dropped.push(outcome(LEFT.into()));
+            // Explaining it would add claims of its own: a citation or a cut adds none.
+            graph.queue_rewrite(
+                page,
+                Some(format!(
+                    "Cite or cut this step: \"{}\" ({}). It is inside reasoning added for an \
+                     earlier step, so do not explain it further: cite the source for it, or \
+                     remove the claim.",
+                    gap.quote, gap.note
+                )),
+            );
+            audit.gaps.push(outcome(CITE_OR_CUT.into()));
             continue;
         }
         let action = match gap.kind {
@@ -798,7 +808,7 @@ mod tests {
     }
 
     #[test]
-    fn steps_inside_added_reasoning_are_left() {
+    fn steps_inside_added_reasoning_are_cited_or_cut() {
         let mut g = graph("p", vec![concept("p", &[], false)]);
         g.added.insert(
             "p".into(),
@@ -819,9 +829,9 @@ mod tests {
                 step("so we can halve it"),
             ],
         );
-        assert_eq!(audit.dropped.len(), 1);
-        assert_eq!(audit.dropped[0].action, LEFT);
-        assert_eq!(audit.gaps.len(), 1);
-        assert_eq!(g.rewrite["p"].len(), 1);
+        assert_eq!(audit.gaps.len(), 2);
+        assert_eq!(audit.gaps[0].action, CITE_OR_CUT);
+        assert!(g.rewrite["p"][0].starts_with("Cite or cut this step:"));
+        assert!(g.rewrite["p"][1].starts_with(STEP_NOTE));
     }
 }

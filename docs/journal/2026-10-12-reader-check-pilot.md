@@ -47,6 +47,10 @@ These are defects a rewrite introduced. The depth limit dropped them with no rew
 
 2026-10-11-depth-limit planned that such a step "must cite it, or it goes to the report". As built, the limit drops it, and that was the shortcut. A step inside added reasoning could get a rewrite note asking for a citation or for the claim to be cut, with no further reasoning. That fix adds no claim, so it cannot renew.
 
+## Cite or cut
+
+Built after this run. A step gap inside reasoning that a rewrite added for an earlier step is no longer dropped. It gets the rewrite note "Cite or cut this step: … cite the source for it, or remove the claim", with the action `CITE_OR_CUT` (exegenius-core/src/audit.rs). It counts as a gap, in the convergence figures and the stop rule, and `status` prints how many were sent back. The note does not begin as a step note does, so the rewrite that answers it records no added sentences of its own. A cut or a citation makes no new claim, so the fix cannot renew. An audit checks it only if a round follows, so runs need `rounds = 3`: the second round finds steps inside added reasoning, and the third checks that they were cited or cut.
+
 ## The reader check, as the author saw it
 
 The author accepted the background as shown and recorded three observations, for later work:
@@ -61,11 +65,11 @@ The author accepted the background as shown and recorded three observations, for
 - The reader check pilot ran 41 tasks in 16 minutes to `done`, explaining `transform-identity` with the five pages of the reduction pilot and one added page, cyclic convolution
 - On the repeated pages, term gaps went 3 → 0 and symbol gaps 3 → 1; step gaps went 6 → 0 as reported and 6 → 5 counting the 5 the depth limit left
 - Two of the steps the depth limit left on `transform-identity` are an undefined $t_i$ and an unstated normalisation of $F_s^+$, which the final page still relies on
-- The depth limit drops a step inside added reasoning without a rewrite note, and `status` counts it apart from the convergence figures (exegenius-core/src/audit.rs, exegenius-cli/src/main.rs)
+- A step inside reasoning a rewrite added for an earlier step gets a rewrite note to cite it or cut it, and counts as a gap (exegenius-core/src/audit.rs, exegenius-cli/src/main.rs)
 - The reader check prints the profile, summary and known concepts as one list, followed by a single question (exegenius-cli/src/main.rs)
 
 ## Missing
-- No rewrite note for a step inside added reasoning, asking for a citation or for the claim to be cut
+- No pilot run with steps inside added reasoning sent back to be cited or cut
 - No assumed-background appendix linking the known concepts out
 - No reader check that separates borderline known concepts from the rest
 - No adjustment of reading level beyond the background task

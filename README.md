@@ -107,8 +107,8 @@ each round, the gaps per page by kind and, on the pages also audited the round b
 many gaps remain and how many are new (a symbol gap is the same gap whatever sentence the
 auditor quotes): a converging run has fewer each round, and few new.
 Each step is explained one level deep: a step an audit reports inside reasoning that a
-rewrite added for an earlier step is left as it is, and `status` counts it, so explanations
-do not regress link by link. If rewrites do not at least halve the step and symbol gaps on
+rewrite added for an earlier step is sent back to be cited or cut, not explained further,
+so explanations do not regress link by link; it counts as a gap like any other. If rewrites do not at least halve the step and symbol gaps on
 the pages audited in two rounds running, the audit rounds stop there and `status` says why. Overloads tasks stop
 after two rounds.
 

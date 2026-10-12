@@ -395,16 +395,16 @@ fn status(project: &Project) -> anyhow::Result<()> {
             );
         }
     }
-    let left = load_rounds(project)?
+    let cut = load_rounds(project)?
         .iter()
         .flat_map(|r| &r.pages)
-        .flat_map(|p| &p.dropped)
-        .filter(|g| g.action == exegenius_core::audit::LEFT)
+        .flat_map(|p| &p.gaps)
+        .filter(|g| g.action == exegenius_core::audit::CITE_OR_CUT)
         .count();
-    if left > 0 {
+    if cut > 0 {
         println!(
-            "steps left unexplained because they are inside reasoning a rewrite added for an \
-             earlier step: {left}"
+            "steps inside reasoning a rewrite added for an earlier step, sent back to be cited \
+             or cut: {cut}"
         );
     }
     if let Some(reason) = &state.stopped {
