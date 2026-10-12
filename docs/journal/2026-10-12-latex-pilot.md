@@ -51,7 +51,7 @@ No claim found in it contradicts the paper.
 - the central-wire returns;
 - which construction is the bit network.
 
-Thirteen pages of the paper's §5 sit behind a five-page pilot. Its growth limit allows one new page per round on five pages, and the candidate concept for tensor products came in round 2, whose candidates are dropped.
+A five-page pilot has no room for them: its growth limit allows one new page per round on five pages, and the candidate concept for tensor products came in round 2, whose candidates are dropped.
 
 **Citations.** All five marks quote a fragment beside the claim rather than the passage that states it:
 - "both are smaller than $1/2$" cited for $\lambda/N = 100/539$ and $101/539$;
