@@ -647,14 +647,24 @@ fn task_loop_end_to_end() {
         )]),
         json!(relations),
     );
+    // The notes are about a letter and a citation, and no audit follows: a claim on
+    // anything else is refused.
+    let page_text = "It is computed with the [DFT](dft.md) and reduced to \
+                     [convolution](convolution.md); values of $x$ are kept \
+                     [dyadic](dyadic-rational.md). Here $j$ is the frequency index. So $nj$ is \
+                     exact <cite data-source=\"notes\">exact on dyadic real and imaginary \
+                     parts</cite>.";
     answer(
         &project,
         &batch[0],
-        "It is computed with the [DFT](dft.md) and reduced to [convolution](convolution.md); \
-         values of $x$ are kept [dyadic](dyadic-rational.md). Here $j$ is the frequency \
-         index. So $nj$ is exact \
-         <cite data-source=\"notes\">exact on dyadic real and imaginary parts</cite>.",
+        &format!("{page_text} The sequence $x$ needs no padding before it is transformed."),
     );
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains("may not add other claims: \"The sequence $x$ needs no padding"),
+        "{err}"
+    );
+    answer(&project, &batch[0], page_text);
     submit(&project, &batch[0].id).unwrap();
 
     // The rewritten claim is a new mark, so the page gets its second and last check.

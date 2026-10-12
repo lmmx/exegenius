@@ -254,6 +254,12 @@ pub fn overloads_task(graph: &Graph, candidates: &[Candidate]) -> String {
     task
 }
 
+/// The letter an overload note is about, if `note` is one: such notes begin "$x$ means".
+pub fn noted_letter(note: &str) -> Option<&str> {
+    let (symbol, rest) = note.strip_prefix('$')?.split_once('$')?;
+    rest.starts_with(" means ").then_some(symbol)
+}
+
 /// Check the verdicts on `candidates`, queue a rewrite for each letter with two meanings,
 /// and store the verdicts.
 pub fn apply_overloads(

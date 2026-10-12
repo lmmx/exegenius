@@ -28,6 +28,9 @@ use crate::text::normalise;
 /// Most support checks per page.
 const CHECKS: u32 = 2;
 
+/// How a rewrite note for an unsupported or contradicted citation begins.
+pub const SUPPORT_NOTE: &str = "The quotation does not support the claim it is attached to";
+
 pub const SUPPORT_INSTRUCTIONS: &str = "\
 Check whether each quotation on a page of an explanatory wiki supports the claim it is \
 attached to. Writers back claims taken from the sources with a quotation copied from them; a \
@@ -286,9 +289,8 @@ pub fn apply_support(
             graph.queue_rewrite(
                 page,
                 Some(format!(
-                    "The quotation does not support the claim it is attached to ({}): \"{}\" \
-                     cites \"{}\": {} Say only what the source supports, or cite the passage \
-                     that supports the claim.",
+                    "{SUPPORT_NOTE} ({}): \"{}\" cites \"{}\": {} Say only what the source \
+                     supports, or cite the passage that supports the claim.",
                     l.label.name(),
                     m.claim,
                     m.quote,

@@ -516,11 +516,16 @@ fn status(project: &Project) -> anyhow::Result<()> {
     let ablated = project.config.simulation.ablations == 0 || simulation.ablated;
     let simulated = rounds == 0 || (simulation.round > rounds && ablated);
     let issued = state.next_id - 1;
+    let tasks = format!(
+        "tasks handed out: {issued} ({} accepted, {} pending)",
+        issued as usize - state.pending.len(),
+        state.pending.len()
+    );
     if state.done {
-        println!("tasks handed out: {issued}; audit rounds over");
+        println!("{tasks}; audit rounds over");
     } else {
         println!(
-            "tasks handed out: {issued}; audit round {} of at most {}",
+            "{tasks}; audit round {} of at most {}",
             state.round, project.config.rounds
         );
     }

@@ -436,6 +436,9 @@ pub fn apply_write(
         None => {}
     }
     errors.extend(symbols::check_page(body, &mut fields.symbols));
+    if let Some(previous) = &previous {
+        errors.extend(narrow(graph, page, previous, body, &fields.symbols));
+    }
     if previous.is_some() {
         let lost: Vec<String> =
             crate::audit::relied_on(&crate::audit::latest_symbols(project)?, page)
@@ -503,6 +506,55 @@ pub fn apply_write(
         graph.relations.insert(page.to_string(), fields.relations);
     }
     Ok(warnings)
+}
+
+/// Sentences a rewrite adds beyond its notes, when every note is about a letter (from the
+/// overloads task) or an unsupported citation (from a support check). Such rewrites come
+/// after the audit rounds and no audit reads them, so each sentence they add, beyond
+/// rewordings of old ones, must use a letter a note names or one the rewrite newly binds,
+/// or carry a citation mark.
+fn narrow(
+    graph: &Graph,
+    page: &str,
+    previous: &str,
+    body: &str,
+    symbols: &[symbols::PageBinding],
+) -> Option<String> {
+    let notes = graph.rewrite.get(page).filter(|n| !n.is_empty())?;
+    let mut letters: Vec<&str> = Vec::new();
+    for note in notes {
+        match crate::notation::noted_letter(note) {
+            Some(letter) => letters.push(letter),
+            None if note.starts_with(crate::support::SUPPORT_NOTE) => {}
+            None => return None,
+        }
+    }
+    let bound_before = graph.bindings.get(page);
+    letters.extend(
+        symbols
+            .iter()
+            .map(|b| b.symbol.as_str())
+            .filter(|s| !bound_before.is_some_and(|old| old.iter().any(|b| b.symbol == *s))),
+    );
+    let extra: Vec<String> = crate::audit::added(previous, body)
+        .into_iter()
+        .filter(|s| !s.contains("(cited)"))
+        .filter(|s| {
+            let math = symbols::math(s);
+            !letters.iter().any(|l| symbols::occurs(l, &math))
+        })
+        .collect();
+    (!extra.is_empty()).then(|| {
+        format!(
+            "this rewrite answers notes on letters and citations only, and no audit will read \
+             it, so it may not add other claims: {}. Keep the rest of the page as it was",
+            extra
+                .iter()
+                .map(|s| format!("\"{s}\""))
+                .collect::<Vec<_>>()
+                .join(", ")
+        )
+    })
 }
 
 /// Most words of prose in a first draft. The 0.1 run's pages had a median of 221; the
