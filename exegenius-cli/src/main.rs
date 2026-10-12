@@ -515,6 +515,15 @@ fn status(project: &Project) -> anyhow::Result<()> {
     let rounds = project.config.simulation.rounds;
     let ablated = project.config.simulation.ablations == 0 || simulation.ablated;
     let simulated = rounds == 0 || (simulation.round > rounds && ablated);
+    let issued = state.next_id - 1;
+    if state.done {
+        println!("tasks handed out: {issued}; audit rounds over");
+    } else {
+        println!(
+            "tasks handed out: {issued}; audit round {} of at most {}",
+            state.round, project.config.rounds
+        );
+    }
     if !state.pending.is_empty() {
         let ids: Vec<&str> = state.pending.iter().map(|t| t.id.as_str()).collect();
         println!("pending tasks: {}", ids.join(", "));
