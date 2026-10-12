@@ -827,7 +827,8 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
             let plan = plan(&graph, &project.sources)?;
             let i = find_page(&plan, page)?;
             let body = project.page_body(page)?.unwrap_or_default();
-            let audit = apply_audit(&mut graph, &plan, i, &body, parse(&path, &text)?)?;
+            let levels = crate::audit::levels(crate::argument::load(project)?.as_ref(), page);
+            let audit = apply_audit(&mut graph, &plan, i, &body, parse(&path, &text)?, levels)?;
             state.round_gaps += audit.gaps.len();
             state.audited.insert(page.clone(), input.clone());
             record(project, state.round, audit)?;
@@ -970,6 +971,7 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
             state.stopped = stall;
             let mut graph = require(project.load_graph()?)?;
             graph.rewrite.clear();
+            graph.note_depth.clear();
             graph.candidates.clear();
             project.save_graph(&graph)?;
         } else {

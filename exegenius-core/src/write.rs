@@ -488,18 +488,20 @@ pub fn apply_write(
             n.starts_with(crate::audit::STEP_NOTE) || n.starts_with(crate::audit::CITE_NOTE)
         })
     });
+    // The sentences it adds are one deeper than the deepest step its notes ask about.
     let on_page = crate::text::normalise(&crate::cite::referenced(body));
-    let mut added: Vec<String> = graph
+    let mut added: Vec<crate::graph::Added> = graph
         .added
         .remove(page)
         .unwrap_or_default()
         .into_iter()
-        .filter(|s| on_page.contains(s.as_str()))
+        .filter(|s| on_page.contains(s.sentence.as_str()))
         .collect();
+    let depth = graph.note_depth.remove(page).unwrap_or(0) + 1;
     if let (Some(previous), true) = (&previous, answers_steps) {
-        for s in crate::audit::added(previous, body) {
-            if !added.contains(&s) {
-                added.push(s);
+        for sentence in crate::audit::added(previous, body) {
+            if !added.iter().any(|s| s.sentence == sentence) {
+                added.push(crate::graph::Added { sentence, depth });
             }
         }
     }

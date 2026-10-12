@@ -80,14 +80,45 @@ pub struct Graph {
     /// In a pilot, the concept the pilot explains in place of the target.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub pilot: Option<String>,
-    /// The sentences the latest rewrite of each page added in answer to step notes. A step
-    /// reported inside one is not sent back for more reasoning: each step is explained one
-    /// level deep, so explanations cannot regress without end.
+    /// The sentences rewrites of each page added in answer to step notes, each with its
+    /// depth, while they are on the page. A step reported inside one is explained only to
+    /// the page's limit ([`crate::audit::levels`]), so explanations cannot regress without
+    /// end.
     #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
-    pub added: BTreeMap<String, Vec<String>>,
+    pub added: BTreeMap<String, Vec<Added>>,
+    /// The depth of the deepest step each page's queued notes ask about: the sentences the
+    /// rewrite adds answering them are one deeper.
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub note_depth: BTreeMap<String, u32>,
     /// What the reader profile covers for these sources, from the background task.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub background: Option<crate::background::Background>,
+}
+
+/// A sentence a rewrite added in answer to a step note, as audits see it, and its depth:
+/// 1 for reasoning added for a step in text not itself added, one more for each level below.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(from = "AddedRecord")]
+pub struct Added {
+    pub sentence: String,
+    pub depth: u32,
+}
+
+/// [`Added`] as stored, or as a bare sentence, as graphs before depths stored it.
+#[derive(Deserialize)]
+#[serde(untagged)]
+enum AddedRecord {
+    Sentence(String),
+    Added { sentence: String, depth: u32 },
+}
+
+impl From<AddedRecord> for Added {
+    fn from(record: AddedRecord) -> Self {
+        match record {
+            AddedRecord::Sentence(sentence) => Added { sentence, depth: 1 },
+            AddedRecord::Added { sentence, depth } => Added { sentence, depth },
+        }
+    }
 }
 
 impl Graph {

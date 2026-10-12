@@ -348,6 +348,7 @@ pub fn apply_audit(
     i: usize,
     body: &str,
     mut answer: AuditAnswer,
+    levels: u32,
 ) -> Result<PageAudit> {
     let page = &plan.order[i];
     let stripped = crate::cite::referenced(body);
@@ -380,7 +381,7 @@ pub fn apply_audit(
         )));
     }
     let known = TermIndex::new(plan.known_at(graph, i));
-    let mut audit = apply_gaps(graph, page, &known, answer.gaps);
+    let mut audit = apply_gaps(graph, page, &known, answer.gaps, levels);
     for u in &answer.symbols {
         if let Anchor::Here { quote } = &u.anchor
             && symbols::quoted(&stripped, quote, &u.symbol) == symbols::Quoted::Late
@@ -426,12 +427,37 @@ pub fn apply_audit(
 
 /// The action recorded for a step reported inside reasoning a rewrite added for an earlier
 /// step: it is sent back to be cited or cut, not explained further.
+/// How many levels a step is explained to on a page that presents no step of the argument:
+/// a step inside reasoning added for an earlier step is cited or cut.
+pub const LEVELS: u32 = 1;
+
+/// How many levels a step is explained to on a page that presents a step of the argument:
+/// the page owes how that step's method works, so reasoning added for a step may itself be
+/// explained once more.
+pub const ARGUMENT_LEVELS: u32 = 2;
+
+/// The levels page `page` explains steps to: [`ARGUMENT_LEVELS`] if the argument assigns it
+/// a step, else [`LEVELS`].
+pub fn levels(argument: Option<&crate::argument::Argument>, page: &str) -> u32 {
+    if argument.is_some_and(|a| a.module(page).is_some()) {
+        ARGUMENT_LEVELS
+    } else {
+        LEVELS
+    }
+}
+
 /// How a rewrite note for a step inside added reasoning begins.
 pub const CITE_NOTE: &str = "Cite or cut this step:";
 
 pub const CITE_OR_CUT: &str = "rewrite: cite or cut a step inside added reasoning";
 
-fn apply_gaps(graph: &mut Graph, page: &str, known: &TermIndex, gaps: Vec<Gap>) -> PageAudit {
+fn apply_gaps(
+    graph: &mut Graph,
+    page: &str,
+    known: &TermIndex,
+    gaps: Vec<Gap>,
+    levels: u32,
+) -> PageAudit {
     let mut audit = PageAudit {
         page: page.to_string(),
         gaps: Vec::new(),
@@ -452,15 +478,23 @@ fn apply_gaps(graph: &mut Graph, page: &str, known: &TermIndex, gaps: Vec<Gap>) 
                 .push(outcome("dropped: the reader already knows this".into()));
             continue;
         }
-        // A step on a claim that already carries a citation mark cannot be met by citing it:
-        // the citation did not make the step followable, so it is explained like any other.
-        let inside_added = graph.added.get(page).is_some_and(|added| {
+        // A step's depth is that of the added sentence it is in, 0 outside added reasoning.
+        // Steps are explained to depth `levels - 1`; deeper, explaining would add claims of
+        // its own, and a citation or a cut adds none. A step on a claim that already carries
+        // a citation mark cannot be met by citing it, so at the limit it is explained once
+        // more; beyond, it is cut.
+        let added = graph.added.get(page).and_then(|added| {
             added
                 .iter()
-                .any(|s| contains_quote(s, &gap.quote) && !s.contains("(cited)"))
+                .find(|s| contains_quote(&s.sentence, &gap.quote))
         });
-        if gap.kind == GapKind::Step && inside_added {
-            // Explaining it would add claims of its own: a citation or a cut adds none.
+        let depth = added.map_or(0, |s| s.depth);
+        let cited = added.is_some_and(|s| s.sentence.contains("(cited)"));
+        if gap.kind == GapKind::Step {
+            let deepest = graph.note_depth.entry(page.to_string()).or_default();
+            *deepest = (*deepest).max(depth);
+        }
+        if gap.kind == GapKind::Step && (depth > levels || (depth == levels && !cited)) {
             graph.queue_rewrite(
                 page,
                 Some(format!(
@@ -475,13 +509,23 @@ fn apply_gaps(graph: &mut Graph, page: &str, known: &TermIndex, gaps: Vec<Gap>) 
         }
         let action = match gap.kind {
             GapKind::Step => {
+                // Below the limit on a page presenting a step of the argument, only how that
+                // step's method works is developed further; a result it uses is stated.
+                let owed = if depth > 0 && levels == ARGUMENT_LEVELS {
+                    " It is inside reasoning added for an earlier step. If it is part of how \
+                     this page's own step of the argument works (see \"This page in the \
+                     argument\"), develop it here; if it concerns a result that step uses, \
+                     say what the result states and cite it."
+                } else {
+                    ""
+                };
                 graph.queue_rewrite(
                     page,
                     Some(format!(
                         "{STEP_NOTE} \"{}\" ({}). Give the reasoning on this \
                          page. If the step rests on a result from prior work, say what the \
                          result states and why it applies here, and cite the source for its \
-                         proof: a citation alone does not explain a step.",
+                         proof: a citation alone does not explain a step.{owed}",
                         gap.quote, gap.note
                     )),
                 );
@@ -669,6 +713,7 @@ mod tests {
                 gap("x", "not on the page", GapKind::Step),
                 gap("κ", "$\\kappa$", GapKind::Symbol),
             ]),
+            LEVELS,
         );
         let err = bad.unwrap_err().to_string();
         assert!(
@@ -686,6 +731,7 @@ mod tests {
                 gap("later", "a later idea", GapKind::Term),
                 gap("dyadic", "dyadic numbers", GapKind::Term),
             ]),
+            LEVELS,
         )
         .unwrap();
         let actions: Vec<&str> = audit.gaps.iter().map(|o| o.action.as_str()).collect();
@@ -779,7 +825,7 @@ mod tests {
                 page: "ring".into(),
             },
         ));
-        let err = apply_audit(&mut g.clone(), &plan, 2, body, answer(wrong))
+        let err = apply_audit(&mut g.clone(), &plan, 2, body, answer(wrong), LEVELS)
             .unwrap_err()
             .to_string();
         assert!(
@@ -795,7 +841,7 @@ mod tests {
             err.contains("`ring` is not an earlier page that binds it"),
             "{err}"
         );
-        let err = apply_audit(&mut g.clone(), &plan, 2, body, answer(rest()))
+        let err = apply_audit(&mut g.clone(), &plan, 2, body, answer(rest()), LEVELS)
             .unwrap_err()
             .to_string();
         assert!(err.contains("missing: T"), "{err}");
@@ -815,7 +861,7 @@ mod tests {
                 quote: "Let $T$ be the length.".into(),
             },
         ));
-        let audit = apply_audit(&mut g, &plan, 2, body, answer(good)).unwrap();
+        let audit = apply_audit(&mut g, &plan, 2, body, answer(good), LEVELS).unwrap();
         assert!(audit.gaps.is_empty() && audit.symbols.len() == 4);
         assert!(!g.rewrite.contains_key("synthetic"));
     }
@@ -836,7 +882,7 @@ mod tests {
             )],
             gaps: vec![],
         };
-        let audit = apply_audit(&mut g, &plan, 0, body, answer).unwrap();
+        let audit = apply_audit(&mut g, &plan, 0, body, answer, LEVELS).unwrap();
         assert_eq!(
             audit.gaps[0].action,
             "rewrite: say what the symbol denotes at its first use"
@@ -915,37 +961,71 @@ mod tests {
     }
 
     #[test]
-    fn steps_inside_added_reasoning_are_cited_or_cut() {
-        let mut g = graph("p", vec![concept("p", &[], false)]);
-        g.added.insert(
-            "p".into(),
-            vec![
-                "One of two consecutive integers is even, so the product is even.".into(),
-                "Such maps exist (cited), and the identity holds.".into(),
-            ],
-        );
+    fn steps_are_explained_to_the_page_s_levels_then_cited_or_cut() {
+        // Sentence n of the page is added reasoning at depth n (1 to 3), uncited and cited;
+        // "Plain" is not added (depth 0).
+        let added = |depth: u32, cited: bool| crate::graph::Added {
+            sentence: format!(
+                "Depth {depth} {} claim holds{}.",
+                if cited { "cited" } else { "plain" },
+                if cited { " (cited)" } else { "" }
+            ),
+            depth,
+        };
         let step = |quote: &str| Gap {
             term: "step".into(),
             quote: quote.into(),
             kind: GapKind::Step,
             note: "why".into(),
         };
-        let audit = apply_gaps(
-            &mut g,
-            "p",
-            &TermIndex::default(),
-            vec![
-                step("One of two consecutive integers is even"),
-                step("so we can halve it"),
-                step("Such maps exist (cited)"),
-            ],
-        );
-        assert_eq!(audit.gaps.len(), 3);
-        assert_eq!(audit.gaps[0].action, CITE_OR_CUT);
-        assert!(g.rewrite["p"][0].starts_with("Cite or cut this step:"));
-        assert!(g.rewrite["p"][1].starts_with(STEP_NOTE));
-        // Already cited, so a citation cannot answer it: the reasoning is asked for.
-        assert_ne!(audit.gaps[2].action, CITE_OR_CUT);
-        assert!(g.rewrite["p"][2].starts_with(STEP_NOTE));
+        let quotes = [
+            ("Plain text", 0, false),
+            ("Depth 1 plain claim", 1, false),
+            ("Depth 1 cited claim", 1, true),
+            ("Depth 2 plain claim", 2, false),
+            ("Depth 2 cited claim", 2, true),
+            ("Depth 3 plain claim", 3, false),
+            ("Depth 3 cited claim", 3, true),
+        ];
+        // What each step gets: E for a step note, C to be cited or cut.
+        for (levels, expected) in [(LEVELS, "ECECCCC"), (ARGUMENT_LEVELS, "EEECECC")] {
+            let mut g = graph("p", vec![concept("p", &[], false)]);
+            g.added.insert(
+                "p".into(),
+                quotes
+                    .iter()
+                    .filter(|(_, depth, _)| *depth > 0)
+                    .map(|&(_, depth, cited)| added(depth, cited))
+                    .collect(),
+            );
+            let audit = apply_gaps(
+                &mut g,
+                "p",
+                &TermIndex::default(),
+                quotes.iter().map(|(q, _, _)| step(q)).collect(),
+                levels,
+            );
+            let got: String = audit
+                .gaps
+                .iter()
+                .map(|o| if o.action == CITE_OR_CUT { 'C' } else { 'E' })
+                .collect();
+            assert_eq!(got, expected, "levels {levels}");
+            let notes = &g.rewrite["p"];
+            assert!(notes[1].starts_with(if levels == LEVELS {
+                CITE_NOTE
+            } else {
+                STEP_NOTE
+            }));
+            // On a page presenting a step of the argument, a step below the limit inside
+            // added reasoning is developed only if it is part of the page's own step.
+            assert_eq!(
+                notes[1].contains("part of how this page's own step"),
+                levels == ARGUMENT_LEVELS
+            );
+            assert!(!notes[0].contains("part of how this page's own step"));
+            // The rewrite answering these notes adds sentences one below the deepest step.
+            assert_eq!(g.note_depth["p"], 3);
+        }
     }
 }

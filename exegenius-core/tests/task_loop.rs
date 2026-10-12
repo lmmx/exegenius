@@ -1103,6 +1103,79 @@ fn reasoning_added_by_any_rewrite_for_a_step_stays_added() {
     );
 }
 
+#[test]
+fn a_page_presenting_a_step_explains_one_level_more() {
+    let temp = tempfile::tempdir().unwrap();
+    // One step a round does not halve, so the rounds run on only with early stopping off.
+    let project = setup(temp.path(), 3);
+    let path = temp.path().join("exegenius.toml");
+    let toml = read(&project, &path).replace("rounds = 3\n", "rounds = 3\nstop_early = false\n");
+    std::fs::write(&path, toml).unwrap();
+    let project = Project::load(temp.path()).unwrap();
+    let batch = tasks(next(&project).unwrap());
+    answer(&project, &batch[0], &extract_answer("a chirp identity"));
+    submit(&project, &batch[0].id).unwrap();
+    background(&project);
+    argue(&project, &["dft", "convolution"]);
+    // The chirp page presents the argument's step. Each round's audit reports one step on
+    // it, each inside the sentence the rewrite before added.
+    let steps = [
+        "It holds",
+        "Because the sum telescopes",
+        "each term cancels the next",
+    ];
+    let bodies = [
+        "It holds.",
+        "It holds. Because the sum telescopes, it holds.",
+        "It holds. Because the sum telescopes, it holds. Here each term cancels the next.",
+    ];
+    for round in 0..3 {
+        for t in tasks(next(&project).unwrap()) {
+            match page(&t) {
+                "chirp-identity" => {
+                    fields(&project, &t, json!([]), json!(chirp_relations()));
+                    answer(&project, &t, &format!("{} {CHIRP_USES}.", bodies[round]));
+                }
+                _ => answer(&project, &t, "Some explanation."),
+            }
+            submit(&project, &t.id).unwrap();
+        }
+        for t in tasks(next(&project).unwrap()) {
+            let gaps = match page(&t) {
+                "chirp-identity" => json!([{"term": "step", "quote": steps[round],
+                                            "kind": "step", "note": "unclear"}]),
+                _ => json!([]),
+            };
+            answer(
+                &project,
+                &t,
+                &json!({"symbols": [], "gaps": gaps}).to_string(),
+            );
+            submit(&project, &t.id).unwrap();
+        }
+    }
+    // Depth 0, then depth 1, are explained; depth 2 is cited or cut.
+    let audit: serde_json::Value =
+        serde_json::from_str(&read(&project, "exegenius/audit.json")).unwrap();
+    let actions: Vec<&str> = audit
+        .as_array()
+        .unwrap()
+        .iter()
+        .flat_map(|r| r["pages"].as_array().unwrap())
+        .filter(|p| p["page"] == "chirp-identity")
+        .flat_map(|p| p["gaps"].as_array().unwrap())
+        .map(|g| g["action"].as_str().unwrap())
+        .collect();
+    assert_eq!(
+        actions,
+        vec![
+            "rewrite: explain the step",
+            "rewrite: explain the step",
+            exegenius_core::audit::CITE_OR_CUT
+        ]
+    );
+}
+
 /// Handles of the links in a page as a simulated reader sees it.
 fn handles(page: &str) -> Vec<String> {
     page.split("](")

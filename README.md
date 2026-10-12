@@ -106,11 +106,15 @@ them, and `status` counts them. Only pages whose audit input changed are audited
 each round, the gaps per page by kind and, on the pages also audited the round before, how
 many gaps remain and how many are new (a symbol gap is the same gap whatever sentence the
 auditor quotes): a converging run has fewer each round, and few new.
-Each step is explained one level deep. A step note asks for the reasoning on the page; a
+Steps are explained to a fixed depth. A step note asks for the reasoning on the page; a
 result from prior work may be cited for its proof, once the page says what it states and why
-it applies. A step an audit reports inside reasoning that a rewrite added for an earlier step
-(new sentences, not rewordings of old ones) is sent back to be cited or cut, not explained further,
-so explanations do not regress link by link; it counts as a gap like any other. If rewrites do not at least halve the step and symbol gaps on
+it applies. Sentences a rewrite adds for a step (new sentences, not rewordings of old ones)
+are one level deeper than the step. A page that presents a step of the argument owes how
+that step's method works, so a step inside reasoning added there is explained once more, if
+it is part of that method; on any other page, and below that, a step inside added reasoning
+is sent back to be cited or cut, so explanations do not regress link by link. A step on a
+claim that already carries a citation is explained one level further, since a citation
+cannot answer it. Steps sent back to be cited or cut count as gaps like any others. If rewrites do not at least halve the step and symbol gaps on
 the pages audited in two rounds running, the audit rounds stop there and `status` says why. `stop_early = false` in `exegenius.toml`
 turns this off, so that every round up to `rounds` runs; `status` then says where it would
 have stopped.
