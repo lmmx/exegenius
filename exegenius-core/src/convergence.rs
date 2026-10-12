@@ -7,7 +7,7 @@
 //! leaves few new gaps; one that replaces each reported step with another leaves as many
 //! new gaps as it removed.
 
-use crate::audit::{GapKind, Outcome, PageAudit, Round};
+use crate::audit::{CITE_OR_CUT, GapKind, Outcome, PageAudit, Round};
 use crate::text::normalise;
 
 /// Gap counts by kind.
@@ -55,6 +55,8 @@ pub struct Summary {
     /// Of `after`, the gaps not reported on the page the round before: for a symbol, the
     /// same symbol; for a term or step, the same passage.
     pub new: Kinds,
+    /// Of `after`, the steps inside reasoning a rewrite added, sent back to be cited or cut.
+    pub cite_or_cut: usize,
 }
 
 /// Why the audit rounds should end after `summary`'s round, if they should: on the pages
@@ -62,17 +64,25 @@ pub struct Summary {
 /// symbol gaps, the kinds a rewrite is meant to fix. Term gaps are left out, as extend
 /// resolves them into pages. The 0.1 run's rounds halved them (28 to 10, 16 to 2); the
 /// 0.5.0 run's and the baseline pilot's did not (202 to 282, 34 to 34).
+///
+/// Steps sent back to be cited or cut are left out too: their fix adds no claim, so they
+/// cannot renew, and only a further round fixes them. Counted, they end the rounds just
+/// when there are many of them to fix.
 pub fn stalled(summary: &Summary) -> Option<String> {
     let before = summary.before.step + summary.before.symbol;
-    let after = summary.after.step + summary.after.symbol;
+    let after = summary.after.step + summary.after.symbol - summary.cite_or_cut;
     (summary.repeated > 0 && before > 0 && after * 2 > before).then(|| {
         format!(
             "after audit round {}, step and symbol gaps on the {} pages also audited in round {} \
              went from {before} to {after}, not to half or fewer, so rewrites were not \
-             converging",
+             converging{}",
             summary.round,
             summary.repeated,
-            summary.round - 1
+            summary.round - 1,
+            match summary.cite_or_cut {
+                0 => String::new(),
+                n => format!(" ({n} steps sent back to be cited or cut not counted)"),
+            }
         )
     })
 }
@@ -117,6 +127,7 @@ pub fn summarise(rounds: &[Round]) -> Vec<Summary> {
             before: Kinds::default(),
             after: Kinds::default(),
             new: Kinds::default(),
+            cite_or_cut: 0,
         };
         for page in &round.pages {
             let gaps = Kinds::of(&page.gaps);
@@ -134,6 +145,9 @@ pub fn summarise(rounds: &[Round]) -> Vec<Summary> {
             summary.before.symbol += earlier.symbol;
             for gap in &page.gaps {
                 summary.after.add(gap.kind);
+                if gap.action == CITE_OR_CUT {
+                    summary.cite_or_cut += 1;
+                }
                 if !reported_before(gap, before) {
                     summary.new.add(gap.kind);
                 }
@@ -181,7 +195,13 @@ mod tests {
                             gap(GapKind::Term, "the tape"),
                         ],
                     ),
-                    page("c", vec![gap(GapKind::Step, "a new page's step")]),
+                    page(
+                        "c",
+                        vec![Outcome {
+                            action: CITE_OR_CUT.into(),
+                            ..gap(GapKind::Step, "a new page's step")
+                        }],
+                    ),
                 ],
             },
             Round {
@@ -232,6 +252,8 @@ mod tests {
         // The step's passage contains the earlier one, which is long enough to count; the
         // short term matches only exactly, which it does.
         assert_eq!(second.new, Kinds::default());
+        // Page c was not audited before, so its step is not on a repeated page.
+        assert_eq!(second.cite_or_cut, 0);
     }
 
     #[test]
@@ -252,6 +274,7 @@ mod tests {
                 symbol: 13,
             },
             new: Kinds::default(),
+            cite_or_cut: 0,
         };
         assert!(stalled(&summary).is_some());
         // The 0.1 run's first comparison: symbols held at 8, but steps fell from 20 to 2.
@@ -265,6 +288,21 @@ mod tests {
             step: 2,
             symbol: 8,
         };
+        assert!(stalled(&summary).is_none());
+        // The 0.6 full run's: 49 to 31, but 21 of the 22 steps were sent back to be cited
+        // or cut, leaving 10.
+        summary.before = Kinds {
+            term: 26,
+            step: 35,
+            symbol: 14,
+        };
+        summary.after = Kinds {
+            term: 12,
+            step: 22,
+            symbol: 9,
+        };
+        assert!(stalled(&summary).is_some());
+        summary.cite_or_cut = 21;
         assert!(stalled(&summary).is_none());
         summary.repeated = 0;
         summary.after.step = 40;

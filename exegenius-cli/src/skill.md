@@ -23,7 +23,10 @@ and writing it asks for, task by task, until it reports done.
    `.claude/agents/`, each with its model and the only tools it may use. Audit tasks must
    each go to a fresh subagent that has seen nothing else: the auditor stands in for a
    reader who has not read the sources or the other pages. Do not do audits yourself.
-4. When every task in the batch is accepted, go back to step 1.
+4. When every task in the batch is accepted, go back to step 1. Keep no tally of your own:
+   each time a subagent finishes, run `exegenius next`, which lists the tasks still
+   pending, and start a subagent for any pending task none is working on. End your turn
+   only while subagents are running, never with a pending task no subagent has.
    Once, early in the run, `exegenius next` prints the reader instead of tasks: the reader
    profile as every later task will be told it, and the concepts counted as known. If the
    user is following the session, show it to them and ask whether it describes the reader

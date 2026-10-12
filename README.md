@@ -109,7 +109,9 @@ auditor quotes): a converging run has fewer each round, and few new.
 Each step is explained one level deep: a step an audit reports inside reasoning that a
 rewrite added for an earlier step is sent back to be cited or cut, not explained further,
 so explanations do not regress link by link; it counts as a gap like any other. If rewrites do not at least halve the step and symbol gaps on
-the pages audited in two rounds running, the audit rounds stop there and `status` says why. Overloads tasks stop
+the pages audited in two rounds running, the audit rounds stop there and `status` says why.
+Steps sent back to be cited or cut are left out of that test: their fix adds no claim, so
+they cannot renew, and only a further round fixes them. Overloads tasks stop
 after two rounds.
 
 A pilot runs the same loop on a small part of the target, to see whether it converges
