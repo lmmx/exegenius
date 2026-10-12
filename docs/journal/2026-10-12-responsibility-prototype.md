@@ -48,7 +48,7 @@ There was no submit, so the result was checked afterwards against submit's tests
 - **Against the paper (Lemma 19's proof, renamed):** $\Phi, \Psi, \Delta, \Lambda$ are its $S, T, D, N$. $L_2$ equals its $D'J'C$, and $\sigma = 2^{2\alpha^2}$ is its constant.
 - **An addition of its own:** the writer bounded $\|L_2\| \le 2^{-(2\alpha^2-2)}e^{\pi\alpha^2/4}$, which the paper does not spell out. It equals $2^{2 - 0.87\alpha^2} < 1$ for $\alpha \ge 2$, so it is correct.
 
-No claim found contradicts the paper. Its notation is consistent. One letter, $I$, was introduced unbound, which submit would have rejected.
+No claim found contradicts the paper. Its notation is consistent. One letter, $I$, was introduced unbound, which submit would have rejected. Given submit's rejection message, the writer bound $I$ ("$I$ is the identity map"), at 306 words, and the page then passed submit's checks: budget, letters and citations.
 
 The audit reported 4 steps and 1 term, each about the construction now on the page:
 - the norm of a map, outside the reader's background;
