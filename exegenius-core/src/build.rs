@@ -1241,6 +1241,7 @@ mod tests {
                 title: None,
                 target: "t".into(),
                 rounds: 1,
+                stop_early: true,
                 reader: crate::config::Reader { knows: "k".into() },
                 sources: vec![],
                 simulation: Default::default(),

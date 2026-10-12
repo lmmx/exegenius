@@ -410,6 +410,15 @@ fn status(project: &Project) -> anyhow::Result<()> {
     if let Some(reason) = &state.stopped {
         println!("audit rounds stopped early: {reason}");
     }
+    if !project.config.stop_early {
+        for s in exegenius_core::convergence::summarise(&load_rounds(project)?) {
+            if let Some(reason) = exegenius_core::convergence::stalled(&s) {
+                println!(
+                    "`stop_early` is off; with it on, the audit rounds would have stopped {reason}"
+                );
+            }
+        }
+    }
     let last = exegenius_core::convergence::summarise(&load_rounds(project)?)
         .last()
         .map_or(0, |s| s.gaps.total());

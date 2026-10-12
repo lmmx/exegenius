@@ -961,7 +961,8 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
         let stall = crate::convergence::summarise(&crate::audit::load_rounds(project)?)
             .into_iter()
             .find(|s| s.round == state.round)
-            .and_then(|s| crate::convergence::stalled(&s));
+            .and_then(|s| crate::convergence::stalled(&s))
+            .filter(|_| project.config.stop_early);
         if state.round_gaps == 0 {
             state.done = true;
         } else if stall.is_some() || state.round >= project.config.rounds {

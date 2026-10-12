@@ -27,6 +27,11 @@ pub struct Config {
     /// Maximum number of audit rounds.
     #[serde(default = "default_rounds")]
     pub rounds: u32,
+    /// Whether the audit rounds end before `rounds` when rewrites do not halve the step and
+    /// symbol gaps ([`crate::convergence::stalled`]). Off, every round runs, and `status`
+    /// says where the rule would have ended them.
+    #[serde(default = "default_stop_early")]
+    pub stop_early: bool,
     pub reader: Reader,
     pub sources: Vec<SourceSpec>,
     /// Simulated readers run once the wiki is written.
@@ -124,6 +129,10 @@ fn default_rounds() -> u32 {
     3
 }
 
+fn default_stop_early() -> bool {
+    true
+}
+
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Reader {
@@ -204,6 +213,9 @@ target = "The main result of the paper"
 
 # Maximum number of audit rounds
 rounds = 3
+
+# End the audit rounds early when rewrites do not halve the step and symbol gaps
+# stop_early = true
 
 [reader]
 # What the reader already knows, in plain words

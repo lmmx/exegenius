@@ -74,8 +74,8 @@ pub fn stalled(summary: &Summary) -> Option<String> {
     (summary.repeated > 0 && before > 0 && after * 2 > before).then(|| {
         format!(
             "after audit round {}, step and symbol gaps on the {} pages also audited in round {} \
-             went from {before} to {after}, not to half or fewer, so the rounds stopped; \
-             the gaps may still have been falling{}",
+             went from {before} to {after}, not to half or fewer (the gaps may still have \
+             been falling){}",
             summary.round,
             summary.repeated,
             summary.round - 1,

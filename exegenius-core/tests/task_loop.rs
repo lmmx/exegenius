@@ -974,6 +974,66 @@ fn overload_verdicts_can_change_the_earlier_page() {
     );
 }
 
+/// Two audit rounds in which each page's step gap is reported again on a sentence the
+/// rewrite kept, so rewrites do not halve the gaps; then what `next` hands out.
+fn second_round_without_halving(stop_early: bool) -> Vec<Task> {
+    let temp = tempfile::tempdir().unwrap();
+    let mut project = setup(temp.path(), 3);
+    if !stop_early {
+        let path = temp.path().join("exegenius.toml");
+        let toml =
+            read(&project, &path).replace("rounds = 3\n", "rounds = 3\nstop_early = false\n");
+        std::fs::write(&path, toml).unwrap();
+        project = Project::load(temp.path()).unwrap();
+    }
+    let batch = tasks(next(&project).unwrap());
+    answer(&project, &batch[0], &extract_answer("a chirp identity"));
+    submit(&project, &batch[0].id).unwrap();
+    background(&project);
+    argue(&project, &["dft", "convolution"]);
+    let write = |t: &Task, first: &str| {
+        let body = if page(t) == "chirp-identity" {
+            fields(&project, t, json!([]), json!(chirp_relations()));
+            format!("{first} It stays the same. {CHIRP_USES}.")
+        } else {
+            format!("{first} It stays the same.")
+        };
+        answer(&project, t, &body);
+        submit(&project, &t.id).unwrap();
+    };
+    let audit = |quote: &str| {
+        for t in tasks(next(&project).unwrap()) {
+            let gaps = json!({"symbols": [], "gaps": [{"term": "step", "quote": quote,
+                                                       "kind": "step", "note": "unclear"}]});
+            answer(&project, &t, &gaps.to_string());
+            submit(&project, &t.id).unwrap();
+        }
+    };
+    for t in tasks(next(&project).unwrap()) {
+        write(&t, "Some explanation.");
+    }
+    audit("Some explanation");
+    for t in tasks(next(&project).unwrap()) {
+        write(&t, "A better explanation.");
+    }
+    audit("It stays the same");
+    tasks(next(&project).unwrap())
+}
+
+#[test]
+fn early_stopping_can_be_turned_off() {
+    // On, the rounds end after round 2: its notes are dropped and the outline comes next.
+    let on = second_round_without_halving(true);
+    assert_eq!(on[0].kind, Kind::Outline);
+    // Off, round 3 runs: the pages are rewritten for round 2's notes.
+    let off = second_round_without_halving(false);
+    assert!(
+        off.iter().all(|t| matches!(t.kind, Kind::Write { .. })),
+        "{off:?}"
+    );
+    assert_eq!(off.len(), 3);
+}
+
 /// Handles of the links in a page as a simulated reader sees it.
 fn handles(page: &str) -> Vec<String> {
     page.split("](")
