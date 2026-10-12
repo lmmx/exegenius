@@ -64,6 +64,46 @@ fn heading(line: &str) -> Option<String> {
     .then(|| format!("§{number} {title}"))
 }
 
+/// A LaTeX sectioning command, numbered as LaTeX numbers it: `\subsection{Gaussian
+/// resampling}` after the seventh `\section` is "§7.2 Gaussian resampling". A starred
+/// command is unnumbered.
+fn latex_heading(line: &str, numbers: &mut [u32; 3]) -> Option<String> {
+    let rest = line.strip_prefix('\\')?;
+    let level = ["section", "subsection", "subsubsection"]
+        .iter()
+        .position(|c| {
+            rest.strip_prefix(c)
+                .is_some_and(|r| r.starts_with(['{', '*', '[']))
+        })?;
+    let after = &rest[["section", "subsection", "subsubsection"][level].len()..];
+    let (starred, after) = match after.strip_prefix('*') {
+        Some(after) => (true, after),
+        None => (false, after),
+    };
+    let after = match after.strip_prefix('[') {
+        Some(short) => short.split_once(']')?.1,
+        None => after,
+    };
+    let body = after.strip_prefix('{')?;
+    let mut depth = 1;
+    let (end, _) = body.char_indices().find(|&(_, c)| {
+        match c {
+            '{' => depth += 1,
+            '}' => depth -= 1,
+            _ => {}
+        }
+        depth == 0
+    })?;
+    let title = body[..end].trim();
+    if starred {
+        return Some(title.to_string());
+    }
+    numbers[level] += 1;
+    numbers[level + 1..].iter_mut().for_each(|n| *n = 0);
+    let number: Vec<String> = numbers[..=level].iter().map(u32::to_string).collect();
+    Some(format!("§{} {title}", number.join(".")))
+}
+
 impl Source {
     pub fn new(id: &str, title: Option<&str>, url: Option<&str>, path: &Path, text: &str) -> Self {
         // `normalise` collapses all whitespace, so the normalised text is the normalised
@@ -71,6 +111,7 @@ impl Source {
         let mut pieces = Vec::new();
         let mut pages = vec![0];
         let mut sections = Vec::new();
+        let mut numbers = [0; 3];
         let mut offset = 0;
         for (p, page) in text.split('\u{c}').enumerate() {
             if p > 0 {
@@ -81,7 +122,7 @@ impl Source {
                 if piece.is_empty() {
                     continue;
                 }
-                if let Some(h) = heading(&piece) {
+                if let Some(h) = heading(&piece).or_else(|| latex_heading(&piece, &mut numbers)) {
                     sections.push((offset, h));
                 }
                 offset += piece.len() + 1;
@@ -285,5 +326,26 @@ impl Project {
             })
             .collect::<Vec<_>>()
             .join("\n")
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn latex_sections_locate_quotes() {
+        let text = "\\section{Introduction}\nWe multiply.\n\\section{Transforms}\n\
+                    \\subsection*{Notation}\nLet $F$ be a transform.\n\
+                    \\subsection[Resampling]{Gaussian resampling of $\\mathbb{C}^s$}\n\
+                    We resample the grid.\n";
+        let source = Source::new("paper", None, None, Path::new("p.tex"), text);
+        let at = |quote: &str| source.locate(quote).flatten();
+        assert_eq!(at("We multiply."), Some("§1 Introduction".into()));
+        assert_eq!(at("Let $F$ be"), Some("Notation".into()));
+        assert_eq!(
+            at("We resample the grid."),
+            Some("§2.1 Gaussian resampling of $\\mathbb{C}^s$".into())
+        );
     }
 }
