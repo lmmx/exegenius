@@ -113,7 +113,7 @@ A citation whose quote contains `\ref{`, `\eqref{`, `\cite` or `\label{` is reje
 - A rewrite answering a cite-or-cut note records the reasoning it adds, and added reasoning stays recorded while it is on the page (exegenius-core/src/write.rs)
 - Of five central pages checked against the paper, `integer-multiplication-target`, `recursive-power-saving` and `rounding-recovery` are correct and derive their claims, while `gaussian-resampling` and `simultaneous-butterfly-layer` state their results and cite the mechanism
 - A step reported inside added reasoning on a claim that already carries a citation mark is asked to be explained, not cited or cut (exegenius-core/src/audit.rs)
-- A citation quoting `\\ref{`, `\\eqref{`, `\\cite` or `\\label{` markup is rejected (exegenius-core/src/cite.rs)
+- A citation quoting `\ref{`, `\eqref{`, `\cite` or `\label{` markup is rejected (exegenius-core/src/cite.rs)
 - Of the run's 30 judged citation marks, the one labelled contradicted agrees with its quote, and the two labelled unsupported quote a fragment beside the claim
 
 ## Missing
