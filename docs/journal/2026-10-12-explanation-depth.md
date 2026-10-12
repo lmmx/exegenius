@@ -57,6 +57,52 @@ ChatGPT's measures, for the pages presenting a step:
 
 Also tracked: reported steps by depth and round, and words against the budget. A page presenting a step that sits at its budget, as `simultaneous-butterfly-layer` did in the prototype, is evidence for the deferred question of budget or added pages, not for changing them in this run.
 
+## The hypothesis the next run tests
+
+ChatGPT framed the hypothesis narrowly. The rule addresses one layer of a failure that has several:
+
+| Layer | The rule's effect |
+|---|---|
+| A page's central mechanism is cited away, because the depth limit treated explaining a page's own method like explaining a result it uses | addressed: the page's own method gets a second level |
+| Explanations regress without end | kept bounded by the hard limit, which the distinction between own method and used result makes less blunt |
+| An explanation exceeds the page's budget, or rests on concepts with no page (the butterfly prototype) | unchanged |
+| A page passes the mechanical checks and is correct but hard to follow, or a rewrite introduces errors or inconsistent notation | partly caught by existing checks; otherwise unchanged |
+| Audits miss gaps or report false ones (2026-10-12-full-latex-run's 8 steps in unchanged text) | unchanged |
+
+**The hypothesis:** pages become more likely to explain the method they are responsible for, without the regress returning.
+
+**The test has two halves:**
+- **Content:** whether central constructions are more explicit.
+- **Recurrence:** whether gaps once fixed stay fixed.
+
+One run cannot show the failure solved, but it can show whether this layer was a large part of it. If it was, the next layers are conceptual coverage and word budgets. If not, the failure is narrower and better described for having tested this.
+
+## The model
+
+The run stays on Haiku, so that the rule is the only change. Haiku did the mathematics in both prototypes:
+- it recovered Lemma 19's construction, against the paper, within budget;
+- it reconstructed the butterfly layer's cost argument correctly, if not followably.
+
+The evidence so far points to the loop's design more than the model's capability.
+
+ChatGPT set out the order in which the model question would be taken up:
+
+| Run | What it shows |
+|---|---|
+| Haiku, next run | whether the rule improves pages, with everything else fixed |
+| Sonnet, after | whether a stronger model improves derivation, fidelity to the source and notation with the loop unchanged |
+| Opus, if needed | whether the hardest remaining failures need deeper reasoning rather than better instruction-following |
+
+A stronger model could write better pages and also hide weaknesses of the loop, which is the reason to change one thing at a time.
+
+**The trigger:** if the Haiku run still gives hollow pages under the rule, the next step is a controlled comparison of Haiku and Sonnet, not further changes to the loop.
+
+**How that comparison would be set up:**
+- same source, reader, budget, rounds and instructions;
+- on a few hard pages, among them `gaussian-resampling` and `simultaneous-butterfly-layer`;
+- judged on derivation from the source, completeness, notation and recurrence;
+- assessed blind to the model.
+
 ## Current State
 - Added sentences carry a depth, one more than the deepest step their rewrite's notes asked about, and stay recorded while on the page (exegenius-core/src/graph.rs, exegenius-core/src/write.rs)
 - Pages presenting a step of the argument explain steps to two levels, other pages to one; a step on an already cited claim is explained one level past the limit (exegenius-core/src/audit.rs)
@@ -64,4 +110,5 @@ Also tracked: reported steps by depth and round, and words against the budget. A
 
 ## Missing
 - No run with explanation depth relative to the argument
+- No comparison of models on the same pages with the loop fixed
 - No check that a writer tells its page's method from a result the method uses
