@@ -43,22 +43,40 @@ None of these pages is in the earlier pilots, so this run tests the source and t
 
 No claim found in it contradicts the paper.
 
-**What the remaining gaps say.** The 29 gaps round 2 left, read one by one:
+**What the remaining gaps say.** The 29 gaps round 2 left, read one by one from `audit.json`, in the five kinds ChatGPT proposed, since each calls for a different fix:
 
-| Kind | Gaps | Examples |
+| Kind | Gaps | Which |
 |---|---|---|
-| A step or term the page itself leaves unexplained | 15 | which vertices are sources and sinks; why every sink label is the whole space; the movement restriction on the tape; why reducing modulo 2 is valid; what $U_a^\perp$ denotes |
-| A concept the five-page pilot has no page for | 7 | tensor products and $\otimes$; a "smaller call"; the rational interface; the central-wire returns; which construction is the bit network |
-| Notation | 7 | five pedantic ($x$ and $y$ not said to range over $\mathbb Q^h$; $a_1, a_2, a_3$ as components of the bank index $a$), two real ($u$ reused for a vertex, $S$ and $T$ used before "neighbors" is defined) |
+| Missing reasoning: the page has, or should state, what the step needs, and does not | 15 | see below |
+| Scope: the step needs a construction from another part of the paper | 4 | what a "smaller call" costs and why it equals the rank of a projection difference; the rational interface; why the central-wire returns are the only decreasing edges |
+| Reader background: the page assumes what the profile excludes | 2 | tensor products; the orthogonal complement $U_a^\perp$ under a bilinear form |
+| Notation | 4 | $u$ for a vertex where an earlier page bound it as a vector; $S$ and $T$ used before "neighbors" is defined; $x$ and $y$ in the form, bound on `linear-network` as control and target values |
+| Audit artefacts | 4 | one point about $a_1, a_2, a_3$ reported three times; $\otimes$ reported again as a symbol after the term gap for tensor products |
 
-9 of the 15 page-local steps were steps sent back to be cited or cut. A third round would have sent notes for them and the rest. It did not run (below).
+**The missing reasoning**, the kind that tests the method directly:
+- **Citation in place of the page's own mechanism (2):** the tape's movement restriction ("The restriction that matters is on movement", cited, never stated); the nesting of labels at the ends of an edge.
+- **Facts of the construction asserted and never stated (6):**
+  - which vertices are sources and sinks, and the sign convention of the signed sum;
+  - that every sink label is the whole space;
+  - that each bank's source label is $U_a$;
+  - how an invocation acts on the banks $X_a$, $Y_a$;
+  - what a "row" of the schedule is;
+  - which of the two constructions is the bit network.
+- **Inferences with an unstated condition (3):**
+  - counting scans counts steps only if the stretches crossed are bounded;
+  - reducing modulo 2 needs the coefficients in $\mathbb F_2$, which the page states only later;
+  - "interchanging growing fields needs more" is a lower bound the page does not argue.
+- **Cross-page (3):** only the endpoints of a route matter, asserted on `subset-network`, on `frame` (role arrays never defined) and on `linear-algebra`. The last is a background page asserting a property of the network's wiring.
+- **Wording (1):** `linear-network`'s stage 2 sentence reads as if it both adds and subtracts. Its worked example, $(x, y+x) \mapsto (-y, y+x)$, is right.
+
+7 of the 15 were steps sent back to be cited or cut, and 8 had notes asking for the reasoning. A third round would have acted on all 15. It did not run (below).
 
 The concept is dense, and five pages cannot carry what it rests on. The growth limit allows one new page per round on five pages, and the candidate concept for tensor products came in round 2, whose candidates are dropped. That confounds what the pilot can say:
 - **What it shows:**
   - the LaTeX source gives pages whose formulas agree with the paper;
   - a run on it completes without rejections;
   - citations quote fragments rather than the passages that state their claims.
-- **What it does not show:** whether the loop closes gaps on dense material. Half of the gaps are page-local and would have had a third round. A quarter needed pages the pilot had no room for.
+- **What it does not show:** whether the loop closes gaps on dense material. 15 gaps were missing reasoning that a third round would have acted on; 6 needed pages or background the pilot had no room for.
 
 The pilot has not demonstrated success, and it has not demonstrated failure either.
 
@@ -87,7 +105,7 @@ The threshold stays at a half. The message now says what was measured and no mor
 ## Current State
 - The LaTeX pilot ran 37 tasks over 5 pages in 19 minutes, with no rejected answer, and explained `subset-network`, a construction none of the earlier pilots covered
 - Its `subset-network` page agrees with §5 of the paper in each formula checked
-- Of its 29 remaining gaps, 15 are steps or terms its pages leave unexplained, 7 concern concepts the five-page pilot has no page for, and 7 are notation
+- Of its 29 remaining gaps, 15 are missing reasoning, 4 need constructions from other parts of the paper, 2 assume background the profile excludes, 4 are notation, and 4 are audit artefacts (repeats)
 - All five of its citation marks quote a fragment beside the claim rather than the passage stating it
 - The audit rounds stop when step and symbol gaps on repeated pages are not cut to half or fewer, and the message says the gaps may still have been falling (exegenius-core/src/convergence.rs)
 
