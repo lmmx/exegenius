@@ -19,7 +19,7 @@
 //! An auditor that notices nothing therefore no longer passes a page by saying nothing
 //! about its symbols.
 
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -141,7 +141,10 @@ pub struct Round {
 pub const STEP_NOTE: &str = "The reader cannot follow this step:";
 
 /// The sentences of `body` that are not in `previous`, normalised, as audits see both
-/// (citation marks shown as "(cited)").
+/// (citation marks shown as "(cited)"). A sentence that rewords one of `previous`, sharing
+/// at least three, and at least two thirds, of its words of four or more letters with that
+/// sentence, is not added: a step reported on it is the step reported before, not one inside
+/// new reasoning.
 pub fn added(previous: &str, body: &str) -> Vec<String> {
     let sentences = |text: &str| -> Vec<String> {
         let text = crate::cite::referenced(text);
@@ -150,10 +153,25 @@ pub fn added(previous: &str, body: &str) -> Vec<String> {
             .filter(|s| s.chars().any(char::is_alphanumeric))
             .collect()
     };
+    let words = |sentence: &str| -> HashSet<String> {
+        sentence
+            .split(|c: char| !c.is_alphanumeric())
+            .filter(|w| w.chars().count() >= 4)
+            .map(str::to_lowercase)
+            .collect()
+    };
     let before = sentences(previous);
+    let before_words: Vec<HashSet<String>> = before.iter().map(|s| words(s)).collect();
     sentences(body)
         .into_iter()
         .filter(|s| !before.contains(s))
+        .filter(|s| {
+            let ws = words(s);
+            !before_words.iter().any(|b| {
+                let shared = ws.intersection(b).count();
+                shared >= 3 && 3 * shared >= 2 * ws.len()
+            })
+        })
         .collect()
 }
 
@@ -825,6 +843,36 @@ mod tests {
         let previous = "It is even, so we halve it. Then we stop.";
         let body = "It is even, so we halve it. One of $n$ and $n-1$ is even. Then we stop.";
         assert_eq!(added(previous, body), vec!["One of $n$ and $n-1$ is even."]);
+        // The full run's `gaussian-resampling`: the rewrite split the sentence a step was
+        // reported on, and added a sentence declining to give the identity.
+        let previous = "Gaussian resampling is the step that makes the transforms of the \
+                        multiplier usable: it expresses each source transform through a \
+                        power-of-two tensor transform, meaning a transform over several axes \
+                        at once in which each axis length is a power of two.";
+        let body = "Gaussian resampling is a reduction that replaces a transform of arbitrary \
+                    length by transforms whose axis lengths are powers of two. Gaussian \
+                    resampling expresses each source transform through a power-of-two tensor \
+                    transform, meaning a transform over several axes at once in which each \
+                    axis length is a power of two. The construction is the one of Harvey and \
+                    van der Hoeven; this page states its effect and does not re-derive the \
+                    identity behind it.";
+        let added = added(previous, body);
+        assert!(
+            added.iter().all(|s| !s.contains("expresses each source")),
+            "{added:?}"
+        );
+        assert!(
+            added
+                .last()
+                .unwrap()
+                .starts_with("The construction is the one")
+        );
+        // A claim added inside a reworded sentence leaves it a rewording: a step reported on
+        // it gets a step note, not cite or cut, so the claim is still explained.
+        let previous = "In general the per-volume cost grows like $f^a$, with exponent below $1$.";
+        let body = "In general the per-volume cost grows like $f^a$ as the parameter grows, and \
+                    the exponent is below $1$ because $s<m$.";
+        assert!(super::added(previous, body).is_empty());
     }
 
     #[test]
