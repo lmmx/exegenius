@@ -60,10 +60,11 @@ pub struct Summary {
 }
 
 /// Why the audit rounds should end after `summary`'s round, if they should: on the pages
-/// audited in this round and the one before, rewrites did not at least halve the step and
-/// symbol gaps, the kinds a rewrite is meant to fix. Term gaps are left out, as extend
-/// resolves them into pages. The 0.1 run's rounds halved them (28 to 10, 16 to 2); the
-/// 0.5.0 run's and the baseline pilot's did not (202 to 282, 34 to 34).
+/// audited in this round and the one before, rewrites did not cut the step and symbol gaps,
+/// the kinds a rewrite is meant to fix, by at least a third. Term gaps are left out, as
+/// extend resolves them into pages. Runs that diverged left them level or higher (the 0.5.0
+/// run 202 to 282, the baseline pilot 34 to 34); runs that converged cut them to between a
+/// tenth and a half (the 0.1 run 28 to 10, the 0.6 LaTeX pilot 33 to 17).
 ///
 /// Steps sent back to be cited or cut are left out too: their fix adds no claim, so they
 /// cannot renew, and only a further round fixes them. Counted, they end the rounds just
@@ -71,11 +72,11 @@ pub struct Summary {
 pub fn stalled(summary: &Summary) -> Option<String> {
     let before = summary.before.step + summary.before.symbol;
     let after = summary.after.step + summary.after.symbol - summary.cite_or_cut;
-    (summary.repeated > 0 && before > 0 && after * 2 > before).then(|| {
+    (summary.repeated > 0 && before > 0 && after * 3 > before * 2).then(|| {
         format!(
             "after audit round {}, step and symbol gaps on the {} pages also audited in round {} \
-             went from {before} to {after}, not to half or fewer, so rewrites were not \
-             converging{}",
+             went from {before} to {after}, a cut of less than a third, so rewrites were \
+             replacing gaps about as fast as they fixed them{}",
             summary.round,
             summary.repeated,
             summary.round - 1,
@@ -257,7 +258,7 @@ mod tests {
     }
 
     #[test]
-    fn rounds_stall_when_rewrites_do_not_halve_steps_and_symbols() {
+    fn rounds_stall_when_rewrites_cut_steps_and_symbols_by_less_than_a_third() {
         let mut summary = Summary {
             round: 2,
             pages: 7,
@@ -289,20 +290,20 @@ mod tests {
             symbol: 8,
         };
         assert!(stalled(&summary).is_none());
-        // The 0.6 full run's: 49 to 31, but 21 of the 22 steps were sent back to be cited
-        // or cut, leaving 10.
+        // The 0.6 LaTeX pilot's: 33 to 26, but 9 of the 17 steps were sent back to be cited
+        // or cut, leaving 17.
         summary.before = Kinds {
-            term: 26,
-            step: 35,
-            symbol: 14,
+            term: 8,
+            step: 23,
+            symbol: 10,
         };
         summary.after = Kinds {
-            term: 12,
-            step: 22,
+            term: 3,
+            step: 17,
             symbol: 9,
         };
         assert!(stalled(&summary).is_some());
-        summary.cite_or_cut = 21;
+        summary.cite_or_cut = 9;
         assert!(stalled(&summary).is_none());
         summary.repeated = 0;
         summary.after.step = 40;
