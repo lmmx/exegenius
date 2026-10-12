@@ -110,8 +110,8 @@ Each step is explained one level deep. A step note asks for the reasoning on the
 result from prior work may be cited for its proof, once the page says what it states and why
 it applies. A step an audit reports inside reasoning that a rewrite added for an earlier step
 (new sentences, not rewordings of old ones) is sent back to be cited or cut, not explained further,
-so explanations do not regress link by link; it counts as a gap like any other. If rewrites do not cut the step and symbol gaps on the pages
-audited in two rounds running by at least a third, the audit rounds stop there and `status` says why.
+so explanations do not regress link by link; it counts as a gap like any other. If rewrites do not at least halve the step and symbol gaps on
+the pages audited in two rounds running, the audit rounds stop there and `status` says why.
 Steps sent back to be cited or cut are left out of that test: their fix adds no claim, so
 they cannot renew, and only a further round fixes them. Overloads tasks stop
 after two rounds.

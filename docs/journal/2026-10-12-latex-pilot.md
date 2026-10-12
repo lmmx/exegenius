@@ -43,15 +43,24 @@ None of these pages is in the earlier pilots, so this run tests the source and t
 
 No claim found in it contradicts the paper.
 
-**What the remaining gaps say.** Round 2 left 29 gaps, 21 of them on `subset-network` and `linear-network`. They are about what the page relies on and the pilot has no page for:
-- tensor products, outside the reader's background;
-- the orthogonal complement $U_a^\perp$;
-- what a "smaller call" is;
-- the rational interface;
-- the central-wire returns;
-- which construction is the bit network.
+**What the remaining gaps say.** The 29 gaps round 2 left, read one by one:
 
-A five-page pilot has no room for them: its growth limit allows one new page per round on five pages, and the candidate concept for tensor products came in round 2, whose candidates are dropped.
+| Kind | Gaps | Examples |
+|---|---|---|
+| A step or term the page itself leaves unexplained | 15 | which vertices are sources and sinks; why every sink label is the whole space; the movement restriction on the tape; why reducing modulo 2 is valid; what $U_a^\perp$ denotes |
+| A concept the five-page pilot has no page for | 7 | tensor products and $\otimes$; a "smaller call"; the rational interface; the central-wire returns; which construction is the bit network |
+| Notation | 7 | five pedantic ($x$ and $y$ not said to range over $\mathbb Q^h$; $a_1, a_2, a_3$ as components of the bank index $a$), two real ($u$ reused for a vertex, $S$ and $T$ used before "neighbors" is defined) |
+
+9 of the 15 page-local steps were steps sent back to be cited or cut. A third round would have sent notes for them and the rest. It did not run (below).
+
+The concept is dense, and five pages cannot carry what it rests on. The growth limit allows one new page per round on five pages, and the candidate concept for tensor products came in round 2, whose candidates are dropped. That confounds what the pilot can say:
+- **What it shows:**
+  - the LaTeX source gives pages whose formulas agree with the paper;
+  - a run on it completes without rejections;
+  - citations quote fragments rather than the passages that state their claims.
+- **What it does not show:** whether the loop closes gaps on dense material. Half of the gaps are page-local and would have had a third round. A quarter needed pages the pilot had no room for.
+
+The pilot has not demonstrated success, and it has not demonstrated failure either.
 
 **Citations.** All five marks quote a fragment beside the claim rather than the passage that states it:
 - "both are smaller than $1/2$" cited for $\lambda/N = 100/539$ and $101/539$;
@@ -61,24 +70,29 @@ The judges labelled them partial or unsupported for that reason. The quoted text
 
 ## The stop rule
 
-The rounds stopped after round 2 because step and symbol gaps on the repeated pages went from 33 to 17, with the 9 steps sent back to be cited or cut not counted. The rule required half or fewer, 16.
+The rounds stopped after round 2 because step and symbol gaps on the repeated pages went from 33 to 17, with the 9 steps sent back to be cited or cut not counted. The rule requires half or fewer, 16. Its message said "so rewrites were not converging", for a cut of 48%.
 
-The threshold of a half was set in 2026-10-11-reduction-pilot from the 0.1 run (28 to 10, 16 to 2), against the diverging 0.5.0 run (202 to 282) and baseline pilot (34 to 34). Since then:
-- the full run went from 49 to 10;
-- the first-level pilot went from 18 to 2, then 18 to 7;
-- this pilot went from 33 to 17.
+On reviewing the run, the threshold was changed to a cut of a third (e9dc240), chosen from the spread of all runs so far, and then changed back. The author and ChatGPT both objected:
+- the change was made after a run it would have altered;
+- a third is no less arbitrary than a half.
 
-No run fell between a cut of a half and no cut at all. The rule's message also misstated what it measured: "rewrites were not converging", for a cut of 48%.
+ChatGPT also pointed out a deeper problem. The rule takes the rate at which gaps fall as a proxy for whether another round is worth running. They differ:
+- a slow round may be facing harder gaps, or an auditor finding new ones;
+- a fast round may have cleared only easy gaps.
 
-The rule now stops the rounds when rewrites cut step and symbol gaps on the repeated pages by less than a third. Its message says "a cut of less than a third, so rewrites were replacing gaps about as fast as they fixed them" (exegenius-core/src/convergence.rs). Every converging comparison above continues under it, and both diverging ones stop. The threshold was moved after a run it would have changed; it is set from the spread of all the runs, and this one passes it with five gaps to spare.
+What the rule should test is open. Its record against outcomes is two diverging runs stopped (202 to 282, 34 to 34) and this pilot stopped while gaps were falling.
+
+The threshold stays at a half. The message now says what was measured and no more: "went from 33 to 17, not to half or fewer, so the rounds stopped; the gaps may still have been falling" (exegenius-core/src/convergence.rs).
 
 ## Current State
 - The LaTeX pilot ran 37 tasks over 5 pages in 19 minutes, with no rejected answer, and explained `subset-network`, a construction none of the earlier pilots covered
 - Its `subset-network` page agrees with §5 of the paper in each formula checked
-- 21 of its 29 remaining gaps are on `subset-network` and `linear-network`, about concepts the five-page pilot has no page for
+- Of its 29 remaining gaps, 15 are steps or terms its pages leave unexplained, 7 concern concepts the five-page pilot has no page for, and 7 are notation
 - All five of its citation marks quote a fragment beside the claim rather than the passage stating it
-- The audit rounds stop when step and symbol gaps on repeated pages are cut by less than a third (exegenius-core/src/convergence.rs)
+- The audit rounds stop when step and symbol gaps on repeated pages are not cut to half or fewer, and the message says the gaps may still have been falling (exegenius-core/src/convergence.rs)
 
 ## Missing
+- No test of whether the stop rule predicts that a further round would not help
+- No pilot of a dense concept with room for the pages it rests on
 - No check, at write time, that a citation's quote states its claim
 - No full run on the LaTeX source
