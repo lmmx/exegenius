@@ -184,13 +184,17 @@ and contains the symbol, and that the named page or concept binds it.
 
 Terms and steps: report what would stop this reader at this point on the page. A term or \
 step is followable if the reader knows it, the page explains it, or the page links it to \
-another wiki page. A claim marked \"(cited)\" is attributed to the source, which the reader \
-can consult: it is followable by reference, so do not report it as a step.
+another wiki page. A claim marked \"(cited)\" is attributed to the source. A citation lets \
+the reader check a result, not follow an argument: a cited result the page uses is followable \
+if the page says what it states and why it applies where it is used, and its proof can be \
+left to the source. A cited claim that stands in for how the page's own concept works, or \
+whose content or role the page does not say, is a step.
 - term: a named concept the reader does not know, which the page neither explains nor links. \
 References to the documents themselves (the paper, the sources, the target result) are not \
 terms.
 - step: an inference, calculation or claim that the page presents as following from what it \
-gives, which the reader cannot check from what the page gives.
+gives, which the reader cannot check from what the page gives. A claim about an identity, \
+construction or definition that the page never states is a step.
 
 Copy each quote from the page exactly, character for character, and keep it short: submit \
 rejects quotes it cannot find on the page. Do not report anything the reader can follow. \
@@ -450,9 +454,10 @@ fn apply_gaps(graph: &mut Graph, page: &str, known: &TermIndex, gaps: Vec<Gap>) 
                 graph.queue_rewrite(
                     page,
                     Some(format!(
-                        "{STEP_NOTE} \"{}\" ({}). Either give the \
-                         reasoning, or attribute the step to the source with a citation; \
-                         choose whichever needs fewer words.",
+                        "{STEP_NOTE} \"{}\" ({}). Give the reasoning on this \
+                         page. If the step rests on a result from prior work, say what the \
+                         result states and why it applies here, and cite the source for its \
+                         proof: a citation alone does not explain a step.",
                         gap.quote, gap.note
                     )),
                 );
@@ -544,6 +549,21 @@ pub fn record(project: &Project, round: u32, page: PageAudit) -> Result<()> {
         }),
     }
     write_json(&path, &rounds)
+}
+
+/// The symbols later pages take their meaning from `page`, by their latest audits: each
+/// symbol with the page that uses it.
+pub fn relied_on(latest: &HashMap<String, Vec<SymbolUse>>, page: &str) -> Vec<(String, String)> {
+    let mut relied: Vec<(String, String)> = latest
+        .iter()
+        .flat_map(|(on, uses)| {
+            uses.iter()
+                .filter(|u| matches!(&u.anchor, Anchor::Page { page: p } if p == page))
+                .map(|u| (u.symbol.clone(), on.clone()))
+        })
+        .collect();
+    relied.sort();
+    relied
 }
 
 /// Each page's symbol accounting from its latest audit.
@@ -805,6 +825,39 @@ mod tests {
         let previous = "It is even, so we halve it. Then we stop.";
         let body = "It is even, so we halve it. One of $n$ and $n-1$ is even. Then we stop.";
         assert_eq!(added(previous, body), vec!["One of $n$ and $n-1$ is even."]);
+    }
+
+    #[test]
+    fn symbols_later_pages_take_from_a_page() {
+        let uses = |anchors: Vec<(&str, Anchor)>| {
+            anchors
+                .into_iter()
+                .map(|(s, anchor)| SymbolUse {
+                    symbol: s.into(),
+                    anchor,
+                })
+                .collect::<Vec<_>>()
+        };
+        let from = |page: &str| Anchor::Page { page: page.into() };
+        let latest = HashMap::from([
+            (
+                "butterfly".to_string(),
+                uses(vec![
+                    ("b", from("kernel")),
+                    ("a", from("kernel")),
+                    ("V", from("tape")),
+                ]),
+            ),
+            ("tape".to_string(), uses(vec![("a", from("dyadics"))])),
+        ]);
+        assert_eq!(
+            relied_on(&latest, "kernel"),
+            vec![
+                ("a".to_string(), "butterfly".to_string()),
+                ("b".to_string(), "butterfly".to_string())
+            ]
+        );
+        assert!(relied_on(&latest, "butterfly").is_empty());
     }
 
     #[test]

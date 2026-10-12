@@ -79,6 +79,10 @@ must read complete without the quoted words: write \"the cost is $O(n \\log n)$ 
 </cite>\", not \"the paper states the cost as <cite …>…</cite>\". Submit rejects a citation \
 right after \"that\", \"as\", \"states\", \"says\", \"is\", \"gives\", \"reads\" or a colon, \
 and text not found in the named source. Do not cite common background.
+- A citation says where a claim comes from; it does not explain it. If the page's concept is \
+an identity, a construction or a definition, state it. Explain how the concept works and how \
+it shows its claim. For a result the page uses from prior work, say what the result states \
+and why it applies here, and cite the source for its proof: the page need not reproduce it.
 - Keep the page short. The task gives its word limit, counted without mathematics and \
 citations, and submit rejects a longer page. Give a small worked example where it makes the \
 idea clearer. No filler, no rhetorical flourishes, no announcing what the page will do.
@@ -432,6 +436,23 @@ pub fn apply_write(
         None => {}
     }
     errors.extend(symbols::check_page(body, &mut fields.symbols));
+    if previous.is_some() {
+        let lost: Vec<String> =
+            crate::audit::relied_on(&crate::audit::latest_symbols(project)?, page)
+                .into_iter()
+                .filter(|(_, on)| plan.contains(on))
+                .filter(|(s, _)| !fields.symbols.iter().any(|b| symbols::same(&b.symbol, s)))
+                .map(|(s, on)| format!("${s}$ (used on `{on}`)"))
+                .collect();
+        if !lost.is_empty() {
+            errors.push(format!(
+                "the rewrite no longer binds symbols that later pages take their meaning from: \
+                 {}. Keep each, with its meaning. If a note asks for another letter, keep this \
+                 one and say on the page that it means something else on the earlier page",
+                lost.join(", ")
+            ));
+        }
+    }
     errors.extend(relations::check(
         body,
         &prerequisites,

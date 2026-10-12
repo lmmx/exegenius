@@ -803,6 +803,167 @@ fn last_round_notes_are_dropped_then_built() {
     assert!(matches!(next(&project).unwrap(), Next::Done(_)));
 }
 
+#[test]
+fn rewrites_keep_symbols_later_pages_rely_on() {
+    let temp = tempfile::tempdir().unwrap();
+    let project = setup(temp.path(), 2);
+    let batch = tasks(next(&project).unwrap());
+    answer(&project, &batch[0], &extract_answer("a chirp identity"));
+    submit(&project, &batch[0].id).unwrap();
+    background(&project);
+    argue(&project, &["dft", "convolution"]);
+    let x_quote = "Here $x$ is the input sequence";
+    for t in tasks(next(&project).unwrap()) {
+        match page(&t) {
+            "dft" => {
+                bindings(
+                    &project,
+                    &t,
+                    json!([binding("x", "input sequence", x_quote)]),
+                );
+                answer(&project, &t, &format!("{x_quote}. Some explanation."));
+            }
+            "chirp-identity" => {
+                fields(&project, &t, json!([]), json!(chirp_relations()));
+                answer(&project, &t, &format!("{CHIRP_USES}. It acts on $x$."));
+            }
+            _ => answer(&project, &t, "Some explanation."),
+        }
+        submit(&project, &t.id).unwrap();
+    }
+    // The chirp page takes x from the DFT page; the DFT page has a step to explain.
+    for t in tasks(next(&project).unwrap()) {
+        let x = |anchor: serde_json::Value| json!([{"symbol": "x", "anchor": anchor}]);
+        let audit = match page(&t) {
+            "dft" => json!({"symbols": x(json!({"kind": "here", "quote": x_quote})),
+                            "gaps": [{"term": "step", "quote": "Some explanation",
+                                      "kind": "step", "note": "too vague"}]}),
+            "chirp-identity" => {
+                json!({"symbols": x(json!({"kind": "page", "page": "dft"})), "gaps": []})
+            }
+            _ => json!({"symbols": [], "gaps": []}),
+        };
+        answer(&project, &t, &audit.to_string());
+        submit(&project, &t.id).unwrap();
+    }
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(page(&batch[0]), "dft");
+    bindings(&project, &batch[0], json!([]));
+    answer(
+        &project,
+        &batch[0],
+        "A clearer explanation, with no symbols.",
+    );
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains(
+            "no longer binds symbols that later pages take their meaning from: $x$ \
+                      (used on `chirp-identity`)"
+        ),
+        "{err}"
+    );
+    bindings(
+        &project,
+        &batch[0],
+        json!([binding("x", "input sequence", x_quote)]),
+    );
+    answer(
+        &project,
+        &batch[0],
+        &format!("{x_quote}. A clearer explanation."),
+    );
+    submit(&project, &batch[0].id).unwrap();
+}
+
+#[test]
+fn overload_verdicts_can_change_the_earlier_page() {
+    let temp = tempfile::tempdir().unwrap();
+    let project = setup(temp.path(), 1);
+    let batch = tasks(next(&project).unwrap());
+    answer(&project, &batch[0], &extract_answer("a chirp identity"));
+    submit(&project, &batch[0].id).unwrap();
+    background(&project);
+    argue(&project, &["dft", "convolution"]);
+    let (x_input, x_chirp) = (
+        "Here $x$ is the input sequence",
+        "Here $x$ is the chirp factor",
+    );
+    for t in tasks(next(&project).unwrap()) {
+        match page(&t) {
+            "dft" => {
+                bindings(
+                    &project,
+                    &t,
+                    json!([binding("x", "input sequence", x_input)]),
+                );
+                answer(&project, &t, &format!("{x_input}."));
+            }
+            "chirp-identity" => {
+                fields(
+                    &project,
+                    &t,
+                    json!([binding("x", "chirp factor", x_chirp)]),
+                    json!(chirp_relations()),
+                );
+                answer(&project, &t, &format!("{CHIRP_USES}. {x_chirp}."));
+            }
+            _ => answer(&project, &t, "Some explanation."),
+        }
+        submit(&project, &t.id).unwrap();
+    }
+    for t in tasks(next(&project).unwrap()) {
+        let here =
+            |quote: &str| json!([{"symbol": "x", "anchor": {"kind": "here", "quote": quote}}]);
+        let symbols = match page(&t) {
+            "dft" => here(x_input),
+            "chirp-identity" => here(x_chirp),
+            _ => json!([]),
+        };
+        answer(
+            &project,
+            &t,
+            &json!({"symbols": symbols, "gaps": []}).to_string(),
+        );
+        submit(&project, &t.id).unwrap();
+    }
+    // The chirp page binds x again with another meaning. The judge may send the note to the
+    // earlier page, which binds x on its page, but not to a page outside the candidate.
+    let batch = tasks(next(&project).unwrap());
+    let overloads = batch.iter().find(|t| t.kind == Kind::Overloads).unwrap();
+    let verdict = |change: &str| {
+        json!({"verdicts": [{"candidate": 1, "same": false, "note": "use y for the input",
+                             "change": change}]})
+        .to_string()
+    };
+    answer(&project, overloads, &verdict("convolution"));
+    let err = submit(&project, &overloads.id).unwrap_err().to_string();
+    assert!(
+        err.contains("`change` is `chirp-identity` or `dft`"),
+        "{err}"
+    );
+    answer(&project, overloads, &verdict("dft"));
+    submit(&project, &overloads.id).unwrap();
+    let judged = read(&project, "exegenius/overloads.json");
+    assert!(judged.contains("\"changed\": \"dft\""), "{judged}");
+    for t in batch.iter().filter(|t| t.kind == Kind::Outline) {
+        let parts = json!({"overview": "o", "parts": [{"title": "All", "intro": "i",
+                           "pages": ["dft", "convolution", "chirp-identity"]}]});
+        answer(&project, t, &parts.to_string());
+        submit(&project, &t.id).unwrap();
+    }
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(page(&batch[0]), "dft");
+    let file = read(&project, batch[0].file());
+    assert!(
+        file.contains("$x$ means input sequence here, but chirp factor on [Chirp"),
+        "{file}"
+    );
+    assert!(
+        file.contains("which builds on this page: use y for the input"),
+        "{file}"
+    );
+}
+
 /// Handles of the links in a page as a simulated reader sees it.
 fn handles(page: &str) -> Vec<String> {
     page.split("](")

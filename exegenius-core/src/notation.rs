@@ -105,9 +105,13 @@ A reader arriving from the earlier page brings the earlier meaning with them.
 - For each candidate, say whether the two bindings denote the same thing (`same: true`), \
 even if worded differently (\"number of digits\" and \"digit count\"), or different things \
 (`same: false`, as for a radix and a digit count).
-- For different things, say in `note` what the later page should do: use another letter, or \
-say where the letter is used that it means something else here than on the earlier page. \
-For the same thing, `note` may be empty.
+- For different things, say in `note` what the page that changes should do: use another \
+letter, or say where the letter is used that it means something else there than on the \
+other page. For the same thing, `note` may be empty.
+- `change` is the page that changes. Leave it out for the later page. Give the earlier page's \
+id when its use of the letter is the odd one out, for instance when the sources use the \
+letter as the later page does, and the earlier page binds it on the page, not in a name. A \
+page that other pages take the letter from keeps it and says where its meaning changes.
 - Read the pages in `exegenius/pages/<id>.md` where the bindings alone do not settle it.
 - Give a verdict for every candidate.";
 
@@ -134,8 +138,11 @@ pub struct Verdict {
     pub candidate: usize,
     /// True if the two bindings denote the same thing.
     pub same: bool,
-    /// For different things: what the later page should do.
+    /// For different things: what the page that changes should do.
     pub note: String,
+    /// For different things: the page that changes, the later page if left out.
+    #[serde(default)]
+    pub change: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -150,6 +157,9 @@ pub struct Judged {
     pub candidate: Candidate,
     pub same: bool,
     pub note: String,
+    /// The page the note was queued on, for different things.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub changed: Option<String>,
 }
 
 /// Every verdict so far, kept so a candidate is judged once.
@@ -261,9 +271,26 @@ pub fn apply_overloads(
             Some(slot) => {
                 if !v.same && v.note.trim().is_empty() {
                     errors.push(format!(
-                        "candidate {}: say what the later page should do",
+                        "candidate {}: say what the page that changes should do",
                         v.candidate
                     ));
+                }
+                if let (Some(c), Some(change)) =
+                    (candidates.get(v.candidate.wrapping_sub(1)), &v.change)
+                    && *change != c.page
+                    && !(*change == c.earlier && !c.in_name)
+                {
+                    errors.push(match c.in_name {
+                        true => format!(
+                            "candidate {}: only `{}` can change, as the earlier binding is in \
+                             a name",
+                            v.candidate, c.page
+                        ),
+                        false => format!(
+                            "candidate {}: `change` is `{}` or `{}`",
+                            v.candidate, c.page, c.earlier
+                        ),
+                    });
                 }
                 *slot = Some(v);
             }
@@ -280,26 +307,45 @@ pub fn apply_overloads(
     let mut overloads = load(project)?;
     for (c, v) in candidates.iter().zip(verdicts) {
         let v = v.expect("every candidate has a verdict");
+        let mut changed = None;
         if !v.same {
             let builds_on = if c.earlier == c.page {
                 ""
             } else {
                 ", which this page builds on"
             };
-            let note = format!(
-                "${}$ means {} here, but {} {}{builds_on}: {}",
-                c.symbol,
-                c.name,
-                c.earlier_name,
-                where_bound(graph, c),
-                v.note.trim()
-            );
-            graph.queue_rewrite(&c.page, Some(note));
+            let (page, note) = match &v.change {
+                Some(earlier) if *earlier != c.page => (
+                    earlier.clone(),
+                    format!(
+                        "${}$ means {} here, but {} on {}, which builds on this page: {}",
+                        c.symbol,
+                        c.earlier_name,
+                        c.name,
+                        graph.get(&c.page).map_or(c.page.clone(), link),
+                        v.note.trim()
+                    ),
+                ),
+                _ => (
+                    c.page.clone(),
+                    format!(
+                        "${}$ means {} here, but {} {}{builds_on}: {}",
+                        c.symbol,
+                        c.name,
+                        c.earlier_name,
+                        where_bound(graph, c),
+                        v.note.trim()
+                    ),
+                ),
+            };
+            graph.queue_rewrite(&page, Some(note));
+            changed = Some(page);
         }
         overloads.judged.push(Judged {
             candidate: c.clone(),
             same: v.same,
             note: v.note.trim().to_string(),
+            changed,
         });
     }
     overloads.rounds += 1;
