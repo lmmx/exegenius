@@ -67,14 +67,57 @@ The three marks not supported:
 
 The two unsupported marks quote a fragment beside the claim, as in 2026-10-12-latex-pilot.
 
+## The pages, against the paper
+
+Five central pages were read against `paper.tex`.
+
+**Correct, and they explain:**
+- **`integer-multiplication-target`:**
+  - $\lg n = \max\{\lceil\log_2 n\rceil, 1\}$ (the paper's line 55);
+  - $\kappa = 2^{-182}$;
+  - the two tape procedures with their costs;
+  - the recursion multiplying cost by $s/W < m$ per level, "the source of the power saving".
+- **`recursive-power-saving`:** derives the cost. Level $\nu$ has $s^\nu$ calls on volume $V/W^\nu$, so it costs $V(s/W)^\nu$. The geometric sum is dominated by its last term, $O(V(m^\ell)^e)$ with $e = \log_m(s/W) < 1$ exactly when $s < Wm$.
+- **`rounding-recovery`:**
+  - derives that the retained permutation cancels, since $QF_K^+Q = F_K^+$ by substituting $\eta k$, and $Q$ commutes with pointwise products;
+  - shows why rounding is exact within $1/2$;
+  - works the carry propagation in base 2, with $3 + 2\cdot5 = 13$ to $1101_2$.
+  
+  Each step checks.
+
+**Correct as far as they go, but hollow:**
+- **`gaussian-resampling`** states the identity $P_sF_{n_0} = K M_2 P_t F_{n_1} M_1$ and cites the existence of the contractions ("Such contractions exist", cited). None of its five versions gave the construction (the Gaussian maps $S$ and $T$, $N = CTD$, the inverse estimate) that the first-level pilot's page gave.
+  - Round 1 asked for the identity, and the rewrite stated it.
+  - Round 2 reported that the page "gives no construction". That sentence was inside the reasoning the rewrite had added, so it was sent back to be cited or cut, "do not explain it further", and the writer cited.
+  - Round 3 reported the cited existence claim, again inside added reasoning, again cite-or-cut.
+  
+  The page's own mechanism was filed as a second-level step.
+  
+  Its notation is broken too. Rewrites after the audits, answering overload notes, renamed $s$ and $t$ to $n_0$ and $n_1$, and $A$ and $B_0$ to $M_1$ and $M_2$. They kept $P_s$ and $P_t$, whose subscripts the page no longer defines. A prime $q$ is introduced and never tied to $n_0$.
+- **`simultaneous-butterfly-layer`** cites the $O(Vd^{\lambda'})$ bound and the sections that prove it, and gives none of the mechanism the earlier full run's page had: the kernel $C = aI + bX$ and $H_0 = bSCS$. One citation quotes the source's markup, "Section~\ref{sec:fast-butterfly-layers} gives the numerical layout…", which readers see as is in the popup.
+
+## Steps on cited claims
+
+Seven of the run's cite-or-cut steps were reported on claims that already carried a citation mark, among them "Such contractions exist (cited)". A citation cannot answer them. Under the audit rule of 2026-10-12-explain-first-level, a step reported on a cited claim means the citation did not make the step followable.
+
+A step reported inside added reasoning now gets a note asking for the reasoning, not one to cite or cut, when its sentence already carries a citation mark (exegenius-core/src/audit.rs).
+
+## Citations of markup
+
+A citation whose quote contains `\ref{`, `\eqref{`, `\cite` or `\label{` is rejected at write time. The message says readers would see the markup as is, and asks for the passage that states the claim (exegenius-core/src/cite.rs).
+
 ## Current State
 - The full LaTeX run ran 180 tasks over 23 pages in 32 minutes, with step gaps on repeated pages at 45, 44 and 45 in three rounds
 - No step gap reported in one round of the full LaTeX run was reported again in the next
 - Of its 23 first-level step gaps in round 3, 7 were inside reasoning added by rewrites answering cite-or-cut notes, 8 in reworded sentences, and 8 in text unchanged since the round 2 audit
 - A rewrite answering a cite-or-cut note records the reasoning it adds, and added reasoning stays recorded while it is on the page (exegenius-core/src/write.rs)
+- Of five central pages checked against the paper, `integer-multiplication-target`, `recursive-power-saving` and `rounding-recovery` are correct and derive their claims, while `gaussian-resampling` and `simultaneous-butterfly-layer` state their results and cite the mechanism
+- A step reported inside added reasoning on a claim that already carries a citation mark is asked to be explained, not cited or cut (exegenius-core/src/audit.rs)
+- A citation quoting `\\ref{`, `\\eqref{`, `\\cite` or `\\label{` markup is rejected (exegenius-core/src/cite.rs)
 - Of the run's 30 judged citation marks, the one labelled contradicted agrees with its quote, and the two labelled unsupported quote a fragment beside the claim
 
 ## Missing
 - No run with added reasoning remembered across rewrites
 - No measure of how much of what a reader would stop at one audit reports
-- No review of the full LaTeX run's pages against the paper
+- No review of the full LaTeX run's other 18 pages against the paper
+- No distinction, in the depth limit, between reasoning about a page's own mechanism and reasoning about what it uses

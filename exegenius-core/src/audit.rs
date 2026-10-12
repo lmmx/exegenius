@@ -452,10 +452,13 @@ fn apply_gaps(graph: &mut Graph, page: &str, known: &TermIndex, gaps: Vec<Gap>) 
                 .push(outcome("dropped: the reader already knows this".into()));
             continue;
         }
-        let inside_added = graph
-            .added
-            .get(page)
-            .is_some_and(|added| added.iter().any(|s| contains_quote(s, &gap.quote)));
+        // A step on a claim that already carries a citation mark cannot be met by citing it:
+        // the citation did not make the step followable, so it is explained like any other.
+        let inside_added = graph.added.get(page).is_some_and(|added| {
+            added
+                .iter()
+                .any(|s| contains_quote(s, &gap.quote) && !s.contains("(cited)"))
+        });
         if gap.kind == GapKind::Step && inside_added {
             // Explaining it would add claims of its own: a citation or a cut adds none.
             graph.queue_rewrite(
@@ -916,7 +919,10 @@ mod tests {
         let mut g = graph("p", vec![concept("p", &[], false)]);
         g.added.insert(
             "p".into(),
-            vec!["One of two consecutive integers is even, so the product is even.".into()],
+            vec![
+                "One of two consecutive integers is even, so the product is even.".into(),
+                "Such maps exist (cited), and the identity holds.".into(),
+            ],
         );
         let step = |quote: &str| Gap {
             term: "step".into(),
@@ -931,11 +937,15 @@ mod tests {
             vec![
                 step("One of two consecutive integers is even"),
                 step("so we can halve it"),
+                step("Such maps exist (cited)"),
             ],
         );
-        assert_eq!(audit.gaps.len(), 2);
+        assert_eq!(audit.gaps.len(), 3);
         assert_eq!(audit.gaps[0].action, CITE_OR_CUT);
         assert!(g.rewrite["p"][0].starts_with("Cite or cut this step:"));
         assert!(g.rewrite["p"][1].starts_with(STEP_NOTE));
+        // Already cited, so a citation cannot answer it: the reasoning is asked for.
+        assert_ne!(audit.gaps[2].action, CITE_OR_CUT);
+        assert!(g.rewrite["p"][2].starts_with(STEP_NOTE));
     }
 }

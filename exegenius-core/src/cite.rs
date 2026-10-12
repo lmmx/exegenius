@@ -75,6 +75,16 @@ pub fn check(body: &str, sources: &[Source]) -> Vec<String> {
             )),
             Some(_) => {}
         }
+        if let Some(command) = ["\\ref{", "\\eqref{", "\\cite", "\\label{"]
+            .iter()
+            .find(|c| mark.quote.contains(**c))
+        {
+            errors.push(format!(
+                "<cite data-source=\"{}\">: \"{}\" quotes the source's `{command}` markup, \
+                 which readers would see as is: quote the passage that states the claim",
+                mark.source, mark.quote
+            ));
+        }
     }
     errors
 }
@@ -217,6 +227,18 @@ mod tests {
         assert!(errors[0].contains("has no data-source"));
         assert!(errors[1].contains("\"a made-up quote\" is not in that source"));
         assert!(errors[2].contains("no source with that id"));
+        let latex = [Source::new(
+            "tex",
+            None,
+            None,
+            Path::new("p.tex"),
+            "Section~\\ref{sec:swap} proves the bound.",
+        )];
+        let body = "It holds <cite data-source=\"tex\">Section~\\ref{sec:swap} proves the \
+                    bound</cite>.";
+        let errors = check(body, &latex);
+        assert_eq!(errors.len(), 1, "{errors:?}");
+        assert!(errors[0].contains("`\\ref{` markup"), "{errors:?}");
     }
 
     #[test]
