@@ -479,19 +479,32 @@ pub fn apply_write(
             )
         })
         .collect();
-    let answers_steps = graph
-        .rewrite
-        .get(page)
-        .is_some_and(|notes| notes.iter().any(|n| n.starts_with(crate::audit::STEP_NOTE)));
-    match &previous {
-        Some(previous) if answers_steps => {
-            graph
-                .added
-                .insert(page.to_string(), crate::audit::added(previous, body));
+    // Reasoning added for a step stays added while it is on the page, and a rewrite that
+    // answers a step note, or a note to cite or cut a step, adds what it adds: a step
+    // reported inside any of it is sent back to be cited or cut, however many rewrites ago
+    // it was written.
+    let answers_steps = graph.rewrite.get(page).is_some_and(|notes| {
+        notes.iter().any(|n| {
+            n.starts_with(crate::audit::STEP_NOTE) || n.starts_with(crate::audit::CITE_NOTE)
+        })
+    });
+    let on_page = crate::text::normalise(&crate::cite::referenced(body));
+    let mut added: Vec<String> = graph
+        .added
+        .remove(page)
+        .unwrap_or_default()
+        .into_iter()
+        .filter(|s| on_page.contains(s.as_str()))
+        .collect();
+    if let (Some(previous), true) = (&previous, answers_steps) {
+        for s in crate::audit::added(previous, body) {
+            if !added.contains(&s) {
+                added.push(s);
+            }
         }
-        _ => {
-            graph.added.remove(page);
-        }
+    }
+    if !added.is_empty() {
+        graph.added.insert(page.to_string(), added);
     }
     project.save_page_body(page, &format!("{}\n", body.trim()))?;
     graph.rewrite.remove(page);

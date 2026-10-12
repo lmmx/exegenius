@@ -1034,6 +1034,75 @@ fn early_stopping_can_be_turned_off() {
     assert_eq!(off.len(), 3);
 }
 
+#[test]
+fn reasoning_added_by_any_rewrite_for_a_step_stays_added() {
+    let temp = tempfile::tempdir().unwrap();
+    let project = setup(temp.path(), 3);
+    let batch = tasks(next(&project).unwrap());
+    answer(&project, &batch[0], &extract_answer("a chirp identity"));
+    submit(&project, &batch[0].id).unwrap();
+    background(&project);
+    argue(&project, &["dft", "convolution"]);
+    // Each round's audit reports one step on the DFT page, and each rewrite adds a sentence.
+    let steps = [
+        "It holds",
+        "Because the sum telescopes",
+        "each term cancels the next",
+    ];
+    let bodies = [
+        "It holds.",
+        "It holds. Because the sum telescopes, it holds.",
+        "It holds. Because the sum telescopes, it holds. Here each term cancels the next.",
+    ];
+    for round in 0..3 {
+        for t in tasks(next(&project).unwrap()) {
+            match page(&t) {
+                "chirp-identity" => {
+                    fields(&project, &t, json!([]), json!(chirp_relations()));
+                    answer(&project, &t, &format!("Some explanation. {CHIRP_USES}."));
+                }
+                "dft" => answer(&project, &t, bodies[round]),
+                _ => answer(&project, &t, "Some explanation."),
+            }
+            submit(&project, &t.id).unwrap();
+        }
+        for t in tasks(next(&project).unwrap()) {
+            let gaps = match page(&t) {
+                "dft" => json!([{"term": "step", "quote": steps[round], "kind": "step",
+                                 "note": "unclear"}]),
+                _ => json!([]),
+            };
+            answer(
+                &project,
+                &t,
+                &json!({"symbols": [], "gaps": gaps}).to_string(),
+            );
+            submit(&project, &t.id).unwrap();
+        }
+    }
+    // Round 2's step is inside the sentence round 1's rewrite added; round 3's is inside
+    // the one the cite-or-cut rewrite added. Both are sent back to be cited or cut.
+    let audit: serde_json::Value =
+        serde_json::from_str(&read(&project, "exegenius/audit.json")).unwrap();
+    let actions: Vec<&str> = audit
+        .as_array()
+        .unwrap()
+        .iter()
+        .flat_map(|r| r["pages"].as_array().unwrap())
+        .filter(|p| p["page"] == "dft")
+        .flat_map(|p| p["gaps"].as_array().unwrap())
+        .map(|g| g["action"].as_str().unwrap())
+        .collect();
+    assert_eq!(
+        actions,
+        vec![
+            "rewrite: explain the step",
+            exegenius_core::audit::CITE_OR_CUT,
+            exegenius_core::audit::CITE_OR_CUT
+        ]
+    );
+}
+
 /// Handles of the links in a page as a simulated reader sees it.
 fn handles(page: &str) -> Vec<String> {
     page.split("](")

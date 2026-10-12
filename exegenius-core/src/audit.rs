@@ -426,6 +426,9 @@ pub fn apply_audit(
 
 /// The action recorded for a step reported inside reasoning a rewrite added for an earlier
 /// step: it is sent back to be cited or cut, not explained further.
+/// How a rewrite note for a step inside added reasoning begins.
+pub const CITE_NOTE: &str = "Cite or cut this step:";
+
 pub const CITE_OR_CUT: &str = "rewrite: cite or cut a step inside added reasoning";
 
 fn apply_gaps(graph: &mut Graph, page: &str, known: &TermIndex, gaps: Vec<Gap>) -> PageAudit {
@@ -458,9 +461,9 @@ fn apply_gaps(graph: &mut Graph, page: &str, known: &TermIndex, gaps: Vec<Gap>) 
             graph.queue_rewrite(
                 page,
                 Some(format!(
-                    "Cite or cut this step: \"{}\" ({}). It is inside reasoning added for an \
-                     earlier step, so do not explain it further: cite the source for it, or \
-                     remove the claim.",
+                    "{CITE_NOTE} \"{}\" ({}). It is inside reasoning added for an earlier \
+                     step, so do not explain it further: cite the source for it, or remove the \
+                     claim.",
                     gap.quote, gap.note
                 )),
             );
