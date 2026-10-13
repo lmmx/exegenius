@@ -32,9 +32,12 @@ exegenius init
 ```
 
 `init` writes `exegenius.toml`, a `sources/` directory, a Claude Code skill at
-`.claude/skills/exegenius/SKILL.md`, and two subagent definitions in `.claude/agents/`:
-`exegenius-task` and `exegenius-reader` (on the smallest model, for simulated readers), each
-limited to the Read, Write and Bash tools. `next` names the definition to use for each task. Put the sources in `sources/` (plain text or markdown;
+`.claude/skills/exegenius/SKILL.md`, and three subagent definitions in `.claude/agents/`:
+`exegenius-task` (on the session's model), `exegenius-planner` (on Sonnet, for the planning
+tasks: extract, background, argument and extend) and `exegenius-reader` (on the smallest
+model, for simulated readers), each limited to the Read, Write and Bash tools. To change a
+definition's model, edit the `model:` line of its file after `init` (running `init` again
+rewrites the definitions). `next` names the definition to use for each task. Put the sources in `sources/` (plain text or markdown;
 convert PDFs to text first) and edit `exegenius.toml`:
 
 ```toml

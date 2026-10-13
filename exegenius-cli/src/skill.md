@@ -18,8 +18,9 @@ and writing it asks for, task by task, until it reports done.
    `exegenius submit <id>` until the answer is accepted. Claude Code runs at most 20
    subagents at once by default: for a larger batch, start 20 and start another each time
    one finishes.
-3. Use the subagent type `exegenius next` names for each task: `exegenius-task`, or
-   `exegenius-reader` for simulated readers. `exegenius init` writes both to
+3. Use the subagent type `exegenius next` names for each task: `exegenius-planner` for
+   the planning tasks (extract, background, argument, extend), `exegenius-reader` for
+   simulated readers, and `exegenius-task` for the rest. `exegenius init` writes all three to
    `.claude/agents/`, each with its model and the only tools it may use. Audit tasks must
    each go to a fresh subagent that has seen nothing else: the auditor stands in for a
    reader who has not read the sources or the other pages. Do not do audits yourself.

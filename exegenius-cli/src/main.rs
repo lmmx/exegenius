@@ -14,10 +14,14 @@ use exegenius_core::task::{self, Kind, Next};
 const SKILL: &str = include_str!("skill.md");
 const SKILL_PATH: &str = ".claude/skills/exegenius/SKILL.md";
 /// Claude Code subagent definitions: the model and the only tools each task may use.
-const SUBAGENTS: [(&str, &str); 2] = [
+const SUBAGENTS: [(&str, &str); 3] = [
     (
         ".claude/agents/exegenius-task.md",
         include_str!("agents/exegenius-task.md"),
+    ),
+    (
+        ".claude/agents/exegenius-planner.md",
+        include_str!("agents/exegenius-planner.md"),
     ),
     (
         ".claude/agents/exegenius-reader.md",
@@ -151,6 +155,17 @@ fn vercel(dir: &Path) -> anyhow::Result<()> {
     Ok(())
 }
 
+/// The subagent definition a task goes to. Planning tasks, which decide what the wiki
+/// explains and where, go to a larger model than the writing and auditing tasks; simulated
+/// readers to their own definition.
+fn subagent(kind: &Kind) -> &'static str {
+    match kind {
+        Kind::Extract | Kind::Background | Kind::Argument | Kind::Extend => "exegenius-planner",
+        Kind::Read { .. } | Kind::Baseline { .. } => "exegenius-reader",
+        _ => "exegenius-task",
+    }
+}
+
 fn init(dir: &Path) -> anyhow::Result<()> {
     let config = dir.join(config::FILE_NAME);
     if config.exists() {
@@ -281,10 +296,7 @@ fn next(project: &Project) -> anyhow::Result<()> {
                     ),
                     None => answer.display().to_string(),
                 };
-                let agent = match t.kind {
-                    Kind::Read { .. } | Kind::Baseline { .. } => "exegenius-reader",
-                    _ => "exegenius-task",
-                };
+                let agent = subagent(&t.kind);
                 println!(
                     "{id}\n  subagent: {agent}\n  prompt: Do the exegenius task in {file}: \
                      follow its instructions, write the answer to {answer}, then run \
@@ -631,5 +643,54 @@ fn main() {
     if let Err(e) = run(Cli::parse()) {
         eprintln!("error: {e:#}");
         std::process::exit(1);
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn planning_tasks_go_to_the_planner() {
+        for kind in [
+            Kind::Extract,
+            Kind::Background,
+            Kind::Argument,
+            Kind::Extend,
+        ] {
+            assert_eq!(subagent(&kind), "exegenius-planner", "{kind:?}");
+        }
+        let page = || "p".to_string();
+        for kind in [
+            Kind::Write { page: page() },
+            Kind::Audit {
+                page: page(),
+                input: "i".into(),
+            },
+            Kind::Outline,
+            Kind::Overloads,
+            Kind::Goals { held_out: false },
+        ] {
+            assert_eq!(subagent(&kind), "exegenius-task", "{kind:?}");
+        }
+        let reader = Kind::Baseline {
+            goal: 0,
+            persona: "reader".into(),
+        };
+        assert_eq!(subagent(&reader), "exegenius-reader");
+    }
+
+    #[test]
+    fn init_writes_the_planner_on_sonnet() {
+        let dir = std::env::temp_dir().join(format!("exegenius-init-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        init(&dir).unwrap();
+        let read =
+            |name: &str| std::fs::read_to_string(dir.join(".claude/agents").join(name)).unwrap();
+        let planner = read("exegenius-planner.md");
+        assert!(planner.contains("name: exegenius-planner\n"), "{planner}");
+        assert!(planner.contains("\nmodel: sonnet\n"), "{planner}");
+        assert!(read("exegenius-task.md").contains("\nmodel: inherit\n"));
+        std::fs::remove_dir_all(&dir).unwrap();
     }
 }
