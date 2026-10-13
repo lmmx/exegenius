@@ -10,6 +10,7 @@ A reusable programme for finding, for a given kind of document, task and require
 | **Explanatory Fidelity Evaluation** | the research track for levels 3 and 4: does the wiki carry a reader along the proof plan's paths, and does the reader come away understanding? | `fidelity/README.md` |
 | **Rubrics** | per-document rubrics for the central chain of reasoning, preregistered | `rubrics/` |
 | **Plans** | each experiment's preregistered question, arms, measures and decision rules, committed before its outputs exist | `plans/` |
+| **Software plan** | execution profiles in exegenius (agent, model, effort per task kind, recorded in the run log): a plan for review, not implemented | `software-plan.md` |
 | **Runner template** | the files for a dated experiment branch, and what earlier failures taught | `runner/` |
 | **Tools** | `registry.py` (build and index records), `calibre.py` (pass rates with exact intervals), `effort.py` (model and effort per subagent), `usage.py` (tokens), `prepare.py` (blind judge inputs), `score.py` and `depth.py` (quote-location diagnostics) | `tools/` |
 
