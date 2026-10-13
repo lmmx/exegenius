@@ -44,7 +44,7 @@ I set it up that way and did not notice. Its conclusion, that Sonnet plans bette
 - **The outline:** it ran `wc` on `paper.tex` (5,361 lines) and a `grep` for `\section`, `\subsection` and theorem environments. That listed the outline to line 5,259.
 - **The one read:** it made one Read call on `paper.tex`, with `limit: 440` and no offset, which returned lines 1–440. It never read the file again.
 - **The answer:** it wrote the answer with a single Python script, and submit accepted it.
-- **The evidence:** all 28 evidence quotes are in the 440 lines it read. The concept names for the later sections, such as `fast-butterfly-layers` and `scratch-restoration`, came from the outline.
+- **The evidence:** all its evidence quotes are in the 440 lines it read: 27 in the answer file, though the session that read the transcript counted 28. The concept names for the later sections, such as `fast-butterfly-layers` and `scratch-restoration`, came from the outline.
 
 **What this rules out:**
 - not a tool limit: the cut was the planner's own `limit`;
@@ -55,6 +55,40 @@ I set it up that way and did not notice. Its conclusion, that Sonnet plans bette
 - **A validation gap.** Submit checks that each quote is in the source, not that a concept's evidence comes from where the source develops it.
 
 The planner's reasoning is redacted in the transcript, so its choice is inferred from what it did.
+
+**The argument planner read the same stretch, on its own account.** The same session read the transcript of the argument planner (`agent-aac7b93692ffc801a`, type `exegenius-planner`, task 0004, about 10:23 to 10:25 UTC, two to three minutes after the extract planner finished). It made four calls:
+
+| Step | Call | Result |
+|---|---|---|
+| 1 | Read `exegenius/tasks/0004-argument.md` | 18,083 characters, 316 lines |
+| 2 | `wc` on `paper.tex`, and a `grep` for `\section`, `\subsection` and theorem environments | 5,361 lines, and the outline to line 5,259 |
+| 3 | Read `sources/paper.tex` with `offset: 37`, `limit: 400` | lines 37–436 (23,733 characters) |
+| 4 | a Python script that wrote the answer, then submit | accepted |
+
+**What the transcript shows:**
+- **One read of the paper.** The planner never read `paper.tex` again after lines 37–436: the introduction (lines 37–431) and the first five lines of §2. That is the region the extract planner read.
+- **No tool limit.** The 400-line limit was the planner's own, and the read ends cleanly at line 436.
+- **The outline, seen and not used.** The planner listed the outline before reading, and did not read below line 436.
+- **The evidence.** All 15 of the argument's inferred-step quotes are within lines 37–436, according to the session, which rebuilt the answer by running the planner's script. The accepted `argument.json` has 19 steps, 4 to show and 15 to infer.
+
+**A correction to that report.** It says only three pages are attached to steps. The run's `argument.json` (72f1de8) has 16 pages presenting a step. Three of them own a sub-step: `main-theorem`, `fast-address-interchange` and `ring-convolution-retained-order`.
+
+**What the argument task inherited.** Its task file lists the pages in reading order (24 at that point) and the concepts the reader knows. Both lists come from the extraction and its background task, so they too were drawn from the introduction. The plan had to attach its steps to those pages.
+
+**So the failure is in both planning tasks:**
+- **The argument planner read only the introduction itself.** It did not rely on the extraction for what it saw of the paper, and it would have read no further with a complete page list.
+- **The extraction also fixed the pages the plan had to fit.** That gave the plan a shape that matches a reading of the introduction.
+
+**The two task files' wording.** Both have the same section, "Sources (read them from disk)", listing `sources/paper.tex`, and neither says to read the whole source or each section:
+- **The extract task** asks it to "Cover everything the target depends on in the sources".
+- **The argument task** asks it to read the plan top down, using "section structure" among the marks of steps. It adds: "Go down to the level the pages need", and "Deeper steps of a page's own proof can stop at an `infer` step quoting where the sources carry them out".
+
+**Hypotheses, not observed:**
+- **The shared template.** The two tasks share an instruction template, so one omission could produce the same behaviour in both.
+- **The introduction as enough.** The argument planner may have judged that the introduction states the proof's architecture and is enough for a plan. Its reasoning is redacted, so this cannot be checked.
+- **Submit.** Its check on the order of quotes is satisfied by a few early quotes, and nothing in it sends a planner into the sections of the proof.
+
+Why either planner stopped reading is not known.
 
 ## Rewrites were not blocked from adding explanations
 
@@ -196,7 +230,9 @@ Planning only, on `paper.tex`, from the same project state:
 - `fast-butterfly-layers`, `subset-intersection-construction` and `recursive-power-saving` carry the layer's recursion, the derivation of $s = WD - N + 2L < WD$ and the recurrence, with one incorrect leaf bound on `recursive-power-saving`
 - Round 3 sent the steps of the $s<Wm$ derivation on `subset-intersection-construction` back to be cited or cut
 - The run's extract planner read lines 1–440 of `paper.tex` in one Read call with `limit: 440`, after listing the outline, and read no more; all its evidence quotes are in those lines
+- The run's argument planner read lines 37–436 of `paper.tex` in one Read call (`offset: 37`, `limit: 400`), after listing the outline, and read no more; its 15 inferred-step quotes are in those lines, and its pages came from the extraction
 
 ## Missing
+- No record of why either planning task stopped reading `paper.tex`
 - No planning comparison that separates the model from the agent definition
 - No measure of notation drift along a chain of pages

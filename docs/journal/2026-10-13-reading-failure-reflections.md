@@ -55,7 +55,7 @@ The analysis supplied the diagnosis. The recording supplies a direction for the 
 
 ## Open questions
 
-- Why the planner stopped at line 440:
+- Why the extract and argument planners each stopped at the introduction (lines 440 and 436):
   - the definition's system prompt;
   - the task's wording, which never says to read the whole source;
   - the model;
@@ -68,13 +68,12 @@ The analysis supplied the diagnosis. The recording supplies a direction for the 
 ## Actions
 
 **Done:**
-- the transcript of the run's extract planner, read and recorded in 2026-10-13-planner-handoff-run;
+- the transcripts of the run's extract planner and argument planner (task 0004), read and recorded in 2026-10-13-planner-handoff-run: each read only the introduction, and the argument planner's pages also came from the extraction;
 - lmmx/openai-nlogn-wiki added to the development session, for reading;
 - the history of the restricted definitions and the extraction coverage of earlier runs, checked against the journal, the commits and the wiki repository's branches;
 - these notes and this entry.
 
 **Open, not yet approved:**
-- read the argument planner's transcript (task 0004) in the same run;
 - optionally, read the transcript of a Haiku extraction under `exegenius-task`;
 - write a decision record for the restricted definitions;
 - define the results and derivations a plan of this paper should contain;
@@ -88,7 +87,7 @@ The analysis supplied the diagnosis. The recording supplies a direction for the 
 - The long-form notes of the author's recording are in `docs/journal/2026-10-13-reading-failure-reflections/`, with `00_outline.md` and eight numbered sections
 
 ## Missing
-- No record of what the argument planner read in `full-v0.6-latex-planner-handoff`
+- No record of why the extract and argument planners in `full-v0.6-latex-planner-handoff` stopped reading at the introduction
 - No decision record for the switch to restricted subagent definitions
 - No reference set of the results and derivations a plan of the paper should contain
 - No check, during a run, of how much of a source a planning task read
