@@ -84,8 +84,10 @@ The baseline recorded no per-task tokens, so cost is compared only where both ru
 
 ## Later, not now
 
+This change makes the planner stronger. It does not make it a supervisor: the writer still gets only what the write task already carries from the plan. 2026-10-13-planner-handoff separates the two, and inspects that handoff.
+
 Two experiments are left for later, on the evidence of this run:
-- Opus writing a brief for a Haiku writer, on `butterfly-layer`;
+- an explicit brief for a Haiku writer, on `butterfly-layer`;
 - audits that correct rather than reject.
 
 The second depth level is given to every page presenting a step. If the larger plan makes that apply too broadly, restrict it to steps to show.
