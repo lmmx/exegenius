@@ -1,0 +1,1 @@
+alright let's keep you occupied in a more productive way: read this and tell me if you see anything worth including in regards to how we frame the problem based on the content [https://arxiv.org/abs/2609.28591](https://arxiv.org/abs/2609.28591)

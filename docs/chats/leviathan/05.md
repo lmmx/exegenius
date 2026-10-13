@@ -1,0 +1,1 @@
+ok and what are we gonna get out of this: i dont want a chat, i want to use it as the launch point for an intervention in the software (be it the docs or the code, or both, or something else)

@@ -1,0 +1,1 @@
+no no no you have just collapsed them all. that is not what i said at all! please address each of the components in isolation! and then consider interplay. you basically mixed all the paint colours into one dull mud.
