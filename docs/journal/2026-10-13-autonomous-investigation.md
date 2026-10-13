@@ -1,5 +1,7 @@
 # 2026-10-13: Handing the investigation to the development session
 
+*Superseded as the handover by 2026-10-13-handover-after-merges, which records the state after the merges into `master`.*
+
 Until now each step of the investigation has gone through the author:
 - one Claude Code session developed exegenius;
 - runs happened in the author's container;
