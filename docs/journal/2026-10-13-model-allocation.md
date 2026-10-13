@@ -55,6 +55,16 @@ This entry is that investigation and its proposal. **Nothing in it is implemente
 
 **The output column is an estimate.** Transcripts record a message's usage when it starts streaming, so their `output_tokens` undercount, sometimes 8 tokens for 30,000 characters of reasoning. `usage.py` takes the input side from the records and estimates output at 4 characters per token. A precise count would need OpenTelemetry's `claude_code.token.usage`, which tags subagent use, or API-side usage.
 
+**Per experiment, as the runner sessions report it.** The cloud session records give each runner's usage, observed after the runners were archived:
+
+| Runner | Planning runs | Cache read | Cache write | Output | Reported cost (USD) |
+|---|---|---|---|---|---|
+| `131026-exp-coverage-recovery` | 4 | 9.5 M | 0.54 M | 0.15 M | 5.40 |
+| `131026-exp-coverage-recovery-2` | 8 | 14.7 M | 0.92 M | 0.23 M | 8.12 |
+| `131026-exp-depth-rejection` | 10 | 16.8 M | 1.25 M | 0.33 M | 10.22 |
+
+These totals are three to four times the subagent medians above (about 4.5 M read from cache for ten runs), so they include the runner's own orchestration on Opus: building, copying, collecting and writing its report. Whether they count every subagent's use in full is not documented. They are an upper anchor for an experiment's cost; the subagent medians are the planning itself.
+
 **Volume in a full run.** The planner-handoff run's 212 tasks:
 - 95 write and 73 audit tasks;
 - 34 citation-support checks;
@@ -88,7 +98,7 @@ Each experiment uses the runner protocol of 2026-10-13-handover-after-merges, fi
 
 | | Question | Arms (all with `coverage = "reject"`) | Measures | Projected cost |
 |---|---|---|---|---|
-| E1 | Is the planning gap the agent configuration? | argument (and extraction) by `exegenius-planner` on Sonnet, against a general-purpose subagent on Sonnet given the same prompt | content judge, coverage, tokens, time | 10 planning runs (extraction, background, argument): about 4.5 M tokens read from cache, 1.0 M written to cache and 0.24 M output (estimated), from the medians; plus 10 judgements |
+| E1 | Is the planning gap the agent configuration? | argument (and extraction) by `exegenius-planner` on Sonnet, against a general-purpose subagent on Sonnet given the same prompt | content judge, coverage, tokens, time | 10 planning runs (extraction, background, argument): about 4.5 M tokens read from cache, 1.0 M written to cache and 0.24 M output (estimated), from the medians; with orchestration, about the depth experiment's runner (10 USD reported); plus 10 judgements |
 | E2 | At the better configuration, does the model matter? | that configuration on Haiku, Sonnet, Opus | as E1 | 15 runs |
 | E3 | Does effort matter at a fixed model? | the better configuration on Sonnet at `effort` medium against high | as E1 | 10 runs |
 | E4 | Do writers need a larger model? | write tasks for a fixed sample of 10 pages from one fixed plan, on Haiku and on Sonnet, audited by one fixed auditor profile | audit gaps, owned-step derivations, a page judge (to be built, like the content judge) | 20 writes and 20 audits |
@@ -104,6 +114,7 @@ Each experiment uses the runner protocol of 2026-10-13-handover-after-merges, fi
 - Task kinds map to the `exegenius-planner` (`model: sonnet`), `exegenius-task` (`model: inherit`) and `exegenius-reader` (`model: haiku`) definitions in `subagent()` of exegenius-cli/src/main.rs, and the planner and task definitions have identical instructions
 - The run log records no subagent definition, model or effort for a task
 - `docs/journal/2026-10-13-model-allocation/usage.py` reports model calls, input-side tokens and estimated output tokens per subagent from Claude Code transcripts
+- Runner sessions of 4, 8 and 10 planning runs reported 5.40, 8.12 and 10.22 USD, including their own orchestration
 - The planning stage of a run on `paper.tex` takes medians of about 9 model calls, 163k tokens read from cache and 71 seconds for extraction, and 9 calls, 253k and 144 seconds for the argument, on `exegenius-planner` with Sonnet
 
 ## Missing
