@@ -36,7 +36,7 @@ My first reading of the analysis was that Haiku was not carrying out the agentic
 
 > **Checked since.** No full run has used Sonnet throughout. Sonnet has done only the planning tasks: twice in the comparison, as general-purpose subagents, and once in this run, under the planner definition.
 
-By the end of reading it I had come round to a different view. Model size is a quantity, and what is going wrong here is qualitative: how the work is set up and handed on. A larger model given the same setup would take longer and produce more output, and could amplify the same failure rather than correct it. It has been a good thing, on balance, that I did not move to a larger model earlier: the failure would have been more expensive and no clearer.
+By the end of reading it I had come round to a different view. Model size is a quantity, and what is going wrong here is qualitative: how the work is set up and handed on. My hypothesis is that a larger model given the same setup might take longer and produce more output, and could amplify the same failure rather than correct it. If so, it was as well that I did not move to a larger model earlier: the failure might have been more expensive and no clearer. None of this is tested.
 
 **Status:** interpretation. The run's records show that the planner read only the introduction; they do not show what a larger model would do under the same definition. The diagnosis's version of this point:
 > A supervisor that read only the introduction would plan the same way.

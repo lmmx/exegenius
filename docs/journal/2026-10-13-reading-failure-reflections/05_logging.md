@@ -37,4 +37,4 @@ No run records what a planning task read.
 
 ## The planning experiment
 
-The experiment is still worth running, but as a use of that logging rather than a substitute for it. It should also be run by an agent rather than by me (08_how-i-want-to-work.md).
+Logging complements controlled experiments rather than replacing them: logs make a regression visible while a run is under way, and a controlled experiment is still what establishes its cause. The planning experiment is worth running, and it should use that logging. It should also be run by an agent rather than by me (08_how-i-want-to-work.md).

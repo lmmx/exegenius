@@ -12,7 +12,7 @@ The short entry that links these notes is `../2026-10-13-reading-failure-reflect
 
 ## Sections
 
-1. [Context: where this started](01_context.md). The setup, how the project grew from 0.1 to 0.6, and the question of whether Haiku can do it. My view now: the problems are qualitative, and a larger model would amplify them, not fix them.
+1. [Context: where this started](01_context.md). The setup, how the project grew from 0.1 to 0.6, and the question of whether Haiku can do it. My view now: the problems are qualitative. My hypothesis, untested, is that a larger model given the same setup would amplify them rather than fix them.
 2. [Reading the diagnosis](02_reading-the-diagnosis.md). My reactions to the analysis as I read it:
    - the planner's token count;
    - one subagent per kind of step, with models matched to difficulty;

@@ -8,14 +8,14 @@ The analysis supplied the diagnosis. The recording supplies a direction for the 
 
 - **Not mainly a question of model size** ([01](2026-10-13-reading-failure-reflections/01_context.md)).
   - The failure is qualitative: how work is set up and handed between stages.
-  - A larger model given the same setup could amplify it.
+  - A hypothesis, untested: a larger model given the same setup could amplify it.
   - Model capability and agent configuration are to be judged separately.
 - **A pipeline, checked as one** ([02](2026-10-13-reading-failure-reflections/02_reading-the-diagnosis.md), [03](2026-10-13-reading-failure-reflections/03_verification-in-the-loop.md)).
   - Each stage's output should be checked before the next stage consumes it.
   - Failing fast is to be intensified, not switched on.
   - A failed check should lead to recovery, with failure only when recovery is impossible.
 - **Deterministic checks** ([04](2026-10-13-reading-failure-reflections/04_deterministic-batch-checks.md)). An agent states a check once as a command, and a program runs it over every claim. Model judgement is kept for what needs it.
-- **Logging in every run** ([05](2026-10-13-reading-failure-reflections/05_logging.md)). Runs report what the agent needs to see a regression as it happens. That replaces one-off experiments after the fact.
+- **Logging in every run** ([05](2026-10-13-reading-failure-reflections/05_logging.md)). Runs report what the agent needs to see a regression as it happens. That complements controlled experiments, which still establish causes.
 - **Work that adapts to the source** ([06](2026-10-13-reading-failure-reflections/06_adaptive-fan-out.md)). Fan-out across subagents for large sources, weighed against overlap and merging.
 - **The variable under test was lost** ([07](2026-10-13-reading-failure-reflections/07_the-handoff-and-what-to-measure.md)).
   - The run did not test the owned-step handoff.

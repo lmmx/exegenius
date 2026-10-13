@@ -12,7 +12,7 @@ The agent states the check once; the program applies it everywhere.
 
 **Why it may be faster.** Repeated tool use means waiting for the model to generate each tool call. A single command handed to a program avoids that.
 
-**Status:** proposal.
+**Status:** proposal. It is not yet a design for running model-written commands safely (see below).
 
 ## What it needs
 

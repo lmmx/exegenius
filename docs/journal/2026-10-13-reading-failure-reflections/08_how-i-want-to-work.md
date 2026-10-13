@@ -32,7 +32,7 @@ It took a lot of words to reach a fairly simple conclusion:
 
 ## Engaging with the detail
 
-ChatGPT's reply opened, in bold, with "don't introduce Opus yet". I read that as a safeguarding move: protecting me from a decision I might regret, in money or time. That is a caring way to write, but I do not need the softly-softly approach. Today I have the time to go through this properly, and I do not want to throw tokens at a problem and expect it to be solved.
+ChatGPT's reply opened, in bold, with "don't introduce Opus yet". I read that as a safeguarding move: protecting me from a decision I might regret, in money or time. That is my reaction to how the advice was presented, not a claim about anyone's intent. It reads as a caring way to write, but I do not need the softly-softly approach. Today I have the time to go through this properly, and I do not want to throw tokens at a problem and expect it to be solved.
 
 ## Recording my reasoning, not my approvals
 

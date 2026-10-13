@@ -64,7 +64,7 @@ It does not show that this explains the level gap counts. The counts were the sa
 
 ## The switch to restricted subagents
 
-The comparison runs that read the whole paper were general-purpose subagents. The full runs that read only the introduction used the restricted definitions. So I take the regression to have come in when I switched to subagent definitions, though we do not yet know why.
+The comparison runs that read the whole paper were general-purpose subagents. The full runs that read only the introduction used the restricted definitions. My first reading was that the regression came in when I switched to subagent definitions. The records checked below qualify that: the Haiku extraction from before the switch already leaned on the introduction. So the switch coincides with the worst cases, but it did not start the bias, and why the planners stopped reading is still not known.
 
 **Why I switched:** subagents were going off and using tools they should not have. That reason should be recorded, almost as an architectural decision record, so that nobody reverts the change without knowing what it fixed.
 
