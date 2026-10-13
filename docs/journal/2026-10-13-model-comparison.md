@@ -22,6 +22,8 @@ Each submitted through the CLI. The Haiku run's answers (tasks 0001, 0003 and 00
 
 ## Planning
 
+**Records.** Each Sonnet sample's project state (`graph.json`, `argument.json`, `state.json`, the `exegenius.toml` and tasks 0001 to 0004 with their answers) is in `2026-10-13-model-comparison/sonnet-sample-1/` and `sonnet-sample-2/`, with scratch paths replaced by `<project>`. Both were run as general-purpose subagents on Sonnet.
+
 | | Haiku | Sonnet |
 |---|---|---|
 | concepts extracted | 31 | 49 |

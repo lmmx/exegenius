@@ -1,0 +1,218 @@
+{
+ "summary": "The reader has an undergraduate computer science education: algorithm analysis (big-O, Omega, Theta, recurrences, divide and conquer including Karatsuba, schoolbook multiplication), discrete mathematics (induction, modular arithmetic, gcd and coprimality, primes, permutations, binary representation and XOR), a first linear algebra course (matrices, inverses, Gaussian elimination, vectors and bases), polynomials and complex numbers with roots of unity, and basic Turing machines with tapes. They have met the FFT at most as an algorithm for polynomial multiplication, and they have not studied multitape complexity in depth, finite fields beyond the bit field, abstract algebra, tensor products, or numerical error analysis.",
+ "known": [
+  {
+   "name": "Omega, Theta and little-o notation",
+   "aliases": [
+    "\u03a9",
+    "\u0398",
+    "o(f)",
+    "asymptotic lower bound",
+    "tight bound",
+    "liminf ratio"
+   ],
+   "gloss": "Companion asymptotic notations to big-O: \u03a9(f) is an eventual lower bound, \u0398(f) is both upper and lower bound, and o(f) means the ratio to f tends to zero."
+  },
+  {
+   "name": "Logarithms and floor/ceiling",
+   "aliases": [
+    "log base 2",
+    "lg",
+    "\u230ax\u230b",
+    "\u2308x\u2309",
+    "integer part",
+    "iterated logarithm"
+   ],
+   "gloss": "Base-2 logarithms (the number of bits needed to write an integer) and the floor and ceiling functions that round a real number down or up to an integer."
+  },
+  {
+   "name": "Binary representation and two's complement",
+   "aliases": [
+    "bit strings",
+    "binary numerals",
+    "signed binary words",
+    "bin_n"
+   ],
+   "gloss": "Integers written as strings of bits, with negative integers stored in a fixed-width signed two's-complement word."
+  },
+  {
+   "name": "Schoolbook and Karatsuba multiplication",
+   "aliases": [
+    "long multiplication",
+    "grade-school multiplication",
+    "Karatsuba",
+    "Toom-Cook",
+    "divide-and-conquer multiplication",
+    "O(n^2) multiplication"
+   ],
+   "gloss": "Long multiplication of n-digit numbers costs O(n^2) digit operations, and Karatsuba's divide-and-conquer trick lowers this to O(n^{log_2 3})."
+  },
+  {
+   "name": "Divisibility, gcd and coprimality",
+   "aliases": [
+    "greatest common divisor",
+    "coprime",
+    "relatively prime",
+    "extended Euclidean algorithm",
+    "Bezout identity"
+   ],
+   "gloss": "The greatest common divisor of two integers, coprime meaning gcd 1, and the extended Euclidean algorithm that finds the Bezout coefficients and hence modular inverses."
+  },
+  {
+   "name": "Modular arithmetic",
+   "aliases": [
+    "congruence",
+    "residues mod q",
+    "integers modulo q",
+    "Z/qZ",
+    "modular inverse",
+    "mod"
+   ],
+   "gloss": "Arithmetic on integers taken modulo q, where a \u2261 b (mod q) means q divides a \u2212 b, and an element has an inverse modulo q exactly when it is coprime to q."
+  },
+  {
+   "name": "Prime numbers",
+   "aliases": [
+    "primes",
+    "odd primes",
+    "prime factorization",
+    "distinct primes",
+    "primality"
+   ],
+   "gloss": "Integers greater than 1 divisible only by 1 and themselves, with unique factorization into primes; deterministic primality testing by trial division is available for small numbers."
+  },
+  {
+   "name": "Permutations",
+   "aliases": [
+    "bijection of indices",
+    "reordering",
+    "permutation matrix",
+    "composition of permutations",
+    "inverse permutation"
+   ],
+   "gloss": "A bijection of a finite index set to itself, i.e. a reordering of an array, which can be composed and inverted."
+  },
+  {
+   "name": "Matrices and matrix inverses",
+   "aliases": [
+    "matrix product",
+    "invertible matrix",
+    "identity matrix",
+    "diagonal matrix",
+    "transpose",
+    "lower triangular matrix",
+    "matrix-vector multiplication",
+    "GL(m)"
+   ],
+   "gloss": "Rectangular arrays of numbers acting on vectors by multiplication, with the identity, invertible matrices, diagonal and triangular matrices, and their products and inverses."
+  },
+  {
+   "name": "Gaussian elimination",
+   "aliases": [
+    "row reduction",
+    "row operations",
+    "echelon form"
+   ],
+   "gloss": "Row reduction of a matrix by elementary row operations to solve linear systems, find rank, or invert a matrix."
+  },
+  {
+   "name": "Vectors, bases and dimension",
+   "aliases": [
+    "vector space",
+    "linear combination",
+    "linear independence",
+    "basis",
+    "dimension",
+    "orthogonal vectors",
+    "dot product",
+    "orthonormal basis"
+   ],
+   "gloss": "Standard first-course linear algebra: linear combinations, independence, bases, dimension, dot products and orthogonality."
+  },
+  {
+   "name": "Bitwise XOR and arithmetic over F2",
+   "aliases": [
+    "exclusive or",
+    "addition mod 2",
+    "GF(2)",
+    "field with two elements",
+    "parity",
+    "Hamming weight",
+    "bit flip"
+   ],
+   "gloss": "XOR of bits is addition modulo 2; bit vectors then form vectors over the two-element field, and the Hamming weight counts the ones in a bit string."
+  },
+  {
+   "name": "Exponentials of imaginary numbers and geometric series",
+   "aliases": [
+    "Euler's formula",
+    "e^{i\u03b8}",
+    "unit circle",
+    "modulus of a complex number",
+    "sum of roots of unity",
+    "geometric series",
+    "conjugate"
+   ],
+   "gloss": "Euler's formula e^{i\u03b8} = cos \u03b8 + i sin \u03b8 puts roots of unity on the unit circle, complex numbers have modulus and conjugate, and geometric series \u03a3 r\u1d4f have closed forms, including the vanishing sum of all q-th roots of unity."
+  },
+  {
+   "name": "Triangle inequality and sup norm",
+   "aliases": [
+    "maximum norm",
+    "max norm",
+    "norm of a vector",
+    "error bounds",
+    "unit disk",
+    "rounding to nearest integer"
+   ],
+   "gloss": "The norm of a sum is at most the sum of norms, and the maximum of the absolute values of the entries of an array is a norm, so errors can be bounded and added."
+  },
+  {
+   "name": "Induction and recurrences",
+   "aliases": [
+    "proof by induction",
+    "recurrence relation",
+    "master theorem",
+    "telescoping sum",
+    "solving recurrences",
+    "geometric decay"
+   ],
+   "gloss": "Proofs by induction, telescoping sums, and solving divide-and-conquer recurrences such as T(n) \u2264 a T(n/b) + O(n)."
+  },
+  {
+   "name": "Stacks and sorting",
+   "aliases": [
+    "stack data structure",
+    "call stack",
+    "radix sort",
+    "stable sort",
+    "counting sort",
+    "recursion",
+    "scanning an array"
+   ],
+   "gloss": "A last-in first-out stack as used by recursion, comparison and radix sorting of records, and linear scans over an array."
+  },
+  {
+   "name": "Word RAM and unit-cost model",
+   "aliases": [
+    "random access machine",
+    "RAM model",
+    "unit cost operations",
+    "word operations"
+   ],
+   "gloss": "A machine model with random access to memory in which arithmetic on words of O(log n) bits takes one step, in contrast to the Turing machine where data movement costs time."
+  },
+  {
+   "name": "Fixed-point and two's-complement arithmetic precision",
+   "aliases": [
+    "fixed point numbers",
+    "rounding error",
+    "truncation",
+    "guard digits",
+    "base b digits",
+    "carry propagation"
+   ],
+   "gloss": "Numbers stored with a fixed number of fractional bits are rounded with bounded error, and integers in base b are added by propagating carries digit by digit."
+  }
+ ]
+}

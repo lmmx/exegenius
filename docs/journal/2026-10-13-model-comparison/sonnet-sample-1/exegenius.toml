@@ -1,0 +1,42 @@
+# exegenius project configuration
+
+# Title of the generated wiki (defaults to the target concept's name)
+title = "Integer multiplication below n log n"
+
+# What the wiki should explain, in plain words
+target = "The main result of the paper: a deterministic multitape Turing machine algorithm that multiplies n-bit integers in O(n (lg n)^(1-kappa)) time, disproving the n log n optimality conjecture in that model, and how it works"
+
+# Maximum number of audit rounds
+rounds = 3
+stop_early = false
+
+[reader]
+# What the reader already knows, in plain words
+knows = "Undergraduate computer science: big-O notation, polynomials, complex numbers, basic Turing machines and tapes"
+
+# One entry per source document (plain text or markdown; convert PDFs to text first)
+[[sources]]
+id = "paper"
+path = "sources/paper.tex"
+title = "Integer multiplication below n log n (OpenAI, 2026)"
+url = "https://github.com/openai/math/tree/fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb/preprints/Integer-multiplication-below-n-log-n-September-23-2026"
+
+# Simulated readers, run once the wiki is written: each tries to answer goal questions
+# using only the wiki, and what they get stuck on is repaired before the next round.
+# [simulation]
+# rounds = 2      # 0 turns the simulation off
+# budget = 15     # most pages a reader may open per goal
+# nonce = true    # invented names for the concepts the wiki teaches
+# ablations = 0   # pivotal sentences to hide, each with a control, after the last round
+
+# Source references on pages ("see p. 5"): hidden until a reader shows them, or shown
+# [site]
+# citations = "hidden"
+
+# Further reader profiles to simulate, beside [reader]
+# [[readers]]
+# name = "newcomer"
+# knows = "High-school algebra"
+
+[simulation]
+rounds = 0

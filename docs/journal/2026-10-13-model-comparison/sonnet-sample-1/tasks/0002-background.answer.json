@@ -1,0 +1,120 @@
+{
+  "summary": "The reader has a standard undergraduate computer science education: algorithm analysis with big-O, divide-and-conquer recurrences, sorting and basic data structures, discrete mathematics (sets, permutations, modular arithmetic, primes, gcd), single-variable calculus with exponentials and logarithms, linear algebra up to matrices, rank and inner products, complex numbers, and basic Turing machines with multiple tapes. They have seen schoolbook and Karatsuba multiplication and know that the FFT multiplies polynomials, but have not studied Fourier analysis in depth, abstract algebra beyond elementary groups and rings, number theory beyond congruences and CRT, or the fixed-tape complexity literature on integer multiplication.",
+  "known": [
+    {
+      "name": "Binary representation of integers",
+      "aliases": ["binary numerals", "bit strings", "bin_k", "val(x)", "two-element alphabet {0,1}", "most significant bit"],
+      "gloss": "A nonnegative integer is written as a string of bits with the leftmost bit most significant, padded with leading zeros to a fixed length."
+    },
+    {
+      "name": "Schoolbook multiplication and carries",
+      "aliases": ["long multiplication", "carry propagation", "quadratic multiplication", "grade-school multiplication"],
+      "gloss": "The elementary O(n^2) method of multiplying integers digit by digit, adding partial products and passing carries to the next position."
+    },
+    {
+      "name": "Karatsuba multiplication",
+      "aliases": ["Karatsuba-Ofman", "divide-and-conquer multiplication", "Toom-Cook"],
+      "gloss": "A divide-and-conquer multiplication that replaces four half-size products by three, giving O(n^{log2 3}) time, with Toom-Cook as its generalization to more pieces."
+    },
+    {
+      "name": "Logarithms, powers and floor/ceiling",
+      "aliases": ["lg", "log base 2", "iterated logarithm", "log*", "floor", "ceiling", "powers of two", "exponent rules"],
+      "gloss": "Base-2 logarithms and exponentials with their rules, together with floor and ceiling rounding, used to size parameters like lg n and 2^ceil(log n)."
+    },
+    {
+      "name": "Little-o, liminf and limits of ratios",
+      "aliases": ["o(n log n)", "limit of T(n)/(n lg n)", "liminf", "asymptotically smaller", "Omega notation"],
+      "gloss": "Little-o and Omega notation and limits of ratios of growth rates, used to say a running time is eventually a vanishing fraction of n log n."
+    },
+    {
+      "name": "Modular arithmetic",
+      "aliases": ["congruence", "residues", "Z/nZ", "integers mod n", "remainder", "Euclidean division", "centered residue", "modular inverse"],
+      "gloss": "Arithmetic on integers up to equivalence mod a modulus, including quotient and remainder, residue classes, and inverses of units modulo q."
+    },
+    {
+      "name": "Primes, divisibility, gcd and the extended Euclidean algorithm",
+      "aliases": ["prime numbers", "coprime", "relatively prime", "greatest common divisor", "Euclid's algorithm", "trial division", "primality by scanning"],
+      "gloss": "Prime numbers and coprimality, with Euclid's algorithm computing gcds and Bezout coefficients, hence modular inverses."
+    },
+    {
+      "name": "Sets, subsets and Cartesian products",
+      "aliases": ["subset of size three", "set intersection", "indicator vector", "product set", "index set"],
+      "gloss": "Finite sets, their subsets and intersections, characteristic (indicator) vectors, and Cartesian products indexing multidimensional arrays."
+    },
+    {
+      "name": "Permutations and bijections",
+      "aliases": ["permutation of indices", "partial permutation", "rearrangement", "transposition of entries", "composition of permutations"],
+      "gloss": "A bijection of a finite index set to itself, composed by applying one after another and inverted by reversing it."
+    },
+    {
+      "name": "Roots of unity",
+      "aliases": ["primitive root of unity", "e^{2 pi i/n}", "n-th roots of unity", "twiddle factors", "Fourier root"],
+      "gloss": "The complex solutions of z^n = 1, equal to e^{2 pi i k/n}, which lie on the unit circle and are closed under multiplication."
+    },
+    {
+      "name": "Matrices and matrix-vector products",
+      "aliases": ["matrix transpose", "matrix inverse", "identity matrix", "diagonal matrix", "triangular matrix", "unit lower triangular", "matrix transposition"],
+      "gloss": "Rectangular arrays of numbers acting on vectors by multiplication, with transpose, inverse, diagonal and triangular forms."
+    },
+    {
+      "name": "Vector norms and the triangle inequality",
+      "aliases": ["sup norm", "max norm", "infinity norm", "||x||_infinity", "modulus bound", "triangle inequality"],
+      "gloss": "A norm assigns a size to a vector, such as the largest absolute coordinate, and satisfies the triangle inequality ||a+b|| <= ||a||+||b||."
+    },
+    {
+      "name": "Exponential and Gaussian functions",
+      "aliases": ["e^x", "Gaussian function", "e^{-x^2}", "bell curve", "exp", "exponential decay", "Gaussian weight"],
+      "gloss": "The exponential function and the bell-shaped Gaussian e^{-x^2}, whose rapid decay makes far-away terms in a sum negligible."
+    },
+    {
+      "name": "Real analysis estimates",
+      "aliases": ["error bounds", "geometric series", "tail of a series", "inequalities", "rounding error", "absolute value bounds"],
+      "gloss": "Elementary calculus-level reasoning with inequalities, geometric series and tail sums to bound numerical errors."
+    },
+    {
+      "name": "Divide-and-conquer recurrences",
+      "aliases": ["master theorem", "recurrence relation", "T(n)=aT(n/b)+f(n)", "recursion tree", "geometric sum of costs", "recursion depth"],
+      "gloss": "Solving running-time recurrences by unrolling the recursion into a sum of costs per level, as in merge sort and Karatsuba."
+    },
+    {
+      "name": "Recursion, call stack and depth-first order",
+      "aliases": ["depth-first recursion", "stack", "push and pop", "recursive calls", "parking stack"],
+      "gloss": "A recursive procedure runs by evaluating one child call fully before the next, with a stack storing the suspended state."
+    },
+    {
+      "name": "Sorting algorithms",
+      "aliases": ["radix sort", "stable sort", "merge sort", "sorting records by key", "binary radix sorting"],
+      "gloss": "Rearranging records into key order in O(N log N) comparisons, or by stable passes on successive key digits for radix sort."
+    },
+    {
+      "name": "Boolean gates and XOR",
+      "aliases": ["exclusive or", "XOR gate", "parity", "AND gate", "addition mod 2", "logic circuit", "bitwise operations"],
+      "gloss": "XOR returns the sum of two bits modulo 2, a basic Boolean gate used with AND in circuits, and parity is the XOR of several bits."
+    },
+    {
+      "name": "Hamming weight",
+      "aliases": ["popcount", "number of ones", "wt(x)", "bit count"],
+      "gloss": "The number of 1 bits in a binary string or vector."
+    },
+    {
+      "name": "Dyadic rationals and positional radix notation",
+      "aliases": ["dyadic numbers", "mixed radix", "radix b digits", "base 2^b digits", "fractional bits", "binary point", "lexicographic order", "digit expansion"],
+      "gloss": "Numbers of the form m/2^k written in binary with a fixed point, and integers written as digit strings in a radix such as 2^b, ordered lexicographically."
+    },
+    {
+      "name": "Rings, fields and cyclic groups",
+      "aliases": ["field", "ring", "group", "cyclic group", "isomorphism", "quotient ring", "Q, R, C", "GF(2)"],
+      "gloss": "Elementary algebraic structures with addition and multiplication, such as the rationals, reals, complex numbers and the integers mod n."
+    },
+    {
+      "name": "Fast Fourier transform",
+      "aliases": ["FFT", "Cooley-Tukey", "FFT multiplication", "evaluation and interpolation"],
+      "gloss": "Evaluating or interpolating polynomials at roots of unity in O(N log N) operations, which multiplies polynomials and integers faster than schoolbook methods."
+    },
+    {
+      "name": "Newton's method",
+      "aliases": ["Newton iteration", "quadratic convergence", "reciprocal iteration", "Newton reciprocal", "approximate square root"],
+      "gloss": "Iteratively refining a root estimate x <- x - f(x)/f'(x), roughly doubling the number of correct digits each step."
+    }
+  ]
+}

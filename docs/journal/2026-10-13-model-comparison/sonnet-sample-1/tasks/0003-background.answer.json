@@ -1,0 +1,130 @@
+{
+  "summary": "The reader has an undergraduate computer science degree: asymptotic analysis, discrete mathematics (sets, functions, combinatorial counting, induction, basic modular arithmetic and number theory such as primes, gcd and the Euclidean algorithm), recursion and elementary algorithms (sorting, stacks, divide and conquer), basic Turing machines with several tapes, and the first-year mathematics that goes with it: single-variable calculus (limits, convergence of sequences and series, basic integrals, geometric series), matrices and vectors, polynomials and complex numbers. The reader has not met the discrete Fourier transform or the FFT, abstract algebra beyond modular arithmetic (rings, quotient rings, algebra isomorphisms, cyclic-group structure), Gaussian integers, number-theoretic results on the density of primes, or any integer-multiplication algorithm faster than the schoolbook method.",
+  "known": [
+    {
+      "name": "Logarithms and exponentials",
+      "aliases": ["log", "lg", "log_2", "base-2 logarithm", "natural logarithm", "powers of two"],
+      "gloss": "The base-2 and natural logarithms and their identities, used for bit lengths, the lg n notation, and for treating exponents like (lg n)^{1-kappa} or 2^{-p} as growing or shrinking functions."
+    },
+    {
+      "name": "Floor, ceiling and rounding",
+      "aliases": ["floor function", "ceiling function", "round to nearest integer", "integer part"],
+      "gloss": "The functions giving the greatest integer at most x, the least integer at least x, and the nearest integer to x, used for lengths such as ceil(log2 n) and for rounding computed values to integers."
+    },
+    {
+      "name": "Binary representation of integers",
+      "aliases": ["binary numerals", "bit strings", "radix representation", "positional notation", "base-b digits", "most significant bit", "leading zeros", "bits"],
+      "gloss": "An integer written as a string of digits in radix 2 (or any radix b) with the leftmost digit most significant, so val(x) = sum x_i 2^{n-i}, with padding by leading zeros to a fixed length."
+    },
+    {
+      "name": "Schoolbook arithmetic and carries",
+      "aliases": ["long multiplication", "grade-school multiplication", "carry propagation", "addition with carries", "O(n^2) multiplication"],
+      "gloss": "The elementary algorithms for adding and multiplying integers digit by digit with carries, taking linear time for addition and quadratic time for multiplication."
+    },
+    {
+      "name": "Bitwise operations and XOR",
+      "aliases": ["exclusive or", "XOR gate", "addition mod 2", "parity", "bit flip"],
+      "gloss": "Logical operations on bits, in particular exclusive or, which is addition modulo 2 and is its own inverse."
+    },
+    {
+      "name": "Modular arithmetic and residues",
+      "aliases": ["congruence", "mod", "integers modulo m", "Z/mZ", "residue ring", "residue classes", "modular inverse"],
+      "gloss": "Arithmetic on remainders modulo m, where a is congruent to b mod m when m divides a-b, with addition, multiplication and inverses of numbers coprime to m."
+    },
+    {
+      "name": "Primes, divisibility and coprimality",
+      "aliases": ["prime numbers", "gcd", "greatest common divisor", "relatively prime", "pairwise coprime", "extended Euclidean algorithm", "trial division", "odd prime"],
+      "gloss": "Divisibility of integers, prime numbers, the gcd and the Euclidean algorithm (including its extended form giving modular inverses), and the meaning of coprime and pairwise coprime integers."
+    },
+    {
+      "name": "Roots of unity",
+      "aliases": ["nth roots of unity", "primitive root of unity", "e^{2 pi i/n}", "twiddle factor", "unit-modulus phase"],
+      "gloss": "The complex numbers w with w^t = 1, namely e^{2 pi i k/t}, which are the unit-modulus complex numbers whose powers cycle with period t."
+    },
+    {
+      "name": "Complex modulus, conjugate and triangle inequality",
+      "aliases": ["absolute value of a complex number", "|z|", "real and imaginary parts", "complex conjugate", "unit disk", "triangle inequality"],
+      "gloss": "The modulus |z| = sqrt(a^2+b^2) of a complex number, its real and imaginary parts, and the inequality |u+v| <= |u|+|v| used to bound sums of errors."
+    },
+    {
+      "name": "Max norm and error bounds",
+      "aliases": ["sup norm", "infinity norm", "maximum norm", "worst-case error", "absolute error", "round-off error"],
+      "gloss": "The norm of a vector as its largest coordinate in absolute value, used to state that every coordinate of a computed array is within a stated error of the true one."
+    },
+    {
+      "name": "Little-o, big-Omega and Theta notation",
+      "aliases": ["o(.)", "Omega", "Theta", "asymptotic lower bound", "tight bound", "polylogarithmic factor", "power saving"],
+      "gloss": "The companions of big-O notation: f = o(g) when f/g tends to 0, f = Omega(g) for a lower bound, and Theta for matching upper and lower bounds."
+    },
+    {
+      "name": "Series and exponential decay estimates",
+      "aliases": ["geometric series", "summing a recurrence", "convergence of series", "exponentially small", "2^{-p}"],
+      "gloss": "Sums of geometric series and similar convergent series, and the fact that quantities like 2^{-p} are negligible against any fixed polynomial in the relevant size, used to sum recursive costs and bound errors."
+    },
+    {
+      "name": "Recurrences and recursion",
+      "aliases": ["recursive calls", "divide and conquer", "recursion depth", "recurrence relation", "unrolling a recurrence", "induction on the parameter"],
+      "gloss": "Defining a procedure by calls to itself on smaller inputs, analyzing its cost by a recurrence such as F_k <= a F_{k-1} + c, and proving bounds by induction."
+    },
+    {
+      "name": "Sorting and stacks",
+      "aliases": ["sorting a list", "stack data structure", "last-in first-out", "push and pop", "merge sort"],
+      "gloss": "Rearranging records into a prescribed order by comparison or by key, and the stack data structure with push and pop, used for depth-first recursion."
+    },
+    {
+      "name": "Sets, subsets and counting",
+      "aliases": ["three-element subsets", "set intersection", "binomial coefficient", "n choose k", "Cartesian product", "inclusion-exclusion", "indicator vector"],
+      "gloss": "Finite sets, subsets of a given size, intersections, Cartesian products of sets, binomial coefficients and the indicator (0/1) vector of a subset."
+    },
+    {
+      "name": "Permutations and bijections",
+      "aliases": ["permutation", "bijection", "partial permutation", "permutation matrix", "inverse permutation", "rearranging indices"],
+      "gloss": "A bijective rearrangement of a finite index set, its inverse, and the corresponding permutation matrix that reorders the entries of a list."
+    },
+    {
+      "name": "Lexicographic order and mixed-radix indices",
+      "aliases": ["lexicographic ordering", "multi-index", "row-major order", "multidimensional array index", "flattening an array", "mixed radix"],
+      "gloss": "Ordering tuples by comparing coordinates left to right, and storing a multidimensional array as a flat list so that a tuple (i_1,...,i_d) is at position sum i_j times the product of later axis lengths."
+    },
+    {
+      "name": "Matrices, matrix-vector products and inverses",
+      "aliases": ["matrix", "matrix multiplication", "identity matrix", "matrix inverse", "diagonal matrix", "triangular matrix", "transpose", "all-ones matrix", "invertible matrix"],
+      "gloss": "Rectangular arrays of numbers acting on vectors by multiplication, with the identity, inverses of invertible matrices, and diagonal and triangular matrices."
+    },
+    {
+      "name": "Kronecker product of matrices",
+      "aliases": ["tensor product of matrices", "Kronecker power", "tensor power", "A tensor B"],
+      "gloss": "The block matrix A (x) B formed from two matrices, which acts on tensor-product index sets and satisfies (A (x) B)(C (x) D) = AC (x) BD."
+    },
+    {
+      "name": "Hadamard matrix and the 2x2 butterfly matrix",
+      "aliases": ["Walsh-Hadamard transform", "Hadamard transform", "H = [[1,1],[1,-1]]", "Pauli X", "swap matrix"],
+      "gloss": "The 2x2 matrix with rows (1,1) and (1,-1) (up to scaling), whose tensor powers act on bit-indexed arrays, together with the 2x2 swap matrix with rows (0,1) and (1,0)."
+    },
+    {
+      "name": "Inner products, orthogonality and eigenvalues",
+      "aliases": ["dot product", "orthogonal vectors", "orthogonal complement", "eigenvalue", "eigenvector", "symmetric matrix", "bilinear form"],
+      "gloss": "The dot product of vectors, orthogonality when it vanishes, and eigenvalues and eigenvectors of a matrix as scalars and directions it only scales."
+    },
+    {
+      "name": "Polynomial evaluation and interpolation",
+      "aliases": ["evaluate a polynomial at a point", "Kronecker substitution", "polynomial multiplication by evaluation", "degree of a polynomial", "coefficient list"],
+      "gloss": "Evaluating a polynomial at a value (in particular at a power of 2 to read it as an integer), and the idea that a polynomial of degree < N is determined by its values at N points."
+    },
+    {
+      "name": "Fixed-point and floating-point numbers",
+      "aliases": ["fixed-point arithmetic", "dyadic rationals", "binary fractions", "fractional bits", "truncation", "significand", "precision"],
+      "gloss": "Representing real numbers as integers divided by a power of two (dyadic rationals), so p fractional bits give a grid of spacing 2^{-p} to which values are truncated or rounded, with rounding error below the spacing."
+    },
+    {
+      "name": "Karatsuba and the history of fast multiplication",
+      "aliases": ["Karatsuba multiplication", "Toom-Cook", "FFT multiplication", "Schonhage-Strassen", "integer multiplication complexity"],
+      "gloss": "The fact that integer multiplication can be done faster than the schoolbook quadratic time, so that the cost M(n) of multiplying n-bit integers is a nontrivial function studied in complexity theory."
+    },
+    {
+      "name": "Square roots and quotient with remainder",
+      "aliases": ["integer division", "quotient and remainder", "integer square root", "Newton iteration for division"],
+      "gloss": "Division with remainder a = bq + r with 0 <= r < b, and the integer square root floor(sqrt(a))."
+    }
+  ]
+}
