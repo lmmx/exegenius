@@ -1,0 +1,472 @@
+{
+ "plan": "P07",
+ "items": [
+  {
+   "id": "bank-exchange-network",
+   "presence": "mentioned",
+   "statement": "n/a",
+   "derivation": "n/a",
+   "steps": [
+    "S1.2",
+    "S1.3"
+   ],
+   "lines": [
+    653,
+    726,
+    728,
+    739
+   ],
+   "note": "The plan speaks only of 'a fixed linear network with roles' built on three-element subsets; the eight-row schedule, the cancellation of scratch values and the signed exchange (X_a,Y_a)->(-Y_a,X_a) are never stated."
+  },
+  {
+   "id": "common-frame-identity",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S1.2"
+   ],
+   "lines": [
+    793,
+    803,
+    804,
+    825
+   ],
+   "note": "S1.2 gives the idea (invertible frames, intermediate frames cancel, only an endpoint operator remains) but attaches frames to each wire rather than to each source, gate and sink, and gives neither D_out S D_in^{-1} nor the per-route operator; the commutation with pointwise gates is not shown."
+  },
+  {
+   "id": "label-residual-budget",
+   "presence": "mentioned",
+   "statement": "n/a",
+   "derivation": "n/a",
+   "steps": [
+    "S1.3"
+   ],
+   "lines": [
+    845,
+    897,
+    997,
+    1010
+   ],
+   "note": "S1.3 names nested subspace labels from three-element subsets and quotes line 853, but gives no label space, no L=Ich, no budget Wm-2N+2L and no L<N/2."
+  },
+  {
+   "id": "bit-shear-interface",
+   "presence": "mentioned",
+   "statement": "n/a",
+   "derivation": "n/a",
+   "steps": [
+    "S1.5"
+   ],
+   "lines": [
+    1138,
+    1154,
+    1456,
+    1471
+   ],
+   "note": "S1.5's method 'express each edge matrix of the network by shears' alludes to the shear frames, but the endpoint identity M_sink - M_source = I_m and s_b = W_b m - N + 2L_b are absent."
+  },
+  {
+   "id": "complex-phase-interface",
+   "presence": "absent",
+   "statement": "n/a",
+   "derivation": "n/a",
+   "steps": [],
+   "lines": [
+    1174,
+    1229
+   ],
+   "note": "No step mentions phase frames, translation kernels aI+bX_v or C^{tensor m}; S1.6 cites only the layer proposition."
+  },
+  {
+   "id": "rank-saving",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S1.3",
+    "S1.4",
+    "S5.1"
+   ],
+   "lines": [
+    1151,
+    1152,
+    1222,
+    1223,
+    1319,
+    1330
+   ],
+   "note": "S1.3 states s<Wm and S1.4 a resulting exponent tau<1 (quoting line 1326), but the cause L<N/2, the condition s/W<m^tau and the value tau=sigma=1-2^{-50} are not given."
+  },
+  {
+   "id": "stream-primitives",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S1.1"
+   ],
+   "lines": [
+    491,
+    511,
+    555,
+    572
+   ],
+   "note": "S1.1 says scans, controlled shifts and affine updates take linear time, which is right in substance, but omits the operations' scope (digit moves, splits by row class) and the condition that offsets be preparable in b^{O(1)} time."
+  },
+  {
+   "id": "matrix-shear",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S1.5.1"
+   ],
+   "lines": [
+    1364,
+    1373,
+    1394,
+    1410
+   ],
+   "note": "S1.5.1 gives A=E_1 Pi E_2 with lower triangular E_i and a shear costing a interchanges plus linear work, matching the two lemmas, but does not say the E_i are invertible or that Pi is a partial permutation with exactly a ones."
+  },
+  {
+   "id": "interchange-recurrence",
+   "presence": "derived",
+   "statement": "imprecise",
+   "derivation": "partial",
+   "steps": [
+    "S1.4",
+    "S1.5",
+    "S1.5.1",
+    "S1.5.2"
+   ],
+   "lines": [
+    1475,
+    1489,
+    1491,
+    1557
+   ],
+   "note": "The route (edge shears factored, recursive smaller interchanges, s calls on volume V/W, cost V e^tau) follows the paper, but the row split into role streams, the endpoint identity producing H<-H+D, and the three-shear swap are missing. S1.5.2 also calls the widths powers of two where the paper uses e=m^k radix-q digits."
+  },
+  {
+   "id": "arbitrary-width-interchange",
+   "presence": "stated",
+   "statement": "correct",
+   "derivation": "n/a",
+   "steps": [
+    "S1.5",
+    "S1.5.3"
+   ],
+   "lines": [
+    1631,
+    1647
+   ],
+   "note": "S1.5 states the O(Vu^tau) interchange of two u-bit fields and S1.5.3 says the width and row restrictions are removed; how this is done (row field, padding, base-m pieces) is not shown."
+  },
+  {
+   "id": "phase-frame-recursion",
+   "presence": "absent",
+   "statement": "n/a",
+   "derivation": "n/a",
+   "steps": [],
+   "lines": [
+    1806,
+    1866
+   ],
+   "note": "No step mentions the change of basis P_M, the s_c child calls of C^{tensor f}, or the recovery of H_0 from C."
+  },
+  {
+   "id": "packed-selected-bit-addition",
+   "presence": "absent",
+   "statement": "n/a",
+   "derivation": "n/a",
+   "steps": [],
+   "lines": [
+    1974,
+    2011
+   ],
+   "note": "No step mentions the packed selected-bit XOR or its bad-set repair."
+  },
+  {
+   "id": "layer-recurrence",
+   "presence": "mentioned",
+   "statement": "n/a",
+   "derivation": "n/a",
+   "steps": [
+    "S1.4",
+    "S1.6"
+   ],
+   "lines": [
+    2306,
+    2323,
+    2393,
+    2408
+   ],
+   "note": "S1.4's generic recurrence (s calls at parameter f on volume V/W) is said to cover 'both recurrences', but the layer recurrence's node overhead O((eK)^tau+1), the leaf cutoff e<d^beta, the row index, and the condition on lambda' are not stated."
+  },
+  {
+   "id": "simultaneous-layer",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S1",
+    "S1.6"
+   ],
+   "lines": [
+    2588,
+    2668
+   ],
+   "note": "S1.6 states H_0 on one bit of up to d chunks of complex fixed-point polynomial records at cost O(V d^{lambda'}), as in the proposition, but omits K=floor(d^c), the truncation Q_p and the error bound sqrt2 2^{-p}."
+  },
+  {
+   "id": "synthetic-transform",
+   "presence": "derived",
+   "statement": "imprecise",
+   "derivation": "partial",
+   "steps": [
+    "S2",
+    "S2.1",
+    "S2.2"
+   ],
+   "lines": [
+    2798,
+    2818,
+    2929,
+    2989
+   ],
+   "note": "S2's method (powers of y as roots of unity, radix-two butterflies, a layout that puts each round in common chunks) with S2.1 and S2.2 follows the paper. Decimation in frequency, bit-reversed order B, the counterparts LBF^- and F^+B^{-1}L^{-1}, the error bound and the cost formula are missing."
+  },
+  {
+   "id": "signed-packing",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S3.1"
+   ],
+   "lines": [
+    3221,
+    3232,
+    3233,
+    3260
+   ],
+   "note": "Kronecker packing of signed ring polynomials with the established multiplier is right, but S3.1 says one multiplier call, whereas the paper makes four products. The base B_0=2^{4p}, the normalization fg/r and the O(rp log(rp)) cost are not given."
+  },
+  {
+   "id": "synthetic-convolution",
+   "presence": "derived",
+   "statement": "imprecise",
+   "derivation": "partial",
+   "steps": [
+    "S3",
+    "S3.1",
+    "S3.2"
+   ],
+   "lines": [
+    3370,
+    3404
+   ],
+   "note": "The route (two forward transforms kept in the same order, pointwise signed-packed products, opposite transform) is the paper's. The normalization (f*g)/(rM), the identity P(LBu,LBv)=LB P(u,v), the scale by M, the error bound and the cost are absent, and S3 says 'exactly' where the paper gives an approximation."
+  },
+  {
+   "id": "gaussian-resampling",
+   "presence": "mentioned",
+   "statement": "n/a",
+   "derivation": "n/a",
+   "steps": [
+    "S4",
+    "S4.1",
+    "S4.2"
+   ],
+   "lines": [
+    3548,
+    3574,
+    3800,
+    3834
+   ],
+   "note": "The steps say resampling maps give the transform without executing the permutations and combine into a tensor interface, but give no formula P_sF_s=2^{2alpha^2}B_0P_tF_tA, no conditions, and no costs."
+  },
+  {
+   "id": "chirp-permutation-cancellation",
+   "presence": "mentioned",
+   "statement": "n/a",
+   "derivation": "n/a",
+   "steps": [
+    "S4",
+    "S4.3"
+   ],
+   "lines": [
+    3899,
+    3936
+   ],
+   "note": "S4.3 says in words that a chirp identity computes the middle transform and R cancels in a convolution; neither identity is given."
+  },
+  {
+   "id": "parameters-and-primes",
+   "presence": "mentioned",
+   "statement": "n/a",
+   "derivation": "n/a",
+   "steps": [
+    "S5.1"
+   ],
+   "lines": [
+    4004,
+    4016,
+    4049,
+    4072
+   ],
+   "note": "S5.1 lists the parameter names and only the value kappa=2^{-182}; the sizes b, p, d, K, T and the prime source lengths are absent."
+  },
+  {
+   "id": "crt-address-map",
+   "presence": "mentioned",
+   "statement": "n/a",
+   "derivation": "n/a",
+   "steps": [
+    "S5.3"
+   ],
+   "lines": [
+    4195,
+    4228
+   ],
+   "note": "S5.3 says a CRT address map puts the digits on distinct prime axes preserving convolution, without the map x -> prod x_i^{mu_i} or its triangular digit form."
+  },
+  {
+   "id": "phase-twist",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S5.4"
+   ],
+   "lines": [
+    4298,
+    4342
+   ],
+   "note": "S5.4 gives the defining content (multiply coefficient k by zeta^k to turn cyclic into negacyclic multiplication) but leaves zeta=e^{pi i/r} and the restriction to the last axis unstated."
+  },
+  {
+   "id": "multiplication-algorithm",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S5",
+    "S5.2",
+    "S5.5"
+   ],
+   "lines": [
+    4415,
+    4484,
+    4506,
+    4534
+   ],
+   "note": "S5.5 lists the steps in the paper's order, but omits the scales S and 2^{2b+4}S, Phi^{-1}, and the composition of the source transform (A, chirp transform, B_0, 2^gamma) and its conjugate opposite."
+  },
+  {
+   "id": "exact-recovery",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S5.6"
+   ],
+   "lines": [
+    4546,
+    4651,
+    4709,
+    4723,
+    4727
+   ],
+   "note": "S5.6 states that the final coefficient error is below 1/2, with errors tracked through contractions, but gives none of the bounds (E_s, E_w, 448b 2^{-b+gamma}) or the role of gamma<=b/4."
+  },
+  {
+   "id": "time-accounting",
+   "presence": "mentioned",
+   "statement": "n/a",
+   "derivation": "n/a",
+   "steps": [
+    "S0",
+    "S5.7"
+   ],
+   "lines": [
+    4815,
+    4854,
+    4985,
+    4995
+   ],
+   "note": "S5.7 says every term in the cost table fits the bound, and S0 gives kappa; the table's entries, the margins and min g_i = 2kappa are absent."
+  },
+  {
+   "id": "conjecture-negation",
+   "presence": "mentioned",
+   "statement": "n/a",
+   "derivation": "n/a",
+   "steps": [
+    "S0"
+   ],
+   "lines": [
+    379,
+    387
+   ],
+   "note": "S0 only relies on 'nlogn-conjecture' and says nothing about the eventual lower bound or its negation; counted as a mention, conservatively."
+  }
+ ],
+ "errors": [
+  {
+   "step": "S1.5.2",
+   "says": "Chunks of power-of-two width can be interchanged, with rows, in time O(Vu^tau).",
+   "paper": "The power-width interchange is for chunks of e=m^k radix-q digits (m=h^3=10^6), with a row field of length divisible by W^k, at cost O(V e^tau).",
+   "lines": [
+    1482,
+    1487
+   ],
+   "severity": "minor"
+  },
+  {
+   "step": "S1.2",
+   "says": "Each wire is given an invertible frame.",
+   "paper": "Frames D_v are assigned to each source, gate and sink, and an edge applies D_vD_u^{-1}; a wire carries different frames along its edges.",
+   "lines": [
+    793,
+    798
+   ],
+   "severity": "minor"
+  },
+  {
+   "step": "S3.1",
+   "says": "Ring polynomials are multiplied exactly by Kronecker packing and one call of the integer multiplier.",
+   "paper": "Four signed evaluation products A_aA_c, A_bA_e, A_aA_e, A_bA_c are formed with the established multiplier.",
+   "lines": [
+    3250,
+    3253
+   ],
+   "severity": "minor"
+  },
+  {
+   "step": "S3",
+   "says": "Cyclic convolution over the polynomial ring is computed exactly.",
+   "paper": "M_r on disk grid operands has an approximation with error less than sqrt2 M(3l+1)2^{-p}.",
+   "lines": [
+    3393,
+    3398
+   ],
+   "severity": "minor"
+  },
+  {
+   "step": "S4",
+   "says": "The source and target permutations are kept inside the transform identity so they cancel between forward and inverse transforms.",
+   "paper": "Only the source permutation R cancels in the convolution; the target permutation Q is absorbed into the chirp identity QF_t u = conj(a).(a*(conj(a).u))/T.",
+   "lines": [
+    3901,
+    3906,
+    3920,
+    3932
+   ],
+   "severity": "minor"
+  }
+ ],
+ "chain": "The tree follows the paper's overall route (the two tape procedures, synthetic transforms, ring convolution, resampling with retained permutations, then the CRT, twist, precision and cost reductions), and each infer step quotes a correct line. It thins out sharply at the core. The bank-exchange network, label budget and shear interface are only named; the phase-frame interface, the phase-frame recursion and packed selected-bit addition, on which the simultaneous layer rests, are absent; so S1.6's O(V d^{lambda'}) bound is asserted rather than reached. The final bound is reached by citation (S5.7), not by the cost table's margins."
+}
