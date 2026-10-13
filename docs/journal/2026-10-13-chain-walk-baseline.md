@@ -1,6 +1,6 @@
 # 2026-10-13: Chain walk: do the existing wikis carry the paper's central saving?
 
-The calibration programme's fidelity track (`calibration/fidelity/README.md`) asks whether a wiki carries a reader along the paper's central chain of reasoning, not only whether the plan states its results. The cheapest first measurement needed no new runs. A blind judge walked the nine steps of the central saving (`calibration/rubrics/nlogn-central-saving.md`) through the pages of the three wikis built from `paper.tex`, all planned at medium effort. For each step it recorded whether the wiki reconstructs it, whether a page says what the step is for, and how a reader gets from one step's page to the next.
+The calibration programme's fidelity track (`calibration/fidelity/README.md`) asks whether a wiki carries a reader along the paper's central chain of reasoning, not only whether the plan states its results. The cheapest first measurement needed no new runs. A blind judge walked the nine steps of the central saving (`calibration/rubrics/nlogn-central-saving.md`) through the pages of the three wikis built from `paper.tex`. Those were the author's full runs: their plans were made from the paper's introduction (2026-10-13-planner-handoff-run), and their effort is unrecorded (2026-10-13-effort-dimension). For each step it recorded whether the wiki reconstructs it, whether a page says what the step is for, and how a reader gets from one step's page to the next.
 
 Instrument: `calibration/fidelity/chain-walk-v1.md` (committed before use). Records: `calibration/fidelity/results/chain-walk-baseline/`.
 
@@ -34,7 +34,7 @@ Each step's verdict: **R**, reconstructed; **m**, mentioned only; **–**, absen
 
 **Observed:**
 - **The best wiki carries the chain's core, though its plan did not.**
-  - **The plan:** the planner and handoff run's plan was made at medium effort from the introduction, and assigned none of the $s<Wm$ derivation (2026-10-13-planner-handoff-run).
+  - **The plan:** the planner and handoff run's plan was made from the introduction, at an unrecorded effort, and assigned none of the $s<Wm$ derivation (2026-10-13-planner-handoff-run).
   - **How the core got onto the pages:** writers' rewrites added that derivation, and the depth rule then sent its steps back to be cited or cut. Round 3's notes were dropped, so they stayed on the page.
   - **What follows:** in this run the chain survived *despite* the pipeline's rules, not because of them.
 - **The other two wikis lose the chain in its middle,** where the saving is earned, and one states the labels wrongly.
@@ -50,6 +50,6 @@ Each step's verdict: **R**, reconstructed; **m**, mentioned only; **–**, absen
 - The verdicts, key and instructions as run are in `calibration/fidelity/results/chain-walk-baseline/`
 
 ## Missing
-- No chain walk of a wiki planned at high effort
+- No chain walk of a wiki whose plan read the whole paper (for example, one planned at high effort)
 - One paired judgement only; the instrument's agreement and validity are not established
 - No reader-side measure (simulated readers or people) on any of these wikis

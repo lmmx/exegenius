@@ -49,7 +49,7 @@ From journal 2026-10-10-simulation-validity and 2026-10-11-aha-moments:
 ## Order of work
 
 1. **A on plans (in E3).** Does any configuration's plan reconstruct the central saving? If none does, writers cannot be expected to explain it, and the plan is the first place to fix.
-2. **B on the wikis that already exist,** with no new run. The wiki branches `full-v0.6-latex-depth` and `full-v0.6-latex-planner-handoff` were planned at medium effort and hold built pages.
+2. **B on the wikis that already exist,** with no new run. The wiki branches `full-v0.6-latex`, `full-v0.6-latex-depth` and `full-v0.6-latex-planner-handoff` hold built pages; their plans were made from the introduction, at unrecorded effort. *Done: journal 2026-10-13-chain-walk-baseline.*
    - **The method:** walk the central saving's nine steps (`../rubrics/nlogn-central-saving.md`) through their pages, blind to which wiki is which.
    - **What it gives:** a baseline for "does the wiki carry the chain", against which a wiki planned at high effort can later be compared.
    - **Cost:** two to four judge tasks per wiki.
