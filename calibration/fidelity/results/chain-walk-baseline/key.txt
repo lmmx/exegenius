@@ -1,0 +1,3 @@
+W1 full-v0.6-latex-planner-handoff
+W2 full-v0.6-latex-depth
+W3 full-v0.6-latex

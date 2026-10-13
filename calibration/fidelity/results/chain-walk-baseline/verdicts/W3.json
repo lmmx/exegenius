@@ -1,0 +1,53 @@
+{
+  "wiki": "W3",
+  "steps": [
+    {"id": "C1", "verdict": "mentioned", "pages": ["linear-network-exchange.md", "recursive-power-saving.md"],
+     "reason_given": true,
+     "note": "linear-network-exchange.md describes 'a fixed network of linear gates that exchanges two banks of values, with prescribed signs, and returns every auxiliary (scratch) value', with a toy 3-gate example (lambda,mu)->(-mu,lambda). The paper's specific network is missing: h=100, banks X_a,Y_a indexed by triples a in T^3, N=binom(h,3)^3, m=h^3, the three stages and invocations, and the map (X_a,Y_a)->(-Y_a,X_a) (paper 653-783). Reason: the page and its Where-this-fits box say each tape procedure is built from such a network, which feeds the recursive power saving."},
+    {"id": "C2", "verdict": "reconstructed", "pages": ["linear-network-exchange.md", "address-interchange.md"],
+     "reason_given": true,
+     "note": "linear-network-exchange.md states the invertible frame D_v per source, gate and sink, that a pointwise gate commutes with a common frame, that an edge applies D_beta D_alpha^{-1} and leaves the logical array fixed, and that a route applies eps_w D_sink(rho(w)) D_source(w)^{-1} (paper 793-825, the per-route form of D_out S D_in^{-1}). The reason, that the intermediate frames make each edge's cost just its frame change, appears on address-interchange.md: 'Gates commute with a common shear ... Each edge e changes that shear by G_e', which then counts as rank G_e interchanges."},
+    {"id": "C3", "verdict": "absent", "pages": [],
+     "reason_given": false,
+     "note": "No page mentions subspace labels, nondegenerate subspaces of F^{tensor 3}, the bilinear form, comparable labels on edges, or central wires losing h from time 3 to 4 (paper 845-1010). A search for label, subspace, nondegenerate, central and tensor-cube terms finds nothing relevant."},
+    {"id": "C4", "verdict": "absent", "pages": [],
+     "reason_given": false,
+     "note": "No page says that for nested U in V the projection difference P_V - P_U has rank dim V - dim U, or that the N source edges are rank-one exceptions (paper 1156-1166). The wiki writes rank G_e per edge but never ties it to a dimension change."},
+    {"id": "C5", "verdict": "absent", "pages": [],
+     "reason_given": false,
+     "note": "The budget sum|Delta dim| = Wm - 2N + 2L with L=Ich, and s_b = W_b m - N + 2L_b (paper 997-1010, 1138-1154), appear nowhere. N and L are never defined."},
+    {"id": "C6", "verdict": "mentioned", "pages": ["recursive-power-saving.md", "address-interchange.md", "index.md"],
+     "reason_given": true,
+     "note": "recursive-power-saving.md states that the saving is strict exactly when s<Wm, and address-interchange.md that 'the condition R<dW gives gamma<d'. Both treat it as a given condition. Neither derives it from the deficit N-2L>0 or the ratios L/N = 100/539 and 101/539 (paper 1105-1110, 1166-1167). The reason, that s<Wm makes e<1, is stated. Error: index.md and the Where-this-fits boxes gloss the condition as 'a fixed linear network with fewer smaller calls than roles', i.e. s<W, which contradicts the paper (s is about W*m; the condition is s<Wm)."},
+    {"id": "C7", "verdict": "mentioned", "pages": ["address-shear.md", "address-interchange.md", "linear-network-exchange.md"],
+     "reason_given": true,
+     "note": "address-shear.md says the bit procedure's endpoint operator is a shear (H,D)->(H+D,D), and address-interchange.md says the middle update is the shear (H,D)->(H+D,D), 'realized by running the' network. The identity M_sink(rho(w)) - M_source(w) = I_m on every role is never stated, nor the source matrix -P_{U_a} and sink matrices that produce it (paper 1138-1172), so the reader is not shown why the same shear H<-H+D happens on every role. The reason is given: the three-update swap D<-D-H, H<-H+D, D<-H-D turns the shear into the interchange."},
+    {"id": "C8", "verdict": "reconstructed", "pages": ["lower-triangular-factorization.md", "address-shear.md", "address-interchange.md"],
+     "reason_given": true,
+     "note": "The pages state A=E1 Pi E2 with Pi having rank A ones, and the four-step shear (H,D)->(H+AD,D) with the three-update swap: one interchange per 1 of Pi, so rank A interchanges. They also state that the lower-triangular changes cost O(V), that each edge needs rank G_e interchanges, and that one level makes R = sum_e rank G_e calls on volume V/W (paper 1364-1447, 1543). A muddle: address-shear.md says the general A-shear 'is realized in' the linear network. In the paper the network realizes H<-H+D, and each edge's A_e-shear is done by Lemma matrix-shear's interchanges."},
+    {"id": "C9", "verdict": "wrong", "pages": ["address-interchange.md", "recursive-power-saving.md", "notation.md"],
+     "reason_given": true,
+     "note": "address-interchange.md correctly gives phi(u) <= gamma*phi(u/d) + C with gamma=R/W, W counting wires 'scratch wires included', and children of volume V/W; choosing tau<1 with gamma<d^tau, unrolling gives O(u^tau). This matches the paper (1475-1557) except that tau=1-2^{-50} and the check s/W<m^tau (1319-1346) are absent. However recursive-power-saving.md, the wiki's designated exponent page, and notation.md define W as 'the number of input roles ... not counting scratch wires'. The paper's W includes every scratch wire (1451; W_b=2N+I(vz_b+c_b)). With scratch wires excluded, s/W<m would be false and the volumes V/W wrong. The two pages contradict each other, so this is marked wrong (conservative)."}
+  ],
+  "links": [
+    {"from": "C1", "to": "C2", "how": "same page", "note": "Both are on linear-network-exchange.md."},
+    {"from": "C2", "to": "C3", "how": "none", "note": "C3 (labels) is absent."},
+    {"from": "C3", "to": "C4", "how": "none", "note": "C3 and C4 are absent."},
+    {"from": "C4", "to": "C5", "how": "none", "note": "C4 and C5 are absent."},
+    {"from": "C5", "to": "C6", "how": "none", "note": "C5 is absent."},
+    {"from": "C6", "to": "C7", "how": "same page", "note": "address-interchange.md carries both the condition R<dW and the H+D shear. recursive-power-saving.md also links to address-interchange.md in its body."},
+    {"from": "C7", "to": "C8", "how": "same page", "note": "address-interchange.md has the shear H+D and the rank-many interchanges per edge. It links to address-shear.md, and address-shear.md's Before-this-page box links to lower-triangular-factorization.md."},
+    {"from": "C8", "to": "C9", "how": "same page", "note": "address-interchange.md goes from R = sum rank G_e calls straight into the recurrence. It also links to recursive-power-saving.md."}
+  ],
+  "breaks": [
+    {"at": "C1", "kind": "missing step", "note": "The concrete network (h=100, triple-indexed banks, N, m=h^3, the exchange (X_a,Y_a)->(-Y_a,X_a)) is never built. Only a generic signed exchange and a two-wire toy are given."},
+    {"at": "C3", "kind": "missing step", "note": "The subspace labels, the heart of the rank saving, are absent, so the reader goes from frames straight to 's<Wm' with no construction in between."},
+    {"at": "C4", "kind": "missing step", "note": "Rank of P_V-P_U equals the dimension change is absent, so edge cost is never tied to labels."},
+    {"at": "C5", "kind": "missing step", "note": "The budget Wm-2N+2L and s_b = W_b m - N + 2L_b are absent."},
+    {"at": "C6", "kind": "missing step", "note": "s<Wm is assumed, not derived: the deficit N-2L>0 and L/N=100/539 or 101/539 are absent."},
+    {"at": "C6", "kind": "error", "note": "index.md and the Where-this-fits boxes summarize the condition as 'fewer smaller calls than roles' (s<W), contradicting the paper's s<Wm."},
+    {"at": "C7", "kind": "missing step", "note": "The endpoint identity M_sink(rho(w)) - M_source(w) = I_m is not stated. The page asserts that the network yields H<-H+D but does not say why it holds on every role."},
+    {"at": "C9", "kind": "error", "note": "recursive-power-saving.md and notation.md define W as excluding scratch wires. The paper's W counts all wires including scratch (W_b=2N+I(vz_b+c_b)), and address-interchange.md says so too. The explicit tau=1-2^{-50} is also missing."}
+  ],
+  "summary": "W3 carries the end of the chain well: frames (C2), and on address-interchange.md the rank-many recursive calls per edge (C8) feeding a correct recurrence phi(u) <= (R/W)phi(u/d)+C to O(u^tau). The middle that makes the saving happen is missing: no concrete h=100 network, no subspace labels, no rank-equals-dimension lemma, no budget Wm-2N+2L, and no derivation of s<Wm. That condition and the endpoint identity are only assumed. The chain also contains errors: the exponent page defines W as excluding scratch wires, and the index glosses the condition as 's<W'."
+}

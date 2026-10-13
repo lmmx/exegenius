@@ -1,0 +1,51 @@
+{
+  "wiki": "W1",
+  "steps": [
+    {"id": "C1", "verdict": "mentioned", "pages": ["linear-network-roles.md", "subset-intersection-construction.md", "scratch-restoration.md"],
+     "reason_given": true,
+     "note": "The network's ingredients are split across pages and never put together. linear-network-roles.md describes an abstract fixed network that 'exchanges two banks of values with prescribed signs and restores every auxiliary value', with no h, no triples and no explicit map. subset-intersection-construction.md gives h=100, triples, N=binom(h,3)^3 indices iota in T^3, and D=h^3 ('the paper's dimension m is D'). It also describes one invocation's gather/scatter/side coefficients (net y_S += x_S over F2). No page says that the banks X_a,Y_a are indexed by T^3, describes the three stages, or gives the resulting map (X_a,Y_a)->(-Y_a,X_a) (paper 653-765). Conservative verdict: mentioned. Reason: linear-network-roles.md says each fixed-tape procedure comes from such a network."},
+    {"id": "C2", "verdict": "reconstructed", "pages": ["linear-network-roles.md"],
+     "reason_given": false,
+     "note": "Matches paper 793-825. The page gives a frame D_nu per node and the edge change D_beta D_alpha^{-1}, shows G(D f_1..)=D G(f_1..) because the frame is common and the coefficients are scalar, and shows that routes telescope to eps_w D_sink(rho(w)) D_source(w)^{-1} on every role, auxiliaries included. It does not say why this matters: that intermediate frames can then be chosen so each edge is cheap and the edge changes become the cost (paper 824-825, 847-848). Without that, a reader meets frames as a fact."},
+    {"id": "C3", "verdict": "mentioned", "pages": ["subset-intersection-construction.md", "glossary.md"],
+     "reason_given": true,
+     "note": "The page defines a label as a nondegenerate subspace of F=(Q^h)^{⊗3} of dimension D=h^3 and uses the form I-J/9 with neighbors orthogonal. It gives source labels U_iota, sink labels U_iota^perp, a side-wire growth example, and 'each of the 3binom(h,3)^2 invocations has h central wires, each losing h on a decreasing edge', so L=3binom(h,3)^2 h^2 (=Ich, consistent with paper 997-1003). It never states the key lemma that every edge joins comparable (nested) labels, which C4 needs. The gate-label table is missing, and the page does not say that the central-wire returns (time 3 to 4) are the only decreasing edges. Unsure between reconstructed and mentioned, so mentioned. Reason: the counting paragraph turns label changes into ranks and calls."},
+    {"id": "C4", "verdict": "reconstructed", "pages": ["subset-intersection-construction.md"],
+     "reason_given": true,
+     "note": "States: if U⊆V, P_V-P_U is the identity on V∩U^perp and zero on U⊕V^perp, so its rank is dim V - dim U. Sources carry -P_{U_iota}, and the first edge out of each source has matrix 2P_{U_iota}, rank one with no label change, giving N extra ranks (paper 1156-1166). Reason: 'Each unit of rank costs one smaller call.'"},
+    {"id": "C5", "verdict": "reconstructed", "pages": ["subset-intersection-construction.md", "address-shear-factorization.md", "main-theorem.md"],
+     "reason_given": true,
+     "note": "subset-intersection-construction.md gives source dimensions summing to N and sinks D except N of dimension D-1, so the signed total is WD-2N, absolute values add 2L, and s=WD-2N+2L+N=WD-N+2L. address-shear-factorization.md and main-theorem.md restate s_b=W_b m-N+2L_b. This matches paper 891-894 and 1146-1151. Reason: s<Wm is what the recursion needs."},
+    {"id": "C6", "verdict": "reconstructed", "pages": ["subset-intersection-construction.md", "address-shear-factorization.md"],
+     "reason_given": true,
+     "note": "L/N=3h^2/binom(h,3)=100/539 (checked: 30000/161700), so 2L<N and s<WD. address-shear-factorization.md repeats that the deficit N-2L_b>0 gives s_b<W_b R. The complex ratio 101/539 is omitted, but the bit chain does not need it. Reason: 'few enough smaller calls for the recursion to save a power'."},
+    {"id": "C7", "verdict": "mentioned", "pages": ["linear-network-roles.md", "address-shear-factorization.md", "fast-address-interchange.md"],
+     "reason_given": true,
+     "note": "The pages assert that 'the endpoint operator of the bit network is the address shear (H,D)->(H+D,D)', but never derive it. No page says that a frame is the address shear Phi_M by the vertex matrix M_v, or states M_sink(rho(w))-M_source(w)=I_m. No page computes P_{U^perp}-(-P_U)=I (paper 1124-1171), although the source and sink data are on the subset page. Error: fast-address-interchange.md says the shear is 'over F_2' and that address fields H,D are vectors over F_2, with each update a pointwise XOR of fields. In the paper the fields are residues mod q^b with q a fixed odd prime (1397-1404, 1494-1495); only the data gates are XOR. address-shear-factorization.md correctly uses Z/q^bZ, so the two pages contradict each other. Reason: the shear is the costly middle update of the three-update swap."},
+    {"id": "C8", "verdict": "reconstructed", "pages": ["address-shear-factorization.md", "subset-intersection-construction.md"],
+     "reason_given": true,
+     "note": "Gives M=F_1 Pi F_2 with lower-triangular invertible factors and rank(M) ones in Pi, a correct worked example, the elimination proof, the update H_sigma<-H_sigma+D_tau as one interchange plus two additions, O(V) triangular passes, and 'each edge of the bit network carries such a matrix; the interchange count is s_b, the sum of their ranks' (paper 1364-1447). Reason: fewer than R interchanges per wire 'which the recurrence turns into a saving'."},
+    {"id": "C9", "verdict": "reconstructed", "pages": ["fast-address-interchange.md", "main-theorem.md", "recursive-power-saving.md"],
+     "reason_given": true,
+     "note": "fast-address-interchange.md: s calls each on a role stream of volume V/W, Q_0=O(1), Q_k<=(s/W)Q_{k-1}+C. It fixes tau<1 with s/W<m^tau and unrolls the geometric sum, splitting the cases s/W<=1 and s/W>1, to get O(Vu^tau) (paper 1543-1557). main-theorem.md repeats it. The explicit value tau=1-2^{-50} for the bit network is not given; 1-2^{-50} appears only as sigma for the complex network on fast-butterfly-layers.md. recursive-power-saving.md gives a more general recurrence with outside work C(mf)^lambda. Reason: the O(Vu^tau) interchange feeds the main theorem."}
+  ],
+  "links": [
+    {"from": "C1", "to": "C2", "how": "same page", "note": "The abstract network (C1's part) and frames (C2) are both on linear-network-roles.md. The concrete construction is on subset-intersection-construction.md."},
+    {"from": "C2", "to": "C3", "how": "linked", "note": "linear-network-roles.md links to subset-intersection-construction.md in its Connections diagram and Used-by list. Nothing explains that labels exist to choose the intermediate frames."},
+    {"from": "C3", "to": "C4", "how": "same page", "note": "subset-intersection-construction.md, Labels then Counting."},
+    {"from": "C4", "to": "C5", "how": "same page", "note": "subset-intersection-construction.md, Counting paragraph."},
+    {"from": "C5", "to": "C6", "how": "same page", "note": "subset-intersection-construction.md, final paragraph."},
+    {"from": "C6", "to": "C7", "how": "indirect", "note": "subset-intersection-construction.md links back to linear-network-roles.md and forward to recursive-power-saving.md. It does not link to address-shear-factorization.md, which is reached only through those pages. No text connects the -P_U source and U^perp sink to the endpoint identity."},
+    {"from": "C7", "to": "C8", "how": "same page", "note": "address-shear-factorization.md presents the shear as endpoint operator and then the factorization."},
+    {"from": "C8", "to": "C9", "how": "linked", "note": "address-shear-factorization.md links to fast-address-interchange.md (Used by / Connections), which has the recurrence."}
+  ],
+  "breaks": [
+    {"at": "C1", "kind": "missing step", "note": "The concrete fixed network is not assembled. No page gives banks X_a,Y_a indexed by T^3, the three stages, or the map (X_a,Y_a)->(-Y_a,X_a). The abstract network page and the triple construction page are not tied together."},
+    {"at": "C2", "kind": "no reason", "note": "Frames are presented as an identity without saying they let the intermediate frames be chosen so each edge is a cheap change of frame, which is what makes edge costs the object of the count."},
+    {"at": "C3", "kind": "missing step", "note": "The lemma that every edge joins comparable (nested) labels is absent, and so is the gate-label assignment. Without nesting, the rank = dimension-change rule of C4 has nothing to apply to."},
+    {"at": "C7", "kind": "missing step", "note": "The endpoint identity M_sink(rho(w))-M_source(w)=I_m is never stated or derived. Frames are never identified with address shears Phi_M. That the network applies H<-H+D on every role is only asserted, so the label/projection count (C3-C6) is not connected to the shear."},
+    {"at": "C7", "kind": "error", "note": "fast-address-interchange.md says the shear is over F_2 and the fields' updates are XORs. The paper adds fields mod q^b with q an odd prime; only the data gates are XOR. This contradicts address-shear-factorization.md."},
+    {"at": "C7", "kind": "no link", "note": "From the page with s<Wm (subset-intersection-construction.md) there is no direct link to the shear/endpoint page; it is reachable only indirectly."}
+  ],
+  "summary": "The wiki carries the counting half of the chain well on one page. Rank equals dimension change, the budget s=Wm-N+2L, and L/N=100/539 giving s<Wm are all reconstructed. The shear factorization and the recurrence to O(Vu^tau) are also clear. The chain thins at both ends of the count. The concrete network (C1) and the nesting of labels (C3) are only partly given, and frames are never said to exist to make edges cheap. It breaks at C7: the endpoint identity M_sink-M_source=I and the identification of frames with address shears are missing, and one page wrongly puts the shear over F_2, so the reader cannot see why the counted network performs H<-H+D."
+}
