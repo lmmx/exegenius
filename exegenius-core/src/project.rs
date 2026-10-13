@@ -7,7 +7,7 @@
 //!                        queued rewrites
 //! exegenius/state.json   task state: issued tasks, audit round, audited pages
 //! exegenius/log.jsonl    run log: each task handed out and each submit (see runlog)
-//! exegenius/tasks/       task files and their answer files
+//! exegenius/tasks/       task files, their answer files, and a scratch directory per task
 //! exegenius/pages/       page bodies
 //! exegenius/audit.json   audit results, one record per round
 //! exegenius/argument.json the plan of the sources' argument

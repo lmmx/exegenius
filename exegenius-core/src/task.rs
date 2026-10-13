@@ -155,6 +155,13 @@ impl Task {
         PathBuf::from("exegenius/tasks").join(format!("{}.answer.{ext}", self.id))
     }
 
+    /// The directory for the files a task's agent makes along the way, such as scripts,
+    /// relative to the project directory. Tasks run at the same time on one machine, so a
+    /// shared place such as /tmp lets one task's agent overwrite or run another's files.
+    pub fn scratch(&self) -> PathBuf {
+        PathBuf::from("exegenius/tasks").join(&self.id)
+    }
+
     /// For a write task, the JSON file with the answer's structured fields (the body is
     /// the markdown answer file), relative to the project directory.
     pub fn fields(&self) -> Option<PathBuf> {
@@ -302,9 +309,12 @@ fn render(project: &Project, task: &Task, instructions: &str, input: &str) -> St
         "# exegenius task {id}\n\nProject directory: `{root}` (paths below are relative to it)\n\n\
          {instructions}\n\n{input}\n## Answer\n\n{format}\n\nWrite {files}, then run \
          `exegenius submit {id}` in the project directory. If submit rejects the answer, fix \
-         the answer and submit again.\n",
+         the answer and submit again.\n\nKeep any other files you make, such as scripts, in \
+         `{scratch}`. Other tasks run at the same time on this machine, and files elsewhere \
+         (in /tmp, for example) can be overwritten or run by them.\n",
         id = task.id,
         root = project.root.display(),
+        scratch = task.scratch().display(),
     )
 }
 
@@ -582,6 +592,11 @@ fn issue(project: &Project, state: &mut State, items: Vec<(Kind, &str, String)>)
             },
         );
         let input = input.replace(TASK_ID, &task.id);
+        let scratch = project.root.join(task.scratch());
+        std::fs::create_dir_all(&scratch).map_err(|source| Error::Io {
+            path: scratch.clone(),
+            source,
+        })?;
         write(
             &project.root.join(task.file()),
             &render(project, &task, instructions, &input),

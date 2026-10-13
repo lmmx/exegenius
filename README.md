@@ -339,7 +339,7 @@ sources/              source documents
 exegenius/graph.json  concept graph, symbols each page binds, candidate concepts, queued rewrites
 exegenius/state.json  task state: pending tasks, audit round, audited pages
 exegenius/log.jsonl   run log: each task handed out and each submit, with its outcome
-exegenius/tasks/      task files and answer files
+exegenius/tasks/      task files, answer files, and a scratch directory per task
 exegenius/pages/      page bodies
 exegenius/audit.json  audit results, one record per round
 exegenius/argument.json the plan of the sources' argument

@@ -58,7 +58,8 @@ and writing it asks for, task by task, until it reports done.
   simulated reader may open per goal, nothing else.) Stop early only if a command fails in
   a way you cannot fix, and report anything that looks wrong, such as pages on concepts the
   reader already knows, when you report the status at the end.
-- Only write answer files (`exegenius/tasks/*.answer.*`). Do not edit anything else under
+- Only write answer files (`exegenius/tasks/*.answer.*`) and, for a task, scratch files in
+  its own directory (`exegenius/tasks/<task id>/`). Do not edit anything else under
   `exegenius/` or `docs/` by hand.
 - Without subagents, do the tasks yourself one at a time, and do each audit task using only
   its task file.

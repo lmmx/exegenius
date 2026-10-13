@@ -226,6 +226,9 @@ fn task_loop_end_to_end() {
     assert_eq!(batch[0].id, "0001-extract");
     let file = read(&project, batch[0].file());
     assert!(file.contains("sources/notes.txt") && file.contains("exegenius submit 0001-extract"));
+    // Each task has a directory of its own for scratch files.
+    assert!(file.contains("such as scripts, in `exegenius/tasks/0001-extract`"));
+    assert!(project.root.join(batch[0].scratch()).is_dir());
     answer(&project, &batch[0], &extract_answer("an invented sentence"));
     let err = submit(&project, "0001-extract").unwrap_err().to_string();
     assert!(err.contains("quote not found verbatim"), "{err}");
