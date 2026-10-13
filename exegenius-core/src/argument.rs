@@ -152,6 +152,19 @@ impl Argument {
             .find(|(_, n)| n.page.as_deref() == Some(id))
     }
 
+    /// The sub-steps of the step page `id` shows that no other page presents: the steps
+    /// the page derives itself. None if the page shows no step, or only infers one.
+    pub fn owned(&self, id: &str) -> Vec<&Node> {
+        match self.module(id) {
+            Some((_, n)) if n.intention == Intention::Show => n
+                .children
+                .iter()
+                .filter(|c| c.page.as_deref().is_none_or(|p| p == id))
+                .collect(),
+            _ => Vec::new(),
+        }
+    }
+
     /// The steps that rely on concept `id`.
     pub fn users(&self, id: &str) -> Vec<&Node> {
         self.root
@@ -625,6 +638,34 @@ mod tests {
             "first step. second step. third step.",
         )];
         (g, plan, sources)
+    }
+
+    #[test]
+    fn a_page_owns_the_sub_steps_no_other_page_presents() {
+        let mut elsewhere = infer("S1.1", "first step.");
+        elsewhere.page = Some("a".into());
+        let mut own = infer("S1.3", "third step.");
+        own.page = Some("b".into());
+        let argument = Argument {
+            planned: vec![],
+            root: show(
+                "S0",
+                Some("t"),
+                vec![show(
+                    "S1",
+                    Some("b"),
+                    vec![elsewhere, infer("S1.2", "second step."), own],
+                )],
+            ),
+        };
+        let ids =
+            |page| -> Vec<String> { argument.owned(page).iter().map(|n| n.id.clone()).collect() };
+        // The target page's step has one sub-step, presented on another page.
+        assert!(ids("t").is_empty());
+        assert_eq!(ids("b"), vec!["S1.2", "S1.3"]);
+        // A page presenting an inferred step, or none, owns no sub-steps.
+        assert!(ids("a").is_empty());
+        assert!(ids("k").is_empty());
     }
 
     #[test]

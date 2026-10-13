@@ -33,6 +33,21 @@ pub struct WriteAnswer {
     /// One relation for each prerequisite page: what this page uses it for. Empty if the
     /// page has no prerequisite pages.
     pub relations: Vec<Edge>,
+    /// For each step listed under "Steps this page derives", the passage on the page that
+    /// derives it. Empty if the task lists none.
+    #[serde(default)]
+    pub derivations: Vec<Derivation>,
+}
+
+/// Where the page derives one of the steps the argument gives it.
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(deny_unknown_fields)]
+pub struct Derivation {
+    /// The step's id, as listed under "Steps this page derives".
+    pub step: String,
+    /// The passage on this page that derives the step, copied exactly: a sentence or more,
+    /// outside citations.
+    pub quote: String,
 }
 
 pub const WRITE_INSTRUCTIONS: &str = "\
@@ -197,6 +212,179 @@ fn argument_section(argument: &crate::argument::Argument, graph: &Graph, id: &st
     out
 }
 
+/// What the writer of page `id` is told about the sub-steps the argument gives the page to
+/// derive: for each, its method, the steps beneath it with the source passages that report
+/// them, and the steps beneath it that other pages derive. The planning task worked these
+/// out; without them a writer has only each sub-step's claim and must reconstruct the
+/// derivation from the sources.
+fn owned_section(
+    project: &Project,
+    argument: &crate::argument::Argument,
+    graph: &Graph,
+    plan: &Plan,
+    id: &str,
+) -> String {
+    let owned = argument.owned(id);
+    if owned.is_empty() {
+        return String::new();
+    }
+    let c = graph.get(id).expect("planned pages are concepts");
+    let mut handoff = Handoff {
+        project,
+        graph,
+        id,
+        steps: String::new(),
+        elsewhere: Vec::new(),
+        uses: Vec::new(),
+    };
+    for n in argument
+        .module(id)
+        .map(|(_, m)| m.children.iter())
+        .into_iter()
+        .flatten()
+    {
+        if let Some(p) = n.page.as_deref().filter(|p| *p != id) {
+            handoff
+                .elsewhere
+                .push(format!("- {} (on {}): {}", n.id, handoff.on(p), n.claim));
+        }
+    }
+    for n in &owned {
+        handoff
+            .steps
+            .push_str(&format!("\n**{}**: {}\n", n.id, n.claim));
+        handoff.render(n, "");
+    }
+    let ids: Vec<&str> = owned.iter().map(|n| n.id.as_str()).collect();
+    let mut out = format!(
+        "\n## Steps this page derives\n\nThe argument gives this page these sub-steps of its step \
+         ({}). Derive each here, so the reader can check how it follows from what comes \
+         before: stating its result, or citing the source for it, does not derive it. The \
+         passages report each step in the source; they ground the derivation and are not to \
+         be copied onto the page. In `derivations`, give each step's id and the passage on the \
+         page that derives it, copied exactly: submit checks that the passage is on the page, \
+         and the audit judges whether it is enough.\n{}",
+        ids.join(", "),
+        handoff.steps
+    );
+    if !handoff.elsewhere.is_empty() {
+        out.push_str(&format!(
+            "\n### Steps derived on other pages\n\nWhere this page uses one, state its result \
+             and link the page that derives it. Do not derive it here, even where a passage \
+             above proves it.\n\n{}\n",
+            handoff.elsewhere.join("\n")
+        ));
+    }
+    let pages: Vec<String> = handoff
+        .uses
+        .iter()
+        .filter(|u| u.as_str() != id && plan.contains(u) && !c.requires.contains(u))
+        .filter_map(|u| graph.get(u))
+        .map(|p| format!("- {}", link(p)))
+        .collect();
+    if !pages.is_empty() {
+        out.push_str(&format!(
+            "\n### Other pages these steps use\n\nLink each where the derivation uses it, \
+             stating what it gives; do not derive its results again.\n\n{}\n",
+            pages.join("\n")
+        ));
+    }
+    out
+}
+
+/// The sub-steps a page derives, rendered for its writer by [`owned_section`].
+struct Handoff<'a> {
+    project: &'a Project,
+    graph: &'a Graph,
+    /// The page being written.
+    id: &'a str,
+    steps: String,
+    /// Steps beneath this page's step that other pages derive.
+    elsewhere: Vec<String>,
+    /// The concepts the rendered steps rely on.
+    uses: Vec<String>,
+}
+
+impl Handoff<'_> {
+    fn on(&self, page: &str) -> String {
+        self.graph
+            .get(page)
+            .map_or_else(|| format!("`{page}`"), link)
+    }
+
+    /// Step `n`'s method, its source passage and the steps beneath it, indented by `indent`.
+    fn render(&mut self, n: &crate::argument::Node, indent: &str) {
+        for f in &n.from {
+            if !self.uses.contains(f) {
+                self.uses.push(f.clone());
+            }
+        }
+        if let Some(method) = &n.method {
+            self.steps.push_str(&format!("{indent}How: {method}\n"));
+        }
+        if let Some(q) = &n.quote {
+            self.steps
+                .push_str(&format!("{indent}Source: \"{}\" ({})\n", q.quote, q.source));
+            if let Some(paragraph) = passage(self.project, &q.source, &q.quote) {
+                self.steps.push_str(&format!("{indent}> {paragraph}\n"));
+            }
+        }
+        for child in &n.children {
+            match child.page.as_deref() {
+                Some(p) if p != self.id => {
+                    let line = format!("- {} (on {}): {}", child.id, self.on(p), child.claim);
+                    self.elsewhere.push(line);
+                }
+                _ => {
+                    self.steps
+                        .push_str(&format!("{indent}- {}: {}\n", child.id, child.claim));
+                    self.render(child, &format!("{indent}  "));
+                }
+            }
+        }
+    }
+}
+
+/// Problems with the derivations a write answer declares for the steps `owned` the
+/// argument gives the page: each needs one passage, found on the page outside citations.
+fn check_derivations(body: &str, owned: &[&str], derivations: &[Derivation]) -> Vec<String> {
+    let page = crate::cite::strip(body);
+    let mut errors = Vec::new();
+    let mut seen: Vec<&str> = Vec::new();
+    for d in derivations {
+        let step = d.step.trim();
+        if !owned.contains(&step) {
+            errors.push(format!(
+                "`{step}` is not a step this page derives (see \"Steps this page derives\")"
+            ));
+            continue;
+        }
+        if seen.contains(&step) {
+            errors.push(format!("`{step}` has two derivations"));
+        }
+        seen.push(step);
+        if crate::text::locate(&page, &d.quote).is_none() {
+            errors.push(format!(
+                "`{step}`: derivation not found on the page outside citations: \"{}\"",
+                d.quote
+            ));
+        }
+    }
+    let missing: Vec<String> = owned
+        .iter()
+        .filter(|s| !seen.contains(s))
+        .map(|s| format!("`{s}`"))
+        .collect();
+    if !missing.is_empty() {
+        errors.push(format!(
+            "derive every step listed under \"Steps this page derives\" and give the passage \
+             in `derivations`; missing: {}",
+            missing.join(", ")
+        ));
+    }
+    errors
+}
+
 /// Planned pages with no body yet or queued for rewriting, in reading order.
 pub fn needs_write(project: &Project, graph: &Graph, plan: &Plan) -> Result<Vec<String>> {
     let mut pages = Vec::new();
@@ -238,6 +426,7 @@ pub fn write_task(project: &Project, graph: &Graph, plan: &Plan, i: usize) -> Re
     }
     if let Some(argument) = crate::argument::current(project, plan)? {
         task.push_str(&argument_section(&argument, graph, &c.id));
+        task.push_str(&owned_section(project, &argument, graph, plan, &c.id));
     }
     let bound: Vec<String> = symbols::in_force(graph, plan, i)
         .iter()
@@ -461,6 +650,10 @@ pub fn apply_write(
         &prerequisites,
         &mut fields.relations,
     ));
+    if let Some(argument) = crate::argument::current(project, plan)? {
+        let owned: Vec<&str> = argument.owned(page).iter().map(|n| n.id.as_str()).collect();
+        errors.extend(check_derivations(body, &owned, &fields.derivations));
+    }
     if !errors.is_empty() {
         let list = errors
             .iter()
@@ -701,6 +894,45 @@ pub fn fix_links(body: &str, pages: &HashSet<String>) -> (String, Vec<String>, H
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn each_owned_step_needs_a_derivation_on_the_page() {
+        let body = "The calls run on volume $V/W$, so $F(e)\\le (s/W)F(e/m)$. Summing the \
+                    levels gives $O(e^\\lambda)$ <cite data-source=\"paper\">the internal costs \
+                    sum</cite>.";
+        let d = |step: &str, quote: &str| Derivation {
+            step: step.into(),
+            quote: quote.into(),
+        };
+        let owned = ["S3.3", "S3.5"];
+        assert!(
+            check_derivations(
+                body,
+                &owned,
+                &[
+                    d("S3.3", "The calls run on volume $V/W$"),
+                    d("S3.5", "Summing the levels gives $O(e^\\lambda)$"),
+                ],
+            )
+            .is_empty()
+        );
+        let errors = check_derivations(
+            body,
+            &owned,
+            &[
+                d("S3.3", "The calls run on volume $V/W$"),
+                d("S3.3", "The calls run on volume $V/W$"),
+                d("S9", "Summing the levels"),
+            ],
+        );
+        assert_eq!(errors.len(), 3, "{errors:?}");
+        assert!(errors[0].contains("`S3.3` has two derivations"));
+        assert!(errors[1].contains("`S9` is not a step this page derives"));
+        assert!(errors[2].contains("missing: `S3.5`"));
+        // A citation does not derive a step.
+        let errors = check_derivations(body, &["S3.5"], &[d("S3.5", "the internal costs sum")]);
+        assert!(errors[0].contains("not found on the page outside citations"));
+    }
 
     #[test]
     fn prose_words_leave_out_mathematics_and_citations() {

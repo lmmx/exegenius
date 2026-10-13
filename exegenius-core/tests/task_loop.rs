@@ -7,9 +7,7 @@
 use std::path::Path;
 
 use exegenius_core::project::Project;
-use exegenius_core::task::{
-    Kind, Next, Task, next, read_page, redo_background, search_pages, submit,
-};
+use exegenius_core::task::{Kind, Next, Task, next, read_page, redo_background, search_pages};
 use serde_json::json;
 
 const SOURCE: &str = "The discrete Fourier transform maps a sequence to its spectrum.\n\
@@ -106,6 +104,39 @@ fn argue(project: &Project, from: &[&str]) {
     assert_eq!(batch[0].kind, Kind::Argument);
     answer(project, &batch[0], &argument_answer(from, false));
     submit(project, &batch[0].id).unwrap();
+}
+
+/// Submit a task. A write task that lists steps the page derives gets, unless the test gave
+/// them, derivations quoting the start of the page for each: these tests are about other
+/// checks.
+fn submit(project: &Project, id: &str) -> exegenius_core::error::Result<Vec<String>> {
+    let dir = project.root.join("exegenius/tasks");
+    let task = std::fs::read_to_string(dir.join(format!("{id}.md"))).unwrap_or_default();
+    let fields = dir.join(format!("{id}.answer.json"));
+    let body = std::fs::read_to_string(dir.join(format!("{id}.answer.md")));
+    if let (Some(rest), Ok(body), Ok(text)) = (
+        task.split("these sub-steps of its step (").nth(1),
+        body,
+        std::fs::read_to_string(&fields),
+    ) {
+        let mut value: serde_json::Value = serde_json::from_str(&text).unwrap();
+        if value.get("derivations").is_none() {
+            let start: String = body
+                .lines()
+                .find(|l| !l.trim().is_empty() && !l.starts_with('#'))
+                .unwrap_or_default()
+                .chars()
+                .take(10)
+                .collect();
+            let steps = &rest[..rest.find(')').unwrap()];
+            value["derivations"] = steps
+                .split(", ")
+                .map(|step| json!({"step": step, "quote": start}))
+                .collect();
+            std::fs::write(&fields, value.to_string()).unwrap();
+        }
+    }
+    exegenius_core::task::submit(project, id)
 }
 
 fn tasks(next: Next) -> Vec<Task> {
@@ -287,6 +318,28 @@ fn task_loop_end_to_end() {
             assert!(err.contains("bogus.md"), "{err}");
             assert!(err.contains("missing: `dft`, `convolution`"), "{err}");
             fields(&project, t, json!([]), json!(chirp_relations()));
+            // The page derives both sub-steps of its step: it must say where.
+            answer(&project, t, body);
+            let err = exegenius_core::task::submit(&project, &t.id)
+                .unwrap_err()
+                .to_string();
+            assert!(err.contains("missing: `S1`, `S2`"), "{err}");
+            let path = project.root.join(t.fields().unwrap());
+            let derivations = json!([
+                {"step": "S1", "quote": "It is computed with the [DFT](dft.md)"},
+                {"step": "S2", "quote": "a chirp turns it into a convolution"},
+            ]);
+            let with = json!({"symbols": [], "relations": chirp_relations(),
+                              "derivations": derivations});
+            std::fs::write(&path, with.to_string()).unwrap();
+            let err = exegenius_core::task::submit(&project, &t.id)
+                .unwrap_err()
+                .to_string();
+            assert!(
+                err.contains("`S2`: derivation not found on the page"),
+                "{err}"
+            );
+            fields(&project, t, json!([]), json!(chirp_relations()));
         }
         if page(t) == "dft" {
             std::fs::write(project.root.join(t.answer()), body).unwrap();
@@ -430,6 +483,16 @@ fn task_loop_end_to_end() {
                 "## This page in the argument\n\nThe step: The chirp identity turns a DFT into \
                  a convolution.\nHow: rewrite the transform as a convolution\nWhy: Convolutions \
                  are fast. (the sources say so: \"converts these through a chirp identity\""
+            ));
+            // Both sub-steps belong to the chirp page: the writer gets each with the passage
+            // that reports it, and must say where the page derives it.
+            assert!(
+                file.contains("these sub-steps of its step (S1, S2)"),
+                "{file}"
+            );
+            assert!(file.contains(
+                "**S1**: Convolution multiplies transforms.\nSource: \"Convolution of two \
+                 sequences multiplies\" (notes)\n> The discrete Fourier transform maps"
             ));
             assert!(
                 file.contains("- Dyadic rational (also: dyadic)\n  - $k$ (exponent): The power")
