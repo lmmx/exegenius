@@ -16,6 +16,7 @@ It supersedes the state recorded in 2026-10-13-autonomous-investigation. Read th
   - **R1 holds:** high effort is preferred for planning on this paper. Same-batch medians were stated 7 → 19, derived 1 → 7, faithful 0 → 3.
   - **R2:** no plan at either effort passes the central-derivation gate. The gap is the counting core, C3–C6.
 - **The chain-walk baseline** (2026-10-13-chain-walk-baseline): of the three existing wikis, only the planner-handoff wiki carries the central chain's core (gate passed). It got there through writers' rewrites, which the depth rule then sent back to be cut.
+- **S1 (model screening: Opus at medium, Opus at high, Haiku at high) is blocked.** Its runner was refused `add_repo` (`[Permission Grant]`), and it was not retried. The remedy is an allow rule (`calibration/plans/S1.md`), the author's decision.
 - **Awaiting the author:**
   - the execution-profile plan (`calibration/software-plan.md`), including whether planning's default effort becomes high;
   - a full run with high-effort planning;
