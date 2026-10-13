@@ -36,12 +36,12 @@ Each step's verdict: **R**, reconstructed; **m**, mentioned only; **–**, absen
 - **The best wiki carries the chain's core, though its plan did not.**
   - **The plan:** the planner and handoff run's plan was made from the introduction, at an unrecorded effort, and assigned none of the $s<Wm$ derivation (2026-10-13-planner-handoff-run).
   - **How the core got onto the pages:** writers' rewrites added that derivation, and the depth rule then sent its steps back to be cited or cut. Round 3's notes were dropped, so they stayed on the page.
-  - **What follows:** in this run the chain survived *despite* the pipeline's rules, not because of them.
+  - **What follows:** ~~in this run the chain survived *despite* the pipeline's rules, not because of them.~~ **Corrected by T1** (2026-10-13-t1-depth-rule): replaying those notes three times, the writers cited the marked steps and kept the chain. The audit-and-rewrite loop is what recovered the derivation the plan lacked.
 - **The other two wikis lose the chain in its middle,** where the saving is earned, and one states the labels wrongly.
 - **Agreement on the one paired wiki was complete.** That is one pair: the instrument's reliability is not established.
 
 **Interpretation, not shown:**
-- The depth rule treats a derivation that enters through a rewrite as elaboration to be cited or cut. When the plan does not own the derivation, that rule works against the central chain. A plan that owns it (high-effort planning, E1) might let writers present it as the page's own content. That is the hypothesis a full run with high-effort planning would test, with this table as its baseline.
+- ~~The depth rule treats a derivation that enters through a rewrite as elaboration to be cited or cut. When the plan does not own the derivation, that rule works against the central chain.~~ Tested and not supported for this page: see 2026-10-13-t1-depth-rule. A plan that owns it (high-effort planning, E1) might let writers present it as the page's own content. That is the hypothesis a full run with high-effort planning would test, with this table as its baseline.
 - This instrument judges the pages, not a reader. Whether a reader following W1's pages comes away understanding the saving needs the reader-side instruments (simulated readers with held-out goals; people).
 
 ## Current State
