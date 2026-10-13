@@ -1,5 +1,6 @@
-//! Where a planning answer's quotes fall in the sources: a diagnostic that reports and
-//! never rejects.
+//! Where a planning answer's quotes fall in the sources: a diagnostic recorded for every
+//! extract and argument answer, and, with `[checks] coverage = "reject"`, a reason to send
+//! an answer back ([`Coverage::shortfall`], [`rejection`]).
 //!
 //! The extract and argument tasks quote the sources as evidence. Submit checks that each
 //! quote is in its source, and nothing else about where the quotes come from, so a plan
@@ -89,6 +90,9 @@ pub struct SectionCoverage {
     pub quotes: usize,
     /// Theorem-like statements in the section, its subsections included.
     pub statements: usize,
+    /// Displayed equations in the section, its subsections included.
+    #[serde(default)]
+    pub displays: usize,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -226,6 +230,11 @@ fn of_source(source: &Source, owners: &[Owner]) -> Coverage {
                 .iter()
                 .filter(|t| s.start <= t.offset && t.offset < s.end)
                 .count(),
+            displays: source
+                .displays()
+                .iter()
+                .filter(|&&d| s.start <= d && d < s.end)
+                .count(),
         })
         .collect();
     let quoted: BTreeSet<&str> = located
@@ -351,7 +360,72 @@ pub fn argument_owners<'a>(root: &'a Node, graph: Option<&Graph>) -> Vec<Owner<'
     owners
 }
 
+/// Why an answer whose quotes leave most of a source's sections unquoted is sent back, or
+/// None if no source has a [`Coverage::shortfall`]. The message names where the quotes come
+/// from and the sections left unquoted, and asks for the source to be read in full.
+pub fn rejection(coverage: &[Coverage], sources: &[Source]) -> Option<String> {
+    let mut parts = Vec::new();
+    for c in coverage {
+        let Some(unquoted) = c.shortfall() else {
+            continue;
+        };
+        let path = sources
+            .iter()
+            .find(|s| s.id == c.source)
+            .map_or(c.source.clone(), |s| s.path.display().to_string());
+        let from = c
+            .span
+            .map_or("no lines".to_string(), |(a, b)| format!("lines {a}–{b}"));
+        let sections = unquoted
+            .iter()
+            .map(|s| {
+                format!(
+                    "- {} (lines {}–{}): {} theorem-like statements, {} displayed equations",
+                    s.title, s.lines.0, s.lines.1, s.statements, s.displays
+                )
+            })
+            .collect::<Vec<_>>()
+            .join("\n");
+        parts.push(format!(
+            "The quotes from `{path}` come from {from} of its {} lines, and none comes from \
+             these sections, which develop results in theorems, lemmas, definitions or displayed equations:\n{sections}",
+            c.lines
+        ));
+    }
+    if parts.is_empty() {
+        return None;
+    }
+    Some(format!(
+        "answer rejected: it is drawn from part of the sources.\n\n{}\n\nAn introduction \
+         summarises results; the sections after it develop them, and the target depends on \
+         that development. Read each source to its last line, in parts (the Read tool's \
+         offset and limit), and revise the answer: keep what holds, add what the target \
+         depends on, and quote each concept or step where the sources develop it rather than \
+         where the introduction mentions it. A section the target does not depend on may stay \
+         unquoted.",
+        parts.join("\n\n")
+    ))
+}
+
 impl Coverage {
+    /// The top-level sections that develop mathematics (hold theorem-like statements or
+    /// displayed equations) and no quote, if they are more than half of the top-level
+    /// sections that develop mathematics: the mark of an answer drawn from part of a source.
+    /// None for a source whose sections are not marked up.
+    pub fn shortfall(&self) -> Option<Vec<&SectionCoverage>> {
+        let top = self.sections.iter().map(|s| s.level).min()?;
+        let holding: Vec<&SectionCoverage> = self
+            .sections
+            .iter()
+            .filter(|s| {
+                s.level == top && s.statements + s.displays > 0 && s.title != "(front matter)"
+            })
+            .collect();
+        let unquoted: Vec<&SectionCoverage> =
+            holding.iter().copied().filter(|s| s.quotes == 0).collect();
+        (self.structured && unquoted.len() * 2 > holding.len()).then_some(unquoted)
+    }
+
     /// Lines for `exegenius status`: the reach, the top-level sections quoted, statements in
     /// unquoted sections, and up to `names` concepts or steps quoted away from the sections
     /// their names head.
@@ -619,6 +693,65 @@ The algorithm runs in time $O(n)$.
     }
 
     #[test]
+    fn an_answer_missing_most_sections_with_statements_falls_short() {
+        let owners_quoting = |texts: &[&str]| -> Vec<Coverage> {
+            let evidence: Vec<Evidence> = texts.iter().map(|t| quote(t)).collect();
+            let owners = vec![Owner {
+                id: "x".into(),
+                terms: Vec::new(),
+                quotes: evidence.iter().collect(),
+            }];
+            coverage(&[source()], &owners)
+        };
+        // Quotes only from the introduction: both sections with statements are unquoted.
+        let intro = owners_quoting(&["by resampling"]);
+        let short: Vec<&str> = intro[0]
+            .shortfall()
+            .unwrap()
+            .iter()
+            .map(|s| s.title.as_str())
+            .collect();
+        assert_eq!(short, ["§2 Gaussian resampling", "§3 Assembly"]);
+        let message = rejection(&intro, &[source()]).unwrap();
+        assert!(message.starts_with("answer rejected: it is drawn from part of the sources."));
+        assert!(
+            message.contains("- §2 Gaussian resampling (lines 10–18): 2 theorem-like statements, 0 displayed equations"),
+            "{message}"
+        );
+        assert!(
+            message.contains("come from lines 8–8 of its 22 lines"),
+            "{message}"
+        );
+        // One of the two quoted, in a subsection: not more than half unquoted.
+        let half = owners_quoting(&["by resampling", "The error is small."]);
+        assert!(half[0].shortfall().is_none());
+        assert!(rejection(&half, &[source()]).is_none());
+    }
+
+    #[test]
+    fn a_section_of_displayed_equations_develops_mathematics() {
+        let text = "\\section{Introduction}\nWe bound the time.\n\\section{Cost}\n\
+                    The total is\n\\begin{equation*}\nT = O(n)\n\\end{equation*}\n";
+        let s = Source::new("paper", None, None, Path::new("p.tex"), text);
+        assert_eq!(s.displays().len(), 1);
+        let evidence = [quote("We bound the time.")];
+        let owners = vec![Owner {
+            id: "x".into(),
+            terms: Vec::new(),
+            quotes: evidence.iter().collect(),
+        }];
+        let c = &coverage(&[s], &owners)[0];
+        assert_eq!((c.sections[1].statements, c.sections[1].displays), (0, 1));
+        let short: Vec<&str> = c
+            .shortfall()
+            .unwrap()
+            .iter()
+            .map(|s| s.title.as_str())
+            .collect();
+        assert_eq!(short, ["§2 Cost"]);
+    }
+
+    #[test]
     fn numbered_lines_are_not_trusted_as_sections() {
         let text = "Abstract text.\n1 Introduction\nWe begin.\n2 Transforms\nMore.\n";
         let s = Source::new("paper", None, None, Path::new("p.txt"), text);
@@ -634,5 +767,9 @@ The algorithm runs in time $O(n)$.
         assert!(c.sections.is_empty() && c.unquoted_statements.is_empty());
         assert!(c.elsewhere.is_empty());
         assert!(c.summary(5)[1].starts_with("sections and theorem-like statements not reported"));
+        assert!(
+            c.shortfall().is_none(),
+            "no judgement without marked-up sections"
+        );
     }
 }

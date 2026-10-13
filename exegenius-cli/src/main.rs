@@ -566,12 +566,17 @@ fn status(project: &Project) -> anyhow::Result<()> {
         for k in runlog::summarise(&events) {
             println!(
                 "  {}: {} handed out, {} accepted ({} at the first submit), {} rejected \
-                 submits{}",
+                 submits{}{}",
                 k.kind,
                 k.issued,
                 k.accepted,
                 k.first_time,
                 k.rejected,
+                if k.coverage > 0 {
+                    format!(" ({} for coverage)", k.coverage)
+                } else {
+                    String::new()
+                },
                 if k.errors > 0 {
                     format!(", {} submits not checked", k.errors)
                 } else {

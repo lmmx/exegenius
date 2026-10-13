@@ -1248,6 +1248,7 @@ mod tests {
                 readers: vec![],
                 site: Default::default(),
                 pilot: None,
+                checks: Default::default(),
             },
             sources: vec![],
         };

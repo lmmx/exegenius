@@ -10,11 +10,13 @@
 //! - `submit`: `exegenius submit` ran on a task. Also `kind` (absent if the id was not a
 //!   pending task), `attempt` (this task's submits so far, this one included), `outcome`
 //!   (`accepted`, `rejected` or `error`), `message` (for a rejection or error, what submit
-//!   printed), `warnings` (for an acceptance, the warnings), and, for extract and argument
+//!   printed), `warnings` (for an acceptance, the warnings), `check` (for a rejection by a
+//!   check on the stage's output, which: `coverage`), and, for extract and argument
 //!   tasks whose answer parses, `coverage` (see [`crate::coverage`]): where the answer's
 //!   quotes fall in each source, recorded whether or not the answer was accepted.
 //!
-//! The log only records: nothing exegenius decides reads it. Writing it is best effort: a
+//! The log records; the one decision that reads it is how many times the coverage check has
+//! sent a task's answer back ([`coverage_rejections`]). Writing it is best effort: a
 //! failure to write it never changes the outcome of `next` or `submit`.
 
 use std::io::Write as _;
@@ -54,6 +56,10 @@ pub enum What {
         message: Option<String>,
         #[serde(default, skip_serializing_if = "Vec::is_empty")]
         warnings: Vec<String>,
+        /// For a rejection by a check on the stage's output rather than by the answer's own
+        /// checks: which check (`coverage`).
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        check: Option<String>,
         #[serde(default, skip_serializing_if = "Option::is_none")]
         coverage: Option<Vec<Coverage>>,
     },
@@ -118,6 +124,17 @@ pub fn submits(events: &[Event], task: &str) -> usize {
         .count()
 }
 
+/// Rejections of `task` by the coverage check recorded so far.
+pub fn coverage_rejections(events: &[Event], task: &str) -> usize {
+    events
+        .iter()
+        .filter(|e| {
+            matches!(&e.what, What::Submit { task: t, check: Some(c), .. }
+                if t == task && c == "coverage")
+        })
+        .count()
+}
+
 /// For one task kind: tasks handed out, submits by outcome, and tasks accepted at their
 /// first submit.
 #[derive(Debug, Clone, Default, PartialEq)]
@@ -126,6 +143,8 @@ pub struct KindSummary {
     pub issued: usize,
     pub accepted: usize,
     pub rejected: usize,
+    /// Rejections by the coverage check, counted among `rejected`.
+    pub coverage: usize,
     pub errors: usize,
     pub first_time: usize,
 }
@@ -152,9 +171,13 @@ pub fn summarise(events: &[Event]) -> Vec<KindSummary> {
                 kind: Some(kind),
                 attempt,
                 outcome,
+                check,
                 ..
             } => {
                 let s = entry(&mut out, kind);
+                if check.as_deref() == Some("coverage") {
+                    s.coverage += 1;
+                }
                 match outcome {
                     Outcome::Accepted => {
                         s.accepted += 1;
@@ -200,6 +223,7 @@ mod tests {
                 outcome,
                 message: None,
                 warnings: Vec::new(),
+                check: None,
                 coverage: None,
             },
         }
@@ -250,6 +274,7 @@ mod tests {
                 issued: 2,
                 accepted: 2,
                 rejected: 1,
+                coverage: 0,
                 errors: 0,
                 first_time: 1,
             }]

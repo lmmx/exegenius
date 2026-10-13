@@ -354,6 +354,20 @@ fn check_quote(sources: &[Source], e: &Evidence, what: &str, errors: &mut Vec<St
     }
 }
 
+/// Check an argument without storing it. Returns warnings.
+pub fn validate(
+    project: &Project,
+    graph: &Graph,
+    plan: &Plan,
+    answer: &ArgumentAnswer,
+) -> Result<Vec<String>> {
+    let (errors, warnings) = check(graph, plan, &project.sources, &answer.root);
+    if !errors.is_empty() {
+        return Err(crate::simulate::rejected(errors));
+    }
+    Ok(warnings)
+}
+
 /// Check an argument and store it. Returns warnings.
 pub fn apply_argument(
     project: &Project,
@@ -361,10 +375,7 @@ pub fn apply_argument(
     plan: &Plan,
     answer: ArgumentAnswer,
 ) -> Result<Vec<String>> {
-    let (errors, warnings) = check(graph, plan, &project.sources, &answer.root);
-    if !errors.is_empty() {
-        return Err(crate::simulate::rejected(errors));
-    }
+    let warnings = validate(project, graph, plan, &answer)?;
     write_json(
         &project.argument_path(),
         &Argument {

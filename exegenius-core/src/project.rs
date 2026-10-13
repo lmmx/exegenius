@@ -49,6 +49,9 @@ pub struct Source {
     marked_up: bool,
     /// Theorem-like statements: LaTeX environments declared with `\newtheorem`.
     statements: Vec<Statement>,
+    /// Where each displayed equation starts in `normalised`: LaTeX `equation`, `align`,
+    /// `gather`, `multline`, `eqnarray` and `displaymath` environments, starred or not.
+    displays: Vec<usize>,
     /// For each non-blank line, where it starts in `normalised` and its line number.
     lines: Vec<(usize, usize)>,
     /// Lines in the text, blank ones included.
@@ -200,6 +203,23 @@ fn statement(line: &str, declared: &BTreeMap<String, String>) -> Option<(String,
     Some((kind.clone(), label))
 }
 
+/// Whether a displayed equation starts on this line.
+fn display(line: &str) -> bool {
+    let Some(name) = line.strip_prefix("\\begin{").and_then(group) else {
+        return false;
+    };
+    let name = name.trim_end_matches('*');
+    [
+        "equation",
+        "align",
+        "gather",
+        "multline",
+        "eqnarray",
+        "displaymath",
+    ]
+    .contains(&name)
+}
+
 impl Source {
     pub fn new(id: &str, title: Option<&str>, url: Option<&str>, path: &Path, text: &str) -> Self {
         // `normalise` collapses all whitespace, so the normalised text is the normalised
@@ -210,6 +230,7 @@ impl Source {
         let mut statements = Vec::new();
         // For each statement, the index of its piece.
         let mut at_piece = Vec::new();
+        let mut displays = Vec::new();
         let mut lines = Vec::new();
         let mut numbering = Numbering::default();
         let mut marked_up = false;
@@ -237,6 +258,8 @@ impl Source {
                         level,
                         title,
                     });
+                } else if display(&piece) {
+                    displays.push(offset);
                 } else if let Some((kind, label)) = statement(&piece, &declared) {
                     at_piece.push(pieces.len());
                     statements.push(Statement {
@@ -274,6 +297,7 @@ impl Source {
             sections,
             marked_up,
             statements,
+            displays,
             lines,
             line_count,
         }
@@ -313,6 +337,11 @@ impl Source {
     /// The theorem-like statements, in order.
     pub fn statements(&self) -> &[Statement] {
         &self.statements
+    }
+
+    /// Where each displayed equation starts in the normalised text, in order.
+    pub fn displays(&self) -> &[usize] {
+        &self.displays
     }
 
     /// Lines in the source text, blank ones included.

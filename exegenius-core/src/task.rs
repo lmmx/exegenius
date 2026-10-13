@@ -776,7 +776,34 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
         .into_iter()
         .find(|t| t.id == id);
     let coverage = task.as_ref().and_then(|t| planning_coverage(project, t));
-    let result = submit_locked(project, id);
+    let events = crate::runlog::load(project);
+    // With `[checks] coverage = "reject"`, an answer drawn from part of the sources goes
+    // back, at most `coverage_retries` times; after that it is accepted with a warning.
+    // A pilot's argument explains part of the target, so it may leave sections unquoted.
+    let pilot_argument = matches!(task.as_ref().map(|t| &t.kind), Some(Kind::Argument))
+        && project.load_graph()?.is_some_and(|g| g.pilot.is_some());
+    let shortfall = coverage
+        .as_deref()
+        .filter(|_| !pilot_argument)
+        .and_then(|c| crate::coverage::rejection(c, &project.sources));
+    let rejecting = project.config.checks.coverage == crate::config::CoverageCheck::Reject;
+    let sent_back = crate::runlog::coverage_rejections(&events, id);
+    let gate = shortfall
+        .clone()
+        .filter(|_| rejecting && sent_back < project.config.checks.coverage_retries as usize);
+    let result = submit_locked(project, id, gate.as_deref()).map(|mut warnings| {
+        if rejecting && gate.is_none() && shortfall.is_some() {
+            warnings.push(format!(
+                "accepted after {sent_back} rejections for coverage, with most of the sections \
+                 that develop results still unquoted (see `exegenius status`)"
+            ));
+        }
+        warnings
+    });
+    let check = match (&result, &gate) {
+        (Err(Error::Invalid(m)), Some(g)) if m == g => Some("coverage".to_string()),
+        _ => None,
+    };
     let (outcome, message, warnings) = match &result {
         Ok(warnings) => (Outcome::Accepted, None, warnings.clone()),
         // Checked and rejected, as opposed to not checked: no answer file, or not pending.
@@ -785,7 +812,7 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
         }
         Err(e) => (Outcome::Error, Some(e.to_string()), Vec::new()),
     };
-    let attempt = crate::runlog::submits(&crate::runlog::load(project), id) + 1;
+    let attempt = crate::runlog::submits(&events, id) + 1;
     crate::runlog::append(
         project,
         What::Submit {
@@ -795,6 +822,7 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
             outcome,
             message,
             warnings,
+            check,
             coverage,
         },
     );
@@ -826,7 +854,9 @@ fn planning_coverage(project: &Project, task: &Task) -> Option<Vec<crate::covera
     }
 }
 
-fn submit_locked(project: &Project, id: &str) -> Result<Vec<String>> {
+/// [`submit`], under the lock. `gate` is the rejection to give an extract or argument answer
+/// that passes its other checks.
+fn submit_locked(project: &Project, id: &str, gate: Option<&str>) -> Result<Vec<String>> {
     let mut state = load_state(project)?;
     let Some(index) = state.pending.iter().position(|t| t.id == id) else {
         return Err(Error::Invalid(format!(
@@ -846,6 +876,9 @@ fn submit_locked(project: &Project, id: &str) -> Result<Vec<String>> {
     let warnings = match &task.kind {
         Kind::Extract => {
             let (graph, warnings) = apply_extract(project, parse(&path, &text)?)?;
+            if let Some(gate) = gate {
+                return Err(Error::Invalid(gate.to_string()));
+            }
             project.save_graph(&graph)?;
             warnings
         }
@@ -865,7 +898,12 @@ fn submit_locked(project: &Project, id: &str) -> Result<Vec<String>> {
         Kind::Argument => {
             let graph = require(graph)?;
             let plan = plan(&graph, &project.sources)?;
-            apply_argument(project, &graph, &plan, parse(&path, &text)?)?
+            let answer: ArgumentAnswer = parse(&path, &text)?;
+            if let Some(gate) = gate {
+                crate::argument::validate(project, &graph, &plan, &answer)?;
+                return Err(Error::Invalid(gate.to_string()));
+            }
+            apply_argument(project, &graph, &plan, answer)?
         }
         Kind::Write { page } => {
             let mut graph = require(graph)?;

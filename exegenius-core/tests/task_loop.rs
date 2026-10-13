@@ -1845,3 +1845,180 @@ fn the_run_log_records_tasks_submits_and_planning_coverage() {
         _ => unreachable!(),
     }
 }
+
+/// A LaTeX source whose introduction summarises what two later sections develop.
+const LATEX: &str = "\\newtheorem{lemma}{Lemma}
+\\section{Introduction}
+The discrete Fourier transform maps a sequence to its spectrum.
+Convolution of two sequences multiplies their transforms.
+The algorithm converts these through a chirp identity to convolution.
+\\section{Transforms}
+\\begin{lemma}\\label{lem:dft}
+The transform of a sequence of length $n$ is computed in $O(n \\log n)$ steps.
+\\end{lemma}
+\\section{The chirp identity}
+\\begin{lemma}\\label{lem:chirp}
+Multiplying by a chirp before and after a convolution gives the transform.
+\\end{lemma}
+";
+
+fn setup_latex(dir: &Path, checks: &str) -> Project {
+    std::fs::create_dir_all(dir.join("sources")).unwrap();
+    std::fs::write(
+        dir.join("exegenius.toml"),
+        format!(
+            "target = \"The chirp identity\"\nrounds = 1\n[reader]\nknows = \"Complex numbers\"\n\
+             [[sources]]\nid = \"notes\"\npath = \"sources/notes.tex\"\n\
+             [simulation]\nrounds = 0\n{checks}"
+        ),
+    )
+    .unwrap();
+    std::fs::write(dir.join("sources/notes.tex"), LATEX).unwrap();
+    Project::load(dir).unwrap()
+}
+
+/// An extract answer quoting `dft` and `chirp` for those two concepts.
+fn latex_extract(dft: &str, chirp: &str) -> String {
+    json!({
+        "target": "chirp-identity",
+        "concepts": [
+            concept("complex", "Complex numbers", &[], true, None),
+            concept("dft", "Discrete Fourier transform", &["complex"], false, Some(dft)),
+            concept("convolution", "Convolution", &[], false, Some("Convolution of two sequences")),
+            concept("chirp-identity", "Chirp identity", &["dft", "convolution"], false, Some(chirp)),
+        ],
+    })
+    .to_string()
+}
+
+#[test]
+fn the_coverage_check_sends_back_an_introduction_only_answer() {
+    use exegenius_core::runlog::{What, load};
+    let temp = tempfile::tempdir().unwrap();
+    let project = setup_latex(
+        temp.path(),
+        "[checks]\ncoverage = \"reject\"\ncoverage_retries = 1\n",
+    );
+    let batch = tasks(next(&project).unwrap());
+    let intro_only = latex_extract(
+        "The discrete Fourier transform maps a sequence",
+        "converts these through a chirp identity",
+    );
+    // Sent back once, naming the unquoted sections; the task stays pending, no graph saved.
+    answer(&project, &batch[0], &intro_only);
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains("it is drawn from part of the sources"),
+        "{err}"
+    );
+    assert!(
+        err.contains("- §2 Transforms (lines 6–9): 1 theorem-like statements"),
+        "{err}"
+    );
+    assert!(
+        err.contains("- §3 The chirp identity (lines 10–13)"),
+        "{err}"
+    );
+    assert!(!project.graph_path().exists());
+    assert_eq!(tasks(next(&project).unwrap()), batch);
+    // The same answer again: the retry is spent, so it is accepted with a warning.
+    let warnings = submit(&project, &batch[0].id).unwrap();
+    assert!(
+        warnings
+            .iter()
+            .any(|w| w.starts_with("accepted after 1 rejections for coverage")),
+        "{warnings:?}"
+    );
+    let checks: Vec<Option<String>> = load(&project)
+        .iter()
+        .filter_map(|e| match &e.what {
+            What::Submit { check, .. } => Some(check.clone()),
+            _ => None,
+        })
+        .collect();
+    assert_eq!(checks, [Some("coverage".to_string()), None]);
+}
+
+#[test]
+fn the_coverage_check_passes_an_answer_quoting_where_results_are_developed() {
+    let temp = tempfile::tempdir().unwrap();
+    let project = setup_latex(temp.path(), "[checks]\ncoverage = \"reject\"\n");
+    let batch = tasks(next(&project).unwrap());
+    answer(
+        &project,
+        &batch[0],
+        &latex_extract(
+            "computed in $O(n \\log n)$ steps",
+            "Multiplying by a chirp before and after a convolution",
+        ),
+    );
+    assert_eq!(
+        submit(&project, &batch[0].id).unwrap(),
+        Vec::<String>::new()
+    );
+}
+
+#[test]
+fn the_coverage_check_only_reports_by_default() {
+    let temp = tempfile::tempdir().unwrap();
+    let project = setup_latex(temp.path(), "");
+    let batch = tasks(next(&project).unwrap());
+    answer(
+        &project,
+        &batch[0],
+        &latex_extract(
+            "The discrete Fourier transform maps a sequence",
+            "converts these through a chirp identity",
+        ),
+    );
+    assert_eq!(
+        submit(&project, &batch[0].id).unwrap(),
+        Vec::<String>::new()
+    );
+}
+
+#[test]
+fn a_pilot_argument_is_not_sent_back_for_coverage() {
+    use exegenius_core::runlog::{Outcome, What, load};
+    let temp = tempfile::tempdir().unwrap();
+    let project = setup_latex(
+        temp.path(),
+        "[pilot]\npages = 1\n[checks]\ncoverage = \"reject\"\n",
+    );
+    let batch = tasks(next(&project).unwrap());
+    answer(
+        &project,
+        &batch[0],
+        &latex_extract(
+            "computed in $O(n \\log n)$ steps",
+            "Multiplying by a chirp before and after a convolution",
+        ),
+    );
+    submit(&project, &batch[0].id).unwrap();
+    background(&project);
+    let batch = tasks(next(&project).unwrap());
+    assert_eq!(batch[0].kind, Kind::Argument);
+    let pilot = project.load_graph().unwrap().unwrap().pilot.unwrap();
+    // A plan of the pilot alone, quoting only the introduction.
+    let argument = json!({"root": {
+        "id": "S0", "intention": "show", "page": pilot, "from": [],
+        "claim": "The pilot's claim.", "method": "one step",
+        "motivation": {"text": "It is direct.", "source": "reconstructed"},
+        "children": [{"id": "S1", "intention": "infer", "claim": "Convolution multiplies.",
+                      "quote": {"source": "notes", "quote": "Convolution of two sequences multiplies"}}],
+    }});
+    answer(&project, &batch[0], &argument.to_string());
+    submit(&project, &batch[0].id).unwrap();
+    let last = load(&project).pop().unwrap();
+    let What::Submit {
+        outcome, coverage, ..
+    } = last.what
+    else {
+        panic!("expected a submit");
+    };
+    assert_eq!(outcome, Outcome::Accepted);
+    assert!(
+        coverage.unwrap()[0].shortfall().is_some(),
+        "it would fall short"
+    );
+}

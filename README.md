@@ -148,15 +148,16 @@ concept binds it.
 ## Run log and diagnostics
 
 `next` and `submit` append to `exegenius/log.jsonl`, one JSON object per line, so a run can
-be read back without the agent's transcripts. The log only records: nothing exegenius
-decides reads it, and a failure to write it never changes what `next` or `submit` does.
+be read back without the agent's transcripts. The one decision that reads it is how many
+times the coverage check below has sent a task back, and a failure to write it never
+changes what `next` or `submit` does.
 Every event has `at` (milliseconds since the Unix epoch), `version` (of exegenius), `event`
 and `task` (the task id):
 
 | `event` | written when | other fields |
 |---|---|---|
 | `issued` | `next` hands out a task | `kind` (as in task ids: `extract`, `write`, `audit`, ...), `round` (the audit round) |
-| `submit` | `submit` runs on a task | `kind` (absent if the id was not a pending task); `attempt` (this task's submits so far, this one included); `outcome`: `accepted`, `rejected` (the answer was checked and the task stays pending) or `error` (nothing was checked: not a pending task, or no answer file); `message` (what submit printed, for `rejected` and `error`); `warnings` (for `accepted`); `coverage` (extract and argument tasks, below) |
+| `submit` | `submit` runs on a task | `kind` (absent if the id was not a pending task); `attempt` (this task's submits so far, this one included); `outcome`: `accepted`, `rejected` (the answer was checked and the task stays pending) or `error` (nothing was checked: not a pending task, or no answer file); `message` (what submit printed, for `rejected` and `error`); `warnings` (for `accepted`); `check` (`coverage`, for a rejection by the coverage check); `coverage` (extract and argument tasks, below) |
 
 The log does not hold model tokens, tool calls, or which subagent did a task: only the
 agent running the loop and its transcripts have those. `next` names a subagent type for each
@@ -184,14 +185,32 @@ a quote shows that a passage was cited, not that its step is in the plan; a plan
 every section and still miss a derivation; a section with no quote may not matter to the
 target; a result argued in prose, outside any theorem-like environment, counts in no
 statement figure; a short quote that also occurs in the introduction is placed there; and
-heading matches compare words without stemming. The diagnostic never rejects an answer and is not
-shown to the agent that wrote it.
+heading matches compare words without stemming.
+
+**The coverage check.** With
+
+```toml
+[checks]
+coverage = "reject"    # default "report": record only
+coverage_retries = 2   # rejections for coverage before the answer is accepted with a warning
+```
+
+`submit` sends back an extract or argument answer that passes its other checks but quotes
+none of more than half of the top-level sections that develop results (hold theorem-like
+statements or displayed equations, the front matter aside). The rejection names the lines
+the quotes come from and each section left unquoted, with its lines, and asks for each
+source to be read to its last line and each concept or step quoted where the sources
+develop it. After `coverage_retries` such rejections the answer is accepted, with a warning,
+and the log keeps every attempt's figures. A pilot's argument is never sent back, since it
+plans part of the target. Sources without marked-up sections are never sent back. With
+`report`, the default, nothing is sent back and nothing shown to the agent: the figures go
+to the log and `status`.
 
 `exegenius status` shows the same figures for the concept graph and the stored argument,
 recomputed from `graph.json` and `argument.json` (so they are available for runs made before
 the log existed; the graph's figures include concepts that extend tasks added), and, from
 the log, per task kind: tasks handed out, accepted, accepted at the first submit, and
-rejected submits. The log can be queried directly, for example with `jq`:
+rejected submits (and how many of those were for coverage). The log can be queried directly, for example with `jq`:
 
 ```sh
 # rejected submits, with what was wrong

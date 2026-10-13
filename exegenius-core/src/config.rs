@@ -45,6 +45,48 @@ pub struct Config {
     /// A pilot: a run on the part of the target that fits in a few pages.
     #[serde(default)]
     pub pilot: Option<Pilot>,
+    /// Checks made on stage outputs during a run.
+    #[serde(default)]
+    pub checks: Checks,
+}
+
+/// Checks made on stage outputs during a run.
+#[derive(Debug, Clone, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Checks {
+    /// What `submit` does when an extract or argument answer quotes none of most of the
+    /// sections that develop a source's results: those with theorem-like statements or
+    /// displayed equations ([`crate::coverage::Coverage::shortfall`]).
+    #[serde(default)]
+    pub coverage: CoverageCheck,
+    /// How many times `reject` sends an answer back for coverage before accepting it with
+    /// a warning.
+    #[serde(default = "default_coverage_retries")]
+    pub coverage_retries: u32,
+}
+
+impl Default for Checks {
+    fn default() -> Self {
+        Self {
+            coverage: CoverageCheck::default(),
+            coverage_retries: default_coverage_retries(),
+        }
+    }
+}
+
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum CoverageCheck {
+    /// Record the shortfall in the run log, and accept the answer.
+    #[default]
+    Report,
+    /// Send the answer back with the sections it left unquoted, up to `coverage_retries`
+    /// times.
+    Reject,
+}
+
+fn default_coverage_retries() -> u32 {
+    2
 }
 
 /// A small run, to see whether the audit rounds converge before a full run.
@@ -245,6 +287,14 @@ path = "sources/paper.txt"
 # Remove it to go on to the full wiki.
 # [pilot]
 # pages = 8
+
+# Checks on stage outputs during a run. With coverage = "reject", an extract or argument
+# answer that quotes none of most of the LaTeX or markdown sections developing results
+# (theorems, lemmas, displayed equations) is sent back, at most coverage_retries times,
+# with the sections it left unquoted; "report" only records it in exegenius/log.jsonl.
+# [checks]
+# coverage = "report"
+# coverage_retries = 2
 
 # Further reader profiles to simulate, beside [reader]
 # [[readers]]
