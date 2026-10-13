@@ -39,9 +39,22 @@ The first tenth of the paper ends at line 464. The introduction runs from line 3
 
 I set it up that way and did not notice. Its conclusion, that Sonnet plans better, does not follow: the difference between the plans may come from reading the whole paper. This run, with Sonnet under the restricted definition, planned like Haiku.
 
-**How the reading stopped is not yet known.** The planner's own transcript shows it, and the records here do not. Two candidates:
-- a read of the 253 KB file truncated at a token limit, and not continued;
-- reading the opening section and searching from there.
+**How the reading stopped: the planner chose to.** Another Claude Code session read the transcript of the extract planner (`agent-a0569a285a5a4788e`, type `exegenius-planner`, in the run's session `464895b1`) and reported:
+- **The task:** it read the task file, which says "Sources (read them from disk)" and asks it to cover everything the target depends on in the sources.
+- **The outline:** it ran `wc` on `paper.tex` (5,361 lines) and a `grep` for `\section`, `\subsection` and theorem environments. That listed the outline to line 5,259.
+- **The one read:** it made one Read call on `paper.tex`, with `limit: 440` and no offset, which returned lines 1–440. It never read the file again.
+- **The answer:** it wrote the answer with a single Python script, and submit accepted it.
+- **The evidence:** all 28 evidence quotes are in the 440 lines it read. The concept names for the later sections, such as `fast-butterfly-layers` and `scratch-restoration`, came from the outline.
+
+**What this rules out:**
+- not a tool limit: the cut was the planner's own `limit`;
+- not a reading of later sections that the extraction then ignored: they were never opened.
+
+**What it points to:**
+- **An instruction gap.** Nothing in the task says the sources must be read in full, or section by section.
+- **A validation gap.** Submit checks that each quote is in the source, not that a concept's evidence comes from where the source develops it.
+
+The planner's reasoning is redacted in the transcript, so its choice is inferred from what it did.
 
 ## Rewrites were not blocked from adding explanations
 
@@ -173,7 +186,7 @@ Planning only, on `paper.tex`, from the same project state:
 
 **What it tells apart:** the model, the agent definition, or both.
 
-**First, a cheaper look:** the planner's transcript for task 0001 in this run would show how its reading stopped.
+**Done since:** the transcript showed the reading stopped at the planner's own 440-line limit (above).
 
 ## Current State
 - In this run and in the explanation-depth run, the extraction's and the argument's quotes come almost wholly from the first tenth of `paper.tex`, the introduction
@@ -182,8 +195,8 @@ Planning only, on `paper.tex`, from the same project state:
 - No round 2 or round 3 rewrite was rejected for new claims; such rejections occur only in post-audit rewrites whose notes concern letters and citations
 - `fast-butterfly-layers`, `subset-intersection-construction` and `recursive-power-saving` carry the layer's recursion, the derivation of $s = WD - N + 2L < WD$ and the recurrence, with one incorrect leaf bound on `recursive-power-saving`
 - Round 3 sent the steps of the $s<Wm$ derivation on `subset-intersection-construction` back to be cited or cut
+- The run's extract planner read lines 1–440 of `paper.tex` in one Read call with `limit: 440`, after listing the outline, and read no more; all its evidence quotes are in those lines
 
 ## Missing
-- No record of how the planner's reading of `paper.tex` stopped
 - No planning comparison that separates the model from the agent definition
 - No measure of notation drift along a chain of pages
