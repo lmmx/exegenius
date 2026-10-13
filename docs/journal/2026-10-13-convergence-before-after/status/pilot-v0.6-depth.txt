@@ -1,0 +1,15 @@
+target: main-theorem (Integer multiplication below n log n)
+pilot: prime-source-lengths (Prime source lengths), the part of the target this run explains
+reader, for these sources: This reader has an undergraduate computer science degree: discrete mathematics (modular arithmetic, gcd and primes, binomial counting, induction), linear algebra over the reals and small fields (subspaces, rank, elimination, eigenvalues, dot-product orthogonal complements and projections), and algorithms (divide-and-conquer recurrences, Karatsuba multiplication, and the DFT and cyclic convolution as used for FFT-based polynomial multiplication). Complex numbers are known as far as roots of unity and Gaussian integers, Turing machines are known with multiple tapes, and basic probability reaches the union bound. Tensor products, bilinear forms beyond the dot product, quotient rings and the sources' network and address constructions are not part of this background.
+concepts: 61 (32 known to the reader); pages: 5 written of 5 planned
+audit round 1: 10 gaps over 5 pages (per page: term 0.6, step 0.4, symbol 1.0)
+audit round 2: 3 gaps over 5 pages (per page: term 0.4, step 0.2, symbol 0.0)
+  on the 5 pages also audited in round 1: term 3 -> 2 (1 new), step 2 -> 1 (1 new), symbol 5 -> 0 (0 new)
+candidate concepts: 0; pages queued for rewriting: 0
+outline: 4 parts, 0 pages in the glossary
+relations: 5 of 5 prerequisite edges between pages
+symbols: 35 bound on pages; letters with two meanings: 12 confirmed, 2 left unjudged after the last overloads round
+citation support: 8 marks judged: 3 supported, 5 partial, 0 unsupported, 0 contradicted
+  a second judge agreed on 2 of 2 marks
+sources with no url (a DOI, arXiv or stable URL lets readers check them): paper
+state: in progress; run `exegenius next`

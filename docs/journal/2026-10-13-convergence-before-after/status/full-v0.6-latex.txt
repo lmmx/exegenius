@@ -1,0 +1,18 @@
+target: integer-multiplication-target (Integer multiplication in O(n(lg n)^(1-κ)) time)
+reader, for these sources: The reader has an undergraduate computer science degree: big-O notation and worst-case time of Turing machines, polynomials and complex numbers, and the calculus the degree requires (limits, convergence of sequences and series, basic integrals). The same degree is taken to include introductory discrete mathematics (modular arithmetic, primes, induction, sets, graphs, recurrences) and a first course in linear algebra over the reals (vectors, subspaces, matrices, elimination, dot products), each at introductory depth. Fields in the abstract sense, tensor products, bilinear forms over general fields, Gaussian integers and the Chinese remainder theorem are not assumed.
+concepts: 48 (25 known to the reader); pages: 23 written of 23 planned
+audit round 1: 69 gaps over 22 pages (per page: term 0.5, step 2.0, symbol 0.5)
+audit round 2: 61 gaps over 23 pages (per page: term 0.4, step 2.0, symbol 0.3)
+  on the 22 pages also audited in round 1: term 12 -> 7 (7 new), step 45 -> 44 (44 new), symbol 12 -> 7 (6 new)
+audit round 3: 58 gaps over 23 pages (per page: term 0.5, step 2.0, symbol 0.1)
+  on the 23 pages also audited in round 2: term 9 -> 11 (10 new), step 45 -> 45 (45 new), symbol 7 -> 2 (2 new)
+steps inside reasoning a rewrite added for an earlier step, sent back to be cited or cut: 54
+the last audit round's 58 gaps are left on the pages, since no audit would check rewrites for them; raise `rounds` to have them fixed
+candidate concepts: 0; pages queued for rewriting: 0
+outline: 5 parts, 3 pages in the glossary
+relations: 44 of 44 prerequisite edges between pages
+symbols: 131 bound on pages; letters with two meanings: 41 confirmed, 10 left unjudged after the last overloads round
+citation support: 30 marks judged: 13 supported, 14 partial, 2 unsupported, 1 contradicted
+  a second judge agreed on 1 of 1 marks
+tasks handed out: 180 (180 accepted, 0 pending); audit rounds over
+state: done (docs/ and zensical.toml are built)

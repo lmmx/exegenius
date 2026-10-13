@@ -1,0 +1,17 @@
+target: main-theorem (Integer multiplication below n log n)
+pilot: transform-identity (Transform identity with retained permutations), the part of the target this run explains
+reader, for these sources: The reader has completed an undergraduate computer science degree, so they know big-O and related asymptotic notation, polynomials, complex numbers (roots of unity, polar form), and Turing machines with tapes. They also know the discrete mathematics and first linear algebra that every such degree teaches: modular arithmetic, gcd and primes, sets, permutations, binary and radix notation, XOR over GF(2), induction, recurrences and geometric sums, and vector spaces, matrices and Gaussian elimination over a field, with basic sorting. They have not met the Chinese remainder theorem, the FFT, tensor products, bilinear forms, Gaussian integers, prime-number estimates, or operator norms and Neumann series.
+concepts: 61 (29 known to the reader); pages: 6 written of 6 planned
+audit round 1: 12 gaps over 5 pages (per page: term 0.6, step 1.2, symbol 0.6)
+audit round 2: 6 gaps over 6 pages (per page: term 0.0, step 0.3, symbol 0.7)
+  on the 5 pages also audited in round 1: term 3 -> 0 (0 new), step 6 -> 0 (0 new), symbol 3 -> 1 (1 new)
+steps left unexplained because they are inside reasoning a rewrite added for an earlier step: 5
+the last audit round's 6 gaps are left on the pages, since no audit would check rewrites for them; raise `rounds` to have them fixed
+candidate concepts: 0; pages queued for rewriting: 0
+outline: 4 parts, 0 pages in the glossary
+relations: 5 of 5 prerequisite edges between pages
+symbols: 51 bound on pages; letters with two meanings: 2 confirmed, 0 left unjudged after the last overloads round
+citation support: 12 marks judged: 4 supported, 5 partial, 3 unsupported, 0 contradicted
+  a second judge agreed on 4 of 4 marks
+sources with no url (a DOI, arXiv or stable URL lets readers check them): paper
+state: done (docs/ and zensical.toml are built)

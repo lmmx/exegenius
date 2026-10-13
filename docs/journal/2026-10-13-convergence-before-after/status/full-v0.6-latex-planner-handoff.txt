@@ -1,0 +1,20 @@
+target: main-theorem (Integer multiplication in O(n(lg n)^{1-κ}) time)
+reader, for these sources: The reader has finished an undergraduate computer science degree: asymptotic analysis, discrete mathematics (modular arithmetic, primes, binary representation, induction), introductory linear algebra (vectors, matrices, inverses, dot products), and the calculus the degree requires (limits, convergence of sequences and series, basic integrals). They know basic Turing machines with several tapes and standard algorithm analysis, including recurrences and schoolbook multiplication. They have not studied the FFT-based multiplication literature, abstract algebra beyond basics, or tape-level data-movement algorithms.
+concepts: 42 (17 known to the reader); pages: 25 written of 25 planned
+audit round 1: 93 gaps over 24 pages (per page: term 0.5, step 2.7, symbol 0.8)
+audit round 2: 100 gaps over 24 pages (per page: term 0.7, step 3.0, symbol 0.4)
+  on the 24 pages also audited in round 1: term 11 -> 17 (16 new), step 64 -> 73 (69 new), symbol 18 -> 10 (9 new)
+audit round 3: 100 gaps over 25 pages (per page: term 0.5, step 3.0, symbol 0.5)
+  on the 24 pages also audited in round 2: term 17 -> 12 (10 new), step 73 -> 73 (70 new), symbol 10 -> 11 (11 new)
+steps inside reasoning a rewrite added for an earlier step, sent back to be cited or cut: 50
+`stop_early` is off; with it on, the audit rounds would have stopped after audit round 2, step and symbol gaps on the 24 pages also audited in round 1 went from 82 to 73, not to half or fewer (the gaps may still have been falling) (10 steps sent back to be cited or cut not counted)
+`stop_early` is off; with it on, the audit rounds would have stopped after audit round 3, step and symbol gaps on the 24 pages also audited in round 2 went from 83 to 44, not to half or fewer (the gaps may still have been falling) (40 steps sent back to be cited or cut not counted)
+the last audit round's 100 gaps are left on the pages, since no audit would check rewrites for them; raise `rounds` to have them fixed
+candidate concepts: 0; pages queued for rewriting: 0
+outline: 6 parts, 1 pages in the glossary
+relations: 46 of 46 prerequisite edges between pages
+symbols: 208 bound on pages; letters with two meanings: 82 confirmed, 21 left unjudged after the last overloads round
+citation support: 65 marks judged: 23 supported, 32 partial, 10 unsupported, 0 contradicted
+  a second judge agreed on 3 of 3 marks
+tasks handed out: 212 (212 accepted, 0 pending); audit rounds over
+state: done (docs/ and zensical.toml are built)

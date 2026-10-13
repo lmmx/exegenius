@@ -1,0 +1,18 @@
+target: main-theorem (Deterministic fixed-tape sub-quasilinear multiplication)
+pilot: subset-network (Subset-intersection network), the part of the target this run explains
+reader, for these sources: The reader has an undergraduate computer science education at introductory depth: discrete mathematics (integers, divisibility, modular arithmetic, gcd and primes, binomial coefficients, induction, the field of two elements with XOR), algorithms (the big-O family, divide-and-conquer recurrences, the RAM and multitape Turing models), calculus (limits, convergence of sequences and series, geometric series, basic integrals), elementary linear algebra over the reals and F_2 (vector spaces, linear maps, rank, dot products, matrix products), and complex numbers with modulus and polar form. The reader has not reached specialist algebra, tensor products, bilinear forms, eigen-theory beyond the basics, analysis (liminf and limsup), or numerical analysis, so the main theorem's proof and its network and transform machinery must be explained.
+concepts: 53 (24 known to the reader); pages: 5 written of 5 planned
+audit round 1: 41 gaps over 5 pages (per page: term 1.6, step 4.6, symbol 2.0)
+audit round 2: 29 gaps over 5 pages (per page: term 0.6, step 3.4, symbol 1.8)
+  on the 5 pages also audited in round 1: term 8 -> 3 (3 new), step 23 -> 17 (16 new), symbol 10 -> 9 (9 new)
+steps inside reasoning a rewrite added for an earlier step, sent back to be cited or cut: 9
+audit rounds stopped early: after audit round 2, step and symbol gaps on the 5 pages also audited in round 1 went from 33 to 17, not to half or fewer, so rewrites were not converging (9 steps sent back to be cited or cut not counted)
+the last audit round's 29 gaps are left on the pages, since no audit would check rewrites for them; raise `rounds` to have them fixed
+candidate concepts: 0; pages queued for rewriting: 0
+outline: 4 parts, 0 pages in the glossary
+relations: 6 of 6 prerequisite edges between pages
+symbols: 35 bound on pages; letters with two meanings: 7 confirmed, 0 left unjudged after the last overloads round
+citation support: 5 marks judged: 0 supported, 4 partial, 1 unsupported, 0 contradicted
+  a second judge agreed on 1 of 1 marks
+tasks handed out: 37 (37 accepted, 0 pending); audit rounds over
+state: done (docs/ and zensical.toml are built)

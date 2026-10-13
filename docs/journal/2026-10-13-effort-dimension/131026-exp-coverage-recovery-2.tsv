@@ -1,0 +1,25 @@
+transcript	agent type	description	models	effort	perTurnEffort
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-a0354085a3efcf29c.jsonl	exegenius-planner	B6 0002-background	claude-sonnet-5-5 x6	medium x6	medium x6
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-a049f254a5765452b.jsonl	exegenius-planner	A5 0003-argument	claude-sonnet-5-5 x7	medium x7	medium x7
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-a1f046df5bef94c11.jsonl	exegenius-planner	A3 0003-argument	claude-sonnet-5-5 x24	medium x24	medium x24
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-a2cee3aad39310873.jsonl	exegenius-planner	A6 0003-argument	claude-sonnet-5-5 x9	medium x9	medium x9
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-a399ff37c27be2e83.jsonl	exegenius-planner	A4 0001-extract	claude-sonnet-5-5 x11	medium x11	medium x11
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-a3d6b3508825ee203.jsonl	exegenius-planner	B5 0003-argument	claude-sonnet-5-5 x32	medium x32	medium x32
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-a549cf6994f18ec5c.jsonl	exegenius-planner	A3 0002-background	claude-sonnet-5-5 x6	medium x6	medium x6
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-a6c4c32c4d4d39274.jsonl	exegenius-planner	B4 0001-extract	claude-sonnet-5-5 x14	medium x14	medium x14
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-aa09a13ffc7be4094.jsonl	exegenius-planner	A4 0002-background	claude-sonnet-5-5 x5	medium x5	medium x5
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-aa57fccc124b8b937.jsonl	exegenius-planner	A3 0001-extract	claude-sonnet-5-5 x17	medium x17	medium x17
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-aae2ef8c1bc82170f.jsonl	exegenius-planner	B6 0003-argument	claude-sonnet-5-5 x14	medium x14	medium x14
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-aaea53456a134d01b.jsonl	exegenius-planner	B5 0001-extract	claude-sonnet-5-5 x21	medium x21	medium x21
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-ab70cee3e1af22442.jsonl	exegenius-planner	B4 0002-background	claude-sonnet-5-5 x5	medium x5	medium x5
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-ab966d884c37dccc5.jsonl	exegenius-planner	A5 0001-extract	claude-sonnet-5-5 x8	medium x8	medium x8
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-abc8f379b4d669625.jsonl	exegenius-planner	A5 0002-background	claude-sonnet-5-5 x5	medium x5	medium x5
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-ac860f37aa80d93bc.jsonl	exegenius-planner	A6 0002-background	claude-sonnet-5-5 x5	medium x5	medium x5
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-ad507c94f51a6442c.jsonl	exegenius-planner	B5 0002-background	claude-sonnet-5-5 x4	medium x4	medium x4
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-ad6acbcf72eadd2be.jsonl	exegenius-planner	B3 0002-background	claude-sonnet-5-5 x5	medium x5	medium x5
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-addec246be2380cf7.jsonl	exegenius-planner	A4 0003-argument	claude-sonnet-5-5 x9	medium x9	medium x9
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-ae8ca1583b8aa7ca4.jsonl	exegenius-planner	B3 0003-argument	claude-sonnet-5-5 x24	medium x24	medium x24
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-ae944351a3cd38ff7.jsonl	exegenius-planner	B3 0001-extract	claude-sonnet-5-5 x26	medium x26	medium x26
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-ae9af7b0b016fb953.jsonl	exegenius-planner	B6 0001-extract	claude-sonnet-5-5 x10	medium x10	medium x10
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-aeeb435f27e5485d6.jsonl	exegenius-planner	B4 0003-argument	claude-sonnet-5-5 x13	medium x13	medium x13
+results/transcripts/-home-user-openai-nlogn-wiki/0cfc0bef-5245-593a-9e08-ca69db71fdf3/subagents/agent-af9af6b791f26d548.jsonl	exegenius-planner	A6 0001-extract	claude-sonnet-5-5 x8	medium x8	medium x8

@@ -1,0 +1,17 @@
+target: main-theorem (Integer multiplication below n log n)
+reader, for these sources: The reader has completed an undergraduate computer science degree: big-O analysis, polynomials and complex numbers, and Turing machines with tapes, plus the discrete mathematics and first linear algebra course that such a degree requires. For the paper this means modular arithmetic, gcd and primes, roots of unity, binary arithmetic over F2 with Hamming weight, and basic vector-space and matrix facts (subspaces, rank, projections, dot product, eigenvalues) at first-course depth. Bilinear forms, tensor products, finite-field and ring theory, the Chinese remainder theorem, Newton iteration and the Fourier and convolution machinery beyond the basics are treated as not known.
+concepts: 54 (20 known to the reader); pages: 34 written of 34 planned
+audit round 1: 75 gaps over 32 pages (per page: term 0.8, step 1.1, symbol 0.4)
+audit round 2: 50 gaps over 34 pages (per page: term 0.4, step 0.7, symbol 0.4)
+  on the 32 pages also audited in round 1: term 26 -> 12 (10 new), step 35 -> 22 (22 new), symbol 14 -> 9 (7 new)
+steps inside reasoning a rewrite added for an earlier step, sent back to be cited or cut: 21
+audit rounds stopped early: after audit round 2, step and symbol gaps on the 32 pages also audited in round 1 went from 49 to 31, not to half or fewer, so rewrites were not converging
+the last audit round's 50 gaps are left on the pages, since no audit would check rewrites for them; raise `rounds` to have them fixed
+candidate concepts: 0; pages queued for rewriting: 0
+outline: 6 parts, 5 pages in the glossary
+relations: 70 of 70 prerequisite edges between pages
+symbols: 144 bound on pages; letters with two meanings: 50 confirmed, 8 left unjudged after the last overloads round
+citation support: 38 marks judged: 19 supported, 14 partial, 5 unsupported, 0 contradicted
+  a second judge agreed on 1 of 1 marks
+sources with no url (a DOI, arXiv or stable URL lets readers check them): paper
+state: done (docs/ and zensical.toml are built)

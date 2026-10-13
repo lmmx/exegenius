@@ -1,0 +1,19 @@
+target: main-theorem (Integer multiplication below n log n)
+pilot: transform-identity (Transform identity with retained permutations), the part of the target this run explains
+reader, for these sources: The reader has completed an undergraduate computer science degree: discrete mathematics through modular arithmetic, primes, gcds and the Euclidean algorithm, and the binary (radix) representation of integers; a first course in linear algebra over the reals covering vector spaces, bases, dimension, matrices, rank and invertibility; and the basics of complex numbers and roots of unity. They have not studied finite fields beyond GF(2), bilinear forms, tensor products, rings beyond polynomials, or the fast Fourier transform as a specialist topic, so those are explained by the wiki.
+concepts: 48 (15 known to the reader); pages: 7 written of 7 planned
+audit round 1: 24 gaps over 5 pages (per page: term 1.2, step 2.6, symbol 1.0)
+audit round 2: 23 gaps over 7 pages (per page: term 0.7, step 1.7, symbol 0.9)
+  on the 5 pages also audited in round 1: term 6 -> 4 (4 new), step 13 -> 10 (10 new), symbol 5 -> 2 (1 new)
+audit round 3: 8 gaps over 5 pages (per page: term 0.2, step 1.0, symbol 0.4)
+  on the 5 pages also audited in round 2: term 5 -> 1 (1 new), step 12 -> 5 (5 new), symbol 6 -> 2 (2 new)
+steps inside reasoning a rewrite added for an earlier step, sent back to be cited or cut: 12
+the last audit round's 8 gaps are left on the pages, since no audit would check rewrites for them; raise `rounds` to have them fixed
+candidate concepts: 0; pages queued for rewriting: 0
+outline: 5 parts, 0 pages in the glossary
+relations: 7 of 7 prerequisite edges between pages
+symbols: 68 bound on pages; letters with two meanings: 17 confirmed, 5 left unjudged after the last overloads round
+citation support: 14 marks judged: 3 supported, 9 partial, 2 unsupported, 0 contradicted
+  a second judge agreed on 1 of 2 marks
+sources with no url (a DOI, arXiv or stable URL lets readers check them): paper
+state: done (docs/ and zensical.toml are built)

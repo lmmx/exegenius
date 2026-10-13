@@ -1,0 +1,9 @@
+transcript	agent type	description	models	effort	perTurnEffort
+subagents/agent-a13700337b6ce8186.jsonl	general-purpose	Sonnet extraction repeat	claude-sonnet-5-5 x27	high x27	high x27
+subagents/agent-a2b054b86b49a328f.jsonl	general-purpose	Sonnet background task	claude-sonnet-5-5 x10	high x10	high x10
+subagents/agent-a4c236dca76fd116e.jsonl	general-purpose	Sonnet argument repeat	claude-sonnet-5-5 x23	high x23	high x23
+subagents/agent-a73bf40adcb262900.jsonl	general-purpose	Sonnet background redo task	claude-sonnet-5-5 x14	high x14	high x14
+subagents/agent-a98df303c609b2f0a.jsonl	general-purpose	Sonnet background repeat	claude-sonnet-5-5 x10	high x10	high x10
+subagents/agent-aaf5031c601aff368.jsonl	general-purpose	Sonnet extraction task	claude-sonnet-5-5 x32	high x32	high x32
+subagents/agent-ab135145e95b70627.jsonl	general-purpose	Sonnet argument task	claude-sonnet-5-5 x35	high x35	high x35
+subagents/agent-aecf49cd64f57b747.jsonl	general-purpose	Sonnet background redo repeat	claude-sonnet-5-5 x10	high x10	high x10
