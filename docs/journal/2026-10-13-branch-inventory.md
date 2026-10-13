@@ -19,7 +19,7 @@ This entry is that inventory. It is updated in place, and its date is when it wa
 
 | Branch | Head | Purpose | Status | Next action |
 |---|---|---|---|---|
-| `master` | cc70355 | the default branch | holds everything below that is merged | none |
+| `master` | see `git log` | the default branch | holds everything below that is merged | none |
 | `wiki-explanation-reader-sim-v8dqtr` | 61e24ec | the branch the cloud session's harness designates | in `master` | keep while the harness names it |
 | `timing-and-parallelism` | b2b9ba4 | pull request #8 | in `master` | **delete on GitHub** (blocked here) |
 | `131026-scratch-dirs` | 02d5b76 | per-task scratch directories | in `master` | **delete on GitHub** |
@@ -50,12 +50,12 @@ The local copies of every branch marked "delete on GitHub" are deleted.
 | `131026-exp-coverage-recovery` | 52704ba | recovery experiment, A1, A2, B1, B2 | evidence, with transcripts | keep |
 | `131026-exp-coverage-recovery-2` | 8023a47 | replication, A3–A6, B3–B6 | evidence, with transcripts | keep |
 | `131026-exp-depth-rejection` | 0dd87da | depth experiment, C1–C5, D1–D5 | evidence, with transcripts | keep |
-| `131026-exp-e1-config` | 9afb736 (protocol) | E1, the planner against a general-purpose subagent | **active**: a runner session is executing it | keep |
+| `131026-exp-e1-config` | 85611ce | E1, the planner against a general-purpose subagent | evidence, with transcripts; the runner session is archived | keep |
 | `exp-coverage-recovery` | 2e35a54 | two refused attempts to run the recovery experiment | its unique records (the two reports and the protocol) are archived in `docs/journal/2026-10-13-coverage-recovery/refused-attempts/`; the rest is a vendored copy of exegenius source, which should not be kept | **delete on GitHub** |
 
 ## Current State
 - `master` of lmmx/exegenius holds all completed work; eight remote branches of lmmx/exegenius are fully contained in it and await deletion on GitHub
-- Fifteen branches of lmmx/openai-nlogn-wiki are kept as the archives of their runs; `131026-exp-e1-config` is active
+- Fifteen branches of lmmx/openai-nlogn-wiki are kept as the archives of their runs, `131026-exp-e1-config` among them
 - `exp-coverage-recovery` of the wiki has its unique records archived in the journal and awaits deletion on GitHub
 
 ## Missing

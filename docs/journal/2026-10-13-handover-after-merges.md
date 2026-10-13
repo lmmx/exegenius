@@ -9,6 +9,27 @@ This entry hands the work over across a compaction of the development session's 
 
 It supersedes the state recorded in 2026-10-13-autonomous-investigation. Read this entry first, then the entries it names.
 
+## Latest state, after E1 (read this first)
+
+Since the sections below were written:
+- **Merged:** all three review branches and this entry's update are on `master`. `cc70355` and later hold the process-safety guard, the content judge and the model-allocation proposal.
+- **Branches:** the merged branches of lmmx/exegenius are deleted locally. Their deletion on GitHub is the author's, because this environment refuses it (2026-10-13-branch-inventory, kept up to date).
+- **The audit rounds** (2026-10-13-convergence-before-after):
+  - since 0.5.0 they no longer diverge;
+  - they still do not drive gaps out, because step gaps renew about one for one;
+  - no full run has used the planning fixes.
+- **Effort was a hidden variable** (2026-10-13-effort-dimension). All 66 earlier `exegenius-planner` subagents ran at medium, the general-purpose Sonnet samples at high.
+- **E1** (2026-10-13-e1-config):
+  - at Sonnet and high effort, the planner definition and a general-purpose subagent make plans the content judge cannot tell apart, both a median of 19 of 19 core results stated;
+  - the same planner at medium stated 12 and derived 2;
+  - so effort, not the definition, is the leading explanation;
+  - no plan derives the saving $s<Wm$ faithfully.
+- **Next, proposed in that entry:**
+  1. E3, medium against high on planning in one experiment;
+  2. a full run with planning at high, to measure the audit rounds;
+  3. writers and auditors, which need a page judge and an audit-variance measure first;
+  4. the $s<Wm$ derivation.
+
 ## Working arrangement
 
 - **Who leads:** the development session (Claude Code, cloud) leads the investigation and coordination. The author, Louis Maddox, keeps architectural oversight.

@@ -1,0 +1,42 @@
+# usage.py (2026-10-13-model-allocation) on results/transcripts of wiki branch 131026-exp-e1-config (85611ce)
+agent / task / model / runs: medians of model calls, fresh input, cache read, cache write, output (estimated), seconds
+exegenius-planner / argument / claude-sonnet-5-5 / 5: 19 38 1504235 223918 56295 479
+exegenius-planner / background / claude-sonnet-5-5 / 5: 5 10 58751 22198 4150 43
+exegenius-planner / extract / claude-sonnet-5-5 / 5: 14 28 826161 137427 19134 178
+general-purpose / argument / claude-sonnet-5-5 / 5: 19 38 2392455 202272 58181 502
+general-purpose / background / claude-sonnet-5-5 / 5: 6 12 292529 29083 4073 43
+general-purpose / extract / claude-sonnet-5-5 / 5: 13 26 1116084 158171 15773 151
+
+# score.py (2026-10-13-coverage-recovery), arguments then extractions
+runs/P1/exegenius/argument.json: 59 quotes located; core reached 19/19, supporting 6/7; missed: conjecture-negation
+runs/P2/exegenius/argument.json: 53 quotes located; core reached 19/19, supporting 7/7; missed: 
+runs/P3/exegenius/argument.json: 67 quotes located; core reached 18/19, supporting 6/7; missed: rank-saving, conjecture-negation
+runs/P4/exegenius/argument.json: 126 quotes located; core reached 19/19, supporting 6/7; missed: conjecture-negation
+runs/P5/exegenius/argument.json: 49 quotes located; core reached 17/19, supporting 6/7; missed: complex-phase-interface, rank-saving, conjecture-negation
+runs/G1/exegenius/argument.json: 39 quotes located; core reached 16/19, supporting 6/7; missed: phase-frame-recursion, layer-recurrence, chirp-permutation-cancellation, conjecture-negation
+runs/G2/exegenius/argument.json: 110 quotes located; core reached 18/19, supporting 5/7; missed: rank-saving, stream-primitives, conjecture-negation
+runs/G3/exegenius/argument.json: 56 quotes located; core reached 16/19, supporting 6/7; missed: complex-phase-interface, rank-saving, layer-recurrence, conjecture-negation
+runs/G4/exegenius/argument.json: 110 quotes located; core reached 18/19, supporting 5/7; missed: common-frame-identity, stream-primitives, conjecture-negation
+runs/G5/exegenius/argument.json: 78 quotes located; core reached 19/19, supporting 5/7; missed: stream-primitives, conjecture-negation
+runs/P1/exegenius/tasks/0001-extract.answer.json: 50 quotes located; core reached 8/19, supporting 2/7; missed: bank-exchange-network, common-frame-identity, label-residual-budget, bit-shear-interface, rank-saving, arbitrary-width-interchange, packed-selected-bit-addition, layer-recurrence, simultaneous-layer, signed-packing, gaussian-resampling, chirp-permutation-cancellation, crt-address-map, phase-twist, exact-recovery, conjecture-negation
+runs/P2/exegenius/tasks/0001-extract.answer.json: 103 quotes located; core reached 18/19, supporting 7/7; missed: layer-recurrence
+runs/P3/exegenius/tasks/0001-extract.answer.json: 72 quotes located; core reached 16/19, supporting 6/7; missed: rank-saving, layer-recurrence, signed-packing, exact-recovery
+runs/P4/exegenius/tasks/0001-extract.answer.json: 101 quotes located; core reached 16/19, supporting 7/7; missed: rank-saving, layer-recurrence, chirp-permutation-cancellation
+runs/P5/exegenius/tasks/0001-extract.answer.json: 66 quotes located; core reached 12/19, supporting 4/7; missed: common-frame-identity, complex-phase-interface, rank-saving, layer-recurrence, gaussian-resampling, chirp-permutation-cancellation, crt-address-map, phase-twist, exact-recovery, conjecture-negation
+runs/G1/exegenius/tasks/0001-extract.answer.json: 56 quotes located; core reached 12/19, supporting 3/7; missed: common-frame-identity, bit-shear-interface, rank-saving, arbitrary-width-interchange, packed-selected-bit-addition, layer-recurrence, simultaneous-layer, synthetic-convolution, crt-address-map, phase-twist, conjecture-negation
+runs/G2/exegenius/tasks/0001-extract.answer.json: 74 quotes located; core reached 15/19, supporting 5/7; missed: common-frame-identity, bit-shear-interface, rank-saving, arbitrary-width-interchange, layer-recurrence, conjecture-negation
+runs/G3/exegenius/tasks/0001-extract.answer.json: 60 quotes located; core reached 11/19, supporting 4/7; missed: bit-shear-interface, complex-phase-interface, rank-saving, packed-selected-bit-addition, layer-recurrence, simultaneous-layer, signed-packing, gaussian-resampling, phase-twist, exact-recovery, conjecture-negation
+runs/G4/exegenius/tasks/0001-extract.answer.json: 77 quotes located; core reached 15/19, supporting 6/7; missed: common-frame-identity, rank-saving, layer-recurrence, exact-recovery, conjecture-negation
+runs/G5/exegenius/tasks/0001-extract.answer.json: 87 quotes located; core reached 15/19, supporting 6/7; missed: rank-saving, layer-recurrence, simultaneous-layer, gaussian-resampling, conjecture-negation
+
+# depth.py (2026-10-13-coverage-recovery)
+P1: saving: deriving section; layer: deriving section
+P2: saving: deriving section; layer: deriving section
+P3: saving: deriving section; layer: deriving section
+P4: saving: deriving section; layer: deriving section
+P5: saving: deriving section; layer: deriving section
+G1: saving: deriving section; layer: deriving section
+G2: saving: deriving section; layer: deriving section
+G3: saving: body; layer: deriving section
+G4: saving: deriving section; layer: deriving section
+G5: saving: deriving section; layer: deriving section

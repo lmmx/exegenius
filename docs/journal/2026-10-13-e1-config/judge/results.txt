@@ -1,0 +1,24 @@
+run        core_stated  core_correct  core_derived core_faithful   supp_stated         wrong         major         minor
+-- E1 P: exegenius-planner, Sonnet, effort high
+P1                  19            12             7             3             6             0             0             7
+P2                  19             8             8             4             7             0             0             4
+P3                  18             9            11             3             6             0             0             3
+P4                  19            15            18            13             6             0             0             7
+P5                  19             6             7             2             6             0             0             6
+median            19.0           9.0           8.0           3.0           6.0           0.0           0.0           6.0
+-- E1 G: general-purpose, Sonnet, effort high
+G1                  17             5             3             0             6             0             0             6
+G2                  19             9            18            10             5             0             0             2
+G3                  19             4             9             1             6             0             0             4
+G4                  18             9            17             5             5             0             0             4
+G5                  19            11            10             5             5             0             0             6
+median            19.0           9.0          10.0           5.0           5.0           0.0           0.0           4.0
+-- anchors judged again (first batch: sonnet1 19/14/11/6, C2 11/0/3/0)
+sonnet1             19            12            13             7             5             0             0             3
+C2                   6             0             3             0             3             1             1             2
+median            12.5           6.0           8.0           3.5           4.0           0.5           0.5           2.5
+
+Agreement of paired judges (presence, and statement where both found the item stated):
+P03 (P2): presence same 26/26, within one level 26/26; statement same 25/26; core stated 19 vs 19, core correct 8 vs 9, major errors 0 vs 0
+P09 (G5): presence same 24/26, within one level 26/26; statement same 18/24; core stated 19 vs 19, core correct 11 vs 8, major errors 0 vs 0
+P12 (C2): presence same 21/26, within one level 25/26; statement same 6/7; core stated 6 vs 4, core correct 0 vs 0, major errors 1 vs 1

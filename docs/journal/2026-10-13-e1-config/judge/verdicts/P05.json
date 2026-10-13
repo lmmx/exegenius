@@ -1,0 +1,496 @@
+{
+  "plan": "P05",
+  "items": [
+    {
+      "id": "bank-exchange-network",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S1.1",
+        "S1.1.1",
+        "S1.1.2",
+        "S1.1.3"
+      ],
+      "lines": [
+        728,
+        765
+      ],
+      "note": "S1.1.1 gives the eight-row cancellation (net change (JV+RG)x independent of a,c, rows 6-7 restore scratch), S1.1.2 the central/side cancellation, and S1.1.3 the three-stage composition (x,y+x),(-y,y+x),(-y,x), matching lines 741-764. S1.1.2 does not write the central coefficients |S∩T| mod 2 and (|S∩T|-1)/2, but the route is the paper's."
+    },
+    {
+      "id": "common-frame-identity",
+      "presence": "stated",
+      "statement": "imprecise",
+      "derivation": "n/a",
+      "steps": [
+        "S1.2",
+        "S2.1",
+        "S2.1.4"
+      ],
+      "lines": [
+        793,
+        825
+      ],
+      "note": "S1.2 states the frames D_v, the edge change D_vD_u^{-1} and commutation with pointwise gates (line 812). It says only that a route applies 'the endpoint operator', with no sign ε_w and no form D_out S_Ω D_in^{-1} or D_sink(ρ(w))D_source(w)^{-1}. The sign matters for the complex exchange."
+    },
+    {
+      "id": "label-residual-budget",
+      "presence": "stated",
+      "statement": "imprecise",
+      "derivation": "n/a",
+      "steps": [
+        "S1",
+        "S1.3"
+      ],
+      "lines": [
+        845,
+        897,
+        997,
+        1071,
+        1105,
+        1110
+      ],
+      "note": "S1.3 states nondegenerate nested labels, residual dimension equal to the dimension change, and that only the central 3→4 edges decrease, each by h (lines 998-1000). It omits what the labels are (triple-indicator tensors in F^{⊗3}, with neighbouring lines orthogonal), the budget L=Ich and ΣΔdim=Wm-2N+2L, and L/N<1/2 (1105-1110). No derivation is given."
+    },
+    {
+      "id": "bit-shear-interface",
+      "presence": "stated",
+      "statement": "correct",
+      "derivation": "n/a",
+      "steps": [
+        "S1.4",
+        "S2.1",
+        "S2.1.4"
+      ],
+      "lines": [
+        1113,
+        1172
+      ],
+      "note": "S1.4 gives s_b=W_bm-N+2L_b<W_bm and the endpoint difference I_m, and S2.1/S2.1.4 give the frames Φ_M and the shear H←H+D on every role, as in Proposition prop:bit-motif-interface. Not derived: the projection matrices P_U, the source matrix -P_{U_a} and the rank-one 2P_{U_a} first edge that turns -2N into -N (1156-1167) are all absent."
+    },
+    {
+      "id": "complex-phase-interface",
+      "presence": "stated",
+      "statement": "imprecise",
+      "derivation": "n/a",
+      "steps": [
+        "S1.5",
+        "S3.1"
+      ],
+      "lines": [
+        1174,
+        1315
+      ],
+      "note": "S1.5 states one kernel aI+bX_v per residual basis vector, residual dimensions summing to s_c<W_cm, and C^{⊗m} on every role. It omits the phase frames C_U and the orthonormality of the basis, and it asserts C^{⊗m} without the source/sink Z corrections and the undoing of the signed exchange that the paper requires (1225-1227, 1300-1314). The weight-additivity proof is absent."
+    },
+    {
+      "id": "rank-saving",
+      "presence": "stated",
+      "statement": "correct",
+      "derivation": "n/a",
+      "steps": [
+        "S1",
+        "S1.4",
+        "S1.5",
+        "S1.6",
+        "S2.3"
+      ],
+      "lines": [
+        1317,
+        1346
+      ],
+      "note": "S1.6 states τ=σ=1-2^{-50} with s_b/W_b<m^τ and s_c/W_c<m^σ, and S1.4/S1.5 give s<Wm, in agreement with 1331-1343. The deficits η_b, η_c, the bound log m<20 and the source L<N/2 are not given, so the step only cites the deficit bound."
+    },
+    {
+      "id": "stream-primitives",
+      "presence": "mentioned",
+      "statement": "n/a",
+      "derivation": "n/a",
+      "steps": [
+        "S2.1.3",
+        "S2.2",
+        "S6.3.2"
+      ],
+      "lines": [
+        491,
+        572
+      ],
+      "note": "The plan uses linear-cost row splitting, later-field updates and prefix-controlled shifts, and relies on stream-scans/controlled-shifts pages. No step states the lemmas' content: digit moves, split/merge, or the update y←y+a(controls) mod q^b with offsets costing b^{O(1)}."
+    },
+    {
+      "id": "matrix-shear",
+      "presence": "derived",
+      "statement": "imprecise",
+      "derivation": "partial",
+      "steps": [
+        "S2.1",
+        "S2.1.1",
+        "S2.1.2"
+      ],
+      "lines": [
+        1364,
+        1447
+      ],
+      "note": "S2.1.1 states the lower-lower factorization correctly, and S2.1.2 states the cost (a interchanges plus O(V)). S2.1's motivation gives the route (triangular factors are cheap controlled updates; only Π costs interchanges). Missing: the fixed odd prime q / modulus q^b and the H-before-D ordering in the statement, and the paper's implementation of each one of Π by D←D+H, swap, D←H-D (1432-1443). The elimination proof of the factorization is also absent."
+    },
+    {
+      "id": "interchange-recurrence",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S2",
+        "S2.1",
+        "S2.1.3",
+        "S2.1.3.1",
+        "S2.1.3.2",
+        "S2.1.4",
+        "S2.2",
+        "S2.3",
+        "S2.3.1",
+        "S2.3.2"
+      ],
+      "lines": [
+        1475,
+        1616
+      ],
+      "note": "The plan follows the proof of prop:power-interchange: cyclic row split r=Wg+(w-1) (1497-1502), shear frames with recursive edge interchanges, H←H+D on every row (1532), the three-shear interchange (1537), s calls of volume V/W, F_k≤(s/W)F_{k-1}+O(1) and the geometric sum (1543-1557), and the parking-stack schedule (1559-1588). The row-count divisibility by W^k is left implicit."
+    },
+    {
+      "id": "arbitrary-width-interchange",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "partial",
+      "steps": [
+        "S2",
+        "S2.4"
+      ],
+      "lines": [
+        1631,
+        1735
+      ],
+      "note": "S2 states O(Vu^τ) for u-bit chunks, and S2.4 gives zero-row padding and base-m pieces (1684-1706). Missing: the row field is made from the chunks' own top ρ=O(log e) digits (1660-1680), and binary ranges are padded to [q^e] (1721-1734). These are essential to removing the row and radix restrictions."
+    },
+    {
+      "id": "phase-frame-recursion",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S3.1",
+        "S3.1.1",
+        "S3.1.2",
+        "S3.1.3",
+        "S3.1.4"
+      ],
+      "lines": [
+        1806,
+        1940
+      ],
+      "note": "The plan gives the edge identity ∏(aI+bX_{v_j})^{ε_j}, conjugation by P_M onto slots (1878-1888), Gaussian elimination into row additions on two whole slots (1892-1901), s_c children on f=e/m axes with inverse kernels from forward children (1904-1916), and H_0^{⊗D}=b^D S_D C^{⊗D} S_D (1930). The explicit inverse formula (C^{-1})^{⊗f}=(-i)^fZ^{⊗f}C^{⊗f}Z^{⊗f} is not written."
+    },
+    {
+      "id": "packed-selected-bit-addition",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S3.2",
+        "S3.2.1",
+        "S3.2.2",
+        "S3.2.3",
+        "S3.2.4"
+      ],
+      "lines": [
+        1974,
+        2231
+      ],
+      "note": "The plan matches the proof: the eight conditional additions flip u's parity and restore w, applied as cyclic shifts (2016-2077); twenty excluded guard values give δ_bad≤80(f-1)2^{-K} (2097-2102); T_0S_0^{-1} permutes only B and is repaired by radix sort on destination ranks (2107-2185); and the time bound (2195-2207). The separate handling of the top position j_{f-1} is omitted."
+    },
+    {
+      "id": "layer-recurrence",
+      "presence": "derived",
+      "statement": "imprecise",
+      "derivation": "partial",
+      "steps": [
+        "S3.3",
+        "S3.3.1",
+        "S3.3.2",
+        "S3.3.3"
+      ],
+      "lines": [
+        2286,
+        2448
+      ],
+      "note": "The plan has the row split u=Wg+w with children of volume V/W, F(e)≤(s/W)F(e/m)+O((eK)^τ+1) with leaves at e<d^β, and the base-m pieces (2325-2445). The unrolling is only asserted: missing K≤e^{c/β} giving O(e^λ) overhead, the geometric sum with a≤m^σ<m^λ, the leaf bound e^σd^{β(1-σ)}, and the condition max{λ,σ+β(1-σ)}<λ'. The row index from the first q_0 chunks appears only in a method phrase."
+    },
+    {
+      "id": "simultaneous-layer",
+      "presence": "derived",
+      "statement": "imprecise",
+      "derivation": "partial",
+      "steps": [
+        "S3",
+        "S3.4",
+        "S3.5"
+      ],
+      "lines": [
+        2450,
+        2586,
+        2588,
+        2758
+      ],
+      "note": "S3 and S3.5 state the layer H_0^{⊗D} on one selected bit per chunk, one final truncation, O(Vd^{λ'}) and error <√2 2^{-p}. S3.4 states the guard width Δ=⌈C_0d^{C_1}⌉=o(p). The statement omits K=⌊d^c⌋ and the exponent conditions. The guard derivation (arithmetic depth A(e)≤sA(e/m)+E and the bound C_0d^{C_1}, 2479-2560) is missing, so the guard width is asserted, not derived."
+    },
+    {
+      "id": "synthetic-transform",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S4.1",
+        "S4.1.1",
+        "S4.1.2",
+        "S4.1.3",
+        "S4.2",
+        "S4.2.1",
+        "S4.2.2",
+        "S4.2.3",
+        "S4.2.4"
+      ],
+      "lines": [
+        2798,
+        2915,
+        2929,
+        3200
+      ],
+      "note": "Character cancellation by the shift giving y^{rj_0}=-1 (2820-2825), the decimation-in-frequency step (2832-2845), bit-reversed storage (2864-2870), the layout L by prefix moves and ≤Dq-1 chunk exchanges (3002-3032), per-round layer cost, the error √2ℓ2^{-p}, and LBF^-/F^+B^{-1}L^{-1} (3180-3193) all match the paper."
+    },
+    {
+      "id": "signed-packing",
+      "presence": "stated",
+      "statement": "correct",
+      "derivation": "n/a",
+      "steps": [
+        "S4.3"
+      ],
+      "lines": [
+        3221,
+        3368
+      ],
+      "note": "S4.3 states evaluation at 2^{4p}, products by the established multiplier, centered residues, negacyclic reduction and O(rp log(rp)), as in Lemma lem:signed-ring-product and its proof (3240-3367). Returning Q_p(fg/r) is left implicit."
+    },
+    {
+      "id": "synthetic-convolution",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S4",
+        "S4.4",
+        "S4.5"
+      ],
+      "lines": [
+        3370,
+        3495
+      ],
+      "note": "S4 states M_r=(f*g)/T with the error and cost bounds of prop:synthetic-convolution. S4.4 gives the retained-LB-order procedure and the final scale by M, and S4.5 the error propagation to √2M(3ℓ+1)2^{-p} (3415-3473). The normalization identity F^-(f*g)=M(F^-f)(F^-g) is not written, but the route is the paper's."
+    },
+    {
+      "id": "gaussian-resampling",
+      "presence": "stated",
+      "statement": "imprecise",
+      "derivation": "n/a",
+      "steps": [
+        "S5",
+        "S5.1",
+        "S5.2",
+        "S6.5"
+      ],
+      "lines": [
+        3548,
+        3650,
+        3800,
+        3897
+      ],
+      "note": "S5.1 states P_sF_s=2^{2α²}B_0P_tF_tA with error p² and time O(tp^{3/2+δ}α), S5.2 the linewise padded-box application at O(Tpd²(1+ℓ^τ)), and S6.5 the tensor form RF_s=2^γB_0QF_tA. The hypotheses gcd(s,t)=1 and θ=t/s-1>p/α^4, and the definitions of P_s, P_t, are missing. The Gaussian maps and Neumann-series construction (3576-3642) are not shown."
+    },
+    {
+      "id": "chirp-permutation-cancellation",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "partial",
+      "steps": [
+        "S5",
+        "S5.3",
+        "S5.4",
+        "S6.5.3"
+      ],
+      "lines": [
+        3911,
+        3988
+      ],
+      "note": "Both identities are stated correctly (S5.3, S5.4), and S5.4 gives the paper's reason for cancellation (RF^+R=F^+, permutations commute with pointwise products). The chirp identity has no derivation beyond the word 'Bluestein': the coefficient computation (3938-3950) is missing, and so is the normalization F_s(u*v)=S·F_su·F_sv."
+    },
+    {
+      "id": "parameters-and-primes",
+      "presence": "stated",
+      "statement": "imprecise",
+      "derivation": "n/a",
+      "steps": [
+        "S7",
+        "S7.1",
+        "S7.2",
+        "S6.1",
+        "S6.2"
+      ],
+      "lines": [
+        4004,
+        4072,
+        4089,
+        4193
+      ],
+      "note": "S7.1 and S7.2 give the fixed exponents and b, p=6b, d=⌊b^ε⌋, K=⌊d^c⌋, Tp=Θ(n). S6.1 gives distinct odd primes in ((1-2η)t_i,(1-η)t_i], found by scanning, with S>T/2, and S6.2 gives no wraparound and c_j<2^{3b}. Missing: η=1/(4d), α, γ, T∈[4n/b,8n/b), t_i∈{r/2,r}, and the actual resampling condition α^4θ_i>p (S6.1 gives only θ_i>η)."
+    },
+    {
+      "id": "crt-address-map",
+      "presence": "derived",
+      "statement": "imprecise",
+      "derivation": "partial",
+      "steps": [
+        "S6.3",
+        "S6.3.1",
+        "S6.3.2",
+        "S6.3.3"
+      ],
+      "lines": [
+        4204,
+        4296
+      ],
+      "note": "S6.3.1 follows the paper's isomorphism argument (4216-4220), S6.3.2 the split-and-merge shift (4273-4277), and S6.3.3 the cost (4285-4292). μ_i=P_i^{-1} mod s_i and the triangular coordinate formula b_i=a_i+μ_iΣ_{j<i}a_jP_j (eq:triangular-crt) are never given. That formula is what makes each update a prefix-controlled shift."
+    },
+    {
+      "id": "phase-twist",
+      "presence": "stated",
+      "statement": "correct",
+      "derivation": "n/a",
+      "steps": [
+        "S6.4"
+      ],
+      "lines": [
+        4298,
+        4347
+      ],
+      "note": "S6.4 states the twist by ζ^k, ζ=e^{πi/r}, taking cyclic length-r convolution to convolution mod y^r+1, so that d-axis cyclic convolution is a (d-1)-axis ring convolution between twist and untwist. This matches 4303-4342. The wrap check and the twist error bounds are not given."
+    },
+    {
+      "id": "multiplication-algorithm",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S6",
+        "S6.5",
+        "S6.5.1",
+        "S6.5.2",
+        "S6.5.3",
+        "S6.6"
+      ],
+      "lines": [
+        4415,
+        4534
+      ],
+      "note": "S6.5.1-S6.5.3 give the chirp transform, the source transform 2^γB_0QF_tA=RF_s, and the conjugated opposite procedure. S6.6 lists the six steps with scalings by S and 2^{2b+4}S (4506-4533). The input scaling of digits by 2^{-b-2} is not mentioned."
+    },
+    {
+      "id": "exact-recovery",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "partial",
+      "steps": [
+        "S6.7",
+        "S6.7.1",
+        "S6.7.2",
+        "S6.7.3",
+        "S6.7.4",
+        "S6.7.5"
+      ],
+      "lines": [
+        4546,
+        4806
+      ],
+      "note": "The plan gives E_s=9·2^γTL, the opposite-transform error (3E_s+2)h_p, the final bound 448b2^{-b+γ}≤448b2^{-3b/4}<1/2, rounding into [0,2^{3b}), and the carry recurrence. These are correct. The chain that produces E_s (ring <5TL, complex convolution <6TL, chirp <8TL, 4600-4653), E_w=S(3E_s+2)<28·2^γT²L, and the use of γ≤b/4 are not shown."
+    },
+    {
+      "id": "time-accounting",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "partial",
+      "steps": [
+        "S7",
+        "S7.3",
+        "S7.4"
+      ],
+      "lines": [
+        4815,
+        4870,
+        4970,
+        4995
+      ],
+      "note": "S7.3 and S7.4 follow the paper's conclusion: seven powers with min margin 2^{-181}=2κ, log factors ≤p^κ, total O(Tp·p^{1-κ}) (4854, 4983-4987). The cost table's entries (dK, pK^{τ-1}, ℓd^{λ'}, d²(1+ℓ^τ), dp^{1/2+δ}α, dp^δ, log(rp)) and their margins g_i are not listed, so the minimum (g_2=εc(1-τ)) is asserted rather than computed."
+    },
+    {
+      "id": "conjecture-negation",
+      "presence": "mentioned",
+      "statement": "n/a",
+      "derivation": "n/a",
+      "steps": [
+        "S0"
+      ],
+      "lines": [
+        379,
+        387
+      ],
+      "note": "S0 says the bound disproves the n log n optimality conjecture in this model, but it never states what the eventual lower bound is or that liminf T_A(n)/(n lg n)=0 negates it."
+    }
+  ],
+  "errors": [
+    {
+      "step": "S1.5",
+      "says": "The endpoint operator on every role is C^{⊗m}.",
+      "paper": "Telescoping the phase frames gives C^{⊗m} only after source and sink diagonal corrections and undoing the signed bank exchange. Without them, the X_a→Y_a route carries C^{-1} on the 27 coordinates of supp(u_a), and the X outputs carry a minus sign.",
+      "lines": [
+        1225,
+        1227,
+        1290,
+        1314
+      ],
+      "severity": "minor"
+    },
+    {
+      "step": "S2.4",
+      "says": "Padding with zero rows and splitting a general width into base-m pieces extends the power-width interchange to arbitrary widths u and to arbitrary rows.",
+      "paper": "The row field is first made from the two chunks' own top ρ digits by exchanging and joining the high parts. Only then is it padded with zero rows to a multiple of W^k. Binary chunk ranges are also padded to [q^e].",
+      "lines": [
+        1660,
+        1690,
+        1721,
+        1734
+      ],
+      "severity": "minor"
+    },
+    {
+      "step": "S6.1",
+      "says": "Each ratio t_i/s_i leaves the separation θ_i>η that Gaussian resampling needs.",
+      "paper": "Resampling requires θ>p/α^4. The paper derives θ_i>η and then, with α=⌈(12d²b)^{1/4}⌉, α^4θ_i>3db≥p.",
+      "lines": [
+        3553,
+        4147,
+        4151
+      ],
+      "severity": "minor"
+    }
+  ],
+  "chain": "The tree follows the paper's route from the scalar exchange network, frames and labels to s<Wm and τ=σ=1-2^{-50}, then through the power-width interchange, the phase-frame and packed-bit layer, synthetic transforms and convolution, resampling with chirp and permutation cancellation, the CRT map and twist, the six-step algorithm with exact recovery, and the exponent table to O(n(lg n)^{1-κ}). It is thinnest at the start: the label construction, the budget L=Ich with L<N/2, and the bit network's projection-matrix rank sum are asserted, so s<Wm is cited rather than shown. Later it thins at the layer's guard width and recurrence unrolling, the Gaussian resampling identity, the source-error chain, and the cost-table entries, which are stated without their computations."
+}
