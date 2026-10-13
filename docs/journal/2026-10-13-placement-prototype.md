@@ -54,11 +54,59 @@ The method is that of 2026-10-12-responsibility-prototype, with no change to exe
 
 If both hypotheses hold, the next step is to propose the smallest general rule that finds missing dependency edges without giving every prerequisite the responsibility to explain. No full run comes before that. The run after it reuses this run's extraction, background and argument answers, so that pages compare one for one.
 
+## Results
+
+Both prototypes were written by fresh Haiku subagents. Each was then given submit's rejection once, and each passed submit's checks on the second answer:
+- `butterfly-layer`: the little-o in $o(p)$ was taken for a new letter. It finished at 401 of 427 words.
+- `subspace-labels`: 5 words over budget, an unbound $M$, and relation ids written as `frame.md`. It finished at 365 of 388 words.
+
+Each was audited by a fresh Haiku subagent with the run's last audit task for the page, and read against `paper.tex`.
+
+**Hypothesis 2, ownership: supported.**
+- **The derivation:** `subspace-labels` now derives the bound from the labels.
+  - Frames are shears $\Phi_M$, so an edge's frame change is $\Phi_{A_e}$.
+  - For an edge other than a source edge, $A_e$ is a difference of projections, of rank equal to the drop.
+  - Gate labels cancel, so the signed sum is $Wm - 2N$, and the drops total $Wm - 2N + 2\Lambda$.
+  - The source edges exceed their drop by $N$, so $s = Wm - N + 2\Lambda$.
+  - $\Lambda < N/2$, cited as the paper's count, gives $s < Wm$.
+- **Against the paper:** each step agrees with §5 and its proof of the rank sum.
+- **The audit:** 6 steps, each a finer point of that derivation:
+  - what a smaller call computes;
+  - how the labels are chosen to nest;
+  - $D_\nu$, $D_\sigma$ not said to be frames;
+  - the sink total;
+  - the source edges' excess;
+  - the count behind $\Lambda < N/2$.
+
+**Hypothesis 1, dependency: not supported.** With `tape-interchange` as a prerequisite, the page gives a relation to it and keeps its link. But it neither states what interchange costs ($O(Vu^\tau)$) nor shows how the layer's own recursion gives $d^{\lambda'}$. It cut its one sentence about that recursion, "The sum is $O(d^{\lambda'})$ for any $\lambda'$ above the swap exponents", because that sentence was at depth 2 and its note said to cite or cut. What remains is a missing derivation on the page that owns it, not a missing link. Two things hid it:
+- **The depth budget went on a gesture.** Round 2 asked for the cited central bound to be explained, and the rewrite answered with a one-sentence summary of the proof's last step. That made the recursion depth 2 on a page whose limit is 2.
+- **The audit missed it.** The fresh audit reported 2 steps (the guard-bit bound, and the cost of an exact operation) and passed the cited central bound, "The layer runs in $O(Vd^{\lambda'})$ tape operations (cited)". Under the audit rule, a cited claim standing in for the page's own mechanism is a step.
+
+**The chain.**
+- **From the interchange recurrence to the saving:** this now holds. `tape-interchange` derives the recurrence and its exponent, and `subspace-labels` derives $s < Wm$, with only the count $\Lambda < N/2$ cited. The link between them runs through `recursive-saving`.
+- **From the butterfly layer to the saving:** this breaks at `butterfly-layer`, whose own recursion is derived nowhere.
+
+**Ownership from extraction evidence.** One candidate rule would assign a cited passage to the concept whose extraction evidence contains it. In this graph no concept's evidence contains the passages cited for $s < Wm$, $O(Vu^\tau)$ or $O(Vd^{\lambda'})$, so the rule has nothing to work with here.
+
+## Who made the organisational decisions
+
+ChatGPT, reading the session's log, attributed the wrong first page for $s < Wm$ (`subset-network`) to the model. That choice was the reviewer's, made while planning this prototype, and corrected before it ran.
+
+The decisions the pipeline made are these, each by a Haiku task:
+- **Extraction:** the graph, which left out the edge.
+- **The argument task:** which pages present a step, which left out `recursive-saving` and `subspace-labels`.
+- **The writer:** the one-sentence gesture.
+- **The audit:** passing the cited central bound.
+
+Given an explicit note, the Haiku writer derived correctly in both prototypes. The failures lie in planning and auditing.
+
 ## Current State
+- With a note that the count is its to derive, `subspace-labels` derived $s = Wm - N + 2\Lambda < Wm$ in agreement with the paper, within budget after one rejection
+- With `tape-interchange` as a prerequisite, `butterfly-layer` still derived neither the interchange cost it uses nor its own recursion, and its fresh audit passed its cited central bound
 - In the explanation-depth run, `butterfly-layer` links `tape-interchange` without a prerequisite edge to it
 - In the explanation-depth run, `tape-interchange` derives the interchange recurrence and its exponent in agreement with the paper
 - In the explanation-depth run, the bound $s < Wm$ is cited on `recursive-saving`, `subspace-labels` and `tape-interchange` and derived on none
 
 ## Missing
-- No prototype results for the two hypotheses
-- No general rule for finding missing dependency edges
+- No general rule for finding missing dependency edges or assigning ownership of a cited result
+- No comparison of models on the planning tasks (extraction, argument) or on audits, with inputs fixed
