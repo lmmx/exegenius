@@ -4,7 +4,8 @@ This entry hands the work over across a compaction of the development session's 
 - the state after the original feature and its three follow-ups were merged into `master`;
 - how experiments are now run;
 - what the evidence shows;
-- what is queued, in order, with the author's instructions for each step.
+- what is queued, in order, with the author's instructions for each step;
+- the three steps done since the merges, on branches awaiting review (see "Since the merges").
 
 It supersedes the state recorded in 2026-10-13-autonomous-investigation. Read this entry first, then the entries it names.
 
@@ -30,7 +31,7 @@ It supersedes the state recorded in 2026-10-13-autonomous-investigation. Read th
 ## State of the repositories
 
 **lmmx/exegenius**
-- **`master`** is at c91907d, linear, with no merge commits:
+- **`master`** is at c91907d for code, linear, with no merge commits. This entry's first version followed it (2bc8940):
 
   | Commit | What it is | Branch |
   |---|---|---|
@@ -114,7 +115,48 @@ Details are in 2026-10-13-recovery-experiment and 2026-10-13-depth-rejection.
 - Parallel planners shared `/tmp/claude-0/gen.py`, so one run submitted another's draft. This led to the scratch directories.
 - A planner ran a machine-wide `pkill -f "cat >"` to kill its own hung command. It interrupted nothing that time, but could interrupt other agents' commands. This is the next fix.
 
+## Since the merges
+
+The three queued steps below are done. Each is on its own dated branch of lmmx/exegenius, based on `master` at 2bc8940, unmerged and awaiting the author's review:
+
+| Branch | Head | What it holds | Entry |
+|---|---|---|---|
+| `131026-process-safety` | 9774295 | `init` denies `Bash(pkill *)` and `Bash(killall *)`; task files ask agents to stop only their own commands, by process id; 97 tests pass | 2026-10-13-process-safety |
+| `131026-content-judge` | f4b1074 | the blind judge of 23 plans' mathematical content: inputs, 28 verdicts, key, analysis; journal only | 2026-10-13-content-judge |
+| `131026-model-allocation` | 16a831a | the model-allocation investigation and proposal, with `usage.py`; journal only, nothing implemented | 2026-10-13-model-allocation |
+
+The three branches touch disjoint files, apart from the process-safety branch's code. Merging them in any order is a fast-forward or a conflict-free rebase.
+
+**Process safety.** A guard, not a boundary: deny rules do not match `pkill` run through `bash -c`, `env` or a full path. No run has yet shown agents keeping to it.
+
+**The content judge, observed:**
+- Over the 21 `exegenius-planner` plans: 3–18 of 19 core results stated in substance, 0–4 stated fully, 0–4 derived, none derived faithfully.
+- The two plans by general-purpose Sonnet subagents: 19 stated, 11–14 fully, 11–12 derived, 5–6 faithfully.
+- The section rule's rejections roughly double what is stated: a median of 12 for planners sent back against 6 for those that stopped at the introduction and were not.
+- The results rule's arm (D) and the section rule's arm (C) have the same medians, 12 stated and 2 derived. Its better quote placement shows no content gain.
+- Major errors repeat across independent runs: the convolution "computed exactly" (it is approximated, then rounded), the address shear "in linear time" (it costs rank-many interchanges), "both permutations cancel" (only the source permutation does).
+- Paired judges agreed on presence for 22–25 of 26 items, and on statement verdicts for 41 of 44.
+
+**The content judge, interpreted, not shown:** the gap between the general-purpose and `exegenius-planner` plans, on the same model family, points at the agent configuration rather than the model. The two samples differ in system prompt, orchestrator and binary as well, so this is a hypothesis for experiment E1, not a finding.
+
+**Model allocation, observed:**
+- The planner and task definitions have identical instructions and differ only in model; which definition a kind goes to is hard-coded in `subagent()`.
+- `exegenius-task` inherits the orchestrator's model, a hidden variable in every comparison of runs.
+- The run log records no definition, model or effort.
+- Token baseline per planning task, medians over 22 runs on Sonnet: extraction about 163k tokens read from cache and 71 seconds; argument about 253k and 144 seconds. Output is estimated at 4 characters per token, because transcripts' `output_tokens` undercount.
+- A full run is dominated in volume by writers (95 tasks) and auditors (73), not planning (7).
+
+**Model allocation, proposed, for review, not implemented:**
+1. Execution profiles (`[profiles]` low, medium, high, each a model and effort) and an `[allocation]` table from task kind to profile, with `init` writing one definition per profile and the task file unchanged as the specification.
+2. The run log records each task's profile, model and effort.
+3. Escalation after k rejections, recorded in shadow mode first.
+4. Allocation pinned per experiment; only a reviewed commit changes the default.
+
+**Experiments proposed, in order:** E1, agent configuration at a fixed Sonnet (`exegenius-planner` against a general-purpose subagent, same prompt, five runs each, judged by the content judge); then E2 (model), E3 (effort), E4 (writers, which needs a page judge) and E5 (auditors). E1 projects to about 4.5 M tokens read from cache and 0.24 M output (estimated) for its ten runs.
+
 ## Queued work, in order, as the author instructed
+
+Steps 1–3 are done (see "Since the merges"); they are kept here as the author's instructions.
 
 1. **Process safety.** Stop one task's agent from killing other tasks' processes; the `pkill -f` above is the case. Make the change on its own dated branch, documented.
 2. **The plan-content judge.**
@@ -132,8 +174,13 @@ Details are in 2026-10-13-recovery-experiment and 2026-10-13-depth-rejection.
    - **Investigator and policy:** keep the investigator apart from the policy it studies, with baselines and pinned versions.
    - **No refactor** of the model-selection architecture before the author reviews the proposal.
    - **A decided caveat:** the confounded comparison behind the Sonnet routing (a539829, now on `master`) is no basis for allocation. The experiments so far held the planner on Sonnet.
-4. **Later, or the author's to decide:**
-   - reviewing the draft reference set;
+4. **The author's to decide now:**
+   - merging `131026-process-safety`;
+   - merging the content-judge and model-allocation journal branches;
+   - approving experiment E1, which runs on a dated wiki branch by the runner protocol and changes no code;
+   - the profile design, before any implementation.
+5. **Later, or the author's to decide:**
+   - reviewing the draft reference set, which the content judge also relies on;
    - making `coverage_depth = "results"` the default once validated on more papers;
    - deleting `exp-coverage-recovery` on the wiki;
    - a full run (writing and auditing) with the new defaults.
@@ -142,10 +189,15 @@ Details are in 2026-10-13-recovery-experiment and 2026-10-13-depth-rejection.
 - `master` of lmmx/exegenius is at c91907d and holds the timing-and-parallelism feature (pull request #8, merged), per-task scratch directories, the `coverage_depth = "results"` option and the coverage check rejecting by default, with 96 passing tests and clean fmt and clippy
 - Experiment runs are made by runner cloud sessions on dated branches of lmmx/openai-nlogn-wiki (`131026-exp-coverage-recovery`, `131026-exp-coverage-recovery-2`, `131026-exp-depth-rejection`), whose protocols, reports, run directories and transcripts are committed there
 - The analysis scripts `score.py`, `depth.py`, `lines_read.py` and `reads.py` are in `docs/journal/2026-10-13-coverage-recovery/`, and the draft reference set is in `docs/journal/2026-10-13-run-log-and-coverage/reference-draft/`
+- `131026-process-safety` (9774295) holds the deny rules against stopping processes by pattern, with 97 passing tests, unmerged
+- `131026-content-judge` (f4b1074) holds the blind judge of 23 plans' content and its verdicts, unmerged
+- `131026-model-allocation` (16a831a) holds the model-allocation investigation, token baseline and proposal, unmerged and unimplemented
 
 ## Missing
-- No safeguard against one task's agent killing another task's processes
-- No judge of the plans' mathematical content
-- No investigation yet of where stronger models change outcomes, and no separation of task specifications from execution profiles
+- The process-safety guard is not on `master`, and misses `pkill` through `bash -c`, `env` or a full path
+- No `exegenius-planner` plan derives the paper's core results faithfully, by the content judge
+- No controlled comparison of agent configuration, model or effort on any task (E1–E5 proposed)
+- No separation of task specifications from execution profiles, and no record of model or effort in the run log
+- No page judge for comparing writers
 - No review of the draft reference set
 - No run with the new defaults beyond planning
