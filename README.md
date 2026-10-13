@@ -37,7 +37,11 @@ exegenius init
 tasks: extract, background, argument and extend) and `exegenius-reader` (on the smallest
 model, for simulated readers), each limited to the Read, Write and Bash tools. To change a
 definition's model, edit the `model:` line of its file after `init` (running `init` again
-rewrites the definitions). `next` names the definition to use for each task. Put the sources in `sources/` (plain text or markdown;
+rewrites the definitions). `next` names the definition to use for each task. `init` also
+adds `Bash(pkill *)` and `Bash(killall *)` to `permissions.deny` in
+`.claude/settings.json`, keeping whatever the file already holds: tasks run side by side, and
+stopping processes by name or pattern would stop other tasks' commands. A deny rule does not
+match a command run through `bash -c` or `env`, so task files also ask agents not to do it. Put the sources in `sources/` (plain text or markdown;
 convert PDFs to text first) and edit `exegenius.toml`:
 
 ```toml

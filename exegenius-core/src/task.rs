@@ -311,7 +311,9 @@ fn render(project: &Project, task: &Task, instructions: &str, input: &str) -> St
          `exegenius submit {id}` in the project directory. If submit rejects the answer, fix \
          the answer and submit again.\n\nKeep any other files you make, such as scripts, in \
          `{scratch}`. Other tasks run at the same time on this machine, and files elsewhere \
-         (in /tmp, for example) can be overwritten or run by them.\n",
+         (in /tmp, for example) can be overwritten or run by them. For the same reason, never \
+         stop processes by name or pattern (`pkill`, `killall`), which would stop other \
+         tasks' commands too: stop a command of your own by its process id.\n",
         id = task.id,
         root = project.root.display(),
         scratch = task.scratch().display(),

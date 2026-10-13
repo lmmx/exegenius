@@ -229,6 +229,7 @@ fn task_loop_end_to_end() {
     // Each task has a directory of its own for scratch files.
     assert!(file.contains("such as scripts, in `exegenius/tasks/0001-extract`"));
     assert!(project.root.join(batch[0].scratch()).is_dir());
+    assert!(file.contains("never stop processes by name or pattern (`pkill`, `killall`)"));
     answer(&project, &batch[0], &extract_answer("an invented sentence"));
     let err = submit(&project, "0001-extract").unwrap_err().to_string();
     assert!(err.contains("quote not found verbatim"), "{err}");

@@ -30,6 +30,13 @@ const SUBAGENTS: [(&str, &str); 3] = [
         include_str!("agents/exegenius-reader.md"),
     ),
 ];
+/// Project settings for Claude Code, where `init` adds the deny rules below.
+const SETTINGS_PATH: &str = ".claude/settings.json";
+/// Bash commands denied to every agent in the project, subagents included: they stop
+/// processes by name or pattern, so one task's agent would stop the commands of tasks running
+/// beside it. A deny rule matches inside compound commands but not through `bash -c` or
+/// `env`, so it is a guard, not a boundary; task files also ask agents not to do this.
+const DENIED: [&str; 2] = ["Bash(pkill *)", "Bash(killall *)"];
 /// Claude Code's default limit on subagents running at once; spawns past it are refused.
 const MAX_SUBAGENTS: usize = 20;
 
@@ -168,6 +175,62 @@ fn subagent(kind: &Kind) -> &'static str {
     }
 }
 
+/// Add [`DENIED`] to `permissions.deny` in the project's Claude Code settings, keeping
+/// everything already there. A settings file that is not a JSON object is left alone.
+fn deny_rules(dir: &Path) -> anyhow::Result<()> {
+    let path = dir.join(SETTINGS_PATH);
+    let mut settings: serde_json::Value = if path.exists() {
+        match serde_json::from_str(&std::fs::read_to_string(&path)?) {
+            Ok(value) => value,
+            Err(e) => {
+                println!(
+                    "kept {} (not valid JSON: {e}); add {} to permissions.deny by hand",
+                    path.display(),
+                    DENIED.join(" and ")
+                );
+                return Ok(());
+            }
+        }
+    } else {
+        serde_json::json!({})
+    };
+    let deny = settings
+        .as_object_mut()
+        .map(|o| {
+            o.entry("permissions")
+                .or_insert_with(|| serde_json::json!({}))
+        })
+        .and_then(|p| p.as_object_mut())
+        .map(|p| p.entry("deny").or_insert_with(|| serde_json::json!([])))
+        .and_then(|d| d.as_array_mut());
+    let Some(deny) = deny else {
+        println!(
+            "kept {} (permissions.deny is not a list); add {} to it by hand",
+            path.display(),
+            DENIED.join(" and ")
+        );
+        return Ok(());
+    };
+    let missing: Vec<&str> = DENIED
+        .iter()
+        .copied()
+        .filter(|rule| !deny.iter().any(|r| r == rule))
+        .collect();
+    if missing.is_empty() {
+        println!("kept {}", path.display());
+        return Ok(());
+    }
+    deny.extend(missing.iter().map(|r| serde_json::json!(r)));
+    std::fs::create_dir_all(path.parent().expect("settings path has a parent"))?;
+    std::fs::write(&path, serde_json::to_string_pretty(&settings)? + "\n")?;
+    println!(
+        "updated {} (denied: {})",
+        path.display(),
+        missing.join(", ")
+    );
+    Ok(())
+}
+
 fn init(dir: &Path) -> anyhow::Result<()> {
     let config = dir.join(config::FILE_NAME);
     if config.exists() {
@@ -187,6 +250,7 @@ fn init(dir: &Path) -> anyhow::Result<()> {
         std::fs::write(&path, definition)?;
         println!("wrote {}", path.display());
     }
+    deny_rules(dir)?;
     println!(
         "next: put the sources in sources/, set target, reader and [[sources]] in {}, then \
          run `exegenius next` and follow what it prints until it prints `done`",
@@ -730,6 +794,32 @@ mod tests {
             persona: "reader".into(),
         };
         assert_eq!(subagent(&reader), "exegenius-reader");
+    }
+
+    #[test]
+    fn init_denies_stopping_processes_by_pattern_and_keeps_existing_settings() {
+        let dir = std::env::temp_dir().join(format!("exegenius-deny-{}", std::process::id()));
+        let settings = dir.join(SETTINGS_PATH);
+        std::fs::create_dir_all(settings.parent().unwrap()).unwrap();
+        std::fs::write(
+            &settings,
+            r#"{"model": "x", "permissions": {"deny": ["Bash(rm -rf *)", "Bash(killall *)"]}}"#,
+        )
+        .unwrap();
+        init(&dir).unwrap();
+        init(&dir).unwrap();
+        let value: serde_json::Value =
+            serde_json::from_str(&std::fs::read_to_string(&settings).unwrap()).unwrap();
+        assert_eq!(value["model"], "x");
+        assert_eq!(
+            value["permissions"]["deny"],
+            serde_json::json!(["Bash(rm -rf *)", "Bash(killall *)", "Bash(pkill *)"])
+        );
+        // A file that is not JSON is left as it is.
+        std::fs::write(&settings, "not json").unwrap();
+        init(&dir).unwrap();
+        assert_eq!(std::fs::read_to_string(&settings).unwrap(), "not json");
+        std::fs::remove_dir_all(&dir).unwrap();
     }
 
     #[test]

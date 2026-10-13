@@ -183,6 +183,7 @@ dependencies = [
  "anyhow",
  "clap",
  "exegenius-core",
+ "serde_json",
 ]
 
 [[package]]
