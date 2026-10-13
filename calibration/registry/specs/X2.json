@@ -1,0 +1,11 @@
+{"id": "X2", "title": "Coverage recovery, replication", "kind": "controlled", "document": {"name": "nlogn", "title": "Integer multiplication below n log n (paper.tex)", "class": "frontier mathematics paper, LaTeX, 5,361 lines"}, "task": "planning (extract, background, argument)",
+ "question": "Replication of X1 with four runs per arm.",
+ "binary": {"repo": "lmmx/exegenius", "commit": "1d90c28"},
+ "evidence": {"repo": "lmmx/openai-nlogn-wiki", "branch": "131026-exp-coverage-recovery-2", "commit": "8023a47"},
+ "journal": "docs/journal/2026-10-13-recovery-experiment.md",
+ "arms": {
+  "A": {"intended": {"agent": "exegenius-planner", "model": "sonnet (definition)", "effort": null, "effort_passed": false, "checks": "coverage = report"}, "runs": ["A3", "A4", "A5", "A6"]},
+  "B": {"intended": {"agent": "exegenius-planner", "model": "sonnet (definition)", "effort": null, "effort_passed": false, "checks": "coverage = reject"}, "runs": ["B3", "B4", "B5", "B6"]}},
+ "excluded": {"A3": "contaminated: it submitted B3's draft through a shared /tmp script (journal 2026-10-13-recovery-experiment)"},
+ "reported": {"session_cost_usd": {"value": 8.12, "basis": "reported", "source": "runner session record (includes orchestration)"}},
+ "limitations": ["Effort was not passed; subagents inherited the runner's (medium)."]}

@@ -1,0 +1,10 @@
+{"id": "S0", "title": "General-purpose Sonnet planning samples", "kind": "observational", "document": {"name": "nlogn", "title": "Integer multiplication below n log n (paper.tex)", "class": "frontier mathematics paper, LaTeX, 5,361 lines"}, "task": "planning (extract, background, argument)",
+ "question": "Planning by general-purpose subagents on Sonnet, from the same task files, in the development session.",
+ "binary": {"repo": "lmmx/exegenius", "commit": "930d40c"},
+ "evidence": {"repo": "lmmx/exegenius", "path": "docs/journal/2026-10-13-model-comparison/sonnet-sample-{1,2}"},
+ "journal": "docs/journal/2026-10-13-model-comparison.md",
+ "arms": {"S": {"intended": {"agent": "general-purpose", "model": "sonnet (per call)", "effort": null, "effort_passed": false}, "runs": ["sonnet1", "sonnet2"]}},
+ "runs_extra": {
+  "sonnet1": {"observed_config": {"agent_types": ["general-purpose"], "models": ["claude-sonnet-5-5"], "efforts": ["high"], "basis": "measured", "source": "docs/journal/2026-10-13-effort-dimension/sonnet-samples.tsv (transcripts not preserved on a branch)"}},
+  "sonnet2": {"observed_config": {"agent_types": ["general-purpose"], "models": ["claude-sonnet-5-5"], "efforts": ["high"], "basis": "measured", "source": "docs/journal/2026-10-13-effort-dimension/sonnet-samples.tsv (transcripts not preserved on a branch)"}}},
+ "limitations": ["Two samples; different binary, orchestrator and prompt sentence from the X experiments; no run log; transcripts were in the development session's container and survive only as the effort table."]}

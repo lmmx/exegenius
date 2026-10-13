@@ -1,0 +1,212 @@
+{
+ "id": "S0",
+ "title": "General-purpose Sonnet planning samples",
+ "kind": "observational",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning (extract, background, argument)",
+ "question": "Planning by general-purpose subagents on Sonnet, from the same task files, in the development session.",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "930d40c"
+ },
+ "evidence": {
+  "repo": "lmmx/exegenius",
+  "path": "docs/journal/2026-10-13-model-comparison/sonnet-sample-{1,2}"
+ },
+ "journal": "docs/journal/2026-10-13-model-comparison.md",
+ "arms": {
+  "S": {
+   "intended": {
+    "agent": "general-purpose",
+    "model": "sonnet (per call)",
+    "effort": null,
+    "effort_passed": false
+   },
+   "runs": [
+    "sonnet1",
+    "sonnet2"
+   ]
+  }
+ },
+ "limitations": [
+  "Two samples; different binary, orchestrator and prompt sentence from the X experiments; no run log; transcripts were in the development session's container and survive only as the effort table."
+ ],
+ "built": {
+  "by": "calibration/tools/registry.py",
+  "wiki_commit": null
+ },
+ "orchestrator_observed": {
+  "value": null,
+  "basis": "unavailable",
+  "note": "no main transcript at the evidence commit"
+ },
+ "runs": [
+  {
+   "id": "sonnet1",
+   "arm": "S",
+   "planning_seconds": {
+    "value": null,
+    "basis": "unavailable",
+    "note": "no run log at the evidence ref"
+   },
+   "subagents": [],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "high"
+    ],
+    "basis": "measured",
+    "source": "docs/journal/2026-10-13-effort-dimension/sonnet-samples.tsv (transcripts not preserved on a branch)"
+   },
+   "matches_arm": null,
+   "quality": [
+    {
+     "batch": "J1",
+     "judge": "a",
+     "plan": "P14",
+     "core_stated": 19,
+     "core_fully": 14,
+     "core_derived": 11,
+     "core_faithful": 6,
+     "supporting_stated": 5,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1
+    },
+    {
+     "batch": "J2",
+     "judge": "a",
+     "plan": "P05",
+     "core_stated": 19,
+     "core_fully": 12,
+     "core_derived": 13,
+     "core_faithful": 7,
+     "supporting_stated": 5,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 3
+    }
+   ]
+  },
+  {
+   "id": "sonnet2",
+   "arm": "S",
+   "planning_seconds": {
+    "value": null,
+    "basis": "unavailable",
+    "note": "no run log at the evidence ref"
+   },
+   "subagents": [],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "high"
+    ],
+    "basis": "measured",
+    "source": "docs/journal/2026-10-13-effort-dimension/sonnet-samples.tsv (transcripts not preserved on a branch)"
+   },
+   "matches_arm": null,
+   "quality": [
+    {
+     "batch": "J1",
+     "judge": "a",
+     "plan": "P08",
+     "core_stated": 19,
+     "core_fully": 11,
+     "core_derived": 12,
+     "core_faithful": 5,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2
+    }
+   ]
+  }
+ ],
+ "arm_summary": {
+  "S": {
+   "runs": 2,
+   "quality_J1": {
+    "core_stated": {
+     "n": 2,
+     "median": 19.0,
+     "min": 19,
+     "max": 19
+    },
+    "core_fully": {
+     "n": 2,
+     "median": 12.5,
+     "min": 11,
+     "max": 14
+    },
+    "core_derived": {
+     "n": 2,
+     "median": 11.5,
+     "min": 11,
+     "max": 12
+    },
+    "core_faithful": {
+     "n": 2,
+     "median": 5.5,
+     "min": 5,
+     "max": 6
+    },
+    "major_errors": {
+     "n": 2,
+     "median": 0.0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": null
+   },
+   "quality_J2": {
+    "core_stated": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 12,
+     "min": 12,
+     "max": 12
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 13,
+     "min": 13,
+     "max": 13
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 7,
+     "min": 7,
+     "max": 7
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": null
+   },
+   "planning_seconds": null
+  }
+ }
+}

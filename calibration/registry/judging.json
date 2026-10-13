@@ -1,0 +1,10 @@
+[
+ {"id": "J1", "dir": "docs/journal/2026-10-13-content-judge", "key": "key.json", "verdicts": "verdicts",
+  "reference": "docs/journal/2026-10-13-run-log-and-coverage/reference-draft/reference.json",
+  "judge": {"agent": "general-purpose", "model_id": "claude-opus-5-5", "effort": "high"},
+  "seed": 20261013, "rubrics": [], "journal": "docs/journal/2026-10-13-content-judge.md"},
+ {"id": "J2", "dir": "docs/journal/2026-10-13-e1-config/judge", "key": "key.json", "verdicts": "verdicts",
+  "reference": "docs/journal/2026-10-13-run-log-and-coverage/reference-draft/reference.json",
+  "judge": {"agent": "general-purpose", "model_id": "claude-opus-5-5", "effort": "high"},
+  "seed": 20261014, "rubrics": [], "journal": "docs/journal/2026-10-13-e1-config.md"}
+]

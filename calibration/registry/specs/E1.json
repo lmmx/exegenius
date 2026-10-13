@@ -1,0 +1,10 @@
+{"id": "E1", "title": "Planner definition against general-purpose, Sonnet at high effort", "kind": "controlled", "document": {"name": "nlogn", "title": "Integer multiplication below n log n (paper.tex)", "class": "frontier mathematics paper, LaTeX, 5,361 lines"}, "task": "planning (extract, background, argument)",
+ "question": "With model, effort, binary, configuration and prompts fixed, does the subagent type change the plans?",
+ "binary": {"repo": "lmmx/exegenius", "commit": "cc70355"},
+ "evidence": {"repo": "lmmx/openai-nlogn-wiki", "branch": "131026-exp-e1-config", "commit": "85611ce"},
+ "protocol": "EXPERIMENT.md at 9afb736", "journal": "docs/journal/2026-10-13-e1-config.md",
+ "arms": {
+  "P": {"intended": {"agent": "exegenius-planner", "model_id": "claude-sonnet-5-5", "effort": "high", "effort_passed": true, "checks": "coverage = reject, coverage_depth = sections"}, "runs": ["P1", "P2", "P3", "P4", "P5"]},
+  "G": {"intended": {"agent": "general-purpose", "model_id": "claude-sonnet-5-5", "effort": "high", "effort_passed": true, "checks": "coverage = reject, coverage_depth = sections"}, "runs": ["G1", "G2", "G3", "G4", "G5"]}},
+ "reported": {"session_cost_usd": {"value": 28.27, "basis": "reported", "source": "runner session record (includes orchestration)"}},
+ "limitations": ["Five runs per arm; one paper; unreviewed reference."]}

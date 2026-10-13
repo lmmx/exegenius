@@ -1,0 +1,3154 @@
+{
+ "id": "X3",
+ "title": "Depth rejection: section rule against results rule",
+ "kind": "controlled",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning (extract, background, argument)",
+ "question": "Does naming the unquoted results make planners quote them, and reach more of the derivations?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "f70a919"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "131026-exp-depth-rejection",
+  "commit": "0dd87da"
+ },
+ "journal": "docs/journal/2026-10-13-depth-rejection.md",
+ "arms": {
+  "C": {
+   "intended": {
+    "agent": "exegenius-planner",
+    "model": "sonnet (definition)",
+    "effort": null,
+    "effort_passed": false,
+    "checks": "coverage = reject, coverage_depth = sections"
+   },
+   "runs": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5"
+   ]
+  },
+  "D": {
+   "intended": {
+    "agent": "exegenius-planner",
+    "model": "sonnet (definition)",
+    "effort": null,
+    "effort_passed": false,
+    "checks": "coverage = reject, coverage_depth = results"
+   },
+   "runs": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5"
+   ]
+  }
+ },
+ "reported": {
+  "session_cost_usd": {
+   "value": 10.22,
+   "basis": "reported",
+   "source": "runner session record (includes orchestration)"
+  }
+ },
+ "limitations": [
+  "Effort was not passed; subagents inherited the runner's (medium)."
+ ],
+ "built": {
+  "by": "calibration/tools/registry.py",
+  "wiki_commit": "0dd87da"
+ },
+ "orchestrator_observed": [
+  {
+   "models": {
+    "claude-opus-5-5": 107
+   },
+   "effort": {
+    "medium": 107
+   }
+  }
+ ],
+ "runs": [
+  {
+   "id": "C1",
+   "arm": "C",
+   "planning_tasks": [
+    {
+     "task": "0001-extract",
+     "kind": "extract",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:09:31.190000Z",
+       "outcome": "rejected",
+       "check": "coverage",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 17,
+         "located": 17,
+         "first_tenth": 17,
+         "span": [
+          41,
+          432
+         ],
+         "sections_quoted": 6,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:09:41.244000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 33,
+         "located": 33,
+         "first_tenth": 17,
+         "span": [
+          41,
+          4810
+         ],
+         "sections_quoted": 22,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:06:16.069000Z"
+    },
+    {
+     "task": "0002-background",
+     "kind": "background",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:10:06.167000Z",
+       "outcome": "accepted"
+      }
+     ],
+     "issued": "2026-10-13T18:09:46.309000Z"
+    },
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:11:14.571000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 17,
+         "located": 17,
+         "first_tenth": 17,
+         "span": [
+          76,
+          443
+         ],
+         "sections_quoted": 5,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:11:17.915000Z",
+       "outcome": "rejected",
+       "check": "coverage",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 17,
+         "located": 17,
+         "first_tenth": 17,
+         "span": [
+          76,
+          443
+         ],
+         "sections_quoted": 5,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 3,
+       "at": "2026-10-13T18:12:03.993000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 17,
+         "located": 17,
+         "first_tenth": 4,
+         "span": [
+          76,
+          4810
+         ],
+         "sections_quoted": 16,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:10:11.242000Z"
+    }
+   ],
+   "other_tasks_issued": 17,
+   "planning_seconds": {
+    "value": 347.9,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 3,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 2,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 17
+     },
+     "effort": {
+      "medium": 17
+     },
+     "model_calls": {
+      "value": 10,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 20,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 193982,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 39889,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 6464,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 184.9,
+      "basis": "measured"
+     },
+     "task": "0001-extract",
+     "description": "C1 0001-extract"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 5
+     },
+     "effort": {
+      "medium": 5
+     },
+     "model_calls": {
+      "value": 4,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 8,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 29144,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 10130,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 1449,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 19.4,
+      "basis": "measured"
+     },
+     "task": "0002-background",
+     "description": "C1 0002-background"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 19
+     },
+     "effort": {
+      "medium": 19
+     },
+     "model_calls": {
+      "value": 11,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 22,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 255998,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 41414,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 11910,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 112.1,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "C1 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "exegenius-planner"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "medium"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J1",
+     "judge": "a",
+     "plan": "P13",
+     "core_stated": 3,
+     "core_fully": 0,
+     "core_derived": 0,
+     "core_faithful": 0,
+     "supporting_stated": 1,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2
+    },
+    {
+     "batch": "J1",
+     "judge": "b",
+     "plan": "P13",
+     "core_stated": 5,
+     "core_fully": 0,
+     "core_derived": 0,
+     "core_faithful": 0,
+     "supporting_stated": 2,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1
+    }
+   ]
+  },
+  {
+   "id": "C2",
+   "arm": "C",
+   "planning_tasks": [
+    {
+     "task": "0001-extract",
+     "kind": "extract",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:07:21.731000Z",
+       "outcome": "rejected",
+       "check": "coverage",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 30,
+         "located": 30,
+         "first_tenth": 30,
+         "span": [
+          32,
+          438
+         ],
+         "sections_quoted": 6,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:07:43.299000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 49,
+         "located": 49,
+         "first_tenth": 31,
+         "span": [
+          32,
+          5259
+         ],
+         "sections_quoted": 29,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:06:18.980000Z"
+    },
+    {
+     "task": "0002-background",
+     "kind": "background",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:08:25.420000Z",
+       "outcome": "accepted"
+      }
+     ],
+     "issued": "2026-10-13T18:07:50.977000Z"
+    },
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:10:36.444000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 22,
+         "located": 22,
+         "first_tenth": 17,
+         "span": [
+          41,
+          2588
+         ],
+         "sections_quoted": 12,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:10:41.629000Z",
+       "outcome": "rejected",
+       "check": "coverage",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 22,
+         "located": 22,
+         "first_tenth": 17,
+         "span": [
+          41,
+          2588
+         ],
+         "sections_quoted": 12,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 3,
+       "at": "2026-10-13T18:11:04.775000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 22,
+         "located": 22,
+         "first_tenth": 6,
+         "span": [
+          41,
+          4808
+         ],
+         "sections_quoted": 24,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:08:29.201000Z"
+    }
+   ],
+   "other_tasks_issued": 25,
+   "planning_seconds": {
+    "value": 285.8,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 3,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 2,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 14
+     },
+     "effort": {
+      "medium": 14
+     },
+     "model_calls": {
+      "value": 9,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 18,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 152494,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 37060,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 6393,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 66.8,
+      "basis": "measured"
+     },
+     "task": "0001-extract",
+     "description": "C2 0001-extract"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 5
+     },
+     "effort": {
+      "medium": 5
+     },
+     "model_calls": {
+      "value": 4,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 8,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 29901,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 10846,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 1919,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 27.4,
+      "basis": "measured"
+     },
+     "task": "0002-background",
+     "description": "C2 0002-background"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 18
+     },
+     "effort": {
+      "medium": 18
+     },
+     "model_calls": {
+      "value": 10,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 20,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 266143,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 49302,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 16934,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 151.2,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "C2 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "exegenius-planner"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "medium"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J1",
+     "judge": "a",
+     "plan": "P03",
+     "core_stated": 11,
+     "core_fully": 0,
+     "core_derived": 3,
+     "core_faithful": 0,
+     "supporting_stated": 5,
+     "wrong": 1,
+     "major_errors": 1,
+     "minor_errors": 2
+    },
+    {
+     "batch": "J2",
+     "judge": "a",
+     "plan": "P12",
+     "core_stated": 6,
+     "core_fully": 0,
+     "core_derived": 3,
+     "core_faithful": 0,
+     "supporting_stated": 3,
+     "wrong": 1,
+     "major_errors": 1,
+     "minor_errors": 2
+    },
+    {
+     "batch": "J2",
+     "judge": "b",
+     "plan": "P12",
+     "core_stated": 4,
+     "core_fully": 0,
+     "core_derived": 0,
+     "core_faithful": 0,
+     "supporting_stated": 2,
+     "wrong": 1,
+     "major_errors": 1,
+     "minor_errors": 3
+    }
+   ]
+  },
+  {
+   "id": "C3",
+   "arm": "C",
+   "planning_tasks": [
+    {
+     "task": "0001-extract",
+     "kind": "extract",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:07:31.183000Z",
+       "outcome": "error"
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:07:34.513000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 38,
+         "located": 38,
+         "first_tenth": 28,
+         "span": [
+          41,
+          4530
+         ],
+         "sections_quoted": 15,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:06:18.987000Z"
+    },
+    {
+     "task": "0002-background",
+     "kind": "background",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:08:04.335000Z",
+       "outcome": "accepted"
+      }
+     ],
+     "issued": "2026-10-13T18:07:39.178000Z"
+    },
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:10:41.733000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 30,
+         "located": 30,
+         "first_tenth": 5,
+         "span": [
+          91,
+          4994
+         ],
+         "sections_quoted": 23,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:08:14.535000Z"
+    }
+   ],
+   "other_tasks_issued": 28,
+   "planning_seconds": {
+    "value": 262.7,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 13
+     },
+     "effort": {
+      "medium": 13
+     },
+     "model_calls": {
+      "value": 8,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 16,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 126169,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 36759,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 5368,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 58.0,
+      "basis": "measured"
+     },
+     "task": "0001-extract",
+     "description": "C3 0001-extract"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 6
+     },
+     "effort": {
+      "medium": 6
+     },
+     "model_calls": {
+      "value": 4,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 8,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 32043,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 12355,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 2072,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 24.3,
+      "basis": "measured"
+     },
+     "task": "0002-background",
+     "description": "C3 0002-background"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 16
+     },
+     "effort": {
+      "medium": 16
+     },
+     "model_calls": {
+      "value": 9,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 18,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 250292,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 66474,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 15657,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 144.8,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "C3 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "exegenius-planner"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "medium"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J1",
+     "judge": "a",
+     "plan": "P16",
+     "core_stated": 12,
+     "core_fully": 2,
+     "core_derived": 3,
+     "core_faithful": 0,
+     "supporting_stated": 3,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 3
+    }
+   ]
+  },
+  {
+   "id": "C4",
+   "arm": "C",
+   "planning_tasks": [
+    {
+     "task": "0001-extract",
+     "kind": "extract",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:07:47.205000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 42,
+         "located": 42,
+         "first_tenth": 25,
+         "span": [
+          32,
+          4016
+         ],
+         "sections_quoted": 16,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:06:18.994000Z"
+    },
+    {
+     "task": "0002-background",
+     "kind": "background",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:08:21.012000Z",
+       "outcome": "accepted"
+      }
+     ],
+     "issued": "2026-10-13T18:07:53.588000Z"
+    },
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:11:18.654000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 30,
+         "located": 30,
+         "first_tenth": 3,
+         "span": [
+          92,
+          4810
+         ],
+         "sections_quoted": 29,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:11:21.711000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 30,
+         "located": 30,
+         "first_tenth": 3,
+         "span": [
+          92,
+          4810
+         ],
+         "sections_quoted": 29,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:08:29.135000Z"
+    }
+   ],
+   "other_tasks_issued": 27,
+   "planning_seconds": {
+    "value": 302.7,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 1,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 10
+     },
+     "effort": {
+      "medium": 10
+     },
+     "model_calls": {
+      "value": 7,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 14,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 89126,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 36426,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 7513,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 72.0,
+      "basis": "measured"
+     },
+     "task": "0001-extract",
+     "description": "C4 0001-extract"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 4
+     },
+     "effort": {
+      "medium": 4
+     },
+     "model_calls": {
+      "value": 3,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 6,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 18452,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 9520,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 1844,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 22.9,
+      "basis": "measured"
+     },
+     "task": "0002-background",
+     "description": "C4 0002-background"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 16
+     },
+     "effort": {
+      "medium": 16
+     },
+     "model_calls": {
+      "value": 10,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 20,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 321840,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 60938,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 17289,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 168.2,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "C4 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "exegenius-planner"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "medium"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J1",
+     "judge": "a",
+     "plan": "P22",
+     "core_stated": 12,
+     "core_fully": 0,
+     "core_derived": 2,
+     "core_faithful": 0,
+     "supporting_stated": 4,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 7
+    }
+   ]
+  },
+  {
+   "id": "C5",
+   "arm": "C",
+   "planning_tasks": [
+    {
+     "task": "0001-extract",
+     "kind": "extract",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:07:26.535000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 27,
+         "located": 27,
+         "first_tenth": 27,
+         "span": [
+          39,
+          440
+         ],
+         "sections_quoted": 6,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:07:30.857000Z",
+       "outcome": "rejected",
+       "check": "coverage",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 27,
+         "located": 27,
+         "first_tenth": 27,
+         "span": [
+          39,
+          440
+         ],
+         "sections_quoted": 6,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 3,
+       "at": "2026-10-13T18:07:52.178000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 58,
+         "located": 58,
+         "first_tenth": 28,
+         "span": [
+          39,
+          4810
+         ],
+         "sections_quoted": 27,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:06:19.002000Z"
+    },
+    {
+     "task": "0002-background",
+     "kind": "background",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:08:30.279000Z",
+       "outcome": "accepted"
+      }
+     ],
+     "issued": "2026-10-13T18:08:03.533000Z"
+    },
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:10:11.696000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 23,
+         "located": 23,
+         "first_tenth": 2,
+         "span": [
+          92,
+          4810
+         ],
+         "sections_quoted": 27,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:10:15.328000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 23,
+         "located": 23,
+         "first_tenth": 2,
+         "span": [
+          92,
+          4810
+         ],
+         "sections_quoted": 27,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:08:38.308000Z"
+    }
+   ],
+   "other_tasks_issued": 27,
+   "planning_seconds": {
+    "value": 236.3,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 3,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 1,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 15
+     },
+     "effort": {
+      "medium": 15
+     },
+     "model_calls": {
+      "value": 10,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 20,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 196287,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 41993,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 7417,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 75.6,
+      "basis": "measured"
+     },
+     "task": "0001-extract",
+     "description": "C5 0001-extract"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 4
+     },
+     "effort": {
+      "medium": 4
+     },
+     "model_calls": {
+      "value": 3,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 6,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 18245,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 9519,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 2026,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 22.6,
+      "basis": "measured"
+     },
+     "task": "0002-background",
+     "description": "C5 0002-background"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 11
+     },
+     "effort": {
+      "medium": 11
+     },
+     "model_calls": {
+      "value": 7,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 14,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 150074,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 45985,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 9880,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 92.6,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "C5 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "exegenius-planner"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "medium"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J1",
+     "judge": "a",
+     "plan": "P18",
+     "core_stated": 12,
+     "core_fully": 0,
+     "core_derived": 0,
+     "core_faithful": 0,
+     "supporting_stated": 3,
+     "wrong": 0,
+     "major_errors": 1,
+     "minor_errors": 3
+    }
+   ]
+  },
+  {
+   "id": "D1",
+   "arm": "D",
+   "planning_tasks": [
+    {
+     "task": "0001-extract",
+     "kind": "extract",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:07:31.511000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 37,
+         "located": 36,
+         "first_tenth": 33,
+         "span": [
+          32,
+          4530
+         ],
+         "sections_quoted": 10,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:07:34.710000Z",
+       "outcome": "rejected",
+       "check": "coverage",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 37,
+         "located": 37,
+         "first_tenth": 33,
+         "span": [
+          32,
+          4530
+         ],
+         "sections_quoted": 11,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 3,
+       "at": "2026-10-13T18:07:53.531000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 71,
+         "located": 70,
+         "first_tenth": 35,
+         "span": [
+          32,
+          5210
+         ],
+         "sections_quoted": 38,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 4,
+       "at": "2026-10-13T18:07:58.498000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 71,
+         "located": 71,
+         "first_tenth": 35,
+         "span": [
+          32,
+          5264
+         ],
+         "sections_quoted": 38,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:06:16.076000Z"
+    },
+    {
+     "task": "0002-background",
+     "kind": "background",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:08:32.342000Z",
+       "outcome": "accepted"
+      }
+     ],
+     "issued": "2026-10-13T18:08:03.543000Z"
+    },
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:10:34.323000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 23,
+         "located": 23,
+         "first_tenth": 2,
+         "span": [
+          92,
+          4810
+         ],
+         "sections_quoted": 25,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:10:39.376000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 23,
+         "located": 23,
+         "first_tenth": 2,
+         "span": [
+          92,
+          4810
+         ],
+         "sections_quoted": 25,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:08:38.372000Z"
+    }
+   ],
+   "other_tasks_issued": 24,
+   "planning_seconds": {
+    "value": 263.3,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 4,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 1,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 20
+     },
+     "effort": {
+      "medium": 20
+     },
+     "model_calls": {
+      "value": 11,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 22,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 275919,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 51346,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 8019,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 82.3,
+      "basis": "measured"
+     },
+     "task": "0001-extract",
+     "description": "D1 0001-extract"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 5
+     },
+     "effort": {
+      "medium": 5
+     },
+     "model_calls": {
+      "value": 4,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 8,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 29725,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 10217,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 1714,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 24.5,
+      "basis": "measured"
+     },
+     "task": "0002-background",
+     "description": "D1 0002-background"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 13
+     },
+     "effort": {
+      "medium": 13
+     },
+     "model_calls": {
+      "value": 8,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 16,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 170213,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 44540,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 12511,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 116.6,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "D1 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "exegenius-planner"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "medium"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J1",
+     "judge": "a",
+     "plan": "P10",
+     "core_stated": 13,
+     "core_fully": 0,
+     "core_derived": 2,
+     "core_faithful": 0,
+     "supporting_stated": 4,
+     "wrong": 1,
+     "major_errors": 1,
+     "minor_errors": 4
+    }
+   ]
+  },
+  {
+   "id": "D2",
+   "arm": "D",
+   "planning_tasks": [
+    {
+     "task": "0001-extract",
+     "kind": "extract",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:07:56.983000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 58,
+         "located": 58,
+         "first_tenth": 23,
+         "span": [
+          32,
+          4837
+         ],
+         "sections_quoted": 30,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:06:19.012000Z"
+    },
+    {
+     "task": "0002-background",
+     "kind": "background",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:08:31.147000Z",
+       "outcome": "accepted"
+      }
+     ],
+     "issued": "2026-10-13T18:08:03.562000Z"
+    },
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:11:33.992000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 35,
+         "located": 35,
+         "first_tenth": 7,
+         "span": [
+          76,
+          4987
+         ],
+         "sections_quoted": 33,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:11:37.633000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 35,
+         "located": 35,
+         "first_tenth": 7,
+         "span": [
+          76,
+          4987
+         ],
+         "sections_quoted": 33,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:08:38.340000Z"
+    }
+   ],
+   "other_tasks_issued": 31,
+   "planning_seconds": {
+    "value": 318.6,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 1,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 16
+     },
+     "effort": {
+      "medium": 16
+     },
+     "model_calls": {
+      "value": 9,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 18,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 173755,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 53264,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 7583,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 83.2,
+      "basis": "measured"
+     },
+     "task": "0001-extract",
+     "description": "D2 0001-extract"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 5
+     },
+     "effort": {
+      "medium": 5
+     },
+     "model_calls": {
+      "value": 4,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 8,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 31853,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 11697,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 1788,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 23.3,
+      "basis": "measured"
+     },
+     "task": "0002-background",
+     "description": "D2 0002-background"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 26
+     },
+     "effort": {
+      "medium": 26
+     },
+     "model_calls": {
+      "value": 15,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 30,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 566278,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 65856,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 18000,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 175.1,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "D2 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "exegenius-planner"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "medium"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J1",
+     "judge": "a",
+     "plan": "P12",
+     "core_stated": 16,
+     "core_fully": 4,
+     "core_derived": 2,
+     "core_faithful": 0,
+     "supporting_stated": 5,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 3
+    }
+   ]
+  },
+  {
+   "id": "D3",
+   "arm": "D",
+   "planning_tasks": [
+    {
+     "task": "0001-extract",
+     "kind": "extract",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:07:10.283000Z",
+       "outcome": "error"
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:07:14.563000Z",
+       "outcome": "rejected",
+       "check": "coverage",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 20,
+         "located": 20,
+         "first_tenth": 20,
+         "span": [
+          41,
+          435
+         ],
+         "sections_quoted": 6,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 3,
+       "at": "2026-10-13T18:07:25.684000Z",
+       "outcome": "rejected",
+       "check": "coverage",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 40,
+         "located": 40,
+         "first_tenth": 20,
+         "span": [
+          41,
+          4825
+         ],
+         "sections_quoted": 23,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 4,
+       "at": "2026-10-13T18:07:46.826000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 64,
+         "located": 64,
+         "first_tenth": 22,
+         "span": [
+          41,
+          5259
+         ],
+         "sections_quoted": 35,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:06:19.020000Z"
+    },
+    {
+     "task": "0002-background",
+     "kind": "background",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:08:22.717000Z",
+       "outcome": "accepted"
+      }
+     ],
+     "issued": "2026-10-13T18:07:53.575000Z"
+    },
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:10:52.065000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 25,
+         "located": 25,
+         "first_tenth": 7,
+         "span": [
+          43,
+          4810
+         ],
+         "sections_quoted": 28,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:10:56.403000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 25,
+         "located": 25,
+         "first_tenth": 7,
+         "span": [
+          43,
+          4810
+         ],
+         "sections_quoted": 28,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:08:29.162000Z"
+    }
+   ],
+   "other_tasks_issued": 29,
+   "planning_seconds": {
+    "value": 277.4,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 3,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 2,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 16
+     },
+     "effort": {
+      "medium": 16
+     },
+     "model_calls": {
+      "value": 10,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 20,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 214204,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 44815,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 6830,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 70.7,
+      "basis": "measured"
+     },
+     "task": "0001-extract",
+     "description": "D3 0001-extract"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 5
+     },
+     "effort": {
+      "medium": 5
+     },
+     "model_calls": {
+      "value": 4,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 8,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 30794,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 11098,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 1698,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 23.7,
+      "basis": "measured"
+     },
+     "task": "0002-background",
+     "description": "D3 0002-background"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 14
+     },
+     "effort": {
+      "medium": 14
+     },
+     "model_calls": {
+      "value": 8,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 16,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 211608,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 51107,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 15546,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 144.2,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "D3 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "exegenius-planner"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "medium"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J1",
+     "judge": "a",
+     "plan": "P20",
+     "core_stated": 9,
+     "core_fully": 0,
+     "core_derived": 0,
+     "core_faithful": 0,
+     "supporting_stated": 1,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 4
+    }
+   ]
+  },
+  {
+   "id": "D4",
+   "arm": "D",
+   "planning_tasks": [
+    {
+     "task": "0001-extract",
+     "kind": "extract",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:07:21.915000Z",
+       "outcome": "rejected",
+       "check": "coverage",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 25,
+         "located": 25,
+         "first_tenth": 25,
+         "span": [
+          28,
+          435
+         ],
+         "sections_quoted": 7,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:07:37.359000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 56,
+         "located": 56,
+         "first_tenth": 28,
+         "span": [
+          28,
+          5210
+         ],
+         "sections_quoted": 33,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:06:19.030000Z"
+    },
+    {
+     "task": "0002-background",
+     "kind": "background",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:08:11.754000Z",
+       "outcome": "accepted"
+      }
+     ],
+     "issued": "2026-10-13T18:07:43.866000Z"
+    },
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:10:21.348000Z",
+       "outcome": "rejected",
+       "check": "coverage",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 22,
+         "located": 22,
+         "first_tenth": 22,
+         "span": [
+          39,
+          438
+         ],
+         "sections_quoted": 5,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:11:42.560000Z",
+       "outcome": "rejected",
+       "check": "coverage",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 22,
+         "located": 22,
+         "first_tenth": 22,
+         "span": [
+          39,
+          438
+         ],
+         "sections_quoted": 5,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 3,
+       "at": "2026-10-13T18:11:53.449000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 22,
+         "located": 22,
+         "first_tenth": 5,
+         "span": [
+          39,
+          4994
+         ],
+         "sections_quoted": 29,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 4,
+       "at": "2026-10-13T18:11:57.892000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 22,
+         "located": 22,
+         "first_tenth": 5,
+         "span": [
+          39,
+          4994
+         ],
+         "sections_quoted": 29,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:08:24.043000Z"
+    }
+   ],
+   "other_tasks_issued": 25,
+   "planning_seconds": {
+    "value": 338.9,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 4,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 3,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 12
+     },
+     "effort": {
+      "medium": 12
+     },
+     "model_calls": {
+      "value": 7,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 14,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 115959,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 42176,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 6097,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 61.4,
+      "basis": "measured"
+     },
+     "task": "0001-extract",
+     "description": "D4 0001-extract"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 6
+     },
+     "effort": {
+      "medium": 6
+     },
+     "model_calls": {
+      "value": 5,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 10,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 41027,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 10789,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 1807,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 28.3,
+      "basis": "measured"
+     },
+     "task": "0002-background",
+     "description": "D4 0002-background"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 29
+     },
+     "effort": {
+      "medium": 29
+     },
+     "model_calls": {
+      "value": 16,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 32,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 750139,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 79246,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 22829,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 214.7,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "D4 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "exegenius-planner"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "medium"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J1",
+     "judge": "a",
+     "plan": "P23",
+     "core_stated": 8,
+     "core_fully": 0,
+     "core_derived": 2,
+     "core_faithful": 0,
+     "supporting_stated": 2,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1
+    }
+   ]
+  },
+  {
+   "id": "D5",
+   "arm": "D",
+   "planning_tasks": [
+    {
+     "task": "0001-extract",
+     "kind": "extract",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:07:42.339000Z",
+       "outcome": "rejected",
+       "check": "coverage",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 35,
+         "located": 35,
+         "first_tenth": 29,
+         "span": [
+          41,
+          4198
+         ],
+         "sections_quoted": 15,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:08:09.401000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 79,
+         "located": 79,
+         "first_tenth": 31,
+         "span": [
+          41,
+          5259
+         ],
+         "sections_quoted": 37,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:06:19.038000Z"
+    },
+    {
+     "task": "0002-background",
+     "kind": "background",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:08:41.070000Z",
+       "outcome": "accepted"
+      }
+     ],
+     "issued": "2026-10-13T18:08:14.548000Z"
+    },
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-13T18:11:12.849000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 28,
+         "located": 28,
+         "first_tenth": 3,
+         "span": [
+          92,
+          4983
+         ],
+         "sections_quoted": 33,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-13T18:11:18.181000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 28,
+         "located": 28,
+         "first_tenth": 3,
+         "span": [
+          92,
+          4983
+         ],
+         "sections_quoted": 33,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-13T18:08:47.244000Z"
+    }
+   ],
+   "other_tasks_issued": 26,
+   "planning_seconds": {
+    "value": 299.1,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 2,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 1,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 18
+     },
+     "effort": {
+      "medium": 18
+     },
+     "model_calls": {
+      "value": 10,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 20,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 254304,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 59459,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 9024,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 92.8,
+      "basis": "measured"
+     },
+     "task": "0001-extract",
+     "description": "D5 0001-extract"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 4
+     },
+     "effort": {
+      "medium": 4
+     },
+     "model_calls": {
+      "value": 3,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 6,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 19500,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 11001,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 2246,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 24.1,
+      "basis": "measured"
+     },
+     "task": "0002-background",
+     "description": "D5 0002-background"
+    },
+    {
+     "agent_type": "exegenius-planner",
+     "models": {
+      "claude-sonnet-5-5": 24
+     },
+     "effort": {
+      "medium": 24
+     },
+     "model_calls": {
+      "value": 13,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 26,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 469645,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 63457,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 15796,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 150.3,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "D5 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "exegenius-planner"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "medium"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J1",
+     "judge": "a",
+     "plan": "P01",
+     "core_stated": 12,
+     "core_fully": 0,
+     "core_derived": 4,
+     "core_faithful": 0,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2
+    }
+   ]
+  }
+ ],
+ "arm_summary": {
+  "C": {
+   "runs": 5,
+   "quality_J1": {
+    "core_stated": {
+     "n": 5,
+     "median": 12,
+     "min": 3,
+     "max": 12
+    },
+    "core_fully": {
+     "n": 5,
+     "median": 0,
+     "min": 0,
+     "max": 2
+    },
+    "core_derived": {
+     "n": 5,
+     "median": 2,
+     "min": 0,
+     "max": 3
+    },
+    "core_faithful": {
+     "n": 5,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "major_errors": {
+     "n": 5,
+     "median": 0,
+     "min": 0,
+     "max": 1
+    },
+    "central_count": null
+   },
+   "quality_J2": {
+    "core_stated": {
+     "n": 1,
+     "median": 6,
+     "min": 6,
+     "max": 6
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 3,
+     "min": 3,
+     "max": 3
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 1,
+     "min": 1,
+     "max": 1
+    },
+    "central_count": null
+   },
+   "resources_extract": {
+    "model_calls": {
+     "n": 5,
+     "median": 9,
+     "min": 7,
+     "max": 10
+    },
+    "cache_read_tokens": {
+     "n": 5,
+     "median": 152494,
+     "min": 89126,
+     "max": 196287
+    },
+    "cache_write_tokens": {
+     "n": 5,
+     "median": 37060,
+     "min": 36426,
+     "max": 41993
+    },
+    "output_tokens": {
+     "n": 5,
+     "median": 6464,
+     "min": 5368,
+     "max": 7513
+    },
+    "seconds": {
+     "n": 5,
+     "median": 72.0,
+     "min": 58.0,
+     "max": 184.9
+    }
+   },
+   "resources_background": {
+    "model_calls": {
+     "n": 5,
+     "median": 4,
+     "min": 3,
+     "max": 4
+    },
+    "cache_read_tokens": {
+     "n": 5,
+     "median": 29144,
+     "min": 18245,
+     "max": 32043
+    },
+    "cache_write_tokens": {
+     "n": 5,
+     "median": 10130,
+     "min": 9519,
+     "max": 12355
+    },
+    "output_tokens": {
+     "n": 5,
+     "median": 1919,
+     "min": 1449,
+     "max": 2072
+    },
+    "seconds": {
+     "n": 5,
+     "median": 22.9,
+     "min": 19.4,
+     "max": 27.4
+    }
+   },
+   "resources_argument": {
+    "model_calls": {
+     "n": 5,
+     "median": 10,
+     "min": 7,
+     "max": 11
+    },
+    "cache_read_tokens": {
+     "n": 5,
+     "median": 255998,
+     "min": 150074,
+     "max": 321840
+    },
+    "cache_write_tokens": {
+     "n": 5,
+     "median": 49302,
+     "min": 41414,
+     "max": 66474
+    },
+    "output_tokens": {
+     "n": 5,
+     "median": 15657,
+     "min": 9880,
+     "max": 17289
+    },
+    "seconds": {
+     "n": 5,
+     "median": 144.8,
+     "min": 92.6,
+     "max": 168.2
+    }
+   },
+   "planning_seconds": {
+    "n": 5,
+    "median": 285.8,
+    "min": 236.3,
+    "max": 347.9
+   }
+  },
+  "D": {
+   "runs": 5,
+   "quality_J1": {
+    "core_stated": {
+     "n": 5,
+     "median": 12,
+     "min": 8,
+     "max": 16
+    },
+    "core_fully": {
+     "n": 5,
+     "median": 0,
+     "min": 0,
+     "max": 4
+    },
+    "core_derived": {
+     "n": 5,
+     "median": 2,
+     "min": 0,
+     "max": 4
+    },
+    "core_faithful": {
+     "n": 5,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "major_errors": {
+     "n": 5,
+     "median": 0,
+     "min": 0,
+     "max": 1
+    },
+    "central_count": null
+   },
+   "resources_extract": {
+    "model_calls": {
+     "n": 5,
+     "median": 10,
+     "min": 7,
+     "max": 11
+    },
+    "cache_read_tokens": {
+     "n": 5,
+     "median": 214204,
+     "min": 115959,
+     "max": 275919
+    },
+    "cache_write_tokens": {
+     "n": 5,
+     "median": 51346,
+     "min": 42176,
+     "max": 59459
+    },
+    "output_tokens": {
+     "n": 5,
+     "median": 7583,
+     "min": 6097,
+     "max": 9024
+    },
+    "seconds": {
+     "n": 5,
+     "median": 82.3,
+     "min": 61.4,
+     "max": 92.8
+    }
+   },
+   "resources_background": {
+    "model_calls": {
+     "n": 5,
+     "median": 4,
+     "min": 3,
+     "max": 5
+    },
+    "cache_read_tokens": {
+     "n": 5,
+     "median": 30794,
+     "min": 19500,
+     "max": 41027
+    },
+    "cache_write_tokens": {
+     "n": 5,
+     "median": 11001,
+     "min": 10217,
+     "max": 11697
+    },
+    "output_tokens": {
+     "n": 5,
+     "median": 1788,
+     "min": 1698,
+     "max": 2246
+    },
+    "seconds": {
+     "n": 5,
+     "median": 24.1,
+     "min": 23.3,
+     "max": 28.3
+    }
+   },
+   "resources_argument": {
+    "model_calls": {
+     "n": 5,
+     "median": 13,
+     "min": 8,
+     "max": 16
+    },
+    "cache_read_tokens": {
+     "n": 5,
+     "median": 469645,
+     "min": 170213,
+     "max": 750139
+    },
+    "cache_write_tokens": {
+     "n": 5,
+     "median": 63457,
+     "min": 44540,
+     "max": 79246
+    },
+    "output_tokens": {
+     "n": 5,
+     "median": 15796,
+     "min": 12511,
+     "max": 22829
+    },
+    "seconds": {
+     "n": 5,
+     "median": 150.3,
+     "min": 116.6,
+     "max": 214.7
+    }
+   },
+   "planning_seconds": {
+    "n": 5,
+    "median": 299.1,
+    "min": 263.3,
+    "max": 338.9
+   }
+  }
+ }
+}

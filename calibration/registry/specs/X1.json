@@ -1,0 +1,10 @@
+{"id": "X1", "title": "Coverage recovery: report against reject", "kind": "controlled", "document": {"name": "nlogn", "title": "Integer multiplication below n log n (paper.tex)", "class": "frontier mathematics paper, LaTeX, 5,361 lines"}, "task": "planning (extract, background, argument)",
+ "question": "Do planners that stop at the introduction recover when the coverage check sends their answer back?",
+ "binary": {"repo": "lmmx/exegenius", "commit": "1d90c28"},
+ "evidence": {"repo": "lmmx/openai-nlogn-wiki", "branch": "131026-exp-coverage-recovery", "commit": "52704ba"},
+ "journal": "docs/journal/2026-10-13-recovery-experiment.md",
+ "arms": {
+  "A": {"intended": {"agent": "exegenius-planner", "model": "sonnet (definition)", "effort": null, "effort_passed": false, "checks": "coverage = report"}, "runs": ["A1", "A2"]},
+  "B": {"intended": {"agent": "exegenius-planner", "model": "sonnet (definition)", "effort": null, "effort_passed": false, "checks": "coverage = reject"}, "runs": ["B1", "B2"]}},
+ "reported": {"session_cost_usd": {"value": 5.40, "basis": "reported", "source": "runner session record (includes orchestration)"}},
+ "limitations": ["Effort was not passed; subagents inherited the runner's (medium)."]}
