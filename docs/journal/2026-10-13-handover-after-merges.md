@@ -123,7 +123,7 @@ The three queued steps below are done. Each is on its own dated branch of lmmx/e
 |---|---|---|---|
 | `131026-process-safety` | 9774295 | `init` denies `Bash(pkill *)` and `Bash(killall *)`; task files ask agents to stop only their own commands, by process id; 97 tests pass | 2026-10-13-process-safety |
 | `131026-content-judge` | f4b1074 | the blind judge of 23 plans' mathematical content: inputs, 28 verdicts, key, analysis; journal only | 2026-10-13-content-judge |
-| `131026-model-allocation` | 16a831a | the model-allocation investigation and proposal, with `usage.py`; journal only, nothing implemented | 2026-10-13-model-allocation |
+| `131026-model-allocation` | 695eeb1 | the model-allocation investigation and proposal, with `usage.py`; journal only, nothing implemented | 2026-10-13-model-allocation |
 
 The three branches touch disjoint files, apart from the process-safety branch's code. Merging them in any order is a fast-forward or a conflict-free rebase.
 
@@ -152,7 +152,7 @@ The three branches touch disjoint files, apart from the process-safety branch's 
 3. Escalation after k rejections, recorded in shadow mode first.
 4. Allocation pinned per experiment; only a reviewed commit changes the default.
 
-**Experiments proposed, in order:** E1, agent configuration at a fixed Sonnet (`exegenius-planner` against a general-purpose subagent, same prompt, five runs each, judged by the content judge); then E2 (model), E3 (effort), E4 (writers, which needs a page judge) and E5 (auditors). E1 projects to about 4.5 M tokens read from cache and 0.24 M output (estimated) for its ten runs.
+**Experiments proposed, in order:** E1, agent configuration at a fixed Sonnet (`exegenius-planner` against a general-purpose subagent, same prompt, five runs each, judged by the content judge); then E2 (model), E3 (effort), E4 (writers, which needs a page judge) and E5 (auditors). E1 projects to about 4.5 M tokens read from cache and 0.24 M output (estimated) for its ten runs' subagents; the depth experiment's runner, ten planning runs with orchestration, reported 10.22 USD.
 
 ## Queued work, in order, as the author instructed
 
@@ -191,7 +191,7 @@ Steps 1–3 are done (see "Since the merges"); they are kept here as the author'
 - The analysis scripts `score.py`, `depth.py`, `lines_read.py` and `reads.py` are in `docs/journal/2026-10-13-coverage-recovery/`, and the draft reference set is in `docs/journal/2026-10-13-run-log-and-coverage/reference-draft/`
 - `131026-process-safety` (9774295) holds the deny rules against stopping processes by pattern, with 97 passing tests, unmerged
 - `131026-content-judge` (f4b1074) holds the blind judge of 23 plans' content and its verdicts, unmerged
-- `131026-model-allocation` (16a831a) holds the model-allocation investigation, token baseline and proposal, unmerged and unimplemented
+- `131026-model-allocation` (695eeb1) holds the model-allocation investigation, token baseline and proposal, unmerged and unimplemented
 
 ## Missing
 - The process-safety guard is not on `master`, and misses `pkill` through `bash -c`, `env` or a full path
