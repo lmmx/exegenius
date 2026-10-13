@@ -528,7 +528,9 @@ fn status(project: &Project) -> anyhow::Result<()> {
     if state.done && last > 0 {
         println!(
             "the last audit round's {last} gaps are left on the pages, since no audit would \
-             check rewrites for them; raise `rounds` to have them fixed"
+             check rewrites for them; their notes were dropped when the rounds ended, so \
+             raising `rounds` now does not fix them: set `rounds` higher before a run to have \
+             them fixed"
         );
     }
     println!(
