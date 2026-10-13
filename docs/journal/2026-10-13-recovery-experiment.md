@@ -72,19 +72,75 @@ A nested `claude -p` in the development session was refused as creating unsafe a
 
 **Hypothesis, not tested:** the rejection names top-level sections, so a planner can satisfy it with a quote from each section's opening. A rejection naming the labelled results inside the sections might draw quotes from where the derivations are.
 
-## Next
+## The replication
 
-A replication with four more runs per arm (A3–A6, B3–B6) is running on branch `131026-exp-coverage-recovery-2` of lmmx/openai-nlogn-wiki, under the same protocol.
+Eight more runs (A3–A6 `report`, B3–B6 `reject`) ran under the same protocol on branch `131026-exp-coverage-recovery-2` of lmmx/openai-nlogn-wiki. Their results are at commit 8023a47.
+
+**Incident: shared scratch files.** Planners running at the same time in different runs wrote their answer-generating scripts to the same path, `/tmp/claude-0/gen.py`.
+- A3's extraction planner re-ran the file after B3's planner had overwritten it, and submitted B3's draft as its own. A3 and B3's accepted graphs have identical sets of concept ids; every other pair of runs shares 7–31% of them.
+- B3's planner later ran another run's script and overwrote B4's answer file after B4's answer had been accepted.
+- **A3 is excluded.** B3's first and final answers are its own. B4 is scored from the state exegenius stored at acceptance (`graph.json`, `argument.json`), as every run is below.
+- **The first experiment's planners used the same path.** Its accepted graphs show no such copying.
+
+**No planner read `exegenius.toml`, the run log or the state files,** so nothing told a planner which arm it was in before a rejection.
+
+## The eleven clean runs, pooled
+
+**Who was sent back:**
+- The extraction planners of A1, A4, A5, A6 (control), and of B1, B2 and B3 (treatment), stopped early: 1–2 of 13 sections quoted on the first attempt.
+- B1, B2 and B3 were sent back for coverage; B2's argument was sent back too.
+- A2, B4, B5 and B6 read past the introduction unprompted, so the check never fired for B4–B6.
+
+**Core reference items reached** (draft reference, unreviewed):
+
+| Group | Runs | Extraction | Argument |
+|---|---|---|---|
+| Stopped early, no check | A1, A4, A5, A6 | 0, 0, 0, 0 | 0, 0, 0, 0 |
+| Stopped early, sent back | B1, B2, B3 | 8, 9, 12 | 15, 9, 14 |
+| Read broadly unprompted | A2, B4, B5, B6 | 1, 2, 14, 0 | 11, 13, 15, 9 |
+
+**Depth** (`depth.py`, beside 2026-10-13-coverage-recovery): where each argument anchors the steps that state the saving $s<Wm$ and the butterfly-layer recursion. Every argument states both, because the introduction states them.
+- **A1, A4, A5, A6:** quote only the introduction for both.
+- **B1, B2, B3, and A2, B4, B5:** quote the sections that derive them (§3, §5).
+- **B6:** quotes the deriving section for the layer recursion, and the body outside §3 for the saving.
+
+**The check enforces breadth, not depth, at extraction.** B6's extraction quoted 6 of the 10 sections that develop results, so it passed, but it reached no core item. B4's quoted 6 and reached 2. Both arguments read the paper again and reached 9 and 13.
+
+## What this shows, and what it does not
+
+**Observed, over 11 runs:**
+- Without the check, a planner that stopped at the introduction produced an argument with no core item, anchored in the introduction: 4 of 4.
+- With the check, it was sent back, read the body sections, and produced an argument with 9–15 core items, anchored in the sections that derive the central results: 3 of 3.
+- The early stop happened in 7 of 11 runs at extraction.
+- Each coverage rejection cost under two minutes, and no run needed its second retry.
+
+**Not shown:**
+- **Behaviour with Haiku orchestrating** in the author's container.
+- **That the plans capture the derivations step by step.** The measures are where quotes fall, against an unreviewed draft, and where the central steps are anchored.
+- **That the threshold catches every partial reading:** B6 shows that it does not.
+
+**Interpretations:**
+- The rejection repairs the failure it targets when it fires.
+- The spontaneous broad reading in 4 of 11 runs is variation in the planner, not an effect of the arm.
+
+## Proposed, not decided
+
+- **Make `[checks] coverage = "reject"` the default.** This is the author's decision.
+- **Give each task a scratch directory of its own.** The task file would name `exegenius/tasks/<id>/` for scratch files, so parallel subagents cannot run or overwrite each other's files. The same sharing can happen in full runs in the author's container, where up to 20 writers run at once.
+- **A follow-up experiment on depth:** a rejection that also names the theorem-like statements and labelled displays left unquoted inside quoted sections, aimed at extractions like B6's.
 
 ## Current State
 - Branch `131026-exp-coverage-recovery` of lmmx/openai-nlogn-wiki holds four planning-only runs of exegenius 1d90c28 (A1, A2 with `[checks] coverage = "report"`, B1, B2 with `"reject"`), with their logs, answers, status and the runner's and planners' transcripts, at commit 52704ba
 - A runner cloud session started on a wiki branch holding `.claude/agents/` offers `exegenius-planner` as a subagent type, and builds lmmx/exegenius once `add_repo` with `access: "push"` attaches it as a session source
 - In B1 and B2 the extraction planners' first answers were sent back for coverage (1–2 of 13 sections quoted) and their next answers were accepted with quotes in 9 of 13 sections, after the planners printed the openings of the body sections with `sed`
-- Against the draft reference, the accepted arguments reach 0 and 11 core items in A1 and A2 and 15 and 9 in B1 and B2, and the accepted extractions reach 0 and 1 in A1 and A2 and 8 and 9 in B1 and B2
+- Branch `131026-exp-coverage-recovery-2` of lmmx/openai-nlogn-wiki holds eight more runs (A3–A6, B3–B6) at commit 8023a47, of which A3 submitted B3's draft through a shared `/tmp/claude-0/gen.py` and is excluded
+- Over the eleven clean runs, the four control runs whose planners stopped at the introduction have arguments reaching no core item of the draft reference, and the three treatment runs whose planners stopped there and were sent back have arguments reaching 9–15
+- `docs/journal/2026-10-13-coverage-recovery/depth.py` reports whether an argument anchors the saving $s<Wm$ and the butterfly-layer recursion in the sections that derive them; the arguments of A1, A4, A5 and A6 anchor both only in the introduction and those of A2, B1–B5 in the deriving sections
 - `docs/journal/2026-10-13-coverage-recovery/lines_read.py` counts the lines of a source each planner requested before each submit, including through `sed`, `head` and `cat`
 
 ## Missing
-- No result from the replication runs A3–A6 and B3–B6 yet
+- No per-task scratch directory: parallel subagents share `/tmp`
 - No scoring of plans that judges the steps they state, rather than where their quotes fall
 - No rejection that names results inside sections rather than whole sections
 - No decision on making `[checks] coverage = "reject"` the default
+- No check that catches an extraction quoting most sections but none of their results (B6)
