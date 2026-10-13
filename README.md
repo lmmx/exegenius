@@ -187,11 +187,11 @@ target; a result argued in prose, outside any theorem-like environment, counts i
 statement figure; a short quote that also occurs in the introduction is placed there; and
 heading matches compare words without stemming.
 
-**The coverage check.** With
+**The coverage check.** By default
 
 ```toml
 [checks]
-coverage = "reject"    # default "report": record only
+coverage = "reject"    # or "report": record only
 coverage_retries = 2   # rejections for coverage before the answer is accepted with a warning
 ```
 
@@ -203,8 +203,10 @@ source to be read to its last line and each concept or step quoted where the sou
 develop it. After `coverage_retries` such rejections the answer is accepted, with a warning,
 and the log keeps every attempt's figures. A pilot's argument is never sent back, since it
 plans part of the target. Sources without marked-up sections are never sent back. With
-`report`, the default, nothing is sent back and nothing shown to the agent: the figures go
-to the log and `status`.
+`report`, nothing is sent back and nothing shown to the agent: the figures go to the log
+and `status`. In the planning runs of 2026-10-13-recovery-experiment, planners stopped at
+the introduction in 7 of 11 runs; the three that were sent back produced arguments
+anchored where the paper derives its central results, and the four that were not did not.
 
 With `coverage_depth = "results"`, `submit` also sends back an answer that quotes the
 sections but fewer than a tenth of the source's results where they are stated or derived:

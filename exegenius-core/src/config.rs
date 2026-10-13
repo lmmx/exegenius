@@ -94,10 +94,11 @@ impl Default for Checks {
 #[serde(rename_all = "lowercase")]
 pub enum CoverageCheck {
     /// Record the shortfall in the run log, and accept the answer.
-    #[default]
     Report,
     /// Send the answer back with the sections it left unquoted, up to `coverage_retries`
-    /// times.
+    /// times. The default: planning answers drawn from a source's introduction alone were
+    /// common, and sending them back recovered them (2026-10-13-recovery-experiment).
+    #[default]
     Reject,
 }
 
@@ -304,14 +305,14 @@ path = "sources/paper.txt"
 # [pilot]
 # pages = 8
 
-# Checks on stage outputs during a run. With coverage = "reject", an extract or argument
-# answer that quotes none of most of the LaTeX or markdown sections developing results
-# (theorems, lemmas, displayed equations) is sent back, at most coverage_retries times,
-# with the sections it left unquoted; "report" only records it in exegenius/log.jsonl.
+# Checks on stage outputs during a run. With coverage = "reject" (the default), an extract
+# or argument answer that quotes none of most of the LaTeX or markdown sections developing
+# results (theorems, lemmas, displayed equations) is sent back, at most coverage_retries
+# times, with the sections it left unquoted; "report" only records it in exegenius/log.jsonl.
 # coverage_depth = "results" also sends back an answer that quotes the sections but fewer than
 # a tenth of the theorems, lemmas and labelled equations where they are stated or derived.
 # [checks]
-# coverage = "report"
+# coverage = "reject"
 # coverage_retries = 2
 # coverage_depth = "sections"
 

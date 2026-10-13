@@ -1962,18 +1962,24 @@ fn the_coverage_check_passes_an_answer_quoting_where_results_are_developed() {
 }
 
 #[test]
-fn the_coverage_check_only_reports_by_default() {
+fn the_coverage_check_rejects_by_default_and_can_only_report() {
+    let intro_only = latex_extract(
+        "The discrete Fourier transform maps a sequence",
+        "converts these through a chirp identity",
+    );
     let temp = tempfile::tempdir().unwrap();
     let project = setup_latex(temp.path(), "");
     let batch = tasks(next(&project).unwrap());
-    answer(
-        &project,
-        &batch[0],
-        &latex_extract(
-            "The discrete Fourier transform maps a sequence",
-            "converts these through a chirp identity",
-        ),
+    answer(&project, &batch[0], &intro_only);
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains("it is drawn from part of the sources"),
+        "{err}"
     );
+    let temp = tempfile::tempdir().unwrap();
+    let project = setup_latex(temp.path(), "[checks]\ncoverage = \"report\"\n");
+    let batch = tasks(next(&project).unwrap());
+    answer(&project, &batch[0], &intro_only);
     assert_eq!(
         submit(&project, &batch[0].id).unwrap(),
         Vec::<String>::new()
