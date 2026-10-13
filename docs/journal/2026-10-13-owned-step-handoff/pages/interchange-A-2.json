@@ -1,0 +1,46 @@
+{
+  "symbols": [
+    {
+      "symbol": "u",
+      "name": "chunk width",
+      "meaning": "The number of bits in each of the two chunks being interchanged.",
+      "relation": "count",
+      "quote": "Here $u$ is the chunk width, the number of bits in each chunk, and $V$ is the number of stored bits in the array."
+    },
+    {
+      "symbol": "V",
+      "name": "array volume",
+      "meaning": "The number of stored bits in the array.",
+      "relation": "count",
+      "quote": "Here $u$ is the chunk width, the number of bits in each chunk, and $V$ is the number of stored bits in the array."
+    },
+    {
+      "symbol": "\\tau",
+      "name": "cost exponent",
+      "meaning": "A fixed number with $0<\\tau<1$ that is the exponent of the width in the cost.",
+      "relation": "direct",
+      "quote": "The exponent $\\tau$ is a fixed number with $0<\\tau<1$, the same for every width."
+    },
+    {
+      "symbol": "H",
+      "name": "first block",
+      "meaning": "One of the two equal blocks of bits that a shear changes.",
+      "relation": "direct",
+      "quote": "A shear $H\\leftarrow H+D$ replaces the block $H$ by $H+D$ bitwise, where $H$ and $D$ are two equal blocks of bits."
+    },
+    {
+      "symbol": "D",
+      "name": "second block",
+      "meaning": "The other of the two equal blocks of bits, which a shear adds to the first.",
+      "relation": "direct",
+      "quote": "A shear $H\\leftarrow H+D$ replaces the block $H$ by $H+D$ bitwise, where $H$ and $D$ are two equal blocks of bits."
+    }
+  ],
+  "relations": [
+    {
+      "prerequisite": "power-width-interchange",
+      "predicate": "is based on",
+      "quote": "The construction is based on the [Power-width address interchange](power-width-interchange.md), which handles chunks whose width is a power of $m$ under a row restriction; this page extends it to every width and drops that restriction."
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "symbols": [
+    {
+      "symbol": "u",
+      "name": "chunk width",
+      "meaning": "The number of bits in each chunk.",
+      "relation": "count",
+      "quote": "$u$ counts the bits in a chunk, $V$ the bits in the array, and $\\tau$ is a fixed exponent with $0<\\tau<1$."
+    },
+    {
+      "symbol": "V",
+      "name": "array size",
+      "meaning": "The number of bits in the array.",
+      "relation": "count",
+      "quote": "$u$ counts the bits in a chunk, $V$ the bits in the array, and $\\tau$ is a fixed exponent with $0<\\tau<1$."
+    },
+    {
+      "symbol": "\\tau",
+      "name": "cost exponent",
+      "meaning": "A fixed exponent with $0<\\tau<1$ in the cost bound.",
+      "relation": "direct",
+      "quote": "$u$ counts the bits in a chunk, $V$ the bits in the array, and $\\tau$ is a fixed exponent with $0<\\tau<1$."
+    },
+    {
+      "symbol": "q",
+      "name": "radix",
+      "meaning": "The fixed radix, which is the number of values each digit takes.",
+      "relation": "count",
+      "quote": "Let $q\\ge 2$ be the fixed radix and $e$ the number of radix-$q$ digits in a chunk, the least integer with $q^e\\ge 2^u$."
+    },
+    {
+      "symbol": "e",
+      "name": "digits per chunk",
+      "meaning": "The number of radix-$q$ digits in a chunk.",
+      "relation": "count",
+      "quote": "Let $q\\ge 2$ be the fixed radix and $e$ the number of radix-$q$ digits in a chunk, the least integer with $q^e\\ge 2^u$."
+    },
+    {
+      "symbol": "k",
+      "name": "top level",
+      "meaning": "The largest integer with $m^k\\le e$.",
+      "relation": "direct",
+      "quote": "Let $k=\\lfloor\\log_m e\\rfloor$ be the largest integer with $m^k\\le e$."
+    },
+    {
+      "symbol": "j",
+      "name": "level index",
+      "meaning": "An index with $j\\ge 0$ that gives the piece width $m^j$.",
+      "relation": "direct",
+      "quote": "The [Power-width address interchange](power-width-interchange.md) result says that, for each $j\\ge 0$, two disjoint chunks of $m^j$ radix-$q$ digits can be interchanged in $O(Vm^{j\\tau})$ time when a row field, whose values are rows, of length divisible by $W^j$ precedes both."
+    },
+    {
+      "symbol": "\\rho",
+      "name": "top digit count",
+      "meaning": "The number of top digits of each chunk that are moved first.",
+      "relation": "count",
+      "quote": "Let $\\rho=O(\\log e)$ be the number of top digits moved first, with $q^{2\\rho}\\ge W^k$."
+    },
+    {
+      "symbol": "h",
+      "name": "first chunk",
+      "meaning": "The first of the two chunks, as a string of $e$ digits.",
+      "relation": "direct",
+      "quote": "Write $h=h^+h^-$ and $d=d^+d^-$, where $h^+$ and $d^+$ are the top $\\rho$ digits, and $h^-$, $d^-$ the rest."
+    },
+    {
+      "symbol": "d",
+      "name": "second chunk",
+      "meaning": "The second of the two chunks, as a string of $e$ digits.",
+      "relation": "direct",
+      "quote": "Write $h=h^+h^-$ and $d=d^+d^-$, where $h^+$ and $d^+$ are the top $\\rho$ digits, and $h^-$, $d^-$ the rest."
+    },
+    {
+      "symbol": "h^+",
+      "name": "top digits of h",
+      "meaning": "The top $\\rho$ digits of the first chunk.",
+      "relation": "direct",
+      "quote": "Write $h=h^+h^-$ and $d=d^+d^-$, where $h^+$ and $d^+$ are the top $\\rho$ digits, and $h^-$, $d^-$ the rest."
+    },
+    {
+      "symbol": "h^-",
+      "name": "remaining digits of h",
+      "meaning": "The remaining $e-\\rho$ digits of the first chunk.",
+      "relation": "direct",
+      "quote": "Write $h=h^+h^-$ and $d=d^+d^-$, where $h^+$ and $d^+$ are the top $\\rho$ digits, and $h^-$, $d^-$ the rest."
+    },
+    {
+      "symbol": "d^+",
+      "name": "top digits of d",
+      "meaning": "The top $\\rho$ digits of the second chunk.",
+      "relation": "direct",
+      "quote": "Write $h=h^+h^-$ and $d=d^+d^-$, where $h^+$ and $d^+$ are the top $\\rho$ digits, and $h^-$, $d^-$ the rest."
+    },
+    {
+      "symbol": "d^-",
+      "name": "remaining digits of d",
+      "meaning": "The remaining $e-\\rho$ digits of the second chunk.",
+      "relation": "direct",
+      "quote": "Write $h=h^+h^-$ and $d=d^+d^-$, where $h^+$ and $d^+$ are the top $\\rho$ digits, and $h^-$, $d^-$ the rest."
+    },
+    {
+      "symbol": "R",
+      "name": "row count",
+      "meaning": "The number of rows in the row field formed by the two high digit fields.",
+      "relation": "count",
+      "quote": "These two fields form a row field of $R=q^{2\\rho}$ rows before the remaining chunks."
+    },
+    {
+      "symbol": "R'",
+      "name": "padded row count",
+      "meaning": "The number of rows after padding, which is a multiple of $W^k$.",
+      "relation": "count",
+      "quote": "Pad with zero rows to $R'=W^k\\lceil R/W^k\\rceil$ rows."
+    },
+    {
+      "symbol": "a_j",
+      "name": "pieces per level",
+      "meaning": "The number of pieces of width $m^j$ cut from each remaining chunk.",
+      "relation": "count",
+      "quote": "Write $e-\\rho=\\sum_{j=0}^{k} a_j m^j$ with $0\\le a_j<m$, and cut $h^-$ and $d^-$ into $a_j$ pieces of width $m^j$."
+    }
+  ],
+  "relations": [
+    {
+      "prerequisite": "power-width-interchange",
+      "predicate": "is assembled from",
+      "quote": "The fast address-chunk interchange is assembled from [Power-width address interchange](power-width-interchange.md) calls on pieces of width $m^j$."
+    }
+  ],
+  "derivations": [
+    {
+      "step": "S1.6",
+      "quote": "Let $\\rho=O(\\log e)$ be the number of top digits moved first, with $q^{2\\rho}\\ge W^k$. Write $h=h^+h^-$ and $d=d^+d^-$, where $h^+$ and $d^+$ are the top $\\rho$ digits, and $h^-$, $d^-$ the rest. Interchange the high digits pairwise, then move $h^+$ after $d^+$. These two fields form a row field of $R=q^{2\\rho}$ rows before the remaining chunks. Digit moves cost $O(V)$ by [Elementary stream operations](stream-ops.md), so this costs $O(V\\rho)$. Pad with zero rows to $R'=W^k\\lceil R/W^k\\rceil$ rows. Write $e-\\rho=\\sum_{j=0}^{k} a_j m^j$ with $0\\le a_j<m$, and cut $h^-$ and $d^-$ into $a_j$ pieces of width $m^j$. Interchange corresponding pieces by the power-width result. Calls share the $R'$-row field, divisible by $W^j$ for $j\\le k$, and keep entries in their rows, so padding affects nothing. The cost is $O(V)\\sum_j a_j m^{j\\tau}$, which is $O(Ve^\\tau)$, as the top term $m^{k\\tau}\\le e^\\tau$ dominates the geometric sum. Scan away the padding and reverse the joining moves, costing $O(V\\rho)$. Finally, pad each binary range numerically from $[2^u]$ to $[q^e]$ with zeros, which enlarges the volume by a fixed factor. Radix-$q$ order is numerical, so padding keeps valid entries in order, and scanning it away recovers the binary result. As $e=O(u)$, the total is $O(Vu^\\tau)$."
+    }
+  ]
+}

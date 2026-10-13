@@ -1,0 +1,46 @@
+{
+  "symbols": [
+    {
+      "symbol": "V",
+      "name": "stored bit count",
+      "meaning": "The number of stored bits in the array.",
+      "relation": "count",
+      "quote": "Here $V$ is the number of stored bits in the array."
+    },
+    {
+      "symbol": "u",
+      "name": "chunk width",
+      "meaning": "The number of bits in each chunk.",
+      "relation": "count",
+      "quote": "Here $u$ is the number of bits in each chunk."
+    },
+    {
+      "symbol": "\\tau",
+      "name": "cost exponent",
+      "meaning": "A fixed exponent below one, the same for every width.",
+      "relation": "direct",
+      "quote": "Here $\\tau$ is a fixed exponent below one."
+    },
+    {
+      "symbol": "H",
+      "name": "first chunk",
+      "meaning": "The value of the first of the two chunks.",
+      "relation": "direct",
+      "quote": "Write $H$ and $D$ for the values of the two chunks."
+    },
+    {
+      "symbol": "D",
+      "name": "second chunk",
+      "meaning": "The value of the second of the two chunks.",
+      "relation": "direct",
+      "quote": "Write $H$ and $D$ for the values of the two chunks."
+    }
+  ],
+  "relations": [
+    {
+      "prerequisite": "power-width-interchange",
+      "predicate": "is reduced to",
+      "quote": "The rest of the width is written in base $m$ and cut into pieces whose widths are powers of $m$; each piece is one such call, so the general width is reduced to [Power-width address interchange](power-width-interchange.md)."
+    }
+  ]
+}

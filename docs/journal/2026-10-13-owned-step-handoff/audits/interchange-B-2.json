@@ -1,0 +1,235 @@
+{
+  "gaps": [
+    {
+      "term": "row field",
+      "quote": "a row field, whose values are rows, of length divisible by $W^j$ precedes both",
+      "kind": "term",
+      "note": "The page only glosses a row field as a field whose values are rows. It never says what a row is, what the length of a row field counts, or what makes a field a row field, yet the power-width hypothesis and the R-row field both depend on it."
+    },
+    {
+      "term": "chunks' own digits as the missing row field",
+      "quote": "The chunks' own digits supply the missing row field.",
+      "kind": "step",
+      "note": "The reader cannot see which digits form the row field, why they form rows, why its length is divisible by W^j, or where it precedes both chunks. The claim is stated without the construction that would make it checkable."
+    },
+    {
+      "term": "padding affects nothing",
+      "quote": "keep entries in their rows, so padding affects nothing",
+      "kind": "step",
+      "note": "The page's statement of the power-width result gives only the row-field hypothesis and the cost, not that a call keeps entries in their rows. Without that property, the claim that zero padding rows are unaffected cannot be checked."
+    },
+    {
+      "term": "geometric-sum domination",
+      "quote": "as the top term $m^{k\\tau}\\le e^\\tau$ dominates the geometric sum",
+      "kind": "step",
+      "note": "Bounding the sum of a_j m^{j tau} by its top term needs a_j < m (stated) and a geometric series that grows, which requires m > 1. The page never states m >= 2; it only gives k = floor(log_m e) and m^k <= e. The domination step is therefore not checkable from the page."
+    },
+    {
+      "term": "XOR combinations vanish",
+      "quote": "each power-width call keeps entries in rows and cleans its work tapes, so its XOR combinations vanish",
+      "kind": "step",
+      "note": "The XOR-combined intermediate steps are never described and the power-width page is not linked here, so the reader cannot see what is combined by XOR or why cleaning the work tapes makes it vanish. The cited claim that the result is an exact permutation (cited) rests on this step."
+    }
+  ],
+  "symbols": [
+    {
+      "symbol": "u",
+      "anchor": {
+        "kind": "here",
+        "quote": "$u$ counts the bits in a chunk, $V$ the bits in the array, and $\\tau$ is a fixed exponent with $0<\\tau<1$."
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "here",
+        "quote": "$u$ counts the bits in a chunk, $V$ the bits in the array, and $\\tau$ is a fixed exponent with $0<\\tau<1$."
+      }
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {
+        "kind": "here",
+        "quote": "$u$ counts the bits in a chunk, $V$ the bits in the array, and $\\tau$ is a fixed exponent with $0<\\tau<1$."
+      }
+    },
+    {
+      "symbol": "O",
+      "anchor": {
+        "kind": "background",
+        "note": "Big-O notation, which the reader profile names as big-O and its relatives."
+      }
+    },
+    {
+      "symbol": "q",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $q\\ge 2$ be the fixed radix and $e$ the number of radix-$q$ digits in a chunk, the least integer with $q^e\\ge 2^u$."
+      }
+    },
+    {
+      "symbol": "e",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $q\\ge 2$ be the fixed radix and $e$ the number of radix-$q$ digits in a chunk, the least integer with $q^e\\ge 2^u$."
+      }
+    },
+    {
+      "symbol": "k",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $k=\\lfloor\\log_m e\\rfloor$ be the largest integer with $m^k\\le e$."
+      }
+    },
+    {
+      "symbol": "\\lfloor",
+      "anchor": {
+        "kind": "background",
+        "note": "Floor and ceiling: standard discrete-mathematics notation of the kind the reader profile covers (discrete mathematics, integer division with remainder)."
+      }
+    },
+    {
+      "symbol": "\\rfloor",
+      "anchor": {
+        "kind": "background",
+        "note": "Floor and ceiling: standard discrete-mathematics notation of the kind the reader profile covers (discrete mathematics, integer division with remainder)."
+      }
+    },
+    {
+      "symbol": "\\log",
+      "anchor": {
+        "kind": "background",
+        "note": "Logarithms: standard notation covered by the reader's single-variable calculus (exponentials) and big-O analysis, as anyone with that background has been taught."
+      }
+    },
+    {
+      "symbol": "m",
+      "anchor": {
+        "kind": "concept",
+        "concept": "rank-saving"
+      }
+    },
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "concept",
+        "concept": "rank-saving"
+      }
+    },
+    {
+      "symbol": "j",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "for each $j\\ge 0$, two disjoint chunks of $m^j$ radix-$q$ digits",
+        "note": "The only statement about j is a range (for each j >= 0) and uses such as m^j. Nothing says what j denotes or counts, and no earlier page binds it."
+      }
+    },
+    {
+      "symbol": "\\rho",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $\\rho=O(\\log e)$ be the number of top digits moved first, with $q^{2\\rho}\\ge W^k$."
+      }
+    },
+    {
+      "symbol": "h",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $h=h^+h^-$ and $d=d^+d^-$, where $h^+$ and $d^+$ are the top $\\rho$ digits, and $h^-$, $d^-$ the rest."
+      }
+    },
+    {
+      "symbol": "d",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $h=h^+h^-$ and $d=d^+d^-$, where $h^+$ and $d^+$ are the top $\\rho$ digits, and $h^-$, $d^-$ the rest."
+      }
+    },
+    {
+      "symbol": "h^+",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $h^+$ and $d^+$ are the top $\\rho$ digits, and $h^-$, $d^-$ the rest."
+      }
+    },
+    {
+      "symbol": "h^-",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $h^+$ and $d^+$ are the top $\\rho$ digits, and $h^-$, $d^-$ the rest."
+      }
+    },
+    {
+      "symbol": "d^+",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $h^+$ and $d^+$ are the top $\\rho$ digits, and $h^-$, $d^-$ the rest."
+      }
+    },
+    {
+      "symbol": "d^-",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $h^+$ and $d^+$ are the top $\\rho$ digits, and $h^-$, $d^-$ the rest."
+      }
+    },
+    {
+      "symbol": "R",
+      "anchor": {
+        "kind": "here",
+        "quote": "These two fields form a row field of $R=q^{2\\rho}$ rows before the remaining chunks."
+      }
+    },
+    {
+      "symbol": "R'",
+      "anchor": {
+        "kind": "here",
+        "quote": "Pad with zero rows to $R'=W^k\\lceil R/W^k\\rceil$ rows."
+      }
+    },
+    {
+      "symbol": "a_j",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $e-\\rho=\\sum_{j=0}^{k} a_j m^j$ with $0\\le a_j<m$"
+      }
+    },
+    {
+      "symbol": "\\sum",
+      "anchor": {
+        "kind": "background",
+        "note": "Sigma notation and summation: standard notation covered by the reader's single-variable calculus and algorithms (recurrences, recursion)."
+      }
+    },
+    {
+      "symbol": "\\lceil",
+      "anchor": {
+        "kind": "background",
+        "note": "Floor and ceiling: standard discrete-mathematics notation of the kind the reader profile covers (discrete mathematics, integer division with remainder)."
+      }
+    },
+    {
+      "symbol": "\\rceil",
+      "anchor": {
+        "kind": "background",
+        "note": "Floor and ceiling: standard discrete-mathematics notation of the kind the reader profile covers (discrete mathematics, integer division with remainder)."
+      }
+    },
+    {
+      "symbol": "[2^u]",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "pad each binary range numerically from $[2^u]$ to $[q^e]$ with zeros",
+        "note": "The bracket range notation is never defined. The reader cannot tell whether [2^u] denotes the integers 0 to 2^u - 1, 1 to 2^u, or something else."
+      }
+    },
+    {
+      "symbol": "[q^e]",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "pad each binary range numerically from $[2^u]$ to $[q^e]$ with zeros",
+        "note": "The bracket range notation is never defined, so the target range [q^e] is also unknown to the reader."
+      }
+    }
+  ]
+}

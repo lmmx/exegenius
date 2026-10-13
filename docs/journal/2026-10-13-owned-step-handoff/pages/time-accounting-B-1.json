@@ -1,0 +1,166 @@
+{
+  "derivations": [
+    {
+      "step": "S6.A",
+      "quote": "Each stage cost is a power of $p$ times $V$, so exponents decide the total. Write $g_i=1-e_i$ for the margin below one of the $i$-th power $p^{e_i}$. Since $d=\\Theta(p^\\epsilon)$, $K=\\Theta(p^{\\epsilon c})$, $\\ell=\\Theta(p^{1-\\epsilon})$ and $\\alpha=\\Theta(p^{1/4+\\epsilon/2})$, the seven rows are $dK=p^{\\epsilon(1+c)}$, $pK^{\\tau-1}=p^{1-\\epsilon c(1-\\tau)}$, $\\ell d^{\\lambda'}=p^{1-\\epsilon(1-\\lambda')}$, $d^2\\ell^\\tau=p^{\\tau+\\epsilon(2-\\tau)}$, $dp^{1/2+\\delta}\\alpha=p^{3/4+\\delta+3\\epsilon/2}$, $dp^\\delta=p^{\\epsilon+\\delta}$ and $\\log(rp)=O(p^{1-\\epsilon})$."
+    },
+    {
+      "step": "S6.B",
+      "quote": "With the fixed values $\\epsilon=2^{-75}$, $c=2^{-56}$, $1-\\tau=2^{-50}$, $1-\\lambda'=2^{-54}$ and $\\delta=1/16$, the margins are $g_2=\\epsilon c(1-\\tau)=2^{-181}$, $g_3=\\epsilon(1-\\lambda')=2^{-129}$ and $g_7=\\epsilon=2^{-75}$, while the other margins exceed $2^{-51}$. So $\\min_i g_i=2^{-181}=2\\kappa$"
+    },
+    {
+      "step": "S6.C",
+      "quote": "Each row is bounded by an earlier cost, divided by $V$. The chunk-exchange row is based on [Fast address-chunk interchange](address-chunk-interchange.md), which swaps equal-width chunks in $O(VK^\\tau)$ time; $O(p/K)$ swaps give $O(pK^{\\tau-1})$. The simultaneous-layer row is costed by [Simultaneous normalized butterfly layer](simultaneous-butterfly-layer.md) at $O(Vd^{\\lambda'})$ per round. Axis moves cost $O(d^2)$ times $O(V(1+\\ell^\\tau))$. The Gaussian row sums the line costs of [Tensor resampling on a padded box](tensor-resampling.md) over the $d$ axes. The total time bound follows from [Convolution from the retained transform layout](synthetic-convolution.md), whose packed products cost $O(Tp\\log(rp))$."
+    },
+    {
+      "step": "S6.D",
+      "quote": "Each power is at most $1-2\\kappa$, since each margin is at least $2\\kappa$. Any fixed power of $\\log p$ is at most $p^\\kappa$ eventually, so each row is $O(p^{1-\\kappa})$. Hence the total is $O(Vp^{1-\\kappa})=O(n(\\lg n)^{1-\\kappa})$, since $V=\\Theta(n)$ and $p=\\Theta(\\lg n)$."
+    }
+  ],
+  "relations": [
+    {
+      "prerequisite": "multiplication-algorithm",
+      "predicate": "bounds the cost of",
+      "quote": "The total time bound, which bounds the cost of [The multiplication algorithm](multiplication-algorithm.md), is the sum of its stage costs."
+    },
+    {
+      "prerequisite": "parameter-choice",
+      "predicate": "is set by",
+      "quote": "The total time bound is set by [Parameter choices for the padded box](parameter-choice.md), which fixes the number of axes $d$ and the chunk width $K$ in bits."
+    },
+    {
+      "prerequisite": "address-chunk-interchange",
+      "predicate": "is based on",
+      "quote": "The chunk-exchange row is based on [Fast address-chunk interchange](address-chunk-interchange.md), which swaps equal-width chunks in $O(VK^\\tau)$ time; $O(p/K)$ swaps give $O(pK^{\\tau-1})$."
+    },
+    {
+      "prerequisite": "simultaneous-butterfly-layer",
+      "predicate": "is costed by",
+      "quote": "The simultaneous-layer row is costed by [Simultaneous normalized butterfly layer](simultaneous-butterfly-layer.md) at $O(Vd^{\\lambda'})$ per round."
+    },
+    {
+      "prerequisite": "tensor-resampling",
+      "predicate": "sums the line costs of",
+      "quote": "The Gaussian row sums the line costs of [Tensor resampling on a padded box](tensor-resampling.md) over the $d$ axes."
+    },
+    {
+      "prerequisite": "synthetic-convolution",
+      "predicate": "follows from",
+      "quote": "The total time bound follows from [Convolution from the retained transform layout](synthetic-convolution.md), whose packed products cost $O(Tp\\log(rp))$."
+    }
+  ],
+  "symbols": [
+    {
+      "symbol": "n",
+      "name": "input bit length",
+      "meaning": "The number of bits in each input.",
+      "relation": "count",
+      "quote": "Here $n$ is the bit length of each input."
+    },
+    {
+      "symbol": "p",
+      "name": "coefficient precision",
+      "meaning": "The coefficient precision in bits, $6\\lceil\\log_2 n\\rceil$.",
+      "relation": "count",
+      "quote": "$p=6\\lceil\\log_2 n\\rceil$ is the coefficient precision in bits."
+    },
+    {
+      "symbol": "T",
+      "name": "transform size",
+      "meaning": "The transform size: the number of coefficients in the padded array.",
+      "relation": "count",
+      "quote": "$T\\approx n/\\lceil\\log_2 n\\rceil$ is the transform size, the number of coefficients."
+    },
+    {
+      "symbol": "V",
+      "name": "volume",
+      "meaning": "The volume $V=Tp$, the stored bit count of the padded array up to a constant.",
+      "relation": "count",
+      "quote": "Its volume $V=Tp=\\Theta(n)$ counts stored bits up to a constant."
+    },
+    {
+      "symbol": "d",
+      "name": "number of axes",
+      "meaning": "The number of axes of the padded box.",
+      "relation": "count",
+      "quote": "which fixes the number of axes $d$ and the chunk width $K$ in bits."
+    },
+    {
+      "symbol": "K",
+      "name": "chunk width",
+      "meaning": "The width in bits of an address chunk, $\\lfloor d^c\\rfloor$.",
+      "relation": "count",
+      "quote": "which fixes the number of axes $d$ and the chunk width $K$ in bits."
+    },
+    {
+      "symbol": "\\epsilon",
+      "name": "axis exponent",
+      "meaning": "The fixed exponent in $d=\\Theta(p^\\epsilon)$.",
+      "relation": "direct",
+      "quote": "Here $\\epsilon$ is the exponent in $d=\\Theta(p^\\epsilon)$, $c$ the exponent in $K=\\lfloor d^c\\rfloor$, and $\\ell=\\log_2 r$ the number of address bits along an axis."
+    },
+    {
+      "symbol": "c",
+      "name": "chunk exponent",
+      "meaning": "The fixed exponent in $K=\\lfloor d^c\\rfloor$.",
+      "relation": "direct",
+      "quote": "Here $\\epsilon$ is the exponent in $d=\\Theta(p^\\epsilon)$, $c$ the exponent in $K=\\lfloor d^c\\rfloor$, and $\\ell=\\log_2 r$ the number of address bits along an axis."
+    },
+    {
+      "symbol": "\\ell",
+      "name": "axis bit count",
+      "meaning": "The number of address bits along an axis, $\\log_2 r$.",
+      "relation": "count",
+      "quote": "Here $\\epsilon$ is the exponent in $d=\\Theta(p^\\epsilon)$, $c$ the exponent in $K=\\lfloor d^c\\rfloor$, and $\\ell=\\log_2 r$ the number of address bits along an axis."
+    },
+    {
+      "symbol": "\\tau",
+      "name": "chunk-exchange exponent",
+      "meaning": "The fixed exponent $\\tau<1$ of the chunk-exchange cost $O(VK^\\tau)$.",
+      "relation": "direct",
+      "quote": "$\\tau<1$ and $\\lambda'<1$ are the chunk-exchange and simultaneous-layer exponents, $\\delta$ is a small slack exponent, and $\\alpha$ is the Gaussian width parameter."
+    },
+    {
+      "symbol": "\\lambda'",
+      "name": "simultaneous-layer exponent",
+      "meaning": "The fixed exponent $\\lambda'<1$ of the simultaneous-layer cost $O(Vd^{\\lambda'})$.",
+      "relation": "direct",
+      "quote": "$\\tau<1$ and $\\lambda'<1$ are the chunk-exchange and simultaneous-layer exponents, $\\delta$ is a small slack exponent, and $\\alpha$ is the Gaussian width parameter."
+    },
+    {
+      "symbol": "\\delta",
+      "name": "slack exponent",
+      "meaning": "A small fixed slack exponent in the Gaussian and chirp costs.",
+      "relation": "direct",
+      "quote": "$\\tau<1$ and $\\lambda'<1$ are the chunk-exchange and simultaneous-layer exponents, $\\delta$ is a small slack exponent, and $\\alpha$ is the Gaussian width parameter."
+    },
+    {
+      "symbol": "\\alpha",
+      "name": "Gaussian width",
+      "meaning": "The Gaussian width parameter, of order $p^{1/4+\\epsilon/2}$.",
+      "relation": "direct",
+      "quote": "$\\tau<1$ and $\\lambda'<1$ are the chunk-exchange and simultaneous-layer exponents, $\\delta$ is a small slack exponent, and $\\alpha$ is the Gaussian width parameter."
+    },
+    {
+      "symbol": "e_i",
+      "name": "row exponent",
+      "meaning": "The exponent of the $i$-th normalized cost power $p^{e_i}$.",
+      "relation": "direct",
+      "quote": "Write $g_i=1-e_i$ for the margin below one of the $i$-th power $p^{e_i}$."
+    },
+    {
+      "symbol": "g_i",
+      "name": "margin",
+      "meaning": "The margin below one of the $i$-th power, $1-e_i$.",
+      "relation": "direct",
+      "quote": "Write $g_i=1-e_i$ for the margin below one of the $i$-th power $p^{e_i}$."
+    },
+    {
+      "symbol": "\\kappa",
+      "name": "power saving",
+      "meaning": "The power saving: the exponent of the log factor the bound saves, $2^{-182}$.",
+      "relation": "direct",
+      "quote": "The power saving $\\kappa$ is the exponent of the log factor $(\\lg n)^\\kappa$ that the bound saves below $n\\lg n$."
+    }
+  ]
+}

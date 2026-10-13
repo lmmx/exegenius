@@ -1,0 +1,191 @@
+{
+  "symbols": [
+    {
+      "symbol": "n",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $n$ is the bit length of each input, $T$ the transform size and $p$ the working precision in bits."
+      }
+    },
+    {
+      "symbol": "T",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $n$ is the bit length of each input, $T$ the transform size and $p$ the working precision in bits."
+      }
+    },
+    {
+      "symbol": "p",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $n$ is the bit length of each input, $T$ the transform size and $p$ the working precision in bits."
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "here",
+        "quote": "Each stage is measured after division by the volume $V=Tp$, the number of stored bits up to a constant."
+      }
+    },
+    {
+      "symbol": "d",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $d$ is the number of axes, $K$ the chunk width in bits and $\\ell=\\log_2 r$ the number of address bits in a record."
+      }
+    },
+    {
+      "symbol": "K",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $d$ is the number of axes, $K$ the chunk width in bits and $\\ell=\\log_2 r$ the number of address bits in a record."
+      }
+    },
+    {
+      "symbol": "\\ell",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $d$ is the number of axes, $K$ the chunk width in bits and $\\ell=\\log_2 r$ the number of address bits in a record."
+      }
+    },
+    {
+      "symbol": "r",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "Here $d$ is the number of axes, $K$ the chunk width in bits and $\\ell=\\log_2 r$ the number of address bits in a record.",
+        "note": "No listed concept or earlier page binds r, and the page's only use of r is in the definition of ell as log_2 r, which does not say what r denotes."
+      }
+    },
+    {
+      "symbol": "\\epsilon",
+      "anchor": {
+        "kind": "here",
+        "quote": "The fixed exponents are $\\epsilon$ and $c$ in these sizes, $\\tau$ and $\\lambda'$ in the chunk and butterfly costs, and $\\delta$ in the Gaussian costs."
+      }
+    },
+    {
+      "symbol": "c",
+      "anchor": {
+        "kind": "here",
+        "quote": "The fixed exponents are $\\epsilon$ and $c$ in these sizes, $\\tau$ and $\\lambda'$ in the chunk and butterfly costs, and $\\delta$ in the Gaussian costs."
+      }
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {
+        "kind": "here",
+        "quote": "The fixed exponents are $\\epsilon$ and $c$ in these sizes, $\\tau$ and $\\lambda'$ in the chunk and butterfly costs, and $\\delta$ in the Gaussian costs."
+      }
+    },
+    {
+      "symbol": "\\lambda'",
+      "anchor": {
+        "kind": "here",
+        "quote": "The fixed exponents are $\\epsilon$ and $c$ in these sizes, $\\tau$ and $\\lambda'$ in the chunk and butterfly costs, and $\\delta$ in the Gaussian costs."
+      }
+    },
+    {
+      "symbol": "\\delta",
+      "anchor": {
+        "kind": "here",
+        "quote": "The fixed exponents are $\\epsilon$ and $c$ in these sizes, $\\tau$ and $\\lambda'$ in the chunk and butterfly costs, and $\\delta$ in the Gaussian costs."
+      }
+    },
+    {
+      "symbol": "\\alpha",
+      "anchor": {
+        "kind": "here",
+        "quote": "The Gaussian maps use an integer parameter $\\alpha=\\Theta(p^{1/4+\\epsilon/2})$."
+      }
+    },
+    {
+      "symbol": "\\Theta",
+      "anchor": {
+        "kind": "background",
+        "note": "The reader profile covers big-O and its relatives, which includes Theta notation; the known concept 'Asymptotic notation beyond big-O' lists Theta only as an alias with no meaning."
+      }
+    },
+    {
+      "symbol": "O",
+      "anchor": {
+        "kind": "background",
+        "note": "Big-O notation is a known concept, and the reader profile covers big-O."
+      }
+    },
+    {
+      "symbol": "\\log",
+      "anchor": {
+        "kind": "background",
+        "note": "Logarithms (base 2 and natural) are covered by the undergraduate computer science background in the reader profile."
+      }
+    },
+    {
+      "symbol": "\\lg",
+      "anchor": {
+        "kind": "background",
+        "note": "The binary logarithm is covered by the undergraduate computer science background in the reader profile."
+      }
+    },
+    {
+      "symbol": "\\kappa",
+      "anchor": {
+        "kind": "here",
+        "quote": "The exponent saving $\\kappa=2^{-182}$ is half the smallest margin."
+      }
+    },
+    {
+      "symbol": "g_i",
+      "anchor": {
+        "kind": "here",
+        "quote": "The seven largest exponents have margins $g_1,\\dots,g_7$ below one, so row $i$ costs $p^{1-g_i}$:"
+      }
+    },
+    {
+      "symbol": "i",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "so row $i$ costs $p^{1-g_i}$",
+        "note": "The index of the rows. The reader can only infer that it runs over the seven listed rows in order, matching g_1 to g_7; the page never says what i denotes."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "prefix moves",
+      "quote": "prefix moves and butterfly rounds",
+      "kind": "term",
+      "note": "A named stage the reader does not know. The page neither explains nor links it, so the row dK = p^{epsilon(1+c)} cannot be connected to anything the reader can read."
+    },
+    {
+      "term": "unlinked row costs",
+      "quote": "Each row is the cost proved earlier for its stage, divided by $V$",
+      "kind": "step",
+      "note": "The rows for prefix moves, axis layouts, chirps and packed products give exponents with no link or citation to where their costs are proved. The reader must take those exponents on trust. Only the chunk, simultaneous and Gaussian rows are linked."
+    },
+    {
+      "term": "cited value of kappa",
+      "quote": "Thus (cited).",
+      "kind": "step",
+      "note": "The page tags this as cited without saying what the source states or why it applies. The cited claim stands in for how the saving kappa, the page's own quantity, is fixed."
+    },
+    {
+      "term": "other rows bound",
+      "quote": "The other rows have exponents at most $\\delta<1-2\\kappa$.",
+      "kind": "step",
+      "note": "The page does not say which rows are the other rows, since all seven rows were already listed as the seven largest. The bound at most delta does not match the rows either: the chirp row is p^{epsilon+delta} and the packed row is p^{1-epsilon}."
+    },
+    {
+      "term": "logarithmic factor in the total",
+      "quote": "The remaining $\\kappa$ is spare for logarithms",
+      "kind": "step",
+      "note": "The page never says where a logarithmic factor enters the total. The seven row bounds p^{1-2kappa} contain no log, and the only logarithm is inside the packed row, which is already bounded by p^{1-epsilon}. The reader cannot see why kappa must be spare for logs."
+    },
+    {
+      "term": "size relations for Tp and p",
+      "quote": "Since $Tp=\\Theta(n)$ and $p=\\Theta(\\lg n)$",
+      "kind": "step",
+      "note": "The page gives no reason why the transform size times p is Theta(n), or why p is Theta(lg n). V is only said to be the stored-bit count up to a constant, and no link covers these size relations."
+    }
+  ]
+}

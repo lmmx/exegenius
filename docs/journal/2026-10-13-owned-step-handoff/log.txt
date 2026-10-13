@@ -1,0 +1,37 @@
+inter-A-2 writer: accepted; flags: W as gates vs wires; 'smaller shears' vs interchanges; power-width page both known and prerequisite; lemma stated for specific shape vs any width
+inter-A-2 usage: 97725 tok; 11 tool uses; 169.1 s; 309 words. READING: items 1/2/3 none -- no S1.6 derivation (no high digits/rows, no base-m split, no padding); says 'extends power-width to every width' only. Restates XOR swap (S1.5.2, power-width page's) over Z/2. Sketches s<Wm => saving (other pages'). Correct as far as it goes.
+inter-A-1 writer: accepted; flags: prerequisite id not given (used graph.json); striking feature asks why exactness holds but sources only state it
+inter-A-1 usage: 130864 tok; 21 tool uses; 271.0 s; 341 words. READING: items 1,2,3 each STATED in one sentence (rows from high digits; base-m pieces each one power-width call; binary padded) -- none derived (no rho, no W^k padding, no cost sum, no volume factor). Most of page on S1.5's recursion sketch and s<Wm (other pages': duplication in summary form). Correct.
+time-A-2 writer: accepted; flags: whether prerequisite-bound symbols must be restated; kappa=2^-182 'largest allowed' is own reading
+time-A-2 usage: 141189 tok; 12 tool uses; 295.9 s; 316 words. READING: item1 V=Tp normalization yes; item2 rows traced partly: chunk-exchange row derived (O(p/K) exchanges x K^tau), butterfly/Gaussian/convolution rows linked, axis/chirps/setup not; item3 margins g1..g7 with constants, min=2^-181 yes; item4 yes with 2kappa slack explanation. Constants check (g2=2^-181, g3=2^-129). 'kappa largest value the argument allows' is writer's gloss.
+AUDIT inter-A-2 attempt1: rejected (s,W,m anchored to rank-saving concept); 6 gaps (4 steps 2 terms) incl. construction of swap network asserted, power saving from s<Wm cited stands in for mechanism; 79536 tok 112.0 s; sent back
+time-A-1 writer: accepted; flags: why kappa is half the smallest margin is own reconstruction; bound many symbols; 'absorbed above' row unexplained; 'prefix-slot moves' undefined
+time-A-1 usage: 154197 tok; 18 tool uses; 328.0 s; 347 words. READING: item1 all 7 rows with powers of p, yes; item2 rows attributed ('each row is the cost proved earlier'; chunk/butterfly/Gaussian linked) but none traced (no O(p/K) exchange count etc.); item3 margins + constants + min yes; item4 yes. Correct.
+AUDIT inter-A-2 attempt2: accepted:; cumulative 84369 tok 152.2 s
+AUDIT inter-A-1 attempt1: rejected (s,W,m to rank-saving concept); 7 steps incl. padding, base-m reduction (pairing), recurrence levels, edge rank cost, XOR circuit, exactness; 76946 tok 103.9 s; sent back
+AUDIT inter-A-1 attempt2: accepted:, 7 gaps
+  inter-A-1 audit cumulative 82610 tok 133.1 s
+time-B-2 writer: accepted; 171889 tok; 18 tool uses; 420.2 s; flags: prerequisite id unclear; exponent values not in task (took from paper); kappa unbound; first draft rejected at 377 words (submit counts more than writer's count)
+READING time-B-2 (333 words): item1 yes (table of 7 powers+margins); item2 attribution only: 3 rows linked, 'Each row is an earlier cost bound, divided by V' -- none traced; item3 yes; item4 yes. Anchors: S6.A/S6.B/S6.D passages do carry their steps; S6.C anchor is a bare statement -- anchor does not derive. No better than A on S6.C. Correct (constants as paper).
+inter-B-1 writer: accepted; flags: m bound as label dim vs base m (same m in paper actually); derivations only for S1.6 so one passage covers three sub-steps; no room for striking feature in 350 words
+inter-B-1 usage: 184970 tok; 21 tool uses; 477.5 s; 339 words. READING: items 1 (rho, h+/-, d+/-, field orders, W^k padding <2q^{2rho}), 2 (base-m split, one row field divisible by every W^j, 'costs sum to O(Ve^tau) because a_j<m and m^k<me' -- reason terse, geometric sum implicit), 3 (pad to q^e, e=O(u)) ALL derived. Correct vs paper (rho def equivalent; O(V) per digit pair = O(V rho)). Minor: 'k least with m^k>=e' muddles e. Follows the paper's text closely (field orders reproduced); little motivation; no s<Wm/recursion duplication (links power-width, bit-network). One anchor = whole derivation (one owned step).
+inter-B-2 writer: accepted; flags: anchors only for S1.6 not sub-steps (one passage); k defined locally (floor log_m e); evidence quote wraps a line
+inter-B-2 usage: 203719 tok; 40 tool uses; 510.2 s; 339 words. READING: items 1,2,3 all derived; item 2 with explicit reason 'top term m^{k tau}<=e^tau dominates the geometric sum'; states power-width result as used (no re-derivation); exactness argued. Correct vs paper.
+AUDIT time-A-2 attempt1: rejected (notation anchors); 9 gaps (3 terms: stage names; 6 steps: margins not tied to stages, O(p/K) count, g3 (auditor misses l rounds; page omits them), Gaussian row, kappa 'largest', log factors); 107785 tok 213.0 s; sent back
+time-B-1 writer: accepted; 217618 tok; 36 tool uses; 538.8 s; flags: omitted S6.C5 and schoolbook cutoff for budget; row names unglossed for budget
+READING time-B-1 (346 words): item1 yes, with each power derived from d=p^eps, K, l=p^{1-eps}, alpha; item2 five rows traced (chunk count O(p/K) x K^tau, simultaneous per round, axis O(d^2) x O(V(1+l^tau)), Gaussian over d axes, packed products O(Tp log(rp))) -- chirps and setup (S6.C5) omitted, flagged; item3 yes; item4 yes. Correct (l=Theta(p^{1-eps}) since r=2^{Theta(p/d)}). Anchors carry their steps.
+AUDIT time-A-1 attempt1: rejected (r anchor; g_i missing); 6 gaps (prefix moves term; unlinked row costs; cited kappa; 'other rows' bound; log factor; Tp size relations); 109197 tok 219.7 s; sent back
+AUDIT time-A-2 attempt2: accepted:, 9 gaps; cumulative 114199 tok 245.2 s
+AUDIT time-B-2: accepted first try; 3 gaps (prefix moves term; unlinked table rows -- the S6.C gap; lg p factor); 88566 tok 142.9 s
+AUDIT time-A-1 attempt2: rejected:, 6 gaps; cumulative 113825 tok 243.5 s
+AUDIT time-A-1 attempt2: rejected again (r anchored to concept with alias name); sent back a second time
+AUDIT time-A-1 attempt3: accepted:, 6 gaps
+  time-A-1 audit cumulative 114802 tok 261.8 s
+AUDIT inter-B-1 attempt1: rejected (m,W to rank-saving concept); 8 gaps (row field, transforms terms; four orders; rho<=e; e=m^k muddle (real); exactness; power-width piece cost sum not carried out; rho unbounded); 96484 tok 176.9 s; sent back
+AUDIT inter-B-1 attempt2: accepted:, 8 gaps
+  inter-B-1 audit cumulative 100093 tok 203.3 s
+AUDIT inter-B-2 attempt1: rejected (8 notation/rank-saving anchors); 5 gaps (row field term; chunks' digits as row field; padding affects nothing; geometric sum needs m>1; XOR vanish); 100269 tok 192.5 s; sent back
+AUDIT time-B-1 attempt1: rejected (r anchor); 6 gaps (l and alpha exponents; dK row origin; dp^delta row origin; axis moves term; rounds count l; Gaussian per-line cost) -- all row-level detail; 95386 tok 169.2 s; sent back
+AUDIT time-B-1 attempt2: accepted:, 6 gaps
+  time-B-1 audit cumulative 100029 tok 184.3 s
+AUDIT inter-B-2 attempt2: accepted:, 5 gaps; cumulative 106904 tok 225.0 s

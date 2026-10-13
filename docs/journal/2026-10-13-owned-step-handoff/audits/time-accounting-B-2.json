@@ -1,0 +1,185 @@
+{
+  "gaps": [
+    {
+      "term": "Prefix moves",
+      "quote": "Prefix moves",
+      "kind": "term",
+      "note": "A named stage in the cost table that the page neither explains nor links, so the reader cannot tell what work its power of p pays for."
+    },
+    {
+      "term": "Unlinked table rows",
+      "quote": "Each row is an earlier cost bound, divided by $V$.",
+      "kind": "step",
+      "note": "Only the chunk-exchange, simultaneous-layer and Gaussian rows are linked to the page they come from. The Prefix moves (p^{epsilon(1+c)}), CRT and axes (p^{tau+epsilon(2-tau)}), Chirps and products (p^{epsilon+delta}) and Packed products (p^{1-epsilon}) rows have no source given, so the reader cannot check their exponents."
+    },
+    {
+      "term": "Power of lg p in the total",
+      "quote": "and any fixed power of $\\lg p$ is at most $p^{\\kappa}$ for large $p$",
+      "kind": "step",
+      "note": "No row or earlier step on the page contains a factor of lg p; each row was just reduced to a power of p up to a constant factor. The reader cannot see where a power of lg p in the total comes from, so the step to O(V p^{1-kappa}) cannot be checked from the page."
+    }
+  ],
+  "symbols": [
+    {
+      "symbol": "n",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $n$ is the number of bits in each input integer, and $\\kappa$ is a fixed constant, the power saving."
+      }
+    },
+    {
+      "symbol": "\\kappa",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $n$ is the number of bits in each input integer, and $\\kappa$ is a fixed constant, the power saving."
+      }
+    },
+    {
+      "symbol": "T",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $T$ is the number of coefficients in the transform, and $p$ is the precision."
+      }
+    },
+    {
+      "symbol": "p",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $T$ is the number of coefficients in the transform, and $p$ is the precision."
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "here",
+        "quote": "The volume $V = Tp$ counts stored bits, up to a constant factor."
+      }
+    },
+    {
+      "symbol": "\\epsilon",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\epsilon$, $c$, $\\tau$, $\\lambda'$ and $\\delta$ are fixed exponents"
+      }
+    },
+    {
+      "symbol": "c",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\epsilon$, $c$, $\\tau$, $\\lambda'$ and $\\delta$ are fixed exponents"
+      }
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\epsilon$, $c$, $\\tau$, $\\lambda'$ and $\\delta$ are fixed exponents"
+      }
+    },
+    {
+      "symbol": "\\lambda'",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\epsilon$, $c$, $\\tau$, $\\lambda'$ and $\\delta$ are fixed exponents"
+      }
+    },
+    {
+      "symbol": "\\delta",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\epsilon$, $c$, $\\tau$, $\\lambda'$ and $\\delta$ are fixed exponents"
+      }
+    },
+    {
+      "symbol": "g_1",
+      "anchor": {
+        "kind": "here",
+        "quote": "$g_1=1-\\epsilon(1+c)$"
+      }
+    },
+    {
+      "symbol": "g_2",
+      "anchor": {
+        "kind": "here",
+        "quote": "$g_2=\\epsilon c(1-\\tau)$"
+      }
+    },
+    {
+      "symbol": "g_3",
+      "anchor": {
+        "kind": "here",
+        "quote": "$g_3=\\epsilon(1-\\lambda')$"
+      }
+    },
+    {
+      "symbol": "g_4",
+      "anchor": {
+        "kind": "here",
+        "quote": "$g_4=1-\\tau-\\epsilon(2-\\tau)$"
+      }
+    },
+    {
+      "symbol": "g_5",
+      "anchor": {
+        "kind": "here",
+        "quote": "$g_5=1/4-\\delta-3\\epsilon/2$"
+      }
+    },
+    {
+      "symbol": "g_6",
+      "anchor": {
+        "kind": "here",
+        "quote": "$g_6=1-\\delta-\\epsilon$"
+      }
+    },
+    {
+      "symbol": "g_7",
+      "anchor": {
+        "kind": "here",
+        "quote": "$g_7=\\epsilon$"
+      }
+    },
+    {
+      "symbol": "g_i",
+      "anchor": {
+        "kind": "here",
+        "quote": "Each row's margin $g_i$ is the amount its exponent lies below one"
+      }
+    },
+    {
+      "symbol": "i",
+      "anchor": {
+        "kind": "here",
+        "quote": "Each row's margin $g_i$ is the amount its exponent lies below one"
+      }
+    },
+    {
+      "symbol": "\\Theta",
+      "anchor": {
+        "kind": "background",
+        "note": "The reader profile says they know big-O and its relatives; Theta notation is one of those relatives."
+      }
+    },
+    {
+      "symbol": "\\lg",
+      "anchor": {
+        "kind": "background",
+        "note": "Undergraduate computer science covers logarithms, so lg (the base-2 logarithm) is covered background."
+      }
+    },
+    {
+      "symbol": "O",
+      "anchor": {
+        "kind": "background",
+        "note": "The reader profile lists big-O notation as known."
+      }
+    },
+    {
+      "symbol": "\\min",
+      "anchor": {
+        "kind": "background",
+        "note": "Minimum of a finite list of numbers is standard notation that any undergraduate computer science course uses."
+      }
+    }
+  ]
+}

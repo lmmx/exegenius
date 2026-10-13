@@ -1,0 +1,129 @@
+{
+  "symbols": [
+    {
+      "symbol": "V",
+      "name": "stored bit volume",
+      "meaning": "The number of bits stored in the array, a count of bits.",
+      "relation": "count",
+      "quote": "Let $u$ be the number of bits in each chunk, and let $V$ be the number of bits stored in the array."
+    },
+    {
+      "symbol": "u",
+      "name": "chunk width",
+      "meaning": "The number of bits in each chunk, a count of bits.",
+      "relation": "count",
+      "quote": "Let $u$ be the number of bits in each chunk, and let $V$ be the number of bits stored in the array."
+    },
+    {
+      "symbol": "\\tau",
+      "name": "cost exponent",
+      "meaning": "A fixed number strictly between 0 and 1 in the time bound.",
+      "relation": "direct",
+      "quote": "Here $\\tau$ is a fixed exponent with $0<\\tau<1$."
+    },
+    {
+      "symbol": "q",
+      "name": "radix",
+      "meaning": "A fixed prime, the base of the digits in which the chunks are written.",
+      "relation": "direct",
+      "quote": "Let $e$ be the number of digits in each chunk, written in a fixed prime radix $q$."
+    },
+    {
+      "symbol": "e",
+      "name": "digits per chunk",
+      "meaning": "The number of radix-$q$ digits in each chunk, a count of digits.",
+      "relation": "count",
+      "quote": "Let $e$ be the number of digits in each chunk, written in a fixed prime radix $q$."
+    },
+    {
+      "symbol": "k",
+      "name": "power exponent",
+      "meaning": "The least integer whose power of $m$ is at least $e$.",
+      "relation": "direct",
+      "quote": "That procedure swaps chunks of $e=m^k$ digits, where $k$ is the least integer with $m^k\\ge e$, when a row field before them has length divisible by $W^k$."
+    },
+    {
+      "symbol": "\\rho",
+      "name": "top digit count",
+      "meaning": "The number of top digits taken from each chunk, a count of digits.",
+      "relation": "count",
+      "quote": "Let $\\rho$ be the least integer with $q^{2\\rho}\\ge W^k$, the number of top digits taken from each chunk."
+    },
+    {
+      "symbol": "h",
+      "name": "first chunk",
+      "meaning": "The first of the two chunks being interchanged.",
+      "relation": "direct",
+      "quote": "Call the first chunk $h$, the second $d$, and the field between them $g$."
+    },
+    {
+      "symbol": "d",
+      "name": "second chunk",
+      "meaning": "The second of the two chunks being interchanged.",
+      "relation": "direct",
+      "quote": "Call the first chunk $h$, the second $d$, and the field between them $g$."
+    },
+    {
+      "symbol": "g",
+      "name": "gap field",
+      "meaning": "The address field between the two chunks.",
+      "relation": "direct",
+      "quote": "Call the first chunk $h$, the second $d$, and the field between them $g$."
+    },
+    {
+      "symbol": "h^+",
+      "name": "top digits, first chunk",
+      "meaning": "The top $\\rho$ digits of the first chunk $h$.",
+      "relation": "direct",
+      "quote": "Write $h^+$ and $h^-$ for the top $\\rho$ digits of $h$ and its remaining digits, and $d^+$ and $d^-$ for those of $d$."
+    },
+    {
+      "symbol": "h^-",
+      "name": "rest of first chunk",
+      "meaning": "The digits of the first chunk $h$ below its top $\\rho$ digits.",
+      "relation": "direct",
+      "quote": "Write $h^+$ and $h^-$ for the top $\\rho$ digits of $h$ and its remaining digits, and $d^+$ and $d^-$ for those of $d$."
+    },
+    {
+      "symbol": "d^+",
+      "name": "top digits, second chunk",
+      "meaning": "The top $\\rho$ digits of the second chunk $d$.",
+      "relation": "direct",
+      "quote": "Write $h^+$ and $h^-$ for the top $\\rho$ digits of $h$ and its remaining digits, and $d^+$ and $d^-$ for those of $d$."
+    },
+    {
+      "symbol": "d^-",
+      "name": "rest of second chunk",
+      "meaning": "The digits of the second chunk $d$ below its top $\\rho$ digits.",
+      "relation": "direct",
+      "quote": "Write $h^+$ and $h^-$ for the top $\\rho$ digits of $h$ and its remaining digits, and $d^+$ and $d^-$ for those of $d$."
+    },
+    {
+      "symbol": "j",
+      "name": "base-m position",
+      "meaning": "An index of a position in the base-$m$ expansion of $e-\\rho$, from $0$ to $k$.",
+      "relation": "direct",
+      "quote": "Write $e-\\rho=\\sum_{j=0}^{k} a_j m^j$ with $0\\le a_j<m$, where $a_j$ counts the pieces of width $m^j$ and $j$ is the base-$m$ position."
+    },
+    {
+      "symbol": "a_j",
+      "name": "pieces of width m^j",
+      "meaning": "The number of pieces of width $m^j$ into which each remaining chunk is split, a count of pieces.",
+      "relation": "count",
+      "quote": "Write $e-\\rho=\\sum_{j=0}^{k} a_j m^j$ with $0\\le a_j<m$, where $a_j$ counts the pieces of width $m^j$ and $j$ is the base-$m$ position."
+    }
+  ],
+  "relations": [
+    {
+      "prerequisite": "power-width-interchange",
+      "predicate": "is reduced to",
+      "quote": "The general case is reduced to the [Power-width address interchange](power-width-interchange.md) in three stages."
+    }
+  ],
+  "derivations": [
+    {
+      "step": "S1.6",
+      "quote": "Let $\\rho$ be the least integer with $q^{2\\rho}\\ge W^k$, the number of top digits taken from each chunk. Call the first chunk $h$, the second $d$, and the field between them $g$. Write $h^+$ and $h^-$ for the top $\\rho$ digits of $h$ and its remaining digits, and $d^+$ and $d^-$ for those of $d$. Interchange the top digits of $h$ and $d$ one pair at a time; then $d^+$ and $h^+$ are on top, and moving $h^+$ after $d^+$ gives a row field of $q^{2\\rho}\\ge W^k$ rows before both remaining parts. Appending zero rows makes its length a multiple of $W^k$, less than $2q^{2\\rho}$. Each digit pair costs $O(V)$ by [Elementary stream operations](stream-ops.md), and the orders are $(h^+,h^-,g,d^+,d^-)\\to(d^+,h^+,h^-,g,d^-)\\to(d^+,h^+,d^-,g,h^-)\\to(d^+,d^-,g,h^+,h^-)$. Write $e-\\rho=\\sum_{j=0}^{k} a_j m^j$ with $0\\le a_j<m$, where $a_j$ counts the pieces of width $m^j$ and $j$ is the base-$m$ position. Split each remaining part into $a_j$ pieces of width $m^j$ for each $j$, and interchange corresponding pieces by the power-width procedure, all using one padded row field whose length is divisible by every $W^j$ with $j\\le k$. The costs sum to $O(Ve^\\tau)$ because $a_j<m$ and $m^k<me$. For binary chunks take $e$ to be the least integer with $q^e\\ge 2^u$, pad each chunk range numerically from $\\{0,\\dots,2^u-1\\}$ to $\\{0,\\dots,q^e-1\\}$ with zeros, interchange, and scan the padding away. Radix-$q$ order is numerical, so padding keeps valid entries in order, and $e=O(u)$ bounds the cost."
+    }
+  ]
+}

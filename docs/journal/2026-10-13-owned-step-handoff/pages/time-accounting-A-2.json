@@ -1,0 +1,57 @@
+{
+  "symbols": [
+    {
+      "symbol": "V",
+      "name": "padded bit volume",
+      "meaning": "The bit volume Tp of the padded arrays, which counts their stored bits up to a constant factor.",
+      "relation": "count",
+      "quote": "Each cost is divided by $V=Tp$, the bit volume of the padded arrays, where $T\\approx n/b$ is the transform size, so $V=\\Theta(n)$."
+    },
+    {
+      "symbol": "g_i",
+      "name": "stage margin",
+      "meaning": "The margin below one of the i-th stage's power, a number below one, so that the power is p^(1-g_i).",
+      "relation": "direct",
+      "quote": "Write $g_i$ for the margin below one of the $i$th stage's power, so that the power is $p^{1-g_i}$:"
+    },
+    {
+      "symbol": "\\kappa",
+      "name": "power-saving constant",
+      "meaning": "The fixed constant 2^(-182), half the smallest stage margin.",
+      "relation": "direct",
+      "quote": "The constant $\\kappa=2^{-182}$ is therefore half the smallest margin, the largest value the argument allows."
+    }
+  ],
+  "relations": [
+    {
+      "prerequisite": "multiplication-algorithm",
+      "predicate": "bounds the cost of",
+      "quote": "Summing the stage costs bounds the cost of [The multiplication algorithm](multiplication-algorithm.md) on $n$-bit inputs."
+    },
+    {
+      "prerequisite": "parameter-choice",
+      "predicate": "is set by",
+      "quote": "The stage sizes are set by [Parameter choices for the padded box](parameter-choice.md): $p=6b$ with $b=\\lceil\\log_2 n\\rceil$, so $p=\\Theta(\\log n)$, $d=\\Theta(p^\\epsilon)$ axes, and chunk width $K=\\Theta(p^{\\epsilon c})$."
+    },
+    {
+      "prerequisite": "address-chunk-interchange",
+      "predicate": "follows from",
+      "quote": "The chunk-exchange row follows from [Fast address-chunk interchange](address-chunk-interchange.md), which gives $O(VK^\\tau)$ for each exchange of width-$K$ chunks."
+    },
+    {
+      "prerequisite": "simultaneous-butterfly-layer",
+      "predicate": "is based on",
+      "quote": "The simultaneous butterfly rounds are based on [Simultaneous normalized butterfly layer](simultaneous-butterfly-layer.md), each costing $O(Vd^{\\lambda'})$."
+    },
+    {
+      "prerequisite": "tensor-resampling",
+      "predicate": "is built from",
+      "quote": "The Gaussian row is built from the line passes of [Tensor resampling on a padded box](tensor-resampling.md) along the $d$ axes."
+    },
+    {
+      "prerequisite": "synthetic-convolution",
+      "predicate": "accounts for the stages of",
+      "quote": "The bound accounts for the stages of [Convolution from the retained transform layout](synthetic-convolution.md): two forward transforms, pointwise products and the opposite transform."
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "symbols": [
+    {
+      "symbol": "u",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $u$ is the chunk width, the number of bits in each chunk, and $V$ is the number of stored bits in the array."
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $u$ is the chunk width, the number of bits in each chunk, and $V$ is the number of stored bits in the array."
+      }
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {
+        "kind": "here",
+        "quote": "The exponent $\\tau$ is a fixed number with $0<\\tau<1$, the same for every width."
+      }
+    },
+    {
+      "symbol": "O",
+      "anchor": {
+        "kind": "background",
+        "note": "Big-O notation, named in the reader profile (big-O and its relatives)."
+      }
+    },
+    {
+      "symbol": "\\mathbb Z/2\\mathbb Z",
+      "anchor": {
+        "kind": "background",
+        "note": "Integers modulo 2 (Z/qZ), covered by modular arithmetic and residue rings in the reader profile."
+      }
+    },
+    {
+      "symbol": "H",
+      "anchor": {
+        "kind": "here",
+        "quote": "A shear $H\\leftarrow H+D$ replaces the block $H$ by $H+D$ bitwise, where $H$ and $D$ are two equal blocks of bits."
+      }
+    },
+    {
+      "symbol": "D",
+      "anchor": {
+        "kind": "here",
+        "quote": "A shear $H\\leftarrow H+D$ replaces the block $H$ by $H+D$ bitwise, where $H$ and $D$ are two equal blocks of bits."
+      }
+    },
+    {
+      "symbol": "\\leftarrow",
+      "anchor": {
+        "kind": "here",
+        "quote": "A shear $H\\leftarrow H+D$ replaces the block $H$ by $H+D$ bitwise, where $H$ and $D$ are two equal blocks of bits."
+      }
+    },
+    {
+      "symbol": "s",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "so the total number $s$ of smaller operations satisfies $s<Wm$",
+        "note": "Nothing on the page or on an earlier page says what s denotes; it is the total number of smaller operations, which the reader can only guess from context."
+      }
+    },
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "fixed network of XOR gates on $W$ wires whose edge changes are smaller shears",
+        "note": "Nothing on the page or on an earlier page says what W denotes; the reader cannot tell whether it counts wires, edges or gates."
+      }
+    },
+    {
+      "symbol": "m",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "satisfies $s<Wm$",
+        "note": "Nothing on the page or on an earlier page says what m denotes; the reader cannot tell what dimension or count it stands for, and the page's first use of m is in this bound."
+      }
+    },
+    {
+      "symbol": "+",
+      "anchor": {
+        "kind": "background",
+        "note": "Ordinary addition; over Z/2Z and for bit blocks it is XOR, covered by bitwise XOR and the field with two elements, and by modular arithmetic."
+      }
+    },
+    {
+      "symbol": "=",
+      "anchor": {
+        "kind": "background",
+        "note": "Equality, standard notation used in the reader's discrete mathematics and calculus."
+      }
+    },
+    {
+      "symbol": "<",
+      "anchor": {
+        "kind": "background",
+        "note": "Order relation; inequalities are covered by the known concept Limits, convergence and error bounds and by the reader's calculus."
+      }
+    },
+    {
+      "symbol": "-",
+      "anchor": {
+        "kind": "background",
+        "note": "Ordinary subtraction in the exponent \\tau-1, covered by single-variable calculus and exponentials."
+      }
+    },
+    {
+      "symbol": "/",
+      "anchor": {
+        "kind": "background",
+        "note": "Division, elementary arithmetic; u^\\tau/u is a ratio of powers, covered by exponentials in single-variable calculus."
+      }
+    },
+    {
+      "symbol": "^",
+      "anchor": {
+        "kind": "background",
+        "note": "Exponent notation for powers, covered by exponentials and polynomials in the reader profile."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "edge changes",
+      "quote": "whose edge changes are smaller shears",
+      "kind": "term",
+      "note": "The page never says what an edge change is or what the network does along an edge. The reader cannot tell what is being counted when s is described as the sum of the ranks of the edge changes."
+    },
+    {
+      "term": "smaller interchanges and the rank count",
+      "quote": "A shear is done by as many smaller interchanges as the rank of its matrix",
+      "kind": "step",
+      "note": "The page does not say what a smaller interchange is, and gives no reason why a shear needs exactly as many of them as the rank of its matrix. The claim is not cited, so the reader cannot check it."
+    },
+    {
+      "term": "baseline for the saving",
+      "quote": "so the saving is a power of the width",
+      "kind": "step",
+      "note": "The saving is read off the ratio u^tau/u, which is a comparison against a per-bit cost of u. The page never states what cost u per bit is being compared against, so the reader cannot see why the ratio is the saving."
+    },
+    {
+      "term": "construction of the swap network",
+      "quote": "The method realises the swap as a fixed network of XOR gates on $W$ wires",
+      "kind": "step",
+      "note": "The page does not say how the W wires hold the bits of the array, or how the edge shears compose into the chunk swap. The construction is asserted but not stated."
+    },
+    {
+      "term": "power saving from the bound s < Wm",
+      "quote": "the recursion saves a power of the chunk width (cited)",
+      "kind": "step",
+      "note": "The page does not say how W and m depend on the chunk width u, so the reader cannot see how the bound s < Wm yields a power of u. The cited claim stands in for how the method's saving arises, and its role in the argument is not explained."
+    },
+    {
+      "term": "row restriction",
+      "quote": "under a row restriction",
+      "kind": "term",
+      "note": "The page does not say what the row restriction is. The link goes to the procedure page, not to the restriction, so the claim that this page drops the restriction cannot be checked from this page."
+    }
+  ]
+}

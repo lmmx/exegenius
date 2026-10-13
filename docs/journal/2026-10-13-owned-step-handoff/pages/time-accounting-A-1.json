@@ -1,0 +1,141 @@
+{
+  "symbols": [
+    {
+      "symbol": "n",
+      "name": "input bit length",
+      "meaning": "The bit length of each input, a count of bits.",
+      "relation": "count",
+      "quote": "Here $n$ is the bit length of each input, $T$ the transform size and $p$ the working precision in bits."
+    },
+    {
+      "symbol": "T",
+      "name": "transform size",
+      "meaning": "The transform size, the number of points in each transform.",
+      "relation": "count",
+      "quote": "Here $n$ is the bit length of each input, $T$ the transform size and $p$ the working precision in bits."
+    },
+    {
+      "symbol": "p",
+      "name": "working precision",
+      "meaning": "The working precision in bits, a count of bits in each coefficient format.",
+      "relation": "count",
+      "quote": "Here $n$ is the bit length of each input, $T$ the transform size and $p$ the working precision in bits."
+    },
+    {
+      "symbol": "V",
+      "name": "volume",
+      "meaning": "The number of stored bits of the padded array, up to a constant, equal to $Tp$.",
+      "relation": "count",
+      "quote": "Each stage is measured after division by the volume $V=Tp$, the number of stored bits up to a constant."
+    },
+    {
+      "symbol": "d",
+      "name": "number of axes",
+      "meaning": "The number of axes of the padded box, a count.",
+      "relation": "count",
+      "quote": "Here $d$ is the number of axes, $K$ the chunk width in bits and $\\ell=\\log_2 r$ the number of address bits in a record."
+    },
+    {
+      "symbol": "K",
+      "name": "chunk width",
+      "meaning": "The width of each address chunk in bits, a count.",
+      "relation": "count",
+      "quote": "Here $d$ is the number of axes, $K$ the chunk width in bits and $\\ell=\\log_2 r$ the number of address bits in a record."
+    },
+    {
+      "symbol": "\\ell",
+      "name": "record address bits",
+      "meaning": "The number of address bits in one record, a count, equal to $\\log_2 r$.",
+      "relation": "count",
+      "quote": "Here $d$ is the number of axes, $K$ the chunk width in bits and $\\ell=\\log_2 r$ the number of address bits in a record."
+    },
+    {
+      "symbol": "\\epsilon",
+      "name": "size exponent",
+      "meaning": "A fixed exponent in the sizes, with $d=\\Theta(p^\\epsilon)$.",
+      "relation": "direct",
+      "quote": "The fixed exponents are $\\epsilon$ and $c$ in these sizes, $\\tau$ and $\\lambda'$ in the chunk and butterfly costs, and $\\delta$ in the Gaussian costs."
+    },
+    {
+      "symbol": "c",
+      "name": "chunk exponent",
+      "meaning": "A fixed exponent with $K=\\Theta(p^{\\epsilon c})$.",
+      "relation": "direct",
+      "quote": "The fixed exponents are $\\epsilon$ and $c$ in these sizes, $\\tau$ and $\\lambda'$ in the chunk and butterfly costs, and $\\delta$ in the Gaussian costs."
+    },
+    {
+      "symbol": "\\tau",
+      "name": "chunk-exchange exponent",
+      "meaning": "The fixed exponent $\\tau<1$ in the chunk-exchange cost $O(VK^\\tau)$.",
+      "relation": "direct",
+      "quote": "The fixed exponents are $\\epsilon$ and $c$ in these sizes, $\\tau$ and $\\lambda'$ in the chunk and butterfly costs, and $\\delta$ in the Gaussian costs."
+    },
+    {
+      "symbol": "\\lambda'",
+      "name": "butterfly exponent",
+      "meaning": "The fixed exponent $\\lambda'<1$ in the simultaneous-round cost $O(Vd^{\\lambda'})$.",
+      "relation": "direct",
+      "quote": "The fixed exponents are $\\epsilon$ and $c$ in these sizes, $\\tau$ and $\\lambda'$ in the chunk and butterfly costs, and $\\delta$ in the Gaussian costs."
+    },
+    {
+      "symbol": "\\delta",
+      "name": "Gaussian exponent",
+      "meaning": "The fixed exponent in the Gaussian and chirp costs, here $\\delta=1/16$.",
+      "relation": "direct",
+      "quote": "The fixed exponents are $\\epsilon$ and $c$ in these sizes, $\\tau$ and $\\lambda'$ in the chunk and butterfly costs, and $\\delta$ in the Gaussian costs."
+    },
+    {
+      "symbol": "\\alpha",
+      "name": "resampling parameter",
+      "meaning": "An integer parameter of the Gaussian maps, of order $p^{1/4+\\epsilon/2}$.",
+      "relation": "direct",
+      "quote": "The Gaussian maps use an integer parameter $\\alpha=\\Theta(p^{1/4+\\epsilon/2})$."
+    },
+    {
+      "symbol": "g_i",
+      "name": "margin below one",
+      "meaning": "The margin of row $i$ below one, so that row $i$ costs $p^{1-g_i}$.",
+      "relation": "direct",
+      "quote": "The seven largest exponents have margins $g_1,\\dots,g_7$ below one, so row $i$ costs $p^{1-g_i}$:"
+    },
+    {
+      "symbol": "\\kappa",
+      "name": "exponent saving",
+      "meaning": "The saving in the exponent of the final bound, $2^{-182}$.",
+      "relation": "direct",
+      "quote": "The exponent saving $\\kappa=2^{-182}$ is half the smallest margin."
+    }
+  ],
+  "relations": [
+    {
+      "prerequisite": "multiplication-algorithm",
+      "predicate": "bounds the running time of",
+      "quote": "Summing them bounds the running time of [The multiplication algorithm](multiplication-algorithm.md) on $n$-bit inputs."
+    },
+    {
+      "prerequisite": "address-chunk-interchange",
+      "predicate": "rests on",
+      "quote": "The chunk row rests on the cost of [Fast address-chunk interchange](address-chunk-interchange.md), with $O(VK^\\tau)$ per exchange."
+    },
+    {
+      "prerequisite": "simultaneous-butterfly-layer",
+      "predicate": "is based on",
+      "quote": "The simultaneous row is based on the cost of [Simultaneous normalized butterfly layer](simultaneous-butterfly-layer.md), which costs $O(Vd^{\\lambda'})$ per round."
+    },
+    {
+      "prerequisite": "tensor-resampling",
+      "predicate": "follows from",
+      "quote": "The Gaussian row follows from the line counts of [Tensor resampling on a padded box](tensor-resampling.md)."
+    },
+    {
+      "prerequisite": "synthetic-convolution",
+      "predicate": "bound the cost of",
+      "quote": "Together the rows bound the cost of [Convolution from the retained transform layout](synthetic-convolution.md)."
+    },
+    {
+      "prerequisite": "parameter-choice",
+      "predicate": "is set by",
+      "quote": "Each power of $p$ below is set by the sizes in [Parameter choices for the padded box](parameter-choice.md)."
+    }
+  ]
+}

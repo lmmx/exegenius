@@ -1,0 +1,120 @@
+{
+  "symbols": [
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $V$ is the number of stored bits in the array."
+      }
+    },
+    {
+      "symbol": "u",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $u$ is the number of bits in each chunk."
+      }
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\tau$ is a fixed exponent below one."
+      }
+    },
+    {
+      "symbol": "O",
+      "anchor": {
+        "kind": "background",
+        "note": "Big-O notation: the reader profile covers big-O and its relatives."
+      }
+    },
+    {
+      "symbol": "H",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $H$ and $D$ for the values of the two chunks."
+      }
+    },
+    {
+      "symbol": "D",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $H$ and $D$ for the values of the two chunks."
+      }
+    },
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "here",
+        "quote": "A fixed circuit of $W$ wires with pointwise XOR gates realises this shear."
+      }
+    },
+    {
+      "symbol": "m",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "Gates and the circuit's inputs and outputs get rational $m\\times m$ matrices",
+        "note": "The page never says what m counts. Its first use is in the matrix sizes here, and no sentence on the page defines it."
+      }
+    },
+    {
+      "symbol": "s",
+      "anchor": {
+        "kind": "here",
+        "quote": "So the number of recursive calls is the total rank $s$."
+      }
+    },
+    {
+      "symbol": "\\leftarrow",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "D\\leftarrow D-H",
+        "note": "The page never says that the arrow means the left-hand chunk value is replaced by the right-hand expression; only the words 'Three updates' hint at it."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "Padding binary chunks to a fixed radix",
+      "quote": "Binary chunks are padded to a fixed radix.",
+      "kind": "step",
+      "note": "The page does not say which radix is meant, what the padding contains, or why padding leaves the chunk swap unchanged, so the reduction that follows cannot be checked."
+    },
+    {
+      "term": "Reduction of a general width to power-of-m pieces",
+      "quote": "each piece is one such call, so the general width is reduced to",
+      "kind": "step",
+      "note": "The page does not say how the pieces of the two chunks are paired, offset or combined, so the reader cannot check that one call per piece swaps the two full chunks."
+    },
+    {
+      "term": "Per-level recurrence giving the width-to-tau bound",
+      "quote": "Each level multiplies the time per stored bit by at most $s/W$, plus a constant",
+      "kind": "step",
+      "note": "The page never says how many levels there are or how the width shrinks from one level to the next, so the reader cannot solve the recurrence to get a bound of a constant times the width to the power tau."
+    },
+    {
+      "term": "Cost of an edge of rank r",
+      "quote": "An edge whose change has a given rank costs that many smaller interchanges, each on a $1/W$ share of the array.",
+      "kind": "step",
+      "note": "The page asserts that a rank-r edge change costs exactly r smaller interchanges on a 1/W share, and gives no reason, so the claim that the number of recursive calls is s cannot be checked."
+    },
+    {
+      "term": "Fixed XOR circuit realising the shear",
+      "quote": "A fixed circuit of $W$ wires with pointwise XOR gates realises this shear.",
+      "kind": "step",
+      "note": "The page never gives or describes the circuit's construction and only asserts that a fixed W-wire XOR circuit realises the shear, so the reader cannot check that it exists or how its matrices are chosen."
+    },
+    {
+      "term": "Middle update sets the cost",
+      "quote": "The other two updates are linear, so the middle one, which adds $D$ to $H$, sets the cost.",
+      "kind": "step",
+      "note": "The page does not say what 'linear' has to do with cost, and the first and third updates also add one chunk to the other, so the reader cannot see why only the middle one sets the cost."
+    },
+    {
+      "term": "Wire labels and exactness of the composed map",
+      "quote": "Each wire's output label minus its input label is the identity",
+      "kind": "step",
+      "note": "The page does not say what a wire's label is or why the difference of its output and input labels is the identity, so the claim that the composed address map is an exact permutation cannot be checked from the page."
+    }
+  ]
+}

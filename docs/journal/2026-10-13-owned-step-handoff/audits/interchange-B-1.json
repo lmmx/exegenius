@@ -1,0 +1,224 @@
+{
+  "symbols": [
+    {
+      "symbol": "u",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $u$ be the number of bits in each chunk"
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "here",
+        "quote": "let $V$ be the number of bits stored in the array"
+      }
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\tau$ is a fixed exponent with $0<\\tau<1$."
+      }
+    },
+    {
+      "symbol": "O",
+      "anchor": {
+        "kind": "background",
+        "note": "Big-O notation; the reader profile covers big-O and its relatives."
+      }
+    },
+    {
+      "symbol": "e",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $e$ be the number of digits in each chunk"
+      }
+    },
+    {
+      "symbol": "q",
+      "anchor": {
+        "kind": "here",
+        "quote": "written in a fixed prime radix $q$"
+      }
+    },
+    {
+      "symbol": "m",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "That procedure swaps chunks of $e=m^k$ digits",
+        "note": "Nothing on the page or in the listed bindings tells the reader what m denotes."
+      }
+    },
+    {
+      "symbol": "k",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $k$ is the least integer with $m^k\\ge e$"
+      }
+    },
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "has length divisible by $W^k$.",
+        "note": "Nothing on the page or in the listed bindings tells the reader what W denotes."
+      }
+    },
+    {
+      "symbol": "\\rho",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $\\rho$ be the least integer with $q^{2\\rho}\\ge W^k$"
+      }
+    },
+    {
+      "symbol": "h",
+      "anchor": {
+        "kind": "here",
+        "quote": "Call the first chunk $h$, the second $d$, and the field between them $g$."
+      }
+    },
+    {
+      "symbol": "d",
+      "anchor": {
+        "kind": "here",
+        "quote": "Call the first chunk $h$, the second $d$, and the field between them $g$."
+      }
+    },
+    {
+      "symbol": "g",
+      "anchor": {
+        "kind": "here",
+        "quote": "Call the first chunk $h$, the second $d$, and the field between them $g$."
+      }
+    },
+    {
+      "symbol": "h^+",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $h^+$ and $h^-$ for the top $\\rho$ digits of $h$ and its remaining digits"
+      }
+    },
+    {
+      "symbol": "h^-",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $h^+$ and $h^-$ for the top $\\rho$ digits of $h$ and its remaining digits"
+      }
+    },
+    {
+      "symbol": "d^+",
+      "anchor": {
+        "kind": "here",
+        "quote": "and $d^+$ and $d^-$ for those of $d$"
+      }
+    },
+    {
+      "symbol": "d^-",
+      "anchor": {
+        "kind": "here",
+        "quote": "and $d^+$ and $d^-$ for those of $d$"
+      }
+    },
+    {
+      "symbol": "a_j",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $a_j$ counts the pieces of width $m^j$"
+      }
+    },
+    {
+      "symbol": "j",
+      "anchor": {
+        "kind": "here",
+        "quote": "and $j$ is the base-$m$ position"
+      }
+    },
+    {
+      "symbol": "\\sum",
+      "anchor": {
+        "kind": "background",
+        "note": "Sigma notation for a finite sum; covered by the profile's discrete mathematics and convergence of series."
+      }
+    },
+    {
+      "symbol": "<",
+      "anchor": {
+        "kind": "background",
+        "note": "Strict inequality; covered by the profile's discrete mathematics and the inequalities of limits and convergence."
+      }
+    },
+    {
+      "symbol": "\\le",
+      "anchor": {
+        "kind": "background",
+        "note": "Less-than-or-equal; covered by the profile's discrete mathematics and the inequalities of limits and convergence."
+      }
+    },
+    {
+      "symbol": "\\ge",
+      "anchor": {
+        "kind": "background",
+        "note": "Greater-than-or-equal; covered by the profile's discrete mathematics and the inequalities of limits and convergence."
+      }
+    },
+    {
+      "symbol": "\\to",
+      "anchor": {
+        "kind": "background",
+        "note": "Arrow between successive rearrangements of a list; covered by the profile's permutations and linear maps notation."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "row field",
+      "quote": "when a row field before them has length divisible by $W^k$",
+      "kind": "term",
+      "note": "Nothing says what a row field is, what its rows are, or why its length matters. The page uses row field and padded row field throughout, and no known concept or linked page covers it."
+    },
+    {
+      "term": "transforms",
+      "quote": "the main algorithm uses it in its transforms",
+      "kind": "term",
+      "note": "The reader has not studied the discrete Fourier transform, the FFT or Fourier analysis, and the page neither explains transforms nor links a page for them. The main algorithm is not identified either."
+    },
+    {
+      "term": "the four orders",
+      "quote": "$(h^+,h^-,g,d^+,d^-)\\to(d^+,h^+,h^-,g,d^-)\\to(d^+,h^+,d^-,g,h^-)\\to(d^+,d^-,g,h^+,h^-)$",
+      "kind": "step",
+      "note": "The page asserts this chain of orders but does not say which pairwise digit interchanges turn each order into the next. Interchanging the top digits of h and d one pair at a time, as described just before, does not obviously produce the first arrow, so the reader cannot check the chain."
+    },
+    {
+      "term": "rho at most e",
+      "quote": "Write $e-\\rho=\\sum_{j=0}^{k} a_j m^j$ with $0\\le a_j<m$",
+      "kind": "step",
+      "note": "The expansion of e minus rho with nonnegative digits a_j needs rho at most e, so that the top rho digits lie inside an e-digit chunk. The page never says so, and nothing on the page relates rho, defined through q^(2 rho) at least W^k, to e."
+    },
+    {
+      "term": "reduction to power-width chunks",
+      "quote": "That procedure swaps chunks of $e=m^k$ digits, where $k$ is the least integer with $m^k\\ge e$",
+      "kind": "step",
+      "note": "Read literally this says e equals m^k, but k is then defined as the least integer with m^k at least e, which equals e only when e is a power of m. The page does not say whether the power-width procedure applies to general e, so the reduction cannot be checked as written."
+    },
+    {
+      "term": "exactness through the bit network",
+      "quote": "sends every input role to its exchanged role, so the result is exact",
+      "kind": "step",
+      "note": "The intermediate steps XOR-combine data, and the page does not say why XOR-combined intermediates cancel, nor what input role and exchanged role mean. The reader knows the bit network by name, not this property, so exactness is asserted rather than shown."
+    },
+    {
+      "term": "cost of the power-width pieces",
+      "quote": "The costs sum to $O(Ve^\\tau)$ because $a_j<m$ and $m^k<me$.",
+      "kind": "step",
+      "note": "The page does not state the cost of one power-width interchange of pieces of width m^j, nor does it carry out the sum over j. Knowing a_j < m and m^k < me does not give the bound; the reader would need the per-piece cost and a geometric-sum argument using tau less than 1, and neither is on the page."
+    },
+    {
+      "term": "total cost of the stages",
+      "quote": "Together these stages interchange any two disjoint chunks of $u$ bits, with no row restriction, in $O(Vu^\\tau)$ time.",
+      "kind": "step",
+      "note": "By the page's own account the top-digit stage costs rho times O(V), but rho is never bounded on the page. The other stage costs are not shown to fit under the O(Vu^tau) bound either."
+    }
+  ]
+}

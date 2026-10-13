@@ -1,0 +1,270 @@
+{
+  "gaps": [
+    {
+      "term": "prefix moves",
+      "quote": "prefix moves, chunk exchanges, simultaneous butterfly rounds",
+      "kind": "term",
+      "note": "Named as one of the seven dominant stages, but it is not a known concept, not linked and not explained, so the reader cannot tell what this stage is or what it costs."
+    },
+    {
+      "term": "axis layouts",
+      "quote": "axis layouts, Gaussian line maps",
+      "kind": "term",
+      "note": "Named as a stage with no link or explanation; the reader cannot tell what it does or what it costs."
+    },
+    {
+      "term": "Gaussian line maps",
+      "quote": "Gaussian line maps, chirps and packed products",
+      "kind": "term",
+      "note": "Named as a stage with no link or explanation. The later phrase 'line passes' does not say what the stage is."
+    },
+    {
+      "term": "margins g_1 and g_4 to g_7",
+      "quote": "g_1=1-\\epsilon(1+c)",
+      "kind": "step",
+      "note": "The page gives these margins as closed forms, but nothing says which stage each belongs to or derives its exponent from a stage cost. The reader cannot check them; only g_2 is derived on the page (line 182)."
+    },
+    {
+      "term": "number of chunk exchanges",
+      "quote": "There are $O(p/K)$ exchanges",
+      "kind": "step",
+      "note": "The page asserts that the number of exchanges is O(p/K) without saying what is exchanged or why there are that many. The normalized cost pK^{\\tau-1} depends on this count."
+    },
+    {
+      "term": "butterfly margin g_3",
+      "quote": "each costing $O(Vd^{\\lambda'})$",
+      "kind": "step",
+      "note": "Dividing by V and using d=\\Theta(p^\\epsilon) gives a normalized cost p^{\\epsilon\\lambda'}, which equals p^{1-g_3} only if g_3=1-\\epsilon\\lambda'. The page states g_3=\\epsilon(1-\\lambda') and no step connects the two, so the reader cannot check g_3 and finds the two inconsistent."
+    },
+    {
+      "term": "Gaussian row",
+      "quote": "The Gaussian row is built from the line passes of",
+      "kind": "step",
+      "note": "No cost or margin is given for the Gaussian row, or for the convolution stages that 'the bound accounts for', and the page does not say which g_i it has. The reader cannot check its power."
+    },
+    {
+      "term": "constant kappa as the largest allowed value",
+      "quote": "the largest value the argument allows",
+      "kind": "step",
+      "note": "This is a cited claim about the role of kappa. The argument is not named or stated on the page, so the reader cannot check that 2^{-182} is the largest permitted value rather than just half the smallest margin."
+    },
+    {
+      "term": "logarithmic factors in the stage costs",
+      "quote": "because the logarithmic factors need room",
+      "kind": "step",
+      "note": "The page never says which stage costs carry logarithmic factors or derives them. The claim that any such factor adds at most kappa to the exponent therefore rests on a bound the reader cannot check."
+    }
+  ],
+  "symbols": [
+    {
+      "symbol": "n",
+      "anchor": {
+        "kind": "background",
+        "note": "Input size in bits: the standard n of big-O analysis and of the schoolbook and Karatsuba multiplication that the profile covers."
+      }
+    },
+    {
+      "symbol": "p",
+      "anchor": {
+        "kind": "here",
+        "quote": "The stage sizes are set by [Parameter choices for the padded box](parameter-choice.md): $p=6b$ with $b=\\lceil\\log_2 n\\rceil$"
+      }
+    },
+    {
+      "symbol": "b",
+      "anchor": {
+        "kind": "here",
+        "quote": "The stage sizes are set by [Parameter choices for the padded box](parameter-choice.md): $p=6b$ with $b=\\lceil\\log_2 n\\rceil$"
+      }
+    },
+    {
+      "symbol": "d",
+      "anchor": {
+        "kind": "here",
+        "quote": "$d=\\Theta(p^\\epsilon)$ axes"
+      }
+    },
+    {
+      "symbol": "K",
+      "anchor": {
+        "kind": "here",
+        "quote": "chunk width $K=\\Theta(p^{\\epsilon c})$"
+      }
+    },
+    {
+      "symbol": "c",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\epsilon=2^{-75}$, $c=2^{-56}$, $\\tau=1-2^{-50}$, $\\lambda'=1-2^{-54}$ and $\\delta=1/16$ are the fixed constants of the cited pages."
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "here",
+        "quote": "Each cost is divided by $V=Tp$, the bit volume of the padded arrays"
+      }
+    },
+    {
+      "symbol": "T",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $T\\approx n/b$ is the transform size"
+      }
+    },
+    {
+      "symbol": "\\epsilon",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\epsilon=2^{-75}$, $c=2^{-56}$, $\\tau=1-2^{-50}$, $\\lambda'=1-2^{-54}$ and $\\delta=1/16$ are the fixed constants of the cited pages."
+      }
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\epsilon=2^{-75}$, $c=2^{-56}$, $\\tau=1-2^{-50}$, $\\lambda'=1-2^{-54}$ and $\\delta=1/16$ are the fixed constants of the cited pages."
+      }
+    },
+    {
+      "symbol": "\\lambda'",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\epsilon=2^{-75}$, $c=2^{-56}$, $\\tau=1-2^{-50}$, $\\lambda'=1-2^{-54}$ and $\\delta=1/16$ are the fixed constants of the cited pages."
+      }
+    },
+    {
+      "symbol": "\\delta",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\epsilon=2^{-75}$, $c=2^{-56}$, $\\tau=1-2^{-50}$, $\\lambda'=1-2^{-54}$ and $\\delta=1/16$ are the fixed constants of the cited pages."
+      }
+    },
+    {
+      "symbol": "\\kappa",
+      "anchor": {
+        "kind": "here",
+        "quote": "The constant $\\kappa=2^{-182}$ is therefore half the smallest margin, the largest value the argument allows."
+      }
+    },
+    {
+      "symbol": "i",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $g_i$ for the margin below one of the $i$th stage's power"
+      }
+    },
+    {
+      "symbol": "g_i",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $g_i$ for the margin below one of the $i$th stage's power"
+      }
+    },
+    {
+      "symbol": "g_1",
+      "anchor": {
+        "kind": "here",
+        "quote": "g_1=1-\\epsilon(1+c),\\quad g_2=\\epsilon c(1-\\tau),\\quad g_3=\\epsilon(1-\\lambda'),\\quad g_4=1-\\tau-\\epsilon(2-\\tau)"
+      }
+    },
+    {
+      "symbol": "g_2",
+      "anchor": {
+        "kind": "here",
+        "quote": "g_1=1-\\epsilon(1+c),\\quad g_2=\\epsilon c(1-\\tau),\\quad g_3=\\epsilon(1-\\lambda'),\\quad g_4=1-\\tau-\\epsilon(2-\\tau)"
+      }
+    },
+    {
+      "symbol": "g_3",
+      "anchor": {
+        "kind": "here",
+        "quote": "g_1=1-\\epsilon(1+c),\\quad g_2=\\epsilon c(1-\\tau),\\quad g_3=\\epsilon(1-\\lambda'),\\quad g_4=1-\\tau-\\epsilon(2-\\tau)"
+      }
+    },
+    {
+      "symbol": "g_4",
+      "anchor": {
+        "kind": "here",
+        "quote": "g_1=1-\\epsilon(1+c),\\quad g_2=\\epsilon c(1-\\tau),\\quad g_3=\\epsilon(1-\\lambda'),\\quad g_4=1-\\tau-\\epsilon(2-\\tau)"
+      }
+    },
+    {
+      "symbol": "g_5",
+      "anchor": {
+        "kind": "here",
+        "quote": "g_5=\\tfrac14-\\delta-\\tfrac32\\epsilon,\\quad g_6=1-\\delta-\\epsilon,\\quad g_7=\\epsilon"
+      }
+    },
+    {
+      "symbol": "g_6",
+      "anchor": {
+        "kind": "here",
+        "quote": "g_5=\\tfrac14-\\delta-\\tfrac32\\epsilon,\\quad g_6=1-\\delta-\\epsilon,\\quad g_7=\\epsilon"
+      }
+    },
+    {
+      "symbol": "g_7",
+      "anchor": {
+        "kind": "here",
+        "quote": "g_5=\\tfrac14-\\delta-\\tfrac32\\epsilon,\\quad g_6=1-\\delta-\\epsilon,\\quad g_7=\\epsilon"
+      }
+    },
+    {
+      "symbol": "\\log",
+      "anchor": {
+        "kind": "background",
+        "note": "Logarithm operator, covered by the profile's big-O and algorithms background (logarithmic factors in divide-and-conquer recurrences and binary representation)."
+      }
+    },
+    {
+      "symbol": "\\lg",
+      "anchor": {
+        "kind": "background",
+        "note": "Binary logarithm, covered by the profile's big-O and algorithms background (logarithmic factors in divide-and-conquer recurrences and binary representation)."
+      }
+    },
+    {
+      "symbol": "\\lceil",
+      "anchor": {
+        "kind": "background",
+        "note": "Ceiling brackets (round up), standard discrete mathematics covered by the profile (division with remainder and integer quotients)."
+      }
+    },
+    {
+      "symbol": "\\rceil",
+      "anchor": {
+        "kind": "background",
+        "note": "Ceiling brackets (round up), standard discrete mathematics covered by the profile (division with remainder and integer quotients)."
+      }
+    },
+    {
+      "symbol": "\\Theta",
+      "anchor": {
+        "kind": "background",
+        "note": "Tight asymptotic bound, one of the big-O relatives covered by the profile's big-O background."
+      }
+    },
+    {
+      "symbol": "O",
+      "anchor": {
+        "kind": "background",
+        "note": "Big-O notation, covered by the profile's big-O background."
+      }
+    },
+    {
+      "symbol": "\\approx",
+      "anchor": {
+        "kind": "background",
+        "note": "The approximately-equal relation of basic mathematics, covered by the profile's big-O and calculus background."
+      }
+    },
+    {
+      "symbol": ">",
+      "anchor": {
+        "kind": "background",
+        "note": "Inequality sign, covered by the profile's single-variable calculus (limits, convergence and error bounds)."
+      }
+    }
+  ]
+}

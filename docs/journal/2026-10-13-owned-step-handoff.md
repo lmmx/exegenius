@@ -95,3 +95,112 @@ The page is also checked for the opposite failure: deriving the power-width recu
 - tokens and time;
 - what the writer flags;
 - in B, whether each anchored passage derives its step or only states it.
+
+## How the replication ran
+
+**The records.** Everything is in `2026-10-13-owned-step-handoff/`:
+- `tasks/`: the four write tasks;
+- `pages/`: the eight pages, with their JSON answers;
+- `audits/`: the eight audit tasks and answers;
+- `log.txt`: each writer's reply and cost, and my reading.
+
+**Submission.** All eight writers' answers were accepted by the submit of their condition.
+- One rejection was reported: `time-B-2`'s first draft, at 377 words.
+- No B writer reported a rejection for its derivations.
+
+**Audits.** Seven of the eight first audit answers were rejected by `apply_audit`. Each was rejected for anchoring a symbol to a known concept that does not bind it, such as `s`, `W` and `m` to "Rank saving $s<Wm$", or `\lfloor` to "Floor and ceiling". `time-A-1` needed three answers. Across the pilot and this replication, that makes 12 first answers in 16.
+
+**No side effects.** Writers told to use only Read, Write and Bash made none.
+
+## Results
+
+**`address-chunk-interchange`**, scored against the items set beforehand:
+
+| Page | 1: rows from high digits, padded to $W^k$ | 2: base-$m$ split and its cost | 3: binary padding | Other pages' results | Words | Audit: steps, terms |
+|---|---|---|---|---|---|---|
+| A-1 | stated in a sentence | stated, no cost | stated | sketches the power-width recursion and cites $s<Wm$ | 341 | 7, 0 |
+| A-2 | no | no | no | restates the XOR swap; sketches $s<Wm$ giving the saving | 309 | 4, 2 |
+| B-1 | derived: $\rho$, the field orders, padding below $2q^{2\rho}$ | derived; the cost is $O(Ve^\tau)$ "because $a_j<m$ and $m^k<me$" | derived, with $e = O(u)$ | the power-width result stated and linked | 339 | 6, 2 |
+| B-2 | derived | derived; the top term $m^{k\tau}\le e^\tau$ "dominates the geometric sum" | derived | the power-width result stated as used, and linked | 339 | 4, 1 |
+
+- **The pattern of the butterfly page recurs.** Neither A page derives S1.6. Both B pages derive all three of its steps, in agreement with the paper.
+- **The audits split the same way.**
+  - On A-1 they flagged the missing steps: how the padding works, how the pieces pair up, how many levels the recursion has.
+  - On A-2 they flagged a construction that is asserted, and a cited saving that "stands in for how the method's saving arises".
+  - On the B pages they flagged details inside the derivation: what a row field is, $\rho \le e$, $m > 1$ for the geometric sum, and the cost sum left to the reader on B-1.
+- **The A pages spent their words on other pages' material.** The B pages did not. This answers the pilot's duplication within this page.
+- **A real flaw.** B-1's "$e=m^k$ digits, where $k$ is the least integer with $m^k\ge e$" muddles $e$, and its audit flagged it.
+
+**`time-accounting`.** Items 1, 3 and 4 (S6.A, S6.B, S6.D, the single inferences) are on all four pages, in agreement with the paper. The difference is in S6.C, the rows traced to the procedures that bound them:
+
+| Page | S6.C: rows traced | Words | Audit: steps, terms |
+|---|---|---|---|
+| A-1 | none; three rows attributed to linked pages | 347 | 5, 1 |
+| A-2 | one: the chunk-exchange row, from $O(p/K)$ exchanges at $O(VK^\tau)$ | 316 | 6, 3 |
+| B-1 | five: chunk exchanges, simultaneous rounds, axis moves, Gaussian lines, packed products; each power derived from $d$, $K$, $\ell = \Theta(p^{1-\epsilon})$ and $\alpha$ | 346 | 5, 1 |
+| B-2 | none; three rows attributed | 333 | 2, 1 |
+
+- **Mixed: one B page in two.**
+- **The budget limited S6.C.** Both B writers said they could not fit it: B-1 omitted the setup row, and B-2's first draft was rejected at 377 words. Five row justifications plus the margin table do not fit in 350 words.
+- **The single inferences reached every page in both conditions**, as on `rank-saving` in the pilot.
+
+**The anchors.**
+- On B-1 and on both interchange pages, each anchored passage holds its step's derivation.
+- B-2's anchor for S6.C is "Each row is an earlier cost bound, divided by $V$.", a statement, not a derivation, and submit accepted it as designed. The audit, which does not see the anchors, flagged exactly that sentence: "Only the chunk-exchange, simultaneous-layer and Gaussian rows are linked to the page they come from".
+- Two writers noted that anchors are asked only for the page's owned steps (S1.6), not for the inferred steps listed beneath them, so one passage covered all three.
+
+**What the writers flagged.**
+- **All A writers, and the B writers, about the task:**
+  - prerequisite ids, which the task shows only inside link targets (two writers);
+  - a page that is both a prerequisite and already "understood";
+  - $W$ described as gates rather than wires;
+  - the exponents' values, which are absent from the task;
+  - `m`'s meaning.
+- **About the new section:** the budget (both `time-B` writers) and the anchor granularity (both `interchange-B` writers).
+
+**Cost.** Each writer's and auditor's tokens and time, as Claude Code reported them:
+
+| | interchange A | interchange B | time A | time B |
+|---|---|---|---|---|
+| writer tokens | 130.9k, 97.7k | 185.0k, 203.7k | 154.2k, 141.2k | 217.6k, 171.9k |
+| writer time | 271 s, 169 s | 477 s, 510 s | 328 s, 296 s | 539 s, 420 s |
+| audit tokens | 82.6k, 84.4k | 100.1k, 106.9k | 114.8k, 114.2k | 100.0k, 88.6k |
+
+- **Writers:** the B writers used 70% more tokens and 124% more time on the interchange page, and 32% and 54% more on `time-accounting`. The new section adds 1,163 and 1,431 words to the tasks.
+- **Audits:** costs were similar between conditions.
+
+## Reading the results
+
+Across the three pages whose owned step has inferred steps beneath it:
+
+| Page | A pages deriving the owned multi-step step | B pages deriving it |
+|---|---|---|
+| butterfly (pilot, the brief) | 0 of 2 | 2 of 2 |
+| `address-chunk-interchange` (this change) | 0 of 2 | 2 of 2 |
+| `time-accounting`, S6.C (this change) | 0 of 2 (one traces one row) | 1 of 2 |
+
+- **Where the owned steps are single inferences**, the conditions did not differ: `rank-saving`, and S6.A, S6.B and S6.D.
+- **The pattern recurs:** passing on what the plan holds beneath a page's own step is followed by that step's derivation on the page.
+- **Duplication:** on the interchange page it fell, since the B pages stated and linked what other pages own.
+- **The budget is the limit where an owned step is wide.** S6.C has five justifications, and one B page in two fitted them.
+
+**Limitations:**
+- Two attempts per condition and two pages, so 5 of 6 against 0 of 6 is a consistent direction, not an estimate.
+- The scoring was mine and not blind.
+- The replication's pages come from the second Sonnet sample; the pilot's came from the first.
+- B writers used more tokens and time.
+- An anchor shows where a writer claims to derive a step, not that it does.
+
+## Current State
+- `exegenius next` gives a write task for a page that owns sub-steps a section, "Steps this page derives", with each owned step's method, the steps beneath it with their quotes and paragraphs, the steps beneath it that other pages present, and the pages those steps use
+- `exegenius submit` rejects a write answer whose `derivations` lack a passage on the page, outside citations, for any owned step, or name a step the page does not own
+- On `address-chunk-interchange` (second Sonnet sample), both pages written with the section derive S1.6 in agreement with the paper, and neither page written without it does
+- On `time-accounting`, one of two pages written with the section traces five of the cost rows to their procedures; the other, and both pages written without it, trace at most one
+- A derivation anchor for S6.C on one page is a statement, not a derivation; submit accepts it, and the audit flags that sentence
+- Seven of eight first Haiku audit answers in the replication were rejected for anchoring symbols to known concepts that do not bind them
+
+## Missing
+- No audit input naming a page's owned steps and their anchors
+- No anchors for the inferred steps beneath an owned step
+- No word budget that depends on what a page owns
+- No full run with the planner on Sonnet and this handoff

@@ -1,0 +1,142 @@
+{
+  "symbols": [
+    {
+      "symbol": "n",
+      "anchor": {"kind": "here", "quote": "Here $n$ is the bit length of each input."}
+    },
+    {
+      "symbol": "\\kappa",
+      "anchor": {"kind": "here", "quote": "The power saving $\\kappa$ is the exponent of the log factor $(\\lg n)^\\kappa$ that the bound saves below $n\\lg n$."}
+    },
+    {
+      "symbol": "p",
+      "anchor": {"kind": "here", "quote": "$p=6\\lceil\\log_2 n\\rceil$ is the coefficient precision in bits."}
+    },
+    {
+      "symbol": "T",
+      "anchor": {"kind": "here", "quote": "$T\\approx n/\\lceil\\log_2 n\\rceil$ is the transform size, the number of coefficients."}
+    },
+    {
+      "symbol": "V",
+      "anchor": {"kind": "here", "quote": "Its volume $V=Tp=\\Theta(n)$ counts stored bits up to a constant."}
+    },
+    {
+      "symbol": "d",
+      "anchor": {"kind": "here", "quote": "which fixes the number of axes $d$ and the chunk width $K$ in bits."}
+    },
+    {
+      "symbol": "K",
+      "anchor": {"kind": "here", "quote": "which fixes the number of axes $d$ and the chunk width $K$ in bits."}
+    },
+    {
+      "symbol": "\\epsilon",
+      "anchor": {"kind": "here", "quote": "Here $\\epsilon$ is the exponent in $d=\\Theta(p^\\epsilon)$, $c$ the exponent in $K=\\lfloor d^c\\rfloor$, and $\\ell=\\log_2 r$ the number of address bits along an axis."}
+    },
+    {
+      "symbol": "c",
+      "anchor": {"kind": "here", "quote": "Here $\\epsilon$ is the exponent in $d=\\Theta(p^\\epsilon)$, $c$ the exponent in $K=\\lfloor d^c\\rfloor$, and $\\ell=\\log_2 r$ the number of address bits along an axis."}
+    },
+    {
+      "symbol": "\\ell",
+      "anchor": {"kind": "here", "quote": "Here $\\epsilon$ is the exponent in $d=\\Theta(p^\\epsilon)$, $c$ the exponent in $K=\\lfloor d^c\\rfloor$, and $\\ell=\\log_2 r$ the number of address bits along an axis."}
+    },
+    {
+      "symbol": "r",
+      "anchor": {"kind": "unbound", "quote": "$\\ell=\\log_2 r$ the number of address bits along an axis.", "note": "Nothing on the page or in a listed binding says what r denotes; the page only uses r inside log_2 r, and the record-length meaning belongs to a concept that does not bind it here."}
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {"kind": "here", "quote": "$\\tau<1$ and $\\lambda'<1$ are the chunk-exchange and simultaneous-layer exponents, $\\delta$ is a small slack exponent, and $\\alpha$ is the Gaussian width parameter."}
+    },
+    {
+      "symbol": "\\lambda'",
+      "anchor": {"kind": "here", "quote": "$\\tau<1$ and $\\lambda'<1$ are the chunk-exchange and simultaneous-layer exponents, $\\delta$ is a small slack exponent, and $\\alpha$ is the Gaussian width parameter."}
+    },
+    {
+      "symbol": "\\delta",
+      "anchor": {"kind": "here", "quote": "$\\tau<1$ and $\\lambda'<1$ are the chunk-exchange and simultaneous-layer exponents, $\\delta$ is a small slack exponent, and $\\alpha$ is the Gaussian width parameter."}
+    },
+    {
+      "symbol": "\\alpha",
+      "anchor": {"kind": "here", "quote": "$\\tau<1$ and $\\lambda'<1$ are the chunk-exchange and simultaneous-layer exponents, $\\delta$ is a small slack exponent, and $\\alpha$ is the Gaussian width parameter."}
+    },
+    {
+      "symbol": "g_i",
+      "anchor": {"kind": "here", "quote": "Write $g_i=1-e_i$ for the margin below one of the $i$-th power $p^{e_i}$."}
+    },
+    {
+      "symbol": "e_i",
+      "anchor": {"kind": "here", "quote": "Write $g_i=1-e_i$ for the margin below one of the $i$-th power $p^{e_i}$."}
+    },
+    {
+      "symbol": "i",
+      "anchor": {"kind": "background", "note": "Generic subscript index for a finite family (the i-th power, the i-th margin); standard indexing notation of discrete mathematics, which the reader profile covers."}
+    },
+    {
+      "symbol": "O",
+      "anchor": {"kind": "background", "note": "Big-O notation, which the reader profile names as known."}
+    },
+    {
+      "symbol": "\\Theta",
+      "anchor": {"kind": "background", "note": "Big-O and its relatives, which the reader profile names as known."}
+    },
+    {
+      "symbol": "\\lg",
+      "anchor": {"kind": "background", "note": "Base-2 logarithm; logarithms are part of the undergraduate computer science background the profile describes."}
+    },
+    {
+      "symbol": "\\log",
+      "anchor": {"kind": "background", "note": "Logarithms, part of the undergraduate computer science background the profile describes; \\log_2 is base 2."}
+    },
+    {
+      "symbol": "\\lceil",
+      "anchor": {"kind": "background", "note": "Ceiling (round up), standard discrete-mathematics notation covered by the profile's discrete mathematics and algorithms background."}
+    },
+    {
+      "symbol": "\\lfloor",
+      "anchor": {"kind": "background", "note": "Floor (round down), standard discrete-mathematics notation covered by the profile's discrete mathematics and algorithms background."}
+    },
+    {
+      "symbol": "\\min",
+      "anchor": {"kind": "background", "note": "Minimum over a finite index set, standard discrete-mathematics notation covered by the profile."}
+    }
+  ],
+  "gaps": [
+    {
+      "term": "size exponents of ell and alpha",
+      "quote": "$\\ell=\\Theta(p^{1-\\epsilon})$ and $\\alpha=\\Theta(p^{1/4+\\epsilon/2})$",
+      "kind": "step",
+      "note": "The page says only that the parameter choices page fixes d and K. It never gives r, the source of ell = log_2 r, or how alpha is chosen, so the reader cannot check these two Theta exponents, which feed rows 3, 4 and 5 of the list."
+    },
+    {
+      "term": "row dK",
+      "quote": "$dK=p^{\\epsilon(1+c)}$",
+      "kind": "step",
+      "note": "The seven rows are listed, but the page never says which stage cost the row dK comes from, so the reader cannot check its exponent against any stage."
+    },
+    {
+      "term": "row dp^delta",
+      "quote": "$dp^\\delta=p^{\\epsilon+\\delta}$",
+      "kind": "step",
+      "note": "The page never says which stage cost the row dp^delta comes from, and it is not among the rows explained in the following paragraph, so the reader cannot check its exponent."
+    },
+    {
+      "term": "axis moves",
+      "quote": "Axis moves cost $O(d^2)$ times $O(V(1+\\ell^\\tau))$.",
+      "kind": "term",
+      "note": "The page never says what an axis move is, why there are O(d^2) of them, or where the cost O(V(1+ell^tau)) per move comes from. No page is linked for it."
+    },
+    {
+      "term": "simultaneous-layer rounds",
+      "quote": "at $O(Vd^{\\lambda'})$ per round",
+      "kind": "step",
+      "note": "The row ell d^{lambda'} needs ell rounds, but the page never says how many rounds there are or that the count is ell = log_2 r, so the row's exponent cannot be checked."
+    },
+    {
+      "term": "Gaussian row line cost",
+      "quote": "The Gaussian row sums the line costs of",
+      "kind": "step",
+      "note": "The row d p^{1/2+delta} alpha is the sum over d axes of a per-line cost of p^{1/2+delta} alpha, but the page does not state the per-line cost, so the reader cannot check the row."
+    }
+  ]
+}

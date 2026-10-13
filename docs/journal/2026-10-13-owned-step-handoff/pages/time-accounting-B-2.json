@@ -1,0 +1,131 @@
+{
+ "symbols": [
+  {
+   "symbol": "n",
+   "name": "input length",
+   "meaning": "The number of bits in each input integer.",
+   "relation": "count",
+   "quote": "Here $n$ is the number of bits in each input integer, and $\\kappa$ is a fixed constant, the power saving."
+  },
+  {
+   "symbol": "\\kappa",
+   "name": "power saving",
+   "meaning": "A fixed constant: the saving in the exponent 1-kappa of the running time.",
+   "relation": "direct",
+   "quote": "Here $n$ is the number of bits in each input integer, and $\\kappa$ is a fixed constant, the power saving."
+  },
+  {
+   "symbol": "V",
+   "name": "volume",
+   "meaning": "The number of stored bits of a full padded array, up to a constant factor.",
+   "relation": "count",
+   "quote": "The volume $V = Tp$ counts stored bits, up to a constant factor."
+  },
+  {
+   "symbol": "T",
+   "name": "transform size",
+   "meaning": "The number of coefficients in the transform.",
+   "relation": "count",
+   "quote": "Here $T$ is the number of coefficients in the transform, and $p$ is the precision."
+  },
+  {
+   "symbol": "p",
+   "name": "precision",
+   "meaning": "The number of bits per coefficient, up to a constant factor.",
+   "relation": "count",
+   "quote": "Here $T$ is the number of coefficients in the transform, and $p$ is the precision."
+  },
+  {
+   "symbol": "g_i",
+   "name": "margin",
+   "meaning": "The amount by which the exponent of row i lies below one.",
+   "relation": "direct",
+   "quote": "Each row's margin $g_i$ is the amount its exponent lies below one, so its power is $p^{1-g_i}$."
+  },
+  {
+   "symbol": "\\epsilon",
+   "name": "fixed exponent",
+   "meaning": "A fixed exponent of the construction, equal to 2^{-75}.",
+   "relation": "direct",
+   "quote": "Here $\\epsilon$, $c$, $\\tau$, $\\lambda'$ and $\\delta$ are fixed exponents, with $c = 2^{-56}$, $\\tau = 1-2^{-50}$, $\\lambda' = 1-2^{-54}$, $\\delta = \\frac1{16}$ and $\\epsilon = 2^{-75}$."
+  },
+  {
+   "symbol": "c",
+   "name": "fixed exponent",
+   "meaning": "A fixed exponent of the construction, equal to 2^{-56}.",
+   "relation": "direct",
+   "quote": "Here $\\epsilon$, $c$, $\\tau$, $\\lambda'$ and $\\delta$ are fixed exponents, with $c = 2^{-56}$, $\\tau = 1-2^{-50}$, $\\lambda' = 1-2^{-54}$, $\\delta = \\frac1{16}$ and $\\epsilon = 2^{-75}$."
+  },
+  {
+   "symbol": "\\tau",
+   "name": "fixed exponent",
+   "meaning": "A fixed exponent of the construction, equal to 1-2^{-50}.",
+   "relation": "direct",
+   "quote": "Here $\\epsilon$, $c$, $\\tau$, $\\lambda'$ and $\\delta$ are fixed exponents, with $c = 2^{-56}$, $\\tau = 1-2^{-50}$, $\\lambda' = 1-2^{-54}$, $\\delta = \\frac1{16}$ and $\\epsilon = 2^{-75}$."
+  },
+  {
+   "symbol": "\\lambda'",
+   "name": "fixed exponent",
+   "meaning": "A fixed exponent of the construction, equal to 1-2^{-54}.",
+   "relation": "direct",
+   "quote": "Here $\\epsilon$, $c$, $\\tau$, $\\lambda'$ and $\\delta$ are fixed exponents, with $c = 2^{-56}$, $\\tau = 1-2^{-50}$, $\\lambda' = 1-2^{-54}$, $\\delta = \\frac1{16}$ and $\\epsilon = 2^{-75}$."
+  },
+  {
+   "symbol": "\\delta",
+   "name": "fixed exponent",
+   "meaning": "A fixed exponent of the construction, equal to 1/16.",
+   "relation": "direct",
+   "quote": "Here $\\epsilon$, $c$, $\\tau$, $\\lambda'$ and $\\delta$ are fixed exponents, with $c = 2^{-56}$, $\\tau = 1-2^{-50}$, $\\lambda' = 1-2^{-54}$, $\\delta = \\frac1{16}$ and $\\epsilon = 2^{-75}$."
+  }
+ ],
+ "derivations": [
+  {
+   "step": "S6.A",
+   "quote": "Dividing a stage's cost by $V$ leaves a power of $p$, up to a constant factor."
+  },
+  {
+   "step": "S6.B",
+   "quote": "Direct substitution gives $g_1>\\frac12$, $g_3 = 2^{-129}$, $g_4>2^{-51}$, $g_5>\\frac18$, $g_6>\\frac12$ and $g_7 = 2^{-75}$, while the chunk-exchange margin is $g_2 = 2^{-181}$"
+  },
+  {
+   "step": "S6.C",
+   "quote": "Each row is an earlier cost bound, divided by $V$."
+  },
+  {
+   "step": "S6.D",
+   "quote": "Each of the seven powers is at most $p^{1-2\\kappa}$, and any fixed power of $\\lg p$ is at most $p^{\\kappa}$ for large $p$, so the total is $O(Vp^{1-\\kappa})$."
+  }
+ ],
+ "relations": [
+  {
+   "prerequisite": "multiplication-algorithm",
+   "predicate": "sums the stage costs of",
+   "quote": "The total time bound and the power saving is the step that sums the stage costs of [The multiplication algorithm](multiplication-algorithm.md) into the main result's running time."
+  },
+  {
+   "prerequisite": "address-chunk-interchange",
+   "predicate": "is based on",
+   "quote": "The chunk-exchange row is based on [Fast address-chunk interchange](address-chunk-interchange.md)."
+  },
+  {
+   "prerequisite": "simultaneous-butterfly-layer",
+   "predicate": "is bounded by",
+   "quote": "The simultaneous butterfly row is bounded by [Simultaneous normalized butterfly layer](simultaneous-butterfly-layer.md)."
+  },
+  {
+   "prerequisite": "tensor-resampling",
+   "predicate": "sums the line costs of",
+   "quote": "The Gaussian row sums the line costs of [Tensor resampling on a padded box](tensor-resampling.md)."
+  },
+  {
+   "prerequisite": "synthetic-convolution",
+   "predicate": "covers the cost of",
+   "quote": "The table below covers the cost of [Convolution from the retained transform layout](synthetic-convolution.md)."
+  },
+  {
+   "prerequisite": "parameter-choice",
+   "predicate": "follows from",
+   "quote": "The sizes $p = \\Theta(\\lg n)$ and $T \\approx n/\\lg n$ follow from [Parameter choices for the padded box](parameter-choice.md), so $V = \\Theta(n)$."
+  }
+ ]
+}
