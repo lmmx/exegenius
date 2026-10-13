@@ -1,0 +1,261 @@
+{
+  "symbols": [
+    {
+      "symbol": "H_0",
+      "anchor": {
+        "kind": "here",
+        "quote": "A simultaneous butterfly layer applies the normalized butterfly $H_0(u,v)=((u+v)/2,(u-v)/2)$ to one common bit offset in several address chunks at once, with one final truncation."
+      }
+    },
+    {
+      "symbol": "u",
+      "anchor": {
+        "kind": "here",
+        "quote": "A simultaneous butterfly layer applies the normalized butterfly $H_0(u,v)=((u+v)/2,(u-v)/2)$ to one common bit offset in several address chunks at once, with one final truncation."
+      }
+    },
+    {
+      "symbol": "v",
+      "anchor": {
+        "kind": "here",
+        "quote": "A simultaneous butterfly layer applies the normalized butterfly $H_0(u,v)=((u+v)/2,(u-v)/2)$ to one common bit offset in several address chunks at once, with one final truncation."
+      }
+    },
+    {
+      "symbol": "r",
+      "anchor": {
+        "kind": "here",
+        "quote": "Each address holds a record of $r$ complex coefficients; $p$ is the fractional-bit count per component."
+      }
+    },
+    {
+      "symbol": "p",
+      "anchor": {
+        "kind": "here",
+        "quote": "Each address holds a record of $r$ complex coefficients; $p$ is the fractional-bit count per component."
+      }
+    },
+    {
+      "symbol": "D",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $D$ is the number of chunks, $K$ the bits per chunk, and $d$ bounds $D$."
+      }
+    },
+    {
+      "symbol": "K",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $D$ is the number of chunks, $K$ the bits per chunk, and $d$ bounds $D$."
+      }
+    },
+    {
+      "symbol": "d",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $D$ is the number of chunks, $K$ the bits per chunk, and $d$ bounds $D$."
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $V$ is the logical bit volume, the number of stored bits."
+      }
+    },
+    {
+      "symbol": "\\lambda'",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\lambda'$ is a fixed exponent."
+      }
+    },
+    {
+      "symbol": "O",
+      "anchor": {
+        "kind": "background",
+        "note": "Big-O notation, named in the reader profile (asymptotic analysis)."
+      }
+    },
+    {
+      "symbol": "C",
+      "anchor": {
+        "kind": "here",
+        "quote": "The method rewrites $H_0$ via the two-point kernel $C$, whose diagonal entries are $\\frac{1+i}{2}$ and whose off-diagonal entries are $\\frac{1-i}{2}$."
+      }
+    },
+    {
+      "symbol": "i",
+      "anchor": {
+        "kind": "background",
+        "note": "The imaginary unit; complex numbers are named in the reader profile."
+      }
+    },
+    {
+      "symbol": "\\mathcal S_D",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $\\mathcal S_D$ multiply each record by $i$ to the power of its selected bits equal to $1$."
+      }
+    },
+    {
+      "symbol": "\\otimes",
+      "anchor": {
+        "kind": "background",
+        "note": "Tensor (Kronecker) product of matrices, covered by the reader's matrices and vectors and by the known concept 'Kronecker product of matrices'."
+      }
+    },
+    {
+      "symbol": "e",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $e$ counts the selected axes in a group, split into $m$ slots, the label-space dimension."
+      }
+    },
+    {
+      "symbol": "m",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $e$ counts the selected axes in a group, split into $m$ slots, the label-space dimension."
+      }
+    },
+    {
+      "symbol": "s",
+      "anchor": {
+        "kind": "here",
+        "quote": "After basis changes, the network makes $s$ recursive calls in all."
+      }
+    },
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $W$ counts the wire roles."
+      }
+    },
+    {
+      "symbol": "\\max",
+      "anchor": {
+        "kind": "background",
+        "note": "Maximum of a finite set of numbers, covered by discrete mathematics in the reader profile."
+      }
+    },
+    {
+      "symbol": "\\log_m",
+      "anchor": {
+        "kind": "background",
+        "note": "Logarithm in base m, covered by the undergraduate computer science background (logarithms and exponentials)."
+      }
+    },
+    {
+      "symbol": "\\Delta",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\Delta=\\lceil C_0d^{C_1}\\rceil$ is the number of guard bits, with $C_0$ and $C_1$ fixed constants."
+      }
+    },
+    {
+      "symbol": "\\lceil",
+      "anchor": {
+        "kind": "background",
+        "note": "Ceiling function, covered by the known concept 'Floor, ceiling and rounding'."
+      }
+    },
+    {
+      "symbol": "C_0",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\Delta=\\lceil C_0d^{C_1}\\rceil$ is the number of guard bits, with $C_0$ and $C_1$ fixed constants."
+      }
+    },
+    {
+      "symbol": "C_1",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\Delta=\\lceil C_0d^{C_1}\\rceil$ is the number of guard bits, with $C_0$ and $C_1$ fixed constants."
+      }
+    },
+    {
+      "symbol": "\\mathbb Z",
+      "anchor": {
+        "kind": "background",
+        "note": "The integers, covered by the discrete mathematics (sets and functions) in the reader profile."
+      }
+    },
+    {
+      "symbol": "\\sqrt",
+      "anchor": {
+        "kind": "background",
+        "note": "Square root, covered by the known concept 'Square roots and quotient with remainder'."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "selected bits",
+      "quote": "to the power of its selected bits equal to $1$",
+      "kind": "term",
+      "note": "The page never says which bits are selected. Inferring that they are the D bits at the common offset is a guess, so S_D is not determined by the page."
+    },
+    {
+      "term": "tensor identity for H_0^{\\otimes D}",
+      "quote": "Then $H_0^{\\otimes D}=\\left(\\frac{1-i}{2}\\right)^D\\mathcal S_D\\,C^{\\otimes D}\\,\\mathcal S_D$",
+      "kind": "step",
+      "note": "The identity is asserted with 'Then'. The reader cannot check it: the page does not show the one-factor identity H_0 = ((1-i)/2) S C S, and does not say that S_D is the D-fold tensor power of diag(1, i)."
+    },
+    {
+      "term": "reduction to C^{\\otimes D}",
+      "quote": "so the layer reduces to $C^{\\otimes D}$",
+      "kind": "step",
+      "note": "Exactness of scalars and phases does not by itself show that the layer reduces to C^{\\otimes D}. The page does not say how the outer S_D factors are handled or why the reduction is valid."
+    },
+    {
+      "term": "row sums bound enlargement",
+      "quote": "$C$ is not one: its row absolute sums are $\\sqrt2$, so $C^{\\otimes D}$ can enlarge values by up to $2^{D/2}$.",
+      "kind": "step",
+      "note": "The page never states that a matrix's row absolute sums bound how much it can enlarge the maximum coefficient norm, nor that row sums multiply under tensor powers. The bound 2^{D/2} therefore cannot be checked."
+    },
+    {
+      "term": "unit row sums give exact run and one truncation",
+      "quote": "$H_0$ has row absolute sums $1$, so the layer runs exactly and truncates once.",
+      "kind": "step",
+      "note": "The page does not say that row sums of 1 make H_0 a contraction in the maximum norm, nor why no intermediate truncation is then needed. This depends on the unstated principle in the previous step."
+    },
+    {
+      "term": "label-space",
+      "quote": "split into $m$ slots, the label-space dimension",
+      "kind": "term",
+      "note": "The page does not say what a label space is or what a slot is. m is named as their count but not explained."
+    },
+    {
+      "term": "wire roles",
+      "quote": "Here $W$ counts the wire roles.",
+      "kind": "term",
+      "note": "The page does not say what a wire role is. The sentence only gives W as their count. The linked role-streams page is about scheduling and is not linked for this term."
+    },
+    {
+      "term": "s/W < m",
+      "quote": "Each level multiplies the volume by $s/W<m$",
+      "kind": "step",
+      "note": "The inequality s/W < m is asserted without derivation, and this page does not link the result that establishes it (the rank-deficit page)."
+    },
+    {
+      "term": "work as a power of group size",
+      "quote": "so the work is a power of the group size with exponent $\\max\\{0,\\log_m(s/W)\\}<1$",
+      "kind": "step",
+      "note": "The page gives no cost accounting: work per level equal to volume, depth log_m of the group size, a geometric sum over levels, and the dominant term. It also never relates the group size e to the chunk count D or the bound d, so the cited O(V d^{λ'}) time cannot be read off from this exponent."
+    },
+    {
+      "term": "bit widths for the layer",
+      "quote": "The layer uses $p+\\Delta$ fractional bits and $\\Delta+3$ integer and sign bits per real component (cited).",
+      "kind": "step",
+      "note": "This cited claim states how the layer's own arithmetic works. The page does not say why these widths hold all intermediate values, and the growth bounds it discusses (row sums) are not connected to the widths."
+    },
+    {
+      "term": "truncation keeps coefficients in the unit disk",
+      "quote": "truncation toward zero to $2^{-p}\\mathbb Z$ keeps coefficients in the unit disk, with error below $\\sqrt2\\,2^{-p}$ (cited).",
+      "kind": "step",
+      "note": "The claim that truncated values stay in the unit disk requires that the values before truncation lie in the disk. The page never says which values are truncated or what bound they satisfy beforehand."
+    }
+  ]
+}

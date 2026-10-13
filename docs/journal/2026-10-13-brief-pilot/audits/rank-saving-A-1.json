@@ -1,0 +1,175 @@
+{
+  "symbols": [
+    {
+      "symbol": "s",
+      "anchor": {
+        "kind": "here",
+        "quote": "the total cost $s$ of its edges"
+      }
+    },
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $W$ be the number of wires and $m$ the dimension of the label space."
+      }
+    },
+    {
+      "symbol": "m",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $W$ be the number of wires and $m$ the dimension of the label space."
+      }
+    },
+    {
+      "symbol": "N",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $N$ be the total dimension of the source labels."
+      }
+    },
+    {
+      "symbol": "L",
+      "anchor": {
+        "kind": "here",
+        "quote": "let $L$ be their total loss"
+      }
+    },
+    {
+      "symbol": "k",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $k$ be the recursion depth."
+      }
+    },
+    {
+      "symbol": "j",
+      "anchor": {
+        "kind": "background",
+        "note": "Summation index of the finite sum in the sum over j less than or equal to k. Standard summation notation, covered by the profile's first-year calculus (convergence of series, geometric series)."
+      }
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "Choose a rational exponent $\\tau<1$ with $s/W<m^\\tau$",
+        "note": "The only sentence introducing tau gives a range of admissible values (a rational exponent below 1 meeting s/W < m^tau), not what it denotes. The later value tau = 1 - 2^{-50} is an example use and is cited."
+      }
+    },
+    {
+      "symbol": "O",
+      "anchor": {
+        "kind": "background",
+        "note": "Big-O notation. Covered by the profile's asymptotic analysis, which is part of the undergraduate computer science degree."
+      }
+    },
+    {
+      "symbol": "\\ln",
+      "anchor": {
+        "kind": "background",
+        "note": "Natural logarithm. Logarithms are covered by the profile's undergraduate computer science background, and the known concept Logarithms and exponentials names the natural logarithm."
+      }
+    },
+    {
+      "symbol": "\\exp",
+      "anchor": {
+        "kind": "background",
+        "note": "Exponential function. Covered by the profile's first-year single-variable calculus and by the known concept Logarithms and exponentials."
+      }
+    },
+    {
+      "symbol": "\\sum",
+      "anchor": {
+        "kind": "background",
+        "note": "Summation notation. Covered by the profile's first-year calculus (convergence of series, geometric series)."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "bit network",
+      "quote": "its rational rank in the bit network",
+      "kind": "term",
+      "note": "The bit network is a named concept that the page neither explains nor links. The reader cannot tell what its edges are, yet the cost of every edge in it is defined by reference to it, and it is used again for the bit-network deficit."
+    },
+    {
+      "term": "complex network",
+      "quote": "the dimension of its orthogonal residual in the complex network",
+      "kind": "term",
+      "note": "The complex network is a named concept that the page neither explains nor links. The reader cannot tell which network is meant or how its edge costs differ from the bit network's."
+    },
+    {
+      "term": "main recursion",
+      "quote": "this is what lets the main recursion save a power",
+      "kind": "term",
+      "note": "The main recursion is named but never described or linked. The reader cannot see its levels, its division of size by m, or what its calls are, so the recursion-depth argument cannot be placed."
+    },
+    {
+      "term": "central wires",
+      "quote": "on the central wires",
+      "kind": "term",
+      "note": "Undefined. The page does not say which wires are central, and the loss bound depends on that classification."
+    },
+    {
+      "term": "signed dimension changes telescope",
+      "quote": "Along each wire the signed dimension changes telescope to sink minus source dimension.",
+      "kind": "step",
+      "note": "The page never defines the signed dimension change of an edge (its sign convention, or that it is the sink-side label dimension minus the source-side one). It also never states that an edge's cost is the absolute value of its signed change, which the later Taking absolute values step needs. The telescoping identity therefore cannot be checked from the page."
+    },
+    {
+      "term": "sinks total Wm-N",
+      "quote": "The sinks total $Wm-N$, so the signed changes sum to $Wm-2N$.",
+      "kind": "step",
+      "note": "No reason is given for the total sink dimension being Wm minus N. Each of the W sinks would naively carry an m-dimensional label, giving Wm, and the page does not explain the difference of N. The reader cannot check the claim."
+    },
+    {
+      "term": "losses only on central wires",
+      "quote": "Only decreasing edges, on the central wires, lose dimension",
+      "kind": "step",
+      "note": "The claim that all dimension loss lies on central wires is asserted without argument. The identity s = Wm - 2N + 2L needs L to count every loss in the network, so this claim is essential and unchecked."
+    },
+    {
+      "term": "bit network adds N",
+      "quote": "the first edge from each nonzero source has rank one but no dimension change",
+      "kind": "step",
+      "note": "This is asserted without proof. Nonzero source is undefined, and the page gives no reason why the first edge from each such source has rank one and no dimension change. The correction term N in s = Wm - N + 2L rests entirely on it."
+    },
+    {
+      "term": "L < N/2 (cited)",
+      "quote": "are positive once $L<N/2$ (cited)",
+      "kind": "step",
+      "note": "The cited bound is stated, but the only reason given is Few edges decrease, against N source dimensions. That does not say why L < N/2 holds or what the source proves, so the reader cannot tell why the cited result applies here."
+    },
+    {
+      "term": "relative deficit",
+      "quote": "The relative deficit is about $1.5\\cdot10^{-11}$ for the bit network (cited)",
+      "kind": "term",
+      "note": "Never defined. The page does not say what quantity it measures or what it is divided by, and it is later compared with 20 times 2^{-50} to conclude m^tau > s/W."
+    },
+    {
+      "term": "s calls spread over W wires",
+      "quote": "Each level divides the size by $m$, and the $s$ calls spread over $W$ wires",
+      "kind": "step",
+      "note": "The page does not say what the s calls are (for example one call per unit of edge cost), nor why each level divides the size by m. Without the recursion's description the per-wire average s/W is not checkable, although the averaging itself is elementary."
+    },
+    {
+      "term": "per-level cost model",
+      "quote": "If each level multiplies the cost by $s/W$ and adds $O(1)$",
+      "kind": "step",
+      "note": "The page gives no argument that the recursion's cost obeys this per-level multiplicative model. The reader cannot check that the sum governs the cost, and the power saving depends on it."
+    },
+    {
+      "term": "m < 2^20",
+      "quote": "Since $m<2^{20}$, $\\ln m<20$",
+      "kind": "step",
+      "note": "The bound m < 2^20 is asserted with no source and no derivation from the page, yet the argument relies on it."
+    },
+    {
+      "term": "relative deficit gives m^tau > s/W",
+      "quote": "The loss $20\\cdot2^{-50}$ is below the relative deficit, so $m^\\tau>s/W$.",
+      "kind": "step",
+      "note": "The page never relates s/W to the relative deficit or to m (no formula is given), and the relative deficit is undefined. The conclusion m^tau > s/W therefore cannot be checked, and the comparison uses an approximate value as if exact."
+    }
+  ]
+}

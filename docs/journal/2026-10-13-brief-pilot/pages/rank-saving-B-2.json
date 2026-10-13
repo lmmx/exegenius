@@ -1,0 +1,198 @@
+{
+ "symbols": [
+  {
+   "symbol": "s",
+   "name": "total edge rank",
+   "meaning": "the sum of the ranks of a network's edges, a count of dimensions",
+   "relation": "count",
+   "quote": "The strict total rank deficit is the inequality $s<Wm$, where $s$ is the sum of the edge ranks, $W$ is its number of wires and $m$ is the dimension of its label space."
+  },
+  {
+   "symbol": "W",
+   "name": "wire count",
+   "meaning": "the number of wires of a network",
+   "relation": "count",
+   "quote": "The strict total rank deficit is the inequality $s<Wm$, where $s$ is the sum of the edge ranks, $W$ is its number of wires and $m$ is the dimension of its label space."
+  },
+  {
+   "symbol": "m",
+   "name": "label dimension",
+   "meaning": "the dimension of the label space",
+   "relation": "count",
+   "quote": "The strict total rank deficit is the inequality $s<Wm$, where $s$ is the sum of the edge ranks, $W$ is its number of wires and $m$ is the dimension of its label space."
+  },
+  {
+   "symbol": "k",
+   "name": "recursion levels",
+   "meaning": "the number of levels of the recursion",
+   "relation": "count",
+   "quote": "Recursing $k$ levels on size $n=m^k$ with $s/W$ smaller calls per wire costs $n^{\\log_m(s/W)}$ per unit of data: a saving exactly when $s/W<m$."
+  },
+  {
+   "symbol": "n",
+   "name": "problem size",
+   "meaning": "the size $m^k$ of the recursive problem, a count of data units",
+   "relation": "count",
+   "quote": "Recursing $k$ levels on size $n=m^k$ with $s/W$ smaller calls per wire costs $n^{\\log_m(s/W)}$ per unit of data: a saving exactly when $s/W<m$."
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "name": "bit wire count",
+   "meaning": "the number of wires of the bit network",
+   "relation": "count",
+   "quote": "Write $W_{\\rm b},s_{\\rm b}$ and $W_{\\rm c},s_{\\rm c}$ for the wire counts and rank sums of the two networks."
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "name": "bit rank sum",
+   "meaning": "the sum of the edge ranks of the bit network",
+   "relation": "count",
+   "quote": "Write $W_{\\rm b},s_{\\rm b}$ and $W_{\\rm c},s_{\\rm c}$ for the wire counts and rank sums of the two networks."
+  },
+  {
+   "symbol": "W_{\\rm c}",
+   "name": "complex wire count",
+   "meaning": "the number of wires of the complex network",
+   "relation": "count",
+   "quote": "Write $W_{\\rm b},s_{\\rm b}$ and $W_{\\rm c},s_{\\rm c}$ for the wire counts and rank sums of the two networks."
+  },
+  {
+   "symbol": "s_{\\rm c}",
+   "name": "complex rank sum",
+   "meaning": "the sum of the residual dimensions of the complex network",
+   "relation": "count",
+   "quote": "Write $W_{\\rm b},s_{\\rm b}$ and $W_{\\rm c},s_{\\rm c}$ for the wire counts and rank sums of the two networks."
+  },
+  {
+   "symbol": "h",
+   "name": "ground-set size",
+   "meaning": "the number of elements in the ground set of triples, 100",
+   "relation": "count",
+   "quote": "Here $h=100$ is the ground-set size, $v=\\binom h3=161700$ the number of triples, and $N=v^3$ the number of input roles."
+  },
+  {
+   "symbol": "v",
+   "name": "triple count",
+   "meaning": "the number of three-element subsets of the ground set",
+   "relation": "count",
+   "quote": "Here $h=100$ is the ground-set size, $v=\\binom h3=161700$ the number of triples, and $N=v^3$ the number of input roles."
+  },
+  {
+   "symbol": "N",
+   "name": "input role count",
+   "meaning": "the number of input roles $X_a$, equal to $v^3$",
+   "relation": "count",
+   "quote": "Here $h=100$ is the ground-set size, $v=\\binom h3=161700$ the number of triples, and $N=v^3$ the number of input roles."
+  },
+  {
+   "symbol": "c_{\\rm b}",
+   "name": "bit central wires",
+   "meaning": "the number of central wires in each invocation of the bit network",
+   "relation": "count",
+   "quote": "The $3v^2$ invocations each have $c_{\\rm b}=100$ central wires, each losing $h$, so the total loss on decreasing edges is $L_{\\rm b}=3v^2hc_{\\rm b}$; likewise $L_{\\rm c}=3v^2hc_{\\rm c}$ with $c_{\\rm c}=101$ central wires for the complex network."
+  },
+  {
+   "symbol": "c_{\\rm c}",
+   "name": "complex central wires",
+   "meaning": "the number of central wires in each invocation of the complex network",
+   "relation": "count",
+   "quote": "The $3v^2$ invocations each have $c_{\\rm b}=100$ central wires, each losing $h$, so the total loss on decreasing edges is $L_{\\rm b}=3v^2hc_{\\rm b}$; likewise $L_{\\rm c}=3v^2hc_{\\rm c}$ with $c_{\\rm c}=101$ central wires for the complex network."
+  },
+  {
+   "symbol": "L_{\\rm b}",
+   "name": "bit dimension loss",
+   "meaning": "the total dimension lost on decreasing edges of the bit network",
+   "relation": "count",
+   "quote": "Decreasing edges lose $L_{\\rm b}$ in total, so the absolute sum is $Wm-2N+2L_{\\rm b}$, giving"
+  },
+  {
+   "symbol": "L_{\\rm c}",
+   "name": "complex dimension loss",
+   "meaning": "the total dimension lost on decreasing edges of the complex network",
+   "relation": "count",
+   "quote": "The $3v^2$ invocations each have $c_{\\rm b}=100$ central wires, each losing $h$, so the total loss on decreasing edges is $L_{\\rm b}=3v^2hc_{\\rm b}$; likewise $L_{\\rm c}=3v^2hc_{\\rm c}$ with $c_{\\rm c}=101$ central wires for the complex network."
+  },
+  {
+   "symbol": "p",
+   "name": "vertex",
+   "meaning": "a vertex of a network: a source, gate or sink",
+   "relation": "direct",
+   "quote": "Each vertex $p$ has a nondegenerate subspace $L_p$ (with $L_p\\cap L_p^\\perp=0$), and an edge $p\\to q$ has matrix $M_q-M_p$, where $M_p=P_{L_p}$ is the orthogonal projection onto $L_p$."
+  },
+  {
+   "symbol": "q",
+   "name": "head vertex",
+   "meaning": "the vertex at the head of an edge from $p$",
+   "relation": "direct",
+   "quote": "Each vertex $p$ has a nondegenerate subspace $L_p$ (with $L_p\\cap L_p^\\perp=0$), and an edge $p\\to q$ has matrix $M_q-M_p$, where $M_p=P_{L_p}$ is the orthogonal projection onto $L_p$."
+  },
+  {
+   "symbol": "L_p",
+   "name": "vertex label",
+   "meaning": "the nondegenerate subspace labelling vertex $p$",
+   "relation": "direct",
+   "quote": "Each vertex $p$ has a nondegenerate subspace $L_p$ (with $L_p\\cap L_p^\\perp=0$), and an edge $p\\to q$ has matrix $M_q-M_p$, where $M_p=P_{L_p}$ is the orthogonal projection onto $L_p$."
+  },
+  {
+   "symbol": "M_p",
+   "name": "vertex matrix",
+   "meaning": "the orthogonal projection onto the label of vertex $p$, used on its edges",
+   "relation": "direct",
+   "quote": "Each vertex $p$ has a nondegenerate subspace $L_p$ (with $L_p\\cap L_p^\\perp=0$), and an edge $p\\to q$ has matrix $M_q-M_p$, where $M_p=P_{L_p}$ is the orthogonal projection onto $L_p$."
+  },
+  {
+   "symbol": "P_{L_p}",
+   "name": "label projection",
+   "meaning": "the orthogonal projection onto the label of vertex $p$",
+   "relation": "direct",
+   "quote": "Each vertex $p$ has a nondegenerate subspace $L_p$ (with $L_p\\cap L_p^\\perp=0$), and an edge $p\\to q$ has matrix $M_q-M_p$, where $M_p=P_{L_p}$ is the orthogonal projection onto $L_p$."
+  },
+  {
+   "symbol": "U",
+   "name": "nested label",
+   "meaning": "a label contained in the label $V$",
+   "relation": "direct",
+   "quote": "For nested $U\\subset V$, $P_V-P_U$ projects onto $V\\cap U^\\perp$, so the edge has rank $\\dim V-\\dim U$."
+  },
+  {
+   "symbol": "V",
+   "name": "containing label",
+   "meaning": "a label containing the label $U$",
+   "relation": "direct",
+   "quote": "For nested $U\\subset V$, $P_V-P_U$ projects onto $V\\cap U^\\perp$, so the edge has rank $\\dim V-\\dim U$."
+  },
+  {
+   "symbol": "\\eta_{\\rm b}",
+   "name": "bit relative deficit",
+   "meaning": "the relative rank deficit of the bit network",
+   "relation": "direct",
+   "quote": "Let $\\eta_{\\rm b}=(W_{\\rm b}m-s_{\\rm b})/(W_{\\rm b}m)$ and $\\eta_{\\rm c}=(W_{\\rm c}m-s_{\\rm c})/(W_{\\rm c}m)$ be the relative deficits, so $s/W=m(1-\\eta)$."
+  },
+  {
+   "symbol": "\\eta_{\\rm c}",
+   "name": "complex relative deficit",
+   "meaning": "the relative rank deficit of the complex network",
+   "relation": "direct",
+   "quote": "Let $\\eta_{\\rm b}=(W_{\\rm b}m-s_{\\rm b})/(W_{\\rm b}m)$ and $\\eta_{\\rm c}=(W_{\\rm c}m-s_{\\rm c})/(W_{\\rm c}m)$ be the relative deficits, so $s/W=m(1-\\eta)$."
+  },
+  {
+   "symbol": "\\tau",
+   "name": "power exponent",
+   "meaning": "the fixed exponent $1-2^{-50}$ below one",
+   "relation": "direct",
+   "quote": "Take $\\tau=1-2^{-50}$."
+  }
+ ],
+ "relations": [
+  {
+   "prerequisite": "subspace-labels",
+   "predicate": "follows from",
+   "quote": "The rank count follows from [Nested subspace labels and orthogonal residuals](subspace-labels.md): adjacent labels are nested, and only central edges from time 3 to time 4 decrease."
+  },
+  {
+   "prerequisite": "bank-exchange-network",
+   "predicate": "is counted over",
+   "quote": "The rank sum is counted over the edges of the [Three-stage bank exchange network](bank-exchange-network.md), which sends $(X_a,Y_a)$ to $(-Y_a,X_a)$."
+  }
+ ]
+}

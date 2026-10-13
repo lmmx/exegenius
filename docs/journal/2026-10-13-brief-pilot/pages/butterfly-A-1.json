@@ -1,0 +1,133 @@
+{
+  "relations": [
+    {
+      "prerequisite": "phase-edge-recursion",
+      "predicate": "computes the tensor power by",
+      "quote": "The layer computes the tensor power by the [Recursive implementation of the phase network on selected bits](phase-edge-recursion.md)."
+    },
+    {
+      "prerequisite": "role-streams",
+      "predicate": "schedules these calls by",
+      "quote": "The layer schedules these calls by the [Role streams and fixed-tape depth-first scheduling](role-streams.md), which distributes rows cyclically among them, so each call works on volume $V/W$."
+    },
+    {
+      "prerequisite": "exact-dyadic-guard",
+      "predicate": "keeps intermediate values exact by",
+      "quote": "The layer keeps intermediate values exact by the [Exact Gaussian dyadic arithmetic and guard widths](exact-dyadic-guard.md)."
+    }
+  ],
+  "symbols": [
+    {
+      "symbol": "H_0",
+      "name": "normalized butterfly",
+      "meaning": "The normalized two-point butterfly on pairs of complex numbers.",
+      "relation": "direct",
+      "quote": "A simultaneous butterfly layer applies the normalized butterfly $H_0(u,v)=((u+v)/2,(u-v)/2)$ to one common bit offset in several address chunks at once, with one final truncation."
+    },
+    {
+      "symbol": "p",
+      "name": "precision",
+      "meaning": "The number of fractional bits per component of a record.",
+      "relation": "count",
+      "quote": "Each address holds a record of $r$ complex coefficients; $p$ is the fractional-bit count per component."
+    },
+    {
+      "symbol": "D",
+      "name": "chunk count",
+      "meaning": "The number of chunks the layer acts on, at most d.",
+      "relation": "count",
+      "quote": "Here $D$ is the number of chunks, $K$ the bits per chunk, and $d$ bounds $D$."
+    },
+    {
+      "symbol": "K",
+      "name": "chunk width",
+      "meaning": "The number of address bits in each chunk.",
+      "relation": "count",
+      "quote": "Here $D$ is the number of chunks, $K$ the bits per chunk, and $d$ bounds $D$."
+    },
+    {
+      "symbol": "d",
+      "name": "chunk bound",
+      "meaning": "An upper bound on the number of chunks D.",
+      "relation": "count",
+      "quote": "Here $D$ is the number of chunks, $K$ the bits per chunk, and $d$ bounds $D$."
+    },
+    {
+      "symbol": "V",
+      "name": "logical bit volume",
+      "meaning": "The number of stored bits, excluding temporary work streams.",
+      "relation": "count",
+      "quote": "Here $V$ is the logical bit volume, the number of stored bits."
+    },
+    {
+      "symbol": "\\lambda'",
+      "name": "cost exponent",
+      "meaning": "A fixed exponent below 1 in the cost bound O(V d^{\\lambda'}).",
+      "relation": "direct",
+      "quote": "Here $\\lambda'$ is a fixed exponent."
+    },
+    {
+      "symbol": "C",
+      "name": "two-point kernel",
+      "meaning": "The two-point kernel with diagonal entries (1+i)/2 and off-diagonal entries (1-i)/2.",
+      "relation": "direct",
+      "quote": "The method rewrites $H_0$ via the two-point kernel $C$, whose diagonal entries are $\\frac{1+i}{2}$ and whose off-diagonal entries are $\\frac{1-i}{2}$."
+    },
+    {
+      "symbol": "\\mathcal S_D",
+      "name": "selected-bit phase",
+      "meaning": "The diagonal operator multiplying each record by i to the power of its selected bits equal to 1.",
+      "relation": "direct",
+      "quote": "Let $\\mathcal S_D$ multiply each record by $i$ to the power of its selected bits equal to $1$."
+    },
+    {
+      "symbol": "e",
+      "name": "group size",
+      "meaning": "The number of selected axes in a group.",
+      "relation": "count",
+      "quote": "Here $e$ counts the selected axes in a group, split into $m$ slots, the label-space dimension."
+    },
+    {
+      "symbol": "m",
+      "name": "slot count",
+      "meaning": "The number of slots a group splits into, the dimension of the network's label space.",
+      "relation": "count",
+      "quote": "Here $e$ counts the selected axes in a group, split into $m$ slots, the label-space dimension."
+    },
+    {
+      "symbol": "s",
+      "name": "recursive call count",
+      "meaning": "The number of recursive calls the network makes in all.",
+      "relation": "count",
+      "quote": "After basis changes, the network makes $s$ recursive calls in all."
+    },
+    {
+      "symbol": "W",
+      "name": "wire role count",
+      "meaning": "The number of wire roles among which rows are distributed.",
+      "relation": "count",
+      "quote": "Here $W$ counts the wire roles."
+    },
+    {
+      "symbol": "\\Delta",
+      "name": "guard width",
+      "meaning": "The number of guard bits, Delta = ceil(C_0 d^{C_1}).",
+      "relation": "count",
+      "quote": "Here $\\Delta=\\lceil C_0d^{C_1}\\rceil$ is the number of guard bits, with $C_0$ and $C_1$ fixed constants."
+    },
+    {
+      "symbol": "C_0",
+      "name": "guard constant",
+      "meaning": "A fixed constant in the guard width.",
+      "relation": "direct",
+      "quote": "Here $\\Delta=\\lceil C_0d^{C_1}\\rceil$ is the number of guard bits, with $C_0$ and $C_1$ fixed constants."
+    },
+    {
+      "symbol": "C_1",
+      "name": "guard exponent",
+      "meaning": "A fixed constant exponent in the guard width.",
+      "relation": "direct",
+      "quote": "Here $\\Delta=\\lceil C_0d^{C_1}\\rceil$ is the number of guard bits, with $C_0$ and $C_1$ fixed constants."
+    }
+  ]
+}

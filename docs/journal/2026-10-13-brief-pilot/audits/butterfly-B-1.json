@@ -1,0 +1,216 @@
+{
+  "symbols": [
+    {
+      "symbol": "d",
+      "anchor": {"kind": "here", "quote": "Let $d$ bound the number of chunks"}
+    },
+    {
+      "symbol": "D",
+      "anchor": {"kind": "here", "quote": "and $D\\le d$ be the number in a layer"}
+    },
+    {
+      "symbol": "K",
+      "anchor": {"kind": "here", "quote": "each of $K=\\lfloor d^c\\rfloor$ bits, where $c>0$ is a fixed number"}
+    },
+    {
+      "symbol": "c",
+      "anchor": {"kind": "here", "quote": "where $c>0$ is a fixed number"}
+    },
+    {
+      "symbol": "H_0",
+      "anchor": {"kind": "here", "quote": "It applies the two-point butterfly $H_0(u,v)=((u+v)/2,(u-v)/2)$ at one bit offset in up to $d$ address chunks"}
+    },
+    {
+      "symbol": "u",
+      "anchor": {"kind": "here", "quote": "It applies the two-point butterfly $H_0(u,v)=((u+v)/2,(u-v)/2)$ at one bit offset in up to $d$ address chunks"}
+    },
+    {
+      "symbol": "v",
+      "anchor": {"kind": "here", "quote": "It applies the two-point butterfly $H_0(u,v)=((u+v)/2,(u-v)/2)$ at one bit offset in up to $d$ address chunks"}
+    },
+    {
+      "symbol": "V",
+      "anchor": {"kind": "here", "quote": "Write $V$ for the logical bit volume"}
+    },
+    {
+      "symbol": "\\lambda'",
+      "anchor": {"kind": "here", "quote": "and $\\lambda'<1$ for a fixed constant"}
+    },
+    {
+      "symbol": "O",
+      "anchor": {"kind": "background", "note": "Big-O notation, which the reader profile covers (asymptotic analysis, big-O notation)."}
+    },
+    {
+      "symbol": "p",
+      "anchor": {"kind": "here", "quote": "with $p$ the number of fractional bits"}
+    },
+    {
+      "symbol": "Z",
+      "anchor": {"kind": "background", "note": "The integers, covered by the profile's discrete mathematics and number theory (integers, modular arithmetic, primes, gcd)."}
+    },
+    {
+      "symbol": "i",
+      "anchor": {"kind": "background", "note": "The imaginary unit; complex numbers are listed in the reader profile."}
+    },
+    {
+      "symbol": "C",
+      "anchor": {"kind": "here", "quote": "Let $C_{00}=C_{11}=(1+i)/2$ and $C_{01}=C_{10}=(1-i)/2$ be the kernel $C$"}
+    },
+    {
+      "symbol": "\\Xi",
+      "anchor": {"kind": "here", "quote": "let $\\Xi$ be the diagonal matrix with entries $1$ and $i$"}
+    },
+    {
+      "symbol": "\\otimes",
+      "anchor": {"kind": "background", "note": "Kronecker (tensor) product of matrices. It is a known concept and a matrix operation within the profile's matrices and vectors, although its symbol is not in the concept's name."}
+    },
+    {
+      "symbol": "x",
+      "anchor": {"kind": "here", "quote": "Here $\\Xi^{\\otimes D}$ multiplies address $x$ by $i^{x_1+\\cdots+x_D}$, its selected bits $x_1,\\ldots,x_D$."}
+    },
+    {
+      "symbol": "W",
+      "anchor": {"kind": "here", "quote": "The network has $W$ wire roles."}
+    },
+    {
+      "symbol": "e",
+      "anchor": {"kind": "here", "quote": "It splits $e=mf$ chunks into $m$ slots of $f$ chunks, and makes $s$ child calls"}
+    },
+    {
+      "symbol": "m",
+      "anchor": {"kind": "here", "quote": "It splits $e=mf$ chunks into $m$ slots of $f$ chunks, and makes $s$ child calls"}
+    },
+    {
+      "symbol": "f",
+      "anchor": {"kind": "here", "quote": "It splits $e=mf$ chunks into $m$ slots of $f$ chunks, and makes $s$ child calls"}
+    },
+    {
+      "symbol": "s",
+      "anchor": {"kind": "here", "quote": "It splits $e=mf$ chunks into $m$ slots of $f$ chunks, and makes $s$ child calls"}
+    },
+    {
+      "symbol": "h",
+      "anchor": {"kind": "here", "quote": "A row $h=Wg+w$ goes to role $w$ of $W$, indexed there by $g$."}
+    },
+    {
+      "symbol": "g",
+      "anchor": {"kind": "here", "quote": "A row $h=Wg+w$ goes to role $w$ of $W$, indexed there by $g$."}
+    },
+    {
+      "symbol": "w",
+      "anchor": {"kind": "here", "quote": "A row $h=Wg+w$ goes to role $w$ of $W$, indexed there by $g$."}
+    },
+    {
+      "symbol": "F",
+      "anchor": {"kind": "here", "quote": "Let $F(e)$ be the time per unit volume."}
+    },
+    {
+      "symbol": "a",
+      "anchor": {"kind": "here", "quote": "Put $a=s/W$."}
+    },
+    {
+      "symbol": "L",
+      "anchor": {"kind": "here", "quote": "with $L=fK$ and fixed $0<\\tau<1$"}
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {"kind": "here", "quote": "with $L=fK$ and fixed $0<\\tau<1$"}
+    },
+    {
+      "symbol": "\\log",
+      "anchor": {"kind": "background", "note": "Logarithms, covered by the known concept Logarithms and exponentials (log, lg, base-2 logarithm) and by the profile's first-year mathematics."}
+    },
+    {
+      "symbol": "\\sigma",
+      "anchor": {"kind": "here", "quote": "Fix exponents $\\sigma$ and $\\mu$ with $\\max\\{0,\\log_m a\\}\\le\\sigma$"}
+    },
+    {
+      "symbol": "\\mu",
+      "anchor": {"kind": "here", "quote": "Fix exponents $\\sigma$ and $\\mu$ with $\\max\\{0,\\log_m a\\}\\le\\sigma$"}
+    },
+    {
+      "symbol": "j",
+      "anchor": {"kind": "here", "quote": "Depth-$j$ nodes have $e/m^j$ chunks and weight $a^j$"}
+    },
+    {
+      "symbol": "\\sqrt",
+      "anchor": {"kind": "background", "note": "Square roots, covered by the known concept Square roots and quotient with remainder (integer square root) and the profile's first-year mathematics."}
+    },
+    {
+      "symbol": "k",
+      "anchor": {"kind": "here", "quote": "leaf groups of $k=e/m^j<\\sqrt d$ chunks"}
+    },
+    {
+      "symbol": "q_0",
+      "anchor": {"kind": "here", "quote": "The first $q_0=O(\\log d)$ chunks supply the row indices"}
+    },
+    {
+      "symbol": "\\ell",
+      "anchor": {"kind": "background", "note": "The digit position in a base-m positional expansion, covered by the known concept Binary representation of integers (base-b digits, positional notation)."}
+    },
+    {
+      "symbol": "\\delta_\\ell",
+      "anchor": {"kind": "here", "quote": "gives $\\delta_\\ell$ blocks of $m^\\ell$ chunks"}
+    },
+    {
+      "symbol": "\\Delta",
+      "anchor": {"kind": "here", "quote": "where $\\Delta=o(p)$ is the guard width"}
+    }
+  ],
+  "gaps": [
+    {
+      "term": "Gaussian integers (Z[i])",
+      "quote": "Coefficients lie on $2^{-p}Z[i]$",
+      "kind": "term",
+      "note": "The reader profile says the reader has not met Gaussian integers, and the page neither explains Z[i] nor links it. The lattice 2^{-p}Z[i] that the coefficients lie on cannot be read."
+    },
+    {
+      "term": "logical bit volume",
+      "quote": "Write $V$ for the logical bit volume",
+      "kind": "term",
+      "note": "A named quantity the page never defines. The reader cannot tell which bits count as logical (for example whether padding is excluded), so the cost O(V d^{λ'}) has no fixed meaning."
+    },
+    {
+      "term": "volume of the child calls",
+      "quote": "since the $s$ child calls run on volume $sV/W$",
+      "kind": "step",
+      "note": "The page does not say why the s child calls together carry volume sV/W, a fraction s/W of V. The link to the role-streams scheduling page is given earlier and is not summarised here. The recurrence F(e) <= aF(e/m) + ... rests on this split, which the reader cannot check."
+    },
+    {
+      "term": "bound K <= e^{2c} and overhead O(e^μ)",
+      "quote": "There $K\\le e^{2c}$, so overhead is $O(e^\\mu)$",
+      "kind": "step",
+      "note": "K <= e^{2c} holds only in the recursive case e >= sqrt(d), since then d <= e^2 and K <= d^c <= e^{2c}. The sentence comes right after the else-branch (e < sqrt(d)), where the inequality reverses, and the page does not say which case 'There' refers to. The step from (eK)^τ + 1 to O(e^μ) using τ(1+2c) < μ is also not shown."
+    },
+    {
+      "term": "cost of leaf groups",
+      "quote": "leaf groups of $k=e/m^j<\\sqrt d$ chunks",
+      "kind": "step",
+      "note": "The page does not state the cost of applying one kernel to one chunk, so the leaf cost a^j k is unsupported. The inequality a^j k <= e^σ k^{1-σ} needs a^j <= (e/k)^σ, that is a <= m^σ, which the reader must derive from log_m a <= σ. The unrolling that turns the recurrence into F(e) = O(d^μ + d^{σ+(1-σ)/2}) is not shown."
+    },
+    {
+      "term": "summing over digit blocks",
+      "quote": "Summing gives",
+      "kind": "step",
+      "note": "The number of blocks is the sum of the digits δ_ℓ. The page does not bound it: each δ_ℓ is below m, but m is never fixed or bounded, so the factor O(log 2d) does not follow from the base-m expansion alone. The per-block bound F(m^ℓ) is also used without saying that m^ℓ <= d."
+    },
+    {
+      "term": "packed repair cost",
+      "quote": "Packed repairs stay cheap: $80(f-1)2^{-K}\\to0$.",
+      "kind": "step",
+      "note": "The constant 80 and the claim that packed repairs cost a constant times (f-1)2^{-K} are not derived or referenced here. Granting that bound, the limit to 0 follows because K = floor(d^c) grows faster than log f, but the bound itself is not given."
+    },
+    {
+      "term": "unitary matrix",
+      "quote": "since $\\sqrt2\\,H_0$ is unitary",
+      "kind": "term",
+      "note": "Unitary matrices (the complex analogue of orthogonal matrices) are not in the reader profile or the known concepts, and the page neither explains nor links them."
+    },
+    {
+      "term": "unit disk bound on values",
+      "quote": "Values stay in the unit disk, since $\\sqrt2\\,H_0$ is unitary",
+      "kind": "step",
+      "note": "Unitarity preserves the Euclidean length of the pair (u,v), not the modulus of each output separately. It bounds the outputs only if the length of the input pair is bounded, which the page never states. The stated reason does not yield the unit-disk claim from the page's givens."
+    }
+  ]
+}

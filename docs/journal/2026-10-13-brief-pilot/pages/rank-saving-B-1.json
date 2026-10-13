@@ -1,0 +1,107 @@
+{
+ "symbols": [
+  {
+   "symbol": "s",
+   "name": "total edge rank",
+   "meaning": "The number of smaller calls, the sum of the ranks of the edge matrices of the network.",
+   "relation": "count",
+   "quote": "The concept is the inequality $s<Wm$ for a fixed linear network, where $W$ is its number of wires, $m$ is the dimension of its label space, and $s$ is the total rank of its edges."
+  },
+  {
+   "symbol": "W",
+   "name": "wire count",
+   "meaning": "The number of wires in the network.",
+   "relation": "count",
+   "quote": "The concept is the inequality $s<Wm$ for a fixed linear network, where $W$ is its number of wires, $m$ is the dimension of its label space, and $s$ is the total rank of its edges."
+  },
+  {
+   "symbol": "m",
+   "name": "label dimension",
+   "meaning": "The dimension of the label space, a count of its basis vectors.",
+   "relation": "count",
+   "quote": "The concept is the inequality $s<Wm$ for a fixed linear network, where $W$ is its number of wires, $m$ is the dimension of its label space, and $s$ is the total rank of its edges."
+  },
+  {
+   "symbol": "h",
+   "name": "triple ground set size",
+   "meaning": "The number of elements in the ground set from which the three-element subsets (triples) are chosen; h is 100.",
+   "relation": "count",
+   "quote": "Only the central edges from time 3 to time 4 decrease, each losing $h=100$ dimensions, the size of the ground set of triples."
+  },
+  {
+   "symbol": "N",
+   "name": "bank entry count",
+   "meaning": "The number of entries in each data bank.",
+   "relation": "count",
+   "quote": "The exceptions are the first edges from the $N$ sources of one bank, where $N$ is the number of entries in a bank; each has matrix $2P_U$ of rank one but no dimension change."
+  },
+  {
+   "symbol": "L",
+   "name": "decreasing dimension loss",
+   "meaning": "The total dimension lost on decreasing edges.",
+   "relation": "count",
+   "quote": "With $L$ the total dimension lost on decreasing edges, the absolute changes sum to $Wm-2N+2L$."
+  },
+  {
+   "symbol": "U",
+   "name": "label",
+   "meaning": "A label: a nondegenerate subspace of the label space.",
+   "relation": "direct",
+   "quote": "Each gate or terminal $v$ carries a label $U$, a nondegenerate subspace, and a matrix $M_v=P_U$, the projection onto $U$ along $U^\\perp$; sources carry $-P_U$ or $0$."
+  },
+  {
+   "symbol": "V",
+   "name": "containing label",
+   "meaning": "A label containing the label U, in a nested pair of labels.",
+   "relation": "direct",
+   "quote": "For labels $U\\subset V$, $P_V-P_U$ is the identity on $V\\cap U^\\perp$ and zero on its complement, so its rank is $\\dim V-\\dim U$."
+  },
+  {
+   "symbol": "v",
+   "name": "gate or terminal",
+   "meaning": "A gate or terminal of the network, a vertex carrying a label and a matrix.",
+   "relation": "direct",
+   "quote": "Each gate or terminal $v$ carries a label $U$, a nondegenerate subspace, and a matrix $M_v=P_U$, the projection onto $U$ along $U^\\perp$; sources carry $-P_U$ or $0$."
+  },
+  {
+   "symbol": "M_v",
+   "name": "vertex matrix",
+   "meaning": "The rational matrix attached to vertex v.",
+   "relation": "direct",
+   "quote": "Each gate or terminal $v$ carries a label $U$, a nondegenerate subspace, and a matrix $M_v=P_U$, the projection onto $U$ along $U^\\perp$; sources carry $-P_U$ or $0$."
+  },
+  {
+   "symbol": "P_U",
+   "name": "label projection",
+   "meaning": "The projection onto the subspace U along its orthogonal complement.",
+   "relation": "direct",
+   "quote": "Each gate or terminal $v$ carries a label $U$, a nondegenerate subspace, and a matrix $M_v=P_U$, the projection onto $U$ along $U^\\perp$; sources carry $-P_U$ or $0$."
+  },
+  {
+   "symbol": "\\eta",
+   "name": "relative deficit",
+   "meaning": "The relative deficit (Wm-s)/(Wm), the fraction of Wm that s does not use.",
+   "relation": "direct",
+   "quote": "Since $Wm$ is far larger than $N$, the relative deficit $\\eta=(Wm-s)/(Wm)$ of the bit-valued network is only about $1.5\\cdot10^{-11}$"
+  },
+  {
+   "symbol": "\\tau",
+   "name": "fixed exponent",
+   "meaning": "The fixed rational exponent 1-2^{-50}, which is less than 1.",
+   "relation": "direct",
+   "quote": "Take $\\tau=1-2^{-50}$."
+  }
+ ],
+ "relations": [
+  {
+   "prerequisite": "subspace-labels",
+   "predicate": "is counted by",
+   "quote": "Apart from sources, the total rank is counted by label dimension changes on the edges of the [nested labels](subspace-labels.md)."
+  },
+  {
+   "prerequisite": "bank-exchange-network",
+   "predicate": "is a sum over",
+   "quote": "The network is the [Three-stage bank exchange network](bank-exchange-network.md), which exchanges two banks with signs and restores scratch wires, and $s$ is a sum over its edges."
+  }
+ ]
+}

@@ -1,0 +1,106 @@
+{
+  "symbols": [
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "where $s$ is the sum of the edge ranks"}},
+    {"symbol": "W", "anchor": {"kind": "here", "quote": "$W$ is its number of wires"}},
+    {"symbol": "m", "anchor": {"kind": "here", "quote": "$m$ is the dimension of its label space"}},
+    {"symbol": "k", "anchor": {"kind": "here", "quote": "Recursing $k$ levels on size $n=m^k$"}},
+    {"symbol": "n", "anchor": {"kind": "here", "quote": "Recursing $k$ levels on size $n=m^k$"}},
+    {"symbol": "\\log_m", "anchor": {"kind": "background", "note": "Logarithm to base m, covered by the known concept Logarithms and exponentials (also: log)."}},
+    {"symbol": "X_a", "anchor": {"kind": "here", "quote": "The exception is the source of each input $X_a$, with matrix $-P_{U_a}$."}},
+    {"symbol": "Y_a", "anchor": {"kind": "here", "quote": "For $X_a$, with output $Y_a$ of sink label $U_a^\\perp$"}},
+    {"symbol": "h", "anchor": {"kind": "here", "quote": "Here $h=100$ is the ground-set size"}},
+    {"symbol": "v", "anchor": {"kind": "here", "quote": "$v=\\binom h3=161700$ the number of triples"}},
+    {"symbol": "N", "anchor": {"kind": "here", "quote": "$N=v^3$ the number of input roles"}},
+    {"symbol": "W_{\\rm b}", "anchor": {"kind": "here", "quote": "Write $W_{\\rm b},s_{\\rm b}$ and $W_{\\rm c},s_{\\rm c}$ for the wire counts and rank sums of the two networks."}},
+    {"symbol": "s_{\\rm b}", "anchor": {"kind": "here", "quote": "Write $W_{\\rm b},s_{\\rm b}$ and $W_{\\rm c},s_{\\rm c}$ for the wire counts and rank sums of the two networks."}},
+    {"symbol": "W_{\\rm c}", "anchor": {"kind": "here", "quote": "Write $W_{\\rm b},s_{\\rm b}$ and $W_{\\rm c},s_{\\rm c}$ for the wire counts and rank sums of the two networks."}},
+    {"symbol": "s_{\\rm c}", "anchor": {"kind": "here", "quote": "Write $W_{\\rm b},s_{\\rm b}$ and $W_{\\rm c},s_{\\rm c}$ for the wire counts and rank sums of the two networks."}},
+    {"symbol": "p", "anchor": {"kind": "here", "quote": "Each vertex $p$ has a nondegenerate subspace $L_p$"}},
+    {"symbol": "q", "anchor": {"kind": "here", "quote": "an edge $p\\to q$ has matrix $M_q-M_p$"}},
+    {"symbol": "L_p", "anchor": {"kind": "here", "quote": "Each vertex $p$ has a nondegenerate subspace $L_p$"}},
+    {"symbol": "M_p", "anchor": {"kind": "here", "quote": "where $M_p=P_{L_p}$ is the orthogonal projection onto $L_p$"}},
+    {"symbol": "M_q", "anchor": {"kind": "unbound", "quote": "an edge $p\\to q$ has matrix $M_q-M_p$", "note": "The page defines M_p = P_{L_p} for a generic vertex p; M_q follows only by substituting q, which the page never states for the head vertex q."}},
+    {"symbol": "P_{L_p}", "anchor": {"kind": "here", "quote": "where $M_p=P_{L_p}$ is the orthogonal projection onto $L_p$"}},
+    {"symbol": "U", "anchor": {"kind": "here", "quote": "For nested $U\\subset V$, $P_V-P_U$ projects onto $V\\cap U^\\perp$"}},
+    {"symbol": "V", "anchor": {"kind": "here", "quote": "For nested $U\\subset V$, $P_V-P_U$ projects onto $V\\cap U^\\perp$"}},
+    {"symbol": "P_V", "anchor": {"kind": "unbound", "quote": "For nested $U\\subset V$, $P_V-P_U$ projects onto $V\\cap U^\\perp$", "note": "P is defined only as M_p = P_{L_p}, the projection onto L_p; the page never says P_V is the projection onto V."}},
+    {"symbol": "P_U", "anchor": {"kind": "unbound", "quote": "For nested $U\\subset V$, $P_V-P_U$ projects onto $V\\cap U^\\perp$", "note": "P is defined only as M_p = P_{L_p}, the projection onto L_p; the page never says P_U is the projection onto U."}},
+    {"symbol": "U_a", "anchor": {"kind": "unbound", "quote": "with matrix $-P_{U_a}$", "note": "The page never says what the label U_a is; it only gives the source matrix -P_{U_a} and the sink label U_a^perp."}},
+    {"symbol": "P_{U_a}", "anchor": {"kind": "unbound", "quote": "with matrix $-P_{U_a}$", "note": "The page never states that P_{U_a} is the projection onto U_a."}},
+    {"symbol": "U_a^\\perp", "anchor": {"kind": "unbound", "quote": "of sink label $U_a^\\perp$", "note": "The orthogonal complement is covered, but the label U_a it is taken of is never said to be a subspace label."}},
+    {"symbol": "P_{U_a^\\perp}", "anchor": {"kind": "unbound", "quote": "this is $P_{U_a^\\perp}+P_{U_a}=I_m$", "note": "The page never states that P_{U_a^perp} is the projection onto U_a^perp."}},
+    {"symbol": "I_m", "anchor": {"kind": "background", "note": "Identity matrix, covered by the known concept Matrices, matrix-vector products and inverses (also: identity matrix)."}},
+    {"symbol": "c_{\\rm b}", "anchor": {"kind": "here", "quote": "The $3v^2$ invocations each have $c_{\\rm b}=100$ central wires"}},
+    {"symbol": "c_{\\rm c}", "anchor": {"kind": "here", "quote": "with $c_{\\rm c}=101$ central wires for the complex network"}},
+    {"symbol": "L_{\\rm b}", "anchor": {"kind": "here", "quote": "Decreasing edges lose $L_{\\rm b}$ in total"}},
+    {"symbol": "L_{\\rm c}", "anchor": {"kind": "here", "quote": "likewise $L_{\\rm c}=3v^2hc_{\\rm c}$ with $c_{\\rm c}=101$ central wires for the complex network"}},
+    {"symbol": "\\eta_{\\rm b}", "anchor": {"kind": "here", "quote": "Let $\\eta_{\\rm b}=(W_{\\rm b}m-s_{\\rm b})/(W_{\\rm b}m)$ and $\\eta_{\\rm c}=(W_{\\rm c}m-s_{\\rm c})/(W_{\\rm c}m)$ be the relative deficits"}},
+    {"symbol": "\\eta_{\\rm c}", "anchor": {"kind": "here", "quote": "Let $\\eta_{\\rm b}=(W_{\\rm b}m-s_{\\rm b})/(W_{\\rm b}m)$ and $\\eta_{\\rm c}=(W_{\\rm c}m-s_{\\rm c})/(W_{\\rm c}m)$ be the relative deficits"}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "be the relative deficits, so $s/W=m(1-\\eta)$"}},
+    {"symbol": "\\tau", "anchor": {"kind": "unbound", "quote": "Take $\\tau=1-2^{-50}$.", "note": "A value is assigned by example (take ...), but the page never says what tau denotes or counts; it is the exponent in m^tau."}},
+    {"symbol": "\\ln", "anchor": {"kind": "background", "note": "Natural logarithm, covered by the known concept Logarithms and exponentials (also: natural logarithm)."}},
+    {"symbol": "e", "anchor": {"kind": "background", "note": "Euler's number as base of the exponential, covered by first-year calculus (exponentials) and the known concept Logarithms and exponentials."}},
+    {"symbol": "\\binom", "anchor": {"kind": "background", "note": "Binomial coefficient, covered by the known concept Sets, subsets and counting (also: binomial coefficient, n choose k)."}},
+    {"symbol": "\\dim", "anchor": {"kind": "background", "note": "Dimension of a subspace, covered by the matrices and vectors of the profile's first-year mathematics."}},
+    {"symbol": "\\cap", "anchor": {"kind": "background", "note": "Set intersection, covered by the profile's discrete mathematics (sets) and the known concept Sets, subsets and counting (also: set intersection)."}},
+    {"symbol": "\\subset", "anchor": {"kind": "background", "note": "Subset, covered by the profile's discrete mathematics (sets) and the known concept Sets, subsets and counting."}},
+    {"symbol": "\\perp", "anchor": {"kind": "background", "note": "Orthogonal complement, covered by the known concepts Linear maps, rank, projections and orthogonal complements and Inner products, orthogonality and eigenvalues (also: orthogonal complement)."}},
+    {"symbol": "\\to", "anchor": {"kind": "here", "quote": "an edge $p\\to q$ has matrix $M_q-M_p$"}}
+  ],
+  "gaps": [
+    {
+      "term": "invocations",
+      "quote": "The $3v^2$ invocations each have $c_{\\rm b}=100$ central wires",
+      "kind": "term",
+      "note": "The page never says what an invocation of the network is, nor why there are 3v^2 of them; the figure of 100 central wires per invocation is also not derived."
+    },
+    {
+      "term": "central wires lose h each",
+      "quote": "each losing $h$",
+      "kind": "step",
+      "note": "The page asserts that every central wire's edge drops the dimension by exactly h, but nothing given shows this from the labels or the network."
+    },
+    {
+      "term": "101 central wires in the complex network",
+      "quote": "with $c_{\\rm c}=101$ central wires for the complex network",
+      "kind": "step",
+      "note": "The count 101 (against 100 for the bank network) is not derived or explained on the page, so L_c cannot be checked."
+    },
+    {
+      "term": "rank and dimension change of the source edge",
+      "quote": "That edge has rank one with no dimension change, so the $N$ inputs add $N$.",
+      "kind": "step",
+      "note": "The page does not say which two labels this edge joins. The rank formula it gives (dim V - dim U) yields rank one only for a change from label 0 to a one-dimensional label, which does change dimension, so 'no dimension change' cannot be checked."
+    },
+    {
+      "term": "sink dimensions total Wm - N",
+      "quote": "leaving sink minus source dimension: $(Wm-N)-N=Wm-2N$",
+      "kind": "step",
+      "note": "The sinks sum to Wm - N only if every sink other than the N Y_a sinks has dimension m. The page does not say so at this point, and the cancellation of gate labels is asserted without being shown."
+    },
+    {
+      "term": "the other inputs",
+      "quote": "the other inputs give $I_m$ too, their source labels being $0$ and sinks the whole space",
+      "kind": "step",
+      "note": "The page never identifies the other inputs (only X_a and Y_a have been named), so the claims that their source labels are 0 and their sinks the whole space cannot be checked."
+    },
+    {
+      "term": "formula for s_b",
+      "quote": "$$s_{\\rm b}=W_{\\rm b}m-N+2L_{\\rm b}.$$",
+      "kind": "step",
+      "note": "The line before derives the absolute sum as W_b m - 2N + 2L_b, not W_b m - N + 2L_b, so the -N here does not follow from it. It also differs from the -2N the page uses for s_c, and the reader cannot tell which value is meant."
+    },
+    {
+      "term": "positivity of both deficits",
+      "quote": "are below $\\frac12$",
+      "kind": "step",
+      "note": "The page does not say what is positive. With s = Wm - 2N + 2L (the derivation and the s_c formula), the deficit Wm - s = 2N - 2L is positive iff L/N < 1, so the threshold 1/2 does not follow; it matches only the -N formula displayed for s_b."
+    },
+    {
+      "term": "cited relative deficits",
+      "quote": "Here $\\eta_{\\rm b}\\approx1.5\\cdot10^{-11}$ (cited)",
+      "kind": "step",
+      "note": "The page names no source and does not say what the source states. W_b and s_b are not given, so the reader cannot check eta_b, or eta_c, and hence the comparison with 20 times 2^{-50}."
+    }
+  ]
+}

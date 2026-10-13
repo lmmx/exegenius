@@ -1,0 +1,170 @@
+{
+  "symbols": [
+    {
+      "symbol": "s",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $s$ for the total edge cost, $W$ for the number of wires and $m$ for the dimension of the label space"
+      }
+    },
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $s$ for the total edge cost, $W$ for the number of wires and $m$ for the dimension of the label space"
+      }
+    },
+    {
+      "symbol": "m",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $s$ for the total edge cost, $W$ for the number of wires and $m$ for the dimension of the label space"
+      }
+    },
+    {
+      "symbol": "h",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $h=100$ be the size of the ground set $[h]$"
+      }
+    },
+    {
+      "symbol": "v",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $v=\\binom h3$ be the number of three-element subsets of $[h]$."
+      }
+    },
+    {
+      "symbol": "N",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $N=v^3$ be the number of index triples $a$ of them."
+      }
+    },
+    {
+      "symbol": "a",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "the number of index triples $a$ of them",
+        "note": "The sentence counts index triples but never says what one is, so the reader cannot tell what a single $a$ denotes."
+      }
+    },
+    {
+      "symbol": "X",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "leaving the sources of bank $X$",
+        "note": "Nothing on the page says what bank X is or which bank it names."
+      }
+    },
+    {
+      "symbol": "L",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $L$ be the total dimension lost on decreasing edges."
+      }
+    },
+    {
+      "symbol": "c",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $c$ be the number of central wires per invocation, the wires that gather and scatter its values"
+      }
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {
+        "kind": "here",
+        "quote": "some fixed exponent $\\tau<1$ has $s/W<m^\\tau$"
+      }
+    },
+    {
+      "symbol": "\\binom",
+      "anchor": {
+        "kind": "background",
+        "note": "Binomial coefficient, covered by the profile's combinatorial counting (sets, subsets and counting)."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "bit network and complex network",
+      "quote": "In the bit network the cost is a rank",
+      "kind": "term",
+      "note": "The two networks whose costs are compared are never defined. The page uses the names without saying what each network is or how the bit and complex versions differ."
+    },
+    {
+      "term": "label space",
+      "quote": "the dimension of the label space",
+      "kind": "term",
+      "note": "Labels and the label space are not described on this page. The only link (to the nested subspace labels page) comes later and is attached to edge costs, not to this use, so the reader cannot tell what m measures."
+    },
+    {
+      "term": "index triple",
+      "quote": "the number of index triples $a$ of them",
+      "kind": "term",
+      "note": "The page never says what an index triple is, so the count N = v^3 cannot be checked."
+    },
+    {
+      "term": "m = h^3",
+      "quote": "so $m=h^3$",
+      "kind": "step",
+      "note": "The page gives no reason the label-space dimension equals h^3. That would need the label space, which is not described."
+    },
+    {
+      "term": "recursion threshold",
+      "quote": "The recursion saves a power only when each wire makes fewer than $m$ smaller calls on average.",
+      "kind": "step",
+      "note": "The recursion, its calls, and why the threshold is m are neither described nor linked, so the stated condition cannot be checked."
+    },
+    {
+      "term": "cost formula for s",
+      "quote": "So $s=Wm-2N+2L$ for the complex network and $s=Wm-N+2L$ for the bit network.",
+      "kind": "step",
+      "note": "The page never states that an edge's cost is the absolute change in dimension across it. Without that identity, s as a sum of absolute changes, and so this formula, does not follow from the earlier sentences."
+    },
+    {
+      "term": "extra one per source edge",
+      "quote": "plus one on each of the $N$ edges leaving the sources of bank $X$.",
+      "kind": "step",
+      "note": "The extra one per edge in the bit network, and the claim that exactly N edges leave the sources, are asserted without derivation."
+    },
+    {
+      "term": "bank X",
+      "quote": "the sources of bank $X$",
+      "kind": "term",
+      "note": "Bank X is never defined. The only link is to the three-stage bank exchange network, and the page does not say which bank X is or what its sources are."
+    },
+    {
+      "term": "central edges decrease",
+      "quote": "Only the central edges from time 3 to time 4 decrease, each losing $h$ dimensions.",
+      "kind": "step",
+      "note": "The page does not say what time 3 and time 4 are, what makes an edge central, or why only these edges decrease or each lose exactly h."
+    },
+    {
+      "term": "3v^2 invocations",
+      "quote": "The construction runs $3v^2$ invocations of the three-element subset gadget.",
+      "kind": "step",
+      "note": "The count depends on the construction, which this page does not restate. The link to the bank exchange network does not show the count."
+    },
+    {
+      "term": "central wires h or h+1",
+      "quote": "so $c=h$ for the bit network and $c=h+1$ for the complex one.",
+      "kind": "step",
+      "note": "The number of central wires per invocation is asserted without saying which wires are central or why they number h or h+1."
+    },
+    {
+      "term": "tiny fraction of Wm",
+      "quote": "The deficit is a tiny fraction of $Wm$ because $Wm$ is far larger than $N$",
+      "kind": "step",
+      "note": "W is never given a value, so Wm being far larger than N cannot be checked, and the cited ratio of about 1.5·10^-11 cannot be verified from the page."
+    },
+    {
+      "term": "sufficiency of strict positivity",
+      "quote": "Strict positivity is all the saving needs.",
+      "kind": "step",
+      "note": "The page does not explain why strict positivity of the deficit, or s/W below m^tau, is enough for the power saving. The recursion that would show this is not described."
+    }
+  ]
+}

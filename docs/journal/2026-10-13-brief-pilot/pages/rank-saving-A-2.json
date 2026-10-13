@@ -1,0 +1,72 @@
+{
+  "symbols": [
+    {
+      "symbol": "s",
+      "name": "total edge cost",
+      "meaning": "The total cost of a network's edges, which is the number of smaller calls it makes.",
+      "relation": "count",
+      "quote": "Write $s$ for the total edge cost, $W$ for the number of wires and $m$ for the dimension of the label space, so the deficit is $s<Wm$."
+    },
+    {
+      "symbol": "W",
+      "name": "wire count",
+      "meaning": "The number of wires of a network.",
+      "relation": "count",
+      "quote": "Write $s$ for the total edge cost, $W$ for the number of wires and $m$ for the dimension of the label space, so the deficit is $s<Wm$."
+    },
+    {
+      "symbol": "h",
+      "name": "ground set size",
+      "meaning": "The number of elements of the ground set [h], equal to 100.",
+      "relation": "count",
+      "quote": "Let $h=100$ be the size of the ground set $[h]$, so $m=h^3$."
+    },
+    {
+      "symbol": "m",
+      "name": "label dimension",
+      "meaning": "The dimension of the label space, which is h cubed.",
+      "relation": "count",
+      "quote": "Write $s$ for the total edge cost, $W$ for the number of wires and $m$ for the dimension of the label space, so the deficit is $s<Wm$."
+    },
+    {
+      "symbol": "v",
+      "name": "subset count",
+      "meaning": "The number of three-element subsets of [h], which is the binomial coefficient h choose 3.",
+      "relation": "count",
+      "quote": "Let $v=\\binom h3$ be the number of three-element subsets of $[h]$."
+    },
+    {
+      "symbol": "N",
+      "name": "index triple count",
+      "meaning": "The number of index triples a of three-element subsets, which is v cubed.",
+      "relation": "count",
+      "quote": "Let $N=v^3$ be the number of index triples $a$ of them."
+    },
+    {
+      "symbol": "c",
+      "name": "central wires per invocation",
+      "meaning": "The number of central wires in one invocation of the gadget, which is h in the bit network and h+1 in the complex network.",
+      "relation": "count",
+      "quote": "Let $c$ be the number of central wires per invocation, the wires that gather and scatter its values, so $c=h$ for the bit network and $c=h+1$ for the complex one."
+    },
+    {
+      "symbol": "L",
+      "name": "total dimension loss",
+      "meaning": "The total dimension lost on the decreasing edges of a network.",
+      "relation": "count",
+      "quote": "Let $L$ be the total dimension lost on decreasing edges."
+    }
+  ],
+  "relations": [
+    {
+      "prerequisite": "bank-exchange-network",
+      "predicate": "is built on",
+      "quote": "The inequality is built on [Three-stage bank exchange network](bank-exchange-network.md)."
+    },
+    {
+      "prerequisite": "subspace-labels",
+      "predicate": "is measured by",
+      "quote": "The total cost $s$ is measured by the dimension of each edge's orthogonal residual, using [Nested subspace labels and orthogonal residuals](subspace-labels.md)."
+    }
+  ]
+}

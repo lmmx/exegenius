@@ -1,0 +1,147 @@
+{
+  "symbols": [
+    {
+      "symbol": "d",
+      "name": "chunk bound",
+      "meaning": "The largest number of chunks that one layer acts on.",
+      "relation": "count",
+      "quote": "Let $d$ be the largest number of chunks a layer acts on."
+    },
+    {
+      "symbol": "D",
+      "name": "chunks in a layer",
+      "meaning": "The number of chunks that a given layer acts on.",
+      "relation": "count",
+      "quote": "A layer acts on $D\\le d$ chunks, and $D$ counts them."
+    },
+    {
+      "symbol": "V",
+      "name": "logical bit volume",
+      "meaning": "The number of bits of data in the array.",
+      "relation": "count",
+      "quote": "$V$ counts the bits of data."
+    },
+    {
+      "symbol": "\\lambda'",
+      "name": "layer exponent",
+      "meaning": "The fixed exponent below 1 in the cost $O(Vd^{\\lambda'})$.",
+      "relation": "direct",
+      "quote": "Here $\\lambda'$ is a fixed exponent below $1$."
+    },
+    {
+      "symbol": "K",
+      "name": "chunk width",
+      "meaning": "The number of address bits in one chunk.",
+      "relation": "count",
+      "quote": "A *chunk* is a block of $K$ address bits, and $K$ counts them."
+    },
+    {
+      "symbol": "c",
+      "name": "chunk exponent",
+      "meaning": "The fixed exponent in $K=\\lfloor d^c\\rfloor$.",
+      "relation": "direct",
+      "quote": "Here $K=\\lfloor d^c\\rfloor$, where $c$ is a fixed exponent."
+    },
+    {
+      "symbol": "e",
+      "name": "chunks per group",
+      "meaning": "The number of chunks in a group.",
+      "relation": "count",
+      "quote": "Let $e$ be the number of chunks in a group."
+    },
+    {
+      "symbol": "m",
+      "name": "slots per group",
+      "meaning": "The number of slots into which a group is split.",
+      "relation": "count",
+      "quote": "Let $m$ be the number of slots a group is split into."
+    },
+    {
+      "symbol": "p",
+      "name": "precision",
+      "meaning": "The number of fractional bits of the input coefficients.",
+      "relation": "count",
+      "quote": "Input parts lie on $2^{-p}\\mathbb Z$, where $p$ counts fractional bits."
+    },
+    {
+      "symbol": "H_0",
+      "name": "two-point butterfly",
+      "meaning": "The map $H_0(u,v)=((u+v)/2,(u-v)/2)$ applied to a pair of values.",
+      "relation": "direct",
+      "quote": "The layer is the tensor product $H_0^{\\otimes D}$ of the two-point butterfly $H_0(u,v)=((u+v)/2,(u-v)/2)$ on the selected bits."
+    },
+    {
+      "symbol": "C",
+      "name": "complex kernel",
+      "meaning": "The complex two-point kernel, the matrix $\\frac12\\begin{pmatrix}1+i&1-i\\\\1-i&1+i\\end{pmatrix}$.",
+      "relation": "direct",
+      "quote": "Write $C=\\frac12\\begin{pmatrix}1+i&1-i\\\\1-i&1+i\\end{pmatrix}$ for the complex two-point kernel."
+    },
+    {
+      "symbol": "\\mathcal S_D",
+      "name": "diagonal phase operator",
+      "meaning": "The diagonal operator that multiplies each value by $i$ for each selected bit equal to $1$.",
+      "relation": "direct",
+      "quote": "where $\\mathcal S_D$ multiplies each value by $i$ for each selected bit equal to $1$."
+    },
+    {
+      "symbol": "s",
+      "name": "child calls",
+      "meaning": "The number of child calls made for one group.",
+      "relation": "count",
+      "quote": "Here $s$ counts child calls (recursive calls) per group."
+    },
+    {
+      "symbol": "W",
+      "name": "role streams",
+      "meaning": "The number of role streams into which rows are split.",
+      "relation": "count",
+      "quote": "Here $W$ counts the role streams."
+    },
+    {
+      "symbol": "F",
+      "name": "time per unit volume",
+      "meaning": "The time per unit of volume for a group of e chunks.",
+      "relation": "direct",
+      "quote": "Let $F(e)$ be the time per unit of volume for a group of $e$ chunks, and let $\\tau<1$ be a fixed exponent."
+    },
+    {
+      "symbol": "\\tau",
+      "name": "overhead exponent",
+      "meaning": "A fixed exponent below 1 in the row-addition overhead.",
+      "relation": "direct",
+      "quote": "Let $F(e)$ be the time per unit of volume for a group of $e$ chunks, and let $\\tau<1$ be a fixed exponent."
+    },
+    {
+      "symbol": "\\theta",
+      "name": "internal exponent",
+      "meaning": "A fixed exponent below 1 that bounds the overhead of an internal group by $O(e^{\\theta})$.",
+      "relation": "direct",
+      "quote": "The exponent $\\theta<1$ is chosen above $\\tau(1+2c)$ and $\\log_m(s/W)$, the latter below $1$ since $s<Wm$."
+    },
+    {
+      "symbol": "\\Delta",
+      "name": "guard width",
+      "meaning": "The number of guard bits, extra bits reserved beyond the precision.",
+      "relation": "count",
+      "quote": "Here $\\Delta$ counts the guard bits; it grows as a fixed power of $d$."
+    }
+  ],
+  "relations": [
+    {
+      "prerequisite": "phase-edge-recursion",
+      "predicate": "is built from",
+      "quote": "The layer is built from the [Recursive implementation of the phase network on selected bits](phase-edge-recursion.md): each group's $C^{\\otimes e}$ is computed by $s$ child calls, each on one slot."
+    },
+    {
+      "prerequisite": "exact-dyadic-guard",
+      "predicate": "is evaluated in",
+      "quote": "The whole layer is evaluated in [Exact Gaussian dyadic arithmetic and guard widths](exact-dyadic-guard.md): each coefficient keeps $p+\\Delta$ fractional bits and $\\Delta+3$ integer and sign bits."
+    },
+    {
+      "prerequisite": "role-streams",
+      "predicate": "is scheduled by",
+      "quote": "The recursion is scheduled by [Role streams and fixed-tape depth-first scheduling](role-streams.md): each child works on a stream of volume $V/W$."
+    }
+  ]
+}

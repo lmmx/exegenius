@@ -1,0 +1,225 @@
+{
+  "symbols": [
+    {
+      "symbol": "d",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $d$ be the largest number of chunks a layer acts on."
+      }
+    },
+    {
+      "symbol": "D",
+      "anchor": {
+        "kind": "here",
+        "quote": "A layer acts on $D\\le d$ chunks, and $D$ counts them."
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "here",
+        "quote": "$V$ counts the bits of data."
+      }
+    },
+    {
+      "symbol": "\\lambda'",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\lambda'$ is a fixed exponent below $1$."
+      }
+    },
+    {
+      "symbol": "O",
+      "anchor": {
+        "kind": "background",
+        "note": "Asymptotic analysis is in the reader profile, and it covers big-O notation (also a known concept, Big-O notation)."
+      }
+    },
+    {
+      "symbol": "K",
+      "anchor": {
+        "kind": "here",
+        "quote": "A *chunk* is a block of $K$ address bits, and $K$ counts them."
+      }
+    },
+    {
+      "symbol": "c",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $K=\\lfloor d^c\\rfloor$, where $c$ is a fixed exponent."
+      }
+    },
+    {
+      "symbol": "e",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $e$ be the number of chunks in a group."
+      }
+    },
+    {
+      "symbol": "m",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $m$ be the number of slots a group is split into."
+      }
+    },
+    {
+      "symbol": "p",
+      "anchor": {
+        "kind": "here",
+        "quote": "Input parts lie on $2^{-p}\\mathbb Z$, where $p$ counts fractional bits."
+      }
+    },
+    {
+      "symbol": "\\mathbb Z",
+      "anchor": {
+        "kind": "background",
+        "note": "Discrete mathematics (sets, integers, basic modular arithmetic) in the reader profile covers the integers."
+      }
+    },
+    {
+      "symbol": "\\lfloor",
+      "anchor": {
+        "kind": "background",
+        "note": "Discrete mathematics covers the floor function (also the known concept Floor, ceiling and rounding)."
+      }
+    },
+    {
+      "symbol": "H_0",
+      "anchor": {
+        "kind": "here",
+        "quote": "The layer is the tensor product $H_0^{\\otimes D}$ of the two-point butterfly $H_0(u,v)=((u+v)/2,(u-v)/2)$ on the selected bits."
+      }
+    },
+    {
+      "symbol": "u",
+      "anchor": {
+        "kind": "here",
+        "quote": "The layer is the tensor product $H_0^{\\otimes D}$ of the two-point butterfly $H_0(u,v)=((u+v)/2,(u-v)/2)$ on the selected bits."
+      }
+    },
+    {
+      "symbol": "v",
+      "anchor": {
+        "kind": "here",
+        "quote": "The layer is the tensor product $H_0^{\\otimes D}$ of the two-point butterfly $H_0(u,v)=((u+v)/2,(u-v)/2)$ on the selected bits."
+      }
+    },
+    {
+      "symbol": "C",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $C=\\frac12\\begin{pmatrix}1+i&1-i\\\\1-i&1+i\\end{pmatrix}$ for the complex two-point kernel."
+      }
+    },
+    {
+      "symbol": "i",
+      "anchor": {
+        "kind": "background",
+        "note": "Complex numbers are in the reader profile; i is the imaginary unit."
+      }
+    },
+    {
+      "symbol": "\\mathrm{diag}",
+      "anchor": {
+        "kind": "background",
+        "note": "Matrices and vectors are in the reader profile; diag(...) is standard notation for a diagonal matrix."
+      }
+    },
+    {
+      "symbol": "\\otimes",
+      "anchor": {
+        "kind": "here",
+        "quote": "The layer is the tensor product $H_0^{\\otimes D}$ of the two-point butterfly $H_0(u,v)=((u+v)/2,(u-v)/2)$ on the selected bits."
+      }
+    },
+    {
+      "symbol": "\\mathcal S_D",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $\\mathcal S_D$ multiplies each value by $i$ for each selected bit equal to $1$."
+      }
+    },
+    {
+      "symbol": "s",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $s$ counts child calls (recursive calls) per group."
+      }
+    },
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $W$ counts the role streams."
+      }
+    },
+    {
+      "symbol": "F",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $F(e)$ be the time per unit of volume for a group of $e$ chunks, and let $\\tau<1$ be a fixed exponent."
+      }
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $F(e)$ be the time per unit of volume for a group of $e$ chunks, and let $\\tau<1$ be a fixed exponent."
+      }
+    },
+    {
+      "symbol": "\\theta",
+      "anchor": {
+        "kind": "here",
+        "quote": "The exponent $\\theta<1$ is chosen above $\\tau(1+2c)$ and $\\log_m(s/W)$, the latter below $1$ since $s<Wm$."
+      }
+    },
+    {
+      "symbol": "\\log",
+      "anchor": {
+        "kind": "background",
+        "note": "Asymptotic analysis in the reader profile uses logarithms to a base throughout; log_m is the base-m logarithm."
+      }
+    },
+    {
+      "symbol": "\\Delta",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\Delta$ counts the guard bits; it grows as a fixed power of $d$."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "s < Wm",
+      "quote": "the latter below $1$ since $s<Wm$",
+      "kind": "step",
+      "note": "The page never states s < Wm as a hypothesis, and it does not link the page that establishes it (the rank-saving page is not linked here). So the inference that log_m(s/W) < 1 cannot be checked from what the page gives."
+    },
+    {
+      "term": "choice of theta below 1",
+      "quote": "The exponent $\\theta<1$ is chosen above $\\tau(1+2c)$",
+      "kind": "step",
+      "note": "Such a theta < 1 exists only if tau(1+2c) < 1. The page bounds tau only by tau < 1 and gives c no bound (c is just a fixed exponent), so the reader cannot check that the choice is possible."
+    },
+    {
+      "term": "per-group recurrence",
+      "quote": "F(e)\\le\\frac{s}{W}\\,F\\!\\left(\\frac{e}{m}\\right)+O\\big((eK)^\\tau+1\\big)",
+      "kind": "step",
+      "note": "The reader can see the s/W factor (s child calls, each on a stream of volume V/W) and the e/m argument. The page never says what the overhead (eK)^tau + 1 counts, nor gives the base case of F, so the recurrence cannot be checked."
+    },
+    {
+      "term": "geometric decay over levels",
+      "quote": "Each level is a fixed fraction of the one above, so the top level dominates.",
+      "kind": "step",
+      "note": "The reader cannot see the ratio between consecutive levels or why the sum over levels is dominated by the top. Unrolling gives terms (s/W)^j times an overhead at size e/m^j. The page gives no ratio, bounds the overhead by O(e^theta) only for e >= d^(1/2), and says nothing about levels below d^(1/2) or the base case."
+    },
+    {
+      "term": "layer cost d^{lambda'} passes",
+      "quote": "Hence the layer costs $d^{\\lambda'}$ passes instead of $d$.",
+      "kind": "step",
+      "note": "The page never says the layer is a single group with e = D (or e = d), so F does not visibly bound its cost. It never identifies lambda' with theta, and it does not show that the derived bound matches the O(V d^{lambda'}) that the page cites (cited) at the start. The comparison with d passes is not explained."
+    }
+  ]
+}

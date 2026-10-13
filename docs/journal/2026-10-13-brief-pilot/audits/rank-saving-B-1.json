@@ -1,0 +1,120 @@
+{
+  "symbols": [
+    {
+      "symbol": "s",
+      "anchor": {"kind": "here", "quote": "$s$ is the total rank of its edges"}
+    },
+    {
+      "symbol": "W",
+      "anchor": {"kind": "here", "quote": "where $W$ is its number of wires"}
+    },
+    {
+      "symbol": "m",
+      "anchor": {"kind": "here", "quote": "$m$ is the dimension of its label space"}
+    },
+    {
+      "symbol": "v",
+      "anchor": {"kind": "here", "quote": "Each gate or terminal $v$ carries a label $U$"}
+    },
+    {
+      "symbol": "U",
+      "anchor": {"kind": "here", "quote": "carries a label $U$, a nondegenerate subspace"}
+    },
+    {
+      "symbol": "M_v",
+      "anchor": {"kind": "here", "quote": "a matrix $M_v=P_U$, the projection onto $U$ along $U^\\perp$"}
+    },
+    {
+      "symbol": "P_U",
+      "anchor": {"kind": "here", "quote": "a matrix $M_v=P_U$, the projection onto $U$ along $U^\\perp$"}
+    },
+    {
+      "symbol": "U^\\perp",
+      "anchor": {"kind": "background", "note": "Orthogonal complement: standard linear algebra covered by the profile's matrices, vectors and inner products, and named in the known concepts 'Linear maps, rank, projections and orthogonal complements' and 'Inner products, orthogonality and eigenvalues (also: orthogonal complement)'."}
+    },
+    {
+      "symbol": "V",
+      "anchor": {"kind": "unbound", "quote": "For labels $U\\subset V$", "note": "The page never says what V denotes. It is not called the label space or a subspace of any named space, so the reader cannot tell what V is at its first use."}
+    },
+    {
+      "symbol": "P_V",
+      "anchor": {"kind": "unbound", "quote": "$P_V-P_U$ is the identity on $V\\cap U^\\perp$", "note": "The page defines P_U only for a label U ('the projection onto $U$ along $U^\\perp$'). P_V is not that symbol, and the page never says P_V is the projection onto V along V^perp; the reader can only guess by substituting V for U."}
+    },
+    {
+      "symbol": "N",
+      "anchor": {"kind": "here", "quote": "where $N$ is the number of entries in a bank"}
+    },
+    {
+      "symbol": "\\dim",
+      "anchor": {"kind": "background", "note": "Dimension of a subspace: covered by the profile's matrices and vectors and by the known concept 'Linear maps, rank, projections and orthogonal complements' (rank)."}
+    },
+    {
+      "symbol": "\\subset",
+      "anchor": {"kind": "background", "note": "Set inclusion: covered by the profile's discrete mathematics (sets) and the known concept 'Sets, subsets and counting'."}
+    },
+    {
+      "symbol": "\\cap",
+      "anchor": {"kind": "background", "note": "Set intersection: covered by the profile's discrete mathematics (sets) and the known concept 'Sets, subsets and counting (also: set intersection)'."}
+    },
+    {
+      "symbol": "h",
+      "anchor": {"kind": "here", "quote": "each losing $h=100$ dimensions, the size of the ground set of triples"}
+    },
+    {
+      "symbol": "L",
+      "anchor": {"kind": "here", "quote": "With $L$ the total dimension lost on decreasing edges"}
+    },
+    {
+      "symbol": "\\eta",
+      "anchor": {"kind": "here", "quote": "the relative deficit $\\eta=(Wm-s)/(Wm)$ of the bit-valued network"}
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {"kind": "unbound", "quote": "Take $\\tau=1-2^{-50}$.", "note": "It is introduced by 'Take', a choice of value, which does not say what it denotes. Only the later use in m^\\tau suggests it is an exponent, and the page never states this."}
+    },
+    {
+      "symbol": "\\exp",
+      "anchor": {"kind": "background", "note": "Exponential function: covered by the known concept 'Logarithms and exponentials'."}
+    },
+    {
+      "symbol": "\\ln",
+      "anchor": {"kind": "background", "note": "Natural logarithm: covered by the known concept 'Logarithms and exponentials (also: natural logarithm)'."}
+    },
+    {
+      "symbol": "\\cdot",
+      "anchor": {"kind": "background", "note": "Ordinary multiplication: covered by the known concept 'Schoolbook arithmetic and carries'."}
+    }
+  ],
+  "gaps": [
+    {
+      "term": "nondegenerate subspace",
+      "quote": "carries a label $U$, a nondegenerate subspace",
+      "kind": "term",
+      "note": "The page never says what nondegenerate means for a subspace. The projection onto U along U^perp and the later dimension counts need U intersect U^perp to be zero, but no known concept or link states this, and the page does not link the term."
+    },
+    {
+      "term": "rank of P_V - P_U",
+      "quote": "is the identity on $V\\cap U^\\perp$ and zero on its complement, so its rank is $\\dim V-\\dim U$",
+      "kind": "step",
+      "note": "The page gives no argument. To check it the reader needs P_V (never defined), a reading of 'its complement' (not specified), and dim(V intersect U^perp) = dim V - dim U, which holds only when U and U^perp split V, a nondegeneracy the page never states."
+    },
+    {
+      "term": "rank of the source edges",
+      "quote": "each has matrix $2P_U$ of rank one but no dimension change",
+      "kind": "step",
+      "note": "The rank of a projection P_U is dim U, so 2P_U has rank one only if the source labels are one-dimensional. The page never says so, and the reader cannot check the claim from what is given."
+    },
+    {
+      "term": "sink total and signed changes",
+      "quote": "Sinks total $Wm-N$ and sources total $N$, so the signed changes total $Wm-2N$",
+      "kind": "step",
+      "note": "Sinks are never defined on this page, and no sign convention for 'signed changes' is given. The reader cannot count the sink total as Wm-N or check the sum. The telescoping claim just before ('since each gate keeps the label') depends on the same missing convention."
+    },
+    {
+      "term": "cost scaling and power saving",
+      "quote": "Per unit volume, each multiplication of the parameter by $m$ multiplies the cost by $s/W$",
+      "kind": "step",
+      "note": "'Unit volume', 'cost' and 'a power is saved' are not defined here. Concluding that a power is saved when s/W < m^\\tau with \\tau < 1 requires the cost exponent to be log_m(s/W) and a comparison with \\tau. That logarithm step is not shown and cannot be checked from the page."
+    }
+  ]
+}

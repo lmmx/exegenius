@@ -1,0 +1,238 @@
+{
+  "symbols": [
+    {
+      "symbol": "H_0",
+      "name": "two-point butterfly",
+      "meaning": "The two-point butterfly, mapping $(u,v)$ to $((u+v)/2,(u-v)/2)$.",
+      "relation": "direct",
+      "quote": "It applies the two-point butterfly $H_0(u,v)=((u+v)/2,(u-v)/2)$ at one bit offset in up to $d$ address chunks."
+    },
+    {
+      "symbol": "d",
+      "name": "chunk bound",
+      "meaning": "An upper bound on the number of address chunks in a layer.",
+      "relation": "count",
+      "quote": "Let $d$ bound the number of chunks, and $D\\le d$ be the number in a layer, each of $K=\\lfloor d^c\\rfloor$ bits, where $c>0$ is a fixed number."
+    },
+    {
+      "symbol": "D",
+      "name": "chunks in a layer",
+      "meaning": "The number of address chunks in one layer, at most $d$.",
+      "relation": "count",
+      "quote": "Let $d$ bound the number of chunks, and $D\\le d$ be the number in a layer, each of $K=\\lfloor d^c\\rfloor$ bits, where $c>0$ is a fixed number."
+    },
+    {
+      "symbol": "K",
+      "name": "chunk width",
+      "meaning": "The number of bits in each address chunk, $\\lfloor d^c\\rfloor$.",
+      "relation": "count",
+      "quote": "Let $d$ bound the number of chunks, and $D\\le d$ be the number in a layer, each of $K=\\lfloor d^c\\rfloor$ bits, where $c>0$ is a fixed number."
+    },
+    {
+      "symbol": "c",
+      "name": "chunk exponent",
+      "meaning": "A fixed positive number in $K=\\lfloor d^c\\rfloor$.",
+      "relation": "direct",
+      "quote": "Let $d$ bound the number of chunks, and $D\\le d$ be the number in a layer, each of $K=\\lfloor d^c\\rfloor$ bits, where $c>0$ is a fixed number."
+    },
+    {
+      "symbol": "V",
+      "name": "bit volume",
+      "meaning": "The logical bit volume of the array.",
+      "relation": "count",
+      "quote": "Write $V$ for the logical bit volume and $\\lambda'<1$ for a fixed constant."
+    },
+    {
+      "symbol": "\\lambda'",
+      "name": "layer exponent",
+      "meaning": "A fixed constant below 1 in the layer cost $O(Vd^{\\lambda'})$.",
+      "relation": "direct",
+      "quote": "Write $V$ for the logical bit volume and $\\lambda'<1$ for a fixed constant."
+    },
+    {
+      "symbol": "p",
+      "name": "precision",
+      "meaning": "The number of fractional bits of the coefficient grid.",
+      "relation": "count",
+      "quote": "Coefficients lie on $2^{-p}Z[i]$, with $p$ the number of fractional bits."
+    },
+    {
+      "symbol": "C",
+      "name": "kernel",
+      "meaning": "The two-point kernel matrix whose tensor powers the phase network computes.",
+      "relation": "direct",
+      "quote": "Let $C_{00}=C_{11}=(1+i)/2$ and $C_{01}=C_{10}=(1-i)/2$ be the kernel $C$, and let $\\Xi$ be the diagonal matrix with entries $1$ and $i$."
+    },
+    {
+      "symbol": "\\Xi",
+      "name": "phase matrix",
+      "meaning": "The diagonal matrix with entries $1$ and $i$.",
+      "relation": "direct",
+      "quote": "Let $C_{00}=C_{11}=(1+i)/2$ and $C_{01}=C_{10}=(1-i)/2$ be the kernel $C$, and let $\\Xi$ be the diagonal matrix with entries $1$ and $i$."
+    },
+    {
+      "symbol": "x",
+      "name": "address",
+      "meaning": "An address of the array.",
+      "relation": "direct",
+      "quote": "Here $\\Xi^{\\otimes D}$ multiplies address $x$ by $i^{x_1+\\cdots+x_D}$, its selected bits $x_1,\\ldots,x_D$."
+    },
+    {
+      "symbol": "W",
+      "name": "wire roles",
+      "meaning": "The number of wire roles of the phase network.",
+      "relation": "count",
+      "quote": "The network has $W$ wire roles."
+    },
+    {
+      "symbol": "e",
+      "name": "group size",
+      "meaning": "The number of chunks in a group handled by one network invocation.",
+      "relation": "count",
+      "quote": "It splits $e=mf$ chunks into $m$ slots of $f$ chunks, and makes $s$ child calls, each computing $C^{\\otimes f}$ on one slot."
+    },
+    {
+      "symbol": "m",
+      "name": "slot count",
+      "meaning": "The number of slots in a group, the label dimension of the network.",
+      "relation": "count",
+      "quote": "It splits $e=mf$ chunks into $m$ slots of $f$ chunks, and makes $s$ child calls, each computing $C^{\\otimes f}$ on one slot."
+    },
+    {
+      "symbol": "f",
+      "name": "slot size",
+      "meaning": "The number of chunks in one slot.",
+      "relation": "count",
+      "quote": "It splits $e=mf$ chunks into $m$ slots of $f$ chunks, and makes $s$ child calls, each computing $C^{\\otimes f}$ on one slot."
+    },
+    {
+      "symbol": "s",
+      "name": "child calls",
+      "meaning": "The number of child calls in one network invocation.",
+      "relation": "count",
+      "quote": "It splits $e=mf$ chunks into $m$ slots of $f$ chunks, and makes $s$ child calls, each computing $C^{\\otimes f}$ on one slot."
+    },
+    {
+      "symbol": "h",
+      "name": "row index",
+      "meaning": "The index of a row, with $h=Wg+w$.",
+      "relation": "direct",
+      "quote": "A row $h=Wg+w$ goes to role $w$ of $W$, indexed there by $g$."
+    },
+    {
+      "symbol": "g",
+      "name": "index within role",
+      "meaning": "The index of a row within its role.",
+      "relation": "direct",
+      "quote": "A row $h=Wg+w$ goes to role $w$ of $W$, indexed there by $g$."
+    },
+    {
+      "symbol": "w",
+      "name": "role",
+      "meaning": "The wire role a row is sent to.",
+      "relation": "direct",
+      "quote": "A row $h=Wg+w$ goes to role $w$ of $W$, indexed there by $g$."
+    },
+    {
+      "symbol": "F",
+      "name": "time per unit volume",
+      "meaning": "The time per unit of logical volume to compute $C^{\\otimes e}$.",
+      "relation": "direct",
+      "quote": "Let $F(e)$ be the time per unit volume."
+    },
+    {
+      "symbol": "a",
+      "name": "child-call ratio",
+      "meaning": "The ratio $s/W$ of child calls to roles.",
+      "relation": "direct",
+      "quote": "Put $a=s/W$."
+    },
+    {
+      "symbol": "\\tau",
+      "name": "packed exponent",
+      "meaning": "A fixed exponent below 1 in the cost of a packed binary change.",
+      "relation": "direct",
+      "quote": "The binary changes of basis cost $O(V(L^\\tau+1))$ by [Packed selected-bit addition with guard repair](packed-selected-bit-addition.md), with $L=fK$ and fixed $0<\\tau<1$."
+    },
+    {
+      "symbol": "L",
+      "name": "slot bit width",
+      "meaning": "The bit width of one slot, $fK$.",
+      "relation": "count",
+      "quote": "The binary changes of basis cost $O(V(L^\\tau+1))$ by [Packed selected-bit addition with guard repair](packed-selected-bit-addition.md), with $L=fK$ and fixed $0<\\tau<1$."
+    },
+    {
+      "symbol": "\\sigma",
+      "name": "level exponent",
+      "meaning": "A fixed exponent with $\\log_m a\\le\\sigma<1$.",
+      "relation": "direct",
+      "quote": "Fix exponents $\\sigma$ and $\\mu$ with $\\max\\{0,\\log_m a\\}\\le\\sigma$, $\\max\\{\\tau,\\sigma\\}<\\mu<1$ and $\\tau(1+2c)<\\mu$."
+    },
+    {
+      "symbol": "\\mu",
+      "name": "overhead exponent",
+      "meaning": "A fixed exponent between $\\max\\{\\tau,\\sigma\\}$ and 1.",
+      "relation": "direct",
+      "quote": "Fix exponents $\\sigma$ and $\\mu$ with $\\max\\{0,\\log_m a\\}\\le\\sigma$, $\\max\\{\\tau,\\sigma\\}<\\mu<1$ and $\\tau(1+2c)<\\mu$."
+    },
+    {
+      "symbol": "j",
+      "name": "recursion depth",
+      "meaning": "The depth of a node in the recursion.",
+      "relation": "direct",
+      "quote": "Depth-$j$ nodes have $e/m^j$ chunks and weight $a^j$; as $a<m^\\mu$, they sum to"
+    },
+    {
+      "symbol": "k",
+      "name": "leaf group size",
+      "meaning": "The number of chunks in a leaf group at the stopping depth.",
+      "relation": "count",
+      "quote": "At the stopping depth, leaf groups of $k=e/m^j<\\sqrt d$ chunks cost $a^jk\\le e^\\sigma k^{1-\\sigma}\\le e^\\sigma d^{(1-\\sigma)/2}$."
+    },
+    {
+      "symbol": "q_0",
+      "name": "row chunk count",
+      "meaning": "The number of chunks that supply the row indices.",
+      "relation": "count",
+      "quote": "The first $q_0=O(\\log d)$ chunks supply the row indices, at cost $O(V\\log d)$."
+    },
+    {
+      "symbol": "\\ell",
+      "name": "digit index",
+      "meaning": "The index of a base-$m$ digit of $D-q_0$.",
+      "relation": "direct",
+      "quote": "Writing $D-q_0=\\sum_\\ell\\delta_\\ell m^\\ell$ in base $m$ gives $\\delta_\\ell$ blocks of $m^\\ell$ chunks."
+    },
+    {
+      "symbol": "\\delta_\\ell",
+      "name": "block count",
+      "meaning": "The number of blocks of $m^\\ell$ chunks.",
+      "relation": "count",
+      "quote": "Writing $D-q_0=\\sum_\\ell\\delta_\\ell m^\\ell$ in base $m$ gives $\\delta_\\ell$ blocks of $m^\\ell$ chunks."
+    },
+    {
+      "symbol": "\\Delta",
+      "name": "guard width",
+      "meaning": "The guard width, which is $o(p)$.",
+      "relation": "count",
+      "quote": "The whole layer is evaluated exactly in [Exact Gaussian dyadic arithmetic and guard widths](exact-dyadic-guard.md), with $p+\\Delta$ fractional bits and $\\Delta+3$ integer and sign bits, where $\\Delta=o(p)$ is the guard width."
+    }
+  ],
+  "relations": [
+    {
+      "prerequisite": "phase-edge-recursion",
+      "predicate": "is computed by",
+      "quote": "Thus $C^{\\otimes e}$ is computed by [Recursive implementation of the phase network on selected bits](phase-edge-recursion.md)."
+    },
+    {
+      "prerequisite": "exact-dyadic-guard",
+      "predicate": "is evaluated exactly in",
+      "quote": "The whole layer is evaluated exactly in [Exact Gaussian dyadic arithmetic and guard widths](exact-dyadic-guard.md), with $p+\\Delta$ fractional bits and $\\Delta+3$ integer and sign bits, where $\\Delta=o(p)$ is the guard width."
+    },
+    {
+      "prerequisite": "role-streams",
+      "predicate": "is scheduled by",
+      "quote": "The recursion is scheduled by [Role streams and fixed-tape depth-first scheduling](role-streams.md)."
+    }
+  ]
+}

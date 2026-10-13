@@ -1,0 +1,65 @@
+{
+  "symbols": [
+    {
+      "symbol": "s",
+      "name": "total edge cost",
+      "meaning": "The total number of smaller operations needed over all edges of the network.",
+      "relation": "count",
+      "quote": "The strict total rank deficit says that, in a fixed linear network, the total cost $s$ of its edges is less than the number of wires times the label dimension; this is what lets the main recursion save a power."
+    },
+    {
+      "symbol": "W",
+      "name": "wire count",
+      "meaning": "The number of wires in the network.",
+      "relation": "count",
+      "quote": "Let $W$ be the number of wires and $m$ the dimension of the label space."
+    },
+    {
+      "symbol": "m",
+      "name": "label dimension",
+      "meaning": "The dimension of the label space.",
+      "relation": "count",
+      "quote": "Let $W$ be the number of wires and $m$ the dimension of the label space."
+    },
+    {
+      "symbol": "N",
+      "name": "total source dimension",
+      "meaning": "The total dimension of the source labels.",
+      "relation": "count",
+      "quote": "Let $N$ be the total dimension of the source labels."
+    },
+    {
+      "symbol": "L",
+      "name": "total dimension lost",
+      "meaning": "The total dimension lost on decreasing edges.",
+      "relation": "count",
+      "quote": "Only decreasing edges, on the central wires, lose dimension; let $L$ be their total loss."
+    },
+    {
+      "symbol": "k",
+      "name": "recursion depth",
+      "meaning": "The depth of the recursion.",
+      "relation": "count",
+      "quote": "Let $k$ be the recursion depth."
+    },
+    {
+      "symbol": "\\tau",
+      "name": "power-saving exponent",
+      "meaning": "A rational exponent below 1 with s/W < m^τ.",
+      "relation": "direct",
+      "quote": "Choose a rational exponent $\\tau<1$ with $s/W<m^\\tau$; this is possible exactly when $s<Wm$."
+    }
+  ],
+  "relations": [
+    {
+      "prerequisite": "subspace-labels",
+      "predicate": "is measured by",
+      "quote": "The sum $s$ is measured by [Nested subspace labels and orthogonal residuals](subspace-labels.md): on an edge with nested labels, the cost is the change in label dimension."
+    },
+    {
+      "prerequisite": "bank-exchange-network",
+      "predicate": "is summed over",
+      "quote": "The total $s$ is summed over every edge of the [Three-stage bank exchange network](bank-exchange-network.md)."
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "symbols": [
+    {
+      "symbol": "V",
+      "name": "logical bit volume",
+      "meaning": "The number of logical bits in the array.",
+      "relation": "count",
+      "quote": "Let $V$ be the logical bit volume of the array, $p$ the number of fractional bits of the grid of multiples of $2^{-p}$, and $d$ an upper bound on the number of chunks."
+    },
+    {
+      "symbol": "p",
+      "name": "fractional bits",
+      "meaning": "The number of fractional bits of the coefficient grid.",
+      "relation": "count",
+      "quote": "Let $V$ be the logical bit volume of the array, $p$ the number of fractional bits of the grid of multiples of $2^{-p}$, and $d$ an upper bound on the number of chunks."
+    },
+    {
+      "symbol": "d",
+      "name": "chunk bound",
+      "meaning": "An upper bound on the number of address chunks.",
+      "relation": "count",
+      "quote": "Let $V$ be the logical bit volume of the array, $p$ the number of fractional bits of the grid of multiples of $2^{-p}$, and $d$ an upper bound on the number of chunks."
+    },
+    {
+      "symbol": "D",
+      "name": "selected chunks",
+      "meaning": "The number of address chunks in which the layer selects a bit.",
+      "relation": "count",
+      "quote": "Here $D$ is the number of selected chunks and $K$ the chunk width in bits."
+    },
+    {
+      "symbol": "K",
+      "name": "chunk width",
+      "meaning": "The number of address bits in each chunk.",
+      "relation": "count",
+      "quote": "Here $D$ is the number of selected chunks and $K$ the chunk width in bits."
+    },
+    {
+      "symbol": "c",
+      "name": "chunk exponent",
+      "meaning": "A fixed exponent $c>0$ in the chunk width $K=\\lfloor d^c\\rfloor$.",
+      "relation": "direct",
+      "quote": "The layer applies $H_0(u,v)=((u+v)/2,(u-v)/2)$ to each coefficient, at one selected bit in each of $D\\le d$ chunks of $K=\\lfloor d^c\\rfloor$ bits, with $c>0$ fixed."
+    },
+    {
+      "symbol": "H_0",
+      "name": "normalized butterfly",
+      "meaning": "The butterfly map $H_0(u,v)=((u+v)/2,(u-v)/2)$, applied to each coefficient.",
+      "relation": "direct",
+      "quote": "The layer applies $H_0(u,v)=((u+v)/2,(u-v)/2)$ to each coefficient, at one selected bit in each of $D\\le d$ chunks of $K=\\lfloor d^c\\rfloor$ bits, with $c>0$ fixed."
+    },
+    {
+      "symbol": "X",
+      "name": "bit flip",
+      "meaning": "The bit-flip matrix.",
+      "relation": "direct",
+      "quote": "Write $X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$ for the bit flip and $C=\\frac{1+i}{2}I+\\frac{1-i}{2}X$."
+    },
+    {
+      "symbol": "C",
+      "name": "two-point kernel",
+      "meaning": "The complex kernel $C=\\frac{1+i}{2}I+\\frac{1-i}{2}X$.",
+      "relation": "direct",
+      "quote": "Write $X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$ for the bit flip and $C=\\frac{1+i}{2}I+\\frac{1-i}{2}X$."
+    },
+    {
+      "symbol": "\\mathcal S_D",
+      "name": "phase operator",
+      "meaning": "The diagonal operator that multiplies each address's value by $i$ to the power of its number of selected 1-bits.",
+      "relation": "direct",
+      "quote": "where $\\mathcal S_D$ multiplies each address's value by $i$ to the power of its number of selected 1-bits."
+    },
+    {
+      "symbol": "e",
+      "name": "group axes",
+      "meaning": "The number of selected axes in a group.",
+      "relation": "count",
+      "quote": "Here $e$ counts the axes in a group, $m$ the slots, and $s$ the child calls per node."
+    },
+    {
+      "symbol": "m",
+      "name": "slot count",
+      "meaning": "The number of slots into which a group is split.",
+      "relation": "count",
+      "quote": "Here $e$ counts the axes in a group, $m$ the slots, and $s$ the child calls per node."
+    },
+    {
+      "symbol": "s",
+      "name": "child calls",
+      "meaning": "The number of child calls at each node.",
+      "relation": "count",
+      "quote": "Here $e$ counts the axes in a group, $m$ the slots, and $s$ the child calls per node."
+    },
+    {
+      "symbol": "W",
+      "name": "wire roles",
+      "meaning": "The number of wire roles among which rows are split.",
+      "relation": "count",
+      "quote": "Here $W$ is the number of wire roles."
+    },
+    {
+      "symbol": "F",
+      "name": "time per unit volume",
+      "meaning": "$F(e)$ is the time per unit volume for a group of $e$ axes.",
+      "relation": "direct",
+      "quote": "Let $F(e)$ be the time per unit volume for $e$ axes."
+    },
+    {
+      "symbol": "\\tau",
+      "name": "row exponent",
+      "meaning": "A fixed exponent in $(0,1)$ bounding the node's row work.",
+      "relation": "direct",
+      "quote": "The $s$ children cost $s(V/W)F(e/m)$, and the node's row work costs $O((eK)^\\tau+1)$ per unit volume, with a fixed exponent $\\tau\\in(0,1)$:"
+    },
+    {
+      "symbol": "J",
+      "name": "leaf depth",
+      "meaning": "The recursion depth at which groups fall below $d^{1/2}$ axes.",
+      "relation": "count",
+      "quote": "Unroll to depth $J$, where $e/m^J<d^{1/2}$."
+    },
+    {
+      "symbol": "j",
+      "name": "level index",
+      "meaning": "The recursion level of an internal node, counted from the root.",
+      "relation": "count",
+      "quote": "An internal node at depth $j<J$ has $e/m^j\\ge d^{1/2}$, so $K\\le d^c\\le(e/m^j)^{2c}$ and its overhead is $O((e/m^j)^\\lambda)$, with fixed $\\lambda<1$ and $\\tau(1+2c)<\\lambda$."
+    },
+    {
+      "symbol": "\\lambda",
+      "name": "internal exponent",
+      "meaning": "A fixed exponent below one bounding the internal overhead.",
+      "relation": "direct",
+      "quote": "An internal node at depth $j<J$ has $e/m^j\\ge d^{1/2}$, so $K\\le d^c\\le(e/m^j)^{2c}$ and its overhead is $O((e/m^j)^\\lambda)$, with fixed $\\lambda<1$ and $\\tau(1+2c)<\\lambda$."
+    },
+    {
+      "symbol": "\\sigma",
+      "name": "weight exponent",
+      "meaning": "A fixed exponent with $s/W\\le m^\\sigma$.",
+      "relation": "direct",
+      "quote": "With $s/W\\le m^\\sigma$ and $0\\le\\sigma<\\lambda$,"
+    },
+    {
+      "symbol": "q",
+      "name": "leaf size",
+      "meaning": "The number of axes in a leaf group.",
+      "relation": "count",
+      "quote": "A leaf of size $q=e/m^J$ has weight $(s/W)^J\\le m^{J\\sigma}=(e/q)^\\sigma$, so leaves cost $O(e^\\sigma q^{1-\\sigma})\\le O(e^\\sigma d^{(1-\\sigma)/2})$."
+    },
+    {
+      "symbol": "\\lambda'",
+      "name": "layer exponent",
+      "meaning": "The fixed cost exponent of the layer, below one.",
+      "relation": "direct",
+      "quote": "for any fixed $\\lambda'$ with $\\max\\{\\lambda,\\sigma+(1-\\sigma)/2\\}<\\lambda'<1$."
+    }
+  ],
+  "relations": [
+    {
+      "prerequisite": "phase-edge-recursion",
+      "predicate": "is computed by",
+      "quote": "The tensor power $C^{\\otimes D}$ is computed by [Recursive implementation of the phase network on selected bits](phase-edge-recursion.md): a group of $e$ axes splits into $m$ slots, and $s$ child calls each run on $e/m$ axes."
+    },
+    {
+      "prerequisite": "exact-dyadic-guard",
+      "predicate": "is kept exact by",
+      "quote": "Intermediate values are kept exact by [Exact Gaussian dyadic arithmetic and guard widths](exact-dyadic-guard.md), using guard bits (extra integer and fractional bits)."
+    },
+    {
+      "prerequisite": "role-streams",
+      "predicate": "is scheduled by",
+      "quote": "The recursion is scheduled by [Role streams and fixed-tape depth-first scheduling](role-streams.md), so each child acts on a stream of volume $V/W$."
+    }
+  ]
+}
