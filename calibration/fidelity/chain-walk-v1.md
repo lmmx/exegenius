@@ -1,0 +1,60 @@
+You are evaluating whether a wiki, written to explain a mathematics paper, carries a reader along one central chain of reasoning in the paper. You are not judging style or length.
+
+**Files** (read them; do not modify anything):
+- the wiki: the markdown pages in `{WIKI}` (start at `index.md` if there is one; pages link to each other with markdown links, and each page may open with "Before this page" and "Where this fits" boxes);
+- the paper: `{PAPER}` (LaTeX, 5,361 lines). The paper is the authority: read the lines you need with the Read tool's offset and limit.
+
+**The chain: the paper's central saving.** A fixed network whose edge changes have total rank $s<Wm$ is turned into a power saving $e^\tau$ with $\tau<1$. It has nine steps:
+
+| Id | Step | Defining content | Paper lines |
+|---|---|---|---|
+| C1 | The fixed network | $h=100$; data pairs $X_a,Y_a$ indexed by triples, $N=\binom h3^3$, $m=h^3$; a fixed linear network exchanging the banks, $(X_a,Y_a)\mapsto(-Y_a,X_a)$, restoring every auxiliary wire | 640–660, 653–783 |
+| C2 | Frames | a common invertible frame per gate commutes with a pointwise gate, so the network on arrays implements $D_{\rm out}\mathsf S D_{\rm in}^{-1}$ and each edge costs only a change of frame | 793–843 |
+| C3 | Labels | each gate gets a nondegenerate subspace of $F^{\otimes3}$ (dimension $m$); every edge joins comparable labels; the only decreasing edges are the central wires from time 3 to 4, each losing $h$ | 845–1010 |
+| C4 | Rank equals dimension change | for nested $U\subset V$, $P_V-P_U$ has rank $\dim V-\dim U$, so an edge's cost is its label's dimension change; the $N$ source edges are the exceptions, each of rank one | 1156–1166 |
+| C5 | The budget | $\sum_e|\Delta\dim|=Wm-2N+2L$ with $L=Ich$; hence $s_{\rm b}=W_{\rm b}m-N+2L_{\rm b}$ | 997–1010, 1138–1154 |
+| C6 | The strict saving | $L/N=100/539$ (bit) or $101/539$ (complex), below $1/2$, so the deficit $N-2L>0$ and $s<Wm$ | 1105–1110, 1166–1167 |
+| C7 | The endpoint identity | $M_{\rm sink(\rho(w))}-M_{\rm source(w)}=I_m$ on every role, so the bit network applies the shear $H\gets H+D$ on every role | 1138–1172 |
+| C8 | Edges as recursive calls | the shear by a rank-$a$ matrix factors as $E_1\Pi E_2$ and costs exactly $a$ interchanges plus $O(V)$, so a node makes $s$ recursive calls in all | 1364–1447 |
+| C9 | The recurrence and the exponent | children of volume $V/W$, so $F_k\le(s/W)F_{k-1}+O(1)$; with $s/W<m^\tau$, $\tau=1-2^{-50}$, $F_k=O(e^\tau)$ | 1319–1346, 1475–1557 |
+
+**Walk the chain through the wiki.** Find where the wiki presents each step (search the pages; a step may be spread over several pages or appear nowhere). For each step, decide:
+- `verdict`:
+  - `reconstructed`: some page states the step with its defining content, in the role it plays in the chain;
+  - `mentioned`: named or alluded to without its defining content;
+  - `absent`;
+  - `wrong`: what the wiki says contradicts the paper.
+- `pages`: the pages involved.
+- `reason_given`: true when a page says why the step is needed, meaning what it makes possible further along the chain. A reader can then see the step's place in the plan, rather than meeting it as an unmotivated fact.
+
+**Then, for each consecutive pair of steps** (C1→C2, …, C8→C9), decide how a reader gets from the first step's page to the second's:
+- `same page`;
+- `linked`: a link on the first page, or in its "Where this fits" box, leads to the second;
+- `indirect`: reachable only through other pages;
+- `none`: a step is absent, or no path joins them.
+
+**Finally**, list the `breaks`: the places where a reader following the chain would lose it (a missing step, a step without its reason, no link, or an error). Then write a `summary` of two or three sentences: does the wiki carry a reader from the network to the exponent, and where does the chain break or thin out?
+
+**Ground every verdict:**
+- check the paper's lines and the pages' text;
+- give no credit for what the pages do not say;
+- when unsure, choose the more conservative verdict and say why in the note.
+
+Write your result as one JSON object to `{OUT}`:
+
+```json
+{
+  "wiki": "Wn",
+  "steps": [
+    {"id": "C1", "verdict": "reconstructed|mentioned|absent|wrong", "pages": ["x.md"],
+     "reason_given": true, "note": "..."}
+  ],
+  "links": [
+    {"from": "C1", "to": "C2", "how": "same page|linked|indirect|none", "note": "..."}
+  ],
+  "breaks": [{"at": "C4", "kind": "missing step|no reason|no link|error", "note": "..."}],
+  "summary": "..."
+}
+```
+
+Include all nine steps and all eight pairs. Check that the file is valid JSON (`python3 -m json.tool {OUT}`), then reply with only the wiki id, the number of steps `reconstructed`, and the number of breaks.
