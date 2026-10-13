@@ -27,11 +27,52 @@
 - **Measures:** as in the recovery experiment, plus each attempt's results quoted.
 - **The question:** do D's extractions stop skimming, and do they reach more core items than C's, at what cost in attempts and time?
 
+## The experiment's results
+
+The runs are on wiki branch `131026-exp-depth-rejection`, at commit 0dd87da.
+- **Setup:** ten planning-only runs, exegenius f70a919, `exegenius-planner` subagents on Sonnet, orchestrated by a runner session on the development session's model.
+- **No contamination:** no planner wrote to a shared place or touched another run's directory, and the highest overlap between two runs' concept sets is 0.30.
+- **The scratch directories were used.** C1's planner put its script in `exegenius/tasks/0001-extract/`. It also ran `pkill -f "cat >"`, which could have killed other planners' commands; no other transcript shows an interrupted command.
+
+**From the logs and the stored state** (core items: the draft reference's 19, reached by where quotes fall; results: the paper's 66 theorem-like statements and labelled equations):
+
+| | C (section rule) | D (section and results rules) |
+|---|---|---|
+| Extraction, core items | 8, 10, 3, 1, 11 | 13, 11, 14, 14, 14 |
+| Extraction, results quoted | 9, 16, 2, 2, 16 | 28, 14, 23, 20, 39 |
+| Argument, core items | 4, 10, 9, 8, 9 | 11, 14, 11, 11, 14 |
+| Saving and layer recursion anchored in the deriving sections (`depth.py`) | 4 of 5 (C3's saving: introduction only) | 5 of 5 |
+| Planning time, seconds | 244–358 | 268–345 |
+
+**What happened at each rejection:**
+- **The early stop again.** The first extraction of C1, C2, C5, D3 and D4 quoted 2 of 10 result-bearing sections. The section rule sent each back, and each next answer quoted 9–10.
+- **Skims passed under C.** The extractions of C3 and C4 were accepted at 7 and 8 sections with 2 results each: the pattern B6 showed.
+- **Skims were sent back under D.** The results rule sent back D5's first extraction (6 sections, 5 results) and D3's third (9 sections, 6 results). Their next answers quoted 39 and 23 results.
+- **D1** was sent back by the section rule at 5 sections, and its accepted answer quoted 28 results.
+
+**What the comparison can and cannot claim:**
+- **The extraction figures are partly circular.** The results rule rewards quotes where results are stated, and the reference scorer counts quotes where its items are stated or derived, which are mostly results.
+- **The argument figures are less so.** Four of the five D argument planners were never sent back for coverage (D4's was, twice, by the section rule). Their arguments reach 11–14 core items against C's 4–10, which reflects the better extractions they planned from.
+- **No judgement of the plans' content was made.** No reader checked that each step states its derivation correctly.
+
+**Observed:** with the results rule, no accepted extraction quoted fewer than 14 of the 66 results, and no accepted argument reached fewer than 11 core items. Without it, two of five extractions were accepted as skims, and one argument (C1's) reached 4.
+
+**Not shown:**
+- that the tenth suits other sources;
+- that the plans' steps are correct;
+- that the rule holds up under the author's container setup.
+
+## Proposed, not decided
+
+- Make `coverage_depth = "results"` the default once reviewed. It would sit with `coverage = "reject"` on `131026-coverage-default`. This is the author's decision.
+- An assessment of plan content that does not rest on where quotes fall: for example, a judge reading each plan against the reference set's statements.
+
 ## Current State
 - `Source` records each displayed equation with its `\label`, if any (`Display` in exegenius-core/src/project.rs)
 - The coverage figures count a source's results (theorem-like statements and labelled equations) and the ones whose stretch holds a quote, and list the unquoted ones by section (`results`, `quoted_results`, `unquoted_results`, `results_shortfall` in exegenius-core/src/coverage.rs)
+- Wiki branch `131026-exp-depth-rejection` (0dd87da) holds ten planning runs of f70a919, five per setting, in which every extraction accepted under `coverage_depth = "results"` quotes 14–39 of `paper.tex`'s 66 results and every argument reaches 11–14 core items of the draft reference, against 2–16 and 4–10 under `"sections"`
 - `[checks] coverage_depth = "results"` makes the coverage check also send back an answer quoting fewer than a tenth of the results, with a message listing them; `"sections"`, the default, leaves the check and its message as before (exegenius-core/src/config.rs, `rejection` in exegenius-core/src/coverage.rs, `submit` in exegenius-core/src/task.rs)
 
 ## Missing
-- No planning run with `coverage_depth = "results"`
 - No calibration of the tenth on any source but the n log n paper
+- No assessment of the plans' content beyond where their quotes fall
