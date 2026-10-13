@@ -9,7 +9,19 @@ This entry hands the work over across a compaction of the development session's 
 
 It supersedes the state recorded in 2026-10-13-autonomous-investigation. Read this entry first, then the entries it names.
 
-## Latest state, after E1 (read this first)
+## Latest state, after E3 and the calibration programme (read this first)
+
+- **The calibration programme is in `calibration/`.** Its README lists the parts: the protocol, the Evaluation Registry (records built mechanically from git refs), the Capability Map, the fidelity track, preregistered plans and rubrics, the runner template, and the tools. The author asked for this work to run autonomously, with updates only at milestones.
+- **E3** (2026-10-13-e3-effort):
+  - **R1 holds:** high effort is preferred for planning on this paper. Same-batch medians were stated 7 → 19, derived 1 → 7, faithful 0 → 3.
+  - **R2:** no plan at either effort passes the central-derivation gate. The gap is the counting core, C3–C6.
+- **The chain-walk baseline** (2026-10-13-chain-walk-baseline): of the three existing wikis, only the planner-handoff wiki carries the central chain's core (gate passed). It got there through writers' rewrites, which the depth rule then sent back to be cut.
+- **Awaiting the author:**
+  - the execution-profile plan (`calibration/software-plan.md`), including whether planning's default effort becomes high;
+  - a full run with high-effort planning;
+  - remote branch deletions (2026-10-13-branch-inventory).
+
+## Latest state, after E1
 
 Since the sections below were written:
 - **Merged:** all three review branches and this entry's update are on `master`. `cc70355` and later hold the process-safety guard, the content judge and the model-allocation proposal.

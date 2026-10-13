@@ -1,5 +1,62 @@
 {
- "Overview": {"gates": [{"measure": "core_stated", "min": 17}, {"measure": "major_errors", "max": 0}, {"measure": "wrong", "max": 0}]},
- "Technical": {"gates": [{"measure": "core_stated", "min": 17}, {"measure": "major_errors", "max": 0}, {"measure": "wrong", "max": 0}, {"measure": "core_derived", "min": 10}]},
- "Research": {"gates": [{"measure": "core_stated", "min": 17}, {"measure": "major_errors", "max": 0}, {"measure": "wrong", "max": 0}, {"measure": "core_derived", "min": 10}, {"measure": "central_gate", "equals": true}]}
+ "Overview": {
+  "gates": [
+   {
+    "measure": "core_stated",
+    "min": 17
+   },
+   {
+    "measure": "major_errors",
+    "max": 0
+   },
+   {
+    "measure": "wrong",
+    "max": 0
+   }
+  ]
+ },
+ "Technical": {
+  "gates": [
+   {
+    "measure": "core_stated",
+    "min": 17
+   },
+   {
+    "measure": "major_errors",
+    "max": 0
+   },
+   {
+    "measure": "wrong",
+    "max": 0
+   },
+   {
+    "measure": "core_derived",
+    "min": 10
+   }
+  ]
+ },
+ "Research": {
+  "gates": [
+   {
+    "measure": "core_stated",
+    "min": 17
+   },
+   {
+    "measure": "major_errors",
+    "max": 0
+   },
+   {
+    "measure": "wrong",
+    "max": 0
+   },
+   {
+    "measure": "core_derived",
+    "min": 10
+   },
+   {
+    "measure": "central_gate",
+    "equals": true
+   }
+  ]
+ }
 }

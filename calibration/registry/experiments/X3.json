@@ -682,6 +682,21 @@
      "wrong": 1,
      "major_errors": 1,
      "minor_errors": 3
+    },
+    {
+     "batch": "J3",
+     "judge": "a",
+     "plan": "P11",
+     "core_stated": 5,
+     "core_fully": 0,
+     "core_derived": 1,
+     "core_faithful": 0,
+     "supporting_stated": 3,
+     "wrong": 1,
+     "major_errors": 0,
+     "minor_errors": 3,
+     "central_count": 0,
+     "central_gate": false
     }
    ]
   },
@@ -2908,6 +2923,45 @@
      "max": 1
     },
     "central_count": null
+   },
+   "quality_J3": {
+    "core_stated": {
+     "n": 1,
+     "median": 5,
+     "min": 5,
+     "max": 5
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 1,
+     "min": 1,
+     "max": 1
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_gate_passed": "0/1"
    },
    "resources_extract": {
     "model_calls": {

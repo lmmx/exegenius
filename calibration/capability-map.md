@@ -24,7 +24,8 @@
 |---|---|---|---|---|---|---|
 | `exegenius-planner` / `claude-sonnet-5-5` / medium / 1d90c28 | 11 | 1/11 (0.00–0.41) | 0/11 (0.00–0.28) | not measured | ~0.08–0.42 M · ~7–17 k · 73–163 s (by arm) | X1, X2 |
 | `exegenius-planner` / `claude-sonnet-5-5` / medium / f70a919 | 10 | 0/10 (0.00–0.31) | 0/10 (0.00–0.31) | not measured | 0.26–0.47 M · ~16 k · 145–150 s | X3 |
-| `exegenius-planner` / `claude-sonnet-5-5` / **high** / cc70355 | 5 | **5/5** (0.48–1.00) | 2/5 (0.05–0.85) | not measured | 1.50 M · ~56 k · 480 s | E1 |
+| `exegenius-planner` / `claude-sonnet-5-5` / medium / **cc70355** (batch J3) | 5 | 0/5 (0.00–0.52) | 0/5 (0.00–0.52) | 0/5 (0.00–0.52) | 0.29 M · ~12 k · 108 s | E3 |
+| `exegenius-planner` / `claude-sonnet-5-5` / **high** / cc70355 (J2; J3 re-judged) | 5 | **5/5** (0.48–1.00) | 2/5 (0.05–0.85) | 0/5 (0.00–0.52), in J3 | 1.50 M · ~56 k · 480 s | E1, E3 |
 | `general-purpose` / `claude-sonnet-5-5` / **high** / cc70355 | 5 | **5/5** (0.48–1.00) | 3/5 (0.15–0.95) | not measured | 2.39 M · ~58 k · 502 s | E1 |
 | `general-purpose` / `claude-sonnet-5-5` / high / 930d40c | 2 | 2/2 (0.16–1.00) | 2/2 (0.16–1.00) | not measured | 264 k and 271 k subagent tokens as Claude Code's task notification counts them (not comparable with the cache-read figures), 8.9 and 10.3 min | S0 |
 
@@ -33,17 +34,17 @@ Pass counts are given with exact two-sided 95% (Clopper–Pearson) intervals. Th
 ### What this supports, so far
 
 - **Overview calibre:**
-  - **Sonnet at medium does not reach it,** in 1 of 21 runs.
+  - **Sonnet at medium does not reach it:** it passed in 1 of 26 runs (1 of 21 earlier, 0 of 5 in E3).
   - **Sonnet at high reaches it** in 10 of 10 runs, with either agent definition.
-- **Effort, not the definition, is the leading explanation.** The binaries differ slightly between the medium and high runs, and E3 tests effort directly in one batch.
+- **Effort, not the definition, explains the gap.** E1 found no difference between definitions at high effort. E3 compared effort within one batch, on one binary.
 - **Technical calibre:** no tested configuration reaches it reliably. At high effort it is 2 to 3 of 5 per arm.
-- **Research calibre:** not measured yet. The central-derivation rubric is first applied in E3's batch.
-  - **What we expect:** none of E1's plans derived the paper's central saving faithfully under the item-level judge, so we expect no configuration to pass.
+- **Research calibre:** no configuration reaches it. 0 of 5 plans at high effort, and 0 of 5 at medium, pass the central-derivation gate (E3, batch J3). At high effort the gap is the counting core (labels, rank as dimension change, the budget, $L/N<1/2$), reconstructed in only 1–2 plans of 5.
+- **E3, a one-batch comparison on one binary,** confirms the effort finding at stage 2. Medians: stated 7 → 19, derived 1 → 7, faithful 0 → 3; exact one-sided p = 0.004 and 0.024 on the primary measures. This is at about 5× the tokens read from cache and 3–4× the seconds.
 - **The agent definition** has shown no measured advantage at high effort: E1, 5 against 5. A general-purpose agent given the task prompt is an equal candidate.
 
 ### Open, in order of what would change a recommendation
 
-1. **E3: Sonnet planner at medium against high,** one batch, with the central-derivation rubric. *In progress.*
+1. **E3: Sonnet planner at medium against high,** one batch, with the central-derivation rubric. *Done: high preferred (R1), and neither reaches Research (R2).*
 2. **Whether a different model reaches the same calibre at lower cost or effort,** by screening at 2 runs per arm (`PROTOCOL.md` §6). The arms would be:
    - Opus at medium and at low;
    - Haiku at high and at xhigh;

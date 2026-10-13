@@ -1,14 +1,83 @@
-{"id": "E3", "title": "Planner at medium effort against high (E1's P arm, re-judged)", "kind": "controlled",
- "document": {"name": "nlogn", "title": "Integer multiplication below n log n (paper.tex)", "class": "frontier mathematics paper, LaTeX, 5,361 lines"},
+{
+ "id": "E3",
+ "title": "Planner at medium effort against high (E1's P arm, re-judged)",
+ "kind": "controlled",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
  "task": "planning (extract, background, argument)",
  "question": "With binary, configuration, definition, model, prompts and runner protocol fixed, how do plans at medium effort compare with plans at high?",
- "binary": {"repo": "lmmx/exegenius", "commit": "cc70355"},
- "evidence": {"repo": "lmmx/openai-nlogn-wiki", "branch": "131026-exp-e3-effort", "commit": "PENDING"},
- "protocol": "EXPERIMENT.md at 70b829a", "preregistration": "calibration/plans/E3.md (cdee3f4, addendum 60bf71f)",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "cc70355"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "131026-exp-e3-effort",
+  "commit": "5ced29e"
+ },
+ "protocol": "EXPERIMENT.md at 70b829a",
+ "preregistration": "calibration/plans/E3.md (cdee3f4, addendum 60bf71f)",
  "journal": "docs/journal/2026-10-13-e3-effort.md",
  "arms": {
-  "M": {"intended": {"agent": "exegenius-planner", "model_id": "claude-sonnet-5-5", "effort": "medium", "effort_passed": true, "checks": "coverage = reject, coverage_depth = sections"}, "runs": ["M1", "M2", "M3", "M4", "M5"]}},
- "reused_arms": {"P": {"from": "E1", "runs": ["P1", "P2", "P3", "P4", "P5"], "note": "re-judged in J3; see E1's record for their run data"}},
+  "M": {
+   "intended": {
+    "agent": "exegenius-planner",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "medium",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections"
+   },
+   "runs": [
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "M5"
+   ]
+  }
+ },
+ "reused_arms": {
+  "P": {
+   "from": "E1",
+   "runs": [
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P5"
+   ],
+   "note": "re-judged in J3; see E1's record for their run data"
+  }
+ },
  "deviations": [
-  {"kind": "operational", "when": "2026-10-13T21:01:48Z", "what": "first runner session refused the exegenius build (Code from External) after registering the clone in the same turn as the build; no run made; report kept as results-attempt-1.md; the protocol's step 2 was reordered (70b829a) and a fresh runner started at 21:07:34Z"}],
- "limitations": ["Sequential and partly re-used: the high arm ran an hour earlier in another runner session.", "Five runs per arm; one paper; unreviewed reference."]}
+  {
+   "kind": "operational",
+   "when": "2026-10-13T21:01:48Z",
+   "what": "first runner session refused the exegenius build (Code from External) after registering the clone in the same turn as the build; no run made; report kept as results-attempt-1.md; the protocol's step 2 was reordered (70b829a) and a fresh runner started at 21:07:34Z"
+  },
+  {
+   "kind": "protocol",
+   "run": "M4",
+   "what": "M4's 0003-argument subagent wrote and ran a script at /tmp/claude-0/gen.py against the task file's scratch-directory instruction; no other run touched /tmp, so no contamination is possible within E3"
+  }
+ ],
+ "limitations": [
+  "Sequential and partly re-used: the high arm ran an hour earlier in another runner session.",
+  "Five runs per arm; one paper; unreviewed reference."
+ ],
+ "reported": {
+  "session_cost_usd": {
+   "value": 5.46,
+   "basis": "reported",
+   "source": "runner session record, attempt 2 (includes orchestration)"
+  },
+  "session_cost_usd_attempt_1": {
+   "value": 0.34,
+   "basis": "reported",
+   "source": "first runner session record (stopped before any run)"
+  }
+ }
+}

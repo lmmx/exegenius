@@ -94,6 +94,21 @@
      "wrong": 0,
      "major_errors": 0,
      "minor_errors": 3
+    },
+    {
+     "batch": "J3",
+     "judge": "a",
+     "plan": "P02",
+     "core_stated": 19,
+     "core_fully": 11,
+     "core_derived": 11,
+     "core_faithful": 7,
+     "supporting_stated": 5,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 5,
+     "central_gate": false
     }
    ]
   },
@@ -205,6 +220,45 @@
      "max": 0
     },
     "central_count": null
+   },
+   "quality_J3": {
+    "core_stated": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 11,
+     "min": 11,
+     "max": 11
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 11,
+     "min": 11,
+     "max": 11
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 7,
+     "min": 7,
+     "max": 7
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 1,
+     "median": 5,
+     "min": 5,
+     "max": 5
+    },
+    "central_gate_passed": "0/1"
    },
    "planning_seconds": null
   }
