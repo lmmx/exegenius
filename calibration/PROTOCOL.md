@@ -96,6 +96,22 @@ The aim is to spend runs where they can change a decision. Runs are added in sta
 - **Calibre thresholds chosen after seeing a result cannot be validated by that result.** The report says which thresholds were chosen after the data.
 - **When outputs are re-used across experiments** (for example, an arm from an earlier experiment), they are re-judged in the new batch, and the comparison is called sequential, not simultaneous.
 
+**The unit of replication.** A run is one fresh execution of a task stage, from a fresh project, on **one document**.
+- **What N runs estimate:** a pass rate for that document at those versions.
+- **Reliability across documents:** needs runs on several documents of the class, with the document as the unit.
+- **Reliability across classes:** needs runs on several classes.
+- **Shared systematic biases** (one judge model, one reference set, one runner) are not reduced by more runs. They are named as limitations.
+- **Clopper–Pearson's assumptions:** it takes the runs to be independent trials with one common success probability. If they are not independent, its nominal coverage does not hold.
+
+**From interval to decision.** For a calibre, each preregistration sets a **target pass rate** (by default 0.8: a configuration recommended for a calibre should meet it four times in five). Then:
+
+| Decision | Requires |
+|---|---|
+| **Reject** the configuration for the calibre | the exact upper bound is below the target (for example 0 of 5, upper 0.52; 1 of 21, upper 0.24) |
+| **Advance** (keep testing) | passing the screen, or an interval that straddles the target |
+| **Recommend provisionally** | an observed rate at or above the target at stage 2 (4 or 5 of 5), and no cheaper configuration that also meets it; scoped to the document and versions |
+| **Confirm** | on fresh runs, an exact lower bound of at least 0.5 (6 of 6 or better), and the same result on at least one more document of the class before it is called a default for that class |
+
 **Why not a full matrix.** Model × effort × definition × task × document is too large to fill. Paired experiments answer most questions, and screening drops arms that fail badly after 2 runs. Interactions are tested only where they could change a decision.
 
 **Operational failures are not results.** A runner that fails before producing outputs (a refused build, a lost session) is recorded as an operational deviation in the experiment's spec and on its branch. Its runs are not counted as failed runs of the configuration, and the experiment continues from a clean runner under the same protocol.
