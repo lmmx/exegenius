@@ -77,6 +77,26 @@ pub struct Coverage {
     /// Concepts or pages named in a section heading whose quotes lie in none of the sections
     /// so named.
     pub elsewhere: Vec<Elsewhere>,
+    /// The results the source states: its theorem-like statements and its labelled displayed
+    /// equations. Each runs to the next result or heading.
+    #[serde(default)]
+    pub results: usize,
+    /// The results whose stretch of the source holds a quote.
+    #[serde(default)]
+    pub quoted_results: usize,
+    /// The results whose stretch holds no quote, in order.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub unquoted_results: Vec<ResultRef>,
+}
+
+/// A result of a source: a theorem-like statement or a labelled displayed equation.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ResultRef {
+    /// The top-level section it is in.
+    pub section: String,
+    /// What it is: "Lemma `lem:x`" or "equation `eq:y`".
+    pub what: String,
+    pub line: usize,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -233,7 +253,7 @@ fn of_source(source: &Source, owners: &[Owner]) -> Coverage {
             displays: source
                 .displays()
                 .iter()
-                .filter(|&&d| s.start <= d && d < s.end)
+                .filter(|d| s.start <= d.offset && d.offset < s.end)
                 .count(),
         })
         .collect();
@@ -291,7 +311,55 @@ fn of_source(source: &Source, owners: &[Owner]) -> Coverage {
             break;
         }
     }
+    // Results, each running to the next result or heading at any level.
+    let mut results: Vec<(usize, usize, String)> = Vec::new();
+    if structured {
+        for t in source.statements() {
+            let what = match &t.label {
+                Some(label) => format!("{} `{label}`", t.kind),
+                None => t.kind.clone(),
+            };
+            results.push((t.offset, t.line, what));
+        }
+        for d in source.displays() {
+            if let Some(label) = &d.label {
+                results.push((d.offset, d.line, format!("equation `{label}`")));
+            }
+        }
+    }
+    results.sort_by_key(|r| r.0);
+    let mut bounds: Vec<usize> = results
+        .iter()
+        .map(|r| r.0)
+        .chain(source.sections().iter().map(|h| h.offset))
+        .collect();
+    bounds.sort_unstable();
+    let top = spans.iter().map(|s| s.level).min().unwrap_or(1);
+    let mut unquoted_results = Vec::new();
+    for (start, line, what) in &results {
+        let end = bounds
+            .iter()
+            .find(|&&b| b > *start)
+            .copied()
+            .unwrap_or(source.normalised.len());
+        if !located.iter().any(|&o| *start <= o && o < end) {
+            let section = spans
+                .iter()
+                .filter(|s| s.level == top && s.start <= *start && *start < s.end)
+                .map(|s| s.title.clone())
+                .next()
+                .unwrap_or_default();
+            unquoted_results.push(ResultRef {
+                section,
+                what: what.clone(),
+                line: *line,
+            });
+        }
+    }
     Coverage {
+        results: results.len(),
+        quoted_results: results.len() - unquoted_results.len(),
+        unquoted_results,
         source: source.id.clone(),
         lines: source.line_count(),
         quotes,
@@ -361,53 +429,96 @@ pub fn argument_owners<'a>(root: &'a Node, graph: Option<&Graph>) -> Vec<Owner<'
 }
 
 /// Why an answer whose quotes leave most of a source's sections unquoted is sent back, or
-/// None if no source has a [`Coverage::shortfall`]. The message names where the quotes come
-/// from and the sections left unquoted, and asks for the source to be read in full.
-pub fn rejection(coverage: &[Coverage], sources: &[Source]) -> Option<String> {
+/// None if no source has a [`Coverage::shortfall`]. With `results`, also when the quotes
+/// reach too few of a source's results ([`Coverage::results_shortfall`]). The message names
+/// where the quotes come from and what they leave unquoted, and asks for the source to be
+/// read in full.
+pub fn rejection(coverage: &[Coverage], sources: &[Source], results: bool) -> Option<String> {
     let mut parts = Vec::new();
     for c in coverage {
-        let Some(unquoted) = c.shortfall() else {
-            continue;
-        };
         let path = sources
             .iter()
             .find(|s| s.id == c.source)
             .map_or(c.source.clone(), |s| s.path.display().to_string());
-        let from = c
-            .span
-            .map_or("no lines".to_string(), |(a, b)| format!("lines {a}–{b}"));
-        let sections = unquoted
-            .iter()
-            .map(|s| {
-                format!(
-                    "- {} (lines {}–{}): {} theorem-like statements, {} displayed equations",
-                    s.title, s.lines.0, s.lines.1, s.statements, s.displays
-                )
-            })
-            .collect::<Vec<_>>()
-            .join("\n");
-        parts.push(format!(
-            "The quotes from `{path}` come from {from} of its {} lines, and none comes from \
-             these sections, which develop results in theorems, lemmas, definitions or displayed equations:\n{sections}",
-            c.lines
-        ));
+        if let Some(unquoted) = c.shortfall() {
+            let from = c
+                .span
+                .map_or("no lines".to_string(), |(a, b)| format!("lines {a}–{b}"));
+            let sections = unquoted
+                .iter()
+                .map(|s| {
+                    format!(
+                        "- {} (lines {}–{}): {} theorem-like statements, {} displayed equations",
+                        s.title, s.lines.0, s.lines.1, s.statements, s.displays
+                    )
+                })
+                .collect::<Vec<_>>()
+                .join("\n");
+            parts.push(format!(
+                "The quotes from `{path}` come from {from} of its {} lines, and none comes \
+                 from these sections, which develop results in theorems, lemmas, definitions \
+                 or displayed equations:\n{sections}",
+                c.lines
+            ));
+        } else if let Some(unquoted) = c.results_shortfall().filter(|_| results) {
+            let mut by_section: Vec<(String, Vec<String>)> = Vec::new();
+            for r in unquoted {
+                let item = format!("{} (line {})", r.what, r.line);
+                match by_section.last_mut() {
+                    Some((section, items)) if *section == r.section => items.push(item),
+                    _ => by_section.push((r.section.clone(), vec![item])),
+                }
+            }
+            let list = by_section
+                .iter()
+                .map(|(section, items)| format!("- {section}: {}", items.join(", ")))
+                .collect::<Vec<_>>()
+                .join("\n");
+            parts.push(format!(
+                "Of the {} results `{path}` states (its theorems, lemmas and definitions, and \
+                 its labelled equations), the quotes fall where {} of them is stated or \
+                 derived. These are not quoted:\n{list}",
+                c.results, c.quoted_results
+            ));
+        }
     }
     if parts.is_empty() {
         return None;
     }
+    let advice = if results {
+        "An introduction summarises results, and a section's opening introduces them; the \
+         results themselves, and their derivations, come after, and the target depends on \
+         them. Read each source to its last line, in parts (the Read tool's offset and limit), \
+         and revise the answer: keep what holds, add what the target depends on, and quote \
+         each concept or step at the theorem, lemma or equation that states or derives it, \
+         rather than where an introduction mentions it. A result the target does not depend \
+         on may stay unquoted."
+    } else {
+        "An introduction summarises results; the sections after it develop them, and the \
+         target depends on that development. Read each source to its last line, in parts (the \
+         Read tool's offset and limit), and revise the answer: keep what holds, add what the \
+         target depends on, and quote each concept or step where the sources develop it \
+         rather than where the introduction mentions it. A section the target does not depend \
+         on may stay unquoted."
+    };
     Some(format!(
-        "answer rejected: it is drawn from part of the sources.\n\n{}\n\nAn introduction \
-         summarises results; the sections after it develop them, and the target depends on \
-         that development. Read each source to its last line, in parts (the Read tool's \
-         offset and limit), and revise the answer: keep what holds, add what the target \
-         depends on, and quote each concept or step where the sources develop it rather than \
-         where the introduction mentions it. A section the target does not depend on may stay \
-         unquoted.",
+        "answer rejected: it is drawn from part of the sources.\n\n{}\n\n{advice}",
         parts.join("\n\n")
     ))
 }
 
 impl Coverage {
+    /// The results with no quote, if fewer than a tenth of the source's results hold one:
+    /// the mark of an answer that quotes sections' openings or summaries but not the results
+    /// they state. None for a source whose sections are not marked up, or that states no
+    /// results. The tenth is calibrated on the plans of the n log n paper
+    /// (2026-10-13-depth-rejection): plans drawn from summaries quote at most 3 of its 66
+    /// results, plans drawn from reading it at least 8.
+    pub fn results_shortfall(&self) -> Option<&[ResultRef]> {
+        (self.structured && self.results > 0 && self.quoted_results * 10 < self.results)
+            .then_some(self.unquoted_results.as_slice())
+    }
+
     /// The top-level sections that develop mathematics (hold theorem-like statements or
     /// displayed equations) and no quote, if they are more than half of the top-level
     /// sections that develop mathematics: the mark of an answer drawn from part of a source.
@@ -712,7 +823,7 @@ The algorithm runs in time $O(n)$.
             .map(|s| s.title.as_str())
             .collect();
         assert_eq!(short, ["§2 Gaussian resampling", "§3 Assembly"]);
-        let message = rejection(&intro, &[source()]).unwrap();
+        let message = rejection(&intro, &[source()], false).unwrap();
         assert!(message.starts_with("answer rejected: it is drawn from part of the sources."));
         assert!(
             message.contains("- §2 Gaussian resampling (lines 10–18): 2 theorem-like statements, 0 displayed equations"),
@@ -725,7 +836,7 @@ The algorithm runs in time $O(n)$.
         // One of the two quoted, in a subsection: not more than half unquoted.
         let half = owners_quoting(&["by resampling", "The error is small."]);
         assert!(half[0].shortfall().is_none());
-        assert!(rejection(&half, &[source()]).is_none());
+        assert!(rejection(&half, &[source()], false).is_none());
     }
 
     #[test]
@@ -749,6 +860,73 @@ The algorithm runs in time $O(n)$.
             .map(|s| s.title.as_str())
             .collect();
         assert_eq!(short, ["§2 Cost"]);
+    }
+
+    /// Sections that open with a sentence before stating their result.
+    const OPENINGS: &str = "\\newtheorem{lemma}{Lemma}
+\\section{Introduction}
+We multiply quickly.
+\\section{Transforms}
+Transforms come first.
+\\begin{lemma}\\label{lem:fast}
+Transforms are fast.
+\\end{lemma}
+\\section{Chirps}
+Chirps come next.
+\\begin{equation}
+c = 1
+\\label{eq:chirp}
+\\end{equation}
+So the chirp is one.
+\\begin{equation*}
+d = 2
+\\end{equation*}
+";
+
+    #[test]
+    fn an_answer_quoting_section_openings_misses_their_results() {
+        let s = Source::new("paper", None, None, Path::new("p.tex"), OPENINGS);
+        let labels: Vec<Option<&str>> = s.displays().iter().map(|d| d.label.as_deref()).collect();
+        assert_eq!(labels, [Some("eq:chirp"), None]);
+        let cover = |texts: &[&str]| {
+            let evidence: Vec<Evidence> = texts.iter().map(|t| quote(t)).collect();
+            let owners = vec![Owner {
+                id: "x".into(),
+                terms: Vec::new(),
+                quotes: evidence.iter().collect(),
+            }];
+            coverage(std::slice::from_ref(&s), &owners)
+        };
+        // Both sections quoted, at their openings: the section rule passes, the results do not.
+        let openings = cover(&["Transforms come first.", "Chirps come next."]);
+        let c = &openings[0];
+        assert!(c.shortfall().is_none());
+        assert_eq!((c.results, c.quoted_results), (2, 0));
+        let missed: Vec<(&str, &str, usize)> = c
+            .results_shortfall()
+            .unwrap()
+            .iter()
+            .map(|r| (r.section.as_str(), r.what.as_str(), r.line))
+            .collect();
+        assert_eq!(
+            missed,
+            [
+                ("§2 Transforms", "Lemma `lem:fast`", 6),
+                ("§3 Chirps", "equation `eq:chirp`", 11)
+            ]
+        );
+        assert!(rejection(&openings, std::slice::from_ref(&s), false).is_none());
+        let message = rejection(&openings, std::slice::from_ref(&s), true).unwrap();
+        assert!(
+            message.contains("Of the 2 results `p.tex` states"),
+            "{message}"
+        );
+        assert!(message.contains("- §2 Transforms: Lemma `lem:fast` (line 6)"));
+        assert!(message.contains("at the theorem, lemma or equation that states or derives it"));
+        // A quote after the labelled equation, before the next result or heading, counts.
+        let results = cover(&["Transforms are fast.", "So the chirp is one."]);
+        assert_eq!(results[0].quoted_results, 2);
+        assert!(rejection(&results, std::slice::from_ref(&s), true).is_none());
     }
 
     #[test]

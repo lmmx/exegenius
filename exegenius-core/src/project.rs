@@ -49,13 +49,24 @@ pub struct Source {
     marked_up: bool,
     /// Theorem-like statements: LaTeX environments declared with `\newtheorem`.
     statements: Vec<Statement>,
-    /// Where each displayed equation starts in `normalised`: LaTeX `equation`, `align`,
-    /// `gather`, `multline`, `eqnarray` and `displaymath` environments, starred or not.
-    displays: Vec<usize>,
+    /// Displayed equations: LaTeX `equation`, `align`, `gather`, `multline`, `eqnarray` and
+    /// `displaymath` environments, starred or not.
+    displays: Vec<Display>,
     /// For each non-blank line, where it starts in `normalised` and its line number.
     lines: Vec<(usize, usize)>,
     /// Lines in the text, blank ones included.
     line_count: usize,
+}
+
+/// A displayed equation in a source.
+#[derive(Debug, Clone, PartialEq)]
+pub struct Display {
+    /// Where the display starts in the normalised text.
+    pub offset: usize,
+    /// Line number in the source, from 1.
+    pub line: usize,
+    /// Its LaTeX label, if it has one: a display the source refers back to.
+    pub label: Option<String>,
 }
 
 /// A section heading in a source.
@@ -203,12 +214,10 @@ fn statement(line: &str, declared: &BTreeMap<String, String>) -> Option<(String,
     Some((kind.clone(), label))
 }
 
-/// Whether a displayed equation starts on this line.
-fn display(line: &str) -> bool {
-    let Some(name) = line.strip_prefix("\\begin{").and_then(group) else {
-        return false;
-    };
-    let name = name.trim_end_matches('*');
+/// The environment of a displayed equation that starts on this line.
+fn display(line: &str) -> Option<String> {
+    let name = line.strip_prefix("\\begin{").and_then(group)?;
+    let bare = name.trim_end_matches('*');
     [
         "equation",
         "align",
@@ -217,7 +226,8 @@ fn display(line: &str) -> bool {
         "eqnarray",
         "displaymath",
     ]
-    .contains(&name)
+    .contains(&bare)
+    .then(|| name.to_string())
 }
 
 impl Source {
@@ -231,6 +241,8 @@ impl Source {
         // For each statement, the index of its piece.
         let mut at_piece = Vec::new();
         let mut displays = Vec::new();
+        // For each display, the index of its piece and its environment.
+        let mut display_at = Vec::new();
         let mut lines = Vec::new();
         let mut numbering = Numbering::default();
         let mut marked_up = false;
@@ -258,8 +270,13 @@ impl Source {
                         level,
                         title,
                     });
-                } else if display(&piece) {
-                    displays.push(offset);
+                } else if let Some(env) = display(&piece) {
+                    display_at.push((pieces.len(), env));
+                    displays.push(Display {
+                        offset,
+                        line: n + 1,
+                        label: None,
+                    });
                 } else if let Some((kind, label)) = statement(&piece, &declared) {
                     at_piece.push(pieces.len());
                     statements.push(Statement {
@@ -285,6 +302,19 @@ impl Source {
                     .and_then(|next| next.strip_prefix("\\label{"))
                     .and_then(group)
                     .map(str::to_string);
+            }
+        }
+        // A display's `\label`, anywhere up to its `\end`.
+        for (d, (i, env)) in displays.iter_mut().zip(&display_at) {
+            let end = format!("\\end{{{env}");
+            for piece in &pieces[*i..] {
+                if let Some(label) = piece.split_once("\\label{").and_then(|(_, l)| group(l)) {
+                    d.label = Some(label.to_string());
+                    break;
+                }
+                if piece.contains(&end) {
+                    break;
+                }
             }
         }
         Self {
@@ -339,8 +369,8 @@ impl Source {
         &self.statements
     }
 
-    /// Where each displayed equation starts in the normalised text, in order.
-    pub fn displays(&self) -> &[usize] {
+    /// The displayed equations, in order.
+    pub fn displays(&self) -> &[Display] {
         &self.displays
     }
 

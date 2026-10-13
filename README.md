@@ -202,7 +202,12 @@ the quotes come from and each section left unquoted, with its lines, and asks fo
 source to be read to its last line and each concept or step quoted where the sources
 develop it. After `coverage_retries` such rejections the answer is accepted, with a warning,
 and the log keeps every attempt's figures. A pilot's argument is never sent back, since it
-plans part of the target. Sources without marked-up sections are never sent back. With
+plans part of the target. Sources without marked-up sections are never sent back. With `coverage_depth = "results"` it also sends back an answer that quotes the sections but
+fewer than a tenth of the source's results where they are stated or derived: its
+theorem-like statements and labelled equations, each running to the next result or heading.
+That rejection lists the unquoted results by section, with their labels and lines. The tenth
+is calibrated on one paper (2026-10-13-depth-rejection), and the default, `sections`, applies
+the section rule alone. With
 `report`, the default, nothing is sent back and nothing shown to the agent: the figures go
 to the log and `status`.
 

@@ -2025,3 +2025,63 @@ fn a_pilot_argument_is_not_sent_back_for_coverage() {
         "it would fall short"
     );
 }
+
+#[test]
+fn the_results_depth_sends_back_an_answer_quoting_only_section_openings() {
+    let temp = tempfile::tempdir().unwrap();
+    let dir = temp.path();
+    let project = setup_latex(
+        dir,
+        "[checks]\ncoverage = \"reject\"\ncoverage_depth = \"results\"\n",
+    );
+    // Sections that open before their lemmas.
+    let text = LATEX
+        .replace(
+            "\\section{Transforms}\n",
+            "\\section{Transforms}\nTransforms come first.\n",
+        )
+        .replace(
+            "\\section{The chirp identity}\n",
+            "\\section{The chirp identity}\nThe identity comes next.\n",
+        );
+    std::fs::write(dir.join("sources/notes.tex"), text).unwrap();
+    let project = Project::load(&project.root).unwrap();
+    let batch = tasks(next(&project).unwrap());
+    answer(
+        &project,
+        &batch[0],
+        &latex_extract("Transforms come first.", "The identity comes next."),
+    );
+    let err = submit(&project, &batch[0].id).unwrap_err().to_string();
+    assert!(
+        err.contains("Of the 2 results `sources/notes.tex` states"),
+        "{err}"
+    );
+    assert!(err.contains("Lemma `lem:dft`"), "{err}");
+    // The same answer under the section rule alone is accepted.
+    let temp = tempfile::tempdir().unwrap();
+    let dir = temp.path();
+    let project = setup_latex(dir, "[checks]\ncoverage = \"reject\"\n");
+    std::fs::write(
+        dir.join("sources/notes.tex"),
+        std::fs::read_to_string(project.root.join("sources/notes.tex"))
+            .unwrap()
+            .replace(
+                "\\section{Transforms}\n",
+                "\\section{Transforms}\nTransforms come first.\n",
+            )
+            .replace(
+                "\\section{The chirp identity}\n",
+                "\\section{The chirp identity}\nThe identity comes next.\n",
+            ),
+    )
+    .unwrap();
+    let project = Project::load(&project.root).unwrap();
+    let batch = tasks(next(&project).unwrap());
+    answer(
+        &project,
+        &batch[0],
+        &latex_extract("Transforms come first.", "The identity comes next."),
+    );
+    submit(&project, &batch[0].id).unwrap();
+}

@@ -800,7 +800,11 @@ pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
     let shortfall = coverage
         .as_deref()
         .filter(|_| !pilot_argument)
-        .and_then(|c| crate::coverage::rejection(c, &project.sources));
+        .and_then(|c| {
+            let results =
+                project.config.checks.coverage_depth == crate::config::CoverageDepth::Results;
+            crate::coverage::rejection(c, &project.sources, results)
+        });
     let rejecting = project.config.checks.coverage == crate::config::CoverageCheck::Reject;
     let sent_back = crate::runlog::coverage_rejections(&events, id);
     let gate = shortfall

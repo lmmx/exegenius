@@ -63,6 +63,21 @@ pub struct Checks {
     /// a warning.
     #[serde(default = "default_coverage_retries")]
     pub coverage_retries: u32,
+    /// What `reject` counts: the sections that develop results, or also the results
+    /// themselves (theorem-like statements and labelled equations), so that an answer
+    /// quoting each section's opening but none of its results is sent back too.
+    #[serde(default)]
+    pub coverage_depth: CoverageDepth,
+}
+
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum CoverageDepth {
+    /// More than half of the top-level sections that develop results left unquoted.
+    #[default]
+    Sections,
+    /// That, or fewer than a tenth of the results quoted where they are stated or derived.
+    Results,
 }
 
 impl Default for Checks {
@@ -70,6 +85,7 @@ impl Default for Checks {
         Self {
             coverage: CoverageCheck::default(),
             coverage_retries: default_coverage_retries(),
+            coverage_depth: CoverageDepth::default(),
         }
     }
 }
@@ -292,9 +308,12 @@ path = "sources/paper.txt"
 # answer that quotes none of most of the LaTeX or markdown sections developing results
 # (theorems, lemmas, displayed equations) is sent back, at most coverage_retries times,
 # with the sections it left unquoted; "report" only records it in exegenius/log.jsonl.
+# coverage_depth = "results" also sends back an answer that quotes the sections but fewer than
+# a tenth of the theorems, lemmas and labelled equations where they are stated or derived.
 # [checks]
 # coverage = "report"
 # coverage_retries = 2
+# coverage_depth = "sections"
 
 # Further reader profiles to simulate, beside [reader]
 # [[readers]]
