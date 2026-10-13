@@ -145,6 +145,63 @@ An audit that says nothing about a symbol does not pass a page: a symbol the wri
 must be accounted for, and a symbol in a known concept's name counts as known only if that
 concept binds it.
 
+## Run log and diagnostics
+
+`next` and `submit` append to `exegenius/log.jsonl`, one JSON object per line, so a run can
+be read back without the agent's transcripts. The log only records: nothing exegenius
+decides reads it, and a failure to write it never changes what `next` or `submit` does.
+Every event has `at` (milliseconds since the Unix epoch), `version` (of exegenius), `event`
+and `task` (the task id):
+
+| `event` | written when | other fields |
+|---|---|---|
+| `issued` | `next` hands out a task | `kind` (as in task ids: `extract`, `write`, `audit`, ...), `round` (the audit round) |
+| `submit` | `submit` runs on a task | `kind` (absent if the id was not a pending task); `attempt` (this task's submits so far, this one included); `outcome`: `accepted`, `rejected` (the answer was checked and the task stays pending) or `error` (nothing was checked: not a pending task, or no answer file); `message` (what submit printed, for `rejected` and `error`); `warnings` (for `accepted`); `coverage` (extract and argument tasks, below) |
+
+The log does not hold model tokens, tool calls, or which subagent did a task: only the
+agent running the loop and its transcripts have those. `next` names a subagent type for each
+task kind, so the kind gives the type that was asked for, not the one used.
+
+**Source coverage of planning answers.** For each extract and argument answer that parses,
+accepted or not, `submit` records where its quotes fall in each source:
+
+- `quotes`, `located` (found word for word), `repeated` (found at more than one place, and
+  placed at the first), `span` (first and last line a quote starts on), `first_tenth`
+  (quotes starting in the first tenth of the source's lines);
+- `sections`: every section of the source, its subsections included, with its lines, its
+  quotes and its theorem-like statements (environments declared with `\newtheorem`);
+- `unquoted_statements`: the theorem-like statements in sections no quote falls in;
+- `elsewhere`: concepts (extract) or steps that a page presents (argument) whose name or
+  alias is in a section heading, while none of their quotes is in a section so named.
+
+Sections and statements are reported only for sources whose headings are marked up (LaTeX
+sectioning commands or markdown `#`). In text from `pdftotext`, numbered lines are mostly
+table-of-contents entries and equations, so for such sources only the line figures are
+given.
+
+This measures where the quotes fall. It does not establish that the plan covers the proof:
+a quote shows that a passage was cited, not that its step is in the plan; a plan can quote
+every section and still miss a derivation; a section with no quote may not matter to the
+target; a result argued in prose, outside any theorem-like environment, counts in no
+statement figure; a short quote that also occurs in the introduction is placed there; and
+heading matches compare words without stemming. The diagnostic never rejects an answer and is not
+shown to the agent that wrote it.
+
+`exegenius status` shows the same figures for the concept graph and the stored argument,
+recomputed from `graph.json` and `argument.json` (so they are available for runs made before
+the log existed; the graph's figures include concepts that extend tasks added), and, from
+the log, per task kind: tasks handed out, accepted, accepted at the first submit, and
+rejected submits. The log can be queried directly, for example with `jq`:
+
+```sh
+# rejected submits, with what was wrong
+jq -c 'select(.event == "submit" and .outcome == "rejected") | {task, attempt, message}' exegenius/log.jsonl
+# for each planning submit: where its quotes reach, and the statements in unquoted sections
+jq -c 'select(.coverage) | {task, outcome, attempt} + (.coverage[] | {source, span, first_tenth, unquoted: (.unquoted_statements | length), statements})' exegenius/log.jsonl
+# the top-level sections an accepted extraction quotes
+jq -c 'select(.kind == "extract" and .outcome == "accepted") | .coverage[].sections[] | select(.level == 1) | {title, quotes, statements}' exegenius/log.jsonl
+```
+
 ## Simulated readers
 
 Once the wiki is written, exegenius plays it as a game against simulated readers. A goals
@@ -250,7 +307,8 @@ adds `vercel.json` (Vercel installs zensical and builds the site into `site/`) a
 [vercel.com/new](https://vercel.com/new); every push redeploys.
 
 Other commands: `exegenius status` (progress, including gaps per round and how many are
-new, citation-support labels and sources with no URL), `exegenius plan` (reading order),
+new, citation-support labels, sources with no URL, the source coverage of the graph and the
+argument, and the run log's counts), `exegenius plan` (reading order),
 `exegenius build` (build from the pages written so far), and `exegenius read` /
 `exegenius search` (used by simulated readers, for their own pending task only).
 
@@ -261,6 +319,7 @@ exegenius.toml        configuration
 sources/              source documents
 exegenius/graph.json  concept graph, symbols each page binds, candidate concepts, queued rewrites
 exegenius/state.json  task state: pending tasks, audit round, audited pages
+exegenius/log.jsonl   run log: each task handed out and each submit, with its outcome
 exegenius/tasks/      task files and answer files
 exegenius/pages/      page bodies
 exegenius/audit.json  audit results, one record per round

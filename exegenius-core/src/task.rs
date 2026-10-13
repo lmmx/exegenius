@@ -573,6 +573,14 @@ fn issue(project: &Project, state: &mut State, items: Vec<(Kind, &str, String)>)
             kind,
         };
         state.next_id += 1;
+        crate::runlog::append(
+            project,
+            crate::runlog::What::Issued {
+                task: task.id.clone(),
+                kind: task.label().to_string(),
+                round: state.round,
+            },
+        );
         let input = input.replace(TASK_ID, &task.id);
         write(
             &project.root.join(task.file()),
@@ -758,9 +766,67 @@ fn find_page(plan: &Plan, page: &str) -> Result<usize> {
 }
 
 /// Check and apply the answer to a pending task. Returns warnings; a rejected answer is an
-/// error listing what to fix, and the task stays pending.
+/// error listing what to fix, and the task stays pending. Each submit is recorded in the
+/// run log, with the coverage of a planning answer's quotes.
 pub fn submit(project: &Project, id: &str) -> Result<Vec<String>> {
+    use crate::runlog::{Outcome, What};
     let _lock = Lock::acquire(project)?;
+    let task = load_state(project)?
+        .pending
+        .into_iter()
+        .find(|t| t.id == id);
+    let coverage = task.as_ref().and_then(|t| planning_coverage(project, t));
+    let result = submit_locked(project, id);
+    let (outcome, message, warnings) = match &result {
+        Ok(warnings) => (Outcome::Accepted, None, warnings.clone()),
+        // Checked and rejected, as opposed to not checked: no answer file, or not pending.
+        Err(e @ Error::Invalid(m)) if task.is_some() && !m.starts_with("no answer yet") => {
+            (Outcome::Rejected, Some(e.to_string()), Vec::new())
+        }
+        Err(e) => (Outcome::Error, Some(e.to_string()), Vec::new()),
+    };
+    let attempt = crate::runlog::submits(&crate::runlog::load(project), id) + 1;
+    crate::runlog::append(
+        project,
+        What::Submit {
+            task: id.to_string(),
+            kind: task.as_ref().map(|t| t.label().to_string()),
+            attempt,
+            outcome,
+            message,
+            warnings,
+            coverage,
+        },
+    );
+    result
+}
+
+/// For an extract or argument task whose answer file parses: where the answer's quotes
+/// fall in the sources.
+fn planning_coverage(project: &Project, task: &Task) -> Option<Vec<crate::coverage::Coverage>> {
+    use crate::coverage::{argument_owners, concept_owners, coverage};
+    let text = std::fs::read_to_string(project.root.join(task.answer())).ok()?;
+    match task.kind {
+        Kind::Extract => {
+            let answer: ExtractAnswer = serde_json::from_str(&text).ok()?;
+            Some(coverage(
+                &project.sources,
+                &concept_owners(&answer.concepts),
+            ))
+        }
+        Kind::Argument => {
+            let answer: ArgumentAnswer = serde_json::from_str(&text).ok()?;
+            let graph = project.load_graph().ok().flatten();
+            Some(coverage(
+                &project.sources,
+                &argument_owners(&answer.root, graph.as_ref()),
+            ))
+        }
+        _ => None,
+    }
+}
+
+fn submit_locked(project: &Project, id: &str) -> Result<Vec<String>> {
     let mut state = load_state(project)?;
     let Some(index) = state.pending.iter().position(|t| t.id == id) else {
         return Err(Error::Invalid(format!(

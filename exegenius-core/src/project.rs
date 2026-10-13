@@ -6,6 +6,7 @@
 //! exegenius/graph.json   concept graph, symbols each page binds, candidate concepts,
 //!                        queued rewrites
 //! exegenius/state.json   task state: issued tasks, audit round, audited pages
+//! exegenius/log.jsonl    run log: each task handed out and each submit (see runlog)
 //! exegenius/tasks/       task files and their answer files
 //! exegenius/pages/       page bodies
 //! exegenius/audit.json   audit results, one record per round
@@ -19,6 +20,7 @@
 //! docs/, zensical.toml   build output
 //! ```
 
+use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 
 use crate::config::{self, Config};
@@ -39,16 +41,53 @@ pub struct Source {
     /// Offsets in `normalised` where each page starts, if the text has page breaks
     /// (form feeds, as `pdftotext` writes them).
     pages: Vec<usize>,
-    /// Offsets in `normalised` of section headings, with the heading.
-    sections: Vec<(usize, String)>,
+    /// The section headings, in order.
+    sections: Vec<Heading>,
+    /// Whether the headings are marked up (LaTeX sectioning commands or markdown `#`), as
+    /// opposed to found by the numbered-line heuristic, which in text from `pdftotext` finds
+    /// table-of-contents entries and equation lines and misses headings split over lines.
+    marked_up: bool,
+    /// Theorem-like statements: LaTeX environments declared with `\newtheorem`.
+    statements: Vec<Statement>,
+    /// For each non-blank line, where it starts in `normalised` and its line number.
+    lines: Vec<(usize, usize)>,
+    /// Lines in the text, blank ones included.
+    line_count: usize,
+}
+
+/// A section heading in a source.
+#[derive(Debug, Clone, PartialEq)]
+pub struct Heading {
+    /// Where the heading starts in the normalised text.
+    pub offset: usize,
+    /// Line number in the source, from 1.
+    pub line: usize,
+    /// 1 for a section, 2 for a subsection, and so on.
+    pub level: usize,
+    /// The heading, with its number if it has one ("§3.2 Gaussian resampling").
+    pub title: String,
+}
+
+/// A theorem-like statement in a source: a theorem, lemma, definition and so on.
+#[derive(Debug, Clone, PartialEq)]
+pub struct Statement {
+    /// Where the statement starts in the normalised text.
+    pub offset: usize,
+    /// Line number in the source, from 1.
+    pub line: usize,
+    /// What it is, as the source names it ("Lemma").
+    pub kind: String,
+    /// Its LaTeX label, if it has one.
+    pub label: Option<String>,
 }
 
 /// A section heading line: a markdown heading, or a numbered heading such as
-/// "3.2 Gaussian resampling".
-fn heading(line: &str) -> Option<String> {
+/// "3.2 Gaussian resampling", with its level.
+fn heading(line: &str) -> Option<(String, usize)> {
     if let Some(rest) = line.strip_prefix('#') {
         let title = rest.trim_start_matches('#').trim();
-        return (!title.is_empty()).then(|| title.to_string());
+        let level = line.len() - line.trim_start_matches('#').len();
+        return (!title.is_empty()).then(|| (title.to_string(), level));
     }
     let (number, title) = line.split_once(' ')?;
     let number = number.trim_end_matches('.');
@@ -61,30 +100,19 @@ fn heading(line: &str) -> Option<String> {
         && line.chars().count() <= 80
         && title.chars().next().is_some_and(char::is_uppercase)
         && !title.ends_with('.'))
-    .then(|| format!("§{number} {title}"))
+    .then(|| (format!("§{number} {title}"), number.split('.').count()))
 }
 
-/// A LaTeX sectioning command, numbered as LaTeX numbers it: `\subsection{Gaussian
-/// resampling}` after the seventh `\section` is "§7.2 Gaussian resampling". A starred
-/// command is unnumbered.
-fn latex_heading(line: &str, numbers: &mut [u32; 3]) -> Option<String> {
-    let rest = line.strip_prefix('\\')?;
-    let level = ["section", "subsection", "subsubsection"]
-        .iter()
-        .position(|c| {
-            rest.strip_prefix(c)
-                .is_some_and(|r| r.starts_with(['{', '*', '[']))
-        })?;
-    let after = &rest[["section", "subsection", "subsubsection"][level].len()..];
-    let (starred, after) = match after.strip_prefix('*') {
-        Some(after) => (true, after),
-        None => (false, after),
-    };
-    let after = match after.strip_prefix('[') {
-        Some(short) => short.split_once(']')?.1,
-        None => after,
-    };
-    let body = after.strip_prefix('{')?;
+/// How far LaTeX's section numbering has got: the counters of sections, subsections and
+/// subsubsections, and whether `\appendix` has turned sections into letters.
+#[derive(Default)]
+struct Numbering {
+    counters: [u32; 3],
+    appendix: bool,
+}
+
+/// The text of a LaTeX group that starts just after its opening brace.
+fn group(body: &str) -> Option<&str> {
     let mut depth = 1;
     let (end, _) = body.char_indices().find(|&(_, c)| {
         match c {
@@ -94,14 +122,82 @@ fn latex_heading(line: &str, numbers: &mut [u32; 3]) -> Option<String> {
         }
         depth == 0
     })?;
-    let title = body[..end].trim();
-    if starred {
-        return Some(title.to_string());
+    Some(&body[..end])
+}
+
+/// A LaTeX sectioning command, numbered as LaTeX numbers it: `\subsection{Gaussian
+/// resampling}` after the seventh `\section` is "§7.2 Gaussian resampling", and sections
+/// after `\appendix` are lettered. A starred command is unnumbered.
+fn latex_heading(line: &str, numbering: &mut Numbering) -> Option<(String, usize)> {
+    let rest = line.strip_prefix('\\')?;
+    if rest.starts_with("appendix") && !rest["appendix".len()..].starts_with(char::is_alphabetic) {
+        numbering.appendix = true;
+        numbering.counters = [0; 3];
+        return None;
     }
-    numbers[level] += 1;
-    numbers[level + 1..].iter_mut().for_each(|n| *n = 0);
-    let number: Vec<String> = numbers[..=level].iter().map(u32::to_string).collect();
-    Some(format!("§{} {title}", number.join(".")))
+    let commands = ["section", "subsection", "subsubsection"];
+    let level = commands.iter().position(|c| {
+        rest.strip_prefix(c)
+            .is_some_and(|r| r.starts_with(['{', '*', '[']))
+    })?;
+    let after = &rest[commands[level].len()..];
+    let (starred, after) = match after.strip_prefix('*') {
+        Some(after) => (true, after),
+        None => (false, after),
+    };
+    let after = match after.strip_prefix('[') {
+        Some(short) => short.split_once(']')?.1,
+        None => after,
+    };
+    let title = group(after.strip_prefix('{')?)?.trim();
+    if starred {
+        return Some((title.to_string(), level + 1));
+    }
+    let counters = &mut numbering.counters;
+    counters[level] += 1;
+    counters[level + 1..].iter_mut().for_each(|n| *n = 0);
+    let number: Vec<String> = counters[..=level]
+        .iter()
+        .enumerate()
+        .map(|(i, &n)| match (i, numbering.appendix) {
+            (0, true) => char::from_u32('A' as u32 + n - 1).map_or(n.to_string(), String::from),
+            _ => n.to_string(),
+        })
+        .collect();
+    Some((format!("§{} {title}", number.join(".")), level + 1))
+}
+
+/// The theorem-like environments a LaTeX source declares with `\newtheorem`, each with its
+/// printed name: `\newtheorem{lemma}[theorem]{Lemma}` declares `lemma`, printed "Lemma".
+fn declared_theorems(text: &str) -> BTreeMap<String, String> {
+    let mut declared = BTreeMap::new();
+    for (at, _) in text.match_indices("\\newtheorem") {
+        let rest = text[at + "\\newtheorem".len()..].trim_start_matches('*');
+        let Some(name) = rest.strip_prefix('{').and_then(group) else {
+            continue;
+        };
+        let mut rest = &rest[name.len() + 2..];
+        // An optional counter it shares, before or after the printed name.
+        if let Some(shared) = rest.strip_prefix('[') {
+            rest = shared.split_once(']').map_or("", |(_, r)| r);
+        }
+        if let Some(printed) = rest.strip_prefix('{').and_then(group) {
+            declared.insert(name.trim().to_string(), printed.trim().to_string());
+        }
+    }
+    declared
+}
+
+/// A theorem-like statement starting on this line: `\begin{lemma}` for an environment the
+/// source declares, with the `\label` on the same line if there is one.
+fn statement(line: &str, declared: &BTreeMap<String, String>) -> Option<(String, Option<String>)> {
+    let name = group(line.strip_prefix("\\begin{")?)?;
+    let kind = declared.get(name.trim_end_matches('*'))?;
+    let label = line
+        .split_once("\\label{")
+        .and_then(|(_, l)| group(l))
+        .map(str::to_string);
+    Some((kind.clone(), label))
 }
 
 impl Source {
@@ -111,26 +207,62 @@ impl Source {
         let mut pieces = Vec::new();
         let mut pages = vec![0];
         let mut sections = Vec::new();
-        let mut numbers = [0; 3];
+        let mut statements = Vec::new();
+        // For each statement, the index of its piece.
+        let mut at_piece = Vec::new();
+        let mut lines = Vec::new();
+        let mut numbering = Numbering::default();
+        let mut marked_up = false;
+        let declared = declared_theorems(text);
         let mut offset = 0;
-        for (p, page) in text.split('\u{c}').enumerate() {
-            if p > 0 {
-                pages.push(offset);
-            }
-            for line in page.lines() {
-                let piece = normalise(line);
+        let mut line_count = 0;
+        for (n, line) in text.lines().enumerate() {
+            line_count = n + 1;
+            for (p, part) in line.split('\u{c}').enumerate() {
+                if p > 0 {
+                    pages.push(offset);
+                }
+                let piece = normalise(part);
                 if piece.is_empty() {
                     continue;
                 }
-                if let Some(h) = heading(&piece).or_else(|| latex_heading(&piece, &mut numbers)) {
-                    sections.push((offset, h));
+                let latex = latex_heading(&piece, &mut numbering);
+                let markdown = latex.is_none() && piece.starts_with('#');
+                let found = latex.or_else(|| heading(&piece));
+                marked_up |= found.is_some() && (markdown || piece.starts_with('\\'));
+                if let Some((title, level)) = found {
+                    sections.push(Heading {
+                        offset,
+                        line: n + 1,
+                        level,
+                        title,
+                    });
+                } else if let Some((kind, label)) = statement(&piece, &declared) {
+                    at_piece.push(pieces.len());
+                    statements.push(Statement {
+                        offset,
+                        line: n + 1,
+                        kind,
+                        label,
+                    });
                 }
+                lines.push((offset, n + 1));
                 offset += piece.len() + 1;
                 pieces.push(piece);
             }
         }
         if pages.len() == 1 {
             pages.clear();
+        }
+        // A `\label` on the line after `\begin{lemma}`.
+        for (s, &i) in statements.iter_mut().zip(&at_piece) {
+            if s.label.is_none() {
+                s.label = pieces
+                    .get(i + 1)
+                    .and_then(|next| next.strip_prefix("\\label{"))
+                    .and_then(group)
+                    .map(str::to_string);
+            }
         }
         Self {
             id: id.to_string(),
@@ -140,6 +272,10 @@ impl Source {
             normalised: pieces.join(" "),
             pages,
             sections,
+            marked_up,
+            statements,
+            lines,
+            line_count,
         }
     }
 
@@ -153,14 +289,53 @@ impl Source {
         }
         let at = self.normalised.find(&quote)?;
         let mut parts = Vec::new();
-        if let Some((_, h)) = self.sections.iter().rev().find(|(o, _)| *o <= at) {
-            parts.push(h.clone());
+        if let Some(h) = self.sections.iter().rev().find(|h| h.offset <= at) {
+            parts.push(h.title.clone());
         }
         if !self.pages.is_empty() {
             let page = self.pages.iter().filter(|&&o| o <= at).count();
             parts.push(format!("p. {page}"));
         }
         Some((!parts.is_empty()).then(|| parts.join(", ")))
+    }
+
+    /// The section headings, in order.
+    pub fn sections(&self) -> &[Heading] {
+        &self.sections
+    }
+
+    /// Whether the section headings are marked up in the source, rather than guessed from
+    /// numbered lines.
+    pub fn marked_up(&self) -> bool {
+        self.marked_up
+    }
+
+    /// The theorem-like statements, in order.
+    pub fn statements(&self) -> &[Statement] {
+        &self.statements
+    }
+
+    /// Lines in the source text, blank ones included.
+    pub fn line_count(&self) -> usize {
+        self.line_count
+    }
+
+    /// The line of the source, from 1, that an offset in the normalised text falls on.
+    pub fn line_at(&self, offset: usize) -> usize {
+        let i = self.lines.partition_point(|&(o, _)| o <= offset);
+        i.checked_sub(1).map_or(1, |i| self.lines[i].1)
+    }
+
+    /// Where `quote` occurs in the normalised text, each match's start, in order.
+    pub fn occurrences(&self, quote: &str) -> Vec<usize> {
+        let quote = normalise(quote);
+        if quote.is_empty() {
+            return Vec::new();
+        }
+        self.normalised
+            .match_indices(&quote)
+            .map(|(at, _)| at)
+            .collect()
     }
 
     /// Markdown citation: a link when the source has a URL.
@@ -222,6 +397,10 @@ impl Project {
 
     pub fn state_path(&self) -> PathBuf {
         self.state_dir().join("state.json")
+    }
+
+    pub fn log_path(&self) -> PathBuf {
+        self.state_dir().join("log.jsonl")
     }
 
     pub fn lock_path(&self) -> PathBuf {
@@ -347,5 +526,58 @@ mod tests {
             at("We resample the grid."),
             Some("§2.1 Gaussian resampling of $\\mathbb{C}^s$".into())
         );
+    }
+
+    #[test]
+    fn headings_have_levels_and_appendix_sections_are_lettered() {
+        let titles = |text: &str| {
+            let s = Source::new("s", None, None, Path::new("s"), text);
+            let t: Vec<(String, usize)> = s
+                .sections()
+                .iter()
+                .map(|h| (h.title.clone(), h.level))
+                .collect();
+            (t, s.marked_up())
+        };
+        let latex =
+            "\\section{Intro}\nA.\n  \\appendix\n\\section{Packed additions}\n\\subsection{Rows}\n";
+        assert_eq!(
+            titles(latex),
+            (
+                vec![
+                    ("§1 Intro".into(), 1),
+                    ("§A Packed additions".into(), 1),
+                    ("§A.1 Rows".into(), 2)
+                ],
+                true
+            )
+        );
+        let markdown = "# Paper\n## Transforms\nText.\n";
+        assert_eq!(
+            titles(markdown),
+            (vec![("Paper".into(), 1), ("Transforms".into(), 2)], true)
+        );
+        let numbered = "3 Transforms\n3.1 Gaussian resampling\n";
+        assert_eq!(
+            titles(numbered),
+            (
+                vec![
+                    ("§3 Transforms".into(), 1),
+                    ("§3.1 Gaussian resampling".into(), 2)
+                ],
+                false
+            )
+        );
+    }
+
+    #[test]
+    fn lines_are_counted_across_page_breaks() {
+        let text = "first page\n\u{c}second page\n\nthird\u{c}fourth\n";
+        let s = Source::new("s", None, None, Path::new("s.txt"), text);
+        assert_eq!(s.locate("second page"), Some(Some("p. 2".into())));
+        assert_eq!(s.locate("fourth"), Some(Some("p. 3".into())));
+        let line = |q: &str| s.line_at(s.normalised.find(q).unwrap());
+        assert_eq!((line("first"), line("second"), line("fourth")), (1, 2, 4));
+        assert_eq!(s.line_count(), 4);
     }
 }

@@ -22,7 +22,8 @@
 //!
 //! [`task`] decides what to hand out next and applies submitted answers; [`build`] writes
 //! the docs tree and `zensical.toml` once no task is left; [`convergence`] summarises
-//! whether the audit rounds are reducing gaps.
+//! whether the audit rounds are reducing gaps; [`runlog`] records each task handed out and
+//! each submit; [`coverage`] reports where planning answers' quotes fall in the sources.
 
 pub mod aha;
 pub mod argument;
@@ -33,6 +34,7 @@ pub mod build;
 pub mod cite;
 pub mod config;
 pub mod convergence;
+pub mod coverage;
 pub mod error;
 pub mod extract;
 pub mod grade;
@@ -43,6 +45,7 @@ pub mod plan;
 pub mod project;
 pub mod relations;
 pub mod report;
+pub mod runlog;
 pub mod simulate;
 pub mod support;
 pub mod symbols;

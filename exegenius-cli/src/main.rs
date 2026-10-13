@@ -5,10 +5,12 @@ use clap::{Parser, Subcommand};
 use exegenius_core::audit::load_rounds;
 use exegenius_core::build::{BuildReport, build};
 use exegenius_core::config;
+use exegenius_core::coverage::{Coverage, argument_owners, concept_owners, coverage};
 use exegenius_core::graph::Graph;
 use exegenius_core::outline;
 use exegenius_core::plan::{Plan, plan};
 use exegenius_core::project::Project;
+use exegenius_core::runlog;
 use exegenius_core::task::{self, Kind, Next};
 
 const SKILL: &str = include_str!("skill.md");
@@ -347,6 +349,18 @@ fn next(project: &Project) -> anyhow::Result<()> {
     Ok(())
 }
 
+/// Where a planning stage's quotes fall in each source, as `exegenius status` shows it.
+fn print_coverage(what: &str, coverage: &[Coverage]) {
+    println!(
+        "source coverage of {what} (where the quotes fall, not whether the proof is covered):"
+    );
+    for c in coverage {
+        for line in c.summary(5) {
+            println!("  {line}");
+        }
+    }
+}
+
 fn status(project: &Project) -> anyhow::Result<()> {
     let state = task::load(project)?;
     let Some(graph) = project.load_graph()? else {
@@ -381,6 +395,19 @@ fn status(project: &Project) -> anyhow::Result<()> {
         graph.concepts.len(),
         plan.order.len()
     );
+    print_coverage(
+        "the concept graph's quotes",
+        &coverage(&project.sources, &concept_owners(&graph.concepts)),
+    );
+    if let Some(argument) = exegenius_core::argument::load(project)? {
+        print_coverage(
+            "the argument's quotes",
+            &coverage(
+                &project.sources,
+                &argument_owners(&argument.root, Some(&graph)),
+            ),
+        );
+    }
     for round in exegenius_core::convergence::summarise(&load_rounds(project)?) {
         let per_page = |n: usize| n as f64 / round.pages.max(1) as f64;
         println!(
@@ -531,6 +558,26 @@ fn status(project: &Project) -> anyhow::Result<()> {
         }
         if let Some(c) = exegenius_core::report::baseline_coverage(&simulation) {
             println!("  baseline (no wiki): {:.0}% of key points", 100.0 * c);
+        }
+    }
+    let events = runlog::load(project);
+    if !events.is_empty() {
+        println!("run log ({}):", project.log_path().display());
+        for k in runlog::summarise(&events) {
+            println!(
+                "  {}: {} handed out, {} accepted ({} at the first submit), {} rejected \
+                 submits{}",
+                k.kind,
+                k.issued,
+                k.accepted,
+                k.first_time,
+                k.rejected,
+                if k.errors > 0 {
+                    format!(", {} submits not checked", k.errors)
+                } else {
+                    String::new()
+                }
+            );
         }
     }
     let rounds = project.config.simulation.rounds;

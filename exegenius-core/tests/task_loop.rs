@@ -1762,3 +1762,86 @@ fn ablation_hides_a_carrying_sentence_and_a_control() {
         "{report}"
     );
 }
+
+#[test]
+fn the_run_log_records_tasks_submits_and_planning_coverage() {
+    use exegenius_core::runlog::{Outcome, What, load};
+    let temp = tempfile::tempdir().unwrap();
+    let project = setup(temp.path(), 3);
+    let batch = tasks(next(&project).unwrap());
+    answer(&project, &batch[0], &extract_answer("an invented sentence"));
+    submit(&project, "0001-extract").unwrap_err();
+    answer(
+        &project,
+        &batch[0],
+        &extract_answer("through a chirp identity to convolution"),
+    );
+    submit(&project, "0001-extract").unwrap();
+    let err = submit(&project, "0001-extract").unwrap_err().to_string();
+    assert!(err.contains("not a pending task"), "{err}");
+    background(&project);
+    argue(&project, &["dft", "convolution"]);
+
+    let events = load(&project);
+    let summary: Vec<(String, String, Option<Outcome>, usize)> = events
+        .iter()
+        .map(|e| match &e.what {
+            What::Issued { task, kind, .. } => (task.clone(), kind.clone(), None, 0),
+            What::Submit {
+                task,
+                kind,
+                outcome,
+                attempt,
+                ..
+            } => (
+                task.clone(),
+                kind.clone().unwrap_or_default(),
+                Some(*outcome),
+                *attempt,
+            ),
+        })
+        .collect();
+    let row = |task: &str, kind: &str, outcome, attempt| {
+        (task.to_string(), kind.to_string(), outcome, attempt)
+    };
+    assert_eq!(
+        summary,
+        [
+            row("0001-extract", "extract", None, 0),
+            row("0001-extract", "extract", Some(Outcome::Rejected), 1),
+            row("0001-extract", "extract", Some(Outcome::Accepted), 2),
+            // Not pending any more: no kind, and nothing was checked.
+            row("0001-extract", "", Some(Outcome::Error), 3),
+            row("0002-background", "background", None, 0),
+            row("0002-background", "background", Some(Outcome::Accepted), 1),
+            row("0003-argument", "argument", None, 0),
+            row("0003-argument", "argument", Some(Outcome::Accepted), 1),
+        ]
+    );
+    let coverage = |i: usize| match &events[i].what {
+        What::Submit { coverage, .. } => coverage.clone(),
+        _ => None,
+    };
+    // Recorded for the rejected answer too: three of its four quotes are in the notes.
+    let rejected = coverage(1).expect("an extract answer that parses has coverage");
+    assert_eq!((rejected[0].quotes, rejected[0].located), (3, 2));
+    let accepted = coverage(2).unwrap();
+    assert_eq!((accepted[0].quotes, accepted[0].located), (3, 3));
+    assert_eq!(accepted[0].span, Some((1, 3)));
+    assert!(coverage(5).is_none(), "background answers have no coverage");
+    let argument = coverage(7).unwrap();
+    assert_eq!((argument[0].located, argument[0].span), (3, Some((2, 3))));
+    // The notes have no marked-up headings, so nothing is reported by section.
+    assert!(!argument[0].structured && argument[0].sections.is_empty());
+    match &events[1].what {
+        What::Submit { message, .. } => {
+            assert!(
+                message
+                    .as_deref()
+                    .unwrap()
+                    .contains("quote not found verbatim")
+            )
+        }
+        _ => unreachable!(),
+    }
+}
