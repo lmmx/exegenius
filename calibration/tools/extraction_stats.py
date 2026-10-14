@@ -632,7 +632,7 @@ def main():
         row = [f"{mo} {ef} (n={len(v)})"]
         for k in test_keys:
             a, p = superiority([r[k] for r in base], [r[k] for r in v])
-            row.append(f"{a:.2f} (p {p:.3f})")
+            row.append(f"{a:.2f} (p {p:.3f})" if p >= 0.001 else f"{a:.2f} (p < 0.001)")
         body.append(row)
     md.append(md_table(["Against Sonnet high"] + [dict(MEASURES)[k] for k in test_keys], body))
 
@@ -650,8 +650,9 @@ def main():
               "central saving reconstructed (of 9); checklist = mechanism sub-steps present (of 26), one "
               "total per judge. Arms: the experiment and its arm (P/G/M/O/Q/K/N: full planning in one "
               "configuration, the argument by the same model as the extraction; E4 B/V, E6 B/V, E7 W, "
-              "E8/E8b X, E9 Y: Sonnet `high` arguments on fixed extractions, under successive "
-              "instructions).\n")
+              "E8/E8b X, E9/E10 Y: Sonnet `high` arguments on fixed extractions, under successive "
+              "instructions; S2-S5: other models and efforts on E6's extractions). J21 (E10) is read from "
+              "its verdicts, since the registry does not list it yet.\n")
     body = []
     for p in sorted(plans, key=lambda p: (p["extraction"], p["arm"])):
         ch = checks.get(p["run"], {})
