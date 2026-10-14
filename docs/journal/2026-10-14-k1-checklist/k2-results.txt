@@ -1,0 +1,16 @@
+| Run | Producer | Opus judge (J11) | Sonnet judge (J14) | Gap | Sub-step agreement |
+|---|---|---|---|---|---|
+| E7F1W | Sonnet | 13 | 13 | +0 | 26/26 |
+| E7F4W | Sonnet | 5 | 6 | -1 | 25/26 |
+| E7F8W | Sonnet | 4 | 6 | -2 | 24/26 |
+| S2F1OM | Opus | 24 | 24 | +0 | 26/26 |
+| S2F1OX | Opus | 19 | 18 | +1 | 25/26 |
+| S2F1SM | Sonnet | 21 | 21 | +0 | 26/26 |
+| S2F1SX | Sonnet | 15 | 15 | +0 | 26/26 |
+| S3F4OH | Opus | 15 | 15 | +0 | 26/26 |
+| S3F4OX | Opus | 15 | 15 | +0 | 26/26 |
+| S3F8OH | Opus | 6 | 8 | -2 | 24/26 |
+| S3F8OX | Opus | 19 | 19 | +0 | 26/26 |
+
+1. agreement 280/286 = 0.979; Spearman rho of totals 0.995; met: True
+2. mean gap (Opus judge - Sonnet judge): Opus-made plans -0.17, Sonnet-made plans -0.60; bias +0.43; flagged: False
