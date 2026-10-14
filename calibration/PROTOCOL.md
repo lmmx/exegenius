@@ -78,7 +78,7 @@ Calibres for other document classes are defined when the first experiment on tha
 
 The aim is to spend runs where they can change a decision. Runs are added in stages, and each stage's rule is fixed in the preregistration. **Screening evidence and confirmatory evidence are different things,** and reports keep them apart.
 
-| Stage | Runs per arm (cumulative) | Supports | Rule |
+| Stage | Most runs per arm (cumulative; §6a: reached only when a decision needs them) | Supports | Rule |
 |---|---|---|---|
 | **Screen** | 2 | **only** a decision to stop spending on an arm | An arm is **screened out** for a calibre if both runs fail a hard gate by a wide margin: on the primary count, below half the gate's threshold, or with a major error. Otherwise it goes on. Passing the screen says nothing about reliability, and a screened-in arm is never called good on screening evidence. |
 | **Estimate** | 5 | a **provisional** comparison or recommendation, scoped to the document, versions and judge batch | Report each arm's pass count for the calibre with its exact two-sided 95% (Clopper–Pearson) interval, and the primary counts' medians and ranges. Compare two arms with the exact Mann–Whitney test on the primary count, one-sided in the preregistered direction. A difference is **distinguished** if p < 0.05 *and* it is at least the preregistered minimum difference. |
@@ -115,6 +115,44 @@ The aim is to spend runs where they can change a decision. Runs are added in sta
 **Why not a full matrix.** Model × effort × definition × task × document is too large to fill. Paired experiments answer most questions, and screening drops arms that fail badly after 2 runs. Interactions are tested only where they could change a decision.
 
 **Operational failures are not results.** A runner that fails before producing outputs (a refused build, a lost session) is recorded as an operational deviation in the experiment's spec and on its branch. Its runs are not counted as failed runs of the configuration, and the experiment continues from a clean runner under the same protocol.
+
+## 6a. Budget and sequencing (added 2026-10-14; applies to every experiment from S2 on)
+
+The stages above give the **most** runs an arm may need, not a quota. Over E4–E7 they were applied as quotas, and the account's usage limit was spent twice, while model × effort went largely untested (journal 2026-10-14-sequential-design-lesson). Every experiment now follows these rules, and its plan says how.
+
+1. **State the decision first.** Say what the result will change, and what result would change it.
+2. **Screen sequentially.**
+   - A new configuration starts with **one** run, when one run can show whether it is worth more.
+   - No arm gets a fixed number of runs by default.
+   - A second run, or the stage-2 estimate, is added only when the decision needs it.
+3. **Budget before launching.**
+   - Estimate the tokens and time of the runs **and of the judging**.
+   - Reserve enough to finish, judge and record within the current usage window.
+   - A run that cannot plausibly finish before the limit waits for the reset.
+4. **Run serially near a usage limit,** one subagent at a time, when a cancellation would waste work in flight.
+5. **Repeat adaptively.** Repeat a configuration only when its result is near a decision boundary or within judge or run noise of a competitor, never every cell of a design.
+6. **Screening is not confirmation.**
+   - One run can flag a configuration as promising or as poor.
+   - It cannot rank configurations or establish equivalence.
+   - One poor run stops spending on a configuration only if that configuration also costs more.
+7. **Keep negative results.**
+   - Stopping work on a configuration is recorded with its results and their uncertainty.
+   - No result is dropped.
+8. **Label every observation** as new, reused, paired or re-judged. Re-judging measures the judges, not the configurations.
+9. **Report decision value with quality.** Each result gives:
+   - its cost (tokens; currency where available);
+   - its time;
+   - its central steps and gate;
+   - its major errors;
+   - whether it changes the recommendation.
+10. **Keep a ledger.**
+    - Each plan holds a ledger of its runs, updated as each finishes.
+    - A retry resumes from the ledger.
+    - A killed run's scratch files are moved aside before it reruns.
+11. **Budget judging as a cost of its own.**
+    - Judge only what a decision needs.
+    - Where the central gate decides something, use **three independent judges per plan** and decide each step by majority: single-judge gate verdicts changed in 3 of 8 plans on re-judging (E7).
+    - A cheaper judge model may replace Opus once its agreement with Opus judges has been measured.
 
 ## 7. Resources
 

@@ -7,12 +7,17 @@ lmmx/exegenius. Method: `calibration/PROTOCOL.md`.
 
 **Question.** {question}
 
-**Arms.** {n} runs per arm, same binary, configuration, definitions and prompts unless the
+**Decision, budget and stopping rule** (`calibration/PROTOCOL.md` §6a). The decision this
+experiment informs: {decision}. Estimated cost of the runs and of the judging: {budget}. Runs are
+made {serially / in parallel because …}; a new configuration starts with one run, and more runs
+are added only when {rule}.
+
+**Arms.** The runs listed per arm, same binary, configuration, definitions and prompts unless the
 table says otherwise:
 
 | Arm | Runs | Subagent type for each task | `model` | `effort` | Configuration lines (setup-run.sh) |
 |---|---|---|---|---|---|
-| {A} | {A1–A5} | {the type `exegenius next` names / general-purpose / …} | {"sonnet"} | {"high"} | {none / arm-a.toml} |
+| {A} | {A1, …} | {the type `exegenius next` names / general-purpose / …} | {"sonnet"} | {"high"} | {none / arm-a.toml} |
 
 ## Protocol
 

@@ -66,7 +66,11 @@ Pass counts are given with exact two-sided 95% (Clopper–Pearson) intervals. Th
    - Haiku at high and at xhigh;
    - Sonnet at xhigh, which may matter for the Research calibre.
 3. **Whether any configuration reaches the Research calibre** (the central derivation). *Partly answered: the gap moves with what the task asks for (E4), not with the model (E5).* Open: a confirmation of the key-step instruction on fresh runs, with the rate of major errors in the derivation as a criterion, and the instruction on Opus.
-4. **Writers, auditors and support checks:** no evidence yet. They dominate a full run's cost.
+4. **Model × effort with the E7 instructions:**
+   - **Not yet estimated:** Opus at high (screened in S1 at 1 of 2 gate passes, never estimated).
+   - **Not yet run at all:** `xhigh` and `max`, for Sonnet and Opus.
+   - **Under way:** S2 screens them one run per configuration, serially.
+5. **Writers, auditors and support checks:** no evidence yet. They dominate a full run's cost.
 
 ## Other document classes
 
