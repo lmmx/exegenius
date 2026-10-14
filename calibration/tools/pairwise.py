@@ -154,6 +154,8 @@ def drop_steps(root, steps):
 
 def prepare(a):
     out = pathlib.Path(a.out).resolve()
+    if (out / "key.json").exists():
+        sys.exit(f"{out} is already prepared (key.json exists): use a fresh OUT_DIR, so that no blind batch is reshuffled")
     paper = pathlib.Path(a.paper).resolve()
     raw = paper.read_text().split("\n")
     line_of = quote_locator(raw)
@@ -347,6 +349,7 @@ def bt_fit(units, arms):
         for i in couple:
             w[i] += 0.5
         n[couple] += 1
+    arms = [i for i in arms if i in w]  # an arm absent from a bootstrap resample gets no estimate
     p = {i: 1.0 for i in arms}
     for _ in range(5000):
         new = {}

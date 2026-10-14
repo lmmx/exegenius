@@ -744,58 +744,78 @@ def main():
 
     # 6. item level
     md.append("\n## 6. Item level: is a core result faithful more often when the extraction reached it?\n")
-    md.append("For each plan on a fixed extraction (E6 family: B, V, W, X; E1-P family: E4 B, V) and each "
-              "core result: was it faithful by majority of the plan's primary-batch judges, and did the "
-              "extraction reach the result (lines or label)? Strata: arm x core result, so an arm's "
-              "general level and a result's difficulty are held fixed. Mantel-Haenszel odds ratio; "
-              "permutation p shuffles which extraction carries which reach pattern (5,000 shuffles, "
-              "one-sided, OR at least as large).\n")
+    md.append("For each plan on a fixed extraction (E6 family: B, V, W, X, one plan per arm and extraction, "
+              "E8F4X2 left out; E1-P family: E4 B and V) and each core result: was it faithful by majority "
+              "of the plan's primary-batch judges, and did the extraction reach it (a quote in its stated "
+              "or derived lines)? Strata: arm x core result, so an arm's general level and a result's "
+              "difficulty are held fixed; strata where every extraction reaches the result, or none does, "
+              "carry no information. Mantel-Haenszel odds ratio. The permutation p reassigns the eight "
+              "(five) extractions' reach patterns to one another, every permutation, one-sided (OR at "
+              "least as large).\n")
+    merged = {"E8:X": "X", "E8b:X": "X"}
 
-    def strata_for(family, arms, reach_map):
-        out = []
-        for a in arms:
+    def outcomes_for(family, arms):
+        out = {}
+        for p in plans:
+            a = merged.get(p["arm"], p["arm"])
+            if a not in arms or p["extraction"] not in family or p["run"] == "E8F4X2":
+                continue
             for cid in core_ids:
-                s = []
-                for p in plans:
-                    if p["arm"] != a or p["extraction"] not in family or p["run"] == "E8F4X2":
-                        continue
-                    v = items[p["run"]][p["batch"]].get(cid, [])
-                    if not v:
-                        continue
-                    faithful = sum(x == "faithful" for x in v) * 2 > len(v)
-                    s.append((cid in reach_map[p["extraction"]], faithful))
-                out.append(s)
+                v = items[p["run"]][p["batch"]].get(cid, [])
+                if v:
+                    out[(a, cid, p["extraction"])] = sum(x == "faithful" for x in v) * 2 > len(v)
         return out
 
-    rng = random.Random(11)
+    def mh_for(family, arms, outc, reach_map):
+        strata = [[(cid in reach_map[f], outc[(a, cid, f)]) for f in family if (a, cid, f) in outc]
+                  for a in arms for cid in core_ids]
+        return mantel_haenszel(strata)
+
+    def exact_p(family, arms, outc, reach_map, observed):
+        hits = total = 0
+        for perm in itertools.permutations(family):
+            o, _ = mh_for(family, arms, outc, {f: reach_map[g] for f, g in zip(family, perm)})
+            hits += o >= observed - 1e-12
+            total += 1
+        return hits / total
+
+    rr = lambda a, b: f"{a}/{a + b} = {a / (a + b):.2f}" if a + b else "-"
     body = []
-    for name, family, arms in [("E6 F1-F8", fs, ("E6:B", "E6:V", "E7:W", "E8:X", "E8b:X")),
-                               ("E1 P1-P5", ps, ("E4:B", "E4:V"))]:
-        for rname, rmap in [("lines or label", reach), ("lines only", reach_lines)]:
-            orr, tot = mantel_haenszel(strata_for(family, arms, rmap))
-            hits = 0
-            for _ in range(5000):
-                perm = rng.sample(family, len(family))
-                shuffled = {f: rmap[g] for f, g in zip(family, perm)}
-                o, _ = mantel_haenszel(strata_for(family, arms, shuffled))
-                hits += o >= orr - 1e-12
-            rr = lambda a, b: f"{a}/{a + b} = {a / (a + b):.2f}" if a + b else "-"
-            body.append([name, rname, rr(tot["a"], tot["b"]), rr(tot["c"], tot["d"]), orr, hits / 5000])
-    md.append(md_table(["Family", "Reach by", "Faithful when reached", "Faithful when not", "MH OR",
-                        "perm. p"], body))
-    md.append("\nPer core result, the E6 extractions that reach it (lines or label), and the X plans (E8/E8b) "
-              "that had it faithful by majority:\n")
+    e6_arms = ("E6:B", "E6:V", "E7:W", "X")
+    for name, family, arms in [("E6 F1-F8, arms B V W X", fs, e6_arms)] + \
+                              [(f"E6 F1-F8, arm {a} alone", fs, (a,)) for a in e6_arms] + \
+                              [("E1 P1-P5, E4 arms B V", ps, ("E4:B", "E4:V"))]:
+        outc = outcomes_for(family, arms)
+        orr, tot = mh_for(family, arms, outc, reach)
+        body.append([name, rr(tot["a"], tot["b"]), rr(tot["c"], tot["d"]), orr,
+                     exact_p(family, arms, outc, reach, orr)])
+    md.append(md_table(["Plans", "Faithful when reached", "Faithful when not", "MH OR", "exact p"], body))
+    md.append("\n**Robustness (E6 family, arms B V W X):** leaving out one extraction, or the two weakest "
+              "plans on low-reach extractions (V on F6, faithful 0; W on F8, faithful 5).\n")
     body = []
-    for cid in core_ids:
-        xs = []
-        for p in plans:
-            if p["arm"] in ("E8:X", "E8b:X") and p["run"] != "E8F4X2":
-                v = items[p["run"]][p["batch"]].get(cid, [])
-                if v and sum(x == "faithful" for x in v) * 2 > len(v):
-                    xs.append(p["extraction"][-2:])
-        body.append([cid, " ".join(f[-2:] for f in fs if cid in reach[f]) or "none",
-                     " ".join(sorted(xs)) or "none"])
-    md.append(md_table(["Core result", "Reached by", "X faithful on"], body))
+    outc_all = outcomes_for(fs, e6_arms)
+    for drop in fs:
+        fam = [f for f in fs if f != drop]
+        orr, _ = mh_for(fam, e6_arms, outc_all, reach)
+        body.append([f"without {drop}", orr, exact_p(fam, e6_arms, outc_all, reach, orr)])
+    trimmed = {k: v for k, v in outc_all.items() if (k[0], k[2]) not in (("E6:V", "E6-F6"), ("E7:W", "E6-F8"))}
+    orr, _ = mh_for(fs, e6_arms, trimmed, reach)
+    body.append(["without plans E6F6V and E7F8W", orr, exact_p(fs, e6_arms, trimmed, reach, orr)])
+    md.append(md_table(["Variant", "MH OR", "exact p"], body))
+    y = outcomes_for(fs, ("E9:Y",))
+    md.append(f"\n**Under the combined instruction (Y, E9 on F2, F4, F8):** {sum(y.values())} of {len(y)} "
+              "core results faithful by majority, including every result F8's extraction does not reach. "
+              "No stratum varies, so Y carries no information here.\n")
+    md.append("**What X (E8/E8b) did not get faithful, and whether the extraction reached it:**\n")
+    body = []
+    for f in fs:
+        miss = [cid for cid in core_ids if ("X", cid, f) in outc_all and not outc_all[("X", cid, f)]]
+        body.append([f, mat["X"].get(f), ", ".join(f"{c} ({'reached' if c in reach[f] else 'not reached'})"
+                                                   for c in miss) or "none"])
+    md.append(md_table(["Extraction", "X faithful", "Core results not faithful by majority"], body))
+    md.append("\nPer core result, the E6 extractions that reach it:\n")
+    md.append(md_table(["Core result", "Reached by"],
+                       [[cid, " ".join(f[-2:] for f in fs if cid in reach[f]) or "none"] for cid in core_ids]))
 
     (out / "table.md").write_text("\n".join(md) + "\n")
     cols = ["extraction", "experiment", "commit", "model", "effort", "agent", "submits",
