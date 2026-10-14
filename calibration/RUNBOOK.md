@@ -69,6 +69,7 @@
   - **Resets:** do not interrupt running jobs. Only exhaustion does.
   - **Use:** the window is not there to be used up. The aim is research progress per unit of usage.
 - **Concurrency is recorded in each ledger,** so a meter interval can be read as joint.
+- **At most 20 subagents run at once** in this environment (`CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS`; hit at 14:50 on 2026-10-14). Batches beyond that are launched as slots free, and the ledger records the launch times.
 
 ## 6. Decision tree and queue (2026-10-14, 14:28 UTC)
 
