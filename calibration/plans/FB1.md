@@ -111,7 +111,7 @@ These are rules for choosing an experiment, not predictions of Fable's behaviour
 
 | Run | Configuration | Run dir | Status |
 |---|---|---|---|
-| FB1F8 | Fable, `high` | `e6/FB1F8` | launched 15:01 UTC on S4's branch "improves, not the ceiling" (incumbent S4F8OM); task file identical to S4F8OM's apart from the path |
+| FB1F8 | Fable, `high` | `e6/FB1F8` | **done** 15:18 UTC: accepted at its second submit (the first was rejected for combined `adds` symbols). 1,235 s, 22 calls, 3.96 M cache read, 0.72 M cache write, 31 k visible output, 185 k signature chars, no `max_tokens` stop; a 98-node plan. Checklist screen J19 launched 15:19 (seed 20261030; first judges Opus, second Sonnet) |
 
 **Narrowed, 15:09 UTC, while FB1F8 was still running and before any result:**
 - **Why:** E8 found that Sonnet `high` with the variant sentence reaches the ceiling on F8 (faithful 19, checklist 25). With the best instructions, F8 has no room for a stronger model.
