@@ -22,6 +22,13 @@
 
 **What they do not allow yet:** a calibrated rate. Two readings within one window are too few.
 
+**Readings are only as clean as the work running between them.**
+- **When several jobs overlap,** the change in the meter is their joint cost, not the cost of any one of them.
+- **The ledgers record what ran when,** so an interval can be read as such.
+- **Isolated runs** give a per-run figure, at the price of serial time.
+
+**Three quantities are kept apart:** money spent, quota consumed and research value. None is converted into another.
+
 ## 2. Measured spend, development-session subagents (`tools/spend.py`, 2026-10-14 09:04 UTC)
 
 **The four token components are kept separate and never summed.**
@@ -72,7 +79,7 @@ Their tokens are inside the run totals above.
 
 ## 3. What each experiment bought
 
-| Experiment | Uncertainty it resolved | Preregistered criterion | Decision it supports | Could something cheaper have answered it? |
+| Experiment | Uncertainty it resolved | Preregistered criterion | Decision it supports | Could something cheaper have answered it? (a hypothesis in hindsight, not a measured saving) |
 |---|---|---|---|---|
 | E1 | is the planner definition the cause of shallow plans? | met (no difference) | definition is not the lever; effort is | yes, in part: a 2+2 screen would have shown no large difference |
 | E3 | does effort explain the depth gap? | met (R1) | plan at high effort | no, a clear effect needed 5 + 5 to separate |
@@ -86,6 +93,7 @@ Their tokens are inside the run totals above.
 
 ## 4. Lessons the record supports so far (each with its evidence; none is a universal rule)
 
+- **Making judging cheaper must not make the evidence weaker.** E7 showed that single-judge gate verdicts are noisy. The remedy may be better-targeted judging or a firmer adjudication rule (majority of three on the gate only), not fewer judges.
 - **Judging is a cost on the scale of the experiment, not an afterthought.** Evidence: E4–E7 (§2). Judging re-reads about as much context as the runs, on the pricier model, with about half their output. Its exact share of quota is unknown, since the components are priced differently and the meter's weighting is not published.
   - Plan for it in every budget.
   - Measure a cheaper judge's agreement with Opus before using it.
@@ -96,6 +104,11 @@ Their tokens are inside the run totals above.
 - **Re-judging the same plans is worth its cost once per instrument.** It is what showed single-judge gate verdicts to be noisy (E7).
 
 ## 5. Planned use
+
+- **Where the files live:**
+  - Shared research infrastructure goes on `master`, where every session inherits it: the protocol, the tools, this file, the plans and the journals.
+  - Experimental changes to the pipeline stay on experiment branches until the author decides: for example, the E7 argument instructions on `141026-exp-key-step-identity`.
+  - Results are recorded on `master`; the runs that produced them are kept on wiki branches.
 
 - **Before an experiment:** the plan gives an estimate for runs and judging, with this file's measured figures as the basis.
 - **After it:** `tools/spend.py` is rerun, and §2 and §3 are updated.
