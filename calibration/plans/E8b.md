@@ -62,3 +62,48 @@ These are estimates, not converted.
 | Stage 2, if reached: 38 primary judgements (~3 M each) | | ~115 M, after the reset |
 
 **Stopping:** one run per new extraction and one repeat.
+
+## Ledger
+
+| Run | Extraction | Window (UTC) | Seconds | Calls | Cache read | Cache write | Outcome |
+|---|---|---|---|---|---|---|---|
+| E8F2X | F2 | 15:09–15:25 | 914 | 19 | 3.08 M | 0.47 M | accepted, first submit |
+| E8F3X | F3 | 15:09–15:25 | 952 | 19 | 3.40 M | 0.48 M | accepted, first submit |
+| E8F5X | F5 | 15:09–15:21 | 691 | 18 | 2.51 M | 0.46 M | accepted, first submit |
+| E8F6X | F6 | 15:09–15:26 | 993 | 33 | 7.15 M | 0.47 M | accepted, first submit (a second `submit` after acceptance was refused as not pending) |
+| E8F7X | F7 | 15:09–15:32 | 1,329 | 31 | 7.72 M | 0.54 M | accepted, first submit |
+| E8F4X2 | F4 (repeat) | 15:09–15:23 | 805 | 21 | 3.48 M | 0.44 M | accepted, first submit |
+
+- No `max_tokens` stop in any run.
+- The six ran concurrently with FB1's Fable run and judging (J19), and with J15/J16's tail.
+
+## Stage 1 result (J17, 15:39 UTC; `docs/journal/2026-10-14-e8b-confirm/checklist/`)
+
+Seed 20261031. Each plan was judged by Opus first, then Sonnet. The analysis was run with `tools/ranges.py`.
+
+| Extraction | X (sentence) | W (E7) | Reading |
+|---|---|---|---|
+| F2 | 21, 19 | 15, 14 | above |
+| F3 | 18, 18 | 14, 16 | above |
+| F5 | 20, 19 | 16, 16 | above |
+| F6 | 18, 17 | 19, 17 | within noise |
+| F7 | 23, 22 | 11, 10 | above |
+
+**By the table: stage 1 passes** (above beyond noise on 4 of 5). Stage 2 (J18) follows.
+
+**Run variance on the checklist:** E8F4X 23, 21 against E8F4X2 22, 21, which is within noise. The difference of at most 1 is smaller than the smallest X-over-W gain beyond noise (F3: 18 against 16, a margin of 2). The primary measure's variance is read in J18.
+
+**F6:** E7F6W was already the strongest W plan of all eight (19, 17; the next is 16, 16). It had L2, L4, M1, M2, S1 and S3, which most W plans lack. X matched it rather than exceeding it, so this is a tie at a high W level, not a loss.
+
+**Measured cost against the estimate:**
+
+| | Estimated | Measured (`spend.py`) |
+|---|---|---|
+| Runs, cache read | ~34 M | 27.3 M |
+| Runs, cache write | | 2.85 M |
+| J17 (24 judgements), cache read | ~21 M | 23.8 M |
+| J17, cache write | | 2.19 M |
+
+**Stage 2's timing:**
+- At 15:39 the usage measured since the 14:20 reset was about 361 M cache read: 260 M by subagents and 101 M by the development session itself.
+- That is past runbook §5's 300 M pause threshold, so J18 waits for a meter reading or for the 18:30 reset.
