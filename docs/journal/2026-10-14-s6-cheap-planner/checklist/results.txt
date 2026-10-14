@@ -1,0 +1,10 @@
+E9F2Y: [25, 26]
+E9F4Y: [25, 23]
+S6F2HH: [1, 1]
+S6F2SM: [19, 18]
+S6F4HH: [4, 5]
+S6F4SM: [10, 9]
+S6F2SM [19, 18] vs E9F2Y [25, 26]: below
+S6F2HH [1, 1] vs E9F2Y [25, 26]: below
+S6F4SM [10, 9] vs E9F4Y [25, 23]: below
+S6F4HH [4, 5] vs E9F4Y [25, 23]: below
