@@ -179,7 +179,7 @@
        "note": "It has source sum N, sink sum Wm-N, signed sum Wm-2N, L=Ich, absolute sum Wm-2N+2L, and s_b=W_b m-N+2L_b."},
       {"id": "C6", "verdict": "reconstructed",
        "plan_steps": ["S2.2.3.10", "S2.2.4.5", "S2.2.5.1"],
-       "lines": [1105, 1110, 1166, 1167, 1258],
+       "lines": [1105, 1110, 1166, 1167, 1260],
        "note": "It has L_b/N=100/539 and L_c/N=101/539, both below 1/2, with deficits N-2L_b>0 and 2N-2L_c>0, hence s<Wm."},
       {"id": "C7", "verdict": "reconstructed",
        "plan_steps": ["S2.2.4.6", "S3.3", "S3.3.3"],
