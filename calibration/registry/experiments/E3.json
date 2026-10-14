@@ -976,6 +976,21 @@
      "minor_errors": 2,
      "central_count": 1,
      "central_gate": false
+    },
+    {
+     "batch": "J7",
+     "judge": "a",
+     "plan": "P18",
+     "core_stated": 12,
+     "core_fully": 0,
+     "core_derived": 1,
+     "core_faithful": 0,
+     "supporting_stated": 4,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 1,
+     "central_gate": false
     }
    ]
   },
@@ -1679,6 +1694,45 @@
      "median": 1,
      "min": 1,
      "max": 1
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 1,
+     "min": 1,
+     "max": 1
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 1,
+     "median": 1,
+     "min": 1,
+     "max": 1
+    },
+    "central_gate_passed": "0/1"
+   },
+   "quality_J7": {
+    "core_stated": {
+     "n": 1,
+     "median": 12,
+     "min": 12,
+     "max": 12
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
     },
     "core_derived": {
      "n": 1,
