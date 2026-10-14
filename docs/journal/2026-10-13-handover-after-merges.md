@@ -9,7 +9,7 @@ This entry hands the work over across a compaction of the development session's 
 
 It supersedes the state recorded in 2026-10-13-autonomous-investigation. Read this entry first, then the entries it names.
 
-## Latest state, after S1, T1, E4, E5 and E6 (read this first)
+## Latest state, after S1, T1, E4–E7 (read this first)
 
 - **The planning default stays Sonnet at high effort.** Opus at medium is not better on the central derivation and derives less: central count median 6 against 5 (p = 0.33), gate 0 of 5 each, derived 6 against 11 (E5, 2026-10-14-e5-opus). S1's screen had looked better (gate 1 of 2 per Opus arm), and it did not hold up. Haiku at high passes no calibre (S1, 2026-10-14-s1-models).
 - **The strongest lever on the central derivation is the argument task's instructions** (E4, 2026-10-14-e4-key-step):
@@ -24,7 +24,16 @@ It supersedes the state recorded in 2026-10-13-autonomous-investigation. Read th
   - **Errors:** the instructed plans made no major errors; one baseline plan made one.
   - **Technical calibre:** reached in 7 of 8 instructed plans, against 2 of 8.
   - **The gate:** passed in 2 of 8, short of the preregistered 4 of 8. The blocker is C4, stated by halves.
-  - **Recommendation for the author:** put the instruction on `master` as a depth improvement. The next test, for C4, is designed in the E6 entry and not run.
+  - **Recommendation for the author:** put the instruction on `master` as a depth improvement.
+- **E7, identities and exceptions** (2026-10-14-e7-key-step-identity): one more sentence asks each counted step for its identity and exceptions. Paired with E6's instructed plans:
+  - **C4:** reconstructed in 8 of 8 plans, against 5 of 8.
+  - **The gate:** passed in 8 of 8, against 5 of 8.
+  - **Errors:** none.
+  - **The rule:** the preregistered rule is met. The configuration reaches the Research calibre in every run.
+  - **The caveat:** the margin is within single-judge gate noise. The same 8 plans changed gate verdict in 3 of 8 across two batches.
+  - **Proposed:**
+    - this instruction on `master` (branch `141026-exp-key-step-identity`), for the author;
+    - majority-of-three judging for the gate.
 - **Recurring bottleneck:** rank as dimension change (C4), with the $N$ rank-one source exceptions, decides the gate. It is also where the instructed plan erred.
 - **Judges:** the central rubric's spread between two judges on a strong plan is about two steps (the anchor E1-P4 ran 8, 8, 7, 6 across J3–J6). Comparisons are therefore made within one batch.
 - **Operational:**
@@ -32,7 +41,7 @@ It supersedes the state recorded in 2026-10-13-autonomous-investigation. Read th
   - **The registry handles new layouts.** Experiments run from the development session are archived on wiki branches laid out for the registry; the builder accepts `transcripts`, `description_prefix`, `planning_kinds`, `log_since` and a per-arm `binary`.
 - **Awaiting the author:**
   - the execution-profile plan (`calibration/software-plan.md`);
-  - whether the key-step instruction goes on `master` (E4 and E6 evidence);
+  - whether the key-step instruction, with E7's sentence, goes on `master` (E4, E6 and E7 evidence; branch `141026-exp-key-step-identity`);
   - a full run with the best planning configuration;
   - remote branch deletions.
 

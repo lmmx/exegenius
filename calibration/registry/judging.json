@@ -113,5 +113,22 @@
    "calibration/rubrics/nlogn-central-saving.md"
   ],
   "journal": "docs/journal/2026-10-14-e6-key-step-confirm.md"
+ },
+ {
+  "id": "J8",
+  "dir": "docs/journal/2026-10-14-e7-key-step-identity/judge",
+  "key": "key.json",
+  "verdicts": "verdicts",
+  "reference": "docs/journal/2026-10-13-run-log-and-coverage/reference-draft/reference.json",
+  "judge": {
+   "agent": "general-purpose",
+   "model_id": "claude-opus-5-5",
+   "effort": "high"
+  },
+  "seed": 20261022,
+  "rubrics": [
+   "calibration/rubrics/nlogn-central-saving.md"
+  ],
+  "journal": "docs/journal/2026-10-14-e7-key-step-identity.md"
  }
 ]

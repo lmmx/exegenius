@@ -1,0 +1,1194 @@
+{
+ "id": "E7",
+ "title": "The key-step instruction asks for identities and exceptions (W against V)",
+ "kind": "controlled",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task, on E6's eight extractions",
+ "question": "Does asking the key step for the identity behind each counted step and its exceptions close the C4 gap left by the key-step instruction?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "91c4fed (141026-exp-key-step-identity)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-e7-key-step-identity",
+  "commit": "c89a3fd",
+  "transcripts": "results/transcripts/e7",
+  "description_prefix": "E7",
+  "planning_kinds": [
+   "argument"
+  ]
+ },
+ "protocol": "run from the development session; E7.md on the evidence branch",
+ "preregistration": "calibration/plans/E7.md (8fe040c)",
+ "journal": "docs/journal/2026-10-14-e7-key-step-identity.md",
+ "comparison": "E6 arm V (E6F1V-E6F8V), re-judged in batch J8",
+ "pairs": [
+  [
+   "E6F1V",
+   "E7F1W"
+  ],
+  [
+   "E6F2V",
+   "E7F2W"
+  ],
+  [
+   "E6F3V",
+   "E7F3W"
+  ],
+  [
+   "E6F4V",
+   "E7F4W"
+  ],
+  [
+   "E6F5V",
+   "E7F5W"
+  ],
+  [
+   "E6F6V",
+   "E7F6W"
+  ],
+  [
+   "E6F7V",
+   "E7F7W"
+  ],
+  [
+   "E6F8V",
+   "E7F8W"
+  ]
+ ],
+ "arms": {
+  "W": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "argument instructions with the key-step paragraph and the identity sentence"
+   },
+   "runs": [
+    "E7F1W",
+    "E7F2W",
+    "E7F3W",
+    "E7F4W",
+    "E7F5W",
+    "E7F6W",
+    "E7F7W",
+    "E7F8W"
+   ]
+  }
+ },
+ "reported": {},
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus, high) with this session's permissions; it only passed prompts and ran exegenius next"
+  }
+ ],
+ "limitations": [
+  "One paper; the argument task only, on extractions shared with E6's arms.",
+  "Judged in one batch (J8) with an unreviewed reference."
+ ],
+ "built": {
+  "by": "calibration/tools/registry.py",
+  "wiki_commit": "c89a3fd"
+ },
+ "orchestrator_observed": {
+  "value": null,
+  "basis": "unavailable",
+  "note": "no main transcript at the evidence commit"
+ },
+ "runs": [
+  {
+   "id": "E7F1W",
+   "arm": "W",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T06:43:19.162000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 195,
+         "located": 195,
+         "first_tenth": 3,
+         "span": [
+          92,
+          4989
+         ],
+         "sections_quoted": 45,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-14T06:43:26.673000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 195,
+         "located": 195,
+         "first_tenth": 3,
+         "span": [
+          92,
+          4989
+         ],
+         "sections_quoted": 45,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-14T06:31:24.078000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 722.6,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 1,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-sonnet-5-5": 35
+     },
+     "effort": {
+      "high": 35
+     },
+     "model_calls": {
+      "value": 20,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 40,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 3062580,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 420185,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 74835,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 693.5,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "F1W 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "high"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J8",
+     "judge": "a",
+     "plan": "P06",
+     "core_stated": 19,
+     "core_fully": 18,
+     "core_derived": 19,
+     "core_faithful": 17,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J8",
+     "judge": "b",
+     "plan": "P06",
+     "core_stated": 19,
+     "core_fully": 17,
+     "core_derived": 19,
+     "core_faithful": 17,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 3,
+     "central_count": 8,
+     "central_gate": true
+    }
+   ]
+  },
+  {
+   "id": "E7F2W",
+   "arm": "W",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T06:42:36.344000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 155,
+         "located": 155,
+         "first_tenth": 5,
+         "span": [
+          76,
+          4990
+         ],
+         "sections_quoted": 44,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-14T06:31:24.116000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 672.2,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-sonnet-5-5": 36
+     },
+     "effort": {
+      "high": 36
+     },
+     "model_calls": {
+      "value": 22,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 44,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 3410923,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 281971,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 67933,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 643.9,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "F2W 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "high"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J8",
+     "judge": "a",
+     "plan": "P13",
+     "core_stated": 19,
+     "core_fully": 14,
+     "core_derived": 19,
+     "core_faithful": 14,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1,
+     "central_count": 8,
+     "central_gate": true
+    }
+   ]
+  },
+  {
+   "id": "E7F3W",
+   "arm": "W",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T06:42:39.740000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 151,
+         "located": 151,
+         "first_tenth": 3,
+         "span": [
+          76,
+          4989
+         ],
+         "sections_quoted": 43,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-14T06:31:24.149000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 675.6,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-sonnet-5-5": 27
+     },
+     "effort": {
+      "high": 27
+     },
+     "model_calls": {
+      "value": 18,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 36,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 2389213,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 419717,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 73476,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 646.8,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "F3W 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "high"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J8",
+     "judge": "a",
+     "plan": "P16",
+     "core_stated": 19,
+     "core_fully": 14,
+     "core_derived": 18,
+     "core_faithful": 14,
+     "supporting_stated": 5,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 9,
+     "central_gate": true
+    }
+   ]
+  },
+  {
+   "id": "E7F4W",
+   "arm": "W",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T06:39:05.892000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 106,
+         "located": 106,
+         "first_tenth": 7,
+         "span": [
+          43,
+          4983
+         ],
+         "sections_quoted": 44,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-14T06:39:10.762000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 107,
+         "located": 107,
+         "first_tenth": 7,
+         "span": [
+          43,
+          4983
+         ],
+         "sections_quoted": 44,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-14T06:31:24.184000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 466.6,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 1,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-sonnet-5-5": 32
+     },
+     "effort": {
+      "high": 32
+     },
+     "model_calls": {
+      "value": 19,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 38,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 2643721,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 237845,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 46593,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 437.7,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "F4W 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "high"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J8",
+     "judge": "a",
+     "plan": "P04",
+     "core_stated": 19,
+     "core_fully": 16,
+     "core_derived": 13,
+     "core_faithful": 7,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 4,
+     "central_count": 7,
+     "central_gate": true
+    }
+   ]
+  },
+  {
+   "id": "E7F5W",
+   "arm": "W",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T06:42:16.186000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 155,
+         "located": 155,
+         "first_tenth": 9,
+         "span": [
+          88,
+          4989
+         ],
+         "sections_quoted": 46,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-14T06:42:21.738000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 155,
+         "located": 155,
+         "first_tenth": 9,
+         "span": [
+          88,
+          4989
+         ],
+         "sections_quoted": 46,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-14T06:31:24.217000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 657.5,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 1,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-sonnet-5-5": 30
+     },
+     "effort": {
+      "high": 30
+     },
+     "model_calls": {
+      "value": 17,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 34,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 2264748,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 414505,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 69656,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 629.0,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "F5W 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "high"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J8",
+     "judge": "a",
+     "plan": "P17",
+     "core_stated": 19,
+     "core_fully": 18,
+     "core_derived": 19,
+     "core_faithful": 14,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 3,
+     "central_count": 9,
+     "central_gate": true
+    }
+   ]
+  },
+  {
+   "id": "E7F6W",
+   "arm": "W",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T06:45:24.924000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 218,
+         "located": 218,
+         "first_tenth": 8,
+         "span": [
+          76,
+          4989
+         ],
+         "sections_quoted": 45,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-14T06:31:24.252000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 840.7,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-sonnet-5-5": 37
+     },
+     "effort": {
+      "high": 37
+     },
+     "model_calls": {
+      "value": 21,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 42,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 2755732,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 482985,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 92209,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 811.9,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "F6W 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "high"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J8",
+     "judge": "a",
+     "plan": "P18",
+     "core_stated": 19,
+     "core_fully": 17,
+     "core_derived": 18,
+     "core_faithful": 17,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1,
+     "central_count": 9,
+     "central_gate": true
+    }
+   ]
+  },
+  {
+   "id": "E7F7W",
+   "arm": "W",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T06:44:49.339000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 166,
+         "located": 166,
+         "first_tenth": 5,
+         "span": [
+          84,
+          4987
+         ],
+         "sections_quoted": 46,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-14T06:44:53.494000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 166,
+         "located": 166,
+         "first_tenth": 5,
+         "span": [
+          84,
+          4987
+         ],
+         "sections_quoted": 46,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-14T06:31:24.290000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 809.2,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 1,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-sonnet-5-5": 47
+     },
+     "effort": {
+      "high": 47
+     },
+     "model_calls": {
+      "value": 27,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 54,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 4448957,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 280092,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 84175,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 780.2,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "F7W 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "high"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J8",
+     "judge": "a",
+     "plan": "P14",
+     "core_stated": 19,
+     "core_fully": 19,
+     "core_derived": 19,
+     "core_faithful": 12,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 9,
+     "central_gate": true
+    }
+   ]
+  },
+  {
+   "id": "E7F8W",
+   "arm": "W",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T06:41:17.219000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 133,
+         "located": 133,
+         "first_tenth": 4,
+         "span": [
+          76,
+          4989
+         ],
+         "sections_quoted": 43,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-14T06:41:26.237000Z",
+       "outcome": "error"
+      }
+     ],
+     "issued": "2026-10-14T06:31:24.326000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 592.9,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-sonnet-5-5": 38
+     },
+     "effort": {
+      "high": 38
+     },
+     "model_calls": {
+      "value": 21,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 44,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 2828359,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 246326,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 61216,
+      "basis": "estimated",
+      "note": "content characters / 4; transcripts undercount output"
+     },
+     "seconds": {
+      "value": 575.5,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "F8W 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "high"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J8",
+     "judge": "a",
+     "plan": "P05",
+     "core_stated": 19,
+     "core_fully": 10,
+     "core_derived": 15,
+     "core_faithful": 5,
+     "supporting_stated": 5,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 8,
+     "central_gate": true
+    }
+   ]
+  }
+ ],
+ "arm_summary": {
+  "W": {
+   "runs": 8,
+   "quality_J8": {
+    "core_stated": {
+     "n": 8,
+     "median": 19.0,
+     "min": 19,
+     "max": 19
+    },
+    "core_fully": {
+     "n": 8,
+     "median": 16.5,
+     "min": 10,
+     "max": 19
+    },
+    "core_derived": {
+     "n": 8,
+     "median": 18.5,
+     "min": 13,
+     "max": 19
+    },
+    "core_faithful": {
+     "n": 8,
+     "median": 14.0,
+     "min": 5,
+     "max": 17
+    },
+    "major_errors": {
+     "n": 8,
+     "median": 0.0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 8,
+     "median": 9.0,
+     "min": 7,
+     "max": 9
+    },
+    "central_gate_passed": "8/8"
+   },
+   "resources_argument": {
+    "model_calls": {
+     "n": 8,
+     "median": 20.5,
+     "min": 17,
+     "max": 27
+    },
+    "cache_read_tokens": {
+     "n": 8,
+     "median": 2792045.5,
+     "min": 2264748,
+     "max": 4448957
+    },
+    "cache_write_tokens": {
+     "n": 8,
+     "median": 348238.0,
+     "min": 237845,
+     "max": 482985
+    },
+    "output_tokens": {
+     "n": 8,
+     "median": 71566.0,
+     "min": 46593,
+     "max": 92209
+    },
+    "seconds": {
+     "n": 8,
+     "median": 645.3499999999999,
+     "min": 437.7,
+     "max": 811.9
+    }
+   },
+   "planning_seconds": {
+    "n": 8,
+    "median": 673.9000000000001,
+    "min": 466.6,
+    "max": 840.7
+   }
+  }
+ }
+}

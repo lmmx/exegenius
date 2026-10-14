@@ -34,6 +34,10 @@ exegenius-planner / claude-sonnet-5-5 / high / binary cc70355 | batch J7 | 1 run
   Overview: 1/1 pass (95% exact 0.02-1.00)
   Technical: 1/1 pass (95% exact 0.02-1.00)
   Research: 0/1 pass (95% exact 0.00-0.98)
+exegenius-planner / claude-sonnet-5-5 / high / binary cc70355 | batch J8 | 1 runs from E1
+  Overview: 1/1 pass (95% exact 0.02-1.00)
+  Technical: 1/1 pass (95% exact 0.02-1.00)
+  Research: 0/1 pass (95% exact 0.00-0.98)
 exegenius-planner / claude-sonnet-5-5 / medium / binary 1d90c28 | batch J1 | 11 runs from X1, X2
   Overview: 1/11 pass (95% exact 0.00-0.41)
   Technical: 0/11 pass (95% exact 0.00-0.28)
@@ -55,6 +59,10 @@ exegenius-planner / claude-sonnet-5-5 / medium / binary cc70355 | batch J6 | 1 r
   Technical: 0/1 pass (95% exact 0.00-0.98)
   Research: 0/1 pass (95% exact 0.00-0.98)
 exegenius-planner / claude-sonnet-5-5 / medium / binary cc70355 | batch J7 | 1 runs from E3
+  Overview: 0/1 pass (95% exact 0.00-0.98)
+  Technical: 0/1 pass (95% exact 0.00-0.98)
+  Research: 0/1 pass (95% exact 0.00-0.98)
+exegenius-planner / claude-sonnet-5-5 / medium / binary cc70355 | batch J8 | 1 runs from E3
   Overview: 0/1 pass (95% exact 0.00-0.98)
   Technical: 0/1 pass (95% exact 0.00-0.98)
   Research: 0/1 pass (95% exact 0.00-0.98)
@@ -82,6 +90,14 @@ general-purpose / claude-sonnet-5-5 / high / binary 0c29556 (131026-exp-key-step
   Overview: 8/8 pass (95% exact 0.63-1.00)
   Technical: 7/8 pass (95% exact 0.47-1.00)
   Research: 2/8 pass (95% exact 0.03-0.65)
+general-purpose / claude-sonnet-5-5 / high / binary 0c29556 (131026-exp-key-step) | batch J8 | 8 runs from E6
+  Overview: 7/8 pass (95% exact 0.47-1.00)
+  Technical: 7/8 pass (95% exact 0.47-1.00)
+  Research: 5/8 pass (95% exact 0.24-0.91)
+general-purpose / claude-sonnet-5-5 / high / binary 91c4fed (141026-exp-key-step-identity) | batch J8 | 8 runs from E7
+  Overview: 8/8 pass (95% exact 0.63-1.00)
+  Technical: 8/8 pass (95% exact 0.63-1.00)
+  Research: 8/8 pass (95% exact 0.63-1.00)
 general-purpose / claude-sonnet-5-5 / high / binary 930d40c | batch J1 | 2 runs from S0
   Overview: 2/2 pass (95% exact 0.16-1.00)
   Technical: 2/2 pass (95% exact 0.16-1.00)

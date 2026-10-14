@@ -1112,6 +1112,21 @@
      "minor_errors": 3,
      "central_count": 6,
      "central_gate": false
+    },
+    {
+     "batch": "J8",
+     "judge": "a",
+     "plan": "P07",
+     "core_stated": 19,
+     "core_fully": 13,
+     "core_derived": 18,
+     "core_faithful": 14,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 4,
+     "central_count": 6,
+     "central_gate": false
     }
    ]
   },
@@ -2851,6 +2866,45 @@
      "median": 19,
      "min": 19,
      "max": 19
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 14,
+     "min": 14,
+     "max": 14
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 1,
+     "median": 6,
+     "min": 6,
+     "max": 6
+    },
+    "central_gate_passed": "0/1"
+   },
+   "quality_J8": {
+    "core_stated": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 13,
+     "min": 13,
+     "max": 13
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 18,
+     "min": 18,
+     "max": 18
     },
     "core_faithful": {
      "n": 1,
