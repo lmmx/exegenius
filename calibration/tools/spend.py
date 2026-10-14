@@ -25,18 +25,19 @@ import re
 import sys
 
 RULES = [  # (pattern on the description, experiment, role)
-    (r"^J(\d) judge P\d+", None, "judging"),
+    (r"^J(\d+) judge P\d+", None, "judging"),
     (r"^(Judge plan|Judge P|Second judge of plan)", "J1-J2", "judging"),
     (r"^([BV])\d \d{4}-argument", "E4", "runs"),
     (r"^N\d \d{4}-", "E5", "runs"),
     (r"^F\d[BV]? \d{4}-", "E6", "runs"),
     (r"^F\dW \d{4}-", "E7", "runs"),
     (r"^F\d(SX|OX|SM|OM) \d{4}-", "S2", "runs"),
+    (r"^S3F\d(OH|OX) \d{4}-", "S3", "runs"),
     (r"^W1 \d{4}-", "W1 (cancelled)", "runs"),
     (r"^R\d \d{4}-", "T1", "runs"),
     (r"^(T\d chain walk|Chain walk)", "chain walks", "judging"),
 ]
-BATCH = {"3": "E3", "4": "S1", "5": "E4", "6": "E5", "7": "E6", "8": "E7", "9": "S2"}
+BATCH = {"3": "E3", "4": "S1", "5": "E4", "6": "E5", "7": "E6", "8": "E7", "9": "S2", "10": "S3"}
 
 
 def classify(desc):

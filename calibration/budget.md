@@ -17,12 +17,25 @@
 | 2026-10-14 ~09:00 | 2% | 13:40 | S2 rows 2–4 (Opus `xhigh`, Sonnet `max`, Opus `max`) running in parallel since 08:48 |
 | 2026-10-14 ~09:15 | 4% | 13:40 | the author confirmed it on the meter (the autofill had suggested 4%); row 2 (Opus `xhigh`) finished at 09:11; rows 3 and 4 still running |
 | 2026-10-14 ~09:25 | 5% | 13:40 | rows 3 and 4 still running; no judging yet |
+| 2026-10-14 ~12:28 | 14% | ~13:28 ("in an hour", as the author reported it; 13:40 was recorded earlier) | taken just before S3 launched (12:29). Since 09:25: S2 rows 3–4 finished, J9's 17 judges, and this session's write-up. The meter is account-wide, so any other use of the account in that interval is included too |
 
 **These are window readings, not the weekly allowance,** and the two should not be read as interchangeable.
 
 **What they allow:** setting a reading against the tokens measured in the same interval, and so estimating what a run costs as a share of a window.
 
 **What they do not allow yet:** a calibrated rate. Two readings within one window are too few.
+
+**What the readings say, and do not say, about S2 (an interpretation, not a measurement):**
+- **S2's spend from 08:45 to 12:28:** rows 2–4, plus J9, plus the development session's own work, moved the meter from 0% to 14%.
+- **The tokens measured in that interval:**
+
+  | | Cache read |
+  |---|---|
+  | rows 2–4 | 47.7 M |
+  | J9 | 42.4 M |
+  | orchestration and write-up | not counted by `spend.py` |
+
+- **Why no per-run quota figure:** 14 points over about 90 M cache read, plus unmeasured orchestration, would be one interval of overlapping jobs, with an unknown share for other use of the account. No per-run or per-token quota rate is derived from it.
 
 **Readings are only as clean as the work running between them.**
 - **When several jobs overlap,** the change in the meter is their joint cost, not the cost of any one of them.
