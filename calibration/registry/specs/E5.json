@@ -1,0 +1,59 @@
+{
+ "id": "E5",
+ "title": "Opus at medium effort for planning (stage 2), against E1's Sonnet-high general-purpose arm",
+ "kind": "controlled",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning (extract, background, argument)",
+ "question": "Does Opus at medium effort plan the central saving better than Sonnet at high effort, at E1's configuration?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "af36d6d"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-e5-opus",
+  "commit": "904a3c6",
+  "transcripts": "results/transcripts/e5"
+ },
+ "protocol": "run from the development session; E5.md on the evidence branch",
+ "preregistration": "calibration/plans/E5.md (b03e7a3)",
+ "journal": "docs/journal/2026-10-14-e5-opus.md",
+ "comparison": "E1 arm G (G1-G5), re-judged in batch J6",
+ "arms": {
+  "N": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "medium",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections"
+   },
+   "runs": [
+    "N1",
+    "N2",
+    "N3",
+    "N4",
+    "N5"
+   ]
+  }
+ },
+ "reported": {},
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus, high) with this session's permissions, not a runner with the wiki's .claude/settings.json; it only passed prompts and ran exegenius next and status"
+  },
+  {
+   "kind": "protocol",
+   "what": "binary af36d6d (cc70355 plus a status-message fix) against E1's cc70355; task files are rendered by code that did not change"
+  }
+ ],
+ "limitations": [
+  "Stage 2 on one paper; the comparison arm ran a day earlier in a runner session.",
+  "Judged in one batch (J6) with an unreviewed reference."
+ ]
+}
