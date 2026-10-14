@@ -81,7 +81,7 @@
 | 4 | **E8** (`plans/E8.md`) | does a sentence asking for every variant and every bound's chain lift Sonnet `high` towards Opus `xhigh`? | now; two-stage | ~17 M (stage 1); +~60 M (stage 2, if the screen passes) | **supported** 15:08: faithful X 18, 18, 19 against W 14, 3, 4, with no added major errors. X is not below Opus `xhigh` on the checklist anywhere, and on F8 it is at the ceiling. **Proposal to the author:** the sentence as an instruction change |
 | 4b | **E8b** (`plans/E8b.md`) | does the sentence hold on F2, F3, F5, F6 and F7, and how much does X vary between runs? | E8 supported; launched 15:11 | ~34 M runs + ~21 M screen; ~115 M primary after the reset | **not supported** 19:24 (stage 2, J18): X above W on F2, F3, F7; tied on F5, F6 (3 of 5, rule needs 4). Never below W; sign test over 8 extractions p ≈ 0.016; run variance 1. **The E8 sentence's proposal is withdrawn** by the table. The ties trace to `label-residual-budget`, which X misses and E9's sentence supplies |
 | 4c | **E9** (`plans/E9.md`) | does a sentence asking for parameter definitions and every case close C1? | launched 18:46 after the reset | ~82–95 M | **closes C1, no loss** 19:24: Y reconstructs C1 on F2, F4, F8 (X on F8 only); every Y judgement 9/9 central and 19/19 faithful; checklist above on F2, F4, tied on F8 (J20); plans not longer |
-| 4d | **E10** (`plans/E10.md`) | does the combined instruction (E8 + E9 sentences) beat E7 where the E8 sentence alone tied (F3, F5, F6), and how much does it vary? | E8b not supported, E9 closes C1 | ~140 M | prepared 19:27: projects rendered and diffed. **Not launched**: §5 threshold reached (310 M since 18:30). Launches on a reading or after the ~23:30 reset (check-in scheduled 23:33, trig_01KnYVmaWrDpC39f9mcjQb4m; `scratchpad/prep-j21.sh` prepares J21) |
+| 4d | **E10** (`plans/E10.md`) | does the combined instruction (E8 + E9 sentences) beat E7 where the E8 sentence alone tied (F3, F5, F6), and how much does it vary? | E8b not supported, E9 closes C1 | ~140 M | **runs launched 22:17** on the author's reading (65%, reset ~23:37). J21 (26 judgements) held until after the reset: check-in at 23:42 (trig_01KnYVmaWrDpC39f9mcjQb4m); `scratchpad/prep-j21.sh` prepares it. **E10 is the last instruction experiment on this paper** (§9) |
 | 5 | **FB1 pilot** (`plans/FB1.md`, "The pilot") | does Fable at `high` beat the incumbent on F8? | S4 outcome "improves but not ceiling" (against Opus `max`), or "does not improve" (against Opus `xhigh`). Not if S4 reaches the ceiling | run unknown (placeholder 6–16 M) + ~30 M judging | **done** 15:21. Run 3.96 M; checklist screen ~2.5 M. Fable 17, 16 against Opus `max` 20, 21: below. No primary judging; no further Fable spend |
 | 6 | Markers tightened (L2, P2, P3, S4) | the judge-free cross-check | now; free | 0 | **done** 14:31: fitted agreement 0.836 → 0.905 on K1 plans (optimistic, since these were used to tighten); J8 hold-out AUC 0.774 → 0.794 |
 | 7 | **Second document** | do the model and instruction effects generalise? | **needs the author to supply a document** (§2) | onboarding: reference set, central rubric and checklist, about 20–40 M of analysis; then a screen | blocked |
@@ -139,3 +139,35 @@ The general default additionally needs the second document.
    - the subagent transcripts, for `max_tokens` stops.
 3. Never restart a run that may still be running.
 4. Take the first item in the queue whose trigger is met.
+
+## 9. Phase 2 (adopted 2026-10-14, 22:20 UTC): the per-stage policy
+
+**Why it was adopted:**
+- An outside review the author relayed found that the programme had optimised the argument task's instructions deeply. Meanwhile the deliverable, a model and effort policy per pipeline stage, stayed mostly empty.
+- `policy.md` now holds that table, with its gaps marked.
+
+**From here, every experiment must do one of two things:**
+- answer a model or effort selection question in `policy.md`;
+- or remove a named blocker to answering one.
+
+**Instruction work on the argument task stops with E10.** Its result fixes the instruction version used in every later planning comparison.
+
+**The queue, in order:**
+
+| # | Item | Question in `policy.md` | Notes |
+|---|---|---|---|
+| P0 | E10 | which instruction version is held fixed for planning | running |
+| P1 | **S6:** cheaper planners with the instruction held fixed: Sonnet `medium` and Haiku `high`, one run each on F2 and F4 (where the combined instruction scored 19) | the cheapest planner that stays at the ceiling | the saturated rubric cannot rank configurations at the ceiling, but it can detect one falling below it. So it answers this question. Checklist screen first, with a Sonnet second judge (~1 M each), and primary judging only for configurations that hold. To be preregistered after E10 |
+| P2 | **A1:** planted-error recall for fidelity auditing | the auditor's model and effort | known errors are seeded into fixed pages; detection and false-alarm rates per configuration. Largely judge-free. Its design comes first, and it needs the author's go-ahead only if it runs the pipeline's own audit stage on a wiki |
+| P3 | **X1:** extraction across models | the extraction model | first judge-free coverage diagnostics on existing extractions (S1, E1, E5, E6), then a fixed planner on the candidates' extractions |
+| P4 | **K3:** a discriminating measure above the ceiling | whether a stronger planner is better above the ceiling | pairwise preference judging, validated against known orderings (E7 vs E8 plans) with order swapped. Only needed if a decision turns on Opus against Sonnet at the ceiling |
+| P5 | **W2:** a stage-isolated writer experiment | the writer's model and effort | a fixed plan and a fixed subset of pages; page fidelity and simulated readers. **Needs the author** (writer runs) |
+| P6 | Second document | generality of every row | **needs the author to supply the document** |
+
+**The cost of the research process itself** (the review's other point):
+- The development session read 708 M from cache over the day, almost all of it before a compaction, when each call re-read 600–670 k tokens. Since the 18:30 reset it has read 53 M, about 17% of that window's measured total.
+- **The remedies, in force from now on:**
+  - keep this session's context small (compaction before large batches, and no polling);
+  - put bulky reading in subagents;
+  - preregister **sequential third judges** in future primary batches: two judges first, and a third only where those two disagree on the gate or differ in faithful count by more than 1. That saves up to a third of primary judging, the largest component. It is a protocol change for experiments not yet preregistered, never retroactive;
+  - offer the author the Workflow tool for judging batches. It needs the author's explicit opt-in, and would spare this session one wake-up per judge.

@@ -20,6 +20,12 @@
 | 2026-10-14 ~12:28 | 14% | ~13:28 ("in an hour", as the author reported it; 13:40 was recorded earlier) | taken just before S3 launched (12:29). Since 09:25: S2 rows 3–4 finished, J9's 17 judges, and this session's write-up. The meter is account-wide, so any other use of the account in that interval is included too |
 
 | 2026-10-14 ~14:20 | ~0% ("basically empty", the author's observation) | ~18:30 (19:30 local, as the author reported it) | the window had reset since 12:28. S3, K1 and S4's launch fell partly in the previous window and partly in this one; no reading separates them |
+| 2026-10-14 ~22:17 | 65% | ~23:37 ("reset in 1h20m") | the window that began at the ~18:30 reset. Measured in it by `spend.py --since 18:30` at 22:17: J18 241.0 M, E9's runs 12.1 M, J20 12.2 M, and the development session 52.7 M cache read, **318 M together**. Little else ran on the account, as far as this session knows. This is the first reading whose interval matches a whole measured window |
+
+**The 22:17 reading against the measured window (an estimate, not a conversion):**
+- The window 18:30–22:17 is 318 M cache read for 65%, about 4.9 M per point.
+- That is one interval, and cache read stands in for every component the meter weighs. It is used only to judge whether a launch fits before a reset, and is recorded here so the next reading can test it.
+- On it, E10's runs (~16 M, about 3 points) went at 22:17. J21 (~125 M, about 25 points) is held until the ~23:37 reset.
 
 **Autofill predictions, kept apart from readings:**
 - The prompt autofill sometimes proposes a meter value.
