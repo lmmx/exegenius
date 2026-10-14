@@ -1,0 +1,24 @@
+{"page": "P08",
+ "items": [
+  {"id": "S4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page defines frames on sources, gates and sinks, the edge change $D_vD_u^{-1}$, $D_{\\rm in}$, $D_{\\rm out}$ and $g=D_{\\rm in}^{-1}f$, proves the invariant and reaches $D_{\\rm out}\\mathsf S_\\Omega D_{\\rm in}^{-1}$. It then concludes that only endpoint frames matter and that interior frames can be chosen for cheap edges, as the paper does (lines 785-825)."},
+  {"id": "S4.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page inducts along the wires with the paper's three cases. At a source the invariant is the definition of $g$. On an edge, \"$D_vD_u^{-1}D_u\\varphi=D_v\\varphi$\". At a gate, the common frame on all incidences gives \"$\\sum_j c_jD_v\\varphi_j=D_v(\\sum_j c_j\\varphi_j)$\". At the sinks this yields $D_{\\rm out}\\mathsf S_\\Omega D_{\\rm in}^{-1}f$."},
+  {"id": "S4.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page writes \"Then that route applies $\\varepsilon_wD_{\\mathrm{sink}(\\rho(w))}D_{\\mathrm{source}(w)}^{-1}$ ..., auxiliary roles included\" as an immediate consequence of the displayed identity, the paper's own \"In particular\". It leaves implicit the reading-off of the $(\\rho(w),w)$ block from the block-diagonal $D_{\\rm in}^{-1}$, $D_{\\rm out}$ and the signed permutation $\\mathsf S_\\Omega$. The separate \"Interior frames cancel\" telescoping paragraph does not supply that argument and is flagged under errors."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "A route through a vertex $m$ from a source $s$ to a sink $t$ applies $D_mD_s^{-1}$ and then $D_tD_m^{-1}$, whose product is $D_tD_s^{-1}$ for every $D_m$.",
+   "problem": "This multiplies only the edge operators and leaves out the pointwise gate at $m$ that acts between them. $D_m^{-1}$ cancels against $D_m$ only because that gate commutes with its common frame (the paper's step $\\sum_j c_jD_v\\varphi_j=D_v(\\sum_j c_j\\varphi_j)$). In a signed role permutation, the route from $\\mathrm{source}(w)$ to $\\mathrm{sink}(\\rho(w))$ also passes through gates that mix wires (for example $X_a$ ends on $Y_a$'s sink), so it is not a single wire path, and the telescoping produces no sign $\\varepsilon_w$. The paper gets the route operator only from $D_{\\rm out}\\mathsf S_\\Omega D_{\\rm in}^{-1}$ (lines 813-825). The page's earlier invariant already gives the correct reason, so the main argument still holds."}
+ ],
+ "motivation_given": true}
