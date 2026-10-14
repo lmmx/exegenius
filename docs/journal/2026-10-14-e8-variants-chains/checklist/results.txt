@@ -1,0 +1,15 @@
+E7F1W: [16, 12]
+E7F4W: [6, 6]
+E7F8W: [5, 6]
+E8F1X: [20, 19]
+E8F4X: [23, 22]
+E8F8X: [25, 25]
+S2F1OX: [19, 18]
+S3F4OX: [15, 15]
+S3F8OX: [19, 19]
+E8F1X [20, 19] vs E7F1W [16, 12]: above
+E8F4X [23, 22] vs E7F4W [6, 6]: above
+E8F8X [25, 25] vs E7F8W [5, 6]: above
+E8F1X [20, 19] vs S2F1OX [19, 18]: within noise
+E8F4X [23, 22] vs S3F4OX [15, 15]: above
+E8F8X [25, 25] vs S3F8OX [19, 19]: above
