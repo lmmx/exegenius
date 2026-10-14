@@ -179,7 +179,7 @@ The general default additionally needs the second document.
 
 **Judging waits for the reset:** J21 (E10) first, then J23 (S6 checklist) and J22 (W2 pages), once their runs finish and their prompts are prepared.
 
-**The author's guidance at 23:50 UTC, recorded:**
+**The author's guidance at 23:49 UTC, recorded:**
 - E10 is support for the combined instruction on this paper's argument task, not a general default.
 - No Opus `xhigh` ceiling runs are launched on autofill. They wait for K3:
   - first, the pilot, then the preregistered validation;
