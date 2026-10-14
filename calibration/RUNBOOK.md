@@ -171,3 +171,10 @@ The general default additionally needs the second document.
   - put bulky reading in subagents;
   - preregister **sequential third judges** in future primary batches: two judges first, and a third only where those two disagree on the gate or differ in faithful count by more than 1. That saves up to a third of primary judging, the largest component. It is a protocol change for experiments not yet preregistered, never retroactive;
   - offer the author the Workflow tool for judging batches. It needs the author's explicit opt-in, and would spare this session one wake-up per judge.
+
+**Launched 23:26 UTC, on the author's 23:20 instruction** (about 40% of the window left; reset about 23:37):
+- **W2:** six writer runs (two pages × Haiku `high`, Sonnet `high`, Opus `xhigh`).
+- **S6:** four planner runs (Sonnet `medium` and Haiku `high` on F2 and F4).
+- **Design subagents, which make no experiment calls:** A1 (planted-error auditor test), X1 (extraction evidence) and K3 (pairwise measure).
+
+**Judging waits for the reset:** J21 (E10) first, then J23 (S6 checklist) and J22 (W2 pages), once their runs finish and their prompts are prepared.
