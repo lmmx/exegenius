@@ -1,0 +1,604 @@
+{
+ "plan": "P14",
+ "items": [
+  {
+   "id": "bank-exchange-network",
+   "presence": "stated",
+   "statement": "correct",
+   "derivation": "n/a",
+   "steps": [
+    "S1.3.1"
+   ],
+   "lines": [
+    728,
+    739,
+    741,
+    765
+   ],
+   "note": "S1.3.1 restates Lemma lem:scalar-motifs exactly (y_S gets y_S+x_S for arbitrary scratch; three stages give (X_a,Y_a)->(-Y_a,X_a) restoring all scratch). The construction (h=100, copy/gather/scatter/side injection, eight-row schedule, net map JV+RG) is not given, so no derivation."
+  },
+  {
+   "id": "common-frame-identity",
+   "presence": "stated",
+   "statement": "correct",
+   "derivation": "n/a",
+   "steps": [
+    "S1.3.2"
+   ],
+   "lines": [
+    793,
+    825
+   ],
+   "note": "S1.3.2 states the invariant (array stored as D_v g), that a common frame commutes with a pointwise linear gate, and the endpoint operator D_out S_Omega D_in^{-1}, as at 804-817. It is an infer step without sub-steps."
+  },
+  {
+   "id": "label-residual-budget",
+   "presence": "mentioned",
+   "statement": "n/a",
+   "derivation": "n/a",
+   "steps": [
+    "S1.3.3"
+   ],
+   "lines": [
+    845,
+    897,
+    997,
+    1010,
+    1105,
+    1110
+   ],
+   "note": "S1.3.3 says labels come from triple indicator vectors and are nested along every edge, but gives no label space of dimension m, no decreasing central edges losing h, no L=Ich, no budget Wm-2N+2L and no ratio L/N."
+  },
+  {
+   "id": "bit-shear-interface",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S1.3",
+    "S1.3.3"
+   ],
+   "lines": [
+    1138,
+    1172
+   ],
+   "note": "S1.3.3 gives the endpoint difference I_m on every role and s<Wm, the contract of eq:finite-shear-contract. It omits the projection matrices, the exact sum s_b=W_b m-N+2L_b, and the consequence that every role gets the shear H<-H+D."
+  },
+  {
+   "id": "complex-phase-interface",
+   "presence": "mentioned",
+   "statement": "n/a",
+   "derivation": "n/a",
+   "steps": [
+    "S2.1"
+   ],
+   "lines": [
+    1174,
+    1229,
+    1231,
+    1315
+   ],
+   "note": "S2.1 says the complex phase network with frames built from C gives C^{tensor e} on every role using s_c child calls. It gives no phase frame C_U, no one-kernel-per-orthonormal-residual-vector factorization and no formula or inequality for s_c."
+  },
+  {
+   "id": "rank-saving",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S1",
+    "S1.3.3",
+    "S1.3.6"
+   ],
+   "lines": [
+    1151,
+    1167,
+    1319,
+    1346
+   ],
+   "note": "The plan states s<Wm (S1.3.3, whose quote carries the deficit N-2L_b>0) and s/W<m^tau for a fixed tau<1 (S1.3.6). It omits the explicit tau=sigma=1-2^{-50}, the deficits eta_b, eta_c, and the bounds eta>20*2^{-50}, log m<20 that give it."
+  },
+  {
+   "id": "stream-primitives",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S1.1",
+    "S1.2"
+   ],
+   "lines": [
+    491,
+    511,
+    555,
+    572
+   ],
+   "note": "S1.1 matches Lemma lem:elementary-streams. S1.2 states the controlled shift mod Q in O(V) but drops the requirement that the offset be prepared in b^{O(1)} time (present only in the quote) and the fixed rational scalings."
+  },
+  {
+   "id": "matrix-shear",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S1.3.4"
+   ],
+   "lines": [
+    1364,
+    1447
+   ],
+   "note": "S1.3.4 states the cost lemma (a rank-a shear in exactly a interchanges plus O(V)). The lower-triangular factorization A=E_1 Pi E_2, which is how the count is obtained, is absent (only a 'relies on' label hints at it), as is the modulus q^b."
+  },
+  {
+   "id": "interchange-recurrence",
+   "presence": "derived",
+   "statement": "correct",
+   "derivation": "partial",
+   "steps": [
+    "S1.3",
+    "S1.3.1",
+    "S1.3.2",
+    "S1.3.3",
+    "S1.3.4",
+    "S1.3.5",
+    "S1.3.6"
+   ],
+   "lines": [
+    1475,
+    1557,
+    1559,
+    1616
+   ],
+   "note": "The statement matches Proposition prop:power-interchange, and the sub-steps follow the paper's route: network, frames, labels and contract, shear cost, recurrence F_k<=(s/W)F_{k-1}+O(1), then O(e^tau). Missing: the network output H<-H+D on every row and its conversion to an interchange by D<-D-H, H<-H+D, D<-H-D (1535-1541), and the fixed-tape depth-first schedule that justifies O(V) per node."
+  },
+  {
+   "id": "arbitrary-width-interchange",
+   "presence": "derived",
+   "statement": "correct",
+   "derivation": "partial",
+   "steps": [
+    "S1",
+    "S1.4",
+    "S1.5"
+   ],
+   "lines": [
+    1631,
+    1735
+   ],
+   "note": "S1 states the O(Vu^tau) bound. S1.4 and S1.5 follow the base-m split, padded row field and radix-q padding. The construction of the row field from the exchanged and joined high digits (R=q^{2rho}>=W^k, 1660-1691) is only alluded to ('after the high digits'). Uncertain between partial and faithful; I chose the conservative one."
+  },
+  {
+   "id": "phase-frame-recursion",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S2.1",
+    "S2.2",
+    "S2.4"
+   ],
+   "lines": [
+    1835,
+    1940
+   ],
+   "note": "The plan states s_c child calls on e/m axes (S2.1), binary row additions (S2.2) and H_0^{tensor D}=b^D S_D C^{tensor D} S_D (S2.4). It omits the conjugation by P_M that puts residual directions into coordinate slots, and the inverse-child identity (C^{-1})^{tensor f}=(-i)^f Z C Z."
+  },
+  {
+   "id": "packed-selected-bit-addition",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S2.2"
+   ],
+   "lines": [
+    1942,
+    2011
+   ],
+   "note": "S2.2 gives the operation (XOR at selected positions of whole chunks), a constant number of whole-chunk cyclic shifts, and a sorting repair of bad addresses, all matching the lemma. It omits the bad fraction delta_bad and the cost O(V(L^tau+1))."
+  },
+  {
+   "id": "layer-recurrence",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S2.3"
+   ],
+   "lines": [
+    2286,
+    2304,
+    2393,
+    2448,
+    2731,
+    2738
+   ],
+   "note": "S2.3 states s_c children on e/m bits, each with 1/W_c of the volume, giving O(Vd^{lambda'}). It does not write the recurrence F(e)<=(s/W)F(e/m)+O((eK)^tau+1), the leaf cutoff e<d^beta, the row-index construction, or the condition on lambda'."
+  },
+  {
+   "id": "simultaneous-layer",
+   "presence": "derived",
+   "statement": "imprecise",
+   "derivation": "partial",
+   "steps": [
+    "S2",
+    "S2.1",
+    "S2.2",
+    "S2.3",
+    "S2.4"
+   ],
+   "lines": [
+    2588,
+    2668,
+    2686,
+    2758
+   ],
+   "note": "S2's statement gives the O(Vd^{lambda'}) cost and a single final truncation but no error bound sqrt2*2^{-p}. Its sub-steps follow the paper's proof (phase network, packed row additions, recurrence, H_0 = b^D S C S). The guard-width analysis (Delta=ceil(C_0 d^{C_1})=o(p), which makes exact Gaussian dyadic evaluation possible) is missing."
+  },
+  {
+   "id": "synthetic-transform",
+   "presence": "derived",
+   "statement": "correct",
+   "derivation": "partial",
+   "steps": [
+    "S3",
+    "S3.1",
+    "S3.2",
+    "S3.3"
+   ],
+   "lines": [
+    2810,
+    2928,
+    2929,
+    2989,
+    2990,
+    3206
+   ],
+   "note": "S3 matches the cost and error of Lemma lem:synthetic-transform-cost, and the sub-steps follow the paper (character cancellation, stored bit-reversed order, common-offset chunk layout). Missing: the prefix-slot moves with individual rounds (the dK term), the one-truncation-per-round error argument (J_E Q_p=Q_p J_E), and the exact counterparts LBF^- and F^+B^{-1}L^{-1}."
+  },
+  {
+   "id": "signed-packing",
+   "presence": "stated",
+   "statement": "correct",
+   "derivation": "n/a",
+   "steps": [
+    "S4.1"
+   ],
+   "lines": [
+    3221,
+    3232
+   ],
+   "note": "S4.1 states evaluation at B_0=2^{4p}, exact integer product, centred carries, and O(rp log(rp)). The division by r and the truncation Q_p appear in S4's claim."
+  },
+  {
+   "id": "synthetic-convolution",
+   "presence": "derived",
+   "statement": "imprecise",
+   "derivation": "faithful",
+   "steps": [
+    "S4",
+    "S4.1",
+    "S4.2",
+    "S4.3",
+    "S4.4"
+   ],
+   "lines": [
+    3370,
+    3412,
+    3414,
+    3495
+   ],
+   "note": "S4 states the normalized convolution and the error sqrt2*M(3l+1)2^{-p}, but not the cost bound. The sub-steps reproduce the proof: retained LB order, pointwise products, normalization via F^-(f*g)=M(F^-f)(F^-g) and F^+F^-=I/M, errors adding, and the final scale by M."
+  },
+  {
+   "id": "gaussian-resampling",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S5",
+    "S5.1",
+    "S5.2",
+    "S8.3"
+   ],
+   "lines": [
+    3548,
+    3574,
+    3800,
+    3834
+   ],
+   "note": "S5.1 states P_sF_s=2^{2alpha^2}B_0P_tF_tA with error <p^2 and time O(tp^{3/2+delta}alpha), but omits the hypothesis theta>p/alpha^4 (it appears only later in S8.3) and the definitions of P_s, P_t. S5.2 states the tensor form. The one-dimensional construction is not derived."
+  },
+  {
+   "id": "chirp-permutation-cancellation",
+   "presence": "stated",
+   "statement": "correct",
+   "derivation": "n/a",
+   "steps": [
+    "S6",
+    "S7"
+   ],
+   "lines": [
+    3911,
+    3988
+   ],
+   "note": "S6 states the chirp identity with the correct a_j. S7 states the cancellation with its reason F_s^+R=R^{-1}F_s^+, matching 3960-3962. Both are infer steps."
+  },
+  {
+   "id": "parameters-and-primes",
+   "presence": "stated",
+   "statement": "imprecise",
+   "derivation": "n/a",
+   "steps": [
+    "S8",
+    "S8.1",
+    "S8.2",
+    "S8.3",
+    "S9"
+   ],
+   "lines": [
+    4004,
+    4015,
+    4049,
+    4101,
+    4135,
+    4155,
+    4180,
+    4192
+   ],
+   "note": "The sizes (p=6b, d, T, t_i, Tp=Theta(n)), the primes with eta=1/(4d), T/2<S<T, and alpha^4 theta_i>p are stated correctly. The fixed rational choice (tau, lambda, c, lambda', epsilon, delta) and the definitions of alpha and gamma are absent, as is the prime-existence argument."
+  },
+  {
+   "id": "crt-address-map",
+   "presence": "derived",
+   "statement": "imprecise",
+   "derivation": "faithful",
+   "steps": [
+    "S10",
+    "S10.1",
+    "S10.2"
+   ],
+   "lines": [
+    4204,
+    4296
+   ],
+   "note": "Phi, its isomorphism argument (the image of x has order S) and the triangular prefix-controlled shifts with cost O(Tp d^2(1+l^tau)) follow the paper. mu_i=P_i^{-1} mod s_i is never defined."
+  },
+  {
+   "id": "phase-twist",
+   "presence": "stated",
+   "statement": "correct",
+   "derivation": "n/a",
+   "steps": [
+    "S11.1"
+   ],
+   "lines": [
+    4298,
+    4347
+   ],
+   "note": "S11.1 states the twist by zeta^k, zeta=e^{pi i/r}, mapping cyclic to negacyclic convolution and the untwist with the correct sign, as at 4303-4320."
+  },
+  {
+   "id": "multiplication-algorithm",
+   "presence": "derived",
+   "statement": "imprecise",
+   "derivation": "faithful",
+   "steps": [
+    "S11",
+    "S11.1",
+    "S11.2",
+    "S11.3",
+    "S12"
+   ],
+   "lines": [
+    4415,
+    4484,
+    4486,
+    4545
+   ],
+   "note": "S11 to S11.3 follow the source-transform composition, including the exact counterpart 2^gamma B_0 Q F_t A = R F_s. S12 lists the algorithm's steps but gives the scalings as S and 2^{2b+4}. The paper's second scale is 2^{2b+4}S (4521-4522, 4536-4541)."
+  },
+  {
+   "id": "exact-recovery",
+   "presence": "derived",
+   "statement": "imprecise",
+   "derivation": "partial",
+   "steps": [
+    "S13",
+    "S13.1",
+    "S13.2",
+    "S13.3",
+    "S13.4"
+   ],
+   "lines": [
+    4546,
+    4600,
+    4640,
+    4730,
+    4771,
+    4806
+   ],
+   "note": "The E_ring, E_s, final 448b 2^{-3b/4}<1/2 and carry steps match the paper. The chirp-transform error (8TL) and the E_w=S(3E_s+2) stage are skipped, and S13.3 repeats the scaling by 2^{2b+4} instead of 2^{2b+4}S."
+  },
+  {
+   "id": "time-accounting",
+   "presence": "derived",
+   "statement": "correct",
+   "derivation": "partial",
+   "steps": [
+    "S14",
+    "S14.1",
+    "S14.2",
+    "S14.3"
+   ],
+   "lines": [
+    4815,
+    4854,
+    4857,
+    4995
+   ],
+   "note": "The margin values g_1..g_7, min=2^{-181}=2kappa, the log-factor slack and the final O(Tp p^{1-kappa}) bound match. The table's normalized costs (dK, pK^{tau-1}, ...) are not listed, and setup and exceptional-address sorting being o(V) is not addressed."
+  },
+  {
+   "id": "conjecture-negation",
+   "presence": "absent",
+   "statement": "n/a",
+   "derivation": "n/a",
+   "steps": [],
+   "lines": [
+    379,
+    387
+   ],
+   "note": "No step discusses the eventual lower bound or its negation via liminf; S0 only mentions the n log n barrier as motivation."
+  }
+ ],
+ "errors": [
+  {
+   "step": "S12",
+   "says": "The algorithm uses scalings by S and 2^{2b+4}, which undo the transform normalization and the digit scale.",
+   "paper": "The first scale is S and the second is 2^{2b+4}S. The exact counterpart after the three transforms is (u*v)/S^2, so a scale of S alone would leave a factor 1/S.",
+   "lines": [
+    4517,
+    4523,
+    4536,
+    4541
+   ],
+   "severity": "minor"
+  },
+  {
+   "step": "S13.3",
+   "says": "After the two scalings by S and 2^{2b+4}, the final absolute error is below 448b 2^{-3b/4}<1/2.",
+   "paper": "The second scaling is by 2^{2b+4}S ('This second occurrence of S reverses the normalization still present in w'). The final-error bound includes that factor S.",
+   "lines": [
+    4716,
+    4726
+   ],
+   "severity": "minor"
+  }
+ ],
+ "chain": "The tree follows the paper's route to the main bound: interchange, simultaneous layer, synthetic transform, ring convolution, resampling, chirp, CRT, assembly, exact recovery, and cost margins ending at O(n(log n)^{1-kappa}). It thins out at the source of the power saving. S1.3.3 asserts nested labels, the endpoint identity and s<Wm without the dimension budget, rank equals dimension change, or L/N<1/2. The shear-to-interchange step and the explicit tau=1-2^{-50} are also missing, so the saving is asserted rather than reconstructed. Downstream, the complex interface and the layer recurrence are only stated, and S12/S13.3 misstate the second scaling factor.",
+ "central": {
+  "steps": [
+   {
+    "id": "C1",
+    "verdict": "mentioned",
+    "plan_steps": [
+     "S1.3.1",
+     "S1.3.3"
+    ],
+    "lines": [
+     653,
+     739,
+     741,
+     783
+    ],
+    "note": "The exchange (X_a,Y_a)->(-Y_a,X_a) restoring every scratch wire is stated, and S1.3.3 mentions three-element subsets. h=100, N=binom(h,3)^3 and m=h^3 are absent, so I chose mentioned conservatively."
+   },
+   {
+    "id": "C2",
+    "verdict": "reconstructed",
+    "plan_steps": [
+     "S1.3.2"
+    ],
+    "lines": [
+     793,
+     825
+    ],
+    "note": "States that a common frame commutes with the pointwise gate and that the network implements D_out S_Omega D_in^{-1}, with arrays stored as D_v g."
+   },
+   {
+    "id": "C3",
+    "verdict": "mentioned",
+    "plan_steps": [
+     "S1.3.3"
+    ],
+    "lines": [
+     845,
+     1010
+    ],
+    "note": "Says only that labels are built from triple indicator vectors and nested along edges. The dimension m and the decreasing central edges losing h (the only decreases) are absent."
+   },
+   {
+    "id": "C4",
+    "verdict": "absent",
+    "plan_steps": [],
+    "lines": [
+     1156,
+     1166
+    ],
+    "note": "No step says that P_V-P_U has rank dim V - dim U, or mentions the N rank-one source exceptions."
+   },
+   {
+    "id": "C5",
+    "verdict": "absent",
+    "plan_steps": [],
+    "lines": [
+     997,
+     1010,
+     1138,
+     1154
+    ],
+    "note": "No budget Wm-2N+2L, L=Ich or s_b=W_b m-N+2L_b appears in the plan."
+   },
+   {
+    "id": "C6",
+    "verdict": "mentioned",
+    "plan_steps": [
+     "S1.3.3"
+    ],
+    "lines": [
+     1105,
+     1110,
+     1166,
+     1167
+    ],
+    "note": "s<Wm is asserted, and the quote carries 'deficit N-2L_b>0', but L/N=100/539 (or 101/539)<1/2 is never stated and L is never defined."
+   },
+   {
+    "id": "C7",
+    "verdict": "mentioned",
+    "plan_steps": [
+     "S1.3",
+     "S1.3.3"
+    ],
+    "lines": [
+     1138,
+     1172
+    ],
+    "note": "S1.3.3 says every role is moved by the endpoint difference I_m, but no matrices M_v are given, and the plan never says the network applies the shear H<-H+D on every role or how that shear becomes the interchange."
+   },
+   {
+    "id": "C8",
+    "verdict": "reconstructed",
+    "plan_steps": [
+     "S1.3",
+     "S1.3.4",
+     "S1.3.5"
+    ],
+    "lines": [
+     1364,
+     1447,
+     1543
+    ],
+    "note": "S1.3.4 states that a rank-a shear costs exactly a interchanges plus O(V), and the recurrence implies s calls per node. The E_1 Pi E_2 factorization is not stated (only hinted by a 'relies on' label); I am somewhat unsure about this verdict."
+   },
+   {
+    "id": "C9",
+    "verdict": "reconstructed",
+    "plan_steps": [
+     "S1.3",
+     "S1.3.5",
+     "S1.3.6"
+    ],
+    "lines": [
+     1319,
+     1346,
+     1497,
+     1557
+    ],
+    "note": "Children of volume V/W, F_k<=(s/W)F_{k-1}+O(1) and s/W<m^tau giving O(e^tau) are all present. The explicit tau=1-2^{-50} and its derivation from eta>20*2^{-50} and log m<20 are absent."
+   }
+  ],
+  "summary": "The plan keeps the outer frame of the central saving: a fixed exchanging network, frames, s<Wm, rank-many interchanges per edge, and the recurrence to O(e^tau). The core mechanism that produces s<Wm is missing: label dimensions, rank equal to dimension change, the budget Wm-2N+2L, and L/N<1/2. The endpoint shear and the explicit exponent are also missing, so the saving is asserted rather than reconstructed (3 of 9 reconstructed)."
+ }
+}
