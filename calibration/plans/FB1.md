@@ -112,3 +112,9 @@ These are rules for choosing an experiment, not predictions of Fable's behaviour
 | Run | Configuration | Run dir | Status |
 |---|---|---|---|
 | FB1F8 | Fable, `high` | `e6/FB1F8` | launched 15:01 UTC on S4's branch "improves, not the ceiling" (incumbent S4F8OM); task file identical to S4F8OM's apart from the path |
+
+**Narrowed, 15:09 UTC, while FB1F8 was still running and before any result:**
+- **Why:** E8 found that Sonnet `high` with the variant sentence reaches the ceiling on F8 (faithful 19, checklist 25). With the best instructions, F8 has no room for a stronger model.
+- **The question that remains:** whether Fable beats Opus `max` with the E7 instructions. It is still informative about model capability, but no longer decision-critical.
+- **The change** (runbook §4, two-stage judging): FB1F8 and S4F8OM are judged first on the checklist (2 judges each).
+- **Full primary judging** follows only if Fable's checklist is above Opus `max`'s beyond noise.
