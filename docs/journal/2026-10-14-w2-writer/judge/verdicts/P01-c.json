@@ -1,0 +1,234 @@
+{
+ "page": "P01",
+ "items": [
+  {
+   "id": "S4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "edge-by-edge residual table (interstage 'in' edges, scratch source and last-to-sink edges) with residual dimensions",
+    "nondegeneracy of every label summand (needed for A=B\\perp P and for projections along U^\\perp)",
+    "existence of orthonormal residual bases over F_2 is only cited"
+   ],
+   "note": "The page builds the triple-indicator forms, terminal labels, stage transitions, the gate table, the telescoping count and L/N=\\gamma/539, then both interfaces; the nesting check is compressed into 'Splitting $A=B\\perp P$ and $F=\\langle t\\rangle\\perp t^\\perp$ shows each edge nested'."
+  },
+  {
+   "id": "S4.3.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "eigenvalues 1 and 1-h/9=-91/9 showing the rational form is nondegenerate (appears only inside a citation)"
+   ],
+   "note": "Derives $\\langle t_S,t_T\\rangle=|S\\cap T|-\\tfrac{3\\cdot3}9$ from 'indicators sum to 3', gives $t_S\\cdot t_T=|S\\cap T|\\bmod2$, $t_T\\cdot t_T=1$ over $\\mathbb F_2$, nondegenerate lines, orthogonal neighbors, $\\mathcal F=F^{\\otimes3}$ and $u_a$; matches the paper."
+  },
+  {
+   "id": "S4.3.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Terminal table matches the paper exactly; the sums N and Wm-N are read off the table (the sink count Nm+N(m-1)+(W-2N)m is left to the reader, as in the paper)."
+  },
+  {
+   "id": "S4.3.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the alternative form B'=(B\\otimes F)\\perp(P\\otimes t^\\perp), which identifies the outgoing Y label with the time-5 gate label",
+    "P nondegenerate, so A=B\\perp P"
+   ],
+   "note": "Gives the transition table, $A'=A\\otimes F,\\ P'=P\\otimes\\langle t\\rangle,\\ B'=(P')^\\perp_{A'},\\ Q=\\langle t_{a_{j+1}}\\rangle\\otimes Q'$ and the endpoints 'from $U_a,0$ to $\\mathcal F,U_a^\\perp$'; the substitution into the next incoming labels is left to the reader but follows directly."
+  },
+  {
+   "id": "S4.3.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "per-edge residual table, including interstage edges through 'in' and scratch last-to-sink edges",
+    "nondegeneracy of every displayed summand"
+   ],
+   "note": "Gate table, nesting by splitting, the single decrease at center $3\\to4$, $L=I\\gamma h$ and $\\sum_e|\\Delta|=Wm-2N+2L$ are all on the page, at the level of the paper's 'other entries follow directly by splitting'."
+  },
+  {
+   "id": "S4.3.4.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "correspondence of times to scalar schedule rows, including stage 2 using the inverse of row 7-r with logical banks exchanged (neighbor relation symmetric)"
+   ],
+   "note": "The page's table of gate labels by time reproduces the paper's (eq:motif-labels) exactly, tensored by Q."
+  },
+  {
+   "id": "S4.3.4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the residual P\\otimes\\langle t_X,t_Y\\rangle^\\perp of the 2->5 edge and its dimension h-2"
+   ],
+   "note": "'side wires between neighbors $t_Y,t_X$ nest at $2\\to5$ because $\\langle t_X\\rangle\\subset t_Y^\\perp$' gives the paper's reason for nesting; the residual itself is not computed."
+  },
+  {
+   "id": "S4.3.4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "explicit check that interstage and terminal edges do not decrease"
+   ],
+   "note": "'Labels only grow, except central wires, losing $\\dim(P\\otimes F\\otimes Q)=h$ at $3\\to4$', then $L=I\\gamma h$ with $\\gamma$ central wires per invocation; correct, though the 'only' rests on the one-line splitting argument."
+  },
+  {
+   "id": "S4.3.4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'all wires at a gate share its label, so edge changes $\\Delta$ telescope' with source sum N and sink sum Wm-N gives $\\sum_e\\Delta=Wm-2N$ and $\\sum_e|\\Delta|=Wm-2N+2L$, as in the paper."
+  },
+  {
+   "id": "S4.3.4.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "nonalternating argument: each nonzero residual contains a norm-one vector built from coordinate units outside small supports",
+    "nondegeneracy of each residual",
+    "construction of an orthonormal basis by absorbing alternating planes"
+   ],
+   "note": "The page says only 'Such bases exist.' with a citation to the paper."
+  },
+  {
+   "id": "S4.3.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Computes $\\frac LN=\\frac{3\\binom h3^2\\gamma h}{\\binom h3^3}=\\frac{3\\gamma h}{161700}=\\frac\\gamma{539}$ with $\\gamma=100,101$, below 1/2; the extra N source ranks appear in the $s_{\\rm b}$ formula, leaving the strict saving."
+  },
+  {
+   "id": "S4.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "nondegeneracy of labels, needed for the projection along U^\\perp",
+    "sign of P_V-P_U on decreasing edges"
+   ],
+   "note": "Projection frames, the rank-equals-dimension rule, the N extra rank-one source edges and the endpoint identity give $s_{\\rm b}=W_{\\rm b}m-2N+2L_{\\rm b}+N<W_{\\rm b}m$, matching the paper."
+  },
+  {
+   "id": "S4.3.6.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'$\\Pi_{U_a^\\perp}-(-\\Pi_{U_a})=\\Pi_{\\mathcal F}-0=I_m$' covers the $X_a\\to Y_a$ route and the zero-to-full routes, as in the paper."
+  },
+  {
+   "id": "S4.3.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'$s_{\\rm b}=W_{\\rm b}m-2N+2L_{\\rm b}+N=W_{\\rm b}m-(N-2L_{\\rm b})<W_{\\rm b}m$' follows from the dimension count plus the N exceptions; the numerical value appears only in the citation."
+  },
+  {
+   "id": "S4.3.6.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "reversing an edge negates P_V-P_U without changing its rank"
+   ],
+   "note": "'$\\Pi_V-\\Pi_U$ is the identity on the residual and zero on its complement, so ranks equal dimension changes' is the paper's argument; the decreasing-edge case is not addressed."
+  },
+  {
+   "id": "S4.3.6.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "B=0 at stage 1, the reason the first gate on X_a has label exactly U_a"
+   ],
+   "note": "'plus $\\operatorname{rank}(\\Pi_{U_a}+\\Pi_{U_a})=1$ on each $X_a$'s first edge (gate label $U_a$)' gives the paper's $2P_{U_a}$ of rank one."
+  },
+  {
+   "id": "S4.3.6.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Endpoint differences $\\Pi_{U_a^\\perp}+\\Pi_{U_a}=I_m$ and $\\Pi_{\\mathcal F}-0=I_m$ are shown."
+  },
+  {
+   "id": "S4.3.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "k-column version of the interface",
+    "Gaussian-dyadic entries of the frames"
+   ],
+   "note": "Phase frames, weight additivity, the kernel factorization, the count $s_{\\rm c}=W_{\\rm c}m-2N+2L_{\\rm c}$ and the $X_a\\to Y_a$ correction are all derived in the paper's order, for one column."
+  },
+  {
+   "id": "S4.3.7.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "normalization H=(1/\\sqrt2)[[1,1],[1,-1]]",
+    "entries of C_U and its inverse are Gaussian integers over 2^m, so arrays over Z[i,1/2] are preserved",
+    "the projection in q_U is over F_2"
+   ],
+   "note": "Defines $q_U(x)=\\operatorname{wt}(\\Pi_Ux)\\bmod4$, $C=H\\operatorname{diag}(1,i)H$ and $\\mathcal C_U$ as in the paper; $C=aI+bX$ is not written out for C, but the kernel coefficients $\\tfrac{1+i}2,\\tfrac{1-i}2$ appear later."
+  },
+  {
+   "id": "S4.3.7.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "One kernel per residual basis vector summed over edges gives '$s_{\\rm c}=W_{\\rm c}m-2N+2L_{\\rm c}<W_{\\rm c}m$ in all' from the earlier $\\sum_e|\\Delta|$."
+  },
+  {
+   "id": "S4.3.7.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Orthogonal binary vectors overlap evenly, so weight adds modulo 4' with the displayed $\\operatorname{wt}(z+w)$ identity, as in the paper."
+  },
+  {
+   "id": "S4.3.7.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page adds the projection identity $\\Pi_Vx=\\Pi_Ux+\\sum_{z\\in\\mathcal B}(z\\cdot x)z$ to obtain $q_V-q_U\\equiv\\pm\\sum\\operatorname{wt}(z)[z\\cdot x]$, with '− on decreasing edges' and odd weights; correct and faithful."
+  },
+  {
+   "id": "S4.3.7.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Gives $i^{\\varepsilon[z\\cdot x]}=\\tfrac{1+i^\\varepsilon}2+\\tfrac{1-i^\\varepsilon}2(-1)^{z\\cdot x}$ and $H\\operatorname{diag}(1,-1)H=X$ turning the character into translation, yielding the kernel or its inverse."
+  },
+  {
+   "id": "S4.3.7.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "k-column version: Z_{a,k} on the 27 coordinates in every column and the scalar i^{27k} applied once to the whole role"
+   ],
+   "note": "Computes $q_{U_a^\\perp}-q_{U_a}\\equiv\\sum_{k\\notin\\operatorname{supp}u_a}x_k-\\sum_{k\\in\\operatorname{supp}u_a}x_k$ (correct mod 4, since $2\\cdot27\\equiv2$) and fixes it with $Z$ before and $i^{27}Z$ after via $C=iZC^{-1}Z$; one column only."
+  },
+  {
+   "id": "S4.3.7.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the reason for negating X outputs: the scalar exchange sends Y_a to X_a with sign -1",
+    "the k-column statement C^{\\otimes mk}"
+   ],
+   "note": "Routes $0\\to\\mathcal F$ are shown to give $C^{\\otimes m}$ and the $X_a\\to Y_a$ route is corrected; 'Negating $X$ outputs and returning roles leaves $C^{\\otimes m}$ everywhere' asserts the last fix without saying where the minus sign comes from."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "*neighbors*, triples joined by side wires ($|S\\cap T|=1,$ or distinct with even intersection), are orthogonal.",
+   "problem": "The two neighbor rules are not attributed to their networks; read as one relation the claim is false (in the bit network disjoint triples have $\\langle t_S,t_T\\rangle=-1$; over $\\mathbb F_2$ triples meeting in one point have dot product 1). The paper: bit neighbors have $|S\\cap T|=1$, complex neighbors are distinct triples with even intersection."
+  },
+  {
+   "severity": "minor",
+   "quote": "$\\Pi_V-\\Pi_U$ is the identity on the residual and zero on its complement, so ranks equal dimension changes",
+   "problem": "On a decreasing edge (the central $3\\to4$ edges) $\\Pi_V-\\Pi_U$ is minus the identity on the residual. The paper notes that reversing the edge negates the matrix without changing its rank, so the rank count is unaffected."
+  }
+ ],
+ "motivation_given": true
+}
