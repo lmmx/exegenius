@@ -293,7 +293,11 @@ concludes from a count, a bound or an equality, state the identity, lemma or def
 that makes it hold, and every case the sources treat as an exception to it. Where the \
 sources carry out a construction or estimate in more than one variant, develop each variant \
 the target result uses; where a sub-step concludes a bound on an error, a size or a depth, \
-state the recurrence or chain of estimates that produces the bound.
+state the recurrence or chain of estimates that produces the bound. Define each parameter \
+and constant the target result's statement or derivation fixes (a size, a count, a \
+threshold) with the value the sources give it, at the step that first uses it; where the \
+sources establish a sub-step case by case or by a table, give every case and what it \
+contributes.
 - `salient`: for a step whose claim has a feature a reader would find striking (a symmetry, \
 a uniformity across cases, a surprising value or bound), that feature. A proof explains a \
 result only relative to such a feature (Lange), so its page is asked to explain why the \
