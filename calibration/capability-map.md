@@ -29,6 +29,7 @@
 | `general-purpose` / `claude-sonnet-5-5` / **high** / cc70355 | 5 | **5/5** (0.48–1.00) | 3/5 (0.15–0.95) | not measured | 2.39 M · ~58 k · 502 s | E1 |
 | `exegenius-planner` / `claude-opus-5-5` / medium / cc70355 (J4) | 2 | 2/2 (0.16–1.00) | 1/2 (0.01–0.99) | 1/2 (0.01–0.99) | 1.04 M · ~25 k · 281 s | S1 (screen) |
 | `exegenius-planner` / `claude-opus-5-5` / high / cc70355 (J4) | 2 | 2/2 (0.16–1.00) | 1/2 (0.01–0.99) | 1/2 (0.01–0.99) | 1.44 M · ~35 k · 395 s | S1 (screen) |
+| `general-purpose` / `claude-opus-5-5` / medium / af36d6d (J6) | 5 | 5/5 (0.48–1.00) | 0/5 (0.00–0.52) | 0/5 (0.00–0.52) | 1.98 M · ~21 k · 239 s | E5 |
 | `exegenius-planner` / `claude-haiku-5-5` / high / cc70355 (J4) | 2 | 0/2 (0.00–0.84) | 0/2 (0.00–0.84) | 0/2 (0.00–0.84) | 2.41 M · ~111 k · 621 s | S1 (screen) |
 | `general-purpose` / `claude-sonnet-5-5` / high / af36d6d, argument only on E1's extractions (J5) | 5 | 5/5 (0.48–1.00) | 2/5 (0.05–0.85) | 0/5 (0.00–0.52) | 3.06 M · ~40 k · 383 s | E4 baseline |
 | `general-purpose` / `claude-sonnet-5-5` / high / **key-step instruction** (0c29556), argument only on E1's extractions (J5) | 5 | 4/5 (0.28–0.99) | 4/5 (0.28–0.99) | **3/5** (0.15–0.95) | 2.22 M · ~66 k · 607 s | E4 variant |
@@ -45,7 +46,7 @@ Pass counts are given with exact two-sided 95% (Clopper–Pearson) intervals. Th
 - **Technical calibre:** no tested configuration reaches it reliably. At high effort it is 2 to 3 of 5 per arm.
 - **Research calibre:** no configuration reaches it reliably.
   - **Sonnet:** 0 of 5 plans at high effort, and 0 of 5 at medium, pass the central-derivation gate (E3, batch J3). At high effort the gap is the counting core (labels, rank as dimension change, the budget, $L/N<1/2$), reconstructed in only 1–2 plans of 5.
-  - **Opus:** passes it in 1 of 2 plans at medium and 1 of 2 at high effort (S1, a screen).
+  - **Opus:** passes it in 1 of 2 plans at medium and 1 of 2 at high effort (S1, a screen), but in 0 of 5 fresh general-purpose plans at medium (E5), which reconstruct rank as dimension change (C4) in none. Against Sonnet at high in the same batch: central count median 6 against 5 (p = 0.33), core derived 6 against 11. Opus at medium is not preferred for planning on this paper.
   - **Sonnet at high with the key-step instruction:** passes it in 3 of 5 plans, against 0 of 5 without, on the same extractions (E4). One of the five made two major errors in the derivation, so the preregistered criterion was not met. The instruction is not on `master`.
 - **E3, a one-batch comparison on one binary,** confirms the effort finding at stage 2. Medians: stated 7 → 19, derived 1 → 7, faithful 0 → 3; exact one-sided p = 0.004 and 0.024 on the primary measures. This is at about 5× the tokens read from cache and 3–4× the seconds.
 - **The agent definition** has shown no measured advantage at high effort: E1, 5 against 5. A general-purpose agent given the task prompt is an equal candidate.
@@ -53,11 +54,11 @@ Pass counts are given with exact two-sided 95% (Clopper–Pearson) intervals. Th
 ### Open, in order of what would change a recommendation
 
 1. **E3: Sonnet planner at medium against high,** one batch, with the central-derivation rubric. *Done: high preferred (R1), and neither reaches Research (R2).*
-2. **Whether a different model reaches the same calibre at lower cost or effort.** *Screened in S1: Opus at medium and high advance, Haiku at high passes nothing. E5 estimates Opus at medium against Sonnet at high.* The screen proposed by screening at 2 runs per arm (`PROTOCOL.md` §6). The arms would be:
+2. **Whether a different model reaches the same calibre at lower cost or effort.** *Screened in S1: Opus at medium and high advance, Haiku at high passes nothing. E5: Opus at medium is not better than Sonnet at high on the central derivation and derives less; it is cheaper in output and time.* The screen proposed by screening at 2 runs per arm (`PROTOCOL.md` §6). The arms would be:
    - Opus at medium and at low;
    - Haiku at high and at xhigh;
    - Sonnet at xhigh, which may matter for the Research calibre.
-3. **Whether any configuration reaches the Research calibre** (the central derivation). *Partly answered: the gap is in both what the task asks for (E4) and the model (S1).* Open: a confirmation of the key-step instruction on fresh runs, with the rate of major errors in the derivation as a criterion, and the instruction on Opus.
+3. **Whether any configuration reaches the Research calibre** (the central derivation). *Partly answered: the gap moves with what the task asks for (E4), not with the model (E5).* Open: a confirmation of the key-step instruction on fresh runs, with the rate of major errors in the derivation as a criterion, and the instruction on Opus.
 4. **Writers, auditors and support checks:** no evidence yet. They dominate a full run's cost.
 
 ## Other document classes

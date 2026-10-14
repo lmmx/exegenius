@@ -26,6 +26,10 @@ exegenius-planner / claude-sonnet-5-5 / high / binary cc70355 | batch J5 | 1 run
   Overview: 1/1 pass (95% exact 0.02-1.00)
   Technical: 1/1 pass (95% exact 0.02-1.00)
   Research: 0/1 pass (95% exact 0.00-0.98)
+exegenius-planner / claude-sonnet-5-5 / high / binary cc70355 | batch J6 | 1 runs from E1
+  Overview: 1/1 pass (95% exact 0.02-1.00)
+  Technical: 1/1 pass (95% exact 0.02-1.00)
+  Research: 0/1 pass (95% exact 0.00-0.98)
 exegenius-planner / claude-sonnet-5-5 / medium / binary 1d90c28 | batch J1 | 11 runs from X1, X2
   Overview: 1/11 pass (95% exact 0.00-0.41)
   Technical: 0/11 pass (95% exact 0.00-0.28)
@@ -42,6 +46,10 @@ exegenius-planner / claude-sonnet-5-5 / medium / binary cc70355 | batch J5 | 1 r
   Overview: 0/1 pass (95% exact 0.00-0.98)
   Technical: 0/1 pass (95% exact 0.00-0.98)
   Research: 0/1 pass (95% exact 0.00-0.98)
+exegenius-planner / claude-sonnet-5-5 / medium / binary cc70355 | batch J6 | 1 runs from E3
+  Overview: 0/1 pass (95% exact 0.00-0.98)
+  Technical: 0/1 pass (95% exact 0.00-0.98)
+  Research: 0/1 pass (95% exact 0.00-0.98)
 exegenius-planner / claude-sonnet-5-5 / medium / binary f70a919 | batch J1 | 10 runs from X3
   Overview: 0/10 pass (95% exact 0.00-0.31)
   Technical: 0/10 pass (95% exact 0.00-0.31)
@@ -54,6 +62,10 @@ exegenius-planner / claude-sonnet-5-5 / medium / binary f70a919 | batch J3 | 1 r
   Overview: 0/1 pass (95% exact 0.00-0.98)
   Technical: 0/1 pass (95% exact 0.00-0.98)
   Research: 0/1 pass (95% exact 0.00-0.98)
+general-purpose / claude-opus-5-5 / medium / binary af36d6d | batch J6 | 5 runs from E5
+  Overview: 5/5 pass (95% exact 0.48-1.00)
+  Technical: 0/5 pass (95% exact 0.00-0.52)
+  Research: 0/5 pass (95% exact 0.00-0.52)
 general-purpose / claude-sonnet-5-5 / high / binary 0c29556 (131026-exp-key-step) | batch J5 | 5 runs from E4
   Overview: 4/5 pass (95% exact 0.28-0.99)
   Technical: 4/5 pass (95% exact 0.28-0.99)
@@ -78,3 +90,7 @@ general-purpose / claude-sonnet-5-5 / high / binary cc70355 | batch J2 | 5 runs 
   Overview: 5/5 pass (95% exact 0.48-1.00)
   Technical: 3/5 pass (95% exact 0.15-0.95)
   Research: not measurable in this batch
+general-purpose / claude-sonnet-5-5 / high / binary cc70355 | batch J6 | 5 runs from E1
+  Overview: 4/5 pass (95% exact 0.28-0.99)
+  Technical: 2/5 pass (95% exact 0.05-0.85)
+  Research: 0/5 pass (95% exact 0.00-0.52)

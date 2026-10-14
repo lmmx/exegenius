@@ -1,0 +1,31 @@
+per plan (first judgements):
+arm     run        core_stated    core_fully  core_derived core_faithful supporting_st         wrong  major_errors  minor_errors central_count  gate  steps C1..C9
+G       G1                  17             6             5             0             6             0             0             5             4  False mRRmmmmRR
+G       G2                  19            14            18            10             5             0             0             2             7  False mRRRRmRRR
+G       G3                  18             5             6             0             6             0             0             6             5  False mRRmmmRRR
+G       G4                  18             9            16             7             5             0             0             5             5  False mmRmmRRRR
+G       G5                  19            13            11             4             5             0             1             1             5  False mRRmmmRRR
+G       median            18.0           9.0          11.0           4.0           5.0           0.0           0.0           5.0           5.0
+N       N1                  19             9             8             3             6             0             0             3             6  False RRRmmmRRR
+N       N2                  19             3             4             0             6             0             0             3             4  False mRRmmmmRR
+N       N3                  19             9             6             3             6             0             0             5             5  False mRRmmmRRR
+N       N4                  17             9             7             0             5             0             0             1             7  False mRRmRRRRR
+N       N5                  17             4             6             0             5             0             0             2             6  False mRRmmRRRR
+N       median            19.0           9.0           6.0           0.0           6.0           0.0           0.0           3.0           6.0
+A       P4                  19            16            18            14             6             0             0             3             6  False mRRmmRRRR
+A       M3                   9             1             1             0             2             0             0             2             1  False mmm--mmRm
+A       median            14.0           8.5           9.5           7.0           4.0           0.0           0.0           2.5           3.5
+
+exact one-sided Mann-Whitney, N > G (n = 5 against 5):
+  core_derived   medians 11 -> 6, difference -5, p = 0.8929
+  core_faithful  medians 4 -> 0, difference -4, p = 0.9167
+  core_stated    medians 18 -> 19, difference 1, p = 0.5000
+  core_fully     medians 9 -> 9, difference 0, p = 0.8651
+  central_count  medians 5 -> 6, difference 1, p = 0.3254
+  central gate passed, G: 0/5
+  central gate passed, N: 0/5
+
+paired judgements (central steps, and counts):
+  P06 (G5): central steps same 7/9; central count 5 vs 5; gate False vs False; core derived 11 vs 10; faithful 4 vs 7
+  P08 (M3): central steps same 9/9; central count 1 vs 1; gate False vs False; core derived 1 vs 2; faithful 0 vs 0
+  P11 (P4): central steps same 7/9; central count 6 vs 8; gate False vs False; core derived 18 vs 18; faithful 14 vs 14

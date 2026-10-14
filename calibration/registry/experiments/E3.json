@@ -946,6 +946,36 @@
      "minor_errors": 2,
      "central_count": 1,
      "central_gate": false
+    },
+    {
+     "batch": "J6",
+     "judge": "a",
+     "plan": "P08",
+     "core_stated": 9,
+     "core_fully": 1,
+     "core_derived": 1,
+     "core_faithful": 0,
+     "supporting_stated": 2,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 1,
+     "central_gate": false
+    },
+    {
+     "batch": "J6",
+     "judge": "b",
+     "plan": "P08",
+     "core_stated": 11,
+     "core_fully": 0,
+     "core_derived": 2,
+     "core_faithful": 0,
+     "supporting_stated": 4,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 1,
+     "central_gate": false
     }
    ]
   },
@@ -1616,6 +1646,45 @@
      "median": 2,
      "min": 2,
      "max": 2
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 1,
+     "median": 1,
+     "min": 1,
+     "max": 1
+    },
+    "central_gate_passed": "0/1"
+   },
+   "quality_J6": {
+    "core_stated": {
+     "n": 1,
+     "median": 9,
+     "min": 9,
+     "max": 9
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 1,
+     "min": 1,
+     "max": 1
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 1,
+     "min": 1,
+     "max": 1
     },
     "core_faithful": {
      "n": 1,
