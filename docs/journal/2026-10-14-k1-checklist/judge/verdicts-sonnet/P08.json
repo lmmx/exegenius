@@ -1,0 +1,308 @@
+{
+ "plan": "P08",
+ "steps": [
+  {
+   "id": "B1",
+   "verdict": "present",
+   "plan_steps": [
+    "S1.1.1.1",
+    "S1.1.1"
+   ],
+   "lines": [
+    744,
+    750
+   ],
+   "note": "S1.1.1.1 gives the rows-0-to-7 subtract/change/add/restore sequence and concludes the net change (JV+RG)x for every initial a,c, with the quote of line 748; S1.1.1 motivation says restoring scratch last makes the map independent of scratch contents."
+  },
+  {
+   "id": "B2",
+   "verdict": "present",
+   "plan_steps": [
+    "S1.1.1.2"
+   ],
+   "lines": [
+    752,
+    755
+   ],
+   "note": "S1.1.1.2 states the central coefficient |S\u2229T| mod 2, side wires cancelling exactly the intersection-one pairs, intersections 0 and 2 already zero, and self coefficient one."
+  },
+  {
+   "id": "B3",
+   "verdict": "absent",
+   "plan_steps": [],
+   "lines": [
+    756,
+    758
+   ],
+   "note": "S1.1.1.2 treats only the bit case; no plan step states the complex-case central coefficient (|S\u2229T|-1)/2 or that side wires cancel intersections zero and two."
+  },
+  {
+   "id": "B4",
+   "verdict": "present",
+   "plan_steps": [
+    "S1.1.1.3"
+   ],
+   "lines": [
+    761,
+    764
+   ],
+   "note": "S1.1.1.3 gives (x,y)->(x,y+x)->(-y,y+x)->(-y,x) via forward, inverse, forward stages, with each invocation restoring its own scratch wires."
+  },
+  {
+   "id": "L1",
+   "verdict": "absent",
+   "plan_steps": [],
+   "lines": [
+    1013,
+    1043,
+    1059,
+    1060
+   ],
+   "note": "The plan never gives the per-edge residual table (residual subspaces and dimensions by wire and edge); S1.1.3.3 only says labels are comparable and dimension never decreases except center 3->4."
+  },
+  {
+   "id": "L2",
+   "verdict": "absent",
+   "plan_steps": [],
+   "lines": [
+    1048,
+    1058
+   ],
+   "note": "S1.1.3.2 states P\u2297<t_X> \u2282 P\u2297t_Y^\u22a5 because t_X \u22a5 t_Y (the paper's earlier line-953 form) but never gives the complement <t_X,t_Y>^\u22a5 of dimension h-2 that is the residual of edge 2->5."
+  },
+  {
+   "id": "L3",
+   "verdict": "present",
+   "plan_steps": [
+    "S1.1.3.3",
+    "S1.1.3.4"
+   ],
+   "lines": [
+    1061,
+    1071
+   ],
+   "note": "S1.1.3.3 names center 3->4 as the only decreasing edge losing h with total loss L=Ich; S1.1.3.4 telescopes sources N, sinks Wm-N, signed Wm-2N, absolute Wm-2N+2L."
+  },
+  {
+   "id": "L4",
+   "verdict": "absent",
+   "plan_steps": [],
+   "lines": [
+    1073,
+    1102
+   ],
+   "note": "No plan step shows that each nonzero residual over F_2 is nondegenerate and nonalternating or the absorption of alternating planes; S2.1.1 and the S2.1 claim only assume an orthonormal basis of the residual exists."
+  },
+  {
+   "id": "L5",
+   "verdict": "present",
+   "plan_steps": [
+    "S1.1.3.5",
+    "S2.1.2"
+   ],
+   "lines": [
+    1105,
+    1109
+   ],
+   "note": "S1.1.3.5 states L_b/N=100/539 and S2.1.2 states L_c/N=101/539."
+  },
+  {
+   "id": "P1",
+   "verdict": "present",
+   "plan_steps": [
+    "S2.1.1"
+   ],
+   "lines": [
+    1232,
+    1245
+   ],
+   "note": "S2.1.1 states weight is additive mod 4 for orthogonal binary vectors (even support intersection) and q_V-q_U=sum_v wt(v)[v.x] over an orthonormal basis of E."
+  },
+  {
+   "id": "P2",
+   "verdict": "absent",
+   "plan_steps": [],
+   "lines": [
+    1246,
+    1257
+   ],
+   "note": "S2.1.1 only asserts that each odd-weight v contributes the kernel aI+bX_v or its inverse; it never gives the phase i^{eps[v.x]} or the identity H diag(1,-1) H = X that turns it into a translation kernel."
+  },
+  {
+   "id": "P3",
+   "verdict": "present",
+   "plan_steps": [
+    "S2.1.2",
+    "S2.1.3",
+    "S2.1.5"
+   ],
+   "lines": [
+    1262,
+    1271
+   ],
+   "note": "S2.1.3 and S2.1.5 give one forward C^{\u2297f} child on the f axes per residual basis vector, summing to s_c child calls (S2.1.2 defines s_c as the number of residual basis vectors); the paper's k columns corresponds to the plan's f axes."
+  },
+  {
+   "id": "P4",
+   "verdict": "absent",
+   "plan_steps": [],
+   "lines": [
+    1273,
+    1314
+   ],
+   "note": "S2.1.5 and the S2.1 method only name the endpoint Z signs, i^{27f} scalar, C=iZC^{-1}Z and negation of X outputs; the plan does not state the zero label frame I, full label C^{\u2297m}, or that X_a->Y_a carries C^{-1} on the 27 coordinates of supp(u_a)."
+  },
+  {
+   "id": "R1",
+   "verdict": "present",
+   "plan_steps": [
+    "S1.1.3.5",
+    "S1.1.3.6",
+    "S1.1.3"
+   ],
+   "lines": [
+    1105,
+    1110
+   ],
+   "note": "S1.1.3.5 gives L_b/N=100/539<1/2 and S1.1.3.6 gives s_b short of W_b m by N-2L_b>0, so s_b<W_b m."
+  },
+  {
+   "id": "R2",
+   "verdict": "present",
+   "plan_steps": [
+    "S1.1.4"
+   ],
+   "lines": [
+    1319,
+    1322
+   ],
+   "note": "S1.1.4 states the relative deficit (W_b m - s_b)/(W_b m)=339/22587335000000."
+  },
+  {
+   "id": "R3",
+   "verdict": "absent",
+   "plan_steps": [],
+   "lines": [
+    1323,
+    1324
+   ],
+   "note": "The plan never states eta_c=73/19906842167500; S2.1.2 only says the complex deficit 2N-2L_c is positive."
+  },
+  {
+   "id": "R4",
+   "verdict": "present",
+   "plan_steps": [
+    "S1.1.4",
+    "S5.1.1",
+    "S2.4.3"
+   ],
+   "lines": [
+    1331,
+    1343
+   ],
+   "note": "S1.1.4 shows deficit >20*2^-50, log m<20, m^{1-2^-50}>m(1-20*2^-50), hence s/W<m^tau with tau=1-2^-50, and quotes the paper's 'Both exact deficits' line; the explicit chain is for the bit network and sigma=tau comes via S5.1.1/S2.4.3, so this is slightly generous."
+  },
+  {
+   "id": "M1",
+   "verdict": "present",
+   "plan_steps": [
+    "S1.1.5.1"
+   ],
+   "lines": [
+    1375,
+    1391
+   ],
+   "note": "S1.1.5.1 states A=E1 Pi E2 with Pi having exactly a ones, found by eliminating with the rightmost entry of the topmost nonzero row as pivot; the clearing and repeat-on-active-indices details are only implicit, so this is borderline."
+  },
+  {
+   "id": "M2",
+   "verdict": "absent",
+   "plan_steps": [],
+   "lines": [
+    1413,
+    1423
+   ],
+   "note": "The S1.1.5 claim only says q is a fixed prime avoiding all denominators; the plan does not give the finite table of factors, oddness, or the specialization of identities to Z/q^b with invertible triangular factors."
+  },
+  {
+   "id": "M3",
+   "verdict": "present",
+   "plan_steps": [
+    "S1.1.5.2"
+   ],
+   "lines": [
+    1425,
+    1430
+   ],
+   "note": "S1.1.5.2 states a lower-triangular transformation costs O(V) by updating coordinates in descending physical order, each via a controlled shift from earlier coordinates still holding original values."
+  },
+  {
+   "id": "M4",
+   "verdict": "present",
+   "plan_steps": [
+    "S1.1.5.3"
+   ],
+   "lines": [
+    1432,
+    1443
+   ],
+   "note": "S1.1.5.3 gives D_j<-D_j+H_i, interchange, D_j<-H_i-D_j taking (h,d) to (h+d,d) with one interchange, so the count is exactly the rank a."
+  },
+  {
+   "id": "S1",
+   "verdict": "absent",
+   "plan_steps": [],
+   "lines": [
+    2457,
+    2477
+   ],
+   "note": "The plan gives only Delta=ceil(C_0 d^{C_1}) with C_1=20 (S2.5, S5.1.1); E=64(W+m+1)^3, B=s+E, nu, C_1=max{20,nu+3} and C_0=128mB^2 are not defined."
+  },
+  {
+   "id": "S2",
+   "verdict": "absent",
+   "plan_steps": [],
+   "lines": [
+    2479,
+    2518
+   ],
+   "note": "S2.5 asserts a depth bound C_0 d^{C_1} but no step gives the recurrence A(e)<=sA(e/m)+E, the leaf bound A(e)<=8e, or the per-invocation count below E."
+  },
+  {
+   "id": "S3",
+   "verdict": "absent",
+   "plan_steps": [],
+   "lines": [
+    2523,
+    2560
+   ],
+   "note": "No step unrolls the recurrence (B^{k+1}<=B^2 d^nu, A(e)<=8B^2 d^{nu+1}); S2.5 only asserts the resulting bound C_0 d^{C_1}."
+  },
+  {
+   "id": "S4",
+   "verdict": "present",
+   "plan_steps": [
+    "S2.5",
+    "S5.1.1"
+   ],
+   "lines": [
+    2562,
+    2586
+   ],
+   "note": "S2.5 states depth-j values lie in 2^{-(p+j)}Z[i] with modulus at most 2^j and that p+Delta fractional and Delta+3 integer bits hold them exactly with Delta=o(p); S5.1.1 gives eps*C_1<1, though the link from eps*C_1<1 to Delta=o(p) is not spelled out."
+  },
+  {
+   "id": "S5",
+   "verdict": "present",
+   "plan_steps": [
+    "S2.6"
+   ],
+   "lines": [
+    2751,
+    2757
+   ],
+   "note": "S2.6 states every row of H has absolute row sum one so disks map to disks, and the single truncation changes each component by less than 2^-p, giving error below sqrt2*2^-p."
+  }
+ ],
+ "summary": "15 of 26 sub-steps present. The plan carries the bank-exchange derivation for the bit case only (B1, B2, B4), the label-budget telescoping and loss ratios (L3, L5), the phase-interface weight additivity and per-vector child counts (P1, P3), the rank-saving numerics for the bit network and exponent (R1, R2, R4), three of four matrix-shear steps (M1, M3, M4) and the guard-bit lattice and row-sum truncation (S4, S5). It omits the complex-case coefficient (B3), the residual table, side-edge complement and nonalternating orthonormal-basis argument (L1, L2, L4), the odd-weight to translation-kernel mechanism and endpoint repair (P2, P4), eta_c (R3), the prime/table specialization (M2) and the whole guard-depth recurrence chain (S1, S2, S3)."
+}

@@ -8,6 +8,9 @@ normalized first: whitespace, braces, `\\left`/`\\right` and thin spaces are rem
 and `B^{k + 1}` match alike. A marker can only suggest presence. It cannot see the role a
 sub-step plays or whether it is stated correctly, so it is a cross-check on judges, not a score.
 Sub-steps without a distinctive form (L1) have no marker and are reported as null.
+
+L2, P2, P3 and S4 were tightened after K1 (2026-10-14): they had matched a stated conclusion
+without the mechanism the sub-step requires (L2, P2, S4), or missed common notations (P3).
 """
 import json
 import re
@@ -19,13 +22,13 @@ MARKERS = {
     "B3": [r"\(\|S\\capT\|-1\)/2|\\frac\|S\\capT\|-12"],
     "B4": [r"\(-y,y\+x\)|\(x,y\+x\)"],
     "L1": None,
-    "L2": [r"t_[A-Z]\\perpt_[A-Z]|\\langlet_[A-Z],t_[A-Z]\\rangle\^\\perp"],
+    "L2": [r"\\langlet_[A-Z],t_[A-Z]\\rangle\^\\perp|h-2"],
     "L3": [r"W(_\\rm[bc]|_[bc])?m-2N\+2L"],
     "L4": [r"orthonormalbas[ie]s", r"alternating"],
     "L5": [r"100/539|\\frac100539"],
     "P1": [r"additiv", r"(mod|\\bmod|\\pmod)\(?4"],
-    "P2": [r"aI\+bX_?v|diag\(1,-1\)H=X"],
-    "P3": [r"\\otimesk"],
+    "P2": [r"diag\(1,-1\)H|i\^\\v?a?r?epsilon"],
+    "P3": [r"\\otimes[kf]\b|tensorpower|kcolumns"],
     "P4": [r"i\^27k|Z_a,k|27coordinates"],
     "R1": [r"L/N<1/2|2L<N|N-2L>0|2N-2L"],
     "R2": [r"339/22587335000000|\\frac33922587335000000"],
@@ -38,7 +41,7 @@ MARKERS = {
     "S1": [r"128mB\^2|\\nu=11"],
     "S2": [r"A\(e\)(\\le|\\leq|≤)|sA\(e/m\)"],
     "S3": [r"B\^k\+1(\\le|\\leq|≤)B\^2d|B\^2d\^\\nu|8B\^2d"],
-    "S4": [r"(\\epsilon|\\varepsilon)C_1<1|\\Delta\+3|p\+\\Delta"],
+    "S4": [r"2\^-\(p\+\\ell\)|modulus(atmost|\\le)2\^\\ell"],
     "S5": [r"rowsum"],
 }
 

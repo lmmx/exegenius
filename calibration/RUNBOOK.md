@@ -79,7 +79,7 @@
 | 3 | **K2** (`plans/K2.md`) | do Sonnet judges agree with Opus judges on the checklist, with no same-model bias? | now; existing plans | ~5–7 M | 11 Sonnet judgements launched 14:31 |
 | 4 | **E8** (`plans/E8.md`) | does a sentence asking for every variant and every bound's chain lift Sonnet `high` towards Opus `xhigh`? | now; two-stage | ~17 M (stage 1); +~60 M (stage 2, if the screen passes) | 3 runs launched 14:30 |
 | 5 | **FB1 pilot** (`plans/FB1.md`, "The pilot") | does Fable at `high` beat the incumbent on F8? | S4 outcome "improves but not ceiling" (against Opus `max`), or "does not improve" (against Opus `xhigh`). Not if S4 reaches the ceiling | run unknown (placeholder 6–16 M) + ~30 M judging | conditional |
-| 6 | Markers tightened (L2, P2, P3, S4) | the judge-free cross-check | now; free | 0 | queued |
+| 6 | Markers tightened (L2, P2, P3, S4) | the judge-free cross-check | now; free | 0 | **done** 14:40: fitted agreement 0.836 → 0.905 on K1 plans (optimistic, since these were used to tighten); J8 hold-out AUC 0.774 → 0.794 |
 | 7 | **Second document** | do the model and instruction effects generalise? | **needs the author to supply a document** (§2) | onboarding: reference set, central rubric and checklist, about 20–40 M of analysis; then a screen | blocked |
 | 8 | Full wiki from the best plans, with simulated readers on | does reconstruction survive the writers, and do readers reach the key step? | needs the author (§2) | large (writers and auditors) | blocked |
 
