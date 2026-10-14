@@ -1,0 +1,323 @@
+{
+  "plan": "P03",
+  "steps": [
+    {
+      "id": "B1",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.2.1"
+      ],
+      "lines": [
+        744,
+        750
+      ],
+      "note": "S1.2.1 states the net target change (JV+RG)x independent of the initial side/central values a,c, with rows 0-1 subtracting, rows 2-5 adding and rows 6-7 restoring c,a."
+    },
+    {
+      "id": "B2",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.2.2"
+      ],
+      "lines": [
+        752,
+        755
+      ],
+      "note": "S1.2.2 gives central coefficient |S\u2229T| mod 2, side wires cancelling exactly the intersection-one cases, zero/two-intersection triples already zero, self coefficient one."
+    },
+    {
+      "id": "B3",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.2.3"
+      ],
+      "lines": [
+        756,
+        758
+      ],
+      "note": "S1.2.3 gives central coefficient (|S\u2229T|-1)/2 cancelled by the side term for intersections zero and two, intersection one contributing zero, self coefficient one."
+    },
+    {
+      "id": "B4",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.2.4",
+        "S1.2"
+      ],
+      "lines": [
+        761,
+        764
+      ],
+      "note": "S1.2.4 gives the three stages (x,y)->(x,y+x)->(-y,y+x)->(-y,x); S1.2 claim/method has each composed invocation restoring its scratch wires."
+    },
+    {
+      "id": "L1",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1013,
+        1060
+      ],
+      "note": "The plan never states the per-edge residual table (e.g. B\u2297t_X^\u22a5 of dimension (a-1)(h-1), P\u2297F of dimension h, scratch residual ah(f-1)); S1.4.1 method only says each edge gets its residual's dimension and S1.4.1.5 says labels are comparable, without any residuals or dimensions."
+    },
+    {
+      "id": "L2",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1048,
+        1058
+      ],
+      "note": "S1.4.1.4 states \u27e8t_X\u27e9 \u2282 t_Y^\u22a5 because t_X \u22a5 t_Y, but the plan never gives the complement \u27e8t_X,t_Y\u27e9^\u22a5 of dimension h-2 as the side-edge 2->5 residual, so the sub-step's content is only half stated."
+    },
+    {
+      "id": "L3",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.1.5",
+        "S1.4.1.2",
+        "S1.4.1.6",
+        "S1.4.1.7"
+      ],
+      "lines": [
+        1061,
+        1071
+      ],
+      "note": "S1.4.1.5 gives center 3->4 as the only decreasing edge losing h, S1.4.1.2 sources N and sinks Wm-N, S1.4.1.6 signed Wm-2N by telescoping, S1.4.1.7 absolute Wm-2N+2L."
+    },
+    {
+      "id": "L4",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.1.7b"
+      ],
+      "lines": [
+        1073,
+        1102
+      ],
+      "note": "S1.4.1.7b states each nonzero F2 residual is nondegenerate and nonalternating via a norm-one unit, hence has an orthonormal basis, with alternating planes absorbed by replacing w with w+a,w+b,w+a+b."
+    },
+    {
+      "id": "L5",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.1.7c"
+      ],
+      "lines": [
+        1105,
+        1109
+      ],
+      "note": "S1.4.1.7c states L_b/N=100/539 and L_c/N=101/539."
+    },
+    {
+      "id": "P1",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.1.9",
+        "S1.4.1.9.2"
+      ],
+      "lines": [
+        1232,
+        1245
+      ],
+      "note": "S1.4.1.9.2 gives wt(z+w) formula and additivity mod 4 on orthogonal vectors; S1.4.1.9 method/motivation says the phase difference decomposes along an orthonormal residual basis into one-vector phases (the explicit sum of wt(v)[v.x] is not written but the content is)."
+    },
+    {
+      "id": "P2",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.1.9.3"
+      ],
+      "lines": [
+        1246,
+        1257
+      ],
+      "note": "S1.4.1.9.3 states wt(v) odd, phase coefficient \u00b11 mod 4, the i^{\u03b5[v.x]} expansion, and H diag(1,-1) H = X giving aI+bX_v or its inverse."
+    },
+    {
+      "id": "P3",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1262,
+        1271
+      ],
+      "note": "The plan never states the k-column tensoring ((C_V C_U^{-1})^{\u2297k} = prod K_{e,v}^{\u2297k}), one factor per residual vector acting on all k columns; S1.4.4.1.4/.7 concern child calls on slots of f axes, a different statement."
+    },
+    {
+      "id": "P4",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1273,
+        1314
+      ],
+      "note": "Only S1.4.4.1.9 touches this: it asserts C^{\u2297m} on every role after unspecified 'source and sink diagonal corrections' and 'undoing the signed bank exchange' and mentions the 27 inverse factors with C=iZC^{-1}Z; it omits zero label frame I and full label C^{\u2297m}, the explicit Z_{a,k} before and i^{27k}Z_{a,k} after, and the negation of the X outputs, so it names the step rather than carrying it out."
+    },
+    {
+      "id": "R1",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.1.7c",
+        "S1.4.1.8.4",
+        "S1.4.1.9.5"
+      ],
+      "lines": [
+        1105,
+        1110
+      ],
+      "note": "S1.4.1.7c gives both ratios below 1/2; S1.4.1.8.4 gives deficit N-2L_b>0 hence s_b<W_b m, and S1.4.1.9.5 the complex deficit 2N-2L_c>0."
+    },
+    {
+      "id": "R2",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.2.1"
+      ],
+      "lines": [
+        1319,
+        1322
+      ],
+      "note": "S1.4.2.1 states \u03b7_b=339/22587335000000."
+    },
+    {
+      "id": "R3",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.2.1"
+      ],
+      "lines": [
+        1323,
+        1324
+      ],
+      "note": "S1.4.2.1 states \u03b7_c=73/19906842167500."
+    },
+    {
+      "id": "R4",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.2.1",
+        "S1.4.2.2",
+        "S1.4.2.3"
+      ],
+      "lines": [
+        1331,
+        1343
+      ],
+      "note": "S1.4.2.1 both deficits exceed 20*2^-50, S1.4.2.2 log m<20 so m^{1-2^-50}>m(1-20*2^-50)>m(1-\u03b7), S1.4.2.3 s/W<m^\u03c4 with \u03c4=\u03c3=1-2^-50."
+    },
+    {
+      "id": "M1",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.3.1.2",
+        "S1.4.3.1.1"
+      ],
+      "lines": [
+        1375,
+        1391
+      ],
+      "note": "S1.4.3.1.2 gives the elimination (topmost nonzero row, rightmost nonzero pivot, lower-triangular clearing, delete row/column and repeat, rank-one block per step) and S1.4.3.1.1 states \u03a0 has exactly a ones."
+    },
+    {
+      "id": "M2",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.3.1.3"
+      ],
+      "lines": [
+        1413,
+        1423
+      ],
+      "note": "S1.4.3.1.3 states the prime q avoids all denominators and diagonal numerators so the diagonal factors are units; the 'finite table' and explicit specialization to Z/q^b are not spelled out, but the prime-choice criterion is stated."
+    },
+    {
+      "id": "M3",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.3.1.3"
+      ],
+      "lines": [
+        1425,
+        1430
+      ],
+      "note": "S1.4.3.1.3 states a lower triangular transformation costs O(V) by updating coordinates in descending physical order, each by a diagonal unit and a combination of earlier coordinates."
+    },
+    {
+      "id": "M4",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.3.1.4",
+        "S1.4.3.1.5"
+      ],
+      "lines": [
+        1432,
+        1443
+      ],
+      "note": "S1.4.3.1.4 gives D_j<-D_j+H_i, interchange, D_j<-H_i-D_j taking (h,d) to (h+d,d); S1.4.3.1.5 gives one interchange per one of \u03a0, a in all."
+    },
+    {
+      "id": "S1",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        2457,
+        2477
+      ],
+      "note": "The plan states E=64(W+m+1)^3 (S1.4.4.4.1), B=s+E (S1.4.4.4.3), \u0394=\u2308C_0 d^{C_1}\u2309 and C_1=max{20,\u03bd+3}=20, but never defines \u03bd=min{j: m^j\u2265B} nor gives \u03bd=11, and never defines C_0=128mB^2 (it only appears as the bound '128mB^2 d^{\u03bd+3} \u2264 C_0 d^{C_1}')."
+    },
+    {
+      "id": "S2",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.4.4.1",
+        "S1.4.4.4.2"
+      ],
+      "lines": [
+        2479,
+        2518
+      ],
+      "note": "S1.4.4.4.1 gives A(e)\u2264sA(e/m)+E internal, A(e)\u22648e leaf, with E=64(W+m+1)^3 bounding scalar gates (24W^3), child corrections (4s) and bank corrections; S1.4.4.4.2 explains why s not s/W."
+    },
+    {
+      "id": "S3",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.4.4.3",
+        "S1.4.4.4.4",
+        "S1.4.4.4.5"
+      ],
+      "lines": [
+        2523,
+        2560
+      ],
+      "note": "S1.4.4.4.3-5 give sx+E\u2264Bx, B^{k+1}\u2264B^2 d^\u03bd, A(e)\u22648B^2 d^{\u03bd+1}, and the total below 128mB^2 d^{\u03bd+3} \u2264 C_0 d^{C_1}."
+    },
+    {
+      "id": "S4",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.4.4.6",
+        "S1.4.4.4.7"
+      ],
+      "lines": [
+        2562,
+        2586
+      ],
+      "note": "S1.4.4.4.6 gives depth-\u2113 values in 2^{-(p+\u2113)}Z[i] of modulus \u22642^\u2113 and exact representation with p+\u0394 fractional and \u0394+3 integer bits; S1.4.4.4.7 gives \u03b5C_1<1 so \u0394=o(p)."
+    },
+    {
+      "id": "S5",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.4.5.3"
+      ],
+      "lines": [
+        2751,
+        2757
+      ],
+      "note": "S1.4.4.5.3 states every row of H has absolute row sum one so disk arrays map to disk arrays and componentwise truncation errs by less than \u221a2 2^{-p}."
+    }
+  ],
+  "summary": "21 of 26 sub-steps present, 5 absent (L1, L2, P3, P4, S1), 0 wrong. The plan carries the bank-exchange network (B1-B4), the rank-saving numbers (R1-R4), the matrix-shear proof (M1-M4) and the guard-width derivation (S2-S5) in full; it omits the residual table (L1), the h-2 side-edge complement (L2), the k-column tensoring of the phase interface (P3), the endpoint frames and Z repair details (P4), and the definitions of nu and C_0 (S1)."
+}
