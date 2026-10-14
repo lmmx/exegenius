@@ -719,8 +719,13 @@ def main():
         body.append([f"{a} vs {b}", f"{pa['faithful']} ({pa['batch']}) vs {pb['faithful']} ({pb['batch']})",
                      abs(pa["faithful"] - pb["faithful"]), ch])
     md.append(md_table(["Repeat", "Faithful", "Difference", "Checklist, same batch"], body))
-    md.append("\nE9F4Y and E10F4Y2 are judged in different batches (J18, J21); J21 also re-judged E9F4Y: "
-              "see section 3.\n")
+    rejudged = items.get("E9F4Y", {}).get("J21", {})
+    if rejudged:
+        n = max(len(v) for v in rejudged.values())
+        each = [sum(1 for cid in core_ids if len(rejudged.get(cid, [])) > j and rejudged[cid][j] == "faithful")
+                for j in range(n)]
+        md.append(f"\nE9F4Y and E10F4Y2 were first judged in different batches (J18, J21); J21 also re-judged "
+                  f"E9F4Y, faithful {each} against E10F4Y2's {[p for p in plans if p['run'] == 'E10F4Y2'][0]['faithful_each']}.\n")
 
     # 5. correlations
     md.append("## 5. Do the judge-free measures predict the plan?\n")

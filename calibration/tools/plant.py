@@ -883,7 +883,7 @@ def wilson(k, n, z=1.2816):
     d = 1 + z * z / n
     c = (p + z * z / (2 * n)) / d
     h = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d
-    return [round(c - h, 3), round(c + h, 3)]
+    return [round(max(0.0, c - h), 3), round(min(1.0, c + h), 3)]
 
 
 def rate(k, n):
@@ -893,58 +893,83 @@ def rate(k, n):
 
 
 def score_audit(key, pages_dir, variant, answer):
-    """Per error and sham of one variant: how the audit answer treats its site."""
+    """How one audit answer treats each planted error and sham of a variant.
+
+    Each gap counts for one site at most: the planted error, sham or native defect it is
+    closest to (its sentence, then a linked sentence, then its paragraph; ties go to the
+    nearer site). An error is `named-exact` when a gap in its sentence asserts that something
+    is wrong, `named-near` when such a gap is in a linked sentence or its paragraph,
+    `named-elsewhere` when an asserting gap anywhere else mentions one of its cues, `located`
+    when a gap in its sentence does not assert an error, and `missed` otherwise."""
     body = (pages_dir / variant["file"]).read_text()
     view = auditor_view(body)
+    sents = sentence_spans(view)
     gaps = [dict(g, _span=locate(view, g.get("quote", ""))) for g in (answer or {}).get("gaps", [])]
-    errs = [e for e in key["errors"] if e["code"] == variant["code"]]
-    shams = [s for s in key["shams"] if s["code"] == variant["code"]]
     page = next(p for p in key["pages"] if p["page"] == variant["page"])
-    native_spans = [tuple(enclosing(sentence_spans(view), *locate(view, n["quote"]))[0])
-                    for n in page["native"] if locate(view, n["quote"])]
-    used, out = set(), {"errors": {}, "shams": {}, "gaps": len(gaps)}
-    for e in errs:
-        loc = e["location"]
-        site = loc["audit_site"]["sentence_span"]
-        near = [loc["audit_site"]["paragraph_span"]] + [l["sentence_span"] for l in loc["linked"]]
-        best = "missed"
-        for i, g in enumerate(gaps):
-            exact = overlaps(g["_span"], site)
-            close = exact or any(overlaps(g["_span"], n) for n in near)
-            named = asserts(g) or mentions(g, e["cues"])
-            level = None
-            if exact and named:
-                level = "named-exact"
-            elif close and named:
-                level = "named-near"
-            elif asserts(g) and mentions(g, e["cues"]):
-                level = "named-elsewhere"
-            elif exact:
-                level = "located"
-            if level:
-                rank = ["missed", "located", "named-elsewhere", "named-near", "named-exact"]
-                if rank.index(level) > rank.index(best):
-                    best = level
-                if level.startswith("named") or level == "located":
-                    used.add(i)
-        out["errors"][e["id"]] = best
-    for s in shams:
-        site = s["location"]["audit_site"]["sentence_span"]
-        hits = [g for g in gaps if overlaps(g["_span"], site)]
-        out["shams"][s["id"]] = ("asserted" if any(asserts(g) for g in hits)
-                                 else "located" if hits else "quiet")
-        used.update(i for i, g in enumerate(gaps) if overlaps(g["_span"], site))
-    # Assertions that match no planted error or sham: native defect, or a false alarm.
-    out["native_asserted"] = 0
-    out["spurious_asserted"] = 0
-    out["unlocated_quotes"] = sum(1 for g in gaps if g["_span"] is None)
+    sites = []  # (kind, id, [(proximity, span)])
+    for e in key["errors"]:
+        if e["code"] == variant["code"]:
+            loc = e["location"]
+            sites.append(("error", e["id"],
+                          [(0, loc["audit_site"]["sentence_span"])] +
+                          [(1, l["sentence_span"]) for l in loc["linked"]] +
+                          [(2, loc["audit_site"]["paragraph_span"])]))
+    for x in key["shams"]:
+        if x["code"] == variant["code"]:
+            sites.append(("sham", x["id"], [(0, x["location"]["audit_site"]["sentence_span"])]))
+    for n in page["native"]:
+        span = locate(view, n["quote"])
+        if span:
+            sn = enclosing(sents, *span)
+            sites.append(("native", n["quote"], [(0, [sn[0][0], sn[-1][1]])]))
+    owner = {}
     for i, g in enumerate(gaps):
-        if i in used or not asserts(g):
+        best = None
+        for kind, sid, spans in sites:
+            for prox, sp in spans:
+                if overlaps(g["_span"], sp):
+                    mid = (g["_span"][0] + g["_span"][1]) / 2
+                    dist = 0 if sp[0] <= mid < sp[1] else min(abs(mid - sp[0]), abs(mid - sp[1]))
+                    cand = (prox, dist, kind, sid)
+                    if best is None or cand[:2] < best[:2]:
+                        best = cand
+                    break
+        if best:
+            owner[i] = best
+    rank = ["missed", "located", "named-elsewhere", "named-near", "named-exact"]
+    out = {"errors": {}, "shams": {}, "gaps": len(gaps), "native_asserted": 0,
+           "spurious_asserted": 0, "unlocated_quotes": sum(1 for g in gaps if g["_span"] is None)}
+    for kind, sid, _ in sites:
+        if kind == "error":
+            out["errors"][sid] = "missed"
+        elif kind == "sham":
+            out["shams"][sid] = "quiet"
+    for i, g in enumerate(gaps):
+        named = asserts(g)
+        if i in owner:
+            prox, _, kind, sid = owner[i]
+            if kind == "error":
+                level = ("named-exact" if prox == 0 else "named-near") if named else \
+                    ("located" if prox == 0 else "missed")
+                if rank.index(level) > rank.index(out["errors"][sid]):
+                    out["errors"][sid] = level
+                continue
+            if kind == "sham":
+                out["shams"][sid] = "asserted" if named or out["shams"][sid] == "asserted" else "located"
+                continue
+            if kind == "native" and named:
+                out["native_asserted"] += 1
+                continue
             continue
-        if any(overlaps(g["_span"], n) for n in native_spans):
-            out["native_asserted"] += 1
-        else:
-            out["spurious_asserted"] += 1
+        if not named:
+            continue
+        cued = [e for e in key["errors"] if e["code"] == variant["code"] and mentions(g, e["cues"])]
+        if cued:
+            for e in cued:
+                if rank.index("named-elsewhere") > rank.index(out["errors"][e["id"]]):
+                    out["errors"][e["id"]] = "named-elsewhere"
+            continue
+        out["spurious_asserted"] += 1
     return out
 
 
