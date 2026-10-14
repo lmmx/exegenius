@@ -9,7 +9,7 @@ This entry hands the work over across a compaction of the development session's 
 
 It supersedes the state recorded in 2026-10-13-autonomous-investigation. Read this entry first, then the entries it names.
 
-## Latest state, after S1, T1, E4 and E5 (read this first)
+## Latest state, after S1, T1, E4, E5 and E6 (read this first)
 
 - **The planning default stays Sonnet at high effort.** Opus at medium is not better on the central derivation and derives less: central count median 6 against 5 (p = 0.33), gate 0 of 5 each, derived 6 against 11 (E5, 2026-10-14-e5-opus). S1's screen had looked better (gate 1 of 2 per Opus arm), and it did not hold up. Haiku at high passes no calibre (S1, 2026-10-14-s1-models).
 - **The strongest lever on the central derivation is the argument task's instructions** (E4, 2026-10-14-e4-key-step):
@@ -19,7 +19,12 @@ It supersedes the state recorded in 2026-10-13-autonomous-investigation. Read th
     - the central count rose in 4 of 5 pairs, with one tie;
     - the central gate was passed in 3 of 5 plans, against 0 of 5.
   - **Why the preregistered rule failed:** one instructed plan made two major errors in the derivation.
-- **E6 is running:** the confirmation on 8 fresh extractions, paired, with an error criterion (`calibration/plans/E6.md`). The plan's evidence goes to wiki branch `141026-exp-e6-key-step-confirm`.
+- **E6, the confirmation on 8 fresh extractions** (2026-10-14-e6-key-step-confirm):
+  - **Depth:** the central count rose in 8 of 8 pairs (p = 0.004), and core derivations rose in 8 of 8.
+  - **Errors:** the instructed plans made no major errors; one baseline plan made one.
+  - **Technical calibre:** reached in 7 of 8 instructed plans, against 2 of 8.
+  - **The gate:** passed in 2 of 8, short of the preregistered 4 of 8. The blocker is C4, stated by halves.
+  - **Recommendation for the author:** put the instruction on `master` as a depth improvement. The next test, for C4, is designed in the E6 entry and not run.
 - **Recurring bottleneck:** rank as dimension change (C4), with the $N$ rank-one source exceptions, decides the gate. It is also where the instructed plan erred.
 - **Judges:** the central rubric's spread between two judges on a strong plan is about two steps (the anchor E1-P4 ran 8, 8, 7, 6 across J3–J6). Comparisons are therefore made within one batch.
 - **Operational:**
@@ -27,7 +32,7 @@ It supersedes the state recorded in 2026-10-13-autonomous-investigation. Read th
   - **The registry handles new layouts.** Experiments run from the development session are archived on wiki branches laid out for the registry; the builder accepts `transcripts`, `description_prefix`, `planning_kinds`, `log_since` and a per-arm `binary`.
 - **Awaiting the author:**
   - the execution-profile plan (`calibration/software-plan.md`);
-  - whether the key-step instruction goes on `master` (after E6);
+  - whether the key-step instruction goes on `master` (E4 and E6 evidence);
   - a full run with the best planning configuration;
   - remote branch deletions.
 

@@ -29,7 +29,7 @@ This entry is that inventory. It is updated in place, and its date is when it wa
 | `131026-content-judge` | f4b1074 | the content judge | rebased into `master` as 385166b–8287b7b; every file identical | **delete on GitHub** |
 | `131026-model-allocation` | 695eeb1 | the model-allocation entry | rebased into `master` as 1f07f0c and 0bccbbf; identical | **delete on GitHub** |
 | `131026-handover` | f189028 | the handover entry update | rebased into `master` as b9a82e1 and 62604b9; identical | **delete on GitHub** |
-| `131026-exp-key-step` | 0c29556 | the key-step instruction in the argument task, for experiments E4 and E6 | **not for `master`** until the author decides on E6's evidence | keep while E6 runs; merge or delete after the author's decision |
+| `131026-exp-key-step` | 0c29556 | the key-step instruction in the argument task, for experiments E4 and E6 | **not for `master`** until the author decides on E6's evidence | keep; merge or delete after the author's decision on E4 and E6 |
 | `docs/leviathan-chat-archive` | 1e0444a | the author's archive of research conversations | not in `master`; the author's own | the author's |
 | `docs/metrics-viz-chat-archive` | b955d34 | the author's archive of research conversations | not in `master`; the author's own | the author's |
 
@@ -59,11 +59,12 @@ The local copies of every branch marked "delete on GitHub" are deleted.
 | `131026-exp-t1-depth-rule` | 38a6cda | T1, the depth rule's dropped notes replayed three times, with the control | evidence, with writer transcripts | keep |
 | `141026-exp-e4-key-step` | 8b5c679 | E4, the key-step instruction paired on E1's extractions | evidence, with transcripts (killed attempts apart) | keep |
 | `141026-exp-e5-opus` | 904a3c6 | E5, five planning runs on Opus at medium | evidence, with transcripts | keep |
+| `141026-exp-e6-key-step-confirm` | 834fb5a | E6, eight fresh projects split into baseline and key-step argument runs | evidence, with transcripts (killed attempts and their drafts apart) | keep |
 | `exp-coverage-recovery` | 2e35a54 | two refused attempts to run the recovery experiment | its unique records (the two reports and the protocol) are archived in `docs/journal/2026-10-13-coverage-recovery/refused-attempts/`; the rest is a vendored copy of exegenius source, which should not be kept | **delete on GitHub** |
 
 ## Current State
 - `master` of lmmx/exegenius holds all completed work; eight remote branches of lmmx/exegenius are fully contained in it and await deletion on GitHub; `131026-exp-key-step` holds an experimental instruction kept off `master` pending the author's decision; two `docs/` branches are the author's own
-- Twenty branches of lmmx/openai-nlogn-wiki are kept as the archives of their runs, through `141026-exp-e5-opus`; E6's branch will be added when it is pushed
+- Twenty-one branches of lmmx/openai-nlogn-wiki are kept as the archives of their runs, through `141026-exp-e6-key-step-confirm`
 - `exp-coverage-recovery` of the wiki has its unique records archived in the journal and awaits deletion on GitHub
 
 ## Missing

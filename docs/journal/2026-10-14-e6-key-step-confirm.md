@@ -82,6 +82,15 @@ The gate's remaining gap is a single, two-part step. A targeted follow-up is des
 | 2. The gate | V passes in ≥ 4 of 8, and more than B | 2 of 8, against 0 of 8 | **no** |
 | 3. Errors | ≤ 2 of 8 V plans with a major error, and V ≤ B + 1 | 0 of 8, against 1 of 8 | **yes** |
 
+**Calibres** (`calibration/registry/calibre-pass-rates.txt`, exact 95% intervals):
+
+| Arm | Overview | Technical | Research |
+|---|---|---|---|
+| baseline | 7/8 (0.47–1.00) | 2/8 (0.03–0.65) | 0/8 (0.00–0.37) |
+| variant | 8/8 (0.63–1.00) | **7/8** (0.47–1.00) | 2/8 (0.03–0.65) |
+
+The Technical calibre (Overview plus ≥ 10 core results derived) is where the instruction changes the most: 7 of 8 against 2 of 8.
+
 **Where the instructed plans fail the gate:**
 
 | Plan | Failed on |
@@ -112,7 +121,14 @@ In every case the plan has one half of the step, or its conclusion without its m
 - **The ratio:** as in E4, about 1.6 times the output and the seconds.
 - **Killed first attempts:** not counted.
 
-**Judge stability:** second judgements SECONDS_PLACEHOLDER.
+**Judge stability (second judgements):**
+- **M3:** 9 of 9 steps agree, 1 against 1.
+- **F3V:** 8 of 9 agree, 9 against 8, gate passed both times.
+- **F5V:** 8 of 9 agree, 7 against 8. The second judge passes its gate, which raises the variant's gate count to 3 of 8, still short of 4.
+- **F3B:** 5 of 9 agree, 4 against 6. Even so, pair F3's difference stays positive (+3 instead of +5).
+- **The anchor E1-P4:** 6, as in J6.
+
+None of the second judgements changes a criterion's outcome.
 
 ## Across E4 and E6 (interpretation, not a preregistered pooled test)
 
@@ -141,6 +157,7 @@ Test 1 is cheaper and reversible. It changes the same paragraph that E4 and E6 t
 
 ## Current State
 - On eight fresh extractions, a one-paragraph key-step instruction raised the central count of Sonnet-high plans in 8 of 8 pairs (median +3, exact one-sided p = 0.004) and core derivations in 8 of 8 (median +6.5), with no major errors against one in the baselines, in batch J7
+- Instructed plans reach the Technical calibre in 7 of 8 against 2 of 8
 - Instructed plans passed the central gate in 2 of 8 against 0 of 8, short of the preregistered 4 of 8; five of the six that failed fell short on C4, stating either the projection-rank identity or the $N$ rank-one source exceptions but not both
 - Across E4 and E6 the instruction deepened every one of 13 paired plans on core derivations and passed the gate in 5 of 13 against 0 of 13; it stays on exegenius branch `131026-exp-key-step` pending the author's decision
 - E6's runs and transcripts are on wiki branch `141026-exp-e6-key-step-confirm` (834fb5a)

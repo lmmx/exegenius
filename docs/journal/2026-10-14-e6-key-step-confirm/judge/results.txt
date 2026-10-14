@@ -1,0 +1,36 @@
+run   plan    core_stated     core_fully   core_derived  core_faithful          wrong   major_errors  central_count  gate  C1-C9
+E6F1B P16              19              6              9              1              0              0              4  fail  m R R m m m m R R
+E6F1V P05              19              8             13              5              0              0              6  fail  m R R m R R R R m
+E6F2B P02              18              9              9              4              0              0              4  fail  m R R m m m R R m
+E6F2V P10              19             14             16              9              0              0              7  fail  m R R m R R R R R
+E6F3B P01              19              9             12              6              0              0              4  fail  m R m m m m R R R
+E6F3V P13              19             17             18             11              0              0              9  pass  R R R R R R R R R
+E6F4B P15              19              8             12              2              0              0              4  fail  m R R m m m R R m
+E6F4V P09              19             12             15              6              0              0              8  fail  R R R m R R R R R
+E6F5B P03              18              3              3              0              0              1              6  fail  R R R m m m R R R
+E6F5V P07              19             17             18             10              0              0              7  fail  m R R R R R R R m
+E6F6B P12              19              9              6              2              0              0              2  fail  m R m m m m m R m
+E6F6V P11              19              7              8              0              0              0              5  fail  m R R m m m R R R
+E6F7B P17              18             10              7              3              0              0              6  fail  R R m m m R R R R
+E6F7V P08              19             17             18             13              0              0              8  pass  m R R R R R R R R
+E6F8B P14              17              6              7              2              0              0              3  fail  m R m - - m m R R
+E6F8V P06              19             15             17             11              0              0              7  fail  m R R m R R R R R
+P4    P04              19             15             19             14              0              0              6  fail  m R R m m R R R R
+M3    P18              12              0              1              0              0              0              1  fail  m m m - - m m R m
+
+pairs judged: 8 of 8
+core_stated        differences [0, 1, 0, 0, 1, 0, 1, 2]  median 0.5  variant greater in 4 of 4 untied, one-sided p = 0.062
+core_fully         differences [2, 5, 8, 4, 14, -2, 7, 9]  median 6.0  variant greater in 7 of 8 untied, one-sided p = 0.035
+core_derived       differences [4, 7, 6, 3, 15, 2, 11, 10]  median 6.5  variant greater in 8 of 8 untied, one-sided p = 0.004
+core_faithful      differences [4, 5, 5, 4, 10, -2, 10, 9]  median 5.0  variant greater in 7 of 8 untied, one-sided p = 0.035
+supporting_stated  differences [0, 0, -1, 1, 0, 0, -1, 0]  median 0.0  variant greater in 1 of 3 untied, one-sided p = 0.875
+wrong              differences [0, 0, 0, 0, 0, 0, 0, 0]  median 0.0  variant greater in 0 of 0 untied, one-sided p = 1.000
+major_errors       differences [0, 0, 0, 0, -1, 0, 0, 0]  median 0.0  variant greater in 0 of 1 untied, one-sided p = 1.000
+minor_errors       differences [1, -2, -1, 0, -3, -2, -4, 2]  median -1.5  variant greater in 2 of 7 untied, one-sided p = 0.938
+central_count      differences [2, 3, 5, 4, 1, 3, 2, 4]  median 3.0  variant greater in 8 of 8 untied, one-sided p = 0.004
+base     reconstructed per step C1-C9: [2, 8, 4, 0, 0, 1, 5, 8, 5]; gate passes 0 of 8; totals: wrong 0, major errors 1
+variant  reconstructed per step C1-C9: [2, 8, 8, 3, 7, 7, 8, 8, 6]; gate passes 2 of 8; totals: wrong 0, major errors 0
+second judgement P01 (E6F3B): central steps agree 5 of 9; central count 4 against 6; derived 12 against 12; gate False against False
+second judgement P07 (E6F5V): central steps agree 8 of 9; central count 7 against 8; derived 18 against 19; gate False against True
+second judgement P13 (E6F3V): central steps agree 8 of 9; central count 9 against 8; derived 18 against 17; gate True against True
+second judgement P18 (M3): central steps agree 9 of 9; central count 1 against 1; derived 1 against 1; gate False against False
