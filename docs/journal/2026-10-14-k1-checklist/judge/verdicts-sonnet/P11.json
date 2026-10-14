@@ -1,0 +1,285 @@
+{
+  "plan": "P11",
+  "steps": [
+    {
+      "id": "B1",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        728,
+        750
+      ],
+      "note": "S1.1 asserts the exchange and that scratch wires return to their arbitrary initial value, but never states that a forward invocation's net target change is (JV+RG)x independent of the initial scratch values or why the last rows restore them."
+    },
+    {
+      "id": "B2",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        752,
+        755
+      ],
+      "note": "No central coefficient |S\u2229T| mod 2, no side-wire cancellation of intersection-one cases and no self coefficient; S1.3.1's <t_S,t_T>=|S\u2229T|-1 is the label-orthogonality fact, not the network coefficient."
+    },
+    {
+      "id": "B3",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        756,
+        758
+      ],
+      "note": "The complex-case central coefficient (|S\u2229T|-1)/2 and the cancellation at intersections zero and two are not stated anywhere in the plan."
+    },
+    {
+      "id": "B4",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        761,
+        764
+      ],
+      "note": "S1.1 says forward-backward-forward gives an exchange up to a sign, but the intermediate states (x,y)->(x,y+x)->(-y,y+x)->(-y,x) are not given; S1.5.4's three array updates are a different array-level decomposition."
+    },
+    {
+      "id": "L1",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1013,
+        1060
+      ],
+      "note": "S1.3.2 says labels are nested and counts dimension changes edge by edge, but the per-edge orthogonal residuals and their dimensions (the residual table) are not given."
+    },
+    {
+      "id": "L2",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1048,
+        1058
+      ],
+      "note": "The side edge 2->5 argument (t_X perp t_Y gives <t_X> inside t_Y^perp, complement <t_X,t_Y>^perp of dimension h-2) is not stated; S1.3.1 only says neighbouring triple lines are orthogonal."
+    },
+    {
+      "id": "L3",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.2",
+        "S1.3.2.1",
+        "S1.3.2.2",
+        "S1.3.2.3"
+      ],
+      "lines": [
+        1061,
+        1071
+      ],
+      "note": "S1.3.2.1 gives center 3->4 as the only decreasing edge losing h, S1.3.2.2 gives telescoping with sources N, sinks Wm-N and signed Wm-2N, and S1.3.2.3 and S1.3.2 give the 2L addition and Wm-2N+2L."
+    },
+    {
+      "id": "L4",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1073,
+        1102
+      ],
+      "note": "The plan never states that each nonzero residual over F_2 is nondegenerate and nonalternating or that an orthonormal basis exists (absorbing alternating planes); S2.1 only mentions an orthonormal basis vector without the derivation."
+    },
+    {
+      "id": "L5",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1105,
+        1109
+      ],
+      "note": "S1.3.3 gives L_b/N=100/539 but the complex ratio L_c/N=101/539 is not stated anywhere, so only half the sub-step appears."
+    },
+    {
+      "id": "P1",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1232,
+        1245
+      ],
+      "note": "S2.1 asserts one translation kernel per orthonormal residual basis vector but does not state weight additivity mod 4 for orthogonal vectors or the formula q_V-q_U=sum wt(v)[v.x]."
+    },
+    {
+      "id": "P2",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1246,
+        1257
+      ],
+      "note": "S2.1 asserts the frames are aI+bX_v products, but the derivation (wt(v) odd, phase i^{eps[v.x]}, H diag(1,-1) H = X) is not given; the result is asserted without the sub-step."
+    },
+    {
+      "id": "P3",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1262,
+        1271
+      ],
+      "note": "S2.1 mentions s kernels in all but nothing about k columns or the tensor power of each residual factor; the sub-step's tensoring over columns is not stated."
+    },
+    {
+      "id": "P4",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1273,
+        1314
+      ],
+      "note": "S2.1 only asserts that the endpoint operator is C^{otimes m} on every role after corrections; the zero/full label frames, the C^{-1} on the 27 coordinates of supp(u_a), the Z_{a,k} and i^{27k}Z_{a,k} repair and the negated X outputs are not stated."
+    },
+    {
+      "id": "R1",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.3",
+        "S1.3.4",
+        "S1.3.4.3"
+      ],
+      "lines": [
+        1105,
+        1110
+      ],
+      "note": "S1.3.3 and S1.3.4.3 give L/N<1/2 and deficit N-2L>0, and S1.3.4 gives s=Wm-N+2L<Wm."
+    },
+    {
+      "id": "R2",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1319,
+        1322
+      ],
+      "note": "The value eta_b=339/22587335000000 does not appear in the plan."
+    },
+    {
+      "id": "R3",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1323,
+        1324
+      ],
+      "note": "The value eta_c=73/19906842167500 does not appear in the plan."
+    },
+    {
+      "id": "R4",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.5",
+        "S5.1"
+      ],
+      "lines": [
+        1331,
+        1343
+      ],
+      "note": "S1.3.5 states that the relative deficit exceeds 20*2^-50 and log m<20, so tau=1-2^-50 gives s/W<m^tau, and S5.1 gives tau=sigma=1-2^-50; the intermediate m^{1-2^-50}>m(1-eta) inequality is only implicit."
+    },
+    {
+      "id": "M1",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1375,
+        1391
+      ],
+      "note": "S1.4.1 asserts the factorization A=E1 Pi E2 with Pi having a ones (quoting only the lemma statement), but the elimination proof (pivot at the topmost row's rightmost entry, lower-triangular clearing, repeat on active indices) is not given."
+    },
+    {
+      "id": "M2",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1413,
+        1423
+      ],
+      "note": "The fixed odd prime avoiding all denominators of the finite factor table, and the specialization to Z/q^b with invertible triangular factors, are not mentioned in the plan."
+    },
+    {
+      "id": "M3",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4"
+      ],
+      "lines": [
+        1425,
+        1430
+      ],
+      "note": "The motivation of S1.4 says lower-triangular coordinate changes run in linear time in tape order because a later field is updated from earlier fields; this matches the O(V) cost and dependency structure, though the descending-order detail is not spelled out."
+    },
+    {
+      "id": "M4",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.4.3",
+        "S1.4"
+      ],
+      "lines": [
+        1432,
+        1443
+      ],
+      "note": "S1.4.3 says each one of Pi gives H_i<-H_i+D_j done by two controlled updates around exactly one interchange, so the interchange count is the rank a; the explicit update formulas are omitted but the content is the same."
+    },
+    {
+      "id": "S1",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        2457,
+        2477
+      ],
+      "note": "S2.7 mentions C_0, C_1 and the p+ceil(C_0 d^{C_1}) bit count, but E, B, nu, the definitions of C_1, C_0, Delta and the values nu=11, C_1=20 are not stated."
+    },
+    {
+      "id": "S2",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        2479,
+        2518
+      ],
+      "note": "No arithmetic-depth recurrence A(e)<=sA(e/m)+E with leaf A(e)<=8e or the per-invocation operation count appears; S2.6.2's recurrence is the time recurrence F(e), a different quantity."
+    },
+    {
+      "id": "S3",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        2523,
+        2560
+      ],
+      "note": "The unrolling B^{k+1}<=B^2 d^nu, A(e)<=8B^2 d^{nu+1} and the total bound below C_0 d^{C_1} are not stated."
+    },
+    {
+      "id": "S4",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        2562,
+        2586
+      ],
+      "note": "S2.7 states exact evaluation with p+C_0 d^{C_1} fractional bits and epsilon*C_1<1 for O(p) width, but the depth-l invariant (values in 2^{-(p+l)}Z[i], modulus at most 2^l) and the Delta+3 integer bits that justify exactness are missing."
+    },
+    {
+      "id": "S5",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.8"
+      ],
+      "lines": [
+        2751,
+        2757
+      ],
+      "note": "S2.8 states that every row of H has absolute row sum one, so disk arrays map to disk arrays and the single truncation errs by less than sqrt2 2^-p."
+    }
+  ],
+  "summary": "The plan covers the label-budget telescoping (L3), the deficit and rank-saving exponent (R1, R4), the cost of the lower-triangular transformation and the one-interchange-per-pivot step (M3, M4) and the row-sum disk-preservation (S5). It states results without the underlying derivations for the exchange-network coefficients (B), the residual table and orthonormal-basis argument (L1, L2, L4, L5 partial), the complex phase interface (P1-P4), the explicit deficits (R2, R3), the elimination and prime-choice proofs (M1, M2) and the depth-recurrence constants (S1-S4)."
+}
