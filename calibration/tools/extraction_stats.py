@@ -138,6 +138,7 @@ def measure(paper, answer, cov, reference, substeps, markers, result_labels):
     m = collections.OrderedDict()
     m["concepts"] = len(concepts)
     m["unknown"] = sum(not c.get("known") for c in concepts)
+    m["gloss_chars"] = sum(len(c.get("gloss", "")) for c in concepts)
     m["quotes"] = cov["quotes"]
     m["located"] = cov["located"]
     m["located_here"] = len(located)
@@ -388,6 +389,31 @@ def mantel_haenszel(strata):
     return (num / den if den else float("inf")), tot
 
 
+def superiority(xs, ys, seed=3, limit=50000):
+    """P(x > y) + P(x = y)/2 over pairs, and its two-sided permutation p (exact when the
+    relabellings number at most `limit`, otherwise 20,000 random relabellings)."""
+    def a_stat(a, b):
+        return sum((x > y) + 0.5 * (x == y) for x in a for y in b) / (len(a) * len(b))
+
+    obs = a_stat(xs, ys)
+    pooled, k = xs + ys, len(xs)
+    if math.comb(len(pooled), k) <= limit:
+        splits = itertools.combinations(range(len(pooled)), k)
+        total = math.comb(len(pooled), k)
+    else:
+        rng = random.Random(seed)
+        total = 20000
+        splits = (rng.sample(range(len(pooled)), k) for _ in range(total))
+    hits = 0
+    for idx in splits:
+        s = set(idx)
+        a = [pooled[i] for i in s]
+        b = [pooled[i] for i in range(len(pooled)) if i not in s]
+        if abs(a_stat(a, b) - 0.5) >= abs(obs - 0.5) - 1e-12:
+            hits += 1
+    return obs, hits / total
+
+
 # ---------------------------------------------------------------- output
 
 
@@ -414,7 +440,8 @@ def med_range(xs):
 
 
 MEASURES = [
-    ("concepts", "concepts"), ("unknown", "unknown concepts"), ("quotes", "quotes"),
+    ("concepts", "concepts"), ("unknown", "unknown concepts"), ("gloss_chars", "gloss characters"),
+    ("quotes", "quotes"),
     ("located", "located (exegenius)"), ("first_tenth", "quotes in first tenth"),
     ("body_share", "share of quotes past the introduction"), ("last_line", "last line quoted"),
     ("blocks", "100-line blocks quoted (of 54)"), ("dev_quoted", "developing top-level sections quoted"),
@@ -499,23 +526,26 @@ def main():
               f"{rows[0]['core_labelled_total']} core items carry a label that is one of the paper's "
               f"{rows[0]['results_total']} results. Cost basis: the registry's measured subagent figures, "
               "or (E6) the extraction transcripts on the evidence branch.\n")
-    hdr = ["Extraction", "Config", "Submits", "Concepts (unknown)", "Quotes", "1st tenth", "Past intro",
+    hdr = ["Extraction", "Config", "Submits", "Concepts (unknown)", "Gloss chars", "Quotes", "1st tenth", "Past intro",
            "Last line", "Blocks", "Dev. sections (1st try)", "Subsections", "Results (1st try)",
            "Core: lines / deriv. / label / either", "Supp.", "Checklist lines", "Markers", "Cache read M", "s"]
     body = []
     for r in rows:
         body.append([r["extraction"], f"{r['model']} {r['effort']}, {r['agent']}", r["submits"],
-                     f"{r['concepts']} ({r['unknown']})", r["quotes"], r["first_tenth"], r["body_share"],
+                     f"{r['concepts']} ({r['unknown']})", r["gloss_chars"], r["quotes"], r["first_tenth"], r["body_share"],
                      r["last_line"], r["blocks"], f"{r['dev_quoted']}/{r['dev_total']} ({r['first_dev_quoted']})",
                      f"{r['subsections_quoted']}/{r['subsections_total']}",
                      f"{r['results_quoted']} ({r['first_results_quoted']})",
                      f"{r['core_lines']} / {r['core_derived_lines']} / {r['core_labels']} / {r['core_either']}",
                      r["supporting_lines"], r["checklist_lines"], r["markers"], r["cache_read_m"], r["seconds"]])
     md.append(md_table(hdr, body))
-    md.append("\nEvery extraction's quotes were all located by exegenius (located = quotes in every row). "
-              "This script's own locator agrees on " +
-              f"{sum(r['located_here'] == r['located'] for r in rows)} of {len(rows)} extractions "
-              "(it differs only where exegenius's normalisation of typographic characters is wider).\n")
+    differ = [f"{r['extraction']} ({r['located_here']} of {r['located']})" for r in rows
+              if r["located_here"] != r["located"]]
+    md.append(f"\nexegenius located every quote in {sum(r['located'] == r['quotes'] for r in rows)} of "
+              f"{len(rows)} accepted extractions. This script's locator (used for reference items, blocks and "
+              f"checklist lines) places the same number in all but: {', '.join(differ) or 'none'}. "
+              "Core items reached by label never add an item that lines miss, so the 'either' count equals "
+              "the 'lines' count throughout.\n")
 
     # 2. by group
     md.append("## 2. By model and effort (median and range)\n")
@@ -525,7 +555,7 @@ def main():
     sub = collections.OrderedDict()
     for r in rows:
         sub.setdefault((r["model"], r["effort"], r["agent"]), []).append(r)
-    keys = ["concepts", "unknown", "quotes", "first_tenth", "body_share", "blocks", "dev_quoted",
+    keys = ["concepts", "unknown", "gloss_chars", "quotes", "first_tenth", "body_share", "blocks", "dev_quoted",
             "subsections_quoted", "results_quoted", "core_lines", "core_derived_lines", "core_either",
             "supporting_lines", "checklist_lines", "markers", "cache_read_m", "seconds"]
     md.append(md_table(["Measure"] + [f"{m} {e} (n={len(v)})" for (m, e), v in groups.items()],
@@ -542,6 +572,25 @@ def main():
                        [[f"{m} {e}", sum(r["coverage_rejections"] for r in v),
                          med_range([r["first_dev_quoted"] for r in v]),
                          med_range([r["first_results_quoted"] for r in v])] for (m, e), v in groups.items()]))
+
+    md.append("\n### Which differences from Sonnet `high` are beyond the spread within configurations\n")
+    md.append("A = probability that a Sonnet `high` extraction exceeds one of the other configuration (ties "
+              "count half; 0.5 = no difference); p = two-sided permutation p of A (exact where feasible). "
+              "Sonnet `high` has 18 extractions; the others 2-7, so a two-extraction group can reach p < 0.05 "
+              "only if both lie outside the whole Sonnet `high` range.\n")
+    base = groups[("Sonnet", "high")]
+    test_keys = ["results_quoted", "core_lines", "core_derived_lines", "subsections_quoted", "blocks",
+                 "first_tenth", "unknown", "gloss_chars"]
+    body = []
+    for (mo, ef), v in groups.items():
+        if (mo, ef) == ("Sonnet", "high"):
+            continue
+        row = [f"{mo} {ef} (n={len(v)})"]
+        for k in test_keys:
+            a, p = superiority([r[k] for r in base], [r[k] for r in v])
+            row.append(f"{a:.2f} (p {p:.3f})")
+        body.append(row)
+    md.append(md_table(["Against Sonnet high"] + [dict(MEASURES)[k] for k in test_keys], body))
 
     # Reference items reached, per configuration
     md.append("\n### Core reference items reached (lines or label), share of extractions per configuration\n")
@@ -582,8 +631,7 @@ def main():
     ckl = collections.defaultdict(dict)
     for run, bt in checks.items():
         m = re.match(r"^E([78])F(\d)([WX])$", run)
-        if m:
-            batch = {"7": None, "8": None}
+        if m:  # the batch that judged W and X on the extraction together
             tots = [t for b, t in sorted(bt.items()) if b in ("J15", "J17")]
             if tots:
                 ckl[m.group(3)][f"E6-F{m.group(2)}"] = statistics.fmean(tots[0])
