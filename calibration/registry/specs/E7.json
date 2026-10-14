@@ -1,0 +1,97 @@
+{
+ "id": "E7",
+ "title": "The key-step instruction asks for identities and exceptions (W against V)",
+ "kind": "controlled",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task, on E6's eight extractions",
+ "question": "Does asking the key step for the identity behind each counted step and its exceptions close the C4 gap left by the key-step instruction?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "91c4fed (141026-exp-key-step-identity)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-e7-key-step-identity",
+  "commit": "c89a3fd",
+  "transcripts": "results/transcripts/e7",
+  "description_prefix": "E7",
+  "planning_kinds": [
+   "argument"
+  ]
+ },
+ "protocol": "run from the development session; E7.md on the evidence branch",
+ "preregistration": "calibration/plans/E7.md (8fe040c)",
+ "journal": "docs/journal/2026-10-14-e7-key-step-identity.md",
+ "comparison": "E6 arm V (E6F1V-E6F8V), re-judged in batch J8",
+ "pairs": [
+  [
+   "E6F1V",
+   "E7F1W"
+  ],
+  [
+   "E6F2V",
+   "E7F2W"
+  ],
+  [
+   "E6F3V",
+   "E7F3W"
+  ],
+  [
+   "E6F4V",
+   "E7F4W"
+  ],
+  [
+   "E6F5V",
+   "E7F5W"
+  ],
+  [
+   "E6F6V",
+   "E7F6W"
+  ],
+  [
+   "E6F7V",
+   "E7F7W"
+  ],
+  [
+   "E6F8V",
+   "E7F8W"
+  ]
+ ],
+ "arms": {
+  "W": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "argument instructions with the key-step paragraph and the identity sentence"
+   },
+   "runs": [
+    "E7F1W",
+    "E7F2W",
+    "E7F3W",
+    "E7F4W",
+    "E7F5W",
+    "E7F6W",
+    "E7F7W",
+    "E7F8W"
+   ]
+  }
+ },
+ "reported": {},
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus, high) with this session's permissions; it only passed prompts and ran exegenius next"
+  }
+ ],
+ "limitations": [
+  "One paper; the argument task only, on extractions shared with E6's arms.",
+  "Judged in one batch (J8) with an unreviewed reference."
+ ]
+}
