@@ -30,7 +30,7 @@
 - **Checked by diff:** the task files of FkV and FkW differ only in that sentence and the project path.
 - **The subagents:** `general-purpose`, `model: "sonnet"`, `effort: "high"`, with the prompt word for word. All eight ran on `claude-sonnet-5-5` at `high` every turn. No restarts.
 - **The comparison:** W against V (E6F1V–E6F8V), both judged blind in batch J8 (seed 20261022), with the anchors E1-P4 and E3-M3 and J3's instructions unchanged.
-- **Second judgements:** four, drawn by seed. They fell on E6F3V, E7F1W, E6F8V and E7F6W (P01, P06, P10, P12).
+- **Second judgements:** four, drawn by seed. They fell on E6F3V, E7F1W, E6F8V and E6F7V (P01, P06, P10, P12).
 - **The evidence:** wiki branch `141026-exp-e7-key-step-identity` (c89a3fd), whose base is E6's branch.
 
 ## Results (J8, first judgements; `judge/results.txt`)
@@ -105,9 +105,13 @@ E6's eight V plans were judged blind in J7 and again in J8, by different judges 
 - **The central count and the content counts are steadier** and remain the primary measures.
 
 **The second judgements in J8:**
-- **E6F3V:** 9 of 9 steps agree, 9 against 9.
-- **E7F1W:** 9 against 8, gate passed both times.
-- **E6F8V and E7F6W:** `judge/results.txt` (appended when complete).
+- **E6F3V:** 9 of 9 steps agree (9 against 9).
+- **E6F8V:** 9 of 9 (7 against 7).
+- **E6F7V:** 9 of 9 (9 against 9).
+- **E7F1W:** 8 of 9 (9 against 8).
+- **The gate:** all four agree on it.
+
+Within one batch, judges agreed more closely than across batches J7 and J8.
 
 ## Next (proposed)
 
