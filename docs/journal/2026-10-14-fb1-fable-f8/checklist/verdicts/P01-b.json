@@ -1,0 +1,322 @@
+{
+  "plan": "P01",
+  "steps": [
+    {
+      "id": "B1",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.1.1.1",
+        "S1.1.1.1.1"
+      ],
+      "lines": [
+        744,
+        750
+      ],
+      "note": "S1.1.1.1.1 states that the first two rows subtract Ja+Rc, the middle rows add R(c+Gx)+J(a+Vx), the last two restore a,c, so the targets change by (JV+RG)x whatever a,c are."
+    },
+    {
+      "id": "B2",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.1.1.1.2"
+      ],
+      "lines": [
+        752,
+        755
+      ],
+      "note": "S1.1.1.1.2 gives the central coefficient |S\u2229T| mod 2, side wires cancelling exactly the intersection-one pairs, zero for distinct triples meeting in zero or two points, and self coefficient 3\u22611."
+    },
+    {
+      "id": "B3",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        756,
+        758
+      ],
+      "note": "The plan's coefficient step (S1.1.1.1.2) and S1.1.1 are bit-case only; the complex central coefficient (|S\u2229T|-1)/2 and the cancellation of intersections zero and two appear nowhere."
+    },
+    {
+      "id": "B4",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.1.1.1",
+        "S1.1.1.1.3"
+      ],
+      "lines": [
+        761,
+        764
+      ],
+      "note": "S1.1.1.1.3 states the three stages (x,y)->(x,y+x)->(-y,y+x)->(-y,x) and that each invocation restores its own auxiliary wires (also in the S1.1.1.1 claim)."
+    },
+    {
+      "id": "L1",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1013,
+        1043,
+        1059,
+        1060
+      ],
+      "note": "The plan never gives the per-edge residual table (residuals and dimensions such as B\u2297t_X^\u22a5 of (a-1)(h-1), P\u2297F of h); it states only the center 3->4 loss and the side-edge label inclusion."
+    },
+    {
+      "id": "L2",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.1.1.3.3"
+      ],
+      "lines": [
+        1048,
+        1058
+      ],
+      "note": "S1.1.1.3.3 gives the side-edge labels at times 2 and 5 and says the inclusion holds only because t_X\u22a5t_Y, but it does not state the complement \u27e8t_X,t_Y\u27e9^\u22a5 of dimension h-2, so this is a judgement call on the inclusion argument being the defining content."
+    },
+    {
+      "id": "L3",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.1.1.3",
+        "S1.1.1.3.4",
+        "S1.1.1.3.5"
+      ],
+      "lines": [
+        1061,
+        1071
+      ],
+      "note": "S1.1.1.3.4 says the only decrease is center 3->4 removing P\u2297F\u2297Q of dimension h with L=Ich, and S1.1.1.3.5 telescopes to sinks Wm-N minus sources N and adds 2L for absolute changes, giving Wm-2N+2L."
+    },
+    {
+      "id": "L4",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.1.1.1"
+      ],
+      "lines": [
+        1073,
+        1102
+      ],
+      "note": "S2.1.1.1 states each nonzero binary residual is nondegenerate with a norm-one vector hence nonalternating, and by splitting off unit lines and absorbing alternating planes has an orthonormal basis."
+    },
+    {
+      "id": "L5",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.1.1.3.6",
+        "S2.1.1.4",
+        "S1.1.1.3"
+      ],
+      "lines": [
+        1105,
+        1109
+      ],
+      "note": "L_b/N=100/539 is stated in S1.1.1.3.6 (and S1.1.1.3) and L_c/N=101/539 in S2.1.1.4."
+    },
+    {
+      "id": "P1",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.1.1.2"
+      ],
+      "lines": [
+        1232,
+        1245
+      ],
+      "note": "S2.1.1.2 states weight is additive mod 4 for orthogonal binary vectors (even support intersection) and q_V-q_U = \u03a3 wt(v)[v\u00b7x] mod 4 over an orthonormal basis of the residual E."
+    },
+    {
+      "id": "P2",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.1.1.3"
+      ],
+      "lines": [
+        1246,
+        1257
+      ],
+      "note": "S2.1.1.3 says each basis vector has odd weight, so its factor i^{\u00b1[v\u00b7x]} = (1+i^{\u00b11})/2+(1-i^{\u00b11})/2 (-1)^{v\u00b7x}, which after conjugation by H^{\u2297m} is the translation kernel aI+bX_v or its inverse."
+    },
+    {
+      "id": "P3",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1262,
+        1271
+      ],
+      "note": "The plan states one kernel per residual vector and s_c kernels over the network (S2.1.1, S2.1.1.4) but never that on k columns each vector gives one factor K^{\u2297k} acting on all k columns."
+    },
+    {
+      "id": "P4",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.1.1.5",
+        "S2.1.2.2"
+      ],
+      "lines": [
+        1273,
+        1314
+      ],
+      "note": "S2.1.1.5 gives frame I for zero labels, C^{\u2297m} for full labels, C^{-1} on the 27 support coordinates of u_a repaired by Z corrections before and after plus scalar i^{27k}; the negation of the X outputs is only covered by S2.1.2.2's 'undoing of the signed bank exchange' and C=iZC^{-1}Z is not written for this step."
+    },
+    {
+      "id": "R1",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.1.1.4.3",
+        "S1.1.1.3.6"
+      ],
+      "lines": [
+        1105,
+        1110
+      ],
+      "note": "S1.1.1.4.3 states L_b/N<1/2 so s_b = W_b m - N + 2L_b falls short of W_b m by N-2L_b>0."
+    },
+    {
+      "id": "R2",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.1.4.3"
+      ],
+      "lines": [
+        1319,
+        1322
+      ],
+      "note": "S1.1.4.3 states \u03b7_b=(W_b m - s_b)/(W_b m)=339/22587335000000."
+    },
+    {
+      "id": "R3",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1323,
+        1324
+      ],
+      "note": "The value \u03b7_c=73/19906842167500 is not stated anywhere in the plan; S2.1.1.4 gives only the symbolic complex deficit 2N-2L_c."
+    },
+    {
+      "id": "R4",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.1.4.3",
+        "S5.1.1"
+      ],
+      "lines": [
+        1331,
+        1343
+      ],
+      "note": "S1.1.4.3 gives deficit > 20\u00b72^{-50}, log m<20 and m^{1-2^{-50}}>m(1-20\u00b72^{-50})>m(1-\u03b7_b)=s_b/W_b (quoting the paper's 'both deficits' sentence) and S5.1.1 fixes \u03c4=\u03c3=1-2^{-50}, though the chain is spelled out only for the bit deficit."
+    },
+    {
+      "id": "M1",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.1.2.1"
+      ],
+      "lines": [
+        1375,
+        1391
+      ],
+      "note": "S1.1.2.1 states the elimination: pivot at the topmost nonzero row's rightmost nonzero entry, clearing by lower-triangular operations, one rank-one block isolated per pivot so \u03a0 has exactly a ones (with the A=0 case)."
+    },
+    {
+      "id": "M2",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.1.2.2"
+      ],
+      "lines": [
+        1413,
+        1423
+      ],
+      "note": "S1.1.2.2 states one fixed odd prime avoiding every denominator and diagonal numerator in the finite table of factors and inverses, so the identities hold over Z/q^b with invertible triangular factors."
+    },
+    {
+      "id": "M3",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.1.2.3"
+      ],
+      "lines": [
+        1425,
+        1430
+      ],
+      "note": "S1.1.2.3 states a lower-triangular change of H or D costs O(V) by updating coordinates in descending physical order, each multiplied by a unit plus a combination of still-original earlier coordinates."
+    },
+    {
+      "id": "M4",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.1.2.4",
+        "S1.1.2.5"
+      ],
+      "lines": [
+        1432,
+        1443
+      ],
+      "note": "S1.1.2.4 realizes each one of \u03a0 as D_j+=H_i, an interchange of H_i and D_j, then D_j=H_i-D_j, and S1.1.2.5 states \u03a0 has a ones so exactly a interchanges are used."
+    },
+    {
+      "id": "S1",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        2457,
+        2477
+      ],
+      "note": "The plan gives E=64(W+m+1)^3 and B=s+E (S2.5.1) and writes \u0394=\u2308C_0 d^20\u2309, but never defines \u03bd, C_1=max{20,\u03bd+3} or C_0=128mB^2, and the values \u03bd=11 do not appear."
+    },
+    {
+      "id": "S2",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.5.1"
+      ],
+      "lines": [
+        2479,
+        2518
+      ],
+      "note": "S2.5.1 states a chain gains at most E=64(W+m+1)^3 per network invocation and at most 8e at a leaf, so A(e)\u2264sA(e/m)+E at an internal node."
+    },
+    {
+      "id": "S3",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.5.1",
+        "S2.5"
+      ],
+      "lines": [
+        2523,
+        2560
+      ],
+      "note": "S2.5.1 states the unrolled bound A(e)\u22648dB^{k+1}\u22648B^2d^{\u03bd+1} and total at most C_0 d^20, although \u03bd is undefined and the step B^{k+1}\u2264B^2 d^\u03bd (via B\u2264m^\u03bd, k\u2264\u2308log_m d\u2309) is only asserted through the quote."
+    },
+    {
+      "id": "S4",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.5.2",
+        "S2.5.3"
+      ],
+      "lines": [
+        2562,
+        2586
+      ],
+      "note": "S2.5.2 states depth-j values lie in 2^{-(p+j)}Z[i] with modulus at most 2^j so p+\u0394 fractional and \u0394+3 integer/sign bits are exact, and S2.5.3 gives 20\u03b5<1 hence \u0394=o(p)."
+    },
+    {
+      "id": "S5",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.5.4"
+      ],
+      "lines": [
+        2751,
+        2757
+      ],
+      "note": "S2.5.4 states every row of H_0^{\u2297D} has absolute row sum one so disk arrays map to disk arrays, and componentwise truncation keeps the disk with error below \u221a2\u00b72^{-p}."
+    }
+  ],
+  "summary": "21 of 26 sub-steps present. Absent: B3 (complex central coefficient), L1 (residual table), P3 (k-column tensoring of kernels), R3 (\u03b7_c value), S1 (constants \u03bd, C_1, C_0 undefined). No sub-step is wrong. Borderline presents: L2 (inclusion stated, h-2 complement not), R4 (chain shown for the bit deficit), S3 (inequality asserted, \u03bd undefined), P4 (X-output negation only as 'undoing the signed bank exchange')."
+}
