@@ -1,0 +1,318 @@
+{
+  "plan": "P12",
+  "steps": [
+    {
+      "id": "B1",
+      "verdict": "present",
+      "plan_steps": [
+        "K1a",
+        "K1a.1",
+        "K1a.2"
+      ],
+      "lines": [
+        744,
+        750
+      ],
+      "note": "K1a.1 says rows 0,1 subtract the old scratch contributions and rows 6,7 restore them, and K1a.2 states the net target change (JV+RG)x is independent of the initial scratch values a,c."
+    },
+    {
+      "id": "B2",
+      "verdict": "present",
+      "plan_steps": [
+        "K1a.3"
+      ],
+      "lines": [
+        752,
+        755
+      ],
+      "note": "K1a.3 gives central coefficient |S\u2229T| mod 2, side injection cancelling intersection one, intersections zero and two already zero, and self coefficient one."
+    },
+    {
+      "id": "B3",
+      "verdict": "present",
+      "plan_steps": [
+        "K1a.4"
+      ],
+      "lines": [
+        756,
+        758
+      ],
+      "note": "K1a.4 gives central coefficient (|S\u2229T|-1)/2, side cancelling distinct triples with intersection zero or two, zero for intersection one, one for S=T."
+    },
+    {
+      "id": "B4",
+      "verdict": "present",
+      "plan_steps": [
+        "K1a.6"
+      ],
+      "lines": [
+        761,
+        764
+      ],
+      "note": "K1a.6 states the three stages (x,y)->(x,y+x)->(-y,y+x)->(-y,x) (forward, inverse, forward) and that every auxiliary wire is restored."
+    },
+    {
+      "id": "L1",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1013,
+        1060
+      ],
+      "note": "The plan never gives the per-edge orthogonal residuals or their dimensions (the residual table); K1c.3/K1c.4 only say labels match per stage and edges join comparable labels."
+    },
+    {
+      "id": "L2",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1048,
+        1058
+      ],
+      "note": "No step treats the side edge 2->5, the inclusion <t_X> in t_Y^perp, or the complement <t_X,t_Y>^perp of dimension h-2; K1c.1 only says neighbouring triple lines are orthogonal."
+    },
+    {
+      "id": "L3",
+      "verdict": "present",
+      "plan_steps": [
+        "K1c.2",
+        "K1c.4",
+        "K1c.5"
+      ],
+      "lines": [
+        1061,
+        1071
+      ],
+      "note": "K1c.4 says the only decreasing edges are center 3->4 each losing h; K1c.2 gives sources N, sinks Wm-N, signed Wm-2N; K1c.5 gives telescoping at gates and +2L with L=Ich for absolute changes."
+    },
+    {
+      "id": "L4",
+      "verdict": "present",
+      "plan_steps": [
+        "K1c.6",
+        "K1c.7"
+      ],
+      "lines": [
+        1073,
+        1102
+      ],
+      "note": "K1c.6 gives nonzero binary residuals contain a norm-one vector so are nonalternating, and K1c.7 gives that nondegenerate nonalternating binary symmetric spaces have an orthonormal basis; the absorption of alternating planes is not spelled out, only the result is stated."
+    },
+    {
+      "id": "L5",
+      "verdict": "present",
+      "plan_steps": [
+        "K1.d"
+      ],
+      "lines": [
+        1105,
+        1109
+      ],
+      "note": "K1.d states L_b/N=100/539 and L_c/N=101/539 exactly."
+    },
+    {
+      "id": "P1",
+      "verdict": "present",
+      "plan_steps": [
+        "T2a.0"
+      ],
+      "lines": [
+        1232,
+        1245
+      ],
+      "note": "T2a.0 defines q_U(x)=wt(P_U x) mod 4 and states weight is additive mod 4 over orthogonal vectors, so each residual basis vector contributes its own phase; the explicit sum wt(v)[v.x] is not written but the content is the same."
+    },
+    {
+      "id": "P2",
+      "verdict": "present",
+      "plan_steps": [
+        "T2a.0"
+      ],
+      "lines": [
+        1246,
+        1257
+      ],
+      "note": "T2a.0 states wt(v) is odd, gives phase i^{\u00b1[v.x]} = (1+i^{\u00b11})/2 + (1-i^{\u00b11})/2 (-1)^{v.x}, i.e. a kernel aI+bX_v, with the frame defined by Hadamard conjugation; the identity H diag(1,-1) H = X is not named explicitly."
+    },
+    {
+      "id": "P3",
+      "verdict": "present",
+      "plan_steps": [
+        "T2a.6",
+        "K1V2.1"
+      ],
+      "lines": [
+        1262,
+        1271
+      ],
+      "note": "T2a.6 says the finite network with column frames needs exactly s_c child calls, one per unit of residual dimension, each on the f axes of one slot; this is the one-factor-per-residual-vector-over-all-columns count, though the tensor-power identity itself is not written."
+    },
+    {
+      "id": "P4",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1273,
+        1314
+      ],
+      "note": "The plan only mentions 'source and sink diagonal corrections' and undoing the signed exchange (T2a.0b) without the zero/full label frames, the C^{-1} on the 27 coordinates of supp(u_a), the Z_{a,k} and i^{27k}Z_{a,k} repair, or C=iZC^{-1}Z for the pair; T2a.4 is about inverse children, not this."
+    },
+    {
+      "id": "R1",
+      "verdict": "present",
+      "plan_steps": [
+        "K1.d",
+        "K1V1.3",
+        "K1V2.2"
+      ],
+      "lines": [
+        1105,
+        1110
+      ],
+      "note": "K1.d says both loss ratios are below 1/2, K1V1.3 gives deficit N-2L_b>0 because L_b<N/2, and K1V2.2 gives deficit 2N-2L_c>0 so s_c<W_c m."
+    },
+    {
+      "id": "R2",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1319,
+        1322
+      ],
+      "note": "The plan refers to the 'explicit relative rank deficits' (K1V3 method) but never states eta_b=339/22587335000000."
+    },
+    {
+      "id": "R3",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1323,
+        1324
+      ],
+      "note": "The plan never states eta_c=73/19906842167500."
+    },
+    {
+      "id": "R4",
+      "verdict": "present",
+      "plan_steps": [
+        "K1V3.1",
+        "K1V3.2",
+        "K1V3.3"
+      ],
+      "lines": [
+        1331,
+        1343
+      ],
+      "note": "K1V3.1 gives both deficits exceed 20*2^-50 with tau=sigma=1-2^-50, K1V3.2 gives m<2^20, log 2<1 and m^{1-2^-50}>m(1-20*2^-50)>m(1-eta), and K1V3.3 concludes s/W<m^tau and m^sigma."
+    },
+    {
+      "id": "M1",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1375,
+        1391
+      ],
+      "note": "K2 only asserts the factorization A=E_1 Pi E_2 with exactly a ones (statement, quote of the lemma line); the pivot choice, lower-triangular clearing and repetition on active indices are not stated."
+    },
+    {
+      "id": "M2",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1413,
+        1423
+      ],
+      "note": "K3 works over Z/q^bZ but no step states a fixed odd prime avoiding every denominator of a finite table of factors so the identities specialize with invertible triangular factors."
+    },
+    {
+      "id": "M3",
+      "verdict": "present",
+      "plan_steps": [
+        "K3.1"
+      ],
+      "lines": [
+        1425,
+        1430
+      ],
+      "note": "K3.1 states a lower triangular transformation of H or D costs O(V) by updating coordinates in descending physical order, with lower triangular inverses."
+    },
+    {
+      "id": "M4",
+      "verdict": "present",
+      "plan_steps": [
+        "K3.3",
+        "K3.4"
+      ],
+      "lines": [
+        1432,
+        1443
+      ],
+      "note": "K3.3 gives D_j<-D_j+H_i, then the interchange (H_i,D_j)<-(D_j,H_i), then D_j<-H_i-D_j with only the middle step an interchange, and K3.4 gives a ones so a interchanges."
+    },
+    {
+      "id": "S1",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        2457,
+        2477
+      ],
+      "note": "Only E=64(W+m+1)^3 (T2d.3), B=s+E (T2d.5), Delta=ceil(C_0 d^{C_1}) (T2d) and C_1=20 (PC.1) appear; nu=min{j: m^j>=B}, C_1=max{20,nu+3}, C_0=128mB^2 and nu=11 are never defined (only B<=m^nu and an inequality ending in C_0 d^{C_1})."
+    },
+    {
+      "id": "S2",
+      "verdict": "present",
+      "plan_steps": [
+        "T2d.2",
+        "T2d.3",
+        "T2d.4"
+      ],
+      "lines": [
+        2479,
+        2518
+      ],
+      "note": "T2d.4 states A(e)<=sA(e/m)+E at an internal node and A(e)<=8e at a leaf, with T2d.2/T2d.3 giving the per-invocation count (12W gates, 2W^2 ops each, total 24W^3+4s+4W+4<E)."
+    },
+    {
+      "id": "S3",
+      "verdict": "present",
+      "plan_steps": [
+        "T2d.5",
+        "T2d.6",
+        "T2d.7"
+      ],
+      "lines": [
+        2523,
+        2560
+      ],
+      "note": "T2d.5 gives sx+E<=Bx through the levels, T2d.6 gives B^{k+1}<=B^2 d^nu and A(e)<=8B^2 d^{nu+1}, and T2d.7 bounds the total below C_0 d^{C_1}."
+    },
+    {
+      "id": "S4",
+      "verdict": "present",
+      "plan_steps": [
+        "T2d.8",
+        "T2d.9"
+      ],
+      "lines": [
+        2562,
+        2586
+      ],
+      "note": "T2d.8 states depth-l values lie in 2^{-(p+l)}Z[i] with modulus at most 2^l and that p+Delta fractional and Delta+3 integer bits are exact; T2d.9 gives epsilon*C_1<1 implies Delta=o(p)."
+    },
+    {
+      "id": "S5",
+      "verdict": "present",
+      "plan_steps": [
+        "T2.3"
+      ],
+      "lines": [
+        2751,
+        2757
+      ],
+      "note": "T2.3 states every row of H has absolute row sum one so disk arrays are preserved and truncation errs by less than sqrt2*2^-p."
+    }
+  ],
+  "summary": "18 of 26 present. Present: B1-B4, L3-L5, P1-P3, R1, R4, M3, M4, S2-S5. Absent: L1 (residual table), L2 (side edge 2->5), P4 (endpoint frames and 27-coordinate Z repair), R2 and R3 (numeric deficits), M1 (elimination proof, only the statement is asserted), M2 (fixed prime), S1 (constants nu, C_1, C_0 not defined). None judged wrong."
+}
