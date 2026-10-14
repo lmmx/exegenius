@@ -1,0 +1,27 @@
+{"page": "P05",
+ "items": [
+  {"id": "S4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page replaces scalars by arrays over a common address set, attaches frames D_v, has each edge apply D_vD_u^{-1}, and derives 'the network maps f to D_out S_Omega D_in^{-1} f' by the invariant, as the paper does (lines 785-825). The explicit explanation of the striking feature (interior frames cancel) relies on the flawed single-route telescoping in the last paragraph, but the invariant paragraph carries the step correctly."},
+  {"id": "S4.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": ["the reason the gate commutes with the frame: each output of a gate is a combination sum_j c_j phi_j with scalar coefficients c_j in R, and D_v is R-linear, so sum_j c_j D_v phi_j = D_v(sum_j c_j phi_j) (the page says only 'by linearity')", "the distinction that a frame may mix addresses within one wire's array while a gate combines wires at each fixed address"],
+   "note": "The page follows the paper's induction: holds at sources 'by the definition of g', 'passes along an edge by applying D_vD_u^{-1}', and passes through a gate since 'G(D_v g_1,...,D_v g_z)=D_v G(g_1,...,g_z)', concluding D_out S_Omega D_in^{-1}. The justification at the gate is compressed to 'by linearity', omitting the scalar-coefficient/R-linearity identity the paper gives."},
+  {"id": "S4.2.2",
+   "presence": "derived",
+   "faithful": false,
+   "dropped": ["the route formula is the specialization of D_out S_Omega D_in^{-1} to a scalar network that is, as a whole, a signed role permutation acting pointwise (this is where epsilon_w and the pairing source(w) -> sink(rho(w)) come from)", "the action of the gate between the two edges: D_x cancels only because the gate commutes with D_x, not merely because the edge operators multiply to D_pD_q^{-1}"],
+   "note": "The page supports the formula by telescoping edge operators along 'a route from a source q through a gate x to a sink p', which omits the gate's action and the sign and applies only when routes are single chains; in the paper's networks interior gates mix roles, and the paper obtains the formula 'in particular' from the common-frame identity. The formula itself, 'auxiliary roles included', and the conclusion about choosing interior frames for cheap edges are stated correctly."}
+ ],
+ "errors": [
+  {"severity": "major",
+   "quote": "Take a route from a source $q$ through a gate $x$ to a sink $p$. Its edge operators $D_xD_q^{-1}$ and $D_pD_x^{-1}$ multiply to $D_pD_q^{-1}$, so the frame $D_x$ cancels.",
+   "problem": "The operator along such a route is D_pD_x^{-1} G_x D_xD_q^{-1}, not just the product of the edge operators; D_x cancels only because the pointwise gate commutes with its frame. Moreover the paper's interior gates (copy, gather, scatter, side injection) mix several roles, so a role's route is not a single chain of edges. The paper derives the route operator epsilon_w D_sink(rho(w)) D_source(w)^{-1} by specializing the global identity D_out S_Omega D_in^{-1} (lines 813-822), not by telescoping along a path; as written this is the only argument the page gives for that formula."},
+  {"severity": "minor",
+   "quote": "Each frame is checked invertible by the rank criterion of [Rank, subspaces and orthogonal complements](linear-algebra-basics.md): it has full rank, so $D_v^{-1}$ exists.",
+   "problem": "Invertibility is a hypothesis of the construction, not something checked here: the paper simply assigns 'an invertible R-linear operator D_v on R^Omega' at each vertex (lines 793-794). No rank computation is made at this point, and the operators are R-linear over the network's scalar ring R, which the page calls only 'linear'."}
+ ],
+ "motivation_given": true}

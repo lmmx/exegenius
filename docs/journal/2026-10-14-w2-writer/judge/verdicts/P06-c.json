@@ -1,0 +1,15 @@
+{"page": "P06",
+ "items": [
+  {"id": "S4.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page sets up frames as in the paper (invertible R-linear D_v at sources, gates and sinks, one D_v for all incidences of a gate, edge change D_vD_u^{-1}, D_in and D_out as direct sums over roles). It proves the invariant by induction to get D_out S_Omega D_in^{-1}, then specializes to signed role permutations, so the step is shown to follow."},
+  {"id": "S4.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "All three cases of the induction appear as in the paper: sources 'by the definition of g', edges 'D_vD_u^{-1}D_u\\varphi=D_v\\varphi', and gates '\\sum_j c_jD_v\\varphi_j=D_v(\\sum_j c_j\\varphi_j)' using R-linearity and the shared frame. The page then concludes 'the network implements D_out S_Omega D_in^{-1}'."},
+  {"id": "S4.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The route formula eps_w D_sink(rho(w)) D_source(w)^{-1} and 'Auxiliary roles are included' match the paper. The page puts it right after the common-frame identity, from which it follows at once, but its stated reason is that 'Interior changes D_vD_u^{-1} telescope'. That holds path by path, but the page does not spell out the paper's step of reading the block off D_out S_Omega D_in^{-1} (see the minor error)."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Interior changes $D_vD_u^{-1}$ telescope, leaving only the frames at the two ends of a route.",
+   "problem": "This treats a role's route as a single chain of edges. In the exchange networks, gates add other wires into a role's array, so a route is not a path. Telescoping works only for each source-to-sink path separately: the scalar gate coefficients commute with the R-linear frames, those path coefficients sum to eps_w at sink(rho(w)), and they sum to 0 at every other sink. The paper does not telescope. It reads the route operator off the identity D_out S_Omega D_in^{-1}, with S_Omega acting on role arrays as the signed permutation ('In particular, ...')."}
+ ],
+ "motivation_given": true}
