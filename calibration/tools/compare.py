@@ -120,4 +120,5 @@ def main():
               f"{a['core_derived']} vs {c['core_derived']}; faithful {a['core_faithful']} vs {c['core_faithful']}")
 
 
-main()
+if __name__ == "__main__":
+    main()
