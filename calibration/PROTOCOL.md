@@ -153,6 +153,7 @@ The stages above give the **most** runs an arm may need, not a quota. Over E4–
     - Judge only what a decision needs.
     - Where the central gate decides something, use **three independent judges per plan** and decide each step by majority: single-judge gate verdicts changed in 3 of 8 plans on re-judging (E7).
     - A cheaper judge model may replace Opus once its agreement with Opus judges has been measured.
+12. **Keep the cumulative budget.** `calibration/budget.md` holds the usage-meter readings the author supplies, measured spend per experiment split into runs and judging (`tools/spend.py`), and what each experiment bought. A new plan's estimate starts from it, and the file is updated when an experiment ends.
 
 ## 7. Resources
 

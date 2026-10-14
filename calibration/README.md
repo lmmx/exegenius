@@ -6,6 +6,7 @@ A reusable programme for finding, for a given kind of document, task and require
 |---|---|---|
 | **Calibration Protocol** | the method: terms, configuration dimensions (model, ordinal effort, agent definition, prompt, settings), the four levels of quality instruments, calibres as hard gates, experimental design, sequential allocation and stopping, screening against confirmatory evidence, resource accounting with bases, and recalibration | `PROTOCOL.md` |
 | **Evaluation Registry** | the evidence: one record per experiment, built mechanically from git refs (run logs, transcripts, verdicts), with every value's basis (measured, estimated, reported, unavailable) | `registry/` (`schema.md`, `specs/`, `experiments/`, `judging.json`, `INDEX.md`) |
+| **Budget** | the cumulative record of cost and value: usage-meter readings supplied by the author, measured spend per experiment split into runs and judging (`tools/spend.py`), and what each experiment settled, used to size and choose the next experiment | `budget.md` |
 | **Capability Map** | the conclusions: which configurations meet which calibre, for which document class, at what cost, with what uncertainty, at which versions | `capability-map.md` |
 | **Explanatory Fidelity Evaluation** | the research track for levels 3 and 4: does the wiki carry a reader along the proof plan's paths, and does the reader come away understanding? | `fidelity/README.md` |
 | **Rubrics** | per-document rubrics for the central chain of reasoning, preregistered | `rubrics/` |
