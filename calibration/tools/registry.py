@@ -133,7 +133,7 @@ def subagent(lines, meta):
         calls[m.get("id")] = (u.get("input_tokens", 0), u.get("cache_read_input_tokens", 0),
                               u.get("cache_creation_input_tokens", 0))
         chars[m.get("id")] += sum(len(json.dumps(b)) for b in m.get("content", []))
-        if m.get("model"):
+        if m.get("model") and m["model"] != "<synthetic>":  # an error message, not a model
             models[m["model"]] += 1
     t = lambda s: datetime.fromisoformat(s.replace("Z", "+00:00"))
     return {

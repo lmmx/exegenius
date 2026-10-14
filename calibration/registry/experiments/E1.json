@@ -1037,6 +1037,21 @@
      "minor_errors": 4,
      "central_count": 8,
      "central_gate": false
+    },
+    {
+     "batch": "J4",
+     "judge": "a",
+     "plan": "P04",
+     "core_stated": 19,
+     "core_fully": 15,
+     "core_derived": 18,
+     "core_faithful": 14,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 4,
+     "central_count": 8,
+     "central_gate": false
     }
    ]
   },
@@ -1286,6 +1301,36 @@
      "plan": "P09",
      "core_stated": 19,
      "core_fully": 6,
+     "core_derived": 7,
+     "core_faithful": 0,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 5,
+     "central_count": 3,
+     "central_gate": false
+    },
+    {
+     "batch": "J4",
+     "judge": "a",
+     "plan": "P05",
+     "core_stated": 19,
+     "core_fully": 6,
+     "core_derived": 7,
+     "core_faithful": 0,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 6,
+     "central_count": 3,
+     "central_gate": false
+    },
+    {
+     "batch": "J4",
+     "judge": "b",
+     "plan": "P05",
+     "core_stated": 19,
+     "core_fully": 8,
      "core_derived": 7,
      "core_faithful": 0,
      "supporting_stated": 6,
@@ -2520,6 +2565,45 @@
      "max": 8
     },
     "central_gate_passed": "0/5"
+   },
+   "quality_J4": {
+    "core_stated": {
+     "n": 2,
+     "median": 19.0,
+     "min": 19,
+     "max": 19
+    },
+    "core_fully": {
+     "n": 2,
+     "median": 10.5,
+     "min": 6,
+     "max": 15
+    },
+    "core_derived": {
+     "n": 2,
+     "median": 12.5,
+     "min": 7,
+     "max": 18
+    },
+    "core_faithful": {
+     "n": 2,
+     "median": 7.0,
+     "min": 0,
+     "max": 14
+    },
+    "major_errors": {
+     "n": 2,
+     "median": 0.0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 2,
+     "median": 5.5,
+     "min": 3,
+     "max": 8
+    },
+    "central_gate_passed": "0/2"
    },
    "resources_extract": {
     "model_calls": {

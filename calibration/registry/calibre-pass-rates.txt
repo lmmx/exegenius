@@ -1,3 +1,15 @@
+exegenius-planner / claude-haiku-5-5 / high / binary cc70355 | batch J4 | 2 runs from S1
+  Overview: 0/2 pass (95% exact 0.00-0.84)
+  Technical: 0/2 pass (95% exact 0.00-0.84)
+  Research: 0/2 pass (95% exact 0.00-0.84)
+exegenius-planner / claude-opus-5-5 / high / binary cc70355 | batch J4 | 2 runs from S1
+  Overview: 2/2 pass (95% exact 0.16-1.00)
+  Technical: 1/2 pass (95% exact 0.01-0.99)
+  Research: 1/2 pass (95% exact 0.01-0.99)
+exegenius-planner / claude-opus-5-5 / medium / binary cc70355 | batch J4 | 2 runs from S1
+  Overview: 2/2 pass (95% exact 0.16-1.00)
+  Technical: 1/2 pass (95% exact 0.01-0.99)
+  Research: 1/2 pass (95% exact 0.01-0.99)
 exegenius-planner / claude-sonnet-5-5 / high / binary cc70355 | batch J2 | 5 runs from E1
   Overview: 5/5 pass (95% exact 0.48-1.00)
   Technical: 2/5 pass (95% exact 0.05-0.85)
@@ -6,6 +18,10 @@ exegenius-planner / claude-sonnet-5-5 / high / binary cc70355 | batch J3 | 5 run
   Overview: 5/5 pass (95% exact 0.48-1.00)
   Technical: 2/5 pass (95% exact 0.05-0.85)
   Research: 0/5 pass (95% exact 0.00-0.52)
+exegenius-planner / claude-sonnet-5-5 / high / binary cc70355 | batch J4 | 2 runs from E1
+  Overview: 2/2 pass (95% exact 0.16-1.00)
+  Technical: 1/2 pass (95% exact 0.01-0.99)
+  Research: 0/2 pass (95% exact 0.00-0.84)
 exegenius-planner / claude-sonnet-5-5 / medium / binary 1d90c28 | batch J1 | 11 runs from X1, X2
   Overview: 1/11 pass (95% exact 0.00-0.41)
   Technical: 0/11 pass (95% exact 0.00-0.28)
@@ -14,6 +30,10 @@ exegenius-planner / claude-sonnet-5-5 / medium / binary cc70355 | batch J3 | 5 r
   Overview: 0/5 pass (95% exact 0.00-0.52)
   Technical: 0/5 pass (95% exact 0.00-0.52)
   Research: 0/5 pass (95% exact 0.00-0.52)
+exegenius-planner / claude-sonnet-5-5 / medium / binary cc70355 | batch J4 | 1 runs from E3
+  Overview: 0/1 pass (95% exact 0.00-0.98)
+  Technical: 0/1 pass (95% exact 0.00-0.98)
+  Research: 0/1 pass (95% exact 0.00-0.98)
 exegenius-planner / claude-sonnet-5-5 / medium / binary f70a919 | batch J1 | 10 runs from X3
   Overview: 0/10 pass (95% exact 0.00-0.31)
   Technical: 0/10 pass (95% exact 0.00-0.31)

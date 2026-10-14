@@ -1,0 +1,96 @@
+{
+ "id": "S1",
+ "title": "Screening other models for planning",
+ "kind": "screening",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning (extract, background, argument)",
+ "question": "At E1/E3's planning configuration, does a cheaper model reach the Overview calibre, and does Opus at medium or high match or exceed Sonnet at high?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "cc70355"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "131026-exp-s1-models",
+  "commit": "7335096"
+ },
+ "protocol": "EXPERIMENT.md at 3c70129",
+ "preregistration": "calibration/plans/S1.md (eaf81b9)",
+ "journal": "docs/journal/2026-10-14-s1-models.md",
+ "arms": {
+  "O": {
+   "intended": {
+    "agent": "exegenius-planner",
+    "model_id": "claude-opus-5-5",
+    "effort": "medium",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections"
+   },
+   "runs": [
+    "O1",
+    "O2"
+   ]
+  },
+  "Q": {
+   "intended": {
+    "agent": "exegenius-planner",
+    "model_id": "claude-opus-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections"
+   },
+   "runs": [
+    "Q1",
+    "Q2"
+   ]
+  },
+  "K": {
+   "intended": {
+    "agent": "exegenius-planner",
+    "model_id": "claude-haiku-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections"
+   },
+   "runs": [
+    "K1",
+    "K2"
+   ]
+  }
+ },
+ "reported": {
+  "session_cost_usd": {
+   "value": 21.27,
+   "basis": "reported",
+   "source": "runner session record, attempt 2 (includes orchestration)"
+  },
+  "session_cost_usd_attempt_1": {
+   "value": 0.32,
+   "basis": "reported",
+   "source": "first runner session (refused add_repo; no runs)"
+  }
+ },
+ "deviations": [
+  {
+   "kind": "operational",
+   "what": "attempt 1's runner was refused add_repo ([Permission Grant]); the author authorised an allow rule for add_repo on this branch only (3c70129) and a fresh runner ran the protocol"
+  },
+  {
+   "kind": "protocol",
+   "what": "the runner issued steps 2.3 (checkout) and 2.4 (register_repo_root) in one message; the build (2.5) followed both"
+  },
+  {
+   "kind": "operational",
+   "run": "K2",
+   "what": "the 0003-argument subagent ended with a rate-limit API error after its submit had been accepted; the transcript's last message is synthetic"
+  }
+ ],
+ "limitations": [
+  "Screening: two runs per arm support only decisions to stop spending, never claims of reliability.",
+  "One paper; unreviewed reference."
+ ]
+}

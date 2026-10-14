@@ -1,0 +1,28 @@
+per plan (first judgements):
+arm     run        core_stated    core_fully  core_derived core_faithful supporting_st         wrong  major_errors  minor_errors central_count  gate  steps C1..C9
+OPUS_MED O1                  18             9             4             3             6             0             0             3             7  False mRRmRRRRR
+OPUS_MED O2                  18            13            12             3             6             0             0             2             9  True  RRRRRRRRR
+OPUS_MED median            18.0          11.0           8.0           3.0           6.0           0.0           0.0           2.5           8.0
+OPUS_HIGH Q1                  18            15            18             9             5             0             0             3             8  True  RmRRRRRRR
+OPUS_HIGH Q2                  19            13             5             3             7             0             0             2             6  False RRRmmmRRR
+OPUS_HIGH median            18.5          14.0          11.5           6.0           6.0           0.0           0.0           2.5           7.0
+HAIKU_HIGH K1                  16             4             5             0             4             0             0             3             5  False mRmmRRmRR
+HAIKU_HIGH K2                  15             5             3             0             6             0             0             3             1  False mmm-mm-Rm
+HAIKU_HIGH median            15.5           4.5           4.0           0.0           5.0           0.0           0.0           3.0           3.0
+ANCHORS P4                  19            15            18            14             6             0             0             4             8  False RRRRmRRRR
+ANCHORS P5                  19             6             7             0             6             0             0             6             3  False mRmmmmRRm
+ANCHORS M3                  13             3             2             0             4             0             0             2             1  False mmmm-mmRm
+ANCHORS median            19.0           6.0           7.0           0.0           6.0           0.0           0.0           4.0           3.0
+
+exact one-sided Mann-Whitney, OPUS_HIGH > OPUS_MED (n = 2 against 2):
+  core_derived   medians 8 -> 11.5, difference 3.5, p = 0.3333
+  core_faithful  medians 3 -> 6, difference 3, p = 0.5000
+  core_stated    medians 18 -> 18.5, difference 0.5, p = 0.5000
+  core_fully     medians 11 -> 14, difference 3, p = 0.3333
+  central_count  medians 8 -> 7, difference -1, p = 0.8333
+  central gate passed, OPUS_MED: 1/2
+  central gate passed, OPUS_HIGH: 1/2
+
+paired judgements (central steps, and counts):
+  P01 (M3): central steps same 9/9; central count 1 vs 1; gate False vs False; core derived 2 vs 0; faithful 0 vs 0
+  P05 (P5): central steps same 9/9; central count 3 vs 3; gate False vs False; core derived 7 vs 7; faithful 0 vs 0

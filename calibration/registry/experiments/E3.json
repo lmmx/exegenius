@@ -901,6 +901,36 @@
      "minor_errors": 2,
      "central_count": 1,
      "central_gate": false
+    },
+    {
+     "batch": "J4",
+     "judge": "a",
+     "plan": "P01",
+     "core_stated": 13,
+     "core_fully": 3,
+     "core_derived": 2,
+     "core_faithful": 0,
+     "supporting_stated": 4,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 1,
+     "central_gate": false
+    },
+    {
+     "batch": "J4",
+     "judge": "b",
+     "plan": "P01",
+     "core_stated": 8,
+     "core_fully": 1,
+     "core_derived": 0,
+     "core_faithful": 0,
+     "supporting_stated": 2,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 3,
+     "central_count": 1,
+     "central_gate": false
     }
    ]
   },
@@ -1513,6 +1543,45 @@
      "max": 1
     },
     "central_gate_passed": "0/5"
+   },
+   "quality_J4": {
+    "core_stated": {
+     "n": 1,
+     "median": 13,
+     "min": 13,
+     "max": 13
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 3,
+     "min": 3,
+     "max": 3
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 2,
+     "min": 2,
+     "max": 2
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 1,
+     "median": 1,
+     "min": 1,
+     "max": 1
+    },
+    "central_gate_passed": "0/1"
    },
    "resources_extract": {
     "model_calls": {
