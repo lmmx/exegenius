@@ -290,7 +290,10 @@ who follows only one derivation should follow this one. Develop it with `show` s
 to the reasoning the sources give for it, each sub-step quoting where the sources carry it \
 out, rather than stopping at an `infer` step that quotes its result. Where a sub-step \
 concludes from a count, a bound or an equality, state the identity, lemma or definition \
-that makes it hold, and every case the sources treat as an exception to it.
+that makes it hold, and every case the sources treat as an exception to it. Where the \
+sources carry out a construction or estimate in more than one variant, develop each variant \
+the target result uses; where a sub-step concludes a bound on an error, a size or a depth, \
+state the recurrence or chain of estimates that produces the bound.
 - `salient`: for a step whose claim has a feature a reader would find striking (a symmetry, \
 a uniformity across cases, a surprising value or bound), that feature. A proof explains a \
 result only relative to such a feature (Lange), so its page is asked to explain why the \
