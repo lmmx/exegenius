@@ -663,22 +663,28 @@ def main():
         rho, p = spearman([full_c["W"][f] for f in fs], [full_c["X"][f] for f in fs])
         body.append(["W vs X checklist", rho, p])
     md.append(md_table(["Pair", "rho", "p"], body))
-    rep = [p for p in plans if p["run"] in ("E8F4X", "E8F4X2")]
-    md.append("\n**Run-to-run variance on one extraction (same planner, same instruction):** " +
-              "; ".join(f"{p['run']} faithful {p['faithful']} ({p['batch']}), checklist "
-                        f"{checks.get(p['run'], {})}" for p in rep) +
-              "; S3F8OX against S5F8OX (Opus `xhigh`, F8, J10/J12): see section 3. The E10 repeat "
-              "E10F4Y2 is not yet judged.\n")
+    md.append("\n**Run-to-run variance on one extraction (same planner, same instruction, same extraction):**\n")
+    body = []
+    for a, b in (("E8F4X", "E8F4X2"), ("S3F8OX", "S5F8OX")):
+        pa = [p for p in plans if p["run"] == a][0]
+        pb = [p for p in plans if p["run"] == b][0]
+        shared = sorted(set(checks.get(a, {})) & set(checks.get(b, {})))
+        ch = "; ".join(f"{bt}: {checks[a][bt]} vs {checks[b][bt]}" for bt in shared) or "-"
+        body.append([f"{a} vs {b}", f"{pa['faithful']} ({pa['batch']}) vs {pb['faithful']} ({pb['batch']})",
+                     abs(pa["faithful"] - pb["faithful"]), ch])
+    md.append(md_table(["Repeat", "Faithful", "Difference", "Checklist, same batch"], body))
+    md.append("\nThe E10 repeat E10F4Y2 is not yet judged.\n")
 
     # 5. correlations
     md.append("## 5. Do the judge-free measures predict the plan?\n")
-    md.append("Spearman's rho of each extraction measure against each arm's faithful count (and the "
-              "checklist), over E6's eight extractions; exact permutation p, two-sided. With n = 8, "
-              "|rho| >= 0.74 is needed for p < 0.05, and about one test in twenty crosses it by chance "
-              "(there are " + str(len([k for k, _ in MEASURES if k not in ('cache_read_m', 'seconds')]) * 6) +
-              " tests here). The last column is the mean of the arms' within-arm ranks.\n")
     outcomes = [(f"{a} faithful", {f: full[a][f] for f in fs}) for a in arms4]
     outcomes += [(f"{a} checklist", full_c[a]) for a in full_c]
+    n_tests = len([k for k, _ in MEASURES if k not in ("cache_read_m", "seconds")]) * (len(outcomes) + 1)
+    md.append("Spearman's rho of each extraction measure against each arm's faithful count (and the "
+              "checklist), over E6's eight extractions; exact permutation p, two-sided. With n = 8, "
+              f"|rho| >= 0.74 is needed for p < 0.05, and with {n_tests} tests about "
+              f"{round(n_tests * 0.05)} would cross it by chance alone. The last column is the mean of the "
+              "arms' within-arm ranks.\n")
     mean_rank = {f: statistics.fmean(ranks([o[g] for g in fs])[fs.index(f)] for _, o in outcomes) for f in fs}
     body = []
     for k, label in MEASURES:
