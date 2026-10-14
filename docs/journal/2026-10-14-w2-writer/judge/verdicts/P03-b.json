@@ -1,0 +1,131 @@
+{
+ "page": "P03",
+ "items": [
+  {
+   "id": "S4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "computation of the loss ratios from I=3v^2, N=v^3, v=161700, c_b=100, c_c=101",
+    "edge-by-edge check that every edge joins nested labels and only the central 3->4 edges decrease"
+   ],
+   "note": "The page chains 'an edge costs rank $\\dim V-\\dim U$', 'absolute changes total $Wm-2N+2L$', the $N$ extra source ranks of the bit interface, and 'both below one half, so $N$ extra source ranks leave a strict saving' to reach $s_{\\rm b}<W_{\\rm b}m$ and $s_{\\rm c}<W_{\\rm c}m$, as the paper does. The dimension facts this chain uses are mostly asserted (see S4.3.3 to S4.3.5)."
+  },
+  {
+   "id": "S4.3.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "nondegeneracy of the rational form $I-J/9$ (eigenvalues $1$ and $1-h/9=-91/9$)",
+    "binary case: $t_T\\cdot t_T=1$ over $\\mathbb F_2$, which is what makes triple lines nondegenerate in the complex network",
+    "the neighbor relations ($|S\\cap T|=1$ in the bit network; distinct with even intersection in the complex network) and why they make neighboring triple lines orthogonal (only asserted later: 'neighbouring triples satisfy $t_S\\perp t_T$')",
+    "nondegeneracy of $\\mathcal F=F^{\\otimes3}$ with the tensor form"
+   ],
+   "note": "'Since $t_S,t_T$ have three ones, $\\langle t_S,t_T\\rangle=|S\\cap T|-1$ and $\\langle t_T,t_T\\rangle=2$' gives the reason for the rational formula (the $J/9$ term contributes $9/9$), and $F$, $\\mathcal F$, $m=h^3$ and $u_a$ are set up as in the paper. The binary case and the orthogonality of neighbors are not worked out."
+  },
+  {
+   "id": "S4.3.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "$\\dim U_a^\\perp=m-1$ (from nondegeneracy), which the sink total uses",
+    "$N=v^3$ as the number of indices $a$ (N is never defined on the page)"
+   ],
+   "note": "The terminal labels match the paper's table, and 'Each $U_a$ is a line, so sources total $N$, one per input, and sinks $Wm-N$' gives the count. The sink count uses, without saying so, that $U_a^\\perp$ has codimension one."
+  },
+  {
+   "id": "S4.3.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the transition table: $X$: $A\\otimes\\langle t\\rangle\\otimes Q\\to(A\\otimes F)\\otimes Q$; $Y$: $B\\otimes\\langle t\\rangle\\otimes Q\\to((B\\otimes F)\\perp(P\\otimes t^\\perp))\\otimes Q$",
+    "the factor $Q=\\langle t_{a_{j+1}}\\otimes\\cdots\\otimes t_{a_3}\\rangle$ and its splitting $Q=\\langle t_{a_{j+1}}\\rangle\\otimes Q'$",
+    "the identity $B'=(P')^\\perp_{A'}=(B\\otimes F)\\perp(P\\otimes t^\\perp)$",
+    "$A=B\\perp P$ from nondegeneracy of $P$; empty tensor product so $B=0$ at stage 1",
+    "the check that labels start at $U_a$ and $0$ at stage 1 and end at $\\mathcal F$ and $U_a^\\perp$ at stage 3"
+   ],
+   "note": "The page defines $A$, $R$ (the paper's $P$), $B$ and the next-stage $A',R',B'$, then asserts 'so outgoing labels equal the next incoming ones'. It never gives the incoming and outgoing labels or the factor $Q$, so the reader cannot check that they match."
+  },
+  {
+   "id": "S4.3.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the residual table for every edge, including interstage edges through 'in', center source$\\to1$, side source$\\to0$, $0\\to2$, $5\\to7$, and scratch last$\\to$sink with residual $(A\\otimes F)\\otimes Q^\\perp$ of dimension $ah(f-1)$",
+    "the identification of the $h-2$ residual as the edge $2\\to5$ and the nesting $P\\otimes\\langle t_X\\rangle\\subset P\\otimes t_Y^\\perp$",
+    "which physical wires each time's gate touches, and the factor $Q$ on every gate label",
+    "the telescoping reason: each touched wire has one incoming and one outgoing incidence with the same gate label",
+    "the reason binary residuals have orthonormal bases: nonzero residuals are nondegenerate and nonalternating (coordinate units outside supports of sizes $3^{j-1}$, $3$, $6$), and nonalternating nondegenerate binary spaces have orthonormal bases"
+   ],
+   "note": "'Dimension drops only on central edges from time $3$ to $4$, each by $h$' and 'Signed changes telescope to $Wm-2N$' are asserted. The gate labels are listed, and one side residual gets a reason ('since neighbouring triples satisfy $t_S\\perp t_T$'), but the page shows no edge-by-edge residuals, no telescoping argument, and no reason for the orthonormal bases."
+  },
+  {
+   "id": "S4.3.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "$I=3v^2$ invocations, $N=v^3$, $v=\\binom{100}{3}=161700$",
+    "central-wire counts $c_{\\rm b}=100$, $c_{\\rm c}=101$",
+    "the arithmetic $L/N=3ch/v=3\\cdot100\\cdot100/161700=100/539$ (and $101/539$)"
+   ],
+   "note": "The ratios are given with a citation and 'both below one half' but are not computed. The page never gives the counts $I$, $v$, $c_{\\rm b}$, $c_{\\rm c}$ needed to get them from $L=\\nu ch$."
+  },
+  {
+   "id": "S4.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the route permutation $\\rho$ ($X_a\\leftrightarrow Y_a$) behind the endpoint difference $M_{\\mathrm{sink}(\\rho(w))}-M_{\\mathrm{source}(w)}$",
+    "why the first edge matrix is $2P_{U_a}$: $B=0$ at stage 1, so the first gate on $X_a$ has label exactly $U_a$",
+    "endpoint check for the other roles (zero source matrix, identity sink matrix)",
+    "decreasing edges: reversing an edge negates the matrix without changing its rank",
+    "explicit value $177176569088785861287000000$ and deficit $N-2L_{\\rm b}>0$"
+   ],
+   "note": "'$P_{U_a^\\perp}+P_{U_a}=I_m$ makes every endpoint difference $I_m$' and 'except at the $N$ source edges, where $2P_{U_a}$ has rank one' follow the paper's proof, using the projection-difference fact stated earlier on the page. The page does not explain why that edge matrix is $2P_{U_a}$."
+  },
+  {
+   "id": "S4.3.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "$\\operatorname{wt}(z+w)=\\operatorname{wt}(z)+\\operatorname{wt}(w)-2|\\operatorname{supp}z\\cap\\operatorname{supp}w|$ and additivity modulo 4 when $z\\cdot w=0$",
+    "negation of the phase sum on a decreasing edge; norm one implies odd weight",
+    "$i^{\\varepsilon[v\\cdot x]}=\\frac{1+i^\\varepsilon}2+\\frac{1-i^\\varepsilon}2(-1)^{v\\cdot x}$",
+    "zero label has frame $I$ and full label has frame $C^{\\otimes m}$ since $q_{\\mathcal F}(x)=\\operatorname{wt}(x)$",
+    "$q_{U_a^\\perp}-q_{U_a}=\\operatorname{wt}(x)+2[u\\cdot x]$ with $\\operatorname{wt}(u_a)=27$, so $C^{-1}$ only on the 27 coordinates of $\\operatorname{supp}(u_a)$",
+    "endpoint corrections $Z_{a,k}$ before $X_a$ and $i^{27k}Z_{a,k}$ after $Y_a$",
+    "negating the physical $X$ outputs (sign of the scalar exchange) and sending $\\rho(w)$ back to $w$",
+    "Gaussian-dyadic entries of $\\mathcal C_U$; the $k$-column tensor version; explicit $s_{\\rm c}$ value and deficit $2N-2L_{\\rm c}>0$"
+   ],
+   "note": "The frames and $C=\\alpha I+\\beta\\sigma$ are correct, and the page names the $H\\operatorname{diag}(1,-1)H=\\sigma$ step. The formula '$q_V(x)-q_U(x)=\\sum_{w\\in\\mathcal K}|w|\\,(w\\cdot x\\bmod2)$' is asserted without the mod-4 weight additivity that carries it, and the $X_a\\to Y_a$ fix is asserted ('has inverse kernels, which $C=iZC^{-1}Z$ ... turns into $C$') without the computation or the endpoint corrections."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "where $W$ counts wires and $m$ is the label dimension",
+   "problem": "$m=h^3$ is the dimension of the ambient label space $\\mathcal F=F^{\\otimes3}$. Individual labels have dimensions from $0$ to $m$."
+  },
+  {
+   "severity": "minor",
+   "quote": "Since $t_S,t_T$ have three ones, $\\langle t_S,t_T\\rangle=|S\\cap T|-1$ and $\\langle t_T,t_T\\rangle=2,$ so each triple line is nondegenerate.",
+   "problem": "This sentence follows the definitions of both networks, but these values hold only for the rational form. Over $\\mathbb F_2$ with the dot product, $t_S\\cdot t_T=|S\\cap T|\\bmod2$ and $t_T\\cdot t_T=1$; a norm of $2$ would be $0$ there and make the line isotropic. The paper states $t_T\\cdot t_T=1$ separately for the complex network."
+  },
+  {
+   "severity": "minor",
+   "quote": "Gate labels at times $0$ to $7$ are $B\\otimes\\langle t_T\\rangle,$ $B\\otimes F,$ $(B\\otimes F)\\oplus(R\\otimes\\langle t_T\\rangle),$ $A\\otimes F,$ $B\\otimes F,$ $(B\\otimes F)\\oplus(R\\otimes\\langle t_T\\rangle^\\perp),$ $A\\otimes F,$ $A\\otimes F,$",
+   "problem": "The same $t_T$ is used at every time. In the paper $t$ is the indicator of the physical triple that indexes each gate: the $Y$ triple at times 0 and 5, the $X$ triple at time 2. Read literally, the time-2 and time-5 labels on a side wire would not be nested, since $t_T\\notin t_T^\\perp$. The labels also drop the factor $Q$ (paper: 'All labels are tensored by $Q$') without saying so."
+  },
+  {
+   "severity": "minor",
+   "quote": "The side edge has residual $R\\otimes\\langle t_S,t_T\\rangle^\\perp$ of dimension $h-2,$",
+   "problem": "A side wire has several edges (source$\\to0$, $0\\to2$, $2\\to5$, $5\\to7$, last$\\to$sink) with different residuals. This residual, tensored by $Q$, belongs to the edge $2\\to5$ only."
+  },
+  {
+   "severity": "minor",
+   "quote": "The pair $X_a\\to Y_a$ has inverse kernels, which $C=iZC^{-1}Z$ with $Z=\\operatorname{diag}(1,-1)$ turns into $C,$ so every role carries $C^{\\otimes m}.$",
+   "problem": "Only the 27 coordinates of $\\operatorname{supp}(u_a)$ carry $C^{-1}$; the rest carry $C$. Turning them into $C$ needs the diagonal corrections $Z_{a,k}$ before $X_a$ and $i^{27k}Z_{a,k}$ after $Y_a$. The physical $X$ outputs must also be negated to undo the sign of the scalar exchange $(X,Y)\\mapsto(-Y,X)$. The paper's claim holds only 'after source and sink diagonal corrections, and undoing the signed bank exchange'."
+  }
+ ],
+ "motivation_given": false
+}
