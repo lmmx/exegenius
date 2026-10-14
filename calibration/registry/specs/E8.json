@@ -1,0 +1,58 @@
+{
+ "id": "E8",
+ "title": "A sentence asking for every variant and every bound's chain, Sonnet at high",
+ "kind": "controlled",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task only, on E6's extractions F1, F4 and F8 (background accepted)",
+ "question": "Does the variant sentence lift Sonnet high towards Opus xhigh?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "4f5ee26 (141026-exp-variants-chains)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-s4-e8-fb1",
+  "commit": "f336a47",
+  "transcripts": "results/transcripts/s4-e8-fb1",
+  "description_prefix": "",
+  "planning_kinds": [
+   "argument"
+  ]
+ },
+ "protocol": "run from the development session; S4-E8-FB1.md on the evidence branch",
+ "preregistration": "calibration/plans/E8.md (criteria fixed before any run)",
+ "journal": "docs/journal/2026-10-14-s4-s5-e8.md",
+ "comparison": "E7F1W, E7F4W, E7F8W (Sonnet, high, E7 instructions), re-judged in J15 (checklist) and J16 (primary)",
+ "arms": {
+  "X": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E7 argument instructions plus the variant sentence (variants and bound chains)"
+   },
+   "runs": [
+    "E8F1X",
+    "E8F4X",
+    "E8F8X"
+   ]
+  }
+ },
+ "reported": {},
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus, high) with this session's permissions; it only passed prompts and ran exegenius next"
+  }
+ ],
+ "limitations": [
+  "One paper, three extractions, one run each.",
+  "The checklist targets the gaps the sentence was written for; the primary rubric does not."
+ ]
+}

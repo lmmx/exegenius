@@ -169,8 +169,9 @@ def subagent(lines, meta):
     }
 
 
-def subagents_by_run(files, prefix=""):
+def subagents_by_run(files, prefix="", rename=None):
     out, orchestrators = collections.defaultdict(list), []
+    rename = rename or {}
     for name, text in files.items():
         if name.endswith(".jsonl") and "/subagents/" in name:
             meta = json.loads(files.get(name[: -len(".jsonl")] + ".meta.json", "{}"))
@@ -180,7 +181,7 @@ def subagents_by_run(files, prefix=""):
                 s = subagent(text, meta)
                 s["task"] = parts[1]
                 s["description"] = desc
-                out[prefix + parts[0]].append(s)
+                out[rename.get(parts[0], prefix + parts[0])].append(s)
         elif name.endswith(".jsonl") and "/subagents/" not in name:
             s = subagent(text, {})
             if s["models"]:
@@ -242,7 +243,8 @@ def build(spec, wiki, batches):
     commit = ev.get("commit")
     wiki_ev = commit and ev.get("repo") == "lmmx/openai-nlogn-wiki"
     files = transcripts(wiki, commit, ev.get("transcripts", "results/transcripts")) if wiki_ev else {}
-    by_run, orchestrators = subagents_by_run(files, ev.get("description_prefix", ""))
+    by_run, orchestrators = subagents_by_run(files, ev.get("description_prefix", ""),
+                                             ev.get("description_rename"))
     kinds = tuple(ev.get("planning_kinds", PLANNING))
     since = ev.get("log_since")
     since_ms = int(datetime.fromisoformat(since.replace("Z", "+00:00")).timestamp() * 1000) if since else None

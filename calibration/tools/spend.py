@@ -1,7 +1,12 @@
 """Measured token use per experiment, split into producing outputs (runs) and evaluating them
 (judging), from the development session's subagent transcripts.
 
-usage: python3 -I spend.py SUBAGENTS_DIR [SUBAGENTS_DIR ...]
+usage: python3 -I spend.py SUBAGENTS_DIR [SUBAGENTS_DIR ...] [--since 2026-10-14T14:20]
+
+With --since, only model calls at or after that UTC time are counted. When SUBAGENTS_DIR is a
+session's `subagents` directory, the session's own transcript (SESSION.jsonl beside SESSION/) is
+counted too, as "development session": its long context is re-read on every call, so orchestration
+is not free.
 
 Each subagent is assigned to an experiment and a role by its description, which every
 protocol fixes ("RUN TASK" for runs, "Jn judge Pnn" for judges). Counts are measured from the
@@ -58,16 +63,24 @@ def classify(desc):
 def main():
     rows = collections.defaultdict(lambda: collections.Counter())
     models = collections.defaultdict(set)
-    for root in sys.argv[1:]:
-        for meta_path in pathlib.Path(root).glob("*.meta.json"):
-            t = meta_path.with_name(meta_path.name[: -len(".meta.json")] + ".jsonl")
-            if not t.exists():
-                continue
-            key = classify(json.load(open(meta_path)).get("description", ""))
+    args = sys.argv[1:]
+    since = None
+    if "--since" in args:
+        i = args.index("--since")
+        since = args[i + 1]
+        args = args[:i] + args[i + 2:]
+    for root in args:
+        root = pathlib.Path(root)
+        found = [(t, classify(json.load(open(t.with_name(t.name[: -len(".jsonl")] + ".meta.json"))).get("description", "")))
+                 for t in root.glob("*.jsonl") if t.with_name(t.name[: -len(".jsonl")] + ".meta.json").exists()]
+        session = root.parent.parent / (root.parent.name + ".jsonl")
+        if root.name == "subagents" and session.exists():
+            found.append((session, ("development session", "orchestration")))
+        for t, key in found:
             calls, visible, signature = {}, collections.Counter(), collections.Counter()
             for line in open(t):
                 e = json.loads(line)
-                if e.get("type") != "assistant":
+                if e.get("type") != "assistant" or (since and e.get("timestamp", "") < since):
                     continue
                 m = e.get("message") or {}
                 u = m.get("usage") or {}
@@ -81,6 +94,8 @@ def main():
                 signature[m.get("id")] += sum(len(b.get("signature", "")) for b in blocks)
                 if m.get("model") and m["model"] != "<synthetic>":
                     models[key].add(m["model"].replace("claude-", ""))
+            if not calls:
+                continue
             r = rows[key]
             r["subagents"] += 1
             r["calls"] += len(calls)

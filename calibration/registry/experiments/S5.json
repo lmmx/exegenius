@@ -1,0 +1,301 @@
+{
+ "id": "S5",
+ "title": "A repeat of Opus at xhigh on F8, for run-to-run variance",
+ "kind": "screening",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task only, on E6's extraction F8 (background accepted)",
+ "question": "How much does Opus xhigh vary between runs on the same extraction?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "91c4fed (141026-exp-key-step-identity)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-s4-e8-fb1",
+  "commit": "f336a47",
+  "transcripts": "results/transcripts/s4-e8-fb1",
+  "description_prefix": "",
+  "planning_kinds": [
+   "argument"
+  ]
+ },
+ "protocol": "run from the development session; S4-E8-FB1.md on the evidence branch",
+ "preregistration": "calibration/plans/S5.md (criteria fixed before the run)",
+ "journal": "docs/journal/2026-10-14-s4-s5-e8.md",
+ "comparison": "S3F8OX, the first run, re-judged in J12 and J13",
+ "arms": {
+  "OX": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "xhigh",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E7 argument instructions (key-step paragraph and identity sentence)"
+   },
+   "runs": [
+    "S5F8OX"
+   ]
+  }
+ },
+ "reported": {},
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus, high) with this session's permissions; it only passed prompts and ran exegenius next"
+  }
+ ],
+ "limitations": [
+  "One repeat on one extraction."
+ ],
+ "built": {
+  "by": "calibration/tools/registry.py",
+  "wiki_commit": "f336a47"
+ },
+ "orchestrator_observed": {
+  "value": null,
+  "basis": "unavailable",
+  "note": "no main transcript at the evidence commit"
+ },
+ "runs": [
+  {
+   "id": "S5F8OX",
+   "arm": "OX",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T14:48:53.633000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 123,
+         "located": 123,
+         "first_tenth": 9,
+         "span": [
+          82,
+          4989
+         ],
+         "sections_quoted": 47,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-14T14:28:27.223000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 1226.4,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-opus-5-5": 38
+     },
+     "effort": {
+      "xhigh": 38
+     },
+     "model_calls": {
+      "value": 20,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 40,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 2709868,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 474111,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 26603,
+      "basis": "estimated",
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 338516,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
+     "seconds": {
+      "value": 1207.8,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "S5F8OX 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-opus-5-5"
+    ],
+    "efforts": [
+     "xhigh"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J12",
+     "judge": "a",
+     "plan": "P03",
+     "core_stated": 19,
+     "core_fully": 16,
+     "core_derived": 17,
+     "core_faithful": 13,
+     "supporting_stated": 7,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J12",
+     "judge": "b",
+     "plan": "P03",
+     "core_stated": 19,
+     "core_fully": 17,
+     "core_derived": 17,
+     "core_faithful": 13,
+     "supporting_stated": 7,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J12",
+     "judge": "c",
+     "plan": "P03",
+     "core_stated": 19,
+     "core_fully": 16,
+     "core_derived": 17,
+     "core_faithful": 13,
+     "supporting_stated": 7,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1,
+     "central_count": 9,
+     "central_gate": true
+    }
+   ]
+  }
+ ],
+ "arm_summary": {
+  "OX": {
+   "runs": 1,
+   "quality_J12": {
+    "core_stated": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 16,
+     "min": 16,
+     "max": 16
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 17,
+     "min": 17,
+     "max": 17
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 13,
+     "min": 13,
+     "max": 13
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 1,
+     "median": 9,
+     "min": 9,
+     "max": 9
+    },
+    "central_gate_passed": "1/1"
+   },
+   "resources_argument": {
+    "model_calls": {
+     "n": 1,
+     "median": 20,
+     "min": 20,
+     "max": 20
+    },
+    "cache_read_tokens": {
+     "n": 1,
+     "median": 2709868,
+     "min": 2709868,
+     "max": 2709868
+    },
+    "cache_write_tokens": {
+     "n": 1,
+     "median": 474111,
+     "min": 474111,
+     "max": 474111
+    },
+    "output_tokens": {
+     "n": 1,
+     "median": 26603,
+     "min": 26603,
+     "max": 26603
+    },
+    "seconds": {
+     "n": 1,
+     "median": 1207.8,
+     "min": 1207.8,
+     "max": 1207.8
+    }
+   },
+   "planning_seconds": {
+    "n": 1,
+    "median": 1226.4,
+    "min": 1226.4,
+    "max": 1226.4
+   }
+  }
+ }
+}

@@ -40,7 +40,7 @@ Every extracted value is an object `{"value": …, "basis": …}`:
 | `task` | the task or stage studied |
 | `binary` | lmmx/exegenius commit that wrote the task files |
 | `evidence` | where the runs are: `repo`, `branch`, `commit` (or `path` for evidence kept in this repository) |
-| `evidence` (optional) | `transcripts`: the transcripts' path at the commit (default `results/transcripts`); `description_prefix`: prepended to the run named in a subagent's description, for runs renamed in the evidence; `planning_kinds`: the task kinds a run's planning consists of (default extract, background, argument, extend); `log_since`: an ISO time before which a run's log events are ignored, for runs copied from an earlier run's project |
+| `evidence` (optional) | `transcripts`: the transcripts' path at the commit (default `results/transcripts`); `description_prefix`: prepended to the run named in a subagent's description, for runs renamed in the evidence; `description_rename`: a map from the run named in a description to the run dir, for runs whose description differs otherwise (E8b's `E8bF2X` is run `E8F2X`); `planning_kinds`: the task kinds a run's planning consists of (default extract, background, argument, extend); `log_since`: an ISO time before which a run's log events are ignored, for runs copied from an earlier run's project |
 | `protocol`, `journal` | the runner protocol and the journal entry |
 | `arms` | `{ARM: {"intended": {...}, "runs": [...]}}`. `intended` gives `agent`, `model` or `model_id`, `effort` (null when not passed), `effort_passed`, `checks`, and optionally `binary` when an arm's task files were written by another binary than the spec's |
 | `excluded` | `{RUN: reason}`: runs kept in the record but left out of summaries |
@@ -84,6 +84,12 @@ Run names are global across experiments (A1–A6, B1–B6, C1–C5, D1–D5, P1�
 | `seed` | the blinding shuffle's seed |
 | `rubrics` | rubrics applied, such as `calibration/rubrics/nlogn-central-saving.md` |
 | `journal` | the entry that reports the batch |
+
+## Checklist batches (`checklist-judging.json`)
+
+The mechanism-checklist batches (J11, J13, J14, J15, J17, J19) have a different verdict shape: per sub-step `present` or `absent`, not the content judge's items. They are listed in `checklist-judging.json`: id, experiment, directory, verdicts, seed, judges and rubric.
+
+`registry.py` does not read them yet. Their totals are read with `../tools/ranges.py` and reported in each plan's result section.
 
 ## What the registry does not hold yet
 

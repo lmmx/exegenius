@@ -1,0 +1,302 @@
+{
+ "id": "S4",
+ "title": "Opus at max on F8, against Opus at xhigh, with the E7 instructions",
+ "kind": "screening",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task only, on E6's extraction F8 (background accepted)",
+ "question": "Does Opus max improve on Opus xhigh on F8, and reach the ceiling?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "91c4fed (141026-exp-key-step-identity)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-s4-e8-fb1",
+  "commit": "f336a47",
+  "transcripts": "results/transcripts/s4-e8-fb1",
+  "description_prefix": "",
+  "planning_kinds": [
+   "argument"
+  ]
+ },
+ "protocol": "run from the development session; S4-E8-FB1.md on the evidence branch",
+ "preregistration": "calibration/plans/S4.md (criteria fixed before the run)",
+ "journal": "docs/journal/2026-10-14-s4-s5-e8.md",
+ "comparison": "S3F8OX (Opus, xhigh, same task file) and S5F8OX, re-judged in batches J12 and J13 (checklist)",
+ "arms": {
+  "OM": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "max",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E7 argument instructions (key-step paragraph and identity sentence)"
+   },
+   "runs": [
+    "S4F8OM"
+   ]
+  }
+ },
+ "reported": {},
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus, high) with this session's permissions; it only passed prompts and ran exegenius next"
+  }
+ ],
+ "limitations": [
+  "One paper, one extraction, one run: a screen.",
+  "Judges are Opus (J12), Opus (J13 checklist)."
+ ],
+ "built": {
+  "by": "calibration/tools/registry.py",
+  "wiki_commit": "f336a47"
+ },
+ "orchestrator_observed": {
+  "value": null,
+  "basis": "unavailable",
+  "note": "no main transcript at the evidence commit"
+ },
+ "runs": [
+  {
+   "id": "S4F8OM",
+   "arm": "OM",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T14:47:40.824000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 146,
+         "located": 146,
+         "first_tenth": 11,
+         "span": [
+          76,
+          4990
+         ],
+         "sections_quoted": 46,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-14T14:13:08.215000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 2072.6,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-opus-5-5": 104
+     },
+     "effort": {
+      "max": 104
+     },
+     "model_calls": {
+      "value": 64,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 128,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 15040411,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 1396276,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 43744,
+      "basis": "estimated",
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 564932,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
+     "seconds": {
+      "value": 2074.5,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "S4F8OM 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-opus-5-5"
+    ],
+    "efforts": [
+     "max"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J12",
+     "judge": "a",
+     "plan": "P05",
+     "core_stated": 19,
+     "core_fully": 17,
+     "core_derived": 19,
+     "core_faithful": 16,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J12",
+     "judge": "b",
+     "plan": "P05",
+     "core_stated": 19,
+     "core_fully": 18,
+     "core_derived": 19,
+     "core_faithful": 16,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 0,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J12",
+     "judge": "c",
+     "plan": "P05",
+     "core_stated": 19,
+     "core_fully": 16,
+     "core_derived": 19,
+     "core_faithful": 17,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1,
+     "central_count": 9,
+     "central_gate": true
+    }
+   ]
+  }
+ ],
+ "arm_summary": {
+  "OM": {
+   "runs": 1,
+   "quality_J12": {
+    "core_stated": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 17,
+     "min": 17,
+     "max": 17
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 16,
+     "min": 16,
+     "max": 16
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 1,
+     "median": 9,
+     "min": 9,
+     "max": 9
+    },
+    "central_gate_passed": "1/1"
+   },
+   "resources_argument": {
+    "model_calls": {
+     "n": 1,
+     "median": 64,
+     "min": 64,
+     "max": 64
+    },
+    "cache_read_tokens": {
+     "n": 1,
+     "median": 15040411,
+     "min": 15040411,
+     "max": 15040411
+    },
+    "cache_write_tokens": {
+     "n": 1,
+     "median": 1396276,
+     "min": 1396276,
+     "max": 1396276
+    },
+    "output_tokens": {
+     "n": 1,
+     "median": 43744,
+     "min": 43744,
+     "max": 43744
+    },
+    "seconds": {
+     "n": 1,
+     "median": 2074.5,
+     "min": 2074.5,
+     "max": 2074.5
+    }
+   },
+   "planning_seconds": {
+    "n": 1,
+    "median": 2072.6,
+    "min": 2072.6,
+    "max": 2072.6
+   }
+  }
+ }
+}

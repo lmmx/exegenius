@@ -1,0 +1,55 @@
+{
+ "id": "FB1",
+ "title": "Fable at high on F8 with the E7 instructions (pilot)",
+ "kind": "screening",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task only, on E6's extraction F8 (background accepted)",
+ "question": "Does Fable at high beat Opus max on F8?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "91c4fed (141026-exp-key-step-identity)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-s4-e8-fb1",
+  "commit": "f336a47",
+  "transcripts": "results/transcripts/s4-e8-fb1",
+  "description_prefix": "",
+  "planning_kinds": [
+   "argument"
+  ]
+ },
+ "protocol": "run from the development session; S4-E8-FB1.md on the evidence branch",
+ "preregistration": "calibration/plans/FB1.md (pilot criteria fixed before the run; judging narrowed to a checklist screen at 15:09 before any Fable result)",
+ "journal": "docs/journal/2026-10-14-s4-s5-e8.md",
+ "comparison": "S4F8OM (Opus, max), judged in J19 (checklist)",
+ "arms": {
+  "F": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-fable-5-1",
+    "effort": "high",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E7 argument instructions (key-step paragraph and identity sentence)"
+   },
+   "runs": [
+    "FB1F8"
+   ]
+  }
+ },
+ "reported": {},
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus, high) with this session's permissions; it only passed prompts and ran exegenius next"
+  }
+ ],
+ "limitations": [
+  "One run, checklist screen only (no primary judging, by the narrowed plan)."
+ ]
+}

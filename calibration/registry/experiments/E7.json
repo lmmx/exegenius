@@ -304,6 +304,51 @@
      "minor_errors": 1,
      "central_count": 9,
      "central_gate": true
+    },
+    {
+     "batch": "J16",
+     "judge": "a",
+     "plan": "P04",
+     "core_stated": 19,
+     "core_fully": 17,
+     "core_derived": 19,
+     "core_faithful": 14,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 8,
+     "central_gate": true
+    },
+    {
+     "batch": "J16",
+     "judge": "b",
+     "plan": "P04",
+     "core_stated": 19,
+     "core_fully": 14,
+     "core_derived": 19,
+     "core_faithful": 14,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 3,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J16",
+     "judge": "c",
+     "plan": "P04",
+     "core_stated": 19,
+     "core_fully": 14,
+     "core_derived": 19,
+     "core_faithful": 14,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 5,
+     "central_count": 8,
+     "central_gate": true
     }
    ]
   },
@@ -737,6 +782,51 @@
      "major_errors": 0,
      "minor_errors": 5,
      "central_count": 7,
+     "central_gate": true
+    },
+    {
+     "batch": "J16",
+     "judge": "a",
+     "plan": "P01",
+     "core_stated": 19,
+     "core_fully": 12,
+     "core_derived": 15,
+     "core_faithful": 3,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 7,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J16",
+     "judge": "b",
+     "plan": "P01",
+     "core_stated": 19,
+     "core_fully": 15,
+     "core_derived": 15,
+     "core_faithful": 5,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 5,
+     "central_count": 8,
+     "central_gate": true
+    },
+    {
+     "batch": "J16",
+     "judge": "c",
+     "plan": "P01",
+     "core_stated": 19,
+     "core_fully": 13,
+     "core_derived": 15,
+     "core_faithful": 3,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 9,
+     "central_count": 8,
      "central_gate": true
     }
    ]
@@ -1320,6 +1410,51 @@
      "minor_errors": 2,
      "central_count": 8,
      "central_gate": true
+    },
+    {
+     "batch": "J16",
+     "judge": "a",
+     "plan": "P06",
+     "core_stated": 19,
+     "core_fully": 9,
+     "core_derived": 15,
+     "core_faithful": 4,
+     "supporting_stated": 5,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 8,
+     "central_gate": true
+    },
+    {
+     "batch": "J16",
+     "judge": "b",
+     "plan": "P06",
+     "core_stated": 19,
+     "core_fully": 11,
+     "core_derived": 15,
+     "core_faithful": 5,
+     "supporting_stated": 5,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1,
+     "central_count": 8,
+     "central_gate": true
+    },
+    {
+     "batch": "J16",
+     "judge": "c",
+     "plan": "P06",
+     "core_stated": 19,
+     "core_fully": 8,
+     "core_derived": 15,
+     "core_faithful": 4,
+     "supporting_stated": 5,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 4,
+     "central_count": 8,
+     "central_gate": true
     }
    ]
   }
@@ -1365,6 +1500,45 @@
      "max": 9
     },
     "central_gate_passed": "2/2"
+   },
+   "quality_J16": {
+    "core_stated": {
+     "n": 3,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_fully": {
+     "n": 3,
+     "median": 12,
+     "min": 9,
+     "max": 17
+    },
+    "core_derived": {
+     "n": 3,
+     "median": 15,
+     "min": 15,
+     "max": 19
+    },
+    "core_faithful": {
+     "n": 3,
+     "median": 4,
+     "min": 3,
+     "max": 14
+    },
+    "major_errors": {
+     "n": 3,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 3,
+     "median": 8,
+     "min": 8,
+     "max": 9
+    },
+    "central_gate_passed": "3/3"
    },
    "quality_J8": {
     "core_stated": {

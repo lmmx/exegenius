@@ -1,0 +1,119 @@
+[
+ {
+  "id": "J11",
+  "experiment": "K1",
+  "dir": "docs/journal/2026-10-14-k1-checklist/judge",
+  "verdicts": "verdicts",
+  "seed": 20261025,
+  "judges": [
+   {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "high"
+   }
+  ],
+  "judges_per_plan": "one, and a second (Opus) on S2F1OX, S2F1SM and S2F1OM",
+  "rubric": "calibration/rubrics/nlogn-mechanism-checklist.md",
+  "journal": "docs/journal/2026-10-14-k1-checklist.md"
+ },
+ {
+  "id": "J13",
+  "experiment": "S4, S5",
+  "dir": "docs/journal/2026-10-14-s4-opus-max-f8/checklist",
+  "verdicts": "verdicts",
+  "seed": 20261027,
+  "judges": [
+   {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "high"
+   }
+  ],
+  "judges_per_plan": "two (Opus, Opus)",
+  "rubric": "calibration/rubrics/nlogn-mechanism-checklist.md",
+  "journal": "docs/journal/2026-10-14-s4-s5-e8.md"
+ },
+ {
+  "id": "J14",
+  "experiment": "K2",
+  "dir": "docs/journal/2026-10-14-k1-checklist/judge",
+  "verdicts": "verdicts-sonnet",
+  "seed": 20261025,
+  "judges": [
+   {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high"
+   }
+  ],
+  "judges_per_plan": "one Sonnet judgement on each of J11's eleven blind plans",
+  "rubric": "calibration/rubrics/nlogn-mechanism-checklist.md",
+  "journal": "docs/journal/2026-10-14-k2-judge-model.md"
+ },
+ {
+  "id": "J15",
+  "experiment": "E8",
+  "dir": "docs/journal/2026-10-14-e8-variants-chains/checklist",
+  "verdicts": "verdicts",
+  "seed": 20261028,
+  "judges": [
+   {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "high"
+   },
+   {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high"
+   }
+  ],
+  "judges_per_plan": "two (Opus first, Sonnet second)",
+  "rubric": "calibration/rubrics/nlogn-mechanism-checklist.md",
+  "journal": "docs/journal/2026-10-14-s4-s5-e8.md"
+ },
+ {
+  "id": "J17",
+  "experiment": "E8b",
+  "dir": "docs/journal/2026-10-14-e8b-confirm/checklist",
+  "verdicts": "verdicts",
+  "seed": 20261031,
+  "judges": [
+   {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "high"
+   },
+   {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high"
+   }
+  ],
+  "judges_per_plan": "two (Opus first, Sonnet second)",
+  "rubric": "calibration/rubrics/nlogn-mechanism-checklist.md",
+  "journal": "calibration/plans/E8b.md"
+ },
+ {
+  "id": "J19",
+  "experiment": "FB1",
+  "dir": "docs/journal/2026-10-14-fb1-fable-f8/checklist",
+  "verdicts": "verdicts",
+  "seed": 20261030,
+  "judges": [
+   {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "high"
+   },
+   {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high"
+   }
+  ],
+  "judges_per_plan": "two (Opus first, Sonnet second)",
+  "rubric": "calibration/rubrics/nlogn-mechanism-checklist.md",
+  "journal": "calibration/plans/FB1.md"
+ }
+]

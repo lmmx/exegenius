@@ -1,0 +1,55 @@
+{
+ "id": "S5",
+ "title": "A repeat of Opus at xhigh on F8, for run-to-run variance",
+ "kind": "screening",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task only, on E6's extraction F8 (background accepted)",
+ "question": "How much does Opus xhigh vary between runs on the same extraction?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "91c4fed (141026-exp-key-step-identity)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-s4-e8-fb1",
+  "commit": "f336a47",
+  "transcripts": "results/transcripts/s4-e8-fb1",
+  "description_prefix": "",
+  "planning_kinds": [
+   "argument"
+  ]
+ },
+ "protocol": "run from the development session; S4-E8-FB1.md on the evidence branch",
+ "preregistration": "calibration/plans/S5.md (criteria fixed before the run)",
+ "journal": "docs/journal/2026-10-14-s4-s5-e8.md",
+ "comparison": "S3F8OX, the first run, re-judged in J12 and J13",
+ "arms": {
+  "OX": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "xhigh",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E7 argument instructions (key-step paragraph and identity sentence)"
+   },
+   "runs": [
+    "S5F8OX"
+   ]
+  }
+ },
+ "reported": {},
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus, high) with this session's permissions; it only passed prompts and ran exegenius next"
+  }
+ ],
+ "limitations": [
+  "One repeat on one extraction."
+ ]
+}

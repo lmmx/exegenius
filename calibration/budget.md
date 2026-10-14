@@ -30,6 +30,16 @@
 | 2026-10-14 ~09:15 | 4% | 4% (author checked the meter) | yes |
 | 2026-10-14 ~14:20 | 20% | ~0%: the window had reset | **no**. The prediction ignored the reset |
 
+**Measured since the 14:20 reset, with no reading yet** (`spend.py --since 2026-10-14T14:20`, 16:05 UTC). These are counts, not a reading:
+
+| | Cache read | Cache write |
+|---|---|---|
+| subagents (S4's run tail, S5, K2, J12, J13, E8, J15, J16, E8b, J17, FB1, J19) | 259.9 M | 18.9 M |
+| the development session itself | 110.4 M | 0.45 M |
+| **together** | **370 M** | **19.3 M** |
+
+That is past runbook §5's 300 M pause threshold. New launches wait for a reading or for the ~18:30 reset.
+
 **These are window readings, not the weekly allowance,** and the two should not be read as interchangeable.
 
 **What they allow:** setting a reading against the tokens measured in the same interval, and so estimating what a run costs as a share of a window.
@@ -81,6 +91,13 @@
 | S2 | 4 · Sonnet, Opus · 53.1 M · 166 k (visible) | 17 · 42.4 M · 110 k |
 | S3 | 4 · Opus · 10.6 M · 84 k (visible) | 20 · 59.6 M · 129 k |
 | K1 (checklist validation, no runs) | — | 14 · 8.8 M · 39 k |
+| K2 (Sonnet checklist judges, no runs) | — | 11 · Sonnet · 8.9 M · 32 k |
+| S4 | 1 · Opus `max` · 15.0 M · 43 k | J12 (shared with S5): 11 · 43.1 M · 78 k; J13 checklist: 6 · 4.4 M · 19 k |
+| S5 | 1 · Opus `xhigh` · 2.7 M · 26 k | in S4's batches |
+| E8 | 3 · Sonnet · 16.8 M · 115 k | J15 checklist: 18 · Opus and Sonnet · 16.0 M · 57 k; J16: 20 · 98.3 M · 164 k |
+| E8b | 6 · Sonnet · 27.3 M · 178 k | J17 checklist: 24 · Opus and Sonnet · 23.8 M · 76 k |
+| FB1 (pilot) | 1 · Fable · 4.0 M · 31 k | J19 checklist: 4 · Opus and Sonnet · 3.4 M · 12 k |
+| **The development session (orchestration, analysis, write-up), all of 2026-10-14** | 1 · Opus · **707.9 M** · 654 k | — |
 | W1 (cancelled) | 1 · Sonnet · 0.1 M · 0 | — |
 | J1–J2 (content-judge development, E1) | — | 43 · 54.8 M · 200 k |
 | Chain walks (baseline and T1) | — | 8 · 6.4 M · 32 k |
@@ -131,6 +148,10 @@ Their tokens are inside the run totals above.
 | E7 | does the identity sentence close C4? | met | propose for `master` | 8 runs, plus re-judging V, which also measured judge reliability; that was the most informative judging spend so far |
 | S2 | does effort above high, or Opus, buy fidelity? | screen: Opus `xhigh`, Sonnet `max` and Opus `max` beyond judge noise (+C1, +3–4 faithful); Sonnet `xhigh` below | repeat Opus `xhigh`, but on extractions with headroom (S3); drop Sonnet `xhigh`; hold the `max` configurations | one run per configuration was right. The input could have been chosen better: F1 was the reference's best extraction, which left little headroom. Choosing the input where the default is weakest would have made the same four runs more informative |
 | S3 | does Opus lift the floor where Sonnet `high` is weakest, and is `high` enough? | met: Opus `xhigh` lifts F4 (+6 faithful) and F8 (+9); Opus `high` does not suffice (F8: 9 against 16) | proposal of Opus `xhigh` for the argument task (the author's call); Fable's argument pilot narrowed to F8, after an Opus `max` check | the runs cost under half the estimate. Judging was 85% of the cache read: 20 judgements for 6 plans, as fixed. A cheaper judging design would need agreement measured first (§4) |
+| K1, K2 | can a mechanism checklist resolve the top of the scale, and may Sonnet judge it? | adopted (AUC 0.957, judges 78/78, resolves 24, 21, 19); Sonnet agrees with Opus (0.979, no same-model bias) | the checklist as a secondary measure and a cheap screen (about a third of a primary judgement's cache read) | 17.7 M bought a screen that let E8 and E8b, and the Fable pilot, be screened before primary judging |
+| S4, S5 | does Opus `max` improve on Opus `xhigh` on F8, and how much does `xhigh` vary? | `max` +1 on each measure, within `xhigh`'s own run variance (2 faithful) | no case for `max` on this task; Fable's pilot against Opus `max` | the repeat (S5, 2.7 M) changed the reading of a 15 M run. Repeats are cheap next to the runs they qualify |
+| E8 | does one sentence (variants, bound chains) lift Sonnet `high`? | faithful 18, 18, 19 against 14, 3, 4; not below Opus `xhigh` anywhere | the sentence proposed to the author; E8b to confirm | the largest gain of the day cost 16.8 M of runs. Instructions targeted at a located gap beat model and effort. Primary judging (98.3 M) was 6× the runs |
+| FB1 (pilot) | does Fable at `high` beat Opus `max` on F8? | below: checklist 17, 16 against 20, 21 | no further Fable spend on this task | narrowing to a checklist screen kept the pilot at 7.4 M in all |
 
 ## 4. Lessons the record supports so far (each with its evidence; none is a universal rule)
 
@@ -156,6 +177,15 @@ Their tokens are inside the run totals above.
 - **Judging dominates a small screen's cost.** Evidence: in S3, judging was 85% of the cache read (20 judgements against 4 runs). Three judges per plan is what E7 showed the gate needs, so the lever is the number of plans per batch, not judges per plan.
 - **Effort above `high` can silently waste a run's main call.** Evidence: S2F1SX's planning call stopped at the 128,000-token output limit after 14.5 minutes, and its thinking was not carried forward (`docs/journal/2026-10-14-sonnet-xhigh-and-rubric.md`). The submit still succeeded. The tokens were spent and counted, and what they bought was lost. The registry now records `max_tokens_stops`, so such a run can be found before it is interpreted.
 - **Choose a screen's input where the current default is weakest.** Evidence: S2 screened on F1, where the reference was already at 17 of 19 faithful in J8. Three of four configurations then hit the ceiling, so the screen could rank nothing above them, Fable included.
+- **Orchestration is not free: the development session's context is re-read on every call.** Evidence: `spend.py` (with the session's own transcript, 16:05 UTC).
+  - Over the day it read 708 M from cache, against 840 M for all subagents together.
+  - Before the last compaction a single call re-read 600–670 k tokens, about what one checklist judgement reads in all. After compaction it fell to about 200 k.
+  - **The levers:**
+    - fewer, larger tool calls;
+    - no polling (completion notifications arrive on their own);
+    - bulky reading in subagents, which return conclusions;
+    - compaction before the context grows large.
+  - This is a component count, not a quota share. Cache reads are the cheapest component per token, and the meter's weighting is not published.
 - **Re-judging the same plans is worth its cost once per instrument.** It is what showed single-judge gate verdicts to be noisy (E7).
 
 ## 5. Planned use
@@ -170,6 +200,8 @@ Their tokens are inside the run totals above.
 - **Meter readings** go into §1 as the author supplies them.
 - **S3, done:** estimated at ~70–78 M cache read and ~7–8 M cache write; measured at 70.2 M and 4.79 M. The runs came in at under half their estimate, and judging at about 1.2×.
 - **K1, done:** estimated at ~20–35 M cache read; measured at 8.8 M (14 checklist judgements at 0.63 M each).
-- **Next proposed (not launched):**
+- **S4 to FB1, done:** see §2 and each plan's result section for estimates against measured figures.
+- **Queued at the reset:** E8b stage 2 with E9 (`plans/E8b.md`, `plans/E9.md`): 3 runs and about 62 judgements, roughly 190 M cache read by the plans' estimates.
+- **Superseded proposals (kept for the record):**
   - **Opus `max` on F8,** judged with S3F8OX on the primary rubric (8 judgements) and on the checklist (4): ~37–43 M cache read (`docs/journal/2026-10-14-k1-checklist.md`).
   - **The Fable pilot after it** (`plans/FB1.md`): per extraction, one Fable run of unknown cost (S2's Opus `max` run, 15.9 M cache read, is the placeholder), plus ~27 M cache read of Opus judging.

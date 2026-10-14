@@ -1,0 +1,56 @@
+{
+ "id": "S4",
+ "title": "Opus at max on F8, against Opus at xhigh, with the E7 instructions",
+ "kind": "screening",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task only, on E6's extraction F8 (background accepted)",
+ "question": "Does Opus max improve on Opus xhigh on F8, and reach the ceiling?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "91c4fed (141026-exp-key-step-identity)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-s4-e8-fb1",
+  "commit": "f336a47",
+  "transcripts": "results/transcripts/s4-e8-fb1",
+  "description_prefix": "",
+  "planning_kinds": [
+   "argument"
+  ]
+ },
+ "protocol": "run from the development session; S4-E8-FB1.md on the evidence branch",
+ "preregistration": "calibration/plans/S4.md (criteria fixed before the run)",
+ "journal": "docs/journal/2026-10-14-s4-s5-e8.md",
+ "comparison": "S3F8OX (Opus, xhigh, same task file) and S5F8OX, re-judged in batches J12 and J13 (checklist)",
+ "arms": {
+  "OM": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "max",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E7 argument instructions (key-step paragraph and identity sentence)"
+   },
+   "runs": [
+    "S4F8OM"
+   ]
+  }
+ },
+ "reported": {},
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus, high) with this session's permissions; it only passed prompts and ran exegenius next"
+  }
+ ],
+ "limitations": [
+  "One paper, one extraction, one run: a screen.",
+  "Judges are Opus (J12), Opus (J13 checklist)."
+ ]
+}

@@ -166,5 +166,41 @@
    "calibration/rubrics/nlogn-central-saving.md"
   ],
   "journal": "docs/journal/2026-10-14-s3-opus-floor.md"
+ },
+ {
+  "id": "J12",
+  "dir": "docs/journal/2026-10-14-s4-opus-max-f8/judge",
+  "key": "key.json",
+  "verdicts": "verdicts",
+  "reference": "docs/journal/2026-10-13-run-log-and-coverage/reference-draft/reference.json",
+  "judge": {
+   "agent": "general-purpose",
+   "model_id": "claude-opus-5-5",
+   "effort": "high"
+  },
+  "seed": 20261026,
+  "judges_per_plan": "three for S4F8OM, S3F8OX and S5F8OX (Pnn, Pnn-b, Pnn-c), one for each anchor; central steps by majority",
+  "rubrics": [
+   "calibration/rubrics/nlogn-central-saving.md"
+  ],
+  "journal": "docs/journal/2026-10-14-s4-s5-e8.md"
+ },
+ {
+  "id": "J16",
+  "dir": "docs/journal/2026-10-14-e8-variants-chains/judge",
+  "key": "key.json",
+  "verdicts": "verdicts",
+  "reference": "docs/journal/2026-10-13-run-log-and-coverage/reference-draft/reference.json",
+  "judge": {
+   "agent": "general-purpose",
+   "model_id": "claude-opus-5-5",
+   "effort": "high"
+  },
+  "seed": 20261029,
+  "judges_per_plan": "three for the six compared plans, one for each anchor; central steps by majority",
+  "rubrics": [
+   "calibration/rubrics/nlogn-central-saving.md"
+  ],
+  "journal": "docs/journal/2026-10-14-s4-s5-e8.md"
  }
 ]

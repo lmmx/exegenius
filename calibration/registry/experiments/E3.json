@@ -1141,6 +1141,36 @@
      "minor_errors": 3,
      "central_count": 1,
      "central_gate": false
+    },
+    {
+     "batch": "J12",
+     "judge": "a",
+     "plan": "P02",
+     "core_stated": 9,
+     "core_fully": 1,
+     "core_derived": 1,
+     "core_faithful": 0,
+     "supporting_stated": 2,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 3,
+     "central_count": 1,
+     "central_gate": false
+    },
+    {
+     "batch": "J16",
+     "judge": "a",
+     "plan": "P08",
+     "core_stated": 10,
+     "core_fully": 0,
+     "core_derived": 2,
+     "core_faithful": 0,
+     "supporting_stated": 2,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 4,
+     "central_count": 1,
+     "central_gate": false
     }
    ]
   },
@@ -1793,6 +1823,84 @@
      "median": 1,
      "min": 1,
      "max": 1
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 1,
+     "median": 1,
+     "min": 1,
+     "max": 1
+    },
+    "central_gate_passed": "0/1"
+   },
+   "quality_J12": {
+    "core_stated": {
+     "n": 1,
+     "median": 9,
+     "min": 9,
+     "max": 9
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 1,
+     "min": 1,
+     "max": 1
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 1,
+     "min": 1,
+     "max": 1
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 1,
+     "median": 1,
+     "min": 1,
+     "max": 1
+    },
+    "central_gate_passed": "0/1"
+   },
+   "quality_J16": {
+    "core_stated": {
+     "n": 1,
+     "median": 10,
+     "min": 10,
+     "max": 10
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 2,
+     "min": 2,
+     "max": 2
     },
     "core_faithful": {
      "n": 1,
