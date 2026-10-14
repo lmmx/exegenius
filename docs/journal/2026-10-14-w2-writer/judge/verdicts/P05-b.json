@@ -1,0 +1,27 @@
+{"page": "P05",
+ "items": [
+  {"id": "S4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": ["the frames are R-linear over the scalar ring R of the gate coefficients (the page says only 'invertible linear operator' and never names R)"],
+   "note": "The page sets up frames, edge operators $D_vD_u^{-1}$, a common frame per gate, $D_{\\rm in}$, $D_{\\rm out}$ and $g=D_{\\rm in}^{-1}f$, and derives by induction that 'the network maps $f$ to $D_{\\rm out}\\,\\mathsf S_\\Omega\\,D_{\\rm in}^{-1}f$', as the paper does; the route form of the claim is only asserted (see S4.2.2)."},
+  {"id": "S4.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": ["the commutation uses R-linearity of $D_v$ against each gate output $\\sum_j c_j\\varphi_j$ with $c_j\\in R$; the page says only 'by linearity' and does not name the scalar ring"],
+   "note": "Follows the paper's invariant: it holds at sources 'by the definition of $g$', passes an edge 'by applying $D_vD_u^{-1}$', and passes a gate since '$G(D_v g_1,\\dots,D_v g_z)=D_v\\,G(g_1,\\dots,g_z)$ by linearity', which gives $D_{\\rm out}\\mathsf S_\\Omega D_{\\rm in}^{-1}$. Correct, though the reason for the gate step is compressed."},
+  {"id": "S4.2.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": ["reading the route operator off the identity $D_{\\rm out}\\mathsf S_\\Omega D_{\\rm in}^{-1}$ when $\\mathsf S_\\Omega$ is a signed role permutation: the $(\\rho(w),w)$ block is $\\varepsilon_w D_{\\mathrm{sink}(\\rho(w))}D_{\\mathrm{source}(w)}^{-1}$"],
+   "note": "The formula with $\\varepsilon_w$ is asserted right after a one-gate example ('Its edge operators $D_xD_q^{-1}$ and $D_pD_x^{-1}$ multiply to $D_pD_q^{-1}$') that shows an interior frame cancelling but leaves out the gate's scalar action and the sign. The page never specializes the operator identity it just proved, as the paper does with 'In particular', so the sign and the formula are not shown to follow."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Each frame is checked invertible by the rank criterion of [Rank, subspaces and orthogonal complements](linear-algebra-basics.md): it has full rank, so $D_v^{-1}$ exists.",
+   "problem": "In the paper, invertibility is part of the definition of a frame ('assign an invertible $R$-linear operator $D_v$'), and no rank check is made. Full rank also does not imply invertibility over the complex network's ring $\\mathbb Z[i,1/2]$ (multiplication by 3, for example). For that network the paper establishes invertibility by noting that the entries of $\\mathcal C_U$ and of its inverse are Gaussian integers over $2^m$."},
+  {"severity": "minor",
+   "quote": "Take a route from a source $q$ through a gate $x$ to a sink $p$. Its edge operators $D_xD_q^{-1}$ and $D_pD_x^{-1}$ multiply to $D_pD_q^{-1}$, so the frame $D_x$ cancels.",
+   "problem": "The operator carried from $q$ to $p$ is not just the product of edge operators: the gate also applies its scalar coefficients pointwise (they commute with $D_x$), and other wires enter at $x$. In the exchange network, a role's array is the net effect of many such paths, which cancel. The paper does not argue path by path. It gets the route operator by specializing $D_{\\rm out}\\mathsf S_\\Omega D_{\\rm in}^{-1}$ to a signed role permutation."}
+ ],
+ "motivation_given": true}

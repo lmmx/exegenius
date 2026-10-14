@@ -1,0 +1,27 @@
+{"page": "P05",
+ "items": [
+  {"id": "S4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page sets up frames, edge changes D_vD_u^{-1}, D_in, D_out and g=D_in^{-1}f, then carries the invariant to the sinks to get \"the network maps f to D_out S_Omega D_in^{-1} f\", from which endpoint-only dependence follows as in the paper (lines 793-825). The per-route reading is the weak part; see S4.2.2."},
+  {"id": "S4.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": ["the scalar ring R and R-linearity of the frames (gate outputs are combinations sum_j c_j phi_j with c_j in R, so sum_j c_j D_v phi_j = D_v sum_j c_j phi_j); the page says only \"linear\" and \"by linearity\" without naming the ring"],
+   "note": "The induction follows the paper. It holds at sources \"by the definition of g\", passes along an edge \"by applying D_vD_u^{-1}\", passes through a gate since \"G(D_v g_1,...,D_v g_z)=D_v G(g_1,...,g_z) by linearity\" with \"A gate's edges all use its frame\", and ends at D_out S_Omega D_in^{-1}. The commutation is justified only as \"by linearity\", without the R-linear combination identity."},
+  {"id": "S4.2.2",
+   "presence": "derived",
+   "faithful": false,
+   "dropped": ["reading the route operator off the identity D_out S_Omega D_in^{-1} with S_Omega a signed role permutation applied pointwise (it sends role array g_w to eps_w g_w in role rho(w))", "the origin of the sign eps_w (the scalar sign of the permutation)"],
+   "note": "The page argues by telescoping along one path (\"Take a route from a source q through a gate x to a sink p ... D_pD_q^{-1}, so the frame D_x cancels\"), and then asserts the signed formula. That argument ignores the gate's combination of several wires and yields no sign. It also does not give the move from source(w) to sink(rho(w)), which in the exchange network happens through mixing gates rather than along one wire. The paper simply specializes the global identity."}
+ ],
+ "errors": [
+  {"severity": "major",
+   "quote": "Take a route from a source q through a gate x to a sink p. Its edge operators D_xD_q^{-1} and D_pD_x^{-1} multiply to D_pD_q^{-1}, so the frame D_x cancels. For a signed role permutation sending input role w to output role \\rho(w) with sign \\varepsilon_w, each route applies \\varepsilon_w D_{sink(\\rho(w))}D_{source(w)}^{-1}",
+   "problem": "The page offers path telescoping as the reason for the route formula. A gate is not transparent: it adds other wires' values at each address (XOR / Gaussian-dyadic combinations). A wire path from a source runs to that wire's own sink(w), not to sink(rho(w)), and the composition of edge operators along it carries no sign eps_w. So the offered derivation of the route operator is broken. The paper (lines 813-825) obtains the formula by substituting the signed role permutation into D_out S_Omega D_in^{-1}, which relies on the invariant through mixing gates and not on telescoping along one path."},
+  {"severity": "minor",
+   "quote": "Each frame is checked invertible by the rank criterion of [Rank, subspaces and orthogonal complements](linear-algebra-basics.md): it has full rank, so D_v^{-1} exists.",
+   "problem": "In the paper invertibility is part of the definition: each D_v is an assigned invertible R-linear operator (line 793), so nothing is checked here. Over the complex network's Gaussian dyadic scalar ring, full rank does not by itself make an operator invertible over R, so the stated inference is also wrong in general."}
+ ],
+ "motivation_given": true}

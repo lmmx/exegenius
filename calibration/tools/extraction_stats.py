@@ -132,7 +132,8 @@ def extract_events(log_text):
 
 def measure(paper, answer, cov, reference, substeps, markers, result_labels):
     concepts = answer["concepts"]
-    quotes = [e["quote"] for c in concepts for e in c.get("evidence", [])]
+    # exegenius counts a quote given under two concepts once; so does this
+    quotes = list(dict.fromkeys(e["quote"] for c in concepts for e in c.get("evidence", [])))
     lines = [paper.line_of(q) for q in quotes]
     located = sorted(x for x in lines if x)
     m = collections.OrderedDict()
