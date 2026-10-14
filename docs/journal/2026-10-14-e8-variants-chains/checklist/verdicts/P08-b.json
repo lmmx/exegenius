@@ -1,0 +1,16 @@
+{
+  "plan": "P08",
+  "steps": [
+    {"id": "B1", "verdict": "present", "plan_steps": ["N0.1", "N0"], "lines": [744, 750], "note": "N0.1 states the eight-row schedule changes the target by (JV+RG)x independent of the initial scratch values a,c, quoting line 748 'Rows 6 and 7 restore c,a'; N0's method also has each invocation restore the scratch values."},
+    {"id": "B2", "verdict": "present", "plan_steps": ["N0.2"], "lines": [752, 755], "note": "N0.2 gives central coefficient |S cap T| mod 2, side injection cancelling exactly the intersection-one cases, zero for intersections zero or two, and coefficient one for T=S."},
+    {"id": "B3", "verdict": "present", "plan_steps": ["N0.3"], "lines": [756, 758], "note": "N0.3 states central coefficient (|S cap T|-1)/2, side cancelling for intersections zero and two, intersection one contributing zero, self coefficient one."},
+    {"id": "B4", "verdict": "present", "plan_steps": ["N0.4", "N0"], "lines": [761, 764], "note": "N0.4 and N0's method give the three stages (x,y)->(x,y+x)->(-y,y+x)->(-y,x) with every scratch wire restored."},
+    {"id": "B5-placeholder-removed", "verdict": "absent", "plan_steps": [], "lines": [0, 0], "note": "placeholder"},
+    {"id": "L1", "verdict": "absent", "plan_steps": [], "lines": [1013, 1060], "note": "The plan only says in L0's method that each edge's orthogonal residual is 'read from a table'; no residual or dimension entry of the table is stated (L0.4 gives only that edges join comparable labels)."},
+    {"id": "L2", "verdict": "absent", "plan_steps": [], "lines": [1048, 1058], "note": "L0.3 has the nesting P(x)<t_X> inside P(x)t_Y-perp from t_X perp t_Y, but never the edge 2->5 residual, the complement <t_X,t_Y>-perp, or its dimension h-2."},
+    {"id": "L3", "verdict": "present", "plan_steps": ["L0.4", "R0.1", "R0.2", "R0"], "lines": [1061, 1071], "note": "L0.4 gives center 3->4 as the only decreasing edge losing h; R0.1 gives telescoping with sources N, sinks Wm-N, signed Wm-2N; R0.2 gives L=Ich and absolute total Wm-2N+2L."},
+    {"id": "L4", "verdict": "absent", "plan_steps": [], "lines": [1073, 1102], "note": "L0.5 (and P0.4) only assert that nonzero binary residuals have orthonormal bases; nondegeneracy, nonalternating (norm-one vector) and absorbing alternating planes are not stated."},
+    {"id": "L5", "verdict": "present", "plan_steps": ["R0.3"], "lines": [1105, 1109], "note": "R0.3 states the exact values L_b/N=100/539 and L_c/N=101/539."}
+  ],
+  "summary": "placeholder"
+}
