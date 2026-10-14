@@ -242,9 +242,52 @@ def extraction_of(exp, run):
     return f"E6-F{m.group(1)}" if m else None
 
 
+# Primary batches judged after the registry was last built, read from their verdicts directly
+# (E10's J21). Each is skipped once judging.json lists it, so a rebuilt registry takes over.
+EXTRA_BATCHES = [{"id": "J21", "experiment": "E10", "arm": "Y",
+                  "dir": "docs/journal/2026-10-14-e10-combined/judge", "key": "key.json",
+                  "verdicts": "verdicts",
+                  "reference": "docs/journal/2026-10-13-run-log-and-coverage/reference-draft/reference.json"}]
+PRIMARY_BATCH["E10:Y"] = "J21"
+
+
+def extra_batches(repo):
+    listed = {b["id"] for b in json.load(open(repo / "calibration/registry/judging.json"))}
+    return [b for b in EXTRA_BATCHES if b["id"] not in listed and (repo / b["dir"] / b["key"]).exists()]
+
+
+def summarise_verdict(v, tiers):
+    """The registry's counts (registry.py `verdict_summary`) that this script uses."""
+    core = [i for i in v.get("items", []) if tiers.get(i["id"]) == "core"]
+    out = {"core_faithful": sum(i.get("derivation") == "faithful" for i in core),
+           "core_derived": sum(i.get("presence") == "derived" for i in core),
+           "major_errors": sum(e.get("severity") == "major" for e in v.get("errors", []))}
+    central = v.get("central")
+    if central:
+        out["central_count"] = sum(st.get("verdict") == "reconstructed" for st in central.get("steps", []))
+    return out
+
+
 def primary_plans(repo):
     """Every judged plan on one of the 34 extractions, with its primary-batch medians."""
     plans = []
+    for b in extra_batches(repo):
+        root = repo / b["dir"]
+        tiers = {i["id"]: i["tier"] for i in json.load(open(repo / b["reference"]))["items"]}
+        for pid, run in json.load(open(root / b["key"])).items():
+            ext = extraction_of(b["experiment"], run)
+            if not ext or not run.startswith(b["experiment"]):
+                continue  # re-judged plans and anchors are read from their own batches
+            files = sorted((root / b["verdicts"]).glob(f"{pid}.json")) + sorted((root / b["verdicts"]).glob(f"{pid}-*.json"))
+            q = [summarise_verdict(json.load(open(x)), tiers) for x in files]
+            if not q:
+                continue
+            med = lambda k: statistics.median(x[k] for x in q if x.get(k) is not None) \
+                if any(x.get(k) is not None for x in q) else None
+            plans.append({"run": run, "arm": f"{b['experiment']}:{b['arm']}", "extraction": ext,
+                          "batch": b["id"], "judges": len(q), "faithful": med("core_faithful"),
+                          "faithful_each": [x["core_faithful"] for x in q], "derived": med("core_derived"),
+                          "central": med("central_count"), "major": med("major_errors")})
     for f in sorted((repo / "calibration/registry/experiments").glob("*.json")):
         d = json.load(open(f))
         for r in d["runs"]:
@@ -284,7 +327,7 @@ def checklist_totals(repo):
 def item_verdicts(repo):
     """run -> batch -> item -> list of derivation verdicts (one per judge)."""
     out = collections.defaultdict(lambda: collections.defaultdict(lambda: collections.defaultdict(list)))
-    for b in json.load(open(repo / "calibration/registry/judging.json")):
+    for b in json.load(open(repo / "calibration/registry/judging.json")) + extra_batches(repo):
         root = repo / b["dir"]
         key = json.load(open(root / b["key"]))
         for pid, run in key.items():
@@ -620,12 +663,13 @@ def main():
     # 4. E6's eight extractions
     md.append("\n## 4. E6's eight Sonnet `high` extractions: how much of the plan is the extraction's\n")
     fs = [f"E6-F{k}" for k in range(1, 9)]
-    arm_of = {"E6:B": "B", "E6:V": "V", "E7:W": "W", "E8:X": "X", "E8b:X": "X", "E9:Y": "Y"}
+    arm_of = {"E6:B": "B", "E6:V": "V", "E7:W": "W", "E8:X": "X", "E8b:X": "X", "E9:Y": "Y", "E10:Y": "Y"}
+    repeats = ("E8F4X2", "E10F4Y2")
     mat = collections.defaultdict(dict)
     central = collections.defaultdict(dict)
     for p in plans:
         a = arm_of.get(p["arm"])
-        if a and p["extraction"] in fs and p["run"] != "E8F4X2":
+        if a and p["extraction"] in fs and p["run"] not in repeats:
             mat[a][p["extraction"]] = p["faithful"]
             central[a][p["extraction"]] = p["central"]
     ckl = collections.defaultdict(dict)
@@ -665,7 +709,9 @@ def main():
     md.append(md_table(["Pair", "rho", "p"], body))
     md.append("\n**Run-to-run variance on one extraction (same planner, same instruction, same extraction):**\n")
     body = []
-    for a, b in (("E8F4X", "E8F4X2"), ("S3F8OX", "S5F8OX")):
+    for a, b in (("E8F4X", "E8F4X2"), ("E9F4Y", "E10F4Y2"), ("S3F8OX", "S5F8OX")):
+        if not [p for p in plans if p["run"] == b]:
+            continue
         pa = [p for p in plans if p["run"] == a][0]
         pb = [p for p in plans if p["run"] == b][0]
         shared = sorted(set(checks.get(a, {})) & set(checks.get(b, {})))
@@ -673,7 +719,8 @@ def main():
         body.append([f"{a} vs {b}", f"{pa['faithful']} ({pa['batch']}) vs {pb['faithful']} ({pb['batch']})",
                      abs(pa["faithful"] - pb["faithful"]), ch])
     md.append(md_table(["Repeat", "Faithful", "Difference", "Checklist, same batch"], body))
-    md.append("\nThe E10 repeat E10F4Y2 is not yet judged.\n")
+    md.append("\nE9F4Y and E10F4Y2 are judged in different batches (J18, J21); J21 also re-judged E9F4Y: "
+              "see section 3.\n")
 
     # 5. correlations
     md.append("## 5. Do the judge-free measures predict the plan?\n")
@@ -758,7 +805,7 @@ def main():
         out = {}
         for p in plans:
             a = merged.get(p["arm"], p["arm"])
-            if a not in arms or p["extraction"] not in family or p["run"] == "E8F4X2":
+            if a not in arms or p["extraction"] not in family or p["run"] in ("E8F4X2", "E10F4Y2"):
                 continue
             for cid in core_ids:
                 v = items[p["run"]][p["batch"]].get(cid, [])
@@ -802,10 +849,14 @@ def main():
     orr, _ = mh_for(fs, e6_arms, trimmed, reach)
     body.append(["without plans E6F6V and E7F8W", orr, f"{exact_p(fs, e6_arms, trimmed, reach, orr):.4f}"])
     md.append(md_table(["Variant", "MH OR", "exact p"], body))
-    y = outcomes_for(fs, ("E9:Y",))
-    md.append(f"\n**Under the combined instruction (Y, E9 on F2, F4, F8):** {sum(y.values())} of {len(y)} "
-              "core results faithful by majority, including every result F8's extraction does not reach. "
-              "No stratum varies, so Y carries no information here.\n")
+    merged.update({"E9:Y": "Y", "E10:Y": "Y"})
+    y = outcomes_for(fs, ("Y",))
+    y_exts = sorted({k[2][-2:] for k in y})
+    unreached = sum(1 for (a, cid, f), v in y.items() if cid not in reach[f])
+    md.append(f"\n**Under the combined instruction (Y: E9 and E10, on {' '.join(y_exts)}):** {sum(y.values())} "
+              f"of {len(y)} core results faithful by majority, {sum(v for (a, cid, f), v in y.items() if cid not in reach[f])} "
+              f"of the {unreached} that the extraction does not reach among them. No stratum varies, so Y "
+              "carries no information on reach: under Y the planner supplies what these extractions miss.\n")
     md.append("**What X (E8/E8b) did not get faithful, and whether the extraction reached it:**\n")
     body = []
     for f in fs:
