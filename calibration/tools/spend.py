@@ -5,8 +5,10 @@ usage: python3 -I spend.py SUBAGENTS_DIR [SUBAGENTS_DIR ...]
 
 Each subagent is assigned to an experiment and a role by its description, which every
 protocol fixes ("RUN TASK" for runs, "Jn judge Pnn" for judges). Counts are measured from the
-transcripts' usage records: model calls, input, cache-read and cache-write tokens. Output tokens
-are estimated from content characters at 4 per token, since transcripts undercount output.
+transcripts' usage records: model calls, input, cache-read and cache-write tokens. Visible output
+tokens (text and tool calls) are estimated from content characters at 4 per token. Thinking is
+not stored in transcripts, only as an encrypted signature: its length is reported as a proxy for
+hidden reasoning, not as a token count.
 Subagents whose description matches no rule are listed as "other".
 
 The four components are reported separately and never summed: they are priced differently (a
@@ -56,16 +58,21 @@ def main():
             if not t.exists():
                 continue
             key = classify(json.load(open(meta_path)).get("description", ""))
-            calls = {}
+            calls, visible, signature = {}, collections.Counter(), collections.Counter()
             for line in open(t):
                 e = json.loads(line)
                 if e.get("type") != "assistant":
                     continue
                 m = e.get("message") or {}
                 u = m.get("usage") or {}
+                # one call can span several lines, one per content block: usage is per call,
+                # content is summed over lines; thinking signatures are not output text
                 calls[m.get("id")] = (u.get("input_tokens", 0), u.get("cache_read_input_tokens", 0),
-                                      u.get("cache_creation_input_tokens", 0),
-                                      sum(len(json.dumps(b)) for b in m.get("content", [])) // 4)
+                                      u.get("cache_creation_input_tokens", 0))
+                blocks = m.get("content", [])
+                visible[m.get("id")] += sum(len(json.dumps({k: v for k, v in b.items() if k != "signature"}))
+                                            for b in blocks)
+                signature[m.get("id")] += sum(len(b.get("signature", "")) for b in blocks)
                 if m.get("model") and m["model"] != "<synthetic>":
                     models[key].add(m["model"].replace("claude-", ""))
             r = rows[key]
@@ -75,12 +82,13 @@ def main():
                 r["input"] += c[0]
                 r["cache_read"] += c[1]
                 r["cache_write"] += c[2]
-                r["output_est"] += c[3]
-    print("| Experiment | Role | Subagents | Models | Calls | Uncached input (k) | Cache read (M) | Cache write (M) | Output, est. (k) |")
-    print("|---|---|---|---|---|---|---|---|---|")
+            r["output_est"] += sum(visible.values()) // 4
+            r["signature"] += sum(signature.values())
+    print("| Experiment | Role | Subagents | Models | Calls | Uncached input (k) | Cache read (M) | Cache write (M) | Visible output, est. (k) | Thinking signatures (k chars) |")
+    print("|---|---|---|---|---|---|---|---|---|---|")
     for (exp, role), r in sorted(rows.items()):
         print(f"| {exp} | {role} | {r['subagents']} | {', '.join(sorted(models[(exp, role)]))} | {r['calls']} | "
-              f"{r['input'] // 1000} | {r['cache_read'] / 1e6:.1f} | {r['cache_write'] / 1e6:.2f} | {r['output_est'] // 1000} |")
+              f"{r['input'] // 1000} | {r['cache_read'] / 1e6:.1f} | {r['cache_write'] / 1e6:.2f} | {r['output_est'] // 1000} | {r['signature'] // 1000} |")
 
 
 if __name__ == "__main__":

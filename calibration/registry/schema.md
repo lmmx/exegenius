@@ -26,7 +26,7 @@ Every extracted value is an object `{"value": …, "basis": …}`:
 | Basis | Meaning |
 |---|---|
 | `measured` | extracted by the builder from run logs, transcripts or verdicts |
-| `estimated` | computed with a stated approximation (output tokens: content characters ÷ 4) |
+| `estimated` | computed with a stated approximation (output tokens: visible content characters ÷ 4, thinking signatures excluded) |
 | `reported` | taken from a source the builder cannot read (a session's reported cost, a journal's figure), with `source` naming it |
 | `unavailable` | not recorded anywhere; `note` says why. Never filled in by inference. |
 
@@ -63,11 +63,11 @@ A record holds every spec field, and adds:
 - **`planning_tasks`:** each planning task's issue time and submits (attempt, time, outcome, check, coverage figures), from `log.jsonl`.
 - **`planning_seconds`:** from the first planning task issued to the last accepted.
 - **Submits:** `rejected_submits`, `coverage_rejections`, and `other_tasks_issued` (the write tasks handed out when planning ended).
-- **`subagents[]`:** per subagent, `agent_type`, `models` (each model with its number of assistant messages), `effort` (each value with its number of records), `model_calls`, `input_tokens`, `cache_read_tokens`, `cache_write_tokens` (measured), `output_tokens` (estimated) and `seconds`.
+- **`subagents[]`:** per subagent, `agent_type`, `models` (each model with its number of assistant messages), `effort` (each value with its number of records), `model_calls`, `input_tokens`, `cache_read_tokens`, `cache_write_tokens` (measured), `output_tokens` (estimated, visible content only), `thinking_signature_chars` (measured: the length of the encrypted thinking signatures, a proxy for hidden reasoning, not a token count) and `seconds`.
 - **`observed_config`:** the agent types, models and efforts the transcripts record.
 - **`matches_arm`:** whether they equal the arm's intended configuration. Only the fields the arm specifies are checked, and the value is null when there are no transcripts.
 - **`quality[]`:** one entry per judgement of the run's plan:
-  - `batch`, `judge` (`a` first, `b` second), `plan` (its blind id);
+  - `batch`, `judge` (`a` first, `b` second, `c` third), `plan` (its blind id);
   - the content judge's counts: `core_stated`, `core_fully`, `core_derived`, `core_faithful`, `supporting_stated`, `wrong`, `major_errors`, `minor_errors`;
   - where the batch used the central-derivation rubric, `central_count` and `central_gate`.
 

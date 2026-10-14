@@ -2,6 +2,37 @@
 
 **Status:** a proposal. **No Fable run is launched until S2 has been judged** and this plan has been completed with S2's results. The author then gets a recommendation and a cost estimate before anything is spent.
 
+## S2's result, and what it changes (added after J9; nothing below was launched)
+
+**What S2 found** (`docs/journal/2026-10-14-s2-model-effort.md`), on E6's extraction F1:
+- all five plans pass the central gate by majority;
+- Opus `xhigh`, Sonnet `max` and Opus `max` each gain C1 and 3–4 faithful derivations over Sonnet `high`;
+- Opus `max` reaches the rubric's ceiling (19 of 19);
+- Sonnet `xhigh` is 2 below Sonnet `high`.
+
+**By the table under "How S2 will be used to choose":**
+- the second row applies: Opus beats Sonnet at matched effort (`xhigh`: 18 against 13);
+- the first applies only in part: Sonnet gains at `max`, not at `xhigh`.
+
+So the argument stage looks capability-limited, and Fable on the argument task is the best-motivated pilot, as this plan said.
+
+**But the pilot as written below cannot work.** It ran Fable on F1 against S2's best configuration. On F1 that configuration is at the ceiling, so a Fable run could at most tie, and would cost a Fable run and a judging batch to learn nothing.
+
+**The revision:**
+- The pilot runs on an extraction where the best available configuration is still below the ceiling.
+- Which extraction that is, if any, is what `S3.md` (Opus `high` and `xhigh` on F4 and F8, where Sonnet `high` is weakest) decides. S3 runs first.
+- S3's table sends FB1 to one of three places:
+  - an extraction Opus `xhigh` does not lift;
+  - the extraction stage;
+  - a second document, if this paper's argument task is solved.
+- The comparison, judging, success criterion and stopping rule below stand. The comparison is against Opus `xhigh` (or whatever S3 shows best) on the same extraction, re-judged in the pilot's batch.
+
+**Cost estimate for the pilot after S3,** per extraction. These are components, not converted:
+- **The Fable run:** unknown until measured. S2's Opus `max` run (15.9 M cache read, 1.1 M cache write, 48 k visible output, 2,021 s) is the nearest known figure, as a placeholder at `max` effort. At `high` it is probably less.
+  - Fable's price per token is higher than Opus's.
+  - How the usage meter weighs it is not published.
+- **The judging:** about 27 M cache read and 2.2 M cache write, on Opus. That is the Fable plan, the best configuration's plan and the reference, at three judges each, plus two anchors: 11 judgements at J9's measured rate.
+
 **The question:** is there one stage of Exegenius where `claude-fable-5-1` is enough better than the strongest existing configuration to justify its much higher usage? Fable is treated as a hypothesis about a specific capability, not a candidate default.
 
 ## Stages, and what is known about each

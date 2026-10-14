@@ -130,5 +130,23 @@
    "calibration/rubrics/nlogn-central-saving.md"
   ],
   "journal": "docs/journal/2026-10-14-e7-key-step-identity.md"
+ },
+ {
+  "id": "J9",
+  "dir": "docs/journal/2026-10-14-s2-model-effort/judge",
+  "key": "key.json",
+  "verdicts": "verdicts",
+  "reference": "docs/journal/2026-10-13-run-log-and-coverage/reference-draft/reference.json",
+  "judge": {
+   "agent": "general-purpose",
+   "model_id": "claude-opus-5-5",
+   "effort": "high"
+  },
+  "seed": null,
+  "judges_per_plan": "three for the five screen plans (Pnn, Pnn-b, Pnn-c), one for each anchor; central steps decided by majority (calibration/tools/majority.py, results.txt)",
+  "rubrics": [
+   "calibration/rubrics/nlogn-central-saving.md"
+  ],
+  "journal": "docs/journal/2026-10-14-s2-model-effort.md"
  }
 ]

@@ -13,8 +13,8 @@ measured:
   issue to the last planning task accepted);
 - per subagent, from the transcripts under `results/transcripts/` at that commit: agent type,
   model(s), effort, model calls, input / cache-read / cache-write tokens (measured), output
-  tokens (estimated at 4 characters per token, since transcripts undercount output) and
-  seconds. Subagents are matched to runs by the description prefix "RUN TASK" that every
+  tokens (estimated at 4 visible characters per token; thinking is stored only as an
+  encrypted signature, whose length is recorded separately as a proxy) and seconds. Subagents are matched to runs by the description prefix "RUN TASK" that every
   runner protocol requires;
 - per run and judge batch, from the batch's verdicts and key: the content judge's counts and,
   where present, the central-derivation rubric's count and gate.
@@ -117,8 +117,15 @@ def transcripts(wiki, commit, path="results/transcripts"):
     return files
 
 
+def visible(block):
+    """A content block's characters without its thinking signature. Transcripts keep thinking
+    only as an encrypted signature, whose length is not a token count."""
+    return len(json.dumps({k: v for k, v in block.items() if k != "signature"}))
+
+
 def subagent(lines, meta):
     calls, chars, models, efforts, stamps = {}, collections.Counter(), collections.Counter(), collections.Counter(), []
+    signatures = 0
     for line in lines.splitlines():
         try:
             e = json.loads(line)
@@ -134,7 +141,8 @@ def subagent(lines, meta):
         u = m.get("usage") or {}
         calls[m.get("id")] = (u.get("input_tokens", 0), u.get("cache_read_input_tokens", 0),
                               u.get("cache_creation_input_tokens", 0))
-        chars[m.get("id")] += sum(len(json.dumps(b)) for b in m.get("content", []))
+        chars[m.get("id")] += sum(visible(b) for b in m.get("content", []))
+        signatures += sum(len(b.get("signature", "")) for b in m.get("content", []))
         if m.get("model") and m["model"] != "<synthetic>":  # an error message, not a model
             models[m["model"]] += 1
     t = lambda s: datetime.fromisoformat(s.replace("Z", "+00:00"))
@@ -147,7 +155,11 @@ def subagent(lines, meta):
         "cache_read_tokens": measured(sum(c[1] for c in calls.values())),
         "cache_write_tokens": measured(sum(c[2] for c in calls.values())),
         "output_tokens": {"value": sum(chars.values()) // 4, "basis": "estimated",
-                          "note": "content characters / 4; transcripts undercount output"},
+                          "note": "visible content characters / 4 (text, tool calls); thinking is not "
+                                  "stored in transcripts, so hidden reasoning is not counted"},
+        "thinking_signature_chars": {"value": signatures, "basis": "measured",
+                                     "note": "length of the encrypted thinking signatures; a proxy for "
+                                             "hidden reasoning, not a token count"},
         "seconds": measured(round((t(max(stamps)) - t(min(stamps))).total_seconds(), 1)) if stamps else
         unavailable("no timestamps"),
     }
@@ -199,14 +211,14 @@ def verdict_summary(verdict, tiers):
 
 
 def judgements(batches):
-    """{run name: [{batch, judge: a|b, ...summary}]} over every judge batch."""
+    """{run name: [{batch, judge: a|b|c, ...summary}]} over every judge batch."""
     found = collections.defaultdict(list)
     for b in batches:
         d = ROOT / b["dir"]
         key = json.load(open(d / b.get("key", "key.json")))
         tiers = {i["id"]: i["tier"] for i in json.load(open(ROOT / b["reference"]))["items"]}
         for pid, run in key.items():
-            for suffix, which in (("", "a"), ("-b", "b")):
+            for suffix, which in (("", "a"), ("-b", "b"), ("-c", "c")):
                 p = d / b.get("verdicts", "verdicts") / f"{pid}{suffix}.json"
                 if p.exists():
                     found[run].append({"batch": b["id"], "judge": which, "plan": pid,

@@ -31,39 +31,51 @@
 
 **Three quantities are kept apart:** money spent, quota consumed and research value. None is converted into another.
 
-## 2. Measured spend, development-session subagents (`tools/spend.py`, 2026-10-14 09:04 UTC)
+## 2. Measured spend, development-session subagents (`tools/spend.py`, 2026-10-14 09:47 UTC)
 
 **The four token components are kept separate and never summed.**
 - **What they are:**
   - uncached input (near zero here);
   - tokens read from cache, which every model call re-reads for the whole context so far;
   - tokens written to cache;
-  - output, estimated at 4 characters per token.
+  - visible output (text and tool calls), estimated at 4 characters per token.
+- **Hidden reasoning is not measured.** Transcripts keep thinking only as an encrypted signature. `spend.py` reports its length as a proxy, comparable only within one model, and never as tokens.
+  - Before 09:47 UTC the registry counted those signatures as output, which inflated its output figures.
+  - `spend.py`'s figures were close to visible output all along, since it kept only the last line of each message.
 - **Why they are not summed:** they are priced very differently. A cache read costs a small fraction of uncached input, and output costs most. Prices also differ by model, and how the subscription's meter weighs each is not published.
 - **So the counts below are not a cost or a share of quota.** A ranking by any one column can differ from a ranking by cost.
 
 | Experiment | Runs: subagents · model · cache read · output | Judging: subagents · cache read · output |
 |---|---|---|
-| E3 (judging only; runs in a runner session) | — | 15 · 18.3 M · 74 k |
-| S1 (judging only; runs in a runner session) | — | 11 · 14.3 M · 58 k |
+| E3 (judging only; runs in a runner session) | — | 15 · 18.3 M · 77 k |
+| S1 (judging only; runs in a runner session) | — | 11 · 14.3 M · 61 k |
 | T1 | 3 · Haiku · 5.5 M · 19 k | 4 chain walks (shared, below) |
-| E4 | 18 · Sonnet · 38.2 M · 166 k | 15 · 29.3 M · 85 k |
-| E5 | 15 · Opus · 16.3 M · 98 k | 15 · 24.3 M · 81 k |
-| E6 | 42 · Sonnet · 66.9 M · 379 k | 22 · 44.4 M · 127 k |
-| E7 | 8 · Sonnet · 23.8 M · 181 k | 22 · 51.9 M · 134 k |
-| S2 (in progress) | 4 · Sonnet, Opus · 16.0 M · 136 k so far | not yet |
+| E4 | 18 · Sonnet · 38.2 M · 169 k | 15 · 29.3 M · 90 k |
+| E5 | 15 · Opus · 16.3 M · 101 k | 15 · 24.3 M · 84 k |
+| E6 | 42 · Sonnet · 66.9 M · 388 k | 22 · 44.4 M · 132 k |
+| E7 | 8 · Sonnet · 23.8 M · 183 k | 22 · 51.9 M · 140 k |
+| S2 | 4 · Sonnet, Opus · 53.1 M · 166 k (visible) | 17 · 42.4 M · 110 k |
 | W1 (cancelled) | 1 · Sonnet · 0.1 M · 0 | — |
-| J1–J2 (content-judge development, E1) | — | 43 · 54.8 M · 192 k |
-| Chain walks (baseline and T1) | — | 8 · 6.4 M · 30 k |
+| J1–J2 (content-judge development, E1) | — | 43 · 54.8 M · 200 k |
+| Chain walks (baseline and T1) | — | 8 · 6.4 M · 32 k |
 
 **All judging is Opus.** Over E4–E7:
 
 | | Read from cache | Written to cache | Output | Model |
 |---|---|---|---|---|
-| judging | 150 M | 11.0 M | 0.43 M | Opus |
-| runs | 145 M | 16.2 M | 0.82 M | mostly Sonnet |
+| judging | 150 M | 11.0 M | 0.45 M | Opus |
+| runs | 145 M | 16.2 M | 0.84 M | mostly Sonnet |
 
-So judging re-reads about as much context as the runs, but writes about half the output. Which cost more in quota is not established. Judging uses the pricier model, and the runs produce more output, which is the costliest component per token.
+So judging re-reads about as much context as the runs, but writes about half the visible output.
+
+**S2 on its own:**
+
+| | Read from cache | Written to cache | Visible output | Model |
+|---|---|---|---|---|
+| runs | 53.1 M | 3.92 M | 0.17 M | Sonnet and Opus |
+| judging | 42.4 M | 3.42 M | 0.11 M | Opus |
+
+Most of the run figure is Sonnet `max` (24.8 M) and Opus `max` (15.9 M). Which cost more in quota is not established. Judging uses the pricier model, and the runs produce more output, which is the costliest component per token.
 
 **Wasted spend, measured:** subagents killed by the usage limit before submitting were rerun.
 - **E4:** 8 of 10 first attempts were killed.
@@ -91,7 +103,7 @@ Their tokens are inside the run totals above.
 | E5 | is Opus at medium better than Sonnet at high? | not met | keep Sonnet high | yes: a 2-run screen with the gap's size in view, before 5 runs |
 | E6 | does the key-step instruction hold on fresh extractions? | depth and errors met, gate not | instruction deepens plans safely; the gate needs more | 8 pairs gave a clear depth result; fewer would have sufficed for depth (8 of 8 is p = 0.004) |
 | E7 | does the identity sentence close C4? | met | propose for `master` | 8 runs, plus re-judging V, which also measured judge reliability; that was the most informative judging spend so far |
-| S2 | does effort above high, or Opus, buy fidelity? | screen, in progress | which configuration, if any, merits a repeat | one run per configuration, by design |
+| S2 | does effort above high, or Opus, buy fidelity? | screen: Opus `xhigh`, Sonnet `max` and Opus `max` beyond judge noise (+C1, +3–4 faithful); Sonnet `xhigh` below | repeat Opus `xhigh`, but on extractions with headroom (S3); drop Sonnet `xhigh`; hold the `max` configurations | one run per configuration was right. The input could have been chosen better: F1 was the reference's best extraction, which left little headroom. Choosing the input where the default is weakest would have made the same four runs more informative |
 
 ## 4. Lessons the record supports so far (each with its evidence; none is a universal rule)
 
@@ -100,9 +112,20 @@ Their tokens are inside the run totals above.
   - Plan for it in every budget.
   - Measure a cheaper judge's agreement with Opus before using it.
 - **Parallel launches near a limit waste work; at the start of a window they cost nothing extra.** Evidence: the E4 and E6 kills, and S2's parallel rows 2–4 at 0–2%.
-- **Effort above high makes runs much longer.** Evidence: one run (S2 row 1).
-  - Sonnet `xhigh` took 2.7× the time and wrote about 5× the output of `high` on the same task, for a plan of similar size.
-  - Whether that bought fidelity awaits judging.
+- **Effort above high makes runs much longer, and buys fidelity only for some model-effort pairs.** Evidence: S2, one run each, judged by majority in J9.
+  - Against Sonnet `high`, the times were:
+
+    | Configuration | Seconds |
+    |---|---|
+    | Sonnet `xhigh` | 2.7× |
+    | Opus `xhigh` | 2.0× |
+    | Opus `max` | 2.9× |
+    | Sonnet `max` | 4.0× |
+
+  - Opus at both levels, and Sonnet at `max`, gained C1 and 3–4 faithful derivations. Sonnet `xhigh` lost 2.
+  - *Corrected 09:47 UTC:* this entry said that Sonnet `xhigh` "wrote about 5× the output of `high`". That compared a usage figure with a visible-content figure. On one basis, visible output was about equal: 27 k against 25 k. The longer run went into hidden reasoning (thinking signatures 3.6× longer), which transcripts do not count.
+- **Measure every run on one basis before comparing.** Evidence: the correction above, and the registry's output figures, which counted thinking signatures until 09:47 UTC. A comparison across two estimators can look like a 5× effect where there is none.
+- **Choose a screen's input where the current default is weakest.** Evidence: S2 screened on F1, where the reference was already at 17 of 19 faithful in J8. Three of four configurations then hit the ceiling, so the screen could rank nothing above them, Fable included.
 - **Re-judging the same plans is worth its cost once per instrument.** It is what showed single-judge gate verdicts to be noisy (E7).
 
 ## 5. Planned use
@@ -115,3 +138,6 @@ Their tokens are inside the run totals above.
 - **Before an experiment:** the plan gives an estimate for runs and judging, with this file's measured figures as the basis.
 - **After it:** `tools/spend.py` is rerun, and §2 and §3 are updated.
 - **Meter readings** go into §1 as the author supplies them.
+- **Next proposed (not launched):**
+  - **S3** (`plans/S3.md`): Opus `high` and `xhigh` on F4 and F8. Estimated at ~70–78 M cache read and ~7–8 M cache write, about 0.75–0.8× S2 measured; judging is about two-thirds of it.
+  - **The Fable pilot after it** (`plans/FB1.md`): per extraction, one Fable run of unknown cost (S2's Opus `max` run, 15.9 M cache read, is the placeholder), plus ~27 M cache read of Opus judging.

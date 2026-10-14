@@ -1,0 +1,1025 @@
+{
+ "id": "S2",
+ "title": "Model \u00d7 effort screen above high with the E7 instructions (Sonnet and Opus at xhigh and max)",
+ "kind": "screening",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task only, on E6's extraction F1 (background accepted)",
+ "question": "Does effort above high, or Opus, add fidelity to the argument plan beyond Sonnet at high with the E7 instructions, and at what cost?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "91c4fed (141026-exp-key-step-identity)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-s2-model-effort",
+  "commit": "74b4094",
+  "transcripts": "results/transcripts/s2",
+  "description_prefix": "S2",
+  "planning_kinds": [
+   "argument"
+  ]
+ },
+ "protocol": "run from the development session; S2.md on the evidence branch",
+ "preregistration": "calibration/plans/S2.md (9fdd9da; judging and reading fixed before any result was seen)",
+ "journal": "docs/journal/2026-10-14-s2-model-effort.md",
+ "comparison": "E7F1W (Sonnet, high, same task file), re-judged in batch J9",
+ "arms": {
+  "SX": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "xhigh",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E7 argument instructions (key-step paragraph and identity sentence)"
+   },
+   "runs": [
+    "S2F1SX"
+   ]
+  },
+  "OX": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "xhigh",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E7 argument instructions (key-step paragraph and identity sentence)"
+   },
+   "runs": [
+    "S2F1OX"
+   ]
+  },
+  "SM": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E7 argument instructions (key-step paragraph and identity sentence)"
+   },
+   "runs": [
+    "S2F1SM"
+   ]
+  },
+  "OM": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "max",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E7 argument instructions (key-step paragraph and identity sentence)"
+   },
+   "runs": [
+    "S2F1OM"
+   ]
+  }
+ },
+ "reported": {},
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus, high) with this session's permissions; it only passed prompts and ran exegenius next"
+  },
+  {
+   "kind": "schedule",
+   "what": "row 1 ran alone; rows 2-4 ran in parallel from 08:48 UTC after the usage window reset (S2.md, change of plan)"
+  }
+ ],
+ "limitations": [
+  "One paper, one extraction (F1), one run per configuration: a screen, not a ranking.",
+  "F1 is the extraction on which the reference already scored highest in E7 (J8), so the screen has little headroom: three of four configurations reach the rubric's ceiling.",
+  "Judged in one batch (J9) with an unreviewed reference; three judges per screen plan, one per anchor."
+ ],
+ "built": {
+  "by": "calibration/tools/registry.py",
+  "wiki_commit": "74b4094"
+ },
+ "orchestrator_observed": {
+  "value": null,
+  "basis": "unavailable",
+  "note": "no main transcript at the evidence commit"
+ },
+ "runs": [
+  {
+   "id": "S2F1SX",
+   "arm": "SX",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T08:43:41.857000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 164,
+         "located": 164,
+         "first_tenth": 4,
+         "span": [
+          76,
+          4991
+         ],
+         "sections_quoted": 45,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-14T08:12:01.370000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 1900.5,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-sonnet-5-5": 53
+     },
+     "effort": {
+      "xhigh": 53
+     },
+     "model_calls": {
+      "value": 32,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 64,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 5454913,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 720865,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 26702,
+      "basis": "estimated",
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 712756,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "seconds": {
+      "value": 1897.2,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "F1SX 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "xhigh"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J9",
+     "judge": "a",
+     "plan": "P05",
+     "core_stated": 19,
+     "core_fully": 16,
+     "core_derived": 17,
+     "core_faithful": 13,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 3,
+     "central_count": 8,
+     "central_gate": true
+    },
+    {
+     "batch": "J9",
+     "judge": "b",
+     "plan": "P05",
+     "core_stated": 19,
+     "core_fully": 18,
+     "core_derived": 17,
+     "core_faithful": 13,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1,
+     "central_count": 8,
+     "central_gate": true
+    },
+    {
+     "batch": "J9",
+     "judge": "c",
+     "plan": "P05",
+     "core_stated": 19,
+     "core_fully": 17,
+     "core_derived": 17,
+     "core_faithful": 14,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 8,
+     "central_gate": true
+    }
+   ]
+  },
+  {
+   "id": "S2F1OX",
+   "arm": "OX",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T09:11:14.047000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 138,
+         "located": 138,
+         "first_tenth": 9,
+         "span": [
+          76,
+          4990
+         ],
+         "sections_quoted": 47,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-14T08:47:39.368000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 1414.7,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-opus-5-5": 67
+     },
+     "effort": {
+      "xhigh": 67
+     },
+     "model_calls": {
+      "value": 33,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 66,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 6934042,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 930534,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 29089,
+      "basis": "estimated",
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 413508,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "seconds": {
+      "value": 1408.8,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "F1OX 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-opus-5-5"
+    ],
+    "efforts": [
+     "xhigh"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J9",
+     "judge": "a",
+     "plan": "P07",
+     "core_stated": 19,
+     "core_fully": 17,
+     "core_derived": 19,
+     "core_faithful": 19,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J9",
+     "judge": "b",
+     "plan": "P07",
+     "core_stated": 19,
+     "core_fully": 18,
+     "core_derived": 19,
+     "core_faithful": 18,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J9",
+     "judge": "c",
+     "plan": "P07",
+     "core_stated": 19,
+     "core_fully": 19,
+     "core_derived": 19,
+     "core_faithful": 17,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 9,
+     "central_gate": true
+    }
+   ]
+  },
+  {
+   "id": "S2F1SM",
+   "arm": "SM",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T09:34:10.141000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 209,
+         "located": 209,
+         "first_tenth": 5,
+         "span": [
+          90,
+          4983
+         ],
+         "sections_quoted": 48,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-14T08:47:39.391000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 2790.8,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-sonnet-5-5": 112
+     },
+     "effort": {
+      "max": 112
+     },
+     "model_calls": {
+      "value": 63,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 126,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 24834693,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 1149213,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 61367,
+      "basis": "estimated",
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 1047676,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "seconds": {
+      "value": 2785.2,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "F1SM 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "max"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J9",
+     "judge": "a",
+     "plan": "P01",
+     "core_stated": 19,
+     "core_fully": 18,
+     "core_derived": 19,
+     "core_faithful": 19,
+     "supporting_stated": 7,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J9",
+     "judge": "b",
+     "plan": "P01",
+     "core_stated": 19,
+     "core_fully": 18,
+     "core_derived": 19,
+     "core_faithful": 18,
+     "supporting_stated": 7,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J9",
+     "judge": "c",
+     "plan": "P01",
+     "core_stated": 19,
+     "core_fully": 19,
+     "core_derived": 19,
+     "core_faithful": 17,
+     "supporting_stated": 7,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1,
+     "central_count": 9,
+     "central_gate": true
+    }
+   ]
+  },
+  {
+   "id": "S2F1OM",
+   "arm": "OM",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T09:21:25.033000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 185,
+         "located": 185,
+         "first_tenth": 10,
+         "span": [
+          88,
+          4989
+         ],
+         "sections_quoted": 48,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-14T08:47:39.413000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 2025.6,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-opus-5-5": 139
+     },
+     "effort": {
+      "max": 139
+     },
+     "model_calls": {
+      "value": 60,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 120,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 15925703,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 1122217,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 48879,
+      "basis": "estimated",
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 538468,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "seconds": {
+      "value": 2021.2,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "F1OM 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-opus-5-5"
+    ],
+    "efforts": [
+     "max"
+    ]
+   },
+   "matches_arm": true,
+   "quality": [
+    {
+     "batch": "J9",
+     "judge": "a",
+     "plan": "P02",
+     "core_stated": 19,
+     "core_fully": 18,
+     "core_derived": 19,
+     "core_faithful": 19,
+     "supporting_stated": 7,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 1,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J9",
+     "judge": "b",
+     "plan": "P02",
+     "core_stated": 19,
+     "core_fully": 18,
+     "core_derived": 19,
+     "core_faithful": 19,
+     "supporting_stated": 7,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J9",
+     "judge": "c",
+     "plan": "P02",
+     "core_stated": 19,
+     "core_fully": 18,
+     "core_derived": 19,
+     "core_faithful": 19,
+     "supporting_stated": 7,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 0,
+     "central_count": 9,
+     "central_gate": true
+    }
+   ]
+  }
+ ],
+ "arm_summary": {
+  "SX": {
+   "runs": 1,
+   "quality_J9": {
+    "core_stated": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 16,
+     "min": 16,
+     "max": 16
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 17,
+     "min": 17,
+     "max": 17
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 13,
+     "min": 13,
+     "max": 13
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 1,
+     "median": 8,
+     "min": 8,
+     "max": 8
+    },
+    "central_gate_passed": "1/1"
+   },
+   "resources_argument": {
+    "model_calls": {
+     "n": 1,
+     "median": 32,
+     "min": 32,
+     "max": 32
+    },
+    "cache_read_tokens": {
+     "n": 1,
+     "median": 5454913,
+     "min": 5454913,
+     "max": 5454913
+    },
+    "cache_write_tokens": {
+     "n": 1,
+     "median": 720865,
+     "min": 720865,
+     "max": 720865
+    },
+    "output_tokens": {
+     "n": 1,
+     "median": 26702,
+     "min": 26702,
+     "max": 26702
+    },
+    "seconds": {
+     "n": 1,
+     "median": 1897.2,
+     "min": 1897.2,
+     "max": 1897.2
+    }
+   },
+   "planning_seconds": {
+    "n": 1,
+    "median": 1900.5,
+    "min": 1900.5,
+    "max": 1900.5
+   }
+  },
+  "OX": {
+   "runs": 1,
+   "quality_J9": {
+    "core_stated": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 17,
+     "min": 17,
+     "max": 17
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 1,
+     "median": 9,
+     "min": 9,
+     "max": 9
+    },
+    "central_gate_passed": "1/1"
+   },
+   "resources_argument": {
+    "model_calls": {
+     "n": 1,
+     "median": 33,
+     "min": 33,
+     "max": 33
+    },
+    "cache_read_tokens": {
+     "n": 1,
+     "median": 6934042,
+     "min": 6934042,
+     "max": 6934042
+    },
+    "cache_write_tokens": {
+     "n": 1,
+     "median": 930534,
+     "min": 930534,
+     "max": 930534
+    },
+    "output_tokens": {
+     "n": 1,
+     "median": 29089,
+     "min": 29089,
+     "max": 29089
+    },
+    "seconds": {
+     "n": 1,
+     "median": 1408.8,
+     "min": 1408.8,
+     "max": 1408.8
+    }
+   },
+   "planning_seconds": {
+    "n": 1,
+    "median": 1414.7,
+    "min": 1414.7,
+    "max": 1414.7
+   }
+  },
+  "SM": {
+   "runs": 1,
+   "quality_J9": {
+    "core_stated": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 18,
+     "min": 18,
+     "max": 18
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 1,
+     "median": 9,
+     "min": 9,
+     "max": 9
+    },
+    "central_gate_passed": "1/1"
+   },
+   "resources_argument": {
+    "model_calls": {
+     "n": 1,
+     "median": 63,
+     "min": 63,
+     "max": 63
+    },
+    "cache_read_tokens": {
+     "n": 1,
+     "median": 24834693,
+     "min": 24834693,
+     "max": 24834693
+    },
+    "cache_write_tokens": {
+     "n": 1,
+     "median": 1149213,
+     "min": 1149213,
+     "max": 1149213
+    },
+    "output_tokens": {
+     "n": 1,
+     "median": 61367,
+     "min": 61367,
+     "max": 61367
+    },
+    "seconds": {
+     "n": 1,
+     "median": 2785.2,
+     "min": 2785.2,
+     "max": 2785.2
+    }
+   },
+   "planning_seconds": {
+    "n": 1,
+    "median": 2790.8,
+    "min": 2790.8,
+    "max": 2790.8
+   }
+  },
+  "OM": {
+   "runs": 1,
+   "quality_J9": {
+    "core_stated": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 18,
+     "min": 18,
+     "max": 18
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 1,
+     "median": 9,
+     "min": 9,
+     "max": 9
+    },
+    "central_gate_passed": "1/1"
+   },
+   "resources_argument": {
+    "model_calls": {
+     "n": 1,
+     "median": 60,
+     "min": 60,
+     "max": 60
+    },
+    "cache_read_tokens": {
+     "n": 1,
+     "median": 15925703,
+     "min": 15925703,
+     "max": 15925703
+    },
+    "cache_write_tokens": {
+     "n": 1,
+     "median": 1122217,
+     "min": 1122217,
+     "max": 1122217
+    },
+    "output_tokens": {
+     "n": 1,
+     "median": 48879,
+     "min": 48879,
+     "max": 48879
+    },
+    "seconds": {
+     "n": 1,
+     "median": 2021.2,
+     "min": 2021.2,
+     "max": 2021.2
+    }
+   },
+   "planning_seconds": {
+    "n": 1,
+    "median": 2025.6,
+    "min": 2025.6,
+    "max": 2025.6
+   }
+  }
+ }
+}

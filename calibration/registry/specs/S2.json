@@ -1,0 +1,100 @@
+{
+ "id": "S2",
+ "title": "Model × effort screen above high with the E7 instructions (Sonnet and Opus at xhigh and max)",
+ "kind": "screening",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task only, on E6's extraction F1 (background accepted)",
+ "question": "Does effort above high, or Opus, add fidelity to the argument plan beyond Sonnet at high with the E7 instructions, and at what cost?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "91c4fed (141026-exp-key-step-identity)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-s2-model-effort",
+  "commit": "74b4094",
+  "transcripts": "results/transcripts/s2",
+  "description_prefix": "S2",
+  "planning_kinds": [
+   "argument"
+  ]
+ },
+ "protocol": "run from the development session; S2.md on the evidence branch",
+ "preregistration": "calibration/plans/S2.md (9fdd9da; judging and reading fixed before any result was seen)",
+ "journal": "docs/journal/2026-10-14-s2-model-effort.md",
+ "comparison": "E7F1W (Sonnet, high, same task file), re-judged in batch J9",
+ "arms": {
+  "SX": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "xhigh",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E7 argument instructions (key-step paragraph and identity sentence)"
+   },
+   "runs": [
+    "S2F1SX"
+   ]
+  },
+  "OX": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "xhigh",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E7 argument instructions (key-step paragraph and identity sentence)"
+   },
+   "runs": [
+    "S2F1OX"
+   ]
+  },
+  "SM": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "max",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E7 argument instructions (key-step paragraph and identity sentence)"
+   },
+   "runs": [
+    "S2F1SM"
+   ]
+  },
+  "OM": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "max",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E7 argument instructions (key-step paragraph and identity sentence)"
+   },
+   "runs": [
+    "S2F1OM"
+   ]
+  }
+ },
+ "reported": {},
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus, high) with this session's permissions; it only passed prompts and ran exegenius next"
+  },
+  {
+   "kind": "schedule",
+   "what": "row 1 ran alone; rows 2-4 ran in parallel from 08:48 UTC after the usage window reset (S2.md, change of plan)"
+  }
+ ],
+ "limitations": [
+  "One paper, one extraction (F1), one run per configuration: a screen, not a ranking.",
+  "F1 is the extraction on which the reference already scored highest in E7 (J8), so the screen has little headroom: three of four configurations reach the rubric's ceiling.",
+  "Judged in one batch (J9) with an unreviewed reference; three judges per screen plan, one per anchor."
+ ]
+}

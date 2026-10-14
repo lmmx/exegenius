@@ -216,9 +216,14 @@
       "basis": "measured"
      },
      "output_tokens": {
-      "value": 40186,
+      "value": 11664,
       "basis": "estimated",
-      "note": "content characters / 4; transcripts undercount output"
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 113884,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
      "seconds": {
       "value": 383.2,
@@ -329,9 +334,14 @@
       "basis": "measured"
      },
      "output_tokens": {
-      "value": 34451,
+      "value": 9142,
       "basis": "estimated",
-      "note": "content characters / 4; transcripts undercount output"
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 101048,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
      "seconds": {
       "value": 317.5,
@@ -457,9 +467,14 @@
       "basis": "measured"
      },
      "output_tokens": {
-      "value": 26279,
+      "value": 7482,
       "basis": "estimated",
-      "note": "content characters / 4; transcripts undercount output"
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 74984,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
      "seconds": {
       "value": 235.6,
@@ -585,9 +600,14 @@
       "basis": "measured"
      },
      "output_tokens": {
-      "value": 76296,
+      "value": 18614,
       "basis": "estimated",
-      "note": "content characters / 4; transcripts undercount output"
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 230524,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
      "seconds": {
       "value": 674.1,
@@ -698,9 +718,14 @@
       "basis": "measured"
      },
      "output_tokens": {
-      "value": 47030,
+      "value": 10316,
       "basis": "estimated",
-      "note": "content characters / 4; transcripts undercount output"
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 146548,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
      "seconds": {
       "value": 437.5,
@@ -816,9 +841,14 @@
       "basis": "measured"
      },
      "output_tokens": {
-      "value": 66162,
+      "value": 17100,
       "basis": "estimated",
-      "note": "content characters / 4; transcripts undercount output"
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 196080,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
      "seconds": {
       "value": 607.2,
@@ -929,9 +959,14 @@
       "basis": "measured"
      },
      "output_tokens": {
-      "value": 43445,
+      "value": 11626,
       "basis": "estimated",
-      "note": "content characters / 4; transcripts undercount output"
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 127140,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
      "seconds": {
       "value": 399.6,
@@ -1062,9 +1097,14 @@
       "basis": "measured"
      },
      "output_tokens": {
-      "value": 116778,
+      "value": 32031,
       "basis": "estimated",
-      "note": "content characters / 4; transcripts undercount output"
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 338784,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
      "seconds": {
       "value": 1026.2,
@@ -1195,9 +1235,14 @@
       "basis": "measured"
      },
      "output_tokens": {
-      "value": 83378,
+      "value": 24003,
       "basis": "estimated",
-      "note": "content characters / 4; transcripts undercount output"
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 237364,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
      "seconds": {
       "value": 716.3,
@@ -1323,9 +1368,14 @@
       "basis": "measured"
      },
      "output_tokens": {
-      "value": 65302,
+      "value": 17331,
       "basis": "estimated",
-      "note": "content characters / 4; transcripts undercount output"
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 191712,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
      "seconds": {
       "value": 568.2,
@@ -1429,9 +1479,9 @@
     },
     "output_tokens": {
      "n": 5,
-     "median": 40186,
-     "min": 26279,
-     "max": 76296
+     "median": 10316,
+     "min": 7482,
+     "max": 18614
     },
     "seconds": {
      "n": 5,
@@ -1509,9 +1559,9 @@
     },
     "output_tokens": {
      "n": 5,
-     "median": 66162,
-     "min": 43445,
-     "max": 116778
+     "median": 17331,
+     "min": 11626,
+     "max": 32031
     },
     "seconds": {
      "n": 5,

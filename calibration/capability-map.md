@@ -37,9 +37,25 @@
 | `general-purpose` / `claude-sonnet-5-5` / high / **key-step instruction** (0c29556), argument on 8 fresh extractions (J7) | 8 | **8/8** (0.63–1.00) | **7/8** (0.47–1.00) | 2/8 (0.03–0.65) | 2.64 M · ~67 k · 619 s | E6 variant |
 | `general-purpose` / `claude-sonnet-5-5` / high / key-step instruction (0c29556), re-judged (J8) | 8 | 7/8 (0.47–1.00) | 7/8 (0.47–1.00) | 5/8 (0.24–0.91) | as E6 | E6 variant, in E7's batch |
 | `general-purpose` / `claude-sonnet-5-5` / high / **key step with identities and exceptions** (91c4fed), on E6's extractions (J8) | 8 | **8/8** (0.63–1.00) | **8/8** (0.63–1.00) | **8/8** (0.63–1.00) | 2.79 M · ~72 k · 645 s | E7 |
+| `general-purpose` / `claude-sonnet-5-5` / high / 91c4fed, re-judged on F1 only (J9, majority of 3) | 1 | 1/1 (0.02–1.00) | 1/1 (0.02–1.00) | 1/1 (0.02–1.00); central 8, faithful 15 | 3.06 M · 25 k · 693 s | S2 reference (E7F1W) |
+| `general-purpose` / `claude-sonnet-5-5` / **xhigh** / 91c4fed, on F1 (J9, majority of 3) | 1 | 1/1 (0.02–1.00) | 1/1 (0.02–1.00) | 1/1 (0.02–1.00); central 8, faithful 13 | 5.45 M · 27 k · 1,897 s | S2 (screen) |
+| `general-purpose` / `claude-opus-5-5` / **xhigh** / 91c4fed, on F1 (J9, majority of 3) | 1 | 1/1 (0.02–1.00) | 1/1 (0.02–1.00) | 1/1 (0.02–1.00); central **9**, faithful **18** | 6.93 M · 29 k · 1,409 s | S2 (screen) |
+| `general-purpose` / `claude-sonnet-5-5` / **max** / 91c4fed, on F1 (J9, majority of 3) | 1 | 1/1 (0.02–1.00) | 1/1 (0.02–1.00) | 1/1 (0.02–1.00); central **9**, faithful **18** | 24.83 M · 61 k · 2,785 s | S2 (screen) |
+| `general-purpose` / `claude-opus-5-5` / **max** / 91c4fed, on F1 (J9, majority of 3) | 1 | 1/1 (0.02–1.00) | 1/1 (0.02–1.00) | 1/1 (0.02–1.00); central **9**, faithful **19** (ceiling) | 15.93 M · 48 k · 2,021 s | S2 (screen) |
 | `general-purpose` / `claude-sonnet-5-5` / high / 930d40c | 2 | 2/2 (0.16–1.00) | 2/2 (0.16–1.00) | not measured | 264 k and 271 k subagent tokens as Claude Code's task notification counts them (not comparable with the cache-read figures), 8.9 and 10.3 min | S0 |
 
-Pass counts are given with exact two-sided 95% (Clopper–Pearson) intervals. These are screening-stage and provisional evidence (`PROTOCOL.md` §6), not guarantees of reliability. Medium-effort runs come from batch J1, high-effort runs from batch J2. Anchors re-judged in J2 suggest J2 is at least as strict as J1 (journal 2026-10-13-e1-config). From J3 on, the central counts of the anchors E1-P4 and E3-M3 have held within one step across batches (8, 8, 7 and 1, 1, 1).
+**S2's rows** give visible output only (09:47 UTC basis). Hidden reasoning is not in transcripts. The `~k` output figures in earlier rows came from the registry before that time and include thinking signatures, so they overstate visible output; the rebuilt registry holds both. S2's single-run 95% intervals are 0.02–1.00, so S2 shows nothing about pass rates: its differences are in faithful derivations, within one batch.
+
+Pass counts are given with exact two-sided 95% (Clopper–Pearson) intervals. These are screening-stage and provisional evidence (`PROTOCOL.md` §6), not guarantees of reliability. Medium-effort runs come from batch J1, high-effort runs from batch J2. Anchors re-judged in J2 suggest J2 is at least as strict as J1 (journal 2026-10-13-e1-config). **The anchors' central counts, first judgements:**
+
+| Anchor | J3 | J4 | J5 | J6 | J7 | J8 | J9 |
+|---|---|---|---|---|---|---|---|
+| E3-M3 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| E1-P4 | 8 | 8 | 7 | 6 | 6 | 6 | 6 |
+
+E3-M3 has held throughout.
+
+E1-P4 has held at 6 from J6 on, but J6's second judge gave it 8. *Corrected 2026-10-14:* this note said earlier that both anchors held within one step, which E1-P4 has not done since J6. Whether batches from J6 on are stricter on a mid-depth plan, or the J3–J5 judges happened to be lenient, is not settled. Central counts from J3–J5 and from J6–J9 should not be compared directly, which the design already avoids: each comparison re-judges its arms in one batch.
 
 ### What this supports, so far
 
@@ -69,7 +85,12 @@ Pass counts are given with exact two-sided 95% (Clopper–Pearson) intervals. Th
 4. **Model × effort with the E7 instructions:**
    - **Not yet estimated:** Opus at high (screened in S1 at 1 of 2 gate passes, never estimated).
    - **Not yet run at all:** `xhigh` and `max`, for Sonnet and Opus.
-   - **Under way:** S2 screens them one run per configuration, serially.
+   - **Screened in S2** (one run each, on E6's extraction F1, majority of three judges):
+     - every configuration passes the gate, so the gate is saturated there;
+     - Opus `xhigh`, Sonnet `max` and Opus `max` gain C1 and 3–4 faithful derivations over Sonnet `high`;
+     - Sonnet `xhigh` loses 2;
+     - Opus `xhigh` is the cheapest that improved.
+   - **Proposed next:** S3 (`plans/S3.md`), Opus `high` and `xhigh` on F4 and F8, the extractions where Sonnet `high` is weakest.
 5. **Writers, auditors and support checks:** no evidence yet. They dominate a full run's cost.
 
 ## Other document classes
