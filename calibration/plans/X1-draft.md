@@ -25,7 +25,7 @@ It informs the extraction row of `policy.md`: which model and effort to use for 
 
 **Haiku `high` is not a token-cost candidate.** Its extractions used 0.47 and 2.06 M. It is used here only as a probe: S1-K1 is the shallowest accepted extraction in the set, with 3 results, 4 core items and 7 of 10 sections.
 
-**The stakes are small in tokens.** Switching to Sonnet `medium` saves about 1 M cache read per wiki on this paper. Stage 1 below costs about as much as 25–45 wikis' saving.
+**The stakes are small in tokens.** Switching to Sonnet `medium` saves about 1 M cache read per wiki on this paper. Stage 1 below costs about as much as 23–44 wikis' saving.
 
 The experiment's larger value is the second document. It shows whether the argument planner's compensation for weak extractions holds beyond Sonnet `high`'s gaps, before a paper where extraction may matter more.
 
@@ -61,7 +61,7 @@ So:
 - if all hold, the extraction configuration does not reach the plan under Y on this paper.
 
 **Mechanics:**
-- **Projects:** copies of `runs/M4` and `runs/M5` (5ced29e) and `runs/K1` (7335096). Each is reset to just after its extraction was accepted, the same reset E4 made one task later.
+- **Projects:** copies of `runs/M4` and `runs/M5` (5ced29e) and `runs/K1` (7335096). Each is reset to just after its extraction was accepted: the reset E4 made before the argument task, made one task earlier.
 - **Contamination guard.** Before any run, these are moved out of each copy, because they embed the original configuration's plans:
   - the original background answer;
   - the argument answer, its task directory and `argument.json`;
@@ -122,7 +122,7 @@ So:
 
 ## Not tested, and why
 
-- **Opus `high` extraction:** the same depth as Sonnet `high` without judging, and the planner under Y is already at 19/19 and checklist 24–26 on Sonnet `high` extractions. No headroom (RUNBOOK §3.5). It belongs to the second document, or to a measure that discriminates above the ceiling.
+- **Opus `high` extraction:** the same depth as Sonnet `high` without judging, and the planner under Y is already at 19/19 and checklist 23–26 on Sonnet `high` extractions. No headroom (RUNBOOK §3.5). It belongs to the second document, or to a measure that discriminates above the ceiling.
 - **Opus `medium` extraction:** shallower than Sonnet `high` beyond the spread, at a higher price per token. It is dominated.
 - **Sonnet above `high` for extraction:** there is no hypothesis about what it would improve (RUNBOOK §3.4), and the same ceiling applies.
 - **Haiku `high` as a configuration:** K1 is a probe of one extraction, a screen. Haiku's extraction token use is not lower than Sonnet `high`'s.
