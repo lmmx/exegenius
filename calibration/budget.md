@@ -30,7 +30,7 @@
 | 2026-10-14 ~09:15 | 4% | 4% (author checked the meter) | yes |
 | 2026-10-14 ~14:20 | 20% | ~0%: the window had reset | **no**. The prediction ignored the reset |
 
-**Measured since the 14:20 reset, with no reading yet** (`spend.py --since 2026-10-14T14:20`, 16:05 UTC). These are counts, not a reading:
+**Measured since the 14:20 reset, with no reading yet** (`spend.py --since 2026-10-14T14:20`, 15:51 UTC). These are counts, not a reading:
 
 | | Cache read | Cache write |
 |---|---|---|
@@ -177,7 +177,7 @@ Their tokens are inside the run totals above.
 - **Judging dominates a small screen's cost.** Evidence: in S3, judging was 85% of the cache read (20 judgements against 4 runs). Three judges per plan is what E7 showed the gate needs, so the lever is the number of plans per batch, not judges per plan.
 - **Effort above `high` can silently waste a run's main call.** Evidence: S2F1SX's planning call stopped at the 128,000-token output limit after 14.5 minutes, and its thinking was not carried forward (`docs/journal/2026-10-14-sonnet-xhigh-and-rubric.md`). The submit still succeeded. The tokens were spent and counted, and what they bought was lost. The registry now records `max_tokens_stops`, so such a run can be found before it is interpreted.
 - **Choose a screen's input where the current default is weakest.** Evidence: S2 screened on F1, where the reference was already at 17 of 19 faithful in J8. Three of four configurations then hit the ceiling, so the screen could rank nothing above them, Fable included.
-- **Orchestration is not free: the development session's context is re-read on every call.** Evidence: `spend.py` (with the session's own transcript, 16:05 UTC).
+- **Orchestration is not free: the development session's context is re-read on every call.** Evidence: `spend.py` (with the session's own transcript, 15:51 UTC).
   - Over the day it read 708 M from cache, against 840 M for all subagents together.
   - Before the last compaction a single call re-read 600–670 k tokens, about what one checklist judgement reads in all. After compaction it fell to about 200 k.
   - **The levers:**

@@ -71,7 +71,7 @@
 - **Concurrency is recorded in each ledger,** so a meter interval can be read as joint.
 - **At most 20 subagents run at once** in this environment (`CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS`; hit at 14:50 on 2026-10-14). Batches beyond that are launched as slots free, and the ledger records the launch times.
 
-## 6. Decision tree and queue (2026-10-14, updated 15:55 UTC)
+## 6. Decision tree and queue (2026-10-14, updated 15:47 UTC)
 
 | # | Item | Question | Trigger | Cost estimate (cache read) | Status |
 |---|---|---|---|---|---|
@@ -80,7 +80,7 @@
 | 3 | **K2** (`plans/K2.md`) | do Sonnet judges agree with Opus judges on the checklist, with no same-model bias? | now; existing plans | ~5–7 M | **done** 14:31: agreement 0.979, ρ 0.995, bias +0.43 (not flagged). Checklist screens may use a Sonnet second judge |
 | 4 | **E8** (`plans/E8.md`) | does a sentence asking for every variant and every bound's chain lift Sonnet `high` towards Opus `xhigh`? | now; two-stage | ~17 M (stage 1); +~60 M (stage 2, if the screen passes) | **supported** 15:08: faithful X 18, 18, 19 against W 14, 3, 4, with no added major errors. X is not below Opus `xhigh` on the checklist anywhere, and on F8 it is at the ceiling. **Proposal to the author:** the sentence as an instruction change |
 | 4b | **E8b** (`plans/E8b.md`) | does the sentence hold on F2, F3, F5, F6 and F7, and how much does X vary between runs? | E8 supported; launched 15:11 | ~34 M runs + ~21 M screen; ~115 M primary after the reset | **stage 1 passed** 15:39: X above W beyond noise on F2, F3, F5 and F7; F6 tied at a high W level. Repeat within noise on the checklist (23, 21 vs 22, 21). Runs 27.3 M, J17 23.8 M. **Stage 2 (J18) waits** for a meter reading or the 18:30 reset (§5 threshold passed) |
-| 4c | **E9** (`plans/E9.md`) | does a sentence asking for parameter definitions and every case close C1, the only central item Sonnet plans still miss? | E8b stage 1 passed; launches with J18 | ~82–95 M (3 runs, 12 judgements in J18, J20 checklist) | prepared 15:55: branch `141026-exp-params-cases` (e8efaa3), binary `exegenius-params`, projects E9F2Y, E9F4Y, E9F8Y rendered and diffed. **Not launched** |
+| 4c | **E9** (`plans/E9.md`) | does a sentence asking for parameter definitions and every case close C1, the only central item Sonnet plans still miss? | E8b stage 1 passed; launches with J18 | ~82–95 M (3 runs, 12 judgements in J18, J20 checklist) | prepared 15:47: branch `141026-exp-params-cases` (e8efaa3), binary `exegenius-params`, projects E9F2Y, E9F4Y, E9F8Y rendered and diffed. **Not launched** |
 | 5 | **FB1 pilot** (`plans/FB1.md`, "The pilot") | does Fable at `high` beat the incumbent on F8? | S4 outcome "improves but not ceiling" (against Opus `max`), or "does not improve" (against Opus `xhigh`). Not if S4 reaches the ceiling | run unknown (placeholder 6–16 M) + ~30 M judging | **done** 15:21. Run 3.96 M; checklist screen ~2.5 M. Fable 17, 16 against Opus `max` 20, 21: below. No primary judging; no further Fable spend |
 | 6 | Markers tightened (L2, P2, P3, S4) | the judge-free cross-check | now; free | 0 | **done** 14:31: fitted agreement 0.836 → 0.905 on K1 plans (optimistic, since these were used to tighten); J8 hold-out AUC 0.774 → 0.794 |
 | 7 | **Second document** | do the model and instruction effects generalise? | **needs the author to supply a document** (§2) | onboarding: reference set, central rubric and checklist, about 20–40 M of analysis; then a screen | blocked |
