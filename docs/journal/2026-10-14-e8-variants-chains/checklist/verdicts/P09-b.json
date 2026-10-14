@@ -1,0 +1,310 @@
+{
+  "plan": "P09",
+  "steps": [
+    {
+      "id": "B1",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.1.1"
+      ],
+      "lines": [
+        744,
+        750
+      ],
+      "note": "S1.3.1.1 says rows 0-1 subtract Ja+Rc, rows 2-5 add R(c+Gx)+J(a+Vx), rows 6-7 restore a,c, so the target changes by (JV+RG)x whatever a,c are, matching the paper."
+    },
+    {
+      "id": "B2",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.1.2"
+      ],
+      "lines": [
+        752,
+        755
+      ],
+      "note": "S1.3.1.2 gives central coefficient |S\u2229T| mod 2, side wires cancelling exactly the intersection-one cases, zero for intersections 0 or 2, and self coefficient one."
+    },
+    {
+      "id": "B3",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.1.3"
+      ],
+      "lines": [
+        756,
+        758
+      ],
+      "note": "S1.3.1.3 gives central coefficient (|S\u2229T|-1)/2, side wires cancelling distinct triples meeting in 0 or 2 points, and self coefficient (3-1)/2=1."
+    },
+    {
+      "id": "B4",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.1.4"
+      ],
+      "lines": [
+        761,
+        764
+      ],
+      "note": "S1.3.1.4 states the three stages (x,y)->(x,y+x)->(-y,y+x)->(-y,x) from the inverse schedule X<-X-Y and that each invocation restores its own auxiliary wires."
+    },
+    {
+      "id": "L1",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1013,
+        1060
+      ],
+      "note": "The plan states that every edge joins comparable labels (S1.3.3, S1.3.3.4) but never gives the per-edge orthogonal residuals or their dimensions (no residual table, no B/P/F tensor splitting); S1.3.3.6 only defines a residual."
+    },
+    {
+      "id": "L2",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1048,
+        1058
+      ],
+      "note": "S1.3.3.3 gives <t_X> inside t_Y^perp because t_X is orthogonal to t_Y, but not the complement <t_X,t_Y>^perp of dimension h-2 (the h-2 appears nowhere in the plan), and it is stated for a generic side wire (quote from line 953), not as the 2->5 residual."
+    },
+    {
+      "id": "L3",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.3.2",
+        "S1.3.3.4",
+        "S1.3.3.5"
+      ],
+      "lines": [
+        1061,
+        1071
+      ],
+      "note": "S1.3.3.4 gives center 3->4 as the only decreasing edge losing h; S1.3.3.2 gives source sum N and sink sum Wm-N; S1.3.3.5 telescopes to signed Wm-2N and adds 2L for absolute changes."
+    },
+    {
+      "id": "L4",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.3.6"
+      ],
+      "lines": [
+        1073,
+        1102
+      ],
+      "note": "S1.3.3.6 states that over F_2 every nonzero residual has a norm-one vector, hence is nondegenerate and nonalternating, hence has an orthonormal basis; the plan does not spell out the absorption of alternating planes, but the claim and its reason are stated."
+    },
+    {
+      "id": "L5",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.3.7"
+      ],
+      "lines": [
+        1105,
+        1109
+      ],
+      "note": "S1.3.3.7 states L_b/N=100/539 and L_c/N=101/539, both below 1/2."
+    },
+    {
+      "id": "P1",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.5.1"
+      ],
+      "lines": [
+        1232,
+        1245
+      ],
+      "note": "S1.3.5.1 gives wt(z+w)=wt(z)+wt(w)-2|supp\u2229supp|, additivity mod 4 for z.w=0, and q_V-q_U as a sum of wt(v)[v.x] over an orthonormal basis of the residual."
+    },
+    {
+      "id": "P2",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.5.2"
+      ],
+      "lines": [
+        1246,
+        1257
+      ],
+      "note": "S1.3.5.2 says each basis vector has odd weight, the phase is i^{\u00b1[v.x]} expanded as (1+i^\u00b1)/2+(1-i^\u00b1)/2 (-1)^{v.x}, and H diag(1,-1) H = X gives aI+bX_v or its inverse."
+    },
+    {
+      "id": "P3",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1262,
+        1271
+      ],
+      "note": "The plan never mentions k columns or tensoring the edge operator over columns; it gives one kernel per residual basis vector and the total s_c (S1.3.5, S1.3.5.3) but not the per-column tensored-factor statement."
+    },
+    {
+      "id": "P4",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1273,
+        1314
+      ],
+      "note": "The plan does not state the endpoint frames (zero label I, full label C^{\u2297m}) or that X_a->Y_a carries C^{-1} on the 27 coordinates of supp(u_a); S1.5.1.5 only names 'source and sink Z signs, the scalar i^{27f} and negation of the X bank' and S1.5.1.3 gives (C^{-1})^{\u2297f}=(-i)^f Z C Z without the endpoint derivation."
+    },
+    {
+      "id": "R1",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.3.7",
+        "S1.3.4.3",
+        "S1.3.5.3"
+      ],
+      "lines": [
+        1105,
+        1110
+      ],
+      "note": "The plan gives L/N<1/2 (S1.3.3, S1.3.3.7), the deficit N-2L_b>0 with s_b<W_b m (S1.3.4.3), and the deficit 2N-2L_c>0 for the complex count (S1.3.5.3)."
+    },
+    {
+      "id": "R2",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.6"
+      ],
+      "lines": [
+        1319,
+        1322
+      ],
+      "note": "S1.3.6 states 1-s_b/(W_b m)=339/22587335000000."
+    },
+    {
+      "id": "R3",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.6"
+      ],
+      "lines": [
+        1323,
+        1324
+      ],
+      "note": "S1.3.6 states 1-s_c/(W_c m)=73/19906842167500."
+    },
+    {
+      "id": "R4",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.6"
+      ],
+      "lines": [
+        1331,
+        1343
+      ],
+      "note": "S1.3.6 states both deficits exceed 20\u00b72^-50, log m<20 from m<2^20, so m^{1-2^-50}>m(1-20\u00b72^-50), hence s_b/W_b<m^tau and s_c/W_c<m^sigma with tau=sigma=1-2^-50 (the intermediate '>m(1-eta)' step is implicit)."
+    },
+    {
+      "id": "M1",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.7.1"
+      ],
+      "lines": [
+        1375,
+        1391
+      ],
+      "note": "S1.3.7.1 describes elimination from the topmost nonzero row with its rightmost pivot using only lower-triangular operations, one rank-one block per step, giving A=E1 Pi E2 with exactly a ones in Pi."
+    },
+    {
+      "id": "M2",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1413,
+        1423
+      ],
+      "note": "S1.3.7 only says in its claim that q is a fixed odd prime avoiding all denominators; the plan does not state the finite table of factors or that the identities specialize to Z/q^b with the triangular factors staying invertible, so I treat it as named without its content."
+    },
+    {
+      "id": "M3",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.7.2"
+      ],
+      "lines": [
+        1425,
+        1430
+      ],
+      "note": "S1.3.7.2 says a lower-triangular transformation of H or D costs O(V) by updating coordinates in descending physical order, each by a unit multiple plus a fixed combination of earlier unchanged coordinates."
+    },
+    {
+      "id": "M4",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.3.7.3"
+      ],
+      "lines": [
+        1432,
+        1443
+      ],
+      "note": "S1.3.7.3 realizes each one of Pi as D_j<-D_j+H_i, an interchange of (H_i,D_j), and D_j<-H_i-D_j, one interchange per one, exactly a in all."
+    },
+    {
+      "id": "S1",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        2457,
+        2477
+      ],
+      "note": "S1.5.4 and S1.5.4.1 give E=64(W+m+1)^3, B=s+E and m^10<B<m^11, and Delta=ceil(C_0 d^20), but never define nu, C_1=max{20,nu+3} or C_0=128mB^2, so the constants are incomplete."
+    },
+    {
+      "id": "S2",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.5.4",
+        "S1.5.4.1"
+      ],
+      "lines": [
+        2479,
+        2518
+      ],
+      "note": "S1.5.4 gives A(e)<=sA(e/m)+E through the recursion and S1.5.4.1 gives at most E=64(W+m+1)^3 operations added per invocation and leaves at most 8e; the plan does not derive the count below E but states the recurrence and its terms."
+    },
+    {
+      "id": "S3",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        2523,
+        2560
+      ],
+      "note": "S1.5.4.1 states the result A<=8B^2 d^12 but not the unrolling B^{k+1}<=B^2 d^nu (from k<=ceil(log_m d), B<=m^nu), nor that the total stays below C_0 d^{C_1}."
+    },
+    {
+      "id": "S4",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.5.4.2",
+        "S1.5.4.3"
+      ],
+      "lines": [
+        2562,
+        2586
+      ],
+      "note": "S1.5.4.2 gives depth-l values in 2^-(p+l)Z[i] with modulus at most 2^l and p+Delta fractional / Delta+3 integer bits being exact; S1.5.4.3 gives 20 eps<1 (eps C_1<1 with C_1=20) so Delta=o(p)."
+    },
+    {
+      "id": "S5",
+      "verdict": "present",
+      "plan_steps": [
+        "S1.5.5"
+      ],
+      "lines": [
+        2751,
+        2757
+      ],
+      "note": "S1.5.5 states every row of H has absolute row sum one, so disk arrays map to disk arrays and the final truncation keeps the disk with error below sqrt2 2^-p."
+    }
+  ],
+  "summary": "19 of 26 present. Present: B1-B4, L3-L5, P1-P2, R1-R4, M1, M3, M4, S2, S4, S5. Absent: L1 (no residual table), L2 (no h-2 complement), P3 (no k-column tensoring), P4 (no endpoint frames or 27-coordinate repair), M2 (prime named without finite table or specialization), S1 (C_0, nu, C_1 definitions missing), S3 (no unrolling). No step judged wrong."
+}
