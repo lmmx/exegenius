@@ -1,0 +1,341 @@
+{
+  "plan": "P05",
+  "steps": [
+    {
+      "id": "B1",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.1.3",
+        "S2.1.4"
+      ],
+      "lines": [
+        744,
+        750
+      ],
+      "note": "S2.1.4 states the net target change (JV+RG)x for any initial scratch vectors, with rows 0-1 subtracting Ja+Rc and rows 4-5 adding back J(a+Vx)+R(c+Gx); S2.1.3 has the final rows undoing gather and copy to restore scratch."
+    },
+    {
+      "id": "B2",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.1.5"
+      ],
+      "lines": [
+        752,
+        755
+      ],
+      "note": "S2.1.5 gives central coefficient |S\u2229T| mod 2, side injection cancelling exactly the intersection-one cases, zero coefficient for intersections zero/two, self coefficient one, net y<-y+x."
+    },
+    {
+      "id": "B3",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.1.6"
+      ],
+      "lines": [
+        756,
+        758
+      ],
+      "note": "S2.1.6 gives central coefficient (|S\u2229T|-1)/2, side injection cancelling intersections zero and two, intersection one contributing zero, self coefficient one."
+    },
+    {
+      "id": "B4",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.1.7",
+        "S2.1",
+        "S2.1.3"
+      ],
+      "lines": [
+        761,
+        764
+      ],
+      "note": "S2.1.7 states the three stages (x,y)->(x,y+x)->(-y,y+x)->(-y,x); restoration of scratch per invocation is stated in the S2.1 claim and S2.1.3 (undo copy, restoring scratch) rather than inside S2.1.7 itself."
+    },
+    {
+      "id": "L1",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.3.3",
+        "S2.3.3.2",
+        "S2.3.3.3"
+      ],
+      "lines": [
+        1013,
+        1060
+      ],
+      "note": "S2.3.3.3 lists the residual dimension of every edge (X, Y, centre, side, scratch rows) matching the paper table, S2.3.3 claims all edge labels nested and nondegenerate, and the quote at line 1033 is a row of the table."
+    },
+    {
+      "id": "L2",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.3.3.3",
+        "S2.3.1"
+      ],
+      "lines": [
+        1048,
+        1058
+      ],
+      "note": "S2.3.3.3 gives side edge 2->5 residual dimension h-2 'using <t_X> in t_Y^perp for neighbours' and S2.3.1 has neighbouring triple lines orthogonal; the complement <t_X,t_Y>^perp is not named but its dimension h-2 is stated."
+    },
+    {
+      "id": "L3",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.3.3",
+        "S2.3.3.4",
+        "S2.3.3.5",
+        "S2.3.2"
+      ],
+      "lines": [
+        1061,
+        1071
+      ],
+      "note": "S2.3.3.4 says only centre 3->4 decreases, S2.3.3.5 gives telescoping, signed Wm-2N, L=Ich with loss h and absolute Wm-2N+2L, and S2.3.2 gives sources N and sinks Wm-N."
+    },
+    {
+      "id": "L4",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.3.3.6",
+        "S2.3.3"
+      ],
+      "lines": [
+        1073,
+        1102
+      ],
+      "note": "S2.3.3.6 shows every nonzero binary residual is nonalternating via a norm-one coordinate vector outside earlier supports and concludes an orthonormal basis (quoting line 1087); the plan does not spell out the absorption of alternating planes, only the conclusion."
+    },
+    {
+      "id": "L5",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.3.4"
+      ],
+      "lines": [
+        1105,
+        1109
+      ],
+      "note": "S2.3.4 states L_b/N=100/539 and L_c/N=101/539."
+    },
+    {
+      "id": "P1",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.4.1"
+      ],
+      "lines": [
+        1232,
+        1245
+      ],
+      "note": "S2.4.1 states weight is additive mod 4 for orthogonal binary vectors and q_V-q_U = sum over an orthonormal basis of wt(v)[v.x] mod 4."
+    },
+    {
+      "id": "P2",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.4.2",
+        "S2.4.3"
+      ],
+      "lines": [
+        1246,
+        1257
+      ],
+      "note": "S2.4.2 gives wt(v) odd so coefficient eps in {1,-1}; S2.4.3 gives the phase i^{eps[v.x]} as (1+i^eps)/2+(1-i^eps)/2 (-1)^{v.x} and, via H diag(1,-1) H = X, the kernel aI+bX_v or its inverse."
+    },
+    {
+      "id": "P3",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1262,
+        1271
+      ],
+      "note": "The plan never states that on k columns each residual vector contributes one factor K^{(x)k} with s_c factors in all (the (C_V C_U^-1)^{(x)k} = prod K^{(x)k} step); S2.4.7 mentions C^{(x)mk} on k columns only as the end result, and S2.9.1.4/S2.9.1.7 describe the later butterfly use after a basis change, so I chose absent."
+    },
+    {
+      "id": "P4",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.4.5",
+        "S2.4.6",
+        "S2.4.7"
+      ],
+      "lines": [
+        1273,
+        1314
+      ],
+      "note": "S2.4.5-S2.4.7 give C^{-1} on the 27 coordinates of supp(u), C=iZC^{-1}Z, Z before at X_a and i^{27k}Z after at Y_a, and negated X outputs; the explicit 'zero label frame I, full label C^{(x)m}' clause is not stated, only the resulting 'C elsewhere' and C^{(x)m} on every role."
+    },
+    {
+      "id": "R1",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.3.4",
+        "S2.3.5.4",
+        "S2.4.4"
+      ],
+      "lines": [
+        1105,
+        1110
+      ],
+      "note": "S2.3.4 says both loss ratios are below 1/2 and S2.3.5.4 / S2.4.4 give the deficits N-2L_b>0 and 2N-2L_c>0 (so s<Wm)."
+    },
+    {
+      "id": "R2",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.5.1"
+      ],
+      "lines": [
+        1319,
+        1322
+      ],
+      "note": "S2.5.1 states eta_b = 339/22587335000000."
+    },
+    {
+      "id": "R3",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.5.1"
+      ],
+      "lines": [
+        1323,
+        1324
+      ],
+      "note": "S2.5.1 states eta_c = 73/19906842167500."
+    },
+    {
+      "id": "R4",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.5.2",
+        "S2.5.3",
+        "S2.5.4",
+        "S2.5.5"
+      ],
+      "lines": [
+        1331,
+        1343
+      ],
+      "note": "S2.5.2-S2.5.5 give both deficits > 20*2^-50, log m<20, m^{1-2^-50}>m(1-20*2^-50)>m(1-eta), and s/W<m^tau, tau=sigma=1-2^-50."
+    },
+    {
+      "id": "M1",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.6.1",
+        "S2.6.2"
+      ],
+      "lines": [
+        1375,
+        1391
+      ],
+      "note": "S2.6.2 gives the elimination proof (topmost nonzero row, rightmost entry as pivot, clearing left by right and below by left lower-triangular elementary matrices, scale, delete and repeat) and S2.6.1 says Pi has exactly a ones."
+    },
+    {
+      "id": "M2",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.6.3"
+      ],
+      "lines": [
+        1413,
+        1423
+      ],
+      "note": "S2.6.3 states a fixed odd prime avoiding all denominators and diagonal numerators is chosen once so the lower triangular factors stay usable mod q^b; the 'finite table' and explicit specialization remark are only implicit in 'chosen once'."
+    },
+    {
+      "id": "M3",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.6.3"
+      ],
+      "lines": [
+        1425,
+        1430
+      ],
+      "note": "S2.6.3 states a lower triangular transformation costs O(V), updating coordinates in descending physical order by a unit multiple plus a combination of earlier coordinates."
+    },
+    {
+      "id": "M4",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.6.5",
+        "S2.6.6"
+      ],
+      "lines": [
+        1432,
+        1443
+      ],
+      "note": "S2.6.5 gives D_j<-D_j+H_i, interchange, D_j<-H_i-D_j per one of Pi and S2.6.6 gives one interchange each, a in all."
+    },
+    {
+      "id": "S1",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.9.5.1",
+        "S2.9.5.2",
+        "S2.9.5"
+      ],
+      "lines": [
+        2457,
+        2477
+      ],
+      "note": "S2.9.5.1 states E=64(W+m+1)^3, B=s+E, nu, C_1=max{20,nu+3}, C_0=128mB^2, Delta=ceil(C_0 d^{C_1}) and S2.9.5.2 gives nu=11, C_1=20."
+    },
+    {
+      "id": "S2",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.9.5.3"
+      ],
+      "lines": [
+        2479,
+        2518
+      ],
+      "note": "S2.9.5.3 states A(e)<=sA(e/m)+E at an internal node and A(e)<=8e at a leaf, with the per-invocation operations below E."
+    },
+    {
+      "id": "S3",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.9.5.4",
+        "S2.9.5.5",
+        "S2.9.5.6"
+      ],
+      "lines": [
+        2523,
+        2560
+      ],
+      "note": "S2.9.5.4-S2.9.5.6 give sx+E<=Bx, B^{k+1}<=B^2 d^nu, A(e)<=8B^2 d^{nu+1}, and the total below 128mB^2 d^{nu+3}<=C_0 d^{C_1}."
+    },
+    {
+      "id": "S4",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.9.5.7",
+        "S2.9.5.8"
+      ],
+      "lines": [
+        2562,
+        2586
+      ],
+      "note": "S2.9.5.7 states depth-l values lie in 2^{-(p+l)}Z[i] with modulus <=2^l and p+Delta fractional / Delta+3 integer bits are exact; S2.9.5.8 gives eps*C_1<1 implying Delta=o(p)."
+    },
+    {
+      "id": "S5",
+      "verdict": "present",
+      "plan_steps": [
+        "S2.9.6"
+      ],
+      "lines": [
+        2751,
+        2757
+      ],
+      "note": "S2.9.6 states every row of H has absolute row sum one, so outputs stay in the unit disk, and truncation toward zero gives error less than sqrt2*2^-p."
+    }
+  ],
+  "summary": "25 of 26 sub-steps present, 1 absent (P3), 0 wrong. The plan carries the bank-exchange, residual-budget, rank-saving, matrix-shear and guard-width derivations in detail; the one gap is the k-column tensoring of each edge frame (one factor per residual vector, s_c in all). Mild leniency calls: L4 (orthonormal basis stated without the absorption of alternating planes), P4 (zero/full label frames not stated explicitly) and M2 (finite table implicit)."
+}
