@@ -1,0 +1,125 @@
+{
+ "id": "E6",
+ "title": "Confirming the key-step instruction on fresh extractions, paired",
+ "kind": "controlled",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task, on eight fresh extractions and backgrounds (shared within each pair)",
+ "question": "Does the key-step instruction deepen Sonnet-high plans of the central saving on fresh extractions, and at what rate of major errors?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "af36d6d"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-e6-key-step-confirm",
+  "commit": "834fb5a",
+  "transcripts": "results/transcripts/e6",
+  "description_prefix": "E6",
+  "planning_kinds": [
+   "argument"
+  ]
+ },
+ "protocol": "run from the development session; E6.md on the evidence branch",
+ "preregistration": "calibration/plans/E6.md (f07da93)",
+ "journal": "docs/journal/2026-10-14-e6-key-step-confirm.md",
+ "pairs": [
+  [
+   "E6F1B",
+   "E6F1V"
+  ],
+  [
+   "E6F2B",
+   "E6F2V"
+  ],
+  [
+   "E6F3B",
+   "E6F3V"
+  ],
+  [
+   "E6F4B",
+   "E6F4V"
+  ],
+  [
+   "E6F5B",
+   "E6F5V"
+  ],
+  [
+   "E6F6B",
+   "E6F6V"
+  ],
+  [
+   "E6F7B",
+   "E6F7V"
+  ],
+  [
+   "E6F8B",
+   "E6F8V"
+  ]
+ ],
+ "arms": {
+  "B": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "baseline argument instructions"
+   },
+   "runs": [
+    "E6F1B",
+    "E6F2B",
+    "E6F3B",
+    "E6F4B",
+    "E6F5B",
+    "E6F6B",
+    "E6F7B",
+    "E6F8B"
+   ]
+  },
+  "V": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "argument instructions plus the key-step paragraph",
+    "binary": "0c29556 (131026-exp-key-step)"
+   },
+   "runs": [
+    "E6F1V",
+    "E6F2V",
+    "E6F3V",
+    "E6F4V",
+    "E6F5V",
+    "E6F6V",
+    "E6F7V",
+    "E6F8V"
+   ]
+  }
+ },
+ "reported": {},
+ "deviations": [
+  {
+   "kind": "operational",
+   "what": "ten of sixteen first argument attempts (F1V, F2V, F3V, F4V, F5B, F5V, F7B, F7V, F8B, F8V) were killed by the account's usage limit (HTTP 429) before submitting and retried after the reset with the same prompt and parameters; before each retry the task's scratch directory and answer file were moved aside (results/e6-killed-attempts), so no retry saw a killed draft"
+  },
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus, high) with this session's permissions; it only passed prompts and ran exegenius next and status"
+  },
+  {
+   "kind": "measurement",
+   "what": "planning_seconds spans the argument task's issue to its acceptance, so for retried runs it includes about four hours' wait for the usage limit to reset; use the subagent's seconds"
+  }
+ ],
+ "limitations": [
+  "One paper; the argument task only, on extractions shared within each pair.",
+  "Judged in one batch (J7) with an unreviewed reference."
+ ]
+}
