@@ -1,0 +1,91 @@
+You are comparing two plans of a paper's argument, Plan A and Plan B. You are not told how either was made. Decide which of the two reconstructs the paper's argument more faithfully and more completely, item by item and overall. You are not judging style, length, formatting, or where the plans' quotes come from. A tie is a legitimate answer, for any item and overall: you are not required to find a winner.
+
+**Files** (read them; do not modify anything except your verdict file):
+- the reference pack: `/home/user/exegenius/docs/journal/2026-10-14-k3-pairwise-design/pack.md`. It holds the 26 results the paper's main theorem depends on, each under a heading `## <id> (<tier>): <name>`, with a draft statement (unreviewed: a guide, not an authority), its role, the paper's own text where the result is stated, and the line ranges where it is derived;
+- the mechanism checklist: `/home/user/exegenius/calibration/rubrics/nlogn-mechanism-checklist.md`. For six of those results, the ones on which plans have differed most (`bank-exchange-network`, `label-residual-budget`, `complex-phase-interface`, `rank-saving`, `matrix-shear`, `simultaneous-layer`), it lists the sub-steps of the paper's derivation (B1–B4, L1–L5, P1–P4, R1–R4, M1–M4, S1–S5), each with its defining content and paper lines;
+- the paper: `/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/paper.tex` (LaTeX, 5,361 lines). The paper is the authority. Read the lines you need with the Read tool's offset and limit;
+- Plan A: `/home/user/exegenius/docs/journal/2026-10-14-k3-pairwise-design/pairs/Q11-A.md`;
+- Plan B: `/home/user/exegenius/docs/journal/2026-10-14-k3-pairwise-design/pairs/Q11-B.md`.
+
+Each plan is a tree of steps: show steps with a method, infer steps with a quote and its line in the paper. Step ids belong to each plan separately, so the same id can occur in both. Read both plans in full before giving any verdict; for a long file, read it in parts with offset and limit.
+
+**The labels A and B, and the order in which the two plans are given, were assigned at random and carry no information.**
+
+## 1. Each item of the pack, in the pack's order
+
+Find the steps of each plan that concern the item. Where the plans differ, check the paper's derivation lines before deciding; where both carry the same content in the same role, a brief check is enough.
+
+**What counts, in order of weight:**
+1. **Correctness.** A statement, method or quoted support that contradicts the paper (a wrong quantity, condition, direction or case, or a route the paper does not take or that does not work) counts against its plan, and more than an omission of the same scope.
+2. **The essential steps of the paper's derivation,** each with its defining content (the key formula, inequality, quantity, condition or construction) and in the role the paper gives it.
+3. **Completeness within the derivation:** every case the paper treats (for example the bit and the complex variants), the constants and their values, the conditions under which a step holds, and what each step relies on.
+
+**What does not count:**
+- length, the number of steps, restatement or repetition;
+- wording, formatting, and notation that differs from the paper's but means the same;
+- which lines are quoted, when the quote supports the step;
+- material beyond the paper's derivation, unless it is wrong (then it counts against, under 1).
+
+A longer plan is not better for being longer. Credit only what a plan says, not what a nearby step would allow or what a reader could infer.
+
+**For the six results in the checklist,** compare sub-step by sub-step. For each sub-step, decide whether each plan states its defining content (in a claim, a method, or a quote used as that step's support, in the role the paper gives it). The plan with more sub-steps present, none wrong, is preferred on that item. Name every sub-step on which the plans differ.
+
+**Record for each item:**
+- `preference`: `A`, `B` or `tie`. Choose `tie` when neither plan carries anything of substance on this item that the other lacks, or when the differences point both ways and you cannot say which weighs more. A preference must rest on at least one concrete difference that you can name and locate in both plans and in the paper: never break a tie by impression.
+- `strength`:
+  - `slight`: one minor difference, such as a constant, one case or one condition;
+  - `clear`: an essential step, several sub-steps, or a statement that contradicts the paper;
+  - `n/a` for a tie.
+- `differences`: each concrete difference behind the preference (empty for a tie, unless you want to record differences that balance out). For each: which plan it favours, what it is, the checklist sub-step id if one applies (otherwise `null`), the steps of each plan involved (empty for the plan that lacks it), and the paper lines you checked.
+- `note`: one or two sentences saying why.
+
+## 2. The chain
+
+Compare how each plan's tree reaches the main theorem by the paper's route, and in particular how it accounts for the central saving: the fixed network whose edge changes have total rank $s<Wm$, which becomes the power saving with exponent $\tau<1$, and then the bound on integer multiplication. Prefer the plan whose chain is more complete and more faithful: the dependencies between its steps follow the paper's, and it does not thin out or break where the other does not. Record `preference`, `strength` and `note`, as for an item.
+
+## 3. Errors
+
+List every step, in either plan, whose claim, method or quoted support misstates the paper, whether or not it concerns a reference item. For each, give the plan (`A` or `B`), the step, what it says, what the paper says (with lines), and `severity`:
+- `major`: it would mislead a reader about the argument;
+- `minor`: otherwise.
+
+## 4. Overall
+
+Decide which plan reconstructs the paper's argument more faithfully and completely. Weigh your item verdicts, the chain and the errors; do not count items:
+1. a major error outweighs omissions elsewhere;
+2. then the central chain and the core items: an essential step of the paper's derivation that one plan carries and the other lacks;
+3. then completeness within derivations (sub-steps, cases, constants, conditions);
+4. supporting items count least.
+
+One clear difference on an essential step can outweigh several slight preferences the other way. Choose `tie` when the differences you found are slight and point both ways, or when you cannot say which set weighs more. Give `strength` (`slight`, `clear`, or `n/a` for a tie) and a `reason` of two to four sentences naming the decisive differences.
+
+## Ground every verdict in the paper and in the plans' text
+
+- Check the paper's lines before you decide on any difference.
+- Do not give credit for what a plan does not say. Do not penalise a faithful paraphrase.
+- When unsure whether a difference is real, say so in the note and choose `tie`.
+
+## The verdict
+
+Write your verdict as one JSON object to `/home/user/exegenius/docs/journal/2026-10-14-k3-pairwise-design/verdicts/Q11.json`, with this shape:
+
+```json
+{
+  "pair": "Q11",
+  "items": [
+    {"id": "bank-exchange-network", "preference": "A|B|tie", "strength": "slight|clear|n/a",
+     "differences": [
+       {"favours": "A|B", "what": "...", "substep": "B2", "steps_a": ["S2.1"], "steps_b": [],
+        "lines": [752, 755]}
+     ],
+     "note": "..."}
+  ],
+  "chain": {"preference": "A|B|tie", "strength": "slight|clear|n/a", "note": "..."},
+  "errors": [
+    {"plan": "A|B", "step": "S3", "says": "...", "paper": "...", "lines": [1475], "severity": "major|minor"}
+  ],
+  "overall": {"preference": "A|B|tie", "strength": "slight|clear|n/a", "reason": "..."}
+}
+```
+
+Include every item of the pack, in the pack's order (26 items). Then check that the file is valid JSON (for example with `python3 -m json.tool /home/user/exegenius/docs/journal/2026-10-14-k3-pairwise-design/verdicts/Q11.json`), and reply with only the pair id, the overall preference and its strength, and the numbers of items preferring A, preferring B, and tied.

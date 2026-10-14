@@ -1,0 +1,94 @@
+{
+ "seed": 20261040,
+ "orders": "both",
+ "pairs": {
+  "Q01": {
+   "A": "E7F2W",
+   "B": "E8F2X",
+   "judges": 2
+  },
+  "Q02": {
+   "A": "E9F2Y",
+   "B": "E9F2Y-L5",
+   "judges": 2
+  },
+  "Q03": {
+   "A": "E8F2X",
+   "B": "E9F2Y",
+   "judges": 2
+  },
+  "Q04": {
+   "A": "E8F8X",
+   "B": "E7F8W",
+   "judges": 1
+  },
+  "Q05": {
+   "A": "E7F8W",
+   "B": "E8F8X",
+   "judges": 1
+  },
+  "Q06": {
+   "A": "E7F4W",
+   "B": "E8F4X",
+   "judges": 1
+  },
+  "Q07": {
+   "A": "E9F2Y-L5",
+   "B": "E9F2Y",
+   "judges": 2
+  },
+  "Q08": {
+   "A": "E9F2Y",
+   "B": "E8F2X",
+   "judges": 2
+  },
+  "Q09": {
+   "A": "E8F2X",
+   "B": "E7F2W",
+   "judges": 2
+  },
+  "Q10": {
+   "A": "E9F2Y",
+   "B": "E9F2Y",
+   "judges": 2
+  },
+  "Q11": {
+   "A": "E8F4X",
+   "B": "E7F4W",
+   "judges": 1
+  },
+  "Q12": {
+   "A": "E8F2X",
+   "B": "E8F2X",
+   "judges": 2
+  }
+ },
+ "plans": {
+  "E7F4W": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/F4W/exegenius/argument.json",
+  "E8F4X": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E8F4X/exegenius/argument.json",
+  "E7F8W": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/F8W/exegenius/argument.json",
+  "E8F8X": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E8F8X/exegenius/argument.json",
+  "E7F2W": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/F2W/exegenius/argument.json",
+  "E8F2X": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E8F2X/exegenius/argument.json",
+  "E9F2Y": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E9F2Y/exegenius/argument.json",
+  "E9F2Y-L5": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E9F2Y/exegenius/argument.json"
+ },
+ "derived": {
+  "E9F2Y-L5": {
+   "base": "E9F2Y",
+   "dropped": [
+    "S1.5.6"
+   ]
+  }
+ },
+ "rendered_bytes": {
+  "E7F4W": 46127,
+  "E8F4X": 110882,
+  "E7F8W": 55544,
+  "E8F8X": 279900,
+  "E7F2W": 69886,
+  "E8F2X": 96658,
+  "E9F2Y": 95528,
+  "E9F2Y-L5": 95332
+ }
+}

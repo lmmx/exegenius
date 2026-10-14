@@ -309,6 +309,32 @@ def name_of(v, label):
     return None if label == "tie" else v[label]
 
 
+def outcome(n1, n2):
+    """Two verdicts mapped to plan names (None for a tie): agree, partial (one tie) or reversal."""
+    return "agree" if n1 == n2 else ("partial" if None in (n1, n2) else "reversal")
+
+
+def compare_couples(couples):
+    """Outcome counts over couples of verdicts: overall, and per item the two share."""
+    c, ci = collections.Counter(), collections.Counter()
+    for v1, v2 in couples:
+        c[outcome(name_of(v1, v1["overall"]), name_of(v2, v2["overall"]))] += 1
+        for i in set(v1["items"]) & set(v2["items"]):
+            ci[outcome(name_of(v1, v1["items"][i]), name_of(v2, v2["items"][i]))] += 1
+    return c, ci
+
+
+def split_orders(u, vs):
+    """The verdicts on unordered pair u, split by which plan held position A."""
+    return [v for v in vs if v["A"] == u[0]], [v for v in vs if v["A"] == u[1]]
+
+
+def share(c):
+    n = sum(c.values())
+    return f"agree {c['agree']}, partial {c['partial']}, reversal {c['reversal']} of {n}" + (
+        f" ({c['agree'] / n:.2f} agree)" if n else "")
+
+
 def bt_fit(units, arms):
     """Bradley-Terry strengths by MM; units is a list of lists of (i, j, score of i); ties count 1/2."""
     w, n = collections.defaultdict(float), collections.defaultdict(float)
@@ -410,19 +436,15 @@ def score(a):
             fx = sum(name_of(v, v["overall"]) == x for v in vs)
             fy = sum(name_of(v, v["overall"]) == y for v in vs)
             clear = sum(name_of(v, v["overall"]) == x and v["strength"] == "clear" for v in vs)
-            by_order = collections.defaultdict(set)
-            for v in vs:
-                by_order[v["A"]].add(name_of(v, v["overall"]))
-            reversal = len(by_order) == 2 and any(
-                {x, y} <= (by_order[x] | by_order[y]) and ({x} <= by_order[o] and {y} <= by_order[p])
-                for o, p in ((x, y), (y, x)))
+            o1, o2 = split_orders(tuple(sorted((x, y))), vs)
+            reversals = compare_couples([(v1, v2) for v1 in o1 for v2 in o2])[0]["reversal"]
             items_x = statistics.mean(sum(name_of(v, l) == x for l in v["items"].values()) for v in vs)
             items_y = statistics.mean(sum(name_of(v, l) == y for l in v["items"].values()) for v in vs)
             net = fx - fy
             counted.append(net)
             print(f"  {x} > {y}: verdicts for {x} {fx} ({clear} clear), for {y} {fy}, tied {len(vs) - fx - fy} "
-                  f"of {len(vs)}; net {net:+d}; orders {sorted(by_order)}; order reversal {'yes' if reversal else 'no'}; "
-                  f"items per verdict: {x} {items_x:.1f}, {y} {items_y:.1f}")
+                  f"of {len(vs)}; net {net:+d}; verdicts per order {len(o1)}, {len(o2)}; "
+                  f"reversals across orders {reversals}; items per verdict: {x} {items_x:.1f}, {y} {items_y:.1f}")
         k = sum(n >= a.margin for n in counted)
         m = sum(n <= -a.margin for n in counted)
         print(f"  sign test over pairs: expected direction in {k} of {k + m} untied ({len(counted) - k - m} tied), "
@@ -454,46 +476,23 @@ def score(a):
               f"(A {fi.count('A')}, B {fi.count('B')})")
 
     # swap consistency and judge-to-judge agreement
-    def outcome(v1, l1, v2, l2):
-        n1, n2 = name_of(v1, l1), name_of(v2, l2)
-        return "agree" if n1 == n2 else ("partial" if None in (n1, n2) else "reversal")
-    cross, within, cross_i, within_i, kap, kap_i = (collections.Counter() for _ in range(4)) + ([], [])
-    per_unit = []
+    cross, within, cross_i, within_i = (collections.Counter() for _ in range(4))
+    kap, kap_i, per_unit = [], [], []
     for u, vs in sorted(by_unit.items()):
-        o1 = [v for v in vs if v["A"] == u[0]]
-        o2 = [v for v in vs if v["A"] == u[1]]
-        c = collections.Counter(outcome(v1, v1["overall"], v2, v2["overall"]) for v1 in o1 for v2 in o2)
+        o1, o2 = split_orders(u, vs)
+        c, ci = compare_couples([(v1, v2) for v1 in o1 for v2 in o2])
         cross += c
-        for v1 in o1:
-            for v2 in o2:
-                for i in set(v1["items"]) & set(v2["items"]):
-                    cross_i[outcome(v1, v1["items"][i], v2, v2["items"][i])] += 1
-        for group in (o1, o2):
-            for i1 in range(len(group)):
-                for i2 in range(i1 + 1, len(group)):
-                    v1, v2 = group[i1], group[i2]
-                    within[outcome(v1, v1["overall"], v2, v2["overall"])] += 1
-                    kap.append((v1["overall"], v2["overall"]))
-                    for i in set(v1["items"]) & set(v2["items"]):
-                        within_i[outcome(v1, v1["items"][i], v2, v2["items"][i])] += 1
-                        kap_i.append((v1["items"][i], v2["items"][i]))
+        cross_i += ci
+        same = [(g[i1], g[i2]) for g in (o1, o2) for i1 in range(len(g)) for i2 in range(i1 + 1, len(g))]
+        c, ci = compare_couples(same)
+        within += c
+        within_i += ci
+        for v1, v2 in same:
+            kap.append((v1["overall"], v2["overall"]))
+            kap_i += [(v1["items"][i], v2["items"][i]) for i in set(v1["items"]) & set(v2["items"])]
         if o1 and o2:
-            per_unit.append(f"{u[0]}:{u[1]} {dict(c)}")
-    for v1, v2 in ((x, y) for g in collections.defaultdict(list, {}).values() for x, y in []):
-        pass
-    ident_groups = collections.defaultdict(list)
-    for v in identical:
-        ident_groups[v["qid"]].append(v)
-    for group in ident_groups.values():
-        for i1 in range(len(group)):
-            for i2 in range(i1 + 1, len(group)):
-                kap.append((group[i1]["overall"], group[i2]["overall"]))
-                within["agree" if group[i1]["overall"] == group[i2]["overall"] else "partial"] += 0  # reported apart
+            per_unit.append(f"{u[0]}:{u[1]} overall {share(compare_couples([(v1, v2) for v1 in o1 for v2 in o2])[0])}")
 
-    def share(c):
-        n = sum(c.values())
-        return f"agree {c['agree']}, partial {c['partial']}, reversal {c['reversal']} of {n}" + (
-            f" ({c['agree'] / n:.2f} agree)" if n else "")
     print("\nswap consistency (couples across the two orders of a pair, mapped to plan names):")
     print(f"  overall: {share(cross)}")
     print(f"  items:   {share(cross_i)}")
@@ -503,8 +502,15 @@ def score(a):
     print(f"  overall: {share(within)}")
     print(f"  items:   {share(within_i)}")
     k1, k2 = kappa(kap), kappa(kap_i)
-    print(f"  Cohen's kappa on A/B/tie: overall {'-' if k1 is None else f'{k1:.2f}'} "
-          f"(including identical-pair files), items {'-' if k2 is None else f'{k2:.2f}'}")
+    print(f"  Cohen's kappa on A/B/tie: overall {'-' if k1 is None else f'{k1:.2f}'}, "
+          f"items {'-' if k2 is None else f'{k2:.2f}'}")
+    groups = collections.defaultdict(list)
+    for v in identical:
+        groups[v["qid"]].append(v)
+    same = [(g[i1], g[i2]) for g in groups.values() for i1 in range(len(g)) for i2 in range(i1 + 1, len(g))]
+    if same:
+        print(f"  identical-pair files: overall labels equal in {sum(x['overall'] == y['overall'] for x, y in same)} "
+              f"of {len(same)} couples")
 
     # agreement with the primary verdicts, item by item
     if a.primary:
