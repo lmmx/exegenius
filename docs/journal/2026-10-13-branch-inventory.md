@@ -65,11 +65,12 @@ The local copies of every branch marked "delete on GitHub" are deleted.
 | `141026-exp-e6-key-step-confirm` | 834fb5a | E6, eight fresh projects split into baseline and key-step argument runs | evidence, with transcripts (killed attempts and their drafts apart) | keep |
 | `141026-exp-e7-key-step-identity` | c89a3fd | E7, eight argument runs with the identity sentence on E6's extractions (based on E6's branch) | evidence, with transcripts | keep |
 | `141026-exp-s2-model-effort` | 74b4094 | S2, four argument runs on E6's F1 (Sonnet and Opus at `xhigh` and `max`) with the E7 instructions (based on E7's branch) | evidence, with transcripts | keep |
+| `141026-exp-s3-opus-floor` | 1be0281 | S3, four argument runs on E6's F4 and F8 (Opus at `high` and `xhigh`) with the E7 instructions (based on S2's branch) | evidence, with transcripts | keep |
 | `exp-coverage-recovery` | 2e35a54 | two refused attempts to run the recovery experiment | its unique records (the two reports and the protocol) are archived in `docs/journal/2026-10-13-coverage-recovery/refused-attempts/`; the rest is a vendored copy of exegenius source, which should not be kept | **delete on GitHub** |
 
 ## Current State
 - `master` of lmmx/exegenius holds all completed work; eight remote branches of lmmx/exegenius are fully contained in it and await deletion on GitHub; `131026-exp-key-step` holds an experimental instruction kept off `master` pending the author's decision; two `docs/` branches are the author's own
-- Twenty-three branches of lmmx/openai-nlogn-wiki are kept as the archives of their runs, through `141026-exp-s2-model-effort`
+- Twenty-four branches of lmmx/openai-nlogn-wiki are kept as the archives of their runs, through `141026-exp-s3-opus-floor`
 - `exp-coverage-recovery` of the wiki has its unique records archived in the journal and awaits deletion on GitHub
 
 ## Missing
