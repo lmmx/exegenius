@@ -288,7 +288,9 @@ ancestor's.
 gives the result its strength (where a saving, a bound or a surprise comes from). A reader \
 who follows only one derivation should follow this one. Develop it with `show` steps down \
 to the reasoning the sources give for it, each sub-step quoting where the sources carry it \
-out, rather than stopping at an `infer` step that quotes its result.
+out, rather than stopping at an `infer` step that quotes its result. Where a sub-step \
+concludes from a count, a bound or an equality, state the identity, lemma or definition \
+that makes it hold, and every case the sources treat as an exception to it.
 - `salient`: for a step whose claim has a feature a reader would find striking (a symmetry, \
 a uniformity across cases, a surprising value or bound), that feature. A proof explains a \
 result only relative to such a feature (Lange), so its page is asked to explain why the \
