@@ -102,7 +102,8 @@
 | The checklist screen shows a gain on ≥ 2 of 3 extractions | stage 2: primary judging. Then, if confirmed, the variant sentence is proposed to the author as an instruction change, and the configuration question is re-asked with it: does Sonnet `high` plus the sentence match Opus `xhigh`? |
 | No gain | the gaps are capability, not instruction. The Opus configuration stands as the candidate |
 
-**At the reset (or on a reading that leaves room), in order:**
+**At the reset (or on a reading that leaves room), in order.** A check-in is scheduled for 18:33 UTC (`send_later`, trig_01SNWeGroCB9wtDraJ4FFcR7); cancel it if the launch happens earlier.
+
 1. Launch E9's three runs (`plans/E9.md`): the prompts are in the scratchpad as `E9FkY.prompt`, with descriptions `E9F2Y 0003-argument` and so on.
 2. When all three are accepted, prepare J18 (E8b stage 2 plus E9's additions: 50 judgements, a new seed) and J20 (E9's checklist: 12 judgements).
 3. Launch both within the 20-subagent limit, with J18's three-judge plans first.
