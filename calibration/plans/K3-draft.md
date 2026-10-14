@@ -234,7 +234,7 @@ So "O is better above the ceiling" needs O favoured on at least 5 extractions an
 | Typical ceiling pair (two ~100 KB plans) | ~190–220 KB | 6.2–6.6 M; 8.0–8.6 M | 1 | — |
 | A primary judgement, for comparison | one plan | 4.8 M (J18 mean) | 1 | — |
 | **Validation:** pilot and stage A | 157–335 KB | 5.7–8.4 M | 10 | 65 M; 84 M |
-| **Validation:** stage B (second judges and the ablation pair) | 167–193 KB | 5.8–6.2 M | 10 | 61 M; 79 M |
+| **Validation:** stage B (second judges and the ablation pair) | 167–193 KB | 5.8–6.2 M | 10 | 61 M; 80 M |
 | **Validation, all** | | | 20 | **126 M; 164 M** |
 | **Ceiling use:** six Opus `xhigh` runs | — | 1.7–6.9 M per run (E7-era Opus `xhigh`) | 6 | 10–40 M |
 | **Ceiling use:** checklist screen | — | ~1 M | 12 | ~12 M |
@@ -242,7 +242,7 @@ So "O is better above the ceiling" needs O favoured on at least 5 extractions an
 
 **Pairwise against primary, for one pair of plans:**
 - a pairwise judgement costs 1.2–1.8 times a primary judgement, but it covers two plans;
-- one judge in each order costs about 13–17 M per pair;
+- one judge in each order costs about 12–17 M per pair;
 - three primary judges on each of two plans cost about 29 M.
 
 **The largest single file** is E8F8X with E7F8W (335 KB, 8.4 M at the fit). That pair is a sanity check, so it gets one judge per order.
@@ -250,7 +250,7 @@ So "O is better above the ceiling" needs O favoured on at least 5 extractions an
 ## (e) Cheaper variants
 
 **1. Sonnet judges, once Opus has validated the instrument** (as K2 did for the checklist):
-- **The check:** Sonnet judges the stage-B F2 files and the ablation files once each, 6 judgements, about 40 M.
+- **The check:** Sonnet judges the stage-B F2 files and the ablation files once each, 6 judgements, about 40–55 M.
 - **Adopted if** Sonnet's overall verdict matches the Opus judges' majority on at least 5 of 6 with no reversal, and its item reversals against Opus are at most 0.05.
 - **Its use at the ceiling:** Sonnet judges in both orders, with one Opus judge per pair as a check. The bias reading in (c) applies.
 - **Caveat: it saves price, not tokens.** On the same plans, Sonnet checklist judges read *more* from cache than Opus judges:
