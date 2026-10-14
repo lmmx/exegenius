@@ -1,0 +1,32 @@
+{
+  "plan": "P09",
+  "steps": [
+    {"id": "B1", "verdict": "present", "plan_steps": ["K.1.1.1"], "lines": [744, 750], "note": "K.1.1.1 states the net target change (JV+RG)x independent of the initial scratch vectors a,c, quoting line 744 with the restoring rows 6 and 7."},
+    {"id": "B2", "verdict": "present", "plan_steps": ["K.1.1.2"], "lines": [752, 755], "note": "K.1.1.2 gives the bit central coefficient |S∩T| mod 2, side wires cancelling exactly the intersection-one cases, and self coefficient one."},
+    {"id": "B3", "verdict": "present", "plan_steps": ["K.1.1.2"], "lines": [756, 758], "note": "K.1.1.2 and its quote give the complex central coefficient (|S∩T|-1)/2 with the side cancelling intersections zero and two."},
+    {"id": "B4", "verdict": "present", "plan_steps": ["K.1.1", "K.1.1.3"], "lines": [761, 764], "note": "K.1.1.3 states the three stages (x,y)->(x,y+x)->(-y,y+x)->(-y,x) with each invocation restoring its own auxiliary wires."},
+    {"id": "L1", "verdict": "absent", "plan_steps": [], "lines": [1013, 1043], "note": "The plan never gives the per-edge residual table or its dimensions; K.1.4.1 and K.1.4.2 only say labels are comparable and that the other entries follow by splitting A=B⊥P and F=<t>⊥t^⊥."},
+    {"id": "L2", "verdict": "present", "plan_steps": ["K.1.4.2"], "lines": [1048, 1058], "note": "K.1.4.2 states that t_X⊥t_Y gives <t_X>⊂t_Y^⊥ and quotes the complement <t_X,t_Y>^⊥ of dimension h-2."},
+    {"id": "L3", "verdict": "present", "plan_steps": ["K.1.4.1", "K.1.4.3", "K.1.4.4", "K.1.4.5"], "lines": [1061, 1071], "note": "The plan gives the single decreasing edge center 3->4 losing h, telescoping with sources N and sinks Wm-N, signed Wm-2N, and absolute Wm-2N+2L."},
+    {"id": "L4", "verdict": "absent", "plan_steps": [], "lines": [1073, 1102], "note": "K.1.4.1 only asserts that every nonzero binary residual has an orthonormal basis; the nonalternating argument and the absorption of alternating planes are not stated."},
+    {"id": "L5", "verdict": "present", "plan_steps": ["K.1.4.6"], "lines": [1105, 1109], "note": "K.1.4.6 states L_b/N=100/539 and L_c/N=101/539, both below 1/2."},
+    {"id": "P1", "verdict": "present", "plan_steps": ["S0.3.1.1"], "lines": [1232, 1245], "note": "S0.3.1.1 states weight additivity mod 4 for orthogonal binary vectors and q_V-q_U as the sum of wt(v)[v·x] over an orthonormal basis of the residual."},
+    {"id": "P2", "verdict": "present", "plan_steps": ["S0.3.1.2"], "lines": [1246, 1257], "note": "S0.3.1.2 states odd weight, the phase i^{ε[v·x]}, and H diag(1,-1) H = X turning it into aI+bX_v or its inverse."},
+    {"id": "P3", "verdict": "present", "plan_steps": ["S0.3.2.4", "S0.3.2.7"], "lines": [1262, 1271], "note": "S0.3.2.4 takes the frame as a tensor product over the f columns with one child (C^{ε_h})^{⊗f} per residual vector, and S0.3.2.7 counts exactly s_c such factors."},
+    {"id": "P4", "verdict": "present", "plan_steps": ["S0.3.1.3"], "lines": [1273, 1314], "note": "S0.3.1.3 gives frame I and C^{⊗m} at the endpoints, C^{-1} on the 27 coordinates of supp(u_a) repaired by Z_{a,k} before and i^{27k}Z_{a,k} after via C=iZC^{-1}Z, and its quote negates the X outputs."},
+    {"id": "R1", "verdict": "present", "plan_steps": ["K.1.4", "K.1.4.6", "K.1.5.5"], "lines": [1105, 1110], "note": "The plan states L/N<1/2, giving Wm-2N+2L<Wm, and K.1.5.5 the deficit N-2L_b>0 with s<Wm."},
+    {"id": "R2", "verdict": "absent", "plan_steps": [], "lines": [1319, 1322], "note": "K.2 names the exact relative deficit η_b but never gives its value 339/22587335000000."},
+    {"id": "R3", "verdict": "absent", "plan_steps": [], "lines": [1323, 1324], "note": "The value η_c=73/19906842167500 does not appear anywhere in the plan."},
+    {"id": "R4", "verdict": "present", "plan_steps": ["K.2"], "lines": [1326, 1343], "note": "K.2 and its quote state both deficits exceed 20·2^{-50}, log m<20, m^{1-2^{-50}}>m(1-η), and s/W<m^τ with τ=σ=1-2^{-50}."},
+    {"id": "M1", "verdict": "present", "plan_steps": ["K.3.1.1", "K.3.1.2"], "lines": [1375, 1391], "note": "The plan gives the topmost-row rightmost-entry pivot, clearing by lower-triangular elementary operations, repetition on active indices, and Π with exactly a ones."},
+    {"id": "M2", "verdict": "present", "plan_steps": ["K.3.2"], "lines": [1413, 1423], "note": "K.3.2 states a fixed odd prime avoiding every denominator (and diagonal numerators) of the finite table, so the identities specialize to Z/q^b with invertible triangular factors."},
+    {"id": "M3", "verdict": "present", "plan_steps": ["K.3.3"], "lines": [1425, 1430], "note": "K.3.3 states the O(V) lower-triangular transformation by updating coordinates in descending physical order."},
+    {"id": "M4", "verdict": "present", "plan_steps": ["K.3.4"], "lines": [1432, 1443], "note": "K.3.4 gives D_j<-D_j+H_i, one interchange, D_j<-H_i-D_j per one of Π, a interchanges in all."},
+    {"id": "S1", "verdict": "absent", "plan_steps": [], "lines": [2457, 2477], "note": "The plan gives E=64(W+m+1)^3, uses B=s+E implicitly and Δ=⌈C_0d^{C_1}⌉, but never defines ν, C_1=max{20,ν+3} or C_0=128mB^2, nor derives ν=11 (C_1=20 appears only in the fixed-parameter list)."},
+    {"id": "S2", "verdict": "present", "plan_steps": ["S0.3.5", "S0.3.5.1", "S0.3.5.2"], "lines": [2479, 2518], "note": "S0.3.5.1 bounds the per-invocation count 24W^3+4s+4W+4<E, and S0.3.5.2 gives A(e)≤sA(e/m)+E internally and A(e)≤8e at a leaf."},
+    {"id": "S3", "verdict": "present", "plan_steps": ["S0.3.5.2", "S0.3.5.3"], "lines": [2523, 2560], "note": "S0.3.5.2 gives B^{k+1}≤B^2d^ν and A(e)≤8B^2d^{ν+1}, and S0.3.5.3 bounds the total below 128mB^2d^{ν+3}≤C_0d^{C_1}."},
+    {"id": "S4", "verdict": "present", "plan_steps": ["S0.3.5.4", "S0.3.5.5"], "lines": [2562, 2586], "note": "The plan states that depth ℓ means values in 2^{-(p+ℓ)}Z[i] of modulus at most 2^ℓ, that reserving p+Δ fractional and Δ+3 integer bits is exact, and that εC_1<1 gives Δ=o(p)."},
+    {"id": "S5", "verdict": "present", "plan_steps": ["S0.3.6.4"], "lines": [2751, 2757], "note": "S0.3.6.4 states that the absolute row sums of H are one, so disks are preserved and the truncation error is below √2·2^{-p}."}
+  ],
+  "summary": "P09 quotes the paper densely and covers 21 of 26 sub-steps. It omits the residual table (L1), the binary nonalternating/orthonormal-basis argument (L4, only asserted), the explicit deficit values η_b and η_c (R2, R3), and the full definitions of ν, C_0 and C_1 (S1). No sub-step is stated contrary to the paper."
+}
