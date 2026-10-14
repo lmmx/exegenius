@@ -1,0 +1,5 @@
+S3F8OX: [19, 19]
+S4F8OM: [20, 20]
+S5F8OX: [19, 19]
+S4F8OM [20, 20] vs S3F8OX [19, 19]: above
+S5F8OX [19, 19] vs S3F8OX [19, 19]: within noise

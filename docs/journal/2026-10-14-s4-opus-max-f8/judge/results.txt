@@ -1,0 +1,7 @@
+| Run | Plan | Judges | Central (majority) | Gate | C1-C9 | Each judge's central | Derived (median; each) | Faithful (median; each) | Major errors (each) |
+|---|---|---|---|---|---|---|---|---|---|
+| M3 | P02 | 1 | 1 | fail | mmmm-mmRm | [1] | 1; [1] | 0; [0] | [0] |
+| P4 | P01 | 1 | 7 | fail | mRRRmRRRR | [7] | 18; [18] | 13; [13] | [0] |
+| S3F8OX | P04 | 3 | 9 | pass | RRRRRRRRR | [9, 9, 9] | 18; [18, 18, 18] | 15; [16, 15, 15] | [0, 0, 0] |
+| S4F8OM | P05 | 3 | 9 | pass | RRRRRRRRR | [9, 9, 9] | 19; [19, 19, 19] | 16; [16, 16, 17] | [0, 0, 0] |
+| S5F8OX | P03 | 3 | 9 | pass | RRRRRRRRR | [9, 9, 9] | 17; [17, 17, 17] | 13; [13, 13, 13] | [0, 0, 0] |
