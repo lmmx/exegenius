@@ -1,0 +1,4134 @@
+{
+ "schema": "a1-plant/1",
+ "seed": "20261014",
+ "errors_per_variant": 2,
+ "variants_per_page": 3,
+ "types": {
+  "constant": "a wrong number, coefficient, exponent, index or computed value",
+  "inequality": "an inequality reversed, or its strictness changed, so the stated bound is false",
+  "hypothesis": "a condition the claim or step needs is removed from its statement",
+  "cases": "a case analysis or enumeration with a case dropped, or a wrong count of its cases, steps or terms",
+  "generalisation": "a claim widened beyond what holds (a quantifier or class enlarged)",
+  "sign": "a sign or an operation reversed (plus and minus, add and subtract)",
+  "attribution": "a citation whose quotation is a real sentence of the paper that does not support the claim it is attached to"
+ },
+ "paper": {
+  "path": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/paper.tex",
+  "sha256": "6d2b6d00dc3422ddb3ef0b2b36f2f204c42fba8f843f25bf41197530ee384ad0"
+ },
+ "wikis": {
+  "W1": {
+   "commit": "72f1de8",
+   "branch": "full-v0.6-latex-planner-handoff"
+  },
+  "W2": {
+   "commit": "fa33c9d",
+   "branch": "full-v0.6-latex-depth (no ref left; commit only)"
+  }
+ },
+ "pages": [
+  {
+   "page": "address-shear-factorization",
+   "wiki": "W1",
+   "commit": "72f1de8",
+   "plan_steps": [
+    "S1.2.1"
+   ],
+   "chain_steps": [
+    "C8",
+    "C5",
+    "C6"
+   ],
+   "clean_sha256": "2378357e47b47d40b3b4b2689fd6a1bb0ae42be3c9817bdeb43286d45269cffc",
+   "bound_symbols": [
+    "q",
+    "b",
+    "R",
+    "H",
+    "D",
+    "M",
+    "\\mu",
+    "\\xi",
+    "\\Pi",
+    "F_1",
+    "F_2",
+    "\\sigma",
+    "\\tau",
+    "\\eta",
+    "\\zeta",
+    "W_{\\rm b}",
+    "N",
+    "L_{\\rm b}",
+    "s_{\\rm b}"
+   ],
+   "native": [],
+   "native_support_labels": [
+    {
+     "claim": "A lower-triangular transformation costs $O(V)$, where $V$ is the stored bit volume",
+     "quote": "earlier fields in linear time",
+     "label": "partial"
+    },
+    {
+     "claim": "The paper shows $N>2L_{\\rm b}$, so $s_{\\rm b}<W_{\\rm b}m$",
+     "quote": "The sum of the rational ranks of all edge differences is",
+     "label": "unsupported"
+    },
+    {
+     "claim": "A lower-triangular transformation costs $O(V)$",
+     "quote": "A lower triangular transformation of $H$, or of $D$, costs $O(V)$",
+     "label": "partial"
+    }
+   ]
+  },
+  {
+   "page": "fast-address-interchange",
+   "wiki": "W1",
+   "commit": "72f1de8",
+   "plan_steps": [
+    "S1.2"
+   ],
+   "chain_steps": [
+    "C9",
+    "C6"
+   ],
+   "clean_sha256": "3701b851589b08072597fb5e9fcebf1e58c6cba65df75928551d30a053d2531e",
+   "bound_symbols": [
+    "\\tau",
+    "Q_k",
+    "k"
+   ],
+   "native": [
+    {
+     "quote": "for the bit procedure this ring is $\\mathbb F_2$",
+     "note": "fields are residues mod q^b, q an odd prime (paper 1397-1404); chain walk W1-b, C7"
+    },
+    {
+     "quote": "Over $\\mathbb F_2$ each update is a pointwise XOR",
+     "note": "same native error: only the data gates are XOR"
+    }
+   ],
+   "native_support_labels": [
+    {
+     "claim": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$",
+     "quote": "for a fixed $\\tau<1$",
+     "label": "partial"
+    },
+    {
+     "claim": "For the bit network, $s<Wm$",
+     "quote": "the total number $s$ of smaller calls satisfies $s<Wm$",
+     "label": "supported"
+    }
+   ]
+  },
+  {
+   "page": "linear-network-roles",
+   "wiki": "W1",
+   "commit": "72f1de8",
+   "plan_steps": [
+    "S1.1"
+   ],
+   "chain_steps": [
+    "C2",
+    "C7"
+   ],
+   "clean_sha256": "fbe9141eedd4cbe125236e55133abb94c3a00f78202f576670add64bd0807159",
+   "bound_symbols": [
+    "W",
+    "\\rho",
+    "w",
+    "\\varepsilon_w",
+    "\\nu",
+    "D_\\nu",
+    "\\alpha",
+    "\\beta",
+    "f",
+    "G",
+    "p",
+    "\\ell",
+    "I"
+   ],
+   "native": [],
+   "native_support_labels": [
+    {
+     "claim": "Each role stream then holds $V/W$ bits",
+     "quote": "contains $V/W$ bits",
+     "label": "supported"
+    },
+    {
+     "claim": "For a scratch role the construction has $\\rho(w)=w$ with sign $+1$",
+     "quote": "each scratch input to its own output with sign $+1$",
+     "label": "supported"
+    },
+    {
+     "claim": "Every role keeps the endpoint operator",
+     "quote": "leaves the endpoint operator on every role array",
+     "label": "supported"
+    }
+   ]
+  },
+  {
+   "page": "recursive-power-saving",
+   "wiki": "W1",
+   "commit": "72f1de8",
+   "plan_steps": [
+    "S1.5"
+   ],
+   "chain_steps": [
+    "C9"
+   ],
+   "clean_sha256": "a3cc589032bc208b9f1c5dafe9c814f593beb3f393b570057ba989c26fa78ae1",
+   "bound_symbols": [
+    "\\lambda",
+    "f",
+    "m",
+    "C",
+    "s",
+    "\\Omega",
+    "d",
+    "\\eta",
+    "\\vartheta",
+    "\\nu",
+    "\\sigma"
+   ],
+   "native": [
+    {
+     "quote": "the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$",
+     "note": "does not follow: with d<=f^(1/theta) it gives only O(f) (journal 2026-10-13-planner-handoff-run)"
+    }
+   ],
+   "native_support_labels": [
+    {
+     "claim": "An address interchange of $u$-bit fields costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed.",
+     "quote": "Its cost is $O(Vu^\\tau)$ for a fixed $\\tau<1$.",
+     "label": "supported"
+    }
+   ]
+  },
+  {
+   "page": "subset-intersection-construction",
+   "wiki": "W1",
+   "commit": "72f1de8",
+   "plan_steps": [
+    "S1.4"
+   ],
+   "chain_steps": [
+    "C1",
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+   ],
+   "clean_sha256": "6a05069dbeb00d6f299d6ac297e2ca8b33facb0eabe010ae793d93bc2b81dd62",
+   "bound_symbols": [
+    "h",
+    "T",
+    "\\mathcal T",
+    "S",
+    "g_T",
+    "C_e",
+    "A_{ST}",
+    "J",
+    "\\mathcal F",
+    "D",
+    "U",
+    "\\iota",
+    "U_\\iota",
+    "P_U",
+    "s",
+    "N",
+    "L",
+    "m"
+   ],
+   "native": [
+    {
+     "quote": "Sources have dimension $1$, summing to $N$",
+     "note": "only the X_a sources have dimension 1; the sum N is right (chain walk W1, C5)"
+    }
+   ],
+   "native_support_labels": [
+    {
+     "claim": "Each unit of rank costs one smaller call",
+     "quote": "An edge matrix of rank $a$ will require $a$ smaller interchanges.",
+     "label": "supported"
+    },
+    {
+     "claim": "Now $L/N=3h^2/\\binom h3=100/539$",
+     "quote": "The loss ratios have the exact values",
+     "label": "partial"
+    },
+    {
+     "claim": "The recursion in [Recursive power saving from s<Wm](recursive-power-saving.md) needs $s/W<m$, which is $s<Wm$; this is the decisive property",
+     "quote": "smaller calls satisfies $s<Wm$",
+     "label": "partial"
+    },
+    {
+     "claim": "The recursion in [Recursive power saving from s<Wm](recursive-power-saving.md) needs $s/W<D$, which is $s<WD$; this is the decisive property",
+     "quote": "smaller calls satisfies $s<Wm$",
+     "label": "unsupported"
+    }
+   ]
+  },
+  {
+   "page": "tape-interchange",
+   "wiki": "W2",
+   "commit": "fa33c9d",
+   "plan_steps": [
+    "S7.1"
+   ],
+   "chain_steps": [
+    "C9",
+    "C6",
+    "C8"
+   ],
+   "clean_sha256": "cbe516e7586e577b85a82bb111605f59e522a125be805f054b19f1683e3cf938",
+   "bound_symbols": [
+    "u",
+    "V",
+    "\\tau",
+    "\\mu",
+    "d",
+    "F_d",
+    "\\lambda",
+    "\\eta"
+   ],
+   "native": [
+    {
+     "quote": "The shear is such an invocation, with $D$ as $X$ and $H$ as $Y$",
+     "note": "the shear comes from the endpoint frames, not from treating the fields as the banks (chain walk W2, C7)"
+    }
+   ],
+   "native_support_labels": [
+    {
+     "claim": "The interchange costs $O(Vu^{\\tau})$",
+     "quote": "Its cost is $O(Vu^\\tau)$ for a fixed $\\tau<1$",
+     "label": "supported"
+    },
+    {
+     "claim": "The paper's explicit network satisfies $s<Wm$",
+     "quote": "supplies these conditions with $W=W_{\\rm b}$ and $s=s_{\\rm b}$",
+     "label": "unsupported"
+    },
+    {
+     "claim": "For the explicit network the paper computes $\\eta>20\\cdot2^{-50}$",
+     "quote": "Both exact deficits displayed above are greater than $20\\cdot2^{-50}$.",
+     "label": "partial"
+    },
+    {
+     "claim": "For any initial auxiliary values, a forward invocation from $X$ to $Y$ adds $x_S$ into $y_S$ and changes no other value",
+     "quote": "a forward invocation changes $y_S$ to $y_S+x_S$ and leaves every other value unchanged",
+     "label": "supported"
+    },
+    {
+     "claim": "A forward, inverse, forward schedule of these invocations exchanges the two banks and returns every auxiliary wire to its starting value",
+     "quote": "restores every auxiliary value",
+     "label": "partial"
+    },
+    {
+     "claim": "The bound needs $s<W\\mu$",
+     "quote": "s<Wm",
+     "label": "supported"
+    },
+    {
+     "claim": ", and the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$",
+     "quote": "supplies these conditions with $W=W_{\\rm b}$ and $s=s_{\\rm b}$",
+     "label": "supported"
+    }
+   ]
+  }
+ ],
+ "variants": [
+  {
+   "code": "a1-74407e",
+   "page": "address-shear-factorization",
+   "variant": 0,
+   "kind": "clean",
+   "file": "pages/a1-74407e.md",
+   "sha256": "2378357e47b47d40b3b4b2689fd6a1bb0ae42be3c9817bdeb43286d45269cffc",
+   "errors": [],
+   "shams": [],
+   "support_marks": [
+    {
+     "claim": "A lower-triangular transformation costs $O(V)$",
+     "quote": "A lower triangular transformation of $H$, or of $D$, costs $O(V)$"
+    }
+   ]
+  },
+  {
+   "code": "a1-34e565",
+   "page": "address-shear-factorization",
+   "variant": 1,
+   "kind": "seeded",
+   "file": "pages/a1-34e565.md",
+   "sha256": "1bef9d415b2a950e88d13c00472c9ebffb6d998a1a0471c2787e1649f9706497",
+   "errors": [
+    "ASF-1@a1-34e565",
+    "ASF-7@a1-34e565"
+   ],
+   "shams": [
+    "ASF-s2@a1-34e565"
+   ],
+   "support_marks": [
+    {
+     "claim": "A lower-triangular transformation costs $O(V)$",
+     "quote": "It uses just one interchange."
+    }
+   ]
+  },
+  {
+   "code": "a1-25155c",
+   "page": "address-shear-factorization",
+   "variant": 2,
+   "kind": "seeded",
+   "file": "pages/a1-25155c.md",
+   "sha256": "7e9b3bfe6d75d1bb51ebaf5f2024594893b1b2b91ebf44721a0a2d3a0ae3f57a",
+   "errors": [
+    "ASF-5@a1-25155c",
+    "ASF-6@a1-25155c"
+   ],
+   "shams": [
+    "ASF-s1@a1-25155c"
+   ],
+   "support_marks": [
+    {
+     "claim": "Any invertible linear transformation of $H$ or $D$ costs $O(V)$",
+     "quote": "A lower triangular transformation of $H$, or of $D$, costs $O(V)$"
+    }
+   ]
+  },
+  {
+   "code": "a1-334ea2",
+   "page": "address-shear-factorization",
+   "variant": 3,
+   "kind": "seeded",
+   "file": "pages/a1-334ea2.md",
+   "sha256": "1408e955498c94f7963136ecfc0fd7a21c046d6180fc7cb5a3408f0bdf4bfd64",
+   "errors": [
+    "ASF-3@a1-334ea2",
+    "ASF-8@a1-334ea2"
+   ],
+   "shams": [
+    "ASF-s2@a1-334ea2"
+   ],
+   "support_marks": [
+    {
+     "claim": "A lower-triangular transformation costs $O(V)$",
+     "quote": "A lower triangular transformation of $H$, or of $D$, costs $O(V)$"
+    }
+   ]
+  },
+  {
+   "code": "a1-279843",
+   "page": "fast-address-interchange",
+   "variant": 0,
+   "kind": "clean",
+   "file": "pages/a1-279843.md",
+   "sha256": "3701b851589b08072597fb5e9fcebf1e58c6cba65df75928551d30a053d2531e",
+   "errors": [],
+   "shams": [],
+   "support_marks": [
+    {
+     "claim": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$",
+     "quote": "for a fixed $\\tau<1$"
+    },
+    {
+     "claim": "For the bit network, $s<Wm$",
+     "quote": "the total number $s$ of smaller calls satisfies $s<Wm$"
+    }
+   ]
+  },
+  {
+   "code": "a1-79746e",
+   "page": "fast-address-interchange",
+   "variant": 1,
+   "kind": "seeded",
+   "file": "pages/a1-79746e.md",
+   "sha256": "55906b953c27c1e3657af38dcafd3a20baacb0c705de4cc1a0e85996b3c3de54",
+   "errors": [
+    "FAI-5@a1-79746e",
+    "FAI-7@a1-79746e"
+   ],
+   "shams": [
+    "FAI-s2@a1-79746e"
+   ],
+   "support_marks": [
+    {
+     "claim": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$",
+     "quote": "contains $V/W$ bits"
+    },
+    {
+     "claim": "For the bit network, $s<W$",
+     "quote": "the total number $s$ of smaller calls satisfies $s<Wm$"
+    }
+   ]
+  },
+  {
+   "code": "a1-fe95b8",
+   "page": "fast-address-interchange",
+   "variant": 2,
+   "kind": "seeded",
+   "file": "pages/a1-fe95b8.md",
+   "sha256": "b7bad360878996328950ef0de94d45e63025e715af6fbb1d6422c4a64fde512b",
+   "errors": [
+    "FAI-4@a1-fe95b8",
+    "FAI-8@a1-fe95b8"
+   ],
+   "shams": [
+    "FAI-s1@a1-fe95b8"
+   ],
+   "support_marks": [
+    {
+     "claim": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$",
+     "quote": "for a fixed $\\tau<1$"
+    },
+    {
+     "claim": "For the bit network, $s<Wm$",
+     "quote": "the total number $s$ of smaller calls satisfies $s<Wm$"
+    }
+   ]
+  },
+  {
+   "code": "a1-c3b1a7",
+   "page": "fast-address-interchange",
+   "variant": 3,
+   "kind": "seeded",
+   "file": "pages/a1-c3b1a7.md",
+   "sha256": "3ab1ba7774d6f00f5d7e0dc861cbd19c6e301bc6c453a5ce62cdeac4b35e1315",
+   "errors": [
+    "FAI-3@a1-c3b1a7",
+    "FAI-6@a1-c3b1a7"
+   ],
+   "shams": [
+    "FAI-s2@a1-c3b1a7"
+   ],
+   "support_marks": [
+    {
+     "claim": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$",
+     "quote": "for a fixed $\\tau<1$"
+    },
+    {
+     "claim": "For every linear network, $s<Wm$",
+     "quote": "the total number $s$ of smaller calls satisfies $s<Wm$"
+    }
+   ]
+  },
+  {
+   "code": "a1-1c92b8",
+   "page": "linear-network-roles",
+   "variant": 0,
+   "kind": "clean",
+   "file": "pages/a1-1c92b8.md",
+   "sha256": "fbe9141eedd4cbe125236e55133abb94c3a00f78202f576670add64bd0807159",
+   "errors": [],
+   "shams": [],
+   "support_marks": [
+    {
+     "claim": "Each role stream then holds $V/W$ bits",
+     "quote": "contains $V/W$ bits"
+    },
+    {
+     "claim": "For a scratch role the construction has $\\rho(w)=w$ with sign $+1$",
+     "quote": "each scratch input to its own output with sign $+1$"
+    },
+    {
+     "claim": "Every role keeps the endpoint operator",
+     "quote": "leaves the endpoint operator on every role array"
+    }
+   ]
+  },
+  {
+   "code": "a1-a8a305",
+   "page": "linear-network-roles",
+   "variant": 1,
+   "kind": "seeded",
+   "file": "pages/a1-a8a305.md",
+   "sha256": "f250a887fb0ff215c8b7f4be3b0814aafb5f8dd2575517a550387dba99320b74",
+   "errors": [
+    "LNR-7@a1-a8a305",
+    "LNR-8@a1-a8a305"
+   ],
+   "shams": [
+    "LNR-s2@a1-a8a305"
+   ],
+   "support_marks": [
+    {
+     "claim": "Each role stream then holds $V/W$ bits",
+     "quote": "contains $V/W$ bits"
+    },
+    {
+     "claim": "For a scratch role the construction has $\\rho(w)=w$ with sign $+1$",
+     "quote": "each scratch input to its own output with sign $+1$"
+    },
+    {
+     "claim": "Every role keeps the endpoint operator",
+     "quote": "Every displayed summand is nondegenerate."
+    }
+   ]
+  },
+  {
+   "code": "a1-aef5e8",
+   "page": "linear-network-roles",
+   "variant": 2,
+   "kind": "seeded",
+   "file": "pages/a1-aef5e8.md",
+   "sha256": "a5a6709a6220545d6c84953330772690a72ffe14c39d1a70fd40e2049ef35831",
+   "errors": [
+    "LNR-5@a1-aef5e8",
+    "LNR-6@a1-aef5e8"
+   ],
+   "shams": [
+    "LNR-s1@a1-aef5e8"
+   ],
+   "support_marks": [
+    {
+     "claim": "Each role stream then holds $V/W$ bits",
+     "quote": "contains $V/W$ bits"
+    },
+    {
+     "claim": "For a scratch role the construction has $\\rho(w)=w$ with sign $+1$",
+     "quote": "each scratch input to its own output with sign $+1$"
+    },
+    {
+     "claim": "Every role keeps the endpoint operator",
+     "quote": "leaves the endpoint operator on every role array"
+    }
+   ]
+  },
+  {
+   "code": "a1-edc768",
+   "page": "linear-network-roles",
+   "variant": 3,
+   "kind": "seeded",
+   "file": "pages/a1-edc768.md",
+   "sha256": "88be8a5bb86f2a465202c8803d80cc865b135f63f7445bbf254189b66294bcb9",
+   "errors": [
+    "LNR-1@a1-edc768",
+    "LNR-4@a1-edc768"
+   ],
+   "shams": [
+    "LNR-s2@a1-edc768"
+   ],
+   "support_marks": [
+    {
+     "claim": "Each role stream then holds $V/(2W)$ bits",
+     "quote": "contains $V/W$ bits"
+    },
+    {
+     "claim": "For a scratch role the construction has $\\rho(w)=w$ with sign $+1$",
+     "quote": "each scratch input to its own output with sign $+1$"
+    },
+    {
+     "claim": "Every role keeps the endpoint operator",
+     "quote": "leaves the endpoint operator on every role array"
+    }
+   ]
+  },
+  {
+   "code": "a1-72b9c2",
+   "page": "recursive-power-saving",
+   "variant": 0,
+   "kind": "clean",
+   "file": "pages/a1-72b9c2.md",
+   "sha256": "a3cc589032bc208b9f1c5dafe9c814f593beb3f393b570057ba989c26fa78ae1",
+   "errors": [],
+   "shams": [],
+   "support_marks": []
+  },
+  {
+   "code": "a1-53c428",
+   "page": "recursive-power-saving",
+   "variant": 1,
+   "kind": "seeded",
+   "file": "pages/a1-53c428.md",
+   "sha256": "66520ecae3bbb99eee80055101ed3d73951480fff4a11f414ed2458a17b09cd7",
+   "errors": [
+    "RPS-1@a1-53c428",
+    "RPS-2@a1-53c428"
+   ],
+   "shams": [
+    "RPS-s1@a1-53c428"
+   ],
+   "support_marks": []
+  },
+  {
+   "code": "a1-06c1ac",
+   "page": "recursive-power-saving",
+   "variant": 2,
+   "kind": "seeded",
+   "file": "pages/a1-06c1ac.md",
+   "sha256": "246d66aa142862b6ec09b9a7267c91e180b9a60eb27e8ff6186a073bd91794ff",
+   "errors": [
+    "RPS-3@a1-06c1ac",
+    "RPS-4@a1-06c1ac"
+   ],
+   "shams": [
+    "RPS-s2@a1-06c1ac"
+   ],
+   "support_marks": []
+  },
+  {
+   "code": "a1-6969c7",
+   "page": "recursive-power-saving",
+   "variant": 3,
+   "kind": "seeded",
+   "file": "pages/a1-6969c7.md",
+   "sha256": "c2844aae82761364d2c35e82e338aecf05d61033ac21aa11f5db073f9e789b91",
+   "errors": [
+    "RPS-5@a1-6969c7",
+    "RPS-7@a1-6969c7"
+   ],
+   "shams": [
+    "RPS-s1@a1-6969c7"
+   ],
+   "support_marks": []
+  },
+  {
+   "code": "a1-aedee4",
+   "page": "subset-intersection-construction",
+   "variant": 0,
+   "kind": "clean",
+   "file": "pages/a1-aedee4.md",
+   "sha256": "6a05069dbeb00d6f299d6ac297e2ca8b33facb0eabe010ae793d93bc2b81dd62",
+   "errors": [],
+   "shams": [],
+   "support_marks": [
+    {
+     "claim": "Now $L/N=3h^2/\\binom h3=100/539$",
+     "quote": "The loss ratios have the exact values"
+    },
+    {
+     "claim": "The paper's decisive property is a bound on the number of smaller calls,",
+     "quote": "smaller calls satisfies $s<Wm$"
+    }
+   ]
+  },
+  {
+   "code": "a1-8c4d7c",
+   "page": "subset-intersection-construction",
+   "variant": 1,
+   "kind": "seeded",
+   "file": "pages/a1-8c4d7c.md",
+   "sha256": "0e9936d2910ebfdc10dcb78ab1d5e6b3669e289dabca7ce9c624f39acaa27027",
+   "errors": [
+    "SIC-10@a1-8c4d7c",
+    "SIC-5@a1-8c4d7c"
+   ],
+   "shams": [
+    "SIC-s2@a1-8c4d7c"
+   ],
+   "support_marks": [
+    {
+     "claim": "Now $L/N=3h^2/\\binom h3=100/539$",
+     "quote": "The loss ratios have the exact values"
+    },
+    {
+     "claim": "The paper's decisive property is a bound on the number of smaller calls,",
+     "quote": "Every displayed summand is nondegenerate."
+    }
+   ]
+  },
+  {
+   "code": "a1-a9453b",
+   "page": "subset-intersection-construction",
+   "variant": 2,
+   "kind": "seeded",
+   "file": "pages/a1-a9453b.md",
+   "sha256": "3aecd363120955b2325d11ecd738a2efac1538461640b29627cd7f0cc4ebd269",
+   "errors": [
+    "SIC-4@a1-a9453b",
+    "SIC-6@a1-a9453b"
+   ],
+   "shams": [
+    "SIC-s1@a1-a9453b"
+   ],
+   "support_marks": [
+    {
+     "claim": "Now $L/N=3h^2/\\binom h3=100/539$",
+     "quote": "The loss ratios have the exact values"
+    },
+    {
+     "claim": "The paper's decisive property is a bound on the number of smaller calls,",
+     "quote": "smaller calls satisfies $s<Wm$"
+    }
+   ]
+  },
+  {
+   "code": "a1-492e03",
+   "page": "subset-intersection-construction",
+   "variant": 3,
+   "kind": "seeded",
+   "file": "pages/a1-492e03.md",
+   "sha256": "50d2bab6d1f1b6f965da7eb148364612a93f27ef218c9880a79efc7ef49cf40e",
+   "errors": [
+    "SIC-3@a1-492e03",
+    "SIC-7@a1-492e03"
+   ],
+   "shams": [
+    "SIC-s2@a1-492e03"
+   ],
+   "support_marks": [
+    {
+     "claim": "Now $L/N=3h^2/\\binom h3=100/539$",
+     "quote": "The loss ratios have the exact values"
+    },
+    {
+     "claim": "The paper's decisive property is a bound on the number of smaller calls,",
+     "quote": "smaller calls satisfies $s<Wm$"
+    }
+   ]
+  },
+  {
+   "code": "a1-df6e82",
+   "page": "tape-interchange",
+   "variant": 0,
+   "kind": "clean",
+   "file": "pages/a1-df6e82.md",
+   "sha256": "cbe516e7586e577b85a82bb111605f59e522a125be805f054b19f1683e3cf938",
+   "errors": [],
+   "shams": [],
+   "support_marks": [
+    {
+     "claim": "The interchange costs $O(Vu^{\\tau})$",
+     "quote": "Its cost is $O(Vu^\\tau)$ for a fixed $\\tau<1$"
+    },
+    {
+     "claim": "The bound needs $s<W\\mu$",
+     "quote": "s<Wm"
+    },
+    {
+     "claim": ", and the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$",
+     "quote": "supplies these conditions with $W=W_{\\rm b}$ and $s=s_{\\rm b}$"
+    },
+    {
+     "claim": "For the explicit network the paper computes $\\eta>20\\cdot2^{-50}$",
+     "quote": "Both exact deficits displayed above are greater than $20\\cdot2^{-50}$."
+    },
+    {
+     "claim": "For any initial auxiliary values, a forward invocation from $X$ to $Y$ adds $x_S$ into $y_S$ and changes no other value",
+     "quote": "a forward invocation changes $y_S$ to $y_S+x_S$ and leaves every other value unchanged"
+    },
+    {
+     "claim": "A forward, inverse, forward schedule of these invocations exchanges the two banks and returns every auxiliary wire to its starting value",
+     "quote": "restores every auxiliary value"
+    }
+   ]
+  },
+  {
+   "code": "a1-3d211b",
+   "page": "tape-interchange",
+   "variant": 1,
+   "kind": "seeded",
+   "file": "pages/a1-3d211b.md",
+   "sha256": "6e9049e445e1409b589e96e13deb77a3e7a31663787b3d013c8766004715dd3f",
+   "errors": [
+    "TI-2@a1-3d211b",
+    "TI-7@a1-3d211b"
+   ],
+   "shams": [
+    "TI-s2@a1-3d211b"
+   ],
+   "support_marks": [
+    {
+     "claim": "The interchange costs $O(Vu^{\\tau})$",
+     "quote": "Its cost is $O(Vu^\\tau)$ for a fixed $\\tau<1$"
+    },
+    {
+     "claim": "The bound needs $s<W\\mu$",
+     "quote": "s<Wm"
+    },
+    {
+     "claim": ", and the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$",
+     "quote": "supplies these conditions with $W=W_{\\rm b}$ and $s=s_{\\rm b}$"
+    },
+    {
+     "claim": "For the explicit network the paper computes $\\eta>20\\cdot2^{-40}$",
+     "quote": "Both exact deficits displayed above are greater than $20\\cdot2^{-50}$."
+    },
+    {
+     "claim": "For any initial auxiliary values, a forward invocation from $X$ to $Y$ adds $x_S$ into $y_S$ and changes no other value",
+     "quote": "a forward invocation changes $y_S$ to $y_S+x_S$ and leaves every other value unchanged"
+    },
+    {
+     "claim": "A forward, inverse, forward schedule of these invocations exchanges the two banks and returns every auxiliary wire to its starting value",
+     "quote": "restores every auxiliary value"
+    }
+   ]
+  },
+  {
+   "code": "a1-d043fc",
+   "page": "tape-interchange",
+   "variant": 2,
+   "kind": "seeded",
+   "file": "pages/a1-d043fc.md",
+   "sha256": "d195871b887e1ed12cb786127277440fbf97bf0e37f5db210f711fe9f3798567",
+   "errors": [
+    "TI-3@a1-d043fc",
+    "TI-8@a1-d043fc"
+   ],
+   "shams": [
+    "TI-s1@a1-d043fc"
+   ],
+   "support_marks": [
+    {
+     "claim": "The interchange costs $O(Vu^{\\tau})$",
+     "quote": "Its cost is $O(Vu^\\tau)$ for a fixed $\\tau<1$"
+    },
+    {
+     "claim": "The bound needs $s<W\\mu$",
+     "quote": "s<Wm"
+    },
+    {
+     "claim": ", and the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$",
+     "quote": "supplies these conditions with $W=W_{\\rm b}$ and $s=s_{\\rm b}$"
+    },
+    {
+     "claim": "For the explicit network the paper computes $\\eta>20\\cdot2^{-50}$",
+     "quote": "Both exact deficits displayed above are greater than $20\\cdot2^{-50}$."
+    },
+    {
+     "claim": "For any initial auxiliary values, a forward invocation from $X$ to $Y$ subtracts $x_S$ from $y_S$ and changes no other value",
+     "quote": "a forward invocation changes $y_S$ to $y_S+x_S$ and leaves every other value unchanged"
+    },
+    {
+     "claim": "A forward, inverse, forward schedule of these invocations exchanges the two banks and returns every auxiliary wire to its starting value",
+     "quote": "restores every auxiliary value"
+    }
+   ]
+  },
+  {
+   "code": "a1-2c1af2",
+   "page": "tape-interchange",
+   "variant": 3,
+   "kind": "seeded",
+   "file": "pages/a1-2c1af2.md",
+   "sha256": "eb1a549753f685b899bb20de7a0b3e732c681373f3946950b8d00dfb9c3d02c7",
+   "errors": [
+    "TI-4@a1-2c1af2",
+    "TI-5@a1-2c1af2"
+   ],
+   "shams": [
+    "TI-s2@a1-2c1af2"
+   ],
+   "support_marks": [
+    {
+     "claim": "The interchange costs $O(Vu^{\\tau})$",
+     "quote": "Its cost is $O(Vu^\\tau)$ for a fixed $\\tau<1$"
+    },
+    {
+     "claim": "The bound needs $s<W\\mu$",
+     "quote": "s<Wm"
+    },
+    {
+     "claim": ", and the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$",
+     "quote": "supplies these conditions with $W=W_{\\rm b}$ and $s=s_{\\rm b}$"
+    },
+    {
+     "claim": "For the explicit network the paper computes $\\eta>20\\cdot2^{-50}$",
+     "quote": "Both exact deficits displayed above are greater than $20\\cdot2^{-50}$."
+    },
+    {
+     "claim": "For any initial auxiliary values, a forward invocation from $X$ to $Y$ adds $x_S$ into $y_S$ and changes no other value",
+     "quote": "a forward invocation changes $y_S$ to $y_S+x_S$ and leaves every other value unchanged"
+    },
+    {
+     "claim": "A forward, inverse, forward schedule of these invocations exchanges the two banks and returns every auxiliary wire to its starting value",
+     "quote": "restores every auxiliary value"
+    }
+   ]
+  }
+ ],
+ "errors": [
+  {
+   "id": "ASF-1@a1-34e565",
+   "catalogue_id": "ASF-1",
+   "code": "a1-34e565",
+   "page": "address-shear-factorization",
+   "variant": 1,
+   "original": "where $F_1$ and $F_2$ are invertible lower-triangular rational matrices",
+   "seeded": "where $F_1$ and $F_2$ are lower-triangular rational matrices",
+   "location": {
+    "offset": 1384,
+    "line": 7,
+    "audit_site": {
+     "text": "where $F_1$ and $F_2$ are lower-triangular rational matrices",
+     "span": [
+      1384,
+      1444
+     ],
+     "sentence": "Every rational $M$ factors as $M=F_1\\Pi F_2$, where $F_1$ and $F_2$ are lower-triangular rational matrices.",
+     "sentence_span": [
+      1338,
+      1445
+     ],
+     "paragraph_span": [
+      1113,
+      1615
+     ]
+    },
+    "audit_site_clean": {
+     "text": "where $F_1$ and $F_2$ are invertible lower-triangular rational matrices",
+     "span": [
+      1376,
+      1447
+     ],
+     "sentence": "Every rational $M$ factors as $M=F_1\\Pi F_2$, where $F_1$ and $F_2$ are invertible lower-triangular rational matrices.",
+     "sentence_span": [
+      1330,
+      1448
+     ],
+     "paragraph_span": [
+      1105,
+      1618
+     ]
+    },
+    "linked": [
+     {
+      "text": "replace $D$ by $F_2D$ and $H$ by $F_1^{-1}H$",
+      "span": [
+       1875,
+       1919
+      ],
+      "sentence": "To apply the shear, replace $D$ by $F_2D$ and $H$ by $F_1^{-1}H$.",
+      "sentence_span": [
+       1855,
+       1920
+      ],
+      "paragraph_span": [
+       1855,
+       2160
+      ]
+     }
+    ],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "hypothesis",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "the procedure applies F_1^{-1} and F_2^{-1}; a lower-triangular matrix need not be invertible",
+   "paper_lines": "1366-1373",
+   "cues": [
+    "invertible",
+    "singular"
+   ]
+  },
+  {
+   "id": "ASF-7@a1-34e565",
+   "catalogue_id": "ASF-7",
+   "code": "a1-34e565",
+   "page": "address-shear-factorization",
+   "variant": 1,
+   "original": "<cite data-source=\"paper\">A lower triangular transformation of $H$, or of $D$, costs $O(V)$</cite>",
+   "seeded": "<cite data-source=\"paper\">It uses just one interchange.</cite>",
+   "location": {
+    "offset": 2673,
+    "line": 15,
+    "audit_site": {
+     "text": "A lower-triangular transformation costs $O(V)$",
+     "span": [
+      2626,
+      2672
+     ],
+     "sentence": "A lower-triangular transformation costs $O(V)$ (cited), where $V$ is the stored bit volume.",
+     "sentence_span": [
+      2626,
+      2717
+     ],
+     "paragraph_span": [
+      2626,
+      2945
+     ]
+    },
+    "audit_site_clean": {
+     "text": "A lower-triangular transformation costs $O(V)$",
+     "span": [
+      2629,
+      2675
+     ],
+     "sentence": "A lower-triangular transformation costs $O(V)$ (cited), where $V$ is the stored bit volume.",
+     "sentence_span": [
+      2629,
+      2720
+     ],
+     "paragraph_span": [
+      2629,
+      2948
+     ]
+    },
+    "linked": [],
+    "support_mark": {
+     "index": 1,
+     "claim": "A lower-triangular transformation costs $O(V)$",
+     "quote": "It uses just one interchange."
+    },
+    "support_mark_clean": {
+     "index": 1,
+     "claim": "A lower-triangular transformation costs $O(V)$",
+     "quote": "A lower triangular transformation of $H$, or of $D$, costs $O(V)$"
+    }
+   },
+   "type": "attribution",
+   "detectable_by": [
+    "quote"
+   ],
+   "why": "the quotation (paper 1443) is about one update's single interchange, not the cost of a triangular transformation",
+   "paper_lines": "1427 (true), 1443 (seeded)",
+   "cues": [
+    "just one interchange"
+   ]
+  },
+  {
+   "id": "ASF-5@a1-25155c",
+   "catalogue_id": "ASF-5",
+   "code": "a1-25155c",
+   "page": "address-shear-factorization",
+   "variant": 2,
+   "original": "The paper shows $N>2L_{\\rm b}$, so",
+   "seeded": "The paper shows $N<2L_{\\rm b}$, so",
+   "location": {
+    "offset": 3455,
+    "line": 17,
+    "audit_site": {
+     "text": "The paper shows $N<2L_{\\rm b}$, so",
+     "span": [
+      3364,
+      3398
+     ],
+     "sentence": "The paper shows $N<2L_{\\rm b}$, so $s_{\\rm b}<W_{\\rm b}R$.",
+     "sentence_span": [
+      3364,
+      3422
+     ],
+     "paragraph_span": [
+      2966,
+      3569
+     ]
+    },
+    "audit_site_clean": {
+     "text": "The paper shows $N>2L_{\\rm b}$, so",
+     "span": [
+      3348,
+      3382
+     ],
+     "sentence": "The paper shows $N>2L_{\\rm b}$, so $s_{\\rm b}<W_{\\rm b}R$.",
+     "sentence_span": [
+      3348,
+      3406
+     ],
+     "paragraph_span": [
+      2950,
+      3553
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "inequality",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "with s_b = W_bR - N + 2L_b, N<2L_b gives s_b > W_bR; the paper's deficit is N-2L_b>0",
+   "paper_lines": "1166-1167",
+   "cues": [
+    "N<2L",
+    "N>2L",
+    "N-2L"
+   ]
+  },
+  {
+   "id": "ASF-6@a1-25155c",
+   "catalogue_id": "ASF-6",
+   "code": "a1-25155c",
+   "page": "address-shear-factorization",
+   "variant": 2,
+   "original": "A lower-triangular transformation costs $O(V)$ <cite",
+   "seeded": "Any invertible linear transformation of $H$ or $D$ costs $O(V)$ <cite",
+   "location": {
+    "offset": 2628,
+    "line": 15,
+    "audit_site": {
+     "text": "Any invertible linear transformation of $H$ or $D$ costs $O(V)$",
+     "span": [
+      2628,
+      2691
+     ],
+     "sentence": "Any invertible linear transformation of $H$ or $D$ costs $O(V)$ (cited), where $V$ is the stored bit volume.",
+     "sentence_span": [
+      2628,
+      2736
+     ],
+     "paragraph_span": [
+      2628,
+      2964
+     ]
+    },
+    "audit_site_clean": {
+     "text": "A lower-triangular transformation costs $O(V)$",
+     "span": [
+      2629,
+      2675
+     ],
+     "sentence": "A lower-triangular transformation costs $O(V)$ (cited), where $V$ is the stored bit volume.",
+     "sentence_span": [
+      2629,
+      2720
+     ],
+     "paragraph_span": [
+      2629,
+      2948
+     ]
+    },
+    "linked": [],
+    "support_mark": {
+     "index": 1,
+     "claim": "Any invertible linear transformation of $H$ or $D$ costs $O(V)$",
+     "quote": "A lower triangular transformation of $H$, or of $D$, costs $O(V)$"
+    },
+    "support_mark_clean": {
+     "index": 1,
+     "claim": "A lower-triangular transformation costs $O(V)$",
+     "quote": "A lower triangular transformation of $H$, or of $D$, costs $O(V)$"
+    }
+   },
+   "type": "generalisation",
+   "detectable_by": [
+    "page",
+    "quote"
+   ],
+   "why": "only triangular transformations run in place in linear time (each coordinate combines earlier, unchanged ones); if every invertible linear map of the fields cost O(V), the shear itself would, and the recursion would be pointless",
+   "paper_lines": "1427-1433",
+   "cues": [
+    "any invertible",
+    "any linear",
+    "every linear",
+    "arbitrary linear"
+   ]
+  },
+  {
+   "id": "ASF-3@a1-334ea2",
+   "catalogue_id": "ASF-3",
+   "code": "a1-334ea2",
+   "page": "address-shear-factorization",
+   "variant": 3,
+   "original": "then set $D_\\tau\\leftarrow H_\\sigma-D_\\tau$",
+   "seeded": "then set $D_\\tau\\leftarrow D_\\tau-H_\\sigma$",
+   "location": {
+    "offset": 2369,
+    "line": 13,
+    "audit_site": {
+     "text": "then set $D_\\tau\\leftarrow D_\\tau-H_\\sigma$",
+     "span": [
+      2369,
+      2412
+     ],
+     "sentence": "Each update $H_\\sigma\\leftarrow H_\\sigma+D_\\tau$ takes one interchange of two equal fields and two additions: set $D_\\tau\\leftarrow D_\\tau+H_\\sigma$, swap the contents of $H_\\sigma$ and $D_\\tau$, then set $D_\\tau\\leftarrow D_\\tau-H_\\sigma$.",
+     "sentence_span": [
+      2173,
+      2413
+     ],
+     "paragraph_span": [
+      2173,
+      2636
+     ]
+    },
+    "audit_site_clean": {
+     "text": "then set $D_\\tau\\leftarrow H_\\sigma-D_\\tau$",
+     "span": [
+      2361,
+      2404
+     ],
+     "sentence": "Each update $H_\\sigma\\leftarrow H_\\sigma+D_\\tau$ takes one interchange of two equal fields and two additions: set $D_\\tau\\leftarrow D_\\tau+H_\\sigma$, swap the contents of $H_\\sigma$ and $D_\\tau$, then set $D_\\tau\\leftarrow H_\\sigma-D_\\tau$.",
+     "sentence_span": [
+      2165,
+      2405
+     ],
+     "paragraph_span": [
+      2165,
+      2627
+     ]
+    },
+    "linked": [
+     {
+      "text": "becomes $(\\eta+\\zeta,\\zeta)$",
+      "span": [
+       2513,
+       2541
+      ],
+      "sentence": "Then the pair $(\\eta,\\zeta)$ becomes $(\\eta+\\zeta,\\zeta)$.",
+      "sentence_span": [
+       2484,
+       2542
+      ],
+      "paragraph_span": [
+       2173,
+       2636
+      ]
+     }
+    ],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "sign",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "with D_τ ← D_τ - H_σ the pair (η,ζ) ends as (η+ζ,-ζ), not the (η+ζ,ζ) the page states",
+   "paper_lines": "1436-1440",
+   "cues": [
+    "-\\zeta",
+    "-ζ",
+    "D_\\tau-H_\\sigma",
+    "H_\\sigma-D_\\tau"
+   ]
+  },
+  {
+   "id": "ASF-8@a1-334ea2",
+   "catalogue_id": "ASF-8",
+   "code": "a1-334ea2",
+   "page": "address-shear-factorization",
+   "variant": 3,
+   "original": "So the shear needs $\\operatorname{rank}_{\\mathbb Q}M$ interchanges",
+   "seeded": "So the shear needs $2\\operatorname{rank}_{\\mathbb Q}M$ interchanges",
+   "location": {
+    "offset": 2543,
+    "line": 13,
+    "audit_site": {
+     "text": "So the shear needs $2\\operatorname{rank}_{\\mathbb Q}M$ interchanges",
+     "span": [
+      2543,
+      2610
+     ],
+     "sentence": "So the shear needs $2\\operatorname{rank}_{\\mathbb Q}M$ interchanges plus $O(V)$ further work.",
+     "sentence_span": [
+      2543,
+      2636
+     ],
+     "paragraph_span": [
+      2173,
+      2636
+     ]
+    },
+    "audit_site_clean": {
+     "text": "So the shear needs $\\operatorname{rank}_{\\mathbb Q}M$ interchanges",
+     "span": [
+      2535,
+      2601
+     ],
+     "sentence": "So the shear needs $\\operatorname{rank}_{\\mathbb Q}M$ interchanges plus $O(V)$ further work.",
+     "sentence_span": [
+      2535,
+      2627
+     ],
+     "paragraph_span": [
+      2165,
+      2627
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "constant",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "each 1 of Π takes one interchange and Π has rank_Q M ones, so rank_Q M interchanges",
+   "paper_lines": "1443-1446",
+   "cues": [
+    "2\\operatorname",
+    "2 rank",
+    "2rank",
+    "twice"
+   ]
+  },
+  {
+   "id": "FAI-5@a1-79746e",
+   "catalogue_id": "FAI-5",
+   "code": "a1-79746e",
+   "page": "fast-address-interchange",
+   "variant": 1,
+   "original": "For the bit network, $s<Wm$ <cite",
+   "seeded": "For the bit network, $s<W$ <cite",
+   "location": {
+    "offset": 1787,
+    "line": 11,
+    "audit_site": {
+     "text": "For the bit network, $s<W$",
+     "span": [
+      1742,
+      1768
+     ],
+     "sentence": "For the bit network, $s<W$ (cited); the paper's proof computes $s$ as $Wm$ minus a positive constant fixed by the construction.",
+     "sentence_span": [
+      1742,
+      1869
+     ],
+     "paragraph_span": [
+      1549,
+      1951
+     ]
+    },
+    "audit_site_clean": {
+     "text": "For the bit network, $s<Wm$",
+     "span": [
+      1745,
+      1772
+     ],
+     "sentence": "For the bit network, $s<Wm$ (cited); the paper's proof computes $s$ as $Wm$ minus a positive constant fixed by the construction.",
+     "sentence_span": [
+      1745,
+      1873
+     ],
+     "paragraph_span": [
+      1552,
+      1955
+     ]
+    },
+    "linked": [],
+    "support_mark": {
+     "index": 2,
+     "claim": "For the bit network, $s<W$",
+     "quote": "the total number $s$ of smaller calls satisfies $s<Wm$"
+    },
+    "support_mark_clean": {
+     "index": 2,
+     "claim": "For the bit network, $s<Wm$",
+     "quote": "the total number $s$ of smaller calls satisfies $s<Wm$"
+    }
+   },
+   "type": "constant",
+   "detectable_by": [
+    "quote"
+   ],
+   "why": "the bound is s<Wm (the quotation); s_b is W_b m(1-η) with η≈1.5e-11, far above W_b",
+   "paper_lines": "168, 1150",
+   "cues": [
+    "s<Wm"
+   ]
+  },
+  {
+   "id": "FAI-7@a1-79746e",
+   "catalogue_id": "FAI-7",
+   "code": "a1-79746e",
+   "page": "fast-address-interchange",
+   "variant": 1,
+   "original": "<cite data-source=\"paper\">for a fixed $\\tau<1$</cite>",
+   "seeded": "<cite data-source=\"paper\">contains $V/W$ bits</cite>",
+   "location": {
+    "offset": 632,
+    "line": 1,
+    "audit_site": {
+     "text": "Here $\\tau$, the fixed exponent below 1 in the cost",
+     "span": [
+      547,
+      598
+     ],
+     "sentence": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited).",
+     "sentence_span": [
+      547,
+      640
+     ],
+     "paragraph_span": [
+      0,
+      729
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Here $\\tau$, the fixed exponent below 1 in the cost",
+     "span": [
+      547,
+      598
+     ],
+     "sentence": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited).",
+     "sentence_span": [
+      547,
+      640
+     ],
+     "paragraph_span": [
+      0,
+      729
+     ]
+    },
+    "linked": [],
+    "support_mark": {
+     "index": 1,
+     "claim": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$",
+     "quote": "contains $V/W$ bits"
+    },
+    "support_mark_clean": {
+     "index": 1,
+     "claim": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$",
+     "quote": "for a fixed $\\tau<1$"
+    }
+   },
+   "type": "attribution",
+   "detectable_by": [
+    "quote"
+   ],
+   "why": "the quotation (paper 128) is about role-stream volume, not the cost exponent",
+   "paper_lines": "97 (true), 128 (seeded)",
+   "cues": [
+    "V/W"
+   ]
+  },
+  {
+   "id": "FAI-4@a1-fe95b8",
+   "catalogue_id": "FAI-4",
+   "code": "a1-fe95b8",
+   "page": "fast-address-interchange",
+   "variant": 2,
+   "original": "The geometric sum is also $O(m^{k\\tau})$: if $s/W\\le1$ it is at most $k$, and if $s/W>1$ it is $O((s/W)^k)$.",
+   "seeded": "The geometric sum is also $O(m^{k\\tau})$, since it is $O((s/W)^k)$.",
+   "location": {
+    "offset": 2495,
+    "line": 15,
+    "audit_site": {
+     "text": "The geometric sum is also $O(m^{k\\tau})$, since it is $O((s/W)^k)$.",
+     "span": [
+      2369,
+      2436
+     ],
+     "sentence": "The geometric sum is also $O(m^{k\\tau})$, since it is $O((s/W)^k)$.",
+     "sentence_span": [
+      2369,
+      2436
+     ],
+     "paragraph_span": [
+      1948,
+      2571
+     ]
+    },
+    "audit_site_clean": {
+     "text": "The geometric sum is also $O(m^{k\\tau})$: if $s/W\\le1$ it is at most $k$, and if $s/W>1$ it is $O((s/W)^k)$.",
+     "span": [
+      2378,
+      2486
+     ],
+     "sentence": "The geometric sum is also $O(m^{k\\tau})$: if $s/W\\le1$ it is at most $k$, and if $s/W>1$ it is $O((s/W)^k)$.",
+     "sentence_span": [
+      2378,
+      2486
+     ],
+     "paragraph_span": [
+      1957,
+      2621
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "cases",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "the case s/W≤1 is dropped: then (s/W)^k→0 while the sum is at least 1, so the sum is not O((s/W)^k); the paper bounds it by k+1 in that case",
+   "paper_lines": "1554-1556",
+   "cues": [
+    "s/W\\le1",
+    "s/W<1",
+    "s/W ≤ 1",
+    "at most k"
+   ]
+  },
+  {
+   "id": "FAI-8@a1-fe95b8",
+   "catalogue_id": "FAI-8",
+   "code": "a1-fe95b8",
+   "page": "fast-address-interchange",
+   "variant": 2,
+   "original": "Unrolling gives $Q_k\\le (s/W)^k Q_0+C\\sum_{j<k}(s/W)^j$",
+   "seeded": "Unrolling gives $Q_k\\le (s/W)^k Q_0-C\\sum_{j<k}(s/W)^j$",
+   "location": {
+    "offset": 2383,
+    "line": 15,
+    "audit_site": {
+     "text": "Unrolling gives $Q_k\\le (s/W)^k Q_0-C\\sum_{j<k}(s/W)^j$",
+     "span": [
+      2257,
+      2312
+     ],
+     "sentence": "Unrolling gives $Q_k\\le (s/W)^k Q_0-C\\sum_{j<k}(s/W)^j$.",
+     "sentence_span": [
+      2257,
+      2313
+     ],
+     "paragraph_span": [
+      1948,
+      2571
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Unrolling gives $Q_k\\le (s/W)^k Q_0+C\\sum_{j<k}(s/W)^j$",
+     "span": [
+      2266,
+      2321
+     ],
+     "sentence": "Unrolling gives $Q_k\\le (s/W)^k Q_0+C\\sum_{j<k}(s/W)^j$.",
+     "sentence_span": [
+      2266,
+      2322
+     ],
+     "paragraph_span": [
+      1957,
+      2621
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "sign",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "unrolling Q_k ≤ (s/W)Q_{k-1}+C adds the outside work at every level",
+   "paper_lines": "1549-1556",
+   "cues": [
+    "-C\\sum",
+    "+C\\sum",
+    "-C sum",
+    "+C sum"
+   ]
+  },
+  {
+   "id": "FAI-3@a1-c3b1a7",
+   "catalogue_id": "FAI-3",
+   "code": "a1-c3b1a7",
+   "page": "fast-address-interchange",
+   "variant": 3,
+   "original": "fix $\\tau<1$ with $s/W<m^\\tau$",
+   "seeded": "fix $\\tau<1$ with $s/W>m^\\tau$",
+   "location": {
+    "offset": 2052,
+    "line": 11,
+    "audit_site": {
+     "text": "fix $\\tau<1$ with $s/W>m^\\tau$",
+     "span": [
+      1926,
+      1956
+     ],
+     "sentence": "Since $m^\\tau\\to m$ as $\\tau\\to1$, fix $\\tau<1$ with $s/W>m^\\tau$.",
+     "sentence_span": [
+      1891,
+      1957
+     ],
+     "paragraph_span": [
+      1549,
+      1957
+     ]
+    },
+    "audit_site_clean": {
+     "text": "fix $\\tau<1$ with $s/W<m^\\tau$",
+     "span": [
+      1924,
+      1954
+     ],
+     "sentence": "Since $m^\\tau\\to m$ as $\\tau\\to1$, fix $\\tau<1$ with $s/W<m^\\tau$.",
+     "sentence_span": [
+      1889,
+      1955
+     ],
+     "paragraph_span": [
+      1552,
+      1955
+     ]
+    },
+    "linked": [
+     {
+      "text": "because $s/W<m^\\tau$",
+      "span": [
+       2358,
+       2378
+      ],
+      "sentence": "The first term is $O(m^{k\\tau})$ because $s/W<m^\\tau$.",
+      "sentence_span": [
+       2325,
+       2379
+      ],
+      "paragraph_span": [
+       1959,
+       2623
+      ]
+     }
+    ],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "inequality",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "the bound needs s/W<m^τ, which the next paragraph uses",
+   "paper_lines": "1482, 1554",
+   "cues": [
+    "s/W>m^",
+    "s/W<m^"
+   ]
+  },
+  {
+   "id": "FAI-6@a1-c3b1a7",
+   "catalogue_id": "FAI-6",
+   "code": "a1-c3b1a7",
+   "page": "fast-address-interchange",
+   "variant": 3,
+   "original": "For the bit network, $s<Wm$ <cite",
+   "seeded": "For every linear network, $s<Wm$ <cite",
+   "location": {
+    "offset": 1788,
+    "line": 11,
+    "audit_site": {
+     "text": "For every linear network, $s<Wm$",
+     "span": [
+      1742,
+      1774
+     ],
+     "sentence": "For every linear network, $s<Wm$ (cited); the paper's proof computes $s$ as $Wm$ minus a positive constant fixed by the construction.",
+     "sentence_span": [
+      1742,
+      1875
+     ],
+     "paragraph_span": [
+      1549,
+      1957
+     ]
+    },
+    "audit_site_clean": {
+     "text": "For the bit network, $s<Wm$",
+     "span": [
+      1745,
+      1772
+     ],
+     "sentence": "For the bit network, $s<Wm$ (cited); the paper's proof computes $s$ as $Wm$ minus a positive constant fixed by the construction.",
+     "sentence_span": [
+      1745,
+      1873
+     ],
+     "paragraph_span": [
+      1552,
+      1955
+     ]
+    },
+    "linked": [],
+    "support_mark": {
+     "index": 2,
+     "claim": "For every linear network, $s<Wm$",
+     "quote": "the total number $s$ of smaller calls satisfies $s<Wm$"
+    },
+    "support_mark_clean": {
+     "index": 2,
+     "claim": "For the bit network, $s<Wm$",
+     "quote": "the total number $s$ of smaller calls satisfies $s<Wm$"
+    }
+   },
+   "type": "generalisation",
+   "detectable_by": [
+    "quote"
+   ],
+   "why": "s<Wm is a property of the paper's construction, not of every network",
+   "paper_lines": "168, 1150",
+   "cues": [
+    "every linear network",
+    "every network"
+   ]
+  },
+  {
+   "id": "LNR-7@a1-a8a305",
+   "catalogue_id": "LNR-7",
+   "code": "a1-a8a305",
+   "page": "linear-network-roles",
+   "variant": 1,
+   "original": "and multiplying by $\\varepsilon_w$ again removes the sign",
+   "seeded": "and multiplying by $-\\varepsilon_w$ again removes the sign",
+   "location": {
+    "offset": 2752,
+    "line": 15,
+    "audit_site": {
+     "text": "and multiplying by $-\\varepsilon_w$ again removes the sign",
+     "span": [
+      2707,
+      2765
+     ],
+     "sentence": "Undoing the exchange moves each output back to its input role, and multiplying by $-\\varepsilon_w$ again removes the sign.",
+     "sentence_span": [
+      2644,
+      2766
+     ],
+     "paragraph_span": [
+      2327,
+      2958
+     ]
+    },
+    "audit_site_clean": {
+     "text": "and multiplying by $\\varepsilon_w$ again removes the sign",
+     "span": [
+      2706,
+      2763
+     ],
+     "sentence": "Undoing the exchange moves each output back to its input role, and multiplying by $\\varepsilon_w$ again removes the sign.",
+     "sentence_span": [
+      2643,
+      2764
+     ],
+     "paragraph_span": [
+      2326,
+      2956
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "sign",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "ε_w^2=1 removes the sign; -ε_w·ε_w=-1 flips it",
+   "paper_lines": "143-147",
+   "cues": [
+    "-\\varepsilon",
+    "-ε",
+    "varepsilon_w^2",
+    "ε_w^2"
+   ]
+  },
+  {
+   "id": "LNR-8@a1-a8a305",
+   "catalogue_id": "LNR-8",
+   "code": "a1-a8a305",
+   "page": "linear-network-roles",
+   "variant": 1,
+   "original": "<cite data-source=\"paper\">leaves the endpoint operator on every role array</cite>",
+   "seeded": "<cite data-source=\"paper\">Every displayed summand is nondegenerate.</cite>",
+   "location": {
+    "offset": 3046,
+    "line": 15,
+    "audit_site": {
+     "text": "Every role keeps the endpoint operator",
+     "span": [
+      2885,
+      2923
+     ],
+     "sentence": "Every role keeps the endpoint operator (cited), auxiliary roles included.",
+     "sentence_span": [
+      2885,
+      2958
+     ],
+     "paragraph_span": [
+      2327,
+      2958
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Every role keeps the endpoint operator",
+     "span": [
+      2883,
+      2921
+     ],
+     "sentence": "Every role keeps the endpoint operator (cited), auxiliary roles included.",
+     "sentence_span": [
+      2883,
+      2956
+     ],
+     "paragraph_span": [
+      2326,
+      2956
+     ]
+    },
+    "linked": [],
+    "support_mark": {
+     "index": 3,
+     "claim": "Every role keeps the endpoint operator",
+     "quote": "Every displayed summand is nondegenerate."
+    },
+    "support_mark_clean": {
+     "index": 3,
+     "claim": "Every role keeps the endpoint operator",
+     "quote": "leaves the endpoint operator on every role array"
+    }
+   },
+   "type": "attribution",
+   "detectable_by": [
+    "quote"
+   ],
+   "why": "the quotation (paper 990) is about label sums, not the endpoint operator",
+   "paper_lines": "147 (true), 990 (seeded)",
+   "cues": [
+    "nondegenerate",
+    "summand"
+   ]
+  },
+  {
+   "id": "LNR-5@a1-aef5e8",
+   "catalogue_id": "LNR-5",
+   "code": "a1-aef5e8",
+   "page": "linear-network-roles",
+   "variant": 2,
+   "original": "carries an invertible linear operator $D_\\nu$",
+   "seeded": "carries a linear operator $D_\\nu$",
+   "location": {
+    "offset": 1458,
+    "line": 9,
+    "audit_site": {
+     "text": "carries a linear operator $D_\\nu$",
+     "span": [
+      1413,
+      1446
+     ],
+     "sentence": "Each source, gate and sink $\\nu$ carries a linear operator $D_\\nu$ on arrays indexed by the common address set, its *frame*.",
+     "sentence_span": [
+      1380,
+      1504
+     ],
+     "paragraph_span": [
+      1380,
+      1749
+     ]
+    },
+    "audit_site_clean": {
+     "text": "carries an invertible linear operator $D_\\nu$",
+     "span": [
+      1408,
+      1453
+     ],
+     "sentence": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$ on arrays indexed by the common address set, its *frame*.",
+     "sentence_span": [
+      1375,
+      1511
+     ],
+     "paragraph_span": [
+      1375,
+      1756
+     ]
+    },
+    "linked": [
+     {
+      "text": "the stored array changes by $D_\\beta D_\\alpha^{-1}$",
+      "span": [
+       1697,
+       1748
+      ],
+      "sentence": "Along an edge from node $\\alpha$ to node $\\beta$ the stored array changes by $D_\\beta D_\\alpha^{-1}$.",
+      "sentence_span": [
+       1648,
+       1749
+      ],
+      "paragraph_span": [
+       1380,
+       1749
+      ]
+     }
+    ],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "hypothesis",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "edges apply D_β D_α^{-1}, so frames must be invertible",
+   "paper_lines": "130-134",
+   "cues": [
+    "invertible",
+    "singular"
+   ]
+  },
+  {
+   "id": "LNR-6@a1-aef5e8",
+   "catalogue_id": "LNR-6",
+   "code": "a1-aef5e8",
+   "page": "linear-network-roles",
+   "variant": 2,
+   "original": "=D_{\\alpha_k}D_{\\alpha_0}^{-1}$",
+   "seeded": "=D_{\\alpha_k}D_{\\alpha_1}^{-1}$",
+   "location": {
+    "offset": 2249,
+    "line": 13,
+    "audit_site": {
+     "text": "=D_{\\alpha_k}D_{\\alpha_1}^{-1}$",
+     "span": [
+      2204,
+      2235
+     ],
+     "sentence": "Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges, the operators telescope: $(D_{\\alpha_k}D_{\\alpha_{k-1}}^{-1})\\cdots(D_{\\alpha_1}D_{\\alpha_0}^{-1})=D_{\\alpha_k}D_{\\alpha_1}^{-1}$.",
+     "sentence_span": [
+      2047,
+      2236
+     ],
+     "paragraph_span": [
+      2047,
+      2317
+     ]
+    },
+    "audit_site_clean": {
+     "text": "=D_{\\alpha_k}D_{\\alpha_0}^{-1}$",
+     "span": [
+      2211,
+      2242
+     ],
+     "sentence": "Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges, the operators telescope: $(D_{\\alpha_k}D_{\\alpha_{k-1}}^{-1})\\cdots(D_{\\alpha_1}D_{\\alpha_0}^{-1})=D_{\\alpha_k}D_{\\alpha_0}^{-1}$.",
+     "sentence_span": [
+      2054,
+      2243
+     ],
+     "paragraph_span": [
+      2054,
+      2324
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "constant",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "the product telescopes to D_{α_k} D_{α_0}^{-1}; the last factor is D_{α_1}D_{α_0}^{-1}",
+   "paper_lines": "140-145",
+   "cues": [
+    "D_{\\alpha_1}^{-1}",
+    "D_{\\alpha_0}^{-1}",
+    "alpha_1}^{-1}",
+    "alpha_0}^{-1}"
+   ]
+  },
+  {
+   "id": "LNR-1@a1-edc768",
+   "catalogue_id": "LNR-1",
+   "code": "a1-edc768",
+   "page": "linear-network-roles",
+   "variant": 3,
+   "original": "Each role stream then holds $V/W$ bits <cite",
+   "seeded": "Each role stream then holds $V/(2W)$ bits <cite",
+   "location": {
+    "offset": 1326,
+    "line": 7,
+    "audit_site": {
+     "text": "Each role stream then holds $V/(2W)$ bits",
+     "span": [
+      1326,
+      1367
+     ],
+     "sentence": "Each role stream then holds $V/(2W)$ bits (cited).",
+     "sentence_span": [
+      1326,
+      1376
+     ],
+     "paragraph_span": [
+      817,
+      1376
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Each role stream then holds $V/W$ bits",
+     "span": [
+      1326,
+      1364
+     ],
+     "sentence": "Each role stream then holds $V/W$ bits (cited).",
+     "sentence_span": [
+      1326,
+      1373
+     ],
+     "paragraph_span": [
+      817,
+      1373
+     ]
+    },
+    "linked": [],
+    "support_mark": {
+     "index": 1,
+     "claim": "Each role stream then holds $V/(2W)$ bits",
+     "quote": "contains $V/W$ bits"
+    },
+    "support_mark_clean": {
+     "index": 1,
+     "claim": "Each role stream then holds $V/W$ bits",
+     "quote": "contains $V/W$ bits"
+    }
+   },
+   "type": "constant",
+   "detectable_by": [
+    "page",
+    "quote"
+   ],
+   "why": "V padded bits split cyclically over W roles give V/W per role (the quotation)",
+   "paper_lines": "126-128",
+   "cues": [
+    "V/(2W)",
+    "V/2W"
+   ]
+  },
+  {
+   "id": "LNR-4@a1-edc768",
+   "catalogue_id": "LNR-4",
+   "code": "a1-edc768",
+   "page": "linear-network-roles",
+   "variant": 3,
+   "original": "Frames therefore pass through gates.",
+   "seeded": "Frames therefore pass through every gate, linear or not.",
+   "location": {
+    "offset": 2064,
+    "line": 11,
+    "audit_site": {
+     "text": "Frames therefore pass through every gate, linear or not.",
+     "span": [
+      2019,
+      2075
+     ],
+     "sentence": "The frame $D_\\nu$ of the gate is linear and the coefficients are scalars, so $$G(D_\\nu f_1,\\ldots,D_\\nu f_p)=D_\\nu G(f_1,\\ldots,f_p).$$ Frames therefore pass through every gate, linear or not.",
+     "sentence_span": [
+      1883,
+      2075
+     ],
+     "paragraph_span": [
+      1761,
+      2075
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Frames therefore pass through gates.",
+     "span": [
+      2016,
+      2052
+     ],
+     "sentence": "The frame $D_\\nu$ of the gate is linear and the coefficients are scalars, so $$G(D_\\nu f_1,\\ldots,D_\\nu f_p)=D_\\nu G(f_1,\\ldots,f_p).$$ Frames therefore pass through gates.",
+     "sentence_span": [
+      1880,
+      2052
+     ],
+     "paragraph_span": [
+      1758,
+      2052
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "generalisation",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "the commutation G(D f_1,...)=D G(f_1,...) uses the gate's linearity and pointwise action",
+   "paper_lines": "136-139",
+   "cues": [
+    "nonlinear",
+    "non-linear",
+    "linear or not",
+    "not linear"
+   ]
+  },
+  {
+   "id": "RPS-1@a1-53c428",
+   "catalogue_id": "RPS-1",
+   "code": "a1-53c428",
+   "page": "recursive-power-saving",
+   "variant": 1,
+   "original": "\\frac{s}{W}\\Phi(f)+C(mf)^\\lambda.$$",
+   "seeded": "\\frac{s}{W}\\Phi(f)-C(mf)^\\lambda.$$",
+   "location": {
+    "offset": 1323,
+    "line": 7,
+    "audit_site": {
+     "text": "\\frac{s}{W}\\Phi(f)-C(mf)^\\lambda.$$",
+     "span": [
+      1323,
+      1358
+     ],
+     "sentence": "$$\\Phi(mf)\\le\\frac{s}{W}\\Phi(f)-C(mf)^\\lambda.$$",
+     "sentence_span": [
+      1310,
+      1358
+     ],
+     "paragraph_span": [
+      1310,
+      1358
+     ]
+    },
+    "audit_site_clean": {
+     "text": "\\frac{s}{W}\\Phi(f)+C(mf)^\\lambda.$$",
+     "span": [
+      1323,
+      1358
+     ],
+     "sentence": "$$\\Phi(mf)\\le\\frac{s}{W}\\Phi(f)+C(mf)^\\lambda.$$",
+     "sentence_span": [
+      1310,
+      1358
+     ],
+     "paragraph_span": [
+      1310,
+      1358
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "sign",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "the call's own outside work adds to the subcalls' cost",
+   "paper_lines": "1549-1553",
+   "cues": [
+    "-C(mf)",
+    "+C(mf)"
+   ]
+  },
+  {
+   "id": "RPS-2@a1-53c428",
+   "catalogue_id": "RPS-2",
+   "code": "a1-53c428",
+   "page": "recursive-power-saving",
+   "variant": 1,
+   "original": "Taking $\\lambda$ with $\\log_m(s/W)<\\lambda<1$",
+   "seeded": "Taking $\\lambda$ with $\\lambda<\\log_m(s/W)<1$",
+   "location": {
+    "offset": 2687,
+    "line": 15,
+    "audit_site": {
+     "text": "Taking $\\lambda$ with $\\lambda<\\log_m(s/W)<1$",
+     "span": [
+      2532,
+      2577
+     ],
+     "sentence": "(cited) Taking $\\lambda$ with $\\lambda<\\log_m(s/W)<1$ makes the ratio below 1, so the internal sum is at most a constant times $f^\\lambda$.",
+     "sentence_span": [
+      2524,
+      2663
+     ],
+     "paragraph_span": [
+      2489,
+      2663
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Taking $\\lambda$ with $\\log_m(s/W)<\\lambda<1$",
+     "span": [
+      2523,
+      2568
+     ],
+     "sentence": "(cited) Taking $\\lambda$ with $\\log_m(s/W)<\\lambda<1$ makes the ratio below 1, so the internal sum is at most a constant times $f^\\lambda$.",
+     "sentence_span": [
+      2515,
+      2654
+     ],
+     "paragraph_span": [
+      2480,
+      2654
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "inequality",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "the ratio (s/W)/m^λ is below 1 only when λ > log_m(s/W)",
+   "paper_lines": "1482, 1554",
+   "cues": [
+    "\\lambda<\\log",
+    "λ<log",
+    "\\log_m(s/W)<\\lambda",
+    "log_m(s/W)<λ"
+   ]
+  },
+  {
+   "id": "RPS-3@a1-06c1ac",
+   "catalogue_id": "RPS-3",
+   "code": "a1-06c1ac",
+   "page": "recursive-power-saving",
+   "variant": 2,
+   "original": "Since $\\vartheta=\\tfrac12$ is a fixed exponent and $f\\ge d^\\vartheta$ at an internal node, $d\\le f^{1/\\vartheta}$",
+   "seeded": "Since $\\vartheta=\\tfrac12$ is a fixed exponent, $d\\le f^{1/\\vartheta}$",
+   "location": {
+    "offset": 1849,
+    "line": 9,
+    "audit_site": {
+     "text": "Since $\\vartheta=\\tfrac12$ is a fixed exponent, $d\\le f^{1/\\vartheta}$",
+     "span": [
+      1777,
+      1847
+     ],
+     "sentence": "Since $\\vartheta=\\tfrac12$ is a fixed exponent, $d\\le f^{1/\\vartheta}$, so the outside work divided by $V$ is $O((f\\Omega)^\\tau+1)\\le O(f^{\\tau(1+\\eta/\\vartheta)}+1)$, which is $O(f^\\lambda)$ when $\\lambda>\\tau(1+\\eta/\\vartheta)$.",
+     "sentence_span": [
+      1777,
+      2007
+     ],
+     "paragraph_span": [
+      1360,
+      2007
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Since $\\vartheta=\\tfrac12$ is a fixed exponent and $f\\ge d^\\vartheta$ at an internal node, $d\\le f^{1/\\vartheta}$",
+     "span": [
+      1777,
+      1890
+     ],
+     "sentence": "Since $\\vartheta=\\tfrac12$ is a fixed exponent and $f\\ge d^\\vartheta$ at an internal node, $d\\le f^{1/\\vartheta}$, so the outside work divided by $V$ is $O((f\\Omega)^\\tau+1)\\le O(f^{\\tau(1+\\eta/\\vartheta)}+1)$, which is $O(f^\\lambda)$ when $\\lambda>\\tau(1+\\eta/\\vartheta)$.",
+     "sentence_span": [
+      1777,
+      2050
+     ],
+     "paragraph_span": [
+      1360,
+      2050
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "hypothesis",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "d ≤ f^{1/ϑ} follows from f ≥ d^ϑ at an internal node, not from ϑ being fixed",
+   "paper_lines": "(the page's own parameters)",
+   "cues": [
+    "internal node",
+    "f\\ge d^",
+    "f ≥ d^"
+   ]
+  },
+  {
+   "id": "RPS-4@a1-06c1ac",
+   "catalogue_id": "RPS-4",
+   "code": "a1-06c1ac",
+   "page": "recursive-power-saving",
+   "variant": 2,
+   "original": "\\approx0.86$",
+   "seeded": "\\approx1.16$",
+   "location": {
+    "offset": 3224,
+    "line": 19,
+    "audit_site": {
+     "text": "\\approx1.16$",
+     "span": [
+      3069,
+      3081
+     ],
+     "sentence": "For $\\lambda=0.8$ the ratio is $\\tfrac{3/2}{2^{0.8}}\\approx1.16$.",
+     "sentence_span": [
+      3017,
+      3082
+     ],
+     "paragraph_span": [
+      2923,
+      3083
+     ]
+    },
+    "audit_site_clean": {
+     "text": "\\approx0.86$",
+     "span": [
+      3111,
+      3123
+     ],
+     "sentence": "For $\\lambda=0.8$ the ratio is $\\tfrac{3/2}{2^{0.8}}\\approx0.86$.",
+     "sentence_span": [
+      3059,
+      3124
+     ],
+     "paragraph_span": [
+      2966,
+      3125
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "constant",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "2^0.8 ≈ 1.741, so (3/2)/2^0.8 ≈ 0.862; with λ=0.8 > log_2(3/2) the ratio is below 1",
+   "paper_lines": "(the page's example)",
+   "cues": [
+    "1.16",
+    "0.86",
+    "1.74"
+   ]
+  },
+  {
+   "id": "RPS-5@a1-6969c7",
+   "catalogue_id": "RPS-5",
+   "code": "a1-6969c7",
+   "page": "recursive-power-saving",
+   "variant": 3,
+   "original": "so the internal sum is at most a constant times $f^\\lambda$.",
+   "seeded": "so the internal sum is at most a constant times $f^\\lambda$ for every $\\lambda>0$.",
+   "location": {
+    "offset": 2758,
+    "line": 15,
+    "audit_site": {
+     "text": "so the internal sum is at most a constant times $f^\\lambda$ for every $\\lambda>0$.",
+     "span": [
+      2603,
+      2685
+     ],
+     "sentence": "(cited) Taking $\\lambda$ with $\\log_m(s/W)<\\lambda<1$ makes the ratio below 1, so the internal sum is at most a constant times $f^\\lambda$ for every $\\lambda>0$.",
+     "sentence_span": [
+      2524,
+      2685
+     ],
+     "paragraph_span": [
+      2489,
+      2685
+     ]
+    },
+    "audit_site_clean": {
+     "text": "so the internal sum is at most a constant times $f^\\lambda$.",
+     "span": [
+      2594,
+      2654
+     ],
+     "sentence": "(cited) Taking $\\lambda$ with $\\log_m(s/W)<\\lambda<1$ makes the ratio below 1, so the internal sum is at most a constant times $f^\\lambda$.",
+     "sentence_span": [
+      2515,
+      2654
+     ],
+     "paragraph_span": [
+      2480,
+      2654
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "generalisation",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "the geometric sum is bounded only when the ratio is below 1, that is λ > log_m(s/W)",
+   "paper_lines": "1554",
+   "cues": [
+    "\\lambda>0",
+    "λ>0",
+    "every λ",
+    "every \\lambda"
+   ]
+  },
+  {
+   "id": "RPS-7@a1-6969c7",
+   "catalogue_id": "RPS-7",
+   "code": "a1-6969c7",
+   "page": "recursive-power-saving",
+   "variant": 3,
+   "original": "The saving exists because $s/W<m$.",
+   "seeded": "The saving exists because $s/W>m$.",
+   "location": {
+    "offset": 2561,
+    "line": 15,
+    "audit_site": {
+     "text": "The saving exists because $s/W>m$.",
+     "span": [
+      2489,
+      2523
+     ],
+     "sentence": "The saving exists because $s/W>m$.",
+     "sentence_span": [
+      2489,
+      2523
+     ],
+     "paragraph_span": [
+      2489,
+      2685
+     ]
+    },
+    "audit_site_clean": {
+     "text": "The saving exists because $s/W<m$.",
+     "span": [
+      2480,
+      2514
+     ],
+     "sentence": "The saving exists because $s/W<m$.",
+     "sentence_span": [
+      2480,
+      2514
+     ],
+     "paragraph_span": [
+      2480,
+      2654
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "inequality",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "the construction gives s<Wm, which the page states above; s/W>m gives no saving",
+   "paper_lines": "168, 1166",
+   "cues": [
+    "s/W>m",
+    "s/W<m"
+   ]
+  },
+  {
+   "id": "SIC-10@a1-8c4d7c",
+   "catalogue_id": "SIC-10",
+   "code": "a1-8c4d7c",
+   "page": "subset-intersection-construction",
+   "variant": 1,
+   "original": "<cite data-source=\"paper\">smaller calls satisfies $s<Wm$</cite>",
+   "seeded": "<cite data-source=\"paper\">Every displayed summand is nondegenerate.</cite>",
+   "location": {
+    "offset": 3362,
+    "line": 16,
+    "audit_site": {
+     "text": "The paper's decisive property is a bound on the number of smaller calls",
+     "span": [
+      3135,
+      3206
+     ],
+     "sentence": "The paper's decisive property is a bound on the number of smaller calls, (cited).",
+     "sentence_span": [
+      3135,
+      3216
+     ],
+     "paragraph_span": [
+      2996,
+      3217
+     ]
+    },
+    "audit_site_clean": {
+     "text": "The paper's decisive property is a bound on the number of smaller calls",
+     "span": [
+      3127,
+      3198
+     ],
+     "sentence": "The paper's decisive property is a bound on the number of smaller calls, (cited).",
+     "sentence_span": [
+      3127,
+      3208
+     ],
+     "paragraph_span": [
+      2988,
+      3209
+     ]
+    },
+    "linked": [],
+    "support_mark": {
+     "index": 2,
+     "claim": "The paper's decisive property is a bound on the number of smaller calls,",
+     "quote": "Every displayed summand is nondegenerate."
+    },
+    "support_mark_clean": {
+     "index": 2,
+     "claim": "The paper's decisive property is a bound on the number of smaller calls,",
+     "quote": "smaller calls satisfies $s<Wm$"
+    }
+   },
+   "type": "attribution",
+   "detectable_by": [
+    "quote"
+   ],
+   "why": "the quotation (paper 990) is about the label sums' nondegeneracy, not the number of smaller calls",
+   "paper_lines": "168 (true), 990 (seeded)",
+   "cues": [
+    "nondegenerate",
+    "summand"
+   ]
+  },
+  {
+   "id": "SIC-5@a1-8c4d7c",
+   "catalogue_id": "SIC-5",
+   "code": "a1-8c4d7c",
+   "page": "subset-intersection-construction",
+   "variant": 1,
+   "original": "Each of the $3\\binom h3^2$ invocations",
+   "seeded": "Each of the $2\\binom h3^2$ invocations",
+   "location": {
+    "offset": 2789,
+    "line": 13,
+    "audit_site": {
+     "text": "Each of the $2\\binom h3^2$ invocations",
+     "span": [
+      2698,
+      2736
+     ],
+     "sentence": "Each of the $2\\binom h3^2$ invocations has $h$ central wires, each losing $h$ on a decreasing edge, so $L=3\\binom h3^2h^2$.",
+     "sentence_span": [
+      2698,
+      2821
+     ],
+     "paragraph_span": [
+      2603,
+      2994
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Each of the $3\\binom h3^2$ invocations",
+     "span": [
+      2698,
+      2736
+     ],
+     "sentence": "Each of the $3\\binom h3^2$ invocations has $h$ central wires, each losing $h$ on a decreasing edge, so $L=3\\binom h3^2h^2$.",
+     "sentence_span": [
+      2698,
+      2821
+     ],
+     "paragraph_span": [
+      2603,
+      2986
+     ]
+    },
+    "linked": [
+     {
+      "text": "so $L=3\\binom h3^2h^2$",
+      "span": [
+       2798,
+       2820
+      ],
+      "sentence": "Each of the $2\\binom h3^2$ invocations has $h$ central wires, each losing $h$ on a decreasing edge, so $L=3\\binom h3^2h^2$.",
+      "sentence_span": [
+       2698,
+       2821
+      ],
+      "paragraph_span": [
+       2603,
+       2994
+      ]
+     }
+    ],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "constant",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "the paper has I=3v^2 invocations; the page's own L=3 binom(h,3)^2 h^2 then no longer follows from the count it gives",
+   "paper_lines": "672-676, 1000-1006",
+   "cues": [
+    "2\\binom h3",
+    "3\\binom h3",
+    "2 binom",
+    "3 binom",
+    "2C(h,3)",
+    "3C(h,3)"
+   ]
+  },
+  {
+   "id": "SIC-4@a1-a9453b",
+   "catalogue_id": "SIC-4",
+   "code": "a1-a9453b",
+   "page": "subset-intersection-construction",
+   "variant": 2,
+   "original": "If $U\\subseteq V$, then $P_V-P_U$ is",
+   "seeded": "For any labels $U,V$, $P_V-P_U$ is",
+   "location": {
+    "offset": 2003,
+    "line": 9,
+    "audit_site": {
+     "text": "For any labels $U,V$, $P_V-P_U$ is",
+     "span": [
+      2003,
+      2037
+     ],
+     "sentence": "For any labels $U,V$, $P_V-P_U$ is the identity on $V\\cap U^\\perp$ and zero on $U\\oplus V^\\perp$, so its rank is $\\dim V-\\dim U$.",
+     "sentence_span": [
+      2003,
+      2132
+     ],
+     "paragraph_span": [
+      1845,
+      2243
+     ]
+    },
+    "audit_site_clean": {
+     "text": "If $U\\subseteq V$, then $P_V-P_U$ is",
+     "span": [
+      1993,
+      2029
+     ],
+     "sentence": "If $U\\subseteq V$, then $P_V-P_U$ is the identity on $V\\cap U^\\perp$ and zero on $U\\oplus V^\\perp$, so its rank is $\\dim V-\\dim U$.",
+     "sentence_span": [
+      1993,
+      2124
+     ],
+     "paragraph_span": [
+      1835,
+      2235
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "hypothesis",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "the decomposition and rank dim V - dim U need nested labels U⊆V; for labels that are not nested, P_V-P_U is not a projection and its rank is not the dimension change",
+   "paper_lines": "1157-1160",
+   "cues": [
+    "U\\subseteq V",
+    "U⊆V",
+    "nested",
+    "comparable"
+   ]
+  },
+  {
+   "id": "SIC-6@a1-a9453b",
+   "catalogue_id": "SIC-6",
+   "code": "a1-a9453b",
+   "page": "subset-intersection-construction",
+   "variant": 2,
+   "original": "is $0$ for sizes $0,1,2$ and $1$ for $T=S$",
+   "seeded": "is $0$ for sizes $0$ and $2$ and $1$ for $T=S$",
+   "location": {
+    "offset": 1033,
+    "line": 5,
+    "audit_site": {
+     "text": "is $0$ for sizes $0$ and $2$ and $1$ for $T=S$",
+     "span": [
+      1033,
+      1079
+     ],
+     "sentence": "The net coefficient $|S\\cap T|+[|S\\cap T|=1]$ mod $2$ is $0$ for sizes $0$ and $2$ and $1$ for $T=S$, so only $g_S$ remains.",
+     "sentence_span": [
+      979,
+      1103
+     ],
+     "paragraph_span": [
+      603,
+      1103
+     ]
+    },
+    "audit_site_clean": {
+     "text": "is $0$ for sizes $0,1,2$ and $1$ for $T=S$",
+     "span": [
+      1027,
+      1069
+     ],
+     "sentence": "The net coefficient $|S\\cap T|+[|S\\cap T|=1]$ mod $2$ is $0$ for sizes $0,1,2$ and $1$ for $T=S$, so only $g_S$ remains.",
+     "sentence_span": [
+      973,
+      1093
+     ],
+     "paragraph_span": [
+      597,
+      1093
+     ]
+    },
+    "linked": [
+     {
+      "text": "so only $g_S$ remains",
+      "span": [
+       1081,
+       1102
+      ],
+      "sentence": "The net coefficient $|S\\cap T|+[|S\\cap T|=1]$ mod $2$ is $0$ for sizes $0$ and $2$ and $1$ for $T=S$, so only $g_S$ remains.",
+      "sentence_span": [
+       979,
+       1103
+      ],
+      "paragraph_span": [
+       603,
+       1103
+      ]
+     }
+    ],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "cases",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "intersection size 1 is dropped from the case list; the conclusion that only g_S remains needs sizes 0, 1 and 2 all to vanish (size 1 vanishes only through the auxiliary wire)",
+   "paper_lines": "700-783",
+   "cues": [
+    "size 1",
+    "size $1$",
+    "|S\\cap T|=1",
+    "sizes 0,1,2",
+    "sizes 0, 1, 2"
+   ]
+  },
+  {
+   "id": "SIC-3@a1-492e03",
+   "catalogue_id": "SIC-3",
+   "code": "a1-492e03",
+   "page": "subset-intersection-construction",
+   "variant": 3,
+   "original": "neighbors are orthogonal.",
+   "seeded": "distinct triples are orthogonal.",
+   "location": {
+    "offset": 1279,
+    "line": 7,
+    "audit_site": {
+     "text": "distinct triples are orthogonal.",
+     "span": [
+      1279,
+      1311
+     ],
+     "sentence": "**Labels.** Over $\\mathbb Q$, the bilinear form with matrix $I-J/9$, where $J$ is the all-one matrix (the letter $J$ changes meaning here), gives $\\langle t_T,t_S\\rangle=|T\\cap S|-1$; distinct triples are orthogonal.",
+     "sentence_span": [
+      1095,
+      1311
+     ],
+     "paragraph_span": [
+      1095,
+      1840
+     ]
+    },
+    "audit_site_clean": {
+     "text": "neighbors are orthogonal.",
+     "span": [
+      1279,
+      1304
+     ],
+     "sentence": "**Labels.** Over $\\mathbb Q$, the bilinear form with matrix $I-J/9$, where $J$ is the all-one matrix (the letter $J$ changes meaning here), gives $\\langle t_T,t_S\\rangle=|T\\cap S|-1$; neighbors are orthogonal.",
+     "sentence_span": [
+      1095,
+      1304
+     ],
+     "paragraph_span": [
+      1095,
+      1833
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "generalisation",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "by |T∩S|-1, only triples meeting in one element are orthogonal; disjoint ones give -1",
+   "paper_lines": "862-868",
+   "cues": [
+    "distinct triples",
+    "disjoint triples",
+    "only neighbors",
+    "only neighbours"
+   ]
+  },
+  {
+   "id": "SIC-7@a1-492e03",
+   "catalogue_id": "SIC-7",
+   "code": "a1-492e03",
+   "page": "subset-intersection-construction",
+   "variant": 3,
+   "original": "so $2L<N$ and $s<WD$",
+   "seeded": "so $2L>N$ and $s<WD$",
+   "location": {
+    "offset": 3199,
+    "line": 16,
+    "audit_site": {
+     "text": "so $2L>N$ and $s<WD$",
+     "span": [
+      3045,
+      3065
+     ],
+     "sentence": "Now $L/N=3h^2/\\binom h3=100/539$ (cited), so $2L>N$ and $s<WD$.",
+     "sentence_span": [
+      3003,
+      3066
+     ],
+     "paragraph_span": [
+      3003,
+      3224
+     ]
+    },
+    "audit_site_clean": {
+     "text": "so $2L<N$ and $s<WD$",
+     "span": [
+      3030,
+      3050
+     ],
+     "sentence": "Now $L/N=3h^2/\\binom h3=100/539$ (cited), so $2L<N$ and $s<WD$.",
+     "sentence_span": [
+      2988,
+      3051
+     ],
+     "paragraph_span": [
+      2988,
+      3209
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "inequality",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "L/N=100/539 < 1/2 gives 2L<N, and s=WD-N+2L<WD needs it",
+   "paper_lines": "1105-1110, 1166",
+   "cues": [
+    "2L>N",
+    "2L<N"
+   ]
+  },
+  {
+   "id": "TI-2@a1-3d211b",
+   "catalogue_id": "TI-2",
+   "code": "a1-3d211b",
+   "page": "tape-interchange",
+   "variant": 1,
+   "original": "=\\exp(-2^{-50}\\ln\\mu)>1-20\\cdot2^{-50}",
+   "seeded": "=\\exp(-2^{-50}\\ln\\mu)<1-20\\cdot2^{-50}",
+   "location": {
+    "offset": 2748,
+    "line": 11,
+    "audit_site": {
+     "text": "=\\exp(-2^{-50}\\ln\\mu)<1-20\\cdot2^{-50}",
+     "span": [
+      2463,
+      2501
+     ],
+     "sentence": "Since $\\mu<2^{20}$, $\\ln\\mu<20$, so $\\mu^{-2^{-50}}=\\exp(-2^{-50}\\ln\\mu)<1-20\\cdot2^{-50}>1-\\eta$, and hence $\\lambda<\\mu^{\\tau}$.",
+     "sentence_span": [
+      2412,
+      2542
+     ],
+     "paragraph_span": [
+      2172,
+      2747
+     ]
+    },
+    "audit_site_clean": {
+     "text": "=\\exp(-2^{-50}\\ln\\mu)>1-20\\cdot2^{-50}",
+     "span": [
+      2457,
+      2495
+     ],
+     "sentence": "Since $\\mu<2^{20}$, $\\ln\\mu<20$, so $\\mu^{-2^{-50}}=\\exp(-2^{-50}\\ln\\mu)>1-20\\cdot2^{-50}>1-\\eta$, and hence $\\lambda<\\mu^{\\tau}$.",
+     "sentence_span": [
+      2406,
+      2536
+     ],
+     "paragraph_span": [
+      2166,
+      2741
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "inequality",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "e^{-x} > 1-x, and x = 2^{-50} ln μ < 20·2^{-50}; reversed, the chain to λ<μ^τ breaks",
+   "paper_lines": "1333-1336",
+   "cues": [
+    "e^{-x}",
+    "1-x",
+    "<1-20"
+   ]
+  },
+  {
+   "id": "TI-7@a1-3d211b",
+   "catalogue_id": "TI-7",
+   "code": "a1-3d211b",
+   "page": "tape-interchange",
+   "variant": 1,
+   "original": "the paper computes $\\eta>20\\cdot2^{-50}$",
+   "seeded": "the paper computes $\\eta>20\\cdot2^{-40}$",
+   "location": {
+    "offset": 2529,
+    "line": 11,
+    "audit_site": {
+     "text": "the paper computes $\\eta>20\\cdot2^{-40}$",
+     "span": [
+      2340,
+      2380
+     ],
+     "sentence": "For the explicit network the paper computes $\\eta>20\\cdot2^{-40}$ (cited) Take $\\tau=1-2^{-50}$.",
+     "sentence_span": [
+      2315,
+      2411
+     ],
+     "paragraph_span": [
+      2172,
+      2747
+     ]
+    },
+    "audit_site_clean": {
+     "text": "the paper computes $\\eta>20\\cdot2^{-50}$",
+     "span": [
+      2334,
+      2374
+     ],
+     "sentence": "For the explicit network the paper computes $\\eta>20\\cdot2^{-50}$ (cited) Take $\\tau=1-2^{-50}$.",
+     "sentence_span": [
+      2309,
+      2405
+     ],
+     "paragraph_span": [
+      2166,
+      2741
+     ]
+    },
+    "linked": [],
+    "support_mark": {
+     "index": 4,
+     "claim": "For the explicit network the paper computes $\\eta>20\\cdot2^{-40}$",
+     "quote": "Both exact deficits displayed above are greater than $20\\cdot2^{-50}$."
+    },
+    "support_mark_clean": {
+     "index": 4,
+     "claim": "For the explicit network the paper computes $\\eta>20\\cdot2^{-50}$",
+     "quote": "Both exact deficits displayed above are greater than $20\\cdot2^{-50}$."
+    }
+   },
+   "type": "constant",
+   "detectable_by": [
+    "quote"
+   ],
+   "why": "η_b ≈ 1.5e-11 and η_c ≈ 3.7e-12 are below 20·2^{-40} ≈ 1.8e-11; the quotation says only greater than 20·2^{-50}",
+   "paper_lines": "1320-1329",
+   "cues": [
+    "2^{-40}",
+    "2^-40"
+   ]
+  },
+  {
+   "id": "TI-3@a1-d043fc",
+   "catalogue_id": "TI-3",
+   "code": "a1-d043fc",
+   "page": "tape-interchange",
+   "variant": 2,
+   "original": "Since $\\mu<2^{20}$, $\\ln\\mu<20$",
+   "seeded": "Since $\\mu<2^{19}$, $\\ln\\mu<20$",
+   "location": {
+    "offset": 2691,
+    "line": 11,
+    "audit_site": {
+     "text": "Since $\\mu<2^{19}$, $\\ln\\mu<20$",
+     "span": [
+      2406,
+      2437
+     ],
+     "sentence": "Since $\\mu<2^{19}$, $\\ln\\mu<20$, so $\\mu^{-2^{-50}}=\\exp(-2^{-50}\\ln\\mu)>1-20\\cdot2^{-50}>1-\\eta$, and hence $\\lambda<\\mu^{\\tau}$.",
+     "sentence_span": [
+      2406,
+      2536
+     ],
+     "paragraph_span": [
+      2166,
+      2741
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Since $\\mu<2^{20}$, $\\ln\\mu<20$",
+     "span": [
+      2406,
+      2437
+     ],
+     "sentence": "Since $\\mu<2^{20}$, $\\ln\\mu<20$, so $\\mu^{-2^{-50}}=\\exp(-2^{-50}\\ln\\mu)>1-20\\cdot2^{-50}>1-\\eta$, and hence $\\lambda<\\mu^{\\tau}$.",
+     "sentence_span": [
+      2406,
+      2536
+     ],
+     "paragraph_span": [
+      2166,
+      2741
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "constant",
+   "detectable_by": [
+    "source"
+   ],
+   "why": "μ is the paper's m = h^3 = 10^6 > 2^19 = 524288; the page never states μ's value, so only the source reveals it",
+   "paper_lines": "655, 1331",
+   "cues": [
+    "2^{19}",
+    "2^{20}",
+    "10^6",
+    "524288"
+   ]
+  },
+  {
+   "id": "TI-8@a1-d043fc",
+   "catalogue_id": "TI-8",
+   "code": "a1-d043fc",
+   "page": "tape-interchange",
+   "variant": 2,
+   "original": "adds $x_S$ into $y_S$",
+   "seeded": "subtracts $x_S$ from $y_S$",
+   "location": {
+    "offset": 3099,
+    "line": 13,
+    "audit_site": {
+     "text": "subtracts $x_S$ from $y_S$",
+     "span": [
+      2814,
+      2840
+     ],
+     "sentence": "For any initial auxiliary values, a forward invocation from $X$ to $Y$ subtracts $x_S$ from $y_S$ and changes no other value (cited).",
+     "sentence_span": [
+      2743,
+      2876
+     ],
+     "paragraph_span": [
+      2743,
+      3139
+     ]
+    },
+    "audit_site_clean": {
+     "text": "adds $x_S$ into $y_S$",
+     "span": [
+      2814,
+      2835
+     ],
+     "sentence": "For any initial auxiliary values, a forward invocation from $X$ to $Y$ adds $x_S$ into $y_S$ and changes no other value (cited).",
+     "sentence_span": [
+      2743,
+      2871
+     ],
+     "paragraph_span": [
+      2743,
+      3134
+     ]
+    },
+    "linked": [],
+    "support_mark": {
+     "index": 5,
+     "claim": "For any initial auxiliary values, a forward invocation from $X$ to $Y$ subtracts $x_S$ from $y_S$ and changes no other value",
+     "quote": "a forward invocation changes $y_S$ to $y_S+x_S$ and leaves every other value unchanged"
+    },
+    "support_mark_clean": {
+     "index": 5,
+     "claim": "For any initial auxiliary values, a forward invocation from $X$ to $Y$ adds $x_S$ into $y_S$ and changes no other value",
+     "quote": "a forward invocation changes $y_S$ to $y_S+x_S$ and leaves every other value unchanged"
+    }
+   },
+   "type": "sign",
+   "detectable_by": [
+    "page",
+    "quote"
+   ],
+   "why": "a forward invocation changes y_S to y_S+x_S (the quotation)",
+   "paper_lines": "678-690",
+   "cues": [
+    "subtract",
+    "y_S+x_S",
+    "y_S-x_S"
+   ]
+  },
+  {
+   "id": "TI-4@a1-2c1af2",
+   "catalogue_id": "TI-4",
+   "code": "a1-2c1af2",
+   "page": "tape-interchange",
+   "variant": 3,
+   "original": "If $\\lambda\\le1$ the sum is at most $d+1$.",
+   "seeded": "If $\\lambda\\le1$ the sum is at most $d$.",
+   "location": {
+    "offset": 2777,
+    "line": 11,
+    "audit_site": {
+     "text": "If $\\lambda\\le1$ the sum is at most $d$.",
+     "span": [
+      2492,
+      2532
+     ],
+     "sentence": "If $\\lambda\\le1$ the sum is at most $d$.",
+     "sentence_span": [
+      2492,
+      2532
+     ],
+     "paragraph_span": [
+      2172,
+      2694
+     ]
+    },
+    "audit_site_clean": {
+     "text": "If $\\lambda\\le1$ the sum is at most $d+1$.",
+     "span": [
+      2537,
+      2579
+     ],
+     "sentence": "If $\\lambda\\le1$ the sum is at most $d+1$.",
+     "sentence_span": [
+      2537,
+      2579
+     ],
+     "paragraph_span": [
+      2166,
+      2741
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "cases",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "1+λ+...+λ^d has d+1 terms, and equals d+1 at λ=1",
+   "paper_lines": "1555",
+   "cues": [
+    "d+1",
+    "at most d"
+   ]
+  },
+  {
+   "id": "TI-5@a1-2c1af2",
+   "catalogue_id": "TI-5",
+   "code": "a1-2c1af2",
+   "page": "tape-interchange",
+   "variant": 3,
+   "original": "The bound needs $\\lambda<\\mu^{\\tau}$ for one fixed $\\tau<1$, not merely $\\lambda<\\mu$.",
+   "seeded": "The bound needs only $\\lambda<\\mu$.",
+   "location": {
+    "offset": 2361,
+    "line": 11,
+    "audit_site": {
+     "text": "The bound needs only $\\lambda<\\mu$.",
+     "span": [
+      2172,
+      2207
+     ],
+     "sentence": "The bound needs only $\\lambda<\\mu$.",
+     "sentence_span": [
+      2172,
+      2207
+     ],
+     "paragraph_span": [
+      2172,
+      2694
+     ]
+    },
+    "audit_site_clean": {
+     "text": "The bound needs $\\lambda<\\mu^{\\tau}$ for one fixed $\\tau<1$, not merely $\\lambda<\\mu$.",
+     "span": [
+      2166,
+      2252
+     ],
+     "sentence": "The bound needs $\\lambda<\\mu^{\\tau}$ for one fixed $\\tau<1$, not merely $\\lambda<\\mu$.",
+     "sentence_span": [
+      2166,
+      2252
+     ],
+     "paragraph_span": [
+      2166,
+      2741
+     ]
+    },
+    "linked": [
+     {
+      "text": "and $\\lambda^d<\\mu^{d\\tau}$",
+      "span": [
+       2570,
+       2597
+      ],
+      "sentence": "If $\\lambda>1$ it is $O(\\lambda^d)$, and $\\lambda^d<\\mu^{d\\tau}$.",
+      "sentence_span": [
+       2533,
+       2598
+      ],
+      "paragraph_span": [
+       2172,
+       2694
+      ]
+     }
+    ],
+    "support_mark": null,
+    "support_mark_clean": null
+   },
+   "type": "hypothesis",
+   "detectable_by": [
+    "page"
+   ],
+   "why": "with only λ<μ, F_d = O(λ^d) is O(μ^d) = O(u): no saving; the page's conclusion uses λ^d < μ^{dτ}",
+   "paper_lines": "1482, 1554",
+   "cues": [
+    "\\mu^{\\tau}",
+    "μ^τ",
+    "\\mu^\\tau",
+    "lambda<\\mu^"
+   ]
+  }
+ ],
+ "shams": [
+  {
+   "id": "ASF-s2@a1-34e565",
+   "catalogue_id": "ASF-s2",
+   "code": "a1-34e565",
+   "page": "address-shear-factorization",
+   "variant": 1,
+   "original": "Several letters here change meaning from earlier pages.",
+   "seeded": "Several letters on this page change meaning from earlier pages.",
+   "location": {
+    "offset": 602,
+    "line": 3,
+    "audit_site": {
+     "text": "Several letters on this page change meaning from earlier pages.",
+     "span": [
+      602,
+      665
+     ],
+     "sentence": "Several letters on this page change meaning from earlier pages.",
+     "sentence_span": [
+      602,
+      665
+     ],
+     "paragraph_span": [
+      297,
+      665
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Several letters here change meaning from earlier pages.",
+     "span": [
+      602,
+      657
+     ],
+     "sentence": "Several letters here change meaning from earlier pages.",
+     "sentence_span": [
+      602,
+      657
+     ],
+     "paragraph_span": [
+      297,
+      657
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "ASF-s1@a1-25155c",
+   "catalogue_id": "ASF-s1",
+   "code": "a1-25155c",
+   "page": "address-shear-factorization",
+   "variant": 2,
+   "original": "Elimination proves this:",
+   "seeded": "Elimination shows this:",
+   "location": {
+    "offset": 1449,
+    "line": 7,
+    "audit_site": {
+     "text": "Elimination shows this:",
+     "span": [
+      1449,
+      1472
+     ],
+     "sentence": "Elimination shows this: pivot on the topmost nonzero row's rightmost entry, clear its left and lower entries by lower-triangular operations, and repeat on what remains.",
+     "sentence_span": [
+      1449,
+      1617
+     ],
+     "paragraph_span": [
+      1105,
+      1617
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Elimination proves this:",
+     "span": [
+      1449,
+      1473
+     ],
+     "sentence": "Elimination proves this: pivot on the topmost nonzero row's rightmost entry, clear its left and lower entries by lower-triangular operations, and repeat on what remains.",
+     "sentence_span": [
+      1449,
+      1618
+     ],
+     "paragraph_span": [
+      1105,
+      1618
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "ASF-s2@a1-334ea2",
+   "catalogue_id": "ASF-s2",
+   "code": "a1-334ea2",
+   "page": "address-shear-factorization",
+   "variant": 3,
+   "original": "Several letters here change meaning from earlier pages.",
+   "seeded": "Several letters on this page change meaning from earlier pages.",
+   "location": {
+    "offset": 602,
+    "line": 3,
+    "audit_site": {
+     "text": "Several letters on this page change meaning from earlier pages.",
+     "span": [
+      602,
+      665
+     ],
+     "sentence": "Several letters on this page change meaning from earlier pages.",
+     "sentence_span": [
+      602,
+      665
+     ],
+     "paragraph_span": [
+      297,
+      665
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Several letters here change meaning from earlier pages.",
+     "span": [
+      602,
+      657
+     ],
+     "sentence": "Several letters here change meaning from earlier pages.",
+     "sentence_span": [
+      602,
+      657
+     ],
+     "paragraph_span": [
+      297,
+      657
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "FAI-s2@a1-79746e",
+   "catalogue_id": "FAI-s2",
+   "code": "a1-79746e",
+   "page": "fast-address-interchange",
+   "variant": 1,
+   "original": "Two further linear-cost address updates complete the interchange.",
+   "seeded": "Two more linear-cost address updates complete the interchange.",
+   "location": {
+    "offset": 1446,
+    "line": 9,
+    "audit_site": {
+     "text": "Two more linear-cost address updates complete the interchange.",
+     "span": [
+      1401,
+      1463
+     ],
+     "sentence": "Two more linear-cost address updates complete the interchange.",
+     "sentence_span": [
+      1401,
+      1463
+     ],
+     "paragraph_span": [
+      1073,
+      1547
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Two further linear-cost address updates complete the interchange.",
+     "span": [
+      1401,
+      1466
+     ],
+     "sentence": "Two further linear-cost address updates complete the interchange.",
+     "sentence_span": [
+      1401,
+      1466
+     ],
+     "paragraph_span": [
+      1073,
+      1550
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "FAI-s1@a1-fe95b8",
+   "catalogue_id": "FAI-s1",
+   "code": "a1-fe95b8",
+   "page": "fast-address-interchange",
+   "variant": 2,
+   "original": "The network performs only the middle update, which is the costly one.",
+   "seeded": "The network performs only the middle update, the costly one.",
+   "location": {
+    "offset": 1119,
+    "line": 9,
+    "audit_site": {
+     "text": "The network performs only the middle update, the costly one.",
+     "span": [
+      1073,
+      1133
+     ],
+     "sentence": "The network performs only the middle update, the costly one.",
+     "sentence_span": [
+      1073,
+      1133
+     ],
+     "paragraph_span": [
+      1073,
+      1541
+     ]
+    },
+    "audit_site_clean": {
+     "text": "The network performs only the middle update, which is the costly one.",
+     "span": [
+      1073,
+      1142
+     ],
+     "sentence": "The network performs only the middle update, which is the costly one.",
+     "sentence_span": [
+      1073,
+      1142
+     ],
+     "paragraph_span": [
+      1073,
+      1550
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "FAI-s2@a1-c3b1a7",
+   "catalogue_id": "FAI-s2",
+   "code": "a1-c3b1a7",
+   "page": "fast-address-interchange",
+   "variant": 3,
+   "original": "Two further linear-cost address updates complete the interchange.",
+   "seeded": "Two more linear-cost address updates complete the interchange.",
+   "location": {
+    "offset": 1447,
+    "line": 9,
+    "audit_site": {
+     "text": "Two more linear-cost address updates complete the interchange.",
+     "span": [
+      1401,
+      1463
+     ],
+     "sentence": "Two more linear-cost address updates complete the interchange.",
+     "sentence_span": [
+      1401,
+      1463
+     ],
+     "paragraph_span": [
+      1073,
+      1547
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Two further linear-cost address updates complete the interchange.",
+     "span": [
+      1401,
+      1466
+     ],
+     "sentence": "Two further linear-cost address updates complete the interchange.",
+     "sentence_span": [
+      1401,
+      1466
+     ],
+     "paragraph_span": [
+      1073,
+      1550
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "LNR-s2@a1-a8a305",
+   "catalogue_id": "LNR-s2",
+   "code": "a1-a8a305",
+   "page": "linear-network-roles",
+   "variant": 1,
+   "original": "The intermediate frames cancel and the route applies only its endpoint operator.",
+   "seeded": "The intermediate frames cancel, and the route applies only its endpoint operator.",
+   "location": {
+    "offset": 2289,
+    "line": 13,
+    "audit_site": {
+     "text": "The intermediate frames cancel, and the route applies only its endpoint operator.",
+     "span": [
+      2244,
+      2325
+     ],
+     "sentence": "The intermediate frames cancel, and the route applies only its endpoint operator.",
+     "sentence_span": [
+      2244,
+      2325
+     ],
+     "paragraph_span": [
+      2054,
+      2325
+     ]
+    },
+    "audit_site_clean": {
+     "text": "The intermediate frames cancel and the route applies only its endpoint operator.",
+     "span": [
+      2244,
+      2324
+     ],
+     "sentence": "The intermediate frames cancel and the route applies only its endpoint operator.",
+     "sentence_span": [
+      2244,
+      2324
+     ],
+     "paragraph_span": [
+      2054,
+      2324
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "LNR-s1@a1-aef5e8",
+   "catalogue_id": "LNR-s1",
+   "code": "a1-aef5e8",
+   "page": "linear-network-roles",
+   "variant": 2,
+   "original": "A wire's fixed place in the network is its *role*.",
+   "seeded": "The fixed place of a wire in the network is its *role*.",
+   "location": {
+    "offset": 325,
+    "line": 3,
+    "audit_site": {
+     "text": "The fixed place of a wire in the network is its *role*.",
+     "span": [
+      325,
+      380
+     ],
+     "sentence": "The fixed place of a wire in the network is its *role*.",
+     "sentence_span": [
+      325,
+      380
+     ],
+     "paragraph_span": [
+      325,
+      546
+     ]
+    },
+    "audit_site_clean": {
+     "text": "A wire's fixed place in the network is its *role*.",
+     "span": [
+      325,
+      375
+     ],
+     "sentence": "A wire's fixed place in the network is its *role*.",
+     "sentence_span": [
+      325,
+      375
+     ],
+     "paragraph_span": [
+      325,
+      541
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "LNR-s2@a1-edc768",
+   "catalogue_id": "LNR-s2",
+   "code": "a1-edc768",
+   "page": "linear-network-roles",
+   "variant": 3,
+   "original": "The intermediate frames cancel and the route applies only its endpoint operator.",
+   "seeded": "The intermediate frames cancel, and the route applies only its endpoint operator.",
+   "location": {
+    "offset": 2312,
+    "line": 13,
+    "audit_site": {
+     "text": "The intermediate frames cancel, and the route applies only its endpoint operator.",
+     "span": [
+      2267,
+      2348
+     ],
+     "sentence": "The intermediate frames cancel, and the route applies only its endpoint operator.",
+     "sentence_span": [
+      2267,
+      2348
+     ],
+     "paragraph_span": [
+      2077,
+      2348
+     ]
+    },
+    "audit_site_clean": {
+     "text": "The intermediate frames cancel and the route applies only its endpoint operator.",
+     "span": [
+      2244,
+      2324
+     ],
+     "sentence": "The intermediate frames cancel and the route applies only its endpoint operator.",
+     "sentence_span": [
+      2244,
+      2324
+     ],
+     "paragraph_span": [
+      2054,
+      2324
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "RPS-s1@a1-53c428",
+   "catalogue_id": "RPS-s1",
+   "code": "a1-53c428",
+   "page": "recursive-power-saving",
+   "variant": 1,
+   "original": "The outside work is a fixed number of address-field row additions.",
+   "seeded": "The outside work consists of a fixed number of address-field row additions.",
+   "location": {
+    "offset": 1360,
+    "line": 9,
+    "audit_site": {
+     "text": "The outside work consists of a fixed number of address-field row additions.",
+     "span": [
+      1360,
+      1435
+     ],
+     "sentence": "The outside work consists of a fixed number of address-field row additions.",
+     "sentence_span": [
+      1360,
+      1435
+     ],
+     "paragraph_span": [
+      1360,
+      2059
+     ]
+    },
+    "audit_site_clean": {
+     "text": "The outside work is a fixed number of address-field row additions.",
+     "span": [
+      1360,
+      1426
+     ],
+     "sentence": "The outside work is a fixed number of address-field row additions.",
+     "sentence_span": [
+      1360,
+      1426
+     ],
+     "paragraph_span": [
+      1360,
+      2050
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "RPS-s2@a1-06c1ac",
+   "catalogue_id": "RPS-s2",
+   "code": "a1-06c1ac",
+   "page": "recursive-power-saving",
+   "variant": 2,
+   "original": "For example, with $m=2$",
+   "seeded": "For instance, with $m=2$",
+   "location": {
+    "offset": 3078,
+    "line": 19,
+    "audit_site": {
+     "text": "For instance, with $m=2$",
+     "span": [
+      2923,
+      2947
+     ],
+     "sentence": "For instance, with $m=2$, $s=3$, $W=2$, we have $s/W=\\tfrac32$ and $\\log_2(3/2)\\approx0.585$.",
+     "sentence_span": [
+      2923,
+      3016
+     ],
+     "paragraph_span": [
+      2923,
+      3083
+     ]
+    },
+    "audit_site_clean": {
+     "text": "For example, with $m=2$",
+     "span": [
+      2966,
+      2989
+     ],
+     "sentence": "For example, with $m=2$, $s=3$, $W=2$, we have $s/W=\\tfrac32$ and $\\log_2(3/2)\\approx0.585$.",
+     "sentence_span": [
+      2966,
+      3058
+     ],
+     "paragraph_span": [
+      2966,
+      3125
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "RPS-s1@a1-6969c7",
+   "catalogue_id": "RPS-s1",
+   "code": "a1-6969c7",
+   "page": "recursive-power-saving",
+   "variant": 3,
+   "original": "The outside work is a fixed number of address-field row additions.",
+   "seeded": "The outside work consists of a fixed number of address-field row additions.",
+   "location": {
+    "offset": 1360,
+    "line": 9,
+    "audit_site": {
+     "text": "The outside work consists of a fixed number of address-field row additions.",
+     "span": [
+      1360,
+      1435
+     ],
+     "sentence": "The outside work consists of a fixed number of address-field row additions.",
+     "sentence_span": [
+      1360,
+      1435
+     ],
+     "paragraph_span": [
+      1360,
+      2059
+     ]
+    },
+    "audit_site_clean": {
+     "text": "The outside work is a fixed number of address-field row additions.",
+     "span": [
+      1360,
+      1426
+     ],
+     "sentence": "The outside work is a fixed number of address-field row additions.",
+     "sentence_span": [
+      1360,
+      1426
+     ],
+     "paragraph_span": [
+      1360,
+      2050
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "SIC-s2@a1-8c4d7c",
+   "catalogue_id": "SIC-s2",
+   "code": "a1-8c4d7c",
+   "page": "subset-intersection-construction",
+   "variant": 1,
+   "original": "Absolute values add $2L$.",
+   "seeded": "Taking absolute values adds $2L$.",
+   "location": {
+    "offset": 2913,
+    "line": 13,
+    "audit_site": {
+     "text": "Taking absolute values adds $2L$.",
+     "span": [
+      2822,
+      2855
+     ],
+     "sentence": "Taking absolute values adds $2L$.",
+     "sentence_span": [
+      2822,
+      2855
+     ],
+     "paragraph_span": [
+      2603,
+      2994
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Absolute values add $2L$.",
+     "span": [
+      2822,
+      2847
+     ],
+     "sentence": "Absolute values add $2L$.",
+     "sentence_span": [
+      2822,
+      2847
+     ],
+     "paragraph_span": [
+      2603,
+      2986
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "SIC-s1@a1-a9453b",
+   "catalogue_id": "SIC-s1",
+   "code": "a1-a9453b",
+   "page": "subset-intersection-construction",
+   "variant": 2,
+   "original": "Call two triples $T,S$ *neighbors* when $|T\\cap S|=1$.",
+   "seeded": "Two triples $T,S$ are called *neighbors* when $|T\\cap S|=1$.",
+   "location": {
+    "offset": 502,
+    "line": 3,
+    "audit_site": {
+     "text": "Two triples $T,S$ are called *neighbors* when $|T\\cap S|=1$.",
+     "span": [
+      502,
+      562
+     ],
+     "sentence": "Two triples $T,S$ are called *neighbors* when $|T\\cap S|=1$.",
+     "sentence_span": [
+      502,
+      562
+     ],
+     "paragraph_span": [
+      274,
+      601
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Call two triples $T,S$ *neighbors* when $|T\\cap S|=1$.",
+     "span": [
+      502,
+      556
+     ],
+     "sentence": "Call two triples $T,S$ *neighbors* when $|T\\cap S|=1$.",
+     "sentence_span": [
+      502,
+      556
+     ],
+     "paragraph_span": [
+      274,
+      595
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "SIC-s2@a1-492e03",
+   "catalogue_id": "SIC-s2",
+   "code": "a1-492e03",
+   "page": "subset-intersection-construction",
+   "variant": 3,
+   "original": "Absolute values add $2L$.",
+   "seeded": "Taking absolute values adds $2L$.",
+   "location": {
+    "offset": 2920,
+    "line": 13,
+    "audit_site": {
+     "text": "Taking absolute values adds $2L$.",
+     "span": [
+      2829,
+      2862
+     ],
+     "sentence": "Taking absolute values adds $2L$.",
+     "sentence_span": [
+      2829,
+      2862
+     ],
+     "paragraph_span": [
+      2610,
+      3001
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Absolute values add $2L$.",
+     "span": [
+      2822,
+      2847
+     ],
+     "sentence": "Absolute values add $2L$.",
+     "sentence_span": [
+      2822,
+      2847
+     ],
+     "paragraph_span": [
+      2603,
+      2986
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "TI-s2@a1-3d211b",
+   "catalogue_id": "TI-s2",
+   "code": "a1-3d211b",
+   "page": "tape-interchange",
+   "variant": 1,
+   "original": "Width one ($d=0$) is a single-digit operation",
+   "seeded": "At width one ($d=0$) it is a single-digit operation",
+   "location": {
+    "offset": 1946,
+    "line": 9,
+    "audit_site": {
+     "text": "At width one ($d=0$) it is a single-digit operation",
+     "span": [
+      1757,
+      1808
+     ],
+     "sentence": "At width one ($d=0$) it is a single-digit operation, so $F_0=O(1)$.",
+     "sentence_span": [
+      1757,
+      1824
+     ],
+     "paragraph_span": [
+      1564,
+      2170
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Width one ($d=0$) is a single-digit operation",
+     "span": [
+      1757,
+      1802
+     ],
+     "sentence": "Width one ($d=0$) is a single-digit operation, so $F_0=O(1)$.",
+     "sentence_span": [
+      1757,
+      1818
+     ],
+     "paragraph_span": [
+      1564,
+      2164
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "TI-s1@a1-d043fc",
+   "catalogue_id": "TI-s1",
+   "code": "a1-d043fc",
+   "page": "tape-interchange",
+   "variant": 2,
+   "original": "The outer two cost linear time.",
+   "seeded": "The outer two take linear time.",
+   "location": {
+    "offset": 1074,
+    "line": 5,
+    "audit_site": {
+     "text": "The outer two take linear time.",
+     "span": [
+      1003,
+      1034
+     ],
+     "sentence": "The outer two take linear time.",
+     "sentence_span": [
+      1003,
+      1034
+     ],
+     "paragraph_span": [
+      691,
+      1034
+     ]
+    },
+    "audit_site_clean": {
+     "text": "The outer two cost linear time.",
+     "span": [
+      1003,
+      1034
+     ],
+     "sentence": "The outer two cost linear time.",
+     "sentence_span": [
+      1003,
+      1034
+     ],
+     "paragraph_span": [
+      691,
+      1034
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  },
+  {
+   "id": "TI-s2@a1-2c1af2",
+   "catalogue_id": "TI-s2",
+   "code": "a1-2c1af2",
+   "page": "tape-interchange",
+   "variant": 3,
+   "original": "Width one ($d=0$) is a single-digit operation",
+   "seeded": "At width one ($d=0$) it is a single-digit operation",
+   "location": {
+    "offset": 1946,
+    "line": 9,
+    "audit_site": {
+     "text": "At width one ($d=0$) it is a single-digit operation",
+     "span": [
+      1757,
+      1808
+     ],
+     "sentence": "At width one ($d=0$) it is a single-digit operation, so $F_0=O(1)$.",
+     "sentence_span": [
+      1757,
+      1824
+     ],
+     "paragraph_span": [
+      1564,
+      2170
+     ]
+    },
+    "audit_site_clean": {
+     "text": "Width one ($d=0$) is a single-digit operation",
+     "span": [
+      1757,
+      1802
+     ],
+     "sentence": "Width one ($d=0$) is a single-digit operation, so $F_0=O(1)$.",
+     "sentence_span": [
+      1757,
+      1818
+     ],
+     "paragraph_span": [
+      1564,
+      2164
+     ]
+    },
+    "linked": [],
+    "support_mark": null,
+    "support_mark_clean": null
+   }
+  }
+ ]
+}

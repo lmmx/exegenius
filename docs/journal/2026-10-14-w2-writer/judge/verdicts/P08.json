@@ -1,0 +1,15 @@
+{"page": "P08",
+ "items": [
+  {"id": "S4.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page defines frames, the edge change $D_vD_u^{-1}$, $D_{\\rm in}$, $D_{\\rm out}$, $\\mathsf S_\\Omega$ and $g=D_{\\rm in}^{-1}f$ as in the paper (lines 785-805). It gets the implemented operator $D_{\\rm out}\\mathsf S_\\Omega D_{\\rm in}^{-1}$ by induction along the wires and concludes that the interior frames can be chosen 'purely to make each edge change inexpensive', which matches lines 806-825."},
+  {"id": "S4.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "All three cases of the induction are shown. At a source the invariant holds by definition of $g$. On an edge the array goes from $D_u\\varphi$ to $D_vD_u^{-1}D_u\\varphi=D_v\\varphi$. At a gate, 'because all incidences use the same frame', $\\sum_j c_jD_v\\varphi_j=D_v(\\sum_j c_j\\varphi_j)$. The page then reads off $D_{\\rm out}\\mathsf S_\\Omega D_{\\rm in}^{-1}f$ at the sinks, following the paper's lines 806-817."},
+  {"id": "S4.2.2", "presence": "stated", "faithful": null, "dropped": [],
+   "note": "The page writes 'Suppose the scalar network is a signed role permutation ... Then that route applies $\\varepsilon_wD_{\\mathrm{sink}(\\rho(w))}D_{\\mathrm{source}(w)}^{-1}$', and it keeps both the auxiliary roles and the fixed routing. It never reads this off as the $(\\rho(w),w)$ block of $D_{\\rm out}\\mathsf S_\\Omega D_{\\rm in}^{-1}$. The only argument it gives in between is a telescoping of edge operators along one route, which does not produce $\\varepsilon_w$ and is not the paper's 'in particular' specialization of the identity."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "A route through a vertex $m$ from a source $s$ to a sink $t$ applies $D_mD_s^{-1}$ and then $D_tD_m^{-1}$, whose product is $D_tD_s^{-1}$ for every $D_m$.",
+   "problem": "This multiplies only the edge operators and ignores the gate at $m$. In the exchange networks the gates combine a wire's array with others, and a signed role permutation comes out only as a net effect of such combinations, so a role's 'route' is not a single path of bare edge changes. In the paper the interior frames cancel because the pointwise gate commutes with the common frame $D_m$ (the invariant), which gives the identity $D_{\\rm out}\\mathsf S_\\Omega D_{\\rm in}^{-1}$. The telescoping product also leaves out the sign $\\varepsilon_w$ that $\\mathsf S_\\Omega$ contributes."}
+ ],
+ "motivation_given": true}
