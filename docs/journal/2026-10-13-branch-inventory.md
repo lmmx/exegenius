@@ -31,6 +31,8 @@ This entry is that inventory. It is updated in place, and its date is when it wa
 | `131026-handover` | f189028 | the handover entry update | rebased into `master` as b9a82e1 and 62604b9; identical | **delete on GitHub** |
 | `131026-exp-key-step` | 0c29556 | the key-step instruction in the argument task, for experiments E4 and E6 | **not for `master`** until the author decides on E6's evidence | keep; merge or delete after the author's decision on E4 and E6 |
 | `141026-exp-key-step-identity` | 91c4fed | the key-step instruction plus the identity sentence (E7), based on `131026-exp-key-step` | **not for `master`** until the author decides | merge or delete after the author's decision; supersedes `131026-exp-key-step` if merged |
+| `141026-exp-variants-chains` | 4f5ee26 | the E7 instruction plus the variant sentence (E8, E8b), based on `141026-exp-key-step-identity` | **not for `master`** until the author decides; proposed to the author once E8b's primary judging reads | merge or delete after the author's decision |
+| `141026-exp-params-cases` | e8efaa3 | E8's instruction plus the parameters-and-cases sentence (E9), based on `141026-exp-variants-chains` | **not for `master`**; experiment | keep until E9 reads |
 | `docs/leviathan-chat-archive` | 1e0444a | the author's archive of research conversations | not in `master`; the author's own | the author's |
 | `docs/metrics-viz-chat-archive` | b955d34 | the author's archive of research conversations | not in `master`; the author's own | the author's |
 | `141026-leviathan-outline` | 2554d38 | on `docs/leviathan-chat-archive` (PR #9): turns renamed with content slugs, README on the sequential relational method, three speculative journal entries | not in `master`, by the author's instruction | the author reviews; can be merged into the PR branch |
@@ -66,11 +68,12 @@ The local copies of every branch marked "delete on GitHub" are deleted.
 | `141026-exp-e7-key-step-identity` | c89a3fd | E7, eight argument runs with the identity sentence on E6's extractions (based on E6's branch) | evidence, with transcripts | keep |
 | `141026-exp-s2-model-effort` | 74b4094 | S2, four argument runs on E6's F1 (Sonnet and Opus at `xhigh` and `max`) with the E7 instructions (based on E7's branch) | evidence, with transcripts | keep |
 | `141026-exp-s3-opus-floor` | 1be0281 | S3, four argument runs on E6's F4 and F8 (Opus at `high` and `xhigh`) with the E7 instructions (based on S2's branch) | evidence, with transcripts | keep |
+| `141026-exp-s4-e8-fb1` | f336a47 | S4, S5, E8, E8b and the FB1 pilot: twelve argument runs on E6's extractions (based on S3's branch) | evidence, with transcripts | keep |
 | `exp-coverage-recovery` | 2e35a54 | two refused attempts to run the recovery experiment | its unique records (the two reports and the protocol) are archived in `docs/journal/2026-10-13-coverage-recovery/refused-attempts/`; the rest is a vendored copy of exegenius source, which should not be kept | **delete on GitHub** |
 
 ## Current State
 - `master` of lmmx/exegenius holds all completed work; eight remote branches of lmmx/exegenius are fully contained in it and await deletion on GitHub; `131026-exp-key-step` holds an experimental instruction kept off `master` pending the author's decision; two `docs/` branches are the author's own
-- Twenty-four branches of lmmx/openai-nlogn-wiki are kept as the archives of their runs, through `141026-exp-s3-opus-floor`
+- Twenty-five branches of lmmx/openai-nlogn-wiki are kept as the archives of their runs, through `141026-exp-s4-e8-fb1`
 - `exp-coverage-recovery` of the wiki has its unique records archived in the journal and awaits deletion on GitHub
 
 ## Missing
