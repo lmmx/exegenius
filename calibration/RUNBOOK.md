@@ -185,3 +185,8 @@ The general default additionally needs the second document.
   - first, the pilot, then the preregistered validation;
   - if K3 validates, they run only if a small Opus `xhigh` against Sonnet `high` comparison could change the policy row, with its full cost, judging included, estimated before launch.
 - Writer (W2), auditor (A1) and extraction (X1) work continues in parallel. Their conclusions stay provisional until each experiment reads.
+
+**00:00 UTC, 2026-10-15:**
+- **A1's design is complete** (`plans/A1-draft.md`). Its finding is design-level: the pipeline has no source-fidelity check.
+- **Running A1** is 3 configurations × 44 tasks: 132 subagent tasks, about 45 M cache read, plus orchestration. If this session orchestrates it, each completion costs a wake-up, about 0.4 M at the current context. The cheaper routes are the Workflow tool (with the author's explicit opt-in) or a runner session.
+- **Under way at the same time:** W2b (4 writer runs) and K3 stage A (9 pairwise judgements).
