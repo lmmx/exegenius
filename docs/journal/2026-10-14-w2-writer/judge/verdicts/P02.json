@@ -1,0 +1,24 @@
+{"page": "P02",
+ "items": [
+  {"id": "S4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page sets up the arrays in R^Omega, pointwise gates, frames D_v common to all incidences of a gate, edge changes D_vD_u^{-1} and D_in, D_out, then proves 'the network implements D_out S_Omega D_in^{-1}' by the paper's invariant and reads off the endpoint operator on each route, concluding interior frames 'only set edge costs'."},
+  {"id": "S4.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "All three cases of the paper's induction are present: sources hold 'by definition' of g=D_in^{-1}f, an edge 'turns stored D_u phi into D_v phi', and at a gate 'sum_j c_j D_v phi_j = D_v sum_j c_j phi_j' with c_j in R equal at every address, using R-linearity of D_v; the conclusion D_out S_Omega D_in^{-1} follows as in the paper."},
+  {"id": "S4.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page states rho (banks swapped, scratch fixed) and signs eps_w=+-1, notes S_Omega moves g_w to role rho(w) as eps_w g_w, and composes with the endpoint frames to get eps_w D_sink(rho(w)) D_source(w)^{-1}, 'scratch roles included', matching the paper; it adds a telescoping gloss explaining why interior frames cancel."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "vertex $v$ gets a rational $m\\times m$ matrix $M_v$ and the frame $\\Phi_{M_v}$ moving the entry at $(h,d)$ to $(h+M_vd,\\,d)$",
+   "problem": "With a rational M_v the address h+M_v d is not defined on integer address fields as written. The paper requires the fields to use a radix coprime to the fixed denominators, with addition modulo their common range; this is what makes Phi_M a well-defined invertible permutation and gives Phi_{M'}Phi_M=Phi_{M'+M}, which the page uses in the next sentence."}
+ ],
+ "motivation_given": true}

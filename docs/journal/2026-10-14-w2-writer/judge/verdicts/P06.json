@@ -1,0 +1,11 @@
+{"page": "P06",
+ "items": [
+  {"id": "S4.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page sets up arrays, pointwise gates, per-vertex invertible R-linear frames shared by all incidences of a gate, and edge changes D_vD_u^{-1}, as in paper lines 787-798. It then proves the invariant by induction and reads off the per-route endpoint operator. It also explains why interior frames cancel ('Interior changes D_vD_u^{-1} telescope'), which matches the paper's conclusion at lines 823-825."},
+  {"id": "S4.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "All three cases of the induction are given as in paper lines 804-817. At sources the invariant holds 'by the definition of g' with g=D_in^{-1}f. On an edge, D_vD_u^{-1}D_u\\varphi=D_v\\varphi. At a gate, R-linearity and the shared frame give \\sum_j c_jD_v\\varphi_j=D_v(\\sum_j c_j\\varphi_j). The page concludes D_out S_\\Omega D_in^{-1}."},
+  {"id": "S4.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page states the route operator \\varepsilon_wD_{sink(\\rho(w))}D_{source(w)}^{-1}, says 'Auxiliary roles are included', and concludes that the interior frames are free to be chosen for cheap edges, as in paper lines 818-825. The page justifies this by telescoping. The paper instead reads it off the common-frame identity. The telescoping is still valid, because each gate's coefficients are scalars that commute with the shared frame, so every path's frame product reduces to D_sink D_source^{-1}."}
+ ],
+ "errors": [],
+ "motivation_given": true}

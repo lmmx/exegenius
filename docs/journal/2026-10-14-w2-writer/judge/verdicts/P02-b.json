@@ -1,0 +1,15 @@
+{"page": "P02",
+ "items": [
+  {"id": "S4.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page sets up arrays, pointwise gates, frames common to all incidences of a gate, edge changes D_vD_u^{-1}, D_in and D_out, then proves the invariant and reads off the endpoint operator per route, concluding interior frames 'only set edge costs', as the paper does (l.785-825)."},
+  {"id": "S4.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "All parts of the paper's induction are present: logical input g=D_in^{-1}f with 'no work is done', the invariant holding at sources 'by definition', the edge turning 'stored D_uφ into D_vφ', the gate step '∑_jc_jD_vφ_j=D_v∑_jc_jφ_j' with coefficients equal at every address and a frame shared by the gate's wires, and the conclusion D_out S_Ω D_in^{-1}."},
+  {"id": "S4.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page shows why the route operator follows: S_Ω 'moves the logical array g_w of w to role ρ(w) as ε_wg_w', so the route applies ε_wD_sink(ρ(w))D_source(w)^{-1}, 'scratch roles included'. The page specializes to the exchange network, with ρ swapping X_a and Y_a and fixing auxiliaries, which matches the paper (l.1121-1122, Lemma scalar-motifs). It adds a telescoping explanation for why interior frames cancel."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "vertex $v$ gets a rational $m\\times m$ matrix $M_v$ and the frame $\\Phi_{M_v}$ moving the entry at $(h,d)$ to $(h+M_vd,\\,d)$",
+   "problem": "With a rational M_v, h+M_v d is defined on the address fields only because, in the paper, 'the fields use a radix coprime to the fixed denominators, and addition is modulo their common range' (l.1127-1128). This is also what makes Φ_M an invertible permutation that satisfies Φ_{M'}Φ_M=Φ_{M'+M}, which the page uses in 'Φ_{M_v}Φ_{M_u}^{-1}=Φ_{M_v-M_u}'. The page leaves out that condition."}
+ ],
+ "motivation_given": true}

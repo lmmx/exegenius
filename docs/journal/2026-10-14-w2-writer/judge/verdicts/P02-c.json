@@ -1,0 +1,11 @@
+{"page": "P02",
+ "items": [
+  {"id": "S4.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page sets up S_Omega, the frames D_v, the edge changes D_vD_u^{-1} and D_in/D_out exactly as in the paper (lines 787-803), proves the invariant and reads off the implemented operator D_out S_Omega D_in^{-1}. It then explains why interior frames cancel (\"edge changes telescope ... and gates let their frame through; they only set edge costs\"), which matches the paper's conclusion at lines 823-825."},
+  {"id": "S4.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page has every piece of the paper's induction: the logical input g=D_in^{-1}f with \"no work is done\"; the invariant holding at sources by definition; an edge turning \"stored D_uφ into D_vφ\"; and the gate step \"∑_jc_jD_vφ_j=D_v∑_jc_jφ_j\" with c_j∈R the same at every address. It concludes \"By induction the invariant reaches the sinks, so the network implements D_out S_Omega D_in^{-1}\", as in lines 804-817."},
+  {"id": "S4.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page says S_Omega \"moves the logical array g_w of w to role ρ(w) as ε_wg_w\" and combines this with the identity to get ε_wD_sink(ρ(w))D_source(w)^{-1}, \"scratch roles included\". It names ρ correctly as swapping the banks and fixing the scratch roles (Lemma lem:scalar-motifs, line 1121), and it states that interior frames \"only set edge costs\", as in lines 818-825."}
+ ],
+ "errors": [],
+ "motivation_given": true}
