@@ -9,7 +9,29 @@ This entry hands the work over across a compaction of the development session's 
 
 It supersedes the state recorded in 2026-10-13-autonomous-investigation. Read this entry first, then the entries it names.
 
-## Latest state, after E3 and the calibration programme (read this first)
+## Latest state, after S1, T1, E4 and E5 (read this first)
+
+- **The planning default stays Sonnet at high effort.** Opus at medium is not better on the central derivation and derives less: central count median 6 against 5 (p = 0.33), gate 0 of 5 each, derived 6 against 11 (E5, 2026-10-14-e5-opus). S1's screen had looked better (gate 1 of 2 per Opus arm), and it did not hold up. Haiku at high passes no calibre (S1, 2026-10-14-s1-models).
+- **The strongest lever on the central derivation is the argument task's instructions** (E4, 2026-10-14-e4-key-step):
+  - **What it adds:** one general paragraph asking for the key step to be developed (exegenius branch `131026-exp-key-step`, 0c29556, not on `master`).
+  - **What it did,** paired on E1's extractions:
+    - core derivations rose in 5 of 5 pairs (p = 0.031);
+    - the central count rose in 4 of 5 pairs, with one tie;
+    - the central gate was passed in 3 of 5 plans, against 0 of 5.
+  - **Why the preregistered rule failed:** one instructed plan made two major errors in the derivation.
+- **E6 is running:** the confirmation on 8 fresh extractions, paired, with an error criterion (`calibration/plans/E6.md`). The plan's evidence goes to wiki branch `141026-exp-e6-key-step-confirm`.
+- **Recurring bottleneck:** rank as dimension change (C4), with the $N$ rank-one source exceptions, decides the gate. It is also where the instructed plan erred.
+- **Judges:** the central rubric's spread between two judges on a strong plan is about two steps (the anchor E1-P4 ran 8, 8, 7, 6 across J3–J6). Comparisons are therefore made within one batch.
+- **Operational:**
+  - **The rate limit.** The account's five-hour rate limit (HTTP 429) killed eight E4 subagents. Retries now empty the task's scratch directory first.
+  - **The registry handles new layouts.** Experiments run from the development session are archived on wiki branches laid out for the registry; the builder accepts `transcripts`, `description_prefix`, `planning_kinds`, `log_since` and a per-arm `binary`.
+- **Awaiting the author:**
+  - the execution-profile plan (`calibration/software-plan.md`);
+  - whether the key-step instruction goes on `master` (after E6);
+  - a full run with the best planning configuration;
+  - remote branch deletions.
+
+## Latest state, after E3 and the calibration programme
 
 - **The calibration programme is in `calibration/`.** Its README lists the parts: the protocol, the Evaluation Registry (records built mechanically from git refs), the Capability Map, the fidelity track, preregistered plans and rubrics, the runner template, and the tools. The author asked for this work to run autonomously, with updates only at milestones.
 - **E3** (2026-10-13-e3-effort):
