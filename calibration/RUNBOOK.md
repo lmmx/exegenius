@@ -75,11 +75,11 @@
 
 | # | Item | Question | Trigger | Cost estimate (cache read) | Status |
 |---|---|---|---|---|---|
-| 1 | **S4** (`plans/S4.md`) | does Opus `max` improve on Opus `xhigh` on F8, and reach the ceiling? | running | ~33–43 M | run launched 14:13 |
-| 2 | **S5** (`plans/S5.md`) | how much does Opus `xhigh` vary between runs on the same extraction (F8)? | now; judged in S4's batches | ~13 M | run launched 14:30 |
+| 1 | **S4** (`plans/S4.md`) | does Opus `max` improve on Opus `xhigh` on F8, and reach the ceiling? | running | ~33–43 M | **done** 15:00: improves (checklist 20 vs 19), not the ceiling (faithful 16, checklist 20). The gain is within S5's run variance on faithful |
+| 2 | **S5** (`plans/S5.md`) | how much does Opus `xhigh` vary between runs on the same extraction (F8)? | now; judged in S4's batches | ~13 M | **done** 15:00: run-to-run difference 2 faithful (beyond judge noise), 0 checklist; variance condition met |
 | 3 | **K2** (`plans/K2.md`) | do Sonnet judges agree with Opus judges on the checklist, with no same-model bias? | now; existing plans | ~5–7 M | **done** 14:31: agreement 0.979, ρ 0.995, bias +0.43 (not flagged). Checklist screens may use a Sonnet second judge |
 | 4 | **E8** (`plans/E8.md`) | does a sentence asking for every variant and every bound's chain lift Sonnet `high` towards Opus `xhigh`? | now; two-stage | ~17 M (stage 1); +~60 M (stage 2, if the screen passes) | 3 runs launched 14:30 |
-| 5 | **FB1 pilot** (`plans/FB1.md`, "The pilot") | does Fable at `high` beat the incumbent on F8? | S4 outcome "improves but not ceiling" (against Opus `max`), or "does not improve" (against Opus `xhigh`). Not if S4 reaches the ceiling | run unknown (placeholder 6–16 M) + ~30 M judging | conditional |
+| 5 | **FB1 pilot** (`plans/FB1.md`, "The pilot") | does Fable at `high` beat the incumbent on F8? | S4 outcome "improves but not ceiling" (against Opus `max`), or "does not improve" (against Opus `xhigh`). Not if S4 reaches the ceiling | run unknown (placeholder 6–16 M) + ~30 M judging | **triggered** by S4 (improves, not the ceiling): against S4F8OM; launching 15:01 |
 | 6 | Markers tightened (L2, P2, P3, S4) | the judge-free cross-check | now; free | 0 | **done** 14:31: fitted agreement 0.836 → 0.905 on K1 plans (optimistic, since these were used to tighten); J8 hold-out AUC 0.774 → 0.794 |
 | 7 | **Second document** | do the model and instruction effects generalise? | **needs the author to supply a document** (§2) | onboarding: reference set, central rubric and checklist, about 20–40 M of analysis; then a screen | blocked |
 | 8 | Full wiki from the best plans, with simulated readers on | does reconstruction survive the writers, and do readers reach the key step? | needs the author (§2) | large (writers and auditors) | blocked |

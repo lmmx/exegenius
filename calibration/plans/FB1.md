@@ -106,3 +106,9 @@ These are rules for choosing an experiment, not predictions of Fable's behaviour
 - **Judging:** ~27 M (primary) and ~2.5 M (checklist), on Opus.
 
 **Stopping:** one Fable run, then a report, before any further Fable spend.
+
+### Pilot ledger
+
+| Run | Configuration | Run dir | Status |
+|---|---|---|---|
+| FB1F8 | Fable, `high` | `e6/FB1F8` | launched 15:01 UTC on S4's branch "improves, not the ceiling" (incumbent S4F8OM); task file identical to S4F8OM's apart from the path |
