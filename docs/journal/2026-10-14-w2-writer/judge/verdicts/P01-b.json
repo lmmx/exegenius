@@ -1,0 +1,95 @@
+{
+ "page": "P01",
+ "items": [
+  {
+   "id": "S4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "nondegeneracy of every label and of every displayed summand (the page never says labels are nondegenerate, yet orthogonal residuals, the splitting A=B⊥P and the projection onto U along U^⊥ all require it)"
+   ],
+   "note": "The page builds the labels, locates the only loss at the central 3→4 edges, computes L/N=γ/539, and turns the dimension count into s_b=W_b m-(N-2L_b)<W_b m and s_c=W_c m-2N+2L_c<W_c m, which is the paper's chain. The one hypothesis it never states is that the labels are nondegenerate."
+  },
+  {
+   "id": "S4.3.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "nondegeneracy of the tensor bilinear form on 𝓕=F^{⊗3} (dimension m=h^3 is left implicit in 'h×h×h arrays')"
+   ],
+   "note": "The page derives <t_S,t_T>=|S∩T|-1 from 'indicators sum to 3' (|S∩T|-3·3/9), gives t_S·t_T=|S∩T| mod 2 over F_2, and concludes that triple lines are nondegenerate and neighbors orthogonal. Nondegeneracy of I-J/9 (eigenvalues 1 and -91/9) appears only inside a citation. The neighbor rule is blurred across the two constructions (see errors)."
+  },
+  {
+   "id": "S4.3.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The terminal labels match the paper's table exactly, and the page gives the telescoping reason ('all wires at a gate share its label, so edge changes Δ telescope') for ΣΔ=Wm-2N. The source and sink sums are read off the table without explicit arithmetic, and the passage from signed to absolute changes ('+2L') is asserted, as in the paper."
+  },
+  {
+   "id": "S4.3.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "B=0 at stage 1 (only implicit in 'F^{⊗0}=scalars')",
+    "the identity B'=(P')^⊥_{A'}=(B⊗F)⊥(P⊗t^⊥), which shows that the Y output label equals the time-5 gate label"
+   ],
+   "note": "The page states the X and Y transitions and A'=A⊗F, P'=P⊗<t>, B'=(P')^⊥_{A'}, Q=<t_{a_{j+1}}>⊗Q', from which 'outputs [are] its inputs' follows by inspection, and it gives the terminal endpoints 'from U_a,0 to 𝓕,U_a^⊥'. This matches the paper's argument."
+  },
+  {
+   "id": "S4.3.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the per-edge residual table (e.g. side 2→5 residual P⊗<t_X,t_Y>^⊥ of dimension h-2, scratch last→sink residual (A⊗F)⊗Q^⊥); the page only says 'Splitting A=B⊥P and F=<t>⊥t^⊥ shows each edge nested'",
+    "over F_2, every nonzero residual is nondegenerate and nonalternating (it contains a norm-one coordinate unit), hence has an orthonormal basis; the page only says 'Such bases exist.' with a citation",
+    "Every displayed summand is nondegenerate"
+   ],
+   "note": "The gate-label table is reproduced exactly. The page gives the essential reason the side edge 2→5 nests ('<t_X>⊂t_Y^⊥') and the single loss ('losing dim(P⊗F⊗Q)=h at 3→4'), so it obtains L=Iγh. The edge-by-edge residuals and the binary orthonormal-basis argument are not shown."
+  },
+  {
+   "id": "S4.3.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page computes L/N=3γh·C(h,3)^2/C(h,3)^3=3γh/161700=γ/539, giving 100/539 and 101/539, both below 1/2. The bit formula 's_b=W_b m-2N+2L_b+N=W_b m-(N-2L_b)<W_b m' shows that the extra N source ranks still leave a strict saving."
+  },
+  {
+   "id": "S4.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "U⊂V nondegenerate as the hypothesis for 'P_V-P_U is the identity on V∩U^⊥' and for the projection along U^⊥",
+    "why the first X_a gate label is exactly U_a (B=0 at stage 1)",
+    "the routing ρ (X_a is sent to Y_a, so the endpoint pair is the sink of Y_a and the source of X_a), i.e. the statement M_sink(ρ(w))-M_source(w)=I_m for every input role w"
+   ],
+   "note": "The page derives that the rank equals the dimension change from 'P_V-P_U is the identity on the residual and zero on its complement', adds rank(Π_{U_a}+Π_{U_a})=1 on each X_a's first edge, and obtains s_b=W_b m-N+2L_b<W_b m and the endpoint identity Π_{U_a^⊥}-(-Π_{U_a})=Π_𝓕-0=I_m. This is the paper's proof."
+  },
+  {
+   "id": "S4.3.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "entries of C_U and C_U^{-1} are Gaussian integers over 2^m, so they preserve arrays over Z[i,1/2]",
+    "existence of orthonormal residual bases over F_2 (only cited)",
+    "the k-column version: Z_{a,k} on the 27 coordinates in every column with scalar i^{27k}, giving C^{⊗mk}",
+    "the scalar route sign -1 on Y_a→X_a, which is the reason the X outputs are negated",
+    "u_a·u_a=1, so that Π_{U_a}x=[u_a·x]u_a"
+   ],
+   "note": "The page derives weight additivity mod 4 for orthogonal vectors, Π_V x=Π_U x+Σ(z·x)z, q_V-q_U≡±Σwt(z)[z·x], the two-point identity for i^{ε[z·x]}, and conjugation of (-1)^{z·x} to translation, giving one kernel per basis vector and s_c=W_c m-2N+2L_c. It also computes q_{U_a^⊥}-q_{U_a}≡Σ_{k∉supp}x_k-Σ_{k∈supp}x_k and fixes the 27 inverse factors with C=iZC^{-1}Z, which is the paper's argument for one column."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "*neighbors*, triples joined by side wires ($|S\\cap T|=1,$ or distinct with even intersection), are orthogonal.",
+   "problem": "The two neighbor rules are not assigned to their constructions. In the paper the bit network's neighbors have |S∩T|=1 and the complex network's neighbors are distinct triples with even intersection. Read as a union in either field, the claim fails: over F_2, |S∩T|=1 gives t_S·t_T=1, and over Q, |S∩T|∈{0,2} gives <t_S,t_T>=∓1."
+  },
+  {
+   "severity": "minor",
+   "quote": "$2\\times2$ Hadamard matrix $H$ and kernel $C=H\\operatorname{diag}(1,i)H,$",
+   "problem": "The 1/√2 normalization is omitted. The paper has H=(1/√2)[[1,1],[1,-1]], so H^2=I. The page's later identities (C=aI+bX, H diag(1,-1)H=X, C_V C_U^{-1}=H^{⊗m}diag(i^{q_V-q_U})H^{⊗m}) need this normalization; with the unnormalized Hadamard matrix each picks up a factor 2."
+  }
+ ],
+ "motivation_given": true
+}

@@ -132,8 +132,7 @@ def extract_events(log_text):
 
 def measure(paper, answer, cov, reference, substeps, markers, result_labels):
     concepts = answer["concepts"]
-    # exegenius counts a quote given under two concepts once; so does this
-    quotes = list(dict.fromkeys(e["quote"] for c in concepts for e in c.get("evidence", [])))
+    quotes = [e["quote"] for c in concepts for e in c.get("evidence", [])]
     lines = [paper.line_of(q) for q in quotes]
     located = sorted(x for x in lines if x)
     m = collections.OrderedDict()
@@ -587,7 +586,8 @@ def main():
               if r["located_here"] != r["located"]]
     md.append(f"\nexegenius located every quote in {sum(r['located'] == r['quotes'] for r in rows)} of "
               f"{len(rows)} accepted extractions. This script's locator (used for reference items, blocks and "
-              f"checklist lines) places the same number in all but: {', '.join(differ) or 'none'}. "
+              f"checklist lines) places the same number in all but: {', '.join(differ) or 'none'} (the answer "
+              "file holds one quote more than the accepted submit's log record; immaterial here). "
               "Core items reached by label never add an item that lines miss, so the 'either' count equals "
               "the 'lines' count throughout.\n")
 

@@ -1,0 +1,24 @@
+{"page": "P08",
+ "items": [
+  {"id": "S4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page sets up arrays in R^Omega, frames D_v on sources, gates and sinks with a common frame per gate, edge changes D_vD_u^{-1}, D_in/D_out as direct sums over roles, and derives that the network implements D_out S_Omega D_in^{-1}, then concludes that 'the interior frames can be chosen purely to make each edge change inexpensive', matching paper lines 787-825."},
+  {"id": "S4.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "All three induction cases are shown as in the paper: the source case 'is the definition of g', the edge case 'D_vD_u^{-1}D_u\\varphi=D_v\\varphi', and the gate case '\\sum_j c_jD_v\\varphi_j=D_v(\\sum_j c_j\\varphi_j) by linearity'. The page then concludes that the sinks hold D_out S_Omega D_in^{-1} f."},
+  {"id": "S4.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The route operator eps_w D_sink(rho(w)) D_source(w)^{-1}, 'auxiliary roles included', comes right after the common-frame identity and is introduced by 'Then', so it is the paper's 'in particular' specialization. The page leaves implicit that this means reading off the (rho(w),w) block of D_out S_Omega D_in^{-1}, which is where the sign eps_w comes from. Its added 'Interior frames cancel' telescoping sketch is looser than the identity (see errors)."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "A route through a vertex $m$ from a source $s$ to a sink $t$ applies $D_mD_s^{-1}$ and then $D_tD_m^{-1}$, whose product is $D_tD_s^{-1}$ for every $D_m$.",
+   "problem": "This treats a route as a single chain of edge changes through one interior vertex and ignores the gate at m, which combines that wire with others using coefficients c_j. In the paper's networks, such as the motif schedules that realize (X_a,Y_a) -> (-Y_a,X_a) through gates like y <- y+x, a role's route is not a single path. The paper gets interior cancellation from the global invariant and the identity D_out S_Omega D_in^{-1}, and reads the route operator off from it. Telescoping holds only path by path, with scalar coefficients that commute with the frames, summed over all paths. The page does not say this."}
+ ],
+ "motivation_given": true}

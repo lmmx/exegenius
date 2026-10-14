@@ -8,28 +8,28 @@ Paper: 5361 lines; the introduction ends at line 431. 10 top-level sections deve
 
 | Extraction | Config | Submits | Concepts (unknown) | Gloss chars | Quotes | 1st tenth | Past intro | Last line | Blocks | Dev. sections (1st try) | Subsections | Results (1st try) | Core: lines / deriv. / label / either | Supp. | Checklist lines | Markers | Cache read M | s |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| E1-P1 | Sonnet high, planner | 1 | 52 (48) | 8771 | 50 | 27 | 0.50 | 4854 | 21 | 9/10 (9) | 18/35 | 9 (9) | 8 / 5 / 7 / 8 | 2 | 0 | 1 | 0.77 | 169 |
+| E1-P1 | Sonnet high, planner | 1 | 52 (48) | 8771 | 50 | 27 | 0.49 | 4854 | 21 | 9/10 (9) | 18/35 | 9 (9) | 8 / 5 / 7 / 8 | 2 | 0 | 1 | 0.77 | 169 |
 | E1-P2 | Sonnet high, planner | 1 | 47 (42) | 10094 | 103 | 32 | 0.73 | 4987 | 37 | 9/10 (9) | 29/35 | 29 (29) | 18 / 11 / 16 / 18 | 7 | 1 | 2 | 1.05 | 213 |
 | E1-P3 | Sonnet high, planner | 1 | 45 (41) | 8914 | 72 | 18 | 0.78 | 4987 | 34 | 9/10 (9) | 28/35 | 25 (25) | 16 / 8 / 13 / 16 | 6 | 0 | 1 | 0.83 | 179 |
 | E1-P4 | Sonnet high, planner | 1 | 64 (60) | 13429 | 101 | 22 | 0.83 | 4983 | 38 | 9/10 (9) | 31/35 | 34 (34) | 16 / 10 / 14 / 16 | 7 | 2 | 6 | 1 | 226 |
 | E1-P5 | Sonnet high, planner | 1 | 44 (40) | 7483 | 66 | 31 | 0.61 | 4854 | 27 | 9/10 (9) | 19/35 | 16 (16) | 12 / 3 / 9 / 12 | 4 | 0 | 0 | 0.50 | 168 |
 | E1-G1 | Sonnet high, general | 1 | 43 (39) | 7724 | 56 | 31 | 0.48 | 4854 | 25 | 9/10 (9) | 19/35 | 14 (14) | 12 / 5 / 9 / 12 | 3 | 0 | 0 | 0.91 | 138 |
 | E1-G2 | Sonnet high, general | 1 | 41 (36) | 6457 | 74 | 27 | 0.68 | 4824 | 32 | 9/10 (9) | 21/35 | 18 (18) | 15 / 2 / 11 / 15 | 5 | 0 | 0 | 0.87 | 130 |
-| E1-G3 | Sonnet high, general | 1 | 39 (35) | 7473 | 60 | 20 | 0.70 | 4987 | 29 | 9/10 (9) | 21/35 | 16 (16) | 11 / 6 / 8 / 11 | 4 | 0 | 0 | 1.12 | 166 |
+| E1-G3 | Sonnet high, general | 1 | 39 (35) | 7473 | 60 | 20 | 0.71 | 4987 | 29 | 9/10 (9) | 21/35 | 16 (16) | 11 / 6 / 8 / 11 | 4 | 0 | 0 | 1.12 | 166 |
 | E1-G4 | Sonnet high, general | 1 | 43 (39) | 6747 | 77 | 18 | 0.82 | 4987 | 35 | 9/10 (9) | 25/35 | 27 (27) | 15 / 7 / 14 / 15 | 6 | 1 | 1 | 1.22 | 151 |
 | E1-G5 | Sonnet high, general | 1 | 50 (42) | 8594 | 87 | 26 | 0.75 | 4985 | 34 | 9/10 (9) | 25/35 | 25 (25) | 15 / 9 / 13 / 15 | 6 | 0 | 0 | 1.36 | 184 |
 | E6-F1 | Sonnet high, general | 1 | 48 (44) | 9108 | 53 | 15 | 0.77 | 4854 | 28 | 9/10 (9) | 24/35 | 20 (20) | 15 / 5 / 12 / 15 | 4 | 0 | 0 | 1.26 | 172 |
-| E6-F2 | Sonnet high, general | 1 | 43 (39) | 8560 | 88 | 28 | 0.74 | 4983 | 35 | 9/10 (9) | 29/35 | 28 (28) | 14 / 9 / 12 / 14 | 5 | 1 | 1 | 1.25 | 192 |
+| E6-F2 | Sonnet high, general | 1 | 43 (39) | 8560 | 88 | 28 | 0.75 | 4983 | 35 | 9/10 (9) | 29/35 | 28 (28) | 14 / 9 / 12 / 14 | 5 | 1 | 1 | 1.25 | 192 |
 | E6-F3 | Sonnet high, general | 1 | 43 (39) | 7468 | 72 | 21 | 0.74 | 4854 | 32 | 9/10 (9) | 23/35 | 23 (23) | 14 / 6 / 12 / 14 | 6 | 0 | 1 | 1.15 | 153 |
 | E6-F4 | Sonnet high, general | 1 | 39 (35) | 9320 | 79 | 29 | 0.67 | 4983 | 31 | 9/10 (9) | 25/35 | 24 (24) | 15 / 9 / 12 / 15 | 6 | 0 | 0 | 1.31 | 181 |
-| E6-F5 | Sonnet high, general | 1 | 52 (45) | 9925 | 88 | 22 | 0.81 | 4987 | 36 | 9/10 (9) | 29/35 | 25 (25) | 15 / 8 / 14 / 15 | 6 | 1 | 0 | 1.33 | 197 |
+| E6-F5 | Sonnet high, general | 1 | 52 (45) | 9925 | 88 | 22 | 0.80 | 4987 | 36 | 9/10 (9) | 29/35 | 25 (25) | 15 / 8 / 14 / 15 | 6 | 1 | 0 | 1.33 | 197 |
 | E6-F6 | Sonnet high, general | 1 | 41 (37) | 7698 | 68 | 22 | 0.72 | 4983 | 30 | 9/10 (9) | 21/35 | 14 (14) | 11 / 7 / 7 / 11 | 5 | 0 | 1 | 1.32 | 190 |
 | E6-F7 | Sonnet high, general | 1 | 48 (44) | 10544 | 93 | 20 | 0.83 | 4987 | 35 | 9/10 (9) | 32/35 | 29 (29) | 18 / 11 / 16 / 18 | 6 | 2 | 1 | 1.17 | 195 |
 | E6-F8 | Sonnet high, general | 1 | 41 (37) | 7105 | 65 | 32 | 0.55 | 4983 | 28 | 9/10 (9) | 23/35 | 11 (11) | 11 / 6 / 8 / 11 | 3 | 0 | 1 | 1.33 | 180 |
 | E3-M1 | Sonnet medium, planner | 2 | 25 (21) | 3716 | 39 | 29 | 0.31 | 3907 | 13 | 8/10 (8) | 3/35 | 2 (2) | 3 / 0 / 1 / 3 | 0 | 0 | 0 | 0.12 | 54 |
 | E3-M2 | Sonnet medium, planner | 2 | 23 (20) | 3063 | 49 | 26 | 0.51 | 4810 | 23 | 9/10 (3) | 13/35 | 13 (0) | 10 / 2 / 9 / 10 | 2 | 0 | 0 | 0.18 | 61 |
-| E3-M3 | Sonnet medium, planner | 2 | 30 (26) | 3963 | 55 | 28 | 0.54 | 4810 | 24 | 9/10 (2) | 12/35 | 6 (1) | 7 / 2 / 3 / 7 | 3 | 0 | 0 | 0.18 | 60 |
-| E3-M4 | Sonnet medium, planner | 2 | 25 (21) | 3341 | 51 | 27 | 0.49 | 4825 | 21 | 9/10 (1) | 13/35 | 11 (0) | 10 / 2 / 6 / 10 | 4 | 0 | 0 | 0.18 | 73 |
+| E3-M3 | Sonnet medium, planner | 2 | 30 (26) | 3963 | 55 | 28 | 0.55 | 4810 | 24 | 9/10 (2) | 12/35 | 6 (1) | 7 / 2 / 3 / 7 | 3 | 0 | 0 | 0.18 | 60 |
+| E3-M4 | Sonnet medium, planner | 2 | 25 (21) | 3341 | 51 | 27 | 0.50 | 4825 | 21 | 9/10 (1) | 13/35 | 11 (0) | 10 / 2 / 6 / 10 | 4 | 0 | 0 | 0.18 | 73 |
 | E3-M5 | Sonnet medium, planner | 2 | 29 (25) | 3558 | 53 | 34 | 0.38 | 4546 | 20 | 9/10 (3) | 14/35 | 11 (2) | 10 / 2 / 7 / 10 | 3 | 0 | 0 | 0.13 | 59 |
 | S1-O1 | Opus medium, planner | 1 | 47 (43) | 7511 | 68 | 32 | 0.59 | 4198 | 26 | 9/10 (9) | 20/35 | 18 (18) | 12 / 5 / 9 / 12 | 5 | 0 | 1 | 0.16 | 135 |
 | S1-O2 | Opus medium, planner | 1 | 41 (37) | 8296 | 64 | 41 | 0.41 | 4854 | 21 | 9/10 (9) | 12/35 | 9 (9) | 7 / 1 / 5 / 7 | 3 | 0 | 0 | 0.48 | 142 |
@@ -43,7 +43,7 @@ Paper: 5361 lines; the introduction ends at line 431. 10 top-level sections deve
 | S1-K1 | Haiku high, planner | 1 | 40 (36) | 6563 | 37 | 25 | 0.38 | 4488 | 13 | 7/10 (7) | 7/35 | 3 (3) | 4 / 1 / 2 / 4 | 1 | 0 | 0 | 0.47 | 174 |
 | S1-K2 | Haiku high, planner | 1 | 65 (61) | 12824 | 61 | 28 | 0.61 | 4983 | 28 | 9/10 (9) | 22/35 | 11 (11) | 12 / 3 / 6 / 12 | 5 | 1 | 0 | 2.06 | 358 |
 
-exegenius located every quote in 34 of 34 accepted extractions. This script's locator (used for reference items, blocks and checklist lines) places the same number in all but: E3-M3 (56 of 55). Core items reached by label never add an item that lines miss, so the 'either' count equals the 'lines' count throughout.
+exegenius located every quote in 34 of 34 accepted extractions. This script's locator (used for reference items, blocks and checklist lines) places the same number in all but: E1-P1 (49 of 50), E1-P2 (102 of 103), E1-G3 (59 of 60), E1-G4 (76 of 77), E6-F1 (52 of 53), E6-F2 (87 of 88), E6-F4 (78 of 79), E6-F5 (87 of 88), E3-M4 (50 of 51). Core items reached by label never add an item that lines miss, so the 'either' count equals the 'lines' count throughout.
 
 ## 2. By model and effort (median and range)
 
@@ -54,7 +54,7 @@ exegenius located every quote in 34 of 34 accepted extractions. This script's lo
 | gloss characters | 8577 (6457-13429) | 3558 (3063-3963) | 7511 (7129-9785) | 10175 (9991-10359) | 9693.5 (6563-12824) |
 | quotes | 73 (50-103) | 51 (39-55) | 64 (55-107) | 107.5 (107-108) | 49 (37-61) |
 | quotes in first tenth | 24 (15-32) | 28 (26-34) | 37 (32-41) | 46 (45-47) | 26.5 (25-28) |
-| share of quotes past the introduction | 0.73 (0.48-0.83) | 0.49 (0.31-0.54) | 0.43 (0.40-0.69) | 0.62 (0.61-0.63) | 0.49 (0.38-0.61) |
+| share of quotes past the introduction | 0.73 (0.48-0.83) | 0.50 (0.31-0.55) | 0.43 (0.40-0.69) | 0.62 (0.61-0.63) | 0.49 (0.38-0.61) |
 | 100-line blocks quoted (of 54) | 32 (21-38) | 21 (13-24) | 23 (18-38) | 34 (33-35) | 20.5 (13-28) |
 | developing top-level sections quoted | 9 (9-9) | 9 (8-9) | 9 (7-10) | 9 (9-9) | 8 (7-9) |
 | body subsections quoted | 24.5 (18-32) | 13 (3-14) | 14 (9-27) | 28.5 (27-30) | 14.5 (7-22) |
@@ -269,7 +269,7 @@ Spearman's rho of each extraction measure against each arm's faithful count (and
 | quotes | 53 88 72 79 88 68 93 65 | +0.29 (p 0.48) | +0.49 (p 0.22) | -0.27 (p 0.51) | -0.44 (p 0.27) | +0.10 (p 0.83) | +0.20 (p 0.63) | +0.29 (p 0.48) |
 | located (exegenius) | 53 88 72 79 88 68 93 65 | +0.29 (p 0.48) | +0.49 (p 0.22) | -0.27 (p 0.51) | -0.44 (p 0.27) | +0.10 (p 0.83) | +0.20 (p 0.63) | +0.29 (p 0.48) |
 | quotes in first tenth | 15 28 21 29 22 22 20 32 | +0.01 (p 0.99) | -0.07 (p 0.87) | -0.62 (p 0.11) | +0.23 (p 0.57) | -0.35 (p 0.40) | +0.49 (p 0.22) | -0.32 (p 0.44) |
-| share of quotes past the introduction | 0.77 0.74 0.74 0.67 0.81 0.72 0.83 0.55 | -0.09 (p 0.85) | +0.32 (p 0.43) | +0.36 (p 0.38) | -0.37 (p 0.36) | +0.32 (p 0.43) | -0.22 (p 0.61) | +0.33 (p 0.42) |
+| share of quotes past the introduction | 0.77 0.75 0.74 0.67 0.80 0.72 0.83 0.55 | -0.10 (p 0.83) | +0.29 (p 0.50) | +0.36 (p 0.39) | -0.37 (p 0.36) | +0.31 (p 0.46) | -0.18 (p 0.67) | +0.32 (p 0.45) |
 | last line quoted | 4854 4983 4854 4983 4987 4983 4987 4983 | -0.24 (p 0.62) | +0.31 (p 0.51) | -0.36 (p 0.43) | -0.12 (p 0.89) | +0.00 (p 1.00) | +0.35 (p 0.41) | -0.08 (p 0.96) |
 | 100-line blocks quoted (of 54) | 28 35 32 31 36 30 35 28 | +0.19 (p 0.66) | +0.43 (p 0.28) | -0.04 (p 0.93) | -0.66 (p 0.09) | +0.37 (p 0.36) | -0.07 (p 0.87) | +0.19 (p 0.66) |
 | developing top-level sections quoted | 9 9 9 9 9 9 9 9 | const | const | const | const | const | const | const |
