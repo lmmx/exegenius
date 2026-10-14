@@ -1,0 +1,13 @@
+A frame is an invertible linear operator attached to each vertex of a network whose wires carry arrays instead of scalars; it lets the [Linear exchange network with restored scratch wires](linear-network.md) run on arrays so that only the two endpoint frames affect the result, and each edge pays only for a change of frame.
+
+**Setup.** Let $R$ be the ring of scalars of the network and $\Omega$ a finite set of addresses shared by all wires. Replace each scalar by an array in $R^\Omega$ and apply each gate pointwise, separately at every address. Write $\mathsf S_\Omega$ for the resulting network. Each source, gate and sink $v$ gets an invertible $R$-linear operator $D_v$ on $R^\Omega$, its frame. A frame may mix the entries of one wire's array across addresses; a gate only combines wires at one fixed address. All incidences of a gate use its single $D_v$. An edge from $u$ to $v$ applies $D_vD_u^{-1}$ to its wire's array. Let $D_{\rm in}$ and $D_{\rm out}$ be the direct sums of the source frames and of the sink frames over the roles.
+
+**Invariant.** Given a physical input $f$, call $g=D_{\rm in}^{-1}f$ its logical interpretation. The claim is that at every vertex $v$ the stored array equals $D_v$ applied to the logical array there.
+
+- At a source it holds by the definition of $g$.
+- Along an edge from $u$ to $v$ with logical array $\varphi$, the stored array $D_u\varphi$ becomes $D_vD_u^{-1}D_u\varphi=D_v\varphi$.
+- At a gate with logical input arrays $\varphi_j$, an output is $\sum_j c_j\,\varphi_j$ with $c_j\in R$. Since $D_v$ is $R$-linear and shared by all incidences, $\sum_j c_jD_v\varphi_j=D_v\big(\sum_j c_j\varphi_j\big)$.
+
+Induction along the wires carries the invariant to the sinks, so the network implements $D_{\rm out}\,\mathsf S_\Omega\,D_{\rm in}^{-1}$ <cite data-source="paper">D_{\rm out}\,\mathsf S_\Omega\,D_{\rm in}^{-1}.</cite>
+
+**Interior frames cancel.** If the scalar network is a signed role permutation sending input role $w$ to output role $\rho(w)$ with sign $\varepsilon_w$, the route of $w$ applies $\varepsilon_wD_{\mathrm{sink}(\rho(w))}D_{\mathrm{source}(w)}^{-1}$ to its array. Auxiliary roles are included. Interior changes $D_vD_u^{-1}$ telescope, leaving only the frames at the two ends of a route. So once the routing is fixed, the endpoint frames determine the array operator on each route <cite data-source="paper">the endpoint frames determine the array operator on each route; the</cite>, and the interior frames are free. Choose them only to make each edge change $D_vD_u^{-1}$ cheap. Later pages measure edge cost by the rank of the change, using [Rank, subspaces and orthogonal complements](linear-algebra-basics.md).
