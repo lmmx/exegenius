@@ -174,10 +174,12 @@ Faithful = core results whose derivation was judged faithful (of 19); central = 
 | E6-F2 | E7F2W | E7:W | J8 | 1 | 14 | 14 | 8 | 0 | J17 [15, 14] |
 | E6-F2 | E8F2X | E8b:X | J18 | 3 | 16 | 16,16,16 | 8 | 0 | J17 [21, 19]; J20 [19, 19] |
 | E6-F2 | E9F2Y | E9:Y | J18 | 3 | 19 | 19,19,19 | 9 | 0 | J20 [26, 25] |
+| E6-F3 | E10F3Y | E10:Y | J21 | 3 | 19 | 19,19,19 | 9 | 0 | - |
 | E6-F3 | E6F3B | E6:B | J7 | 2 | 7 | 6,8 | 5 | 0 | - |
 | E6-F3 | E6F3V | E6:V | J7 | 2 | 11.5 | 11,12 | 8.50 | 0 | - |
 | E6-F3 | E7F3W | E7:W | J8 | 1 | 14 | 14 | 9 | 0 | J17 [14, 16] |
 | E6-F3 | E8F3X | E8b:X | J18 | 3 | 16 | 16,16,16 | 8 | 0 | J17 [18, 18] |
+| E6-F4 | E10F4Y2 | E10:Y | J21 | 3 | 19 | 19,19,18 | 9 | 0 | - |
 | E6-F4 | E6F4B | E6:B | J7 | 1 | 2 | 2 | 4 | 0 | - |
 | E6-F4 | E6F4V | E6:V | J7 | 1 | 6 | 6 | 8 | 0 | - |
 | E6-F4 | E7F4W | E7:W | J8 | 1 | 7 | 7 | 7 | 0 | J11 [5]; J15 [6, 6] |
@@ -186,10 +188,12 @@ Faithful = core results whose derivation was judged faithful (of 19); central = 
 | E6-F4 | E9F4Y | E9:Y | J18 | 3 | 19 | 19,19,19 | 9 | 0 | J20 [25, 24] |
 | E6-F4 | S3F4OH | S3:OH | J10 | 3 | 14 | 13,14,16 | 8 | 0 | J11 [15] |
 | E6-F4 | S3F4OX | S3:OX | J10 | 3 | 13 | 13,13,14 | 9 | 0 | J11 [15]; J15 [15, 15] |
+| E6-F5 | E10F5Y | E10:Y | J21 | 3 | 19 | 19,19,19 | 9 | 0 | - |
 | E6-F5 | E6F5B | E6:B | J7 | 1 | 0 | 0 | 6 | 1 | - |
 | E6-F5 | E6F5V | E6:V | J7 | 2 | 10.5 | 10,11 | 7.50 | 0 | - |
 | E6-F5 | E7F5W | E7:W | J8 | 1 | 14 | 14 | 9 | 0 | J17 [16, 16] |
 | E6-F5 | E8F5X | E8b:X | J18 | 3 | 16 | 16,16,15 | 8 | 0 | J17 [20, 19] |
+| E6-F6 | E10F6Y | E10:Y | J21 | 3 | 19 | 19,19,19 | 9 | 0 | - |
 | E6-F6 | E6F6B | E6:B | J7 | 1 | 2 | 2 | 2 | 0 | - |
 | E6-F6 | E6F6V | E6:V | J7 | 1 | 0 | 0 | 5 | 0 | - |
 | E6-F6 | E7F6W | E7:W | J8 | 1 | 17 | 17 | 9 | 0 | J17 [19, 17] |
@@ -220,10 +224,10 @@ Faithful = core results whose derivation was judged faithful (of 19); central = 
 |---|---|---|---|---|---|---|---|---|---|---|
 | E6-F1 | 1 | 5 | 17 | 18 | - | 4 | 6 | 8.50 | 14 | 19.5 |
 | E6-F2 | 4 | 9 | 14 | 16 | 19 | 4 | 7 | 8 | 14.5 | 20 |
-| E6-F3 | 7 | 11.5 | 14 | 16 | - | 5 | 8.50 | 9 | 15 | 18 |
+| E6-F3 | 7 | 11.5 | 14 | 16 | 19 | 5 | 8.50 | 9 | 15 | 18 |
 | E6-F4 | 2 | 6 | 7 | 18 | 19 | 4 | 8 | 7 | 6 | 22.5 |
-| E6-F5 | 0 | 10.5 | 14 | 16 | - | 6 | 7.50 | 9 | 16 | 19.5 |
-| E6-F6 | 2 | 0 | 17 | 16 | - | 2 | 5 | 9 | 18 | 17.5 |
+| E6-F5 | 0 | 10.5 | 14 | 16 | 19 | 6 | 7.50 | 9 | 16 | 19.5 |
+| E6-F6 | 2 | 0 | 17 | 16 | 19 | 2 | 5 | 9 | 18 | 17.5 |
 | E6-F7 | 3 | 13 | 12 | 17 | - | 6 | 8 | 9 | 10.5 | 22.5 |
 | E6-F8 | 2 | 11 | 5 | 19 | 19 | 3 | 7 | 8 | 5.50 | 25 |
 
@@ -248,9 +252,10 @@ Faithful = core results whose derivation was judged faithful (of 19); central = 
 | Repeat | Faithful | Difference | Checklist, same batch |
 |---|---|---|---|
 | E8F4X vs E8F4X2 | 18 (J16) vs 17 (J18) | 1 | J17: [23, 21] vs [22, 21] |
+| E9F4Y vs E10F4Y2 | 19 (J18) vs 19 (J21) | 0 | - |
 | S3F8OX vs S5F8OX | 16 (J10) vs 13 (J12) | 3 | J13: [19, 19] vs [19, 19] |
 
-The E10 repeat E10F4Y2 is not yet judged.
+E9F4Y and E10F4Y2 are judged in different batches (J18, J21); J21 also re-judged E9F4Y: see section 3.
 
 ## 5. Do the judge-free measures predict the plan?
 
@@ -336,7 +341,7 @@ For each plan on a fixed extraction (E6 family: B, V, W, X, one plan per arm and
 | without E6-F8 | 5.13 | 0.0006 |
 | without plans E6F6V and E7F8W | 2.83 | 0.0067 |
 
-**Under the combined instruction (Y, E9 on F2, F4, F8):** 57 of 57 core results faithful by majority, including every result F8's extraction does not reach. No stratum varies, so Y carries no information here.
+**Under the combined instruction (Y: E9 and E10, on F2 F3 F4 F5 F6 F8):** 114 of 114 core results faithful by majority, 34 of the 34 that the extraction does not reach among them. No stratum varies, so Y carries no information on reach: under Y the planner supplies what these extractions miss.
 
 **What X (E8/E8b) did not get faithful, and whether the extraction reached it:**
 

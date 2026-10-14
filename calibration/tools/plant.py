@@ -618,10 +618,17 @@ def cmd_fetch(args):
 # ---------------------------------------------------------------------------------------------
 # seed
 
+def visible(text):
+    """The part of an edit's text the auditor sees: without a trailing partial <cite tag."""
+    return re.sub(r"\s*<cite$", "", text)
+
+
 def site_span(view, text):
     span = locate(view, text)
     if span is None:
         raise ValueError(f"site not visible to the auditor: {text!r}")
+    if normalise(view).count(normalise(text)) != 1:
+        raise ValueError(f"site not unique on the page: {text!r}")
     sents = enclosing(sentence_spans(view), *span)
     paras = enclosing(paragraph_spans(view), *span)
     return {"text": text, "span": list(span),
@@ -638,46 +645,46 @@ def mark_for(body, at):
     return None
 
 
-def choose(page, rng, n_err, n_var, by_id):
-    """N errors for each of V variants: one quote-detectable error first when the page has
-    one, then types in a rotating order, at most one source-only error per page, no two errors
-    of a variant in one sentence or in conflict."""
+def choose(page, rng, n_err, n_var, sentence, order):
+    """N errors for each of V variants. A quote-detectable error goes first when the page has
+    one; then types are taken in `order` (a rotation of one seeded order, so that types balance
+    across pages); at most one source-only error per page; no two errors of a variant share a
+    sentence or conflict."""
     pool = [e for e in CATALOGUE if e["page"] == page]
     rng.shuffle(pool)
-    want = n_err * n_var
-    picked = []
-    quote = [e for e in pool if "quote" in e["detectable_by"]]
-    if quote:
-        picked.append(quote[0])
-    order = TYPE_ORDER[:]
-    rng.shuffle(order)
-    while len(picked) < want:
-        added = False
-        for t in order:
-            if len(picked) >= want:
-                break
-            for e in pool:
-                if e in picked or e["type"] != t:
-                    continue
-                if e["detectable_by"] == ["source"] and any(p["detectable_by"] == ["source"] for p in picked):
-                    continue
-                picked.append(e)
-                added = True
-                break
-        if not added:
-            break
-    # Distribute into variants, keeping conflicts and shared sentences apart.
     variants = [[] for _ in range(n_var)]
-    for e in picked:
-        slots = sorted(range(n_var), key=lambda v: (len(variants[v]), v))
-        for v in slots:
+    taken = set()
+
+    def place(e):
+        if e["id"] in taken:
+            return False
+        if e["detectable_by"] == ["source"] and any(
+                o["detectable_by"] == ["source"] for v in variants for o in v):
+            return False
+        for v in sorted(range(n_var), key=lambda v: (len(variants[v]), v)):
             if len(variants[v]) >= n_err:
                 continue
             if any(e["id"] in o["conflicts"] or o["id"] in e["conflicts"] or
-                   e["_sentence"] == o["_sentence"] for o in variants[v]):
+                   sentence[e["id"]] == sentence[o["id"]] for o in variants[v]):
                 continue
             variants[v].append(e)
+            taken.add(e["id"])
+            return True
+        return False
+
+    for e in pool:
+        if "quote" in e["detectable_by"] and place(e):
             break
+    progress = True
+    while progress and sum(map(len, variants)) < n_err * n_var:
+        progress = False
+        for t in order:
+            for e in pool:
+                if e["type"] == t and place(e):
+                    progress = True
+                    break
+    for v in variants:
+        v.sort(key=lambda e: e["id"])
     return variants
 
 
@@ -700,49 +707,55 @@ def cmd_seed(args):
            "paper": {"path": args.paper, "sha256": sha(paper) if paper else None},
            "wikis": WIKIS, "pages": [], "variants": [], "errors": [], "shams": []}
     problems = []
-    by_id = {e["id"]: e for e in CATALOGUE}
-    for page in sorted(PAGES):
+    native_support = {}
+    if (clean_dir / "native-support.json").exists():
+        native_support = json.loads((clean_dir / "native-support.json").read_text())
+    global_order = TYPE_ORDER[:]
+    random.Random(f"A1:{args.seed}:types").shuffle(global_order)
+    for k, page in enumerate(sorted(PAGES)):
         meta = PAGES[page]
         clean = (clean_dir / f"{page}.md").read_text()
         clean_view = auditor_view(clean)
-        for e in CATALOGUE + [{"id": s[0], "page": s[1], "find": s[2], "replace": s[3]} for s in SHAMS]:
-            if e["page"] != page:
-                continue
+        sents = sentence_spans(clean)
+        sentence = {}
+        edits_here = [e for e in CATALOGUE if e["page"] == page] + \
+            [{"id": x[0], "page": x[1], "find": x[2], "replace": x[3]} for x in SHAMS if x[1] == page]
+        for e in edits_here:
             if clean.count(e["find"]) != 1:
                 problems.append(f"{e['id']}: text to replace occurs {clean.count(e['find'])} times")
                 continue
             at = clean.index(e["find"])
-            sents = sentence_spans(clean)
-            e["_sentence"] = next((s for s in sents if s[0] <= at < s[1]), None)
+            sentence[e["id"]] = next((sp for sp in sents if sp[0] <= at < sp[1]), None)
         if problems:
             continue
         key["pages"].append({
             "page": page, "wiki": meta["wiki"], "commit": WIKIS[meta["wiki"]]["commit"],
             "plan_steps": meta["plan"], "chain_steps": meta["chain"], "clean_sha256": sha(clean),
             "bound_symbols": bindings.get(page, []),
-            "native": [{"quote": q, "note": n,
-                        "span": list(locate(clean_view, q) or [])} for q, n in meta["native"]]})
+            "native": [{"quote": q, "note": n} for q, n in meta["native"]],
+            "native_support_labels": native_support.get(page, [])})
         for q, _ in meta["native"]:
             if locate(clean_view, q) is None:
                 problems.append(f"{page}: native defect quote not on the page: {q!r}")
         rng = random.Random(f"A1:{args.seed}:{page}")
-        variants = choose(page, rng, args.errors, args.variants, by_id)
-        shams = [s for s in SHAMS if s[1] == page]
+        shift = (k * args.errors * args.variants) % len(global_order)
+        order = global_order[shift:] + global_order[:shift]
+        variants = choose(page, rng, args.errors, args.variants, sentence, order)
+        shams = sorted((x for x in SHAMS if x[1] == page), key=lambda x: x[0])
         rng.shuffle(shams)
         bodies = [(0, "clean", [], None, clean)]
         for v, errs in enumerate(variants, start=1):
-            used = {e["_sentence"] for e in errs}
-            sham = next((s for s in shams
-                         if [x for x in CATALOGUE + [{"id": s[0], "page": s[1], "find": s[2]}]
-                             if x["id"] == s[0]][0].get("_sentence", None) not in used), None)
+            if len(errs) < args.errors:
+                problems.append(f"{page} variant {v}: only {len(errs)} errors could be placed")
+            used = {sentence[e["id"]] for e in errs}
+            sham = next((x for x in shams if sentence[x[0]] not in used), None)
             sham_e = None
             if sham:
-                sham_e = {"id": sham[0], "find": sham[2], "replace": sham[3]}
+                sham_e = {"id": sham[0], "find": sham[2], "replace": sham[3], "sham": True}
                 shams.remove(sham)
                 shams.append(sham)
-            edits = sorted(errs, key=lambda e: clean.index(e["find"]))
-            body = apply(clean, edits + ([sham_e] if sham_e else []))
-            bodies.append((v, "seeded", errs, sham_e, body))
+            edits = sorted(errs + ([sham_e] if sham_e else []), key=lambda e: clean.index(e["find"]))
+            bodies.append((v, "seeded", errs, sham_e, apply(clean, edits)))
         for v, kind, errs, sham_e, body in bodies:
             code = "a1-" + hashlib.sha256(f"{args.seed}:{page}:{v}".encode()).hexdigest()[:6]
             view = auditor_view(body)
@@ -752,11 +765,12 @@ def cmd_seed(args):
                      "shams": [f"{sham_e['id']}@{code}"] if sham_e else [],
                      "support_marks": [{"claim": m["claim"], "quote": m["quote"]}
                                        for m in support_marks(body)]}
-            # Checks: the writer's bound symbols still occur; no new letters reach the auditor;
-            # attribution quotes are verbatim in the paper.
-            for s in bindings.get(page, []):
-                if occurs(s, auditor_view(clean)) and not occurs(s, view):
-                    problems.append(f"{code}: bound symbol {s} no longer occurs")
+            # Checks: the writer's bound symbols still occur (submit rejects an audit that
+            # cannot account for one); no new letters reach the auditor; every quotation is
+            # verbatim in the paper (as the writer's submit required).
+            for sym in bindings.get(page, []):
+                if occurs(sym, clean_view) and not occurs(sym, view):
+                    problems.append(f"{code}: bound symbol {sym} no longer occurs")
             new = math_tokens(view) - math_tokens(clean_view)
             if new:
                 problems.append(f"{code}: new symbols reach the auditor: {sorted(new)}")
@@ -766,19 +780,21 @@ def cmd_seed(args):
                         problems.append(f"{code}: quotation not in the paper: {q!r}")
             (out / entry["file"]).write_text(body)
             key["variants"].append(entry)
-            for e in errs + ([dict(sham_e, sham=True)] if sham_e else []):
-                at = body.index(e["replace"]) if e["replace"] else None
+            for e in errs + ([sham_e] if sham_e else []):
+                at = body.index(e["replace"])
                 clean_at = clean.index(e["find"])
-                site = e.get("site") or e["replace"]
-                site_clean = e.get("site") or e["find"]
+                try:
+                    site = site_span(view, e.get("site") or visible(e["replace"]))
+                    site_clean = site_span(clean_view, e.get("site") or visible(e["find"]))
+                    linked = [site_span(view, t) for t in e.get("linked", [])]
+                except ValueError as err:
+                    problems.append(f"{e['id']}@{code}: {err}")
+                    continue
                 rec = {"id": f"{e['id']}@{code}", "catalogue_id": e["id"], "code": code,
-                       "page": page, "variant": v,
-                       "original": e["find"], "seeded": e["replace"],
+                       "page": page, "variant": v, "original": e["find"], "seeded": e["replace"],
                        "location": {
                            "offset": at, "line": body[:at].count("\n") + 1,
-                           "audit_site": site_span(view, site),
-                           "audit_site_clean": site_span(clean_view, site_clean),
-                           "linked": [site_span(view, t) for t in e.get("linked", [])],
+                           "audit_site": site, "audit_site_clean": site_clean, "linked": linked,
                            "support_mark": mark_for(body, at),
                            "support_mark_clean": mark_for(clean, clean_at)}}
                 if e.get("sham"):
@@ -835,7 +851,7 @@ def overlaps(span, other):
 def parse_support_task(text):
     """The quotations a support task lists, as (claim, quote), in order."""
     marks = []
-    for m in re.finditer(r"^### (\d+)\n\nClaim: (.*?)\n\nQuotation, from .*?: \"(.*)\"\n\nParagraph:",
+    for m in re.finditer(r"^### (\d+)\n\nClaim: (.*?)\n\nQuotation, from .*?: \"(.*?)\"\n\nParagraph:",
                          text, flags=re.M | re.S):
         marks.append({"claim": m.group(2), "quote": m.group(3)})
     return marks
@@ -853,8 +869,8 @@ def load_answers(root):
                 rec[name] = json.loads(f.read_text())
         if (d / "support.task.md").exists():
             rec["support_task"] = (d / "support.task.md").read_text()
-        if (d / "log.jsonl").exists():
-            rec["log"] = [json.loads(l) for l in (d / "log.jsonl").read_text().splitlines() if l.strip()]
+        rec["log"] = [json.loads(l) for f in sorted(d.glob("*log.jsonl"))
+                      for l in f.read_text().splitlines() if l.strip()]
         data.setdefault(config, {}).setdefault(run, {})[code] = rec
     return data
 
@@ -871,7 +887,9 @@ def wilson(k, n, z=1.2816):
 
 
 def rate(k, n):
-    return {"k": k, "n": n, "rate": round(k / n, 3) if n else None, "ci80": wilson(k, n)}
+    """A proportion with its 80% interval, or, for a count per page (k may exceed n), a mean."""
+    return {"k": k, "n": n, "rate": round(k / n, 3) if n else None,
+            "ci80": wilson(k, n) if k <= n else None}
 
 
 def score_audit(key, pages_dir, variant, answer):
@@ -961,7 +979,7 @@ def cmd_score(args, data=None, quiet=False):
     data = data if data is not None else load_answers(args.answers)
     variants = {v["code"]: v for v in key["variants"]}
     errors = {e["id"]: e for e in key["errors"]}
-    report, notes = {}, []
+    report = {}
     for config in sorted(data):
         per_run, agg = {}, collections.defaultdict(lambda: [0, 0])
         missing = 0
@@ -1017,7 +1035,6 @@ def cmd_score(args, data=None, quiet=False):
                                 agg["clean_site_located"][1] += 1
                                 agg["clean_site_asserted"][0] += any(asserts(g) for g in cg)
                                 agg["clean_site_asserted"][1] += 1
-                        notes.append((config, run, eid, how))
                 if s is not None:
                     for eid, label in s["errors"].items():
                         e = errors[eid]
@@ -1045,9 +1062,11 @@ def cmd_score(args, data=None, quiet=False):
                         per_run.setdefault(run, [0, 0])
                         per_run[run][0] += hit
                         per_run[run][1] += 1
+        counts = {k: agg.pop(k) for k in ("audit_gaps", "unlocated_quotes") if k in agg}
         report[config] = {k: rate(*v) for k, v in sorted(agg.items())}
-        report[config]["audit_gaps_per_page"] = (round(agg["audit_gaps"][0] / agg["audit_gaps"][1], 2)
-                                                 if agg["audit_gaps"][1] else None)
+        report[config]["unlocated_quotes"] = counts.get("unlocated_quotes", [0])[0]
+        g = counts.get("audit_gaps", [0, 0])
+        report[config]["audit_gaps_per_page"] = round(g[0] / g[1], 2) if g[1] else None
         report[config]["union_caught_per_run"] = {r: rate(*v) for r, v in per_run.items()}
         report[config]["missing_answers"] = missing
         report[config]["submits"] = submit_summary(data[config])
@@ -1177,10 +1196,7 @@ def cmd_selftest(args):
     check(a["fa_sham_asserted"]["rate"] == 1.0, "alarmist is caught at every sham site")
     check(a["support_fa_clean_marks"]["rate"] == 1.0, "alarmist's support labels are all false alarms on clean marks")
     check(a["clean_site_asserted"]["rate"] == 1.0, "the clean-site baseline sees the alarmist")
-    # Determinism: choices depend only on the seed.
-    by_id = {e["id"]: e for e in CATALOGUE}
     for page in PAGES:
-        clean = next(p for p in key["pages"] if p["page"] == page)
         picks = [sorted(e.split("@")[0] for e in v["errors"]) for v in key["variants"] if v["page"] == page]
         check(all(len(p) <= key["errors_per_variant"] for p in picks), f"{page}: at most N errors per variant")
     types = collections.Counter(e["type"] for e in key["errors"])
