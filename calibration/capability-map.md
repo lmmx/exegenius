@@ -96,7 +96,13 @@ E1-P4 has held at 6 from J6 on, but J6's second judge gave it 8. *Corrected 2026
      - Opus `xhigh` lifts both (faithful 7 → 13 on F4, 7 → 16 on F8), with C1 gained and no major errors;
      - Opus `high` does not suffice.
    - **Across F1, F4 and F8,** Opus `xhigh` beats Sonnet `high` beyond judge noise every time (+3, +6, +9 faithful). This is one run per extraction, on one paper.
-   - **Proposed next:** Opus `max` on F8, before any Fable run (`docs/journal/2026-10-14-s3-opus-floor.md`).
+   - **S4 and S5 (F8):**
+     - Opus `max` is +1 faithful and +1 checklist sub-step over Opus `xhigh`, at 5× the cache read.
+     - That gain is within Opus `xhigh`'s own run-to-run difference (2 faithful).
+   - **E8: the instruction outweighs the model.**
+     - With one more sentence (every variant, and the chain behind each bound), Sonnet `high` reaches faithful 18, 18 and 19 on F1, F4 and F8 (J16), against 14, 3 and 4 without it.
+     - It is not below Opus `xhigh` on the checklist anywhere, and at the ceiling on F8.
+     - E8b, on the other five extractions, is running (`docs/journal/2026-10-14-s4-s5-e8.md`).
 5. **Writers, auditors and support checks:** no evidence yet. They dominate a full run's cost.
 
 ## Other document classes
