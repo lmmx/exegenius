@@ -1,6 +1,6 @@
 # Mechanism checklist for six discriminating core results of `paper.tex` (secondary measure, under validation)
 
-**Status:** under validation in K1 (`calibration/plans/K1.md`). It is not used to decide any experiment until K1's criteria are met. The content judge's rubric and the central-derivation rubric (`nlogn-central-saving.md`) remain the primary measures.
+**Status:** validated in K1 (`docs/journal/2026-10-14-k1-checklist.md`: AUC 0.957 against earlier faithful verdicts, 0.836 agreement with the markers, 78 of 78 between judges). Adopted as a preregistered **secondary** measure. The content judge's rubric and the central-derivation rubric (`nlogn-central-saving.md`) remain the primary measures.
 
 **Why these six:**
 - **They carry the measure's information.** Across the 53 judgements of compared plans in J8–J10, they are the core results with the lowest faithful rates (0.17–0.55). Results faithful in ≥ 0.9 of judgements carry almost no information (`docs/journal/2026-10-14-sonnet-xhigh-and-rubric.md`).

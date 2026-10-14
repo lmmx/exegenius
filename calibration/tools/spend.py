@@ -37,7 +37,7 @@ RULES = [  # (pattern on the description, experiment, role)
     (r"^R\d \d{4}-", "T1", "runs"),
     (r"^(T\d chain walk|Chain walk)", "chain walks", "judging"),
 ]
-BATCH = {"3": "E3", "4": "S1", "5": "E4", "6": "E5", "7": "E6", "8": "E7", "9": "S2", "10": "S3"}
+BATCH = {"3": "E3", "4": "S1", "5": "E4", "6": "E5", "7": "E6", "8": "E7", "9": "S2", "10": "S3", "11": "K1"}
 
 
 def classify(desc):

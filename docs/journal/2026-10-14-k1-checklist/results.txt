@@ -1,0 +1,31 @@
+## Criterion 1: completeness against the earlier majority faithful verdict
+pairs 66: faithful 29 (mean completeness 0.85), not faithful 37 (mean 0.33); AUC 0.957; met: True
+  bank-exchange-network: faithful 6, not 5, AUC 1.00
+  label-residual-budget: faithful 2, not 9, AUC 0.92
+  complex-phase-interface: faithful 3, not 8, AUC 1.00
+  rank-saving: faithful 7, not 4, AUC 0.71
+  matrix-shear: faithful 7, not 4, AUC 1.00
+  simultaneous-layer: faithful 4, not 7, AUC 1.00
+
+## Criterion 2: first judge against markers
+agreement 230/275 = 0.836; judge present, marker absent 13; marker present, judge absent 32; met: True
+  per sub-step agreement: B1 11/11, B2 11/11, B3 11/11, B4 11/11, L2 6/11, L3 9/11, L4 11/11, L5 9/11, P1 9/11, P2 4/11, P3 4/11, P4 10/11, R1 8/11, R2 11/11, R3 11/11, R4 11/11, M1 9/11, M2 9/11, M3 10/11, M4 11/11, S1 8/11, S2 11/11, S3 9/11, S4 5/11, S5 11/11
+
+## Criterion 3: first against second judge
+  S2F1OX: agreement 26/26, totals 19 and 19
+  S2F1OM: agreement 26/26, totals 24 and 24
+  S2F1SM: agreement 26/26, totals 21 and 21
+agreement 78/78 = 1.000; met: True
+
+## Criterion 4: totals (first judge; second in brackets) and marker hits
+  E7F1W: 13 of 26 (B4 L3 P0 R2 M3 S1); markers 16 of 25
+  E7F4W: 5 of 26 (B0 L1 P1 R2 M1 S0); markers 6 of 25
+  E7F8W: 4 of 26 (B0 L1 P0 R2 M0 S1); markers 8 of 25
+  S2F1OM: 24 [24] of 26 (B4 L4 P4 R4 M4 S4); markers 23 of 25
+  S2F1OX: 19 [19] of 26 (B4 L3 P3 R4 M4 S1); markers 19 of 25
+  S2F1SM: 21 [21] of 26 (B4 L3 P4 R2 M4 S4); markers 21 of 25
+  S2F1SX: 15 of 26 (B4 L2 P1 R2 M2 S4); markers 18 of 25
+  S3F4OH: 15 of 26 (B3 L2 P2 R3 M4 S1); markers 17 of 25
+  S3F4OX: 15 of 26 (B3 L2 P2 R3 M3 S2); markers 17 of 25
+  S3F8OH: 6 of 26 (B0 L0 P2 R2 M1 S1); markers 8 of 25
+  S3F8OX: 19 of 26 (B4 L3 P2 R4 M3 S3); markers 22 of 25

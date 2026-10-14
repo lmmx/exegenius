@@ -69,6 +69,7 @@
 | E7 | 8 · Sonnet · 23.8 M · 183 k | 22 · 51.9 M · 140 k |
 | S2 | 4 · Sonnet, Opus · 53.1 M · 166 k (visible) | 17 · 42.4 M · 110 k |
 | S3 | 4 · Opus · 10.6 M · 84 k (visible) | 20 · 59.6 M · 129 k |
+| K1 (checklist validation, no runs) | — | 14 · 8.8 M · 39 k |
 | W1 (cancelled) | 1 · Sonnet · 0.1 M · 0 | — |
 | J1–J2 (content-judge development, E1) | — | 43 · 54.8 M · 200 k |
 | Chain walks (baseline and T1) | — | 8 · 6.4 M · 32 k |
@@ -157,6 +158,7 @@ Their tokens are inside the run totals above.
 - **After it:** `tools/spend.py` is rerun, and §2 and §3 are updated.
 - **Meter readings** go into §1 as the author supplies them.
 - **S3, done:** estimated at ~70–78 M cache read and ~7–8 M cache write; measured at 70.2 M and 4.79 M. The runs came in at under half their estimate, and judging at about 1.2×.
+- **K1, done:** estimated at ~20–35 M cache read; measured at 8.8 M (14 checklist judgements at 0.63 M each).
 - **Next proposed (not launched):**
-  - **Opus `max` on F8,** judged with S3F8OX (8 judgements): ~35–40 M cache read (`docs/journal/2026-10-14-s3-opus-floor.md`).
+  - **Opus `max` on F8,** judged with S3F8OX on the primary rubric (8 judgements) and on the checklist (4): ~37–43 M cache read (`docs/journal/2026-10-14-k1-checklist.md`).
   - **The Fable pilot after it** (`plans/FB1.md`): per extraction, one Fable run of unknown cost (S2's Opus `max` run, 15.9 M cache read, is the placeholder), plus ~27 M cache read of Opus judging.
