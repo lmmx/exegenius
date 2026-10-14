@@ -259,6 +259,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 184.9,
       "basis": "measured"
@@ -300,6 +305,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 19.4,
       "basis": "measured"
@@ -340,6 +350,11 @@
       "value": 31688,
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
      },
      "seconds": {
       "value": 112.1,
@@ -571,6 +586,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 66.8,
       "basis": "measured"
@@ -612,6 +632,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 27.4,
       "basis": "measured"
@@ -652,6 +677,11 @@
       "value": 45136,
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
      },
      "seconds": {
       "value": 151.2,
@@ -854,6 +884,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 58.0,
       "basis": "measured"
@@ -895,6 +930,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 24.3,
       "basis": "measured"
@@ -935,6 +975,11 @@
       "value": 42124,
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
      },
      "seconds": {
       "value": 144.8,
@@ -1111,6 +1156,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 72.0,
       "basis": "measured"
@@ -1152,6 +1202,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 22.9,
       "basis": "measured"
@@ -1192,6 +1247,11 @@
       "value": 45940,
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
      },
      "seconds": {
       "value": 168.2,
@@ -1409,6 +1469,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 75.6,
       "basis": "measured"
@@ -1450,6 +1515,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 22.6,
       "basis": "measured"
@@ -1490,6 +1560,11 @@
       "value": 24652,
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
      },
      "seconds": {
       "value": 92.6,
@@ -1727,6 +1802,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 82.3,
       "basis": "measured"
@@ -1768,6 +1848,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 24.5,
       "basis": "measured"
@@ -1808,6 +1893,11 @@
       "value": 33580,
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
      },
      "seconds": {
       "value": 116.6,
@@ -1984,6 +2074,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 83.2,
       "basis": "measured"
@@ -2025,6 +2120,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 23.3,
       "basis": "measured"
@@ -2065,6 +2165,11 @@
       "value": 46288,
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
      },
      "seconds": {
       "value": 175.1,
@@ -2288,6 +2393,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 70.7,
       "basis": "measured"
@@ -2329,6 +2439,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 23.7,
       "basis": "measured"
@@ -2369,6 +2484,11 @@
       "value": 45188,
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
      },
      "seconds": {
       "value": 144.2,
@@ -2608,6 +2728,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 61.4,
       "basis": "measured"
@@ -2649,6 +2774,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 28.3,
       "basis": "measured"
@@ -2689,6 +2819,11 @@
       "value": 63692,
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
      },
      "seconds": {
       "value": 214.7,
@@ -2886,6 +3021,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 92.8,
       "basis": "measured"
@@ -2927,6 +3067,11 @@
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
      },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
      "seconds": {
       "value": 24.1,
       "basis": "measured"
@@ -2967,6 +3112,11 @@
       "value": 39100,
       "basis": "measured",
       "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
      },
      "seconds": {
       "value": 150.3,

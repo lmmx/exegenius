@@ -147,6 +147,12 @@ The registry's output estimate also counted thinking signatures as output, which
 - **The reference set is unreviewed.**
 - **The judges are all Opus at `high`.** Judging Opus plans with Opus judges could favour them, and nothing here tests that.
 
+## Addendum: why Sonnet `xhigh` regressed (from the transcripts; no new runs)
+
+Its main planning call hit the output-token limit (`max_tokens`, 128,000 tokens, all thinking). Nothing from that call was carried forward. The run then re-planned in 5.6 minutes and wrote the plan in five pieces.
+
+This is the only such stop in the programme. Analysis, and the evidence kept apart from interpretation: `2026-10-14-sonnet-xhigh-and-rubric.md`.
+
 ## Current State
 - All four S2 configurations and the reference pass the central gate on F1 under majority judging; the gate is saturated with the E7 instructions on this extraction
 - Opus `xhigh`, Sonnet `max` and Opus `max` each gain C1 and 3–4 faithful derivations over Sonnet `high`, beyond J9's judge noise; Sonnet `xhigh` loses 2 at 2.7× the time

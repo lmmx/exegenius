@@ -125,7 +125,7 @@ def visible(block):
 
 def subagent(lines, meta):
     calls, chars, models, efforts, stamps = {}, collections.Counter(), collections.Counter(), collections.Counter(), []
-    signatures = 0
+    signatures, truncated = 0, 0
     for line in lines.splitlines():
         try:
             e = json.loads(line)
@@ -139,6 +139,7 @@ def subagent(lines, meta):
         if e.get("type") != "assistant" or not isinstance(m, dict):
             continue
         u = m.get("usage") or {}
+        truncated += m.get("stop_reason") == "max_tokens"
         calls[m.get("id")] = (u.get("input_tokens", 0), u.get("cache_read_input_tokens", 0),
                               u.get("cache_creation_input_tokens", 0))
         chars[m.get("id")] += sum(visible(b) for b in m.get("content", []))
@@ -160,6 +161,9 @@ def subagent(lines, meta):
         "thinking_signature_chars": {"value": signatures, "basis": "measured",
                                      "note": "length of the encrypted thinking signatures; a proxy for "
                                              "hidden reasoning, not a token count"},
+        "max_tokens_stops": {"value": truncated, "basis": "measured",
+                             "note": "model calls cut off at the output-token limit; their output, thinking "
+                                     "included, is not carried into the next call"},
         "seconds": measured(round((t(max(stamps)) - t(min(stamps))).total_seconds(), 1)) if stamps else
         unavailable("no timestamps"),
     }

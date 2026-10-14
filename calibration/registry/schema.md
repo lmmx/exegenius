@@ -63,7 +63,7 @@ A record holds every spec field, and adds:
 - **`planning_tasks`:** each planning task's issue time and submits (attempt, time, outcome, check, coverage figures), from `log.jsonl`.
 - **`planning_seconds`:** from the first planning task issued to the last accepted.
 - **Submits:** `rejected_submits`, `coverage_rejections`, and `other_tasks_issued` (the write tasks handed out when planning ended).
-- **`subagents[]`:** per subagent, `agent_type`, `models` (each model with its number of assistant messages), `effort` (each value with its number of records), `model_calls`, `input_tokens`, `cache_read_tokens`, `cache_write_tokens` (measured), `output_tokens` (estimated, visible content only), `thinking_signature_chars` (measured: the length of the encrypted thinking signatures, a proxy for hidden reasoning, not a token count) and `seconds`.
+- **`subagents[]`:** per subagent, `agent_type`, `models` (each model with its number of assistant messages), `effort` (each value with its number of records), `model_calls`, `input_tokens`, `cache_read_tokens`, `cache_write_tokens` (measured), `output_tokens` (estimated, visible content only), `thinking_signature_chars` (measured: the length of the encrypted thinking signatures, a proxy for hidden reasoning, not a token count), `max_tokens_stops` (measured: model calls cut off at the output-token limit) and `seconds`.
 - **`observed_config`:** the agent types, models and efforts the transcripts record.
 - **`matches_arm`:** whether they equal the arm's intended configuration. Only the fields the arm specifies are checked, and the value is null when there are no transcripts.
 - **`quality[]`:** one entry per judgement of the run's plan:
