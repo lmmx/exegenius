@@ -255,7 +255,7 @@ Faithful = core results whose derivation was judged faithful (of 19); central = 
 | E9F4Y vs E10F4Y2 | 19 (J18) vs 19 (J21) | 0 | - |
 | S3F8OX vs S5F8OX | 16 (J10) vs 13 (J12) | 3 | J13: [19, 19] vs [19, 19] |
 
-E9F4Y and E10F4Y2 are judged in different batches (J18, J21); J21 also re-judged E9F4Y: see section 3.
+E9F4Y and E10F4Y2 were first judged in different batches (J18, J21); J21 also re-judged E9F4Y, faithful [19, 19, 19] against E10F4Y2's [19, 19, 18].
 
 ## 5. Do the judge-free measures predict the plan?
 

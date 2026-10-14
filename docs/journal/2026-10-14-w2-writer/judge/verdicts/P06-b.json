@@ -1,0 +1,24 @@
+{"page": "P06",
+ "items": [
+  {"id": "S4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page sets up arrays, pointwise gates, frames D_v, edge changes D_vD_u^{-1} and D_in, D_out as direct sums over roles exactly as the paper does (lines 787-805), proves the invariant by induction and concludes \"the network implements D_out S_Omega D_in^{-1}\", from which \"the endpoint frames determine the array operator on each route\" and \"the interior frames are free\". The core identity is correctly derived; only the route read-off (S4.2.2) uses a looser justification."},
+  {"id": "S4.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "All three cases of the paper's induction are shown: sources \"by the definition of g\" with g=D_in^{-1}f, edges \"D_vD_u^{-1}D_uvarphi=D_vvarphi\", and gates \"sum_j c_jD_vvarphi_j=D_v(sum_j c_jvarphi_j)\" using R-linearity and the single D_v shared by all incidences, with the pointwise gate application stated in the setup; induction then gives D_out S_Omega D_in^{-1}, matching lines 804-817."},
+  {"id": "S4.2.2",
+   "presence": "derived",
+   "faithful": false,
+   "dropped": ["the specialization of the identity D_out S_Omega D_in^{-1} to a signed role permutation: S_Omega sends role w's array to epsilon_w times it at role rho(w), and the direct-sum blocks of D_in and D_out at w and rho(w) are D_source(w)^{-1} and D_sink(rho(w))"],
+   "note": "The route formula and \"Auxiliary roles are included\" match the paper, but the page justifies it by \"Interior changes D_vD_u^{-1} telescope, leaving only the frames at the two ends of a route\", whereas the paper obtains it \"in particular\" from the common-frame identity (lines 818-822). Literal telescoping fails in a network whose gates mix roles, such as the exchange motif with scratch wires, where a role's array does not travel along one chain of edges. The cancellation holds only because each gate commutes with its common frame, so it rests on the invariant, which the page does not invoke here."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Interior changes $D_vD_u^{-1}$ telescope, leaving only the frames at the two ends of a route.",
+   "problem": "Edge changes alone do not telescope: gates sit between them and, in a signed role permutation built from mixing gates with scratch wires, a route is not a single chain of edges. The interior frames cancel because each pointwise gate commutes with its common frame (the invariant), and the paper reads the route operator epsilon_w D_sink(rho(w)) D_source(w)^{-1} directly off the identity D_out S_Omega D_in^{-1} (lines 813-822). The stated result is correct."}
+ ],
+ "motivation_given": true}
