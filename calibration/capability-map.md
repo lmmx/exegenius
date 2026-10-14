@@ -42,6 +42,9 @@
 | `general-purpose` / `claude-opus-5-5` / **xhigh** / 91c4fed, on F1 (J9, majority of 3) | 1 | 1/1 (0.02–1.00) | 1/1 (0.02–1.00) | 1/1 (0.02–1.00); central **9**, faithful **18** | 6.93 M · 29 k · 1,409 s | S2 (screen) |
 | `general-purpose` / `claude-sonnet-5-5` / **max** / 91c4fed, on F1 (J9, majority of 3) | 1 | 1/1 (0.02–1.00) | 1/1 (0.02–1.00) | 1/1 (0.02–1.00); central **9**, faithful **18** | 24.83 M · 61 k · 2,785 s | S2 (screen) |
 | `general-purpose` / `claude-opus-5-5` / **max** / 91c4fed, on F1 (J9, majority of 3) | 1 | 1/1 (0.02–1.00) | 1/1 (0.02–1.00) | 1/1 (0.02–1.00); central **9**, faithful **19** (ceiling) | 15.93 M · 48 k · 2,021 s | S2 (screen) |
+| `general-purpose` / `claude-opus-5-5` / **high** / 91c4fed, on F4 and F8 (J10, majority of 3) | 2 | 2/2 (0.16–1.00) | 2/2 (0.16–1.00) | 2/2 (0.16–1.00); faithful 14 and 9 | 1.49–2.16 M · 16–20 k · 517–696 s | S3 (screen) |
+| `general-purpose` / `claude-opus-5-5` / **xhigh** / 91c4fed, on F4 and F8 (J10, majority of 3) | 2 | 2/2 (0.16–1.00) | 2/2 (0.16–1.00) | 2/2 (0.16–1.00); central 9 and 9, faithful **13** and **16** | 2.91–4.02 M · 23–24 k · 962–1,034 s | S3 (screen) |
+| `general-purpose` / `claude-sonnet-5-5` / high / 91c4fed, F4 and F8 re-judged (J10, majority of 3) | 2 | 2/2 (0.16–1.00) | 2/2 (0.16–1.00) | 2/2 (0.16–1.00); faithful 7 and 7 | as E7 | S3 comparison (E7F4W, E7F8W) |
 | `general-purpose` / `claude-sonnet-5-5` / high / 930d40c | 2 | 2/2 (0.16–1.00) | 2/2 (0.16–1.00) | not measured | 264 k and 271 k subagent tokens as Claude Code's task notification counts them (not comparable with the cache-read figures), 8.9 and 10.3 min | S0 |
 
 **S2's rows** give visible output only (09:47 UTC basis). Hidden reasoning is not in transcripts. The `~k` output figures in earlier rows came from the registry before that time and include thinking signatures, so they overstate visible output; the rebuilt registry holds both. S2's single-run 95% intervals are 0.02–1.00, so S2 shows nothing about pass rates: its differences are in faithful derivations, within one batch.
@@ -83,14 +86,17 @@ E1-P4 has held at 6 from J6 on, but J6's second judge gave it 8. *Corrected 2026
    - Sonnet at xhigh, which may matter for the Research calibre.
 3. **Whether any configuration reaches the Research calibre** (the central derivation). *Partly answered: the gap moves with what the task asks for (E4), not with the model (E5).* Open: a confirmation of the key-step instruction on fresh runs, with the rate of major errors in the derivation as a criterion, and the instruction on Opus.
 4. **Model × effort with the E7 instructions:**
-   - **Not yet estimated:** Opus at high (screened in S1 at 1 of 2 gate passes, never estimated).
-   - **Not yet run at all:** `xhigh` and `max`, for Sonnet and Opus.
+   - **Opus at `high` with the E7 instructions:** run in S3 on F4 and F8, one run each. It was uneven: 14 faithful on F4, 9 on F8.
    - **Screened in S2** (one run each, on E6's extraction F1, majority of three judges):
      - every configuration passes the gate, so the gate is saturated there;
      - Opus `xhigh`, Sonnet `max` and Opus `max` gain C1 and 3–4 faithful derivations over Sonnet `high`;
      - Sonnet `xhigh` loses 2;
      - Opus `xhigh` is the cheapest that improved.
-   - **Proposed next:** S3 (`plans/S3.md`), Opus `high` and `xhigh` on F4 and F8, the extractions where Sonnet `high` is weakest.
+   - **S3** (Opus `high` and `xhigh` on F4 and F8, where Sonnet `high` is weakest; J10, majority of three):
+     - Opus `xhigh` lifts both (faithful 7 → 13 on F4, 7 → 16 on F8), with C1 gained and no major errors;
+     - Opus `high` does not suffice.
+   - **Across F1, F4 and F8,** Opus `xhigh` beats Sonnet `high` beyond judge noise every time (+3, +6, +9 faithful). This is one run per extraction, on one paper.
+   - **Proposed next:** Opus `max` on F8, before any Fable run (`docs/journal/2026-10-14-s3-opus-floor.md`).
 5. **Writers, auditors and support checks:** no evidence yet. They dominate a full run's cost.
 
 ## Other document classes

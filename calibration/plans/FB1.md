@@ -27,6 +27,14 @@ So the argument stage looks capability-limited, and Fable on the argument task i
   - a second document, if this paper's argument task is solved.
 - The comparison, judging, success criterion and stopping rule below stand. The comparison is against Opus `xhigh` (or whatever S3 shows best) on the same extraction, re-judged in the pilot's batch.
 
+**After S3** (`docs/journal/2026-10-14-s3-opus-floor.md`):
+- **Opus `xhigh` falls short of the ceiling** on F4 (13) and F8 (16).
+- **F4:** the table's extraction-limit row fired there, but the judges' notes show the gaps are depth on the paper's second construction and nested error chains, not the extraction.
+- **F8:** the remaining argument-task candidate. Opus `xhigh` misses three results there, two of which Opus `max` derived on F1.
+- **So the next step proposed is an Opus `max` run on F8 first** (about 35–40 M cache read with judging).
+  - If Opus `max` reaches the ceiling there, the argument task on this paper has no headroom left for Fable. FB1 then moves to a second document, or to auditing the key step.
+  - If it does not, the pilot below runs on F8, against Opus `max`.
+
 **Cost estimate for the pilot after S3,** per extraction. These are components, not converted:
 - **The Fable run:** unknown until measured. S2's Opus `max` run (15.9 M cache read, 1.1 M cache write, 48 k visible output, 2,021 s) is the nearest known figure, as a placeholder at `max` effort. At `high` it is probably less.
   - Fable's price per token is higher than Opus's.

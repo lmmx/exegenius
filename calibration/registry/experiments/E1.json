@@ -1202,6 +1202,21 @@
      "minor_errors": 4,
      "central_count": 6,
      "central_gate": false
+    },
+    {
+     "batch": "J10",
+     "judge": "a",
+     "plan": "P04",
+     "core_stated": 19,
+     "core_fully": 13,
+     "core_derived": 19,
+     "core_faithful": 13,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 5,
+     "central_count": 7,
+     "central_gate": false
     }
    ]
   },
@@ -2824,6 +2839,45 @@
  "arm_summary": {
   "P": {
    "runs": 5,
+   "quality_J10": {
+    "core_stated": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_fully": {
+     "n": 1,
+     "median": 13,
+     "min": 13,
+     "max": 13
+    },
+    "core_derived": {
+     "n": 1,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_faithful": {
+     "n": 1,
+     "median": 13,
+     "min": 13,
+     "max": 13
+    },
+    "major_errors": {
+     "n": 1,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 1,
+     "median": 7,
+     "min": 7,
+     "max": 7
+    },
+    "central_gate_passed": "0/1"
+   },
    "quality_J2": {
     "core_stated": {
      "n": 5,

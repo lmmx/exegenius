@@ -44,7 +44,7 @@
 
 **Three quantities are kept apart:** money spent, quota consumed and research value. None is converted into another.
 
-## 2. Measured spend, development-session subagents (`tools/spend.py`, 2026-10-14 09:47 UTC)
+## 2. Measured spend, development-session subagents (`tools/spend.py`, 2026-10-14 12:54 UTC for S3; 09:47 UTC for the rest)
 
 **The four token components are kept separate and never summed.**
 - **What they are:**
@@ -68,6 +68,7 @@
 | E6 | 42 · Sonnet · 66.9 M · 388 k | 22 · 44.4 M · 132 k |
 | E7 | 8 · Sonnet · 23.8 M · 183 k | 22 · 51.9 M · 140 k |
 | S2 | 4 · Sonnet, Opus · 53.1 M · 166 k (visible) | 17 · 42.4 M · 110 k |
+| S3 | 4 · Opus · 10.6 M · 84 k (visible) | 20 · 59.6 M · 129 k |
 | W1 (cancelled) | 1 · Sonnet · 0.1 M · 0 | — |
 | J1–J2 (content-judge development, E1) | — | 43 · 54.8 M · 200 k |
 | Chain walks (baseline and T1) | — | 8 · 6.4 M · 32 k |
@@ -117,6 +118,7 @@ Their tokens are inside the run totals above.
 | E6 | does the key-step instruction hold on fresh extractions? | depth and errors met, gate not | instruction deepens plans safely; the gate needs more | 8 pairs gave a clear depth result; fewer would have sufficed for depth (8 of 8 is p = 0.004) |
 | E7 | does the identity sentence close C4? | met | propose for `master` | 8 runs, plus re-judging V, which also measured judge reliability; that was the most informative judging spend so far |
 | S2 | does effort above high, or Opus, buy fidelity? | screen: Opus `xhigh`, Sonnet `max` and Opus `max` beyond judge noise (+C1, +3–4 faithful); Sonnet `xhigh` below | repeat Opus `xhigh`, but on extractions with headroom (S3); drop Sonnet `xhigh`; hold the `max` configurations | one run per configuration was right. The input could have been chosen better: F1 was the reference's best extraction, which left little headroom. Choosing the input where the default is weakest would have made the same four runs more informative |
+| S3 | does Opus lift the floor where Sonnet `high` is weakest, and is `high` enough? | met: Opus `xhigh` lifts F4 (+6 faithful) and F8 (+9); Opus `high` does not suffice (F8: 9 against 16) | proposal of Opus `xhigh` for the argument task (the author's call); Fable's argument pilot narrowed to F8, after an Opus `max` check | the runs cost under half the estimate. Judging was 85% of the cache read: 20 judgements for 6 plans, as fixed. A cheaper judging design would need agreement measured first (§4) |
 
 ## 4. Lessons the record supports so far (each with its evidence; none is a universal rule)
 
@@ -138,6 +140,8 @@ Their tokens are inside the run totals above.
   - Opus at both levels, and Sonnet at `max`, gained C1 and 3–4 faithful derivations. Sonnet `xhigh` lost 2.
   - *Corrected 09:47 UTC:* this entry said that Sonnet `xhigh` "wrote about 5× the output of `high`". That compared a usage figure with a visible-content figure. On one basis, visible output was about equal: 27 k against 25 k. The longer run went into hidden reasoning (thinking signatures 3.6× longer), which transcripts do not count.
 - **Measure every run on one basis before comparing.** Evidence: the correction above, and the registry's output figures, which counted thinking signatures until 09:47 UTC. A comparison across two estimators can look like a 5× effect where there is none.
+- **Estimate runs from the median run, not one run.** Evidence: S3's estimate scaled from S2's single Opus `xhigh` run (6.93 M). S3's two Opus `xhigh` runs measured 4.02 M and 2.91 M.
+- **Judging dominates a small screen's cost.** Evidence: in S3, judging was 85% of the cache read (20 judgements against 4 runs). Three judges per plan is what E7 showed the gate needs, so the lever is the number of plans per batch, not judges per plan.
 - **Choose a screen's input where the current default is weakest.** Evidence: S2 screened on F1, where the reference was already at 17 of 19 faithful in J8. Three of four configurations then hit the ceiling, so the screen could rank nothing above them, Fable included.
 - **Re-judging the same plans is worth its cost once per instrument.** It is what showed single-judge gate verdicts to be noisy (E7).
 
@@ -151,6 +155,7 @@ Their tokens are inside the run totals above.
 - **Before an experiment:** the plan gives an estimate for runs and judging, with this file's measured figures as the basis.
 - **After it:** `tools/spend.py` is rerun, and §2 and §3 are updated.
 - **Meter readings** go into §1 as the author supplies them.
+- **S3, done:** estimated at ~70–78 M cache read and ~7–8 M cache write; measured at 70.2 M and 4.79 M. The runs came in at under half their estimate, and judging at about 1.2×.
 - **Next proposed (not launched):**
-  - **S3** (`plans/S3.md`): Opus `high` and `xhigh` on F4 and F8. Estimated at ~70–78 M cache read and ~7–8 M cache write, about 0.75–0.8× S2 measured; judging is about two-thirds of it.
+  - **Opus `max` on F8,** judged with S3F8OX (8 judgements): ~35–40 M cache read (`docs/journal/2026-10-14-s3-opus-floor.md`).
   - **The Fable pilot after it** (`plans/FB1.md`): per extraction, one Fable run of unknown cost (S2's Opus `max` run, 15.9 M cache read, is the placeholder), plus ~27 M cache read of Opus judging.
