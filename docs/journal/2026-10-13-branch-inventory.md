@@ -33,6 +33,8 @@ This entry is that inventory. It is updated in place, and its date is when it wa
 | `141026-exp-key-step-identity` | 91c4fed | the key-step instruction plus the identity sentence (E7), based on `131026-exp-key-step` | **not for `master`** until the author decides | merge or delete after the author's decision; supersedes `131026-exp-key-step` if merged |
 | `docs/leviathan-chat-archive` | 1e0444a | the author's archive of research conversations | not in `master`; the author's own | the author's |
 | `docs/metrics-viz-chat-archive` | b955d34 | the author's archive of research conversations | not in `master`; the author's own | the author's |
+| `141026-leviathan-outline` | 2554d38 | on `docs/leviathan-chat-archive` (PR #9): turns renamed with content slugs, README on the sequential relational method, three speculative journal entries | not in `master`, by the author's instruction | the author reviews; can be merged into the PR branch |
+| `141026-metrics-viz-outline` | 3389604 | on `docs/metrics-viz-chat-archive` (PR #10): turns renamed, README linking to the calibration infrastructure, one speculative journal entry | not in `master`, by the author's instruction | the author reviews; can be merged into the PR branch |
 
 The local copies of every branch marked "delete on GitHub" are deleted.
 
