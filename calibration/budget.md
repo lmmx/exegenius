@@ -15,6 +15,8 @@
 | 2026-10-14 ~08:00 | 91% | 11:00 | after the overnight run; Max 5× plan |
 | 2026-10-14 ~08:45 | 0% | 13:40 | plan upgraded; S2 row 1 (Sonnet `xhigh`) had just finished |
 | 2026-10-14 ~09:00 | 2% | 13:40 | S2 rows 2–4 (Opus `xhigh`, Sonnet `max`, Opus `max`) running in parallel since 08:48 |
+| 2026-10-14 ~09:15 | 4% | 13:40 | the author confirmed it on the meter (the autofill had suggested 4%); row 2 (Opus `xhigh`) finished at 09:11; rows 3 and 4 still running |
+| 2026-10-14 ~09:25 | 5% | 13:40 | rows 3 and 4 still running; no judging yet |
 
 **These are window readings, not the weekly allowance,** and the two should not be read as interchangeable.
 
