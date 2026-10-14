@@ -30,10 +30,14 @@ The author identified this. The design rules below are now part of `calibration/
    | planning runs, E4–E7 | 83 | Sonnet; Opus for E5 | 145 M | 0.82 M |
    | blind judging, J5–J8 | 74 | Opus | 150 M | 0.43 M |
 
-   **Why judging was as expensive:**
+   **Why judging was so large:**
    - each plan was judged by an Opus subagent reading a 77 k-character reference pack and the 5,361-line paper;
-   - anchors and second judgements added a third again;
-   - at Opus prices, judging probably cost more than the runs it judged.
+   - anchors and second judgements added a third again.
+
+   **What these counts do and do not show** (corrected 2026-10-14, 09:20 UTC):
+   - **The components are priced differently.** Cache reads, cache writes and output differ in price, so these counts are not costs.
+   - **What is measured:** judging re-read about as much context as the runs, on Opus, and wrote about half their output.
+   - **What is not established:** whether judging cost more than the runs, in money or in quota. The first version of this entry said it probably did; that went beyond the evidence.
 5. **The model × effort question was deferred, not answered.**
    - S1's screen advanced both Opus arms. Only Opus at medium went on (E5, chosen as cheaper and as the author's hypothesis), and Opus at high was never estimated.
    - When the key-step instruction took over the agenda, effort above `high` was never screened.
@@ -83,7 +87,7 @@ The author identified this. The design rules below are now part of `calibration/
 
 ## Current State
 - The calibration protocol now requires a stated decision, a budget covering runs and judging, sequential one-run screens for new configurations, serial execution near usage limits, adaptive repeats and a resumable ledger (§6a)
-- Blind judging with Opus cost about as much as the planning runs it judged over E4–E7 (150 M against 145 M tokens read from cache, at Opus prices)
+- Blind judging with Opus re-read about as much context as the planning runs it judged over E4–E7 (150 M against 145 M tokens read from cache) and wrote about half their output (0.43 M against 0.82 M); its share of cost or quota is not established, since the token components are priced differently
 - S2, a one-run-per-configuration screen of Sonnet and Opus at `xhigh` and `max`, is under way, serially
 
 ## Missing

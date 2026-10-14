@@ -24,7 +24,14 @@
 
 ## 2. Measured spend, development-session subagents (`tools/spend.py`, 2026-10-14 09:04 UTC)
 
-Tokens read from cache dominate. Output is estimated at 4 characters per token.
+**The four token components are kept separate and never summed.**
+- **What they are:**
+  - uncached input (near zero here);
+  - tokens read from cache, which every model call re-reads for the whole context so far;
+  - tokens written to cache;
+  - output, estimated at 4 characters per token.
+- **Why they are not summed:** they are priced very differently. A cache read costs a small fraction of uncached input, and output costs most. Prices also differ by model, and how the subscription's meter weighs each is not published.
+- **So the counts below are not a cost or a share of quota.** A ranking by any one column can differ from a ranking by cost.
 
 | Experiment | Runs: subagents · model · cache read · output | Judging: subagents · cache read · output |
 |---|---|---|
@@ -40,7 +47,14 @@ Tokens read from cache dominate. Output is estimated at 4 characters per token.
 | J1–J2 (content-judge development, E1) | — | 43 · 54.8 M · 192 k |
 | Chain walks (baseline and T1) | — | 8 · 6.4 M · 30 k |
 
-**All judging is Opus.** Over E4–E7, judging read 150 M tokens from cache against the runs' 145 M, and at Opus prices it probably cost more.
+**All judging is Opus.** Over E4–E7:
+
+| | Read from cache | Written to cache | Output | Model |
+|---|---|---|---|---|
+| judging | 150 M | 11.0 M | 0.43 M | Opus |
+| runs | 145 M | 16.2 M | 0.82 M | mostly Sonnet |
+
+So judging re-reads about as much context as the runs, but writes about half the output. Which cost more in quota is not established. Judging uses the pricier model, and the runs produce more output, which is the costliest component per token.
 
 **Wasted spend, measured:** subagents killed by the usage limit before submitting were rerun.
 - **E4:** 8 of 10 first attempts were killed.
@@ -72,7 +86,7 @@ Their tokens are inside the run totals above.
 
 ## 4. Lessons the record supports so far (each with its evidence; none is a universal rule)
 
-- **Judging is a cost on the scale of the experiment.** Evidence: E4–E7 (§2).
+- **Judging is a cost on the scale of the experiment, not an afterthought.** Evidence: E4–E7 (§2). Judging re-reads about as much context as the runs, on the pricier model, with about half their output. Its exact share of quota is unknown, since the components are priced differently and the meter's weighting is not published.
   - Plan for it in every budget.
   - Measure a cheaper judge's agreement with Opus before using it.
 - **Parallel launches near a limit waste work; at the start of a window they cost nothing extra.** Evidence: the E4 and E6 kills, and S2's parallel rows 2–4 at 0–2%.

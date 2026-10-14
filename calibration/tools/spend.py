@@ -7,8 +7,14 @@ Each subagent is assigned to an experiment and a role by its description, which 
 protocol fixes ("RUN TASK" for runs, "Jn judge Pnn" for judges). Counts are measured from the
 transcripts' usage records: model calls, input, cache-read and cache-write tokens. Output tokens
 are estimated from content characters at 4 per token, since transcripts undercount output.
-Subagents whose description matches no rule are listed as "other". Experiments run in separate
-runner sessions (E1, E3, S1) are not in these transcripts; the registry holds their runs.
+Subagents whose description matches no rule are listed as "other".
+
+The four components are reported separately and never summed: they are priced differently (a
+cache read costs a small fraction of uncached input, and output costs most), prices differ by model,
+and how a subscription's usage meter weighs them is not published. No conversion to cost or to
+quota is made here; a meter reading supplied by the author can be set beside these counts.
+Experiments run in separate runner sessions (E1, E3, S1) are not in these transcripts; the
+registry holds their runs.
 """
 import collections
 import json
@@ -70,11 +76,11 @@ def main():
                 r["cache_read"] += c[1]
                 r["cache_write"] += c[2]
                 r["output_est"] += c[3]
-    print("| Experiment | Role | Subagents | Models | Cache read (M) | Cache write (M) | Output, est. (k) |")
-    print("|---|---|---|---|---|---|---|")
+    print("| Experiment | Role | Subagents | Models | Calls | Uncached input (k) | Cache read (M) | Cache write (M) | Output, est. (k) |")
+    print("|---|---|---|---|---|---|---|---|---|")
     for (exp, role), r in sorted(rows.items()):
-        print(f"| {exp} | {role} | {r['subagents']} | {', '.join(sorted(models[(exp, role)]))} | "
-              f"{r['cache_read'] / 1e6:.1f} | {r['cache_write'] / 1e6:.2f} | {r['output_est'] // 1000} |")
+        print(f"| {exp} | {role} | {r['subagents']} | {', '.join(sorted(models[(exp, role)]))} | {r['calls']} | "
+              f"{r['input'] // 1000} | {r['cache_read'] / 1e6:.1f} | {r['cache_write'] / 1e6:.2f} | {r['output_est'] // 1000} |")
 
 
 if __name__ == "__main__":
