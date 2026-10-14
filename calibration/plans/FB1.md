@@ -118,3 +118,20 @@ These are rules for choosing an experiment, not predictions of Fable's behaviour
 - **The question that remains:** whether Fable beats Opus `max` with the E7 instructions. It is still informative about model capability, but no longer decision-critical.
 - **The change** (runbook §4, two-stage judging): FB1F8 and S4F8OM are judged first on the checklist (2 judges each).
 - **Full primary judging** follows only if Fable's checklist is above Opus `max`'s beyond noise.
+
+### Pilot result (J19 checklist screen, 15:21 UTC; `docs/journal/2026-10-14-fb1-fable-f8/checklist/results.txt`)
+
+| Run | Checklist (Opus judge, Sonnet judge) | B L P R M S (Opus judge) |
+|---|---|---|
+| FB1F8, Fable `high` | 17, 16 | 4 2 1 4 4 2 |
+| S4F8OM, Opus `max` | 20, 21 | 3 3 3 3 4 4 |
+
+**Fable is below Opus `max` beyond judge noise.** By the narrowed rule there is no primary judging, and the outcome is **"ties or loses"**: with the E7 instructions, Fable at `high` is not worth its cost for argument planning on this paper.
+
+**Its gaps** are L2 and L4, P1, P2 and P4, and S1–S3. These are the variant and bound-chain sub-steps that the E8 sentence closes for Sonnet `high`.
+
+**Its cost:** 3.96 M cache read, a quarter of Opus `max`'s on F8. Fable's per-token price is higher; no conversion is made.
+
+**Not tested, and not decision-relevant now:** Fable with the variant sentence. On F8, Sonnet `high` with it is already at the ceiling.
+
+**Stopping:** one Fable run, as planned. No further Fable spend is queued.
