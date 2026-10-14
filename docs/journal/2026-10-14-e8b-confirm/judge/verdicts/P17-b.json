@@ -1,0 +1,969 @@
+{
+  "plan": "P17",
+  "items": [
+    {
+      "id": "bank-exchange-network",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "partial",
+      "steps": [
+        "S2.3",
+        "S2.3.1",
+        "S2.3.2",
+        "S2.3.3",
+        "S2.3.4",
+        "S2.3.4a",
+        "S2.3.4b",
+        "S2.3.4c",
+        "S2.3.4d",
+        "S2.3.5",
+        "S2.3.6"
+      ],
+      "lines": [
+        653,
+        739,
+        741,
+        765,
+        767,
+        783
+      ],
+      "note": "The lemma and its whole proof (rows 0-1 subtract Ja+Rc, net change (JV+RG)x, the central coefficients |S∩T| mod 2 and (|S∩T|-1)/2, the three stages giving (-y,x)) are reproduced from 741-765. But h=100 is never fixed, and the neighbour and wire counts of 767-783 (z_b, z_c, c_b=100, c_c=101, W_b, W_c) are reduced to 'fixed numbers' in S2.3.6. These counts set W and the loss ratio L/N=3ch/v, so the derivation is partial."
+    },
+    {
+      "id": "common-frame-identity",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S2.4",
+        "S2.4.1",
+        "S2.4.2",
+        "S2.4.2a",
+        "S2.4.2b",
+        "S2.4.2c",
+        "S2.4.3",
+        "S2.4.4"
+      ],
+      "lines": [
+        793,
+        825
+      ],
+      "note": "The plan gives the invariant 'stored array = D_v times logical array' at the sources (by definition), along edges and across gates (by R-linearity), then D_out S D_in^{-1} and the signed-route corollary, exactly as in 804-825."
+    },
+    {
+      "id": "label-residual-budget",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S2.5",
+        "S2.5.1",
+        "S2.5.1a",
+        "S2.5.1b",
+        "S2.5.1c",
+        "S2.5.1d",
+        "S2.5.2",
+        "S2.5.2a",
+        "S2.5.2b",
+        "S2.5.3",
+        "S2.5.3a",
+        "S2.5.3b",
+        "S2.5.4",
+        "S2.5.4a",
+        "S2.5.4b",
+        "S2.5.4c",
+        "S2.5.5",
+        "S2.5.5a",
+        "S2.5.5b",
+        "S2.5.5c",
+        "S2.5.5d",
+        "S2.5.5e",
+        "S2.5.5f",
+        "S2.5.5g"
+      ],
+      "lines": [
+        856,
+        937,
+        939,
+        1010,
+        1012,
+        1110
+      ],
+      "note": "The plan covers the bilinear forms, terminal labels, stage transitions, the eight-time gate-label table, the residual table, the 2->5 inclusion through t_X ⊥ t_Y, telescoping to Wm-2N+2L with L=Ich, the binary orthonormal bases and the ratios 100/539 and 101/539. This is the paper's proof. The ratios are quoted, not computed, as in the paper."
+    },
+    {
+      "id": "bit-shear-interface",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S2.5.6",
+        "S2.5.6a",
+        "S2.5.6b",
+        "S2.5.6c",
+        "S2.5.6d",
+        "S2.5.6e",
+        "S2.5.6f"
+      ],
+      "lines": [
+        1113,
+        1172
+      ],
+      "note": "The plan has the projections P_U and source matrix -P_{U_a}, the shear frames Phi_M, rank(P_V-P_U)=dim V-dim U, the N rank-one exceptions 2P_{U_a} with deficit N-2L_b>0, and the endpoint difference I_m. This matches 1115-1171."
+    },
+    {
+      "id": "complex-phase-interface",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S2.6",
+        "S2.6.1",
+        "S2.6.2",
+        "S2.6.3",
+        "S2.6.4",
+        "S2.6.5",
+        "S2.6.6",
+        "S2.6.7",
+        "S2.6.8",
+        "S2.6.9",
+        "S2.6.10",
+        "S2.6.11",
+        "S2.6.12",
+        "S2.6.13"
+      ],
+      "lines": [
+        1174,
+        1315
+      ],
+      "note": "The plan derives the result as the paper does: phase frames from weight mod 4, additivity over orthogonal sums, a norm-one vector giving one kernel aI+bX_v, the count s_c with deficit 2N-2L_c, column tensoring, and the X_a->Y_a repair by Z conjugation with i^{27k}. S2.6.4 states the endpoint C^{⊗m} before the corrections (see errors), but S2.6.11-13 supply them."
+    },
+    {
+      "id": "rank-saving",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S2.0",
+        "S2.5.5g",
+        "S2.5.6c",
+        "S2.5.6e",
+        "S2.6.4",
+        "S2.6.8",
+        "S2.6.14",
+        "S2.6.14a",
+        "S2.6.14b",
+        "S2.6.14c",
+        "S2.6.14d"
+      ],
+      "lines": [
+        1105,
+        1110,
+        1151,
+        1152,
+        1222,
+        1223,
+        1319,
+        1346
+      ],
+      "note": "The plan has L/N<1/2, s_b<W_b m and s_c<W_c m with their deficits, the exact eta_b and eta_c, eta > 20*2^{-50}, log m<20 giving m^{1-2^{-50}} > m(1-eta), hence s/W<m^tau with tau=sigma=1-2^{-50}. This is the paper's argument at 1319-1346."
+    },
+    {
+      "id": "stream-primitives",
+      "presence": "derived",
+      "statement": "imprecise",
+      "derivation": "partial",
+      "steps": [
+        "S2.1",
+        "S2.1.1",
+        "S2.1.2",
+        "S2.1.3",
+        "S2.1.4",
+        "S2.2",
+        "S2.2.1",
+        "S2.2.2",
+        "S2.2.3"
+      ],
+      "lines": [
+        491,
+        550,
+        555,
+        621
+      ],
+      "note": "The elementary operations and the controlled shift are stated and derived by split and merge (S2.2.2-3 follow 575-589). But the fixed rational unit scalings of Lemma ordered-affine-streams (569-570, proved at 592-614) are neither stated nor derived in S2.2, though S2.8.5 relies on them. The digit permutations and moves (514-518) and the counter accounting are only summarized in a method line."
+    },
+    {
+      "id": "matrix-shear",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S2.8",
+        "S2.8.1",
+        "S2.8.2",
+        "S2.8.3",
+        "S2.8.4",
+        "S2.8.5",
+        "S2.8.6",
+        "S2.8.7",
+        "S2.8.8"
+      ],
+      "lines": [
+        1364,
+        1447
+      ],
+      "note": "The plan has the elimination by topmost row and rightmost pivot giving E_1 Pi E_2, the triangular transforms by controlled shifts in descending order, the conjugation by E_2, E_1^{-1}, and one interchange per pivot via D<-D+H, swap, D<-H-D. This is the paper's route. Why a suitable odd prime q exists (1413-1423) is only asserted."
+    },
+    {
+      "id": "interchange-recurrence",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S2.9",
+        "S2.9.1",
+        "S2.9.2",
+        "S2.9.3",
+        "S2.9.4",
+        "S2.9.5",
+        "S2.9.6",
+        "S2.9.7",
+        "S2.9.8",
+        "S2.9.9",
+        "S2.9.9a",
+        "S2.9.9b",
+        "S2.9.9c",
+        "S2.9.10",
+        "S2.9.10a",
+        "S2.9.10b",
+        "S2.9.10c",
+        "S2.9.10d"
+      ],
+      "lines": [
+        1449,
+        1557,
+        1559,
+        1616
+      ],
+      "note": "The plan has the contract, the cyclic row split into W role streams of volume V/W, edge shears through the matrix-shear lemma, the frame identity giving H<-H+D on every role, the three-shear interchange, the s calls, F_k<=(s/W)F_{k-1}+O(1) and the geometric sum, and the fixed-tape depth-first schedule. All match 1491-1616."
+    },
+    {
+      "id": "arbitrary-width-interchange",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S2.10",
+        "S2.10.1",
+        "S2.10.2",
+        "S2.10.3",
+        "S2.10.4",
+        "S2.10.4a",
+        "S2.10.4b",
+        "S2.10.5",
+        "S2.10.6",
+        "S2.10.7"
+      ],
+      "lines": [
+        1631,
+        1762
+      ],
+      "note": "The plan has the high-digit row field with rho=O(log 2e), padding rows to a multiple of W^k, base-m pieces with the geometric cost sum, undoing, binary padding to [q^e], and the unequal-width case, as at 1649-1762."
+    },
+    {
+      "id": "phase-frame-recursion",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S2.12.2",
+        "S2.12.3",
+        "S2.12.4",
+        "S2.12.4a",
+        "S2.12.4b",
+        "S2.12.4c",
+        "S2.12.4d",
+        "S2.12.4e",
+        "S2.12.5",
+        "S2.12.6"
+      ],
+      "lines": [
+        1806,
+        1940
+      ],
+      "note": "The plan has the conjugation P_M X_v P_M^{-1}=X_{Mv}, the m slots of f chunks, one child call per residual vector, the inverse child through (C^{-1})^{⊗f}=(-i)^f Z C Z, at most m(m-1)+3m row additions, exactly s_c children on e/m axes, and H_0^{⊗D}=b^D S_D C^{⊗D} S_D. This follows 1835-1930."
+    },
+    {
+      "id": "packed-selected-bit-addition",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S2.11",
+        "S2.11.1",
+        "S2.11.2",
+        "S2.11.2a",
+        "S2.11.2b",
+        "S2.11.3",
+        "S2.11.4",
+        "S2.11.5",
+        "S2.11.6",
+        "S2.11.7",
+        "S2.11.8",
+        "S2.11.9",
+        "S2.11.10",
+        "S2.11.11",
+        "S2.11.12",
+        "S2.11.13"
+      ],
+      "lines": [
+        1974,
+        2011,
+        2013,
+        2231
+      ],
+      "note": "The plan covers the eight conditional additions and their parity three-cycles, the guard segments, the packed cyclic shifts S_0, the bad set B with the union bound delta_bad, T_0 S_0^{-1} permuting B, the radix-sort repair, the top-position XOR, the cost terms, and the use for row additions in a change of basis. This matches 2013-2231."
+    },
+    {
+      "id": "layer-recurrence",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S2.12.7",
+        "S2.12.7a",
+        "S2.12.7b",
+        "S2.12.7b1",
+        "S2.12.7b2",
+        "S2.12.7b3",
+        "S2.12.7b4",
+        "S2.12.7b5",
+        "S2.12.7c",
+        "S2.12.7c1",
+        "S2.12.7c2",
+        "S2.12.7c3",
+        "S2.12.7c4",
+        "S2.12.7c5",
+        "S2.12.7c6",
+        "S2.12.7c7"
+      ],
+      "lines": [
+        2286,
+        2304,
+        2306,
+        2391,
+        2393,
+        2448
+      ],
+      "note": "The plan has the node overhead O(V((eK)^tau+1)), q_0 row chunks padded to a multiple of W^{k_0}, children of volume V/W, the recurrence F(e)<=(s/W)F(e/m)+O((eK)^tau+1) with leaves O(e), the internal and leaf sums, and the base-m pieces giving O(d^{lambda'}). This is the paper's unrolling."
+    },
+    {
+      "id": "simultaneous-layer",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S2.12",
+        "S2.12.1",
+        "S2.12.8",
+        "S2.12.8a",
+        "S2.12.8b",
+        "S2.12.8c",
+        "S2.12.8d",
+        "S2.12.8e",
+        "S2.12.8f",
+        "S2.12.8g",
+        "S2.12.9",
+        "S2.12.10",
+        "S2.12.10a",
+        "S2.12.10b",
+        "S2.12.10c",
+        "S2.12.10d",
+        "S2.12.10e"
+      ],
+      "lines": [
+        2450,
+        2586,
+        2588,
+        2668,
+        2686,
+        2758
+      ],
+      "note": "The plan has the statement (K=floor(d^c), D<=d, O(Vd^{lambda'}), error below sqrt2 2^{-p}), the guard width Delta=ceil(C_0 d^{C_1}) from A(e)<=sA(e/m)+E, nu=11 and C_1=20, the exact Gaussian-dyadic evaluation, the uniform packed costs, and the final truncation. This matches 2450-2758."
+    },
+    {
+      "id": "synthetic-transform",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S3",
+        "S3.1",
+        "S3.1.1",
+        "S3.1.2",
+        "S3.1.3",
+        "S3.1.4",
+        "S3.1.5",
+        "S3.1.6",
+        "S3.2",
+        "S3.2.1",
+        "S3.2.2",
+        "S3.2.3",
+        "S3.2.4",
+        "S3.2.5",
+        "S3.3",
+        "S3.4",
+        "S3.5",
+        "S3.6",
+        "S3.7",
+        "S3.8",
+        "S3.9",
+        "S3.10",
+        "S3.11",
+        "S3.12"
+      ],
+      "lines": [
+        2798,
+        2915,
+        2929,
+        2989,
+        2990,
+        3206
+      ],
+      "note": "The plan derives the result by the paper's route: character cancellation by pairing, decimation in frequency in bit-reversed order B_t and the opposite F^+B^{-1}, rounds as parallel H followed by J_E, prefix moves and Dq-1 chunk exchanges, layer calls, monomials, one truncation per round, and L conjugation giving LBF^- and F^+B^{-1}L^{-1}. S3.9 misreads one per-round cost (see errors)."
+    },
+    {
+      "id": "signed-packing",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S4.1",
+        "S4.1.1",
+        "S4.1.2",
+        "S4.1.3",
+        "S4.1.4",
+        "S4.1.5",
+        "S4.1.6",
+        "S4.1.7",
+        "S4.1.8",
+        "S4.1.9",
+        "S4.1.10",
+        "S4.1.11"
+      ],
+      "lines": [
+        3211,
+        3232,
+        3233,
+        3368
+      ],
+      "note": "The plan has evaluation at B_0=2^{4p} with signed carries, four products, the bound |h_j|<B_0/2, extraction by centered residues with the residual-identity induction, negacyclic reduction, and truncation after division by r. This is the paper's proof."
+    },
+    {
+      "id": "synthetic-convolution",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S4",
+        "S4.2",
+        "S4.3",
+        "S4.4",
+        "S4.5",
+        "S4.6",
+        "S4.7",
+        "S4.7.1",
+        "S4.7.2",
+        "S4.7.3",
+        "S4.8",
+        "S4.9"
+      ],
+      "lines": [
+        3370,
+        3413,
+        3414,
+        3495
+      ],
+      "note": "The plan has the normalization M F^+((F^-f)(F^-g)/r)=(f*g)/(rM), P(LBu,LBv)=LB P(u,v) so the stored order is kept, the error 2delta+eta and then 3delta+eta times M, the exact scaling by M with width w_M, and the cost. This matches 3414-3495."
+    },
+    {
+      "id": "gaussian-resampling",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S5",
+        "S5.1",
+        "S5.2",
+        "S5.3",
+        "S5.4",
+        "S5.4.1",
+        "S5.4.2",
+        "S5.4.3",
+        "S5.4.4",
+        "S5.4.5",
+        "S5.4.6",
+        "S5.4.7",
+        "S5.4.8",
+        "S5.4.9",
+        "S5.4.10",
+        "S5.4.11",
+        "S5.4.12",
+        "S5.5",
+        "S5.5.1",
+        "S5.5.2",
+        "S5.5.3",
+        "S5.5.4",
+        "S5.5.5",
+        "S5.5.6"
+      ],
+      "lines": [
+        3548,
+        3574,
+        3576,
+        3792,
+        3800,
+        3834,
+        3836,
+        3897
+      ],
+      "note": "The plan has the Gaussian maps S and T, N=CTD, ||N-I||<1/2 via Neumann, the normalizations giving 2^{-2alpha^2}, A=S' and B_0=D'J'C, the HvdH error and time bounds, the selector C, permutations kept unexecuted, and the tensor version with padded-box expansion and compression and axis exposure costs. All follow the paper."
+    },
+    {
+      "id": "chirp-permutation-cancellation",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S5.6",
+        "S5.6.1",
+        "S5.6.2",
+        "S5.7",
+        "S5.7.1",
+        "S5.7.2",
+        "S5.7.3"
+      ],
+      "lines": [
+        3911,
+        3936,
+        3938,
+        3988
+      ],
+      "note": "The plan has the chirp periodicity, the Bluestein coefficient check against Q reading frequency (-s_i j_i), the dilation identity R F^+ R=F^+ from t_i being units mod s_i, the convolution rule giving (u*v)/S^2, and conjugation. This matches 3938-3988."
+    },
+    {
+      "id": "parameters-and-primes",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S6.1",
+        "S6.1.1",
+        "S6.1.2",
+        "S6.1.3",
+        "S6.1.4",
+        "S6.1.5",
+        "S6.1.6",
+        "S6.1.7",
+        "S6.1.8",
+        "S6.1.8a",
+        "S6.1.8b",
+        "S6.1.8c",
+        "S6.1.8d",
+        "S6.1.8e",
+        "S6.1.8f",
+        "S6.1.8g",
+        "S6.2",
+        "S6.2.1",
+        "S6.2.2"
+      ],
+      "lines": [
+        4004,
+        4036,
+        4049,
+        4101,
+        4103,
+        4193
+      ],
+      "note": "The plan has all fixed exponents and the layer conditions, the sizes b, p=6b, d, K, T, r, t_i with Tp=Theta(n), the comparison constants, alpha, gamma and eta, the prime-interval bound, disjoint intervals, T/2<S<T, alpha^4 theta_i>p, the prime search in n^{o(1)}, and the no-wraparound and capacity bounds, as in the paper."
+    },
+    {
+      "id": "crt-address-map",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S6.3",
+        "S6.3.1",
+        "S6.3.2",
+        "S6.3.3",
+        "S6.3.4",
+        "S6.3.5",
+        "S6.3.6",
+        "S6.3.7"
+      ],
+      "lines": [
+        4196,
+        4296
+      ],
+      "note": "The plan has Phi as an algebra isomorphism, the triangular mixed-radix formula b_i, padding by nested scan, updates in order i=d..1 as prefix-controlled cyclic shifts preserving the valid set, and axis reversal by peeled chunk swaps costing O(Tp d^2(1+ell^tau)). This matches 4204-4296."
+    },
+    {
+      "id": "phase-twist",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S6.4",
+        "S6.4.1",
+        "S6.4.2",
+        "S6.4.3",
+        "S6.4.4",
+        "S6.4.5",
+        "S6.4.6",
+        "S6.4.7",
+        "S6.7.2",
+        "S6.7.4"
+      ],
+      "lines": [
+        4298,
+        4347,
+        4349,
+        4413,
+        4598,
+        4618
+      ],
+      "note": "The plan has the wrap check zeta^{k+l}(-1)^h=zeta^j, M_C=D_- iota^{-1} M_r(iota D_+ f, iota D_+ g)=(f*g)/T, matching formats so iota moves nothing, the computed twist sequence, and the twist errors below 4 each. The 6TL bound uses L=log_2 T, which the plan never defines."
+    },
+    {
+      "id": "multiplication-algorithm",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S6",
+        "S6.5",
+        "S6.5.1",
+        "S6.5.2",
+        "S6.5.3",
+        "S6.5.4",
+        "S6.5.5",
+        "S6.5.6",
+        "S6.5.7",
+        "S6.6",
+        "S6.6.1",
+        "S6.6.2",
+        "S6.6.3",
+        "S6.6.4",
+        "S6.6.5",
+        "S6.6.6",
+        "S6.6.7",
+        "S6.6.8"
+      ],
+      "lines": [
+        4415,
+        4484,
+        4486,
+        4544
+      ],
+      "note": "The plan has the source transform (A, chirp transform, B_0, 2^gamma) with exact counterpart RF_s, the conjugate opposite procedure, input conversion with scale 2^{-b-2}, the six steps, and the explanation of the two scalings by S. This matches 4415-4544."
+    },
+    {
+      "id": "exact-recovery",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S6.7",
+        "S6.7.1",
+        "S6.7.2",
+        "S6.7.3",
+        "S6.7.4",
+        "S6.7.5",
+        "S6.7.6",
+        "S6.7.7",
+        "S6.7.8",
+        "S6.7.9",
+        "S6.7.10",
+        "S6.7.11",
+        "S6.7.12",
+        "S6.7.13",
+        "S6.7.14",
+        "S6.7.15",
+        "S6.7.16",
+        "S6.7.17"
+      ],
+      "lines": [
+        4546,
+        4806
+      ],
+      "note": "The plan follows the paper's error chain: E_ring<5TL, the twisted convolution <6TL, chirp <8TL, E_s=9*2^gamma TL, product and opposite transform (3E_s+2), E_w<28*2^gamma T^2 L, final error <448b 2^{-3b/4}<1/2, then rounding and carries. The symbol L=log_2 T (4552) is used throughout but never defined in the plan."
+    },
+    {
+      "id": "time-accounting",
+      "presence": "derived",
+      "statement": "correct",
+      "derivation": "faithful",
+      "steps": [
+        "S6.8",
+        "S6.8.1",
+        "S6.8.2",
+        "S6.8.3",
+        "S6.8.4",
+        "S6.8.5",
+        "S6.8.6",
+        "S6.8.7",
+        "S6.8.8",
+        "S6.8.9",
+        "S6.8.10",
+        "S6.8.11",
+        "S6.8.12",
+        "S6.8.13",
+        "S6.8.13a",
+        "S6.8.13b",
+        "S6.8.13c",
+        "S6.8.13d",
+        "S6.8.14",
+        "S6.8.15"
+      ],
+      "lines": [
+        4808,
+        4854,
+        4857,
+        4995
+      ],
+      "note": "The plan has the cost table with powers, the margins g_1..g_7 with min g_2=2^{-181}=2kappa, the justification of each row, o(V) setup and exceptional sorting, absorption of log factors by p^kappa, and the schoolbook cutoff. This matches 4808-4995."
+    },
+    {
+      "id": "conjecture-negation",
+      "presence": "mentioned",
+      "statement": "n/a",
+      "derivation": "n/a",
+      "steps": [
+        "S0",
+        "S1",
+        "S1.1"
+      ],
+      "lines": [
+        379,
+        387
+      ],
+      "note": "S0 asserts that the bound 'disproves the n log n optimality conjecture in this model', and S1/S1.1 recall the conjecture. The plan never states what an eventual lower bound means or the liminf T_A(n)/(n lg n)=0 negation (381-387)."
+    }
+  ],
+  "errors": [
+    {
+      "step": "S3.9",
+      "says": "The rounds on prefix slots process their bits individually 'at cost O(Tp) per round' and O(TpdK) in total.",
+      "paper": "O(Tp) is the cost of the moves and scans for one participating bit processed individually (3106-3114). A prefix round has up to D<=d such bits, so it costs O(TpD), and the at most b+1<=K rounds give O(TpdK) (3127-3128). 'O(Tp) per round' would give only O(TpK) and contradicts the plan's own total.",
+      "lines": [
+        3106,
+        3114,
+        3127,
+        3128
+      ],
+      "severity": "minor"
+    },
+    {
+      "step": "S2.6.4",
+      "says": "Each edge's frame change is a product of kernels summing to s_c, 'and the telescoped endpoint operator is C^{⊗m} on every role'.",
+      "paper": "Telescoping alone gives C^{-1} on the 27 support coordinates of u_a for the pair X_a->Y_a (1287-1298), together with the sign of the scalar exchange. C^{⊗m} on every role holds only 'after source and sink diagonal corrections, and undoing the signed bank exchange' (1225-1228, 1300-1314). The plan supplies these corrections later, in S2.6.11-S2.6.13.",
+      "lines": [
+        1225,
+        1228,
+        1287,
+        1314
+      ],
+      "severity": "minor"
+    }
+  ],
+  "chain": "Yes. The plan follows the paper's route and order. S2 builds both power-saving procedures from one rank-saving network: frames (S2.4), labels and budget (S2.5), the rational interface (S2.5.6), the phase interface (S2.6), the exponent (S2.6.14), shears (S2.8), the interchange recurrence (S2.9-S2.10) and the butterfly layer (S2.11-S2.12). It then goes through transforms (S3), convolution (S4), resampling, chirp and cancellation (S5), and parameters, CRT, twist, the source transform, the algorithm, exact recovery and the cost table (S6), reaching O(n(lg n)^{1-kappa}) with kappa=2^{-182}. It thins out only at the edges: h=100 and the wire counts W_b, W_c are never given, so the loss ratios and eta are quoted rather than computed; the rational-unit scalings of the controlled-shift lemma are dropped; and the disproof of the conjecture is only asserted in S0.",
+  "central": {
+    "steps": [
+      {
+        "id": "C1",
+        "verdict": "reconstructed",
+        "plan_steps": [
+          "S2.3",
+          "S2.3.1",
+          "S2.3.2",
+          "S2.3.4",
+          "S2.3.5",
+          "S2.3.6",
+          "S2.5.2a",
+          "S2.5.2b"
+        ],
+        "lines": [
+          640,
+          660,
+          670,
+          739,
+          741,
+          783
+        ],
+        "note": "The network is reconstructed in full: copy, side, gather and scatter gates on triples, three stages, (X_a,Y_a)->(-Y_a,X_a), and every auxiliary wire restored. Data are indexed through u_a=t_{a1}⊗t_{a2}⊗t_{a3}, m is the dimension of F^{⊗3} with F=Q^h, and N is the sum of source dimensions. But h=100 is never stated, and N=binom(h,3)^3 and m=h^3 appear only implicitly. I judged this reconstructed because the mechanism and its role are explicit, with this caveat."
+      },
+      {
+        "id": "C2",
+        "verdict": "reconstructed",
+        "plan_steps": [
+          "S2.4",
+          "S2.4.1",
+          "S2.4.2",
+          "S2.4.2c",
+          "S2.4.3",
+          "S2.4.4"
+        ],
+        "lines": [
+          793,
+          825
+        ],
+        "note": "The plan states that a common frame per gate commutes with pointwise gates by R-linearity, that the network implements D_out S_Omega D_in^{-1}, and that intermediate frames are free so that each edge is only a change of frame (S2.4 motivation)."
+      },
+      {
+        "id": "C3",
+        "verdict": "reconstructed",
+        "plan_steps": [
+          "S2.5",
+          "S2.5.1",
+          "S2.5.2a",
+          "S2.5.3",
+          "S2.5.4",
+          "S2.5.4b",
+          "S2.5.4c",
+          "S2.5.5a",
+          "S2.5.5c"
+        ],
+        "lines": [
+          845,
+          1010
+        ],
+        "note": "Nondegenerate subspaces of F^{⊗3} of dimension m are assigned to gates. Every edge joins comparable labels, and the only decreasing edges are the central wires 3->4, each losing P⊗F of dimension h."
+      },
+      {
+        "id": "C4",
+        "verdict": "reconstructed",
+        "plan_steps": [
+          "S2.5.6",
+          "S2.5.6a",
+          "S2.5.6d",
+          "S2.5.6e"
+        ],
+        "lines": [
+          1156,
+          1166
+        ],
+        "note": "The plan states rank(P_V-P_U)=dim V-dim U for nested nondegenerate U⊂V, and the N exceptions where the first edge on X_a is 2P_{U_a} of rank one."
+      },
+      {
+        "id": "C5",
+        "verdict": "reconstructed",
+        "plan_steps": [
+          "S2.5.2b",
+          "S2.5.5",
+          "S2.5.5e",
+          "S2.5.6c",
+          "S2.5.6e"
+        ],
+        "lines": [
+          890,
+          897,
+          997,
+          1010,
+          1066,
+          1071,
+          1138,
+          1154
+        ],
+        "note": "The plan has sum |Delta dim|=Wm-2N+2L with L=Ich from telescoping, and s_b=W_b m-N+2L_b once the N extra source ranks are added."
+      },
+      {
+        "id": "C6",
+        "verdict": "reconstructed",
+        "plan_steps": [
+          "S2.5.5g",
+          "S2.5.6e",
+          "S2.5.6c",
+          "S2.6.8"
+        ],
+        "lines": [
+          1105,
+          1110,
+          1166,
+          1167
+        ],
+        "note": "The plan gives L_b/N=100/539 and L_c/N=101/539, both below 1/2, the deficit N-2L_b>0 (and 2N-2L_c>0), and hence s<Wm."
+      },
+      {
+        "id": "C7",
+        "verdict": "reconstructed",
+        "plan_steps": [
+          "S2.5.6b",
+          "S2.5.6c",
+          "S2.5.6f",
+          "S2.9.1",
+          "S2.9.6",
+          "S2.9.7"
+        ],
+        "lines": [
+          1124,
+          1137,
+          1138,
+          1145,
+          1169,
+          1171,
+          1514,
+          1533
+        ],
+        "note": "The plan states M_sink(rho(w))-M_source(w)=I_m, from P_{U_a^perp}+P_{U_a}=I_m for X_a and zero/identity for the other roles. With frames Phi_M, the bit network then applies H<-H+D on every role, including scratch rows."
+      },
+      {
+        "id": "C8",
+        "verdict": "reconstructed",
+        "plan_steps": [
+          "S2.8",
+          "S2.8.1",
+          "S2.8.4",
+          "S2.8.6",
+          "S2.8.7",
+          "S2.8.8",
+          "S2.9.5",
+          "S2.9.9a"
+        ],
+        "lines": [
+          1364,
+          1447,
+          1543,
+          1545
+        ],
+        "note": "The plan states A=E_1 Pi E_2 with a ones in Pi, exactly a interchanges plus O(V) (triangular parts by controlled shifts), and therefore s recursive calls per node."
+      },
+      {
+        "id": "C9",
+        "verdict": "reconstructed",
+        "plan_steps": [
+          "S2.9.4",
+          "S2.9.9",
+          "S2.9.9a",
+          "S2.9.9b",
+          "S2.9.9c",
+          "S2.6.14",
+          "S2.6.14a",
+          "S2.6.14b",
+          "S2.6.14c",
+          "S2.6.14d"
+        ],
+        "lines": [
+          1319,
+          1346,
+          1497,
+          1503,
+          1543,
+          1557
+        ],
+        "note": "The plan has children of volume V/W, F_k<=(s/W)F_{k-1}+O(1), and tau=1-2^{-50} from eta > 20*2^{-50} and log m<20 giving s/W<m^tau, so F_k=O(e^tau)."
+      }
+    ],
+    "summary": "P17 reconstructs the whole central saving in S2.3-S2.9 and S2.6.14, almost entirely with verbatim quotes at the correct lines. It covers the bank-exchange network, frames, nested subspace labels with the single decreasing central edge, rank equal to dimension change with the N source exceptions, the budget Wm-2N+2L with L=Ich, the strict saving from L/N=100/539, the endpoint identity giving H<-H+D, edges as rank-many interchanges via E_1 Pi E_2, and the recurrence with tau=1-2^{-50}. The only thin point is C1: h=100 is never fixed, and N and m are carried only implicitly."
+  }
+}
