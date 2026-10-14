@@ -61,11 +61,13 @@ def iso(ms):
     return datetime.fromtimestamp(ms / 1000, tz=timezone.utc).isoformat().replace("+00:00", "Z")
 
 
-def run_log(wiki, commit, run):
+def run_log(wiki, commit, run, kinds=PLANNING, since_ms=None):
     text = git(wiki, "show", f"{commit}:runs/{run}/exegenius/log.jsonl")
     if text is None:
         return None
     events = [json.loads(line) for line in text.splitlines() if line.strip()]
+    if since_ms is not None:  # a run copied from another: drop the earlier run's events
+        events = [e for e in events if e["at"] >= since_ms]
     tasks = collections.OrderedDict()
     for e in events:
         t = tasks.setdefault(e["task"], {"task": e["task"], "kind": e.get("kind"), "submits": []})
@@ -84,7 +86,7 @@ def run_log(wiki, commit, run):
             t["submits"].append(s)
             if e.get("outcome") == "accepted":
                 t["_accepted_ms"] = e["at"]
-    planning = [t for t in tasks.values() if t["kind"] in PLANNING]
+    planning = [t for t in tasks.values() if t["kind"] in kinds]
     start = min((t["_issued_ms"] for t in planning if "_issued_ms" in t), default=None)
     end = max((t["_accepted_ms"] for t in planning if "_accepted_ms" in t), default=None)
     rejected = sum(1 for t in planning for s in t["submits"] if s["outcome"] == "rejected")
@@ -102,9 +104,9 @@ def run_log(wiki, commit, run):
     }
 
 
-def transcripts(wiki, commit):
-    """Subagent and main transcripts under results/transcripts at the commit, keyed by path."""
-    blob = git(wiki, "archive", commit, "results/transcripts", binary=True)
+def transcripts(wiki, commit, path="results/transcripts"):
+    """Subagent and main transcripts under `path` (default results/transcripts) at the commit, keyed by path."""
+    blob = git(wiki, "archive", commit, path, binary=True)
     if blob is None:
         return {}
     files = {}
@@ -151,7 +153,7 @@ def subagent(lines, meta):
     }
 
 
-def subagents_by_run(files):
+def subagents_by_run(files, prefix=""):
     out, orchestrators = collections.defaultdict(list), []
     for name, text in files.items():
         if name.endswith(".jsonl") and "/subagents/" in name:
@@ -162,7 +164,7 @@ def subagents_by_run(files):
                 s = subagent(text, meta)
                 s["task"] = parts[1]
                 s["description"] = desc
-                out[parts[0]].append(s)
+                out[prefix + parts[0]].append(s)
         elif name.endswith(".jsonl") and "/subagents/" not in name:
             s = subagent(text, {})
             if s["models"]:
@@ -222,8 +224,12 @@ def summarise(values):
 def build(spec, wiki, batches):
     ev = spec.get("evidence", {})
     commit = ev.get("commit")
-    files = transcripts(wiki, commit) if commit and ev.get("repo") == "lmmx/openai-nlogn-wiki" else {}
-    by_run, orchestrators = subagents_by_run(files)
+    wiki_ev = commit and ev.get("repo") == "lmmx/openai-nlogn-wiki"
+    files = transcripts(wiki, commit, ev.get("transcripts", "results/transcripts")) if wiki_ev else {}
+    by_run, orchestrators = subagents_by_run(files, ev.get("description_prefix", ""))
+    kinds = tuple(ev.get("planning_kinds", PLANNING))
+    since = ev.get("log_since")
+    since_ms = int(datetime.fromisoformat(since.replace("Z", "+00:00")).timestamp() * 1000) if since else None
     judged = judgements(batches)
     record = {k: spec[k] for k in spec if k != "runs_extra"}
     record["built"] = {"by": "calibration/tools/registry.py", "wiki_commit": commit}
@@ -232,7 +238,7 @@ def build(spec, wiki, batches):
     for arm_id, arm in spec["arms"].items():
         for run in arm["runs"]:
             r = {"id": run, "arm": arm_id}
-            log = run_log(wiki, commit, run) if commit and ev.get("repo") == "lmmx/openai-nlogn-wiki" else None
+            log = run_log(wiki, commit, run, kinds, since_ms) if wiki_ev else None
             r.update(log or {"planning_seconds": unavailable("no run log at the evidence ref")})
             subs = sorted(by_run.get(run, []), key=lambda s: s["task"])
             r["subagents"] = subs

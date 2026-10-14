@@ -1,0 +1,29 @@
+run   plan    core_stated     core_fully   core_derived  core_faithful          wrong   major_errors  central_count  gate  C1-C9
+E4B1  P04              19              8             10              2              0              0              4  fail  m R R m m m R R m
+E4V1  P11              19             12             15              7              0              2              7  fail  m R R m R R R R R
+E4B2  P10              19              7              4              2              0              0              7  fail  m R R m R R R R R
+E4V2  P01              19              9             10              5              0              0              7  fail  m R R m R R R R R
+E4B3  P06              17              5              4              0              0              0              3  fail  m R m m - m R R m
+E4V3  P08              19             19             19             16              0              0              9  pass  R R R R R R R R R
+E4B4  P09              19             14             12             11              0              0              7  fail  m R R m R R R R R
+E4V4  P02              19             19             17             13              0              0              8  pass  m R R R R R R R R
+E4B5  P07              19              8              5              1              0              0              4  fail  m R R m m m R R m
+E4V5  P12              19             14             17              8              0              0              8  pass  m R R R R R R R R
+P4    P05              19             14             18             13              0              0              7  fail  m R R R m R R R R
+M3    P03              10              1              2              0              0              0              1  fail  m m m - - m m R m
+
+pairs judged: 5 of 5
+core_stated        differences [0, 0, 2, 0, 0]  median 0  variant greater in 1 of 1 untied, one-sided p = 0.500
+core_fully         differences [4, 2, 14, 5, 6]  median 5  variant greater in 5 of 5 untied, one-sided p = 0.031
+core_derived       differences [5, 6, 15, 5, 12]  median 6  variant greater in 5 of 5 untied, one-sided p = 0.031
+core_faithful      differences [5, 3, 16, 2, 7]  median 5  variant greater in 5 of 5 untied, one-sided p = 0.031
+supporting_stated  differences [1, 0, 2, 0, 0]  median 0  variant greater in 2 of 2 untied, one-sided p = 0.250
+wrong              differences [0, 0, 0, 0, 0]  median 0  variant greater in 0 of 0 untied, one-sided p = 1.000
+major_errors       differences [2, 0, 0, 0, 0]  median 0  variant greater in 1 of 1 untied, one-sided p = 0.500
+minor_errors       differences [-2, -1, -1, 0, 0]  median -1  variant greater in 0 of 3 untied, one-sided p = 1.000
+central_count      differences [3, 0, 6, 1, 4]  median 3  variant greater in 4 of 4 untied, one-sided p = 0.062
+base     reconstructed per step C1-C9: [0, 5, 4, 0, 2, 2, 5, 5, 2]; gate passes 0 of 5; totals: wrong 0, major errors 0
+variant  reconstructed per step C1-C9: [1, 5, 5, 3, 5, 5, 5, 5, 5]; gate passes 3 of 5; totals: wrong 0, major errors 2
+second judgement P02 (E4V4): central steps agree 9 of 9; central count 8 against 8; derived 17 against 17; gate True against True
+second judgement P06 (E4B3): central steps agree 9 of 9; central count 3 against 3; derived 4 against 4; gate False against False
+second judgement P10 (E4B2): central steps agree 7 of 9; central count 7 against 5; derived 4 against 4; gate False against False

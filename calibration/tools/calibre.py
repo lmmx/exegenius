@@ -63,7 +63,8 @@ def main():
                 conf = "unavailable"
             else:
                 conf = (f"{'+'.join(oc['agent_types'])} / {'+'.join(oc['models'])} / "
-                        f"{'+'.join(oc.get('efforts') or ['?'])} / binary {rec['binary']['commit']}")
+                        f"{'+'.join(oc.get('efforts') or ['?'])} / binary "
+                        f"{rec['arms'][r['arm']]['intended'].get('binary', rec['binary']['commit'])}")
             for q in r["quality"]:
                 if q["judge"] == "a":
                     table[(conf, q["batch"])][rec["id"]].append((r["id"], q))

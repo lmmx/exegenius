@@ -40,8 +40,9 @@ Every extracted value is an object `{"value": …, "basis": …}`:
 | `task` | the task or stage studied |
 | `binary` | lmmx/exegenius commit that wrote the task files |
 | `evidence` | where the runs are: `repo`, `branch`, `commit` (or `path` for evidence kept in this repository) |
+| `evidence` (optional) | `transcripts`: the transcripts' path at the commit (default `results/transcripts`); `description_prefix`: prepended to the run named in a subagent's description, for runs renamed in the evidence; `planning_kinds`: the task kinds a run's planning consists of (default extract, background, argument, extend); `log_since`: an ISO time before which a run's log events are ignored, for runs copied from an earlier run's project |
 | `protocol`, `journal` | the runner protocol and the journal entry |
-| `arms` | `{ARM: {"intended": {...}, "runs": [...]}}`. `intended` gives `agent`, `model` or `model_id`, `effort` (null when not passed), `effort_passed`, `checks` |
+| `arms` | `{ARM: {"intended": {...}, "runs": [...]}}`. `intended` gives `agent`, `model` or `model_id`, `effort` (null when not passed), `effort_passed`, `checks`, and optionally `binary` when an arm's task files were written by another binary than the spec's |
 | `excluded` | `{RUN: reason}`: runs kept in the record but left out of summaries |
 | `runs_extra` | per-run facts the builder cannot extract (for example `observed_config` with its basis and source) |
 | `reported` | facts with basis `reported`, such as `session_cost_usd` |

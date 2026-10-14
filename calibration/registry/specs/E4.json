@@ -1,0 +1,118 @@
+{
+ "id": "E4",
+ "title": "The key-step instruction in the argument task, paired on E1's extractions",
+ "kind": "controlled",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task only, on E1's extractions and backgrounds",
+ "question": "Does one general instruction asking the argument task to develop the key step make Sonnet-high plans reconstruct the paper's central saving?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "af36d6d"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-e4-key-step",
+  "commit": "8b5c679",
+  "transcripts": "results/transcripts/e4",
+  "description_prefix": "E4",
+  "planning_kinds": [
+   "argument"
+  ],
+  "log_since": "2026-10-13T22:00:00Z"
+ },
+ "protocol": "run from the development session; E4.md on the evidence branch",
+ "preregistration": "calibration/plans/E4.md (ec4a2b6)",
+ "journal": "docs/journal/2026-10-14-e4-key-step.md",
+ "pairs": [
+  [
+   "E4B1",
+   "E4V1"
+  ],
+  [
+   "E4B2",
+   "E4V2"
+  ],
+  [
+   "E4B3",
+   "E4V3"
+  ],
+  [
+   "E4B4",
+   "E4V4"
+  ],
+  [
+   "E4B5",
+   "E4V5"
+  ]
+ ],
+ "arms": {
+  "B": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "baseline argument instructions"
+   },
+   "runs": [
+    "E4B1",
+    "E4B2",
+    "E4B3",
+    "E4B4",
+    "E4B5"
+   ]
+  },
+  "V": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "argument instructions plus the key-step paragraph",
+    "binary": "0c29556 (131026-exp-key-step)"
+   },
+   "runs": [
+    "E4V1",
+    "E4V2",
+    "E4V3",
+    "E4V4",
+    "E4V5"
+   ]
+  }
+ },
+ "reported": {},
+ "deviations": [
+  {
+   "kind": "operational",
+   "what": "eight of ten first attempts (all but E4B2 and E4B3) were killed by the account's rate limit (HTTP 429) before submitting and retried with the same prompt and parameters after the reset; the killed attempts' transcripts are kept apart in results/e4-killed-attempts and are not counted in resources"
+  },
+  {
+   "kind": "operational",
+   "run": "E4B2",
+   "what": "the argument subagent ended with a rate-limit error after its answer was accepted; the transcript's last message is synthetic"
+  },
+  {
+   "kind": "protocol",
+   "run": "E4B4",
+   "what": "the retry read and used a quote-checking script and candidate-quote list written by the killed first attempt in the task's scratch directory"
+  },
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus, high) with this session's permissions, not a runner with the wiki's .claude/settings.json; it only passed prompts"
+  },
+  {
+   "kind": "measurement",
+   "what": "planning_seconds spans the argument task's issue to its acceptance, so for retried runs it includes the wait for the rate limit to reset; use the subagent's seconds"
+  }
+ ],
+ "limitations": [
+  "Stage-2 paired comparison on one paper; the argument task only, on extractions from one earlier experiment.",
+  "Judged in one batch (J5) with an unreviewed reference."
+ ]
+}
