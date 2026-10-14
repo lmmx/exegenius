@@ -78,7 +78,7 @@ These are rules for choosing an experiment, not predictions of Fable's behaviour
   - Fable is never called better on one run.
 - **The budget:** an estimate in tokens for the run and its judging, using S2's measured Opus `max` run as the nearest known cost. Fable's own cost is unknown until its first run is measured.
 
-## The pilot, preregistered for runbook item 5 (14:35 UTC, before S4's result)
+## The pilot, preregistered for runbook item 5 (14:28 UTC, before S4's result)
 
 **Trigger:** only on S4's outcome "improves, not the ceiling" (incumbent: S4F8OM) or "does not improve" (incumbent: S3F8OX). Not on "reaches the ceiling".
 

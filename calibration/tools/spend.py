@@ -34,11 +34,13 @@ RULES = [  # (pattern on the description, experiment, role)
     (r"^F\d(SX|OX|SM|OM) \d{4}-", "S2", "runs"),
     (r"^S3F\d(OH|OX) \d{4}-", "S3", "runs"),
     (r"^S4F\d(OM) \d{4}-", "S4", "runs"),
+    (r"^S5F\d(OX) \d{4}-", "S5", "runs"),
+    (r"^E8F\dX \d{4}-", "E8", "runs"),
     (r"^W1 \d{4}-", "W1 (cancelled)", "runs"),
     (r"^R\d \d{4}-", "T1", "runs"),
     (r"^(T\d chain walk|Chain walk)", "chain walks", "judging"),
 ]
-BATCH = {"3": "E3", "4": "S1", "5": "E4", "6": "E5", "7": "E6", "8": "E7", "9": "S2", "10": "S3", "11": "K1", "12": "S4", "13": "S4 checklist"}
+BATCH = {"3": "E3", "4": "S1", "5": "E4", "6": "E5", "7": "E6", "8": "E7", "9": "S2", "10": "S3", "11": "K1", "12": "S4", "13": "S4 checklist", "14": "K2", "15": "E8 checklist", "16": "E8"}
 
 
 def classify(desc):
