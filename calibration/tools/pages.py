@@ -9,7 +9,10 @@ nested sub-steps; those extra items are reported but not scored.
 import json, pathlib, statistics, sys
 
 ASSIGNED = {"0014": ["S4.2", "S4.2.1", "S4.2.2"],
-            "0015": ["S4.3"] + [f"S4.3.{i}" for i in range(1, 8)]}
+            "0015": ["S4.3"] + [f"S4.3.{i}" for i in range(1, 8)],
+            # W2b, fixed 23:58 UTC before any J24 verdict: page 0016's assignment lists only S4.4 as
+            # its sub-step, with S4.4.1-S4.4.3 beneath it; all four ids named there are scored
+            "0016": ["S4.4", "S4.4.1", "S4.4.2", "S4.4.3"]}
 d = pathlib.Path(sys.argv[1])
 key = json.load(open(d / "key.json"))
 rows = []
@@ -36,7 +39,7 @@ for r in rows:
     print(f"| {r[0]} | {r[1]} | {r[2]} | {r[3]} | {r[4]} | {r[5]} | {r[6]} | {r[7]} | {r[9]} | {r[10]} |")
 print()
 for page in ASSIGNED:
-    ws = next((r for r in rows if r[0] == page and r[1].startswith("W2WS")), None)
+    ws = next((r for r in rows if r[0] == page and r[1].startswith("W2WS")), None)  # first WS run per page
     if not ws:
         continue
     for r in rows:

@@ -190,7 +190,7 @@ A gap **names** an error when its term or note asserts that something is false. 
 
 | Measure | Definition | n per run |
 |---|---|---|
-| **R_A**, audit recall (primary) | page-detectable errors named at their sentence, a linked sentence or their paragraph, or anywhere with one of their cues | 28 |
+| **R_A**, audit recall (primary) | page-detectable errors named at their sentence, a linked sentence or their paragraph, or by an asserting gap elsewhere that mentions one of their cues | 28 |
 | **R_S**, support recall (primary) | quote-detectable errors whose mark is labelled `unsupported` or `contradicted` | 10 |
 | **U**, pipeline catch rate (primary) | page- or quote-detectable errors caught by either task | 35 |
 | **F_A**, audit false alarms (primary) | asserting gaps per clean page, outside native defects | 6 pages |
@@ -200,14 +200,14 @@ A gap **names** an error when its term or note asserts that something is false. 
 | Localisation (secondary) | the share of named errors named in their own sentence | |
 | Descriptive | recall per type; native detections; gaps per page; submits, rejections and never-accepted tasks; the source-only probe (expected 0) | |
 
-**Classifier check.** `--notes` writes every gap, shuffled and blinded to configuration. The session labels each gap at a planted or sham site, and each asserting gap, as "asserts an error" or not, before unblinding. If `ASSERTS` agrees with those labels on fewer than 80% of them, the hand labels replace it for the primary measures. This fallback is preregistered.
+**Classifier check.** `--notes` writes every gap, shuffled and blinded to configuration and run. The session labels every gap as "asserts an error" or not, before unblinding: about 60 to 100 short rows per configuration-run. If `ASSERTS` agrees with those labels on fewer than 80% of them, the hand labels replace it for the primary measures. This fallback is preregistered.
 
 ## Reading (proposals, to be fixed at preregistration)
 
 **A configuration is adequate if, pooled:**
 - R_A ≥ 0.50, with its 80% lower bound ≥ 0.35. Reason: the last audit round's notes are dropped, so an error gets about two repair chances. At 0.5 per round, about three quarters are named at least once;
-- F_A ≤ 0.5 per clean page, and F_sham ≤ 0.10. Reason: the full runs' audits gave 2.0–2.4 step gaps per page (journal 2026-10-13-explanation-depth-run). Each false error claim is a rewrite note that can break a correct step;
-- R_S ≥ 0.70, and F_S ≤ 0.20. Reason: this comparison is the support task's whole job. The incumbent labelled 10 of 65 marks on W1's final pages `unsupported`, many on genuinely weak quotations;
+- F_A ≤ 0.5 per clean page, and F_sham ≤ 0.10. Reason: the explanation-depth run's audits gave 2.0–2.4 step gaps per page (journal 2026-10-13-explanation-depth-run). Each false error claim is a rewrite note that can break a correct step;
+- R_S ≥ 0.70, and F_S ≤ 0.20. Reason: this comparison is the support task's whole job. In W1's run the incumbent labelled 10 of the 65 marks it judged `unsupported`, many on genuinely weak quotations;
 - at most one never-accepted task per run, and every contaminated task rerun.
 
 **Beyond noise:** the 80% intervals do not overlap, as the programme's other plans read ranges. At n = 28, that needs a difference of about 0.25 after one run, and about 0.18 after two.

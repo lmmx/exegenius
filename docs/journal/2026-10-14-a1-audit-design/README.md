@@ -131,7 +131,7 @@ Each page has a clean control and three seeded variants. A seeded variant carrie
 
 **Clean controls (6 pages).** These are the original pages. They give:
 - the false-alarm rate: notes asserting an error on a clean page, outside the native defects;
-- the per-site baseline: how often a configuration flags the same sentence when it is correct. The audit task reports followability gaps on correct text routinely, about two to three per page in the full runs. So a gap at a site is evidence of detection only beyond that baseline;
+- the per-site baseline: how often a configuration flags the same sentence when it is correct. The audit task reports followability gaps on correct text routinely: 2.0–2.4 step gaps per page in the explanation-depth run's three rounds. So a gap at a site is evidence of detection only beyond that baseline;
 - the support labels on 14 correct citation marks.
 
 **Sham edits (18).** These are meaning-preserving rewordings, for example "Elimination proves this:" → "Elimination shows this:". A note calling a sham site wrong is a false alarm provoked by an edit, not by an error.

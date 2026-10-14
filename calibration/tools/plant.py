@@ -1118,8 +1118,9 @@ def submit_summary(runs):
 
 
 def write_notes(path, data, key, pages_dir):
-    """Every gap at a planted or sham site, and every asserting gap, blinded to configuration,
-    for the hand check of the ASSERTS classifier."""
+    """Every gap of every answer, shuffled and blinded to configuration and run, with the
+    ASSERTS verdict, for the hand check of the classifier; the unblinding map is written beside
+    it."""
     rows = []
     for config in data:
         for run in data[config]:

@@ -1,6 +1,6 @@
 # W2b (preregistered): does Opus `xhigh` write the hard key-step pages better than Sonnet `high`?
 
-**Status:** written and committed before any W2b run, at 23:57 UTC. It follows W2, whose table found Opus `xhigh` within noise of Sonnet `high`, and whose plan required a repeat before any writer proposal.
+**Status:** written and committed before any W2b run, at 23:56 UTC. It follows W2, whose table found Opus `xhigh` within noise of Sonnet `high`, and whose plan required a repeat before any writer proposal.
 
 **The decision it informs:** whether the writer policy should use Opus `xhigh` for the hard key-step pages and Sonnet `high` elsewhere. On the hard page W2 found 8, 8, 8 for Opus against 8, 6, 7 for Sonnet, at about twice Sonnet's cost.
 
@@ -20,7 +20,7 @@
 **Judging, J24:**
 - **The pages:** the four new pages, with W2WSP15 and W2WOP15 re-judged in the same batch: six pages, three Opus judges each, 18 judgements.
 - **The judge:** J22's page judge, unchanged. Page 0016's assignment is its task file's "This page in the argument" and "Steps this page derives".
-- **Scoring:** the listed items only (`tools/pages.py`, extended with page 0016's ids before any J24 verdict exists).
+- **Scoring:** the listed items only (`tools/pages.py`). For page 0016 these are S4.4, S4.4.1, S4.4.2 and S4.4.3: the assignment names S4.4 as the sub-step, with S4.4.1–S4.4.3 beneath it. The ids were fixed at 23:58 UTC, before any J24 verdict.
 
 ## Reading (fixed now)
 
