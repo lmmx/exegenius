@@ -1,0 +1,9 @@
+E8F2X: [19, 19]
+E8F4X: [23, 21]
+E8F8X: [25, 25]
+E9F2Y: [26, 25]
+E9F4Y: [25, 24]
+E9F8Y: [26, 25]
+E9F2Y [26, 25] vs E8F2X [19, 19]: above
+E9F4Y [25, 24] vs E8F4X [23, 21]: above
+E9F8Y [26, 25] vs E8F8X [25, 25]: within noise
