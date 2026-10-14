@@ -658,10 +658,10 @@ def main():
     arms4 = list(full)
     for a, b in itertools.combinations(arms4, 2):
         rho, p = spearman([full[a][f] for f in fs], [full[b][f] for f in fs])
-        body.append([f"{a} vs {b}", rho, p])
+        body.append([f"{a} vs {b}", f"{rho:+.2f}", f"{p:.4f}"])
     if len(full_c) == 2:
         rho, p = spearman([full_c["W"][f] for f in fs], [full_c["X"][f] for f in fs])
-        body.append(["W vs X checklist", rho, p])
+        body.append(["W vs X checklist", f"{rho:+.2f}", f"{p:.4f}"])
     md.append(md_table(["Pair", "rho", "p"], body))
     md.append("\n**Run-to-run variance on one extraction (same planner, same instruction, same extraction):**\n")
     body = []
@@ -788,7 +788,7 @@ def main():
         outc = outcomes_for(family, arms)
         orr, tot = mh_for(family, arms, outc, reach)
         body.append([name, rr(tot["a"], tot["b"]), rr(tot["c"], tot["d"]), orr,
-                     exact_p(family, arms, outc, reach, orr)])
+                     f"{exact_p(family, arms, outc, reach, orr):.4f}"])
     md.append(md_table(["Plans", "Faithful when reached", "Faithful when not", "MH OR", "exact p"], body))
     md.append("\n**Robustness (E6 family, arms B V W X):** leaving out one extraction, or the two weakest "
               "plans on low-reach extractions (V on F6, faithful 0; W on F8, faithful 5).\n")
@@ -797,10 +797,10 @@ def main():
     for drop in fs:
         fam = [f for f in fs if f != drop]
         orr, _ = mh_for(fam, e6_arms, outc_all, reach)
-        body.append([f"without {drop}", orr, exact_p(fam, e6_arms, outc_all, reach, orr)])
+        body.append([f"without {drop}", orr, f"{exact_p(fam, e6_arms, outc_all, reach, orr):.4f}"])
     trimmed = {k: v for k, v in outc_all.items() if (k[0], k[2]) not in (("E6:V", "E6-F6"), ("E7:W", "E6-F8"))}
     orr, _ = mh_for(fs, e6_arms, trimmed, reach)
-    body.append(["without plans E6F6V and E7F8W", orr, exact_p(fs, e6_arms, trimmed, reach, orr)])
+    body.append(["without plans E6F6V and E7F8W", orr, f"{exact_p(fs, e6_arms, trimmed, reach, orr):.4f}"])
     md.append(md_table(["Variant", "MH OR", "exact p"], body))
     y = outcomes_for(fs, ("E9:Y",))
     md.append(f"\n**Under the combined instruction (Y, E9 on F2, F4, F8):** {sum(y.values())} of {len(y)} "
