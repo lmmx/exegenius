@@ -77,3 +77,32 @@ These are rules for choosing an experiment, not predictions of Fable's behaviour
   - A second run happens only if the first clears the criterion or falls within judge noise of it.
   - Fable is never called better on one run.
 - **The budget:** an estimate in tokens for the run and its judging, using S2's measured Opus `max` run as the nearest known cost. Fable's own cost is unknown until its first run is measured.
+
+## The pilot, preregistered for runbook item 5 (14:35 UTC, before S4's result)
+
+**Trigger:** only on S4's outcome "improves, not the ceiling" (incumbent: S4F8OM) or "does not improve" (incumbent: S3F8OX). Not on "reaches the ceiling".
+
+**The run:**
+- one run, FB1F8, on a fresh copy of E6's F8 with the E7 instructions (91c4fed);
+- `general-purpose`, `model: "fable"`, `effort: "high"`, the prompt word for word;
+- **why `high`:** the effort rule above, since S2 showed gains from effort as well as model, and the question is whether the stronger model buys them more cheaply.
+
+**Judging:** the Fable plan and the incumbent's plan, re-judged together. Primary: three judges each, plus anchors (8). Checklist: two judges each (4).
+
+**Fable beats the incumbent** if:
+- its checklist total is above the incumbent's beyond judge noise;
+- with no loss on the primary measures (the gate by majority, central count, faithful range not entirely below, no major error);
+- and no `max_tokens` stop.
+
+**It reaches the ceiling** if, in addition, its faithful median is ≥ 18 and each checklist total is ≥ 24.
+
+| Outcome | Action |
+|---|---|
+| beats | Fable earns a test on a second document and at the extraction stage. Reported to the author with its measured cost |
+| ties or loses | Fable is not worth its cost for argument planning on this paper; recorded |
+
+**Budget:**
+- **The run:** unknown. Placeholder 6–16 M cache read, at Fable's rates.
+- **Judging:** ~27 M (primary) and ~2.5 M (checklist), on Opus.
+
+**Stopping:** one Fable run, then a report, before any further Fable spend.
