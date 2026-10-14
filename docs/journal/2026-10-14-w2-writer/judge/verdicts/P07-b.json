@@ -1,0 +1,286 @@
+{
+ "page": "P07",
+ "items": [
+  {
+   "id": "S4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "proof that every edge joins comparable nondegenerate labels (gate-label table and residual table)",
+    "endpoint identity M_sink(rho(w)) - M_source(w) = I_m for the bit network",
+    "source/sink corrections and sign fix that give C^{⊗m} on every role in the complex network"
+   ],
+   "note": "The page puts together L=Kch, L/N=c/539<1/2, s_b=Wm-N+2L_b and s_c=Wm-2N+2L_c from the label construction. The central lemma, that labels nest along every edge and drop only at center 3→4, is cited, not shown."
+  },
+  {
+   "id": "S4.3.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the neighbor relations: |S∩T|=1 (bit) and distinct triples with even intersection (complex), which make neighboring indicators orthogonal",
+    "t_T·t_T=1 over F_2, which makes triple lines nondegenerate in the complex network",
+    "nondegeneracy of the form x^T(I-J/9)y (eigenvalues 1 and -91/9) and of the tensor space"
+   ],
+   "note": "The page gives ⟨t_S,t_T⟩=|S∩T|-1 'over $\\mathbb Q$' (cited) and the definitions of F, the tensor space and u_a. Nondegeneracy over Q follows from norm 2, but 'neighbors span orthogonal lines' cannot be checked because neighbors are never defined, and the F_2 case is not treated."
+  },
+  {
+   "id": "S4.3.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the count: N sources U_a of dimension 1; all sinks of dimension m except the N sinks U_a^⊥ of dimension m-1, giving Wm-N"
+   ],
+   "note": "The terminal labels are listed correctly, but the totals N and Wm-N are asserted with a citation, not counted."
+  },
+  {
+   "id": "S4.3.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the tensor factor Q=⟨t_{a_{j+1}}⊗…⊗t_{a_3}⟩ on every label, and Q=⟨t_{a_{j+1}}⟩⊗Q', which makes the outgoing labels A'⊗⟨t_{a_{j+1}}⟩⊗Q' and B'⊗⟨t_{a_{j+1}}⟩⊗Q' match the next incoming ones",
+    "A=B⊥P because P is nondegenerate; B=0 at stage 1 (an empty tensor product is the ground field)",
+    "boundary check: labels start at U_a and 0 at stage 1 and end at the full space and U_a^⊥ at stage 3, matching the terminals"
+   ],
+   "note": "Setting A'=A⊗F, P'=P⊗⟨t⟩, B'=(P')^⊥_{A'}, the page shows that the outgoing X label A⊗F is A' and the outgoing Y label (P⊗⟨t⟩)^⊥_{A⊗F} is B', as the paper does. Without Q, the match with the next incoming labels and with the terminals is not shown."
+  },
+  {
+   "id": "S4.3.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the gate-label table for times 0-7 and the order in which gates touch the wires",
+    "the residual table showing that every edge joins comparable nondegenerate labels",
+    "the side edge 2→5 nesting from t_X⊥t_Y"
+   ],
+   "note": "'Only the central edge from time 3 to 4 decreases, losing $P\\otimes F$ (dimension $h$)' is cited, and the times in an invocation are never defined. L=Kch and Wm-2N+2L then follow correctly from it."
+  },
+  {
+   "id": "S4.3.4.1",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "gate labels at times 0-7: B⊗⟨t⟩, B⊗F, (B⊗F)⊥(P⊗⟨t⟩), A⊗F, B⊗F, (B⊗F)⊥(P⊗t^⊥), A⊗F, A⊗F (all tensored by Q), each nondegenerate"
+   ],
+   "note": "The page gives no gate labels by time."
+  },
+  {
+   "id": "S4.3.4.2",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "t_X⊥t_Y gives ⟨t_X⟩⊂t_Y^⊥, so (B⊗F)⊥(P⊗⟨t_X⟩)⊂(B⊗F)⊥(P⊗t_Y^⊥), with residual P⊗⟨t_X,t_Y⟩^⊥ of dimension h-2"
+   ],
+   "note": "The page never uses the neighbor relation for side edges and does not mention side wires."
+  },
+  {
+   "id": "S4.3.4.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the factor Q in the removed space P⊗F⊗Q",
+    "the residual table, from which nondecrease on all other edges follows"
+   ],
+   "note": "The single decreasing edge is asserted with a citation. The page then correctly counts K=3binom(h,3)^2 invocations × c central wires × h to get L=Kch (K is the paper's I)."
+  },
+  {
+   "id": "S4.3.4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the reason gate contributions cancel: each touched wire has one incoming and one outgoing incidence with the same gate label"
+   ],
+   "note": "'Signed changes telescope at each gate to $Wm-2N$; absolute values add $2L$' follows the paper, using the source and sink totals N and Wm-N given earlier. The incidence reason for the telescoping is not stated."
+  },
+  {
+   "id": "S4.3.4.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "every residual is nondegenerate, by the orthogonal decompositions",
+    "a nondegenerate binary symmetric space is nonalternating iff it contains a norm-one vector, and a nondegenerate nonalternating one has an orthonormal basis",
+    "the norm-one vector in a residual is built by tensoring coordinate units outside small supports with the norm-one vectors of P, Q and the triple lines",
+    "the claim applies to nonzero residuals; a zero residual uses the empty basis"
+   ],
+   "note": "'A residual has an orthonormal basis $\\mathcal B$ (it has a norm-one coordinate vector)' is asserted. Its parenthetical reason is not valid (see errors), and the nondegeneracy and splitting arguments are missing."
+  },
+  {
+   "id": "S4.3.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the arithmetic L/N = Ich/N = 3ch/binom(h,3) = 300c/161700 = c/539"
+   ],
+   "note": "'As $L/N=c/539$ with $c=100$ (bit) or $101$ (complex)' follows from L=Kch, K=3binom(h,3)^2 and N=binom(h,3)^3 as given on the page. The comparison with 1/2 and the extra N source ranks reappear correctly in the bit paragraph."
+  },
+  {
+   "id": "S4.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "endpoint identity M_sink(rho(w)) - M_source(w) = I_m for every input role",
+    "P_U is the projection onto U along U^⊥, for nondegenerate labels",
+    "the frame Phi_M:(H,D)↦(H+MD,D) that makes rank_Q(M_head - M_tail) the cost of an edge",
+    "decreasing (reversed) edges negate P_V - P_U without changing its rank"
+   ],
+   "note": "The rank count is derived as in the paper: the rank of P_V-P_U equals the dimension change, plus one for each X_a source edge, giving Wm-N+2L_b<Wm. The endpoint identity, half of the sub-step, is absent."
+  },
+  {
+   "id": "S4.3.6.1",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "M_sink(rho(w)) - M_source(w) = I_m, so every role receives the same shear H←H+D"
+   ],
+   "note": "The page never states the endpoint identity and never defines rho."
+  },
+  {
+   "id": "S4.3.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "s_b=Wm-N+2L_b follows from the absolute change Wm-2N+2L plus the N extra source ranks, and '<Wm' follows from L_b/N=100/539<1/2. The exact value 177176569088785861287000000 is omitted but not needed."
+  },
+  {
+   "id": "S4.3.6.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "U and V nondegenerate (needed for P_U to be defined and for dim(V∩U^⊥)=dim V-dim U)",
+    "reversing an edge negates the matrix without changing its rank"
+   ],
+   "note": "The page gives the paper's reason ('the identity on $V\\cap U^\\perp$ ... so has rank $\\dim V-\\dim U$'). It writes 'zero elsewhere' instead of zero on the orthogonal complement, and covers only increasing edges."
+  },
+  {
+   "id": "S4.3.6.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "at stage 1 B=0, so the first gate on X_a has label exactly U_a and the edge matrix is P_{U_a}-(-P_{U_a})=2P_{U_a}"
+   ],
+   "note": "'The first edge at each $X_a$ is $2P_{U_a}$, rank one despite zero dimension change' is asserted. The page does not show why the first gate label is U_a."
+  },
+  {
+   "id": "S4.3.6.5",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "P_{U_a^⊥}-(-P_{U_a})=I_m for X_a; zero source matrix and identity sink matrix for every other role"
+   ],
+   "note": "The page has no endpoint check."
+  },
+  {
+   "id": "S4.3.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the X_a→Y_a route, which carries C^{-1} on the 27 coordinates of supp(u_a), and its Z corrections",
+    "negating the physical X outputs and sending rho(w) back to w",
+    "Gaussian-dyadic entries of the frames"
+   ],
+   "note": "The factorization of each edge into one kernel aI+bX_v per residual basis vector, and the count s_c, are derived along the paper's lines. The endpoint corrections that give C^{⊗m} on every role are only asserted."
+  },
+  {
+   "id": "S4.3.7.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "entries of C_U and C_U^{-1} are Gaussian integers divided by 2^m, so they preserve arrays over Z[i,1/2]",
+    "the projection P_U is taken over F_2",
+    "H=(1/√2)[[1,1],[1,-1]]"
+   ],
+   "note": "The definitions of q_U, C=H diag(1,i)H=aI+bX and the frame C_U are given correctly. The Gaussian-dyadic property is absent, and C=aI+bX is asserted."
+  },
+  {
+   "id": "S4.3.7.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'One kernel per basis vector gives $s_{\\rm c}=Wm-2N+2L_{\\rm c}<Wm$' follows from residual dimension = absolute label change and the earlier total Wm-2N+2L. The inequality follows from L_c/N=101/539."
+  },
+  {
+   "id": "S4.3.7.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "z·w=0 means |supp z ∩ supp w| is even, so the term 2|supp z ∩ supp w| vanishes mod 4"
+   ],
+   "note": "The page gives the weight identity together with its conclusion, but leaves implicit the step from orthogonality to an even intersection."
+  },
+  {
+   "id": "S4.3.7.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the decomposition V=U⊥E, with E the edge residual and B an orthonormal basis of E",
+    "for a decreasing edge the right side is negated",
+    "wt(v) is odd because v·v=1"
+   ],
+   "note": "As in the paper, the formula comes directly after weight additivity. The page does not state the setting V=U⊥E or the sign on decreasing edges, and does not justify 'wt(v) odd'."
+  },
+  {
+   "id": "S4.3.7.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "X_v defined as translation, (X_v f)(x)=f(x+v)",
+    "epsilon is wt(v) mod 4 times the sign of the edge direction"
+   ],
+   "note": "The page gives the two-point identity for i^{ε[v·x]} and uses H diag(1,-1)H=X to turn the character into a translation, which is the paper's argument."
+  },
+  {
+   "id": "S4.3.7.6",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "q_{U_a^⊥}-q_{U_a}=wt(x)+2[u·x] mod 4, so X_a→Y_a carries C^{-1} on the 27 coordinates of supp(u_a) and C elsewhere",
+    "Z=diag(1,-1)",
+    "corrections Z_{a,k} before the network at X_a and i^{27k}Z_{a,k} after it at Y_a"
+   ],
+   "note": "Only 'Using $C=iZC^{-1}Z$ on $X_a\\to Y_a$' appears. The 27 inverse factors and the sign corrections are missing, and Z is undefined."
+  },
+  {
+   "id": "S4.3.7.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the zero label has frame I and the full label has frame C^{⊗m}, because q_F(x)=wt(x)",
+    "negating the physical X outputs (sign -1 of the scalar exchange) and sending rho(w) back to w",
+    "scratch roles included; tensor products over k columns give C^{⊗mk}"
+   ],
+   "note": "'every role receives $C^{\\otimes m}$' is asserted without the source and sink corrections or the sign fix."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "keeping the dimension lost on decreasing edges small relative to the number $N$ of data roles",
+   "problem": "N is the number of indices a∈T^3, i.e. the number of roles X_a. There are 2N data roles (X_a and Y_a). The page's own later definition ('$N=\\binom h3^3$ counts the roles $X_a$') is correct."
+  },
+  {
+   "severity": "minor",
+   "quote": "Subspace labels give each network vertex a subspace, so an edge costs its label dimension change.",
+   "problem": "An edge's cost equals its label dimension change only when its labels are nested and nondegenerate. In the bit network, the N first edges of X_a cost rank one with zero dimension change (paper: 'The only exceptions are the $N$ negative source projections'). The page notes this exception later."
+  },
+  {
+   "severity": "minor",
+   "quote": "$X$ labels grow from $A\\otimes\\langle t\\rangle$ to $A\\otimes F$, $Y$ labels from $B\\otimes\\langle t\\rangle$ to $(P\\otimes\\langle t\\rangle)^\\perp_{A\\otimes F}$",
+   "problem": "The tensor factor Q=⟨t_{a_{j+1}}⊗…⊗t_{a_3}⟩ is omitted without comment. The paper's labels are A⊗⟨t⟩⊗Q, etc., which are subspaces of the full tensor space. Without Q they lie in F^{⊗j}, and 'outgoing labels equal next incoming labels' needs Q=⟨t_{a_{j+1}}⟩⊗Q'."
+  },
+  {
+   "severity": "minor",
+   "quote": "$P_V-P_U$ is the identity on $V\\cap U^\\perp$ and zero elsewhere",
+   "problem": "The paper has 'zero on its orthogonal complement' (of V∩U^⊥). P_U is the projection along U^⊥, which the page never says. 'Elsewhere' is not a subspace."
+  },
+  {
+   "severity": "minor",
+   "quote": "A residual has an orthonormal basis $\\mathcal B$ (it has a norm-one coordinate vector)",
+   "problem": "Some residuals contain no coordinate unit vector. For example, the side residual P⊗⟨t_Y⟩⊗Q is a line spanned by a weight-27 vector. In the paper, the norm-one vector is a tensor of coordinate units with the norm-one vectors of P, Q and the triple lines. A norm-one vector only makes a nondegenerate residual nonalternating; the orthonormal basis then comes from the paper's splitting argument, and only for nonzero residuals."
+  },
+  {
+   "severity": "minor",
+   "quote": "Using $C=iZC^{-1}Z$ on $X_a\\to Y_a$, every role receives $C^{\\otimes m}$.",
+   "problem": "The paper needs explicit corrections: Z_{a,k} before the network at X_a and i^{27k}Z_{a,k} after it at Y_a, which turn the 27 inverse factors on supp(u_a) into C. The route Y_a→X_a carries the scalar sign -1, so the physical X outputs must be negated and output role rho(w) sent back to w. Z is undefined on the page."
+  }
+ ],
+ "motivation_given": true
+}

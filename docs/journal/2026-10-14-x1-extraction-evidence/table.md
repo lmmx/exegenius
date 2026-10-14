@@ -96,8 +96,8 @@ A = probability that a Sonnet `high` extraction exceeds one of the other configu
 
 | Against Sonnet high | results quoted (of 66) | core items reached by lines (of 19) | core items reached in derivation lines | body subsections quoted | 100-line blocks quoted (of 54) | quotes in first tenth | unknown concepts | gloss characters |
 |---|---|---|---|---|---|---|---|---|
-| Sonnet medium (n=5) | 0.94 (p 0.001) | 0.97 (p 0.000) | 0.98 (p 0.000) | 1.00 (p 0.000) | 0.97 (p 0.000) | 0.28 (p 0.155) | 1.00 (p 0.000) | 1.00 (p 0.000) |
-| Opus medium (n=7) | 0.87 (p 0.003) | 0.89 (p 0.002) | 0.82 (p 0.014) | 0.87 (p 0.004) | 0.81 (p 0.015) | 0.01 (p 0.000) | 0.46 (p 0.754) | 0.60 (p 0.496) |
+| Sonnet medium (n=5) | 0.94 (p 0.001) | 0.97 (p < 0.001) | 0.98 (p < 0.001) | 1.00 (p < 0.001) | 0.97 (p < 0.001) | 0.28 (p 0.155) | 1.00 (p < 0.001) | 1.00 (p < 0.001) |
+| Opus medium (n=7) | 0.87 (p 0.003) | 0.89 (p 0.002) | 0.82 (p 0.014) | 0.87 (p 0.004) | 0.81 (p 0.015) | 0.01 (p < 0.001) | 0.46 (p 0.754) | 0.60 (p 0.496) |
 | Opus high (n=2) | 0.56 (p 0.800) | 0.25 (p 0.284) | 0.26 (p 0.326) | 0.22 (p 0.242) | 0.35 (p 0.537) | 0.00 (p 0.005) | 0.06 (p 0.037) | 0.14 (p 0.126) |
 | Haiku high (n=2) | 0.96 (p 0.026) | 0.86 (p 0.100) | 0.96 (p 0.032) | 0.83 (p 0.147) | 0.89 (p 0.095) | 0.40 (p 0.679) | 0.43 (p 0.774) | 0.50 (p 1.000) |
 
@@ -127,7 +127,7 @@ A = probability that a Sonnet `high` extraction exceeds one of the other configu
 
 ## 3. Plans judged on each extraction (primary batch, median of its judges)
 
-Faithful = core results whose derivation was judged faithful (of 19); central = steps of the central saving reconstructed (of 9); checklist = mechanism sub-steps present (of 26), one total per judge. Arms: the experiment and its arm (P/G/M/O/Q/K/N: full planning in one configuration, the argument by the same model as the extraction; E4 B/V, E6 B/V, E7 W, E8/E8b X, E9 Y: Sonnet `high` arguments on fixed extractions, under successive instructions).
+Faithful = core results whose derivation was judged faithful (of 19); central = steps of the central saving reconstructed (of 9); checklist = mechanism sub-steps present (of 26), one total per judge. Arms: the experiment and its arm (P/G/M/O/Q/K/N: full planning in one configuration, the argument by the same model as the extraction; E4 B/V, E6 B/V, E7 W, E8/E8b X, E9/E10 Y: Sonnet `high` arguments on fixed extractions, under successive instructions; S2-S5: other models and efforts on E6's extractions). J21 (E10) is read from its verdicts, since the registry does not list it yet.
 
 | Extraction | Plan | Arm | Batch | Judges | Faithful | Each | Central | Major | Checklist |
 |---|---|---|---|---|---|---|---|---|---|

@@ -1,0 +1,327 @@
+{
+ "page": "P03",
+ "items": [
+  {
+   "id": "S4.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "computation of L/N: I=3v^2 invocations, N=v^3, v=C(100,3)=161700, h=100, c_b=100, c_c=101, so L/N=3ch/v",
+    "stage-transition labels (incoming/outgoing on X and Y) and the factor Q",
+    "edge-by-edge residual table showing that the only decrease is center 3->4"
+   ],
+   "note": "The page builds s<Wm from claims it only asserts. 'Dimension drops only on central edges from time $3$ to $4$' and 'The loss ratios are $L_{\\rm b}/N=100/539$ ... and $L_{\\rm c}/N=101/539$' are asserted, and I, N, v and c never appear on the page. Only the last link, from L<N/2 to s_b=W_bm-N+2L_b<W_bm, is shown."
+  },
+  {
+   "id": "S4.3.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "nondegeneracy of the form I-J/9 (eigenvalues 1 and -91/9)",
+    "t_T.t_T=1 over F_2, so triple lines are also nondegenerate in the complex network",
+    "the neighbor relations (|S∩T|=1 for bit; distinct with even intersection for complex) that make neighboring triple lines orthogonal",
+    "nondegeneracy of the tensor form on F^{⊗3}"
+   ],
+   "note": "The page explains the intersection formula ('Since $t_S,t_T$ have three ones') and gets nondegeneracy of triple lines over Q. Orthogonality of neighbors only comes later, as 'neighbouring triples satisfy $t_S\\perp t_T$', with no neighbor relation defined, and the F_2 case is never checked."
+  },
+  {
+   "id": "S4.3.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "U_a^⊥ has dimension m-1, which is why the sinks total Wm-N"
+   ],
+   "note": "The terminal labels match the paper's table. 'Each $U_a$ is a line, so sources total $N$' derives the source count, but 'sinks $Wm-N$' is asserted without noting the N sinks U_a^⊥ of dimension m-1."
+  },
+  {
+   "id": "S4.3.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the transition table: X goes from A⊗<t>⊗Q to (A⊗F)⊗Q, and Y goes from B⊗<t>⊗Q to ((B⊗F)⊥(P⊗t^⊥))⊗Q",
+    "the factor Q=<t_{a_{j+1}}⊗...⊗t_{a_3}>, with Q=<t_{a_{j+1}}>⊗Q' for j<3",
+    "the identity B'=(B⊗F)⊥(P⊗t^⊥)",
+    "A=B⊥P, because P is nondegenerate",
+    "B=0 at stage 1, and the stage-1 and stage-3 labels agreeing with the terminal labels"
+   ],
+   "note": "The page defines A, R (the paper's P), B and A', R', B', but never says what the incoming and outgoing labels are. So 'so outgoing labels equal the next incoming ones' is asserted, not shown."
+  },
+  {
+   "id": "S4.3.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the residual of every edge (the paper's table), including the interstage edges through 'in' and the scratch last->sink edges with residual (A⊗F)⊗Q^⊥",
+    "that every edge joins comparable nondegenerate labels",
+    "which physical wires each gate touches",
+    "the number of invocations, I=3v^2"
+   ],
+   "note": "'Dimension drops only on central edges from time $3$ to $4,$ each by $h$' is asserted before any edge is examined. Only one side edge's residual is given, so the claim that no other edge decreases is never checked."
+  },
+  {
+   "id": "S4.3.4.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the physical wires touched at each time (Y-side, Y+center, X-side, X+center, Y+center, Y-side, X+center, X-side)",
+    "the suppressed tensor factor Q",
+    "that t is the indicator of the gate's own physical bank triple",
+    "nondegeneracy of every displayed summand",
+    "the organizing decomposition A⊗F=(B⊗F)⊥(P⊗F) and the side chain P⊗<t_X> ⊂ P⊗t_Y^⊥ ⊂ P⊗F"
+   ],
+   "note": "The eight labels are listed and agree with the paper's table (with P renamed R). The page does not say which wires each gate touches, so the labels cannot be used to compute edge residuals."
+  },
+  {
+   "id": "S4.3.4.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "that the edge in question is side 2->5",
+    "the nesting (B⊗F)⊥(P⊗<t_X>) ⊂ (B⊗F)⊥(P⊗t_Y^⊥), which uses <t_X> ⊂ t_Y^⊥",
+    "the complement of <t_X> inside t_Y^⊥ is <t_X,t_Y>^⊥",
+    "the tensor factor Q"
+   ],
+   "note": "The page gives the right reason ('since neighbouring triples satisfy $t_S\\perp t_T$') and the right residual. It does not say which side edge this is or show the nesting. Its gate-label list also uses a single $t_T$ at times 2 and 5, and labels written that way would not be nested."
+  },
+  {
+   "id": "S4.3.4.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "a check that every other edge is nondecreasing",
+    "the removed space is P⊗F⊗Q, of dimension 1·h·1",
+    "the number of invocations, I=3v^2 (the page's ν is never given a value)"
+   ],
+   "note": "'Dimension drops only on central edges from time $3$ to $4,$ each by $h$' and '$L=\\nu ch$' are asserted. The page never says that central wires go from the time-3 gate (A⊗F) to the time-4 gate (B⊗F)."
+  },
+  {
+   "id": "S4.3.4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The source and sink totals N and Wm-N are already on the page, so 'Signed changes telescope to $Wm-2N,$ and absolute changes total $Wm-2N+2L$' is the paper's telescoping argument in brief. The +2L follows because L is the total loss on decreasing edges."
+  },
+  {
+   "id": "S4.3.4.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "nonzero residuals are nondegenerate (by the orthogonal decompositions)",
+    "the criterion that a nondegenerate binary symmetric space is nonalternating exactly when it contains a vector of norm one",
+    "norm-one coordinate unit vectors in B, Q^⊥, triple complements and complements of two neighboring triple lines (supports of size 3^{j-1}, 3 and 6, all smaller than h)",
+    "nondegenerate nonalternating binary spaces have orthonormal bases; a zero residual takes the empty basis"
+   ],
+   "note": "The page asserts 'Over $\\mathbb F_2$ residuals have orthonormal bases' with no reason. This fails for alternating spaces in general, and the paper's argument that these residuals are nonalternating is missing."
+  },
+  {
+   "id": "S4.3.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "I=3v^2",
+    "N=v^3",
+    "v=C(100,3)=161700",
+    "c_b=100 and c_c=101",
+    "L/N=3ch/v, giving 30000/161700=100/539 and 30300/161700=101/539"
+   ],
+   "note": "The ratios are cited from the paper with no computation, and I, N, v, c_b and c_c do not appear on the page. The consequence, 'both below one half, so $N$ extra source ranks leave a strict saving', matches the paper."
+  },
+  {
+   "id": "S4.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the map ρ (exchanging X_a and Y_a, fixing scratch roles) that defines the endpoint difference",
+    "the explicit value 177176569088785861287000000",
+    "the shear frame Φ_M:(H,D)->(H+MD,D)"
+   ],
+   "note": "The page assigns P_U, with -P_{U_a} at the source of X_a, and checks the endpoint identity for X_a. It sets edge ranks equal to dimension changes except for N extra unit ranks, and concludes $s_{\\rm b}=W_{\\rm b}m-N+2L_{\\rm b}<W_{\\rm b}m$. This follows the paper's proof."
+  },
+  {
+   "id": "S4.3.6.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "ρ(X_a)=Y_a, ρ(Y_a)=X_a, ρ fixes auxiliary roles, so the endpoint difference is M_sink(ρ(w))-M_source(w)",
+    "the roles other than X_a (zero source matrix, identity sink matrix)",
+    "that every role therefore receives the same shear H<-H+D"
+   ],
+   "note": "The page's '$P_{U_a^\\perp}+P_{U_a}=I_m$ makes every endpoint difference $I_m$' proves the identity for X_a routed to Y_a's sink. ρ and the other roles are left implicit."
+  },
+  {
+   "id": "S4.3.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the explicit value 177176569088785861287000000",
+    "the deficit N-2L_b>0"
+   ],
+   "note": "The formula follows on the page from the absolute changes Wm-2N+2L plus N extra unit ranks. The strict inequality follows from L_b/N<1/2."
+  },
+  {
+   "id": "S4.3.6.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "reversing an edge (a decreasing edge) negates P_V-P_U without changing its rank"
+   ],
+   "note": "Line 3 gives the paper's reasoning: '$P_V-P_U$ is the identity on the residual $V\\cap U^\\perp$ and zero on its complement, so an edge costs rank $\\dim V-\\dim U$'."
+  },
+  {
+   "id": "S4.3.6.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "at stage 1, B=0, so the first gate on X_a has label exactly U_a",
+    "the edge matrix P_{U_a}-(-P_{U_a})=2P_{U_a} sits on an edge whose dimension change is zero, so each such edge adds one rank"
+   ],
+   "note": "'except at the $N$ source edges, where $2P_{U_a}$ has rank one' asserts the exception. The page never shows that the head label of that edge is U_a."
+  },
+  {
+   "id": "S4.3.6.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "every other role has zero source matrix and identity sink matrix"
+   ],
+   "note": "The page computes the X_a case, '$P_{U_a^\\perp}+P_{U_a}=I_m$', as the paper does. It does not mention the trivial Y_a and scratch cases."
+  },
+  {
+   "id": "S4.3.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "weight additivity modulo 4 for orthogonal binary vectors",
+    "the q-difference on X_a->Y_a and the 27 coordinates of supp(u_a)",
+    "the source/sink corrections Z_{a,k} and i^{27k}Z_{a,k}, and the negation of the physical X outputs",
+    "the explicit value of s_c"
+   ],
+   "note": "The frame definitions, the kernel conversion and the count are on the page. But the identity that drives the factorization ('$q_V(x)-q_U(x)=\\sum$...') is asserted without weight additivity, and the conclusion 'every role carries $C^{\\otimes m}$' is asserted."
+  },
+  {
+   "id": "S4.3.7.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the normalization H=(1/√2)[[1,1],[1,-1]]",
+    "the projection P_U is taken over F_2",
+    "the entries of C_U and its inverse are Gaussian integers divided by 2^m, so both preserve arrays over Z[i,1/2]"
+   ],
+   "note": "The definitions of C, α, β, C_U and q_U match the paper. C=H diag(1,i)H=αI+βσ is asserted, and the Gaussian-dyadic property is dropped."
+  },
+  {
+   "id": "S4.3.7.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the explicit value 1873807244636671267308000000",
+    "the deficit 2N-2L_c>0 (the complex network has no extra source ranks)",
+    "the empty basis for a zero residual"
+   ],
+   "note": "With one kernel per residual basis vector, the count equals the sum of absolute dimension changes, Wm-2N+2L, already on the page. This is the paper's route: 'so $s_{\\rm c}=W_{\\rm c}m-2N+2L_{\\rm c}<W_{\\rm c}m$'."
+  },
+  {
+   "id": "S4.3.7.3",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "wt(z+w)=wt(z)+wt(w)-2|supp z ∩ supp w|",
+    "z·w=0 makes the intersection even, so weight is additive mod 4"
+   ],
+   "note": "Weight additivity is not on the page, and the q-difference formula appears without it."
+  },
+  {
+   "id": "S4.3.7.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "V=U⊥E, with weight additivity applied to P_Vx=P_Ux+Σ_v [v·x] v",
+    "the right side is negated on a decreasing edge",
+    "wt(v) is odd because v has norm one"
+   ],
+   "note": "The formula and 'with $|w|$ odd' are asserted with no derivation."
+  },
+  {
+   "id": "S4.3.7.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the identity i^{ε[b]}=(1+i^ε)/2+(1-i^ε)/2·(-1)^b",
+    "the translation (X_v f)(x)=f(x+v), with H diag(1,-1)H=X tensored over supp(v)"
+   ],
+   "note": "The page's 'since $H\\operatorname{diag}(1,-1)H=\\sigma$ turns $(-1)^{w\\cdot x}$ into a translation $\\tau_w$' gives the paper's conjugation step. Splitting the phase into a constant plus a character is left to the reader, who can recover it from C=H diag(1,i)H=αI+βσ."
+  },
+  {
+   "id": "S4.3.7.6",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "q_{U_a^⊥}(x)-q_{U_a}(x)=wt(x)+2[u·x] mod 4",
+    "u_a has weight 27, so the operator is C^{-1} on the 27 coordinates of supp(u_a) and C elsewhere",
+    "the corrections Z_{a,k} before the network at X_a and i^{27k}Z_{a,k} after it at Y_a",
+    "the zero label has frame I and the full label has frame C^{⊗m}, since q_F(x)=wt(x)"
+   ],
+   "note": "The page says 'The pair $X_a\\to Y_a$ has inverse kernels, which $C=iZC^{-1}Z$ ... turns into $C$'. It does not say where the inverse factors sit or how many there are, or that Z has to be applied outside the network."
+  },
+  {
+   "id": "S4.3.7.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the scalar exchange sends Y_a to X_a with sign -1, so the physical X outputs must be negated",
+    "output role ρ(w) is sent back to role w",
+    "scratch roles have zero source and full sink labels",
+    "the k-column version C^{⊗mk}"
+   ],
+   "note": "The page asserts 'so every role carries $C^{\\otimes m}$'. The sign correction and the rerouting are missing."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "where $W$ counts wires and $m$ is the label dimension",
+   "problem": "m=h^3 is the dimension of the ambient label space F=F^{⊗3}. Individual labels have dimensions from 0 to m."
+  },
+  {
+   "severity": "minor",
+   "quote": "$P_V-P_U$ is the identity on the residual $V\\cap U^\\perp$ and zero on its complement",
+   "problem": "It is zero on the orthogonal complement of the residual (U + V^⊥), not on an arbitrary complement. The paper says 'zero on its orthogonal complement'."
+  },
+  {
+   "severity": "minor",
+   "quote": "$(B\\otimes F)\\oplus(R\\otimes\\langle t_T\\rangle),$ ... $(B\\otimes F)\\oplus(R\\otimes\\langle t_T\\rangle^\\perp),$",
+   "problem": "The page uses one t_T at times 2 and 5. In the paper, t is the indicator of the gate's own physical triple: the X triple at time 2 and the Y triple at time 5. With a single T the two labels are not nested, because <t_T> is not contained in t_T^⊥."
+  },
+  {
+   "severity": "minor",
+   "quote": "Gate labels at times $0$ to $7$ are $B\\otimes\\langle t_T\\rangle,$ $B\\otimes F,$",
+   "problem": "The factor Q is dropped without comment. The paper says 'All labels are tensored by Q and viewed as subspaces of F'. As written, these labels are not subspaces of F^{⊗3} (at stage 1, A⊗F=F), and the scratch-sink residual (A⊗F)⊗Q^⊥ cannot be formed."
+  },
+  {
+   "severity": "minor",
+   "quote": "The side edge has residual $R\\otimes\\langle t_S,t_T\\rangle^\\perp$ of dimension $h-2,$",
+   "problem": "This holds only for the side edge 2->5, and the residual also carries ⊗Q. A side wire has four edges, with residual dimensions a-1, (a-1)(h-1)+1, h-2 and 1."
+  },
+  {
+   "severity": "minor",
+   "quote": "with $H$ the Hadamard matrix",
+   "problem": "The paper uses the normalized H=(1/√2)[[1,1],[1,-1]]. With the unnormalized Hadamard matrix, H diag(1,i)H=2C and H diag(1,-1)H=2σ."
+  },
+  {
+   "severity": "minor",
+   "quote": "$q_V(x)-q_U(x)=\\sum_{w\\in\\mathcal K}|w|\\,(w\\cdot x\\bmod2)\\pmod4,$",
+   "problem": "This holds for an increasing edge U⊂V=U⊥E. The paper adds 'For a decreasing edge the right side is negated'. The page's later ± only partly covers this."
+  },
+  {
+   "severity": "minor",
+   "quote": "except at the $N$ source edges, where $2P_{U_a}$ has rank one",
+   "problem": "Every wire has a source edge. The exceptions are the N first edges of the X_a wires at stage 1, whose head label is exactly U_a."
+  },
+  {
+   "severity": "minor",
+   "quote": "so every role carries $C^{\\otimes m}.$",
+   "problem": "This holds only after the diagonal corrections Z_{a,k} before the network and i^{27k}Z_{a,k} after it, the negation of the physical X outputs (the scalar network gives (X_a,Y_a)->(-Y_a,X_a)) and routing ρ(w) back to w. Without them the Y_a->X_a route carries -C^{⊗m}. The paper states these conditions explicitly."
+  }
+ ],
+ "motivation_given": true
+}
