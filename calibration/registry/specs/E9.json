@@ -1,0 +1,58 @@
+{
+ "id": "E9",
+ "title": "A sentence asking for each fixed parameter's definition and every case, added to E8's instruction, Sonnet at high",
+ "kind": "controlled",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task only, on E6's extractions F2, F4 and F8 (background accepted)",
+ "question": "Does the parameters-and-cases sentence close C1 (the parameter setup) without loss?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "e8efaa3 (141026-exp-params-cases)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-e9-params-cases",
+  "commit": "0d73706",
+  "transcripts": "results/transcripts/e9",
+  "description_prefix": "",
+  "planning_kinds": [
+   "argument"
+  ]
+ },
+ "protocol": "run from the development session; S4-E8-FB1.md on the evidence branch",
+ "preregistration": "calibration/plans/E9.md (criteria fixed before any run)",
+ "journal": "docs/journal/2026-10-14-e8b-e9.md",
+ "comparison": "E8F2X, E8F4X, E8F8X (Sonnet, high, E8 instructions), re-judged in J18 (primary) and J20 (checklist)",
+ "arms": {
+  "Y": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E8 argument instructions plus the parameters-and-cases sentence"
+   },
+   "runs": [
+    "E9F2Y",
+    "E9F4Y",
+    "E9F8Y"
+   ]
+  }
+ },
+ "reported": {},
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus, high) with this session's permissions; it only passed prompts and ran exegenius next"
+  }
+ ],
+ "limitations": [
+  "One paper, three extractions, one run each; no Y repeat until E10.",
+  "E9F8Y's accepted plan has two strings with control characters (not visible in the rendered plan)."
+ ]
+}

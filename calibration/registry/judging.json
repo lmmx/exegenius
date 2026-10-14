@@ -202,5 +202,23 @@
    "calibration/rubrics/nlogn-central-saving.md"
   ],
   "journal": "docs/journal/2026-10-14-s4-s5-e8.md"
+ },
+ {
+  "id": "J18",
+  "dir": "docs/journal/2026-10-14-e8b-confirm/judge",
+  "key": "key.json",
+  "verdicts": "verdicts",
+  "reference": "docs/journal/2026-10-13-run-log-and-coverage/reference-draft/reference.json",
+  "judge": {
+   "agent": "general-purpose",
+   "model_id": "claude-opus-5-5",
+   "effort": "high"
+  },
+  "seed": 20261032,
+  "judges_per_plan": "three for the sixteen compared plans (E8b's twelve, E9's three, E8F8X), one for each anchor; central steps by majority",
+  "rubrics": [
+   "calibration/rubrics/nlogn-central-saving.md"
+  ],
+  "journal": "docs/journal/2026-10-14-e8b-e9.md"
  }
 ]

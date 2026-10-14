@@ -30,6 +30,18 @@
 | 2026-10-14 ~09:15 | 4% | 4% (author checked the meter) | yes |
 | 2026-10-14 ~14:20 | 20% | ~0%: the window had reset | **no**. The prediction ignored the reset |
 
+**Measured since the 18:30 reset, with no reading** (`spend.py --since 2026-10-14T18:30`, 19:26 UTC). These are counts, not a reading:
+
+| | Cache read |
+|---|---|
+| J18 | 241.0 M |
+| E9's runs | 12.1 M |
+| J20 | 12.2 M |
+| the development session | 45.1 M |
+| **together** | **310 M** |
+
+That is past runbook §5's threshold, so E10 waits for a reading or the ~23:30 reset.
+
 **Measured since the 14:20 reset, with no reading yet** (`spend.py --since 2026-10-14T14:20`, 15:51 UTC). These are counts, not a reading:
 
 | | Cache read | Cache write |
@@ -97,6 +109,7 @@ That is past runbook §5's 300 M pause threshold. New launches wait for a readin
 | E8 | 3 · Sonnet · 16.8 M · 115 k | J15 checklist: 18 · Opus and Sonnet · 16.0 M · 57 k; J16: 20 · 98.3 M · 164 k |
 | E8b | 6 · Sonnet · 27.3 M · 178 k | J17 checklist: 24 · Opus and Sonnet · 23.8 M · 76 k |
 | FB1 (pilot) | 1 · Fable · 4.0 M · 31 k | J19 checklist: 4 · Opus and Sonnet · 3.4 M · 12 k |
+| E8b stage 2 and E9 (shared batch J18) | E9: 3 · Sonnet · 12.1 M · 106 k | J18: 50 · Opus · 241.0 M · 401 k (4.8 M per judgement, against ~3 M estimated); J20 checklist: 12 · Opus and Sonnet · 12.2 M · 39 k |
 | **The development session (orchestration, analysis, write-up), all of 2026-10-14** | 1 · Opus · **707.9 M** · 654 k | — |
 | W1 (cancelled) | 1 · Sonnet · 0.1 M · 0 | — |
 | J1–J2 (content-judge development, E1) | — | 43 · 54.8 M · 200 k |
@@ -152,6 +165,7 @@ Their tokens are inside the run totals above.
 | S4, S5 | does Opus `max` improve on Opus `xhigh` on F8, and how much does `xhigh` vary? | `max` +1 on each measure, within `xhigh`'s own run variance (2 faithful) | no case for `max` on this task; Fable's pilot against Opus `max` | the repeat (S5, 2.7 M) changed the reading of a 15 M run. Repeats are cheap next to the runs they qualify |
 | E8 | does one sentence (variants, bound chains) lift Sonnet `high`? | faithful 18, 18, 19 against 14, 3, 4; not below Opus `xhigh` anywhere | the sentence proposed to the author; E8b to confirm | the largest gain of the day cost 16.8 M of runs. Instructions targeted at a located gap beat model and effort. Primary judging (98.3 M) was 6× the runs |
 | FB1 (pilot) | does Fable at `high` beat Opus `max` on F8? | below: checklist 17, 16 against 20, 21 | no further Fable spend on this task | narrowing to a checklist screen kept the pilot at 7.4 M in all |
+| E8b stage 2, E9 | does the E8 sentence hold on fresh extractions, and does a parameters-and-cases sentence close C1? | E8b: not supported (3 of 5; ties on F5, F6). E9: closes C1, with every judgement 19/19 faithful | the E8-only proposal withdrawn; E10 tests the combined instruction where E8 tied | consolidating E9 into J18 shared the W and X plans and saved a batch. J18's per-judgement cost was 1.6× J16's, because the plans are longer. Estimate judging from the latest batch, not the first |
 
 ## 4. Lessons the record supports so far (each with its evidence; none is a universal rule)
 

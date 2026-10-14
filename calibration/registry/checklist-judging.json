@@ -115,5 +115,27 @@
   "judges_per_plan": "two (Opus first, Sonnet second)",
   "rubric": "calibration/rubrics/nlogn-mechanism-checklist.md",
   "journal": "calibration/plans/FB1.md"
+ },
+ {
+  "id": "J20",
+  "experiment": "E9",
+  "dir": "docs/journal/2026-10-14-e9-params-cases/checklist",
+  "verdicts": "verdicts",
+  "seed": 20261033,
+  "judges": [
+   {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "high"
+   },
+   {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high"
+   }
+  ],
+  "judges_per_plan": "two (Opus first, Sonnet second)",
+  "rubric": "calibration/rubrics/nlogn-mechanism-checklist.md",
+  "journal": "calibration/plans/E9.md"
  }
 ]

@@ -102,9 +102,11 @@ E1-P4 has held at 6 from J6 on, but J6's second judge gave it 8. *Corrected 2026
    - **E8: the instruction outweighs the model.**
      - With one more sentence (every variant, and the chain behind each bound), Sonnet `high` reaches faithful 18, 18 and 19 on F1, F4 and F8 (J16), against 14, 3 and 4 without it.
      - It is not below Opus `xhigh` on the checklist anywhere, and at the ceiling on F8.
-     - **E8b's checklist screen (J17):** X is above W beyond noise on F2, F3, F5 and F7, and tied on F6, where W was already the strongest. A repeat on F4 is within noise. Primary judging (J18) is pending (`docs/journal/2026-10-14-s4-s5-e8.md`).
+     - **E8b (J17 screen, J18 primary):** on the primary measure, X is above W on F2, F3 and F7 and ties on F5 and F6. That is 3 of 5, so not supported by its table. X is never below W; the sign test over eight extractions gives p ≈ 0.016.
+     - **The ties trace to `label-residual-budget`,** which nearly every X and W plan misses.
+   - **E9: a second sentence** (each fixed parameter's value, and every case of a case-by-case step) closes C1. On F2, F4 and F8, every judgement finds 9/9 central steps and 19/19 core results faithful, with plans no longer (`docs/journal/2026-10-14-e8b-e9.md`).
+   - **The candidate is now the combined instruction.** E10 tests it against E7 where E8 alone tied.
    - **Fable at `high` (FB1 pilot, F8, E7 instructions):** below Opus `max` on the checklist (17, 16 against 20, 21). No further Fable spend on this task.
-   - **The remaining gap for Sonnet `high` with the sentence is C1,** the parameter setup. It is missed by selection, not reading. E9 tests a sentence for it.
 5. **Writers, auditors and support checks:** no evidence yet. They dominate a full run's cost.
 
 ## Other document classes

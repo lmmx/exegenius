@@ -472,6 +472,51 @@
      "minor_errors": 1,
      "central_count": 8,
      "central_gate": true
+    },
+    {
+     "batch": "J18",
+     "judge": "a",
+     "plan": "P02",
+     "core_stated": 19,
+     "core_fully": 13,
+     "core_derived": 18,
+     "core_faithful": 14,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J18",
+     "judge": "b",
+     "plan": "P02",
+     "core_stated": 19,
+     "core_fully": 10,
+     "core_derived": 18,
+     "core_faithful": 13,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 3,
+     "central_count": 8,
+     "central_gate": true
+    },
+    {
+     "batch": "J18",
+     "judge": "c",
+     "plan": "P02",
+     "core_stated": 19,
+     "core_fully": 12,
+     "core_derived": 18,
+     "core_faithful": 13,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
+     "central_count": 8,
+     "central_gate": true
     }
    ]
   },
@@ -594,6 +639,51 @@
      "major_errors": 0,
      "minor_errors": 2,
      "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J18",
+     "judge": "a",
+     "plan": "P18",
+     "core_stated": 19,
+     "core_fully": 12,
+     "core_derived": 18,
+     "core_faithful": 14,
+     "supporting_stated": 5,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 4,
+     "central_count": 8,
+     "central_gate": true
+    },
+    {
+     "batch": "J18",
+     "judge": "b",
+     "plan": "P18",
+     "core_stated": 19,
+     "core_fully": 14,
+     "core_derived": 18,
+     "core_faithful": 11,
+     "supporting_stated": 5,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 3,
+     "central_count": 7,
+     "central_gate": true
+    },
+    {
+     "batch": "J18",
+     "judge": "c",
+     "plan": "P18",
+     "core_stated": 19,
+     "core_fully": 12,
+     "core_derived": 18,
+     "core_faithful": 13,
+     "supporting_stated": 5,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 3,
+     "central_count": 7,
      "central_gate": true
     }
    ]
@@ -971,6 +1061,51 @@
      "minor_errors": 3,
      "central_count": 9,
      "central_gate": true
+    },
+    {
+     "batch": "J18",
+     "judge": "a",
+     "plan": "P01",
+     "core_stated": 19,
+     "core_fully": 15,
+     "core_derived": 19,
+     "core_faithful": 16,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 5,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J18",
+     "judge": "b",
+     "plan": "P01",
+     "core_stated": 19,
+     "core_fully": 17,
+     "core_derived": 19,
+     "core_faithful": 16,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 6,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J18",
+     "judge": "c",
+     "plan": "P01",
+     "core_stated": 19,
+     "core_fully": 17,
+     "core_derived": 19,
+     "core_faithful": 12,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 6,
+     "central_count": 9,
+     "central_gate": true
     }
    ]
   },
@@ -1092,6 +1227,51 @@
      "wrong": 0,
      "major_errors": 0,
      "minor_errors": 1,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J18",
+     "judge": "a",
+     "plan": "P11",
+     "core_stated": 19,
+     "core_fully": 14,
+     "core_derived": 18,
+     "core_faithful": 16,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 4,
+     "central_count": 8,
+     "central_gate": true
+    },
+    {
+     "batch": "J18",
+     "judge": "b",
+     "plan": "P11",
+     "core_stated": 19,
+     "core_fully": 14,
+     "core_derived": 18,
+     "core_faithful": 16,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 3,
+     "central_count": 8,
+     "central_gate": true
+    },
+    {
+     "batch": "J18",
+     "judge": "c",
+     "plan": "P11",
+     "core_stated": 19,
+     "core_fully": 11,
+     "core_derived": 18,
+     "core_faithful": 16,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 2,
      "central_count": 9,
      "central_gate": true
     }
@@ -1235,6 +1415,51 @@
      "wrong": 0,
      "major_errors": 0,
      "minor_errors": 2,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J18",
+     "judge": "a",
+     "plan": "P04",
+     "core_stated": 19,
+     "core_fully": 16,
+     "core_derived": 19,
+     "core_faithful": 11,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 4,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J18",
+     "judge": "b",
+     "plan": "P04",
+     "core_stated": 19,
+     "core_fully": 15,
+     "core_derived": 19,
+     "core_faithful": 11,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 4,
+     "central_count": 9,
+     "central_gate": true
+    },
+    {
+     "batch": "J18",
+     "judge": "c",
+     "plan": "P04",
+     "core_stated": 19,
+     "core_fully": 13,
+     "core_derived": 19,
+     "core_faithful": 10,
+     "supporting_stated": 6,
+     "wrong": 0,
+     "major_errors": 0,
+     "minor_errors": 4,
      "central_count": 9,
      "central_gate": true
     }
@@ -1539,6 +1764,45 @@
      "max": 9
     },
     "central_gate_passed": "3/3"
+   },
+   "quality_J18": {
+    "core_stated": {
+     "n": 5,
+     "median": 19,
+     "min": 19,
+     "max": 19
+    },
+    "core_fully": {
+     "n": 5,
+     "median": 14,
+     "min": 12,
+     "max": 16
+    },
+    "core_derived": {
+     "n": 5,
+     "median": 18,
+     "min": 18,
+     "max": 19
+    },
+    "core_faithful": {
+     "n": 5,
+     "median": 14,
+     "min": 11,
+     "max": 16
+    },
+    "major_errors": {
+     "n": 5,
+     "median": 0,
+     "min": 0,
+     "max": 0
+    },
+    "central_count": {
+     "n": 5,
+     "median": 9,
+     "min": 8,
+     "max": 9
+    },
+    "central_gate_passed": "5/5"
    },
    "quality_J8": {
     "core_stated": {
