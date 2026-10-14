@@ -1,0 +1,17 @@
+| Page | Run | Plan | Assigned | Faithful (each) | Median | Derived (each) | Major errors (each) | Items itemised (each) | Motivation (each) |
+|---|---|---|---|---|---|---|---|---|---|
+| 0014 | W2WHP14 | P05 | 3 | [2, 2, 2] | 2 | [3, 2, 3] | [1, 0, 1] | [3, 3, 3] | [True, True, True] |
+| 0014 | W2WMP14 | P08 | 3 | [2, 3, 3] | 3 | [2, 3, 3] | [0, 0, 0] | [3, 3, 3] | [True, True, True] |
+| 0014 | W2WOP14 | P02 | 3 | [3, 3, 3] | 3 | [3, 3, 3] | [0, 0, 0] | [3, 3, 3] | [True, True, True] |
+| 0014 | W2WSP14 | P06 | 3 | [3, 2, 3] | 3 | [3, 3, 3] | [0, 0, 0] | [3, 3, 3] | [True, True, True] |
+| 0015 | W2WHP15 | P03 | 8 | [5, 4, 3] | 4 | [5, 4, 3] | [1, 0, 0] | [25, 8, 25] | [True, False, True] |
+| 0015 | W2WMP15 | P07 | 8 | [5, 5, 5] | 5 | [5, 5, 5] | [0, 0, 0] | [25, 25, 25] | [True, True, True] |
+| 0015 | W2WOP15 | P01 | 8 | [8, 8, 8] | 8 | [8, 8, 8] | [0, 0, 0] | [25, 8, 25] | [True, True, True] |
+| 0015 | W2WSP15 | P04 | 8 | [8, 6, 7] | 7 | [8, 6, 7] | [0, 0, 0] | [25, 25, 25] | [True, True, True] |
+
+page 0014: W2WHP14 [2, 2, 2] vs WS [3, 2, 3]: within noise; major errors 1 vs 0; adequate=False
+page 0014: W2WMP14 [2, 3, 3] vs WS [3, 2, 3]: within noise; major errors 0 vs 0; adequate=True
+page 0014: W2WOP14 [3, 3, 3] vs WS [3, 2, 3]: within noise; major errors 0 vs 0; adequate=True
+page 0015: W2WHP15 [5, 4, 3] vs WS [8, 6, 7]: below; major errors 0 vs 0; adequate=False
+page 0015: W2WMP15 [5, 5, 5] vs WS [8, 6, 7]: below; major errors 0 vs 0; adequate=False
+page 0015: W2WOP15 [8, 8, 8] vs WS [8, 6, 7]: within noise; major errors 0 vs 0; adequate=True

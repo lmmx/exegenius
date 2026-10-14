@@ -1,0 +1,284 @@
+# A1 (DRAFT, not preregistered): the fidelity auditor's model and effort, by planted-error recall
+
+**Status: DRAFT.** Written on 2026-10-14 at 23:54 UTC.
+- It is **not preregistered**. The thresholds, the decision table and the agent route below are proposals. They must be fixed and committed before any A1 run.
+- No model or subagent has run for A1.
+- It answers the "Fidelity auditing (auditors, support checks)" row of `policy.md`, item P2 of `RUNBOOK.md` §9. The pipeline default is unchanged.
+
+**The decision it informs:** which model and effort the pipeline's `audit` and `support` tasks should use. Today both go to the `exegenius-task` subagent with `model: inherit` (`exegenius-cli/src/main.rs` `subagent`), the same definition writers use.
+
+## What the pipeline's fidelity auditing is
+
+The test drives the two real task kinds, not an invented auditor.
+
+### The `audit` task
+
+Defined in `exegenius-core/src/audit.rs`, as `AUDIT_INSTRUCTIONS` and `audit_task`.
+
+**Its instructions** begin: "Audit one page of an explanatory wiki on behalf of a specific reader. Use only this task file: do not read the sources, other pages or any other file."
+
+**Its input:**
+- the reader profile;
+- the known concepts;
+- the symbols bound on earlier pages that occur on this page;
+- the list of pages;
+- the page body, with each citation mark shown as "(cited)" (`cite::referenced`). The auditor never sees a quotation.
+
+**Its answer** is `AuditAnswer`:
+- `symbols[]`: each symbol with an anchor, one of `here`, `page`, `concept`, `background` or `unbound`;
+- `gaps[]`: each with `term`, `quote` (copied exactly from the page), `kind` (`term` or `step`) and `note`.
+
+**What submit does:**
+- it rejects quotes that are not on the page, and symbol accounting that does not hold;
+- each accepted step gap becomes the rewrite note "The reader cannot follow this step: …".
+
+**What the task asks for** is what this reader cannot follow, not what is false. A wrong step is reported only if the auditor finds it uncheckable or inconsistent from the page itself.
+
+### The `support` task
+
+Defined in `exegenius-core/src/support.rs`, as `SUPPORT_INSTRUCTIONS` and `support_task`. It runs once the pages are final, at most twice per page.
+
+**Its input:** for each citation mark whose claim is not empty, the claim, the quotation and the paragraph.
+- The claim runs from the end of the previous sentence or mark to the mark.
+- So a mark that follows a full stop, as in "…fixed. `<cite>`", has an empty claim and is never checked.
+
+**Its answer** is `labels[]`, each with `mark`, `label` (`supported`, `partial`, `unsupported` or `contradicted`) and `reason`. Unsupported and contradicted marks become rewrite notes.
+
+### What follows for this row of `policy.md`
+
+**Neither task compares a page with the paper.** Fidelity errors fall into three groups:
+- errors the page itself reveals: only `audit` can catch them;
+- errors the claim's own quotation reveals: only `support` can catch them;
+- errors only the source reveals: a blind spot of the pipeline that no model choice can close.
+
+A1 scores the first two. It reports the third.
+
+## Design
+
+### The seeded set
+
+The set is fixed in `docs/journal/2026-10-14-a1-audit-design/` and was made by `calibration/tools/plant.py` with seed 20261014. The journal's README lists every error.
+
+**Pages:** six pages that carry the central saving's derivation (C1–C9):
+
+| Page | Plan step | Wiki |
+|---|---|---|
+| `subset-intersection-construction` | S1.4 | W1 (72f1de8) |
+| `address-shear-factorization` | S1.2.1 | W1 |
+| `fast-address-interchange` | S1.2 | W1 |
+| `linear-network-roles` | S1.1 | W1 |
+| `recursive-power-saving` | S1.5 | W1 |
+| `tape-interchange` | S7.1 | W2 (fa33c9d) |
+
+**Per page:** one clean control, and three seeded variants with two errors and one sham edit each. That makes 24 page bodies.
+
+**Errors:** 36, in seven types:
+
+| Type | Errors |
+|---|---|
+| constant | 8 |
+| inequality | 6 |
+| hypothesis | 5 |
+| cases | 3 |
+| generalisation | 5 |
+| sign | 5 |
+| attribution | 4 |
+
+By what can reveal them:
+- 28 are page-detectable (`page` or `page+quote`): the audit's denominator;
+- 10 are quote-detectable (`quote` or `page+quote`): the support check's denominator;
+- 1 is source-only: the blind-spot probe.
+
+**Controls:**
+- **6 clean pages:** for false alarms, and for the per-sentence baseline at every planted site;
+- **18 sham rewordings:** a false alarm provoked by an edit;
+- **14 correct citation marks** on the clean pages.
+
+**Native defects:** errors already on the clean pages are listed in the key. Calling one wrong is a native detection, not a false alarm.
+
+### Configurations and runs
+
+| Code | Model, effort |
+|---|---|
+| AH | Haiku, `high` |
+| AS | Sonnet, `high` |
+| AO | Opus, `xhigh` |
+
+**A run of a configuration** is every page body done once:
+- 24 audit tasks;
+- 20 support tasks: the four `recursive-power-saving` bodies have no checked mark, so no support task is issued for them.
+
+That is 44 tasks, each in its own project copy, so no two tasks share state.
+
+**Stage 1:** one run per configuration, 132 tasks.
+
+**Stage 2:** a second run, only for a configuration that meets the trigger below. One run per condition is a screen (`RUNBOOK.md` §3.7). Here a run is already 44 tasks, and a repeat is preregistered only where it could change the decision.
+
+## Setup of each project copy
+
+The procedure below was checked with no model on both wikis on 2026-10-14; see the journal README, "Checks done here".
+
+**1. The binary.** Build `master` at a commit recorded at preregistration. Make it the `exegenius` on `PATH`, since the prompt tells the subagent to run `exegenius submit`. Today `/usr/local/bin/exegenius` points to `target/debug`, built 2026-10-13 22:15. Record `exegenius --version` and the commit in the ledger.
+
+**2. The project.** Copy the wiki at the page's commit (72f1de8 or fa33c9d) without `exegenius/tasks/`. Two ways:
+- `git -C openai-nlogn-wiki archive COMMIT exegenius.toml sources/paper.tex exegenius | tar -x`, then remove `exegenius/tasks`;
+- or `git show COMMIT:PATH` per file, as in the dry run.
+
+**3. The page.** Replace `exegenius/pages/<page>.md` with `pages/<code>.md` from the seeded set. Check its sha256 against `key.json`.
+
+**4. An audit copy.**
+1. In `exegenius/state.json`, set `pending: []` and `done: false`. Leave `round` at 3, which equals `rounds`.
+2. Run `exegenius next`. It issues audits for every page whose audit input changed since its last audit: 22 on W1, because post-audit rewrites changed inputs.
+3. Copy each pending audit's `input` hash into `audited` for every page except the target.
+4. Restore `pending: []` and the original `next_id`, and delete `exegenius/tasks/` and `exegenius/log.jsonl`.
+5. Run `exegenius next` again. It now issues exactly one task: `0213-audit-<page>` on W1, `0235-audit-tape-interchange` on W2.
+
+**5. A support copy.**
+1. In `state.json`, set `pending: []` and `done: true`.
+2. In `exegenius/support.json`, drop the `judged` and `second` entries whose `mark.page` is the target, and delete `checks[<page>]`. The other pages' checks stay, so no second judge is sampled.
+3. Run `exegenius next`. It issues one task, `0213-support-<page>` (W1) or `0235-support-tape-interchange` (W2). Its quotations equal the key's `support_marks` for that variant.
+
+**6. Diff check.** Every task file of a kind must be identical across configurations and runs apart from its path. Check this by diff, as W2 did.
+
+## Invocation, word for word
+
+**Each task goes to its own fresh subagent.** The session never does an audit itself. The Agent call has:
+- `subagent_type: "general-purpose"`, as in E9, E10 and W2;
+- `model`: `"haiku"`, `"sonnet"` or `"opus"`;
+- `effort`: `"high"`, `"high"` or `"xhigh"`;
+- `description`: `"A1<cfg><run> <task id>"`, for example `"A1AS1 0213-audit-subset-intersection-construction"`, so that `spend.py` and the registry can match transcripts to runs;
+- `prompt`: exactly the `prompt:` line `exegenius next` printed, with nothing added: no mention of A1, planted errors or fidelity.
+
+For an audit copy at `ROOT`, the prompt is:
+
+> Do the exegenius task in ROOT/exegenius/tasks/0213-audit-subset-intersection-construction.md: follow its instructions, write the answer to ROOT/exegenius/tasks/0213-audit-subset-intersection-construction.answer.json, then run \`exegenius submit 0213-audit-subset-intersection-construction\` in ROOT. If submit rejects the answer, fix the answer and submit again until it is accepted. Reply with only "accepted" or the last error.
+
+A support task's prompt is the same with `0213-support-<page>`.
+
+**A deviation to settle before preregistration.** The pipeline's own route is `subagent_type: "exegenius-task"`, from `.claude/agents/` written by `exegenius init`. This session has no such type: `/home/user/exegenius/.claude` does not exist. A `general-purpose` subagent differs in two ways:
+- it lacks the definition's line "An audit task stands in for a reader who has seen nothing else: read nothing but its task file". The task file says the same: "Use only this task file";
+- it has more tools than Read, Write and Bash.
+
+**The alternative:** a runner session on an experiment branch of the wiki (`calibration/runner/README.md`), with `subagent_type: "exegenius-task"` and `model` and `effort` passed in every call. Choose one route and record it.
+
+**Isolation check, from transcripts:**
+- An audit subagent may read its task file, write its answer and run `exegenius submit`.
+- Any other file read (the paper, other pages, this journal) marks the task as contaminated.
+- A contaminated task is excluded and rerun once, in a fresh copy. The count is reported.
+
+## Collection and scoring
+
+**Collection.** For each configuration, run and variant, copy into `answers/<cfg>/<run>/<code>/`:
+- `audit.answer.json` and `support.answer.json`, the accepted answers;
+- `support.task.md`;
+- each copy's `exegenius/log.jsonl`, as `audit.log.jsonl` and `support.log.jsonl`.
+
+The log gives submits, rejections and never-accepted tasks.
+
+**Scoring** is judge-free:
+
+```
+python3 -I calibration/tools/plant.py score --key docs/journal/2026-10-14-a1-audit-design/key.json \
+    --answers answers --json A1-score.json --notes A1-notes.tsv
+```
+
+**How an audit gap is credited.** Each gap is located on the page as the auditor saw it, with the pipeline's own quote matching, ported in `plant.py`. It is assigned to one site at most: the planted error, sham or native defect nearest to it. The order is its sentence, then a linked sentence, then its paragraph.
+
+A gap **names** an error when its term or note asserts that something is false. The fixed pattern is `ASSERTS` in `plant.py`: "wrong", "incorrect", "inconsistent", "contradicts", "does not equal", "should be", "instead of", "sign error", and so on. A note that only says the reader cannot check a step does not name an error.
+
+**The measures, per configuration, pooled over runs, with 80% Wilson intervals:**
+
+| Measure | Definition | n per run |
+|---|---|---|
+| **R_A**, audit recall (primary) | page-detectable errors named at their sentence, a linked sentence or their paragraph, or anywhere with one of their cues | 28 |
+| **R_S**, support recall (primary) | quote-detectable errors whose mark is labelled `unsupported` or `contradicted` | 10 |
+| **U**, pipeline catch rate (primary) | page- or quote-detectable errors caught by either task | 35 |
+| **F_A**, audit false alarms (primary) | asserting gaps per clean page, outside native defects | 6 pages |
+| **F_sham** (primary) | share of sham sites with an asserting gap | 18 |
+| **F_S**, support false alarms (primary) | share of clean marks labelled `unsupported` or `contradicted` | 14 |
+| Located recall and its baseline (secondary) | any gap in the error's sentence, against the same sentence on the clean page. Their difference is how often the error itself triggers a rewrite at its site. That matters in the pipeline even without naming, since a step note sends the step back to a writer | |
+| Localisation (secondary) | the share of named errors named in their own sentence | |
+| Descriptive | recall per type; native detections; gaps per page; submits, rejections and never-accepted tasks; the source-only probe (expected 0) | |
+
+**Classifier check.** `--notes` writes every gap, shuffled and blinded to configuration. The session labels each gap at a planted or sham site, and each asserting gap, as "asserts an error" or not, before unblinding. If `ASSERTS` agrees with those labels on fewer than 80% of them, the hand labels replace it for the primary measures. This fallback is preregistered.
+
+## Reading (proposals, to be fixed at preregistration)
+
+**A configuration is adequate if, pooled:**
+- R_A ≥ 0.50, with its 80% lower bound ≥ 0.35. Reason: the last audit round's notes are dropped, so an error gets about two repair chances. At 0.5 per round, about three quarters are named at least once;
+- F_A ≤ 0.5 per clean page, and F_sham ≤ 0.10. Reason: the full runs' audits gave 2.0–2.4 step gaps per page (journal 2026-10-13-explanation-depth-run). Each false error claim is a rewrite note that can break a correct step;
+- R_S ≥ 0.70, and F_S ≤ 0.20. Reason: this comparison is the support task's whole job. The incumbent labelled 10 of 65 marks on W1's final pages `unsupported`, many on genuinely weak quotations;
+- at most one never-accepted task per run, and every contaminated task rerun.
+
+**Beyond noise:** the 80% intervals do not overlap, as the programme's other plans read ranges. At n = 28, that needs a difference of about 0.25 after one run, and about 0.18 after two.
+
+**Stage 2 trigger.** A configuration gets a second run if either:
+- a criterion's point estimate is within 0.10 of its threshold (0.1 per page for F_A);
+- or the comparison that decides the candidate is a tie with a point difference of at least 0.10.
+
+| Outcome | Action |
+|---|---|
+| AH adequate | Haiku `high` is the auditing candidate. Before any default proposal, it is confirmed on a second page set, from the second document when the author supplies one |
+| AH not adequate, AS adequate, AO not above AS beyond noise on U | Sonnet `high` is the candidate |
+| AO above AS beyond noise on U, and its F_A and F_S not beyond noise higher | AO is reported with its cost ratio; the author weighs it |
+| No configuration reaches R_A, but some reach R_S | the audit task, not the model, is the limit: it asks about followability, not correctness. The support model is chosen on R_S and F_S. Whether to give auditors a correctness or source check is an instruction and task decision for the author |
+| None reaches R_S | no support proposal. Read the per-type failures (attribution against generalisation) first |
+
+**A dependency of any proposal (not of the run).** Audit and support share the `exegenius-task` definition with writers. Giving them their own model needs a change in `exegenius-cli`, a pipeline default, which is the author's decision.
+
+## Budget (cache read)
+
+**The basis**, measured in this session's transcripts:
+
+| Tasks | Cache read per task | Calls |
+|---|---|---|
+| 14 Haiku pipeline audits with the submit loop ("Pilot base: audit", 2026-10-11) | 0.13–0.46 M, median ≈ 0.21 M | 3–7 |
+| 47 Haiku audits of all kinds | median 0.16 M | |
+| 7 Sonnet audit prototypes | ≈ 0.095 M | 3 (no submit loop) |
+| Opus | not measured | |
+
+**Context per task:** the first call is about 42–55 k tokens. Audit task files are 18–23 KB; support task files are about 4 KB.
+
+**Estimates:**
+
+| Configuration | Per audit | Per support task | Per run (24 + 20 tasks) |
+|---|---|---|---|
+| AH, Haiku `high` | 0.21 M (0.13–0.46) | 0.12 M (0.08–0.20) | ~7.4 M (4–15) |
+| AS, Sonnet `high` | 0.25 M (0.10–0.40) | 0.13 M (0.08–0.20) | ~8.6 M (4–14) |
+| AO, Opus `xhigh` | 0.40 M (0.15–0.80) | 0.20 M (0.10–0.30) | ~13.6 M (6–25) |
+| **Stage 1** (one run each, 132 tasks) | | | **~30 M (14–54)**; plan for ~45 M, since past estimates ran 1.4–1.7× low |
+| Stage 2, if triggered for all three | | | up to the same again |
+| Scoring and classifier check | | | judge-free; the hand check is under 1 M |
+
+**Orchestration is the hidden term.** 132 launches per stage, at most 20 at once.
+- If the development session, with 150–250 k of context, wakes for each completion, that alone is about 20–35 M: as much as the runs.
+- Orchestrate from a runner session with a small context, or with the Workflow tool, which needs the author's opt-in. Do not poll.
+
+**Time:** Haiku audits took 99–146 s each (journal 2026-10-11-wall-time). At 20 at a time, a stage takes about 15–35 minutes.
+
+**Stopping:**
+- at most two runs per configuration;
+- no Fable;
+- operational failures (usage kills, never-accepted tasks) are rerun once in fresh copies.
+
+## Risks to the reading
+
+- **One paper and six pages.** The errors are hand-made, so their difficulty is not a sample of writers' real errors. Per-type recall is descriptive only: 3 to 8 errors per type per run.
+- **Easy and hard errors.** Some are easy, such as arithmetic visible on the page (SIC-7, RPS-4). Others need a reader to connect two sentences (SIC-9, LNR-5). Both are kept, and the ceiling is checked: if every configuration's R_A is ≥ 0.9, the cheapest wins.
+- **Pre-existing errors.** The pages carry native errors, recorded in the key from the chain walk and the run journal. An auditor may also find native errors the key does not list. Those count as false alarms in F_A, so F_A is an upper bound. The blinded notes file lets them be recognised before unblinding.
+- **Followability gaps.** The audit task reports such gaps on correct text routinely. Located recall is therefore read only against the clean-sentence baseline.
+
+## Blockers before any A1 run
+
+1. **The author's go-ahead.** `RUNBOOK.md` §9 says P2 needs it "only if it runs the pipeline's own audit stage on a wiki". This design runs the pipeline's own audit and support tasks, one page at a time, in copies of built wikis: no writers, no rounds, no rewrites. The cautious reading is that it needs the go-ahead.
+2. **Preregistration.** Fix the thresholds and the agent route, and commit this plan, `plant.py` and the seeded set. This session did not commit (instructed).
+3. **The binary.** Rebuild `exegenius` from `master` and put it on `PATH`. Both `next` and `submit` must use it.
+4. **The orchestration route.** A runner session or the Workflow tool. Otherwise orchestration roughly doubles the cost.
+
+## Ledger
+
+| Item | Status |
+|---|---|
+| Design, seeded set, `plant.py` | written 2026-10-14 23:54 UTC; `plant.py selftest` passes; no-model dry run of the setup on W1 and W2 passes |
+| Preregistration | not done |
+| Runs | none |
