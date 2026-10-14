@@ -42,12 +42,13 @@ RULES = [  # (pattern on the description, experiment, role)
     (r"^S5F\d(OX) \d{4}-", "S5", "runs"),
     (r"^E8F\dX \d{4}-", "E8", "runs"),
     (r"^E8bF\dX2? \d{4}-", "E8b", "runs"),
+    (r"^E9F\dY \d{4}-", "E9", "runs"),
     (r"^FB1F\d \d{4}-", "FB1", "runs"),
     (r"^W1 \d{4}-", "W1 (cancelled)", "runs"),
     (r"^R\d \d{4}-", "T1", "runs"),
     (r"^(T\d chain walk|Chain walk)", "chain walks", "judging"),
 ]
-BATCH = {"3": "E3", "4": "S1", "5": "E4", "6": "E5", "7": "E6", "8": "E7", "9": "S2", "10": "S3", "11": "K1", "12": "S4", "13": "S4 checklist", "14": "K2", "15": "E8 checklist", "16": "E8", "17": "E8b checklist", "18": "E8b", "19": "FB1 checklist", "20": "FB1"}
+BATCH = {"3": "E3", "4": "S1", "5": "E4", "6": "E5", "7": "E6", "8": "E7", "9": "S2", "10": "S3", "11": "K1", "12": "S4", "13": "S4 checklist", "14": "K2", "15": "E8 checklist", "16": "E8", "17": "E8b checklist", "18": "E8b", "19": "FB1 checklist", "20": "E9 checklist"}
 
 
 def classify(desc):

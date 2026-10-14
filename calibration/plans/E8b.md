@@ -112,3 +112,51 @@ Seed 20261031. Each plan was judged by Opus first, then Sonnet. The analysis was
 **Stage 2's timing:**
 - At 15:39 the usage measured since the 14:20 reset was about 361 M cache read: 260 M by subagents and 101 M by the development session itself.
 - That is past runbook §5's 300 M pause threshold, so J18 waits for a meter reading or for the 18:30 reset.
+
+## Stage 2 result (J18, complete at 19:24 UTC; `docs/journal/2026-10-14-e8b-confirm/judge/results.txt`)
+
+Seed 20261032. Opus judges, three per plan, by majority (`tools/majority.py`). J3's instructions.
+
+| Extraction | X faithful (median; each) | W faithful (median; each) | X above W? | Gate X, W | Major errors X, W |
+|---|---|---|---|---|---|
+| F2 | 16; 16, 16, 16 | 13; 14, 13, 13 | **above** | pass, pass | 0, 0 |
+| F3 | 16; 16, 16, 16 | 13; 14, 11, 13 | **above** | pass, pass | 0, 0 |
+| F5 | 16; 16, 16, 15 | 16; 16, 16, 12 | no (overlap) | pass, pass | 0, 0 |
+| F6 | 16; 16, 16, 16 | 16; 16, 16, 16 | no (tie) | pass, pass | 0, 0 |
+| F7 | 17; 17, 17, 17 | 11; 11, 11, 10 | **above** | pass, pass | 0, 0 |
+
+**By the table: not supported.**
+- X is above W on 3 of 5, and the rule needs 4.
+- The table's action: E8's three-extraction result stands as a screen, and the proposal of the E8 sentence alone is withdrawn until it is understood why it does not hold on the others.
+
+**X is never below W.**
+- On F5 and F6, X ties W at 16.
+- These are the two extractions where W was already strongest in J17 and J18.
+
+**Across all eight extractions (reported):**
+- **The data:** E8, J16 (F1, F4, F8), and E8b, J18 (F2, F3, F5, F6, F7). Each pair is compared within its own batch.
+- **Faithful differences X − W, by median:** +4, +3, +3, +15, 0, 0, +6, +15.
+- **The sign test:** 6 positive, 0 negative, 2 ties. The exact one-sided sign test, ties excluded, gives p = 1/64 ≈ 0.016.
+
+**Run variance:**
+- E8F4X: 18 (18, 18, 17). E8F4X2: 17 (17, 16, 18). The ranges overlap, and the medians differ by 1.
+- That is smaller than the smallest X-over-W gain beyond noise (3, on F2 and F3), so the variance condition is met.
+
+**Why it does not hold on F5 and F6** (analysis of the J18 verdicts, after the result):
+
+| Plan | Core results not faithful by majority |
+|---|---|
+| E7F5W | `label-residual-budget`, `matrix-shear`, `packed-selected-bit-addition` |
+| E8F5X | `label-residual-budget`, `common-frame-identity`, `time-accounting` |
+| E7F6W | `label-residual-budget`, `complex-phase-interface`, `phase-frame-recursion` |
+| E8F6X | `label-residual-budget`, `common-frame-identity`, `matrix-shear` |
+
+- The sentence changes which results are missed, not how many, on these two.
+- **One result is missed throughout:** `label-residual-budget` is missed by every W plan in J18, and by every X plan except E8F8X (E8F4X and E8F4X2 included). This is the result whose sub-steps are the per-edge residual table (checklist L1–L5).
+- X plateaus at 16–18 largely because of it. E9's sentence targets it: every E9 plan is faithful on all 19 (`plans/E9.md`).
+- The follow-up that tests this reading against W is E10 (`plans/E10.md`).
+
+**Measured cost:**
+- J18: 50 judgements, 241.0 M cache read and 11.8 M cache write (`spend.py`), about 4.8 M per judgement.
+- The estimate was ~3 M per judgement, from J16. The plans are longer now.
+- E8b's and E9's estimates together were ~175 M, so J18 came in at 1.38×.
