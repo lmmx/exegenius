@@ -1,0 +1,273 @@
+{
+ "page": "P04",
+ "items": [
+  {
+   "id": "S4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "edge-by-edge residual table showing every other edge is nondecreasing"
+   ],
+   "note": "The page builds the labels, gets L=Ich and the absolute-change total Wm-2N+2L, computes L_b/N=100/539 and L_c/N=101/539, and turns these into s_b=Wm-N+2L_b<Wm and s_c=Wm-2N+2L_c<Wm. All of this matches the paper. The one gap is that 'Only central edges 3->4 decrease' is asserted, not checked."
+  },
+  {
+   "id": "S4.3.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "nondegeneracy of the ambient space F^{\\otimes3} under the tensor form"
+   ],
+   "note": "The page derives <t_S,t_T>=|S∩T|-1 from 't_S^T t_T=|S∩T| and t_S^T J t_T=9' and gets nondegenerate, orthogonal triple lines (bit). For the complex case it gives t_T·t_T=1 and orthogonality of even-intersection neighbors. Self-norm 2 is left to the S=T case of the formula."
+  },
+  {
+   "id": "S4.3.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "dim U_a^⊥ = m-1 (U_a nondegenerate) and the role count (2N data, W-2N scratch) behind the sink total"
+   ],
+   "note": "The terminal labels are given exactly as in the paper. 'Sources total N, sinks Wm-N' is asserted, but it follows at once from the displayed table, at the paper's own level of detail."
+  },
+  {
+   "id": "S4.3.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "boundary check: B=0 at stage 1 (empty tensor product), so the labels start at U_a on X_a and 0 on Y_a, and end at F and U_a^⊥ at stage 3",
+    "A=B⊥P and the alternative form (B⊗F)⊥(P⊗t^⊥) of the outgoing Y label, which the time-5 gate label uses",
+    "restriction j<3 for writing R=<t_{a_{j+1}}>⊗R'"
+   ],
+   "note": "The transition table and the substitution A'=A⊗F, P'=P⊗<t>, B'=(P')^⊥_{A'}, R=<t_{a_{j+1}}>⊗R' are given, so 'outgoing equals next incoming' can be checked directly. The terminal-matching check at stages 1 and 3 is omitted."
+  },
+  {
+   "id": "S4.3.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "orthogonal residual and its dimension for every edge (data, center, side, scratch-to-sink)",
+    "which physical wires each time's gate touches, without which the edges cannot be identified",
+    "nondegeneracy of every label summand / comparability of every edge",
+    "splitting A=B⊥P and F=<t>⊥t^⊥ that gives the other residuals"
+   ],
+   "note": "Comparability is shown only for edge 2->5. The page asserts 'Only central edges 3->4 decrease' without the residual table and without saying which wires each gate touches, so the main claim of the lemma is not shown. The telescoping and L=Ich then follow."
+  },
+  {
+   "id": "S4.3.4.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "physical wires at each time (Y+side, Y+center, X+side, X+center, Y+center, Y+side, X+center, X+side)",
+    "every displayed summand is nondegenerate",
+    "stage 2 uses inverse rows with banks exchanged but the same physical gate order"
+   ],
+   "note": "The eight gate labels match the paper's table. This item is a prescription, so listing it counts as presenting it. The page omits which wires each gate touches."
+  },
+  {
+   "id": "S4.3.4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the residual P⊗<t_X,t_Y>^⊥ of the side edge 2->5 and its dimension h-2"
+   ],
+   "note": "'Orthogonal neighbors give <t_S>⊂t_T^⊥, so edge 2->5 nests' follows the paper's reasoning, but the page does not compute the residual or its dimension."
+  },
+  {
+   "id": "S4.3.4.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "verification that all other edges are nondecreasing (the residual table)"
+   ],
+   "note": "The loss P⊗F⊗R of dimension h on the 3->4 edge can be read off the time-3 and time-4 labels, and L=Ich follows. That no other edge decreases is only asserted ('Only central edges 3->4 decrease')."
+  },
+  {
+   "id": "S4.3.4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "reason the sum telescopes: each touched wire has one incoming and one outgoing incidence with the same gate label"
+   ],
+   "note": "'Signed changes telescope at each gate to Wm-2N; absolute values add 2L', together with the source and sink totals, gives the count as the paper does, though tersely."
+  },
+  {
+   "id": "S4.3.4.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "norm-one coordinate-unit argument showing each nonzero residual is nonalternating",
+    "existence of an orthonormal basis for a nondegenerate nonalternating binary space"
+   ],
+   "note": "The page only cites the conclusion ('every nonzero orthogonal residual of an edge has an orthonormal basis') where the complex interface uses it."
+  },
+  {
+   "id": "S4.3.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "With I/N=3/binom(h,3), c_b=100, c_c=101, h=100 and L=Ich on the page, the ratios L/N=3ch/binom(h,3)=100/539 and 101/539 are immediate, though the arithmetic is not written out. The strict saving after the N extra ranks shows up in s_b=Wm-N+2L_b<Wm."
+  },
+  {
+   "id": "S4.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "P_U is the projection along U^⊥ for the bilinear form",
+    "role permutation ρ and the endpoint identity M_sink(ρ(w)) - M_source(w) = I_m for every input role",
+    "exact value of s_b"
+   ],
+   "note": "The page assigns P_U (and -P_{U_a} at the X_a source), prices nested edges at the dimension change, adds the N rank-one source exceptions, and gets s_b=Wm-N+2L_b<Wm, as in the paper."
+  },
+  {
+   "id": "S4.3.6.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "definition of ρ (X_a<->Y_a, scratch fixed)",
+    "the identity for every input role, including Y_a and scratch roles",
+    "meaning: every role receives the same shear H<-H+D"
+   ],
+   "note": "Only the X_a instance appears ('at the endpoints P_{U_a^⊥}+P_{U_a}=1'). The page never states the general endpoint requirement or why the tape application needs it."
+  },
+  {
+   "id": "S4.3.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "exact value 177176569088785861287000000"
+   ],
+   "note": "s_b=Wm-N+2L_b follows from the absolute-change total Wm-2N+2L plus N source exceptions, and it is <Wm because L_b<N/2. This matches the paper."
+  },
+  {
+   "id": "S4.3.6.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "reversing an edge negates P_V-P_U without changing its rank (needed for the decreasing 3->4 edges)"
+   ],
+   "note": "The page uses the paper's argument, 'identity on V∩U^⊥ ... so has rank dim V-dim U', but says 'zero elsewhere' where the paper says zero on the orthogonal complement."
+  },
+  {
+   "id": "S4.3.6.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "B=0 at stage 1, so the first gate on X_a has label exactly U_a and the dimension change on that edge is zero"
+   ],
+   "note": "'On the N first edges of X_a, 2P_{U_a} has rank 1, not 0' is asserted. Why the head label is exactly U_a, and why these are the only exceptions, is not shown."
+  },
+  {
+   "id": "S4.3.6.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "every other role has zero source matrix and identity sink matrix"
+   ],
+   "note": "The X_a check P_{U_a^⊥}-(-P_{U_a})=1 is given. The other roles are not checked."
+  },
+  {
+   "id": "S4.3.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "sign negation on decreasing edges",
+    "Gaussian-dyadic entries of the frames",
+    "zero and full labels have frames I and C^{⊗m} (q_F(x)=wt(x))",
+    "negation of physical X outputs",
+    "k-column version"
+   ],
+   "note": "The page follows the paper's route: mod-4 weight additivity gives a phase sum over an orthonormal residual basis, each term becomes a kernel via HZH=τ, the count is s_c, and the X_a->Y_a pair is fixed with C=iZC^{-1}Z."
+  },
+  {
+   "id": "S4.3.7.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "projection P_U taken over F_2",
+    "entries of C_U and its inverse are Gaussian integers over 2^m (preserve Z[i,1/2] arrays)"
+   ],
+   "note": "The definitions of H, [b], q_U, C=H diag(1,i)H=(1+i)/2·1+(1-i)/2·τ and the frame C_U match the paper (this item is a definition). The Gaussian-dyadic claim is missing."
+  },
+  {
+   "id": "S4.3.7.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "exact value 1873807244636671267308000000"
+   ],
+   "note": "One kernel per residual basis vector, summed over edges, gives s_c=Wm-2N+2L_c<Wm from the earlier absolute-change total, as in the paper."
+  },
+  {
+   "id": "S4.3.7.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "z·w=0 makes |supp z ∩ supp w| even, so the correction term vanishes mod 4"
+   ],
+   "note": "The page gives the weight identity and the conclusion 'Orthogonal binary z,w add weights mod 4'. It skips the parity step in between."
+  },
+  {
+   "id": "S4.3.7.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the right side is negated on a decreasing edge",
+    "wt(e) is odd because e has norm one"
+   ],
+   "note": "q_V-q_U=Σ wt(e)[e·x] is presented as following from weight additivity, at the paper's level. 'Each wt(e) is odd' is stated without the norm-one reason."
+  },
+  {
+   "id": "S4.3.7.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "identification of the ε=-1 kernel as the inverse of aI+bX_e"
+   ],
+   "note": "The page gives i^{ε[e·x]}=(1+i^ε)/2+(1-i^ε)/2(-1)^{e·x} and HZH=τ, giving one kernel per basis vector, as in the paper."
+  },
+  {
+   "id": "S4.3.7.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "u_a has norm one and weight 27, which gives the phase difference wt(x)-2·27[u·x]",
+    "2[u·x]≡2Σ_{j∈supp u}x_j mod 4, which gives C^{-1} on supp(u_a) and C elsewhere",
+    "k columns: Z_{a,k} and scalar i^{27k}"
+   ],
+   "note": "The phase difference wt(x)+2[u_a·x] is asserted, not derived. The conversion 'since C=iZC^{-1}Z, signs Z before and i^{27}Z after give C' is correct for one column."
+  },
+  {
+   "id": "S4.3.7.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "negate the physical X outputs, which carry the scalar exchange's minus sign, and send ρ(w) back to w",
+    "zero label frame I and full label frame C^{⊗m}, so every other pair already gives C^{⊗m}",
+    "scratch roles included; C^{⊗mk} on k columns"
+   ],
+   "note": "'Undoing the bank exchange gives all roles C^{⊗m}' is asserted with none of the paper's justification."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "$\\langle x,y\\rangle=x^{\\mathsf T}(\\mathbf 1-J/9)y$, $J=\\mathbf 1\\mathbf 1^{\\mathsf T}$",
+   "problem": "The page uses $\\mathbf 1$ both for the identity matrix (in 1-J/9) and for the all-ones vector (in J=11^T). The paper writes I-J/9 with J the all-one matrix."
+  },
+  {
+   "severity": "minor",
+   "quote": "Gate labels at times $0,\\dots,7$ (tensored with $R$) for neighbors $S,T$ at $X,Y$: $$B\\otimes\\langle t\\rangle,\\ B\\otimes F,\\ (B\\otimes F)\\perp(P\\otimes\\langle t_S\\rangle),\\ \\dots",
+   "problem": "The time-0 label is written with a bare t, while the same list uses t_S and t_T. It should be the Y-triple indicator t_T. The paper says that in each gate's label, t is that gate's own physical triple."
+  },
+  {
+   "severity": "minor",
+   "quote": "assign each vertex the projection $P_U$ onto its label",
+   "problem": "No complement is specified. The paper's P_U is the projection along U^⊥ with respect to the bilinear form (I-J/9 tensored), and the rank and endpoint identities depend on that choice."
+  },
+  {
+   "severity": "minor",
+   "quote": "$P_V-P_U$ is the identity on $V\\cap U^\\perp$ and zero elsewhere",
+   "problem": "A linear map that is the identity on a subspace cannot be zero 'elsewhere'. The paper says it is zero on the orthogonal complement of V∩U^⊥."
+  }
+ ],
+ "motivation_given": true
+}

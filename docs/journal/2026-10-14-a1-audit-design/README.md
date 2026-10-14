@@ -73,7 +73,7 @@ So each error is tagged with what could reveal it:
 Each page has a clean control and three seeded variants. A seeded variant carries two errors and one sham edit.
 
 **How errors are chosen:**
-- from a hand-written catalogue of 45 errors, in `plant.py`;
+- from a hand-written catalogue of 51 errors and 12 shams, in `plant.py`;
 - one error that its quotation would reveal goes first, where the page has one;
 - then types are taken in a seeded rotation;
 - no two errors of a variant share a sentence or are marked as conflicting;
