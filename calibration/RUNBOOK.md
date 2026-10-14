@@ -65,13 +65,13 @@
 - **Meter readings** come only from the author, timestamped, in `budget.md` §1. Autofill predictions go in their own table with the observed outcome.
 - **Estimates against actuals:** each plan states its estimates, and its result section the measured figures beside them.
 - **The window** (about five hours; the next reset is about 18:30 UTC on 2026-10-14):
-  - **Runs:** launched in parallel when the last reading, or the measured spend since the reset, leaves room. With no reading for a while, the session pauses new launches after about 300 M cache read since the last reading. That is a safety threshold, not a conversion. From the observed 0% → 14% over S2's runs, judging and write-up, it is well under one window, and the session then asks for a reading.
+  - **Runs:** launched in parallel when the last reading, or the measured spend since the reset, leaves room. With no reading for a while, the session pauses new launches after about 300 M cache read since the last reading, counting the development session's own calls as well as subagents'. The development session was 101 M of the 361 M measured from 14:20 to 15:39: its long context is re-read on every call. That is a safety threshold, not a conversion. From the observed 0% → 14% over S2's runs, judging and write-up, it is well under one window, and the session then asks for a reading.
   - **Resets:** do not interrupt running jobs. Only exhaustion does.
   - **Use:** the window is not there to be used up. The aim is research progress per unit of usage.
 - **Concurrency is recorded in each ledger,** so a meter interval can be read as joint.
 - **At most 20 subagents run at once** in this environment (`CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS`; hit at 14:50 on 2026-10-14). Batches beyond that are launched as slots free, and the ledger records the launch times.
 
-## 6. Decision tree and queue (2026-10-14, 14:28 UTC)
+## 6. Decision tree and queue (2026-10-14, updated 15:55 UTC)
 
 | # | Item | Question | Trigger | Cost estimate (cache read) | Status |
 |---|---|---|---|---|---|
@@ -79,7 +79,8 @@
 | 2 | **S5** (`plans/S5.md`) | how much does Opus `xhigh` vary between runs on the same extraction (F8)? | now; judged in S4's batches | ~13 M | **done** 15:00: run-to-run difference 2 faithful (beyond judge noise), 0 checklist; variance condition met |
 | 3 | **K2** (`plans/K2.md`) | do Sonnet judges agree with Opus judges on the checklist, with no same-model bias? | now; existing plans | ~5–7 M | **done** 14:31: agreement 0.979, ρ 0.995, bias +0.43 (not flagged). Checklist screens may use a Sonnet second judge |
 | 4 | **E8** (`plans/E8.md`) | does a sentence asking for every variant and every bound's chain lift Sonnet `high` towards Opus `xhigh`? | now; two-stage | ~17 M (stage 1); +~60 M (stage 2, if the screen passes) | **supported** 15:08: faithful X 18, 18, 19 against W 14, 3, 4, with no added major errors. X is not below Opus `xhigh` on the checklist anywhere, and on F8 it is at the ceiling. **Proposal to the author:** the sentence as an instruction change |
-| 4b | **E8b** (`plans/E8b.md`) | does the sentence hold on F2, F3, F5, F6 and F7, and how much does X vary between runs? | E8 supported; launched 15:11 | ~34 M runs + ~21 M screen; ~115 M primary after the reset | 6 runs launched |
+| 4b | **E8b** (`plans/E8b.md`) | does the sentence hold on F2, F3, F5, F6 and F7, and how much does X vary between runs? | E8 supported; launched 15:11 | ~34 M runs + ~21 M screen; ~115 M primary after the reset | **stage 1 passed** 15:39: X above W beyond noise on F2, F3, F5 and F7; F6 tied at a high W level. Repeat within noise on the checklist (23, 21 vs 22, 21). Runs 27.3 M, J17 23.8 M. **Stage 2 (J18) waits** for a meter reading or the 18:30 reset (§5 threshold passed) |
+| 4c | **E9** (`plans/E9.md`) | does a sentence asking for parameter definitions and every case close C1, the only central item Sonnet plans still miss? | E8b stage 1 passed; launches with J18 | ~82–95 M (3 runs, 12 judgements in J18, J20 checklist) | prepared 15:55: branch `141026-exp-params-cases` (e8efaa3), binary `exegenius-params`, projects E9F2Y, E9F4Y, E9F8Y rendered and diffed. **Not launched** |
 | 5 | **FB1 pilot** (`plans/FB1.md`, "The pilot") | does Fable at `high` beat the incumbent on F8? | S4 outcome "improves but not ceiling" (against Opus `max`), or "does not improve" (against Opus `xhigh`). Not if S4 reaches the ceiling | run unknown (placeholder 6–16 M) + ~30 M judging | **done** 15:21. Run 3.96 M; checklist screen ~2.5 M. Fable 17, 16 against Opus `max` 20, 21: below. No primary judging; no further Fable spend |
 | 6 | Markers tightened (L2, P2, P3, S4) | the judge-free cross-check | now; free | 0 | **done** 14:31: fitted agreement 0.836 → 0.905 on K1 plans (optimistic, since these were used to tighten); J8 hold-out AUC 0.774 → 0.794 |
 | 7 | **Second document** | do the model and instruction effects generalise? | **needs the author to supply a document** (§2) | onboarding: reference set, central rubric and checklist, about 20–40 M of analysis; then a screen | blocked |
@@ -100,6 +101,20 @@
 |---|---|
 | The checklist screen shows a gain on ≥ 2 of 3 extractions | stage 2: primary judging. Then, if confirmed, the variant sentence is proposed to the author as an instruction change, and the configuration question is re-asked with it: does Sonnet `high` plus the sentence match Opus `xhigh`? |
 | No gain | the gaps are capability, not instruction. The Opus configuration stands as the candidate |
+
+**At the reset (or on a reading that leaves room), in order:**
+1. Launch E9's three runs (`plans/E9.md`): the prompts are in the scratchpad as `E9FkY.prompt`, with descriptions `E9F2Y 0003-argument` and so on.
+2. When all three are accepted, prepare J18 (E8b stage 2 plus E9's additions: 50 judgements, a new seed) and J20 (E9's checklist: 12 judgements).
+3. Launch both within the 20-subagent limit, with J18's three-judge plans first.
+4. Read J18 by E8b's table and E9's table, and J20 by E9's secondary reading.
+
+**Branches after E8b stage 2 and E9:**
+
+| Outcome | Next |
+|---|---|
+| E8b supported, E9 closes C1 with no loss | propose both sentences to the author (separate items). Planning-stage tuning on this paper is then done; the second document is the next test |
+| E8b supported, E9 does not close C1 | propose the E8 sentence alone, with C1 as a known gap |
+| E8b not supported | E8's result stands as a screen. Understand the failure (per-extraction verdicts) before any proposal |
 
 **What would justify proposing a planning configuration to the author** (for this paper's argument task, not the general default):
 - the candidate beats Sonnet `high` beyond noise on ≥ 3 extractions (met by Opus `xhigh`: S2 and S3);

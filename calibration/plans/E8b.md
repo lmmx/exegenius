@@ -63,6 +63,11 @@ These are estimates, not converted.
 
 **Stopping:** one run per new extraction and one repeat.
 
+**Amendment, 15:55 UTC, before any J18 judgement:**
+- J18 also contains E9's three Y plans (E9F2Y, E9F4Y, E9F8Y) and E8F8X, three judges each (`plans/E9.md`). That makes 38 + 12 = 50 judgements.
+- E8b's criteria, plans and judges are unchanged. The added plans only share the batch, so that E9's comparisons are within it.
+- J18 launches when E9's runs are accepted.
+
 ## Ledger
 
 | Run | Extraction | Window (UTC) | Seconds | Calls | Cache read | Cache write | Outcome |
