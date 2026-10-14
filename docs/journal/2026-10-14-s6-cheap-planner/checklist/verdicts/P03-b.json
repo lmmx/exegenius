@@ -1,0 +1,334 @@
+{
+  "plan": "P03",
+  "steps": [
+    {
+      "id": "B1",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.1.5",
+        "S4.1.6",
+        "S4.1"
+      ],
+      "lines": [
+        744,
+        750
+      ],
+      "note": "S4.1.5 gives the eight-row schedule (first two rows remove the old scratch effect, last two restore) and S4.1.6 states the net change (JV+RG)x independent of initial scratch values a,c, matching the paper's 'independently of a,c'."
+    },
+    {
+      "id": "B2",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.1.7"
+      ],
+      "lines": [
+        752,
+        755
+      ],
+      "note": "S4.1.7 states central coefficient |S\u2229T| mod 2, side injection cancels the intersection-one cases, zero/two already vanish, self coefficient one, net y<-y+x."
+    },
+    {
+      "id": "B3",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.1.8"
+      ],
+      "lines": [
+        756,
+        758
+      ],
+      "note": "S4.1.8 states central coefficient (|S\u2229T|-1)/2, side wires cancel distinct triples with intersection zero or two, intersection one contributes zero, self coefficient one."
+    },
+    {
+      "id": "B4",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.1.9"
+      ],
+      "lines": [
+        761,
+        764
+      ],
+      "note": "S4.1.9 gives (x,y)->(x,y+x)->(-y,y+x)->(-y,x) over three stages with every invocation restoring its own scratch wires."
+    },
+    {
+      "id": "L1",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1013,
+        1043
+      ],
+      "note": "The plan gives gate labels by time (S4.3.4.1) and asserts edges join nested labels and that a residual table is tabulated (S4.3.4 method), but never states the per-edge orthogonal residuals and dimensions (e.g. B\u2297t_X^\u22a5 of dim (a-1)(h-1), P\u2297F of dim h, scratch (A\u2297F)\u2297Q^\u22a5); only the 2->5 and 3->4 rows appear, in other steps."
+    },
+    {
+      "id": "L2",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.3.4.2"
+      ],
+      "lines": [
+        1048,
+        1058
+      ],
+      "note": "S4.3.4.2 states t_X\u22a5t_Y so <t_X> \u2282 t_Y^\u22a5, labels nested, residual P\u2297<t_X,t_Y>^\u22a5 of dimension h-2."
+    },
+    {
+      "id": "L3",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.3.4.3",
+        "S4.3.4.4",
+        "S4.3.4"
+      ],
+      "lines": [
+        1061,
+        1071
+      ],
+      "note": "S4.3.4.3 gives center 3->4 as the only decreasing edge losing h (L=Ich); S4.3.4.4 telescopes at gates with sources N, sinks Wm-N, signed Wm-2N, absolute adds 2L."
+    },
+    {
+      "id": "L4",
+      "verdict": "absent",
+      "plan_steps": [
+        "S4.3.4.5"
+      ],
+      "lines": [
+        1073,
+        1102
+      ],
+      "note": "S4.3.4.5 asserts every nonzero residual is nondegenerate and nonalternating (coordinate unit of norm one) and 'hence has an orthonormal basis', but never gives the basis construction (splitting off unit lines and absorbing alternating planes via w+a, w+b, w+a+b); the conclusion is asserted without the derivation."
+    },
+    {
+      "id": "L5",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.3.5"
+      ],
+      "lines": [
+        1105,
+        1109
+      ],
+      "note": "S4.3.5 states L_b/N=100/539 and L_c/N=101/539."
+    },
+    {
+      "id": "P1",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.3.7.3",
+        "S4.3.7.4"
+      ],
+      "lines": [
+        1232,
+        1245
+      ],
+      "note": "S4.3.7.3 gives wt(z+w)=wt(z)+wt(w)-2|supp\u2229supp| with even intersection for z\u00b7w=0 so additive mod 4; S4.3.7.4 gives q_V-q_U=sum_{v in orthonormal basis} wt(v)[v\u00b7x] mod 4, negated on decreasing edges."
+    },
+    {
+      "id": "P2",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.3.7.4",
+        "S4.3.7.5"
+      ],
+      "lines": [
+        1246,
+        1257
+      ],
+      "note": "S4.3.7.4 notes wt(v) is odd (norm one); S4.3.7.5 writes i^{\u03b5[v\u00b7x]} as (1+i^\u03b5)/2+(1-i^\u03b5)/2(-1)^{v\u00b7x} and uses H diag(1,-1) H = X to get the kernel aI+bX_v or its inverse."
+    },
+    {
+      "id": "P3",
+      "verdict": "absent",
+      "plan_steps": [],
+      "lines": [
+        1262,
+        1271
+      ],
+      "note": "No step states that on k columns (C_V C_U^{-1})^{\u2297k} equals the product of K^{\u2297k} so each residual vector gives one factor acting on all columns; S4.3.7.7 mentions C^{\u2297mk} only as the final outcome, and S4.6.1.x tensors over slots/axes in a different role."
+    },
+    {
+      "id": "P4",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.3.7.6",
+        "S4.3.7.7",
+        "S4.3.7"
+      ],
+      "lines": [
+        1273,
+        1314
+      ],
+      "note": "S4.3.7.6 gives C^{-1} on the 27 coordinates of supp(u_a), C=iZC^{-1}Z with Z_{a,k} before and i^{27k}Z_{a,k} after; S4.3.7.7 negates the physical X outputs and reroutes \u03c1(w) to w so every role carries C^{\u2297m}; the zero-label frame I / full-label frame C^{\u2297m} is not stated separately (only the end result), a minor gap."
+    },
+    {
+      "id": "R1",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.3.5",
+        "S4.3.6.2",
+        "S4.3.7.2"
+      ],
+      "lines": [
+        1105,
+        1110
+      ],
+      "note": "S4.3.5 states both loss ratios are below 1/2 so a strict saving remains; S4.3.6.2 gives s_b=W_b m-N+2L_b<W_b m and S4.3.7.2 gives deficit 2N-2L_c>0 with s_c<W_c m."
+    },
+    {
+      "id": "R2",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.4.1"
+      ],
+      "lines": [
+        1319,
+        1322
+      ],
+      "note": "S4.4.1 states \u03b7_b=339/22587335000000."
+    },
+    {
+      "id": "R3",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.4.1"
+      ],
+      "lines": [
+        1323,
+        1324
+      ],
+      "note": "S4.4.1 states \u03b7_c=73/19906842167500."
+    },
+    {
+      "id": "R4",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.4.1",
+        "S4.4.2",
+        "S4.4.3",
+        "S4.4.4",
+        "S4.4"
+      ],
+      "lines": [
+        1331,
+        1343
+      ],
+      "note": "S4.4.1-S4.4.4 give both deficits >20\u00b72^-50, log m<20, m^{1-2^-50}>m(1-20\u00b72^-50)>m(1-\u03b7), hence s/W<m^\u03c4 with \u03c4=\u03c3=1-2^-50."
+    },
+    {
+      "id": "M1",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.5.1.1",
+        "S4.5.1.2"
+      ],
+      "lines": [
+        1375,
+        1391
+      ],
+      "note": "S4.5.1.2 gives pivot at topmost nonzero row's rightmost entry, clearing left/below by lower-triangular elementary matrices, deleting the row/column and repeating; S4.5.1.1 gives \u03a0 with exactly a ones."
+    },
+    {
+      "id": "M2",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.5.1.3"
+      ],
+      "lines": [
+        1413,
+        1423
+      ],
+      "note": "S4.5.1.3 states a fixed odd prime avoiding all denominators and diagonal numerators in a finite table so the identities specialize to Z/q^b with invertible triangular factors."
+    },
+    {
+      "id": "M3",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.5.1.4"
+      ],
+      "lines": [
+        1425,
+        1430
+      ],
+      "note": "S4.5.1.4 states a lower triangular transformation costs O(V) by updating coordinates in descending physical order."
+    },
+    {
+      "id": "M4",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.5.1.5"
+      ],
+      "lines": [
+        1432,
+        1443
+      ],
+      "note": "S4.5.1.5 gives D_j<-D_j+H_i, interchange, D_j<-H_i-D_j yielding (h+d,d) with one interchange per one of \u03a0, a in all."
+    },
+    {
+      "id": "S1",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.6.4.1",
+        "S4.6.4.2"
+      ],
+      "lines": [
+        2457,
+        2477
+      ],
+      "note": "S4.6.4.1 gives E=64(W+m+1)^3, B=s+E, \u03bd=min{j\u22651:m^j\u2265B}; S4.6.4.2 gives C_1=max{20,\u03bd+3}, C_0=128mB^2, \u0394=\u2308C_0 d^{C_1}\u2309 and \u03bd=11, C_1=20."
+    },
+    {
+      "id": "S2",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.6.4.3",
+        "S4.6.4.4",
+        "S4.6.4.5"
+      ],
+      "lines": [
+        2479,
+        2518
+      ],
+      "note": "S4.6.4.3-4 bound the per-invocation operation count (24W^3+4s+4W+4 < E) and S4.6.4.5 states A(e)<=sA(e/m)+E at internal nodes and A(e)<=8e at a leaf."
+    },
+    {
+      "id": "S3",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.6.4.6",
+        "S4.6.4.7"
+      ],
+      "lines": [
+        2523,
+        2560
+      ],
+      "note": "S4.6.4.6 gives B^{k+1}<=B^2 d^\u03bd so A(e)<=8B^2 d^{\u03bd+1}; S4.6.4.7 totals below 128mB^2 d^{\u03bd+3} <= C_0 d^{C_1}."
+    },
+    {
+      "id": "S4",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.6.4.8",
+        "S4.6.4.9"
+      ],
+      "lines": [
+        2562,
+        2586
+      ],
+      "note": "S4.6.4.8 states depth-\u2113 values lie in 2^{-(p+\u2113)}Z[i] with modulus <=2^\u2113 and p+\u0394 fractional, \u0394+3 integer bits are exact; S4.6.4.9 gives \u03b5C_1<1 so \u0394=o(p)."
+    },
+    {
+      "id": "S5",
+      "verdict": "present",
+      "plan_steps": [
+        "S4.6.5.6"
+      ],
+      "lines": [
+        2751,
+        2757
+      ],
+      "note": "S4.6.5.6 states every row of H has absolute row sum one so disk arrays map to disk arrays and truncation errs by less than \u221a2\u00b72^-p."
+    }
+  ],
+  "summary": "23 of 26 sub-steps present, 3 absent (L1, L4, P3), 0 wrong. The plan carries the bank network (B1-B4), the rank-saving arithmetic (R1-R4), the matrix-shear lemma (M1-M4) and the simultaneous-layer bound (S1-S5) in full. Gaps: it never gives the per-edge residual table with dimensions (L1), it asserts the F_2 orthonormal basis without the alternating-plane absorption (L4), and it does not state the tensoring over k columns, one factor per residual vector (P3)."
+}
