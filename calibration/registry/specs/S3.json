@@ -1,0 +1,71 @@
+{
+ "id": "S3",
+ "title": "Opus at high and xhigh on the extractions where Sonnet high is weakest (F4, F8), with the E7 instructions",
+ "kind": "screening",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task only, on E6's extractions F4 and F8 (background accepted)",
+ "question": "Does Opus (at high or xhigh) lift the argument plan above Sonnet high where Sonnet high is weakest, and is high enough?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "91c4fed (141026-exp-key-step-identity)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-s3-opus-floor",
+  "commit": "1be0281",
+  "transcripts": "results/transcripts/s3",
+  "description_prefix": "",
+  "planning_kinds": [
+   "argument"
+  ]
+ },
+ "protocol": "run from the development session; S3.md on the evidence branch",
+ "preregistration": "calibration/plans/S3.md (ba2878b; criteria fixed before any run)",
+ "journal": "docs/journal/2026-10-14-s3-opus-floor.md",
+ "comparison": "E7F4W and E7F8W (Sonnet, high, same task files), re-judged in batch J10",
+ "arms": {
+  "OH": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E7 argument instructions (key-step paragraph and identity sentence)"
+   },
+   "runs": [
+    "S3F4OH",
+    "S3F8OH"
+   ]
+  },
+  "OX": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "xhigh",
+    "effort_passed": true,
+    "checks": "coverage = reject, coverage_depth = sections",
+    "task_prompt": "the E7 argument instructions (key-step paragraph and identity sentence)"
+   },
+   "runs": [
+    "S3F4OX",
+    "S3F8OX"
+   ]
+  }
+ },
+ "reported": {},
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus, high) with this session's permissions; it only passed prompts and ran exegenius next"
+  }
+ ],
+ "limitations": [
+  "One paper, two extractions, one run per configuration per extraction: a screen.",
+  "Judged in one batch (J10) with an unreviewed reference; three judges per compared plan, one per anchor; judges are Opus."
+ ]
+}
