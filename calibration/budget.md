@@ -19,6 +19,17 @@
 | 2026-10-14 ~09:25 | 5% | 13:40 | rows 3 and 4 still running; no judging yet |
 | 2026-10-14 ~12:28 | 14% | ~13:28 ("in an hour", as the author reported it; 13:40 was recorded earlier) | taken just before S3 launched (12:29). Since 09:25: S2 rows 3–4 finished, J9's 17 judges, and this session's write-up. The meter is account-wide, so any other use of the account in that interval is included too |
 
+| 2026-10-14 ~14:20 | ~0% ("basically empty", the author's observation) | ~18:30 (19:30 local, as the author reported it) | the window had reset since 12:28. S3, K1 and S4's launch fell partly in the previous window and partly in this one; no reading separates them |
+
+**Autofill predictions, kept apart from readings:**
+- The prompt autofill sometimes proposes a meter value.
+- A proposal is recorded here as a prediction, with the observation it was checked against. It never goes into the readings above unless the author confirms it on the meter.
+
+| Time (UTC) | Autofill predicted | Observed | Matched |
+|---|---|---|---|
+| 2026-10-14 ~09:15 | 4% | 4% (author checked the meter) | yes |
+| 2026-10-14 ~14:20 | 20% | ~0%: the window had reset | **no**. The prediction ignored the reset |
+
 **These are window readings, not the weekly allowance,** and the two should not be read as interchangeable.
 
 **What they allow:** setting a reading against the tokens measured in the same interval, and so estimating what a run costs as a share of a window.
