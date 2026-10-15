@@ -9,7 +9,7 @@ For each task in prompts.tsv, it copies into ANSWERS_DIR/<cfg>/<run>/<code>/ (pl
 - `support.task.md` for support tasks.
 
 With --subagents (the session's subagents directory), it also reads each task's transcript, matched by
-its description, and lists every file the subagent read or touched besides its own task file and
+the copy's root path in its prompt, and lists every file the subagent read or touched besides its own task file and
 answer. A task that read anything else is contaminated: excluded and rerun once, in a fresh copy.
 Prints, per configuration: tasks, accepted, never accepted, no transcript and contaminated, and
 writes ANSWERS_DIR/collect.json.
@@ -26,11 +26,17 @@ def accepted(log, tid):
 
 
 def transcripts(sub):
+    """{copy root: transcript}. The four variants of a page share a description, so transcripts are
+    matched by the copy's root path, which the prompt (the transcript's first user message) contains."""
     out = {}
     for meta in pathlib.Path(sub).glob("*.meta.json"):
-        d = json.loads(meta.read_text()).get("description", "")
-        if d.startswith("A1"):
-            out[d] = meta.with_suffix("").with_suffix(".jsonl")
+        if not json.loads(meta.read_text()).get("description", "").startswith("A1A"):
+            continue
+        t = meta.with_suffix("").with_suffix(".jsonl")
+        first = json.loads(open(t).readline()).get("message", {}).get("content", "")
+        m = re.search(r"(/\S*/A1A[HSO]\d+/a1-[0-9a-f]+/(?:audit|support))/exegenius/tasks/", first if isinstance(first, str) else json.dumps(first))
+        if m:
+            out[m.group(1)] = t
     return out
 
 
@@ -75,7 +81,7 @@ def main():
         row = {"task": desc, "accepted": ok,
                "submits": sum(1 for e in log if e.get("event") == "submit" and e.get("task") == tid)}
         if sub:
-            t = tx.get(desc)
+            t = tx.get(str(root))
             if t is None:
                 row["transcript"] = None
             else:
