@@ -1,0 +1,279 @@
+{
+ "page": "P04",
+ "items": [
+  {
+   "id": "S4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "gate-label table by time (eq. motif-labels)",
+    "residual table for every edge (Lemma motif-residuals)",
+    "the suppressed one-dimensional factor Q"
+   ],
+   "note": "The page assembles the step: terminal sums N and Wm-N, loss L=Ich, L/N=3ch/v, then s_b=Wm-N+2L_b<Wm and s_c=Wm-2N+2L_c<Wm. The central lemma (every edge nested, only center 3->4 decreasing) is only cited, and the gate and residual tables are missing."
+  },
+  {
+   "id": "S4.3.1",
+   "presence": "derived",
+   "faithful": false,
+   "dropped": [
+    "eigenvalues 1 and 1-h/9=-91/9 showing the form x^T(I-J/9)y is nondegenerate",
+    "qualifier 'over Q' on <t_S,t_T>=|S∩T|-1",
+    "binary facts t_T·t_T=1 and t_S·t_T=|S∩T| mod 2 for the complex network",
+    "the two neighbor relations (|S∩T|=1 bit; distinct with even intersection complex)",
+    "nondegeneracy of the tensor form on F^{⊗3}"
+   ],
+   "note": "Both forms are defined, but only the rational identity '<t_S,t_T>=|S∩T|-1 ... and <t_T,t_T>=2' is given, unqualified, as the reason that 'each line <t_T> is nondegenerate, and neighbors' lines are orthogonal'. That reasoning fails for the phase form over F_2. Over F_2 the paper uses t_T·t_T=1."
+  },
+  {
+   "id": "S4.3.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The terminal table '(U_a,Φ), (0,U_a^⊥), (0,Φ)' is given, with 'Sources total N, sinks Wm-N (U_a^⊥ has dimension m-1)', which matches the paper."
+  },
+  {
+   "id": "S4.3.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "incoming labels A⊗<t>⊗Q on X and B⊗<t>⊗Q on Y",
+    "the factor Q and Q=<t_{a_{j+1}}>⊗Q'",
+    "A=B⊥P because P is nondegenerate",
+    "the splitting that gives B'=(B⊗F)⊥(P⊗t^⊥)",
+    "boundary match: start U_a/0 at stage 1, end Φ/U_a^⊥ at stage 3"
+   ],
+   "note": "The page writes A', P', B' and asserts that the 'Outgoing labels A⊗F on X and B' on Y equal the next incoming ones'. Because neither the incoming labels nor Q are given, the equality cannot be checked."
+  },
+  {
+   "id": "S4.3.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "gate-label table by time",
+    "residual table for every edge, including interstage edges and the scratch-to-sink residual (A⊗F)⊗Q^⊥",
+    "nondegeneracy of every label and summand"
+   ],
+   "note": "That every edge joins comparable labels, and that only center 3->4 decreases, is asserted with a citation ('Only central edge 3->4 loses dimension'). The consequences L=Ich and Wm-2N+2L are then drawn from it."
+  },
+  {
+   "id": "S4.3.4.1",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "the time 0-7 common gate labels and the wire groups they touch"
+   ],
+   "note": "The page has no gate-label table. It refers to times 2, 3, 4 and 5 without giving the labels at those times."
+  },
+  {
+   "id": "S4.3.4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the compared labels (B⊗F)⊥(P⊗<t_X>) at time 2 and (B⊗F)⊥(P⊗t_Y^⊥) at time 5",
+    "tensoring the residual by Q"
+   ],
+   "note": "The paper's chain is reproduced: 't_X⊥t_Y gives <t_X>⊂t_Y^⊥: labels nest, with residual P⊗<t_X,t_Y>^⊥ of dimension h-2'. The two labels being nested are never written."
+  },
+  {
+   "id": "S4.3.4.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "labels A⊗F at time 3 and B⊗F at time 4 with A⊗F=(B⊗F)⊥(P⊗F)",
+    "the factor Q (loss is P⊗F⊗Q)",
+    "check that every other edge, including interstage and terminal edges, is nondecreasing"
+   ],
+   "note": "The claim that 'Only central edge 3->4 loses dimension, namely P⊗F of dimension h' is cited, not shown. Only the count L=Ich (Ic edges times h) is computed."
+  },
+  {
+   "id": "S4.3.4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "reason for telescoping: each touched wire has one incoming and one outgoing incidence with the same gate label"
+   ],
+   "note": "'Signed changes telescope at each gate to Wm-2N; absolute values add 2L' is drawn from the earlier source and sink totals N and Wm-N, as in the paper. The reason the gates cancel is left implicit."
+  },
+  {
+   "id": "S4.3.4.5",
+   "presence": "derived",
+   "faithful": false,
+   "dropped": [
+    "nondegeneracy of each residual",
+    "criterion: a nondegenerate binary space is nonalternating iff it has a norm-one vector",
+    "construction of a norm-one vector by tensoring the generators of P and Q with coordinate units of B, Q^⊥, triple complements and full spaces",
+    "a nondegenerate nonalternating binary space has an orthonormal basis"
+   ],
+   "note": "The page reasons 'A nonzero residual contains a coordinate unit vector, hence an orthonormal basis'. The premise is false for residuals that involve the lines P or Q. The step also skips nondegeneracy and the structure theorem the paper uses."
+  },
+  {
+   "id": "S4.3.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "c_b=100 and c_c=101 central wires per invocation"
+   ],
+   "note": "'As L/N=3ch/v' follows from L=Ich, I=3v^2, N=v^3 and gives 100/539 and 101/539, which is correct. The values of c needed to reach those numbers are not on the page. The strict saving is drawn in the bit and phase paragraphs."
+  },
+  {
+   "id": "S4.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the frame Φ_M:(H,D)->(H+MD,D) whose edge cost is the rational rank",
+    "P_U is the projection along U^⊥",
+    "numeric value of s_b"
+   ],
+   "note": "The projection assignment, the rank of P_V-P_U, the N exceptional source edges and the endpoint check all appear, and they give s_b=Wm-N+2L_b<Wm as in the paper."
+  },
+  {
+   "id": "S4.3.6.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the general identity M_{sink(ρ(w))}-M_{source(w)}=I_m with ρ exchanging X_a and Y_a",
+    "its purpose: the same shear H<-H+D on every role"
+   ],
+   "note": "The identity appears only through its instances, 'Ends: P_{U_a^⊥}+P_{U_a}=I_m for X_a, else I_m-0'. The routing ρ and the shear it serves are never mentioned."
+  },
+  {
+   "id": "S4.3.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "s_b defined as the sum over edges of rank_Q(M_head-M_tail)",
+    "numeric value 177176569088785861287000000"
+   ],
+   "note": "'So s_b=Wm-N+2L_b<Wm' follows from the absolute dimension sum plus N extra source ranks, which is correct."
+  },
+  {
+   "id": "S4.3.6.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "on a decreasing edge P_V-P_U is negated, with unchanged rank"
+   ],
+   "note": "'For nested U⊂V, P_V-P_U is the identity on V∩U^⊥ and zero on its complement, so has rank dim V-dim U' matches the paper. Decreasing edges are not addressed."
+  },
+  {
+   "id": "S4.3.6.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'at stage 1, B=0, the first gate label is U_a, and 2P_{U_a} has rank 1, not 0' matches the paper."
+  },
+  {
+   "id": "S4.3.6.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "X_a's route ends at the sink of Y_a=ρ(X_a)"
+   ],
+   "note": "'P_{U_a^⊥}+P_{U_a}=I_m for X_a, else I_m-0' is the paper's endpoint check."
+  },
+  {
+   "id": "S4.3.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "edge change C_V C_U^{-1}=H^{⊗m} diag(i^{q_V-q_U}) H^{⊗m}",
+    "source and sink corrections Z_{a,k}, i^{27k}Z_{a,k}",
+    "frames I for the zero label and C^{⊗m} for the full label",
+    "numeric value of s_c"
+   ],
+   "note": "The kernel factorization and the count s_c=Wm-2N+2L_c are derived. The final C^{⊗m} on every role is only asserted."
+  },
+  {
+   "id": "S4.3.7.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "normalization 1/√2 of H",
+    "definition of X as the coordinate interchange",
+    "entries of C_U and its inverse are Gaussian integers over 2^m"
+   ],
+   "note": "q_U, C=aI+bX with a=(1+i)/2, b=(1-i)/2, and C_U are defined as in the paper (P_U over F_2). The normalization of H is missing."
+  },
+  {
+   "id": "S4.3.7.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "numeric value 1873807244636671267308000000"
+   ],
+   "note": "'One kernel per basis vector gives s_c=Wm-2N+2L_c<Wm' follows from the residual dimensions summing to Wm-2N+2L, which is correct."
+  },
+  {
+   "id": "S4.3.7.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page gives the weight identity, with 'orthogonal z,w overlap evenly, so weight is additive mod 4', as the paper does."
+  },
+  {
+   "id": "S4.3.7.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "reason wt(v) is odd: v has norm one, v·v=wt(v) mod 2"
+   ],
+   "note": "The formula with '± ... - on decreasing edges' follows from weight additivity, as in the paper. The page says 'As wt(v) is odd' without giving the reason."
+  },
+  {
+   "id": "S4.3.7.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "tensoring H diag(1,-1) H=X over the coordinates of supp(v)"
+   ],
+   "note": "The page gives the two-term expansion of i^{ε[v·x]} and 'H diag(1,-1)H=X turns [it] into the kernel aI+bX_v or its inverse', as in the paper."
+  },
+  {
+   "id": "S4.3.7.6",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "computation q_{U_a^⊥}-q_{U_a}=wt(x)+2[u·x] mod 4, with u_a of norm one and weight 27",
+    "corrections Z_{a,k} before X_a and i^{27k}Z_{a,k} after Y_a",
+    "C^{-1}=-iZCZ"
+   ],
+   "note": "'On X_a->Y_a the 27 coordinates of supp(u_a) get C^{-1}, fixed by C=iZC^{-1}Z' is asserted without the phase computation, and without the sign corrections that the identity requires."
+  },
+  {
+   "id": "S4.3.7.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "zero label frame I and full label frame C^{⊗m}, since q_F(x)=wt(x)",
+    "negating the physical X outputs (sign -1 of the scalar exchange)",
+    "sending output role ρ(w) back to w",
+    "the k-column version C^{⊗mk}"
+   ],
+   "note": "'undoing signs and exchange gives C^{⊗m} on every role' is only asserted."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "major",
+   "quote": "A triple $T$ has indicator $t_T$ with $\\langle t_S,t_T\\rangle=|S∩T|-1$ ... and $\\langle t_T,t_T\\rangle=2$. So each line $\\langle t_T\\rangle$ is nondegenerate, and neighbors' lines are orthogonal.",
+   "problem": "This follows the definition of both forms in the same bracket notation, but the identity holds only for the bit form over Q. For the phase form (F_2^h, dot product), t_S·t_T=|S∩T| mod 2 and t_T·t_T=1 (paper lines 867-870). Read there, the page's formula gives <t_T,t_T>=2=0, so every triple line would be isotropic, and it makes complex neighbors (even intersection) non-orthogonal. The page's justification for the binary label case is therefore false."
+  },
+  {
+   "severity": "minor",
+   "quote": "A nonzero residual contains a coordinate unit vector, hence an orthonormal basis",
+   "problem": "Residuals involving the lines P or Q, such as P⊗t_X^⊥⊗Q, contain no coordinate unit vector of F^{⊗3}. P and Q are spanned by tensors of triple indicators of weight 3^{j-1} and 3^{3-j}. The paper instead tensors coordinate units of the factors with those generators to get a norm-one vector. It then uses nondegeneracy of the residual and the fact that nondegenerate nonalternating binary spaces have orthonormal bases."
+  },
+  {
+   "severity": "minor",
+   "quote": "let $H$ be the Hadamard matrix ... $C=H\\operatorname{diag}(1,i)H=aI+bX$",
+   "problem": "The paper's H is normalized, (1/√2)[[1,1],[1,-1]]. With the usual ±1 Hadamard matrix, H diag(1,i)H=(1+i)I+(1-i)X=2C and H diag(1,-1)H=2X, so the stated identities are off by a factor 2."
+  },
+  {
+   "severity": "minor",
+   "quote": "Labels live in $\\Phi=F^{\\otimes3}$ ... Outgoing labels $A\\otimes F$ on $X$ and $B'$ on $Y$ equal the next incoming ones",
+   "problem": "A⊗F, B' and P⊗F lie in F^{⊗j}, not in F^{⊗3}. The paper tensors every stage label by the line Q=<t_{a_{j+1}}⊗...⊗t_{a_3}> and says it suppresses Q. Without Q the asserted equality does not hold literally: the next incoming X label is A'⊗<t_{a_{j+1}}>⊗Q'."
+  }
+ ],
+ "motivation_given": true
+}

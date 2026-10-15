@@ -50,3 +50,22 @@ for page in ASSIGNED:
         adequate = (not below) and r[8] <= ws[8]
         print(f"page {page}: {r[1]} {r[4]} vs WS {ws[4]}: {'above' if above else 'below' if below else 'within noise'}; "
               f"major errors {r[8]} vs {ws[8]}; adequate={adequate}")
+
+# W2b's reading (plans/W2b.md, fixed before J24): pool each configuration's runs on a page, and call
+# Opus better on that page if all its pooled faithful values are at least Sonnet's pooled median and
+# its pooled median exceeds Sonnet's.
+if "--pooled" in sys.argv:
+    print()
+    for page in ASSIGNED:
+        pool = {}
+        for r in rows:
+            if r[0] == page:
+                c = pool.setdefault(r[1][3], {"f": [], "m": [], "runs": []})
+                c["f"] += r[4]; c["m"] += r[7]; c["runs"].append(r[1])
+        if "S" not in pool or "O" not in pool:
+            continue
+        s, o = pool["S"], pool["O"]
+        sm, om = statistics.median(s["f"]), statistics.median(o["f"])
+        better = min(o["f"]) >= sm and om > sm
+        print(f"page {page} pooled: O {o['runs']} faithful {o['f']} (median {om}), major {o['m']} (median {statistics.median(o['m'])}); "
+              f"S {s['runs']} faithful {s['f']} (median {sm}), major {s['m']} (median {statistics.median(s['m'])}); Opus better: {better}")

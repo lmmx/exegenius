@@ -1,0 +1,16 @@
+| Page | Run | Plan | Assigned | Faithful (each) | Median | Derived (each) | Major errors (each) | Items itemised (each) | Motivation (each) |
+|---|---|---|---|---|---|---|---|---|---|
+| 0015 | W2WOP15 | P02 | 8 | [8, 8, 8] | 8 | [8, 8, 8] | [0, 0, 0] | [25, 25, 25] | [True, True, True] |
+| 0015 | W2WOP15R | P06 | 8 | [8, 7, 8] | 8 | [8, 7, 8] | [0, 0, 0] | [25, 25, 25] | [True, True, True] |
+| 0015 | W2WSP15 | P05 | 8 | [7, 6, 5] | 6 | [7, 6, 5] | [0, 0, 0] | [25, 25, 25] | [True, True, True] |
+| 0015 | W2WSP15R | P04 | 8 | [5, 5, 5] | 5 | [6, 6, 6] | [2, 1, 1] | [25, 25, 25] | [True, True, True] |
+| 0016 | W2WOP16 | P01 | 4 | [4, 4, 4] | 4 | [4, 4, 4] | [0, 0, 0] | [5, 5, 5] | [True, True, True] |
+| 0016 | W2WSP16 | P03 | 4 | [3, 3, 3] | 3 | [3, 3, 3] | [0, 0, 0] | [5, 5, 5] | [True, True, True] |
+
+page 0015: W2WOP15 [8, 8, 8] vs WS [7, 6, 5]: above; major errors 0 vs 0; adequate=True
+page 0015: W2WOP15R [8, 7, 8] vs WS [7, 6, 5]: within noise; major errors 0 vs 0; adequate=True
+page 0015: W2WSP15R [5, 5, 5] vs WS [7, 6, 5]: within noise; major errors 1 vs 0; adequate=False
+page 0016: W2WOP16 [4, 4, 4] vs WS [3, 3, 3]: above; major errors 0 vs 0; adequate=True
+
+page 0015 pooled: O ['W2WOP15', 'W2WOP15R'] faithful [8, 8, 8, 8, 7, 8] (median 8.0), major [0, 0, 0, 0, 0, 0] (median 0.0); S ['W2WSP15', 'W2WSP15R'] faithful [7, 6, 5, 5, 5, 5] (median 5.0), major [0, 0, 0, 2, 1, 1] (median 0.5); Opus better: True
+page 0016 pooled: O ['W2WOP16'] faithful [4, 4, 4] (median 4), major [0, 0, 0] (median 0); S ['W2WSP16'] faithful [3, 3, 3] (median 3), major [0, 0, 0] (median 0); Opus better: True

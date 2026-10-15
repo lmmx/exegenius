@@ -1,0 +1,242 @@
+{
+ "page": "P02",
+ "items": [
+  {
+   "id": "S4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "residual dimensions edge by edge (the paper's residual table)",
+    "nondegeneracy of every label/summand"
+   ],
+   "note": "The page carries the whole chain: triple-indicator forms, terminal and stage labels, gate-label table, nesting by splitting A=B\\perp P and F=\\langle t\\rangle\\perp t^\\perp, loss h only on center 3->4, L/N=\\gamma/539<1/2, then s_b and s_c. It follows the paper's argument, but some per-edge detail is compressed."
+  },
+  {
+   "id": "S4.3.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "eigenvalues 1 and 1-h/9=-91/9 as the reason the rational form is nondegenerate (it appears only inside a citation)"
+   ],
+   "note": "The page writes the form as x\\cdot y-\\tfrac19\\sum x_k\\sum y_k and derives \\langle t_S,t_T\\rangle=|S\\cap T|-\\tfrac{3\\cdot3}9=|S\\cap T|-1 and \\langle t_T,t_T\\rangle=2, plus t_S\\cdot t_T=|S\\cap T| mod 2 over F_2. It defines \\mathcal F=F^{\\otimes3} and u_a as the paper does."
+  },
+  {
+   "id": "S4.3.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The terminal labels match the paper exactly. The sums N and Wm-N are given right after the table and follow by inspection, though the page does not spell out dim U_a^\\perp=m-1 or the W-2N scratch roles; the paper does not spell them out either."
+  },
+  {
+   "id": "S4.3.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the identity B'=(P')^\\perp_{A'}=(B\\otimes F)\\perp(P\\otimes t^\\perp), which ties the outgoing Y label to the time-5 gate label"
+   ],
+   "note": "The page gives A, P, B, Q, the X and Y transitions, and A'=A\\otimes F, P'=P\\otimes\\langle t\\rangle, B'=(P')^\\perp_{A'}, Q=\\langle t_{a_{j+1}}\\rangle\\otimes Q', so 'make outputs its inputs' can be checked by substitution. This is the paper's reasoning. It leaves out the second form of B'."
+  },
+  {
+   "id": "S4.3.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "nondegeneracy of the labels ('Every displayed summand is nondegenerate')",
+    "interstage edges through 'in' and scratch last->sink edges (residual (A\\otimes F)\\otimes Q^\\perp)",
+    "per-edge residuals and their dimensions"
+   ],
+   "note": "The page argues nesting by splitting, treats the 2->5 side edge through \\langle t_X\\rangle\\subset t_Y^\\perp, locates the only decrease at center 3->4 with loss h, and telescopes to Wm-2N+2L. It does not give the residual table, and the F_2 orthonormal-basis claim is only stated."
+  },
+  {
+   "id": "S4.3.4.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "stage 2 uses the inverse of row 7-r with banks exchanged, so the physical gate order is the same in every stage",
+    "each displayed summand is nondegenerate"
+   ],
+   "note": "The gate-label table (times 0-7, tensored by Q) is reproduced exactly as in eq. (motif-labels)."
+  },
+  {
+   "id": "S4.3.4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "residual P\\otimes\\langle t_X,t_Y\\rangle^\\perp of dimension h-2"
+   ],
+   "note": "The page gives the inclusion: 'side wires between neighbors t_Y,t_X nest at 2\\to5 because \\langle t_X\\rangle\\subset t_Y^\\perp', resting on the earlier orthogonality of neighbors. It does not identify the residual or its dimension."
+  },
+  {
+   "id": "S4.3.4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Labels only grow, except central wires, losing \\dim(P\\otimes F\\otimes Q)=h at 3\\to4', read off from time-3 label A\\otimes F and time-4 label B\\otimes F. Then L=I\\gamma h, with \\gamma central wires per invocation."
+  },
+  {
+   "id": "S4.3.4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'all wires at a gate share its label, so edge changes \\Delta telescope' gives \\sum\\Delta=Wm-2N, and \\sum|\\Delta|=Wm-2N+2L follows from the definition of L. This matches the paper."
+  },
+  {
+   "id": "S4.3.4.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "criterion: a nondegenerate binary symmetric space is nonalternating iff it contains a norm-one vector",
+    "coordinate unit vectors outside small supports (3^{j-1}<h^{j-1}, sizes 3 and 6) giving norm-one vectors in each residual summand",
+    "nondegeneracy of each residual",
+    "splitting/absorption argument giving an orthonormal basis"
+   ],
+   "note": "The page only says 'Such bases exist.' and cites the paper's completeness remark; none of the nonalternating argument appears."
+  },
+  {
+   "id": "S4.3.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Explicit computation: L/N=3\\binom h3^2\\gamma h/\\binom h3^3=3\\gamma h/161700=\\gamma/539, giving 100/539 and 101/539, both below 1/2. The extra N source ranks are handled in s_b=W_bm-(N-2L_b). I checked the arithmetic."
+  },
+  {
+   "id": "S4.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "explicit frame \\Phi_M:(H,D)\\mapsto(H+MD,D) (only linked as 'address shear')"
+   ],
+   "note": "Projection matrices with -\\Pi_{U_a} at X_a sources, rank = residual dimension plus one on each X_a first edge, s_b=W_bm-2N+2L_b+N<W_bm, and the endpoint identity: the paper's proof, compressed."
+  },
+  {
+   "id": "S4.3.6.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the routing permutation \\rho (X_a\\leftrightarrow Y_a, auxiliaries fixed) that pairs source(w) with sink(\\rho(w))",
+    "its consequence that every role receives the same shear H\\gets H+D"
+   ],
+   "note": "The identity is shown through the case check '\\Pi_{U_a^\\perp}-(-\\Pi_{U_a})=\\Pi_{\\mathcal F}-0=I_m'. The general statement M_{sink(\\rho(w))}-M_{source(w)}=I_m is never written."
+  },
+  {
+   "id": "S4.3.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'s_b=W_bm-2N+2L_b+N=W_bm-(N-2L_b)<W_bm' follows from \\sum|\\Delta| plus the N extra ranks and agrees with W_bm-N+2L_b. The exact value 177176569088785861287000000 appears only in a citation; I verified it."
+  },
+  {
+   "id": "S4.3.6.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "reversing an edge negates the matrix without changing its rank (decreasing edges)",
+    "nondegeneracy of U\\subset V"
+   ],
+   "note": "'\\Pi_V-\\Pi_U is the identity on the residual and zero on its complement, so ranks equal dimension changes' is the paper's argument. It leaves the decreasing-edge case implicit."
+  },
+  {
+   "id": "S4.3.6.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "B=0 at stage 1, which makes the first X_a gate label exactly U_a, so the dimension change on that edge is zero"
+   ],
+   "note": "'plus \\operatorname{rank}(\\Pi_{U_a}+\\Pi_{U_a})=1 on each X_a's first edge (gate label U_a)' matches the paper's 2P_{U_a} of rank one. The reason the gate label equals U_a is left implicit."
+  },
+  {
+   "id": "S4.3.6.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'\\Pi_{U_a^\\perp}-(-\\Pi_{U_a})=\\Pi_{\\mathcal F}-0=I_m' covers X_a and the zero-source, identity-sink roles."
+  },
+  {
+   "id": "S4.3.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "Gaussian-dyadic entries of \\mathcal C_U and its inverse (arrays stay over \\mathbb Z[i,1/2])",
+    "k-column tensor-power version",
+    "scalar route sign -1 on Y_a\\to X_a that motivates negating the X outputs"
+   ],
+   "note": "Phase frames, mod-4 weight additivity, one kernel per orthonormal residual vector, s_c, and the 27-coordinate correction via C=iZC^{-1}Z are all present and follow the paper's proof."
+  },
+  {
+   "id": "S4.3.7.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "normalization H=\\tfrac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}",
+    "projection over \\mathbb F_2",
+    "entries of \\mathcal C_U are Gaussian integers over 2^m (Gaussian-dyadic)"
+   ],
+   "note": "Defines q_U(x)=\\operatorname{wt}(\\Pi_Ux)\\bmod4, C=H\\operatorname{diag}(1,i)H and \\mathcal C_U. The values a=(1+i)/2, b=(1-i)/2 appear later in the kernel. The Gaussian-dyadic claim is absent."
+  },
+  {
+   "id": "S4.3.7.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "One kernel per residual basis vector, summed through the dimension count, gives 's_c=W_cm-2N+2L_c<W_cm in all'. That inequality holds because L_c<N. I verified the exact value 1873807244636671267308000000."
+  },
+  {
+   "id": "S4.3.7.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Gives the formula \\operatorname{wt}(z+w)=\\operatorname{wt}z+\\operatorname{wt}w-2|\\operatorname{supp}z\\cap\\operatorname{supp}w| and 'Orthogonal binary vectors overlap evenly, so weight adds modulo 4'."
+  },
+  {
+   "id": "S4.3.7.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Adds \\Pi_Vx=\\Pi_Ux+\\sum_{z}(z\\cdot x)z (more explicit than the paper) and q_V-q_U\\equiv\\pm\\sum\\operatorname{wt}(z)[z\\cdot x], with minus on decreasing edges, and 'Each \\operatorname{wt}(z) is odd as z\\cdot z=1'."
+  },
+  {
+   "id": "S4.3.7.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Gives i^{\\varepsilon[z\\cdot x]}=\\tfrac{1+i^\\varepsilon}2+\\tfrac{1-i^\\varepsilon}2(-1)^{z\\cdot x} and H\\operatorname{diag}(1,-1)H=X, turning the character into translation and giving \\tfrac{1+i}2I+\\tfrac{1-i}2\\operatorname{sh}_z or its inverse."
+  },
+  {
+   "id": "S4.3.7.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "k-column version: Z_{a,k} before and i^{27k}Z_{a,k} after, the scalar applied once per role"
+   ],
+   "note": "q_{U_a^\\perp}-q_{U_a}\\equiv\\operatorname{wt}(x)-2\\operatorname{wt}(u_a)[u_a\\cdot x]\\equiv\\sum_{k\\notin\\operatorname{supp}}x_k-\\sum_{k\\in\\operatorname{supp}}x_k (mod 4) is correct and shows C^{-1} on the 27 coordinates, fixed by Z before and i^{27}Z after. The page treats only one column."
+  },
+  {
+   "id": "S4.3.7.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the scalar exchange (X,Y)\\mapsto(-Y,X) leaves a minus sign on the physical X outputs",
+    "C^{\\otimes mk} on k columns"
+   ],
+   "note": "'Negating X outputs and returning roles leaves C^{\\otimes m} everywhere' is asserted. The page never says why the X outputs carry a sign."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "*neighbors*, triples joined by side wires ($|S\\cap T|=1,$ or distinct with even intersection), are orthogonal.",
+   "problem": "The two neighbor rules belong to different constructions: |S\\cap T|=1 is the bit rule, orthogonal under the rational form; 'distinct with even intersection' is the complex rule, orthogonal under the F_2 dot product. The 'or' does not say which goes with which. Over Q, distinct triples with intersection 0 or 2 have \\langle t_S,t_T\\rangle=\\mp1, so they are not orthogonal. The paper ties each rule to its own label field."
+  },
+  {
+   "severity": "minor",
+   "quote": "$2\\times2$ Hadamard matrix $H$ and kernel $C=H\\operatorname{diag}(1,i)H$",
+   "problem": "The normalization is never given. The paper uses H=\\tfrac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}. With the unnormalized Hadamard matrix, H\\operatorname{diag}(1,-1)H=2X and C=2(aI+bX), so the page's identities H\\operatorname{diag}(1,-1)H=X, \\mathcal C_V\\mathcal C_U^{-1}=H^{\\otimes m}\\operatorname{diag}(i^{q_V-q_U})H^{\\otimes m} and \\mathcal C_{\\mathcal F}=C^{\\otimes m} would be off by powers of 2."
+  },
+  {
+   "severity": "minor",
+   "quote": "$\\Pi_V-\\Pi_U$ is the identity on the residual and zero on its complement, so ranks equal dimension changes",
+   "problem": "This holds for U\\subset V. On a decreasing edge the matrix is the negative, and its rank is the absolute dimension change. The paper says 'reversing the edge negates the matrix without changing its rank'. The page's total, which uses \\sum|\\Delta|, is still correct."
+  }
+ ],
+ "motivation_given": true
+}

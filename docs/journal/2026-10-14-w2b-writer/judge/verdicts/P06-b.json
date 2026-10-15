@@ -1,0 +1,246 @@
+{
+ "page": "P06",
+ "items": [
+  {
+   "id": "S4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "per-edge orthogonal residual table (only the side edge 2->5 nesting is justified)",
+    "numerical values of s_b and s_c"
+   ],
+   "note": "The page builds the labels, computes source total $N$ and sink total $Wm-N$, gets $L=Ich$ and $L/N=3ch/\\binom h3=c/539$, and concludes $s_{\\rm b}=W_{\\rm b}m-2N+2L_{\\rm b}+N<W_{\\rm b}m$ and $s_{\\rm c}=W_{\\rm c}m-2N+2L_{\\rm c}<W_{\\rm c}m$, as in the paper; comparability of every edge and the uniqueness of the decreasing center $3\\to4$ edges are asserted rather than tabulated."
+  },
+  {
+   "id": "S4.3.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page rewrites the form as $g\\cdot g'-\\frac19(\\sum g)(\\sum g')$, uses coordinate sum 3 to get $\\langle t_S,t_T\\rangle=|S\\cap T|-\\frac{3\\cdot3}9=|S\\cap T|-1$ and $\\langle t_T,t_T\\rangle=2$, gives $t_S\\cdot t_T=|S\\cap T|\\bmod2$ over $\\mathbb F_2$, and reads off nondegenerate triple lines and orthogonal neighbors in both constructions; $\\mathcal F=F^{\\otimes3}$ of $h\\times h\\times h$ arrays and $u_a$ as in the paper."
+  },
+  {
+   "id": "S4.3.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "nondegeneracy of the tensor form on F (used for dim U_a^perp = m-1)"
+   ],
+   "note": "Terminal table matches the paper, and the page computes the sink total explicitly: 'sinks $Nm+N(m-1)+(W-2N)m=Wm-N$', with sources totalling $N$."
+  },
+  {
+   "id": "S4.3.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "empty-tensor-product convention (B=0 at stage 1, trivial K at stage 3) behind 'from U_a,0 to F,U_a^perp'",
+    "A = B perp P, since P is nondegenerate",
+    "identity B'=(P')^perp_{A'}=(B tensor F) perp (P tensor t^perp), linking the outgoing Y label of the transition to the time-5 gate label"
+   ],
+   "note": "The page gives $A,P,B,K$, the transitions $X:A\\otimes\\langle t_T\\rangle\\otimes K\\to A\\otimes F\\otimes K$ and $Y:B\\otimes\\langle t_T\\rangle\\otimes K\\to(P\\otimes\\langle t_T\\rangle)^\\perp_{A\\otimes F}\\otimes K$, and $A'=A\\otimes F$, $P'=P\\otimes\\langle t_T\\rangle$, $B'=(P')^\\perp_{A'}$ with $K=\\langle t_{a_{j+1}}\\rangle\\otimes K'$, so outgoing labels visibly become the next incoming ones; the boundary values at stages 1 and 3 are asserted."
+  },
+  {
+   "id": "S4.3.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "residual and dimension of every edge (X in->2, 2->3; Y 0->1, 4->5; center source->1, 1->3, 4->6; side source->0, 0->2, 5->7; scratch last->sink with residual (A tensor F) tensor Q^perp of dimension ah(f-1))",
+    "decomposition A tensor F = (B tensor F) perp (P tensor F)",
+    "nondegeneracy of every label and residual",
+    "check that interstage edges and terminal labels match, so no other dimension changes occur"
+   ],
+   "note": "'Labels nest along every edge' and 'Only central-wire edges $3\\to4$ decrease' are asserted; only the $2\\to5$ nesting gets a reason, and the telescoped total $Wm-2N+2L$ is then correctly derived from these assertions."
+  },
+  {
+   "id": "S4.3.4.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "statement that every displayed summand is nondegenerate"
+   ],
+   "note": "The time/gate/label table is reproduced exactly (with $K$ for $Q$); it is a prescription, and the page omits the paper's organizing decomposition and the side-wire chain $P\\otimes\\langle t_X\\rangle\\subset P\\otimes t_Y^\\perp\\subset P\\otimes F$ that motivate it."
+  },
+  {
+   "id": "S4.3.4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "residual P tensor <t_X,t_Y>^perp of dimension h-2"
+   ],
+   "note": "The page gives the essential reason, 'the side edge $2\\to5$ since neighbors $S,T$ satisfy $\\langle t_S\\rangle\\subset t_T^\\perp$', which yields the inclusion of the time-2 label in the time-5 label, but it does not give the residual or its dimension $h-2$."
+  },
+  {
+   "id": "S4.3.4.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "verification that every other edge is nondecreasing (the residual table)"
+   ],
+   "note": "'Only central-wire edges $3\\to4$ decrease, each losing $P\\otimes F$ of dimension $h$, so $L=Ich$': the loss from $A\\otimes F$ to $B\\otimes F$ is readable from the table and the count $Ic$ is right, but the claim that no other edge decreases is asserted."
+  },
+  {
+   "id": "S4.3.4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Gates keep one label, so changes telescope along wires: signed ones total $(Wm-N)-N$ and absolute ones $Wm-2N+2L$' matches the paper's telescoping argument and uses the source and sink totals computed earlier."
+  },
+  {
+   "id": "S4.3.4.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "each residual is nondegenerate",
+    "a nondegenerate binary symmetric space is nonalternating iff it contains a norm-one vector",
+    "coordinate units outside supports of size 3^{j-1}<h^{j-1}, at most 3, and at most 6",
+    "splitting theorem: a nondegenerate nonalternating binary symmetric space has an orthonormal basis"
+   ],
+   "note": "One cited sentence asserts the result, and it compresses the argument so that the norm-one tensors themselves seem to form the basis, whereas the paper uses one norm-one vector for nonalternation plus a general splitting theorem."
+  },
+  {
+   "id": "S4.3.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'$L/N=3ch/\\binom h3=c/539$' follows from $L=Ich$, $I=3\\binom h3^2$, $N=\\binom h3^3$ (and $3\\cdot100/161700=1/539$), giving $100/539$ and $101/539$ below one half; the extra $N$ source ranks are accounted in '$s_{\\rm b}=W_{\\rm b}m-2N+2L_{\\rm b}+N<W_{\\rm b}m$ because $2L_{\\rm b}<N$'."
+  },
+  {
+   "id": "S4.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "explicit frame Phi_M:(H,D)->(H+MD,D) with Phi_{M'}Phi_M=Phi_{M+M'} (delegated to the linked address-shear page)",
+    "numerical value of s_b"
+   ],
+   "note": "The page assigns $\\Pi_U$ (and $-\\Pi_{U_a}$ at sources of $X_a$), checks the endpoint identity, equates edge rank with dimension change, adds the $N$ source exceptions, and concludes $s_{\\rm b}<W_{\\rm b}m$ from $2L_{\\rm b}<N$, following the paper."
+  },
+  {
+   "id": "S4.3.6.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'every route gets the shear $\\mathrm{id}$: $\\Pi_{U_a^\\perp}-(-\\Pi_{U_a})$ on $X_a\\to Y_a$ and $\\Pi_{\\mathcal F}-0$ elsewhere' is the paper's $M_{\\mathrm{sink}(\\rho(w))}-M_{\\mathrm{source}(w)}=I_m$."
+  },
+  {
+   "id": "S4.3.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "numerical value 177176569088785861287000000"
+   ],
+   "note": "'$s_{\\rm b}=W_{\\rm b}m-2N+2L_{\\rm b}+N<W_{\\rm b}m$ because $2L_{\\rm b}<N$' equals the paper's $W_{\\rm b}m-N+2L_{\\rm b}$ and follows from the dimension count plus the $N$ exceptions."
+  },
+  {
+   "id": "S4.3.6.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "reversing a (decreasing) edge only negates the matrix, leaving its rank unchanged"
+   ],
+   "note": "'$\\operatorname{rank}(\\Pi_V-\\Pi_U)=\\operatorname{rank}\\Pi_{V\\cap U^\\perp}=\\dim V-\\dim U$' is the paper's identity; the case of decreasing edges is left implicit."
+  },
+  {
+   "id": "S4.3.6.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'except the first edge of $X_a$, into $U_a$ as $B=0$, costing $\\operatorname{rank}2\\Pi_{U_a}=1$' matches the paper: the source matrix $-\\Pi_{U_a}$ against first gate label $U_a$ gives rank one where the dimension change is zero."
+  },
+  {
+   "id": "S4.3.6.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page checks $\\Pi_{U_a^\\perp}-(-\\Pi_{U_a})$ on $X_a\\to Y_a$ and $\\Pi_{\\mathcal F}-0$ on all other routes, as in the paper."
+  },
+  {
+   "id": "S4.3.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "numerical value of s_c",
+    "k-column version (Z_{a,k}, i^{27k}, C^{tensor mk})",
+    "Gaussian-dyadic entries of C_U and its inverse"
+   ],
+   "note": "The page defines the phase frames, derives the per-basis-vector kernel factorization from weight additivity mod 4, counts $s_{\\rm c}=W_{\\rm c}m-2N+2L_{\\rm c}<W_{\\rm c}m$ from $L_{\\rm c}<N$, and fixes the $X_a\\to Y_a$ pair with $C=iZC^{-1}Z$, following the paper for one column."
+  },
+  {
+   "id": "S4.3.7.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "entries of C_U and its inverse are Gaussian integers divided by 2^m",
+    "the projection in q_U is taken over F_2"
+   ],
+   "note": "Definitions of $q_U$, $\\mathcal C_U$ and $C=H\\operatorname{diag}(1,i)H=\\alpha+\\beta\\,\\mathrm{sh}$ with $\\alpha=\\frac{1+i}2$, $\\beta=\\frac{1-i}2$ are correct (and $\\mathcal C_{\\mathcal F}=C^{\\otimes m}$ is noted), but they are definitions; the matrix identity is not computed and the dyadic-entry property is missing."
+  },
+  {
+   "id": "S4.3.7.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "numerical value 1873807244636671267308000000"
+   ],
+   "note": "One kernel per residual basis vector makes the count the sum of absolute dimension changes, so '$s_{\\rm c}=W_{\\rm c}m-2N+2L_{\\rm c}<W_{\\rm c}m$ as $L_{\\rm c}<N$ holds' follows from the earlier total; the deficit $2N-2L_{\\rm c}>0$ is correct."
+  },
+  {
+   "id": "S4.3.7.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "identity wt(z+w)=wt(z)+wt(w)-2|supp(z) cap supp(w)|"
+   ],
+   "note": "'weight is additive mod 4, as orthogonal binary vectors share an even support' gives the paper's reason but omits the weight identity that turns an even intersection into a multiple of 4."
+  },
+  {
+   "id": "S4.3.7.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "wt(e) is odd because e has norm one"
+   ],
+   "note": "The displayed $q_V(x)-q_U(x)\\equiv\\pm\\sum_{e}\\operatorname{wt}(e)[e\\cdot x]$ follows from the additivity, with the sign for direction; 'As $\\operatorname{wt}(e)$ is odd' is asserted without the norm-one reason."
+  },
+  {
+   "id": "S4.3.7.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page displays $i^{\\varepsilon[e\\cdot x]}=\\frac{1+i^\\varepsilon}2+\\frac{1-i^\\varepsilon}2(-1)^{e\\cdot x}$ and uses $H\\operatorname{diag}(1,-1)H=\\mathrm{sh}$ to turn the character into $\\mathrm{sh}_e$, giving $\\alpha+\\beta\\,\\mathrm{sh}_e$ or its inverse, as in the paper."
+  },
+  {
+   "id": "S4.3.7.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "derivation of the phase difference from wt(u_a)=27 and -54 = 2 mod 4",
+    "C on the coordinates outside supp u_a",
+    "k-column signs Z_{a,k} and i^{27k}"
+   ],
+   "note": "'$q_{U_a^\\perp}-q_{U_a}\\equiv\\operatorname{wt}(x)+2[u_a\\cdot x]$ gives $C^{-1}$ on $\\operatorname{supp}u_a$ (27 coordinates), fixed by $Z$ there before and $i^{27}Z$ after since $C=iZC^{-1}Z$' gives the paper's correction for one column; the phase difference itself is asserted."
+  },
+  {
+   "id": "S4.3.7.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the zero label has frame I and every other route runs from label 0 to label F",
+    "the sign -1 on the route Y_a -> X_a from the scalar exchange (the reason for negating X outputs)",
+    "k-column statement C^{tensor mk}"
+   ],
+   "note": "'Negating physical $X$ outputs and undoing the exchange leaves $C^{\\otimes m}$ everywhere' asserts the conclusion; the sign of the scalar exchange and the frames on the other routes are not connected to it on the page."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "Over $\\mathbb F_2,$ norm-one tensors of indicators or coordinate units give each nonzero residual an orthonormal basis",
+   "problem": "The norm-one tensors only show that each residual contains a vector of norm one, i.e. is nonalternating; with nondegeneracy (not mentioned), the orthonormal basis then comes from the splitting theorem for nondegenerate nonalternating binary symmetric spaces (paper, proof of Lemma motif-residuals). As worded, the tensors seem to supply the basis themselves."
+  },
+  {
+   "severity": "minor",
+   "quote": "2&X\\text{, side}&(B\\otimes F)\\perp(P\\otimes\\langle t_T\\rangle)",
+   "problem": "The same symbol $t_T$ is used in rows 2 and 5 of the gate table for different triples (the X-side gate's triple at time 2, the Y-side gate's triple at time 5); read with one $T$, the $2\\to5$ inclusion $P\\otimes\\langle t_T\\rangle\\subset P\\otimes t_T^\\perp$ would be false since $\\langle t_T,t_T\\rangle\\neq0$. The paper writes $t_X,t_Y$ and says that for a gate indexed by a physical bank triple, $t$ is that triple's indicator."
+  }
+ ],
+ "motivation_given": true
+}

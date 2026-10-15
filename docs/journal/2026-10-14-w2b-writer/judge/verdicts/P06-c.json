@@ -1,0 +1,251 @@
+{
+ "page": "P06",
+ "items": [
+  {
+   "id": "S4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page builds the triple-indicator labels, computes $L/N=3ch/\\binom h3=c/539$ and concludes $s_{\\rm b}=W_{\\rm b}m-2N+2L_{\\rm b}+N<W_{\\rm b}m$ and $s_{\\rm c}=W_{\\rm c}m-2N+2L_{\\rm c}<W_{\\rm c}m$, as the paper does; the residual lemma at its core (only center $3\\to4$ edges decrease) is asserted rather than tabulated."
+  },
+  {
+   "id": "S4.3.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "nondegeneracy of the tensor form on $\\mathcal F$ (the page says only 'forms multiplying factorwise')"
+   ],
+   "note": "Derives the rational formula from the coordinate sum 3: '$\\langle t_S,t_T\\rangle=|S\\cap T|-\\frac{3\\cdot3}9=|S\\cap T|-1$', gives $t_S\\cdot t_T=|S\\cap T|\\bmod 2$ over $\\mathbb F_2$, and gets nondegenerate triple lines and orthogonal neighbors in both constructions, matching the paper."
+  },
+  {
+   "id": "S4.3.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The terminal table matches the paper, and the sums are computed: 'sources total dimension $N$ and sinks $Nm+N(m-1)+(W-2N)m=Wm-N$'."
+  },
+  {
+   "id": "S4.3.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "$A=B\\perp P$ because $P$ is nondegenerate",
+    "the identity $(P\\otimes\\langle t\\rangle)^\\perp_{A\\otimes F}=(B\\otimes F)\\perp(P\\otimes t^\\perp)$ linking the outgoing $Y$ label to the time-5 gate label",
+    "empty-tensor-product convention ($A$ the ground field, $B=0$ at stage 1) behind the boundary check"
+   ],
+   "note": "Gives the same $X$/$Y$ transitions and the next-stage $A'=A\\otimes F,\\ P'=P\\otimes\\langle t_T\\rangle,\\ B'=(P')^\\perp_{A'}$ with $K=\\langle t_{a_{j+1}}\\rangle\\otimes K'$, so the outgoing labels are visibly the next incoming ones; the terminal match 'from $U_a,0$ to $\\mathcal F,U_a^\\perp$' is asserted."
+  },
+  {
+   "id": "S4.3.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the orthogonal residual of each edge (the paper's residual table, from splitting $A=B\\perp P$ and $F=\\langle t\\rangle\\perp t^\\perp$)",
+    "nondegeneracy of every label and residual",
+    "interstage edges and the scratch last-gate-to-sink edges (residual $(A\\otimes F)\\otimes Q^\\perp$)"
+   ],
+   "note": "The 2-to-5 nesting is shown, and so is the telescoping to $Wm-2N+2L$, but 'Labels nest along every edge' and 'Only central-wire edges $3\\to4$ decrease' are asserted without the paper's tabulation of every edge."
+  },
+  {
+   "id": "S4.3.4.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the organizing decomposition $A\\otimes F=(B\\otimes F)\\perp(P\\otimes F)$ and the chain $P\\otimes\\langle t_X\\rangle\\subset P\\otimes t_Y^\\perp\\subset P\\otimes F$ that motivate the labels",
+    "every displayed summand is nondegenerate"
+   ],
+   "note": "The table ('An invocation's gates get') is reproduced correctly, with the factor $K$ (the paper's $Q$), but it is given as a bare prescription."
+  },
+  {
+   "id": "S4.3.4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the residual $P\\otimes\\langle t_X,t_Y\\rangle^\\perp$ and its dimension $h-2$"
+   ],
+   "note": "'the side edge $2\\to5$ since neighbors $S,T$ satisfy $\\langle t_S\\rangle\\subset t_T^\\perp$' gives the paper's reason for the nesting."
+  },
+  {
+   "id": "S4.3.4.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "verification that every other edge (data, center, side, interstage, scratch-to-sink) is nondecreasing",
+    "$A=B\\perp P$, so $A\\otimes F\\to B\\otimes F$ removes exactly $P\\otimes F\\otimes Q$"
+   ],
+   "note": "'Only central-wire edges $3\\to4$ decrease, each losing $P\\otimes F$ of dimension $h,$ so $L=Ich.$' is asserted; the count $Ic$ of such edges is left implicit."
+  },
+  {
+   "id": "S4.3.4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Gates keep one label, so changes telescope along wires: signed ones total $(Wm-N)-N$ and absolute ones $Wm-2N+2L.$' Telescoping along wires is equivalent to the paper's telescoping at gates."
+  },
+  {
+   "id": "S4.3.4.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "nondegeneracy of every residual",
+    "criterion: a nondegenerate binary symmetric space is nonalternating iff it contains a norm-one vector",
+    "support-size argument ($3^{j-1}<h^{j-1}$; supports of size at most 3 and 6) placing coordinate units in $B$, $Q^\\perp$, $t^\\perp$, $\\langle t_X,t_Y\\rangle^\\perp$",
+    "theorem that a nondegenerate nonalternating binary symmetric space has an orthonormal basis (split off unit lines, absorb alternating planes)"
+   ],
+   "note": "A one-sentence claim backed by a citation; the nonalternating argument and the orthonormal-basis theorem are missing."
+  },
+  {
+   "id": "S4.3.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'$L/N=3ch/\\binom h3=c/539$' follows from $L=Ich$, $I=3\\binom h3^2$, $N=\\binom h3^3$, which gives $100/539$ and $101/539$ below one half. The extra $N$ source ranks and $2L_{\\rm b}<N$ are used in the bit paragraph."
+  },
+  {
+   "id": "S4.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "reversing a (decreasing) edge only negates $\\Pi_V-\\Pi_U$, so its rank is still the dimension loss",
+    "explicit value $s_{\\rm b}=177176569088785861287000000$"
+   ],
+   "note": "Projection labels, the endpoint identity, the rank of $\\Pi_V-\\Pi_U$ and the $N$ exceptional source edges together give $s_{\\rm b}=W_{\\rm b}m-N+2L_{\\rm b}<W_{\\rm b}m$, as in the paper."
+  },
+  {
+   "id": "S4.3.6.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'every route gets the shear $\\mathrm{id}:$ $\\Pi_{U_a^\\perp}-(-\\Pi_{U_a})$ on $X_a\\to Y_a$ and $\\Pi_{\\mathcal F}-0$ elsewhere.'"
+  },
+  {
+   "id": "S4.3.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "explicit value 177176569088785861287000000"
+   ],
+   "note": "'So $s_{\\rm b}=W_{\\rm b}m-2N+2L_{\\rm b}+N<W_{\\rm b}m$ because $2L_{\\rm b}<N$ holds' follows from the edge-rank rule plus the $N$ exceptions."
+  },
+  {
+   "id": "S4.3.6.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "reversing an edge negates the matrix without changing its rank"
+   ],
+   "note": "'An edge $U\\subset V$ costs $\\operatorname{rank}(\\Pi_V-\\Pi_U)=\\operatorname{rank}\\Pi_{V\\cap U^\\perp}=\\dim V-\\dim U$' matches the paper, but only increasing edges are covered."
+  },
+  {
+   "id": "S4.3.6.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'except the first edge of $X_a,$ into $U_a$ as $B=0,$ costing $\\operatorname{rank}2\\Pi_{U_a}=1$', and the $+N$ in $s_{\\rm b}$ accounts for these edges."
+  },
+  {
+   "id": "S4.3.6.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The same sentence as S4.3.6.1 checks both cases: $\\Pi_{U_a^\\perp}+\\Pi_{U_a}=I$ for $X_a$, and $0\\to\\mathcal F$ for the other roles."
+  },
+  {
+   "id": "S4.3.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "extension to $k$ columns ($Z_{a,k}$, $i^{27k}$, $C^{\\otimes mk}$)",
+    "Gaussian-dyadic integrality of the frames",
+    "explicit value of $s_{\\rm c}$"
+   ],
+   "note": "The page follows the paper: weight additivity mod 4, then one $\\alpha+\\beta\\,\\mathrm{sh}_e$ kernel per residual basis vector, then the count $s_{\\rm c}$, then the $Z$ fix on $X_a\\to Y_a$."
+  },
+  {
+   "id": "S4.3.7.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "entries of $\\mathcal C_U$ and its inverse are Gaussian integers over $2^m$, so they preserve $\\mathbb Z[i,1/2]$ arrays"
+   ],
+   "note": "$q_U$, $\\mathcal C_U$ and $C=H\\operatorname{diag}(1,i)H=\\alpha+\\beta\\,\\mathrm{sh}$ with $\\alpha=\\frac{1+i}2,\\beta=\\frac{1-i}2$ are given correctly, as definitions; the identity for $C$ is asserted, not computed."
+  },
+  {
+   "id": "S4.3.7.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "explicit value 1873807244636671267308000000"
+   ],
+   "note": "Each residual basis vector gives one kernel, so the count is the sum of absolute dimension changes: '$s_{\\rm c}=W_{\\rm c}m-2N+2L_{\\rm c}<W_{\\rm c}m$ as $L_{\\rm c}<N$ holds'."
+  },
+  {
+   "id": "S4.3.7.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "identity $\\operatorname{wt}(z+w)=\\operatorname{wt}(z)+\\operatorname{wt}(w)-2|\\operatorname{supp}z\\cap\\operatorname{supp}w|$"
+   ],
+   "note": "'weight is additive mod 4, as orthogonal binary vectors share an even support' gives the crux, but not the identity that turns an even intersection into additivity mod 4."
+  },
+  {
+   "id": "S4.3.7.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "$V=U\\perp E$ behind the sum, and which sign applies ($+$ increasing, $-$ decreasing)",
+    "$\\operatorname{wt}(e)$ is odd because $e$ has norm one"
+   ],
+   "note": "The displayed '$q_V(x)-q_U(x)\\equiv\\pm\\sum_{e\\in\\mathcal E}\\operatorname{wt}(e)[e\\cdot x]$' is presented as a consequence of additivity, but the sign rule and the reason the weight is odd are not given."
+  },
+  {
+   "id": "S4.3.7.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "$H\\operatorname{diag}(1,-1)H=X$ is tensored over the coordinates of $\\operatorname{supp}(e)$"
+   ],
+   "note": "Gives $i^{\\varepsilon[e\\cdot x]}=\\tfrac{1+i^\\varepsilon}2+\\tfrac{1-i^\\varepsilon}2(-1)^{e\\cdot x}$ and $H\\operatorname{diag}(1,-1)H=\\mathrm{sh}$ turning $(-1)^{e\\cdot x}$ into $\\mathrm{sh}_e$, hence 'one kernel $\\alpha+\\beta\\,\\mathrm{sh}_e$ or its inverse'."
+  },
+  {
+   "id": "S4.3.7.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "derivation of $q_{U_a^\\perp}-q_{U_a}$ from $u_a$ having binary norm one and weight $27=3^3$",
+    "$2[u\\cdot x]\\equiv2\\sum_{j\\in\\operatorname{supp}u}x_j\\pmod 4$",
+    "$k$-column version $Z_{a,k}$ and $i^{27k}$"
+   ],
+   "note": "Chain: '$q_{U_a^\\perp}-q_{U_a}\\equiv\\operatorname{wt}(x)+2[u_a\\cdot x]$ gives $C^{-1}$ on $\\operatorname{supp}u_a$ ... fixed by $Z$ ... before and $i^{27}Z$ after since $C=iZC^{-1}Z$'. This is correct for one column, but the phase difference is asserted."
+  },
+  {
+   "id": "S4.3.7.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "zero label has frame $I$, and every other pair runs from label $0$ to $\\mathcal F$ (frames $I\\to C^{\\otimes m}$)",
+    "the scalar exchange $(X_a,Y_a)\\mapsto(-Y_a,X_a)$ as the source of the sign on physical $X$ outputs",
+    "$k$-column statement $C^{\\otimes mk}$"
+   ],
+   "note": "'Negating physical $X$ outputs and undoing the exchange leaves $C^{\\otimes m}$ everywhere.' is a bare conclusion."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "Over $\\mathbb F_2,$ norm-one tensors of indicators or coordinate units give each nonzero residual an orthonormal basis",
+   "problem": "This reads as if the orthonormal basis is made of such tensors. In the paper, these vectors only show that each nonzero (nondegenerate) residual contains a norm-one vector, so it is nonalternating. The orthonormal basis then comes from the general theorem that a nondegenerate nonalternating binary symmetric space has one (split off unit lines, absorb alternating planes with w+a, w+b, w+a+b)."
+  },
+  {
+   "severity": "minor",
+   "quote": "with $T$ the wire's $j$th triple",
+   "problem": "The gate table reuses $t_T$, but there $T$ must be the gate's own physical triple. The paper says 'for a gate indexed by a physical bank triple, $t$ denotes that triple's indicator'. A side wire passes gates of two different triples ($Y$-triple at times 0 and 5, $X$-triple at times 2 and 7), so 'the wire's triple' does not determine its labels; the page then switches to $S,T$ for the 2-to-5 edge."
+  },
+  {
+   "severity": "minor",
+   "quote": "q_V(x)-q_U(x)\\equiv\\pm\\sum_{e\\in\\mathcal E}\\operatorname{wt}(e)[e\\cdot x]",
+   "problem": "The sign is unspecified. The paper has $+$ when $V=U\\perp E$ (an increasing edge) and the right side negated on a decreasing edge, where $E$ is the residual inside $U$."
+  }
+ ],
+ "motivation_given": true
+}

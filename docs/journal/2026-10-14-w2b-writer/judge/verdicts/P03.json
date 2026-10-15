@@ -1,0 +1,22 @@
+{"page": "P03",
+ "items": [
+  {"id": "S4.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page runs the paper's chain: log m<20, then m^{1-2^{-50}}=m exp(-2^{-50} log m)>m(1-20*2^{-50})>m(1-eta), then s/W=m(1-eta)<m^tau for both networks with tau=sigma=1-2^{-50}. It also adds the e^{-x}>1-x justification and the identity s/W=m(1-eta), which the paper leaves implicit."},
+  {"id": "S4.4.1", "presence": "stated", "faithful": null, "dropped": [],
+   "note": "The page gives the definition eta=(Wm-s)/(Wm) and copies the two values 339/22587335000000 and 73/19906842167500, then asserts 'both greater than 20*2^{-50}'. It neither computes the values from W, s, m nor shows the comparison (about 1.5e-11 and 3.7e-12 against about 1.8e-14). The paper does not show these either."},
+  {"id": "S4.4.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page reproduces 'Since m<2^{20} and log 2<1, we have log m<20', which is the paper's reasoning (log m<20 log 2<20). The page never gives m=h^3=10^6, so the premise m<2^{20} is not grounded on the page, although the assigned passage does not supply it either."},
+  {"id": "S4.4.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page gives the full chain and justifies the first inequality 'using e^{-x}>1-x for x>0' together with log m<20. The final step uses eta>20*2^{-50}, which the page stated just before. This matches the paper."},
+  {"id": "S4.4.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page closes the argument with 'Since s/W=m(1-eta), consequently s_b/W_b<m^tau and s_c/W_c<m^sigma with 0<tau=sigma=1-2^{-50}<1'. This follows correctly from the definition of eta and the preceding chain, as in the paper."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Replace each scalar by an array of logical volume $V$, the total size of the array, and use [Elementary stream operations](elementary-stream-ops.md) to split it into $W$ role streams of volume $V/W$.",
+   "problem": "This conflates the per-wire array with the whole input. In the paper a single input array of logical volume V is split by rows into W role streams, and each wire (scalar) carries one stream of volume V/W. It is not that each scalar becomes an array of volume V, which would give total volume WV."},
+  {"severity": "minor",
+   "quote": "using $e^{-x}>1-x$ for $x>0$",
+   "problem": "This is a notation clash. The page earlier defines e as the recursion parameter ('A call at parameter $e=m^k$', 'F_k=O(m^{k\\tau})=O(e^\\tau)') and here uses e for Euler's number. The paper writes exp for the exponential."}
+ ],
+ "motivation_given": true}

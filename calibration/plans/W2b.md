@@ -46,6 +46,40 @@
 
 | Item | Status |
 |---|---|
-| W2WSP16, W2WOP16, W2WSP15R | accepted (00:0x UTC) |
-| W2WOP15R | accepted at 00:17 UTC (1,187 s, 58 tool uses) |
-| J24 | prepared at 00:18 (`scratchpad/prep-j24.py`, seed 20261037; key P01 W2WOP16, P02 W2WOP15, P03 W2WSP16, P04 W2WSP15R, P05 W2WSP15, P06 W2WOP15R); all 18 judges launched at 00:18 |
+| W2WSP16, W2WOP16, W2WSP15R | accepted; subagents ended at 00:00, 00:04 and 00:06 UTC |
+| W2WOP15R | accepted; subagent ended at 00:18 UTC (1,187 s, 50 calls) |
+| J24 | prepared at 00:18 (`scratchpad/prep-j24.py`, seed 20261037; key P01 W2WOP16, P02 W2WOP15, P03 W2WSP16, P04 W2WSP15R, P05 W2WSP15, P06 W2WOP15R); all 18 judges launched at 00:19 |
+| J24 | complete at 00:25 UTC, all 18 verdicts (`docs/journal/2026-10-14-w2b-writer/judge/results.txt`) |
+
+## Result (J24, 00:25 UTC; read by the pooled rule above, `tools/pages.py --pooled`)
+
+| Page | Opus `xhigh`, faithful of assigned (each judge) | Sonnet `high` | Opus major errors | Sonnet major errors | Opus better (rule) |
+|---|---|---|---|---|---|
+| 0015 (8 items) | W2WOP15 8, 8, 8; W2WOP15R 8, 7, 8. Pooled median 8, minimum 7 | W2WSP15 7, 6, 5; W2WSP15R 5, 5, 5. Pooled median 5 | 0 in all six | W2WSP15 0; W2WSP15R 2, 1, 1 | **yes** (7 ≥ 5, and 8 > 5) |
+| 0016 (4 items) | W2WOP16 4, 4, 4 | W2WSP16 3, 3, 3 | 0 | 0 | **yes** (4 ≥ 3, and 4 > 3) |
+
+**By the table: Opus is better on both hard pages, with no more major errors. The action is to propose a split writer policy to the author:** Opus `xhigh` for key-step pages, Sonnet `high` elsewhere, with its cost.
+
+**What the differences are** (from the verdicts, read after the result):
+- **Page 0015:** W2WSP15R makes the same major error in all three judgements. It states the inner products of the triple indicators, $\langle t_S,t_T\rangle=|S\cap T|-1$ and $\langle t_T,t_T\rangle=2$, right after defining both forms. Those values hold only for the rational form; under the phase network's $\mathbb F_2$ dot product (paper lines 867–870) they are false, and the line they span would be degenerate. One judge also finds "a nonzero residual contains a coordinate unit vector" false. W2WSP15 has no major error but leaves 1–3 sub-steps stated rather than derived.
+- **Page 0016:** every judge finds the same gap in W2WSP16. S4.4.1, the size of the saving $\eta=(Wm-s)/(Wm)$, is stated: the page copies the two exact values and asserts that both exceed $20\cdot2^{-50}$, without computing them. W2WOP16 derives it.
+
+**Judge drift between batches.** W2WSP15 was judged 8, 6, 7 in J22 and 7, 6, 5 here; W2WOP15 was 8, 8, 8 in both. Pooling both runs and re-judging the W2 pages in the same batch is what the design was for: W2's one-run reading ("within noise") did not hold once Sonnet's second run and the shared batch were in.
+
+**The limits:**
+- one paper and two hard pages;
+- two runs per configuration on page 0015, and one on page 0016, where the gap is a single sub-step (consistent across the three judges);
+- on the easier page 0014 (W2), Opus and Sonnet were both adequate, so Opus there buys nothing measured.
+
+**Measured cost per page, cache read** (`perrun.py`):
+
+| Page | Opus `xhigh` | Sonnet `high` | Ratio |
+|---|---|---|---|
+| 0015 | 8.13 M, 8.06 M (1,187–1,226 s) | 4.06 M, 3.92 M (509–608 s) | ~2.0× |
+| 0016 | 2.09 M (348 s) | 0.66 M (116 s) | ~3.2× |
+| 0014 (W2) | 1.92 M | 0.34 M | ~5.6× |
+
+- The added cost is about 1.4–4.2 M cache read per hard page, in measured tokens. Opus's higher price per token is not converted here (runbook §5).
+- How many pages count as "key-step" is part of the proposal. In E9F4Y's wiki, 0014–0016 carry the central saving's step S4; the wiki has 36 write pages.
+
+**J24 measured 9.67 M cache read** for 18 judgements (0.54 M each). The four W2b runs measured 14.7 M.

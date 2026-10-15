@@ -62,7 +62,7 @@ That is past runbook §5's threshold, so E10 waits for a reading or the ~23:30 r
 | the development session | 115.1 M |
 | **together** | **~364 M** |
 
-That is past runbook §5's ~300 M threshold. J24 (W2b's page judging, ~8–10 M by J22's measured 0.43 M per judgement) was launched at 00:18 because it completes an experiment whose runs were already spent. E11 (~125–250 M) waits for a reading or the next reset (about 04:40 UTC, assuming a five-hour window; a check-in is scheduled at 04:42).
+That is past runbook §5's ~300 M threshold. J24 (W2b's page judging, ~8–10 M by J22's measured 0.43 M per judgement; measured 9.67 M) was launched at 00:19 because it completes an experiment whose runs were already spent. E11 (~125–250 M) waits for a reading or the next reset (about 04:40 UTC, assuming a five-hour window; a check-in is scheduled at 04:42).
 
 **Measured since the 14:20 reset, with no reading yet** (`spend.py --since 2026-10-14T14:20`, 15:51 UTC). These are counts, not a reading:
 

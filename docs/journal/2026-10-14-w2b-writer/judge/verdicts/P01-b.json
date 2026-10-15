@@ -1,0 +1,19 @@
+{"page": "P01",
+ "items": [
+  {"id": "S4.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page sets tau=sigma=1-2^{-50}, gets log m<20 from m<2^{20}, writes the chain m^{1-2^{-50}}=m exp(-2^{-50}log m)>...>m(1-20*2^{-50})>m(1-eta)=s/W, and concludes s_b/W_b<m^tau and s_c/W_c<m^sigma. This is the paper's argument (lines 1319-1346), with the step exp(-x)>1-x written out."},
+  {"id": "S4.4.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page defines eta=(Wm-s)/(Wm), notes s/W=m(1-eta), and takes W_b m-s_b=(339/539)N and W_c m-s_c=(876/539)N from the label counts (both match N-2L_b and 2N-2L_c in the paper). Dividing by W_b m and W_c m with the stated N, W_b and W_c gives exactly 339/22587335000000 and 73/19906842167500. The comparison with 20*2^{-50}~1.8e-14 is checked numerically. The page does not show how 339/539 and 876/539 come from L/N=100/539 and 101/539, but that belongs to S4.3."},
+  {"id": "S4.4.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "\"Since m<2^{20}, the natural logarithm satisfies log m<20 log2<20\": this is the paper's reasoning, with log 2<1 used implicitly in the last inequality. m=10^6 is given earlier, so m<2^{20} can be checked."},
+  {"id": "S4.4.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page gives the full chain m exp(-2^{-50}log m)>m(1-2^{-50}log m)>m(1-20*2^{-50})>m(1-eta) and justifies each link: exp(-x)>1-x, log m<20, and eta>20*2^{-50}. This matches the paper and makes its implicit step explicit."},
+  {"id": "S4.4.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Because s/W=m(1-eta), the chain ends at s/W, and the page concludes \"s_b/W_b<m^tau and s_c/W_c<m^sigma, with 0<tau=sigma<1\", as the paper does."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Let $\\tau<1$ be an exponent with $a<m^\\tau$. Then both are $O(m^{k\\tau})=O(e^\\tau)$",
+   "problem": "The page drops the requirement tau>0. If a<=1 the sum is O(k+1), and k+1=O(m^{k tau}) only when tau>0. The paper chooses tau in (0,1) (Proposition power-interchange, line 1481). The page's later choice tau=1-2^{-50} satisfies this, so the argument is unaffected."}
+ ],
+ "motivation_given": true}

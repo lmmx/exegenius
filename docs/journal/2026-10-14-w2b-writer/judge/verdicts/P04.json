@@ -1,0 +1,283 @@
+{
+ "page": "P04",
+ "items": [
+  {
+   "id": "S4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "gate-label table by time (S4.3.4.1)",
+    "edge residual table showing every edge nested and only center 3->4 decreasing",
+    "central wire counts c_b=100, c_c=101"
+   ],
+   "note": "The page carries the paper's chain: labels, residual dimension = label change, L=Ich, L/N=3ch/v<1/2, then s_b=Wm-N+2L_b<Wm and s_c=Wm-2N+2L_c<Wm. But the central lemma ('Only central edge 3->4 loses dimension') is cited, not shown."
+  },
+  {
+   "id": "S4.3.1",
+   "presence": "derived",
+   "faithful": false,
+   "dropped": [
+    "nondegeneracy of the rational form (eigenvalues 1 and 1-h/9=-91/9)",
+    "restriction of <t_S,t_T>=|S cap T|-1 and <t_T,t_T>=2 to the rational form",
+    "binary values t_T.t_T=1 and t_S.t_T=|S cap T| mod 2",
+    "neighbor relations (|S cap T|=1 in the bit network, even intersection in the complex network)",
+    "nondegeneracy of the tensor form on F^{otimes 3}"
+   ],
+   "note": "The page states the rational formulas right after defining both forms and concludes 'So each line <t_T> is nondegenerate, and neighbors' lines are orthogonal' for both. Over F_2 these values are wrong (t_T.t_T=1, not 2=0), so the phase case is unjustified, and the neighbor relation that orthogonality needs is never given."
+  },
+  {
+   "id": "S4.3.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The terminal-label table matches the paper. The totals N and Wm-N are justified by '(U_a^perp has dimension m-1)'."
+  },
+  {
+   "id": "S4.3.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "incoming labels A(x)<t>(x)Q on X and B(x)<t>(x)Q on Y",
+    "the factor Q and Q=<t_{a_{j+1}}>(x)Q'",
+    "A=B perp P from nondegeneracy of P",
+    "B=0 at stage 1 (the empty tensor product is the ground field)",
+    "boundary check: labels start at U_a and 0 and end at F^{otimes3} and U_a^perp"
+   ],
+   "note": "The page gives A', P', B' but never states the incoming labels, so 'Outgoing labels A(x)F on X and B' on Y equal the next incoming ones' is asserted, not checked. It also drops the factor Q that makes the match work."
+  },
+  {
+   "id": "S4.3.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "gate-label table (S4.3.4.1)",
+    "residual table for every edge, including interstage edges and the scratch last->sink residual (A(x)F)(x)Q^perp of dimension ah(f-1)",
+    "nondegeneracy of every label and summand"
+   ],
+   "note": "That every edge joins comparable labels, and that 'Only central edge 3->4 loses dimension', is asserted with a citation. L=Ich and the absolute sum Wm-2N+2L then follow correctly."
+  },
+  {
+   "id": "S4.3.4.1",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "labels at times 0-7: B(x)<t>, B(x)F, (B(x)F)perp(P(x)<t>), A(x)F, B(x)F, (B(x)F)perp(P(x)t^perp), A(x)F, A(x)F, each tensored by Q",
+    "gate order Y-side, Y-center, X-side, X-center, Y-center, Y-side, X-center, X-side"
+   ],
+   "note": "The page never gives the gate labels by time, though it refers to 'side edge 2->5' and 'central edge 3->4'."
+  },
+  {
+   "id": "S4.3.4.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the two labels (B(x)F)perp(P(x)<t_X>) subset (B(x)F)perp(P(x)t_Y^perp)",
+    "complement of <t_X> inside t_Y^perp is <t_X,t_Y>^perp",
+    "factor Q"
+   ],
+   "note": "The key implication 't_X perp t_Y gives <t_X> subset t_Y^perp' is on the page. But the labels at times 2 and 5 never appear, so 'labels nest, with residual P(x)<t_X,t_Y>^perp' cannot be checked from the page."
+  },
+  {
+   "id": "S4.3.4.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "labels A(x)F at time 3 and B(x)F at time 4, with A(x)F=(B(x)F)perp(P(x)F)",
+    "the other edge residuals showing nondecrease",
+    "factor Q in the lost space P(x)F(x)Q",
+    "values c_b=100, c_c=101"
+   ],
+   "note": "'Only central edge 3->4 loses dimension, namely P(x)F of dimension h' is cited, not shown. The count L=Ich from 'I=3v^2 invocations of c central wires each' is correct."
+  },
+  {
+   "id": "S4.3.4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "reason for the cancellation: each touched wire has one incoming and one outgoing incidence carrying the same gate label"
+   ],
+   "note": "'Signed changes telescope at each gate to Wm-2N; absolute values add 2L' follows from the source and sink totals given earlier, as in the paper."
+  },
+  {
+   "id": "S4.3.4.5",
+   "presence": "derived",
+   "faithful": false,
+   "dropped": [
+    "nondegeneracy of each residual",
+    "norm-one vectors: those spanning the lines P, Q, plus coordinate units in B, Q^perp, triple complements and full spaces, tensored and placed in an orthogonal summand",
+    "a nondegenerate nonalternating binary space has an orthonormal basis (absorbing alternating planes)"
+   ],
+   "note": "The page's reason, 'A nonzero residual contains a coordinate unit vector, hence an orthonormal basis', is false (e.g. P(x)<t_Y>(x)Q is spanned by a weight-27 tensor) and skips nondegeneracy. The paper builds a norm-one vector by tensoring and uses nondegenerate plus nonalternating."
+  },
+  {
+   "id": "S4.3.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "central wire counts c_b=100 (C_i, i in [h]) and c_c=101 (adding C_*)"
+   ],
+   "note": "'As L/N=3ch/v' correctly reduces the ratios (3*100*100/161700=100/539, 3*101*100/161700=101/539). But the page never gives the values of c, so the reader cannot finish the computation."
+  },
+  {
+   "id": "S4.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "route rho (X_a<->Y_a, scratch fixed) in the endpoint identity",
+    "reversing an edge negates P_V-P_U without changing rank",
+    "frame Phi_M:(H,D)->(H+MD,D)",
+    "numeric value of s_b"
+   ],
+   "note": "The page assigns P_U (and -P_{U_a} at X_a sources), counts ranks as dimension changes plus N for the source edges, and gets 's_b=Wm-N+2L_b<Wm', as in the paper."
+  },
+  {
+   "id": "S4.3.6.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "definition of rho",
+    "purpose: the same shear H<-H+D on every role"
+   ],
+   "note": "'Ends: P_{U_a^perp}+P_{U_a}=I_m for X_a, else I_m-0' verifies the identity, though it silently uses the route X_a->Y_a without naming rho."
+  },
+  {
+   "id": "S4.3.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "value 177176569088785861287000000"
+   ],
+   "note": "It follows from the absolute sum Wm-2N+2L plus N for the source edges. The '<Wm' uses L_b<N/2."
+  },
+  {
+   "id": "S4.3.6.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "P_U is the projection along U^perp (needs U nondegenerate)",
+    "reversing the edge negates the matrix without changing rank (needed for the decreasing center edges)"
+   ],
+   "note": "'P_V-P_U is the identity on V cap U^perp and zero on its complement, so has rank dim V-dim U' matches the paper. The reversed-edge case is left implicit."
+  },
+  {
+   "id": "S4.3.6.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "why B=0 at stage 1 (empty tensor product)",
+    "first gate label (B(x)F)perp(P(x)<t>)(x)Q reduces to U_a"
+   ],
+   "note": "'at stage 1, B=0, the first gate label is U_a, and 2P_{U_a} has rank 1, not 0' is the paper's argument."
+  },
+  {
+   "id": "S4.3.6.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Correct: P_{U_a^perp}-(-P_{U_a})=I_m, and every other role goes from 0 to I_m ('else I_m-0')."
+  },
+  {
+   "id": "S4.3.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "details of the X_a->Y_a correction (Z_{a,k} before, i^{27k}Z_{a,k} after)",
+    "negation of the physical X outputs",
+    "k-column tensor version",
+    "Gaussian-dyadic entries of the frames"
+   ],
+   "note": "Weight additivity, the phase difference per orthonormal residual vector and the kernel identity are derived, giving s_c=Wm-2N+2L_c<Wm. The final source and sink corrections are only asserted."
+  },
+  {
+   "id": "S4.3.7.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "normalization H=(1/sqrt2)[[1,1],[1,-1]]",
+    "entries of C_U and its inverse are Gaussian integers over 2^m, preserving Z[i,1/2] arrays",
+    "X is the coordinate swap"
+   ],
+   "note": "The definitions of q_U, C, a, b and C_U are given correctly up to H's normalization. But 'C=H diag(1,i)H=aI+bX' is only asserted, and the Gaussian-dyadic property is not mentioned."
+  },
+  {
+   "id": "S4.3.7.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "value 1873807244636671267308000000"
+   ],
+   "note": "'One kernel per basis vector gives s_c=Wm-2N+2L_c<Wm' follows from residual dimension = label change and the sum Wm-2N+2L, with no extra N here."
+  },
+  {
+   "id": "S4.3.7.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'orthogonal z,w overlap evenly, so weight is additive mod 4' is the paper's argument."
+  },
+  {
+   "id": "S4.3.7.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "wt(v) is odd because v.v=1 (norm one)"
+   ],
+   "note": "The formula, negated on decreasing edges, matches the paper. 'As wt(v) is odd' is asserted without the norm-one reason."
+  },
+  {
+   "id": "S4.3.7.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "(X_v f)(x)=f(x+v)",
+    "H diag(1,-1)H=X tensored over supp(v)"
+   ],
+   "note": "The displayed identity for i^{eps[v.x]}, turned by H diag(1,-1)H=X into aI+bX_v or its inverse, matches the paper."
+  },
+  {
+   "id": "S4.3.7.6",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "q_{U_a^perp}-q_{U_a}=wt(x)+2[u.x] mod 4 (u has norm one and weight 27)",
+    "zero label has frame I and full label has frame C^{otimes m} since q_F(x)=wt(x)",
+    "corrections Z_{a,k} before the network at X_a and i^{27k}Z_{a,k} after it at Y_a"
+   ],
+   "note": "'the 27 coordinates of supp(u_a) get C^{-1}, fixed by C=iZC^{-1}Z' is asserted. The page shows neither why those coordinates get C^{-1} nor how the Z corrections are applied."
+  },
+  {
+   "id": "S4.3.7.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "negate the physical X outputs (scalar sign -1)",
+    "send output role rho(w) back to w",
+    "k-column version C^{otimes mk}"
+   ],
+   "note": "'undoing signs and exchange gives C^{otimes m} on every role' is asserted only."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "major",
+   "quote": "A triple $T$ has indicator $t_T$ with $\\langle t_S,t_T\\rangle=|S∩T|-1$ ... and $\\langle t_T,t_T\\rangle=2$. So each line $\\langle t_T\\rangle$ is nondegenerate, and neighbors' lines are orthogonal.",
+   "problem": "The page states this right after defining both forms, with no qualifier, but it holds only for the rational form x^T(I-J/9)y. For the F_2 dot product of the phase network, t_S.t_T=|S cap T| mod 2 and t_T.t_T=1. Read literally, <t_T,t_T>=2=0 in F_2 makes each line isotropic (degenerate), and |S cap T|-1 is odd for the complex neighbors (even intersection), so they would not be orthogonal. The paper treats the two cases separately: 'For the complex network, take instead F=F_2^h with the ordinary dot product; here t_T.t_T=1.'"
+  },
+  {
+   "severity": "major",
+   "quote": "A nonzero residual contains a coordinate unit vector, hence an orthonormal basis",
+   "problem": "This is false. For example, the side 5->7 residual P(x)<t_Y>(x)Q is a line spanned by a tensor of three triple indicators (weight 27), and the center residual P(x)F(x)Q contains no coordinate unit of F^{otimes3} when P or Q is spanned by a vector of weight above one. The inference also skips nondegeneracy. The paper shows each residual is nondegenerate and contains a norm-one vector, made by tensoring coordinate units (in B, Q^perp, triple complements, full spaces) with the norm-one vectors spanning P and Q. It then uses the fact that a nondegenerate nonalternating binary space has an orthonormal basis."
+  },
+  {
+   "severity": "minor",
+   "quote": "let $H$ be the Hadamard matrix, ... $C=H\\operatorname{diag}(1,i)H=aI+bX$",
+   "problem": "The paper uses the normalized H=(1/sqrt2)[[1,1],[1,-1]]. With the unnormalized Hadamard matrix the product is 2(aI+bX), and H diag(1,-1)H=2X, so C_U would be off by 2^m."
+  },
+  {
+   "severity": "minor",
+   "quote": "Outgoing labels $A\\otimes F$ on $X$ and $B'$ on $Y$ equal the next incoming ones",
+   "problem": "The page never introduces the one-dimensional factor Q=<t_{a_{j+1}} (x)...(x) t_{a_3}>. The labels are therefore not subspaces of F^{otimes3}, and the match with the next incoming labels A'(x)<t_{a_{j+1}}>(x)Q' only holds once Q=<t_{a_{j+1}}>(x)Q' is used. Likewise 'namely $P\\otimes F$ of dimension $h$' should be P(x)F(x)Q (the dimension is unchanged). The paper carries Q throughout."
+  }
+ ],
+ "motivation_given": true
+}

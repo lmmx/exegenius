@@ -1,0 +1,269 @@
+{
+ "page": "P05",
+ "items": [
+  {
+   "id": "S4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "orthogonal-residual table for every edge (comparability of all labels and nondecrease outside center $3\\to4$)",
+    "explicit values $s_{\\rm b}=177176569088785861287000000$ and $s_{\\rm c}=1873807244636671267308000000$"
+   ],
+   "note": "The page carries the chain labels -> residual dimensions -> $L=Ich$ -> $L/N=c/539<1/2$ -> $s_{\\rm b}=Wm-N+2L_{\\rm b}<Wm$ and $s_{\\rm c}=Wm-2N+2L_{\\rm c}<Wm$, as the paper does, but the claim that every other edge is nested and nondecreasing is asserted, not tabulated."
+  },
+  {
+   "id": "S4.3.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "nondegeneracy of the tensor bilinear form on $\\mathcal F$"
+   ],
+   "note": "The page computes $t_S^{\\mathsf T}t_T=|S\\cap T|$ and $t_S^{\\mathsf T}Jt_T=9$ to get $\\langle t_S,t_T\\rangle=|S\\cap T|-1$, gives the eigenvalues $1,-91/9$, and for $\\mathbb F_2$ notes $t_T\\cdot t_T=1$ and orthogonality of even-intersection neighbors; $m=h^3$ and $u_a$ are as in the paper."
+  },
+  {
+   "id": "S4.3.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "The terminal labels are given correctly, but \\\"Sources total $N$, sinks $Wm-N$\\\" is asserted without the count ($N$ one-dimensional $X_a$ sources; sinks $Nm+N(m-1)+(W-2N)m$)."
+  },
+  {
+   "id": "S4.3.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "$B=0$ at stage 1 (empty tensor product is the ground field) and $A=B\\perp P$",
+    "boundary match: labels start at $U_a$ on $X_a$ and $0$ on $Y_a$ at stage 1 and end at $\\mathcal F$ and $U_a^\\perp$ at stage 3",
+    "the restriction $j<3$ for writing $R=\\langle t_{a_{j+1}}\\rangle\\otimes R'$"
+   ],
+   "note": "The page gives the transitions (using the paper's alternative form $(P\\otimes\\langle t\\rangle)^\\perp_{A\\otimes F}$ for outgoing $Y$) and the identifications $A'=A\\otimes F$, $P'=P\\otimes\\langle t\\rangle$, $B'=(P')^\\perp_{A'}$, which is the paper's argument that outgoing equals next incoming; the match with the terminal labels is not said."
+  },
+  {
+   "id": "S4.3.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "orthogonal-residual table for every edge (in$\\to2$, $2\\to3$, $0\\to1$, $4\\to5$, center source$\\to1$, $1\\to3$, $4\\to6$, side source$\\to0$, $0\\to2$, $5\\to7$, scratch last$\\to$sink)",
+    "nondegeneracy of every label",
+    "initial and final data labels match their terminals, so no other changes occur"
+   ],
+   "note": "Only the $2\\to5$ nesting and the telescoping are shown; \\\"Only central edges $3\\to4$ decrease\\\" and comparability of all other edges are asserted, and without the physical-wire assignment of the gates the reader cannot enumerate the edges."
+  },
+  {
+   "id": "S4.3.4.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "physical wires touched at each time (Y and its side wires at 0, Y and all center wires at 1, X and its side wires at 2, X and all center wires at 3, Y and center at 4, Y and its side wires at 5, X and center at 6, X and its side wires at 7)",
+    "organizing split $A\\otimes F=(B\\otimes F)\\perp(P\\otimes F)$ with center gates $A\\otimes F$ on $X$ and $B\\otimes F$ on $Y$",
+    "every displayed summand is nondegenerate"
+   ],
+   "note": "The eight labels are listed correctly (with $R$ for the paper's $Q$), but without the wire column of the paper's table or the reason the labels fit the stage transitions."
+  },
+  {
+   "id": "S4.3.4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "residual $P\\otimes\\langle t_X,t_Y\\rangle^\\perp$ of the $2\\to5$ edge and its dimension $h-2$"
+   ],
+   "note": "\\\"Orthogonal neighbors give $\\langle t_S\\rangle\\subset t_T^\\perp$, so edge $2\\to5$ nests\\\" is the paper's argument for the nesting; the residual and its dimension are not given."
+  },
+  {
+   "id": "S4.3.4.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "residual dimensions of the other edges showing they are nondecreasing"
+   ],
+   "note": "\\\"Only central edges $3\\to4$ decrease, losing $P\\otimes F\\otimes R$ of dimension $h$, so ... $L=Ich$\\\" is correct but asserted; the reader can see $A\\otimes F\\to B\\otimes F$ in the label list but not that no other edge decreases."
+  },
+  {
+   "id": "S4.3.4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "reason for the cancellation: each touched wire has one incoming and one outgoing incidence with the same gate label"
+   ],
+   "note": "With sources $N$ and sinks $Wm-N$ given earlier, \\\"Signed changes telescope at each gate to $Wm-2N$; absolute values add $2L$\\\" is the paper's telescoping argument in brief."
+  },
+  {
+   "id": "S4.3.4.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "a nondegenerate binary space is nonalternating iff it contains a norm-one vector",
+    "coordinate unit vectors outside supports of sizes $3^{j-1}$, three and six give norm-one vectors in each summand of each residual",
+    "every nondegenerate nonalternating binary space has an orthonormal basis"
+   ],
+   "note": "The existence of orthonormal residual bases is only cited (\\\"every nonzero orthogonal residual of an edge has an orthonormal basis\\\")."
+  },
+  {
+   "id": "S4.3.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "that the threshold $1/2$ comes from the $N$ extra source ranks of the rational interface ($s_{\\rm b}<W_{\\rm b}m$ needs $2L_{\\rm b}<N$)"
+   ],
+   "note": "The page gives $I/N=3/\\binom h3$, $h$ and $c_{\\rm b},c_{\\rm c}$, so $L/N=3hc/\\binom{100}3=c/539$ follows, though the arithmetic $\\binom{100}3=161700=300\\cdot539$ is left to the reader."
+  },
+  {
+   "id": "S4.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "frame $\\Phi_M:(H,D)\\mapsto(H+MD,D)$ with $M_v=P_{U_v}$",
+    "endpoint identity for $Y_a$ and scratch roles (zero source, identity sink)",
+    "$P_U$ is the projection along $U^\\perp$"
+   ],
+   "note": "Projection matrices, the rank of $P_V-P_U$, the $N$ exceptional source edges, and $s_{\\rm b}=Wm-N+2L_{\\rm b}<Wm$ follow the paper's proof; the shear frame that motivates the endpoint identity is absent."
+  },
+  {
+   "id": "S4.3.6.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the identity $M_{\\mathrm{sink}(\\rho(w))}-M_{\\mathrm{source}(w)}=I_m$ for every input role $w$, with $\\rho$ exchanging $X_a,Y_a$ and fixing scratch roles",
+    "its purpose: every role receives the same shear $H\\gets H+D$"
+   ],
+   "note": "Only the $X_a$ instance appears (\\\"at the endpoints $P_{U_a^\\perp}+P_{U_a}=\\mathbf 1$\\\"); the general requirement and its use are not stated."
+  },
+  {
+   "id": "S4.3.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "numeric value $177176569088785861287000000$"
+   ],
+   "note": "Adding $N$ to the absolute dimension sum $Wm-2N+2L_{\\rm b}$ gives $s_{\\rm b}=Wm-N+2L_{\\rm b}$, and $<Wm$ follows from $L_{\\rm b}/N<1/2$, as in the paper."
+  },
+  {
+   "id": "S4.3.6.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "reversing an edge negates $P_V-P_U$ without changing its rank (needed for the decreasing center edges)"
+   ],
+   "note": "\\\"$P_V-P_U$ is the identity on $V\\cap U^\\perp$ and zero elsewhere, so has rank $\\dim V-\\dim U$\\\" reproduces the paper's argument, with \\\"elsewhere\\\" for the orthogonal complement."
+  },
+  {
+   "id": "S4.3.6.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "at stage 1, $B=0$, so the first gate on $X_a$ has label exactly $U_a$"
+   ],
+   "note": "\\\"On the $N$ first edges of $X_a$, $2P_{U_a}$ has rank $1$, not $0$\\\" is asserted; why the head matrix is $P_{U_a}$ is not shown."
+  },
+  {
+   "id": "S4.3.6.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the other roles: zero source matrix and identity sink matrix"
+   ],
+   "note": "\\\"$P_{U_a^\\perp}+P_{U_a}=\\mathbf 1$\\\" is the paper's computation $P_{U_a^\\perp}-(-P_{U_a})=I_m$ for $X_a$; the other roles are not checked."
+  },
+  {
+   "id": "S4.3.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "$\\mathcal C_V\\mathcal C_U^{-1}=H^{\\otimes m}\\operatorname{diag}_x(i^{q_V-q_U})H^{\\otimes m}$ (all frames share $H^{\\otimes m}$)",
+    "zero label has frame $I$ and full label $C^{\\otimes m}$ since $q_{\\mathcal F}(x)=\\operatorname{wt}(x)$",
+    "negation of the physical $X$ outputs (signed exchange)",
+    "$k$-column version"
+   ],
+   "note": "Weight additivity, the phase sum over an orthonormal residual basis, the two-point kernel per basis vector and the count $s_{\\rm c}=Wm-2N+2L_{\\rm c}$ follow the paper; the role corrections are only sketched."
+  },
+  {
+   "id": "S4.3.7.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the projection $P_U$ is over $\\mathbb F_2$",
+    "entries of $\\mathcal C_U$ and its inverse are Gaussian integers over $2^m$"
+   ],
+   "note": "$q_U$, $H$, $C=H\\operatorname{diag}(1,i)H=\\tfrac{1+i}2\\mathbf 1+\\tfrac{1-i}2\\tau$ and $\\mathcal C_U$ are defined as in the paper (with $\\tau$ for the paper's $X$)."
+  },
+  {
+   "id": "S4.3.7.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "numeric value $1873807244636671267308000000$"
+   ],
+   "note": "One kernel per residual basis vector makes the count the absolute dimension sum $Wm-2N+2L_{\\rm c}$, and $<Wm$ since $L_{\\rm c}<N$."
+  },
+  {
+   "id": "S4.3.7.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "$z\\cdot w=0$ means $|\\operatorname{supp}z\\cap\\operatorname{supp}w|$ is even, so the correction is $0\\bmod4$"
+   ],
+   "note": "The page gives the weight formula and says orthogonal vectors add weights mod 4, leaving the evenness step implicit."
+  },
+  {
+   "id": "S4.3.7.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the sum is negated on a decreasing edge"
+   ],
+   "note": "\\\"$q_V-q_U=\\sum_{e\\in\\mathcal B}\\operatorname{wt}(e)[e\\cdot x]$\\\" for $V=U\\perp E$ with odd weights matches the paper; the sign for decreasing edges is absorbed into $\\varepsilon=\\pm1$ without comment."
+  },
+  {
+   "id": "S4.3.7.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page gives $i^{\\varepsilon[e\\cdot x]}=\\frac{1+i^\\varepsilon}2+\\frac{1-i^\\varepsilon}2(-1)^{e\\cdot x}$ and $HZH=\\tau$, yielding the kernel $\\frac{1+i^\\varepsilon}2\\mathbf 1+\\frac{1-i^\\varepsilon}2\\tau_e$, which is $aI+bX_e$ or its inverse."
+  },
+  {
+   "id": "S4.3.7.6",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "derivation of $q_{U_a^\\perp}-q_{U_a}\\equiv\\operatorname{wt}(x)+2[u_a\\cdot x]$ from orthogonal additivity with $u_a$ of norm one and weight $27$",
+    "$2[u\\cdot x]\\equiv2\\sum_{j\\in\\operatorname{supp}u}x_j\\pmod4$, which localizes $C^{-1}$ to the 27 coordinates",
+    "$k$-column corrections $Z_{a,k}$ and $i^{27k}$"
+   ],
+   "note": "The congruence and the resulting $C^{-1}$ on $\\operatorname{supp}u_a$ are asserted; the correction \\\"signs $Z$ before and $i^{27}Z$ after give $C$\\\" is correct for one column but the 27 factors of $i$ are not explained."
+  },
+  {
+   "id": "S4.3.7.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "zero label has frame $I$ and full label has frame $C^{\\otimes m}$, which settles every route except $X_a\\to Y_a$",
+    "negating the physical $X$ outputs that carry the scalar sign $-1$",
+    "$C^{\\otimes mk}$ on $k$ columns"
+   ],
+   "note": "\\\"Undoing the bank exchange gives all roles $C^{\\otimes m}$\\\" is asserted without the frame values at the zero and full labels or the sign correction."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "$\\langle x,y\\rangle=x^{\\mathsf T}(\\mathbf 1-J/9)y$, $J=\\mathbf 1\\mathbf 1^{\\mathsf T}$",
+   "problem": "$\\mathbf 1$ denotes both the identity matrix and the all-ones vector; read as the identity (as in $\\mathbf 1-J/9$ and later $P_{U_a^\\perp}+P_{U_a}=\\mathbf 1$), $J=\\mathbf 1\\mathbf 1^{\\mathsf T}$ would be the identity. The paper writes $I-J/9$ with $J$ the all-one matrix."
+  },
+  {
+   "severity": "minor",
+   "quote": "$P_V-P_U$ is the identity on $V\\cap U^\\perp$ and zero elsewhere",
+   "problem": "\\\"Elsewhere\\\" should be the orthogonal complement of $V\\cap U^\\perp$ with respect to the form $I-J/9$, not the standard one. The paper says \\\"zero on its orthogonal complement\\\", with $P_U$ the projection along $U^\\perp$."
+  },
+  {
+   "severity": "minor",
+   "quote": "Gate labels at times $0,\\dots,7$ (tensored with $R$) for neighbors $S,T$ at $X,Y$: $B\\otimes\\langle t\\rangle,\\ B\\otimes F,\\dots$",
+   "problem": "The time-0 label uses an undefined $t$ (it should be the $Y$ triple's indicator, $t_T$ in the page's naming). Putting $S$ at $X$ and $T$ at $Y$ also reverses the paper's convention ($x_T$ controls, $y_S$ targets), so a reader using the paper's names would swap the indicators at times 2 and 5."
+  },
+  {
+   "severity": "minor",
+   "quote": "Undoing the bank exchange gives all roles $C^{\\otimes m}$.",
+   "problem": "The scalar exchange is signed, $(X_a,Y_a)\\mapsto(-Y_a,X_a)$. The paper also negates the physical $X$ outputs before sending $\\rho(w)$ back to $w$. An unsigned undoing leaves $-C^{\\otimes m}$ on the $Y_a\\to X_a$ route."
+  }
+ ],
+ "motivation_given": true
+}

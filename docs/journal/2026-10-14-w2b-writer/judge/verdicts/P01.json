@@ -1,0 +1,19 @@
+{"page": "P01",
+ "items": [
+  {"id": "S4.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page defines eta=(Wm-s)/(Wm) so that s/W=m(1-eta), gets both deficits, and runs the chain m^{1-2^{-50}}=m exp(-2^{-50} log m)>m(1-2^{-50} log m)>m(1-20*2^{-50})>m(1-eta)=s/W to conclude s_b/W_b<m^tau and s_c/W_c<m^sigma. This is the paper's argument in Sec. 'Explicit rational bounds', with the step exp(-x)>1-x written out."},
+  {"id": "S4.4.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page gives W_b m-s_b=(339/539)N and W_c m-s_c=(876/539)N, the value of N, and both values of W, and divides by Wm to get 339/22587335000000 and 73/19906842167500. These are exact (checked with rationals). It then compares the decimals 1.5e-11 and 3.7e-12 with 20*2^{-50}~1.8e-14. The deficits in terms of N are taken as 'label counts' from S4.3, which another page derives."},
+  {"id": "S4.4.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "'Since m<2^20, the natural logarithm satisfies log m<20 log2<20', with m=10^6 given earlier. This is the paper's m<2^20 and log 2<1 argument."},
+  {"id": "S4.4.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The chain is displayed in full for either network. It makes the paper's implicit step explicit with 'exp(-x)>1-x for x>0' and the intermediate m(1-2^{-50} log m), and uses both deficits exceeding 20*2^{-50}."},
+  {"id": "S4.4.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The chain ends in '=s/W', and the page concludes 's_b/W_b<m^tau and s_c/W_c<m^sigma, with 0<tau=sigma<1', as in the paper."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Let $\\tau<1$ be an exponent with $a<m^\\tau$. Then both are $O(m^{k\\tau})=O(e^\\tau)$",
+   "problem": "The case a<=1 gives F_k=O(k+1), and k+1=O(m^{k tau}) needs tau>0. The paper chooses 'a rational number tau in (0,1) with s/W<m^tau' (Prop. power-interchange). The page states only tau<1 at this point. It gives 0<tau later, for the specific tau=1-2^{-50}."}
+ ],
+ "motivation_given": true}

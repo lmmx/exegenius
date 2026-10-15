@@ -1,0 +1,19 @@
+{"page": "P01",
+ "items": [
+  {"id": "S4.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page defines eta=(Wm-s)/(Wm) so that s/W=m(1-eta), computes both deficits, bounds log m<20, and runs the chain m^{1-2^{-50}}>m(1-20*2^{-50})>m(1-eta)=s/W to conclude s_b/W_b<m^tau and s_c/W_c<m^sigma with 0<tau=sigma<1, as the paper does (paper lines 1319-1346)."},
+  {"id": "S4.4.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page gives W_b m-s_b=(339/539)N and W_c m-s_c=(876/539)N (these agree with N-2L_b and 2N-2L_c for L_b/N=100/539 and L_c/N=101/539), together with N, W_b and W_c, and divides by Wm to get 339/22587335000000 and 73/19906842167500. These values check exactly. It then compares the decimal values 1.5e-11 and 3.7e-12 against 20*2^{-50}≈1.8e-14."},
+  {"id": "S4.4.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "\"Since m<2^{20}, the natural logarithm satisfies log m<20 log2<20\": the same argument as the paper, with log 2<1 used in the last inequality. m=10^6 is given earlier on the page."},
+  {"id": "S4.4.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes out the paper's chain and adds the step m(1-2^{-50}log m) through exp(-x)>1-x, which the paper leaves implicit. It uses both log m<20 and eta>20*2^{-50}."},
+  {"id": "S4.4.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The chain ends in \"=s/W for either network\". Since s/W=m(1-eta) was set up earlier, the conclusion s_b/W_b<m^tau, s_c/W_c<m^sigma with 0<tau=sigma<1 follows directly."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Let $\\tau<1$ be an exponent with $a<m^\\tau$. Then both are $O(m^{k\\tau})=O(e^\\tau)$",
+   "problem": "The case a<=1, where the sum is O(k+1), needs tau>0 for k+1=O(m^{k tau}). With tau<0 this fails. The paper's Proposition (power-width interchange) takes a rational tau in (0,1). The page states 0<tau only later, for the explicit value."}
+ ],
+ "motivation_given": true}
