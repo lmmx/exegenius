@@ -1,0 +1,62 @@
+verdicts read: 20; files expected: 20
+
+preference matrix (overall verdicts): row's wins over column / ties
+               E7F2W     E7F4W     E7F8W     E8F2X     E8F4X     E8F8X     E9F2Y  E9F2Y-L5
+E7F2W                                          0/0                                        
+E7F4W                                                    0/0                              
+E7F8W                                                              0/0                    
+E8F2X            4/0                                                         0/0          
+E8F4X                      2/0                                                            
+E8F8X                                2/0                                                  
+E9F2Y                                          4/0                                     4/0
+E9F2Y-L5                                                                     0/0          
+
+expected orderings (a pair counts when |net| >= 1):
+  E8F4X > E7F4W: verdicts for E8F4X 2 (2 clear), for E7F4W 0, tied 0 of 2; net +2; verdicts per order 1, 1; reversals across orders 0; items per verdict: E8F4X 26.0, E7F4W 0.0
+  E8F8X > E7F8W: verdicts for E8F8X 2 (2 clear), for E7F8W 0, tied 0 of 2; net +2; verdicts per order 1, 1; reversals across orders 0; items per verdict: E8F8X 25.5, E7F8W 0.0
+  E9F2Y > E8F2X: verdicts for E9F2Y 4 (4 clear), for E8F2X 0, tied 0 of 4; net +4; verdicts per order 2, 2; reversals across orders 0; items per verdict: E9F2Y 11.0, E8F2X 0.2
+  E8F2X > E7F2W: verdicts for E8F2X 4 (4 clear), for E7F2W 0, tied 0 of 4; net +4; verdicts per order 2, 2; reversals across orders 0; items per verdict: E8F2X 14.2, E7F2W 0.0
+  E9F2Y > E9F2Y-L5: verdicts for E9F2Y 4 (0 clear), for E9F2Y-L5 0, tied 0 of 4; net +4; verdicts per order 2, 2; reversals across orders 0; items per verdict: E9F2Y 2.2, E9F2Y-L5 0.0
+  sign test over pairs: expected direction in 5 of 5 untied (0 tied), one-sided p = 0.031
+  pooled verdicts (not independent; reported only): expected 16, reversed 0
+
+position bias:
+  different plans, overall: position A in 8 of 16 non-tie verdicts (0.50); two-sided p = 1.000
+  different plans, items: position A in 106 of 214 non-tie item verdicts (0.50); two-sided p = 0.946 (items are not independent)
+  identical plans, overall: 0 false preferences of 4 verdicts (A 0, B 0; clear 0); files ['Q10', 'Q12']
+  identical plans, items: 0 false preferences of 108 item verdicts (A 0, B 0)
+
+swap consistency (couples across the two orders of a pair, mapped to plan names):
+  overall: agree 14, partial 0, reversal 0 of 14 (1.00 agree)
+  items:   agree 353, partial 25, reversal 0 of 378 (0.93 agree)
+    E7F2W:E8F2X overall agree 4, partial 0, reversal 0 of 4 (1.00 agree)
+    E7F4W:E8F4X overall agree 1, partial 0, reversal 0 of 1 (1.00 agree)
+    E7F8W:E8F8X overall agree 1, partial 0, reversal 0 of 1 (1.00 agree)
+    E8F2X:E9F2Y overall agree 4, partial 0, reversal 0 of 4 (1.00 agree)
+    E9F2Y:E9F2Y-L5 overall agree 4, partial 0, reversal 0 of 4 (1.00 agree)
+judge-to-judge agreement (couples within one pair file, different plans):
+  overall: agree 6, partial 0, reversal 0 of 6 (1.00 agree)
+  items:   agree 147, partial 15, reversal 0 of 162 (0.91 agree)
+  Cohen's kappa on A/B/tie: overall 1.00, items 0.82
+  identical-pair files: overall labels equal in 2 of 2 couples
+
+items against the primary verdicts (same primary batch for both plans):
+  E7F2W:E8F2X (2026-10-14-e8b-confirm): 2 items differ beyond noise; pairwise majority agrees 2, ties 0, reverses 0 (1.00)
+    tied in the primary, consistent pairwise preference: arbitrary-width-interchange->E8F2X (4 of 4), chirp-permutation-cancellation->E8F2X (4 of 4), gaussian-resampling->E8F2X (4 of 4), label-residual-budget->E8F2X (4 of 4), layer-recurrence->E8F2X (3 of 4), matrix-shear->E8F2X (3 of 4), multiplication-algorithm->E8F2X (4 of 4), packed-selected-bit-addition->E8F2X (4 of 4), phase-twist->E8F2X (4 of 4), rank-saving->E8F2X (4 of 4), simultaneous-layer->E8F2X (4 of 4), time-accounting->E8F2X (2 of 4)
+  E7F4W:E8F4X (2026-10-14-e8-variants-chains): 14 items differ beyond noise; pairwise majority agrees 14, ties 0, reverses 0 (1.00)
+    tied in the primary, consistent pairwise preference: arbitrary-width-interchange->E8F4X (2 of 2), common-frame-identity->E8F4X (2 of 2), crt-address-map->E8F4X (2 of 2), gaussian-resampling->E8F4X (2 of 2), interchange-recurrence->E8F4X (2 of 2), label-residual-budget->E8F4X (2 of 2), multiplication-algorithm->E8F4X (2 of 2), parameters-and-primes->E8F4X (2 of 2), phase-frame-recursion->E8F4X (2 of 2), signed-packing->E8F4X (2 of 2), time-accounting->E8F4X (2 of 2)
+  E7F8W:E8F8X (2026-10-14-e8-variants-chains): 17 items differ beyond noise; pairwise majority agrees 17, ties 0, reverses 0 (1.00)
+    tied in the primary, consistent pairwise preference: arbitrary-width-interchange->E8F8X (2 of 2), chirp-permutation-cancellation->E8F8X (2 of 2), crt-address-map->E8F8X (2 of 2), interchange-recurrence->E8F8X (2 of 2), multiplication-algorithm->E8F8X (2 of 2), signed-packing->E8F8X (2 of 2), synthetic-transform->E8F8X (2 of 2)
+  E8F2X:E9F2Y (2026-10-14-e8b-confirm): 4 items differ beyond noise; pairwise majority agrees 4, ties 0, reverses 0 (1.00)
+    tied in the primary, consistent pairwise preference: arbitrary-width-interchange->E9F2Y (3 of 4), bank-exchange-network->E9F2Y (4 of 4), complex-phase-interface->E9F2Y (4 of 4), conjecture-negation->E9F2Y (3 of 4), exact-recovery->E9F2Y (2 of 4), gaussian-resampling->E9F2Y (2 of 4), parameters-and-primes->E9F2Y (4 of 4), time-accounting->E9F2Y (4 of 4)
+  E9F2Y:E9F2Y-L5: no primary batch holds both
+
+Bradley-Terry over plans (5 pairs as units; 0 within-arm verdicts left out; bootstrap 2000):
+  E9F2Y        log-strength +1.86
+  E8F4X        log-strength +1.14
+  E8F8X        log-strength +1.14
+  E8F2X        log-strength -0.33
+  E9F2Y-L5     log-strength -0.33
+  E7F4W        log-strength -0.47
+  E7F8W        log-strength -0.47
+  E7F2W        log-strength -2.53

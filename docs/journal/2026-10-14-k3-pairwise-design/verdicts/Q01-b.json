@@ -1,0 +1,163 @@
+{
+  "pair": "Q01",
+  "items": [
+    {"id": "bank-exchange-network", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both plans carry B1 (A K1.a.1, B S5.1.2), B2 (A K1.a.2, B S5.1.3), B3 (A K1.a.3, B S5.1.4) and B4 (A K1.b, B S5.2 with its quote at line 763) in the paper's roles. Neither gives the neighbour or wire counts (lines 767-782)."},
+
+    {"id": "common-frame-identity", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both plans state the stored-equals-frame invariant, commutation of a common frame with a pointwise linear gate, D_out S D_in^{-1}, and the route operator eps_w D_sink(rho(w)) D_source(w)^{-1} (A K2, K2.a-c; B S5.3, S5.3.1-3), matching lines 804-843."},
+
+    {"id": "label-residual-budget", "preference": "B", "strength": "clear",
+     "differences": [
+       {"favours": "B", "what": "The label construction itself: the bilinear forms (<t_S,t_T>=|S cap T|-1 over Q, the dot product over F_2) make every triple line nondegenerate and neighbouring triple lines orthogonal, in an m-dimensional F^{(x)3}. A only says 'nested nondegenerate subspaces of an m-dimensional space'.", "substep": null, "steps_a": [], "steps_b": ["S5.4.1"], "lines": [856, 870]},
+       {"favours": "B", "what": "The side-edge inclusion: t_X perp t_Y gives <t_X> subset t_Y^perp. This is L2 in part: the complement <t_X,t_Y>^perp of dimension h-2 is not stated.", "substep": "L2", "steps_a": [], "steps_b": ["S5.4.3"], "lines": [1048, 1058]},
+       {"favours": "B", "what": "Identifies what the decreasing centre edge 3->4 loses (the summand P(x)F, dimension h). A gives only the dimension h.", "substep": null, "steps_a": ["K3.A.2"], "steps_b": ["S5.4.4"], "lines": [939, 957]}
+     ],
+     "note": "Both plans carry L3 (telescoping to Wm-2N+2L with L=Ich) and L5 (100/539, 101/539), and neither has the residual table (L1) or the orthonormal-basis argument (L4). B adds the bilinear-form construction that makes the labels nest, and part of L2; A has nothing on this item that B lacks."},
+
+    {"id": "bit-shear-interface", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both plans give s_b=W_b m-N+2L_b<W_b m, rank(P_V-P_U)=dim V-dim U, the exceptional source edges 2P_{U_a}, the deficit N-2L_b, and the endpoint condition with Phi_M frames giving H<-H+D on every role (A K3.B.1-4, KS.frame; B S5.4.7.1-3, S5.9.2-3). Neither shows the endpoint difference P_{U_a^perp}+P_{U_a}=I (line 1170)."},
+
+    {"id": "complex-phase-interface", "preference": "B", "strength": "clear",
+     "differences": [
+       {"favours": "B", "what": "Weight is additive mod 4 for orthogonal binary vectors, so q_V-q_U=sum_v wt(v)[v.x] over an orthonormal residual basis.", "substep": "P1", "steps_a": [], "steps_b": ["S5.5.1"], "lines": [1232, 1245]},
+       {"favours": "B", "what": "wt(v) is odd, so the phase is i^{eps[v.x]}; conjugating by H turns it into the translation kernel aI+bX_v or its inverse.", "substep": "P2", "steps_a": [], "steps_b": ["S5.5.2"], "lines": [1246, 1257]},
+       {"favours": "B", "what": "The endpoint correction: the pair X_a->Y_a carries C^{-1} on the 27 coordinates of supp(u_a), and C=iZC^{-1}Z with sign and phase corrections turns them into C. A only names 'source and sink corrections'. B also omits that the zero/full labels give frames I and C^{(x)m} and that X outputs are negated.", "substep": "P4", "steps_a": ["S3.1.e"], "steps_b": ["S5.5.4"], "lines": [1287, 1314]},
+       {"favours": "B", "what": "The kernel count s_c=W_c m-2N+2L_c<W_c m, with no extra source term and deficit 2N-2L_c. A never states s_c's value or that it is below W_c m.", "substep": null, "steps_a": [], "steps_b": ["S5.5", "S5.5.3"], "lines": [1220, 1260]}
+     ],
+     "note": "A states only the proposition's outcome: one kernel per orthonormal residual vector, s_c child calls, and C^{(x)e} after unnamed corrections. B derives P1, P2 and most of P4 and gives the s_c formula. P3 (k-column tensoring) is stated by neither beyond the s_c-call count both carry (A S3.1.d, B S5.11.4)."},
+
+    {"id": "rank-saving", "preference": "B", "strength": "clear",
+     "differences": [
+       {"favours": "B", "what": "eta_b=339/22587335000000. A only says 'the relative deficit exceeds 20*2^-50'.", "substep": "R2", "steps_a": ["K3.C"], "steps_b": ["S5.6.1"], "lines": [1319, 1322]},
+       {"favours": "B", "what": "eta_c=73/19906842167500.", "substep": "R3", "steps_a": [], "steps_b": ["S5.6.1"], "lines": [1323, 1324]},
+       {"favours": "B", "what": "The strict saving for the complex network: deficit 2N-2L_c>0, so s_c<W_c m, and s_c/W_c<m^sigma. A gives R1 and R4 only for the bit network, or generically for s/W.", "substep": "R1", "steps_a": ["K3.B.4", "K3.C"], "steps_b": ["S5.5.3", "S5.6.3"], "lines": [1259, 1344]}
+     ],
+     "note": "Both plans have L/N<1/2 giving s_b<W_b m (R1, bit case) and the exponential inequality with log m<20 (R4). B adds both exact deficits (R2, R3) and covers the complex network's s_c<W_c m and sigma, which A leaves out."},
+
+    {"id": "stream-primitives", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both plans state the O(V) elementary stream operations and the controlled shift/unit scaling by splitting a fibre and re-merging (A S2.1, S2.2; B S3, S4), consistent with lines 491-613."},
+
+    {"id": "matrix-shear", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "The condition on the modulus: q is a fixed odd prime chosen for the fixed finite set of matrices. This is M2 in part only, because 'avoiding every denominator of the factor table' is not stated. A's K5 omits the prime condition entirely.", "substep": "M2", "steps_a": ["K5"], "steps_b": ["S5.8"], "lines": [1396, 1423]}
+     ],
+     "note": "Both plans state the factorization A=E_1 Pi E_2 without the elimination proof (M1 absent in both), and both carry M3 (A K5.a, B S5.8.1) and M4 (A K5.b-c, B S5.8.2-4). The only difference is B's partial statement of the prime condition."},
+
+    {"id": "interchange-recurrence", "preference": "tie", "strength": "n/a",
+     "differences": [
+       {"favours": "A", "what": "The base case k=0 is done by the single-digit elementary stream operation.", "substep": null, "steps_a": ["KS.base"], "steps_b": [], "lines": [1492, 1493]},
+       {"favours": "B", "what": "The hypothesis that a row field divisible by W^k precedes the chunks, and that each role stream's row count is divisible by W^{k-1}. A states the W^k rows only in the caller (S2.3).", "substep": null, "steps_a": ["S2.3"], "steps_b": ["S5.9", "S5.9.1"], "lines": [1483, 1502]}
+     ],
+     "note": "Both plans carry the row split into W streams of volume V/W, the Phi shears implemented recursively by matrix-shear, the endpoint identity, the three-update interchange, exactly s calls, the recurrence and its two-case solution, the depth-first schedule and the descriptor bound. The two small differences point in opposite directions."},
+
+    {"id": "arbitrary-width-interchange", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "rho=ceil(k log W/(2 log q)), and the joined high digits form a row field R=q^{2rho}>=W^k before both chunks. A says only rho=O(log e) and exchanges the high digits, without the joining or the bound R>=W^k.", "substep": null, "steps_a": ["S2.3"], "steps_b": ["S5.10.1", "S5.10.2"], "lines": [1653, 1690]}
+     ],
+     "note": "Both plans carry the high-digit row supply, padding to a multiple of W^k, the base-m pieces with sum O(Ve^tau), and padding binary ranges to [q^e]. B adds the explicit rho and why the rows suffice."},
+
+    {"id": "phase-frame-recursion", "preference": "B", "strength": "clear",
+     "differences": [
+       {"favours": "B", "what": "The conjugation C_{U+}C_{U-}^{-1}=P_M(prod_j C_{e_j}^{eps_j})P_M^{-1}, with M an invertible binary matrix whose first columns are the residual basis. This puts each directional kernel on one coordinate slot, so it is one child call. A only states the product of directional kernels C_{v_j} and never moves them to slots.", "substep": null, "steps_a": ["S3.1.b"], "steps_b": ["S5.11.1"], "lines": [1849, 1865]},
+       {"favours": "B", "what": "Gaussian elimination writes M as at most m(m-1)+3m elementary row additions, each an XOR of selected bits across two whole slots. This reduces the non-recursive work to binary row additions.", "substep": null, "steps_a": [], "steps_b": ["S5.11.2"], "lines": [1892, 1901]}
+     ],
+     "note": "Both plans give the inverse-child identity (C^{-1})^{(x)f}=(-i)^f Z C Z, the s_c children on f=e/m axes, and H_0^{(x)D}=b^D S_D C^{(x)D} S_D (A S3.1.c,d,f; B S5.11.3, S5.11.4, S5.11.4b). Only B has the change-of-basis step that defines the recursion's children and its row additions."},
+
+    {"id": "packed-selected-bit-addition", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "The tape cost: at most sixteen chunk swaps (O(VL^tau) each, by the arbitrary-width interchange) and eight O(V) rotations.", "substep": null, "steps_a": ["S3.2.b"], "steps_b": ["S5.11.5.5"], "lines": [2117, 2155]},
+       {"favours": "B", "what": "The full time bound O(V(L^tau+1)+MA^3+delta_bad MA(R+A)), and the family conditions that make the extra terms o(1). A says only 'plus negligible terms'.", "substep": null, "steps_a": ["S3.2.e"], "steps_b": ["S5.11.5.7", "S5.11.5.8"], "lines": [2195, 2207]},
+       {"favours": "A", "what": "The omitted last selected position is done by a separate two-bit XOR.", "substep": null, "steps_a": ["S3.2.e"], "steps_b": [], "lines": [2187, 2193]}
+     ],
+     "note": "Both plans have the eight conditional updates, the guard condition with delta_bad=min{1,80(f-1)2^-K}, T_0 S_0^{-1} permuting B, and the sort-based repair. B states the cost accounting and its hypotheses more completely; A adds only the last-position XOR."},
+
+    {"id": "layer-recurrence", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "The exponent condition tau(1+c/beta)<lambda that makes the node overhead O(e^{tau(1+c/beta)}+1)=O(e^lambda), together with beta=1/2 at the stopping rule. A asserts the overhead is O(e^lambda) without the condition.", "substep": null, "steps_a": ["S3.3.e"], "steps_b": ["S5.11.6.1", "S5.11.6.5", "S5.11.6.5.1"], "lines": [2394, 2415]}
+     ],
+     "note": "Both plans carry the s child calls on V/W streams, rows from the first q_0 chunks padded to W^{k_0}, F(e)<=(s/W)F(e/m)+O((eK)^tau+1), the internal geometric sum, the leaf bound and the base-m pieces giving O(d^{lambda'}). B also states the condition that makes the overhead bound hold."},
+
+    {"id": "simultaneous-layer", "preference": "B", "strength": "clear",
+     "differences": [
+       {"favours": "B", "what": "The constants C_1=max{20,nu+3} and C_0=128mB^2 that define Delta. A uses Delta=ceil(C_0 d^{C_1}) without defining C_0 or C_1 from E, B and nu.", "substep": "S1", "steps_a": ["S3.4.a", "S3.4.b", "S3.4.c"], "steps_b": ["S5.11.7.1", "S5.11.7.3", "S5.11.7.4", "S5.11.7.6"], "lines": [2457, 2466]},
+       {"favours": "B", "what": "Completing the unrolling: concatenating at most md pieces, the individual kernels and the outer diagonals keeps the total below 128mB^2 d^{nu+3}<=C_0 d^{C_1}. A stops at A(e)<=8B^2 d^{nu+1}.", "substep": "S3", "steps_a": ["S3.4.b"], "steps_b": ["S5.11.7.6"], "lines": [2536, 2560]}
+     ],
+     "note": "Both plans carry S2 (A(e)<=sA(e/m)+E, leaf 8e), S4 (depth to bits, epsilon C_1<1 so Delta=o(p)) and S5 (absolute row sum one, error below sqrt2 2^-p). A lacks the defining constants of S1 and the last link of S3, so its Delta is never tied to the depth bound."},
+
+    {"id": "synthetic-transform", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both plans carry character cancellation by index shift with no two-torsion, decimation in frequency with bit-reversed storage and the reversed opposite procedure, the grouped multi-axis round, and the layout cost O(Tp[dK+pK^{tau-1}+l d^{lambda'}]) with error sqrt2 l 2^-p (A S4.1-S4.3; B S6.1-S6.3). Each method's one-word description of which slots go to the prefix ('top' in A, 'lowest' in B) is incomplete, but the cost steps are correct in both (lines 3002-3010)."},
+
+    {"id": "signed-packing", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both plans have evaluation at B_0=2^{4p}, the separation |h_j|<=r2^{2p}<B_0/2, centred-residue extraction with carry in {0,1}, reduction mod y^r+1 and the O(rp log(rp)) cost (A S4.4; B S6.4). The remaining detail differs only in emphasis."},
+
+    {"id": "synthetic-convolution", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both plans give the retained LB order, P(LBu,LBv)=LB P(u,v), the convolution identity with scale M, the error sqrt2 M(3l+1)2^-p and the cost (A S4, S4.5-S4.8; B S6, S6.5-S6.7). B spells out the error chain in more steps, but with the same content."},
+
+    {"id": "gaussian-resampling", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "The approximation errors: below p^2 per one-dimensional map (16p and 4+3p^2/4) and below dp^2 for the linewise maps. Also the condition alpha^2 theta>p/alpha^2>1 that gives ||N-I||<1/2 for the Neumann series. A states the Neumann inversion without the condition and gives no error bounds; 2dp^2 appears only inside its E_s step.", "substep": null, "steps_a": ["S5.1", "S6.6.c"], "steps_b": ["S7.1", "S7.1.3", "S7.1.6", "S7.1.8"], "lines": [3610, 3689]}
+     ],
+     "note": "Both plans carry the Gaussian identity, the contractions A=S' and B_0=D'J'C with factor 2^{2alpha^2}, the tensor form with gamma=2d alpha^2, the line count and the axis-exposure cost. B adds the error bounds and the invertibility condition."},
+
+    {"id": "chirp-permutation-cancellation", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "The chirp a has period t_i because the exponent change -pi i s_i(2j_i+t_i) is a multiple of 2 pi i when t_i is even. A states only the hypothesis 'for even t_i'.", "substep": null, "steps_a": ["S5.b"], "steps_b": ["S7.2.1"], "lines": [3938, 3941]}
+     ],
+     "note": "Both plans give the coefficient check for Q F_t, the substitution showing R F^+ R=F^+, the (u*v)/S^2 identity, and conjugation for R F^+ (A S5.b.1-3, S6.4.b; B S7.2.2-5). B additionally proves the periodicity."},
+
+    {"id": "parameters-and-primes", "preference": "tie", "strength": "n/a",
+     "differences": [
+       {"favours": "A", "what": "The full list of fixed exponents, including delta=1/16, lambda=1-2^-52, c=2^-56 and lambda'=1-2^-54, which B never states.", "substep": null, "steps_a": ["S6.1.a"], "steps_b": ["S8.1.1"], "lines": [4008, 4014]},
+       {"favours": "B", "what": "The construction r=2^{ceil(log2 T/d)} with the last axis of length r, the comparison constants a_d,a_r,b_d,b_r,C_l, the bound gamma<28b^{2/3} (so gamma=o(b)), and the n^{o(1)} prime search.", "substep": null, "steps_a": [], "steps_b": ["S8.1.3", "S8.1.5", "S8.1.6", "S8.1.10"], "lines": [4058, 4171]}
+     ],
+     "note": "Both plans have b, p=6b, d, K, T, Tp=Theta(n), the prime-interval count with eta=1/(4d), T/2<S<T, alpha^4 theta_i>p and no wraparound. A has the exponent constants; B has the size and gamma details and the search cost. The differences point both ways."},
+
+    {"id": "crt-address-map", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both plans have the algebra isomorphism, the order-S argument, the triangular formula b_i=a_i+mu_i sum_{j<i} a_j P_j, updating in the order i=d..1, and the O(Tp d^2(1+l^tau)) cost (A S6.2.a-e; B S8.2.1-5)."},
+
+    {"id": "phase-twist", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "The computed twist: grid approximations of zeta^{+-k} with error below 2*2^-p, f'=Q_p(theta+ f), the ring convolution, the untwist, and total cost O(Tp^{1+delta}). A has only the exact identity.", "substep": null, "steps_a": [], "steps_b": ["S8.3.4"], "lines": [4374, 4401]}
+     ],
+     "note": "Both plans give the well-definedness, the diagonal isomorphism, the wrap check zeta^{k+l}(-1)^h=zeta^j and M_C=D_- iota^{-1} M_r(iota D_+ f, iota D_+ g)=(f*g)/T (A S6.3; B S8.3). B adds the computed procedure."},
+
+    {"id": "multiplication-algorithm", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "The input scaling: each digit is written as the grid numerator a_j 2^{p-b-2}, so its value is a_j 2^{-b-2}, with S-q zero records appended.", "substep": null, "steps_a": ["S6.5.a"], "steps_b": ["S8.5.1"], "lines": [4495, 4499]},
+       {"favours": "B", "what": "The computed chirp transform: phase numerators mod 2r, then x_0=Q_p(conj(a~) x), y_0=M_C(a~,x_0), C~(x)=Q_p(conj(a~) y_0), with exact counterpart Q F_t x. A only summarizes it as 'a chirp transform evaluated by a twisted ring convolution'.", "substep": null, "steps_a": ["S6.4", "S6.4.a"], "steps_b": ["S8.4.1", "S8.4.2", "S8.4.3"], "lines": [4417, 4452]},
+       {"favours": "B", "what": "Why S appears twice: the first scale gives w=(u*v)/S and the second, with 2^{2b+4}, gives the integer convolution. A explains only the first.", "substep": null, "steps_a": ["S6.5.d"], "steps_b": ["S8.5.8"], "lines": [4535, 4541]}
+     ],
+     "note": "Both plans carry the source transform A~, chirp, B~_0, 2^gamma with counterpart RF_s, conjugation for F^+, and the six algorithm steps. B adds the input scale, the computed chirp steps and the full account of the two S scalings."},
+
+    {"id": "exact-recovery", "preference": "tie", "strength": "n/a",
+     "differences": [
+       {"favours": "B", "what": "The pointwise-product step: z has norm at most .26^2<.5 and error (2E_s+2)h_p, before the (3E_s+2) bound for the opposite transform.", "substep": null, "steps_a": ["S6.6.d"], "steps_b": ["S8.5.9.6", "S8.5.9.7"], "lines": [4677, 4702]},
+       {"favours": "A", "what": "The output length: the product is below 2^{2n}, so only the zero padding bits above 2n-1 are removed to output exactly 2n bits.", "substep": null, "steps_a": ["S6.6.i"], "steps_b": [], "lines": [4802, 4806]}
+     ],
+     "note": "Both plans chain E_ring<5TL, the .701 margin, 6TL, 8TL, E_s=9*2^gamma TL, E_w<28*2^gamma T^2 L and the final bound 448b 2^{-3b/4}<1/2, then rounding and carries. The small extra details point both ways."},
+
+    {"id": "time-accounting", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "The compact sorting of exceptional records costs O(Vp^{A'}2^{-K})=o(V), a deterministic bound. A omits this lower-order term.", "substep": null, "steps_a": [], "steps_b": ["S8.6.11"], "lines": [4955, 4972]}
+     ],
+     "note": "Both plans give the seven normalized rows, the margins g_1..g_7 with min g_2=2^-181=2kappa, the setup term o(Tp), the p^kappa absorption, O(n(log n)^{1-kappa}) and the schoolbook cutoff. B additionally justifies more rows and the exceptional sorting."},
+
+    {"id": "conjecture-negation", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Neither plan states the liminf form of the negation of an eventual n lg n lower bound (lines 379-387). Both only rely on an 'n-log-n-conjecture' concept at S0."}
+  ],
+  "chain": {"preference": "B", "strength": "clear",
+    "note": "Both trees follow the paper's route: digit convolution, CRT, Gaussian resampling with chirp, twisted ring convolution with synthetic transforms, two fast tape procedures, exact recovery, cost table. A carries the central saving only for the bit network: s_b<W_b m, then s/W<m^tau, then F_k=O(e^tau), then O(Vu^tau). For the butterfly layer A never derives s_c<W_c m or s_c/W_c<m^sigma, its S3.3.e uses a=s/W<=m^sigma without support, and it lacks the P_M step that turns residual kernels into slot-wise children. B's S5 derives both savings (s_b and s_c with eta_b and eta_c, giving tau=sigma), then both recurrences, with the P_M conjugation linking the complex network to the layer recursion."},
+  "errors": [],
+  "overall": {"preference": "B", "strength": "clear",
+    "reason": "Neither plan misstates the paper. The decisive difference is the complex half of the central saving. B gives s_c=W_c m-2N+2L_c<W_c m with eta_b and eta_c (so s_c/W_c<m^sigma), the phase-interface mechanism (weight additivity mod 4, odd weight giving the translation kernel aI+bX_v, the 27-coordinate C^{-1} correction), and the P_M conjugation that makes each residual vector one slot-wise child. A lacks all of these, so its butterfly-layer recursion rests on an unproved s/W<=m^sigma. The remaining differences are smaller and mostly favour B (the label bilinear forms and the L2 inclusion, the guard-width constants C_0 and C_1); A's few extras (base case, exponent list, output length) are minor."}
+}

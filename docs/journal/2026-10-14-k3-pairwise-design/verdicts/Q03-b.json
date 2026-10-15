@@ -1,0 +1,127 @@
+{
+  "pair": "Q03",
+  "items": [
+    {"id": "bank-exchange-network", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "B states the fixed constants of the network: h=100, v=161700, N=v^3, m=10^6 (S1.3.0), I=3v^2=78440670000 and the wire counts W_b=177176569091445000000, W_c=1873807244643542670000 (S1.3.3), all of which match the paper. A gives none of these constants.", "substep": null, "steps_a": [], "steps_b": ["S1.3.0", "S1.3.3"], "lines": [653, 656, 676, 776, 783]}
+     ],
+     "note": "Both plans carry B1-B4 with correct content: A in S5.1.1-S5.1.4 and S5.2, B in S1.3.1.1-S1.3.1.3 and S1.3.2. The only difference is that B also gives the network's constants and wire counts, a slight completeness gain."},
+    {"id": "common-frame-identity", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both plans carry the same content: the invariant, the commutation of a shared frame with a pointwise linear gate, the operator D_out S D_in^{-1}, and the route operator eps_w D_sink D_source^{-1} including auxiliary roles (A S5.3.1-S5.3.3, B S1.4.1-S1.4.3; paper 804-825)."},
+    {"id": "label-residual-budget", "preference": "B", "strength": "clear",
+     "differences": [
+       {"favours": "B", "what": "B gives the per-edge orthogonal residuals and their dimensions for every edge type (the residual table), together with the stage-transition labels. A only asserts that every edge joins comparable labels.", "substep": "L1", "steps_a": [], "steps_b": ["S1.5.4", "S1.5.5.1", "S1.5.5.8", "S1.5.5.13", "S1.5.5.16", "S1.5.5.17"], "lines": [911, 937, 1013, 1043, 1059, 1060]},
+       {"favours": "B", "what": "On the side edge 2->5, B gives the residual P (x) <t_X,t_Y>^perp of dimension h-2, which exists because t_X is orthogonal to t_Y. A states only the inclusion <t_X> in t_Y^perp, without the complement or its dimension.", "substep": "L2", "steps_a": ["S5.4.3"], "steps_b": ["S1.5.5.14"], "lines": [1048, 1058]},
+       {"favours": "B", "what": "B states that over F_2 every nonzero residual is nondegenerate and nonalternating, and so has an orthonormal basis. A never establishes this; it only uses orthonormal residual bases later.", "substep": "L4", "steps_a": [], "steps_b": ["S1.5.5.19"], "lines": [1008, 1009, 1073, 1102]}
+     ],
+     "note": "L3 (A S5.4.2, S5.4.4, S5.4.5; B S1.5.2, S1.5.3, S1.5.5.17-18) and L5 (A S5.4.6; B S1.5.6) are present in both. B also carries L1 and L4, which A lacks, and the dimension part of L2, which A has only in part."},
+    {"id": "bit-shear-interface", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "B derives the endpoint identity M_sink(rho(w)) - M_source(w) = I_m from P_{U_a^perp} + P_{U_a} = I_m, and gives the vertex frames Phi_M. A only invokes the endpoint condition as given, in the power-width step.", "substep": null, "steps_a": ["S5.9.3"], "steps_b": ["S1.5.8", "S1.8.2", "S1.8.3"], "lines": [1124, 1133, 1169, 1171]}
+     ],
+     "note": "Both have the rank of P_V - P_U as the dimension change, the N extra ranks from 2P_{U_a}, and s_b = W_b m - N + 2L_b < W_b m. A explains the projection difference in slightly more detail (S5.4.7.1), but only B proves the endpoint half of the contract."},
+    {"id": "complex-phase-interface", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "B writes out the phase-frame construction C_U = H^{(x)m} diag(i^{q_U(x)}) H^{(x)m}. A only says that frames are defined from the Hamming weight modulo four.", "substep": null, "steps_a": ["S5.5"], "steps_b": ["S2.1"], "lines": [1179, 1193]},
+       {"favours": "B", "what": "Endpoint: B includes undoing the signed exchange (negating the X outputs) and cites the zero-label frame I and full-label frame. A's S5.5.4 omits the negation, although it states explicitly that X_a->Y_a carries C^{-1} on 27 coordinates. Neither gives Z_{a,k} or i^{27k}.", "substep": "P4", "steps_a": ["S5.5.4"], "steps_b": ["S2.1.3"], "lines": [1287, 1314]},
+       {"favours": "B", "what": "B states the k-column version (C^{(x)mk} on k columns). A never mentions columns. Neither states that each residual vector gives one factor acting on all k columns, so P3 is not fully present in either.", "substep": "P3", "steps_a": [], "steps_b": ["S2.1.3"], "lines": [1262, 1271, 1283, 1286]}
+     ],
+     "note": "P1 (A S5.5.1, B S2.1.1) and P2 (A S5.5.2, B S2.1.2) are present in both, as are s_c and its deficit. Both are partial on P4, and B adds the frame construction and the k-column case, so the differences are small but point to B."},
+    {"id": "rank-saving", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "R1-R4 are present in both: A in S5.4.6, S5.4.7.3, S5.5.3 and S5.6.1-S5.6.3; B in S1.5.6, S1.5.7, S1.5.9 and S1.5.10.1-S1.5.10.3, with the same eta values and the same exponential inequality (paper 1105-1110, 1319-1343)."},
+    {"id": "stream-primitives", "preference": "B", "strength": "clear",
+     "differences": [
+       {"favours": "B", "what": "B gives the derivations. It splits into q^2 or q streams by digit, splits rows with r = Wg + w into W streams of volume V/W, performs a controlled shift by splitting each fiber at Q-a and merging the pieces in the opposite order, absorbs the offset work because b^C = O(q^b), and multiplies by c through its c increasing pieces. A only states the results, with a one-phrase method.", "substep": null, "steps_a": ["S3", "S4"], "steps_b": ["S1.1.3", "S1.1.4", "S1.2.1", "S1.2.2", "S1.2.3"], "lines": [514, 527, 575, 604]}
+     ],
+     "note": "Both state the same O(V) results. B carries the paper's sub-derivations for both lemmas, which A lacks."},
+    {"id": "matrix-shear", "preference": "B", "strength": "clear",
+     "differences": [
+       {"favours": "B", "what": "B gives the elimination proof of A = E_1 Pi E_2: the pivot at the rightmost entry of the topmost nonzero row, clearing by lower-triangular elementary operations, repetition on the active indices, a ones, E_1 = L^{-1} and E_2 = R^{-1}. A only states the factorization.", "substep": "M1", "steps_a": ["S5.7"], "steps_b": ["S1.6", "S1.6.1", "S1.6.2", "S1.6.3"], "lines": [1375, 1391]},
+       {"favours": "B", "what": "B explains the choice of the odd prime: it avoids every denominator and every diagonal numerator of the finite factor table, so the factors stay invertible mod q^b. A asserts only that such a prime exists.", "substep": "M2", "steps_a": [], "steps_b": ["S1.7.1"], "lines": [1413, 1423]}
+     ],
+     "note": "M3 (A S5.8.1, B S1.7.2) and M4 (A S5.8.3-S5.8.4, B S1.7.4) are present in both. B also has M1 and M2, which A lacks."},
+    {"id": "interchange-recurrence", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both carry the same steps: the cyclic row split into W streams of volume V/W, the edge shears Phi_{A_e} implemented by recursive interchanges, the endpoint condition giving H<-H+D, the three-update interchange, s calls, the recurrence and its geometric solution, the O(V) fixed-tape schedule and descriptor absorption (A S5.9.1-S5.9.8, B S1.8.1-S1.8.7; paper 1491-1616). B describes the parking stack slightly more fully, but that does not change the content."},
+    {"id": "arbitrary-width-interchange", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both have rho high digits as the row field with R = q^{2rho} >= W^k, padding to R' < 2R, the base-m pieces, the O(V log 2e) cleanup and binary padding to [q^e] (A S5.10.1-S5.10.6, B S1.9.1-S1.9.5). B gives the unequal-width case here (S1.9.6). A gives the same single-bit peeling in S8.6.6 (paper 4875), so neither lacks it."},
+    {"id": "phase-frame-recursion", "preference": "tie", "strength": "n/a",
+     "differences": [
+       {"favours": "A", "what": "A gives the Gaussian-elimination bound: M in GL(m,F_2) is at most m(m-1)+3m elementary row additions, each XORing corresponding selected bits of two whole slots. B says only that a fixed basis change is a fixed number of row additions.", "substep": null, "steps_a": ["S5.11.2"], "steps_b": ["S2.2.10"], "lines": [1892, 1901]},
+       {"favours": "B", "what": "B gives the conjugation identity P_M X_v P_M^{-1} = X_{Mv} behind the coordinate form of the edge identity, and the basic identities C^2 = X, C^4 = I, C^{-1} = -iZCZ. A states the coordinate form without the conjugation identity.", "substep": null, "steps_a": ["S5.11.1", "S5.5.5"], "steps_b": ["S2.1.4", "S2.1.5"], "lines": [1826, 1830, 1849, 1865]}
+     ],
+     "note": "Both have the P_M edge form, one forward child per inverse kernel via (C^{-1})^{(x)f}, s_c child calls on f = e/m axes, and H_0^{(x)D} = b^D S_D C^{(x)D} S_D. The two small differences point in opposite directions."},
+    {"id": "packed-selected-bit-addition", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both carry the same steps: the eight updates composing to (00 10)(01 11), the guard interval 10 <= g <= 2^{K-1}-11, delta_bad by the union bound, T_0 S_0^{-1} permuting B, at most 16 swaps and 8 rotations, the radix-sort repair, the cost terms, the family bound and the change-of-basis cost (A S5.11.5.1-S5.11.5.9, B S2.2.1-S2.2.10; paper 2013-2231)."},
+    {"id": "layer-recurrence", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "B defines q_0 = ceil(log_2 W) ceil(log_m(2d)) and k_0 = ceil(log_m d) for the row index. A uses q_0 and k_0 without giving their values.", "substep": null, "steps_a": ["S5.11.6.3"], "steps_b": ["S2.3.3"], "lines": [2307, 2323]}
+     ],
+     "note": "Both have the leaf cost O(Ve), the node overhead, the recurrence, the e^lambda bound, the geometric sum, the leaf bound, the base-m pieces and lambda' (A S5.11.6.1-S5.11.6.5.6, B S2.3.1-S2.3.8). B is ahead only on the row-index constants."},
+    {"id": "simultaneous-layer", "preference": "tie", "strength": "n/a",
+     "differences": [
+       {"favours": "B", "what": "B gives nu = 11 for the stated network and the per-invocation count 24W^3+4s+4W+4 < E.", "substep": "S1", "steps_a": ["S5.11.7.1", "S5.11.7.4"], "steps_b": ["S2.4.1", "S2.4.2"], "lines": [2468, 2473, 2507, 2509]},
+       {"favours": "A", "what": "A notes that the depth recurrence uses s rather than s/W, and that the packed-call hypotheses hold uniformly over the allowed d and r.", "substep": null, "steps_a": ["S5.11.7.2", "S5.11.8.1"], "steps_b": [], "lines": [2519, 2521, 2732]}
+     ],
+     "note": "S1-S5 are present in both: the constants, A(e) <= sA(e/m)+E with the 8e leaf, the B^2 d^nu unrolling to C_0 d^{C_1}, the guard bits with eps C_1 < 1, and absolute row sum one with the sqrt2 2^{-p} truncation. The minor extras balance."},
+    {"id": "synthetic-transform", "preference": "tie", "strength": "n/a",
+     "differences": [
+       {"favours": "A", "what": "A gives the implementation of the monomial y^E as a signed rotation, E = er + s.", "substep": null, "steps_a": ["S6.3.5"], "steps_b": [], "lines": [3148, 3153]},
+       {"favours": "B", "what": "B gives the combined twiddle exponent E, and that Q_p commutes with the signed permutation J_E, so each round truncates once.", "substep": null, "steps_a": [], "steps_b": ["S3.2.5", "S3.3.4"], "lines": [2904, 3159, 3164]}
+     ],
+     "note": "Both have character cancellation via the shift by t/2^{v+1}, decimation in frequency with bit reversal, H_0^2 = I/2 for the reverse procedure, the prefix moves, the Dq-1 chunk exchanges, one layer per round, the error sqrt2 l 2^{-p}, and LBF^- with F^+B^{-1}L^{-1}. The small extras balance."},
+    {"id": "signed-packing", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both have B_0 = 2^{4p}, |h_j| <= r2^{2p} < B_0/2, the two's-complement packing carries, centered extraction, reduction mod y^r+1 with |H_j| <= r2^{2p}, and four products dominating the cost (A S6.4.1-S6.4.5, B S3.4.1-S3.4.6)."},
+    {"id": "synthetic-convolution", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both have the convolution rule with F^+F^- = I/M, the retained LB order commuting with pointwise products (A states it as a formula in S6.5b, B in words in its S3.5 motivation), the bilinear-contraction error chain to sqrt2 M(3l+1)2^{-p}, and the O(Tp log(rp)) product cost."},
+    {"id": "gaussian-resampling", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both have T P_s F_s = P_t F_t S, N = CTD with the Neumann inversion, the normalizations multiplying to 2^{-2alpha^2}, the errors 16p and 3p^2/4+4, C in O(tp), the tensor form with gamma = 2d alpha^2, error dp^2, cost O(dTp^{3/2+delta}alpha) and axis exposure (A S7.1.1-S7.1.10, B S4.1.1-S4.1.9)."},
+    {"id": "chirp-permutation-cancellation", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both have the period t_i, the coefficient check against QF_t, F^+R_c = R_c^{-1}F^+, RF^+R = F^+, (u*v)/S^2, and the conjugation remark (A S7.2.1-S7.2.5, B S4.2.1-S4.2.6)."},
+    {"id": "parameters-and-primes", "preference": "B", "strength": "clear",
+     "differences": [
+       {"favours": "B", "what": "B lists all the fixed rationals, including beta = 1/2, delta = 1/16, lambda = 1-2^{-52}, c = 2^{-56} and lambda' = 1-2^{-54}. A lists only C_1, epsilon and kappa, and never gives lambda, c, lambda' or delta, on which the margins depend.", "substep": null, "steps_a": ["S8.1.1"], "steps_b": ["S5.1.1", "S5.1.2", "S5.1.3"], "lines": [4008, 4015]},
+       {"favours": "B", "what": "B verifies the layer conditions: tau(1+c/beta) < 1-31*2^{-55} < lambda and sigma+beta(1-sigma) = 1-2^{-51} < lambda < lambda' < 1. A does not.", "substep": null, "steps_a": [], "steps_b": ["S5.1.4"], "lines": [4018, 4025]}
+     ],
+     "note": "Both carry the sizes, comparison constants, alpha and gamma, the prime-interval bound, T/2 < S < T, alpha^4 theta_i > p, the prime search, the absence of wraparound and the capacity bound. B adds several fixed constants and the check of the layer conditions."},
+    {"id": "crt-address-map", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both have the algebra map, order S and isomorphism, the triangular formula, updates in the order i = d..1 as rotations of the valid interval with the padding kept zero, and O(Tp d^2(1+l^tau)) (A S8.2.1-S8.2.5, B S5.2.1-S5.2.6). B's explicit padding scan is minor."},
+    {"id": "phase-twist", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both have well-definedness via (zeta y)^r = 1, the diagonal isomorphism, the wrap factor zeta^{k+l}(-1)^h = zeta^j, M_C = D_- iota^{-1} M_r(iota D_+ f, iota D_+ g) = (f*g)/T, and the computed twist with its cost (A S8.3.1-S8.3.4, B S5.3.1.1-S5.3.1.3 and S5.3.2). The error of 4 per twist appears in both error chains."},
+    {"id": "multiplication-algorithm", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both have the source transform A, chirp, B_0 and 2^gamma with counterpart RF_s, the conjugate opposite procedure, and the six algorithm steps with the two scales by S explained. A adds the chirp numerator mod 2r and B the input-reading cost; these are minor and balance."},
+    {"id": "exact-recovery", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "B states the carry recurrence d_j = (c_j+k_j) mod 2^b, k_{j+1} = floor((c_j+k_j)/2^b), and that the product is below 2^{2n} so exactly 2n bits are output. It also states the contraction and phase-product error rules (< 4h_p). A has the carry bound and invariant but not the recurrence or the output-length argument.", "substep": null, "steps_a": ["S8.5.9.11"], "steps_b": ["S5.9.1.1", "S5.9.1.2", "S5.9.3.1", "S5.9.3.4"], "lines": [4559, 4575, 4776, 4805]}
+     ],
+     "note": "Both carry the error chain E_ring < 5TL, 6TL, 8TL, E_s = 9*2^gamma TL, (2E_s+2), (3E_s+2), E_w < 28*2^gamma T^2 L and 448b 2^{-3b/4} < 1/2, followed by rounding. B is slightly more complete at the start and the end of the chain."},
+    {"id": "time-accounting", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "B gives the power of p for every row of the cost table and the formula of every margin g_1..g_7, for example g_2 = 2^{-75}*2^{-56}*2^{-50}. A lists the normalized costs without their exponents and gives the margin values with only g_2's formula.", "substep": null, "steps_a": ["S8.6.1", "S8.6.2"], "steps_b": ["S6.1", "S6.2", "S6.3", "S6.4", "S6.5", "S6.6", "S6.7", "S6.M.1", "S6.M.2"], "lines": [4820, 4828, 4839, 4847]}
+     ],
+     "note": "Both reach min g_i = 2^{-181} = 2 kappa, absorb polylog factors into p^kappa, show the setup and exceptional sorting are o(V), and conclude O(n(log n)^{1-kappa}) with a schoolbook cutoff. B shows more of how the exponents arise."},
+    {"id": "conjecture-negation", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "B's root step states that the bound disproves the n log n optimality conjecture in this model. A never draws this conclusion. Neither gives the liminf argument.", "substep": null, "steps_a": [], "steps_b": ["S0"], "lines": [379, 387]}
+     ],
+     "note": "Only B states the conclusion. It is a supporting item, and neither plan gives the paper's reasoning for it."}
+  ],
+  "chain": {"preference": "B", "strength": "slight",
+    "note": "Both trees follow the paper's route. L < N/2 gives s < Wm for both networks; the deficits give tau = sigma = 1-2^{-50}; edge ranks become interchanges or child calls; the recurrences give O(Ve^tau) and O(Vd^{lambda'}); these feed the transform layout, convolution, resampling and exact recovery; and the margins give kappa = 2^{-182}. B's chain is fuller at two links of the central saving where A only asserts: the residual table with orthonormal residual bases over F_2 behind the rank count, and the elimination proof with the prime choice behind 'rank = number of interchanges'. B also shows how tau enters kappa through g_2 = epsilon c (1-tau)."},
+  "errors": [
+    {"plan": "B", "step": "S3.3", "says": "The method moves 'the top slots into a prefix (about dK slot moves)'.", "paper": "The prefix list is (i, l-1) for the length-2^l axes plus the lowest slots (i,h), h = b-1..0, of every axis, at most D(b+1) slots. It is mainly low slots, not top slots.", "lines": [2998, 3008], "severity": "minor"}
+  ],
+  "overall": {"preference": "B", "strength": "clear",
+    "reason": "Neither plan has a major error. B's only misstatement is a minor slip about which slots go to the prefix. B carries essential derivation steps of core items that A lacks: the per-edge residual table, the h-2 complement on the side edge and the existence of orthonormal residual bases over F_2 (L1, L2, L4), and the elimination proof and prime choice for the triangular factorization (M1, M2). These are links in the central rank-saving chain. B is also more complete on the fixed parameters, the stream primitives and the time-accounting exponents, and A has no item where it is ahead."}
+}
