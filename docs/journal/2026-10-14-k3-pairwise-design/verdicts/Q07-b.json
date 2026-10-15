@@ -1,0 +1,226 @@
+{
+  "pair": "Q07",
+  "items": [
+    {
+      "id": "bank-exchange-network",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same steps: S1.3.1.1 (B1, net change (JV+RG)x independent of scratch), S1.3.1.2 (B2), S1.3.1.3 (B3) and S1.3.2 (B4), plus the wire counts in S1.3.3. All of them match lines 741-783, and the plans do not differ here."
+    },
+    {
+      "id": "common-frame-identity",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S1.4.1-S1.4.3 are the same in both plans and match lines 804-825 (the common frame commutes with the gate, D_out S D_in^{-1}, the route operator eps_w D_sink D_source^{-1})."
+    },
+    {
+      "id": "label-residual-budget",
+      "preference": "B",
+      "strength": "slight",
+      "differences": [
+        {
+          "favours": "B",
+          "what": "L5: only Plan B states the exact loss ratios L_b/N=100/539 and L_c/N=101/539, both below 1/2. Plan A never gives these values.",
+          "substep": "L5",
+          "steps_a": [],
+          "steps_b": [
+            "S1.5.6"
+          ],
+          "lines": [
+            1105,
+            1110
+          ]
+        }
+      ],
+      "note": "Both plans state L1-L4 in the same way: the residual table S1.5.5.1-S1.5.5.18, the side edge 2->5 in S1.5.5.14, the telescoping in S1.5.2/S1.5.3/S1.5.5.17/S1.5.5.18, and the orthonormal basis over F_2 in S1.5.5.19. Only B adds L5 (S1.5.6). It is a single sub-step made of constants, so the preference is slight."
+    },
+    {
+      "id": "bit-shear-interface",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S1.5.7 (s_b=W_b m-N+2L_b<W_b m), S1.5.8 (P_V-P_U has rank equal to the dimension change, first edge matrix 2P_{U_a}, endpoint difference I_m) and S1.8.2-S1.8.3 are the same in both plans and match lines 1138-1172."
+    },
+    {
+      "id": "complex-phase-interface",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry P1 (S2.1.1), P2 (S2.1.2), P3 (S1.5.9, S2.1.3, S2.1.7) and the same partial P4 (S2.1.3: C=iZC^{-1}Z on the 27 coordinates, then undoing the signed exchange). Both leave out the zero/full label frames and the placement of Z_{a,k} and i^{27k} (lines 1287-1314). The plans do not differ."
+    },
+    {
+      "id": "rank-saving",
+      "preference": "B",
+      "strength": "slight",
+      "differences": [
+        {
+          "favours": "B",
+          "what": "Support for R1. Plan B states the exact ratios L_b/N=100/539 and L_c/N=101/539 below 1/2 (S1.5.6, quoting line 1107). This is the paper's reason that the deficits N-2L_b and 2N-2L_c are positive and s<Wm. Plan A asserts L<N/2 only in S1.5's claim, with no step giving its values. The conclusion of R1 (L<N/2, a positive deficit, s<Wm) appears in both plans: in A at S1.5, S1.5.7 and S1.5.9.",
+          "substep": "R1",
+          "steps_a": [],
+          "steps_b": [
+            "S1.5.6"
+          ],
+          "lines": [
+            1105,
+            1110
+          ]
+        }
+      ],
+      "note": "R2-R4 are the same in both plans (S1.5.10, S1.5.10.1-S1.5.10.3, matching lines 1319-1343), and R1's conclusion is present in both. So the checklist count is equal. B is preferred slightly because it also gives the exact loss ratios that the pack lists as this result's derivation (lines 1105-1110)."
+    },
+    {
+      "id": "stream-primitives",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S1.1.1-S1.1.4 and S1.2.1-S1.2.3 are the same in both plans and match lines 513-600."
+    },
+    {
+      "id": "matrix-shear",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "M1 (S1.6.1-S1.6.3), M2 (S1.7.1), M3 (S1.7.2) and M4 (S1.7.4) are present and the same in both plans. They match lines 1375-1443."
+    },
+    {
+      "id": "interchange-recurrence",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S1.8.1-S1.8.8 are the same in both plans: role-stream split, shear frames, D<-D-H / H<-H+D / D<-H-D, the recurrence F_k<=(s/W)F_{k-1}+O(1) and the depth-first schedule. They match lines 1491-1619."
+    },
+    {
+      "id": "arbitrary-width-interchange",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S1.9.1-S1.9.6 are the same in both plans and match lines 1649-1760."
+    },
+    {
+      "id": "phase-frame-recursion",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S2.1.4-S2.1.8 are the same in both plans: the C identities, P_M conjugation, the inverse child via (C^{-1})^{(x)f}, s_c children, and H_0^{(x)D}=b^D S_D C^{(x)D} S_D. They match lines 1825-1935."
+    },
+    {
+      "id": "packed-selected-bit-addition",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S2.2.1-S2.2.10 are the same in both plans: the eight operations, the cycles, the guard interval, delta_bad, T_0S_0^{-1}, the repair, and the cost. They match lines 2013-2231."
+    },
+    {
+      "id": "layer-recurrence",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S2.3.1-S2.3.8 are the same in both plans and match lines 2283-2448."
+    },
+    {
+      "id": "simultaneous-layer",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry S1 (S2.4.1, with Delta in S2.4), S2 (S2.4.2-S2.4.3), S3 (S2.4.4-S2.4.5), S4 (S2.4.6-S2.4.7) and S5 (S2.5), all matching lines 2457-2586 and 2751-2757. The plans do not differ."
+    },
+    {
+      "id": "synthetic-transform",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S3.1-S3.3 and their sub-steps are the same in both plans and match lines 2805-3190."
+    },
+    {
+      "id": "signed-packing",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S3.4.1-S3.4.6 are the same in both plans and match lines 3236-3366."
+    },
+    {
+      "id": "synthetic-convolution",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S3.5.1-S3.5.6 are the same in both plans and match lines 3418-3491."
+    },
+    {
+      "id": "gaussian-resampling",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S4.1.1-S4.1.9 are the same in both plans and match lines 3590-3890."
+    },
+    {
+      "id": "chirp-permutation-cancellation",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S4.2.1-S4.2.6 are the same in both plans and match lines 3938-3988."
+    },
+    {
+      "id": "parameters-and-primes",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S5.1.1-S5.1.13 are the same in both plans and match lines 4008-4191."
+    },
+    {
+      "id": "crt-address-map",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S5.2.1-S5.2.6 are the same in both plans and match lines 4216-4291."
+    },
+    {
+      "id": "phase-twist",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S5.3.1 (with S5.3.1.1-S5.3.1.3) and S5.3.2 are the same in both plans and match lines 4303-4400."
+    },
+    {
+      "id": "multiplication-algorithm",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S5.3.3-S5.3.4 and S5.4-S5.8 are the same in both plans and match lines 4434-4534."
+    },
+    {
+      "id": "exact-recovery",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S5.9.1-S5.9.3 and their sub-steps are the same in both plans: E_ring, E_s, E_w, the final error 448b2^{-3b/4}<1/2, and the carries. They match lines 4546-4806."
+    },
+    {
+      "id": "time-accounting",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S6.T, S6.M, S6.D, S6.F and S6.G are the same in both plans and match lines 4815-4995."
+    },
+    {
+      "id": "conjecture-negation",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans only assert the disproof in S0's claim. Neither states the eventual-lower-bound / liminf argument of lines 379-387, so they are equal."
+    }
+  ],
+  "chain": {
+    "preference": "B",
+    "strength": "slight",
+    "note": "Both trees follow the paper's route step for step, with the same dependencies: network (S1.3), frames (S1.4), labels and rank budget (S1.5), the exponent tau from the eta deficits (S1.5.10), the matrix shear (S1.6-S1.7), the interchange recurrence (S1.8-S1.9), the phase layer (S2), then S3-S5 and the cost (S6). They differ only at the central saving. B's S1.5.6 gives L_b/N=100/539 and L_c/N=101/539 below 1/2 (lines 1105-1110), which is the paper's reason that the deficits are positive and s<Wm. A asserts L<N/2 without that support, though its eta values (S1.5.10) still carry s/W<m^tau into the recurrences."
+  },
+  "errors": [],
+  "overall": {
+    "preference": "B",
+    "strength": "slight",
+    "reason": "The two plans are identical except for one step. B's S1.5.6 states the exact loss ratios L_b/N=100/539 and L_c/N=101/539, both below 1/2 (lines 1105-1110). This is checklist sub-step L5 and the paper's ground for R1's L<N/2, hence s<Wm. A only asserts L<N/2. Neither plan contains a statement contrary to the paper, so B's single added constant step decides the comparison, and only slightly."
+  }
+}

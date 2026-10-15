@@ -1,0 +1,235 @@
+{
+  "pair": "Q07",
+  "items": [
+    {
+      "id": "bank-exchange-network",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans state B1-B4 in identical steps (S1.3.1.1 net change (JV+RG)x independent of scratch, S1.3.1.2 bit case |S cap T| mod 2 with side cancelling intersection one, S1.3.1.3 complex case (|S cap T|-1)/2 with side cancelling zero and two, S1.3.2 the three stages), checked against lines 744-764. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "common-frame-identity",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans have the same S1.4, S1.4.1-S1.4.3 (common frame commutes with pointwise gate, D_out S_Omega D_in^{-1}, route operator eps_w D_sink D_source^{-1}), matching lines 804-825. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "label-residual-budget",
+      "preference": "B",
+      "strength": "slight",
+      "differences": [
+        {
+          "favours": "B",
+          "what": "Plan B states the exact loss ratios L_b/N=100/539 and L_c/N=101/539, both below 1/2 (checklist L5); Plan A never gives these values and only asserts L<N/2 in the claim of S1.5.",
+          "substep": "L5",
+          "steps_a": [],
+          "steps_b": [
+            "S1.5.6"
+          ],
+          "lines": [
+            1105,
+            1110
+          ]
+        }
+      ],
+      "note": "L1-L4 are present identically in both (residual table S1.5.5.1-16, side edge 2->5 with t_X perp t_Y in S1.5.5.14, telescoping and the single decreasing centre edge in S1.5.2/S1.5.3/S1.5.5.17/S1.5.5.18, orthonormal binary bases in S1.5.5.19; lines 1013-1102). Only B carries L5, the exact ratios at lines 1105-1109, a single constant-level sub-step."
+    },
+    {
+      "id": "bit-shear-interface",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S1.5.7 (s_b=W_b m-N+2L_b<W_b m, deficit N-2L_b), S1.5.8 (rank dim V-dim U, the 2P_{U_a} first edge, endpoint difference I_m) and S1.8.2/S1.8.3, matching lines 1156-1171. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "complex-phase-interface",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "P1 (S2.1.1), P2 (S2.1.2), P3 (S1.5.9/S2.1.3/S2.1.7) and P4 (S2.1.3 with the 27-coordinate Z correction and the quote at line 1287) are carried by identical steps in both plans; checked against lines 1232-1314. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "rank-saving",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "R1-R4 are present in both: L<N/2 and s<Wm with deficits N-2L_b and 2N-2L_c (S1.5 claim, S1.5.7, S1.5.9), eta_b and eta_c and the 20*2^{-50}, log m<20 argument giving tau=sigma=1-2^{-50} (S1.5.10.1-3); lines 1105-1110, 1319-1343. Plan B's extra S1.5.6 grounds L<N/2 in the exact ratios, but that content is checklist sub-step L5 and is counted under label-residual-budget, not here."
+    },
+    {
+      "id": "stream-primitives",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans have the same S1.1 and S1.2 steps (digit permutations, row splits, controlled shifts, unit multiplication), lines 513-605. Both share the same minor omission of the W | R condition in S1.1.4, listed under errors. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "matrix-shear",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "M1 (S1.6.1-S1.6.3), M2 (S1.7.1), M3 (S1.7.2) and M4 (S1.7.4) are present identically in both plans, matching lines 1375-1443. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "interchange-recurrence",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S1.8.1-S1.8.8: role-stream split, Phi_M frames, H<-H+D on every role, the three-shear interchange, F_k<=(s/W)F_{k-1}+O(1), the geometric sum and the fixed-tape schedule; lines 1491-1616. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "arbitrary-width-interchange",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S1.9.1-S1.9.6 (high digits as row field with rho formula, padding rows, base-m pieces, binary padding to q^e, one-bit width difference); lines 1649-1762. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "phase-frame-recursion",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S2.1.4-S2.1.8 (basic identities, P_M conjugation, the inverse-child formula, exactly s_c children on e/m axes, H_0^{otimes D}=b^D S_D C^{otimes D} S_D); lines 1825-1936. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "packed-selected-bit-addition",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S2.2.1-S2.2.10 (eight operations and cycles, guard interval and bad set, delta_bad bound, T_0 S_0^{-1} permuting B, repair by radix sort, cost); lines 2013-2231. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "layer-recurrence",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S2.3.1-S2.3.8 (individual kernels, node overhead, q_0 row index, F(e)<=(s/W)F(e/m)+O((eK)^tau+1), internal and leaf sums, base-m pieces giving d^{lambda'}); lines 2283-2445. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "simultaneous-layer",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "S1 (S2.4.1), S2 (S2.4.2/S2.4.3), S3 (S2.4.4/S2.4.5), S4 (S2.4.6/S2.4.7) and S5 (S2.5) are present identically in both plans; checked against lines 2457-2586. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "synthetic-transform",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S3.1-S3.3 (character cancellation by pairing, decimation in frequency with bit-reversed order, layout L, error sqrt2 l 2^{-p} and the three cost terms); lines 2805-3189. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "signed-packing",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S3.4.1-S3.4.6 (B_0=2^{4p}, separation bound, two's-complement packing, centred extraction, negacyclic reduction, truncation); lines 3243-3366. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "synthetic-convolution",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S3.5.1-S3.5.6 (bilinear contraction, normalization identity, error 3delta+eta scaled by M, cost); lines 3386-3491. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "gaussian-resampling",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S4.1.1-S4.1.9 (N=CTD, Neumann inversion, contractions S' and D'J'C, normalization 2^{-2alpha^2}, error table, tensor form, line counts, axis exposure); lines 3598-3886. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "chirp-permutation-cancellation",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S4.2.1-S4.2.6 (chirp periodicity, Bluestein coefficient, R F^+ R=F^+, (u*v)/S^2, conjugation); lines 3939-3988. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "parameters-and-primes",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S5.1.1-S5.1.13 (fixed rationals, sizes, comparison constants, alpha, gamma, eta, prime existence, T/2<S<T, alpha^4 theta>p, search cost, no wraparound, capacity); lines 4010-4191. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "crt-address-map",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S5.2.1-S5.2.6 (isomorphism, triangular formula, padding, update order, padding preserved, cost); lines 4216-4291. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "phase-twist",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S5.3.1 with S5.3.1.1-3 and S5.3.2 (well-definedness, wrap check zeta^{k+l}(-1)^h=zeta^j, M_C=(f*g)/T, computed twists); lines 4303-4385. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "multiplication-algorithm",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S5.3.3-S5.3.4 and S5.4-S5.8 (source transform with counterpart RF_s, conjugate procedure, input scaling, the six operations with scales S and 2^{2b+4}S); lines 4436-4531. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "exact-recovery",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S5.9.1-S5.9.3 (E_ring<5TL, 6TL, 8TL, E_s=9*2^gamma TL, E_w<28*2^gamma T^2 L, final 448b2^{-3b/4}<1/2, carries); lines 4559-4805. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "time-accounting",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans carry the same S6.T, S6.M, S6.D, S6.F and S6.G (nine table rows, margins g_1..g_7 with min 2^{-181}=2kappa, justification of rows, final bound and schoolbook cutoff); lines 4822-4994. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    },
+    {
+      "id": "conjecture-negation",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Both plans state only, in S0, that the bound disproves the n log n conjecture in this model; neither gives the liminf formulation of lines 379-387. The two plans carry identical steps for this item (verified by a full diff: the plans differ only in Plan B's step S1.5.6, which concerns label-residual-budget)."
+    }
+  ],
+  "chain": {
+    "preference": "B",
+    "strength": "slight",
+    "note": "The two trees are the same route (S1 bank-exchange network -> frames -> labels -> s<Wm -> eta and tau=1-2^{-50} -> interchange recurrence; S2 phase network -> layer recurrence; S3-S6 transforms, resampling, recovery and cost), and neither breaks. The one difference is at the source of the central saving: Plan B derives L<N/2 from the exact ratios 100/539 and 101/539 (S1.5.6, lines 1105-1110) before s_b<W_b m and s_c<W_c m, whereas Plan A only asserts L<N/2 in S1.5's claim. A's chain still reaches s<Wm through the stated deficits (S1.5.7, S1.5.9) and the exact eta values (S1.5.10), so the difference is slight."
+  },
+  "errors": [
+    {
+      "plan": "A",
+      "step": "S1.1.4",
+      "says": "Writing a row number as r=Wg+w and sending the whole row to stream w gives W streams of equal shape, each of volume V/W (stated unconditionally).",
+      "paper": "Equal shape and volume V/W hold only when W divides R: 'If W divides R, each stream has address set [P]x[R/W]x[B] ... Thus the streams have the same shape and each has volume V/W.'",
+      "lines": [
+        522,
+        526
+      ],
+      "severity": "minor"
+    },
+    {
+      "plan": "B",
+      "step": "S1.1.4",
+      "says": "Writing a row number as r=Wg+w and sending the whole row to stream w gives W streams of equal shape, each of volume V/W (stated unconditionally).",
+      "paper": "Equal shape and volume V/W hold only when W divides R: 'If W divides R, each stream has address set [P]x[R/W]x[B] ... Thus the streams have the same shape and each has volume V/W.'",
+      "lines": [
+        522,
+        526
+      ],
+      "severity": "minor"
+    }
+  ],
+  "overall": {
+    "preference": "B",
+    "strength": "slight",
+    "reason": "A full diff shows the plans are identical except for Plan B's step S1.5.6. That step states the exact loss ratios L_b/N=100/539 and L_c/N=101/539, both below 1/2 (lines 1105-1110). This is checklist sub-step L5, and it is the paper's ground for L<N/2, the inequality behind the strict saving s<Wm; Plan A only asserts L<N/2. No error separates the plans (the one minor issue, the dropped W | R condition in S1.1.4, is in both), so B is preferred by a single constant-level sub-step."
+  }
+}
