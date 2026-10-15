@@ -1,6 +1,6 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-15 05:15 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-15 05:30 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
 
 ## Standing instructions from the author (latest, about 01:22–01:45 UTC)
 
@@ -24,17 +24,21 @@
 - **Not run:** the cross-check (O was not favoured) and F3's second judges (skipped, since no outcome could change).
 - **Recorded:** the result is in E11.md, `policy.md` and the registry.
 
-### A1 (`plans/A1.md`): planted-error recall for fidelity auditing
+### A1 (`plans/A1.md`): stage 1 complete at 05:17 UTC; stage 2 triggered and held
 
-- **Stage 1 running since 05:02:** tasks are launched from `scratchpad/a1/queue.tsv` in order. The count launched is in `scratchpad/a1/launched.txt` (20 at 05:02; all 132 launched by 05:15). On resuming, check which of the launched tasks are accepted (each copy's `exegenius/log.jsonl`) before launching more. Never relaunch a task that may still be running.
-- **State:** preregistered at 01:18. The 132 task copies are made and checked in `scratchpad/a1/runs/A1{AH,AS,AO}1/`. `prompts.tsv` lists description, model, effort, root and prompt for each.
-- **Gate:** E11 is complete (04:58) and the reset has passed. Measured since 04:40: 94.2 M, against A1's ~65–80 M and runbook §5's ~300 M safeguard. The session cannot read the meter.
-- **Then:**
-  - launch from `prompts.tsv`, up to 20 at a time, `general-purpose`, with `model` and `effort` as listed;
-  - collect the answers into the plan's layout;
-  - score with `plant.py score`;
-  - run the classifier check;
-  - read the result by A1's table.
+- **Result (preregistered):** no configuration is adequate. R_A is AH 0.46, AS 0.29 and AO 0.39, against 0.50; R_S is 0.60 for all three, against 0.70. F_A, F_sham and F_S are within their thresholds.
+- **Classifier check:** `ASSERTS` agrees with the blind hand labels on 0.885 of gaps, so it stays. It finds 35 of 78 asserting notes. Under the hand labels (a sensitivity analysis), R_A is 0.64, 0.50 and 0.71, all passing.
+- **Recorded:** `plans/A1.md` "Result, stage 1"; `policy.md`; `registry/specs/A1.json`; `docs/journal/2026-10-15-a1-stage1/`.
+- **For the author:**
+  1. Do the hand labels replace `ASSERTS`? This would change a criterion after results.
+  2. Is the inclusive reading of the stage-2 trigger for R_S right?
+  3. A fresh meter reading before stage 2.
+- **Stage 2, when cleared:**
+  - copies for run 2 by `tools/a1setup.py` with RUN=2 (see the ledger);
+  - launch as stage 1 (up to 20 at a time, `general-purpose`, model and effort from `prompts.tsv`);
+  - collect with `a1collect.py`; score pooled; hand-label the new gaps under `labels-rule.md` before unblinding;
+  - read by the table.
+  - Estimated cost: about 23 M cache read for the tasks if all three run, plus orchestration.
 
 ### W3 (`plans/W3-draft.md`): writer validation
 
@@ -49,7 +53,7 @@
 | Writers | Sonnet `high` is the general default. A provisional exception for this wiki covers 0015 and 0016 (W2b). The blind designation of 23 key-step pages is a classification only, and no rollout follows from it (W3 is pending) |
 | Judging | the primary rubric below the ceiling; pairwise (K3) above it. The identical-pair control is not informative |
 | Extraction | keep Sonnet `high` (EX1 analysis) |
-| Auditing | unmeasured (A1 pending) |
+| Auditing | A1 stage 1: no configuration adequate; the audit verdict depends on the classifier; stage 2 held for a meter reading |
 
 ## Records still to do (model-free)
 

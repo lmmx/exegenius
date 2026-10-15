@@ -65,6 +65,17 @@ That is past runbook §5's threshold, so E10 waits for a reading or the ~23:30 r
 
 That is past runbook §5's ~300 M threshold. J24 (W2b's page judging, ~8–10 M by J22's measured 0.43 M per judgement; measured 9.67 M) was launched at 00:19 because it completes an experiment whose runs were already spent. E11 (~125–250 M) waits for a reading or the next reset (about 04:40 UTC, assuming a five-hour window; a check-in is scheduled at 04:42).
 
+**Measured since the ~04:40 reset, with no reading** (`spend.py --since 2026-10-15T04:40`, 05:25 UTC on 2026-10-15). The reset time is the author's estimate ("in about 3 hours" at about 01:40), not an observation. These are counts, not a reading:
+
+| | Cache read |
+|---|---|
+| J25 (E11's pairwise judging) | 80.6 M |
+| A1 stage 1 (132 tasks) | 23.4 M |
+| the development session | 64.2 M |
+| **together** | **~168 M** |
+
+Since the last reading (45% at about 01:22), the same count is about 212 M (`--since 2026-10-15T01:22`, adding E11's runs, 19.6 M, and the key-step designation, 0.5 M). **A1 stage 2** (about 23 M for the tasks, by stage 1, plus orchestration) **is held for a fresh meter reading**, under the author's rule: the current budget cannot be established with adequate confidence, since the reset is not observed and there has been no reading since 01:22.
+
 **Measured since the 14:20 reset, with no reading yet** (`spend.py --since 2026-10-14T14:20`, 15:51 UTC). These are counts, not a reading:
 
 | | Cache read | Cache write |

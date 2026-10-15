@@ -1,0 +1,208 @@
+{
+ "id": "A1",
+ "title": "Planted-error recall for fidelity auditing: Haiku high, Sonnet high and Opus xhigh on audit and support tasks over seeded pages",
+ "kind": "screening",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "fidelity auditing: 24 audit tasks (6 clean and 18 seeded page variants) and 20 support tasks per configuration-run, on 6 pages of the W1/W2 wikis with 36 planted errors and 18 shams",
+ "question": "Which model and effort catch planted errors in the audit and support tasks, at what false-alarm rate, within what those tasks can see?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "master at 01:18 UTC, 2026-10-15 (exegenius 0.6.0, target/debug/exegenius sha256 c37a2b3d\u2026caee8)"
+ },
+ "evidence": {
+  "path": "docs/journal/2026-10-15-a1-stage1"
+ },
+ "protocol": "general-purpose subagents launched from the development session, up to 20 at a time, from prompts.tsv (calibration/plans/A1.md, Decisions)",
+ "preregistration": "calibration/plans/A1.md (preregistered 01:18 UTC, 2026-10-15, before any run; the classifier-check labelling rule fixed at 05:21, before any label)",
+ "journal": "docs/journal/2026-10-15-a1-stage1/README.md",
+ "comparison": "the preregistered thresholds (R_A, F_A, F_sham, R_S, F_S) and, between configurations, U with 80% Wilson intervals",
+ "arms": {
+  "AH": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-haiku-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "task_prompt": "the audit or support task as written by exegenius 0.6.0 (target/debug/exegenius, sha256 c37a2b3d\u2026caee8) in a project copy with one seeded page; prompts.tsv, word for word"
+   },
+   "runs": [
+    "A1AH1"
+   ]
+  },
+  "AS": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "task_prompt": "the audit or support task as written by exegenius 0.6.0 (target/debug/exegenius, sha256 c37a2b3d\u2026caee8) in a project copy with one seeded page; prompts.tsv, word for word"
+   },
+   "runs": [
+    "A1AS1"
+   ]
+  },
+  "AO": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "xhigh",
+    "effort_passed": true,
+    "task_prompt": "the audit or support task as written by exegenius 0.6.0 (target/debug/exegenius, sha256 c37a2b3d\u2026caee8) in a project copy with one seeded page; prompts.tsv, word for word"
+   },
+   "runs": [
+    "A1AO1"
+   ]
+  }
+ },
+ "reported": {
+  "primary_preregistered": {
+   "value": "R_A: AH 13/28 = 0.46 [0.35, 0.58], AS 8/28 = 0.29, AO 11/28 = 0.39; R_S: 6/10 = 0.60 for all three; F_A 0, F_sham 0/18 and F_S 1/14 for all three; U: AH 19/35, AS 14/35, AO 18/35. No configuration adequate (all fail R_A and R_S)",
+   "basis": "reported",
+   "source": "calibration/plans/A1.md (Result); docs/journal/2026-10-15-a1-stage1/A1-score.json"
+  },
+  "classifier_check": {
+   "value": "ASSERTS agrees with blind hand labels on 348 of 393 gaps (0.885 >= 0.80): ASSERTS kept for the primary measures. It finds 35 of the 78 asserting notes (0.45) and flags 2 that do not assert",
+   "basis": "reported",
+   "source": "docs/journal/2026-10-15-a1-stage1/labels.tsv, A1-score-hand.json"
+  },
+  "sensitivity_hand_labels": {
+   "value": "not preregistered: with hand labels, R_A is AH 0.64, AS 0.50, AO 0.71 (all meet the R_A criterion); U AH 0.69, AS 0.57, AO 0.71; still no configuration adequate (R_S)",
+   "basis": "reported",
+   "source": "docs/journal/2026-10-15-a1-stage1/A1-score-hand.json"
+  },
+  "stage_2": {
+   "value": "triggered for AH (R_A within 0.10) and, reading 'within 0.10' inclusively, for AS and AO (R_S = 0.60, 0.10 below 0.70); not launched pending a fresh meter reading",
+   "basis": "reported",
+   "source": "calibration/plans/A1.md"
+  },
+  "runs_cache_read_tokens": {
+   "value": "23.4 M for 132 tasks: AH 10.6 M (189 calls), AS 6.2 M (144), AO 6.5 M (144)",
+   "basis": "reported",
+   "source": "the subagent transcripts, usage records deduplicated by message id (spend.py row 'A1 (auditing)')"
+  },
+  "stray_tools": {
+   "value": "AH tasks called session tools: read_documentation (9 tasks), list_sessions (7), send_message (3, refused), archive_session (1, refused), list_events (1); no effect. AS and AO called none",
+   "basis": "reported",
+   "source": "docs/journal/2026-10-15-a1-stage1/answers/collect.json"
+  }
+ },
+ "deviations": [
+  {
+   "kind": "analysis",
+   "what": "the stage-2 trigger's 'within 0.10' was met exactly by R_S (0.60 against 0.70) and by F_sham (0 against 0.10); the session reads it inclusively for R_S and not for F_sham, which is at its floor on the passing side. Read after the results; put to the author"
+  },
+  {
+   "kind": "analysis",
+   "what": "a hand-label rescoring (tools/plant_labels.py) is reported as a sensitivity analysis; it is not the preregistered primary"
+  }
+ ],
+ "limitations": [
+  "One run per configuration; six pages of one paper; 28 page-detectable and 10 quote-detectable errors per run.",
+  "The audit and support tasks do not compare a page with the paper, so source-only errors are out of reach by design.",
+  "The hand labels are one labeller's (this session's), made blind to configuration but after seeing the pooled preliminary scores."
+ ],
+ "built": {
+  "by": "calibration/tools/registry.py",
+  "wiki_commit": null
+ },
+ "orchestrator_observed": {
+  "value": null,
+  "basis": "unavailable",
+  "note": "no main transcript at the evidence commit"
+ },
+ "runs": [
+  {
+   "id": "A1AH1",
+   "arm": "AH",
+   "planning_seconds": {
+    "value": null,
+    "basis": "unavailable",
+    "note": "no run log at the evidence ref"
+   },
+   "subagents": [],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-haiku-5-5"
+    ],
+    "efforts": [
+     "high"
+    ],
+    "basis": "measured",
+    "source": "the development session's subagent transcripts and their meta files (44 of 44 tasks per configuration); not preserved on a branch"
+   },
+   "matches_arm": null,
+   "quality": []
+  },
+  {
+   "id": "A1AS1",
+   "arm": "AS",
+   "planning_seconds": {
+    "value": null,
+    "basis": "unavailable",
+    "note": "no run log at the evidence ref"
+   },
+   "subagents": [],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "high"
+    ],
+    "basis": "measured",
+    "source": "the development session's subagent transcripts and their meta files (44 of 44 tasks per configuration); not preserved on a branch"
+   },
+   "matches_arm": null,
+   "quality": []
+  },
+  {
+   "id": "A1AO1",
+   "arm": "AO",
+   "planning_seconds": {
+    "value": null,
+    "basis": "unavailable",
+    "note": "no run log at the evidence ref"
+   },
+   "subagents": [],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-opus-5-5"
+    ],
+    "efforts": [
+     "xhigh"
+    ],
+    "basis": "measured",
+    "source": "the development session's subagent transcripts and their meta files (44 of 44 tasks per configuration); not preserved on a branch"
+   },
+   "matches_arm": null,
+   "quality": []
+  }
+ ],
+ "arm_summary": {
+  "AH": {
+   "runs": 1,
+   "planning_seconds": null
+  },
+  "AS": {
+   "runs": 1,
+   "planning_seconds": null
+  },
+  "AO": {
+   "runs": 1,
+   "planning_seconds": null
+  }
+ }
+}
