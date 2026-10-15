@@ -29,13 +29,22 @@
 3. ~~Prepare J25~~ **Done at 01:53.** 14 pair files and prompts are in `docs/journal/2026-10-15-e11-ceiling/judge/prompts/Qnn.txt`, with no leaks.
 4. **Budget gate before J25** (14 pairwise judgements, ~85–140 M): a fresh meter reading that leaves room, or the reset having passed (after about 04:40) with spend since the reset measured (`calibration/tools/spend.py SUBAGENTS --since <reset time>`).
 5. **Launch J25:** one Opus judge per file; description `J25 judge Qnn[-b]`; pointer prompt "Read the instructions in <prompt file> and follow them exactly. Read only that file and the files it names."
-6. **Score:**
+6. **Score** (checked to run on the empty batch at 01:57). The sign test counts a pair for O when net ≥ 2:
 
    ```
-   python3 -I calibration/tools/pairwise.py score docs/journal/2026-10-15-e11-ceiling/judge --arm O=E11F2O,E11F3O,E11F4O,E11F5O,E11F6O,E11F8O --arm S=E9F2Y,E10F3Y,E9F4Y,E10F5Y,E10F6Y,E9F8Y
+   cd /home/user/exegenius; J=docs/journal/2026-10-15-e11-ceiling/judge
+   python3 -I calibration/tools/pairwise.py score $J --margin 2 \
+     --expect E11F2O\>E9F2Y --expect E11F3O\>E10F3Y --expect E11F4O\>E9F4Y \
+     --expect E11F5O\>E10F5Y --expect E11F6O\>E10F6Y --expect E11F8O\>E9F8Y \
+     --arm O=E11F2O,E11F3O,E11F4O,E11F5O,E11F6O,E11F8O --arm S=E9F2Y,E10F3Y,E9F4Y,E10F5Y,E10F6Y,E9F8Y > $J/results.txt
+   python3 -I calibration/tools/pairwise.py score $J --margin 2 --expect E9F4Y\>E10F4Y2 > $J/control.txt
    ```
 
-   Check the flags against `pairwise.py score --help`. Read the result by E11's preregistered table: per-extraction net, sign test, and the control pair.
+   **The reading** (E11.md, fixed):
+   - Per extraction, O is favoured when net ≥ 2 and O wins at least one verdict in each order. With 2 verdicts that means both; with 4, check "verdicts per order" by hand. S is favoured under the symmetric rule; anything else is tied.
+   - "O better" needs O favoured on ≥ 5 extractions and S on none.
+   - A proposal also needs the control tied (|net| ≤ 1), then the Sonnet-judge cross-check.
+
 7. **Sequential second judges** (only where a pair's two verdicts disagree in direction) and the **Sonnet-judge cross-check** (only if O is favoured) each need a fresh budget check first.
 
 ### A1 (`plans/A1.md`): planted-error recall for fidelity auditing
@@ -66,5 +75,5 @@
 
 ## Records still to do (model-free)
 
-- E11's evidence branch on lmmx/openai-nlogn-wiki (`141026-exp-e11-ceiling`, based on `141026-exp-w2-writer`), with the runs and transcripts, once the runs end. Then its registry spec and record, and the branch inventory.
+- ~~E11's evidence branch, registry spec and branch inventory~~: done at 01:55–01:57 (`141026-exp-e11-ceiling` b02b658; `registry/specs/E11.json`).
 - J25's batch entry in `registry/pairwise-judging.json`, and E11's result in `plans/E11.md`, `policy.md` and a journal entry.
