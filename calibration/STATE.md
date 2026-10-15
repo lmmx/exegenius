@@ -12,6 +12,8 @@
 - A check-in is scheduled for 09:52 (`trig_01SpgYi2xwX2SFduvWJ6jE5h`).
 - After the reset, there is no reading until the author gives one. Do not infer the meter from tokens.
 
+**09:52 check-in:** the reset has passed and the author has posted no reading since 09:24. Nothing was launched; one request for a reading was sent.
+
 ### Next actions after reset, in order
 
 1. **Get a fresh meter reading,** or use one the author has posted after 09:44. If none, ask once, and do only model-free work meanwhile.
