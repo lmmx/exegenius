@@ -1,0 +1,130 @@
+{
+  "pair": "Q10",
+  "items": [
+    {"id": "bank-exchange-network", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "B states the gate maps of both constructions (copy, side injection with coefficient -(|S cap T|-1)/2 in the complex case, gather including the wire C_*, scatter (sum C_i - C_*)/2) and the eight-row schedule; A only names the gates and summarizes rows 0-1, 2-5, 6-7, so the coefficient claims of B2/B3 are not tied to the gate definitions", "substep": null, "steps_a": [], "steps_b": ["K1.2", "K1.3"], "lines": [688, 726]}
+     ],
+     "note": "Both carry B1-B4 (A S1.1.1a-c and S1.1.2; B K1.4-K1.6), the sizes and the wire counts. B additionally gives the gate definitions on which the central and side coefficients rest."},
+    {"id": "common-frame-identity", "preference": "A", "strength": "slight",
+     "differences": [
+       {"favours": "A", "what": "A states the invariant 'stored array = D_v applied to the logical array', with the logical input g = D_in^{-1} f needing no physical preprocessing and each edge carrying D_u phi to D_v phi; B states only that the common frame commutes with the gate and the resulting operator", "substep": null, "steps_a": ["S1.2a", "S1.2b"], "steps_b": [], "lines": [804, 813]}
+     ],
+     "note": "Both state the common-frame identity and the route operator. A also gives the invariant that carries the proof."},
+    {"id": "label-residual-budget", "preference": "A", "strength": "slight",
+     "differences": [
+       {"favours": "A", "what": "A lists the orthogonal residual subspace of every edge (B tensor t_X-perp, P tensor F, (B tensor t_Y-perp) perp (P tensor <t_X>), P tensor <t_X,t_Y>-perp, (A tensor F) tensor Q-perp, ...) together with its dimension; B gives only the dimensions", "substep": "L1", "steps_a": ["S1.3.5a", "S1.3.5b", "S1.3.5c", "S1.3.5d", "S1.3.5e"], "steps_b": ["K3.4"], "lines": [1013, 1043]},
+       {"favours": "A", "what": "A gives the order in which the gates touch the physical wires (Y-side, Y-center, X-side, X-center, Y-center, Y-side, X-center, X-side), which fixes the time labels; B gives the labels only", "substep": null, "steps_a": ["S1.3.4"], "steps_b": [], "lines": [960, 969]},
+       {"favours": "B", "what": "For the side edge 2->5, B states the inclusion P tensor <t_X> in P tensor t_Y-perp; A gives the complement <t_X,t_Y>-perp of dimension h-2 and the need for t_X perp t_Y. Both carry L2", "substep": "L2", "steps_a": ["S1.3.5d"], "steps_b": ["K3", "K3.4"], "lines": [1048, 1058]}
+     ],
+     "note": "L2-L5 are present in both. On L1, A carries the residual table itself while B carries only its dimension column."},
+    {"id": "bit-shear-interface", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both assign P_U and -P_{U_a}, give rank(P_V-P_U) = dim V - dim U, the N exceptional source edges 2P_{U_a}, the endpoint identity I_m and the value of s_b (A S1.4.1a-c, B K4.1-K4.3)."},
+    {"id": "complex-phase-interface", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "B states that on k columns each residual vector contributes one factor acting on all k columns, s_c factors in all; A has no such step", "substep": "P3", "steps_a": [], "steps_b": ["K5.2"], "lines": [1262, 1271]},
+       {"favours": "B", "what": "B states the endpoint frames: zero label frame I, full label frame C^{tensor m}; A only says the X_a->Y_a pair is the one route whose labels are neither zero nor full", "substep": "P4", "steps_a": [], "steps_b": ["K5.3"], "lines": [1287, 1289]},
+       {"favours": "A", "what": "A derives the pair's phase difference q_{U_a-perp} - q_{U_a} = wt(x) + 2[u.x] mod 4 from weight 27 and orthogonal additivity; B states the resulting C^{-1} on the 27 coordinates without it", "substep": "P4", "steps_a": ["S1.4.2c"], "steps_b": [], "lines": [1290, 1299]}
+     ],
+     "note": "P1, P2 and the repair C = iZC^{-1}Z with Z_{a,k}, i^{27k}Z_{a,k} and X-output negation are in both. B also carries P3 and the I / C^{tensor m} endpoint frames of P4, which A lacks."},
+    {"id": "rank-saving", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "R1-R4 are present in both: L/N<1/2 with deficits N-2L_b and 2N-2L_c, eta_b and eta_c, and the comparison with 20*2^{-50} using log m<20 (A S1.3.8, S1.4.1b, S1.4.2b, S1.4.3a-c; B K3.7, K4.2, K5.2, K6)."},
+    {"id": "stream-primitives", "preference": "B", "strength": "clear",
+     "differences": [
+       {"favours": "B", "what": "B states the elementary stream operations lemma (digit permutations and moves, split-map-merge, cyclic row splitting into W streams) and the controlled-shift/rational-unit lemma, including the split at Q-a and absorption of b^{O(1)} offset work; A has no step for either and only cites them as relied-on concepts", "substep": null, "steps_a": [], "steps_b": ["S2.1", "S2.2"], "lines": [491, 620]}
+     ],
+     "note": "This supporting item is entirely absent from A's steps and fully stated in B."},
+    {"id": "matrix-shear", "preference": "A", "strength": "slight",
+     "differences": [
+       {"favours": "A", "what": "A gives the full elimination proof: the A=0 case, deleting the pivot row and column and repeating on the active indices with operations still lower triangular, each step isolating a rank-one block so Pi has exactly a ones, and E_1=L^{-1}, E_2=R^{-1}. B gives only the pivot choice and lower-triangular clearing", "substep": "M1", "steps_a": ["S1.5.1a", "S1.5.1b"], "steps_b": ["C1"], "lines": [1375, 1391]}
+     ],
+     "note": "M2-M4 are present in both (A S1.5.2a-c; B C2.1-C2.3). On M1, A carries the repetition and rank count, which B omits."},
+    {"id": "interchange-recurrence", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "B writes each chunk as m fields of b=e/m digits, which is what makes children of size e/m; A speaks of b-digit fields without relating b to e", "substep": null, "steps_a": [], "steps_b": ["C3.2"], "lines": [1492, 1495]},
+       {"favours": "B", "what": "B defines the frame Phi_M:(H,D)->(H+MD,D) with Phi_{M'}Phi_M=Phi_{M'+M}; A uses Phi_{A_e} and Phi_{I_m} without defining them", "substep": null, "steps_a": [], "steps_b": ["C3.3"], "lines": [1504, 1508]},
+       {"favours": "B", "what": "B states the contract (endpoint differences I_m, s<Wm) and that the bit interface supplies it with W=W_b, s=s_b, the negative source projections included", "substep": null, "steps_a": [], "steps_b": ["C3.1"], "lines": [1464, 1473]},
+       {"favours": "A", "what": "A gives the reason the frame identity applies: a common address permutation commutes with every pointwise bit gate", "substep": null, "steps_a": ["S1.5.3.2"], "steps_b": [], "lines": [1514, 1519]},
+       {"favours": "A", "what": "A splits the geometric sum into the cases a<=1 and a>1", "substep": null, "steps_a": ["S1.5.3.5d"], "steps_b": [], "lines": [1554, 1557]}
+     ],
+     "note": "Both carry the row split, the edge shears by recursive interchanges, Phi_{I_m}, the three-update interchange, F_k <= (s/W)F_{k-1}+O(1) and the fixed-tape schedule. B's definitions of the field decomposition and of Phi_M weigh slightly more than A's commutation remark and case split."},
+    {"id": "arbitrary-width-interchange", "preference": "A", "strength": "slight",
+     "differences": [
+       {"favours": "A", "what": "A treats chunks whose widths differ by one bit (moving the extra leading bit outside the equal-width pair, one O(V) single-bit move); B omits this case", "substep": null, "steps_a": ["S1.5.4e"], "steps_b": [], "lines": [1740, 1762]}
+     ],
+     "note": "Both carry the high-digit row field, row padding, base-m pieces and binary padding (A S1.5.4a-d; B C4, C5). Only A covers unequal widths."},
+    {"id": "phase-frame-recursion", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both give the C identities, P_M conjugation, the slot implementation with m(m-1)+3m row additions, the forward-child conversion of inverse kernels, the s_c child count and H_0^{tensor D} = b^D S_D C^{tensor D} S_D (A S1.6.1a-f; B L1.1-L1.6)."},
+    {"id": "packed-selected-bit-addition", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both carry the eight-operation parity cycles, the packed cyclic shifts, the guard-defined bad set with delta_bad, the T_0 S_0^{-1} repair by sorting, the top-position XOR and the cost reduction (A S1.6.2a-i; B P1-P6)."},
+    {"id": "layer-recurrence", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both carry the leaf cost O(Ve), node overhead O(V((eK)^tau+1)), the q_0 row index with padding, the 1/W role streams, the exponent conditions, the internal and leaf sums and the base-m pieces (A S1.6.3a-g; B B1-B6)."},
+    {"id": "simultaneous-layer", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "S1-S5 are present in both: the constants E, B, nu=11, C_1=20, C_0, Delta; A(e) <= sA(e/m)+E and 8e; B^{k+1} <= B^2 d^nu and the total below C_0 d^{C_1}; the depth-to-bits argument with epsilon C_1<1; the row-sum-one truncation bound (A S1.6.4a-f, S1.6.5b; B L4, GB1-GB6, L6)."},
+    {"id": "synthetic-transform", "preference": "tie", "strength": "n/a",
+     "differences": [
+       {"favours": "A", "what": "A gives the round order (h=l-1 on long axes, then the qK chunk rounds, then the bottom positions)", "substep": null, "steps_a": ["S2.3c"], "steps_b": [], "lines": [3061, 3069]},
+       {"favours": "B", "what": "B gives the implementation and cost of the monomial J_E (split, exchange, sign change, O(rp) per record, exponent from address bits)", "substep": null, "steps_a": [], "steps_b": ["TL5"], "lines": [3136, 3170]}
+     ],
+     "note": "Both carry character cancellation, the decimation-in-frequency step, bit-reversed storage and its opposite, the grouped rounds, the layout L and its costs, and the error accumulation. The minor differences balance."},
+    {"id": "signed-packing", "preference": "A", "strength": "slight",
+     "differences": [
+       {"favours": "A", "what": "A gives the formation of the signed evaluation integers by carries gamma_j in {-1,0} as a two's-complement encoding, and the extraction-carry identity; B gives only the separation bound and a summary of extraction", "substep": null, "steps_a": ["S2.4c", "S2.4d"], "steps_b": ["KP2"], "lines": [3266, 3310]}
+     ],
+     "note": "Both carry B_0=2^{4p}, the 4pr-bit bound, the separation |h_j|<B_0/2, the reduction mod y^r+1, truncation and the O(rp log(rp)) cost. A also covers the signed encoding step."},
+    {"id": "synthetic-convolution", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both give the normalization identity, P(LBu,LBv)=LB P(u,v), the error 3 delta + eta scaled by M and the cost (A S2.5a-c; B R7, R8)."},
+    {"id": "gaussian-resampling", "preference": "A", "strength": "clear",
+     "differences": [
+       {"favours": "A", "what": "A defines the Gaussian maps S, T, the nearest indices q_j, offsets beta_j, the selection C, the diagonal D and N=CTD with unit diagonal; B names N=CTD only in a method", "substep": null, "steps_a": ["S3.1a"], "steps_b": [], "lines": [3577, 3600]},
+       {"favours": "A", "what": "A gives the norm bounds ||S'||<3/4, ||J'||<7/8, ||D'||<1 that make A=S' and B_0=D'J'C contractions; B asserts that they are contractions without this step", "substep": null, "steps_a": ["S3.1c"], "steps_b": [], "lines": [3613, 3626]},
+       {"favours": "A", "what": "A gives the in-order generation of the selected indices and the Neumann evaluation of J' with its O(tp sqrt(p) alpha) cost", "substep": null, "steps_a": ["S3.1f", "S3.1g"], "steps_b": ["G1.2"], "lines": [3659, 3783]},
+       {"favours": "B", "what": "B states the error convention for approximations of contractions and that composing them adds errors", "substep": null, "steps_a": [], "steps_b": ["G0"], "lines": [3529, 3534]}
+     ],
+     "note": "Both carry the identity P_sF_s = 2^{2alpha^2} B_0 P_t F_t A via the left inverse, the errors and costs, tensoring and axis exposure. B never derives the contraction property of A and B_0, which A does."},
+    {"id": "chirp-permutation-cancellation", "preference": "A", "strength": "slight",
+     "differences": [
+       {"favours": "A", "what": "A derives the one-dimensional dilation identity (F_q^+ R_c z)_j = (R_c^{-1} F_q^+ z)_j by substituting h=ck, from which RF^+R=F^+ follows; B states F^+R=R^{-1}F^+ from the unit property only", "substep": null, "steps_a": ["S3.4a"], "steps_b": ["G3"], "lines": [3952, 3962]}
+     ],
+     "note": "Both carry the Bluestein coefficient check and the cancellation (u*v)/S^2 with conjugation. A also gives the derivation of the dilation step."},
+    {"id": "parameters-and-primes", "preference": "A", "strength": "slight",
+     "differences": [
+       {"favours": "A", "what": "A verifies the prime-interval lemma's hypothesis log x > 8d = 2/eta for x=r/2 and x=r and gives the reason the two intervals are disjoint; B applies the count and asserts disjointness without these", "substep": null, "steps_a": ["S4.4b", "S4.4c"], "steps_b": ["PA1"], "lines": [4118, 4133]}
+     ],
+     "note": "Both give the fixed rationals, the sizes and bands, alpha, gamma, eta, the primes with T/2<S<T and alpha^4 theta_i>p, the search cost and the no-wraparound capacity bound. A also checks one condition B skips."},
+    {"id": "crt-address-map", "preference": "A", "strength": "slight",
+     "differences": [
+       {"favours": "A", "what": "A gives the explicit inverse (process i=1..d subtracting the same expression) and implements the prefix-controlled shift by splitting the valid interval into two pieces merged in opposite order; B gives the rotation but no inverse", "substep": null, "steps_a": ["S5.1d", "S5.1e"], "steps_b": ["CR3"], "lines": [4266, 4276]}
+     ],
+     "note": "Both carry the isomorphism, the triangular formula, padding, update order and cost. Only A states how Phi^{-1}, which the algorithm uses, is computed."},
+    {"id": "phase-twist", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both give well-definedness, the diagonal isometric isomorphism, the wrap-sign cancellation, the formula for M_C via iota and D_pm, and the computed twist (A S5.2a-c; B PT1-PT3)."},
+    {"id": "multiplication-algorithm", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both give the chirp and source procedures with exact counterparts QF_t and RF_s, conjugation for F^+, the six-step algorithm and the role of the two scalings by S (A S5.3, S5.4; B S5.6, S5.7)."},
+    {"id": "exact-recovery", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both carry E_ring<5TL, 6TL, 8TL, E_s=9*2^gamma TL, E_w<28*2^gamma T^2 L, the final bound below 1/2, rounding and carries (A S5.5a-j; B ER1-ER6)."},
+    {"id": "time-accounting", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both give the cost table, the margins g_1-g_7 with minimum 2kappa, the origin of each row, the o(V) setup and exceptional sorting, and the final bound with the schoolbook cutoff (A S6.1-S6.6; B T1-T5)."},
+    {"id": "conjecture-negation", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both state the eventual lower bound, its negation by liminf 0, and the stronger limit-zero conclusion (A S7; B S1)."}
+  ],
+  "chain": {"preference": "B", "strength": "slight",
+    "note": "Both trees follow the paper's route: the exchange network, frames and labels give s<Wm, then s/W<m^tau with tau=1-2^{-50}, then F_k <= (s/W)F_{k-1}+O(1) and F(e) <= (s/W)F(e/m)+..., then the two tape procedures, transforms, convolution, resampling, recovery and the cost table. B gathers the saving in one node (KEY) and states that the bit interface supplies the contract consumed by the power-width interchange (C3.1). It also establishes the linear-time stream and controlled-shift primitives the recursion relies on (S2.1, S2.2). A leaves those primitives as unestablished references."},
+  "errors": [
+    {"plan": "A", "step": "S1.1", "says": "Method: 'stage j adds the bank X into Y along coordinate j (forward invocation), then subtracts Y from X, then adds X to Y again', which reads as if each stage performs all three updates", "paper": "Stage 1 is a forward invocation X to Y, stage 2 the inverse schedule Y to X, stage 3 a forward invocation X to Y, each along its own coordinate; A's child S1.1.2 states this correctly, so this is ambiguous wording rather than a wrong mechanism", "lines": [731, 733, 761, 763], "severity": "minor"}
+  ],
+  "overall": {"preference": "A", "strength": "slight",
+    "reason": "Neither plan has a major error, and both reconstruct the central chain fully, with near-identical checklist coverage (B adds P3 and the I/C^{tensor m} endpoint frames; A has fuller L1 and M1). The decisive difference is on a core item: A derives Gaussian resampling, including the Gaussian maps and the norm bounds that make A and B_0 contractions, where B only asserts them. A is also more complete across several derivations (the frame invariant, the residual table, the unequal-width interchange, signed packing, the dilation identity, the CRT inverse). B's advantages are mainly the supporting stream primitives and a few construction definitions (gate maps, Phi_M, b=e/m), which weigh less."}
+}
