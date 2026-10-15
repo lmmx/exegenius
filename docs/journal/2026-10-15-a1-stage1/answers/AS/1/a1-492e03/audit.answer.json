@@ -1,0 +1,42 @@
+{
+ "symbols": [
+  {"symbol":"h","anchor":{"kind":"here","quote":"Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$"}},
+  {"symbol":"[h]","anchor":{"kind":"here","quote":"Let $[h]=\\{1,\\dots,h\\}$ be the ground set"}},
+  {"symbol":"T","anchor":{"kind":"here","quote":"For a three-element subset $T$ of $[h]$, called a triple"}},
+  {"symbol":"t_T","anchor":{"kind":"page","page":"tensor-product-of-vector-spaces"}},
+  {"symbol":"\\mathcal T","anchor":{"kind":"here","quote":"$\\mathcal T$ is the set of all triples"}},
+  {"symbol":"S","anchor":{"kind":"here","quote":"Call two triples $T,S$ *neighbors* when $|T\\cap S|=1$"}},
+  {"symbol":"g_T","anchor":{"kind":"here","quote":"Each triple $T$ carries a value $g_T$."}},
+  {"symbol":"\\mathbb F_2","anchor":{"kind":"background","note":"Integers mod 2 / the two-element field; covered by modular arithmetic and basic algebraic structures."}},
+  {"symbol":"e","anchor":{"kind":"here","quote":"on a central wire $C_e$ for each element $e$"}},
+  {"symbol":"C_e","anchor":{"kind":"here","quote":"on a central wire $C_e$ for each element $e$"}},
+  {"symbol":"A_{ST}","anchor":{"kind":"here","quote":"A copy of $g_T$ on an auxiliary wire $A_{ST}$ for each neighbor pair"}},
+  {"symbol":"\\mathbb Q","anchor":{"kind":"background","note":"The rationals; standard notation for an undergraduate."}},
+  {"symbol":"I","anchor":{"kind":"page","page":"linear-network-roles"}},
+  {"symbol":"J","anchor":{"kind":"here","quote":"where $J$ is the all-one matrix"}},
+  {"symbol":"\\mathcal F","anchor":{"kind":"here","quote":"Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$, a space built from the"}},
+  {"symbol":"D","anchor":{"kind":"here","quote":"of dimension $D=h^3$ (the label space dimension)"}},
+  {"symbol":"U","anchor":{"kind":"here","quote":"A label $U$ is a nondegenerate subspace of $\\mathcal F$."}},
+  {"symbol":"\\iota","anchor":{"kind":"here","quote":"For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"}},
+  {"symbol":"T_1","anchor":{"kind":"here","quote":"For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"}},
+  {"symbol":"T_2","anchor":{"kind":"here","quote":"For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"}},
+  {"symbol":"T_3","anchor":{"kind":"here","quote":"For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"}},
+  {"symbol":"U_\\iota","anchor":{"kind":"here","quote":"the label $U_\\iota$ is the line spanned by"}},
+  {"symbol":"P_U","anchor":{"kind":"here","quote":"the projection $P_U$ onto $U$ along $U^\\perp$"}},
+  {"symbol":"V","anchor":{"kind":"unbound","quote":"If $U\\subseteq V$, then $P_V-P_U$","note":"V is never said to be a label or subspace; an earlier page binds V only as a stored bit volume."}},
+  {"symbol":"s","anchor":{"kind":"here","quote":"Let $s$, the total rank over all edges, change meaning here."}},
+  {"symbol":"W","anchor":{"kind":"page","page":"linear-network-roles"}},
+  {"symbol":"N","anchor":{"kind":"here","quote":"Let $N=\\binom h3^3$, the number of indices $\\iota$"}},
+  {"symbol":"L","anchor":{"kind":"here","quote":"Let $L$ be the total dimension lost on decreasing edges"}},
+  {"symbol":"m","anchor":{"kind":"here","quote":"so the paper's dimension $m$ is $D$"}}
+ ],
+ "gaps": [
+  {"term":"nondegenerate subspace","quote":"A label $U$ is a nondegenerate subspace of $\\mathcal F$.","kind":"term","note":"Nondegeneracy relative to the bilinear form is not defined or linked; the reader has only met inner products, not indefinite forms, and does not know why it is needed (e.g. for U and U^perp to give a projection)."},
+  {"term":"distinct triples orthogonal","quote":"distinct triples are orthogonal","kind":"step","note":"The form gives |T cap S|-1, which is zero only when |T cap S|=1; for disjoint triples it is -1 and for overlap 2 it is 1, so orthogonality of all distinct triples does not follow from what is shown."},
+  {"term":"label growth along side wire","quote":"a label containing $t_T$ may grow to $t_S^\\perp$","kind":"step","note":"Labels are subspaces of the h^3-dimensional space F, but t_S^perp is introduced as a complement in Q^h; why the label can grow this way and why it adds h-2 dimensions is not explained."},
+  {"term":"signed total WD-2N","quote":"So the signed total is $WD-2N$.","kind":"step","note":"The page never says there are W sinks (or how many gates and edges), so the count of sink dimensions as WD and the telescoping to this total cannot be checked."},
+  {"term":"invocation and central wire count","quote":"Each of the $3\\binom h3^2$ invocations has $h$ central wires, each losing $h$ on a decreasing edge","kind":"step","note":"Neither the number of invocations 3*C(h,3)^2 nor the loss of h per central wire is derived from the construction."},
+  {"term":"matrix 2P on first source edge","quote":"The first edge out of each source has matrix $2P_{U_\\iota}$","kind":"step","note":"The construction never states where the factor 2 comes from or why this edge has rank one with no label change."},
+  {"term":"cited decisive property","quote":"The paper's decisive property is a bound on the number of smaller calls, (cited).","kind":"step","note":"The page does not say what the bound is or how s<WD yields it, so the role of the cited result is unclear."}
+ ]
+}

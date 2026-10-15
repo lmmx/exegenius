@@ -1,0 +1,14 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "partial",
+      "reason": "The quotation only says the loss ratios have exact values; it does not give the value 100/539 or the identity 3h^2/binom(h,3)."
+    },
+    {
+      "mark": 2,
+      "label": "partial",
+      "reason": "The quotation gives a bound s<Wm on smaller calls, but nothing says this bound is the decisive property of the paper."
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "symbols": [
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "\\mathbb F_2", "anchor": {"kind": "background", "note": "Modular arithmetic and bit operations in the profile: the ring of integers mod 2 (bits with XOR as addition); the page also says addition and subtraction coincide there."}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited)."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation from asymptotic analysis in the profile."}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "s", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "m", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "Q_k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+    {"symbol": "k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+    {"symbol": "C", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "j", "anchor": {"kind": "background", "note": "Summation index in sigma notation (series and summation in the profile)."}}
+  ],
+  "gaps": [
+    {
+      "term": "Why updating D from H is linear-time but H from D is costly",
+      "quote": "Both change only $D$, each combining $D$ with the earlier field $H$ in linear time.",
+      "kind": "step",
+      "note": "The page asserts that the two updates of D are linear-cost while the middle update H<-H+D needs the network, but never says why the direction of the update (or H being the 'earlier' field) makes the difference, so the reader cannot check the cost split."
+    },
+    {
+      "term": "Cited bound s<Wm for the bit network",
+      "quote": "For the bit network, $s<Wm$ (cited); the paper's proof computes $s$ as $Wm$ minus a positive constant fixed by the construction.",
+      "kind": "step",
+      "note": "This inequality is the whole source of the speed-up, but the page never describes the bit network's calls or says what m is for it, nor how the construction removes calls; the cited claim stands in for how the page's own procedure works."
+    },
+    {
+      "term": "Unrolling the recurrence (sign)",
+      "quote": "Unrolling gives $Q_k\\le (s/W)^k Q_0-C\\sum_{j<k}(s/W)^j$.",
+      "kind": "step",
+      "note": "Unrolling Q_k <= (s/W)Q_{k-1}+C gives (s/W)^k Q_0 + C times the geometric sum; the minus sign does not follow from the recurrence, and the next sentences treat the sum as an added term."
+    },
+    {
+      "term": "Geometric sum is O((s/W)^k)",
+      "quote": "The geometric sum is also $O(m^{k\\tau})$, since it is $O((s/W)^k)$.",
+      "kind": "step",
+      "note": "A geometric sum of ratio s/W is O((s/W)^k) only when s/W>1; the page never establishes s/W>1 (only s/W<m), so the reader cannot check this bound."
+    },
+    {
+      "term": "Role of m>=2",
+      "quote": "Both are $O(m^{k\\tau})$, since $m\\ge2$.",
+      "kind": "step",
+      "note": "The page never states m>=2, and the reader cannot see why m>=2 is needed for terms already shown to be O(m^{k tau})."
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "symbols": [
+    {
+      "symbol": "H",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $H$ and $D$ for the two fields"
+      }
+    },
+    {
+      "symbol": "D",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $H$ and $D$ for the two fields"
+      }
+    },
+    {
+      "symbol": "u",
+      "anchor": {
+        "kind": "page",
+        "page": "address-fields"
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "page",
+        "page": "address-fields"
+      }
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\tau$, the fixed exponent below 1 in the cost"
+      }
+    },
+    {
+      "symbol": "O",
+      "anchor": {
+        "kind": "background",
+        "note": "Big-O notation, named in the profile; O(...) expresses the cost bounds."
+      }
+    },
+    {
+      "symbol": "\\mathbb F_2",
+      "anchor": {
+        "kind": "background",
+        "note": "Arithmetic modulo 2 on bits, where addition and subtraction coincide; covered by modular arithmetic and by binary representation and bit operations (XOR)."
+      }
+    },
+    {
+      "symbol": "s",
+      "anchor": {
+        "kind": "page",
+        "page": "recursive-power-saving"
+      }
+    },
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "page",
+        "page": "linear-network-roles"
+      }
+    },
+    {
+      "symbol": "m",
+      "anchor": {
+        "kind": "page",
+        "page": "recursive-power-saving"
+      }
+    },
+    {
+      "symbol": "C",
+      "anchor": {
+        "kind": "page",
+        "page": "recursive-power-saving"
+      }
+    },
+    {
+      "symbol": "Q_k",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $Q_k$ bound the time per unit of volume"
+      }
+    },
+    {
+      "symbol": "k",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $k$ is the recursion level"
+      }
+    },
+    {
+      "symbol": "j",
+      "anchor": {
+        "kind": "background",
+        "note": "Summation index in the sum over j<k; covered by the series and summation in limits, series and convergence from the calculus the degree requires."
+      }
+    },
+    {
+      "symbol": "0",
+      "anchor": {
+        "kind": "background",
+        "note": "Numeral; covered by basic arithmetic."
+      }
+    },
+    {
+      "symbol": "1",
+      "anchor": {
+        "kind": "background",
+        "note": "Numeral; covered by basic arithmetic."
+      }
+    },
+    {
+      "symbol": "2",
+      "anchor": {
+        "kind": "background",
+        "note": "Numeral; covered by basic arithmetic."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "choice of tau below 1",
+      "quote": "fix $\\tau<1$ with $s/W>m^\\tau$",
+      "kind": "step",
+      "note": "The page chooses tau so that s/W is greater than m^tau, but line 152 then uses s/W < m^tau for the first term, and that inequality is what the O(m^{k tau}) bound needs. The stated choice does not give it. The opening sentence also calls tau a fixed exponent from the cited cost bound, so it is unclear which tau is meant."
+    },
+    {
+      "term": "network endpoint operator realises the shear",
+      "quote": "the network's endpoint operator is the shear",
+      "kind": "step",
+      "note": "The page asserts that the network performs only the middle update, the shear (H,D) to (H+D,D) over F_2, with its rank reduced by a lower-triangular factorization. It does not say what an endpoint operator is, how the network realises the shear, or what the rank is reduced to, so the reader cannot check the claim."
+    },
+    {
+      "term": "linear-time combination of fields",
+      "quote": "each combining $D$ with the earlier field $H$ in linear time",
+      "kind": "step",
+      "note": "Combining two disjoint fields pointwise requires moving them into alignment on the tapes. The reader has not studied tape-level data-movement algorithms, and the page gives no argument that this takes linear time."
+    },
+    {
+      "term": "base case Q_0",
+      "quote": "Q_0=O(1)",
+      "kind": "step",
+      "note": "The base case is asserted without saying what a level-0 call does (fields of m^0 = 1 bit) or why its cost per unit of volume is constant. It also depends on the unexplained linear-time claim above."
+    },
+    {
+      "term": "exactness from the restoring schedule",
+      "quote": "the initial contents cancel, so the final permutation does not depend on them",
+      "kind": "step",
+      "note": "The result is cited, but the page only names the schedule's steps (subtract, compute, add back, reverse) and does not say what the computing step does to the scratch rows under the shear. The reader cannot check that the initial contents cancel, so exactness of the permutation is not followable from the page."
+    },
+    {
+      "term": "field widths that are not powers of m",
+      "quote": "A field of $u=m^k$ bits therefore has $Q_k=O(u^\\tau)$, and the interchange costs $O(Vu^\\tau)$",
+      "kind": "step",
+      "note": "The recursion gives Q_k only for fields of exactly m^k bits. The page never says how a field whose width u is not a power of m is handled, so the general claim that the interchange costs O(V u^tau) is not established."
+    }
+  ]
+}

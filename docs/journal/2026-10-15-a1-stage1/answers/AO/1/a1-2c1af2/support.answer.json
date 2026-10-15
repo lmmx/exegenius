@@ -1,0 +1,10 @@
+{
+  "labels": [
+    {"mark": 1, "label": "supported", "reason": ""},
+    {"mark": 2, "label": "partial", "reason": "The quotation is only the bare inequality s<Wm; it does not say the bound needs it (and writes m rather than mu)."},
+    {"mark": 3, "label": "supported", "reason": ""},
+    {"mark": 4, "label": "supported", "reason": ""},
+    {"mark": 5, "label": "supported", "reason": ""},
+    {"mark": 6, "label": "partial", "reason": "The quotation only says auxiliary values are restored; it does not mention the forward, inverse, forward schedule or that it exchanges the two banks."}
+  ]
+}

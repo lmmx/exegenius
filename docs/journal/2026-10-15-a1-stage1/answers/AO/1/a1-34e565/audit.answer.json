@@ -1,0 +1,223 @@
+{
+ "symbols": [
+  {
+   "symbol": "R",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $R$ be the number of fields in each vector"
+   }
+  },
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "here",
+    "quote": "let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"
+   }
+  },
+  {
+   "symbol": "q",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $q$ is a fixed odd prime, the radix of the digits"
+   }
+  },
+  {
+   "symbol": "b",
+   "anchor": {
+    "kind": "here",
+    "quote": "$b$ is the number of radix-$q$ digits in each field"
+   }
+  },
+  {
+   "symbol": "\\mathbb Z",
+   "anchor": {
+    "kind": "background",
+    "note": "Standard notation for the integers; Z/q^bZ is the residues mod q^b from modular arithmetic in the discrete mathematics of the degree."
+   }
+  },
+  {
+   "symbol": "M",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a rational $R\\times R$ matrix $M$, the shear by $M$ is $(H,D)\\mapsto(H+MD,D)$."
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"
+   }
+  },
+  {
+   "symbol": "\\xi",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"
+   }
+  },
+  {
+   "symbol": "\\mathbb Q",
+   "anchor": {
+    "kind": "background",
+    "note": "Standard notation for the rational numbers, covered by undergraduate discrete mathematics and linear algebra."
+   }
+  },
+  {
+   "symbol": "\\operatorname{rank}_{\\mathbb Q}",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\operatorname{rank}_{\\mathbb Q}M$ be the number of linearly independent rows of $M$."
+   }
+  },
+  {
+   "symbol": "\\Pi",
+   "anchor": {
+    "kind": "here",
+    "quote": "A partial permutation matrix $\\Pi$ is a 0-1 matrix with at most one 1 in each row and column"
+   }
+  },
+  {
+   "symbol": "F_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "Every rational $M$ factors as $M=F_1\\Pi F_2$, where $F_1$ and $F_2$ are lower-triangular rational matrices."
+   }
+  },
+  {
+   "symbol": "F_2",
+   "anchor": {
+    "kind": "here",
+    "quote": "Every rational $M$ factors as $M=F_1\\Pi F_2$, where $F_1$ and $F_2$ are lower-triangular rational matrices."
+   }
+  },
+  {
+   "symbol": "I",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "\\sigma",
+   "anchor": {
+    "kind": "here",
+    "quote": "For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$, update $H_\\sigma\\leftarrow H_\\sigma+D_\\tau$, using the transformed $D$."
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$, update $H_\\sigma\\leftarrow H_\\sigma+D_\\tau$, using the transformed $D$."
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."
+   }
+  },
+  {
+   "symbol": "\\zeta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation from asymptotic analysis in the reader profile."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "The interchange count of the network is $s_{\\rm b}$, the sum of their ranks."
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $W_{\\rm b}$ is the number of wires"
+   }
+  },
+  {
+   "symbol": "N",
+   "anchor": {
+    "kind": "here",
+    "quote": "$N$ the number of negative source projections"
+   }
+  },
+  {
+   "symbol": "L_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "$L_{\\rm b}$ the total dimension lost on decreasing edges"
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "q divides no numerator or denominator",
+   "kind": "step",
+   "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used.",
+   "note": "Presented as following from 'q must not divide xi', which constrains only denominators, and 'the finitely many matrices used' have not been introduced; the reader cannot see why numerators, or the entries of the factors F_1, F_2 and their inverses produced by elimination over Q, avoid q."
+  },
+  {
+   "term": "invertibility of the triangular factors",
+   "kind": "step",
+   "quote": "To apply the shear, replace $D$ by $F_2D$ and $H$ by $F_1^{-1}H$.",
+   "note": "The page uses F_1^{-1} and F_2^{-1} (and that Pi has rank M ones) but never says the factors are invertible; the terse elimination sketch does not say that clearing left entries is a column operation (right multiplication by a lower-triangular matrix), that pivots are scaled to 1, or how the operations assemble into F_1 and F_2."
+  },
+  {
+   "term": "why only the H update needs an interchange",
+   "kind": "step",
+   "quote": "So the shear needs $\\operatorname{rank}_{\\mathbb Q}M$ interchanges plus $O(V)$ further work.",
+   "note": "The page never states the order of the H and D fields, so the reader cannot tell why D_tau <- D_tau + H_sigma (and D_tau <- H_sigma - D_tau) are linear-cost lower-triangular updates while H_sigma <- H_sigma + D_tau is not and needs an interchange."
+  },
+  {
+   "term": "rank budget formula",
+   "kind": "step",
+   "quote": "The network's rank budget, which counts dimension changes along its edges, gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$",
+   "note": "The rank budget is not explained and the formula is not derived or cited; the reader cannot check how dimension changes along edges yield W_b R - N + 2L_b."
+  },
+  {
+   "term": "negative source projections",
+   "kind": "term",
+   "quote": "$N$ the number of negative source projections",
+   "note": "Not explained or linked; the reader does not know what a negative source projection (or a decreasing edge losing dimension) is, so cannot understand the cited N > 2L_b."
+  },
+  {
+   "term": "chunk width",
+   "kind": "term",
+   "quote": "a saving of a power of the chunk width (the chunk length)",
+   "note": "Chunk width/chunk length is never defined on the page or linked."
+  },
+  {
+   "term": "recurrence turning the per-wire saving into a power saving",
+   "kind": "step",
+   "quote": "Per wire, the interchanges are fewer than $R$, which the recurrence turns into a saving of a power of the chunk width (the chunk length).",
+   "note": "The recurrence is neither stated nor linked, so the reader cannot check how fewer than R interchanges per wire yields a power saving."
+  }
+ ]
+}

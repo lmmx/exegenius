@@ -1,0 +1,7 @@
+{
+  "labels": [
+    {"mark": 1, "label": "partial", "reason": "The quotation gives the V/W bit count but does not say that it is each role stream that contains them."},
+    {"mark": 2, "label": "supported", "reason": ""},
+    {"mark": 3, "label": "supported", "reason": ""}
+  ]
+}

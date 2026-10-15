@@ -1,0 +1,10 @@
+{
+  "labels": [
+    {"mark": 1, "label": "supported", "reason": ""},
+    {"mark": 2, "label": "partial", "reason": "The quotation gives only the bare inequality s<Wm (in m, not mu); it does not say the bound needs it."},
+    {"mark": 3, "label": "supported", "reason": ""},
+    {"mark": 4, "label": "supported", "reason": ""},
+    {"mark": 5, "label": "contradicted", "reason": "The quotation says a forward invocation adds x_S to y_S (y_S+x_S), not subtracts it."},
+    {"mark": 6, "label": "partial", "reason": "The quotation supports only restoring the auxiliary values; it says nothing about a forward, inverse, forward schedule exchanging the two banks."}
+  ]
+}

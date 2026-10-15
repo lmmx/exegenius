@@ -1,0 +1,14 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "unsupported",
+      "reason": "The quotation only says something contains V/W bits; it says nothing about the exponent tau or the cost bound O(V u^tau)."
+    },
+    {
+      "mark": 2,
+      "label": "partial",
+      "reason": "The quotation gives only s < Wm, a weaker bound than the claimed s < W."
+    }
+  ]
+}

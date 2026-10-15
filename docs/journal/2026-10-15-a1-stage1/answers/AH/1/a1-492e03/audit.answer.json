@@ -1,0 +1,114 @@
+{
+  "symbols": [
+    {"symbol": "h", "anchor": {"kind": "here", "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set"}},
+    {"symbol": "T", "anchor": {"kind": "here", "quote": "For a three-element subset $T$ of $[h]$, called a triple"}},
+    {"symbol": "S", "anchor": {"kind": "here", "quote": "Call two triples $T,S$"}},
+    {"symbol": "t_T", "anchor": {"kind": "here", "quote": "$t_T$ is its indicator vector"}},
+    {"symbol": "\\mathcal T", "anchor": {"kind": "here", "quote": "$\\mathcal T$ is the set of all triples"}},
+    {"symbol": "g_T", "anchor": {"kind": "here", "quote": "Each triple $T$ carries a value $g_T$."}},
+    {"symbol": "\\mathbb F_2", "anchor": {"kind": "background", "note": "Integers mod 2 from modular arithmetic, the two-element field of basic algebraic structures; the page's 'mod 2' fixes the arithmetic."}},
+    {"symbol": "\\ni", "anchor": {"kind": "background", "note": "Set membership, from discrete mathematics (sets)."}},
+    {"symbol": "\\in", "anchor": {"kind": "background", "note": "Set membership, from discrete mathematics (sets)."}},
+    {"symbol": "e", "anchor": {"kind": "unbound", "quote": "with $T\\ni e$", "note": "Used as 'each element e' and as T contains e, but the set e ranges over is never named; it is implicitly the ground set [h]."}},
+    {"symbol": "C_e", "anchor": {"kind": "here", "quote": "gather puts the sum of the $g_T$ with $T\\ni e$ on a central wire $C_e$"}},
+    {"symbol": "\\sum", "anchor": {"kind": "background", "note": "Summation, covered by limits, series and convergence (also: summation)."}},
+    {"symbol": "A_{ST}", "anchor": {"kind": "here", "quote": "A copy of $g_T$ on an auxiliary wire $A_{ST}$ for each neighbor pair"}},
+    {"symbol": "|T\\cap S|", "anchor": {"kind": "background", "note": "Cardinality of an intersection of finite sets, from discrete mathematics."}},
+    {"symbol": "[|S\\cap T|=1]", "anchor": {"kind": "background", "note": "Indicator bracket, 1 when the condition holds and 0 otherwise, standard discrete mathematics counting notation; the sentence 'adds 1 exactly when' gives its value."}},
+    {"symbol": "\\langle t_T,t_S\\rangle", "anchor": {"kind": "here", "quote": "the bilinear form with matrix $I-J/9$, where $J$ is the all-one matrix (the letter $J$ changes meaning here), gives $\\langle t_T,t_S\\rangle=|T\\cap S|-1$"}},
+    {"symbol": "I", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "J", "anchor": {"kind": "here", "quote": "where $J$ is the all-one matrix"}},
+    {"symbol": "\\perp", "anchor": {"kind": "background", "note": "Orthogonality and orthogonal complement, from dot products and orthogonality in introductory linear algebra."}},
+    {"symbol": "\\mathbb Q", "anchor": {"kind": "background", "note": "Rational numbers, the standard number system of the calculus and linear algebra the profile covers."}},
+    {"symbol": "\\mathcal F", "anchor": {"kind": "here", "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$"}},
+    {"symbol": "\\otimes", "anchor": {"kind": "background", "note": "Tensor product, the operation of the known concept Tensor product of vector spaces."}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "of dimension $D=h^3$ (the label space dimension)"}},
+    {"symbol": "U", "anchor": {"kind": "here", "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$"}},
+    {"symbol": "\\iota", "anchor": {"kind": "here", "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"}},
+    {"symbol": "T_1", "anchor": {"kind": "here", "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"}},
+    {"symbol": "T_2", "anchor": {"kind": "here", "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"}},
+    {"symbol": "T_3", "anchor": {"kind": "here", "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"}},
+    {"symbol": "U_\\iota", "anchor": {"kind": "here", "quote": "the label $U_\\iota$ is the line spanned by"}},
+    {"symbol": "\\subseteq", "anchor": {"kind": "background", "note": "Subset relation, from discrete mathematics (sets)."}},
+    {"symbol": "V", "anchor": {"kind": "unbound", "quote": "If $U\\subseteq V$", "note": "Used as a subspace containing U, but never said to be one; the earlier page binds V as the stored bit volume, a number."}},
+    {"symbol": "\\cap", "anchor": {"kind": "background", "note": "Intersection of sets and of subspaces, from discrete mathematics and introductory linear algebra."}},
+    {"symbol": "\\oplus", "anchor": {"kind": "background", "note": "Direct sum of subspaces, from introductory linear algebra."}},
+    {"symbol": "P_U", "anchor": {"kind": "here", "quote": "the projection $P_U$ onto $U$ along $U^\\perp$"}},
+    {"symbol": "P_V", "anchor": {"kind": "unbound", "quote": "$P_V-P_U$", "note": "Only P_U is defined, for a label U; P_V is the same construction for V by analogy, which the page never states."}},
+    {"symbol": "\\dim", "anchor": {"kind": "background", "note": "Dimension of a vector space, from introductory linear algebra."}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "Let $s$, the total rank over all edges, change meaning here"}},
+    {"symbol": "\\binom", "anchor": {"kind": "background", "note": "Binomial coefficient, counting from discrete mathematics."}},
+    {"symbol": "N", "anchor": {"kind": "here", "quote": "Let $N=\\binom h3^3$, the number of indices $\\iota$"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "L", "anchor": {"kind": "here", "quote": "Let $L$ be the total dimension lost on decreasing edges"}},
+    {"symbol": "m", "anchor": {"kind": "here", "quote": "so the paper's dimension $m$ is $D$"}}
+  ],
+  "gaps": [
+    {
+      "term": "bilinear form with a matrix",
+      "quote": "the bilinear form with matrix $I-J/9$",
+      "kind": "term",
+      "note": "Not in the reader's profile (which covers dot products only) and not explained. The page never says the form is x^T M y, so the value <t_T,t_S> cannot be computed."
+    },
+    {
+      "term": "nondegenerate subspace",
+      "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$",
+      "kind": "term",
+      "note": "Not explained: the page does not say what nondegenerate means for a subspace, or with respect to which form."
+    },
+    {
+      "term": "projection along the orthogonal complement in F",
+      "quote": "the projection $P_U$ onto $U$ along $U^\\perp$",
+      "kind": "step",
+      "note": "The page gives a form only on Q^h, not on F, so U^perp is undefined in F. Without U and U^perp splitting F, the projection and the claim that U_iota^perp has dimension D-1 cannot be checked."
+    },
+    {
+      "term": "distinct triples are orthogonal",
+      "quote": "distinct triples are orthogonal",
+      "kind": "step",
+      "note": "False on the page's own formula. <t_T,t_S> = |T∩S|-1 is zero only when |T∩S|=1; it is -1 for disjoint triples, 1 when |T∩S|=2, and 2 when T=S. The side-wire growth 'since t_T perp t_S, adding h-2 dimensions' rests on this claim."
+    },
+    {
+      "term": "rank of P_V - P_U",
+      "quote": "so its rank is $\\dim V-\\dim U$",
+      "kind": "step",
+      "note": "The identity and zero facts do not give the rank by themselves. The kernel count needs dim V^perp = D - dim V, and the identity part needs dim(V∩U^perp) >= dim V - dim U. Neither is stated, and both need nondegeneracy."
+    },
+    {
+      "term": "unit of rank costs one smaller call",
+      "quote": "Each unit of rank costs one smaller call. (cited)",
+      "kind": "step",
+      "note": "The page does not say what a smaller call is in this network or how an edge's rank becomes calls. The cited claim stands in for the network's cost model, and its content and role are not stated."
+    },
+    {
+      "term": "signed total WD-2N",
+      "quote": "So the signed total is $WD-2N$.",
+      "kind": "step",
+      "note": "Needs the number of sinks (the W in WD), the sign convention for the signed total, and the telescoping and cancellation claims just before. The page states none of these."
+    },
+    {
+      "term": "invocation count and wire loss L",
+      "quote": "Each of the $3\\binom h3^2$ invocations has $h$ central wires",
+      "kind": "step",
+      "note": "The count 3*C(h,3)^2 of invocations is not explained, and 'each losing h on a decreasing edge' is asserted without reason. 'Invocation' and 'decreasing edge' are not defined on the page."
+    },
+    {
+      "term": "source edges contribute N to the rank",
+      "quote": "The first edge out of each source has matrix $2P_{U_\\iota}$, rank one, with no label change",
+      "kind": "step",
+      "note": "The page does not explain why these edges are left out of the signed total, or why the matrix is 2P rather than P. So the +N in s = WD-2N+2L+N is not checkable."
+    },
+    {
+      "term": "2L > N and s < WD",
+      "quote": "so $2L>N$ and $s<WD$",
+      "kind": "step",
+      "note": "Wrong direction. L/N = 100/539 gives 2L/N = 200/539 < 1, so 2L < N, not 2L > N. From s = WD-N+2L, s < WD is equivalent to 2L < N, so the stated reason is false even though s < WD holds."
+    },
+    {
+      "term": "decisive property of the paper",
+      "quote": "The paper's decisive property is a bound on the number of smaller calls, (cited).",
+      "kind": "step",
+      "note": "The bound is not stated, and the page does not say why s < WD gives it. The cited claim's content and role are not stated."
+    }
+  ]
+}

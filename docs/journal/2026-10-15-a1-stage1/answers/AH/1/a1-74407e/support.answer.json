@@ -1,0 +1,9 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "partial",
+      "reason": "The quotation only says that lower triangular transformations of H or of D cost O(V); the claim is unqualified and covers lower-triangular transformations in general."
+    }
+  ]
+}

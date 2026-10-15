@@ -1,0 +1,150 @@
+{
+  "symbols": [
+    {
+      "symbol": "H",
+      "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"}
+    },
+    {
+      "symbol": "D",
+      "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"}
+    },
+    {
+      "symbol": "u",
+      "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"}
+    },
+    {
+      "symbol": "V",
+      "anchor": {"kind": "here", "quote": "let $V$ be the stored volume, the number of data units in the array."}
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {"kind": "here", "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."}
+    },
+    {
+      "symbol": "O",
+      "anchor": {"kind": "background", "note": "Big-O notation, which the profile covers under algorithms and complexity (big-O together with Omega and Theta)."}
+    },
+    {
+      "symbol": "\\leftarrow",
+      "anchor": {"kind": "here", "quote": "where $\\leftarrow$ is assignment: the field on its left takes the value on its right."}
+    },
+    {
+      "symbol": "\\mu",
+      "anchor": {"kind": "here", "quote": "where $\\mu$ is its number of rows."}
+    },
+    {
+      "symbol": "a",
+      "anchor": {"kind": "here", "quote": "of rank $a$ costs $a$ smaller calls"}
+    },
+    {
+      "symbol": "s",
+      "anchor": {"kind": "here", "quote": "so $s$ is the sum of these ranks."}
+    },
+    {
+      "symbol": "W",
+      "anchor": {"kind": "page", "page": "role-streams"}
+    },
+    {
+      "symbol": "W_{\\rm b}",
+      "anchor": {"kind": "here", "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$"}
+    },
+    {
+      "symbol": "s_{\\rm b}",
+      "anchor": {"kind": "here", "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$"}
+    },
+    {
+      "symbol": "F_d",
+      "anchor": {"kind": "here", "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."}
+    },
+    {
+      "symbol": "d",
+      "anchor": {"kind": "here", "quote": "where $d$ is the recursion depth."}
+    },
+    {
+      "symbol": "\\lambda",
+      "anchor": {"kind": "here", "quote": "with $\\lambda=s/W$"}
+    },
+    {
+      "symbol": "\\eta",
+      "anchor": {"kind": "here", "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$"}
+    },
+    {
+      "symbol": "\\ln",
+      "anchor": {"kind": "background", "note": "Natural logarithm, covered by the logarithm and exponential function background in single-variable calculus."}
+    },
+    {
+      "symbol": "\\exp",
+      "anchor": {"kind": "background", "note": "Exponential function, covered by the logarithm and exponential function background in single-variable calculus."}
+    },
+    {
+      "symbol": "X",
+      "anchor": {"kind": "page", "page": "subset-network"}
+    },
+    {
+      "symbol": "Y",
+      "anchor": {"kind": "page", "page": "subset-network"}
+    },
+    {
+      "symbol": "x",
+      "anchor": {"kind": "page", "page": "linear-network"}
+    },
+    {
+      "symbol": "y",
+      "anchor": {"kind": "page", "page": "linear-network"}
+    },
+    {
+      "symbol": "S",
+      "anchor": {"kind": "page", "page": "subset-network"}
+    }
+  ],
+  "gaps": [
+    {
+      "term": "inverse invocation",
+      "quote": "A forward, inverse, forward schedule of these invocations",
+      "kind": "term",
+      "note": "The page defines only a forward invocation (it adds x_S into y_S). An inverse invocation is not defined or linked, so the reader cannot tell what the schedule does."
+    },
+    {
+      "term": "role of the cited exchange schedule",
+      "quote": "A forward, inverse, forward schedule of these invocations exchanges the two banks",
+      "kind": "step",
+      "note": "The schedule is cited, but the page never says how it relates to the three updates D←D−H, H←H+D, D←H−D, or what it establishes for the interchange. The reader cannot see what the claim is for."
+    },
+    {
+      "term": "bound mu < 2^20",
+      "quote": "Since $\\mu<2^{20}$, $\\ln\\mu<20$",
+      "kind": "step",
+      "note": "The page gives no source or reason for mu < 2^20. It is a bound on the number of rows of a vertex, and the later estimate depends on it. The reader cannot check it from the page."
+    },
+    {
+      "term": "bound mu >= 2",
+      "quote": "As $\\mu\\ge2$, $F_d=O(\\mu^{d\\tau})$",
+      "kind": "step",
+      "note": "The page asserts mu >= 2 without justification. The case lambda <= 1 needs it to get d = O(mu^{d tau}), so the reader cannot check that step."
+    },
+    {
+      "term": "applicability of the explicit-network bound",
+      "quote": "For the explicit network the paper computes $\\eta>20\\cdot2^{-50}$ (cited)",
+      "kind": "step",
+      "note": "The page never says that the bit network carrying the shear is the paper's explicit network, or that the eta computed there applies to the eta of this network. The reason the cited bound applies here is not given."
+    },
+    {
+      "term": "shear as a forward invocation",
+      "quote": "The shear is such an invocation, with $D$ as $X$ and $H$ as $Y$",
+      "kind": "step",
+      "note": "The cited invocation fact is for banks of scalars indexed by subsets (X and Y are banks of x_S and y_S). The page asserts that the shear has this form but never shows that the shear's bit network does, so the exactness conclusion is not checkable from the page."
+    },
+    {
+      "term": "splitting and merging passes",
+      "quote": "Splitting, merging and gates are a fixed number of linear passes, $O(1)$ per unit volume.",
+      "kind": "step",
+      "note": "Splitting and merging are never described, so the reader cannot check that they are a fixed number of linear passes."
+    },
+    {
+      "term": "widths that are not powers of mu",
+      "quote": "which for width $u=\\mu^d$ is $O(u^{\\tau})$ per unit volume",
+      "kind": "step",
+      "note": "The bound F_d is derived only for widths u = mu^d. The page never says how a general width u is handled (for example by padding), so the claimed O(V u^tau) for every u is not shown."
+    }
+  ]
+}

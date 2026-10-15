@@ -1,0 +1,7 @@
+{
+  "labels": [
+    {"mark": 1, "label": "partial", "reason": "The fragment gives the V/W bit count but does not say what contains it, so it does not establish that each role stream holds V/W bits."},
+    {"mark": 2, "label": "supported", "reason": ""},
+    {"mark": 3, "label": "unsupported", "reason": "The quotation is about displayed summands being nondegenerate, not about every role (including auxiliary roles) keeping the endpoint operator."}
+  ]
+}

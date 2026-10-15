@@ -1,0 +1,7 @@
+{
+  "labels": [
+    {"mark": 1, "label": "contradicted", "reason": "The quotation gives V/W bits, not V/(2W) bits."},
+    {"mark": 2, "label": "supported", "reason": ""},
+    {"mark": 3, "label": "supported", "reason": ""}
+  ]
+}

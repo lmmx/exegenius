@@ -1,0 +1,60 @@
+{
+  "symbols": [
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."}},
+    {"symbol": "u", "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."}},
+    {"symbol": "V", "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation, covered by the algorithms and complexity part of the profile (and a known concept)."}},
+    {"symbol": "\\leftarrow", "anchor": {"kind": "here", "quote": "The updates are $D\\leftarrow D-H$, $H\\leftarrow H+D$, $D\\leftarrow H-D$, where $\\leftarrow$ is assignment: the field on its left takes the value on its right."}},
+    {"symbol": "\\mu", "anchor": {"kind": "here", "quote": "Each vertex holds a rational $\\mu\\times\\mu$ matrix, where $\\mu$ is its number of rows."}},
+    {"symbol": "a", "anchor": {"kind": "here", "quote": "An edge matrix, the head's matrix minus the tail's, of rank $a$ costs $a$ smaller calls, so $s$ is the sum of these ranks."}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "An edge matrix, the head's matrix minus the tail's, of rank $a$ costs $a$ smaller calls, so $s$ is the sum of these ranks."}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "role-streams"}},
+    {"symbol": "W_{\\rm b}", "anchor": {"kind": "here", "quote": "The bound needs $s<W\\mu$ (cited), and the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)."}},
+    {"symbol": "s_{\\rm b}", "anchor": {"kind": "here", "quote": "The bound needs $s<W\\mu$ (cited), and the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)."}},
+    {"symbol": "F_d", "anchor": {"kind": "here", "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."}},
+    {"symbol": "d", "anchor": {"kind": "here", "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."}},
+    {"symbol": "\\lambda", "anchor": {"kind": "here", "quote": "So $F_d\\le\\lambda F_{d-1}+O(1)$, with $\\lambda=s/W$, and unrolling gives $F_d=O(1+\\lambda+\\cdots+\\lambda^d)$."}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$, so $\\lambda=\\mu(1-\\eta)$."}},
+    {"symbol": "\\ln", "anchor": {"kind": "background", "note": "Natural logarithm, covered by the calculus part of the profile (logarithms and exponentials)."}},
+    {"symbol": "\\exp", "anchor": {"kind": "background", "note": "Exponential function, covered by the calculus part of the profile (logarithms and exponentials)."}},
+    {"symbol": "X", "anchor": {"kind": "page", "page": "subset-network"}},
+    {"symbol": "Y", "anchor": {"kind": "page", "page": "subset-network"}},
+    {"symbol": "x", "anchor": {"kind": "page", "page": "linear-network"}},
+    {"symbol": "y", "anchor": {"kind": "page", "page": "linear-network"}},
+    {"symbol": "S", "anchor": {"kind": "page", "page": "subset-network"}}
+  ],
+  "gaps": [
+    {
+      "term": "linear cost of the outer updates",
+      "quote": "The outer two cost linear time.",
+      "kind": "step",
+      "note": "Each update rewrites an address field and so permutes the array's data on tape. The page does not say why the updates $D\\leftarrow D-H$ and $D\\leftarrow H-D$ take linear time on a tape machine when $H\\leftarrow H+D$ needs the whole recursive network. The layout or argument that makes them cheap is never given."
+    },
+    {
+      "term": "bound mu < 2^20",
+      "quote": "Since $\\mu<2^{20}$, $\\ln\\mu<20$",
+      "kind": "step",
+      "note": "The page never says how large the explicit network's matrices are. It neither states nor cites the bound $\\mu<2^{20}$, yet the choice of $\\tau$ depends on it."
+    },
+    {
+      "term": "sum at most d when lambda <= 1",
+      "quote": "If $\\lambda\\le1$ the sum is at most $d$.",
+      "kind": "step",
+      "note": "The sum $1+\\lambda+\\cdots+\\lambda^d$ has $d+1$ terms, each at most 1, so the bound the reader can check is $d+1$. With $d=0$ or $\\lambda=1$ the stated bound $d$ is false."
+    },
+    {
+      "term": "shear as a forward invocation",
+      "quote": "The shear is such an invocation, with $D$ as $X$ and $H$ as $Y$, so it is exact for any initial auxiliary contents.",
+      "kind": "step",
+      "note": "$X$ and $Y$ are banks of scalars indexed by triples, while $H$ and $D$ are $u$-bit address fields. The page never says that the bit network is the subset-intersection network, how the field bits are laid out as banks, or how the entrywise addition $x_S$ into $y_S$ matches $H+D$. So the reader cannot check that the shear is such an invocation."
+    },
+    {
+      "term": "inverse invocation",
+      "quote": "A forward, inverse, forward schedule of these invocations exchanges the two banks and returns every auxiliary wire to its starting value (cited).",
+      "kind": "term",
+      "note": "The page defines only the forward invocation. It never says what an inverse invocation does, so the reader cannot see why forward, inverse, forward exchanges the banks. This cited claim also stands in for how the interchange itself works, and it does not match the three updates given earlier, where only the middle one uses the network."
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "symbols": [
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $W$ be the number of roles."
+      }
+    },
+    {
+      "symbol": "\\rho",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $\\rho$ be the permutation of roles that it applies"
+      }
+    },
+    {
+      "symbol": "w",
+      "anchor": {
+        "kind": "here",
+        "quote": "an input at role $w$ leaves at output role $\\rho(w)$"
+      }
+    },
+    {
+      "symbol": "\\varepsilon_w",
+      "anchor": {
+        "kind": "here",
+        "quote": "leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$"
+      }
+    },
+    {
+      "symbol": "\\ell",
+      "anchor": {
+        "kind": "here",
+        "quote": "row $\\ell$, the $\\ell$th row at a fixed prefix"
+      }
+    },
+    {
+      "symbol": "\\bmod",
+      "anchor": {
+        "kind": "background",
+        "note": "Remainder arithmetic in $\\ell \\bmod W$ is modular arithmetic, covered by the profile's discrete mathematics."
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $V$ be the number of bits stored after padding."
+      }
+    },
+    {
+      "symbol": "\\nu",
+      "anchor": {
+        "kind": "here",
+        "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$"
+      }
+    },
+    {
+      "symbol": "D_\\nu",
+      "anchor": {
+        "kind": "here",
+        "quote": "carries an invertible linear operator $D_\\nu$ on arrays indexed by the common address set"
+      }
+    },
+    {
+      "symbol": "f",
+      "anchor": {
+        "kind": "here",
+        "quote": "when the logical array is $f$"
+      }
+    },
+    {
+      "symbol": "\\alpha",
+      "anchor": {
+        "kind": "here",
+        "quote": "Along an edge from node $\\alpha$ to node $\\beta$"
+      }
+    },
+    {
+      "symbol": "\\beta",
+      "anchor": {
+        "kind": "here",
+        "quote": "Along an edge from node $\\alpha$ to node $\\beta$"
+      }
+    },
+    {
+      "symbol": "G",
+      "anchor": {
+        "kind": "here",
+        "quote": "A pointwise linear gate $G$ combines its $p$ input arrays"
+      }
+    },
+    {
+      "symbol": "p",
+      "anchor": {
+        "kind": "here",
+        "quote": "combines its $p$ input arrays"
+      }
+    },
+    {
+      "symbol": "k",
+      "anchor": {
+        "kind": "background",
+        "note": "Generic index of the last term of a finite sequence $\\alpha_0,\\dots,\\alpha_k$; index notation for finite sequences is covered by discrete mathematics and the known concept of index tuples."
+      }
+    },
+    {
+      "symbol": "\\mathrm{source}",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route."
+      }
+    },
+    {
+      "symbol": "\\mathrm{sink}",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route."
+      }
+    },
+    {
+      "symbol": "I",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $I$ is the identity operator, which leaves every array unchanged."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "undoing the exchange",
+      "quote": "Undoing the exchange moves each output back to its input role",
+      "kind": "step",
+      "note": "The page never says what the undoing is: which wiring is applied, or that it is the inverse of the exchange rho. The reader cannot check that each output at role rho(w) returns to input role w."
+    },
+    {
+      "term": "sign removal",
+      "quote": "multiplying by $-\\varepsilon_w$ again removes the sign",
+      "kind": "step",
+      "note": "Since the sign is plus or minus one, (-eps_w)(eps_w X) = -X, so as written the factor leaves a minus sign rather than removing the sign. The reader cannot verify the claim from the page; eps_w itself would remove the sign."
+    },
+    {
+      "term": "scratch role returned to itself with sign +1",
+      "quote": "For a scratch role the construction has $\\rho(w)=w$ with sign $+1$ (cited)",
+      "kind": "step",
+      "note": "This cited claim is how scratch roles behave in the network, which is the page's own concept, and the page gives no reason why the construction returns a scratch role to itself with sign +1. The reader cannot check it from what the page gives."
+    },
+    {
+      "term": "restoration of auxiliary values",
+      "quote": "Every role keeps the endpoint operator (cited), auxiliary roles included.",
+      "kind": "step",
+      "note": "The introduction says the network restores every auxiliary value it uses, but the page never says that a scratch role's source and sink frames agree, so that its endpoint operator is the identity I. Without that, the endpoint-operator formula does not yield restoration, and the cited claim is not shown to apply to auxiliary roles."
+    }
+  ]
+}

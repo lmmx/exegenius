@@ -1,0 +1,19 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "contradicted",
+      "reason": "The quotation says each stream contains V/W bits, which is twice the claimed V/(2W); the two quantities are incompatible."
+    },
+    {
+      "mark": 2,
+      "label": "supported",
+      "reason": ""
+    },
+    {
+      "mark": 3,
+      "label": "supported",
+      "reason": ""
+    }
+  ]
+}

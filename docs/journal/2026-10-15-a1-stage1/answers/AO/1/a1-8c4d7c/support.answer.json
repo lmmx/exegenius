@@ -1,0 +1,4 @@
+{"labels":[
+{"mark":1,"label":"unsupported","reason":"The quotation only says the loss ratios have exact values; it gives no value and nothing about L/N = 3h^2/binom(h,3) = 100/539."},
+{"mark":2,"label":"unsupported","reason":"The quotation is about summands being nondegenerate; it says nothing about a bound on the number of smaller calls or that this is the paper's decisive property."}
+]}

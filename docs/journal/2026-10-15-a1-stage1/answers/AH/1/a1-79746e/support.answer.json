@@ -1,0 +1,14 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "unsupported",
+      "reason": "The quotation \"contains V/W bits\" only describes the size of a stream; it says nothing about the exponent tau or about the cost O(V u^tau)."
+    },
+    {
+      "mark": 2,
+      "label": "partial",
+      "reason": "The quotation gives only the bound s<Wm, which is a different and weaker bound (for m at least 1) than the claimed s<W for the bit network; it does not state s<W."
+    }
+  ]
+}

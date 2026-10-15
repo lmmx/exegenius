@@ -1,0 +1,34 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "supported",
+      "reason": ""
+    },
+    {
+      "mark": 2,
+      "label": "supported",
+      "reason": ""
+    },
+    {
+      "mark": 3,
+      "label": "supported",
+      "reason": ""
+    },
+    {
+      "mark": 4,
+      "label": "partial",
+      "reason": "The quotation says two exact deficits exceed 20·2^-50, but does not say that either one is the explicit network's eta or that the deficit is eta; it does not single out the explicit network."
+    },
+    {
+      "mark": 5,
+      "label": "supported",
+      "reason": ""
+    },
+    {
+      "mark": 6,
+      "label": "partial",
+      "reason": "The quotation covers only the restoration of every auxiliary value; it says nothing about the schedule exchanging the two banks."
+    }
+  ]
+}

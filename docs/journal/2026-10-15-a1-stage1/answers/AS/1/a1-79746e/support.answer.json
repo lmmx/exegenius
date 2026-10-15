@@ -1,0 +1,4 @@
+{"labels":[
+{"mark":1,"label":"unsupported","reason":"The quotation only says something contains V/W bits; it says nothing about tau or the O(V u^tau) cost exponent."},
+{"mark":2,"label":"partial","reason":"The quotation gives only s<Wm, a weaker bound; it does not give the stronger s<W for the bit network, which depends on m."}
+]}

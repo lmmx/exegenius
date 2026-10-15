@@ -1,0 +1,5 @@
+{"labels":[
+{"mark":1,"label":"partial","reason":"The quotation only says something 'contains V/W bits'; it does not say that each role stream is the thing holding them, nor the cyclic distribution over W roles."},
+{"mark":2,"label":"supported","reason":""},
+{"mark":3,"label":"unsupported","reason":"The quotation is about summands being nondegenerate; it says nothing about roles keeping the endpoint operator, auxiliary roles included."}
+]}

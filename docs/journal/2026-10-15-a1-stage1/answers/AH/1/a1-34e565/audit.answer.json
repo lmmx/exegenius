@@ -1,0 +1,84 @@
+{
+  "symbols": [
+    {"symbol": "R", "anchor": {"kind": "here", "quote": "Let $R$ be the number of fields in each vector"}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+    {"symbol": "q", "anchor": {"kind": "here", "quote": "Here $q$ is a fixed odd prime, the radix of the digits"}},
+    {"symbol": "b", "anchor": {"kind": "here", "quote": "$b$ is the number of radix-$q$ digits in each field"}},
+    {"symbol": "\\mathbb Z", "anchor": {"kind": "background", "note": "The integers, and residues mod $q^b$: covered by discrete mathematics (modular arithmetic, binary representation) and the residue ring known concept."}},
+    {"symbol": "M", "anchor": {"kind": "here", "quote": "For a rational $R\\times R$ matrix $M$"}},
+    {"symbol": "\\mu", "anchor": {"kind": "here", "quote": "where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"}},
+    {"symbol": "\\xi", "anchor": {"kind": "here", "quote": "where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"}},
+    {"symbol": "\\operatorname{rank}_{\\mathbb Q}", "anchor": {"kind": "here", "quote": "Let $\\operatorname{rank}_{\\mathbb Q}M$ be the number of linearly independent rows of $M$"}},
+    {"symbol": "\\Pi", "anchor": {"kind": "here", "quote": "A partial permutation matrix $\\Pi$ is a 0-1 matrix"}},
+    {"symbol": "F_1", "anchor": {"kind": "here", "quote": "where $F_1$ and $F_2$ are lower-triangular rational matrices"}},
+    {"symbol": "F_2", "anchor": {"kind": "here", "quote": "where $F_1$ and $F_2$ are lower-triangular rational matrices"}},
+    {"symbol": "I", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "\\sigma", "anchor": {"kind": "here", "quote": "For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$"}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$"}},
+    {"symbol": "\\zeta", "anchor": {"kind": "here", "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$"}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation, a named concept of the reader profile (asymptotic analysis)."}},
+    {"symbol": "s_{\\rm b}", "anchor": {"kind": "here", "quote": "The interchange count of the network is $s_{\\rm b}$, the sum of their ranks"}},
+    {"symbol": "W_{\\rm b}", "anchor": {"kind": "here", "quote": "where $W_{\\rm b}$ is the number of wires"}},
+    {"symbol": "N", "anchor": {"kind": "here", "quote": "$N$ the number of negative source projections"}},
+    {"symbol": "L_{\\rm b}", "anchor": {"kind": "here", "quote": "$L_{\\rm b}$ the total dimension lost on decreasing edges"}}
+  ],
+  "gaps": [
+    {
+      "term": "rank budget identity",
+      "quote": "The network's rank budget, which counts dimension changes along its edges, gives",
+      "kind": "step",
+      "note": "The page never states the rank budget or how it yields s_b = W_b R - N + 2 L_b; the reader cannot check the identity from what is given."
+    },
+    {
+      "term": "negative source projections",
+      "quote": "$N$ the number of negative source projections",
+      "kind": "term",
+      "note": "Not a known concept, and the page neither explains nor links it, so the reader cannot tell what N counts."
+    },
+    {
+      "term": "decreasing edges",
+      "quote": "$L_{\\rm b}$ the total dimension lost on decreasing edges",
+      "kind": "term",
+      "note": "A decreasing edge is never defined or linked, so the reader cannot tell what L_b measures."
+    },
+    {
+      "term": "endpoint operator",
+      "quote": "The address shear is the endpoint operator of the bit network",
+      "kind": "term",
+      "note": "Not a known concept; the link on this sentence is attached to the network, not to the endpoint operator, and the page does not explain it."
+    },
+    {
+      "term": "chunk",
+      "quote": "the chunk width (the chunk length)",
+      "kind": "term",
+      "note": "Chunk width and chunk length are never defined or linked, and the page does not say how they relate to the fields or wires."
+    },
+    {
+      "term": "per-wire bound",
+      "quote": "Per wire, the interchanges are fewer than $R$",
+      "kind": "step",
+      "note": "The inequality s_b < W_b R bounds the total over all wires; it gives a per-wire bound only on average, which the page does not say."
+    },
+    {
+      "term": "recurrence saving",
+      "quote": "which the recurrence turns into a saving of a power of the chunk width",
+      "kind": "step",
+      "note": "The recurrence is not stated or linked here, and the saving is not derived, so the reader cannot check it."
+    },
+    {
+      "term": "numerators prime to q",
+      "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used.",
+      "kind": "step",
+      "note": "The page only requires q not to divide the denominator xi; nothing given forces the numerators to avoid q, so the conclusion does not follow."
+    },
+    {
+      "term": "invertibility of F_1 and F_2",
+      "quote": "To apply the shear, replace $D$ by $F_2D$ and $H$ by $F_1^{-1}H$.",
+      "kind": "step",
+      "note": "The procedure uses F_1^{-1} and F_2^{-1}, but the page never says F_1 and F_2 are invertible, and the elimination sketch does not state it."
+    }
+  ]
+}

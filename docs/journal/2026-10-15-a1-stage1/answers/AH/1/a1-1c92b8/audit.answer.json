@@ -1,0 +1,43 @@
+{
+  "symbols": [
+    {"symbol": "W", "anchor": {"kind": "here", "quote": "Let $W$ be the number of roles."}},
+    {"symbol": "\\rho", "anchor": {"kind": "here", "quote": "Let $\\rho$ be the permutation of roles that it applies: an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$."}},
+    {"symbol": "w", "anchor": {"kind": "here", "quote": "Let $\\rho$ be the permutation of roles that it applies: an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$."}},
+    {"symbol": "\\varepsilon_w", "anchor": {"kind": "here", "quote": "Let $\\rho$ be the permutation of roles that it applies: an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$."}},
+    {"symbol": "\\ell", "anchor": {"kind": "here", "quote": "row $\\ell$, the $\\ell$th row at a fixed prefix, goes to role $\\ell \\bmod W$"}},
+    {"symbol": "\\bmod", "anchor": {"kind": "background", "note": "Modular arithmetic, which the profile's discrete mathematics covers (remainder arithmetic, residues mod m): the remainder on division by $W$."}},
+    {"symbol": "V", "anchor": {"kind": "here", "quote": "Let $V$ be the number of bits stored after padding."}},
+    {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$ on arrays indexed by the common address set, its *frame*."}},
+    {"symbol": "D_\\nu", "anchor": {"kind": "here", "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$ on arrays indexed by the common address set, its *frame*."}},
+    {"symbol": "\\alpha", "anchor": {"kind": "here", "quote": "Along an edge from node $\\alpha$ to node $\\beta$ the stored array changes by $D_\\beta D_\\alpha^{-1}$."}},
+    {"symbol": "\\beta", "anchor": {"kind": "here", "quote": "Along an edge from node $\\alpha$ to node $\\beta$ the stored array changes by $D_\\beta D_\\alpha^{-1}$."}},
+    {"symbol": "f", "anchor": {"kind": "here", "quote": "The stored array at $\\nu$ is $D_\\nu f$ when the logical array is $f$."}},
+    {"symbol": "G", "anchor": {"kind": "here", "quote": "A pointwise linear gate $G$ combines its $p$ input arrays $f_1,\\dots,f_p$ at each address with fixed scalar coefficients."}},
+    {"symbol": "p", "anchor": {"kind": "here", "quote": "A pointwise linear gate $G$ combines its $p$ input arrays $f_1,\\dots,f_p$ at each address with fixed scalar coefficients."}},
+    {"symbol": "k", "anchor": {"kind": "unbound", "quote": "Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges", "note": "The page never says what $k$ counts. The list $\\alpha_0,\\dots,\\alpha_k$ suggests it indexes the route's last node, but no sentence states it."}},
+    {"symbol": "I", "anchor": {"kind": "here", "quote": "Here $I$ is the identity operator, which leaves every array unchanged."}},
+    {"symbol": "\\in", "anchor": {"kind": "background", "note": "Set membership, basic set notation covered by the profile's discrete mathematics (the profile's Cartesian product and tuples presuppose sets)."}},
+    {"symbol": "\\mathrm{source}(w)", "anchor": {"kind": "here", "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route."}},
+    {"symbol": "\\mathrm{sink}(\\rho(w))", "anchor": {"kind": "here", "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route."}}
+  ],
+  "gaps": [
+    {
+      "term": "undoing the exchange (final step for input roles)",
+      "quote": "Undoing the exchange moves each output back to its input role, and multiplying by $\\varepsilon_w$ again removes the sign.",
+      "kind": "step",
+      "note": "The page never says what undoing is (which wiring or inverse permutation performs it). The route's frame operator $D_{\\mathrm{sink}}D_{\\mathrm{source}}^{-1}$ is not cancelled by this step, and the page never says it is the identity, so the reader cannot check that the input value comes back unchanged."
+    },
+    {
+      "term": "scratch-role construction (cited): rho(w)=w with sign +1",
+      "quote": "For a scratch role the construction has $\\rho(w)=w$ with sign $+1$ (cited), so the undoing needs no correction there.",
+      "kind": "step",
+      "note": "This cited claim is how scratch roles are restored, which is the property the page's concept is defined by. The page does not say what the construction is or why scratch roles are fixed with sign +1, so the reader is given only the citation."
+    },
+    {
+      "term": "endpoint operator kept by auxiliary roles (cited)",
+      "quote": "Every role keeps the endpoint operator (cited), auxiliary roles included.",
+      "kind": "step",
+      "note": "The page does not say what keeping the endpoint operator means for an auxiliary role, nor shows that the scratch role's operator $D_{\\mathrm{sink}}D_{\\mathrm{source}}^{-1}$ is the identity $I$. The reader cannot check that auxiliary values come back unchanged."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "labels": [
+    {"mark": 1, "label": "supported", "reason": ""},
+    {"mark": 2, "label": "partial", "reason": "The quotation is a bare inequality s<Wm; it does not say the bound requires it (and writes m, not mu)."},
+    {"mark": 3, "label": "supported", "reason": ""},
+    {"mark": 4, "label": "partial", "reason": "The quotation gives deficits greater than 20*2^-50, a weaker bound than the claimed eta > 20*2^-40."},
+    {"mark": 5, "label": "supported", "reason": ""},
+    {"mark": 6, "label": "partial", "reason": "The quotation only says auxiliary values are restored; it says nothing about a forward, inverse, forward schedule exchanging the two banks."}
+  ]
+}

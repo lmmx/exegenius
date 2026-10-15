@@ -1,0 +1,34 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "supported",
+      "reason": ""
+    },
+    {
+      "mark": 2,
+      "label": "supported",
+      "reason": ""
+    },
+    {
+      "mark": 3,
+      "label": "supported",
+      "reason": ""
+    },
+    {
+      "mark": 4,
+      "label": "partial",
+      "reason": "The quotation says only that \"both exact deficits displayed above\" exceed 20·2^-50; it does not name η or identify the explicit network."
+    },
+    {
+      "mark": 5,
+      "label": "contradicted",
+      "reason": "The quotation says the invocation changes y_S to y_S + x_S (adds x_S), while the claim says it subtracts x_S from y_S."
+    },
+    {
+      "mark": 6,
+      "label": "partial",
+      "reason": "The quotation only says the schedule restores every auxiliary value; it does not mention the forward, inverse, forward schedule or the exchange of the two banks."
+    }
+  ]
+}

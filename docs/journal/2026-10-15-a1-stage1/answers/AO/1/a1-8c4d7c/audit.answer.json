@@ -1,0 +1,252 @@
+{
+ "symbols": [
+  {
+   "symbol": "h",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$ (the letter $h$ changes meaning here)."
+   }
+  },
+  {
+   "symbol": "T",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a three-element subset $T$ of $[h]$, called a triple, $t_T$ is its indicator vector, and $\\mathcal T$ is the set of all triples."
+   }
+  },
+  {
+   "symbol": "t_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a three-element subset $T$ of $[h]$, called a triple, $t_T$ is its indicator vector, and $\\mathcal T$ is the set of all triples."
+   }
+  },
+  {
+   "symbol": "\\mathcal T",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a three-element subset $T$ of $[h]$, called a triple, $t_T$ is its indicator vector, and $\\mathcal T$ is the set of all triples."
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "here",
+    "quote": "Call two triples $T,S$ *neighbors* when $|T\\cap S|=1$."
+   }
+  },
+  {
+   "symbol": "g_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each triple $T$ carries a value $g_T$."
+   }
+  },
+  {
+   "symbol": "\\mathbb F_2",
+   "anchor": {
+    "kind": "background",
+    "note": "The integers mod 2 (residues mod 2), covered by modular arithmetic and residue rings from discrete mathematics."
+   }
+  },
+  {
+   "symbol": "e",
+   "anchor": {
+    "kind": "here",
+    "quote": "on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "C_e",
+   "anchor": {
+    "kind": "here",
+    "quote": "on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "A_{ST}",
+   "anchor": {
+    "kind": "here",
+    "quote": "A copy of $g_T$ on an auxiliary wire $A_{ST}$ for each neighbor pair"
+   }
+  },
+  {
+   "symbol": "\\mathbb Q",
+   "anchor": {
+    "kind": "background",
+    "note": "The rational numbers, standard notation from discrete mathematics."
+   }
+  },
+  {
+   "symbol": "I",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "J",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $J$ is the all-one matrix (the letter $J$ changes meaning here)"
+   }
+  },
+  {
+   "symbol": "\\mathcal F",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "of dimension $D=h^3$ (the label space dimension)"
+   }
+  },
+  {
+   "symbol": "U",
+   "anchor": {
+    "kind": "here",
+    "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$."
+   }
+  },
+  {
+   "symbol": "\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$, the label $U_\\iota$ is the line spanned by $t_{T_1}\\otimes t_{T_2}\\otimes t_{T_3}$."
+   }
+  },
+  {
+   "symbol": "T_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$, the label $U_\\iota$ is the line spanned by $t_{T_1}\\otimes t_{T_2}\\otimes t_{T_3}$."
+   }
+  },
+  {
+   "symbol": "T_2",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$, the label $U_\\iota$ is the line spanned by $t_{T_1}\\otimes t_{T_2}\\otimes t_{T_3}$."
+   }
+  },
+  {
+   "symbol": "T_3",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$, the label $U_\\iota$ is the line spanned by $t_{T_1}\\otimes t_{T_2}\\otimes t_{T_3}$."
+   }
+  },
+  {
+   "symbol": "U_\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$, the label $U_\\iota$ is the line spanned by $t_{T_1}\\otimes t_{T_2}\\otimes t_{T_3}$."
+   }
+  },
+  {
+   "symbol": "P_U",
+   "anchor": {
+    "kind": "here",
+    "quote": "Give each gate or sink with label $U$ the projection $P_U$ onto $U$ along $U^\\perp$, and the source of index $\\iota$ the matrix $-P_{U_\\iota}$."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "If $U\\subseteq V$, then $P_V-P_U$ is the identity on $V\\cap U^\\perp$",
+    "note": "The page never says what V is (presumably the label at the other end of an edge, a subspace containing U); the only earlier binding of V is the stored bit volume on address-fields, which does not fit here."
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$, the total rank over all edges, change meaning here."
+   }
+  },
+  {
+   "symbol": "N",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $N=\\binom h3^3$, the number of indices $\\iota$ (the letter $N$ changes meaning here)."
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "L",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $L$ be the total dimension lost on decreasing edges (the letter $L$ changes meaning here)."
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "Here $\\mathcal F$ is the fixed space, so the paper's dimension $m$ is $D$.",
+    "note": "It is only called 'the paper's dimension' and set equal to D; the page never says what m measures in the recursion or what 'the fixed space' is, and the earlier bindings of m (tape position, frequency index) do not fit."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "nondegenerate subspace",
+   "kind": "term",
+   "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$.",
+   "note": "The reader knows dot products but not what it means for a subspace to be nondegenerate under a bilinear form such as the one with matrix I-J/9 (which is not positive definite), nor why this makes the projection onto U along U^perp exist."
+  },
+  {
+   "term": "side wire",
+   "kind": "term",
+   "quote": "Along a side wire, a label containing $t_T$ may grow to $t_S^\\perp$",
+   "note": "Side wires are never defined (the page has spoken only of central and auxiliary wires), so the reader cannot tell which wires this applies to."
+  },
+  {
+   "term": "rule for how labels change along wires",
+   "kind": "step",
+   "quote": "Along a side wire, a label containing $t_T$ may grow to $t_S^\\perp$, since $t_T\\perp t_S$, adding $h-2$ dimensions.",
+   "note": "The page never states what constraint labels on a wire must satisfy or why orthogonality permits growth; also labels are subspaces of F=(Q^h)^{⊗3}, while t_T and t_S^perp live in Q^h, so the count h-2 (which assumes the label is the line through t_T inside Q^h) cannot be checked."
+  },
+  {
+   "term": "edge matrices from node projections",
+   "kind": "step",
+   "quote": "Give each gate or sink with label $U$ the projection $P_U$ onto $U$ along $U^\\perp$, and the source of index $\\iota$ the matrix $-P_{U_\\iota}$.",
+   "note": "Matrices are assigned to nodes, but the count is a rank over edges; the page never says that an edge carries the difference of its endpoints' matrices (so that an edge from U to V carries P_V-P_U and the first edge out of a source carries 2P_{U_iota}), nor how these rational matrices relate to the network whose coefficients were checked over F_2."
+  },
+  {
+   "term": "rank costs one smaller call",
+   "kind": "step",
+   "quote": "Each unit of rank costs one smaller call.",
+   "note": "The page never says what a 'smaller call' is (a recursive call of which operation, on what size) or why an edge matrix of rank k costs k such calls; this cited claim stands in for how the construction's cost is measured."
+  },
+  {
+   "term": "signed total WD-2N",
+   "kind": "step",
+   "quote": "So the signed total is $WD-2N$.",
+   "note": "The reader cannot check this: the page does not define a signed label change, say why gate labels cancel, why there are exactly W sinks (one per role), why the N sinks receiving sources have label U_iota^perp, or why wires that do not start at a source contribute no starting dimension."
+  },
+  {
+   "term": "count of lost dimension L",
+   "kind": "step",
+   "quote": "so $L=3\\binom h3^2h^2$",
+   "note": "The page never says what the invocations are or why there are 2·C(h,3)^2 of them (it builds the gadget on single triples, not on indices in T^3), nor why each central wire loses h dimensions; and 2·C(h,3)^2·h·h gives 2C(h,3)^2h^2, not the stated 3C(h,3)^2h^2 that the ratio 100/539 relies on."
+  },
+  {
+   "term": "decisive bound on smaller calls",
+   "kind": "step",
+   "quote": "The paper's decisive property is a bound on the number of smaller calls, (cited).",
+   "note": "The bound is never stated, and the page does not say why s<WD (with m=D) is what the recursion needs to save a power; the recursion itself is neither explained nor linked."
+  }
+ ]
+}

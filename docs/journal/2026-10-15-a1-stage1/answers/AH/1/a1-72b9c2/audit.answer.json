@@ -1,0 +1,158 @@
+{
+  "symbols": [
+    {
+      "symbol": "\\lambda",
+      "anchor": {
+        "kind": "here",
+        "quote": "with exponent $\\lambda<1$"
+      }
+    },
+    {
+      "symbol": "f",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $f$ be the parameter of a call"
+      }
+    },
+    {
+      "symbol": "m",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $m$ is the factor by which the parameter grows"
+      }
+    },
+    {
+      "symbol": "s",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $s$ be the number of subcalls of one call."
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "page",
+        "page": "address-fields"
+      }
+    },
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "page",
+        "page": "linear-network-roles"
+      }
+    },
+    {
+      "symbol": "\\Phi",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."
+      }
+    },
+    {
+      "symbol": "C",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $C$ be a constant such that the call's own outside work is at most"
+      }
+    },
+    {
+      "symbol": "u",
+      "anchor": {
+        "kind": "page",
+        "page": "address-fields"
+      }
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed.",
+        "note": "The page says only that tau is a fixed number below 1, an unnamed exponent in the cost bound. The earlier bindings of tau (column of a one, second last-axis exponent, second coefficient position) are other objects, and none is a fixed exponent below 1."
+      }
+    },
+    {
+      "symbol": "O",
+      "anchor": {
+        "kind": "background",
+        "note": "Big-O notation, listed in the reader profile (big-O notation; asymptotic analysis)."
+      }
+    },
+    {
+      "symbol": "\\Omega",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\Omega$ is the bit count of one axis chunk"
+      }
+    },
+    {
+      "symbol": "d",
+      "anchor": {
+        "kind": "here",
+        "quote": "$d$ is the paper's axis-count parameter"
+      }
+    },
+    {
+      "symbol": "\\eta",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "and $\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$",
+        "note": "The page says only that eta is a fixed positive constant with Omega at most d^eta. No meaning is given. The earlier bindings of eta (content of H_sigma, wrap flag, product coefficient position) do not fit."
+      }
+    },
+    {
+      "symbol": "\\vartheta",
+      "anchor": {
+        "kind": "here",
+        "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"
+      }
+    },
+    {
+      "symbol": "\\nu",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $\\nu$ count the levels of unrolling"
+      }
+    },
+    {
+      "symbol": "\\sigma",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "Choose $\\sigma$ with",
+        "note": "The page only chooses sigma in a range and never says what it counts. The earlier bindings (last-axis exponent of x, row of a one) are different objects, and the earlier integer exponent does not match the real exponent of m used here."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "outside work as a fixed number of address-field row additions",
+      "quote": "The outside work is a fixed number of address-field row additions.",
+      "kind": "step",
+      "note": "The page cites only the cost of an address interchange, O(V u^tau). It then asserts without argument that the outside work is a fixed number of row additions, and that a row addition costs O(V(u^tau+1)). The reader cannot check why the cited interchange bound transfers to row additions, or why the outside work is a fixed number of them."
+    },
+    {
+      "term": "joint constraints on lambda",
+      "quote": "Taking $\\lambda$ with $\\log_m(s/W)<\\lambda<1$ makes the ratio below 1",
+      "kind": "step",
+      "note": "This choice of lambda must also exceed tau(1+eta/vartheta), the condition stated earlier for the outside work, and lambda must be below 1. The page never shows that these constraints can hold together. That needs tau(1+eta/vartheta)<1, which the page does not give, so the claimed exponent lambda<1 is not established."
+    },
+    {
+      "term": "kernel",
+      "quote": "Each leaf is handled by one kernel per chunk, at cost $O(f/m^\\nu)$.",
+      "kind": "term",
+      "note": "The page does not say what a kernel is (a base-case routine, a convolution kernel and an operating-system kernel are all possible readings). It also does not say whether the cost O(f/m^nu) is per kernel or per leaf, and the later leaf cost O((s/W)^nu u) depends on which."
+    },
+    {
+      "term": "leaf chunk count u",
+      "quote": "The leaves at depth $\\nu$ have $u=f/m^\\nu<d^\\vartheta$ chunks",
+      "kind": "step",
+      "note": "Earlier the page sets u = f Omega bits, the field width in bits. Here u is a count of chunks, f/m^nu, and the page does not say the letter changes meaning. The reader cannot tell whether the leaf cost O((s/W)^nu u) and the bound (f/u)^sigma use bits or chunks."
+    },
+    {
+      "term": "bound on the leaf cost with d",
+      "quote": "the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$",
+      "kind": "step",
+      "note": "This needs d to be a fixed constant, so that d^(vartheta(1-sigma)) is absorbed and f^sigma is at most f^lambda since sigma is below lambda. The page never says d is fixed; it says eta and vartheta are fixed but not d. The only bound it gives on d is d at most f^(1/vartheta), which yields only f^sigma times f^(1-sigma), that is f, not f^lambda."
+    }
+  ]
+}

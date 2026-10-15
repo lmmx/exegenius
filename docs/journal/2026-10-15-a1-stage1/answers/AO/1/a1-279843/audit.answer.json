@@ -1,0 +1,26 @@
+{
+  "symbols": [
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "\\mathbb F_2", "anchor": {"kind": "background", "note": "The integers modulo 2 (the residue ring of bits, where addition is XOR), covered by modular arithmetic and binary operations in discrete mathematics."}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited)."}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation from asymptotic analysis."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "s", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "m", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "Q_k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+    {"symbol": "k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+    {"symbol": "C", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "j", "anchor": {"kind": "background", "note": "A summation index in a finite sum, covered by summation notation in calculus and discrete mathematics."}}
+  ],
+  "gaps": [
+    {
+      "term": "why the two outer updates are linear-time while the middle one is costly",
+      "quote": "Both change only $D$, each combining $D$ with the earlier field $H$ in linear time.",
+      "kind": "step",
+      "note": "The page asserts that D <- D-H and D <- H-D cost linear time on the tapes while H <- H+D is 'the costly one', giving only that H is 'the earlier field' (an ordering of the fields never set up on the page). The reader, who has not studied tape-level data movement, cannot check why updating D from H is a linear-time rearrangement while updating H from D is not."
+    }
+  ]
+}

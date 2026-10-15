@@ -1,0 +1,143 @@
+{
+  "symbols": [
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $W$ be the number of roles."
+      }
+    },
+    {
+      "symbol": "\\rho",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $\\rho$ be the permutation of roles that it applies: an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$."
+      }
+    },
+    {
+      "symbol": "w",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $\\rho$ be the permutation of roles that it applies: an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$."
+      }
+    },
+    {
+      "symbol": "\\varepsilon_w",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $\\rho$ be the permutation of roles that it applies: an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$."
+      }
+    },
+    {
+      "symbol": "\\ell",
+      "anchor": {
+        "kind": "here",
+        "quote": "Distribute the rows cyclically: row $\\ell$, the $\\ell$th row at a fixed prefix, goes to role $\\ell \\bmod W$, after the row count for each prefix is padded to a multiple of $W$."
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $V$ be the number of bits stored after padding."
+      }
+    },
+    {
+      "symbol": "\\nu",
+      "anchor": {
+        "kind": "here",
+        "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$ on arrays indexed by the common address set, its *frame*."
+      }
+    },
+    {
+      "symbol": "D_\\nu",
+      "anchor": {
+        "kind": "here",
+        "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$ on arrays indexed by the common address set, its *frame*."
+      }
+    },
+    {
+      "symbol": "f",
+      "anchor": {
+        "kind": "here",
+        "quote": "The stored array at $\\nu$ is $D_\\nu f$ when the logical array is $f$."
+      }
+    },
+    {
+      "symbol": "\\alpha",
+      "anchor": {
+        "kind": "here",
+        "quote": "Along an edge from node $\\alpha$ to node $\\beta$ the stored array changes by $D_\\beta D_\\alpha^{-1}$."
+      }
+    },
+    {
+      "symbol": "\\beta",
+      "anchor": {
+        "kind": "here",
+        "quote": "Along an edge from node $\\alpha$ to node $\\beta$ the stored array changes by $D_\\beta D_\\alpha^{-1}$."
+      }
+    },
+    {
+      "symbol": "G",
+      "anchor": {
+        "kind": "here",
+        "quote": "A pointwise linear gate $G$ combines its $p$ input arrays $f_1,\\dots,f_p$ at each address with fixed scalar coefficients."
+      }
+    },
+    {
+      "symbol": "p",
+      "anchor": {
+        "kind": "here",
+        "quote": "A pointwise linear gate $G$ combines its $p$ input arrays $f_1,\\dots,f_p$ at each address with fixed scalar coefficients."
+      }
+    },
+    {
+      "symbol": "k",
+      "anchor": {
+        "kind": "background",
+        "note": "Standard indexing of a finite sequence $x_0,\\dots,x_k$ from discrete mathematics: $k$ is the last index, so the route $\\alpha_0,\\dots,\\alpha_k$ has $k$ edges."
+      }
+    },
+    {
+      "symbol": "\\mathrm{source}",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route."
+      }
+    },
+    {
+      "symbol": "\\mathrm{sink}",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route."
+      }
+    },
+    {
+      "symbol": "I",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $I$ is the identity operator, which leaves every array unchanged."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "Bits per role stream V/(2W)",
+      "quote": "Each role stream then holds $V/(2W)$ bits (cited).",
+      "kind": "step",
+      "note": "Spreading V padded bits evenly over W roles gives V/W bits per role; the page never says where the extra factor 2 comes from (e.g. two banks, or half the roles being scratch), so the reader cannot check the stated count or see why the citation applies."
+    },
+    {
+      "term": "Frames commute with nonlinear gates",
+      "quote": "Frames therefore pass through every gate, linear or not.",
+      "kind": "step",
+      "note": "The displayed identity is derived only for pointwise linear gates with scalar coefficients, using linearity of the frame; nothing on the page supports the conclusion for gates that are not linear, and the network was described as made of linear steps."
+    },
+    {
+      "term": "Restoring auxiliary values / roles keep the endpoint operator",
+      "quote": "Every role keeps the endpoint operator (cited), auxiliary roles included.",
+      "kind": "step",
+      "note": "The page opens by saying the network restores every auxiliary value, but its own derivation leaves a scratch role holding $D_{\\mathrm{sink}}D_{\\mathrm{source}}^{-1}$ applied to its value, which restores it only if that endpoint operator is the identity. The page never says what 'keeps the endpoint operator' means, what undoing the exchange does to the operator, or why scratch values end up unchanged, so the restoration claim cannot be checked."
+    }
+  ]
+}

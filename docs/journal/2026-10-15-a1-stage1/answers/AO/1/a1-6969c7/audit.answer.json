@@ -1,0 +1,31 @@
+{
+  "symbols": [
+    {"symbol": "\\lambda", "anchor": {"kind": "here", "quote": "can grow as a fixed power of its parameter, with exponent $\\lambda<1$"}},
+    {"symbol": "f", "anchor": {"kind": "here", "quote": "Let $f$ be the parameter of a call"}},
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "m", "anchor": {"kind": "here", "quote": "Here $m$ is the factor by which the parameter grows"}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "Let $s$ be the number of subcalls of one call."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "\\Phi", "anchor": {"kind": "here", "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."}},
+    {"symbol": "C", "anchor": {"kind": "here", "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation, from asymptotic analysis in the undergraduate CS profile (a known concept)."}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "An address interchange of $u$-bit fields costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed."}},
+    {"symbol": "\\Omega", "anchor": {"kind": "here", "quote": "Here $\\Omega$ is the bit count of one axis chunk"}},
+    {"symbol": "d", "anchor": {"kind": "here", "quote": "$d$ is the paper's axis-count parameter"}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "and $\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"}},
+    {"symbol": "\\vartheta", "anchor": {"kind": "here", "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"}},
+    {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Let $\\nu$ count the levels of unrolling"}},
+    {"symbol": "\\sigma", "anchor": {"kind": "here", "quote": "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$."}}
+  ],
+  "gaps": [
+    {"term": "field digits", "quote": "the number of field digits for an address interchange", "kind": "term", "note": "The parameter of the whole recursion is defined as a count of 'field digits', but the page never says what a digit of an address field is (the reader knows fields as groups of address bits); only later does u = f Omega hint that a field consists of f pieces of Omega bits."},
+    {"term": "axis chunk", "quote": "Here $\\Omega$ is the bit count of one axis chunk", "kind": "term", "note": "Omega is defined via an 'axis chunk', a notion the page neither explains nor links, so the reader cannot tell what Omega measures or why Omega <= d^eta."},
+    {"term": "kernel", "quote": "Each leaf is handled by one kernel per chunk, at cost $O(f/m^\\nu)$.", "kind": "term", "note": "'Kernel' (and 'chunk') is never explained or linked, so the reader cannot tell what a leaf does or check the stated leaf cost O(f/m^nu)."},
+    {"term": "row addition cost from interchange cost", "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.", "kind": "step", "note": "The cited result bounds an address interchange, not a row addition; the page does not say how a row addition's cost follows from it (or why the +1 term appears), nor why fields of the call have u = f Omega bits."},
+    {"term": "s/W > m contradicts s < Wm", "quote": "The saving exists because $s/W>m$.", "kind": "step", "note": "The page earlier says the construction gives s < Wm, i.e. s/W < m, and the next sentence needs log_m(s/W) < 1, i.e. s/W < m, for a lambda < 1 to exist (as in the example, s/W = 3/2 < 2 = m). The stated reason s/W > m contradicts both, so the reader cannot see why the saving exists."},
+    {"term": "bound for every lambda > 0", "quote": "so the internal sum is at most a constant times $f^\\lambda$ for every $\\lambda>0$", "kind": "step", "note": "The geometric series converges only when (s/W)/m^lambda < 1, i.e. lambda > log_m(s/W), as the same sentence just required; the conclusion 'for every lambda > 0' does not follow and contradicts it."},
+    {"term": "u reused as a chunk count", "quote": "The leaves at depth $\\nu$ have $u=f/m^\\nu<d^\\vartheta$ chunks", "kind": "step", "note": "u was a field width in bits (u = f Omega bits above, and on the address-fields page); here u is suddenly a number of chunks f/m^nu, so the reader cannot reconcile the two uses or check the leaf cost O((s/W)^nu u)."},
+    {"term": "leaf cost bounded by f^lambda", "quote": "and the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$", "kind": "step", "note": "From what the page gives (f >= d^vartheta at an internal node) one only gets d^{vartheta(1-sigma)} <= f^{1-sigma}, so f^sigma d^{vartheta(1-sigma)} <= f, not f^lambda with lambda < 1; the page gives no relation between f and d that yields the final inequality."}
+  ]
+}

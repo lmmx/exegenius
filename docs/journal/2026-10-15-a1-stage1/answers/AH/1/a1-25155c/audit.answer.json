@@ -1,0 +1,223 @@
+{
+  "symbols": [
+    {
+      "symbol": "R",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $R$ be the number of fields in each vector"
+      }
+    },
+    {
+      "symbol": "H",
+      "anchor": {
+        "kind": "here",
+        "quote": "let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"
+      }
+    },
+    {
+      "symbol": "D",
+      "anchor": {
+        "kind": "here",
+        "quote": "let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"
+      }
+    },
+    {
+      "symbol": "q",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $q$ is a fixed odd prime, the radix of the digits"
+      }
+    },
+    {
+      "symbol": "b",
+      "anchor": {
+        "kind": "here",
+        "quote": "$b$ is the number of radix-$q$ digits in each field"
+      }
+    },
+    {
+      "symbol": "\\mathbb Z",
+      "anchor": {
+        "kind": "background",
+        "note": "Standard notation for the integers; the residues mod m (Z/mZ) are covered by the modular arithmetic in the reader's discrete mathematics."
+      }
+    },
+    {
+      "symbol": "M",
+      "anchor": {
+        "kind": "here",
+        "quote": "For a rational $R\\times R$ matrix $M$"
+      }
+    },
+    {
+      "symbol": "\\mu",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"
+      }
+    },
+    {
+      "symbol": "\\xi",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"
+      }
+    },
+    {
+      "symbol": "\\operatorname{rank}_{\\mathbb Q}M",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $\\operatorname{rank}_{\\mathbb Q}M$ be the number of linearly independent rows of $M$."
+      }
+    },
+    {
+      "symbol": "\\mathbb Q",
+      "anchor": {
+        "kind": "background",
+        "note": "Standard notation for the rational numbers, used throughout the linear algebra and calculus the reader profile covers."
+      }
+    },
+    {
+      "symbol": "\\Pi",
+      "anchor": {
+        "kind": "here",
+        "quote": "A partial permutation matrix $\\Pi$ is a 0-1 matrix with at most one 1 in each row and column"
+      }
+    },
+    {
+      "symbol": "F_1",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $F_1$ and $F_2$ are invertible lower-triangular rational matrices"
+      }
+    },
+    {
+      "symbol": "F_2",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $F_1$ and $F_2$ are invertible lower-triangular rational matrices"
+      }
+    },
+    {
+      "symbol": "I",
+      "anchor": {
+        "kind": "page",
+        "page": "linear-network-roles"
+      }
+    },
+    {
+      "symbol": "\\eta",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$"
+      }
+    },
+    {
+      "symbol": "\\zeta",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$"
+      }
+    },
+    {
+      "symbol": "\\sigma",
+      "anchor": {
+        "kind": "here",
+        "quote": "For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$"
+      }
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {
+        "kind": "here",
+        "quote": "For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$"
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "page",
+        "page": "address-fields"
+      }
+    },
+    {
+      "symbol": "s_{\\rm b}",
+      "anchor": {
+        "kind": "here",
+        "quote": "The interchange count of the network is $s_{\\rm b}$, the sum of their ranks"
+      }
+    },
+    {
+      "symbol": "W_{\\rm b}",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $W_{\\rm b}$ is the number of wires"
+      }
+    },
+    {
+      "symbol": "N",
+      "anchor": {
+        "kind": "here",
+        "quote": "$N$ the number of negative source projections"
+      }
+    },
+    {
+      "symbol": "L_{\\rm b}",
+      "anchor": {
+        "kind": "here",
+        "quote": "$L_{\\rm b}$ the total dimension lost on decreasing edges"
+      }
+    },
+    {
+      "symbol": "O",
+      "anchor": {
+        "kind": "background",
+        "note": "Big-O notation, named in the reader profile under asymptotic analysis. (The dft-fft page's O means odd sub-transform; that binding does not apply here.)"
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "negative source projections",
+      "quote": "$N$ the number of negative source projections",
+      "kind": "term",
+      "note": "Not in the reader's known concepts, and the page neither explains nor links it. The reader cannot tell which projections count as negative, so cannot evaluate N in the formula for s_b."
+    },
+    {
+      "term": "decreasing edges and dimension lost",
+      "quote": "$L_{\\rm b}$ the total dimension lost on decreasing edges",
+      "kind": "term",
+      "note": "The page does not say what a decreasing edge is or how dimension is lost along one, so L_b cannot be computed from the network."
+    },
+    {
+      "term": "rank budget identity s_b = W_b R - N + 2 L_b",
+      "quote": "The network's rank budget, which counts dimension changes along its edges, gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$",
+      "kind": "step",
+      "note": "The rank budget is not defined or derived on the page, so the reader cannot check this identity relating the interchange count to the wire count, N and L_b."
+    },
+    {
+      "term": "direction of the bound s_b < W_b R",
+      "quote": "The paper shows $N<2L_{\\rm b}$, so $s_{\\rm b}<W_{\\rm b}R$.",
+      "kind": "step",
+      "note": "Does not follow from the stated formula. With s_b = W_b R - N + 2 L_b, N < 2 L_b gives 2 L_b - N > 0, so s_b > W_b R, the opposite of the claimed bound. As written, the inference is inconsistent with the page's own identity."
+    },
+    {
+      "term": "chunk",
+      "quote": "a saving of a power of the chunk width (the chunk length)",
+      "kind": "term",
+      "note": "'Chunk' is never defined and no linked page is given for it. The page names the same thing both chunk width and chunk length, so the reader cannot tell what the saving is measured against."
+    },
+    {
+      "term": "recurrence giving a power saving per chunk",
+      "quote": "which the recurrence turns into a saving of a power of the chunk width",
+      "kind": "step",
+      "note": "No recurrence is stated, and the page does not say how interchange costs enter it, what the saving's exponent is, or how the per-wire bound of fewer than R interchanges yields it. The reader cannot check the claimed saving."
+    },
+    {
+      "term": "q avoids all denominators of the matrices used",
+      "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used",
+      "kind": "step",
+      "note": "The page only states the requirement that q not divide a denominator. It does not say which matrices are used, nor show that the factors F_1, F_2 and their inverses have denominators prime to q, so the 'So' does not follow from what the page gives."
+    }
+  ]
+}

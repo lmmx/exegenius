@@ -1,0 +1,14 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "partial",
+      "reason": "The quotation only says tau is fixed and below 1; it does not say tau is the exponent in the cost O(Vu^tau)."
+    },
+    {
+      "mark": 2,
+      "label": "partial",
+      "reason": "The quotation states s<Wm for the smaller calls in question, but not that this holds for every linear network."
+    }
+  ]
+}

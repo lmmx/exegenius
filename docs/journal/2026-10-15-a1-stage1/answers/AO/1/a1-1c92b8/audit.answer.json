@@ -1,0 +1,38 @@
+{
+  "symbols": [
+    {"symbol": "W", "anchor": {"kind": "here", "quote": "Let $W$ be the number of roles."}},
+    {"symbol": "\\rho", "anchor": {"kind": "here", "quote": "Let $\\rho$ be the permutation of roles that it applies: an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$."}},
+    {"symbol": "w", "anchor": {"kind": "here", "quote": "Let $\\rho$ be the permutation of roles that it applies: an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$."}},
+    {"symbol": "\\varepsilon_w", "anchor": {"kind": "here", "quote": "Let $\\rho$ be the permutation of roles that it applies: an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$."}},
+    {"symbol": "\\ell", "anchor": {"kind": "here", "quote": "row $\\ell$, the $\\ell$th row at a fixed prefix, goes to role $\\ell \\bmod W$"}},
+    {"symbol": "\\bmod", "anchor": {"kind": "background", "note": "Remainder operator from modular arithmetic in the discrete mathematics of the degree."}},
+    {"symbol": "V", "anchor": {"kind": "here", "quote": "Let $V$ be the number of bits stored after padding."}},
+    {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$ on arrays indexed by the common address set, its *frame*."}},
+    {"symbol": "D_\\nu", "anchor": {"kind": "here", "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$ on arrays indexed by the common address set, its *frame*."}},
+    {"symbol": "f", "anchor": {"kind": "here", "quote": "The stored array at $\\nu$ is $D_\\nu f$ when the logical array is $f$."}},
+    {"symbol": "\\alpha", "anchor": {"kind": "here", "quote": "Along an edge from node $\\alpha$ to node $\\beta$ the stored array changes by $D_\\beta D_\\alpha^{-1}$."}},
+    {"symbol": "\\beta", "anchor": {"kind": "here", "quote": "Along an edge from node $\\alpha$ to node $\\beta$ the stored array changes by $D_\\beta D_\\alpha^{-1}$."}},
+    {"symbol": "G", "anchor": {"kind": "here", "quote": "A pointwise linear gate $G$ combines its $p$ input arrays $f_1,\\dots,f_p$ at each address with fixed scalar coefficients."}},
+    {"symbol": "p", "anchor": {"kind": "here", "quote": "A pointwise linear gate $G$ combines its $p$ input arrays $f_1,\\dots,f_p$ at each address with fixed scalar coefficients."}},
+    {"symbol": "f_1", "anchor": {"kind": "here", "quote": "A pointwise linear gate $G$ combines its $p$ input arrays $f_1,\\dots,f_p$ at each address with fixed scalar coefficients."}},
+    {"symbol": "\\alpha_0", "anchor": {"kind": "here", "quote": "Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges, the operators telescope"}},
+    {"symbol": "k", "anchor": {"kind": "here", "quote": "Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges, the operators telescope"}},
+    {"symbol": "\\mathrm{source}", "anchor": {"kind": "here", "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"}},
+    {"symbol": "\\mathrm{sink}", "anchor": {"kind": "here", "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"}},
+    {"symbol": "I", "anchor": {"kind": "here", "quote": "Here $I$ is the identity operator, which leaves every array unchanged."}}
+  ],
+  "gaps": [
+    {
+      "term": "route map from telescoping",
+      "quote": "By the telescoping, the route applies $\\varepsilon_w D_{\\mathrm{sink}(\\rho(w))}D_{\\mathrm{source}(w)}^{-1}$",
+      "kind": "step",
+      "note": "The telescoping identity only multiplies the frame changes along the edges of one route; the gates on that route also combine the value with other wires' values. The page never connects the frames to the scalar network's signed permutation (that at every address the logical output at role rho(w) is epsilon_w times the logical input at w, so the stored output is epsilon_w D_sink times D_source inverse of the stored input), so the reader cannot see why the whole network's map from input w to output rho(w) is this operator rather than something involving the gates."
+    },
+    {
+      "term": "every role keeps the endpoint operator",
+      "quote": "Every role keeps the endpoint operator (cited), auxiliary roles included.",
+      "kind": "step",
+      "note": "The page does not say what it means for a role to 'keep' its endpoint operator or what role this cited claim plays. For a scratch role it would mean the value returns multiplied by D_sink(w) D_source(w)^{-1}, which is not the identity unless the two frames agree, yet the page opened by saying the network restores every auxiliary value; the reader cannot reconcile the two or tell how scratch values are actually restored."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "symbols": [
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "\\mathbb F_2", "anchor": {"kind": "here", "quote": "for the bit procedure this ring is $\\mathbb F_2$, where subtraction and addition coincide"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in"}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "big-O notation, covered by the asymptotic analysis in the reader profile"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "each of its $s$ smaller calls acts on one role stream of volume $V/W$"}},
+    {"symbol": "m", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "Q_k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits"}},
+    {"symbol": "k", "anchor": {"kind": "here", "quote": "where $k$ is the recursion level"}},
+    {"symbol": "C", "anchor": {"kind": "here", "quote": "plus $O(V)$ outside work whose normalized cost is at most $C$"}},
+    {"symbol": "j", "anchor": {"kind": "background", "note": "summation index of a geometric series, covered by the limits, series and summation background"}},
+    {"symbol": "\\sum", "anchor": {"kind": "background", "note": "summation notation from discrete mathematics and calculus"}},
+    {"symbol": "\\leftarrow", "anchor": {"kind": "background", "note": "assignment arrow, standard in algorithm descriptions"}},
+    {"symbol": "\\to", "anchor": {"kind": "background", "note": "limit notation from calculus"}}
+  ],
+  "gaps": [
+    {
+      "term": "unrolled recurrence has wrong sign",
+      "quote": "Q_k\\le (s/W)^k Q_0-C\\sum_{j<k}(s/W)^j",
+      "kind": "step",
+      "note": "Unrolling Q_k <= (s/W) Q_{k-1} + C gives a plus C times the geometric sum, not a minus. The reader who unrolls the displayed recurrence gets a different formula, and the page never says why the sign is negative, so the step cannot be checked."
+    },
+    {
+      "term": "geometric sum bound",
+      "quote": "The geometric sum is also $O(m^{k\\tau})$, since it is $O((s/W)^k)$.",
+      "kind": "step",
+      "note": "A geometric sum with ratio s/W is O((s/W)^k) only if s/W > 1. The page never says s/W > 1; if s/W < 1 the sum is O(1) and if s/W = 1 it is k. The reader cannot check which case applies."
+    },
+    {
+      "term": "m >= 2",
+      "quote": "Both are $O(m^{k\\tau})$, since $m\\ge2$.",
+      "kind": "step",
+      "note": "The page never states or justifies m >= 2 (m is only a cited growth factor), and does not explain how m >= 2 turns the bounds into O(m^{k tau}), for example for the O(1) term."
+    }
+  ]
+}

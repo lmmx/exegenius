@@ -1,0 +1,19 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "partial",
+      "reason": "The quotation gives the bit count V/W but names no subject, so it does not say that each role stream holds that many bits."
+    },
+    {
+      "mark": 2,
+      "label": "supported",
+      "reason": ""
+    },
+    {
+      "mark": 3,
+      "label": "unsupported",
+      "reason": "The quotation only says that displayed summands are nondegenerate and says nothing about roles keeping the endpoint operator."
+    }
+  ]
+}

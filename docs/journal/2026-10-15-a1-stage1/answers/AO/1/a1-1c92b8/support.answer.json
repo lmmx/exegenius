@@ -1,0 +1,7 @@
+{
+  "labels": [
+    {"mark": 1, "label": "partial", "reason": "The quotation says something contains V/W bits but does not say what; it never identifies each role stream as the holder."},
+    {"mark": 2, "label": "supported", "reason": ""},
+    {"mark": 3, "label": "supported", "reason": ""}
+  ]
+}

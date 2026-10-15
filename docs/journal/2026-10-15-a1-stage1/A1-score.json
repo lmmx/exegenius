@@ -1,0 +1,767 @@
+{
+ "AH": {
+  "audit_exact_of_named": {
+   "k": 10,
+   "n": 13,
+   "rate": 0.769,
+   "ci80": [
+    0.595,
+    0.883
+   ]
+  },
+  "audit_located_page": {
+   "k": 17,
+   "n": 28,
+   "rate": 0.607,
+   "ci80": [
+    0.486,
+    0.716
+   ]
+  },
+  "audit_named_page": {
+   "k": 13,
+   "n": 28,
+   "rate": 0.464,
+   "ci80": [
+    0.349,
+    0.584
+   ]
+  },
+  "audit_named_quote": {
+   "k": 1,
+   "n": 7,
+   "rate": 0.143,
+   "ci80": [
+    0.044,
+    0.378
+   ]
+  },
+  "audit_named_source": {
+   "k": 0,
+   "n": 1,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.622
+   ]
+  },
+  "audit_named_type:cases": {
+   "k": 1,
+   "n": 3,
+   "rate": 0.333,
+   "ci80": [
+    0.106,
+    0.679
+   ]
+  },
+  "audit_named_type:constant": {
+   "k": 1,
+   "n": 5,
+   "rate": 0.2,
+   "ci80": [
+    0.062,
+    0.486
+   ]
+  },
+  "audit_named_type:generalisation": {
+   "k": 2,
+   "n": 4,
+   "rate": 0.5,
+   "ci80": [
+    0.23,
+    0.77
+   ]
+  },
+  "audit_named_type:hypothesis": {
+   "k": 1,
+   "n": 5,
+   "rate": 0.2,
+   "ci80": [
+    0.062,
+    0.486
+   ]
+  },
+  "audit_named_type:inequality": {
+   "k": 5,
+   "n": 6,
+   "rate": 0.833,
+   "ci80": [
+    0.575,
+    0.949
+   ]
+  },
+  "audit_named_type:sign": {
+   "k": 3,
+   "n": 5,
+   "rate": 0.6,
+   "ci80": [
+    0.33,
+    0.82
+   ]
+  },
+  "clean_site_asserted": {
+   "k": 0,
+   "n": 28,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.055
+   ]
+  },
+  "clean_site_located": {
+   "k": 8,
+   "n": 28,
+   "rate": 0.286,
+   "ci80": [
+    0.191,
+    0.405
+   ]
+  },
+  "fa_clean_asserted": {
+   "k": 0,
+   "n": 6,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.215
+   ]
+  },
+  "fa_seeded_spurious": {
+   "k": 0,
+   "n": 18,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.084
+   ]
+  },
+  "fa_sham_asserted": {
+   "k": 0,
+   "n": 18,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.084
+   ]
+  },
+  "native_asserted": {
+   "k": 0,
+   "n": 6,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.215
+   ]
+  },
+  "sham_located": {
+   "k": 1,
+   "n": 18,
+   "rate": 0.056,
+   "ci80": [
+    0.017,
+    0.169
+   ]
+  },
+  "support_fa_clean_marks": {
+   "k": 1,
+   "n": 14,
+   "rate": 0.071,
+   "ci80": [
+    0.022,
+    0.211
+   ]
+  },
+  "support_flagged_quote": {
+   "k": 6,
+   "n": 10,
+   "rate": 0.6,
+   "ci80": [
+    0.401,
+    0.77
+   ]
+  },
+  "support_flagged_type:attribution": {
+   "k": 4,
+   "n": 4,
+   "rate": 1.0,
+   "ci80": [
+    0.709,
+    1.0
+   ]
+  },
+  "support_flagged_type:constant": {
+   "k": 1,
+   "n": 3,
+   "rate": 0.333,
+   "ci80": [
+    0.106,
+    0.679
+   ]
+  },
+  "support_flagged_type:generalisation": {
+   "k": 0,
+   "n": 2,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.451
+   ]
+  },
+  "support_flagged_type:sign": {
+   "k": 1,
+   "n": 1,
+   "rate": 1.0,
+   "ci80": [
+    0.378,
+    1.0
+   ]
+  },
+  "support_partial_quote": {
+   "k": 4,
+   "n": 10,
+   "rate": 0.4,
+   "ci80": [
+    0.23,
+    0.599
+   ]
+  },
+  "union_caught": {
+   "k": 19,
+   "n": 35,
+   "rate": 0.543,
+   "ci80": [
+    0.435,
+    0.646
+   ]
+  },
+  "unlocated_quotes": 0,
+  "audit_gaps_per_page": 6.46,
+  "union_caught_per_run": {
+   "1": {
+    "k": 19,
+    "n": 35,
+    "rate": 0.543,
+    "ci80": [
+     0.435,
+     0.646
+    ]
+   }
+  },
+  "missing_answers": 4,
+  "submits": {
+   "submits": 52,
+   "rejected": 8,
+   "never_accepted": 0
+  }
+ },
+ "AO": {
+  "audit_exact_of_named": {
+   "k": 11,
+   "n": 11,
+   "rate": 1.0,
+   "ci80": [
+    0.87,
+    1.0
+   ]
+  },
+  "audit_located_page": {
+   "k": 22,
+   "n": 28,
+   "rate": 0.786,
+   "ci80": [
+    0.672,
+    0.868
+   ]
+  },
+  "audit_named_page": {
+   "k": 11,
+   "n": 28,
+   "rate": 0.393,
+   "ci80": [
+    0.284,
+    0.514
+   ]
+  },
+  "audit_named_quote": {
+   "k": 2,
+   "n": 7,
+   "rate": 0.286,
+   "ci80": [
+    0.125,
+    0.528
+   ]
+  },
+  "audit_named_source": {
+   "k": 0,
+   "n": 1,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.622
+   ]
+  },
+  "audit_named_type:cases": {
+   "k": 1,
+   "n": 3,
+   "rate": 0.333,
+   "ci80": [
+    0.106,
+    0.679
+   ]
+  },
+  "audit_named_type:constant": {
+   "k": 2,
+   "n": 5,
+   "rate": 0.4,
+   "ci80": [
+    0.18,
+    0.67
+   ]
+  },
+  "audit_named_type:generalisation": {
+   "k": 2,
+   "n": 4,
+   "rate": 0.5,
+   "ci80": [
+    0.23,
+    0.77
+   ]
+  },
+  "audit_named_type:hypothesis": {
+   "k": 1,
+   "n": 5,
+   "rate": 0.2,
+   "ci80": [
+    0.062,
+    0.486
+   ]
+  },
+  "audit_named_type:inequality": {
+   "k": 5,
+   "n": 6,
+   "rate": 0.833,
+   "ci80": [
+    0.575,
+    0.949
+   ]
+  },
+  "audit_named_type:sign": {
+   "k": 0,
+   "n": 5,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.247
+   ]
+  },
+  "clean_site_asserted": {
+   "k": 0,
+   "n": 28,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.055
+   ]
+  },
+  "clean_site_located": {
+   "k": 5,
+   "n": 28,
+   "rate": 0.179,
+   "ci80": [
+    0.104,
+    0.288
+   ]
+  },
+  "fa_clean_asserted": {
+   "k": 0,
+   "n": 6,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.215
+   ]
+  },
+  "fa_seeded_spurious": {
+   "k": 1,
+   "n": 18,
+   "rate": 0.056,
+   "ci80": [
+    0.017,
+    0.169
+   ]
+  },
+  "fa_sham_asserted": {
+   "k": 0,
+   "n": 18,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.084
+   ]
+  },
+  "native_asserted": {
+   "k": 0,
+   "n": 6,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.215
+   ]
+  },
+  "sham_located": {
+   "k": 1,
+   "n": 18,
+   "rate": 0.056,
+   "ci80": [
+    0.017,
+    0.169
+   ]
+  },
+  "support_fa_clean_marks": {
+   "k": 1,
+   "n": 14,
+   "rate": 0.071,
+   "ci80": [
+    0.022,
+    0.211
+   ]
+  },
+  "support_flagged_quote": {
+   "k": 6,
+   "n": 10,
+   "rate": 0.6,
+   "ci80": [
+    0.401,
+    0.77
+   ]
+  },
+  "support_flagged_type:attribution": {
+   "k": 4,
+   "n": 4,
+   "rate": 1.0,
+   "ci80": [
+    0.709,
+    1.0
+   ]
+  },
+  "support_flagged_type:constant": {
+   "k": 1,
+   "n": 3,
+   "rate": 0.333,
+   "ci80": [
+    0.106,
+    0.679
+   ]
+  },
+  "support_flagged_type:generalisation": {
+   "k": 0,
+   "n": 2,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.451
+   ]
+  },
+  "support_flagged_type:sign": {
+   "k": 1,
+   "n": 1,
+   "rate": 1.0,
+   "ci80": [
+    0.378,
+    1.0
+   ]
+  },
+  "support_partial_quote": {
+   "k": 4,
+   "n": 10,
+   "rate": 0.4,
+   "ci80": [
+    0.23,
+    0.599
+   ]
+  },
+  "union_caught": {
+   "k": 18,
+   "n": 35,
+   "rate": 0.514,
+   "ci80": [
+    0.408,
+    0.619
+   ]
+  },
+  "unlocated_quotes": 0,
+  "audit_gaps_per_page": 5.92,
+  "union_caught_per_run": {
+   "1": {
+    "k": 18,
+    "n": 35,
+    "rate": 0.514,
+    "ci80": [
+     0.408,
+     0.619
+    ]
+   }
+  },
+  "missing_answers": 4,
+  "submits": {
+   "submits": 48,
+   "rejected": 4,
+   "never_accepted": 0
+  }
+ },
+ "AS": {
+  "audit_exact_of_named": {
+   "k": 8,
+   "n": 8,
+   "rate": 1.0,
+   "ci80": [
+    0.83,
+    1.0
+   ]
+  },
+  "audit_located_page": {
+   "k": 18,
+   "n": 28,
+   "rate": 0.643,
+   "ci80": [
+    0.522,
+    0.748
+   ]
+  },
+  "audit_named_page": {
+   "k": 8,
+   "n": 28,
+   "rate": 0.286,
+   "ci80": [
+    0.191,
+    0.405
+   ]
+  },
+  "audit_named_quote": {
+   "k": 0,
+   "n": 7,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.19
+   ]
+  },
+  "audit_named_source": {
+   "k": 0,
+   "n": 1,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.622
+   ]
+  },
+  "audit_named_type:cases": {
+   "k": 0,
+   "n": 3,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.354
+   ]
+  },
+  "audit_named_type:constant": {
+   "k": 1,
+   "n": 5,
+   "rate": 0.2,
+   "ci80": [
+    0.062,
+    0.486
+   ]
+  },
+  "audit_named_type:generalisation": {
+   "k": 1,
+   "n": 4,
+   "rate": 0.25,
+   "ci80": [
+    0.078,
+    0.567
+   ]
+  },
+  "audit_named_type:hypothesis": {
+   "k": 1,
+   "n": 5,
+   "rate": 0.2,
+   "ci80": [
+    0.062,
+    0.486
+   ]
+  },
+  "audit_named_type:inequality": {
+   "k": 4,
+   "n": 6,
+   "rate": 0.667,
+   "ci80": [
+    0.409,
+    0.852
+   ]
+  },
+  "audit_named_type:sign": {
+   "k": 1,
+   "n": 5,
+   "rate": 0.2,
+   "ci80": [
+    0.062,
+    0.486
+   ]
+  },
+  "clean_site_asserted": {
+   "k": 0,
+   "n": 28,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.055
+   ]
+  },
+  "clean_site_located": {
+   "k": 5,
+   "n": 28,
+   "rate": 0.179,
+   "ci80": [
+    0.104,
+    0.288
+   ]
+  },
+  "fa_clean_asserted": {
+   "k": 0,
+   "n": 6,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.215
+   ]
+  },
+  "fa_seeded_spurious": {
+   "k": 1,
+   "n": 18,
+   "rate": 0.056,
+   "ci80": [
+    0.017,
+    0.169
+   ]
+  },
+  "fa_sham_asserted": {
+   "k": 0,
+   "n": 18,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.084
+   ]
+  },
+  "native_asserted": {
+   "k": 0,
+   "n": 6,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.215
+   ]
+  },
+  "sham_located": {
+   "k": 1,
+   "n": 18,
+   "rate": 0.056,
+   "ci80": [
+    0.017,
+    0.169
+   ]
+  },
+  "support_fa_clean_marks": {
+   "k": 1,
+   "n": 14,
+   "rate": 0.071,
+   "ci80": [
+    0.022,
+    0.211
+   ]
+  },
+  "support_flagged_quote": {
+   "k": 6,
+   "n": 10,
+   "rate": 0.6,
+   "ci80": [
+    0.401,
+    0.77
+   ]
+  },
+  "support_flagged_type:attribution": {
+   "k": 4,
+   "n": 4,
+   "rate": 1.0,
+   "ci80": [
+    0.709,
+    1.0
+   ]
+  },
+  "support_flagged_type:constant": {
+   "k": 1,
+   "n": 3,
+   "rate": 0.333,
+   "ci80": [
+    0.106,
+    0.679
+   ]
+  },
+  "support_flagged_type:generalisation": {
+   "k": 0,
+   "n": 2,
+   "rate": 0.0,
+   "ci80": [
+    0.0,
+    0.451
+   ]
+  },
+  "support_flagged_type:sign": {
+   "k": 1,
+   "n": 1,
+   "rate": 1.0,
+   "ci80": [
+    0.378,
+    1.0
+   ]
+  },
+  "support_partial_quote": {
+   "k": 3,
+   "n": 10,
+   "rate": 0.3,
+   "ci80": [
+    0.154,
+    0.503
+   ]
+  },
+  "union_caught": {
+   "k": 14,
+   "n": 35,
+   "rate": 0.4,
+   "ci80": [
+    0.301,
+    0.508
+   ]
+  },
+  "unlocated_quotes": 0,
+  "audit_gaps_per_page": 4.0,
+  "union_caught_per_run": {
+   "1": {
+    "k": 14,
+    "n": 35,
+    "rate": 0.4,
+    "ci80": [
+     0.301,
+     0.508
+    ]
+   }
+  },
+  "missing_answers": 4,
+  "submits": {
+   "submits": 56,
+   "rejected": 12,
+   "never_accepted": 0
+  }
+ }
+}

@@ -1,0 +1,56 @@
+{
+  "symbols": [
+    {"symbol": "\\lambda", "anchor": {"kind": "here", "quote": "with exponent $\\lambda<1$"}},
+    {"symbol": "f", "anchor": {"kind": "here", "quote": "Let $f$ be the parameter of a call"}},
+    {"symbol": "m", "anchor": {"kind": "here", "quote": "Here $m$ is the factor by which the parameter grows"}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "Let $s$ be the number of subcalls of one call."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "\\Phi", "anchor": {"kind": "here", "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on"}},
+    {"symbol": "C", "anchor": {"kind": "here", "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"}},
+    {"symbol": "\\tau", "anchor": {"kind": "unbound", "quote": "An address interchange of $u$-bit fields costs $O(Vu^\\tau)$", "note": "The page gives only a range, tau below 1, and says it is fixed. No sentence says what it measures; the page never names it as the cost exponent of the interchange."}},
+    {"symbol": "\\Omega", "anchor": {"kind": "here", "quote": "Here $\\Omega$ is the bit count of one axis chunk"}},
+    {"symbol": "d", "anchor": {"kind": "here", "quote": "$d$ is the paper's axis-count parameter"}},
+    {"symbol": "\\eta", "anchor": {"kind": "unbound", "quote": "$\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$", "note": "The page gives only that eta is positive and fixed and bounds Omega by d^eta. It never says what eta measures. Earlier pages bind eta to other quantities, none of which fits here."}},
+    {"symbol": "\\vartheta", "anchor": {"kind": "here", "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"}},
+    {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Let $\\nu$ count the levels of unrolling"}},
+    {"symbol": "\\sigma", "anchor": {"kind": "unbound", "quote": "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$", "note": "The page only gives a range for sigma and says to choose it. It never says what sigma denotes. Earlier pages bind sigma to other quantities (a row index and an axis exponent), which do not fit here."}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation, covered by the profile's asymptotic analysis."}},
+    {"symbol": "\\log", "anchor": {"kind": "background", "note": "Logarithms in base m and base 2, covered by the profile's discrete mathematics and asymptotic analysis."}},
+    {"symbol": "\\sum", "anchor": {"kind": "background", "note": "Summation over a series, covered by the profile's limits, series and convergence (geometric series)."}},
+    {"symbol": "\\max", "anchor": {"kind": "background", "note": "Maximum of a set of numbers, basic discrete mathematics notation covered by the profile."}}
+  ],
+  "gaps": [
+    {
+      "term": "kernel (leaf routine)",
+      "quote": "Each leaf is handled by one kernel per chunk",
+      "kind": "term",
+      "note": "The page uses kernel for whatever handles each leaf but neither explains nor links it. The reader's linear algebra gives no such meaning, so the leaf cost O(f/m^nu) that the page asserts cannot be checked."
+    },
+    {
+      "term": "outside work as row additions",
+      "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.",
+      "kind": "step",
+      "note": "The only cost result given is the cited cost of an address interchange. The page never says why a row addition has the same cost, where the +1 comes from, or why the outside work consists only of a fixed number of row additions. Row operations are known from linear algebra, but tape-level data movement is not in the profile."
+    },
+    {
+      "term": "saving condition s/W>m",
+      "quote": "The saving exists because $s/W>m$.",
+      "kind": "step",
+      "note": "This contradicts the earlier s<Wm, which gives s/W<m. The later range log_m(s/W)<lambda<1 and the worked example (s/W = 3/2 < 2 = m) both need s/W<m. As written, the claimed saving is unsupported and false."
+    },
+    {
+      "term": "internal sum for every lambda",
+      "quote": "so the internal sum is at most a constant times $f^\\lambda$ for every $\\lambda>0$",
+      "kind": "step",
+      "note": "The geometric bound needs the ratio (s/W)/m^lambda below 1, which the page secures only for lambda above log_m(s/W). For smaller lambda the ratio exceeds 1 and the sum grows faster than f^lambda, so 'for every lambda>0' is unsupported and false."
+    },
+    {
+      "term": "leaf bound by f^lambda",
+      "quote": "and the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$",
+      "kind": "step",
+      "note": "From d at most f^(1/vartheta), the leaf bound is only O(f), not O(f^lambda). The final inequality needs d to be fixed or bounded by a smaller power of f. The page calls tau, eta and vartheta fixed but never says d is fixed."
+    }
+  ]
+}

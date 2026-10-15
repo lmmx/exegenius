@@ -1,0 +1,4 @@
+{"labels":[
+{"mark":1,"label":"unsupported","reason":"The quotation only says the loss ratios have exact values; it gives no formula 3h^2/C(h,3) and no value 100/539."},
+{"mark":2,"label":"unsupported","reason":"The quotation says displayed summands are nondegenerate; it says nothing about a bound on the number of smaller calls being the paper's decisive property."}
+]}

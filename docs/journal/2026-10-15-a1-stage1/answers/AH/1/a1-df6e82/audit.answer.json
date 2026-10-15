@@ -1,0 +1,76 @@
+{
+  "symbols": [
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"}},
+    {"symbol": "u", "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"}},
+    {"symbol": "V", "anchor": {"kind": "here", "quote": "let $V$ be the stored volume, the number of data units in the array"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation, covered by the profile's algorithms and complexity (big-O together with Omega and Theta)."}},
+    {"symbol": "\\leftarrow", "anchor": {"kind": "here", "quote": "where $\\leftarrow$ is assignment: the field on its left takes the value on its right"}},
+    {"symbol": "\\mu", "anchor": {"kind": "here", "quote": "where $\\mu$ is its number of rows"}},
+    {"symbol": "a", "anchor": {"kind": "here", "quote": "An edge matrix, the head's matrix minus the tail's, of rank $a$ costs $a$ smaller calls"}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "so $s$ is the sum of these ranks"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "role-streams"}},
+    {"symbol": "\\lambda", "anchor": {"kind": "here", "quote": "with $\\lambda=s/W$"}},
+    {"symbol": "F_d", "anchor": {"kind": "here", "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."}},
+    {"symbol": "d", "anchor": {"kind": "here", "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$"}},
+    {"symbol": "X", "anchor": {"kind": "page", "page": "subset-network"}},
+    {"symbol": "Y", "anchor": {"kind": "page", "page": "subset-network"}},
+    {"symbol": "x_S", "anchor": {"kind": "unbound", "quote": "a forward invocation from $X$ to $Y$ adds $x_S$ into $y_S$", "note": "Not bound by any earlier page or known concept as a symbol. Only the bank X is bound on subset-network, as the bank of scalars x_S indexed by triples, and the page does not say that x_S is the S-th scalar of X here."}},
+    {"symbol": "y_S", "anchor": {"kind": "unbound", "quote": "a forward invocation from $X$ to $Y$ adds $x_S$ into $y_S$", "note": "Not bound by any earlier page or known concept as a symbol. Only the bank Y is bound on subset-network, as the bank of scalars y_S indexed by triples, and the page does not say that y_S is the S-th scalar of Y here."}},
+    {"symbol": "W_{\\rm b}", "anchor": {"kind": "unbound", "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)", "note": "Only given as the value of W for the paper's explicit network, a cited object the page never describes. Nothing says what the subscript b denotes or what its number is."}},
+    {"symbol": "s_{\\rm b}", "anchor": {"kind": "unbound", "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)", "note": "Only given as the value of s for the paper's explicit network, a cited object the page never describes. Nothing says what the subscript b denotes or what its number is."}},
+    {"symbol": "\\ln", "anchor": {"kind": "background", "note": "Natural logarithm, covered by the profile's logarithm and exponential function."}},
+    {"symbol": "\\exp", "anchor": {"kind": "background", "note": "Exponential function, covered by the profile's logarithm and exponential function."}},
+    {"symbol": "+", "anchor": {"kind": "background", "note": "Addition, covered by the profile's binary arithmetic and linear algebra."}},
+    {"symbol": "-", "anchor": {"kind": "background", "note": "Subtraction, covered by the profile's binary arithmetic and linear algebra."}},
+    {"symbol": "=", "anchor": {"kind": "background", "note": "Equality, covered by the profile's discrete mathematics."}},
+    {"symbol": "<", "anchor": {"kind": "background", "note": "Strict inequality of real numbers, covered by the profile's limits and asymptotic bookkeeping."}},
+    {"symbol": ">", "anchor": {"kind": "background", "note": "Strict inequality of real numbers, covered by the profile's limits and asymptotic bookkeeping."}},
+    {"symbol": "\\ge", "anchor": {"kind": "background", "note": "Non-strict inequality of real numbers, covered by the profile's limits and asymptotic bookkeeping."}},
+    {"symbol": "\\le", "anchor": {"kind": "background", "note": "Non-strict inequality of real numbers, covered by the profile's limits and asymptotic bookkeeping."}},
+    {"symbol": "\\times", "anchor": {"kind": "background", "note": "Dimensions of a matrix, covered by the profile's linear algebra (matrices)."}},
+    {"symbol": "/", "anchor": {"kind": "background", "note": "Quotient, covered by the profile's basic arithmetic and fractions."}},
+    {"symbol": "\\cdot", "anchor": {"kind": "background", "note": "Multiplication, covered by the profile's binary arithmetic."}},
+    {"symbol": "\\cdots", "anchor": {"kind": "background", "note": "Sum notation in a geometric sum, covered by the profile's geometric series under single-variable calculus."}}
+  ],
+  "gaps": [
+    {
+      "term": "bound on the width of the network, mu < 2^20",
+      "quote": "Since $\\mu<2^{20}$, $\\ln\\mu<20$",
+      "kind": "step",
+      "note": "The page asserts mu < 2^20 with no citation, no derivation and no statement of which network it holds for. The reader cannot check the bound on ln mu that the choice of tau depends on."
+    },
+    {
+      "term": "mu at least 2",
+      "quote": "As $\\mu\\ge2$, $F_d=O(\\mu^{d\\tau})$",
+      "kind": "step",
+      "note": "mu is only introduced as the number of rows of a vertex matrix. Nothing on the page shows mu >= 2, and the step to O(mu^(d tau)) fails for mu = 1, so the reader cannot check it."
+    },
+    {
+      "term": "applying the explicit network's eta bound to the shear",
+      "quote": "For the explicit network the paper computes $\\eta>20\\cdot2^{-50}$ (cited)",
+      "kind": "step",
+      "note": "The cited eta bound is for the paper's explicit network, but the page never says that this is the bit network carrying the shear, or how its W_b and s_b values determine eta. The reader cannot see why the cited result applies where it is used."
+    },
+    {
+      "term": "linear-time outer updates",
+      "quote": "The outer two cost linear time.",
+      "kind": "step",
+      "note": "The page does not say linear in what, nor why subtracting u-bit fields over the whole array takes that time. The reader needs this cost to be absorbed into O(V u^tau) and cannot check it."
+    },
+    {
+      "term": "splitting and merging",
+      "quote": "Splitting, merging and gates are a fixed number of linear passes",
+      "kind": "term",
+      "note": "Splitting and merging are named as operations of the recursion but neither explained nor linked on this page, so the reader cannot tell what is being counted as a fixed number of linear passes."
+    },
+    {
+      "term": "forward, inverse, forward schedule (inverse invocation)",
+      "quote": "A forward, inverse, forward schedule of these invocations exchanges the two banks",
+      "kind": "step",
+      "note": "The term inverse invocation is not known to the reader and is not explained or linked. The page never says that its three updates are this schedule, and the outer updates it does give (D <- D-H and D <- H-D) are not invocations, so the reader cannot check the exchange claim or see how it bears on the interchange."
+    }
+  ]
+}

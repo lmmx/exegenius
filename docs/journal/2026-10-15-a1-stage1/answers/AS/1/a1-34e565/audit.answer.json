@@ -1,0 +1,36 @@
+{
+  "symbols": [
+    {"symbol": "R", "anchor": {"kind": "here", "quote": "Let $R$ be the number of fields in each vector"}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+    {"symbol": "q", "anchor": {"kind": "here", "quote": "Here $q$ is a fixed odd prime, the radix of the digits"}},
+    {"symbol": "b", "anchor": {"kind": "here", "quote": "$b$ is the number of radix-$q$ digits in each field"}},
+    {"symbol": "\\mathbb Z", "anchor": {"kind": "background", "note": "the integers and residues mod m are covered by discrete mathematics (modular arithmetic)"}},
+    {"symbol": "\\mathbb Q", "anchor": {"kind": "background", "note": "the rationals are standard notation covered by undergraduate discrete mathematics and linear algebra"}},
+    {"symbol": "M", "anchor": {"kind": "here", "quote": "For a rational $R\\times R$ matrix $M$"}},
+    {"symbol": "\\mu", "anchor": {"kind": "here", "quote": "where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"}},
+    {"symbol": "\\xi", "anchor": {"kind": "here", "quote": "where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"}},
+    {"symbol": "\\operatorname{rank}_{\\mathbb Q}M", "anchor": {"kind": "here", "quote": "Let $\\operatorname{rank}_{\\mathbb Q}M$ be the number of linearly independent rows of $M$"}},
+    {"symbol": "\\Pi", "anchor": {"kind": "here", "quote": "A partial permutation matrix $\\Pi$ is a 0-1 matrix with at most one 1 in each row and column"}},
+    {"symbol": "F_1", "anchor": {"kind": "here", "quote": "where $F_1$ and $F_2$ are lower-triangular rational matrices"}},
+    {"symbol": "F_2", "anchor": {"kind": "here", "quote": "where $F_1$ and $F_2$ are lower-triangular rational matrices"}},
+    {"symbol": "I", "anchor": {"kind": "background", "note": "identity matrix, covered by introductory linear algebra"}},
+    {"symbol": "\\sigma", "anchor": {"kind": "here", "quote": "at row $\\sigma$ and column $\\tau$"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "at row $\\sigma$ and column $\\tau$"}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."}},
+    {"symbol": "\\zeta", "anchor": {"kind": "here", "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "big-O notation is in the reader profile"}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "s_{\\rm b}", "anchor": {"kind": "here", "quote": "The interchange count of the network is $s_{\\rm b}$, the sum of their ranks."}},
+    {"symbol": "W_{\\rm b}", "anchor": {"kind": "here", "quote": "where $W_{\\rm b}$ is the number of wires"}},
+    {"symbol": "N", "anchor": {"kind": "here", "quote": "$N$ the number of negative source projections"}},
+    {"symbol": "L_{\\rm b}", "anchor": {"kind": "here", "quote": "$L_{\\rm b}$ the total dimension lost on decreasing edges"}}
+  ],
+  "gaps": [
+    {"term": "q divides no numerator or denominator", "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used.", "kind": "step", "note": "The page only requires that q not divide each denominator xi. It does not follow that q divides no numerator (a numerator may be divisible by q), nor that this holds for the matrices F_1, F_2 and their inverses, nor why the matrices used are finitely many."},
+    {"term": "negative source projections", "quote": "$N$ the number of negative source projections", "kind": "term", "note": "Negative source projection is never defined or linked, and the reader cannot tell what it counts."},
+    {"term": "each edge of the bit network carries a matrix", "quote": "Each edge of the bit network carries such a matrix.", "kind": "step", "note": "The page never states how the bit network's edges give R x R rational matrices, or why the shear is its endpoint operator. The reader cannot check the claim."},
+    {"term": "rank budget formula", "quote": "gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$", "kind": "step", "note": "The rank budget (dimension changes along edges, dimension lost on decreasing edges) is not explained, and the formula is not derived. The reader cannot check it from what the page gives."},
+    {"term": "recurrence saving", "quote": "which the recurrence turns into a saving of a power of the chunk width (the chunk length)", "kind": "step", "note": "The recurrence and the chunk width are not introduced on this page. The reader cannot see how fewer than R interchanges per wire becomes a power saving."}
+  ]
+}

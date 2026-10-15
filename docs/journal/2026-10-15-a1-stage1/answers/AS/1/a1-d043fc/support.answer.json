@@ -1,0 +1,8 @@
+{"labels":[
+{"mark":1,"label":"supported","reason":""},
+{"mark":2,"label":"supported","reason":""},
+{"mark":3,"label":"supported","reason":""},
+{"mark":4,"label":"supported","reason":""},
+{"mark":5,"label":"contradicted","reason":"The quotation says a forward invocation adds x_S to y_S (y_S becomes y_S+x_S), not that it subtracts x_S."},
+{"mark":6,"label":"partial","reason":"The quotation only says auxiliary values are restored; it does not say the schedule exchanges the two banks."}
+]}

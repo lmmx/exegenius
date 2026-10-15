@@ -1,0 +1,170 @@
+{
+  "symbols": [
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $W$ be the number of roles."
+      }
+    },
+    {
+      "symbol": "w",
+      "anchor": {
+        "kind": "here",
+        "quote": "an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$"
+      }
+    },
+    {
+      "symbol": "\\rho",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $\\rho$ be the permutation of roles that it applies"
+      }
+    },
+    {
+      "symbol": "\\varepsilon_w",
+      "anchor": {
+        "kind": "here",
+        "quote": "an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$"
+      }
+    },
+    {
+      "symbol": "\\ell",
+      "anchor": {
+        "kind": "here",
+        "quote": "row $\\ell$, the $\\ell$th row at a fixed prefix, goes to role $\\ell \\bmod W$"
+      }
+    },
+    {
+      "symbol": "\\bmod",
+      "anchor": {
+        "kind": "background",
+        "note": "Modular arithmetic (residues mod m), covered by the discrete mathematics the reader studied."
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $V$ be the number of bits stored after padding."
+      }
+    },
+    {
+      "symbol": "\\nu",
+      "anchor": {
+        "kind": "here",
+        "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$"
+      }
+    },
+    {
+      "symbol": "D_\\nu",
+      "anchor": {
+        "kind": "here",
+        "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$"
+      }
+    },
+    {
+      "symbol": "f",
+      "anchor": {
+        "kind": "here",
+        "quote": "The stored array at $\\nu$ is $D_\\nu f$ when the logical array is $f$."
+      }
+    },
+    {
+      "symbol": "G",
+      "anchor": {
+        "kind": "here",
+        "quote": "A pointwise linear gate $G$ combines its $p$ input arrays"
+      }
+    },
+    {
+      "symbol": "p",
+      "anchor": {
+        "kind": "here",
+        "quote": "A pointwise linear gate $G$ combines its $p$ input arrays"
+      }
+    },
+    {
+      "symbol": "\\alpha",
+      "anchor": {
+        "kind": "here",
+        "quote": "Along an edge from node $\\alpha$ to node $\\beta$"
+      }
+    },
+    {
+      "symbol": "\\beta",
+      "anchor": {
+        "kind": "here",
+        "quote": "Along an edge from node $\\alpha$ to node $\\beta$"
+      }
+    },
+    {
+      "symbol": "k",
+      "anchor": {
+        "kind": "background",
+        "note": "Final index of a finite sequence alpha_0, alpha_1, ..., alpha_k, standard indexing notation covered by discrete mathematics and induction. The page never says what k counts, but the sequence notation makes it the last index, one less than the number of nodes."
+      }
+    },
+    {
+      "symbol": "I",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $I$ is the identity operator, which leaves every array unchanged."
+      }
+    },
+    {
+      "symbol": "\\mathrm{source}",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"
+      }
+    },
+    {
+      "symbol": "\\mathrm{sink}",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"
+      }
+    },
+    {
+      "symbol": "\\in",
+      "anchor": {
+        "kind": "background",
+        "note": "Set membership, basic set notation covered by discrete mathematics."
+      }
+    },
+    {
+      "symbol": "^{-1}",
+      "anchor": {
+        "kind": "background",
+        "note": "Inverse of an invertible operator, covered by introductory linear algebra (matrices and inverses)."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "Frames pass through nonlinear gates",
+      "quote": "Frames therefore pass through every gate, linear or not.",
+      "kind": "step",
+      "note": "The commuting identity G(D f_1,...,D f_p) = D G(f_1,...,f_p) is derived only for pointwise linear gates, using linearity of D and scalar coefficients. The page gives no argument for a nonlinear gate, so the 'linear or not' conclusion does not follow from what is shown, and the telescoping that depends on it is unsupported for such gates."
+    },
+    {
+      "term": "Undoing the exchange",
+      "quote": "Undoing the exchange moves each output back to its input role",
+      "kind": "step",
+      "note": "The page never says what the undoing is (which wiring or operator performs it) or what frame it applies. It also never says what the 'correction' is that exchanged roles need, so the operator D_sink(rho(w)) D_source(w)^{-1} left at a non-scratch role cannot be checked to be undone or what remains."
+    },
+    {
+      "term": "Endpoint operator kept by every role",
+      "quote": "Every role keeps the endpoint operator (cited), auxiliary roles included.",
+      "kind": "step",
+      "note": "This cited claim describes how the network's own construction behaves for each role. The page does not say what 'keeps' means here, nor how the construction gives it or why it holds for auxiliary roles. The citation is the only support, and the page does not state the claim's content or role precisely enough to check it."
+    },
+    {
+      "term": "Role stream size V/(2W)",
+      "quote": "Each role stream then holds $V/(2W)$ bits (cited).",
+      "kind": "step",
+      "note": "The page presents the size as following ('then') from the padding and the distribution over W roles, but the factor 2 is not explained. The two banks are mentioned only in the opening, and the page never links them to the stream size. The claim is also never used, so the page does not say why it applies."
+    }
+  ]
+}

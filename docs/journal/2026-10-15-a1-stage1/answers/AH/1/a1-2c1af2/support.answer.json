@@ -1,0 +1,34 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "supported",
+      "reason": ""
+    },
+    {
+      "mark": 2,
+      "label": "partial",
+      "reason": "The quotation writes the multiplier as a plain m, not mu, and does not say m is the row count, so alone it does not establish the bound as s<W mu."
+    },
+    {
+      "mark": 3,
+      "label": "partial",
+      "reason": "The parameter values W=W_b and s=s_b are given, but the quotation has no subject (\"supplies these conditions\") and does not say it is the explicit network."
+    },
+    {
+      "mark": 4,
+      "label": "partial",
+      "reason": "The quotation gives a bound of 20*2^-50 on unnamed \"exact deficits\", not on eta, and does not tie it to the explicit network."
+    },
+    {
+      "mark": 5,
+      "label": "partial",
+      "reason": "The quotation gives the invocation's effect (y_S becomes y_S+x_S, other values unchanged) but omits the claim's qualifier \"for any initial auxiliary values\"."
+    },
+    {
+      "mark": 6,
+      "label": "partial",
+      "reason": "The quotation says the schedule restores every auxiliary value, but says nothing about the forward, inverse, forward schedule or about exchanging the two banks."
+    }
+  ]
+}

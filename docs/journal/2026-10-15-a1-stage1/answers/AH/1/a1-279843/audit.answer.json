@@ -1,0 +1,162 @@
+{
+  "symbols": [
+    {
+      "symbol": "u",
+      "anchor": {
+        "kind": "page",
+        "page": "address-fields"
+      }
+    },
+    {
+      "symbol": "H",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"
+      }
+    },
+    {
+      "symbol": "D",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"
+      }
+    },
+    {
+      "symbol": "\\mathbb F_2",
+      "anchor": {
+        "kind": "background",
+        "note": "The ring of residues mod 2, where addition and subtraction coincide; covered by modular arithmetic (residues mod m), rings and basic algebraic structures (residue ring), and binary representation and bit operations. Not the matrix F_2 bound on the address-shear page."
+      }
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited)."
+      }
+    },
+    {
+      "symbol": "O",
+      "anchor": {
+        "kind": "background",
+        "note": "Big-O notation, a known concept and part of asymptotic analysis in the reader's degree."
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "page",
+        "page": "address-fields"
+      }
+    },
+    {
+      "symbol": "\\leftarrow",
+      "anchor": {
+        "kind": "background",
+        "note": "Assignment arrow of update notation in pseudocode, standard in algorithm analysis; the displayed updates show the effect of each one."
+      }
+    },
+    {
+      "symbol": "\\mapsto",
+      "anchor": {
+        "kind": "background",
+        "note": "Function notation for a linear map, covered by vectors, matrices and inverses (linear map) in introductory linear algebra."
+      }
+    },
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "page",
+        "page": "linear-network-roles"
+      }
+    },
+    {
+      "symbol": "s",
+      "anchor": {
+        "kind": "page",
+        "page": "recursive-power-saving"
+      }
+    },
+    {
+      "symbol": "m",
+      "anchor": {
+        "kind": "page",
+        "page": "recursive-power-saving"
+      }
+    },
+    {
+      "symbol": "\\to",
+      "anchor": {
+        "kind": "background",
+        "note": "Limit notation, covered by limits, series and convergence (limits) in the calculus the degree requires."
+      }
+    },
+    {
+      "symbol": "k",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."
+      }
+    },
+    {
+      "symbol": "Q_k",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."
+      }
+    },
+    {
+      "symbol": "C",
+      "anchor": {
+        "kind": "page",
+        "page": "recursive-power-saving"
+      }
+    },
+    {
+      "symbol": "j",
+      "anchor": {
+        "kind": "background",
+        "note": "Summation index of the geometric sum; standard summation notation covered by summation in limits, series and convergence."
+      }
+    },
+    {
+      "symbol": "\\sum",
+      "anchor": {
+        "kind": "background",
+        "note": "Summation sign, covered by summation in limits, series and convergence."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "endpoint operator",
+      "quote": "the network's endpoint operator is the shear",
+      "kind": "term",
+      "note": "Not a known concept, and the page neither explains nor links it. The reader cannot tell which operator of the network is meant, or why the endpoint operator is the shear."
+    },
+    {
+      "term": "linear-time field updates",
+      "quote": "each combining $D$ with the earlier field $H$ in linear time",
+      "kind": "step",
+      "note": "The page asserts linear cost for combining D with H on the tapes but gives no argument. The reader has not studied tape-level data-movement algorithms, so cannot check that moving data between the two fields costs only linear time."
+    },
+    {
+      "term": "base case Q_0=O(1)",
+      "quote": "Q_0=O(1),\\qquad Q_k\\le \\frac{s}{W}\\,Q_{k-1}+C",
+      "kind": "step",
+      "note": "The base case is stated with no argument. The page never describes the level-0 interchange of one-bit fields, so the reader cannot check that it costs constant time per unit volume."
+    },
+    {
+      "term": "m at least 2",
+      "quote": "Both are $O(m^{k\\tau})$, since $m\\ge2$.",
+      "kind": "step",
+      "note": "The page never says m is an integer or at least 2. The binding on recursive-power-saving says only that m is a growth factor, so the reader cannot check m at least 2."
+    },
+    {
+      "term": "sign of tau in k = O(m^{k tau})",
+      "quote": "if $s/W\\le1$ it is at most $k$",
+      "kind": "step",
+      "note": "Bounding the sum by k gives O(m^{k tau}) only if tau is positive. The page fixes tau only by tau<1 and s/W<m^tau, so the sign of tau is not settled and the reader cannot check this step."
+    }
+  ]
+}

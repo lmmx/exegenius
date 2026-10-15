@@ -1,0 +1,1 @@
+{"labels":[{"mark":1,"label":"partial","reason":"The quotation only gives the O(V) cost for lower triangular transformations of H or D; the claim extends this to any invertible linear transformation, which the quotation does not state or imply."}]}

@@ -1,0 +1,53 @@
+{
+  "symbols": [
+    {"symbol": "\\lambda", "anchor": {"kind": "here", "quote": "a recursion's cost per bit can grow as a fixed power of its parameter, with exponent $\\lambda<1$"}},
+    {"symbol": "f", "anchor": {"kind": "here", "quote": "Let $f$ be the parameter of a call"}},
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "m", "anchor": {"kind": "here", "quote": "Here $m$ is the factor by which the parameter grows"}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "Let $s$ be the number of subcalls of one call."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "\\Phi", "anchor": {"kind": "here", "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."}},
+    {"symbol": "C", "anchor": {"kind": "here", "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation from asymptotic analysis in the undergraduate CS profile"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "An address interchange of $u$-bit fields costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed."}},
+    {"symbol": "\\Omega", "anchor": {"kind": "here", "quote": "Here $\\Omega$ is the bit count of one axis chunk"}},
+    {"symbol": "d", "anchor": {"kind": "here", "quote": "$d$ is the paper's axis-count parameter"}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "$\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"}},
+    {"symbol": "\\vartheta", "anchor": {"kind": "here", "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent and $f\\ge d^\\vartheta$ at an internal node"}},
+    {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Let $\\nu$ count the levels of unrolling"}},
+    {"symbol": "\\sigma", "anchor": {"kind": "here", "quote": "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$."}}
+  ],
+  "gaps": [
+    {
+      "term": "axis chunk / field digit",
+      "quote": "Here $\\Omega$ is the bit count of one axis chunk",
+      "kind": "term",
+      "note": "The page never says what an axis chunk (or a 'field digit', the unit the parameter f counts) is, so the reader cannot see why a field at parameter f has u = f Omega bits or what a leaf's 'chunks' are."
+    },
+    {
+      "term": "row addition cost from interchange cost",
+      "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.",
+      "kind": "step",
+      "note": "The cited result bounds an address interchange, but the page applies it to an address-field row addition without saying why a row addition costs the same (or where the +1 comes from), and without saying how citing an interchange bound inside the argument for interchanges is not circular."
+    },
+    {
+      "term": "kernel",
+      "quote": "Each leaf is handled by one kernel per chunk, at cost $O(f/m^\\nu)$.",
+      "kind": "term",
+      "note": "The page does not say what a kernel is or why handling a leaf with one kernel per chunk costs O(1) per bit per chunk, so the leaf cost O(f/m^nu) cannot be checked."
+    },
+    {
+      "term": "existence of a valid lambda",
+      "quote": "Taking $\\lambda$ with $\\log_m(s/W)<\\lambda<1$ makes the ratio below 1",
+      "kind": "step",
+      "note": "Earlier the outside-work bound needed lambda > tau(1+eta/vartheta); the page never shows tau(1+eta/vartheta) < 1 (eta is only said to be a fixed positive number), so the reader cannot tell that some lambda < 1 meets both constraints."
+    },
+    {
+      "term": "leaf cost bounded by f^lambda",
+      "quote": "the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$",
+      "kind": "step",
+      "note": "Using only f >= d^vartheta, the reader gets f^sigma d^{vartheta(1-sigma)} <= f, not f^lambda; the final inequality needs d^{vartheta(1-sigma)} <= f^{lambda-sigma}, a relation between f and d the page never states."
+    }
+  ]
+}

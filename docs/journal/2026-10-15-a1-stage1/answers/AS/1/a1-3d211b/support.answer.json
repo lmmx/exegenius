@@ -1,0 +1,8 @@
+{"labels":[
+{"mark":1,"label":"supported","reason":""},
+{"mark":2,"label":"supported","reason":""},
+{"mark":3,"label":"supported","reason":""},
+{"mark":4,"label":"partial","reason":"The quotation gives deficits greater than 20*2^-50, not 20*2^-40; it supports only the weaker bound, and the claimed 2^-40 bound is stronger."},
+{"mark":5,"label":"supported","reason":""},
+{"mark":6,"label":"partial","reason":"The quotation says only that auxiliary values are restored; it does not mention the forward, inverse, forward schedule or that the two banks are exchanged."}
+]}

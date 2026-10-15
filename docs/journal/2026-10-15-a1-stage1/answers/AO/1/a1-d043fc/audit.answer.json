@@ -1,0 +1,66 @@
+{
+  "symbols": [
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."}},
+    {"symbol": "u", "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."}},
+    {"symbol": "V", "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation, covered by the algorithms and complexity background."}},
+    {"symbol": "\\leftarrow", "anchor": {"kind": "here", "quote": "The updates are $D\\leftarrow D-H$, $H\\leftarrow H+D$, $D\\leftarrow H-D$, where $\\leftarrow$ is assignment: the field on its left takes the value on its right."}},
+    {"symbol": "\\mu", "anchor": {"kind": "here", "quote": "Each vertex holds a rational $\\mu\\times\\mu$ matrix, where $\\mu$ is its number of rows."}},
+    {"symbol": "a", "anchor": {"kind": "here", "quote": "An edge matrix, the head's matrix minus the tail's, of rank $a$ costs $a$ smaller calls, so $s$ is the sum of these ranks."}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "An edge matrix, the head's matrix minus the tail's, of rank $a$ costs $a$ smaller calls, so $s$ is the sum of these ranks."}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "role-streams"}},
+    {"symbol": "W_{\\rm b}", "anchor": {"kind": "here", "quote": "The bound needs $s<W\\mu$ (cited), and the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)."}},
+    {"symbol": "s_{\\rm b}", "anchor": {"kind": "here", "quote": "The bound needs $s<W\\mu$ (cited), and the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)."}},
+    {"symbol": "F_d", "anchor": {"kind": "here", "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."}},
+    {"symbol": "d", "anchor": {"kind": "here", "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."}},
+    {"symbol": "\\lambda", "anchor": {"kind": "here", "quote": "So $F_d\\le\\lambda F_{d-1}+O(1)$, with $\\lambda=s/W$, and unrolling gives $F_d=O(1+\\lambda+\\cdots+\\lambda^d)$."}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$, so $\\lambda=\\mu(1-\\eta)$."}},
+    {"symbol": "\\ln", "anchor": {"kind": "background", "note": "Natural logarithm, covered by the calculus background (logarithms and exponentials)."}},
+    {"symbol": "\\exp", "anchor": {"kind": "background", "note": "Exponential function, covered by the calculus background (logarithms and exponentials)."}},
+    {"symbol": "X", "anchor": {"kind": "page", "page": "subset-network"}},
+    {"symbol": "Y", "anchor": {"kind": "page", "page": "subset-network"}},
+    {"symbol": "x", "anchor": {"kind": "page", "page": "linear-network"}},
+    {"symbol": "y", "anchor": {"kind": "page", "page": "linear-network"}},
+    {"symbol": "S", "anchor": {"kind": "page", "page": "subset-network"}}
+  ],
+  "gaps": [
+    {
+      "term": "linear time of the outer updates",
+      "quote": "The outer two take linear time.",
+      "kind": "step",
+      "note": "The page never says how the array is laid out on the tapes or why rewriting D from H can be done in linear passes while the symmetric-looking middle update H+D needs the recursive network, so the reader cannot check this."
+    },
+    {
+      "term": "the paper's explicit network",
+      "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)",
+      "kind": "step",
+      "note": "The cited claim has no stated content: the page never describes the explicit network or gives the values of W_b and s_b, so the reader cannot tell what is being asserted or check that s<W mu holds for it."
+    },
+    {
+      "term": "smaller calls are width mu^{d-1} interchanges",
+      "quote": "At depth $d$, the $s$ smaller calls are interchanges of width $\\mu^{d-1}$ on streams of volume $V/W$",
+      "kind": "step",
+      "note": "The page never says how a width-mu^d address field is split into the mu rows the network acts on, nor why the smaller calls of a shear network are themselves interchanges whose width drops by a factor mu, so the recursion for F_d cannot be checked."
+    },
+    {
+      "term": "bound mu < 2^19",
+      "quote": "Since $\\mu<2^{19}$, $\\ln\\mu<20$",
+      "kind": "step",
+      "note": "Nothing earlier on the page gives the size of mu for the explicit network (nor that mu>=2, used later), so the reader cannot check the premise on which the choice tau = 1-2^{-50} rests."
+    },
+    {
+      "term": "shear as a forward invocation",
+      "quote": "The shear is such an invocation, with $D$ as $X$ and $H$ as $Y$, so it is exact for any initial auxiliary contents.",
+      "kind": "step",
+      "note": "The forward invocation is said to subtract x_S from y_S, which with D as X and H as Y gives H-D, but the shear replaces H by H+D; the page also never says how the u-bit address fields correspond to banks of scalars indexed by triples S, so the reader cannot reconcile the identification."
+    },
+    {
+      "term": "forward, inverse, forward schedule",
+      "quote": "A forward, inverse, forward schedule of these invocations exchanges the two banks and returns every auxiliary wire to its starting value (cited).",
+      "kind": "step",
+      "note": "The page does not say what the inverse invocation does or between which banks each invocation runs, and three invocations from X to Y and back would not exchange the banks; nor does it say how this schedule relates to the three updates, of which it said only the middle one uses the network, so the role of this cited claim is unclear."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "partial",
+      "reason": "The quotation gives the quantity V/W bits held and the verb 'contains', but its subject is missing; it does not say that each role stream is the thing holding the bits."
+    },
+    {
+      "mark": 2,
+      "label": "supported",
+      "reason": ""
+    },
+    {
+      "mark": 3,
+      "label": "supported",
+      "reason": ""
+    }
+  ]
+}

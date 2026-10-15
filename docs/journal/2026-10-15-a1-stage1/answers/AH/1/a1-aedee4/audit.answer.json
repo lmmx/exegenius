@@ -1,0 +1,75 @@
+{
+  "symbols": [
+    {"symbol": "h", "anchor": {"kind": "here", "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$"}},
+    {"symbol": "T", "anchor": {"kind": "here", "quote": "For a three-element subset $T$ of $[h]$, called a triple"}},
+    {"symbol": "\\mathcal T", "anchor": {"kind": "here", "quote": "and $\\mathcal T$ is the set of all triples"}},
+    {"symbol": "t_T", "anchor": {"kind": "here", "quote": "$t_T$ is its indicator vector"}},
+    {"symbol": "S", "anchor": {"kind": "here", "quote": "Call two triples $T,S$ *neighbors* when $|T\\cap S|=1$"}},
+    {"symbol": "g_T", "anchor": {"kind": "here", "quote": "Each triple $T$ carries a value $g_T$"}},
+    {"symbol": "\\mathbb F_2", "anchor": {"kind": "background", "note": "Integers mod 2 (modular arithmetic; XOR on bits). The profile covers modular arithmetic and binary representation."}},
+    {"symbol": "C_e", "anchor": {"kind": "here", "quote": "on a central wire $C_e$ for each element $e$"}},
+    {"symbol": "e", "anchor": {"kind": "here", "quote": "for each element $e$"}},
+    {"symbol": "A_{ST}", "anchor": {"kind": "here", "quote": "on an auxiliary wire $A_{ST}$ for each neighbor pair"}},
+    {"symbol": "\\sum", "anchor": {"kind": "background", "note": "Summation; sums and series in the calculus the degree requires."}},
+    {"symbol": "\\cap", "anchor": {"kind": "background", "note": "Set intersection; discrete mathematics."}},
+    {"symbol": "\\mathbb Q", "anchor": {"kind": "background", "note": "Rational numbers; the number system of basic linear algebra and calculus."}},
+    {"symbol": "I", "anchor": {"kind": "background", "note": "Identity matrix; introductory linear algebra (matrices and inverses)."}},
+    {"symbol": "J", "anchor": {"kind": "here", "quote": "where $J$ is the all-one matrix"}},
+    {"symbol": "\\perp", "anchor": {"kind": "background", "note": "Orthogonality; the profile's linear algebra includes orthogonality (known concept Vectors, matrices and inverses)."}},
+    {"symbol": "\\mathcal F", "anchor": {"kind": "here", "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$"}},
+    {"symbol": "\\otimes", "anchor": {"kind": "background", "note": "Tensor product and tensor power; covered by the known concept Tensor product of vector spaces, not by the profile's listed topics."}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "of dimension $D=h^3$ (the label space dimension)"}},
+    {"symbol": "U", "anchor": {"kind": "here", "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$"}},
+    {"symbol": "\\iota", "anchor": {"kind": "here", "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"}},
+    {"symbol": "U_\\iota", "anchor": {"kind": "here", "quote": "the label $U_\\iota$ is the line spanned by"}},
+    {"symbol": "\\oplus", "anchor": {"kind": "background", "note": "Direct sum of subspaces; introductory linear algebra."}},
+    {"symbol": "P_U", "anchor": {"kind": "here", "quote": "the projection $P_U$ onto $U$ along $U^\\perp$"}},
+    {"symbol": "P_V", "anchor": {"kind": "unbound", "quote": "$P_V-P_U$", "note": "Read by analogy as the projection onto V along V-perp; P_U is defined only for a label U, and V is never introduced as a label."}},
+    {"symbol": "V", "anchor": {"kind": "unbound", "quote": "If $U\\subseteq V$", "note": "Implicitly a subspace of F containing U, since P_V is a projection onto V. The page never says so, and an earlier page binds V to a stored bit volume, which does not fit here."}},
+    {"symbol": "\\dim", "anchor": {"kind": "background", "note": "Dimension of a vector space; introductory linear algebra."}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "Let $s$, the total rank over all edges, change meaning here"}},
+    {"symbol": "\\binom h3", "anchor": {"kind": "background", "note": "Binomial coefficient, counting 3-element subsets; discrete mathematics."}},
+    {"symbol": "N", "anchor": {"kind": "here", "quote": "Let $N=\\binom h3^3$, the number of indices $\\iota$"}},
+    {"symbol": "L", "anchor": {"kind": "here", "quote": "Let $L$ be the total dimension lost on decreasing edges"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "m", "anchor": {"kind": "here", "quote": "so the paper's dimension $m$ is $D$"}}
+  ],
+  "gaps": [
+    {
+      "term": "nondegenerate subspace",
+      "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$",
+      "kind": "term",
+      "note": "The page never defines nondegenerate and never says which bilinear form on F is meant (the tensor cube of the form on Q^h is never stated). The orthogonal complements U^perp and the projections P_U depend on it."
+    },
+    {
+      "term": "rank of P_V - P_U",
+      "quote": "so its rank is $\\dim V-\\dim U$",
+      "kind": "step",
+      "note": "The two identities do not by themselves give the rank. The reader must also show that F splits as (V cap U^perp) plus (U plus V^perp) and that dim(V cap U^perp) = dim V - dim U. That needs U and V to be nondegenerate, which the page never states, and V is never introduced."
+    },
+    {
+      "term": "invocation count and central-wire loss",
+      "quote": "Each of the $3\\binom h3^2$ invocations has $h$ central wires, each losing $h$ on a decreasing edge",
+      "kind": "step",
+      "note": "The page does not say what an invocation is, why there are 3 binom(h,3)^2 of them, or why each central wire loses exactly h dimensions on a decreasing edge. L = 3 binom(h,3)^2 h^2 rests on these counts."
+    },
+    {
+      "term": "signed total WD - 2N",
+      "quote": "So the signed total is $WD-2N$.",
+      "kind": "step",
+      "note": "The signed total is never defined. The sign of the source and sink contributions, the telescoping along wires, the cancellation of gate labels, and the number W of sinks (each of dimension D) are not explained on the page."
+    },
+    {
+      "term": "absolute values add 2L",
+      "quote": "Absolute values add $2L$.",
+      "kind": "step",
+      "note": "The page shows the rank formula only for an inclusion U contained in V. It never says that each edge's rank equals its absolute label change, or that a decreasing edge loses exactly the rank it is counted with, so the step from the signed total to s is unsupported."
+    },
+    {
+      "term": "the paper's decisive property",
+      "quote": "The paper's decisive property is a bound on the number of smaller calls, (cited)",
+      "kind": "step",
+      "note": "The page never states the bound or why s < WD, with the paper's m equal to D, is the property the paper needs. The cited claim's content and its role here are not stated, so it stands in for the argument that the construction saves a power."
+    }
+  ]
+}

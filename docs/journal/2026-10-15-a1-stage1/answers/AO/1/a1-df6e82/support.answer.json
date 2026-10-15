@@ -1,0 +1,10 @@
+{
+  "labels": [
+    {"mark": 1, "label": "supported", "reason": ""},
+    {"mark": 2, "label": "partial", "reason": "The quotation gives only the bare inequality s<Wm (with m, not mu); it does not say the bound needs it."},
+    {"mark": 3, "label": "supported", "reason": ""},
+    {"mark": 4, "label": "partial", "reason": "The quotation says two exact deficits exceed 20*2^-50 but does not identify them as eta or tie them to the explicit network."},
+    {"mark": 5, "label": "partial", "reason": "The quotation gives the effect of a forward invocation but not that it holds for any initial auxiliary values."},
+    {"mark": 6, "label": "partial", "reason": "The quotation supports only restoring auxiliary values; it says nothing about a forward, inverse, forward schedule or exchanging the two banks."}
+  ]
+}

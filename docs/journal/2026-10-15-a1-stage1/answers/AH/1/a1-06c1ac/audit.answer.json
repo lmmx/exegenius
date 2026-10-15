@@ -1,0 +1,62 @@
+{
+  "symbols": [
+    {"symbol": "\\lambda", "anchor": {"kind": "here", "quote": "with exponent $\\lambda<1$"}},
+    {"symbol": "f", "anchor": {"kind": "here", "quote": "Let $f$ be the parameter of a call"}},
+    {"symbol": "m", "anchor": {"kind": "here", "quote": "Here $m$ is the factor by which the parameter grows"}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "Let $s$ be the number of subcalls of one call."}},
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "\\Phi", "anchor": {"kind": "here", "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."}},
+    {"symbol": "C", "anchor": {"kind": "here", "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"}},
+    {"symbol": "\\tau", "anchor": {"kind": "unbound", "quote": "costs $O(Vu^\\tau)$", "note": "The only statement is a range: where tau<1 is fixed. The page never says tau is the cost exponent. The earlier tau bindings (address-shear column, phase-twist last-axis exponent, signed-packing coefficient index) denote other things, and this page does not say this tau is any of them."}},
+    {"symbol": "\\Omega", "anchor": {"kind": "here", "quote": "Here $\\Omega$ is the bit count of one axis chunk"}},
+    {"symbol": "d", "anchor": {"kind": "here", "quote": "$d$ is the paper's axis-count parameter"}},
+    {"symbol": "\\eta", "anchor": {"kind": "unbound", "quote": "$\\eta>0$ is fixed", "note": "The only statement is a range: eta>0 is fixed. The page never says eta denotes an exponent; it appears as one only in the use Omega <= d^eta. The earlier eta bindings denote other things."}},
+    {"symbol": "\\vartheta", "anchor": {"kind": "here", "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"}},
+    {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Let $\\nu$ count the levels of unrolling"}},
+    {"symbol": "\\sigma", "anchor": {"kind": "unbound", "quote": "Choose $\\sigma$ with", "note": "The only statement is a range constraint on sigma. The page never says what sigma counts; it is used as an exponent only in the later use m^(nu sigma). The earlier sigma bindings denote other things."}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation, a known concept; covered by the profile's asymptotic analysis."}},
+    {"symbol": "\\log", "anchor": {"kind": "background", "note": "Logarithms to base m and base 2, a known concept; covered by the profile's asymptotic analysis and binary representation."}},
+    {"symbol": "\\max", "anchor": {"kind": "background", "note": "Maximum of two reals, elementary arithmetic covered by the profile's calculus."}},
+    {"symbol": "\\sum", "anchor": {"kind": "background", "note": "Finite and infinite summation, covered by the profile's limits and convergence of series."}}
+  ],
+  "gaps": [
+    {
+      "term": "row addition cost",
+      "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.",
+      "kind": "step",
+      "note": "Stated as the cost of the outside work with no citation and no argument. The only cited bound is for an address interchange, and the page does not say how it yields this row-addition cost. Tape-level data movement is outside the reader's profile, so the reader cannot check it."
+    },
+    {
+      "term": "d at most f^(1/theta)",
+      "quote": "$d\\le f^{1/\\vartheta}$",
+      "kind": "step",
+      "note": "Presented as following from the fixed value of theta, but theta = 1/2 alone gives no bound on d in terms of f. The page cites nothing for it, so the reader cannot see where it comes from."
+    },
+    {
+      "term": "choice of lambda",
+      "quote": "Taking $\\lambda$ with $\\log_m(s/W)<\\lambda<1$ makes the ratio below 1",
+      "kind": "step",
+      "note": "The outside-work bound needed lambda > tau(1+eta/theta). The page never imposes this on the chosen lambda and never shows that a lambda meeting both constraints exists, so the reader cannot check that the internal-sum argument and the outside-work bound use the same lambda."
+    },
+    {
+      "term": "leaf cost bound",
+      "quote": "the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$",
+      "kind": "step",
+      "note": "Using the page's own d at most f^(1/theta), the leaf bound gives only O(f^sigma times f^(1-sigma)) = O(f), which is not O(f^lambda) because lambda < 1. Nothing on the page supplies the missing inequality, so this final step does not follow from what the page gives."
+    },
+    {
+      "term": "kernel",
+      "quote": "Each leaf is handled by one kernel per chunk",
+      "kind": "term",
+      "note": "Kernel is not defined or linked, so the reader does not know what a leaf routine does. Its cost O(f/m^nu) per chunk is also not explained."
+    },
+    {
+      "term": "axis chunk",
+      "quote": "the bit count of one axis chunk",
+      "kind": "term",
+      "note": "Chunk is not defined or linked, so the reader cannot tell how an axis is divided or what Omega counts."
+    }
+  ]
+}

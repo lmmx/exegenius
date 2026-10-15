@@ -1,0 +1,9 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "unsupported",
+      "reason": "The quotation only says the transformation uses one interchange. It says nothing about the cost, the stored bit volume V, or any complexity bound, so it does not address what the claim asserts."
+    }
+  ]
+}

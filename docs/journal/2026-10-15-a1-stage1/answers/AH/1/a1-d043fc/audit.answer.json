@@ -1,0 +1,53 @@
+{
+  "symbols": [
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"}},
+    {"symbol": "u", "anchor": {"kind": "here", "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"}},
+    {"symbol": "V", "anchor": {"kind": "here", "quote": "let $V$ be the stored volume, the number of data units in the array"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation, which the reader profile covers as big-O together with Omega and Theta."}},
+    {"symbol": "\\leftarrow", "anchor": {"kind": "here", "quote": "where $\\leftarrow$ is assignment: the field on its left takes the value on its right"}},
+    {"symbol": "\\mu", "anchor": {"kind": "here", "quote": "where $\\mu$ is its number of rows"}},
+    {"symbol": "a", "anchor": {"kind": "here", "quote": "of rank $a$ costs $a$ smaller calls"}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "so $s$ is the sum of these ranks"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "role-streams"}},
+    {"symbol": "W_{\\rm b}", "anchor": {"kind": "here", "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$"}},
+    {"symbol": "s_{\\rm b}", "anchor": {"kind": "here", "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$"}},
+    {"symbol": "F_d", "anchor": {"kind": "here", "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange"}},
+    {"symbol": "d", "anchor": {"kind": "here", "quote": "where $d$ is the recursion depth"}},
+    {"symbol": "\\lambda", "anchor": {"kind": "here", "quote": "with $\\lambda=s/W$"}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$"}},
+    {"symbol": "\\ln", "anchor": {"kind": "background", "note": "Natural logarithm, covered by the profile's logarithms and exponentials."}},
+    {"symbol": "\\exp", "anchor": {"kind": "background", "note": "Exponential function, covered by the profile's logarithms and exponentials."}},
+    {"symbol": "x_S", "anchor": {"kind": "unbound", "quote": "subtracts $x_S$ from $y_S$", "note": "The subset-network page binds only X and Y, as banks of scalars x_S and y_S. It does not list x_S as a bound symbol. The reader can infer it from the X binding, but no listed binding gives it."}},
+    {"symbol": "y_S", "anchor": {"kind": "unbound", "quote": "subtracts $x_S$ from $y_S$", "note": "The subset-network page binds only X and Y, as banks of scalars x_S and y_S. It does not list y_S as a bound symbol. The reader can infer it from the Y binding, but no listed binding gives it."}},
+    {"symbol": "X", "anchor": {"kind": "page", "page": "subset-network"}},
+    {"symbol": "Y", "anchor": {"kind": "page", "page": "subset-network"}}
+  ],
+  "gaps": [
+    {
+      "term": "butterfly input",
+      "quote": "$u$ is a butterfly input or a tail vertex",
+      "kind": "term",
+      "note": "Butterfly is a named concept the reader does not know. The page neither explains nor links it. It appears only in an aside about what u means on the dyadic page, so it does not block the interchange argument itself."
+    },
+    {
+      "term": "row bound on the explicit network",
+      "quote": "Since $\\mu<2^{19}$, $\\ln\\mu<20$",
+      "kind": "step",
+      "note": "Nothing on the page, and no citation, gives mu < 2^19 for the explicit network. The constant 20 in the following chain of inequalities depends on this bound, so the step cannot be checked from the page."
+    },
+    {
+      "term": "shear as a forward invocation",
+      "quote": "The shear is such an invocation, with $D$ as $X$ and $H$ as $Y$",
+      "kind": "step",
+      "note": "The forward invocation was defined to subtract x_S from y_S, which would make H become H - D. The shear replaces H by H + D. The page gives no sign convention or ring in which the two agree, so the reader cannot check that the shear is a forward invocation, or that it is exact."
+    },
+    {
+      "term": "three updates as the cited schedule",
+      "quote": "A forward, inverse, forward schedule of these invocations exchanges the two banks",
+      "kind": "step",
+      "note": "The page never says that the three updates D <- D - H, H <- H + D, D <- H - D are this schedule. Read with the stated subtraction convention, forward, inverse, forward gives D <- D - H on both outer steps, which does not match the third update D <- H - D. The reader cannot see how the cited schedule yields the interchange."
+    }
+  ]
+}

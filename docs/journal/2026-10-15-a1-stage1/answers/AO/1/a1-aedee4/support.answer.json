@@ -1,0 +1,14 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "unsupported",
+      "reason": "The quotation only says the loss ratios have exact values; it gives neither the formula 3h^2/C(h,3) nor the value 100/539."
+    },
+    {
+      "mark": 2,
+      "label": "partial",
+      "reason": "The quotation gives a bound on smaller calls (s<Wm) but does not say this is the paper's decisive property."
+    }
+  ]
+}

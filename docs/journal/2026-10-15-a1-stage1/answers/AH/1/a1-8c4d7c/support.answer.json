@@ -1,0 +1,14 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "partial",
+      "reason": "The quotation only says the loss ratios have exact values; it gives no value, so it does not support the specific value 100/539 or the derivation 3h^2/binom(h,3)."
+    },
+    {
+      "mark": 2,
+      "label": "unsupported",
+      "reason": "The quotation says every displayed summand is nondegenerate and says nothing about a bound on the number of smaller calls, which is what the claim asserts."
+    }
+  ]
+}

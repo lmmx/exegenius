@@ -1,0 +1,9 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "partial",
+      "reason": "The quotation covers only lower triangular transformations of H or D; the claim extends this to any invertible linear transformation, which the quotation does not address."
+    }
+  ]
+}

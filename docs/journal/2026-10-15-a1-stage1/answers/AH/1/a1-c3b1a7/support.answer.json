@@ -1,0 +1,14 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "partial",
+      "reason": "The quotation only says tau is fixed and below 1; it does not say tau is the exponent in O(Vu^tau)."
+    },
+    {
+      "mark": 2,
+      "label": "partial",
+      "reason": "The quotation gives s<Wm for the construction's smaller calls but does not say it holds for every linear network; the universal scope is missing."
+    }
+  ]
+}

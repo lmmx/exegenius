@@ -1,0 +1,26 @@
+{
+  "symbols": [
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "\\mathbb F_2", "anchor": {"kind": "background", "note": "The two-element field {0,1} with arithmetic mod 2, covered by the discrete mathematics and modular arithmetic in the profile."}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited)."}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation from asymptotic analysis in the profile."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "The network has $W$ roles, and each of its $s$ smaller calls acts on one role stream of volume $V/W$."}},
+    {"symbol": "m", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "Q_k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+    {"symbol": "k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+    {"symbol": "C", "anchor": {"kind": "here", "quote": "plus $O(V)$ outside work whose normalized cost is at most $C$"}},
+    {"symbol": "j", "anchor": {"kind": "background", "note": "The dummy summation index of the geometric sum, standard sigma notation from the series and summation the profile covers."}}
+  ],
+  "gaps": [
+    {
+      "term": "bound on s",
+      "quote": "For the bit network, $s<W$ (cited)",
+      "kind": "step",
+      "note": "The cited bound s<W contradicts the next clause, which says s equals Wm minus a positive constant (more than W for m>=2 unless the constant is large), and the linked result is named s<Wm. The reader cannot tell which bound holds; if s<W held, s/W<1 and the recursion would give a logarithmic factor rather than u^tau, so the stated reasoning to s/W<m cannot be checked."
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+{"at":1792027570583,"version":"0.6.0","event":"issued","task":"0235-audit-tape-interchange","kind":"audit","round":3}
+{"at":1792040905317,"version":"0.6.0","event":"submit","task":"0235-audit-tape-interchange","kind":"audit","attempt":1,"outcome":"rejected","message":"answer rejected:\n- `x_S`: `subset-network` is not an earlier page that binds it (see \"Symbols bound on earlier pages\")\n- `y_S`: `subset-network` is not an earlier page that binds it (see \"Symbols bound on earlier pages\")\nCopy quotes exactly from the page, and use only the bindings listed in the task."}
+{"at":1792040911218,"version":"0.6.0","event":"submit","task":"0235-audit-tape-interchange","kind":"audit","attempt":2,"outcome":"accepted"}

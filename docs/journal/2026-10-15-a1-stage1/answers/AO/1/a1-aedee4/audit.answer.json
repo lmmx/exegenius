@@ -1,0 +1,325 @@
+{
+  "symbols": [
+    {
+      "symbol": "h",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$ (the letter $h$ changes meaning here)."
+      }
+    },
+    {
+      "symbol": "T",
+      "anchor": {
+        "kind": "here",
+        "quote": "For a three-element subset $T$ of $[h]$, called a triple, $t_T$ is its indicator vector, and $\\mathcal T$ is the set of all triples."
+      }
+    },
+    {
+      "symbol": "t_T",
+      "anchor": {
+        "kind": "here",
+        "quote": "For a three-element subset $T$ of $[h]$, called a triple, $t_T$ is its indicator vector, and $\\mathcal T$ is the set of all triples."
+      }
+    },
+    {
+      "symbol": "\\mathcal T",
+      "anchor": {
+        "kind": "here",
+        "quote": "For a three-element subset $T$ of $[h]$, called a triple, $t_T$ is its indicator vector, and $\\mathcal T$ is the set of all triples."
+      }
+    },
+    {
+      "symbol": "S",
+      "anchor": {
+        "kind": "here",
+        "quote": "Call two triples $T,S$ *neighbors* when $|T\\cap S|=1$."
+      }
+    },
+    {
+      "symbol": "g_T",
+      "anchor": {
+        "kind": "here",
+        "quote": "Each triple $T$ carries a value $g_T$."
+      }
+    },
+    {
+      "symbol": "e",
+      "anchor": {
+        "kind": "here",
+        "quote": "Over $\\mathbb F_2$, gather puts the sum of the $g_T$ with $T\\ni e$ on a central wire $C_e$ for each element $e$, and scatter adds $\\sum_{e\\in S}C_e$ to the target $S$."
+      }
+    },
+    {
+      "symbol": "C_e",
+      "anchor": {
+        "kind": "here",
+        "quote": "Over $\\mathbb F_2$, gather puts the sum of the $g_T$ with $T\\ni e$ on a central wire $C_e$ for each element $e$, and scatter adds $\\sum_{e\\in S}C_e$ to the target $S$."
+      }
+    },
+    {
+      "symbol": "A_{ST}",
+      "anchor": {
+        "kind": "here",
+        "quote": "A copy of $g_T$ on an auxiliary wire $A_{ST}$ for each neighbor pair, injected back into $S$, adds $1$ exactly when $|S\\cap T|=1$."
+      }
+    },
+    {
+      "symbol": "I",
+      "anchor": {
+        "kind": "page",
+        "page": "linear-network-roles"
+      }
+    },
+    {
+      "symbol": "J",
+      "anchor": {
+        "kind": "here",
+        "quote": "Over $\\mathbb Q$, the bilinear form with matrix $I-J/9$, where $J$ is the all-one matrix (the letter $J$ changes meaning here), gives $\\langle t_T,t_S\\rangle=|T\\cap S|-1$; neighbors are orthogonal."
+      }
+    },
+    {
+      "symbol": "\\langle t_T,t_S\\rangle",
+      "anchor": {
+        "kind": "here",
+        "quote": "Over $\\mathbb Q$, the bilinear form with matrix $I-J/9$, where $J$ is the all-one matrix (the letter $J$ changes meaning here), gives $\\langle t_T,t_S\\rangle=|T\\cap S|-1$; neighbors are orthogonal."
+      }
+    },
+    {
+      "symbol": "\\mathcal F",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$, a space built from the [Tensor product of vector spaces](tensor-product-of-vector-spaces.md) of three copies of $\\mathbb Q^h$, of dimension $D=h^3$ (the label space dimension)."
+      }
+    },
+    {
+      "symbol": "D",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$, a space built from the [Tensor product of vector spaces](tensor-product-of-vector-spaces.md) of three copies of $\\mathbb Q^h$, of dimension $D=h^3$ (the label space dimension)."
+      }
+    },
+    {
+      "symbol": "U",
+      "anchor": {
+        "kind": "here",
+        "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$."
+      }
+    },
+    {
+      "symbol": "\\iota",
+      "anchor": {
+        "kind": "here",
+        "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$, the label $U_\\iota$ is the line spanned by $t_{T_1}\\otimes t_{T_2}\\otimes t_{T_3}$."
+      }
+    },
+    {
+      "symbol": "T_1",
+      "anchor": {
+        "kind": "here",
+        "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$, the label $U_\\iota$ is the line spanned by $t_{T_1}\\otimes t_{T_2}\\otimes t_{T_3}$."
+      }
+    },
+    {
+      "symbol": "T_2",
+      "anchor": {
+        "kind": "here",
+        "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$, the label $U_\\iota$ is the line spanned by $t_{T_1}\\otimes t_{T_2}\\otimes t_{T_3}$."
+      }
+    },
+    {
+      "symbol": "T_3",
+      "anchor": {
+        "kind": "here",
+        "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$, the label $U_\\iota$ is the line spanned by $t_{T_1}\\otimes t_{T_2}\\otimes t_{T_3}$."
+      }
+    },
+    {
+      "symbol": "U_\\iota",
+      "anchor": {
+        "kind": "here",
+        "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$, the label $U_\\iota$ is the line spanned by $t_{T_1}\\otimes t_{T_2}\\otimes t_{T_3}$."
+      }
+    },
+    {
+      "symbol": "P_U",
+      "anchor": {
+        "kind": "here",
+        "quote": "Give each gate or sink with label $U$ the projection $P_U$ onto $U$ along $U^\\perp$, and the source of index $\\iota$ the matrix $-P_{U_\\iota}$."
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "unbound",
+        "quote": "If $U\\subseteq V$",
+        "note": "V is never introduced: the reader can only guess it is another label (a subspace containing U, e.g. the label at the other end of an edge); on an earlier page V meant the stored bit volume."
+      }
+    },
+    {
+      "symbol": "s",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $s$, the total rank over all edges, change meaning here."
+      }
+    },
+    {
+      "symbol": "N",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $N=\\binom h3^3$, the number of indices $\\iota$ (the letter $N$ changes meaning here)."
+      }
+    },
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "page",
+        "page": "linear-network-roles"
+      }
+    },
+    {
+      "symbol": "L",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $L$ be the total dimension lost on decreasing edges (the letter $L$ changes meaning here)."
+      }
+    },
+    {
+      "symbol": "m",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\mathcal F$ is the fixed space, so the paper's dimension $m$ is $D$."
+      }
+    },
+    {
+      "symbol": "\\mathbb F_2",
+      "anchor": {
+        "kind": "background",
+        "note": "Integers modulo 2 (modular arithmetic in discrete mathematics)."
+      }
+    },
+    {
+      "symbol": "\\mathbb Q",
+      "anchor": {
+        "kind": "background",
+        "note": "The rational numbers, standard undergraduate notation."
+      }
+    },
+    {
+      "symbol": "\\binom",
+      "anchor": {
+        "kind": "background",
+        "note": "Binomial coefficient, from discrete mathematics."
+      }
+    },
+    {
+      "symbol": "\\sum",
+      "anchor": {
+        "kind": "background",
+        "note": "Summation notation, from the calculus/discrete mathematics background."
+      }
+    },
+    {
+      "symbol": "\\cap",
+      "anchor": {
+        "kind": "background",
+        "note": "Set intersection, from discrete mathematics."
+      }
+    },
+    {
+      "symbol": "\\otimes",
+      "anchor": {
+        "kind": "background",
+        "note": "Tensor product, a known concept (Tensor product of vector spaces)."
+      }
+    },
+    {
+      "symbol": "\\perp",
+      "anchor": {
+        "kind": "background",
+        "note": "Orthogonality / orthogonal complement, from introductory linear algebra."
+      }
+    },
+    {
+      "symbol": "\\oplus",
+      "anchor": {
+        "kind": "background",
+        "note": "Direct sum of subspaces, from introductory linear algebra."
+      }
+    },
+    {
+      "symbol": "\\dim",
+      "anchor": {
+        "kind": "background",
+        "note": "Dimension of a subspace, from introductory linear algebra."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "bilinear form with a matrix",
+      "kind": "term",
+      "quote": "the bilinear form with matrix $I-J/9$",
+      "note": "The reader knows dot products but not bilinear forms; the page never says that the form is <x,y> = x^T (I-J/9) y, so the reader cannot check that it gives |T∩S|-1 or what orthogonality, U^perp and projections 'along U^perp' mean afterwards."
+    },
+    {
+      "term": "nondegenerate subspace",
+      "kind": "term",
+      "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$.",
+      "note": "Nondegeneracy of a subspace with respect to a bilinear form is not in the reader's background and is not explained; the reader cannot see why it is required (it is what makes F = U ⊕ U^perp so that P_U exists)."
+    },
+    {
+      "term": "the form on the tensor space F",
+      "kind": "step",
+      "quote": "the projection $P_U$ onto $U$ along $U^\\perp$",
+      "note": "The form is defined only on Q^h, but orthogonal complements and projections are taken in F = (Q^h)^{⊗3}; the page never states the induced form on F (e.g. the product of the factor forms), so U^perp, U_iota^perp and P_U in F are undefined for the reader."
+    },
+    {
+      "term": "switch from F_2 coefficients to Q labels",
+      "kind": "step",
+      "quote": "Over $\\mathbb Q$, the bilinear form",
+      "note": "The cancellation is computed over F_2, but labels, projections and ranks are taken over Q, where the same coefficients (2 for intersections of size 1 or 2) would not cancel; the page never says how the F_2 network and the rational matrices whose ranks are counted are related."
+    },
+    {
+      "term": "label growth along a side wire",
+      "kind": "step",
+      "quote": "Along a side wire, a label containing $t_T$ may grow to $t_S^\\perp$, since $t_T\\perp t_S$, adding $h-2$ dimensions.",
+      "note": "The page never states the rule for how labels may change along wires, never says what a 'side wire' is, and labels live in F while t_T and t_S^perp live in Q^h; the reader cannot check why orthogonality permits the growth or where the count h-2 comes from."
+    },
+    {
+      "term": "matrices on edges",
+      "kind": "step",
+      "quote": "Let $s$, the total rank over all edges, change meaning here.",
+      "note": "Nodes are given projections, but the page never says which matrix an edge carries (implicitly the difference of its endpoint projections); without that the reader cannot connect edge ranks to label dimension changes or check that the first edge out of a source has matrix 2P_{U_iota}."
+    },
+    {
+      "term": "rank costs smaller calls",
+      "kind": "step",
+      "quote": "Each unit of rank costs one smaller call. (cited)",
+      "note": "This cited claim carries the whole purpose of the construction, but the page never says what a 'smaller call' is, which recursion makes it, or why the rank of an edge matrix determines the number of calls."
+    },
+    {
+      "term": "signed total WD-2N",
+      "kind": "step",
+      "quote": "So the signed total is $WD-2N$.",
+      "note": "The reader is not told where each wire starts and ends, what label a non-source wire starts with, why sinks have label F of dimension D, why the sinks receiving sources have label U_iota^perp, or why gate labels cancel, so the telescoping sum cannot be checked."
+    },
+    {
+      "term": "number of invocations and losses",
+      "kind": "step",
+      "quote": "Each of the $3\\binom h3^2$ invocations has $h$ central wires",
+      "note": "The page never describes how the gather/scatter construction is applied inside F (e.g. once per tensor coordinate for each choice of the other two triples), so the reader cannot check the count 3·C(h,3)^2 of invocations, or why each central wire loses exactly h dimensions on a decreasing edge."
+    },
+    {
+      "term": "fixed space and the paper's m",
+      "kind": "step",
+      "quote": "Here $\\mathcal F$ is the fixed space, so the paper's dimension $m$ is $D$.",
+      "note": "'Fixed space' is not explained or linked, and the role of the paper's dimension m is not said, so the reader cannot see why s<WD is the inequality that matters."
+    },
+    {
+      "term": "decisive bound on smaller calls",
+      "kind": "step",
+      "quote": "The paper's decisive property is a bound on the number of smaller calls, (cited).",
+      "note": "The bound's content is not stated (presumably s<Wm), nor how it makes the recursion 'save a power'; the page does not link the Recursive power saving page, so the reader cannot tell what the computation was for."
+    }
+  ]
+}

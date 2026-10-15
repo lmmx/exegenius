@@ -1,0 +1,14 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "partial",
+      "reason": "The quotation says loss ratios have exact values, which supports the exactness part, but it gives neither the formula 3h^2/C(h,3) nor the value 100/539."
+    },
+    {
+      "mark": 2,
+      "label": "partial",
+      "reason": "The quotation gives an inequality bounding the number of smaller calls (s < Wm), which supports the bound part; it does not say this bound is the paper's decisive property."
+    }
+  ]
+}

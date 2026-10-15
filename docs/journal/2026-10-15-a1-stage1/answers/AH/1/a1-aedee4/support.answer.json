@@ -1,0 +1,14 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "unsupported",
+      "reason": "The quotation only says the loss ratios have exact values; it gives no value, no formula 3h^2/C(h,3), and no equality to 100/539, so it does not address the specific value the claim asserts."
+    },
+    {
+      "mark": 2,
+      "label": "partial",
+      "reason": "The quotation gives a bound s<Wm on the number of smaller calls, which matches the bound part of the claim, but nothing in it says this bound is the paper's decisive property."
+    }
+  ]
+}

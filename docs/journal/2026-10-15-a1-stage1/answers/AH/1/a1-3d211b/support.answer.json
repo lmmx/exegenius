@@ -1,0 +1,34 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "supported",
+      "reason": ""
+    },
+    {
+      "mark": 2,
+      "label": "partial",
+      "reason": "The quotation writes the factor as m (s<Wm), not μ; it establishes s<W·m, so it supports the claim's bound only if m is the same quantity as μ, which the quotation does not show."
+    },
+    {
+      "mark": 3,
+      "label": "supported",
+      "reason": ""
+    },
+    {
+      "mark": 4,
+      "label": "partial",
+      "reason": "The quotation gives only the weaker bound η > 20·2^{-50}; it does not establish the claimed stronger bound η > 20·2^{-40}."
+    },
+    {
+      "mark": 5,
+      "label": "supported",
+      "reason": ""
+    },
+    {
+      "mark": 6,
+      "label": "partial",
+      "reason": "The quotation supports only the return of every auxiliary value to its start; it says nothing about the forward, inverse, forward schedule or about exchanging the two banks."
+    }
+  ]
+}

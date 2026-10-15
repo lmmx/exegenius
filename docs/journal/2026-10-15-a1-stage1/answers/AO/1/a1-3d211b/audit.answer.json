@@ -1,0 +1,210 @@
+{
+ "symbols": [
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation, part of the algorithms and complexity background in the reader profile."
+   }
+  },
+  {
+   "symbol": "\\leftarrow",
+   "anchor": {
+    "kind": "here",
+    "quote": "The updates are $D\\leftarrow D-H$, $H\\leftarrow H+D$, $D\\leftarrow H-D$, where $\\leftarrow$ is assignment: the field on its left takes the value on its right."
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each vertex holds a rational $\\mu\\times\\mu$ matrix, where $\\mu$ is its number of rows."
+   }
+  },
+  {
+   "symbol": "a",
+   "anchor": {
+    "kind": "here",
+    "quote": "An edge matrix, the head's matrix minus the tail's, of rank $a$ costs $a$ smaller calls, so $s$ is the sum of these ranks."
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "An edge matrix, the head's matrix minus the tail's, of rank $a$ costs $a$ smaller calls, so $s$ is the sum of these ranks."
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "role-streams"
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "The bound needs $s<W\\mu$ (cited), and the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)."
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "The bound needs $s<W\\mu$ (cited), and the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)."
+   }
+  },
+  {
+   "symbol": "F_d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "So $F_d\\le\\lambda F_{d-1}+O(1)$, with $\\lambda=s/W$, and unrolling gives $F_d=O(1+\\lambda+\\cdots+\\lambda^d)$."
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$, so $\\lambda=\\mu(1-\\eta)$."
+   }
+  },
+  {
+   "symbol": "\\ln",
+   "anchor": {
+    "kind": "background",
+    "note": "Natural logarithm, from the single-variable calculus in the reader profile."
+   }
+  },
+  {
+   "symbol": "\\exp",
+   "anchor": {
+    "kind": "background",
+    "note": "Exponential function, from the single-variable calculus in the reader profile."
+   }
+  },
+  {
+   "symbol": "X",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "Y",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "x",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network"
+   }
+  },
+  {
+   "symbol": "y",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network"
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "Outer updates take linear time",
+   "kind": "step",
+   "quote": "The outer two cost linear time.",
+   "note": "The page never says how the array's address fields are laid out on the tapes. D<-D-H and D<-H-D have the same form as the shear: one field is shifted by the other. So the reader cannot see why those two are linear passes while H<-H+D needs the recursive network."
+  },
+  {
+   "term": "Why lambda < mu is not enough",
+   "kind": "step",
+   "quote": "The bound needs $\\lambda<\\mu^{\\tau}$ for one fixed $\\tau<1$, not merely $\\lambda<\\mu$.",
+   "note": "For one fixed network, lambda and mu are constants, so lambda<mu already gives lambda=mu^tau with tau=log_mu(lambda)<1. The page does not say why lambda<mu alone would not be enough."
+  },
+  {
+   "term": "Bound mu < 2^20",
+   "kind": "step",
+   "quote": "Since $\\mu<2^{20}$",
+   "note": "The page never gives mu for the explicit network or any bound on it, so the reader has no source for mu<2^20 (nor for the later mu>=2)."
+  },
+  {
+   "term": "Inequality chain for mu^(-2^-50)",
+   "kind": "step",
+   "quote": "$\\mu^{-2^{-50}}=\\exp(-2^{-50}\\ln\\mu)<1-20\\cdot2^{-50}>1-\\eta$",
+   "note": "From ln mu<20, exp(-2^-50 ln mu) > exp(-20*2^-50) >= 1-20*2^-50, so the first inequality points the wrong way. A chain a<b>c also says nothing about how a compares with 1-eta. The step that is needed, mu^(-2^-50) > 1-20*2^-50 > 1-eta (using eta>20*2^-40), and from it mu^tau > mu(1-eta) = lambda, is not what the page writes."
+  },
+  {
+   "term": "Shear as a subset-network forward invocation",
+   "kind": "step",
+   "quote": "The shear is such an invocation, with $D$ as $X$ and $H$ as $Y$, so it is exact for any initial auxiliary contents.",
+   "note": "X and Y are the subset network's banks of scalars x_S and y_S, indexed by triples S. The page never says that the shear's bit network or 'the paper's explicit network' is that network. It also never says how the u-bit address fields D and H become banks indexed by triples. So the reader cannot check that the shear is such an invocation."
+  },
+  {
+   "term": "Forward, inverse, forward schedule",
+   "kind": "step",
+   "quote": "A forward, inverse, forward schedule of these invocations exchanges the two banks and returns every auxiliary wire to its starting value (cited).",
+   "note": "The page never says what an inverse invocation does, and the known concept covers only forward invocation. So the reader cannot see why these three invocations swap the banks. The page also does not square this with its earlier reduction, where only the middle update is the shear and the outer two are linear passes."
+  }
+ ]
+}

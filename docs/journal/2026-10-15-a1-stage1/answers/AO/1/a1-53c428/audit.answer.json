@@ -1,0 +1,167 @@
+{
+ "symbols": [
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "a recursion's cost per bit can grow as a fixed power of its parameter, with exponent $\\lambda<1$"
+   }
+  },
+  {
+   "symbol": "f",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $f$ be the parameter of a call"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $m$ is the factor by which the parameter grows"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$ be the number of subcalls of one call."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "\\Phi",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."
+   }
+  },
+  {
+   "symbol": "C",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed"
+   }
+  },
+  {
+   "symbol": "\\Omega",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $\\Omega$ is the bit count of one axis chunk"
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "$d$ is the paper's axis-count parameter"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "$\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"
+   }
+  },
+  {
+   "symbol": "\\vartheta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"
+   }
+  },
+  {
+   "symbol": "\\nu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\nu$ count the levels of unrolling"
+   }
+  },
+  {
+   "symbol": "\\sigma",
+   "anchor": {
+    "kind": "here",
+    "quote": "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation, named in the reader profile (asymptotic analysis)."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "sign of the outside-work term in the recurrence",
+   "kind": "step",
+   "quote": "\\Phi(mf)\\le\\frac{s}{W}\\Phi(f)-C(mf)^\\lambda",
+   "note": "The page says the cost is the subcalls' contribution plus outside work of at most C(mf)^lambda, which gives Phi(mf) <= (s/W)Phi(f) + C(mf)^lambda. The displayed inequality subtracts the outside work, which does not follow, and the later unrolled sum adds these costs, so the reader cannot reconcile the two."
+  },
+  {
+   "term": "role of the cited interchange cost",
+   "kind": "step",
+   "quote": "An address interchange of $u$-bit fields costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed.",
+   "note": "The recursion on this page is itself the procedure for an address interchange (f is the parameter of an interchange call), yet its outside work is bounded with a cited cost for address interchanges. The page does not say whether this is an earlier, separate result, an induction hypothesis, or why it may be used here, so the cited claim stands in for how the recursion works."
+  },
+  {
+   "term": "cost of a row addition",
+   "kind": "step",
+   "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.",
+   "note": "The page only states the cost of an address interchange; it never says how a row addition on address fields is carried out or how it reduces to interchanges, so the reader cannot obtain O(V(u^tau+1)) for a row addition."
+  },
+  {
+   "term": "existence of an exponent below 1",
+   "kind": "step",
+   "quote": "which is $O(f^\\lambda)$ when $\\lambda>\\tau(1+\\eta/\\vartheta)$",
+   "note": "The page needs lambda < 1 and lambda > tau(1+eta/vartheta) = tau(1+2 eta), but eta > 0 is only said to be fixed and tau < 1; nothing on the page ensures tau(1+2 eta) < 1, so the reader cannot check that a suitable lambda exists."
+  },
+  {
+   "term": "condition on lambda for the ratio",
+   "kind": "step",
+   "quote": "Taking $\\lambda$ with $\\lambda<\\log_m(s/W)<1$ makes the ratio below 1",
+   "note": "The ratio (s/W)/m^lambda is below 1 exactly when m^lambda > s/W, i.e. lambda > log_m(s/W). With lambda < log_m(s/W) as stated the ratio exceeds 1 and the sum diverges; this also contradicts the example (lambda = 0.8 > 0.585) and the later choice log_m(s/W) <= sigma < lambda."
+  },
+  {
+   "term": "kernel",
+   "kind": "term",
+   "quote": "Each leaf is handled by one kernel per chunk",
+   "note": "The page never says what a kernel is or what it does at a leaf, nor links it, so the reader cannot see why a leaf costs O(f/m^nu) per bit."
+  },
+  {
+   "term": "leaf cost bounded by f^lambda",
+   "kind": "step",
+   "quote": "and the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$",
+   "note": "From u < d^vartheta the reader gets f^sigma d^{vartheta(1-sigma)}, but the only relation the page gives between d and f is f >= d^vartheta, which bounds this by f^sigma f^{1-sigma} = f, not f^lambda. The final inequality needs a bound on d in terms of f that the page does not give."
+  }
+ ]
+}

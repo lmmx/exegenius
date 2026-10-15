@@ -1,0 +1,287 @@
+{
+  "symbols": [
+    {
+      "symbol": "H",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"
+      }
+    },
+    {
+      "symbol": "D",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"
+      }
+    },
+    {
+      "symbol": "u",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "here",
+        "quote": "and let $V$ be the stored volume, the number of data units in the array"
+      }
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {
+        "kind": "here",
+        "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."
+      }
+    },
+    {
+      "symbol": "O",
+      "anchor": {
+        "kind": "background",
+        "note": "Big-O notation, named in the reader profile under algorithms and complexity."
+      }
+    },
+    {
+      "symbol": "\\leftarrow",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $\\leftarrow$ is assignment: the field on its left takes the value on its right"
+      }
+    },
+    {
+      "symbol": "\\mu",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $\\mu$ is its number of rows"
+      }
+    },
+    {
+      "symbol": "\\times",
+      "anchor": {
+        "kind": "background",
+        "note": "Dimensions of a square matrix, covered by undergraduate linear algebra (matrices)."
+      }
+    },
+    {
+      "symbol": "a",
+      "anchor": {
+        "kind": "here",
+        "quote": "of rank $a$ costs $a$ smaller calls"
+      }
+    },
+    {
+      "symbol": "s",
+      "anchor": {
+        "kind": "here",
+        "quote": "so $s$ is the sum of these ranks"
+      }
+    },
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "page",
+        "page": "role-streams"
+      }
+    },
+    {
+      "symbol": "W_{\\rm b}",
+      "anchor": {
+        "kind": "here",
+        "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$"
+      }
+    },
+    {
+      "symbol": "s_{\\rm b}",
+      "anchor": {
+        "kind": "here",
+        "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$"
+      }
+    },
+    {
+      "symbol": "F_d",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange"
+      }
+    },
+    {
+      "symbol": "d",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $d$ is the recursion depth"
+      }
+    },
+    {
+      "symbol": "\\lambda",
+      "anchor": {
+        "kind": "here",
+        "quote": "with $\\lambda=s/W$"
+      }
+    },
+    {
+      "symbol": "\\eta",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$"
+      }
+    },
+    {
+      "symbol": "\\ln",
+      "anchor": {
+        "kind": "background",
+        "note": "Natural logarithm, covered by the single-variable calculus background (logarithms and exponentials)."
+      }
+    },
+    {
+      "symbol": "\\exp",
+      "anchor": {
+        "kind": "background",
+        "note": "Exponential function, covered by the single-variable calculus background (logarithms and exponentials)."
+      }
+    },
+    {
+      "symbol": "x",
+      "anchor": {
+        "kind": "page",
+        "page": "linear-network"
+      }
+    },
+    {
+      "symbol": "y",
+      "anchor": {
+        "kind": "page",
+        "page": "linear-network"
+      }
+    },
+    {
+      "symbol": "S",
+      "anchor": {
+        "kind": "page",
+        "page": "subset-network"
+      }
+    },
+    {
+      "symbol": "X",
+      "anchor": {
+        "kind": "page",
+        "page": "subset-network"
+      }
+    },
+    {
+      "symbol": "Y",
+      "anchor": {
+        "kind": "page",
+        "page": "subset-network"
+      }
+    },
+    {
+      "symbol": "+",
+      "anchor": {
+        "kind": "background",
+        "note": "Addition of integers, bits and vectors, covered by discrete mathematics and linear algebra."
+      }
+    },
+    {
+      "symbol": "-",
+      "anchor": {
+        "kind": "background",
+        "note": "Subtraction of integers, bits and vectors, covered by discrete mathematics and linear algebra."
+      }
+    },
+    {
+      "symbol": "=",
+      "anchor": {
+        "kind": "background",
+        "note": "Equality, basic notation covered by discrete mathematics."
+      }
+    },
+    {
+      "symbol": "<",
+      "anchor": {
+        "kind": "background",
+        "note": "Strict inequality, covered by discrete mathematics and the calculus background on limits."
+      }
+    },
+    {
+      "symbol": ">",
+      "anchor": {
+        "kind": "background",
+        "note": "Strict inequality, covered by discrete mathematics and the calculus background on limits."
+      }
+    },
+    {
+      "symbol": "\\le",
+      "anchor": {
+        "kind": "background",
+        "note": "Non-strict inequality, covered by discrete mathematics and the calculus background on limits."
+      }
+    },
+    {
+      "symbol": "\\ge",
+      "anchor": {
+        "kind": "background",
+        "note": "Non-strict inequality, covered by discrete mathematics and the calculus background on limits."
+      }
+    },
+    {
+      "symbol": "/",
+      "anchor": {
+        "kind": "background",
+        "note": "Division of integers and rationals, covered by discrete mathematics and linear algebra."
+      }
+    },
+    {
+      "symbol": "\\cdot",
+      "anchor": {
+        "kind": "background",
+        "note": "Multiplication, covered by schoolbook multiplication and basic arithmetic."
+      }
+    },
+    {
+      "symbol": "\\cdots",
+      "anchor": {
+        "kind": "background",
+        "note": "Ellipsis in a finite sum of powers, covered by the calculus background on series and the geometric series."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "smaller call",
+      "quote": "costs $a$ smaller calls",
+      "kind": "term",
+      "note": "The page does not say what a smaller call is at this point. It is described only later, as an interchange of width mu^(d-1) inside the recursion, so the reader cannot tell why an edge matrix of rank a costs exactly a of them."
+    },
+    {
+      "term": "outer updates cost linear time",
+      "quote": "The outer two cost linear time.",
+      "kind": "step",
+      "note": "Linear in what is not said: the field width u, the volume V, or the total bit count. The page never justifies the cost of the two outer updates, and the claimed total O(V u^tau) depends on which measure is meant."
+    },
+    {
+      "term": "inverse invocation",
+      "quote": "A forward, inverse, forward schedule of these invocations exchanges the two banks",
+      "kind": "term",
+      "note": "Only forward invocation is covered by the known linear network concept. The page never defines an inverse invocation and does not link one."
+    },
+    {
+      "term": "three updates as the cited schedule",
+      "quote": "The updates are $D\\leftarrow D-H$, $H\\leftarrow H+D$, $D\\leftarrow H-D$",
+      "kind": "step",
+      "note": "The page never says that these three updates are the forward, inverse, forward schedule it cites, or how the outer updates are invocations of that kind. The role of the cited result here is not stated, so the reader cannot check that the schedule accounts for this exchange."
+    },
+    {
+      "term": "bound mu < 2^20",
+      "quote": "Since $\\mu<2^{20}$, $\\ln\\mu<20$",
+      "kind": "step",
+      "note": "Nothing on the page gives mu < 2^20. mu is defined only as a vertex's row count, and no network size is stated, so this bound on ln mu rests on an unstated fact."
+    },
+    {
+      "term": "chain bounding mu^(-2^-50)",
+      "quote": "$\\mu^{-2^{-50}}=\\exp(-2^{-50}\\ln\\mu)<1-20\\cdot2^{-50}>1-\\eta$",
+      "kind": "step",
+      "note": "The chain does not follow as written. From ln mu < 20, exp(-2^-50 ln mu) is greater than 1 - 20*2^-50, not less, so the inequality sign is reversed. The needed fact, exp(...) > 1 - 20*2^-50 > 1 - eta, is not stated, so lambda < mu^tau is not established."
+    }
+  ]
+}

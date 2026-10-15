@@ -1,0 +1,68 @@
+{
+  "symbols": [
+    {"symbol": "\\lambda", "anchor": {"kind": "here", "quote": "with exponent $\\lambda<1$"}},
+    {"symbol": "f", "anchor": {"kind": "here", "quote": "Let $f$ be the parameter of a call"}},
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "m", "anchor": {"kind": "here", "quote": "Here $m$ is the factor by which the parameter grows"}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "Let $s$ be the number of subcalls of one call."}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "\\Phi", "anchor": {"kind": "here", "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."}},
+    {"symbol": "C", "anchor": {"kind": "here", "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "An address interchange of $u$-bit fields costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed."}},
+    {"symbol": "\\Omega", "anchor": {"kind": "here", "quote": "Here $\\Omega$ is the bit count of one axis chunk"}},
+    {"symbol": "d", "anchor": {"kind": "here", "quote": "$d$ is the paper's axis-count parameter"}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "and $\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$."}},
+    {"symbol": "\\vartheta", "anchor": {"kind": "here", "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"}},
+    {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Let $\\nu$ count the levels of unrolling"}},
+    {"symbol": "\\sigma", "anchor": {"kind": "unbound", "quote": "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$.", "note": "The page only restricts sigma to a range and never says what it counts. The earlier bindings do not fit: phase-twist-convolution makes sigma an integer exponent with 0 <= sigma < r, and address-shear-factorization makes it a row index of Pi."}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation, a known concept and part of the profile's asymptotic analysis."}},
+    {"symbol": "\\log", "anchor": {"kind": "background", "note": "Logarithms to base m and base 2, covered by the known concept Logarithms and floor/ceiling."}},
+    {"symbol": "\\sum", "anchor": {"kind": "background", "note": "Summation of a geometric-type series, covered by the profile's limits, series and convergence."}},
+    {"symbol": "\\max", "anchor": {"kind": "background", "note": "Maximum of two real numbers, elementary arithmetic the degree covers."}}
+  ],
+  "gaps": [
+    {
+      "term": "recurrence for Phi(mf)",
+      "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$",
+      "kind": "step",
+      "note": "Outside work at most C(mf)^lambda adds to the cost, so the bound should be Phi(mf) <= (s/W)Phi(f) + C(mf)^lambda. With the minus sign the stated inequality does not follow from the premise, and the page's later sum uses the plus sign."
+    },
+    {
+      "term": "row addition cost from the interchange bound",
+      "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.",
+      "kind": "step",
+      "note": "The only cost given is for an address interchange (cited). The page never says why a row addition obeys the same bound, or where the +1 comes from. It also never says what the call's own outside work consists of, beyond a fixed number of row additions."
+    },
+    {
+      "term": "leaf cost bound",
+      "quote": "the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$",
+      "kind": "step",
+      "note": "From d <= f^(1/vartheta) = f^2 the leaf cost is at most f^sigma * f^(1-sigma) = f, not O(f^lambda). Reaching O(f^lambda) needs d^(vartheta(1-sigma)) <= f^(lambda-sigma), which the page does not give."
+    },
+    {
+      "term": "choice of lambda (inequality reversed)",
+      "quote": "Taking $\\lambda$ with $\\lambda<\\log_m(s/W)<1$ makes the ratio below 1",
+      "kind": "step",
+      "note": "The ratio (s/W)/m^lambda is below 1 only when lambda > log_m(s/W). The stated lambda < log_m(s/W) gives a ratio above 1, so the geometric sum diverges. The leaf step (sigma >= log_m(s/W)) shows the intended order is log_m(s/W) < lambda."
+    },
+    {
+      "term": "joint constraints on lambda",
+      "quote": "which is $O(f^\\lambda)$ when $\\lambda>\\tau(1+\\eta/\\vartheta)$.",
+      "kind": "step",
+      "note": "Lambda must satisfy lambda > tau(1+eta/vartheta), lambda > log_m(s/W) and lambda < 1 at once. The page never shows that tau(1+eta/vartheta) < 1 or that eta can be chosen to make it so, so the existence of such a lambda, which the opening claim relies on, is not established."
+    },
+    {
+      "term": "u at the leaves",
+      "quote": "The leaves at depth $\\nu$ have $u=f/m^\\nu<d^\\vartheta$ chunks",
+      "kind": "step",
+      "note": "Earlier on the page u is a bit count (u = f*Omega bits); here it counts chunks. The page does not say the letter changes meaning, so the leaf cost O((s/W)^nu u) and the bound (f/u)^sigma cannot be read with certainty about which u is meant."
+    },
+    {
+      "term": "kernel",
+      "quote": "Each leaf is handled by one kernel per chunk, at cost $O(f/m^\\nu)$.",
+      "kind": "term",
+      "note": "The page does not say what a kernel is, so the claim that a leaf costs O(f/m^nu) per chunk cannot be checked."
+    }
+  ]
+}

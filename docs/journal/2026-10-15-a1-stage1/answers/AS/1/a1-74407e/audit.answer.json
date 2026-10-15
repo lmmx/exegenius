@@ -1,0 +1,54 @@
+{
+  "symbols": [
+    {"symbol": "R", "anchor": {"kind": "here", "quote": "Let $R$ be the number of fields in each vector"}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+    {"symbol": "q", "anchor": {"kind": "here", "quote": "Here $q$ is a fixed odd prime, the radix of the digits"}},
+    {"symbol": "b", "anchor": {"kind": "here", "quote": "$b$ is the number of radix-$q$ digits in each field"}},
+    {"symbol": "\\mathbb Z", "anchor": {"kind": "background", "note": "Residue ring Z/mZ from modular arithmetic in the discrete mathematics background."}},
+    {"symbol": "\\mathbb Q", "anchor": {"kind": "background", "note": "Standard notation for the rationals, covered by undergraduate discrete mathematics."}},
+    {"symbol": "M", "anchor": {"kind": "here", "quote": "For a rational $R\\times R$ matrix $M$"}},
+    {"symbol": "\\mu", "anchor": {"kind": "here", "quote": "where $\\mu$ is its integer numerator"}},
+    {"symbol": "\\xi", "anchor": {"kind": "here", "quote": "$\\xi$ its integer denominator"}},
+    {"symbol": "\\Pi", "anchor": {"kind": "here", "quote": "A partial permutation matrix $\\Pi$ is a 0-1 matrix with at most one 1 in each row and column"}},
+    {"symbol": "F_1", "anchor": {"kind": "here", "quote": "where $F_1$ and $F_2$ are invertible lower-triangular rational matrices"}},
+    {"symbol": "F_2", "anchor": {"kind": "here", "quote": "where $F_1$ and $F_2$ are invertible lower-triangular rational matrices"}},
+    {"symbol": "I", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "\\sigma", "anchor": {"kind": "here", "quote": "at row $\\sigma$ and column $\\tau$"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "at row $\\sigma$ and column $\\tau$"}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "Let $\\eta$ be the content of $H_\\sigma$"}},
+    {"symbol": "\\zeta", "anchor": {"kind": "here", "quote": "$\\zeta$ that of $D_\\tau$"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation, covered by the asymptotic analysis background."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "s_{\\rm b}", "anchor": {"kind": "here", "quote": "The interchange count of the network is $s_{\\rm b}$, the sum of their ranks."}},
+    {"symbol": "W_{\\rm b}", "anchor": {"kind": "here", "quote": "where $W_{\\rm b}$ is the number of wires"}},
+    {"symbol": "N", "anchor": {"kind": "here", "quote": "$N$ the number of negative source projections"}},
+    {"symbol": "L_{\\rm b}", "anchor": {"kind": "here", "quote": "$L_{\\rm b}$ the total dimension lost on decreasing edges"}}
+  ],
+  "gaps": [
+    {
+      "term": "q divides no numerator or denominator",
+      "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used.",
+      "kind": "step",
+      "note": "The page only requires q not to divide the denominator xi, then concludes with 'So' that q divides no numerator either, which does not follow. It also never says which finitely many matrices are meant, nor why the factors F_1, F_2 and their inverses (whose denominators can differ from those of M) avoid q."
+    },
+    {
+      "term": "O(V) cost of the additions",
+      "quote": "So the shear needs $\\operatorname{rank}_{\\mathbb Q}M$ interchanges plus $O(V)$ further work.",
+      "kind": "step",
+      "note": "The page never says that each field update is applied to every item of the stored array at once, or that each field addition is one pass costing O(V) on the tape. The reader cannot see where the O(V) comes from, or what an interchange of two equal fields costs."
+    },
+    {
+      "term": "negative source projections, dimension lost on decreasing edges, rank budget",
+      "quote": "$N$ the number of negative source projections",
+      "kind": "term",
+      "note": "The terms 'negative source projection', 'decreasing edge', 'dimension lost' and 'rank budget' are not explained, and the bit network and its matrices on edges are not described. The reader cannot interpret N and L_b or check the formula for s_b."
+    },
+    {
+      "term": "recurrence and chunk width",
+      "quote": "which the recurrence turns into a saving of a power of the chunk width (the chunk length)",
+      "kind": "step",
+      "note": "The page does not say which recurrence is meant, what a chunk is, or why fewer than R interchanges per wire gives a power saving. The reader cannot check this final claim."
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "symbols": [
+    {
+      "symbol": "u",
+      "anchor": {
+        "kind": "page",
+        "page": "address-fields"
+      }
+    },
+    {
+      "symbol": "H",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"
+      }
+    },
+    {
+      "symbol": "D",
+      "anchor": {
+        "kind": "here",
+        "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"
+      }
+    },
+    {
+      "symbol": "\\mathbb F_2",
+      "anchor": {
+        "kind": "here",
+        "quote": "for the bit procedure this ring is $\\mathbb F_2$, where subtraction and addition coincide"
+      }
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {
+        "kind": "here",
+        "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$"
+      }
+    },
+    {
+      "symbol": "V",
+      "anchor": {
+        "kind": "page",
+        "page": "address-fields"
+      }
+    },
+    {
+      "symbol": "O",
+      "anchor": {
+        "kind": "background",
+        "note": "Big-O notation, covered by the profile's asymptotic analysis."
+      }
+    },
+    {
+      "symbol": "W",
+      "anchor": {
+        "kind": "page",
+        "page": "linear-network-roles"
+      }
+    },
+    {
+      "symbol": "s",
+      "anchor": {
+        "kind": "page",
+        "page": "recursive-power-saving"
+      }
+    },
+    {
+      "symbol": "m",
+      "anchor": {
+        "kind": "page",
+        "page": "recursive-power-saving"
+      }
+    },
+    {
+      "symbol": "Q_k",
+      "anchor": {
+        "kind": "here",
+        "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits"
+      }
+    },
+    {
+      "symbol": "k",
+      "anchor": {
+        "kind": "here",
+        "quote": "where $k$ is the recursion level"
+      }
+    },
+    {
+      "symbol": "C",
+      "anchor": {
+        "kind": "page",
+        "page": "recursive-power-saving"
+      }
+    },
+    {
+      "symbol": "j",
+      "anchor": {
+        "kind": "background",
+        "note": "Index of a summation, covered by the profile's limits, series and convergence (summation)."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "term": "m at least 2, and tau positive",
+      "quote": "since $m\\ge2$",
+      "kind": "step",
+      "note": "The page asserts m>=2 without giving or deriving it, and this page never says what m is beyond the growth factor it binds. The step also needs tau>0 for k = O(m^{k tau}), but tau is only said to be below 1."
+    },
+    {
+      "term": "Hence s/W < m",
+      "quote": "Hence $s/W<m$",
+      "kind": "step",
+      "note": "The two supporting claims disagree. The page says s<W (cited) for the bit network, which gives s/W<1, and also that the paper's proof gives s = Wm minus a positive constant, which with m>=2 gives s>=2W minus that constant. For large W these cannot both hold. The positive constant is never named, so the reader cannot tell which bound applies or check the conclusion."
+    },
+    {
+      "term": "Q_0 = O(1) base case",
+      "quote": "Q_0=O(1)",
+      "kind": "step",
+      "note": "The base case is asserted. The page never says what a level-0 interchange of one-bit fields does or why it costs constant time per unit of volume, and the recurrence and every later bound depend on it."
+    },
+    {
+      "term": "u a power of m",
+      "quote": "A field of $u=m^k$ bits therefore has $Q_k=O(u^\\tau)$",
+      "kind": "step",
+      "note": "The conclusion for a field of u bits is reached by writing u = m^k for some integer k. The page never says that the field width is a power of m, or what happens when it is not, so the reader cannot check the reduction to Q_k."
+    },
+    {
+      "term": "role stream",
+      "quote": "each of its $s$ smaller calls acts on one role stream of volume $V/W$",
+      "kind": "term",
+      "note": "A role stream is not defined on this page or linked. The volume V/W assumes the data is split equally over the W roles, which the page does not say; the roles binding only says rows are distributed over the roles."
+    }
+  ]
+}

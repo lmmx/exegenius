@@ -1,0 +1,32 @@
+{
+  "symbols": [
+    {"symbol": "\\lambda", "anchor": {"kind": "here", "quote": "with exponent $\\lambda<1$"}},
+    {"symbol": "f", "anchor": {"kind": "here", "quote": "Let $f$ be the parameter of a call"}},
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "m", "anchor": {"kind": "here", "quote": "Here $m$ is the factor by which the parameter grows"}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "Let $s$ be the number of subcalls of one call."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "\\Phi", "anchor": {"kind": "here", "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."}},
+    {"symbol": "C", "anchor": {"kind": "here", "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation, covered by the profile's asymptotic analysis."}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "An address interchange of $u$-bit fields costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed."}},
+    {"symbol": "\\Omega", "anchor": {"kind": "here", "quote": "Here $\\Omega$ is the bit count of one axis chunk"}},
+    {"symbol": "d", "anchor": {"kind": "here", "quote": "$d$ is the paper's axis-count parameter"}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "$\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"}},
+    {"symbol": "\\vartheta", "anchor": {"kind": "unbound", "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent", "note": "The page only gives the value 1/2 and calls it an exponent; it never says what it is the exponent of (the leaf threshold d^vartheta appears only later), and it does not flag that the letter no longer means the relative excess of Q from the Gaussian resampling page."}},
+    {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Let $\\nu$ count the levels of unrolling"}},
+    {"symbol": "\\sigma", "anchor": {"kind": "here", "quote": "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$."}}
+  ],
+  "gaps": [
+    {"term": "field digits", "quote": "the number of field digits for an address interchange", "kind": "term", "note": "The page never says what a digit of an address field is (its base or size), so the reader cannot tell what the parameter f counts for an interchange."},
+    {"term": "axis chunk", "quote": "Here $\\Omega$ is the bit count of one axis chunk", "kind": "term", "note": "A chunk of an axis is never defined or linked, nor related to the field digits that f counts, so the reader cannot see why fields have u = f Omega bits."},
+    {"term": "row addition cost from interchange cost", "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.", "kind": "step", "note": "The cited bound is for an address interchange, not a row addition; the page does not say why a row addition costs the same, where the +1 comes from, or why citing the interchange cost is not circular when the page's recursion is what bounds interchanges."},
+    {"term": "d bounded by a power of f", "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent, $d\\le f^{1/\\vartheta}$", "kind": "step", "note": "Nothing given implies d <= f^{1/vartheta}; the value of vartheta alone does not, and the condition that recursion only happens while f >= d^vartheta is stated only later and not tied to this inference."},
+    {"term": "existence of a valid lambda", "quote": "which is $O(f^\\lambda)$ when $\\lambda>\\tau(1+\\eta/\\vartheta)$", "kind": "step", "note": "The page needs lambda < 1 and also lambda > tau(1+eta/vartheta) and lambda > log_m(s/W), but never shows tau(1+eta/vartheta) < 1; with tau < 1 and eta > 0 only fixed, this need not hold."},
+    {"term": "kernel", "quote": "Each leaf is handled by one kernel per chunk, at cost $O(f/m^\\nu)$.", "kind": "term", "note": "A kernel is never defined or linked, so the reader cannot check why a leaf costs O(f/m^nu) per bit."},
+    {"term": "u reused as a chunk count", "quote": "The leaves at depth $\\nu$ have $u=f/m^\\nu<d^\\vartheta$ chunks", "kind": "step", "note": "Earlier u is a field width in bits (u = f Omega); here it is a number of chunks, with no notice of the change, so the reader cannot reconcile the two."},
+    {"term": "leaf cost bound", "quote": "the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$", "kind": "step", "note": "From f >= d^vartheta one only gets f^sigma d^{vartheta(1-sigma)} <= f, not <= f^lambda; the page gives nothing that makes d^{vartheta(1-sigma)} at most f^{lambda-sigma}."},
+    {"term": "example ratio", "quote": "For $\\lambda=0.8$ the ratio is $\\tfrac{3/2}{2^{0.8}}\\approx1.16$.", "kind": "step", "note": "2^0.8 is about 1.74, so the ratio is about 0.86, not 1.16; the stated value exceeds 1 and contradicts the claim that lambda above log_2(3/2) makes the ratio below 1."}
+  ]
+}

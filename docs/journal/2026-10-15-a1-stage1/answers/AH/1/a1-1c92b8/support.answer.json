@@ -1,0 +1,19 @@
+{
+  "labels": [
+    {
+      "mark": 1,
+      "label": "partial",
+      "reason": "The quotation gives the bit count V/W and the verb 'contains', but names no subject, so it does not establish that each role stream holds it."
+    },
+    {
+      "mark": 2,
+      "label": "supported",
+      "reason": ""
+    },
+    {
+      "mark": 3,
+      "label": "supported",
+      "reason": ""
+    }
+  ]
+}

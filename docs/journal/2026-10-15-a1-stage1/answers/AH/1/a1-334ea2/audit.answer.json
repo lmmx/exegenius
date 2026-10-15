@@ -1,0 +1,184 @@
+{
+  "symbols": [
+    {
+      "symbol": "R",
+      "anchor": {"kind": "here", "quote": "Let $R$ be the number of fields in each vector"}
+    },
+    {
+      "symbol": "H",
+      "anchor": {"kind": "here", "quote": "let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}
+    },
+    {
+      "symbol": "D",
+      "anchor": {"kind": "here", "quote": "let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}
+    },
+    {
+      "symbol": "q",
+      "anchor": {"kind": "here", "quote": "Here $q$ is a fixed odd prime, the radix of the digits"}
+    },
+    {
+      "symbol": "b",
+      "anchor": {"kind": "here", "quote": "and $b$ is the number of radix-$q$ digits in each field"}
+    },
+    {
+      "symbol": "\\mathbb Z",
+      "anchor": {"kind": "background", "note": "The integers, and Z/mZ as the residues mod m; covered by modular arithmetic (residues mod m) in discrete mathematics."}
+    },
+    {
+      "symbol": "M",
+      "anchor": {"kind": "here", "quote": "For a rational $R\\times R$ matrix $M$, the shear by $M$ is $(H,D)\\mapsto(H+MD,D)$"}
+    },
+    {
+      "symbol": "\\mu",
+      "anchor": {"kind": "here", "quote": "A rational entry is written $\\mu/\\xi$, where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"}
+    },
+    {
+      "symbol": "\\xi",
+      "anchor": {"kind": "here", "quote": "A rational entry is written $\\mu/\\xi$, where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"}
+    },
+    {
+      "symbol": "\\mathbb Q",
+      "anchor": {"kind": "background", "note": "The rational numbers, the standard number system used in introductory linear algebra (rational matrices) and calculus."}
+    },
+    {
+      "symbol": "\\operatorname{rank}_{\\mathbb Q}",
+      "anchor": {"kind": "here", "quote": "Let $\\operatorname{rank}_{\\mathbb Q}M$ be the number of linearly independent rows of $M$."}
+    },
+    {
+      "symbol": "\\Pi",
+      "anchor": {"kind": "here", "quote": "A partial permutation matrix $\\Pi$ is a 0-1 matrix with at most one 1 in each row and column"}
+    },
+    {
+      "symbol": "F_1",
+      "anchor": {"kind": "here", "quote": "Every rational $M$ factors as $M=F_1\\Pi F_2$, where $F_1$ and $F_2$ are invertible lower-triangular rational matrices"}
+    },
+    {
+      "symbol": "F_2",
+      "anchor": {"kind": "here", "quote": "Every rational $M$ factors as $M=F_1\\Pi F_2$, where $F_1$ and $F_2$ are invertible lower-triangular rational matrices"}
+    },
+    {
+      "symbol": "I",
+      "anchor": {"kind": "page", "page": "linear-network-roles"}
+    },
+    {
+      "symbol": "\\sigma",
+      "anchor": {"kind": "here", "quote": "For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$"}
+    },
+    {
+      "symbol": "\\tau",
+      "anchor": {"kind": "here", "quote": "For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$"}
+    },
+    {
+      "symbol": "\\eta",
+      "anchor": {"kind": "here", "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$"}
+    },
+    {
+      "symbol": "\\zeta",
+      "anchor": {"kind": "here", "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$"}
+    },
+    {
+      "symbol": "O",
+      "anchor": {"kind": "background", "note": "Big-O notation, covered by the asymptotic analysis of the degree. It is not the symbol O bound on dft-fft (the odd sub-transform)."}
+    },
+    {
+      "symbol": "V",
+      "anchor": {"kind": "page", "page": "address-fields"}
+    },
+    {
+      "symbol": "s_{\\rm b}",
+      "anchor": {"kind": "here", "quote": "The interchange count of the network is $s_{\\rm b}$, the sum of their ranks"}
+    },
+    {
+      "symbol": "W_{\\rm b}",
+      "anchor": {"kind": "here", "quote": "gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$, where $W_{\\rm b}$ is the number of wires, $N$ the number of negative source projections, and $L_{\\rm b}$ the total dimension lost on decreasing edges"}
+    },
+    {
+      "symbol": "N",
+      "anchor": {"kind": "here", "quote": "gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$, where $W_{\\rm b}$ is the number of wires, $N$ the number of negative source projections, and $L_{\\rm b}$ the total dimension lost on decreasing edges"}
+    },
+    {
+      "symbol": "L_{\\rm b}",
+      "anchor": {"kind": "here", "quote": "gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$, where $W_{\\rm b}$ is the number of wires, $N$ the number of negative source projections, and $L_{\\rm b}$ the total dimension lost on decreasing edges"}
+    },
+    {
+      "symbol": "\\times",
+      "anchor": {"kind": "background", "note": "Matrix dimensions R x R; standard notation of introductory linear algebra (matrices)."}
+    },
+    {
+      "symbol": "\\mapsto",
+      "anchor": {"kind": "background", "note": "Maps, here the map (H,D) to (H+MD,D); covered by introductory linear algebra (linear maps)."}
+    },
+    {
+      "symbol": "\\leftarrow",
+      "anchor": {"kind": "background", "note": "Assignment notation of algorithm pseudocode (replace, set); covered by the algorithm analysis of the degree."}
+    }
+  ],
+  "gaps": [
+    {
+      "term": "q divides no numerator (step)",
+      "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used.",
+      "kind": "step",
+      "note": "The page requires only that q not divide a denominator (q must not divide ξ). Nothing says why numerators avoid q, and 'the finitely many matrices used' are not identified until the network paragraph. The shear also applies the inverses F1^{-1} and F2^{-1} to fields, and this claim does not establish that their denominators are prime to q."
+    },
+    {
+      "term": "update of a pair (η,ζ)",
+      "quote": "Then the pair $(\\eta,\\zeta)$ becomes $(\\eta+\\zeta,\\zeta)$.",
+      "kind": "step",
+      "note": "Tracing the three operations just given: D becomes ζ+η; the swap gives H = ζ+η and D = η; then D becomes η-(ζ+η) = -ζ. The pair becomes (η+ζ, -ζ), not (η+ζ, ζ), so the stated result and the later claim that D is unchanged do not follow."
+    },
+    {
+      "term": "interchange count 2 rank M",
+      "quote": "So the shear needs $2\\operatorname{rank}_{\\mathbb Q}M$ interchanges plus $O(V)$ further work.",
+      "kind": "step",
+      "note": "The page says each update takes one interchange, and there is one update per 1 in Π, where Π has rank_Q M ones. That gives rank_Q M interchanges, not twice that. The page gives no source for the second interchange, and the network paragraph later counts one interchange per unit of rank."
+    },
+    {
+      "term": "linear cost of a lower-triangular transformation",
+      "quote": "A lower-triangular transformation costs $O(V)$ (cited)",
+      "kind": "step",
+      "note": "This cited cost is the mechanism behind the shear's O(V) work. The reader has not studied tape-level data-movement algorithms, and the following sentences argue only in terms of combinations of coordinates. They do not say how coordinates stored at different tape positions are combined in linear time on the fixed-tape machine, or what the cost counts."
+    },
+    {
+      "term": "endpoint operator",
+      "quote": "The address shear is the endpoint operator of the bit network",
+      "kind": "term",
+      "note": "'Endpoint operator' is not defined on the page. The link on the same sentence attaches to the network name, not to this term, so the identification cannot be followed."
+    },
+    {
+      "term": "negative source projections",
+      "quote": "the number of negative source projections",
+      "kind": "term",
+      "note": "Not defined and not linked. Only the network's source nodes are known to the reader; source projections are not."
+    },
+    {
+      "term": "decreasing edges",
+      "quote": "the total dimension lost on decreasing edges",
+      "kind": "term",
+      "note": "Not defined. The page says only that the rank budget counts dimension changes along its edges."
+    },
+    {
+      "term": "rank-budget formula",
+      "quote": "gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$",
+      "kind": "step",
+      "note": "The formula is presented as following from the rank budget, but the page says only that the budget counts dimension changes along edges. It does not say where the term W_b R, the -N term, or the +2L_b term come from, so the reader cannot check the identity."
+    },
+    {
+      "term": "N > 2 L_b for this network",
+      "quote": "The paper shows $N>2L_{\\rm b}$",
+      "kind": "step",
+      "note": "The cited inequality is stated, but the page gives no reason that it applies to this bit network's N and L_b. The deduction s_b < W_b R follows from the formula only if it does."
+    },
+    {
+      "term": "chunk width and chunk length",
+      "quote": "a saving of a power of the chunk width (the chunk length)",
+      "kind": "term",
+      "note": "'Chunk width' and 'chunk length' are neither defined nor linked to another page."
+    },
+    {
+      "term": "recurrence saving",
+      "quote": "which the recurrence turns into a saving of a power of the chunk width",
+      "kind": "step",
+      "note": "No recurrence is stated, nor what it bounds, nor how 'fewer than R per wire' turns into a saving that is a power of the chunk width. The reader cannot check this step."
+    }
+  ]
+}
