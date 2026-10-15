@@ -72,11 +72,12 @@ The local copies of every branch marked "delete on GitHub" are deleted.
 | `141026-exp-e9-params-cases` | 0d73706 | E9, three argument runs with the parameters-and-cases sentence (based on `141026-exp-s4-e8-fb1`) | evidence, with transcripts | keep |
 | `141026-exp-e10-s6` | 4335166 | E10 and S6: eight argument runs with the combined instruction (Sonnet `high`, Sonnet `medium`, Haiku `high`) (based on `141026-exp-e9-params-cases`) | evidence, with transcripts | keep |
 | `141026-exp-w2-writer` | 845e3b0 | W2 and W2b: twelve writer runs on key-step pages from E9F4Y's fixed plan (based on `141026-exp-e10-s6`) | evidence, with transcripts | keep |
+| `141026-exp-e11-ceiling` | b02b658 | E11: six Opus `xhigh` argument runs with the combined instruction (based on `141026-exp-w2-writer`) | evidence, with transcripts | keep |
 | `exp-coverage-recovery` | 2e35a54 | two refused attempts to run the recovery experiment | its unique records (the two reports and the protocol) are archived in `docs/journal/2026-10-13-coverage-recovery/refused-attempts/`; the rest is a vendored copy of exegenius source, which should not be kept | **delete on GitHub** |
 
 ## Current State
 - `master` of lmmx/exegenius holds all completed work; eight remote branches of lmmx/exegenius are fully contained in it and await deletion on GitHub; `131026-exp-key-step` holds an experimental instruction kept off `master` pending the author's decision; two `docs/` branches are the author's own
-- Twenty-eight branches of lmmx/openai-nlogn-wiki are kept as the archives of their runs, through `141026-exp-w2-writer`
+- Twenty-nine branches of lmmx/openai-nlogn-wiki are kept as the archives of their runs, through `141026-exp-e11-ceiling`
 - `exp-coverage-recovery` of the wiki has its unique records archived in the journal and awaits deletion on GitHub
 
 ## Missing

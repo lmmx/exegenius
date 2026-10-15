@@ -1,0 +1,79 @@
+{
+ "id": "E11",
+ "title": "Opus xhigh against Sonnet high planners above the primary rubric's ceiling, both with the combined instruction, judged pairwise",
+ "kind": "controlled",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task only, on E6's extractions F2, F3, F4, F5, F6 and F8 (background accepted)",
+ "question": "Is Opus xhigh a better planner than Sonnet high above the ceiling, where the primary rubric saturates?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "e8efaa3 (141026-exp-params-cases)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-e11-ceiling",
+  "commit": "b02b658",
+  "transcripts": "results/transcripts/e11",
+  "description_prefix": "",
+  "planning_kinds": [
+   "argument"
+  ]
+ },
+ "protocol": "run from the development session; E11.md on the evidence branch",
+ "preregistration": "calibration/plans/E11.md (criteria fixed at 00:19 UTC, 2026-10-15, before any run)",
+ "journal": "calibration/plans/E11.md",
+ "comparison": "the Sonnet high plans with the combined instruction on the same extractions (E9F2Y, E10F3Y, E9F4Y, E10F5Y, E10F6Y, E9F8Y); control E9F4Y against E10F4Y2; pairwise batch J25",
+ "arms": {
+  "O": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "xhigh",
+    "effort_passed": true,
+    "task_prompt": "the E8 argument instructions plus the parameters-and-cases sentence (the combined instruction)"
+   },
+   "runs": [
+    "E11F2O",
+    "E11F3O",
+    "E11F4O",
+    "E11F5O",
+    "E11F6O",
+    "E11F8O"
+   ]
+  }
+ },
+ "reported": {
+  "runs_cache_read_tokens": {
+   "value": "24.8 M for six runs",
+   "basis": "reported",
+   "source": "perrun.py over the E11 transcripts"
+  },
+  "J25": {
+   "value": "prepared at 01:53 UTC (14 pair files); not yet judged",
+   "basis": "reported",
+   "source": "calibration/plans/E11.md"
+  }
+ },
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus) with this session's permissions; it only passed prompts and ran exegenius next"
+  },
+  {
+   "kind": "timing",
+   "what": "three runs launched at 01:07 UTC on a reading later corrected (40% to 45% used); three launched at 01:22 after a permission-classifier denial, on the author's explicit authorisation"
+  },
+  {
+   "kind": "binary",
+   "what": "the exegenius binary on PATH was rebuilt from master (same code) at 01:17 while three runs were active"
+  }
+ ],
+ "limitations": [
+  "One paper; one Opus run per extraction.",
+  "Pairwise judging pending (J25)."
+ ]
+}
