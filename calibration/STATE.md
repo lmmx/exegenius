@@ -21,7 +21,7 @@
 
 **Runs:** six Opus `xhigh` runs in `scratchpad/e6/E11F{2,3,4,5,6,8}O`.
 - E11F2O, E11F5O and E11F6O are accepted.
-- E11F3O, E11F4O and E11F8O were running at 01:43. E11F4O had one `max_tokens` stop.
+- E11F3O, E11F4O and E11F8O were running at 01:42. E11F4O had one `max_tokens` stop.
 - Check acceptance in each run's `exegenius/log.jsonl`: a `submit` event for `0003-argument` with outcome `accepted`.
 
 **Next:**
