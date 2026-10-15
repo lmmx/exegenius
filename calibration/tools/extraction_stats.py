@@ -36,6 +36,7 @@ import random
 import re
 import statistics
 import subprocess
+import sys
 
 PAPER_COMMIT = "834fb5a"
 PAPER_PATH = "template/sources/paper.tex"
@@ -106,6 +107,7 @@ def line_ranges(text):
 
 
 def load_markers(repo):
+    sys.dont_write_bytecode = True  # read-only: leave no __pycache__ behind
     spec = importlib.util.spec_from_file_location("markers", repo / "calibration/tools/markers.py")
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
