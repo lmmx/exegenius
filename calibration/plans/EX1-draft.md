@@ -5,7 +5,7 @@
 - **Its evidence:** `docs/journal/2026-10-14-x1-extraction-evidence/`.
 - **The pipeline default is unchanged.**
 
-**The id clashes.** The registry already has EX1: "Coverage recovery: report against reject", 2026-10-13. This plan needs a new id before preregistration, for example EEX1. Run names below use `EX1` as a placeholder.
+**The id clashes.** The registry already has X1: "Coverage recovery: report against reject", 2026-10-13. This plan is renamed EX1 (2026-10-15). Run names below use `EX1` as a placeholder.
 
 ## The decision it informs
 
@@ -143,4 +143,4 @@ So:
 **Stopping:** one run per extraction. No repeats, except the one fresh Sonnet `medium` extraction named in the decision table.
 
 
-**Decision (2026-10-15, 00:00 UTC):** not run. The evidence analysis answers the policy question (keep Sonnet `high`), and the experiment's cost (~71–80 M) exceeds what it could save (~1 M per wiki). Renamed from X1, which the registry already uses for coverage recovery.
+**Decision (2026-10-15, 00:01 UTC):** not run. The evidence analysis answers the policy question (keep Sonnet `high`), and the experiment's cost (~71–80 M) exceeds what it could save (~1 M per wiki). Renamed from X1, which the registry already uses for coverage recovery.
