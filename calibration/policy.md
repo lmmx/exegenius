@@ -10,6 +10,26 @@
 
 **Its authority:** nothing here changes a pipeline default. A row marked "proposed" goes to the author. Only the author changes defaults.
 
+## Calibration status: the policy in force (11:08 UTC, 2026-10-15)
+
+**The bar (the author, about 11:00):** a task is calibrated only when it has both a defensible configuration and adequate evidence that it preserves the mathematics. A best-tested configuration is not enough on its own. Defaults change only with the author's approval. Every row rests on one paper.
+
+| Task | Configuration in force | Configuration status | Evidence that it preserves the mathematics | Calibrated? | What closes it |
+|---|---|---|---|---|---|
+| Extraction | Sonnet `high`, `master` | final for this paper | indirect but sufficient for planning: every extraction tested led to ceiling plans | **yes, for this paper** | a second document |
+| Background | Sonnet `high`, `master` | accepted: no alternative tested, and no sign it limits a decision | indirect for planning (the same ceiling plans); none for writing | **for planning only** | its effect on writing is unmeasured. Check against the reader profile, with no model, if pages point here |
+| Argument planning | Sonnet `high` with the combined instruction. **`master` still has the older instruction** | final for this paper, once the instruction is merged | strong: the rubric's ceiling and the central gate, blind, on several extractions | **yes for this paper, after the merge** | the merge (`proposals/argument-instruction.md`), then a second document |
+| Writing | Sonnet `high`; Opus `xhigh` on 0015 and 0016 in this wiki | provisional | Sonnet failed on a hard key-step page in 1 of 2 runs; Opus met the standard on both hard pages | **no** | W3, read on both its primary table and its fidelity secondary (`plans/W3.md`) |
+| Fidelity auditing | as `master` (the writer configuration) | **unresolved** | none of Haiku `high`, Sonnet `high` and Opus `xhigh` meets the standard; all miss the same errors | **no** | a task redesign, not a model choice: A2, source-aware and structured (`plans/A2-draft.md`), and A1b, the support instruction (`plans/A1b-draft.md`) |
+| Simulated readers | `master` | unmeasured | none | **no** | after writing is settled |
+| Judging (the instrument) | Opus; the primary rubric below the ceiling, K3 pairwise above | validated | K3 passed its preregistered criteria | **yes, as an instrument** | — |
+
+**Decisions for the author, kept separate:**
+1. **The planning-instruction merge:** a default change, reviewed on its own (`proposals/argument-instruction.md`). It does not block any experiment.
+2. **Measurement validity:** a general rule for when the `ASSERTS` classifier may score audit notes, for future experiments only (`plans/A1b-draft.md`). A1's preregistered result stays primary.
+3. **Auditor evidence:** whether auditors get the source. A2 tests it before any adoption.
+4. **W3:** launch on a meter reading, and whether to add a second Sonnet run per key-step page (`plans/W3.md`, option). Then the writer default.
+
 ## Decision ledger (2026-10-15, 09:26 UTC): the configuration to use for each task, and how far it is proven
 
 **The objective (the author, 09:24):** a defensible configuration for every pipeline task, not a finished queue of experiments. Each row separates two things:
@@ -36,6 +56,7 @@ Nothing here changes a production default; the author decides those. Every row r
 1. **W3**, the writer routing rule. It can change the writer row for key-step pages.
 2. **The support-task instruction test** (`plans/A1b-draft.md`, drafted at 09:30; ~11–16 M). It can turn "the auditing task fails" into a fixable prompt.
 3. ~~The background audit~~: done at 09:30. Keep Sonnet `high`; no model experiment is justified.
+4. **A2, the source-aware structured audit** (`plans/A2-draft.md`, a design). It can say whether auditing is fixable by giving auditors the source. It needs 12 source-only seeds, written by hand, and an isolated binary before preregistration.
 
 **A1 stage 2 is deferred,** with the author's direction at 09:24 ("Don't run it merely because a threshold was narrowly triggered"). It cannot change the auditing verdict: adequacy needs support recall ≥ 0.70, and all three models miss the same 4 of 10 errors. Its preregistered trigger stays on record, and its copies are kept.
 

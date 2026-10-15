@@ -1,6 +1,27 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-15 09:31 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-15 11:08 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+
+## Update, 11:08 UTC (the author's note at about 11:00; no meter reading in it)
+
+**No model calls.** There is no reading since the reset, and the last one (20% remaining at about 09:24) predates it.
+
+**Done, model-free:**
+- **W3 check** (`plans/W3.md`, "Can the table decide?"):
+  - The primary table guards well against a false "generalises", but returns "page-specific" for most plausible effect sizes.
+  - Ceiling ties on 0021 and 0033 make "generalises" unlikely even with a strong advantage.
+  - A **secondary fidelity analysis**, added before any run, asks whether Sonnet meets the standard on key-step pages and whether Opus fixes the failures. The primary table is unchanged.
+  - **Option for the author:** a second Sonnet run per key-step page, about +15–35 M.
+- **A2 drafted** (`plans/A2-draft.md`): a source-aware, structured audit tested against A1's errors plus 12 new source-only seeds; arms B, I and SI on Sonnet `high`; about 25–45 M.
+- **The final policy form:** `policy.md`, "Calibration status", with the author's decisions listed separately.
+- **The planning-instruction proposal:** `proposals/argument-instruction.md`, the diff and its evidence.
+
+**Blocked:** creating the PR branch for the planning instruction. The permission classifier denied `git worktree add -B wiki-explanation-reader-sim-v8dqtr …` as "Git Destructive". It was not retried.
+
+**Next, in order:**
+1. **With a meter reading:** launch W3 (`docs/journal/2026-10-15-w3-setup/prompts.tsv`), with the second Sonnet run only if the author adds it. Prepare J26 while the runs go, and read W3 by both tables.
+2. **A2, model-free:** write and check the 12 source-only seeds; build the experiment branch and isolated binary when no runs are active (if the classifier allows the branch); then preregister.
+3. **A1b:** preregister, then build its isolated binary.
 
 ## Checkpoint, 09:26 UTC, 2026-10-15 (read first)
 
