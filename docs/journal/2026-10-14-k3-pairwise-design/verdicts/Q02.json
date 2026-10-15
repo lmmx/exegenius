@@ -1,0 +1,212 @@
+{
+  "pair": "Q02",
+  "items": [
+    {
+      "id": "bank-exchange-network",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S1.3, S1.3.0-S1.3.3). B1 (S1.3.1.1), B2 (S1.3.1.2), B3 (S1.3.1.3) and B4 (S1.3.2) are present in both and agree with lines 741-764; the wire counts in S1.3.3 match lines 777-782."
+    },
+    {
+      "id": "common-frame-identity",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S1.4, S1.4.1-S1.4.3), which match the invariant argument and the identity D_out S_Omega D_in^{-1} at lines 804-825."
+    },
+    {
+      "id": "label-residual-budget",
+      "preference": "A",
+      "strength": "slight",
+      "differences": [
+        {
+          "favours": "A",
+          "what": "Exact loss ratios L_b/N=100/539 and L_c/N=101/539, both below 1/2. This is the quantitative basis for L<N/2. Plan B only asserts L<N/2 in the S1.5 claim and never gives the values.",
+          "substep": "L5",
+          "steps_a": [
+            "S1.5.6"
+          ],
+          "steps_b": [],
+          "lines": [
+            1105,
+            1110
+          ]
+        }
+      ],
+      "note": "Otherwise the plans are identical here. L1 (S1.5.5.1-S1.5.5.16), L2 (S1.5.5.14), L3 (S1.5.2, S1.5.3, S1.5.5.17, S1.5.5.18) and L4 (S1.5.5.19, which states only the nonalternating/orthonormal-basis conclusion in both) are shared. The single differing sub-step is L5, which only A carries, so A is slightly preferred."
+    },
+    {
+      "id": "bit-shear-interface",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S1.5.7, S1.5.8, with the Phi_M frames in S1.8.2-S1.8.3). The rank of P_V-P_U, the extra rank from the first edge matrix 2P_{U_a}, and the endpoint identity are stated in both and agree with lines 1156-1171."
+    },
+    {
+      "id": "complex-phase-interface",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S1.5.9, S2.1, S2.1.1-S2.1.3). P1 and P2 are present in both. P3 and P4 are covered only partly, and to the same extent: S2.1.3 names the C=iZC^{-1}Z correction on the 27 coordinates but not the Z_{a,k}/i^{27k} placement or the negated X outputs. No checklist sub-step differs."
+    },
+    {
+      "id": "rank-saving",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item apart from S1.5.6. R1 (L<N/2 in the S1.5 claim, with the deficits N-2L_b>0 and 2N-2L_c>0 in S1.5.7 and S1.5.9) and R2-R4 (S1.5.10, S1.5.10.1-S1.5.10.3, lines 1319-1343) are present in both. A's extra exact L/N values are counted under label-residual-budget (L5), not again here."
+    },
+    {
+      "id": "stream-primitives",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S1.1, S1.1.1-S1.1.4, S1.2, S1.2.1-S1.2.3), consistent with lines 513-621."
+    },
+    {
+      "id": "matrix-shear",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S1.6, S1.6.1-S1.6.3, S1.7, S1.7.1-S1.7.4). M1-M4 are present in both and agree with lines 1375-1446."
+    },
+    {
+      "id": "interchange-recurrence",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S1.8, S1.8.1-S1.8.8): the row split, the Phi_M frames, D<-D-H / H<-H+D / D<-H-D, the recurrence F_k<=(s/W)F_{k-1}+O(1) and the fixed-tape schedule, as at lines 1491-1616."
+    },
+    {
+      "id": "arbitrary-width-interchange",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S1.9, S1.9.1-S1.9.6), matching lines 1649-1762."
+    },
+    {
+      "id": "phase-frame-recursion",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S2.1.4-S2.1.8): the conjugation by P_M, the inverse child (C^{-1})^{(x)f}, exactly s_c child calls, and H_0^{(x)D}=b^D S_D C^{(x)D} S_D, as at lines 1826-1940."
+    },
+    {
+      "id": "packed-selected-bit-addition",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S2.2, S2.2.1-S2.2.10), matching lines 2013-2231."
+    },
+    {
+      "id": "layer-recurrence",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S2.3, S2.3.1-S2.3.8), matching lines 2286-2448."
+    },
+    {
+      "id": "simultaneous-layer",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S2, S2.4, S2.4.1-S2.4.7, S2.5). S1-S5 are present in both and agree with lines 2457-2586 and 2751-2757."
+    },
+    {
+      "id": "synthetic-transform",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S3.1-S3.3 and their children), matching lines 2819-2915 and 2990-3200."
+    },
+    {
+      "id": "signed-packing",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S3.4, S3.4.1-S3.4.6), matching lines 3233-3367."
+    },
+    {
+      "id": "synthetic-convolution",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S3.5, S3.5.1-S3.5.6), matching lines 3414-3494."
+    },
+    {
+      "id": "gaussian-resampling",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S4.1, S4.1.1-S4.1.9), matching lines 3576-3792 and 3836-3897."
+    },
+    {
+      "id": "chirp-permutation-cancellation",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S4.2, S4.2.1-S4.2.6), matching lines 3938-3988."
+    },
+    {
+      "id": "parameters-and-primes",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S5.1, S5.1.1-S5.1.13), matching lines 4008-4193."
+    },
+    {
+      "id": "crt-address-map",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S5.2, S5.2.1-S5.2.6), matching lines 4204-4296."
+    },
+    {
+      "id": "phase-twist",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S5.3.1, S5.3.1.1-S5.3.1.3, S5.3.2), matching lines 4303-4413."
+    },
+    {
+      "id": "multiplication-algorithm",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S5, S5.3, S5.3.3, S5.3.4, S5.4-S5.8), matching lines 4434-4544."
+    },
+    {
+      "id": "exact-recovery",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S5.9, S5.9.1-S5.9.3 and their children), matching lines 4548-4806."
+    },
+    {
+      "id": "time-accounting",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item (S6, S6.T, S6.M, S6.D, S6.F, S6.G), matching lines 4815-4995."
+    },
+    {
+      "id": "conjecture-negation",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "The two plans carry word-for-word identical steps on this item. Both state the disproof only in the S0 claim and give no step for the liminf/eventual-lower-bound argument at lines 379-387."
+    }
+  ],
+  "chain": {
+    "preference": "A",
+    "strength": "slight",
+    "note": "The two trees are identical step for step. The one exception is on the central saving's path: A's S1.5.6 supplies L_b/N=100/539 and L_c/N=101/539 < 1/2 (lines 1105-1110), which links L=Ich (S1.5.5.18) to the positive deficits and s<Wm (S1.5.7, S1.5.9). B goes from L=Ich to those deficits on the bare assertion L<N/2 in the S1.5 claim. Everything downstream (the eta values, tau=1-2^{-50}, both recurrences, cost table, main bound) is the same in both."
+  },
+  "errors": [],
+  "overall": {
+    "preference": "A",
+    "strength": "slight",
+    "reason": "The plans are identical except that Plan A has one more step, S1.5.6, giving the exact loss ratios L_b/N=100/539 and L_c/N=101/539 below 1/2 (checklist sub-step L5, lines 1105-1110). Plan B lacks it. Neither plan has an error and every other item ties. This single constant-level difference, which supports L<N/2 on the central saving's path, gives A a slight edge."
+  }
+}
