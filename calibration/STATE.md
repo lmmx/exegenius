@@ -24,7 +24,7 @@
    - Compare with A1 stage 1's support answers.
    - Judge-free; about 6–10 M per configuration.
    - Fix a classifier criterion on recall of hand-labelled positives for any audit measure, prospectively.
-4. **Background audit (model-free):** acceptance, redos and stability of the known-concept lists across existing accepted background tasks. It decides whether background needs any model experiment.
+4. ~~Background audit~~: **done at 09:30** (`docs/journal/2026-10-15-background-audit.md`). Keep Sonnet `high`; no model experiment is justified.
 5. Update `policy.md`'s ledger after each.
 
 ### Decisions only the author can take
