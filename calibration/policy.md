@@ -35,19 +35,19 @@
 
 **The designation is recorded before the writer is chosen,** so the rule cannot be retrofitted to favourable results.
 
-| Page | Key-step | Source |
-|---|---|---|
-| 0015 `subset-intersection-labels` | yes | the author, 01:06 |
-| 0016 `rank-saving-recurrence` | yes | the author, 01:06 |
-| 0014 `common-frame-principle` | no | the author, 01:06 |
-| 0004–0013, 0017–0038 | not yet designated | to be designated from the plan alone, before any writer is chosen for a full run of this wiki |
+**The designation (blind, 01:25 UTC, 2026-10-15; `docs/journal/2026-10-15-keystep-designation/`).**
+- **How it was made:** a fresh Opus reviewer applied the rule to all 35 pages, from the plan alone. It saw neither W2 nor W2b, and its transcript shows it read only its prompt and the plan packet. The author asked for this at about 01:22, so that the classification does not depend on the observed writer scores.
+- **The result:** 23 pages are key-step: 0012–0019, 0021–0023 and 0027–0038.
+- **Not key-step:** 0004–0011, 0020 and 0024–0026.
+- **Borderline:** 0010 (marked no); 0018, 0019, 0021, 0022, 0028, 0034 and 0035 (marked yes).
 
-**A flag on page 0014 (the session's, recorded with the decision):**
-- W2 chose page 0014 *because* it carries the key step (`plans/W2.md`: "Two pages, chosen because they carry the key step"), as `S4.2`, the common-frame principle.
-- Opus bought nothing measurable there, so excluding it is consistent with the results. But read by the rule alone, it may qualify.
-- **Two consistent ways forward:**
-  1. designate every page by the rule, from the plan alone, by someone who has not seen W2 or W2b, accepting Opus spend wherever the rule says so;
-  2. keep the author's designation of 0014 as a judgement call, and say so in the record.
+**This governs the writer choice.** The author's earlier "0014 does not qualify" was made after the writer results were seen, so it is superseded and not counted as independent evidence. 0014 is key-step under the blind designation.
+
+**What it implies (decision-relevant, reported to the author):**
+- The rule, applied blind, covers 23 of 35 pages, not the two hard pages the evidence is about.
+- On 0014, the one designated page W2 measured besides 0015 and 0016, Opus bought nothing measurable over Sonnet.
+- Opus wrote 0014–0016 at 1.4–4.2 M more cache read per page than Sonnet (2–5.6×). Across 23 pages that is roughly 30–100 M more per wiki, a rough range in measured tokens, not converted to quota.
+- Whether the rule should be narrower is the author's call. Nothing here runs a writer.
 
 ## Cost per argument run, measured (for the table's cost column)
 

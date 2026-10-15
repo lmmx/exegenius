@@ -1,0 +1,20 @@
+You are classifying the pages of an explanatory wiki built from a mathematics paper's argument plan. Read only the two files named here.
+
+**The file to read:** `/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/keystep/pages.md`. It lists 35 pages (0004 to 0038). For each page it gives what the page is, where it sits in the argument, and, for pages that carry steps of the argument, the steps the page derives. Do not read the paper, other files or the web.
+
+**The rule.** Designate a page as **key-step** when it introduces or carries a central derivation, proof transition, or result whose omission or distortion would break the explanatory chain. Every other page is not key-step.
+
+Apply the rule to each page on its own content and its place in the argument, consistently across all 35 pages:
+- A page that only defines a concept, recalls standard material, or supports a step without carrying one is not key-step, however useful.
+- A page that carries a derivation, transition or result the main result's chain cannot do without, so that an error or gap on it would break the chain a reader follows, is key-step.
+- Where the call is close, decide, and mark it `borderline`.
+
+**Write your answer** as JSON to `/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/keystep/designation.json`:
+
+```
+{"rule": "<the rule, copied>",
+ "pages": [{"page": "0004", "slug": "...", "key_step": true, "borderline": false,
+            "reason": "one or two sentences: what the page carries and why its omission or distortion would, or would not, break the chain"}]}
+```
+
+List all 35 pages in order. Then reply with one line: the number of key-step pages and the number marked borderline.

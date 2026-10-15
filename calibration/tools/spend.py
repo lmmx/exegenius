@@ -49,6 +49,7 @@ RULES = [  # (pattern on the description, experiment, role)
     (r"^W2W[HMSO]P\d+ \d{4}-", "W2", "runs"),
     (r"^E11F\dO \d{4}-", "E11", "runs"),
     (r"^K3 judge", "K3 (pairwise)", "judging"),
+    (r"^KS ", "key-step designation", "design"),
     (r"^(A1|X1|K3) ", "design subagents", "design"),
     (r"^FB1F\d \d{4}-", "FB1", "runs"),
     (r"^W1 \d{4}-", "W1 (cancelled)", "runs"),
