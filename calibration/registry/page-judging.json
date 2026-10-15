@@ -1,0 +1,30 @@
+[
+ {
+  "id": "J22",
+  "experiment": "W2",
+  "dir": "docs/journal/2026-10-14-w2-writer/judge",
+  "verdicts": "verdicts",
+  "seed": 20261036,
+  "judge": {
+   "agent": "general-purpose",
+   "model_id": "claude-opus-5-5"
+  },
+  "judges_per_page": "three",
+  "scoring": "calibration/tools/pages.py (assigned ids only)",
+  "journal": "calibration/plans/W2.md"
+ },
+ {
+  "id": "J24",
+  "experiment": "W2b",
+  "dir": "docs/journal/2026-10-14-w2b-writer/judge",
+  "verdicts": "verdicts",
+  "seed": 20261037,
+  "judge": {
+   "agent": "general-purpose",
+   "model_id": "claude-opus-5-5"
+  },
+  "judges_per_page": "three",
+  "scoring": "calibration/tools/pages.py --pooled (assigned ids only)",
+  "journal": "calibration/plans/W2b.md"
+ }
+]

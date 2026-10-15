@@ -220,5 +220,23 @@
    "calibration/rubrics/nlogn-central-saving.md"
   ],
   "journal": "docs/journal/2026-10-14-e8b-e9.md"
+ },
+ {
+  "id": "J21",
+  "dir": "docs/journal/2026-10-14-e10-combined/judge",
+  "key": "key.json",
+  "verdicts": "verdicts",
+  "reference": "docs/journal/2026-10-13-run-log-and-coverage/reference-draft/reference.json",
+  "judge": {
+   "agent": "general-purpose",
+   "model_id": "claude-opus-5-5",
+   "effort": "inherited from the development session"
+  },
+  "seed": 20261034,
+  "judges_per_plan": "three for E10's four plans, E7F3W, E7F5W, E7F6W and E9F4Y; one for each anchor; central steps by majority",
+  "rubrics": [
+   "calibration/rubrics/nlogn-central-saving.md"
+  ],
+  "journal": "calibration/plans/E10.md"
  }
 ]

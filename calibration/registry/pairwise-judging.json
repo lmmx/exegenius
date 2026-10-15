@@ -1,0 +1,17 @@
+[
+ {
+  "id": "K3",
+  "experiment": "K3",
+  "dir": "docs/journal/2026-10-14-k3-pairwise-design",
+  "verdicts": "verdicts",
+  "seed": 20261040,
+  "judge": {
+   "agent": "general-purpose",
+   "model_id": "claude-opus-5-5"
+  },
+  "judges": "one per order on the wide pairs; two per order on the F2, identical and ablation pairs",
+  "prompt": "calibration/rubrics/pairwise-judge-prompt.md",
+  "scoring": "calibration/tools/pairwise.py score",
+  "journal": "calibration/plans/K3.md"
+ }
+]

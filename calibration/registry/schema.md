@@ -34,7 +34,7 @@ Every extracted value is an object `{"value": …, "basis": …}`:
 
 | Field | Meaning |
 |---|---|
-| `id`, `title`, `kind` | `kind` is `controlled` (arms differ in a stated dimension) or `observational` |
+| `id`, `title`, `kind` | `kind` is `controlled` (arms differ in a stated dimension), `screening` (one run per configuration, read against a reference), `observational`, or `instrument` (a judging method validated against known orderings; no runs, `arms` empty) |
 | `question` | what the experiment asks |
 | `document` | `name`, `title`, `class` (the document class a result is scoped to) |
 | `task` | the task or stage studied |
@@ -90,6 +90,13 @@ Run names are global across experiments (A1–A6, B1–B6, C1–C5, D1–D5, P1�
 The mechanism-checklist batches (J11, J13, J14, J15, J17, J19) have a different verdict shape: per sub-step `present` or `absent`, not the content judge's items. They are listed in `checklist-judging.json`: id, experiment, directory, verdicts, seed, judges and rubric.
 
 `registry.py` does not read them yet. Their totals are read with `../tools/ranges.py` and reported in each plan's result section.
+
+## Page and pairwise batches (`page-judging.json`, `pairwise-judging.json`)
+
+- **Page batches** (J22, J24) judge one written page against its assignment: per assigned id `presence` and `faithful`, plus errors. `../tools/pages.py` scores only the ids the assignment lists.
+- **Pairwise batches** (K3; E11's J25 when it runs) compare two plans per core result in both orders. `../tools/pairwise.py score` reads them.
+
+`registry.py` does not read either yet. Their results are carried in each spec's `reported` field, with the source named.
 
 ## What the registry does not hold yet
 

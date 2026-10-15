@@ -1,0 +1,111 @@
+{
+ "id": "W2",
+ "title": "The writer stage on two key-step pages from a fixed 19/19 plan: Sonnet high and medium, Haiku high, Opus xhigh",
+ "kind": "screening",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "exposition: write tasks 0014 (common-frame-principle) and 0015 (subset-intersection-labels), from E9F4Y's fixed plan",
+ "question": "Which writer configuration is adequate on key-step pages, and is any better than Sonnet at high?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "e8efaa3 (141026-exp-params-cases)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-w2-writer",
+  "commit": "845e3b0",
+  "transcripts": "results/transcripts/w2",
+  "description_prefix": "",
+  "planning_kinds": [
+   "write"
+  ],
+  "log_since": "2026-10-14T23:20:00Z"
+ },
+ "protocol": "run from the development session; W2.md on the evidence branch",
+ "preregistration": "calibration/plans/W2.md (criteria fixed before any run; the WM arm added by amendment before any verdict)",
+ "journal": "calibration/plans/W2.md (result section)",
+ "comparison": "WS (Sonnet, high), the pipeline's writer",
+ "arms": {
+  "WS": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "task_prompt": "the write task as rendered by exegenius-params (e8efaa3) from E9F4Y's accepted plan"
+   },
+   "runs": [
+    "W2WSP14",
+    "W2WSP15"
+   ]
+  },
+  "WM": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "medium",
+    "effort_passed": true,
+    "task_prompt": "the write task as rendered by exegenius-params (e8efaa3) from E9F4Y's accepted plan"
+   },
+   "runs": [
+    "W2WMP14",
+    "W2WMP15"
+   ]
+  },
+  "WH": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-haiku-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "task_prompt": "the write task as rendered by exegenius-params (e8efaa3) from E9F4Y's accepted plan"
+   },
+   "runs": [
+    "W2WHP14",
+    "W2WHP15"
+   ]
+  },
+  "WO": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "xhigh",
+    "effort_passed": true,
+    "task_prompt": "the write task as rendered by exegenius-params (e8efaa3) from E9F4Y's accepted plan"
+   },
+   "runs": [
+    "W2WOP14",
+    "W2WOP15"
+   ]
+  }
+ },
+ "reported": {
+  "J22_pages": {
+   "value": "assigned items faithful, three Opus judges each: page 0015 WS 8, 6, 7; WO 8, 8, 8; WH a major error on 0014 and below on 0015; WM below on 0015. Read by W2's table: Sonnet high adequate, Opus within noise at about 2x cost",
+   "basis": "reported",
+   "source": "calibration/plans/W2.md; docs/journal/2026-10-14-w2-writer/judge/results.txt"
+  },
+  "J22_cache_read_tokens": {
+   "value": "10.4 M for 24 judgements",
+   "basis": "reported",
+   "source": "spend.py --since 2026-10-14T23:37"
+  }
+ },
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus) with this session's permissions; it only passed prompts and ran exegenius next"
+  },
+  {
+   "kind": "scoring",
+   "what": "some judges itemised nested sub-steps beyond the assignment; only the assigned ids are scored (tools/pages.py)"
+  }
+ ],
+ "limitations": [
+  "One run per page and configuration; two pages of one paper.",
+  "W2b re-judged page 0015 and found W2's one-run reading did not hold."
+ ]
+}

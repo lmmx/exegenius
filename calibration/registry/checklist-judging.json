@@ -137,5 +137,25 @@
   "judges_per_plan": "two (Opus first, Sonnet second)",
   "rubric": "calibration/rubrics/nlogn-mechanism-checklist.md",
   "journal": "calibration/plans/E9.md"
+ },
+ {
+  "id": "J23",
+  "experiment": "S6",
+  "dir": "docs/journal/2026-10-14-s6-cheap-planner/checklist",
+  "verdicts": "verdicts",
+  "seed": 20261035,
+  "judges": [
+   {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5"
+   },
+   {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5"
+   }
+  ],
+  "judges_per_plan": "two (Opus first, Sonnet second)",
+  "rubric": "calibration/rubrics/nlogn-mechanism-checklist.md",
+  "journal": "calibration/plans/S6.md"
  }
 ]

@@ -1,0 +1,54 @@
+{
+ "id": "K3",
+ "title": "Blind pairwise judging of argument plans, validated against known orderings, with order swapped",
+ "kind": "instrument",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "judging: pairwise preference between two argument plans, per core result, with both orders",
+ "question": "Does pairwise judging reproduce known orderings without position bias or order reversals, and resolve differences above the primary rubric's ceiling?",
+ "evidence": {
+  "path": "docs/journal/2026-10-14-k3-pairwise-design"
+ },
+ "protocol": "calibration/tools/pairwise.py prepare and score; prompt calibration/rubrics/pairwise-judge-prompt.md; pointer prompts to Opus general-purpose subagents",
+ "preregistration": "calibration/plans/K3.md (adopted from K3-draft.md at 23:47 UTC, before any pairwise judgement)",
+ "journal": "docs/journal/2026-10-15-k3-w2b-e11.md",
+ "comparison": "known orderings from the primary batches: E8 over E7 on F4 and F8, E9F2Y over E8F2X over E7F2W, and E9F2Y over a copy with one sub-step (S1.5.6, L5) removed",
+ "arms": {},
+ "reported": {
+  "criteria": {
+   "value": "1(a) 4 of 4; 1(b) 4 of 4 and 4 of 4; 1(c) 37 of 37 items agree, 0 reversed; 2(a) 0 of 4 overall, 0 of 108 items; 2(b) position share 106 of 214 (0.50); 3(a) 14 of 14 couples agree; 3(b) 0 of 378 item reversals, cross-order 0.93 against judge-to-judge 0.91; 4(a) 6 of 6; 4(b) 0 of 162 reversals, kappa 0.82; 5 resolved: intact plan 4 of 4 (slight), located at label-residual-budget",
+   "basis": "reported",
+   "source": "calibration/plans/K3.md; docs/journal/2026-10-14-k3-pairwise-design/results.txt"
+  },
+  "outcome": {
+   "value": "criteria 1-4 met: adopted as the measure for comparisons above the primary rubric's ceiling; the smallest claimable difference is one sub-step",
+   "basis": "reported",
+   "source": "calibration/plans/K3.md"
+  },
+  "cache_read_tokens": {
+   "value": "114.5 M for 20 judgements (mean 5.73 M, range 2.8-8.8 M)",
+   "basis": "reported",
+   "source": "perrun.py over the K3 judge transcripts"
+  }
+ },
+ "deviations": [],
+ "limitations": [
+  "The identical-pair control is not informative: every judge noticed the two files were identical, so it cannot detect position bias. The evidence on position bias is the balanced share on different plans and the absence of reversals; the control is not evidence of reliability.",
+  "Opus judges only; Sonnet judges are not validated for pairwise use.",
+  "One paper; known orderings come from one family of instruction versions."
+ ],
+ "built": {
+  "by": "calibration/tools/registry.py",
+  "wiki_commit": null
+ },
+ "orchestrator_observed": {
+  "value": null,
+  "basis": "unavailable",
+  "note": "no main transcript at the evidence commit"
+ },
+ "runs": [],
+ "arm_summary": {}
+}

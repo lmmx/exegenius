@@ -1,0 +1,648 @@
+{
+ "id": "S6",
+ "title": "Cheaper planners with the combined instruction: Sonnet at medium and Haiku at high",
+ "kind": "screening",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task only, on E6's extractions F2 and F4 (background accepted)",
+ "question": "Does a cheaper planner stay at the ceiling the combined instruction reaches with Sonnet at high?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "e8efaa3 (141026-exp-params-cases)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-e10-s6",
+  "commit": "4335166",
+  "transcripts": "results/transcripts/e10-s6",
+  "description_prefix": "",
+  "planning_kinds": [
+   "argument"
+  ],
+  "log_since": "2026-10-14T23:20:00Z"
+ },
+ "protocol": "run from the development session; E10-S6.md on the evidence branch",
+ "preregistration": "calibration/plans/S6.md (criteria fixed before any run)",
+ "journal": "calibration/plans/S6.md (result section)",
+ "comparison": "E9F2Y and E9F4Y (Sonnet, high, combined instruction), re-judged in J23 (checklist)",
+ "arms": {
+  "SM": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "medium",
+    "effort_passed": true,
+    "task_prompt": "the E8 argument instructions plus the parameters-and-cases sentence (the combined instruction)"
+   },
+   "runs": [
+    "S6F2SM",
+    "S6F4SM"
+   ]
+  },
+  "HH": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-haiku-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "task_prompt": "the E8 argument instructions plus the parameters-and-cases sentence (the combined instruction)"
+   },
+   "runs": [
+    "S6F2HH",
+    "S6F4HH"
+   ]
+  }
+ },
+ "reported": {
+  "J23_checklist": {
+   "value": "of 26 sub-steps, Opus then Sonnet judge: E9 reference F2 25, 26 and F4 25, 23; Sonnet medium F2 19, 18 and F4 10, 9; Haiku high F2 1, 1 and F4 4, 5. Neither holds, so stage 2 (primary judging) was not run",
+   "basis": "reported",
+   "source": "calibration/plans/S6.md"
+  },
+  "J23_cache_read_tokens": {
+   "value": "9.3 M for 12 judgements",
+   "basis": "reported",
+   "source": "spend.py --since 2026-10-14T23:37"
+  }
+ },
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus) with this session's permissions; it only passed prompts and ran exegenius next"
+  }
+ ],
+ "limitations": [
+  "One run per extraction and configuration, two extractions; a checklist screen only."
+ ],
+ "built": {
+  "by": "calibration/tools/registry.py",
+  "wiki_commit": "4335166"
+ },
+ "orchestrator_observed": {
+  "value": null,
+  "basis": "unavailable",
+  "note": "no main transcript at the evidence commit"
+ },
+ "runs": [
+  {
+   "id": "S6F2SM",
+   "arm": "SM",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T23:40:05.463000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 212,
+         "located": 212,
+         "first_tenth": 5,
+         "span": [
+          91,
+          4989
+         ],
+         "sections_quoted": 43,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-14T23:25:38.154000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 867.3,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-sonnet-5-5": 31
+     },
+     "effort": {
+      "medium": 31
+     },
+     "model_calls": {
+      "value": 19,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 38,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 2463205,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 436998,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 31537,
+      "basis": "estimated",
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 197408,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
+     "seconds": {
+      "value": 760.6,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "S6F2SM 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "medium"
+    ]
+   },
+   "matches_arm": true,
+   "quality": []
+  },
+  {
+   "id": "S6F4SM",
+   "arm": "SM",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T23:34:03.292000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 175,
+         "located": 175,
+         "first_tenth": 7,
+         "span": [
+          76,
+          4994
+         ],
+         "sections_quoted": 44,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-14T23:34:20.191000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 179,
+         "located": 179,
+         "first_tenth": 7,
+         "span": [
+          76,
+          4994
+         ],
+         "sections_quoted": 44,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-14T23:25:38.282000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 521.9,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 1,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-sonnet-5-5": 41
+     },
+     "effort": {
+      "medium": 41
+     },
+     "model_calls": {
+      "value": 18,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 36,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 1991189,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 207318,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 17276,
+      "basis": "estimated",
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 94116,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
+     "seconds": {
+      "value": 415.7,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "S6F4SM 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "medium"
+    ]
+   },
+   "matches_arm": true,
+   "quality": []
+  },
+  {
+   "id": "S6F2HH",
+   "arm": "HH",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T23:37:46.292000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 65,
+         "located": 65,
+         "first_tenth": 2,
+         "span": [
+          92,
+          4987
+         ],
+         "sections_quoted": 37,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-14T23:37:56.699000Z",
+       "outcome": "error"
+      }
+     ],
+     "issued": "2026-10-14T23:25:38.218000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 728.1,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-haiku-5-5": 66
+     },
+     "effort": {
+      "high": 66
+     },
+     "model_calls": {
+      "value": 36,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 72,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 5439373,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 453197,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 13308,
+      "basis": "estimated",
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 399776,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
+     "seconds": {
+      "value": 653.4,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "S6F2HH 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-haiku-5-5"
+    ],
+    "efforts": [
+     "high"
+    ]
+   },
+   "matches_arm": true,
+   "quality": []
+  },
+  {
+   "id": "S6F4HH",
+   "arm": "HH",
+   "planning_tasks": [
+    {
+     "task": "0003-argument",
+     "kind": "argument",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T23:40:20.556000Z",
+       "outcome": "rejected",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 86,
+         "located": 86,
+         "first_tenth": 2,
+         "span": [
+          32,
+          4987
+         ],
+         "sections_quoted": 41,
+         "sections": 56
+        }
+       ]
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-14T23:40:39.442000Z",
+       "outcome": "accepted",
+       "coverage": [
+        {
+         "source": "paper",
+         "lines": 5361,
+         "quotes": 86,
+         "located": 86,
+         "first_tenth": 1,
+         "span": [
+          32,
+          4987
+         ],
+         "sections_quoted": 39,
+         "sections": 56
+        }
+       ]
+      }
+     ],
+     "issued": "2026-10-14T23:25:38.364000Z"
+    }
+   ],
+   "other_tasks_issued": 0,
+   "planning_seconds": {
+    "value": 901.1,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 1,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-haiku-5-5": 51
+     },
+     "effort": {
+      "high": 51
+     },
+     "model_calls": {
+      "value": 29,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 58,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 4322943,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 521630,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 15371,
+      "basis": "estimated",
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 511248,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
+     "seconds": {
+      "value": 795.0,
+      "basis": "measured"
+     },
+     "task": "0003-argument",
+     "description": "S6F4HH 0003-argument"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-haiku-5-5"
+    ],
+    "efforts": [
+     "high"
+    ]
+   },
+   "matches_arm": true,
+   "quality": []
+  }
+ ],
+ "arm_summary": {
+  "SM": {
+   "runs": 2,
+   "resources_argument": {
+    "model_calls": {
+     "n": 2,
+     "median": 18.5,
+     "min": 18,
+     "max": 19
+    },
+    "cache_read_tokens": {
+     "n": 2,
+     "median": 2227197.0,
+     "min": 1991189,
+     "max": 2463205
+    },
+    "cache_write_tokens": {
+     "n": 2,
+     "median": 322158.0,
+     "min": 207318,
+     "max": 436998
+    },
+    "output_tokens": {
+     "n": 2,
+     "median": 24406.5,
+     "min": 17276,
+     "max": 31537
+    },
+    "seconds": {
+     "n": 2,
+     "median": 588.15,
+     "min": 415.7,
+     "max": 760.6
+    }
+   },
+   "planning_seconds": {
+    "n": 2,
+    "median": 694.5999999999999,
+    "min": 521.9,
+    "max": 867.3
+   }
+  },
+  "HH": {
+   "runs": 2,
+   "resources_argument": {
+    "model_calls": {
+     "n": 2,
+     "median": 32.5,
+     "min": 29,
+     "max": 36
+    },
+    "cache_read_tokens": {
+     "n": 2,
+     "median": 4881158.0,
+     "min": 4322943,
+     "max": 5439373
+    },
+    "cache_write_tokens": {
+     "n": 2,
+     "median": 487413.5,
+     "min": 453197,
+     "max": 521630
+    },
+    "output_tokens": {
+     "n": 2,
+     "median": 14339.5,
+     "min": 13308,
+     "max": 15371
+    },
+    "seconds": {
+     "n": 2,
+     "median": 724.2,
+     "min": 653.4,
+     "max": 795.0
+    }
+   },
+   "planning_seconds": {
+    "n": 2,
+    "median": 814.6,
+    "min": 728.1,
+    "max": 901.1
+   }
+  }
+ }
+}

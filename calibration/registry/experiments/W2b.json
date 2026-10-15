@@ -1,0 +1,1371 @@
+{
+ "id": "W2b",
+ "title": "Opus xhigh against Sonnet high on the hard key-step pages: a repeat on page 0015 and a second hard page, 0016",
+ "kind": "controlled",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "exposition: write tasks 0015 (repeat) and 0016 (rank-saving-recurrence), from E9F4Y's fixed plan; W2's page-0015 runs re-judged in the same batch",
+ "question": "Does Opus at xhigh write the hard key-step pages better than Sonnet at high, pooled over runs?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "e8efaa3 (141026-exp-params-cases)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-w2-writer",
+  "commit": "845e3b0",
+  "transcripts": "results/transcripts/w2",
+  "description_prefix": "",
+  "planning_kinds": [
+   "write"
+  ],
+  "log_since": "2026-10-14T23:55:00Z"
+ },
+ "protocol": "run from the development session; W2.md on the evidence branch",
+ "preregistration": "calibration/plans/W2b.md (criteria fixed at 23:56 UTC, before any run; page 0016's scored ids fixed at 23:58, before any verdict)",
+ "journal": "docs/journal/2026-10-15-k3-w2b-e11.md",
+ "comparison": "Sonnet high on the same pages; W2WSP15 and W2WOP15 re-judged in J24",
+ "arms": {
+  "WS": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "task_prompt": "the write task as rendered by exegenius-params (e8efaa3) from E9F4Y's accepted plan"
+   },
+   "runs": [
+    "W2WSP15R",
+    "W2WSP16"
+   ]
+  },
+  "WO": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "xhigh",
+    "effort_passed": true,
+    "task_prompt": "the write task as rendered by exegenius-params (e8efaa3) from E9F4Y's accepted plan"
+   },
+   "runs": [
+    "W2WOP15R",
+    "W2WOP16"
+   ]
+  }
+ },
+ "reported": {
+  "J24_pooled": {
+   "value": "page 0015: Opus 8, 8, 8 and 8, 7, 8 of 8, no major error; Sonnet 7, 6, 5 and 5, 5, 5, W2WSP15R with a major error in all three judgements. Page 0016: Opus 4, 4, 4; Sonnet 3, 3, 3 of 4. By the pooled rule Opus is better on both pages",
+   "basis": "reported",
+   "source": "calibration/plans/W2b.md; docs/journal/2026-10-14-w2b-writer/judge/results.txt"
+  },
+  "decision": {
+   "value": "the author adopted a provisional, paper-specific writer exception at about 01:06 UTC on 2026-10-15: Opus xhigh for key-step pages (0015, 0016), Sonnet high otherwise; Sonnet high remains the general default",
+   "basis": "reported",
+   "source": "calibration/policy.md"
+  },
+  "J24_cache_read_tokens": {
+   "value": "9.67 M for 18 judgements",
+   "basis": "reported",
+   "source": "perrun.py over the J24 transcripts"
+  },
+  "runs_cache_read_tokens": {
+   "value": "Opus 8.06 M (0015) and 2.09 M (0016); Sonnet 3.92 M (0015) and 0.66 M (0016)",
+   "basis": "reported",
+   "source": "perrun.py over the run transcripts"
+  }
+ },
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus) with this session's permissions; it only passed prompts and ran exegenius next"
+  }
+ ],
+ "limitations": [
+  "Two hard pages of one paper; two runs per configuration on page 0015 and one on 0016, where the gap is one sub-step.",
+  "Judge drift between batches: W2WSP15 was 8, 6, 7 in J22 and 7, 6, 5 in J24."
+ ],
+ "built": {
+  "by": "calibration/tools/registry.py",
+  "wiki_commit": "845e3b0"
+ },
+ "orchestrator_observed": {
+  "value": null,
+  "basis": "unavailable",
+  "note": "no main transcript at the evidence commit"
+ },
+ "runs": [
+  {
+   "id": "W2WSP15R",
+   "arm": "WS",
+   "planning_tasks": [
+    {
+     "task": "0004-write-integer-multiplication-conjecture",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.400000Z"
+    },
+    {
+     "task": "0005-write-polynomial-ring-mod",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.401000Z"
+    },
+    {
+     "task": "0006-write-fixed-point-truncation",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.401000Z"
+    },
+    {
+     "task": "0007-write-established-multiplier",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.402000Z"
+    },
+    {
+     "task": "0008-write-tape-address-model",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.402000Z"
+    },
+    {
+     "task": "0009-write-elementary-stream-ops",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.402000Z"
+    },
+    {
+     "task": "0010-write-controlled-shift",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.403000Z"
+    },
+    {
+     "task": "0011-write-linear-algebra-basics",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.403000Z"
+    },
+    {
+     "task": "0012-write-linear-network",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.404000Z"
+    },
+    {
+     "task": "0013-write-address-shear",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.404000Z"
+    },
+    {
+     "task": "0014-write-common-frame-principle",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.404000Z"
+    },
+    {
+     "task": "0015-write-subset-intersection-labels",
+     "kind": "write",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-15T00:01:24.241000Z",
+       "outcome": "error"
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-15T00:04:23.116000Z",
+       "outcome": "error"
+      },
+      {
+       "attempt": 3,
+       "at": "2026-10-15T00:04:36.439000Z",
+       "outcome": "rejected"
+      },
+      {
+       "attempt": 4,
+       "at": "2026-10-15T00:05:41.275000Z",
+       "outcome": "rejected"
+      },
+      {
+       "attempt": 5,
+       "at": "2026-10-15T00:06:18.880000Z",
+       "outcome": "rejected"
+      },
+      {
+       "attempt": 6,
+       "at": "2026-10-15T00:06:27.687000Z",
+       "outcome": "rejected"
+      },
+      {
+       "attempt": 7,
+       "at": "2026-10-15T00:06:33.155000Z",
+       "outcome": "rejected"
+      },
+      {
+       "attempt": 8,
+       "at": "2026-10-15T00:06:41.398000Z",
+       "outcome": "rejected"
+      },
+      {
+       "attempt": 9,
+       "at": "2026-10-15T00:06:46.928000Z",
+       "outcome": "accepted"
+      }
+     ],
+     "issued": "2026-10-14T23:56:41.405000Z"
+    },
+    {
+     "task": "0016-write-rank-saving-recurrence",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.405000Z"
+    },
+    {
+     "task": "0017-write-address-chunk-interchange",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.405000Z"
+    },
+    {
+     "task": "0018-write-packed-selected-bit-addition",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.406000Z"
+    },
+    {
+     "task": "0019-write-signed-packing",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.406000Z"
+    },
+    {
+     "task": "0020-write-cyclic-convolution",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.407000Z"
+    },
+    {
+     "task": "0021-write-radix-digit-convolution",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.407000Z"
+    },
+    {
+     "task": "0022-write-phase-twist",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.407000Z"
+    },
+    {
+     "task": "0023-write-exact-recovery",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.408000Z"
+    },
+    {
+     "task": "0024-write-dft",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.408000Z"
+    },
+    {
+     "task": "0025-write-multidimensional-dft",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.408000Z"
+    },
+    {
+     "task": "0026-write-butterfly",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.409000Z"
+    },
+    {
+     "task": "0027-write-synthetic-transform",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.409000Z"
+    },
+    {
+     "task": "0028-write-bluestein-chirp",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.409000Z"
+    },
+    {
+     "task": "0029-write-phase-frame-kernel",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.410000Z"
+    },
+    {
+     "task": "0030-write-fast-butterfly-layer",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.410000Z"
+    },
+    {
+     "task": "0031-write-ring-convolution",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.410000Z"
+    },
+    {
+     "task": "0032-write-gaussian-resampling",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.411000Z"
+    },
+    {
+     "task": "0033-write-permutation-cancellation",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.411000Z"
+    },
+    {
+     "task": "0034-write-crt-address-map",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.411000Z"
+    },
+    {
+     "task": "0035-write-parameter-choice",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.412000Z"
+    },
+    {
+     "task": "0036-write-multiplication-algorithm",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.412000Z"
+    },
+    {
+     "task": "0037-write-time-accounting",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.413000Z"
+    },
+    {
+     "task": "0038-write-main-theorem",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:41.413000Z"
+    }
+   ],
+   "other_tasks_issued": 35,
+   "planning_seconds": {
+    "value": 605.5,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 6,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-sonnet-5-5": 65
+     },
+     "effort": {
+      "high": 65
+     },
+     "model_calls": {
+      "value": 34,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 68,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 3919574,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 154703,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 23130,
+      "basis": "estimated",
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 119196,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
+     "seconds": {
+      "value": 510.0,
+      "basis": "measured"
+     },
+     "task": "0015-write",
+     "description": "W2WSP15R 0015-write"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "high"
+    ]
+   },
+   "matches_arm": true,
+   "quality": []
+  },
+  {
+   "id": "W2WSP16",
+   "arm": "WS",
+   "planning_tasks": [
+    {
+     "task": "0004-write-integer-multiplication-conjecture",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.033000Z"
+    },
+    {
+     "task": "0005-write-polynomial-ring-mod",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.034000Z"
+    },
+    {
+     "task": "0006-write-fixed-point-truncation",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.034000Z"
+    },
+    {
+     "task": "0007-write-established-multiplier",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.034000Z"
+    },
+    {
+     "task": "0008-write-tape-address-model",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.035000Z"
+    },
+    {
+     "task": "0009-write-elementary-stream-ops",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.035000Z"
+    },
+    {
+     "task": "0010-write-controlled-shift",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.035000Z"
+    },
+    {
+     "task": "0011-write-linear-algebra-basics",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.036000Z"
+    },
+    {
+     "task": "0012-write-linear-network",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.036000Z"
+    },
+    {
+     "task": "0013-write-address-shear",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.036000Z"
+    },
+    {
+     "task": "0014-write-common-frame-principle",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.037000Z"
+    },
+    {
+     "task": "0015-write-subset-intersection-labels",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.037000Z"
+    },
+    {
+     "task": "0016-write-rank-saving-recurrence",
+     "kind": "write",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-14T23:59:57.006000Z",
+       "outcome": "rejected"
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-15T00:00:08.256000Z",
+       "outcome": "rejected"
+      },
+      {
+       "attempt": 3,
+       "at": "2026-10-15T00:00:14.098000Z",
+       "outcome": "accepted"
+      }
+     ],
+     "issued": "2026-10-14T23:56:49.037000Z"
+    },
+    {
+     "task": "0017-write-address-chunk-interchange",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.038000Z"
+    },
+    {
+     "task": "0018-write-packed-selected-bit-addition",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.038000Z"
+    },
+    {
+     "task": "0019-write-signed-packing",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.038000Z"
+    },
+    {
+     "task": "0020-write-cyclic-convolution",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.039000Z"
+    },
+    {
+     "task": "0021-write-radix-digit-convolution",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.039000Z"
+    },
+    {
+     "task": "0022-write-phase-twist",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.039000Z"
+    },
+    {
+     "task": "0023-write-exact-recovery",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.040000Z"
+    },
+    {
+     "task": "0024-write-dft",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.040000Z"
+    },
+    {
+     "task": "0025-write-multidimensional-dft",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.040000Z"
+    },
+    {
+     "task": "0026-write-butterfly",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.041000Z"
+    },
+    {
+     "task": "0027-write-synthetic-transform",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.041000Z"
+    },
+    {
+     "task": "0028-write-bluestein-chirp",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.041000Z"
+    },
+    {
+     "task": "0029-write-phase-frame-kernel",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.042000Z"
+    },
+    {
+     "task": "0030-write-fast-butterfly-layer",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.042000Z"
+    },
+    {
+     "task": "0031-write-ring-convolution",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.043000Z"
+    },
+    {
+     "task": "0032-write-gaussian-resampling",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.043000Z"
+    },
+    {
+     "task": "0033-write-permutation-cancellation",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.044000Z"
+    },
+    {
+     "task": "0034-write-crt-address-map",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.044000Z"
+    },
+    {
+     "task": "0035-write-parameter-choice",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.044000Z"
+    },
+    {
+     "task": "0036-write-multiplication-algorithm",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.045000Z"
+    },
+    {
+     "task": "0037-write-time-accounting",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.045000Z"
+    },
+    {
+     "task": "0038-write-main-theorem",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:49.046000Z"
+    }
+   ],
+   "other_tasks_issued": 35,
+   "planning_seconds": {
+    "value": 205.1,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 2,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-sonnet-5-5": 19
+     },
+     "effort": {
+      "high": 19
+     },
+     "model_calls": {
+      "value": 11,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 22,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 656768,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 78593,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 4220,
+      "basis": "estimated",
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 34140,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
+     "seconds": {
+      "value": 116.8,
+      "basis": "measured"
+     },
+     "task": "0016-write",
+     "description": "W2WSP16 0016-write"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "high"
+    ]
+   },
+   "matches_arm": true,
+   "quality": []
+  },
+  {
+   "id": "W2WOP15R",
+   "arm": "WO",
+   "planning_tasks": [
+    {
+     "task": "0004-write-integer-multiplication-conjecture",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.278000Z"
+    },
+    {
+     "task": "0005-write-polynomial-ring-mod",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.278000Z"
+    },
+    {
+     "task": "0006-write-fixed-point-truncation",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.279000Z"
+    },
+    {
+     "task": "0007-write-established-multiplier",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.279000Z"
+    },
+    {
+     "task": "0008-write-tape-address-model",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.279000Z"
+    },
+    {
+     "task": "0009-write-elementary-stream-ops",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.280000Z"
+    },
+    {
+     "task": "0010-write-controlled-shift",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.280000Z"
+    },
+    {
+     "task": "0011-write-linear-algebra-basics",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.281000Z"
+    },
+    {
+     "task": "0012-write-linear-network",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.281000Z"
+    },
+    {
+     "task": "0013-write-address-shear",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.281000Z"
+    },
+    {
+     "task": "0014-write-common-frame-principle",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.282000Z"
+    },
+    {
+     "task": "0015-write-subset-intersection-labels",
+     "kind": "write",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-15T00:10:00.387000Z",
+       "outcome": "rejected"
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-15T00:18:04.588000Z",
+       "outcome": "accepted"
+      }
+     ],
+     "issued": "2026-10-14T23:56:45.282000Z"
+    },
+    {
+     "task": "0016-write-rank-saving-recurrence",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.282000Z"
+    },
+    {
+     "task": "0017-write-address-chunk-interchange",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.283000Z"
+    },
+    {
+     "task": "0018-write-packed-selected-bit-addition",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.283000Z"
+    },
+    {
+     "task": "0019-write-signed-packing",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.284000Z"
+    },
+    {
+     "task": "0020-write-cyclic-convolution",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.284000Z"
+    },
+    {
+     "task": "0021-write-radix-digit-convolution",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.284000Z"
+    },
+    {
+     "task": "0022-write-phase-twist",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.285000Z"
+    },
+    {
+     "task": "0023-write-exact-recovery",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.285000Z"
+    },
+    {
+     "task": "0024-write-dft",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.286000Z"
+    },
+    {
+     "task": "0025-write-multidimensional-dft",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.286000Z"
+    },
+    {
+     "task": "0026-write-butterfly",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.286000Z"
+    },
+    {
+     "task": "0027-write-synthetic-transform",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.287000Z"
+    },
+    {
+     "task": "0028-write-bluestein-chirp",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.287000Z"
+    },
+    {
+     "task": "0029-write-phase-frame-kernel",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.287000Z"
+    },
+    {
+     "task": "0030-write-fast-butterfly-layer",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.288000Z"
+    },
+    {
+     "task": "0031-write-ring-convolution",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.288000Z"
+    },
+    {
+     "task": "0032-write-gaussian-resampling",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.288000Z"
+    },
+    {
+     "task": "0033-write-permutation-cancellation",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.289000Z"
+    },
+    {
+     "task": "0034-write-crt-address-map",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.289000Z"
+    },
+    {
+     "task": "0035-write-parameter-choice",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.289000Z"
+    },
+    {
+     "task": "0036-write-multiplication-algorithm",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.290000Z"
+    },
+    {
+     "task": "0037-write-time-accounting",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.290000Z"
+    },
+    {
+     "task": "0038-write-main-theorem",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:45.291000Z"
+    }
+   ],
+   "other_tasks_issued": 35,
+   "planning_seconds": {
+    "value": 1279.3,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 1,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-opus-5-5": 94
+     },
+     "effort": {
+      "xhigh": 94
+     },
+     "model_calls": {
+      "value": 50,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 100,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 8063704,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 221701,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 28591,
+      "basis": "estimated",
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 274504,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
+     "seconds": {
+      "value": 1187.2,
+      "basis": "measured"
+     },
+     "task": "0015-write",
+     "description": "W2WOP15R 0015-write"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-opus-5-5"
+    ],
+    "efforts": [
+     "xhigh"
+    ]
+   },
+   "matches_arm": true,
+   "quality": []
+  },
+  {
+   "id": "W2WOP16",
+   "arm": "WO",
+   "planning_tasks": [
+    {
+     "task": "0004-write-integer-multiplication-conjecture",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.601000Z"
+    },
+    {
+     "task": "0005-write-polynomial-ring-mod",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.601000Z"
+    },
+    {
+     "task": "0006-write-fixed-point-truncation",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.602000Z"
+    },
+    {
+     "task": "0007-write-established-multiplier",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.602000Z"
+    },
+    {
+     "task": "0008-write-tape-address-model",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.603000Z"
+    },
+    {
+     "task": "0009-write-elementary-stream-ops",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.603000Z"
+    },
+    {
+     "task": "0010-write-controlled-shift",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.603000Z"
+    },
+    {
+     "task": "0011-write-linear-algebra-basics",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.604000Z"
+    },
+    {
+     "task": "0012-write-linear-network",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.604000Z"
+    },
+    {
+     "task": "0013-write-address-shear",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.604000Z"
+    },
+    {
+     "task": "0014-write-common-frame-principle",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.605000Z"
+    },
+    {
+     "task": "0015-write-subset-intersection-labels",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.605000Z"
+    },
+    {
+     "task": "0016-write-rank-saving-recurrence",
+     "kind": "write",
+     "submits": [
+      {
+       "attempt": 1,
+       "at": "2026-10-15T00:03:02.371000Z",
+       "outcome": "rejected"
+      },
+      {
+       "attempt": 2,
+       "at": "2026-10-15T00:03:41.655000Z",
+       "outcome": "rejected"
+      },
+      {
+       "attempt": 3,
+       "at": "2026-10-15T00:04:05.541000Z",
+       "outcome": "accepted"
+      }
+     ],
+     "issued": "2026-10-14T23:56:52.605000Z"
+    },
+    {
+     "task": "0017-write-address-chunk-interchange",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.606000Z"
+    },
+    {
+     "task": "0018-write-packed-selected-bit-addition",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.606000Z"
+    },
+    {
+     "task": "0019-write-signed-packing",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.606000Z"
+    },
+    {
+     "task": "0020-write-cyclic-convolution",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.607000Z"
+    },
+    {
+     "task": "0021-write-radix-digit-convolution",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.607000Z"
+    },
+    {
+     "task": "0022-write-phase-twist",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.607000Z"
+    },
+    {
+     "task": "0023-write-exact-recovery",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.608000Z"
+    },
+    {
+     "task": "0024-write-dft",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.608000Z"
+    },
+    {
+     "task": "0025-write-multidimensional-dft",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.608000Z"
+    },
+    {
+     "task": "0026-write-butterfly",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.609000Z"
+    },
+    {
+     "task": "0027-write-synthetic-transform",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.609000Z"
+    },
+    {
+     "task": "0028-write-bluestein-chirp",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.609000Z"
+    },
+    {
+     "task": "0029-write-phase-frame-kernel",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.610000Z"
+    },
+    {
+     "task": "0030-write-fast-butterfly-layer",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.610000Z"
+    },
+    {
+     "task": "0031-write-ring-convolution",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.610000Z"
+    },
+    {
+     "task": "0032-write-gaussian-resampling",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.611000Z"
+    },
+    {
+     "task": "0033-write-permutation-cancellation",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.611000Z"
+    },
+    {
+     "task": "0034-write-crt-address-map",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.612000Z"
+    },
+    {
+     "task": "0035-write-parameter-choice",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.612000Z"
+    },
+    {
+     "task": "0036-write-multiplication-algorithm",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.613000Z"
+    },
+    {
+     "task": "0037-write-time-accounting",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.613000Z"
+    },
+    {
+     "task": "0038-write-main-theorem",
+     "kind": "write",
+     "submits": [],
+     "issued": "2026-10-14T23:56:52.613000Z"
+    }
+   ],
+   "other_tasks_issued": 35,
+   "planning_seconds": {
+    "value": 432.9,
+    "basis": "measured"
+   },
+   "rejected_submits": {
+    "value": 2,
+    "basis": "measured"
+   },
+   "coverage_rejections": {
+    "value": 0,
+    "basis": "measured"
+   },
+   "subagents": [
+    {
+     "agent_type": "general-purpose",
+     "models": {
+      "claude-opus-5-5": 46
+     },
+     "effort": {
+      "xhigh": 46
+     },
+     "model_calls": {
+      "value": 25,
+      "basis": "measured"
+     },
+     "input_tokens": {
+      "value": 50,
+      "basis": "measured"
+     },
+     "cache_read_tokens": {
+      "value": 2086236,
+      "basis": "measured"
+     },
+     "cache_write_tokens": {
+      "value": 83035,
+      "basis": "measured"
+     },
+     "output_tokens": {
+      "value": 8383,
+      "basis": "estimated",
+      "note": "visible content characters / 4 (text, tool calls); thinking is not stored in transcripts, so hidden reasoning is not counted"
+     },
+     "thinking_signature_chars": {
+      "value": 93396,
+      "basis": "measured",
+      "note": "length of the encrypted thinking signatures; a proxy for hidden reasoning, not a token count"
+     },
+     "max_tokens_stops": {
+      "value": 0,
+      "basis": "measured",
+      "note": "model calls cut off at the output-token limit; their output, thinking included, is not carried into the next call"
+     },
+     "seconds": {
+      "value": 348.0,
+      "basis": "measured"
+     },
+     "task": "0016-write",
+     "description": "W2WOP16 0016-write"
+    }
+   ],
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-opus-5-5"
+    ],
+    "efforts": [
+     "xhigh"
+    ]
+   },
+   "matches_arm": true,
+   "quality": []
+  }
+ ],
+ "arm_summary": {
+  "WS": {
+   "runs": 2,
+   "planning_seconds": {
+    "n": 2,
+    "median": 405.3,
+    "min": 205.1,
+    "max": 605.5
+   }
+  },
+  "WO": {
+   "runs": 2,
+   "planning_seconds": {
+    "n": 2,
+    "median": 856.0999999999999,
+    "min": 432.9,
+    "max": 1279.3
+   }
+  }
+ }
+}

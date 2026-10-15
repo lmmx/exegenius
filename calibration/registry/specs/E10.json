@@ -1,0 +1,74 @@
+{
+ "id": "E10",
+ "title": "The combined instruction against E7 where the E8 sentence alone tied, Sonnet at high, with a repeat",
+ "kind": "controlled",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "planning: the argument task only, on E6's extractions F3, F5, F6, and F4 (repeat of E9F4Y) (background accepted)",
+ "question": "Does the combined instruction beat E7 beyond judge noise where the E8 sentence alone tied or barely gained, and is its run variance smaller than its gain?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "e8efaa3 (141026-exp-params-cases)"
+ },
+ "evidence": {
+  "repo": "lmmx/openai-nlogn-wiki",
+  "branch": "141026-exp-e10-s6",
+  "commit": "4335166",
+  "transcripts": "results/transcripts/e10-s6",
+  "description_prefix": "",
+  "planning_kinds": [
+   "argument"
+  ],
+  "log_since": "2026-10-14T22:10:00Z"
+ },
+ "protocol": "run from the development session; E10-S6.md on the evidence branch",
+ "preregistration": "calibration/plans/E10.md (criteria fixed before any run)",
+ "journal": "calibration/plans/E10.md (result section)",
+ "comparison": "E7F3W, E7F5W, E7F6W (Sonnet, high, E7 instructions) and E9F4Y, re-judged in J21",
+ "arms": {
+  "Y": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "task_prompt": "the E8 argument instructions plus the parameters-and-cases sentence (the combined instruction)"
+   },
+   "runs": [
+    "E10F3Y",
+    "E10F5Y",
+    "E10F6Y",
+    "E10F4Y2"
+   ]
+  }
+ },
+ "reported": {
+  "outcome": {
+   "value": "supported: Y beats W beyond noise on F3, F5 and F6 (faithful 19 against 15, 15, 17 by median), the gate passes, no major errors; the repeat on F4 differs by 0 in median",
+   "basis": "reported",
+   "source": "calibration/plans/E10.md"
+  },
+  "J21_cache_read_tokens": {
+   "value": "49.7 M after 23:37 UTC; the part before the reset is not separated",
+   "basis": "reported",
+   "source": "calibration/budget.md, spend.py --since 2026-10-14T23:37"
+  }
+ },
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "orchestrated by the development session (Opus) with this session's permissions; it only passed prompts and ran exegenius next"
+  },
+  {
+   "kind": "timing",
+   "what": "J21 launched at 23:29 UTC, before the usage reset, on the author's instruction"
+  }
+ ],
+ "limitations": [
+  "One paper; one run per extraction and one repeat.",
+  "Supported for this paper's argument task only; not a general pipeline default."
+ ]
+}
