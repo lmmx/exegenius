@@ -1,0 +1,120 @@
+{
+  "pair": "Q02",
+  "items": [
+    {"id": "bank-exchange-network", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "A's parent claim says the exchange is made by 'three stages of forward invocations', whereas the paper runs a forward invocation at stages 1 and 3 and the inverse schedule from Y to X at stage 2; B's parent claim states the forward/inverted/forward route correctly. A's own sub-step S2.1.7 does give the correct route, so the error is minor.", "substep": "B4", "steps_a": ["S2.1", "S2.1.7"], "steps_b": ["S2.2.1", "S2.2.1.6"], "lines": [731, 763]}
+     ],
+     "note": "Both plans carry B1-B4 (scratch-independence (JV+RG)x, bit and complex coefficients, the three-stage sequence) and the neighbour and wire counts. The only difference is A's inaccurate parent claim that all three stages are forward invocations."},
+    {"id": "common-frame-identity", "preference": "A", "strength": "slight",
+     "differences": [
+       {"favours": "A", "what": "A derives the identity: the logical array g=D_in^{-1}f needs no preprocessing, the invariant that the stored array equals D_v applied to the logical array (holding at sources, carried along edges by D_vD_u^{-1}), and the commutation sum_j c_j D_v phi_j = D_v(sum_j c_j phi_j) at a gate. B states only the resulting operator, quoting the commutation sentence.", "substep": null, "steps_a": ["S2.2.1", "S2.2.2", "S2.2.3"], "steps_b": ["S2.2.2"], "lines": [804, 822]}
+     ],
+     "note": "Both state D_out S D_in^{-1} and the route operator epsilon_w D_sink D_source^{-1}. A also gives the invariant argument the paper uses to prove it."},
+    {"id": "label-residual-budget", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "For the orthonormal basis over F_2, B gives the paper's construction (split off unit lines, absorb each alternating plane a,b into a unit vector w via w+a, w+b, w+a+b). A only says 'nonalternating, hence has an orthonormal basis', and its reason (a norm-one coordinate vector in every residual) is not what the paper says.", "substep": "L4", "steps_a": ["S2.3.3.6"], "steps_b": ["S2.2.3.6"], "lines": [1073, 1102]}
+     ],
+     "note": "L1, L2, L3 and L5 are carried by both: the residual table, the side edge 2->5 of dimension h-2 using t_X perp t_Y, the single decreasing centre edge 3->4 with the telescoping, and 100/539 and 101/539. Only B carries L4 with its plane-absorption step. Each plan also misstates one detail of L4's reason (see errors)."},
+    {"id": "bit-shear-interface", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both assign P_U and -P_{U_a}, give rank(P_V-P_U)=dim V-dim U, the N exceptional 2P_{U_a} edges, the deficit N-2L_b and the endpoint difference I_m. B states the composition law Phi_{M'}Phi_M=Phi_{M'+M} (line 1130) and A uses it in S2.7.2, so the difference is negligible."},
+    {"id": "complex-phase-interface", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "On k columns, (C_V C_U^{-1})^{tensor k} is the product of K_{e,v}^{tensor k}, so each residual vector gives one factor on all k columns and there are s_c factors in all. B states this; A mentions k columns only for the final C^{tensor mk}.", "substep": "P3", "steps_a": [], "steps_b": ["S2.2.5.3"], "lines": [1262, 1271]},
+       {"favours": "B", "what": "The endpoint frames: the zero label has frame I and the full label C^{tensor m} (q_F(x)=wt(x)). B states this; A does not.", "substep": "P4", "steps_a": ["S2.4.6", "S2.4.7"], "steps_b": ["S2.2.5.4"], "lines": [1287, 1289]},
+       {"favours": "A", "what": "A gives the weight identity q_{U_a^perp}-q_{U_a}=wt(x)+2[u.x] (mod 4) that puts C^{-1} on the 27 support coordinates; B states the 27-coordinate result without this formula.", "substep": "P4", "steps_a": ["S2.4.5"], "steps_b": [], "lines": [1290, 1299]}
+     ],
+     "note": "Both carry P1 and P2 and the Z/i^{27k} repair. B also carries P3 (the k-column factorization), which A lacks, and gives the zero/full endpoint frames. A's extra weight formula does not offset the missing sub-step."},
+    {"id": "rank-saving", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both carry R1-R4: L/N<1/2 with deficits N-2L_b and 2N-2L_c, eta_b and eta_c exactly, both above 20*2^-50, log m<20, and s/W<m^tau with tau=sigma=1-2^-50."},
+    {"id": "stream-primitives", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both list the O(V) digit operations and cyclic row split, and the controlled shift y->y+a (mod q^b) by splitting at Q-a and swapping, plus fixed rational scalings."},
+    {"id": "matrix-shear", "preference": "A", "strength": "slight",
+     "differences": [
+       {"favours": "A", "what": "The elimination proof: A gives the pivot at the rightmost entry of the topmost nonzero row, clearing its row and column with lower triangular elementary matrices, scaling, deleting and repeating. B names only the pivot and the count of a ones.", "substep": "M1", "steps_a": ["S2.6.2"], "steps_b": ["S2.3.1.1.1"], "lines": [1375, 1391]},
+       {"favours": "A", "what": "The full shear sequence: A has transform D by E_2 and H by E_1^{-1}, add Pi D, then transform H by E_1 and D by E_2^{-1}. B omits the final retransformation.", "substep": "M4", "steps_a": ["S2.6.4"], "steps_b": ["S2.3.1.1.4"], "lines": [1432, 1434]},
+       {"favours": "B", "what": "B states that the prime makes all the identities specialize to Z/q^b with invertible triangular factors. A names only the prime's avoidance condition, in a parenthesis.", "substep": "M2", "steps_a": ["S2.6.3"], "steps_b": ["S2.3.1.1.2"], "lines": [1413, 1423]}
+     ],
+     "note": "Both have M3 and the one-interchange-per-one implementation of M4. A gives the elimination mechanism of M1 and the complete four-phase sequence; B is fuller only on the consequence of M2."},
+    {"id": "interchange-recurrence", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both carry the cyclic row split into W streams, Phi_M frames giving Phi_{I_m}, the three-shear interchange, s calls on V/W, F_k<=(s/W)F_{k-1}+O(1), the geometric sum and the fixed-tape O(V) schedule. B also mentions merging rows back to Wg+(w-1), a minor addition."},
+    {"id": "arbitrary-width-interchange", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both carry k and rho, the high-digit row field R=q^{2 rho}>=W^k padded to R', base-m pieces with the geometric sum, binary padding to [q^e] and the one-bit-difference case."},
+    {"id": "phase-frame-recursion", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both carry the C identities, P_M conjugation to coordinate kernels, slots and columns, the inverse-child identity, m(m-1)+3m row additions, s_c children on e/m axes and H_0^D=b^D S_D C^D S_D. A repeats the i^{27f} endpoint correction here, which B gives at the complex interface; this is not a substantive difference."},
+    {"id": "packed-selected-bit-addition", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "The top selected position j_{f-1} is omitted from the packed shifts and supplied at the end by a two-bit XOR costing O(V); this is the whole algorithm when f=1. A's shifts sum only to i=f-2 and never handle j_{f-1}.", "substep": null, "steps_a": [], "steps_b": ["S2.4.2.2", "S2.4.2.8"], "lines": [2054, 2192]},
+       {"favours": "B", "what": "B adds the reason the correction is well defined: T_0 preserves guard values and hence the bad set.", "substep": null, "steps_a": ["S2.9.2.6"], "steps_b": ["S2.4.2.5"], "lines": [2107, 2114]}
+     ],
+     "note": "Both have the eight +-1 updates, packed cyclic shifts, the guard interval, delta_bad, T_0S_0^{-1} permuting the bad set, the sort repair and the costs. Only B completes the construction with the omitted top position."},
+    {"id": "layer-recurrence", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both carry individual kernels at O(Ve), s calls per node with O(V((eK)^tau+1)) overhead, q_0 and k_0 rows with padding, 1/W role streams, the recurrence, the O(e^lambda) internal and O(e^sigma d^{beta(1-sigma)}) leaf bounds, and the base-m pieces giving O(d^lambda'). A lists the exponent conditions here; B gives them in its parameter step."},
+    {"id": "simultaneous-layer", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "B carries the proof's uniformity check: every packed call has A_*<=C_A p, K>=6, K/log p->inf and superpolynomial records, so it costs O(M_child R_g(L^tau+1)) with one constant. A has no counterpart.", "substep": null, "steps_a": [], "steps_b": ["S2.4.5"], "lines": [2697, 2736]}
+     ],
+     "note": "Checklist S1-S5 are present in both: the constants with nu=11 and C_1=20, the depth recurrence, the unrolling to C_0d^{C_1}, the guard bits with Delta=o(p), and the row sum one with truncation error. B additionally carries the packed-call uniformity step and a fuller count of the per-invocation operations."},
+    {"id": "synthetic-transform", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "The final identification of the full procedures: executing on named slots after L conjugates by L, giving LBF^- and F^+B^{-1}L^{-1}, with the forward entry j stored at L(Bj). A names only LBF^- for the forward procedure and never gives the opposite procedure's exact counterpart with L.", "substep": null, "steps_a": ["S3.3"], "steps_b": ["S3.3", "S3.3.8"], "lines": [3180, 3195]}
+     ],
+     "note": "Both carry character cancellation without division, decimation in frequency, the bit-reversed stored order and its reverse, the prefix moves and chunk exchanges, rounds as simultaneous layers, y^E monomials and the error bound. Only B closes the layout lemma with the full exact operators."},
+    {"id": "signed-packing", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both evaluate at B_0=2^{4p} with signed carries, use the |h_j|<B_0/2 separation, centred-residue extraction, the ac-be and ae+bc streams with negacyclic wrap, and the four products for O(rp log(rp))."},
+    {"id": "synthetic-convolution", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both carry the bilinear contraction, the normalization identity, P(LBu,LBv)=LBP(u,v), the error chain to sqrt2 M(3l+1)2^-p and the cost."},
+    {"id": "gaussian-resampling", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "B gives the step that turns the Gaussian identity into the resampling identity: D N^{-1} C is a left inverse of T (since CT=ND^{-1}). It also gives the norms 3/4, 7/8 and 1 that make A and B_0 contractions. A goes from N being invertible straight to the result.", "substep": null, "steps_a": ["S4.1.4", "S4.1.5", "S4.1.6"], "steps_b": ["S4.1.2"], "lines": [3615, 3629]}
+     ],
+     "note": "Both carry the Gaussian maps, T P_sF_s=P_tF_t S, ||N-I|| bound with Neumann series, the normalizations, the numerical errors and times, permutations kept in the identity, tensoring with dp^2 error and the axis exposure cost. B also includes the left-inverse step."},
+    {"id": "chirp-permutation-cancellation", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "The lemma's last assertion and its proof: conjugation turns the negative Fourier sign into the positive one, commutes with the real permutation R and preserves the grid and norm, so it gives RF_s^+ with the same error. A has no counterpart in this item; it only defines the conjugated procedure in S4.5.4.", "substep": null, "steps_a": [], "steps_b": ["S4.3", "S4.3.2"], "lines": [3983, 3988]},
+       {"favours": "A", "what": "A gives the reason the chirp has period t_i: the exponent changes by -pi i s_i(2j_i+t_i), a multiple of 2 pi i. B states the period without reason.", "substep": null, "steps_a": ["S4.3.1"], "steps_b": ["S4.2"], "lines": [3939, 3940]}
+     ],
+     "note": "Both derive the Bluestein coefficient, Q reading frequency (-s_ij_i), F^+R_c=R_c^{-1}F^+, RF^+R=F^+ and the (u*v)/S^2 normalization. B also carries the conjugation step, which outweighs A's periodicity justification."},
+    {"id": "parameters-and-primes", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both fix the rationals and sizes, alpha, gamma, eta, the prime-interval count and disjointness, T/2<S<T, alpha^4 theta_i>p and the n^{o(1)} prime search."},
+    {"id": "crt-address-map", "preference": "B", "strength": "slight",
+     "differences": [
+       {"favours": "B", "what": "The padding insertion: one nested lexicographic scan of the box in (a_d,...,a_1) order copies each coefficient to its mixed-radix address and writes zeros elsewhere in O(Tp), and the same enumeration deletes padding. A has no counterpart.", "substep": null, "steps_a": [], "steps_b": ["S5.3.3"], "lines": [4231, 4247]}
+     ],
+     "note": "Both carry the isomorphism, the triangular coordinates b_i, the update order d..1, the valid-interval rotations keeping padding zero, and the axis reversal cost. B also describes how the padding is inserted."},
+    {"id": "phase-twist", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both carry the twist x_d->zeta y, the wrap check zeta^{k+l}(-1)^h=zeta^j, the identification iota and D_+-, M_C=(f*g)/T, and the computed twist at O(Tp^{1+delta})."},
+    {"id": "multiplication-algorithm", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both compose A, the chirp transform, B_0 and 2^gamma into F with exact counterpart RF_s, define F^+ by conjugation, and list the six steps with the two S scalings undoing (u*v)/S^2. B states F^+'s counterpart RF_s^+ explicitly, while A uses it in S5.5.8; the substance is the same."},
+    {"id": "exact-recovery", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both chain E_ring<5TL, 6TL, 8TL, E_s=9*2^gamma TL, (2E_s+2), (3E_s+2), E_w<28*2^gamma T^2L, the final 448b2^{-3b/4}<1/2, rounding and carries."},
+    {"id": "time-accounting", "preference": "tie", "strength": "n/a",
+     "differences": [],
+     "note": "Both give the cost table, the seven margins with min g_2=2^-181=2kappa, the o(V) setup and exceptional sorting, the log p absorption and the schoolbook cutoff."},
+    {"id": "conjecture-negation", "preference": "B", "strength": "clear",
+     "differences": [
+       {"favours": "B", "what": "B derives the disproof: an eventual lower bound needs c_A, N_A with T_A(n)>=c_A n lg n for every machine; its negation needs one machine with liminf T_A/(n lg n)=0; the bound gives limit zero. A only asserts 'disproving' in its root claim.", "substep": null, "steps_a": ["S0"], "steps_b": ["S1", "S1.1", "S1.2"], "lines": [379, 387]}
+     ],
+     "note": "A carries none of the logic of this supporting item beyond the word 'disproving' in S0; B states the definition, its negation and why the bound gives it."}
+  ],
+  "chain": {"preference": "tie", "strength": "n/a", "note": "Both trees follow the paper's route. They go from the scratch-restoring exchange and frames, to nested labels with L<N/2, to s_b<W_bm and s_c<W_cm, to the exponent tau=sigma=1-2^-50 via eta>20*2^-50. From there they reach the interchange recurrence F_k<=(s/W)F_{k-1}+O(1) and O(Vu^tau), and the layer recurrence and O(Vd^lambda'). These feed the transform layout costs, the convolution, resampling, chirp and cancellation, the six-step algorithm, exact recovery, and the margin min g_2=2^-181 giving O(n(lg n)^{1-kappa}). Neither chain breaks or thins where the other does not. B's extra step on negating the conjecture lies after the time bound."},
+  "errors": [
+    {"plan": "A", "step": "S2.1", "says": "Three stages of forward invocations y_S->y_S+x_S send (X_a,Y_a)->(-Y_a,X_a).", "paper": "Stages 1 and 3 are forward invocations from X to Y, but stage 2 runs the inverse forward schedule from Y to X (X<-X-Y); three forward invocations would not give the exchange. A's own S2.1.7 states the correct route.", "lines": [731, 733, 761, 763], "severity": "minor"},
+    {"plan": "A", "step": "S2.3.3.6", "says": "Over F_2 every nonzero residual is nonalternating because it contains a norm-one coordinate vector outside the supports of the earlier tensor vectors.", "paper": "Coordinate units are found only in the factors B, Q^perp, triple complements and full spaces. The lines P and Q contribute their own norm-one tensor vectors, and the norm-one vector of a residual is the tensor of these, e.g. in P(x)t_X^perp. It is not in general a coordinate vector.", "lines": [1073, 1085], "severity": "minor"},
+    {"plan": "B", "step": "S2.2.3.6", "says": "Every nonzero residual contains a norm-one vector, so it is nondegenerate and nonalternating.", "paper": "Nondegeneracy of each residual follows from the orthogonal decompositions; the norm-one vector only shows it is nonalternating.", "lines": [1084, 1085], "severity": "minor"}
+  ],
+  "overall": {"preference": "B", "strength": "slight", "reason": "Neither plan has a major error and the central chains coincide, so the verdict rests on completeness within derivations. B carries checklist sub-steps that A lacks: L4's plane absorption and P3's k-column factorization. On core results B also carries steps A omits: the omitted top position in the packed addition, the packed-call uniformity in the layer proof, the L-conjugated exact operators of the transform layout, the left inverse in resampling, and the conjugation step of the cancellation lemma. A is fuller on the frame invariant and on M1 of the matrix shear, and has one more minor misstatement than B."}
+}
