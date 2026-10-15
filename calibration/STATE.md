@@ -19,7 +19,7 @@
    - Expected cost: ~70–140 M cache read; about an hour (runs of 15–25 min, 20 at a time, then J26's 54 page judgements).
    - **Setup done at 09:28–09:29** (model-free): 18 copies in `scratchpad/e6/W3{WS,WO}P{page}`; prompts in `docs/journal/2026-10-15-w3-setup/prompts.tsv`; scored ids fixed in `assigned.json`. **Ready to launch.**
    - Then launch 18 `general-purpose` runs (WS: sonnet/high; WO: opus/xhigh). Judge with J22's page judge (J26) and read by W3's table.
-3. **A1b, the support-instruction test:** draft and preregister it before any run.
+3. **A1b, the support-instruction test:** **drafted at 09:30** (`plans/A1b-draft.md`). It needs preregistration, an isolated binary built from a branch with the one-sentence change, and copies made by `a1setup.py` (support kind) before any run.
    - It uses A1's seeded pages and support tasks (20 per configuration), with one instruction sentence added: ask whether the claim is more general than its quotation.
    - Compare with A1 stage 1's support answers.
    - Judge-free; about 6–10 M per configuration.

@@ -34,8 +34,8 @@ Nothing here changes a production default; the author decides those. Every row r
 
 **What is next, ranked by whether it can change a configuration decision:**
 1. **W3**, the writer routing rule. It can change the writer row for key-step pages.
-2. **The support-task instruction test (A1b, to be preregistered).** It can turn "the auditing task fails" into a fixable prompt.
-3. **The background audit (model-free).**
+2. **The support-task instruction test** (`plans/A1b-draft.md`, drafted at 09:30; ~11–16 M). It can turn "the auditing task fails" into a fixable prompt.
+3. ~~The background audit~~: done at 09:30. Keep Sonnet `high`; no model experiment is justified.
 
 **A1 stage 2 is deferred,** with the author's direction at 09:24 ("Don't run it merely because a threshold was narrowly triggered"). It cannot change the auditing verdict: adequacy needs support recall ≥ 0.70, and all three models miss the same 4 of 10 errors. Its preregistered trigger stays on record, and its copies are kept.
 
