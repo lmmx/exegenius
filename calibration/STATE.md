@@ -1,6 +1,6 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-15 01:42 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-15 01:53 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
 
 ## Standing instructions from the author (latest, about 01:22–01:45 UTC)
 
@@ -20,14 +20,13 @@
 ### E11 (`plans/E11.md`): Opus `xhigh` against Sonnet `high` planners above the ceiling, pairwise
 
 **Runs:** six Opus `xhigh` runs in `scratchpad/e6/E11F{2,3,4,5,6,8}O`.
-- E11F2O, E11F5O and E11F6O are accepted.
-- E11F3O, E11F4O and E11F8O were running at 01:42. E11F4O had one `max_tokens` stop.
+- **All six are accepted** (01:34–01:53). The run table is in E11.md.
 - Check acceptance in each run's `exegenius/log.jsonl`: a `submit` event for `0003-argument` with outcome `accepted`.
 
 **Next:**
 1. When all six are accepted (or have ended), record each in E11's ledger: seconds, calls, cache read, submits and `max_tokens` stops (`scratchpad/tools/perrun.py SUBAGENTS '^E11F'`). Then run the judge-free screen: acceptance, node count, characters.
 2. If a run ended without an accepted plan, record it. E11's plan has no rerun rule for operational failures, so a rerun must be preregistered in E11.md before it launches.
-3. Prepare J25 with `scratchpad/prep-j25.sh` (no model; seed 20261041). It writes `docs/journal/2026-10-15-e11-ceiling/judge/` and the prompts.
+3. ~~Prepare J25~~ **Done at 01:53.** 14 pair files and prompts are in `docs/journal/2026-10-15-e11-ceiling/judge/prompts/Qnn.txt`, with no leaks.
 4. **Budget gate before J25** (14 pairwise judgements, ~85–140 M): a fresh meter reading that leaves room, or the reset having passed (after about 04:40) with spend since the reset measured (`calibration/tools/spend.py SUBAGENTS --since <reset time>`).
 5. **Launch J25:** one Opus judge per file; description `J25 judge Qnn[-b]`; pointer prompt "Read the instructions in <prompt file> and follow them exactly. Read only that file and the files it names."
 6. **Score:**

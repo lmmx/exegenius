@@ -1,0 +1,107 @@
+{
+ "seed": 20261041,
+ "orders": "both",
+ "pairs": {
+  "Q01": {
+   "A": "E11F2O",
+   "B": "E9F2Y",
+   "judges": 1
+  },
+  "Q02": {
+   "A": "E9F8Y",
+   "B": "E11F8O",
+   "judges": 1
+  },
+  "Q03": {
+   "A": "E9F2Y",
+   "B": "E11F2O",
+   "judges": 1
+  },
+  "Q04": {
+   "A": "E9F4Y",
+   "B": "E10F4Y2",
+   "judges": 1
+  },
+  "Q05": {
+   "A": "E10F5Y",
+   "B": "E11F5O",
+   "judges": 1
+  },
+  "Q06": {
+   "A": "E9F4Y",
+   "B": "E11F4O",
+   "judges": 1
+  },
+  "Q07": {
+   "A": "E11F6O",
+   "B": "E10F6Y",
+   "judges": 1
+  },
+  "Q08": {
+   "A": "E11F8O",
+   "B": "E9F8Y",
+   "judges": 1
+  },
+  "Q09": {
+   "A": "E11F4O",
+   "B": "E9F4Y",
+   "judges": 1
+  },
+  "Q10": {
+   "A": "E10F3Y",
+   "B": "E11F3O",
+   "judges": 1
+  },
+  "Q11": {
+   "A": "E11F5O",
+   "B": "E10F5Y",
+   "judges": 1
+  },
+  "Q12": {
+   "A": "E11F3O",
+   "B": "E10F3Y",
+   "judges": 1
+  },
+  "Q13": {
+   "A": "E10F6Y",
+   "B": "E11F6O",
+   "judges": 1
+  },
+  "Q14": {
+   "A": "E10F4Y2",
+   "B": "E9F4Y",
+   "judges": 1
+  }
+ },
+ "plans": {
+  "E11F2O": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E11F2O/exegenius/argument.json",
+  "E11F3O": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E11F3O/exegenius/argument.json",
+  "E11F4O": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E11F4O/exegenius/argument.json",
+  "E11F5O": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E11F5O/exegenius/argument.json",
+  "E11F6O": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E11F6O/exegenius/argument.json",
+  "E11F8O": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E11F8O/exegenius/argument.json",
+  "E9F2Y": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E9F2Y/exegenius/argument.json",
+  "E10F3Y": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E10F3Y/exegenius/argument.json",
+  "E9F4Y": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E9F4Y/exegenius/argument.json",
+  "E10F5Y": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E10F5Y/exegenius/argument.json",
+  "E10F6Y": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E10F6Y/exegenius/argument.json",
+  "E9F8Y": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E9F8Y/exegenius/argument.json",
+  "E10F4Y2": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/e6/E10F4Y2/exegenius/argument.json"
+ },
+ "derived": {},
+ "rendered_bytes": {
+  "E11F2O": 75230,
+  "E11F3O": 89864,
+  "E11F4O": 109055,
+  "E11F5O": 99865,
+  "E11F6O": 107275,
+  "E11F8O": 107149,
+  "E9F2Y": 95528,
+  "E10F3Y": 115009,
+  "E9F4Y": 107049,
+  "E10F5Y": 138935,
+  "E10F6Y": 128054,
+  "E9F8Y": 104955,
+  "E10F4Y2": 102828
+ }
+}
