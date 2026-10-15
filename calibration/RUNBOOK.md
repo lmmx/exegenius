@@ -133,6 +133,7 @@ The general default additionally needs the second document.
 
 ## 8. Resuming
 
+0. Read `STATE.md` first: it holds the current state, the author's latest standing instructions, the budget basis, and the next actions in order.
 1. Read this file, then the ledgers of every item marked running or queued.
 2. Check for running subagents and for finished runs not yet judged:
    - `exegenius/log.jsonl` in each run dir;
