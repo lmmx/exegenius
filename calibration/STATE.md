@@ -1,8 +1,8 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-15 09:27 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-15 09:26 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
 
-## Checkpoint, 09:27 UTC, 2026-10-15 (read first)
+## Checkpoint, 09:26 UTC, 2026-10-15 (read first)
 
 **The objective (the author, 09:24):** a complete, defensible configuration policy for every pipeline task: extraction, background, argument planning, writing and fidelity auditing. Finishing the queued experiments is not the goal in itself. The ledger is `policy.md`, "Decision ledger". Run only experiments that can change a configuration decision.
 
@@ -17,7 +17,7 @@
 1. **Get a fresh meter reading,** or use one the author has posted after 09:44. If none, ask once, and do only model-free work meanwhile.
 2. **W3** (`plans/W3.md`, preregistered 05:31): the writer routing question, the one queued experiment that can change a decision.
    - Expected cost: ~70–140 M cache read; about an hour (runs of 15–25 min, 20 at a time, then J26's 54 page judgements).
-   - Setup (model-free; not yet done): render the nine write tasks (pages 0018, 0021, 0031, 0032, 0033, 0036, 0005, 0006, 0010) from E9F4Y's project with `exegenius-params` (e8efaa3), as W2 and W2b did (`plans/W2.md`, `plans/W2b.md`). Two copies per page (WS, WO). Diff the task files across arms.
+   - **Setup done at 09:28–09:29** (model-free): 18 copies in `scratchpad/e6/W3{WS,WO}P{page}`; prompts in `docs/journal/2026-10-15-w3-setup/prompts.tsv`; scored ids fixed in `assigned.json`. **Ready to launch.**
    - Then launch 18 `general-purpose` runs (WS: sonnet/high; WO: opus/xhigh). Judge with J22's page judge (J26) and read by W3's table.
 3. **A1b, the support-instruction test:** draft and preregister it before any run.
    - It uses A1's seeded pages and support tasks (20 per configuration), with one instruction sentence added: ask whether the claim is more general than its quotation.
