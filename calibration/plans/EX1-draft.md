@@ -1,11 +1,11 @@
-# X1 (DRAFT, not preregistered): does the extraction configuration reach the plan under the combined instruction?
+# EX1 (DRAFT, not preregistered): does the extraction configuration reach the plan under the combined instruction?
 
 **Status: DRAFT.**
 - **Written:** 2026-10-14, after E10 (supported, 23:45 UTC) and S6 stage 1 (neither cheap planner holds) were read. It is not committed as a preregistration, and no run has been made.
 - **Its evidence:** `docs/journal/2026-10-14-x1-extraction-evidence/`.
 - **The pipeline default is unchanged.**
 
-**The id clashes.** The registry already has X1: "Coverage recovery: report against reject", 2026-10-13. This plan needs a new id before preregistration, for example EX1. Run names below use `X1` as a placeholder.
+**The id clashes.** The registry already has EX1: "Coverage recovery: report against reject", 2026-10-13. This plan needs a new id before preregistration, for example EEX1. Run names below use `EX1` as a placeholder.
 
 ## The decision it informs
 
@@ -45,9 +45,9 @@ S6 showed that cheaper planners fall well below the ceiling, so the planner stay
 
 | Run | Extraction (existing, accepted) | Configuration | Results quoted | Core items reached | Unknown concepts | Why |
 |---|---|---|---|---|---|---|
-| X1M4Y | E3-M4 (5ced29e) | Sonnet `medium`, planner | 11 | 10 | 21 | the cost candidate; closest to its configuration's median (rule: core reached, then results) |
-| X1M5Y | E3-M5 (5ced29e) | Sonnet `medium`, planner | 11 | 10 | 25 | the same, a second extraction, so that a pass does not rest on one |
-| X1K1Y | S1-K1 (7335096) | Haiku `high`, planner | 3 | 4 | 36 | the floor probe: the shallowest accepted extraction, with Sonnet-like granularity |
+| EX1M4Y | E3-M4 (5ced29e) | Sonnet `medium`, planner | 11 | 10 | 21 | the cost candidate; closest to its configuration's median (rule: core reached, then results) |
+| EX1M5Y | E3-M5 (5ced29e) | Sonnet `medium`, planner | 11 | 10 | 25 | the same, a second extraction, so that a pass does not rest on one |
+| EX1K1Y | S1-K1 (7335096) | Haiku `high`, planner | 3 | 4 | 36 | the floor probe: the shallowest accepted extraction, with Sonnet-like granularity |
 | E9F8Y (anchor, re-judged) | E6-F8 | Sonnet `high`, general-purpose | 11 | 11 | 37 | the lowest-reach Sonnet `high` extraction under Y: 19/19, checklist 26, 25 (J20) |
 | E9F4Y (anchor, re-judged) | E6-F4 | Sonnet `high`, general-purpose | 24 | 15 | 35 | a typical Sonnet `high` extraction under Y: 19/19 (twice), checklist 25, 24 |
 
@@ -87,13 +87,13 @@ So:
 **Reading, fixed now:**
 - **"Below":** a plan's two totals both lie below the lower total of the lower-scoring anchor (`ranges.py` "below").
 - **Noise reference:** repeats on one extraction differ by at most 2 on the checklist (E8F4X against E8F4X2: 23, 21 and 22, 21; S3F8OX against S5F8OX: 19, 19 and 19, 19).
-- **Sonnet `medium` holds stage 1** if neither X1M4Y nor X1M5Y is below.
-- **K1 holds** if X1K1Y is not below.
+- **Sonnet `medium` holds stage 1** if neither EX1M4Y nor EX1M5Y is below.
+- **K1 holds** if EX1K1Y is not below.
 
 ## Stage 2: primary judging (only if Sonnet `medium` holds stage 1 and the author would act on it)
 
 **The batch:**
-- X1M4Y and X1M5Y, three Opus judges each;
+- EX1M4Y and EX1M5Y, three Opus judges each;
 - E9F8Y re-judged, three judges;
 - the scale anchor E1-P4, one judge.
 - That makes 10 judgements, with J3's instructions and the central rubric (`calibration/rubrics/nlogn-central-saving.md`).
@@ -111,7 +111,7 @@ So:
 | Sonnet `medium` stays at the ceiling, and K1 holds stage 1 | the extraction configuration does not reach the plan under Y on this paper. **Propose Sonnet `medium` for `extract`** (about 1 M cache read and 2 minutes saved per wiki). State that it halves the pages, which no plan judgement measures; the author decides whether that granularity is acceptable. The default changes only after the second document |
 | Sonnet `medium` stays at the ceiling, and K1 is below | there is a floor, and Sonnet `medium` is above it. Propose as above, and record K1's figures as the first point below the floor (3 results, 4 core items, 7 of 10 sections) |
 | Sonnet `medium` holds stage 1 but not stage 2 | Sonnet `high` stays. Report which central steps or results the M plans lose, against their extractions' reach |
-| X1M4Y or X1M5Y is below at stage 1 | Sonnet `high` stays. The policy row records that Y does not compensate for Sonnet `medium`'s extractions. If K1 holds while the M plans fall, record granularity, not reach, as the likely cause. Nothing further unless the author asks |
+| EX1M4Y or EX1M5Y is below at stage 1 | Sonnet `high` stays. The policy row records that Y does not compensate for Sonnet `medium`'s extractions. If K1 holds while the M plans fall, record granularity, not reach, as the likely cause. Nothing further unless the author asks |
 | one M plan below, the other not | ambiguous. Report it, and run one fresh Sonnet `medium` extraction (about 0.2 M), with its background and argument, before any proposal |
 | the author declines stage 2 | the stage 1 result is reported as a screen; no default changes |
 
@@ -138,6 +138,9 @@ So:
 | Stage 2, 10 primary judgements (conditional) | ~4.8 M each (J18) | ~48 M |
 | **Whole experiment, if stage 2 runs** | | **~71–80 M (up to ~92 M)** |
 
-**A cheaper minimum, if the author wants only the floor question:** X1M4Y and X1K1Y with one anchor (E9F8Y), at stage 1 only. That is 2 runs and 6 checklist judgements, about 15–20 M. It gives up the second Sonnet `medium` extraction, so a pass would not support a proposal.
+**A cheaper minimum, if the author wants only the floor question:** EX1M4Y and EX1K1Y with one anchor (E9F8Y), at stage 1 only. That is 2 runs and 6 checklist judgements, about 15–20 M. It gives up the second Sonnet `medium` extraction, so a pass would not support a proposal.
 
 **Stopping:** one run per extraction. No repeats, except the one fresh Sonnet `medium` extraction named in the decision table.
+
+
+**Decision (2026-10-15, 00:00 UTC):** not run. The evidence analysis answers the policy question (keep Sonnet `high`), and the experiment's cost (~71–80 M) exceeds what it could save (~1 M per wiki). Renamed from X1, which the registry already uses for coverage recovery.
