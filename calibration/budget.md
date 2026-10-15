@@ -48,6 +48,22 @@
 
 That is past runbook §5's threshold, so E10 waits for a reading or the ~23:30 reset.
 
+**Measured since the ~23:37 reset, with no reading yet** (`spend.py --since 2026-10-14T23:37`, 00:17 UTC on 2026-10-15). These are counts, not a reading:
+
+| | Cache read |
+|---|---|
+| K3 (pairwise validation, 20 judgements) | 116.5 M |
+| J21 (E10, the part after 23:37) | 49.7 M |
+| design subagents (K3, A1, EX1 drafts) | 27.2 M |
+| W2 and W2b writer runs | 15.9 M + 14.7 M |
+| J22 (W2 pages) | 10.4 M |
+| S6 runs and J23 | 5.8 M + 9.3 M |
+| other | 0 (W2b runs reattributed) |
+| the development session | 115.1 M |
+| **together** | **~364 M** |
+
+That is past runbook §5's ~300 M threshold. J24 (W2b's page judging, ~8–10 M by J22's measured 0.43 M per judgement) was launched at 00:18 because it completes an experiment whose runs were already spent. E11 (~125–250 M) waits for a reading or the next reset (about 04:40 UTC, assuming a five-hour window; a check-in is scheduled at 04:42).
+
 **Measured since the 14:20 reset, with no reading yet** (`spend.py --since 2026-10-14T14:20`, 15:51 UTC). These are counts, not a reading:
 
 | | Cache read | Cache write |
