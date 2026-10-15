@@ -65,6 +65,8 @@ That is past runbook §5's threshold, so E10 waits for a reading or the ~23:30 r
 
 That is past runbook §5's ~300 M threshold. J24 (W2b's page judging, ~8–10 M by J22's measured 0.43 M per judgement; measured 9.67 M) was launched at 00:19 because it completes an experiment whose runs were already spent. E11 (~125–250 M) waits for a reading or the next reset (about 04:40 UTC, assuming a five-hour window; a check-in is scheduled at 04:42).
 
+**Reading at about 09:24 UTC (the author): 20% remaining, that is 80% used, with the reset in about 20 minutes (~09:44).** No experiment was launched on it: W3 (~70–140 M, and about an hour of runs and judging) cannot finish before the reset, and A1 stage 2 would not change a decision. The window's measured cache read is in the table below, as of 05:25; the development session continued after that.
+
 **Measured since the ~04:40 reset, with no reading** (`spend.py --since 2026-10-15T04:40`, 05:25 UTC on 2026-10-15). The reset time is the author's estimate ("in about 3 hours" at about 01:40), not an observation. These are counts, not a reading:
 
 | | Cache read |

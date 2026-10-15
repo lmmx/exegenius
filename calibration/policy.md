@@ -10,6 +10,35 @@
 
 **Its authority:** nothing here changes a pipeline default. A row marked "proposed" goes to the author. Only the author changes defaults.
 
+## Decision ledger (2026-10-15, 09:26 UTC): the configuration to use for each task, and how far it is proven
+
+**The objective (the author, 09:24):** a defensible configuration for every pipeline task, not a finished queue of experiments. Each row separates two things:
+- **best tested:** the best configuration among those compared;
+- **proven adequate:** shown to meet the task's fidelity standard.
+
+Nothing here changes a production default; the author decides those. Every row rests on one paper.
+
+| Task | Recommended now: model, effort, prompt | Routing | Best tested | Proven adequate? (standard) | Evidence | Cost | Open, and the smallest work that would close it |
+|---|---|---|---|---|---|---|---|
+| **Extraction** (`extract`) | Sonnet `high`, `master`'s task (0.6.0) | none | Sonnet `high` ≈ Opus `high` in depth; Opus costs more. Sonnet `medium` skims (4 of 5 sent back); Haiku `high` and Opus `medium` are shallower (EX1) | **yes, for planning on this paper:** all six extractions tested give 19/19 faithful plans under the combined instruction (E9–E11). Standard: the coverage check passes, and plans reach the ceiling downstream | moderate: 34 extractions, judge-free, plus downstream plans | small; the possible saving from a cheaper model is about 1 M per wiki | generality only (second document). **No experiment** |
+| **Background** (`background`) | Sonnet `high`, `master`'s task | none | **not compared** | **not measured; no standard defined.** It writes the reader's known-concept list, which the argument and writer tasks inherit. One run needed a redo (calculus, 2026-10-13 planner hand-off run) | none on model choice | small (a short task) | **model-free first:** tabulate acceptance, redos and the stability of the known-concept list across the accepted backgrounds in existing projects (count to be taken). A model experiment only if that shows instability |
+| **Argument planning** (`argument`; `extend` runs under the same configuration) | Sonnet `high` **with the combined instruction** (the E8 and E9 sentences; branch `141026-exp-params-cases`, e8efaa3). **`master` still has the E6/E7-era instructions** | none | Sonnet `high` + combined = Opus `xhigh` above the ceiling (E11: 2–2, 2 tied, p = 0.69; run variance dominates). Sonnet `medium` and Haiku `high` fall below (S6). Effort above `high` buys nothing (S2, S3) | **yes, on this paper:** 19/19 faithful and 9/9 central on every extraction tested (E9, E10). Standard: the primary rubric's ceiling and central gate, three Opus judges | **strong for this paper:** several extractions, preregistered, blind | 3–5 M cache read per run | (1) **the prompt is not on `master`**: putting the combined instruction there is a default change, which needs the author's approval; (2) generality (second document). **No further model comparison** |
+| **Writing** (`write`) | Sonnet `high`, `master`'s task | **provisional, this wiki only:** Opus `xhigh` for 0015 and 0016 (the author, 01:06). The blind designation of 23 key-step pages is a classification, not a routing rule | Opus `xhigh` beats Sonnet `high` on the two hard key-step pages (W2b); on 0014 they tie; Haiku `high` and Sonnet `medium` fall below on the hard page (W2) | **Sonnet `high` is not proven adequate on hard key-step pages:** one of its two runs on 0015 had a major error in every judgement. Opus `xhigh` met the standard on 0015 and 0016 (no major error; 8/8 and 4/4 items). Standard: the page judge's derived items faithful, no major error | weak to moderate: 3 pages, 1 paper | Opus costs 2–5.6× Sonnet's cache read on hard pages (+1.4–4.2 M per page) | **W3** (preregistered, ready): does Opus routing generalise to key-step pages? It is the one queued experiment that can change a consequential decision. About 70–140 M |
+| **Fidelity auditing** (`audit`, `support`) | no change: the tasks run on the writer configuration (they share `exegenius-task` with writers; a separate model needs a CLI change) | none | **no ranking supported** (A1 stage 1: one run each, overlapping intervals) | **no, for any model tested** (A1, preregistered): audit recall below 0.50 for all three (`ASSERTS`), and support recall 0.60 for all three. All three miss the same generalisation errors. The hand-label sensitivity analysis lifts audit recall above the bar for all three, but support recall still fails. Neither task compares a page with the paper, so source-only errors are out of reach by design | moderate for "the task is the limit": three models, identical support misses | 0.14–0.24 M per task | **the task, not the model:** (1) a small preregistered test of a support instruction that asks whether a claim is more general than its quotation, on A1's seeded pages, judge-free (~6–10 M per configuration); (2) **for future experiments only**, fix a classifier criterion on recall of hand-labelled positives (A1's stage-1 result stays as preregistered); (3) whether auditors get a source check is the author's design decision. **A1 stage 2 is not run** (see below) |
+| Simulated readers | `master` | none | not compared | not measured | none | — | after writing is settled |
+| Judging (the instrument) | Opus; three judges on the primary rubric; pairwise (K3) above the ceiling | the primary rubric below the ceiling, K3 above it | K2: Sonnet agrees with Opus on the checklist (0.979) | K3 passed all four preregistered criteria | strong for its purpose | about 4.8 M per primary judgement and 5.7 M per pairwise judgement | whether Sonnet can judge pairwise (would cut cost; not decision-critical) |
+
+**Prompt changes the results already justify:** one.
+- **The combined argument instruction** (E8 + E9), justified by E9 and E10. It is on `141026-exp-params-cases`, not `master`. Merging it changes a pipeline default, so it is the author's decision.
+- No writer, auditor, extraction or background prompt change is yet supported by evidence. The support instruction above is a hypothesis to test, not a justified change.
+
+**What is next, ranked by whether it can change a configuration decision:**
+1. **W3**, the writer routing rule. It can change the writer row for key-step pages.
+2. **The support-task instruction test (A1b, to be preregistered).** It can turn "the auditing task fails" into a fixable prompt.
+3. **The background audit (model-free).**
+
+**A1 stage 2 is deferred,** with the author's direction at 09:24 ("Don't run it merely because a threshold was narrowly triggered"). It cannot change the auditing verdict: adequacy needs support recall ≥ 0.70, and all three models miss the same 4 of 10 errors. Its preregistered trigger stays on record, and its copies are kept.
+
 ## The table (one paper, `paper.tex`, unless stated)
 
 | Stage (task) | Current default | Best evidence so far | Status | What would settle it |

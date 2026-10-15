@@ -1,6 +1,44 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-15 05:30 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-15 09:27 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+
+## Checkpoint, 09:27 UTC, 2026-10-15 (read first)
+
+**The objective (the author, 09:24):** a complete, defensible configuration policy for every pipeline task: extraction, background, argument planning, writing and fidelity auditing. Finishing the queued experiments is not the goal in itself. The ledger is `policy.md`, "Decision ledger". Run only experiments that can change a configuration decision.
+
+**Quota:**
+- The author's reading at about 09:24: **20% remaining** (80% used), with the reset at about 09:44.
+- Nothing was launched on it: W3 cannot finish before the reset, and A1 stage 2 would not change a decision.
+- A check-in is scheduled for 09:52 (`trig_01SpgYi2xwX2SFduvWJ6jE5h`).
+- After the reset, there is no reading until the author gives one. Do not infer the meter from tokens.
+
+### Next actions after reset, in order
+
+1. **Get a fresh meter reading,** or use one the author has posted after 09:44. If none, ask once, and do only model-free work meanwhile.
+2. **W3** (`plans/W3.md`, preregistered 05:31): the writer routing question, the one queued experiment that can change a decision.
+   - Expected cost: ~70–140 M cache read; about an hour (runs of 15–25 min, 20 at a time, then J26's 54 page judgements).
+   - Setup (model-free; not yet done): render the nine write tasks (pages 0018, 0021, 0031, 0032, 0033, 0036, 0005, 0006, 0010) from E9F4Y's project with `exegenius-params` (e8efaa3), as W2 and W2b did (`plans/W2.md`, `plans/W2b.md`). Two copies per page (WS, WO). Diff the task files across arms.
+   - Then launch 18 `general-purpose` runs (WS: sonnet/high; WO: opus/xhigh). Judge with J22's page judge (J26) and read by W3's table.
+3. **A1b, the support-instruction test:** draft and preregister it before any run.
+   - It uses A1's seeded pages and support tasks (20 per configuration), with one instruction sentence added: ask whether the claim is more general than its quotation.
+   - Compare with A1 stage 1's support answers.
+   - Judge-free; about 6–10 M per configuration.
+   - Fix a classifier criterion on recall of hand-labelled positives for any audit measure, prospectively.
+4. **Background audit (model-free):** acceptance, redos and stability of the known-concept lists across existing accepted background tasks. It decides whether background needs any model experiment.
+5. Update `policy.md`'s ledger after each.
+
+### Decisions only the author can take
+
+- Merge the combined argument instruction (branch `141026-exp-params-cases`) to `master`. This is a default change.
+- A1: keep the preregistered `ASSERTS` result as primary (it is), and approve the prospective classifier rule for new experiments.
+- Auditing design: whether audit or support tasks get a source check (a task change, not a model change).
+- The writer default after W3.
+
+### What is ready
+
+- **A1 stage-2 copies:** `scratchpad/a1/runs2/` and `queue2.tsv`. Deferred, not cancelled.
+- **W3 plan:** preregistered.
+- **The ledger:** in `policy.md`.
 
 ## Standing instructions from the author (latest, about 01:22–01:45 UTC)
 
