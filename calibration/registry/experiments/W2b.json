@@ -63,9 +63,9 @@
    "source": "calibration/plans/W2b.md; docs/journal/2026-10-14-w2b-writer/judge/results.txt"
   },
   "decision": {
-   "value": "the author adopted a provisional, paper-specific writer exception at about 01:06 UTC on 2026-10-15: Opus xhigh for key-step pages (0015, 0016), Sonnet high otherwise; Sonnet high remains the general default",
+   "value": "the author adopted a provisional, paper-specific writer exception at about 01:06 UTC on 2026-10-15: Opus xhigh for key-step pages, Sonnet high otherwise, in this wiki only; Sonnet high remains the general default. Key-step pages were then designated blind to the writer results by a fresh reviewer applying the author's rule to the plan alone (01:25): 23 of 35 pages, including 0014, 0015 and 0016",
    "basis": "reported",
-   "source": "calibration/policy.md"
+   "source": "calibration/policy.md; docs/journal/2026-10-15-keystep-designation/"
   },
   "J24_cache_read_tokens": {
    "value": "9.67 M for 18 judgements",
