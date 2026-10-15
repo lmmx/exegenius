@@ -41,19 +41,25 @@ def transcripts(sub):
 
 
 def touched(path):
-    """Paths named in the transcript's Read/Write/Edit calls and in its shell commands."""
-    seen = set()
+    """(paths, other_tools): absolute filesystem paths named in the transcript's Read/Write/Edit/Glob/Grep
+    calls and shell commands, and the names of any other tools called. Only tokens that start a word
+    and begin with /tmp/, /home/ or /root/ count as paths, so slashes inside formulas or relative paths
+    are not mistaken for reads."""
+    seen, other = set(), set()
     for line in open(path):
         m = json.loads(line).get("message") or {}
         for c in m.get("content", []) if isinstance(m.get("content"), list) else []:
             if c.get("type") != "tool_use":
                 continue
-            i = c.get("input", {})
-            if i.get("file_path"):
-                seen.add(i["file_path"])
+            i, name = c.get("input", {}), c.get("name", "")
+            if name not in ("Read", "Write", "Edit", "Bash", "Glob", "Grep", "SubagentHandback"):
+                other.add(name)
+            for key in ("file_path", "path"):
+                if isinstance(i.get(key), str):
+                    seen.add(i[key])
             if i.get("command"):
-                seen.update(re.findall(r"/[\w./-]+", i["command"]))
-    return seen
+                seen.update(re.findall(r"(?:^|(?<=[\s'\"=(]))(/(?:tmp|home|root)/[\w./-]+)", i["command"]))
+    return {p.rstrip("/.") for p in seen if p.startswith(("/tmp/", "/home/", "/root/"))}, sorted(other)
 
 
 def main():
@@ -85,11 +91,12 @@ def main():
             if t is None:
                 row["transcript"] = None
             else:
-                allowed = {str(root / "exegenius/tasks" / f"{tid}.md"), str(root / "exegenius/tasks" / f"{tid}.answer.json")}
-                extra = sorted(p for p in touched(t) if p not in allowed and not p.startswith(str(root / "exegenius/tasks" / tid))
-                               and p != str(root) and not p.startswith("/usr/") and not p.startswith("/dev/"))
+                paths, other_tools = touched(t)
+                own = str(root / "exegenius/tasks")
+                extra = sorted(p for p in paths if p != str(root) and p != str(root / "exegenius") and not p.startswith(own))
                 row["contaminated"] = bool(extra)
                 row["other_paths"] = extra
+                row["other_tools"] = other_tools
         rows.append(row)
         s = summary.setdefault(cfg, {"tasks": 0, "accepted": 0, "never_accepted": 0, "no_transcript": 0, "contaminated": 0})
         s["tasks"] += 1; s["accepted"] += ok; s["never_accepted"] += not ok
