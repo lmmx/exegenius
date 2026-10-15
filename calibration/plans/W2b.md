@@ -41,3 +41,11 @@
 |---|---|---|
 | 4 writer runs | W2: Sonnet 4.1 M, Opus 8.1 M on the hard page | ~25 M |
 | J24, 18 judgements | J22: about 2 M each | ~35–45 M |
+
+## Ledger
+
+| Item | Status |
+|---|---|
+| W2WSP16, W2WOP16, W2WSP15R | accepted (00:0x UTC) |
+| W2WOP15R | accepted at 00:17 UTC (1,187 s, 58 tool uses) |
+| J24 | prepared at 00:18 (`scratchpad/prep-j24.py`, seed 20261037; key P01 W2WOP16, P02 W2WOP15, P03 W2WSP16, P04 W2WSP15R, P05 W2WSP15, P06 W2WOP15R); all 18 judges launched at 00:18 |

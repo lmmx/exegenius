@@ -1,0 +1,17 @@
+Recursive rank saving is the counting argument showing that running a fixed linear network recursively on tape arrays costs a power of its parameter below one, rather than linear in it; both tape procedures that beat $n\log n$ get their saving here.
+
+The parameter $e$ counts the digits in each of two address chunks being swapped, or the selected address bits of a butterfly layer ($e$ is not Euler's number here). Each level cuts the parameter into $m=10^6$ equal pieces, so $e=m^k$ with $k$ the number of levels. Let $V$ be the array's logical volume and $W$ the number of wires of the [linear exchange network](linear-network.md). A call deals whole rows cyclically into $W$ role streams of volume $V/W$ by [elementary stream operations](elementary-stream-ops.md) costing $O(V)$. By [frames on wire arrays](common-frame-principle.md), intermediate frames cancel, and each edge is charged only for its change of frame, done by smaller calls at parameter $e/m$ on that edge's stream. The network takes its frames from [subspace labels from three-element subsets](subset-intersection-labels.md), which keep the total number $s$ of smaller calls below $Wm$ <cite data-source="paper">The decisive property is that the total number $s$ of smaller calls satisfies $s<Wm$.</cite>.
+
+For the address interchange everything else costs $O(V)$, so $F_k$, an upper bound on time divided by $V$ at parameter $m^k$, obeys
+$$F_0=O(1),\qquad F_k\le\frac sW\,F_{k-1}+O(1).$$
+Unrolling with $a=s/W$ gives $F_k=O\bigl(\sum_{j=0}^{k}a^j\bigr)$, which is $O(k+1)$ if $a\le1$ and $O(a^k)$ otherwise. Let $\tau<1$ be an exponent with $a<m^\tau$. Then both are $O(m^{k\tau})=O(e^\tau)$, so a call costs $O(Ve^\tau)$ <cite data-source="paper">Hence $F_k=O(e^\tau)$.</cite>. Had $s=Wm$, then $a=m$ and $F_k$ would grow like $m^k=e$. The strict inequality $s/W<m$ buys the power <cite data-source="paper">This strict inequality is the source of the power saving.</cite>. The butterfly layer adds overhead to this recursion.
+
+Subscripts $\rm b$ and $\rm c$ mark the bit network (address interchange) and the complex network (butterfly layer). Let $\eta=(Wm-s)/(Wm)$ be the relative rank deficit, so $s/W=m(1-\eta)$. The label counts give $W_{\rm b}m-s_{\rm b}=\tfrac{339}{539}N$ and $W_{\rm c}m-s_{\rm c}=\tfrac{876}{539}N$, where $N=4227952113000000$ is the number of wires in each data bank. Dividing by $Wm$, with $W_{\rm b}=177176569091445000000$ and $W_{\rm c}=1873807244643542670000$, gives
+$$\eta_{\rm b}=\frac{339}{22587335000000}\approx1.5\cdot10^{-11},\qquad\eta_{\rm c}=\frac{73}{19906842167500}\approx3.7\cdot10^{-12},$$
+both larger than $20\cdot2^{-50}\approx1.8\cdot10^{-14}$ <cite data-source="paper">Both exact deficits displayed above are greater than $20\cdot2^{-50}$.</cite>.
+
+Take $\tau=\sigma=1-2^{-50}$, where $\sigma$ is the exponent bounding the complex recurrence. Since $m<2^{20}$, the natural logarithm satisfies $\log m<20\log2<20$. Since both deficits exceed $20\cdot2^{-50}$ and $\exp(-x)>1-x$ for $x>0$,
+$$m^{1-2^{-50}}=m\exp(-2^{-50}\log m)>m(1-2^{-50}\log m)>m(1-20\cdot2^{-50})>m(1-\eta)=\frac sW$$
+for either network. Consequently $s_{\rm b}/W_{\rm b}<m^\tau$ and $s_{\rm c}/W_{\rm c}<m^\sigma$, with $0<\tau=\sigma<1$.
+
+A deficit near $10^{-11}$ suffices because it compounds: each level loses the factor $1-\eta$ against $m$, and over $k=\log_m e$ levels this gives $(1-\eta)^k=e^{\log_m(1-\eta)}$, a fixed negative power of $e$. So any $s<Wm$ gives an exponent below one.

@@ -1,0 +1,34 @@
+Subspace labels are nested subspaces of a fixed $m$-dimensional space, attached to the gates and terminals of the [linear exchange network](linear-network.md), making its $W$ wires cost under $Wm$ smaller calls. Each label is turned into a [frame](common-frame-principle.md); an edge's cost is measured by the dimension of its *orthogonal residual*, the [orthogonal complement](linear-algebra-basics.md) of the smaller label in the larger. The saving comes from keeping the dimension $L$ lost on decreasing edges below $N/2,$ for $N$ values per bank.
+
+A *triple* $T$ is a 3-element subset of $\{1,\dots,h\},$ $h=100,$ with indicator $t_T\in\{0,1\}^h.$ The bit network uses $F=\mathbb Q^h$ with nondegenerate form $\langle x,y\rangle=x\cdot y-\tfrac19\sum_kx_k\sum_ky_k.$<cite data-source="paper">$1-h/9=-91/9$, so it is nondegenerate.</cite> As indicators sum to $3,$
+$$\langle t_S,t_T\rangle=|S\cap T|-\tfrac{3\cdot3}9=|S\cap T|-1,\qquad\langle t_T,t_T\rangle=2.$$
+The complex network uses $F=\mathbb F_2^h,$ where $t_S\cdot t_T=|S\cap T|\bmod2,\ t_T\cdot t_T=1.$ So lines $\langle t_T\rangle$ are nondegenerate, and *neighbors*, triples joined by side wires ($|S\cap T|=1,$ or distinct with even intersection), are orthogonal.<cite data-source="paper">\langle t_S,t_T\rangle=|S\cap T|-1,</cite>
+
+Labels lie in $\mathcal F=F^{\otimes3},$ the $h\times h\times h$ arrays; $x\otimes y\otimes z$ has entries $x_\alpha y_\beta z_\delta,$ $U\otimes V$ is spanned by such arrays, and forms multiply factorwise. Bank index $a$ is three triples; $U_a$ is the line of $u_a=t_{a_1}\otimes t_{a_2}\otimes t_{a_3}.$ Terminal labels:
+$$X_a:\ U_a\to\mathcal F,\qquad Y_a:\ 0\to U_a^\perp,\qquad\text{scratch}:\ 0\to\mathcal F\qquad(\text{source}\to\text{sink}),$$
+and all wires at a gate share its label, so edge changes $\Delta$ telescope:
+$$\textstyle\sum_{\text{sources}}\dim=N,\quad\sum_{\text{sinks}}\dim=Wm-N,\quad\sum_e\Delta=Wm-2N,\quad\sum_e|\Delta|=Wm-2N+2L.$$
+
+Stage $j$ varies $a_j;$ with $t=t_{a_j}$ and
+$$A=F^{\otimes(j-1)}\ (F^{\otimes0}=\text{scalars}),\quad P=\langle t_{a_1}\otimes\cdots\otimes t_{a_{j-1}}\rangle,\quad B=P^\perp_A\ (\text{complement in }A),\quad Q=\langle t_{a_{j+1}}\otimes\cdots\otimes t_{a_3}\rangle,$$
+data labels move as
+$$X:\ A\otimes\langle t\rangle\otimes Q\ \longrightarrow\ A\otimes F\otimes Q,\qquad Y:\ B\otimes\langle t\rangle\otimes Q\ \longrightarrow\ (P\otimes\langle t\rangle)^\perp_{A\otimes F}\otimes Q.$$
+The next stage's $A'=A\otimes F,\ P'=P\otimes\langle t\rangle,\ B'=(P')^\perp_{A'},\ Q=\langle t_{a_{j+1}}\rangle\otimes Q'$ make outputs its inputs, from $U_a,0$ to $\mathcal F,U_a^\perp.$
+
+An invocation's gate labels, tensored by $Q$ ($t$ is the gate's triple):
+$$\begin{array}{l|l|l}\text{time}&\text{wires}&\text{label}\\\hline 0&Y,\ \text{side}&B\otimes\langle t\rangle\\ 1&Y,\ \text{center}&B\otimes F\\ 2&X,\ \text{side}&(B\otimes F)\perp(P\otimes\langle t\rangle)\\ 3&X,\ \text{center}&A\otimes F\\ 4&Y,\ \text{center}&B\otimes F\\ 5&Y,\ \text{side}&(B\otimes F)\perp(P\otimes t^\perp)\\ 6&X,\ \text{center}&A\otimes F\\ 7&X,\ \text{side}&A\otimes F\end{array}$$
+Splitting $A=B\perp P$ and $F=\langle t\rangle\perp t^\perp$ shows each edge nested; side wires between neighbors $t_Y,t_X$ nest at $2\to5$ because $\langle t_X\rangle\subset t_Y^\perp.$ Labels only grow, except central wires, losing $\dim(P\otimes F\otimes Q)=h$ at $3\to4.$<cite data-source="paper">Label dimension is nondecreasing along every edge except center $3\to4$, which removes</cite> With $I=3\binom h3^2$ invocations of $\gamma$ central wires each,
+$$L=I\gamma h,\qquad N=\tbinom h3^3,\qquad \frac LN=\frac{3\binom h3^2\gamma h}{\binom h3^3}=\frac{3\gamma h}{161700}=\frac\gamma{539}=\frac{100}{539}\ (\text{bit},\ \gamma=100),\quad\frac{101}{539}\ (\text{complex},\ \gamma=101),$$
+below $\tfrac12:$ only about $h$ wires per invocation shrink.<cite data-source="paper">\frac{L_{\rm b}}{N}=\frac{100}{539},\qquad</cite>
+
+Bit network: label $U$ gives the [address shear](address-shear.md) by the projection $\Pi_U$ onto $U$ along $U^\perp$ (sources: $-\Pi_{U_a}$ on $X_a,$ else $0$). Shears add; $\Pi_V-\Pi_U$ is the identity on the residual and zero on its complement, so ranks equal dimension changes, plus $\operatorname{rank}(\Pi_{U_a}+\Pi_{U_a})=1$ on each $X_a$'s first edge (gate label $U_a$). So total rank $s_{\rm b}$ and endpoint shears are
+$$s_{\rm b}=W_{\rm b}m-2N+2L_{\rm b}+N=W_{\rm b}m-(N-2L_{\rm b})<W_{\rm b}m,\qquad \Pi_{U_a^\perp}-(-\Pi_{U_a})=\Pi_{\mathcal F}-0=I_m.$$
+<cite data-source="paper">=177176569088785861287000000<W_{\rm b}m.</cite>
+
+Complex network: with Hamming weight $\operatorname{wt},$ $q_U(x)=\operatorname{wt}(\Pi_Ux)\bmod4,$ $2\times2$ Hadamard matrix $H$ and kernel $C=H\operatorname{diag}(1,i)H,$ label $U$ gives the frame $\mathcal C_U=H^{\otimes m}\operatorname{diag}_x(i^{q_U(x)})H^{\otimes m}.$ Orthogonal binary vectors overlap evenly, so weight adds modulo $4;$ for $V=U\perp E$ with orthonormal basis $\mathcal B$ of residual $E,$
+$$\operatorname{wt}(z+w)=\operatorname{wt}(z)+\operatorname{wt}(w)-2|\operatorname{supp}z\cap\operatorname{supp}w|,\qquad \Pi_Vx=\Pi_Ux+\sum_{z\in\mathcal B}(z\cdot x)z,$$
+$$\mathcal C_V\mathcal C_U^{-1}=H^{\otimes m}\operatorname{diag}_x\big(i^{q_V(x)-q_U(x)}\big)H^{\otimes m},\qquad q_V(x)-q_U(x)\equiv\pm\sum_{z\in\mathcal B}\operatorname{wt}(z)[z\cdot x]\pmod 4,$$
+$$([z\cdot x]\in\{0,1\};\ -\text{ on decreasing edges}),\qquad i^{\varepsilon[z\cdot x]}=\tfrac{1+i^\varepsilon}2+\tfrac{1-i^\varepsilon}2(-1)^{z\cdot x}\quad(\varepsilon=\pm1).$$
+Each $\operatorname{wt}(z)$ is odd as $z\cdot z=1,$ and since $H\operatorname{diag}(1,-1)H=\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right),$ conjugating by $H^{\otimes m}$ turns $(-1)^{z\cdot x}$ into translation $(\operatorname{sh}_zf)(x)=f(x+z),$ so each basis vector gives one kernel $\tfrac{1+i}2I+\tfrac{1-i}2\operatorname{sh}_z$ or its inverse, $s_{\rm c}=W_{\rm c}m-2N+2L_{\rm c}<W_{\rm c}m$ in all.<cite data-source="paper">=1873807244636671267308000000<W_{\rm c}m.</cite> Such bases exist.<cite data-source="paper">every nondegenerate nonalternating binary symmetric</cite> Routes $0\to\mathcal F$ get $\mathcal C_{\mathcal F}\mathcal C_0^{-1}=H^{\otimes m}\operatorname{diag}_x(i^{\operatorname{wt}(x)})H^{\otimes m}=C^{\otimes m};$ only $X_a\to Y_a$ differs:
+$$q_{U_a^\perp}(x)-q_{U_a}(x)\equiv\operatorname{wt}(x)-2\operatorname{wt}(u_a)[u_a\cdot x]\equiv\sum_{k\notin\operatorname{supp}u_a}x_k-\sum_{k\in\operatorname{supp}u_a}x_k\pmod 4,\qquad|\operatorname{supp}u_a|=27,$$
+so $C^{-1}$ on 27 coordinates, made $C$ by $Z=\operatorname{diag}(1,-1)$ there before and $i^{27}Z$ after, since $C=iZC^{-1}Z.$<cite data-source="paper">C=iZC^{-1}Z,\qquad C^{-1}=-iZCZ.</cite> Negating $X$ outputs and returning roles leaves $C^{\otimes m}$ everywhere.

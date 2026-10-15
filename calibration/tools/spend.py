@@ -45,7 +45,9 @@ RULES = [  # (pattern on the description, experiment, role)
     (r"^E9F\dY \d{4}-", "E9", "runs"),
     (r"^E10F\dY2? \d{4}-", "E10", "runs"),
     (r"^S6F\d(SM|HH) \d{4}-", "S6", "runs"),
+    (r"^W2W[HMSO]P(15R|16) \d{4}-", "W2b", "runs"),
     (r"^W2W[HMSO]P\d+ \d{4}-", "W2", "runs"),
+    (r"^E11F\dO \d{4}-", "E11", "runs"),
     (r"^K3 judge", "K3 (pairwise)", "judging"),
     (r"^(A1|X1|K3) ", "design subagents", "design"),
     (r"^FB1F\d \d{4}-", "FB1", "runs"),
@@ -53,7 +55,7 @@ RULES = [  # (pattern on the description, experiment, role)
     (r"^R\d \d{4}-", "T1", "runs"),
     (r"^(T\d chain walk|Chain walk)", "chain walks", "judging"),
 ]
-BATCH = {"3": "E3", "4": "S1", "5": "E4", "6": "E5", "7": "E6", "8": "E7", "9": "S2", "10": "S3", "11": "K1", "12": "S4", "13": "S4 checklist", "14": "K2", "15": "E8 checklist", "16": "E8", "17": "E8b checklist", "18": "E8b", "19": "FB1 checklist", "20": "E9 checklist", "21": "E10", "22": "W2 pages", "23": "S6 checklist"}
+BATCH = {"3": "E3", "4": "S1", "5": "E4", "6": "E5", "7": "E6", "8": "E7", "9": "S2", "10": "S3", "11": "K1", "12": "S4", "13": "S4 checklist", "14": "K2", "15": "E8 checklist", "16": "E8", "17": "E8b checklist", "18": "E8b", "19": "FB1 checklist", "20": "E9 checklist", "21": "E10", "22": "W2 pages", "23": "S6 checklist", "24": "W2b pages", "25": "E11 (pairwise)"}
 
 
 def classify(desc):

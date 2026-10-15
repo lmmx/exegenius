@@ -1,0 +1,29 @@
+Subspace labels attach nondegenerate subspaces of a fixed $m$-dimensional bilinear space to the vertices of the [linear exchange network](linear-network.md) on $W$ wires so its total edge cost $s$ falls below $Wm$ as recursive saving requires.
+
+Triples are three-element subsets of $h=100$ points; a bank has $N=\binom h3^3$ wires $X_a$ or $Y_a$ indexed by triples of triples $a=(a_1,a_2,a_3);$ there are $I=3\binom h3^2$ invocations with $c$ central wires each $(c_{\rm b}=100$ bit, $c_{\rm c}=101$ complex); $m=h^3.$
+
+The labels choose the frames of [frames on wire arrays](common-frame-principle.md) and measure each edge's frame change by its orthogonal residual, the [orthogonal complement](linear-algebra-basics.md) of its smaller label in its larger. The saving needs the dimension $L$ lost on decreasing edges small relative to $N.$
+
+The bit network uses $F=\mathbb Q^h$ with nondegenerate $\langle g,g'\rangle=g\cdot g'-\frac19(\sum_kg_k)(\sum_kg'_k)$ of eigenvalues $1$ and $-91/9.$<cite data-source="paper">This form has eigenvalues $1$ and</cite> Triple indicators $t_S,t_T$ have coordinate sum $3,$ so $\langle t_S,t_T\rangle=|S\cap T|-\frac{3\cdot3}9=|S\cap T|-1$ and $\langle t_T,t_T\rangle=2;$ the complex network uses $F=\mathbb F_2^h$ with the dot product, $t_S\cdot t_T=|S\cap T|\bmod 2.$ So triple lines $\langle t_T\rangle$ are nondegenerate and neighbors $(|S\cap T|=1,$ resp. $|S\cap T|\in\{0,2\})$ are orthogonal. Labels lie in $\mathcal F=F^{\otimes3}$ of $h\times h\times h$ arrays, $g\otimes g'\otimes g''$ having entries $g_{k_1}g'_{k_2}g''_{k_3}$ and forms multiplying factorwise. Put $u_a=t_{a_1}\otimes t_{a_2}\otimes t_{a_3}$ and $U_a=\langle u_a\rangle.$ Terminals get
+
+$$\begin{array}{c|cc} &\text{source}&\text{sink}\\\hline X_a&U_a&\mathcal F\\ Y_a&0&U_a^\perp\\ \text{scratch}&0&\mathcal F\end{array}$$
+
+so sources total dimension $N$ and sinks $Nm+N(m-1)+(W-2N)m=Wm-N.$ At stage $j$ put $A=F^{\otimes(j-1)},\ P=\langle t_{a_1}\otimes\cdots\otimes t_{a_{j-1}}\rangle,\ B=P^\perp\subset A$ and $K=\langle t_{a_{j+1}}\otimes\cdots\otimes t_{a_3}\rangle;$ with $T$ the wire's $j$th triple, labels move
+
+$$X:\ A\otimes\langle t_T\rangle\otimes K\to A\otimes F\otimes K,\qquad Y:\ B\otimes\langle t_T\rangle\otimes K\to (P\otimes\langle t_T\rangle)^\perp_{A\otimes F}\otimes K.$$
+
+Writing $K=\langle t_{a_{j+1}}\rangle\otimes K',$ the next stage has $A'=A\otimes F,\ P'=P\otimes\langle t_T\rangle,\ B'=(P')^\perp_{A'}$ and $K',$ making these its incoming labels from $U_a,0$ to $\mathcal F,U_a^\perp.$ An invocation's gates get
+
+$$\begin{array}{c|l|l} \text{time}&\text{gate}&\text{label}\otimes K\\\hline 0&Y\text{, side}&B\otimes\langle t_T\rangle\\ 1&Y\text{, center}&B\otimes F\\ 2&X\text{, side}&(B\otimes F)\perp(P\otimes\langle t_T\rangle)\\ 3&X\text{, center}&A\otimes F\\ 4&Y\text{, center}&B\otimes F\\ 5&Y\text{, side}&(B\otimes F)\perp(P\otimes t_T^\perp)\\ 6&X\text{, center}&A\otimes F\\ 7&X\text{, side}&A\otimes F\end{array}$$
+
+Labels nest along every edge, the side edge $2\to5$ since neighbors $S,T$ satisfy $\langle t_S\rangle\subset t_T^\perp.$ Only central-wire edges $3\to4$ decrease, each losing $P\otimes F$ of dimension $h,$ so $L=Ich.$ Gates keep one label, so changes telescope along wires: signed ones total $(Wm-N)-N$ and absolute ones $Wm-2N+2L.$ Thus $L/N=3ch/\binom h3=c/539,$ giving $L_{\rm b}/N=100/539$ and $L_{\rm c}/N=101/539$ below one half<cite data-source="paper">\frac{L_{\rm b}}{N}=\frac{100}{539},\qquad</cite>.
+
+Over $\mathbb F_2,$ norm-one tensors of indicators or coordinate units give each nonzero residual an orthonormal basis<cite data-source="paper">every nondegenerate nonalternating binary symmetric</cite>.
+
+Bit-network label $U$ gets the [address shear](address-shear.md) by the projection $\Pi_U$ onto $U$ along $U^\perp$ $(-\Pi_{U_a}$ at sources of $X_a);$ so every route gets the shear $\mathrm{id}:$ $\Pi_{U_a^\perp}-(-\Pi_{U_a})$ on $X_a\to Y_a$ and $\Pi_{\mathcal F}-0$ elsewhere. An edge $U\subset V$ costs $\operatorname{rank}(\Pi_V-\Pi_U)=\operatorname{rank}\Pi_{V\cap U^\perp}=\dim V-\dim U,$ except the first edge of $X_a,$ into $U_a$ as $B=0,$ costing $\operatorname{rank}2\Pi_{U_a}=1.$ So $s_{\rm b}=W_{\rm b}m-2N+2L_{\rm b}+N<W_{\rm b}m$ because $2L_{\rm b}<N$ holds<cite data-source="paper">&=W_{\rm b}m-N+2L_{\rm b}</cite>.
+
+A complex-network label $U$ gets $\mathcal C_U=H^{\otimes m}\operatorname{diag}_x(i^{q_U(x)})H^{\otimes m}$ with $q_U(x)=\operatorname{wt}(\Pi_Ux)\bmod4$ $(x\in\mathbb F_2^m$ the address, $\operatorname{wt}$ Hamming weight, $H$ Hadamard), so $\mathcal C_{\mathcal F}=C^{\otimes m}$ for the kernel $C=H\operatorname{diag}(1,i)H=\alpha+\beta\,\mathrm{sh},\ \alpha=\frac{1+i}2,\ \beta=\frac{1-i}2,$ $\mathrm{sh}$ swapping two entries. On an edge $U\to V$ with orthonormal residual basis $\mathcal E$ weight is additive mod 4, as orthogonal binary vectors share an even support:
+
+$$q_V(x)-q_U(x)\equiv\pm\sum_{e\in\mathcal E}\operatorname{wt}(e)[e\cdot x],\qquad i^{\varepsilon[e\cdot x]}=\tfrac{1+i^\varepsilon}2+\tfrac{1-i^\varepsilon}2(-1)^{e\cdot x}\ \ (\varepsilon=\pm1,\ [e\cdot x]\in\{0,1\}).$$
+
+As $\operatorname{wt}(e)$ is odd and $H\operatorname{diag}(1,-1)H=\mathrm{sh}$ turns $(-1)^{e\cdot x}$ into $\mathrm{sh}_e,$ $(\mathrm{sh}_ef)(x)=f(x+e),$ each $e$ gives one kernel $\alpha+\beta\,\mathrm{sh}_e$ or its inverse; so $s_{\rm c}=W_{\rm c}m-2N+2L_{\rm c}<W_{\rm c}m$ as $L_{\rm c}<N$ holds<cite data-source="paper">s_{\rm c}=W_{\rm c}m-2N+2L_{\rm c}</cite>. On $X_a\to Y_a,$ $q_{U_a^\perp}-q_{U_a}\equiv\operatorname{wt}(x)+2[u_a\cdot x]$ gives $C^{-1}$ on $\operatorname{supp}u_a$ $(27$ coordinates), fixed by $Z=\operatorname{diag}(1,-1)$ there before and $i^{27}Z$ after since $C=iZC^{-1}Z.$ Negating physical $X$ outputs and undoing the exchange leaves $C^{\otimes m}$ everywhere.

@@ -1,0 +1,22 @@
+Subspace labels attach a nondegenerate subspace to every vertex of the [linear exchange network with restored scratch wires](linear-network.md), so that its $s$ smaller calls number fewer than $Wm$ ($W$ wires, label dimension $m$), by keeping the dimension lost on decreasing edges small <cite data-source="paper">The saving will come from keeping the total dimension lost on decreasing</cite>.
+
+A ground set of $h=100$ points has $v=\binom h3$ triples. Let
+$$\text{bit: }F=\mathbb Q^h,\ \langle x,y\rangle=x^{\mathsf T}(\mathbf 1-J/9)y\ (J\text{ all-ones});\qquad \text{phase: }F=\mathbb F_2^h,\ \langle x,y\rangle=x\cdot y.$$
+A triple $T$ has indicator $t_T$ with $\langle t_S,t_T\rangle=|S∩T|-1$ <cite data-source="paper">\langle t_S,t_T\rangle=|S\cap T|-1,</cite> and $\langle t_T,t_T\rangle=2$. So each line $\langle t_T\rangle$ is nondegenerate, and neighbors' lines are orthogonal.
+
+Labels live in $\Phi=F^{\otimes3}$, of dimension $m=h^3$. Each of the $N=v^3$ indices $a=(a_1,a_2,a_3)$ gives $u_a=t_{a_1}\otimes t_{a_2}\otimes t_{a_3}$, $U_a=\langle u_a\rangle$, and (source, sink) labels
+$$X_a:(U_a,\Phi),\qquad Y_a:(0,U_a^\perp),\qquad \text{aux}:(0,\Phi).$$
+Sources total $N$, sinks $Wm-N$ ($U_a^\perp$ has dimension $m-1$).
+
+At stage $j$ let $A=F^{\otimes(j-1)}$, $P=\langle t_{a_1}\otimes\ldots\otimes t_{a_{j-1}}\rangle$, $B=P^\perp\subset A$, and $t$ the indicator of the wire's $j$th triple. Outgoing labels $A\otimes F$ on $X$ and $B'$ on $Y$ equal the next incoming ones, where
+$$A'=A\otimes F,\quad P'=P\otimes\langle t\rangle,\quad B'=(P')^\perp_{A'}=(B\otimes F)\perp(P\otimes t^\perp)$$
+
+An edge's orthogonal residual, the [orthogonal complement](linear-algebra-basics.md) of its smaller label in the larger, has the label change as dimension. On the side edge $2\to5$, $t_X\perp t_Y$ gives $\langle t_X\rangle\subset t_Y^\perp$: labels nest, with residual $P\otimes\langle t_X,t_Y\rangle^\perp$ of dimension $h-2$. Only central edge $3\to4$ loses dimension <cite data-source="paper">Label dimension is nondecreasing along every edge except center $3\to4$, which removes</cite>, namely $P\otimes F$ of dimension $h$. With $I=3v^2$ invocations of $c$ central wires each, the loss is $L=Ich$. Signed changes telescope at each gate to $Wm-2N$; absolute values add $2L$. As $L/N=3ch/v$, $L_{\rm b}/N=100/539$ and $L_{\rm c}/N=101/539$ <cite data-source="paper">\frac{L_{\rm b}}{N}=\frac{100}{539},\qquad</cite>, below $1/2$.
+
+Under [frames on wire arrays](common-frame-principle.md), an edge pays its change of frame. Bit network: give each vertex the projection $P_U$ onto its label $U$, but $-P_{U_a}$ at the source of $X_a$. For nested $U\subset V$, $P_V-P_U$ is the identity on $V\cap U^\perp$ and zero on its complement, so has rank $\dim V-\dim U$. The $N$ source edges differ: at stage 1, $B=0$, the first gate label is $U_a$, and $2P_{U_a}$ has rank $1$, not $0$. So $s_{\rm b}=Wm-N+2L_{\rm b}<Wm$. Ends: $P_{U_a^\perp}+P_{U_a}=I_m$ for $X_a$, else $I_m-0$.
+
+Complex (phase) network: let $H$ be the Hadamard matrix, $\operatorname{wt}$ the Hamming weight, $C=H\operatorname{diag}(1,i)H=aI+bX$ with $a=\tfrac{1+i}2$, $b=\tfrac{1-i}2$, and
+$$\mathcal C_U=H^{\otimes m}\operatorname{diag}_x(i^{q_U(x)})H^{\otimes m},\qquad q_U(x)=\operatorname{wt}(P_Ux)\bmod 4,$$
+where $P_U$ is over $\mathbb F_2$. A nonzero residual contains a coordinate unit vector, hence an orthonormal basis <cite data-source="paper">is nonalternating precisely when it contains a vector of norm one.</cite> In $\operatorname{wt}(z+w)=\operatorname{wt}(z)+\operatorname{wt}(w)-2|\operatorname{supp}z\cap\operatorname{supp}w|$ orthogonal $z,w$ overlap evenly, so weight is additive mod 4. For $V=U\perp E$ with orthonormal basis $\mathcal B$ of $E$,
+$$q_V(x)-q_U(x)=\pm\sum_{v\in\mathcal B}\operatorname{wt}(v)[v\cdot x]\pmod 4,\qquad [b]\in\{0,1\}\text{ represents }b\in\mathbb F_2,\quad -\text{ on decreasing edges}$$
+As $\operatorname{wt}(v)$ is odd, each term is $i^{\varepsilon[v\cdot x]}=\frac{1+i^\varepsilon}2+\frac{1-i^\varepsilon}2(-1)^{v\cdot x}$, $\varepsilon=\pm1$, which $H\operatorname{diag}(1,-1)H=X$ turns into the kernel $aI+bX_v$ or its inverse. One kernel per basis vector gives $s_{\rm c}=Wm-2N+2L_{\rm c}<Wm$. On $X_a\to Y_a$ the $27$ coordinates of $\operatorname{supp}(u_a)$ get $C^{-1}$, fixed by $C=iZC^{-1}Z$, $Z=\operatorname{diag}(1,-1)$; undoing signs and exchange gives $C^{\otimes m}$ on every role.
