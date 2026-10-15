@@ -1,6 +1,6 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-15 05:03 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-15 05:15 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
 
 ## Standing instructions from the author (latest, about 01:22–01:45 UTC)
 
@@ -26,7 +26,7 @@
 
 ### A1 (`plans/A1.md`): planted-error recall for fidelity auditing
 
-- **Stage 1 running since 05:02:** tasks are launched from `scratchpad/a1/queue.tsv` in order. The count launched is in `scratchpad/a1/launched.txt` (20 at 05:02). On resuming, check which of the launched tasks are accepted (each copy's `exegenius/log.jsonl`) before launching more. Never relaunch a task that may still be running.
+- **Stage 1 running since 05:02:** tasks are launched from `scratchpad/a1/queue.tsv` in order. The count launched is in `scratchpad/a1/launched.txt` (20 at 05:02; all 132 launched by 05:15). On resuming, check which of the launched tasks are accepted (each copy's `exegenius/log.jsonl`) before launching more. Never relaunch a task that may still be running.
 - **State:** preregistered at 01:18. The 132 task copies are made and checked in `scratchpad/a1/runs/A1{AH,AS,AO}1/`. `prompts.tsv` lists description, model, effort, root and prompt for each.
 - **Gate:** E11 is complete (04:58) and the reset has passed. Measured since 04:40: 94.2 M, against A1's ~65–80 M and runbook §5's ~300 M safeguard. The session cannot read the meter.
 - **Then:**
