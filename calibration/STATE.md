@@ -59,5 +59,10 @@
 
 ## Records still to do (model-free)
 
-- ~~E11's evidence branch, registry spec and branch inventory~~: done at 01:53–01:55 (`141026-exp-e11-ceiling` b02b658; `registry/specs/E11.json`).
-- J25's batch entry in `registry/pairwise-judging.json`, and E11's result in `plans/E11.md`, `policy.md` and a journal entry.
+- None outstanding. E11's result is in `plans/E11.md`, `policy.md`, `registry/` (J25 in `pairwise-judging.json`) and `docs/journal/2026-10-15-e11-a1-results.md`. A1 stage 1 is recorded in the same places.
+
+## Next actions, in order, when the author replies
+
+1. Record the meter reading in `budget.md`, as a reading, with its time.
+2. Record the author's rulings on A1 (classifier, trigger reading, which configurations get stage 2) in `plans/A1.md`'s ledger, before any stage-2 call.
+3. Launch whatever the author orders (A1 stage 2, W3), within the reading. Launch nothing without a reading.
