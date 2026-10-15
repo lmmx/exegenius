@@ -52,7 +52,7 @@
 **The author's ruling (about 01:37 UTC):**
 - The blind designation stays fixed. It is a *classification* result, not evidence that Opus is better on all 23 pages. W2b establishes the advantage on 0015 and 0016 only.
 - **No 23-page Opus rollout.** Sonnet `high` remains the general default.
-- After E11, and with budget, a small preregistered writer validation is proposed: `plans/W3-draft.md`, with 6 seeded key-step pages and 3 non-key-step controls. Its results decide whether the split generalises.
+- After E11, and with budget, a small preregistered writer validation is proposed: `plans/W3.md` (preregistered 05:31 UTC, 2026-10-15; not launched), with 6 seeded key-step pages and 3 non-key-step controls. Its results decide whether the split generalises.
 
 ## Cost per argument run, measured (for the table's cost column)
 

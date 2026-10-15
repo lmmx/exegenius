@@ -1,6 +1,8 @@
 # W3 (draft, a proposal; not preregistered): does the Opus writer advantage generalise to other key-step pages?
 
-**Status:**
+**Status:** superseded by `W3.md`, preregistered at 05:31 UTC on 2026-10-15. This draft is kept as written.
+
+**Original status:**
 - Drafted on 2026-10-15 at 01:39 UTC, on the author's instruction at about 01:37: once E11 is complete and the budget allows, propose a small, preregistered writer validation. It should sample further blind-designated key-step pages and non-key-step controls.
 - **Not preregistered and not launched.** No model has run for it.
 - The pages below were drawn by a fixed seed from the blind designation, before any W3 result. They were chosen without consulting W2's or W2b's per-page outcomes.

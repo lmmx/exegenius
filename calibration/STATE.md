@@ -34,16 +34,18 @@
   2. Is the inclusive reading of the stage-2 trigger for R_S right?
   3. A fresh meter reading before stage 2.
 - **Stage 2, when cleared:**
-  - copies for run 2 by `tools/a1setup.py` with RUN=2 (see the ledger);
+  - the copies for run 2 are made (05:30): `scratchpad/a1/runs2/`, launch order in `scratchpad/a1/queue2.tsv`. If the author clears AH only, launch only the `A1AH2` rows;
   - launch as stage 1 (up to 20 at a time, `general-purpose`, model and effort from `prompts.tsv`);
   - collect with `a1collect.py`; score pooled; hand-label the new gaps under `labels-rule.md` before unblinding;
   - read by the table.
   - Estimated cost: about 23 M cache read for the tasks if all three run, plus orchestration.
 
-### W3 (`plans/W3-draft.md`): writer validation
+### W3 (`plans/W3.md`): writer validation, **preregistered at 05:31 UTC; not launched**
 
-- A draft proposal on new seeded pages: key-step 0018, 0021, 0031, 0032, 0033 and 0036; controls 0005, 0006 and 0010.
-- It is preregistered only after E11 completes and the budget allows, and launched in the order the author sets.
+- **Pages:** key-step 0018, 0021, 0031, 0032, 0033 and 0036; controls 0005, 0006 and 0010.
+- **Runs:** Sonnet `high` against Opus `xhigh`, one run per page, judged by J26 (J22's page judge, three judges per page).
+- **Estimate:** about 70–140 M cache read.
+- **Launch needs:** the author's order (relative to A1 stage 2) and a fresh meter reading.
 
 ## Policy state (`policy.md`)
 
