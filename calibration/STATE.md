@@ -1,6 +1,6 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-15 01:53 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-15 04:47 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
 
 ## Standing instructions from the author (latest, about 01:22–01:45 UTC)
 
@@ -28,7 +28,7 @@
 2. If a run ended without an accepted plan, record it. E11's plan has no rerun rule for operational failures, so a rerun must be preregistered in E11.md before it launches.
 3. ~~Prepare J25~~ **Done at 01:53.** 14 pair files and prompts are in `docs/journal/2026-10-15-e11-ceiling/judge/prompts/Qnn.txt`, with no leaks.
 4. **Budget gate before J25** (14 pairwise judgements, ~85–140 M): a fresh meter reading that leaves room, or the reset having passed (after about 04:40) with spend since the reset measured (`calibration/tools/spend.py SUBAGENTS --since <reset time>`).
-5. **Launch J25:** one Opus judge per file; description `J25 judge Qnn[-b]`; pointer prompt "Read the instructions in <prompt file> and follow them exactly. Read only that file and the files it names."
+5. **J25 launched at 04:47** (all 14), after the reset; see E11.md's ledger for the budget basis. *Was:* **Launch J25:** one Opus judge per file; description `J25 judge Qnn[-b]`; pointer prompt "Read the instructions in <prompt file> and follow them exactly. Read only that file and the files it names."
 6. **Score** (checked to run on the empty batch at 01:55). The sign test counts a pair for O when net ≥ 2:
 
    ```

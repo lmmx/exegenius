@@ -30,7 +30,7 @@ import re
 import sys
 
 RULES = [  # (pattern on the description, experiment, role)
-    (r"^J(\d+) judge P\d+", None, "judging"),
+    (r"^J(\d+) judge [PQ]\d+", None, "judging"),
     (r"^(Judge plan|Judge P|Second judge of plan)", "J1-J2", "judging"),
     (r"^([BV])\d \d{4}-argument", "E4", "runs"),
     (r"^N\d \d{4}-", "E5", "runs"),
