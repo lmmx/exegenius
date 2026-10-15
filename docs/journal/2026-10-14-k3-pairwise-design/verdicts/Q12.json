@@ -1,0 +1,198 @@
+{
+  "pair": "Q12",
+  "items": [
+    {
+      "id": "bank-exchange-network",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Both carry B1 (S5.1.2), B2 (S5.1.3), B3 (S5.1.4) and B4 (S5.2) identically; checked against lines 741-764."
+    },
+    {
+      "id": "common-frame-identity",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Both state the invariant, gate commutation and D_out S D_in^{-1} identically (S5.3-S5.3.3); consistent with lines 804-843."
+    },
+    {
+      "id": "label-residual-budget",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Same sub-steps in both: L3 (S5.4.2, S5.4.4, S5.4.5) and L5 (S5.4.6); L2 only as the inclusion without the h-2 complement (S5.4.3); L1 residual table and L4 orthonormal-basis argument absent in both. Checked lines 1013-1109."
+    },
+    {
+      "id": "bit-shear-interface",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S5.4.7-S5.4.7.3 (projection rank, 2P_{U_a} source exception, s_b deficit N-2L_b); matches lines 1156-1172."
+    },
+    {
+      "id": "complex-phase-interface",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical P1 (S5.5.1), P2 (S5.5.2), partial P4 (S5.5.4); P3 (k columns) not stated in either. Checked lines 1231-1315."
+    },
+    {
+      "id": "rank-saving",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical R1-R4 (S5.4.6, S5.4.7.3, S5.6.1-S5.6.3); matches lines 1105-1110, 1319-1343."
+    },
+    {
+      "id": "stream-primitives",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S3 and S4; consistent with lines 491-566."
+    },
+    {
+      "id": "matrix-shear",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical: M3 (S5.8.1), M4 (S5.8.3, S5.8.4), M2 only as 'fixed odd prime' (S5.8), M1 elimination proof absent from both (S5.7 states the factorization only). Checked lines 1364-1446."
+    },
+    {
+      "id": "interchange-recurrence",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S5.9-S5.9.8 (row split, shears, three-update interchange, recurrence, depth-first schedule); matches lines 1475-1602."
+    },
+    {
+      "id": "arbitrary-width-interchange",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S5.10-S5.10.6; matches lines 1650-1734."
+    },
+    {
+      "id": "phase-frame-recursion",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S5.11.1-S5.11.4b (P_M conjugation, inverse child, elimination count, b^D); matches lines 1820-1936."
+    },
+    {
+      "id": "packed-selected-bit-addition",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S5.11.5-S5.11.5.9; matches lines 1974-2226."
+    },
+    {
+      "id": "layer-recurrence",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S5.11.6-S5.11.6.5.6 (beta=1/2, row construction, geometric sum, leaves, base-m pieces); matches lines 2286-2445."
+    },
+    {
+      "id": "simultaneous-layer",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S1-S5 coverage (S5.11.7.1-S5.11.7.8, S5.11.8.3-S5.11.8.4); matches lines 2457-2586, 2751-2757."
+    },
+    {
+      "id": "synthetic-transform",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S6.1-S6.3.7; consistent with lines 2805-3189."
+    },
+    {
+      "id": "signed-packing",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S6.4-S6.4.5; consistent with lines 3260-3366."
+    },
+    {
+      "id": "synthetic-convolution",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S6, S6.5-S6.7; matches the statement at 3392-3410 and lines 3425-3492."
+    },
+    {
+      "id": "gaussian-resampling",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S7.1-S7.1.10; consistent with lines 3600-3887."
+    },
+    {
+      "id": "chirp-permutation-cancellation",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S7.2-S7.2.5; matches lines 3925-3985."
+    },
+    {
+      "id": "parameters-and-primes",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S8.1-S8.1.12; matches lines 4006-4193."
+    },
+    {
+      "id": "crt-address-map",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S8.2-S8.2.5; matches lines 4200-4292."
+    },
+    {
+      "id": "phase-twist",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S8.3-S8.3.4; consistent with lines 4308-4401."
+    },
+    {
+      "id": "multiplication-algorithm",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S8.4-S8.5.8; consistent with lines 4415-4539."
+    },
+    {
+      "id": "exact-recovery",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S8.5.9-S8.5.9.11; matches lines 4582-4782."
+    },
+    {
+      "id": "time-accounting",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Identical S8.6-S8.6.13 and S9; matches lines 4812-4991."
+    },
+    {
+      "id": "conjecture-negation",
+      "preference": "tie",
+      "strength": "n/a",
+      "differences": [],
+      "note": "Plans A and B are byte-identical except for the title line (diff shows only line 1), so they carry the same steps, methods and quotes on this item. Neither plan has a step on the lower-bound scope beyond S0's reliance on n-log-n-conjecture; no difference."
+    }
+  ],
+  "chain": {
+    "preference": "tie",
+    "strength": "n/a",
+    "note": "The two trees are identical: both run S5.1-S5.6 (bank exchange, frames, labels, s_b and s_c below Wm, tau=sigma=1-2^{-50}) into S5.8-S5.11 (shear, interchange and layer recurrences with factor s/W<m^tau) and on through S6-S8 to the time bound O(n(lg n)^{1-kappa}), so neither chain thins out where the other does not."
+  },
+  "errors": [],
+  "overall": {
+    "preference": "tie",
+    "strength": "n/a",
+    "reason": "Plan A and Plan B are the same text apart from the title line, so every item, the chain and the error list are identical. Spot checks of their claims against the paper (labels and residuals 926-1109, interfaces 1156-1315, rank saving 1319-1343, shear and interchange 1364-1734, layer 1820-2757, convolution, resampling, parameters, recovery and cost accounting 2870-4991) found no misstatement. There is no difference on which to prefer either plan."
+  }
+}
