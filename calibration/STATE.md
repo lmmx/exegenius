@@ -1,6 +1,6 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-15 09:26 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-15 09:31 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
 
 ## Checkpoint, 09:26 UTC, 2026-10-15 (read first)
 
@@ -15,6 +15,9 @@
 ### Next actions after reset, in order
 
 1. **Get a fresh meter reading,** or use one the author has posted after 09:44. If none, ask once, and do only model-free work meanwhile.
+   - With a reading after the reset, launch W3's 18 runs at once from `docs/journal/2026-10-15-w3-setup/prompts.tsv`.
+   - When the runs are accepted, collect the pages and prepare J26 as J24 was prepared (`scratchpad/prep-j24.py`; J22's page judge, three judges per page, a fresh seed, scored ids from `assigned.json`).
+   - Judge, then read by `plans/W3.md`'s table.
 2. **W3** (`plans/W3.md`, preregistered 05:31): the writer routing question, the one queued experiment that can change a decision.
    - Expected cost: ~70–140 M cache read; about an hour (runs of 15–25 min, 20 at a time, then J26's 54 page judgements).
    - **Setup done at 09:28–09:29** (model-free): 18 copies in `scratchpad/e6/W3{WS,WO}P{page}`; prompts in `docs/journal/2026-10-15-w3-setup/prompts.tsv`; scored ids fixed in `assigned.json`. **Ready to launch.**
