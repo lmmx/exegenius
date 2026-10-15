@@ -49,6 +49,11 @@
 - Opus wrote 0014–0016 at 1.4–4.2 M more cache read per page than Sonnet (2–5.6×). Across 23 pages that is roughly 30–100 M more per wiki, a rough range in measured tokens, not converted to quota.
 - Whether the rule should be narrower is the author's call. Nothing here runs a writer.
 
+**The author's ruling (about 01:37 UTC):**
+- The blind designation stays fixed. It is a *classification* result, not evidence that Opus is better on all 23 pages. W2b establishes the advantage on 0015 and 0016 only.
+- **No 23-page Opus rollout.** Sonnet `high` remains the general default.
+- After E11, and with budget, a small preregistered writer validation is proposed: `plans/W3-draft.md`, with 6 seeded key-step pages and 3 non-key-step controls. Its results decide whether the split generalises.
+
 ## Cost per argument run, measured (for the table's cost column)
 
 | Configuration | Cache read per run | Time per run |
