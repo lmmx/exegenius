@@ -13,5 +13,20 @@
   "prompt": "calibration/rubrics/pairwise-judge-prompt.md",
   "scoring": "calibration/tools/pairwise.py score",
   "journal": "calibration/plans/K3.md"
+ },
+ {
+  "id": "J25",
+  "experiment": "E11",
+  "dir": "docs/journal/2026-10-15-e11-ceiling/judge",
+  "verdicts": "verdicts",
+  "seed": 20261041,
+  "judge": {
+   "agent": "general-purpose",
+   "model_id": "claude-opus-5-5"
+  },
+  "judges": "one per order on each of 7 pairs (6 O-S, 1 control)",
+  "prompt": "calibration/rubrics/pairwise-judge-prompt.md",
+  "scoring": "calibration/tools/pairwise.py score --margin 2",
+  "journal": "calibration/plans/E11.md"
  }
 ]

@@ -1,0 +1,56 @@
+verdicts read: 14; files expected: 14
+
+preference matrix (overall verdicts): row's wins over column / ties
+              E10F3Y   E10F4Y2    E10F5Y    E10F6Y    E11F2O    E11F3O    E11F4O    E11F5O    E11F6O    E11F8O     E9F2Y     E9F4Y     E9F8Y
+E10F3Y                                                             1/1                                                                      
+E10F4Y2                                                                                                                        0/0          
+E10F5Y                                                                                 2/0                                                  
+E10F6Y                                                                                           0/2                                        
+E11F2O                                                                                                               0/0                    
+E11F3O           0/1                                                                                                                        
+E11F4O                                                                                                                         2/0          
+E11F5O                               0/0                                                                                                    
+E11F6O                                         0/2                                                                                          
+E11F8O                                                                                                                                   2/0
+E9F2Y                                                    2/0                                                                                
+E9F4Y                      2/0                                               0/0                                                            
+E9F8Y                                                                                                      0/0                              
+
+expected orderings (a pair counts when |net| >= 2):
+  E9F4Y > E10F4Y2: verdicts for E9F4Y 2 (1 clear), for E10F4Y2 0, tied 0 of 2; net +2; verdicts per order 1, 1; reversals across orders 0; items per verdict: E9F4Y 11.0, E10F4Y2 0.5
+  sign test over pairs: expected direction in 1 of 1 untied (0 tied), one-sided p = 0.500
+  pooled verdicts (not independent; reported only): expected 2, reversed 0
+
+position bias:
+  different plans, overall: position A in 6 of 11 non-tie verdicts (0.55); two-sided p = 1.000
+  different plans, items: position A in 70 of 139 non-tie item verdicts (0.50); two-sided p = 1.000 (items are not independent)
+
+swap consistency (couples across the two orders of a pair, mapped to plan names):
+  overall: agree 6, partial 1, reversal 0 of 7 (0.86 agree)
+  items:   agree 158, partial 31, reversal 0 of 189 (0.84 agree)
+    E10F3Y:E11F3O overall agree 0, partial 1, reversal 0 of 1 (0.00 agree)
+    E10F4Y2:E9F4Y overall agree 1, partial 0, reversal 0 of 1 (1.00 agree)
+    E10F5Y:E11F5O overall agree 1, partial 0, reversal 0 of 1 (1.00 agree)
+    E10F6Y:E11F6O overall agree 1, partial 0, reversal 0 of 1 (1.00 agree)
+    E11F2O:E9F2Y overall agree 1, partial 0, reversal 0 of 1 (1.00 agree)
+    E11F4O:E9F4Y overall agree 1, partial 0, reversal 0 of 1 (1.00 agree)
+    E11F8O:E9F8Y overall agree 1, partial 0, reversal 0 of 1 (1.00 agree)
+judge-to-judge agreement (couples within one pair file, different plans):
+  overall: agree 0, partial 0, reversal 0 of 0
+  items:   agree 0, partial 0, reversal 0 of 0
+  Cohen's kappa on A/B/tie: overall -, items -
+
+Bradley-Terry over plans (7 pairs as units; 0 within-arm verdicts left out; bootstrap 2000):
+  E11F4O       log-strength +1.47
+  E10F5Y       log-strength +0.74
+  E11F8O       log-strength +0.74
+  E9F2Y        log-strength +0.74
+  E10F3Y       log-strength +0.52
+  E10F6Y       log-strength +0.23
+  E11F6O       log-strength +0.23
+  E9F4Y        log-strength -0.14
+  E11F3O       log-strength -0.17
+  E11F2O       log-strength -0.87
+  E11F5O       log-strength -0.87
+  E9F8Y        log-strength -0.87
+  E10F4Y2      log-strength -1.75

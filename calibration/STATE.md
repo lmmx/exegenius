@@ -1,6 +1,6 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-15 04:47 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-15 05:00 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
 
 ## Standing instructions from the author (latest, about 01:22–01:45 UTC)
 
@@ -17,40 +17,17 @@
 
 ## Experiments in flight
 
-### E11 (`plans/E11.md`): Opus `xhigh` against Sonnet `high` planners above the ceiling, pairwise
+### E11 (`plans/E11.md`): **complete at 04:58 UTC**
 
-**Runs:** six Opus `xhigh` runs in `scratchpad/e6/E11F{2,3,4,5,6,8}O`.
-- **All six are accepted** (01:34–01:53). The run table is in E11.md.
-- Check acceptance in each run's `exegenius/log.jsonl`: a `submit` event for `0003-argument` with outcome `accepted`.
-
-**Next:**
-1. When all six are accepted (or have ended), record each in E11's ledger: seconds, calls, cache read, submits and `max_tokens` stops (`scratchpad/tools/perrun.py SUBAGENTS '^E11F'`). Then run the judge-free screen: acceptance, node count, characters.
-2. If a run ended without an accepted plan, record it. E11's plan has no rerun rule for operational failures, so a rerun must be preregistered in E11.md before it launches.
-3. ~~Prepare J25~~ **Done at 01:53.** 14 pair files and prompts are in `docs/journal/2026-10-15-e11-ceiling/judge/prompts/Qnn.txt`, with no leaks.
-4. **Budget gate before J25** (14 pairwise judgements, ~85–140 M): a fresh meter reading that leaves room, or the reset having passed (after about 04:40) with spend since the reset measured (`calibration/tools/spend.py SUBAGENTS --since <reset time>`).
-5. **J25 launched at 04:47** (all 14), after the reset; see E11.md's ledger for the budget basis. *Was:* **Launch J25:** one Opus judge per file; description `J25 judge Qnn[-b]`; pointer prompt "Read the instructions in <prompt file> and follow them exactly. Read only that file and the files it names."
-6. **Score** (checked to run on the empty batch at 01:55). The sign test counts a pair for O when net ≥ 2:
-
-   ```
-   cd /home/user/exegenius; J=docs/journal/2026-10-15-e11-ceiling/judge
-   python3 -I calibration/tools/pairwise.py score $J --margin 2 \
-     --expect E11F2O\>E9F2Y --expect E11F3O\>E10F3Y --expect E11F4O\>E9F4Y \
-     --expect E11F5O\>E10F5Y --expect E11F6O\>E10F6Y --expect E11F8O\>E9F8Y \
-     --arm O=E11F2O,E11F3O,E11F4O,E11F5O,E11F6O,E11F8O --arm S=E9F2Y,E10F3Y,E9F4Y,E10F5Y,E10F6Y,E9F8Y > $J/results.txt
-   python3 -I calibration/tools/pairwise.py score $J --margin 2 --expect E9F4Y\>E10F4Y2 > $J/control.txt
-   ```
-
-   **The reading** (E11.md, fixed):
-   - Per extraction, O is favoured when net ≥ 2 and O wins at least one verdict in each order. With 2 verdicts that means both; with 4, check "verdicts per order" by hand. S is favoured under the symmetric rule; anything else is tied.
-   - "O better" needs O favoured on ≥ 5 extractions and S on none.
-   - A proposal also needs the control tied (|net| ≤ 1), then the Sonnet-judge cross-check.
-
-7. **Sequential second judges** (only where a pair's two verdicts disagree in direction) and the **Sonnet-judge cross-check** (only if O is favoured) each need a fresh budget check first.
+- **Result:** "O not shown better". O was favoured on F4 and F8, S on F2 and F5, and F3 and F6 tied (p = 0.69).
+- **Control:** two Sonnet runs on F4 are not tied (net +2).
+- **Not run:** the cross-check (O was not favoured) and F3's second judges (skipped, since no outcome could change).
+- **Recorded:** the result is in E11.md, `policy.md` and the registry.
 
 ### A1 (`plans/A1.md`): planted-error recall for fidelity auditing
 
 - **State:** preregistered at 01:18. The 132 task copies are made and checked in `scratchpad/a1/runs/A1{AH,AS,AO}1/`. `prompts.tsv` lists description, model, effort, root and prompt for each.
-- **Gate:** no model calls until E11 is complete or the reset has passed, and the budget is checked. E11 has priority.
+- **Gate:** E11 is complete (04:58) and the reset has passed. Measured since 04:40: 94.2 M, against A1's ~65–80 M and runbook §5's ~300 M safeguard. The session cannot read the meter.
 - **Then:**
   - launch from `prompts.tsv`, up to 20 at a time, `general-purpose`, with `model` and `effort` as listed;
   - collect the answers into the plan's layout;

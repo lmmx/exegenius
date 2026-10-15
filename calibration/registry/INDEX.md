@@ -75,7 +75,7 @@ Limitations: One paper; one run per extraction and one repeat. Supported for thi
   - argument: model_calls 26; cache_read_tokens 3,981,051; cache_write_tokens 793,192; output_tokens 34,048; seconds 1,564
   - planning seconds: 5,342 (4,805-5,927)
 
-Limitations: One paper; one Opus run per extraction. Pairwise judging pending (J25).
+Limitations: One paper; one Opus run per extraction. The control shows run-to-run differences between two Sonnet runs as large as any O-S difference; one run per configuration cannot separate models above the ceiling.
 
 ### E3: Planner at medium effort against high (E1's P arm, re-judged)
 

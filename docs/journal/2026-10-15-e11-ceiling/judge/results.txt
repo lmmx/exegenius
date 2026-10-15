@@ -1,0 +1,54 @@
+verdicts read: 14; files expected: 14
+
+preference matrix (overall verdicts): row's wins over column / ties
+              E10F3Y   E10F4Y2    E10F5Y    E10F6Y    E11F2O    E11F3O    E11F4O    E11F5O    E11F6O    E11F8O     E9F2Y     E9F4Y     E9F8Y
+E10F3Y                                                             1/1                                                                      
+E10F4Y2                                                                                                                        0/0          
+E10F5Y                                                                                 2/0                                                  
+E10F6Y                                                                                           0/2                                        
+E11F2O                                                                                                               0/0                    
+E11F3O           0/1                                                                                                                        
+E11F4O                                                                                                                         2/0          
+E11F5O                               0/0                                                                                                    
+E11F6O                                         0/2                                                                                          
+E11F8O                                                                                                                                   2/0
+E9F2Y                                                    2/0                                                                                
+E9F4Y                      2/0                                               0/0                                                            
+E9F8Y                                                                                                      0/0                              
+
+expected orderings (a pair counts when |net| >= 2):
+  E11F2O > E9F2Y: verdicts for E11F2O 0 (0 clear), for E9F2Y 2, tied 0 of 2; net -2; verdicts per order 1, 1; reversals across orders 0; items per verdict: E11F2O 3.5, E9F2Y 10.0
+  E11F3O > E10F3Y: verdicts for E11F3O 0 (0 clear), for E10F3Y 1, tied 1 of 2; net -1; verdicts per order 1, 1; reversals across orders 0; items per verdict: E11F3O 4.5, E10F3Y 8.0
+  E11F4O > E9F4Y: verdicts for E11F4O 2 (0 clear), for E9F4Y 0, tied 0 of 2; net +2; verdicts per order 1, 1; reversals across orders 0; items per verdict: E11F4O 5.0, E9F4Y 3.0
+  E11F5O > E10F5Y: verdicts for E11F5O 0 (0 clear), for E10F5Y 2, tied 0 of 2; net -2; verdicts per order 1, 1; reversals across orders 0; items per verdict: E11F5O 1.5, E10F5Y 6.0
+  E11F6O > E10F6Y: verdicts for E11F6O 0 (0 clear), for E10F6Y 0, tied 2 of 2; net +0; verdicts per order 1, 1; reversals across orders 0; items per verdict: E11F6O 1.0, E10F6Y 1.5
+  E11F8O > E9F8Y: verdicts for E11F8O 2 (0 clear), for E9F8Y 0, tied 0 of 2; net +2; verdicts per order 1, 1; reversals across orders 0; items per verdict: E11F8O 10.5, E9F8Y 3.5
+  sign test over pairs: expected direction in 2 of 4 untied (2 tied), one-sided p = 0.688
+  pooled verdicts (not independent; reported only): expected 4, reversed 5
+
+position bias:
+  different plans, overall: position A in 6 of 11 non-tie verdicts (0.55); two-sided p = 1.000
+  different plans, items: position A in 70 of 139 non-tie item verdicts (0.50); two-sided p = 1.000 (items are not independent)
+
+swap consistency (couples across the two orders of a pair, mapped to plan names):
+  overall: agree 6, partial 1, reversal 0 of 7 (0.86 agree)
+  items:   agree 158, partial 31, reversal 0 of 189 (0.84 agree)
+    E10F3Y:E11F3O overall agree 0, partial 1, reversal 0 of 1 (0.00 agree)
+    E10F4Y2:E9F4Y overall agree 1, partial 0, reversal 0 of 1 (1.00 agree)
+    E10F5Y:E11F5O overall agree 1, partial 0, reversal 0 of 1 (1.00 agree)
+    E10F6Y:E11F6O overall agree 1, partial 0, reversal 0 of 1 (1.00 agree)
+    E11F2O:E9F2Y overall agree 1, partial 0, reversal 0 of 1 (1.00 agree)
+    E11F4O:E9F4Y overall agree 1, partial 0, reversal 0 of 1 (1.00 agree)
+    E11F8O:E9F8Y overall agree 1, partial 0, reversal 0 of 1 (1.00 agree)
+judge-to-judge agreement (couples within one pair file, different plans):
+  overall: agree 0, partial 0, reversal 0 of 0
+  items:   agree 0, partial 0, reversal 0 of 0
+  Cohen's kappa on A/B/tie: overall -, items -
+
+Bradley-Terry over arms (7 pairs as units; 0 within-arm verdicts left out; bootstrap 2000):
+  S            log-strength +0.59
+  O            log-strength +0.43
+  E10F4Y2      log-strength -1.02
+  E10F4Y2 vs O: log ratio -1.46, P(E10F4Y2 preferred) 0.19; bootstrap 95% [-3.42, -0.17]
+  E10F4Y2 vs S: log ratio -1.61, P(E10F4Y2 preferred) 0.17; bootstrap 95% [-2.56, -1.61]
+  O vs S: log ratio -0.15, P(O preferred) 0.46; bootstrap 95% [-1.61, +1.22]

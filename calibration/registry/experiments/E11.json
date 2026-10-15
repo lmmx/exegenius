@@ -53,9 +53,14 @@
    "source": "perrun.py over the E11 transcripts"
   },
   "J25": {
-   "value": "prepared at 01:53 UTC (14 pair files); not yet judged",
+   "value": "14 pairwise verdicts (one Opus judge per order): O favoured on F4 and F8, S on F2 and F5, F3 and F6 tied; sign test 2 of 4, p = 0.69; outcome 'O not shown better'. Control E9F4Y vs E10F4Y2 not tied (net +2; clear on 11 items, slight on 10)",
    "basis": "reported",
-   "source": "calibration/plans/E11.md"
+   "source": "calibration/plans/E11.md; docs/journal/2026-10-15-e11-ceiling/judge/results.txt"
+  },
+  "J25_cache_read_tokens": {
+   "value": "80.5 M for 14 judgements",
+   "basis": "reported",
+   "source": "perrun.py over the J25 transcripts"
   }
  },
  "deviations": [
@@ -70,11 +75,15 @@
   {
    "kind": "binary",
    "what": "the exegenius binary on PATH was rebuilt from master (same code) at 01:17 while three runs were active"
+  },
+  {
+   "kind": "procedure",
+   "what": "F3's sequential second judges (triggered by one S verdict and one tie) were skipped because no outcome row could change"
   }
  ],
  "limitations": [
   "One paper; one Opus run per extraction.",
-  "Pairwise judging pending (J25)."
+  "The control shows run-to-run differences between two Sonnet runs as large as any O-S difference; one run per configuration cannot separate models above the ceiling."
  ],
  "built": {
   "by": "calibration/tools/registry.py",
