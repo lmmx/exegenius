@@ -1,0 +1,11 @@
+{"page": "P34",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Executing such a permutation is a sort of data on a tape, costing time proportional to the line length times a logarithm of it",
+   "problem": "The paper's cost for each label-and-sort operation is O(tp log t) (lines 3692-3693): it is an upper bound, and it also scales with the record precision p. The page drops the factor p and turns the bound into an exact proportionality."},
+  {"severity": "minor",
+   "quote": "so the relabelling sits in the phases and costs nothing beyond a convolution the algorithm performs anyway",
+   "problem": "The chirp convolution a*(conj(a).u)/T is not something the algorithm would do anyway. The paper introduces it to evaluate the middle factor QF_t (eq. permuted-chirp; Sec. 'Chirp and source-transform procedures', lines 4417-4444), so it replaces the middle transform. The relabelling Q is free only in the sense that no separate permutation is executed on top of that convolution."}
+ ],
+ "motivation_given": true}

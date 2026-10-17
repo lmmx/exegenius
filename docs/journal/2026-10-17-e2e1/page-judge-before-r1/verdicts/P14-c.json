@@ -1,0 +1,8 @@
+{"page": "P14",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "it computes the [Discrete Fourier transform](dft.md) of an array in $\\log_2 t$ layers instead of $t^2$ operations",
+   "problem": "The comparison sets a count of layers against a count of operations. The fast procedure takes $\\log_2 t$ layers of $t/2$ butterflies and twiddles each, so $O(t\\log t)$ operations, against $O(t^2)$ for the direct sum. The page's own later sentence ('for $O(t\\log t)$ operations in all') gives the correct comparison. Also, the layers compute the transform with its outputs in bit-reversed order ($B_tF_t^-$ in the paper, lines 2864-2870), not the DFT array in natural order. The page states this further down."}
+ ],
+ "motivation_given": true}

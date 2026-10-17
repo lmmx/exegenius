@@ -1,0 +1,11 @@
+{"page": "P39",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Let a value computed with $k$ operations in sequence since the layer began be said to have depth $k$.",
+   "problem": "The paper (lines 2479-2488) measures arithmetic dependency depth: the number of operations on a chain from an input coefficient to the value, and it says explicitly that work on other coefficients lies on other chains 'even though the fixed-tape machine executes that work sequentially'. 'In sequence since the layer began' can be read as a count of the machine's sequential operations. The denominator and modulus bounds still hold under that reading, but then the maximal depth would be about the layer's whole operation count, not ceil(C_0 d^{C_1}) = o(p), and the page's later 'The parameters keep Delta small compared with p' would fail."},
+  {"severity": "minor",
+   "quote": "The truncation $Q_p$ drops the bits below $2^{-p}$ in each real and imaginary part",
+   "problem": "The paper defines Q_p as truncation toward zero to 2^{-p}Z (lines 2658-2660, 2788-2789). It implements this by shifting the absolute numerator right and then restoring the sign (lines 2747-2750). On the page's two's-complement components, simply dropping the low bits rounds toward minus infinity. The stated error bound sqrt2 2^{-p} still holds, but the paper also needs ||Q_p z|| <= ||z||, so that the result stays in the unit disk ('truncation cannot increase the absolute value of either component'), and rounding toward minus infinity can break that."}
+ ],
+ "motivation_given": true}

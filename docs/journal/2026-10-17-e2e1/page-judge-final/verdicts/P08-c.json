@@ -1,0 +1,117 @@
+{
+ "page": "P08",
+ "items": [
+  {
+   "id": "S2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the lemma's parameter hypotheses: K=floor(d^c) with 1<=K<=l-1, d*l<=C_l*p, d>=2, 2<=l<p, w in [p+2, C_w p]",
+    "cost of the recordwise monomial J_E (split-and-merge, O(rp) per record) and of computing the exponent E, which fit within each round's scan cost",
+    "parsing the header and generating the layout/descriptor lists in poly(p)=O(Tp), since T dominates every fixed power of p",
+    "the round schedule: h=l-1 on the long axes first, then the qK chunk rounds, then h=b-1..0; the opposite procedure runs it in reverse",
+    "disk preservation of outputs"
+   ],
+   "note": "The page assembles the three cost terms (\"Adding the three costs, the moves, exchanges and rounds give O(Tp[dK+pK^{tau-1}+l d^{lambda'}])\"), the error bound and both exact operators along the paper's lines. It leaves out the twiddle-implementation and header-parsing costs and the parameter constraints."
+  },
+  {
+   "id": "S2.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Gives the definitions in full (\"Call an axis long if it has l address bits and short if l-1. Put b=(l-1) mod K ... and q=floor((l-1)/K)\"), with a correct reading of b as the leftover low bits and q as the whole chunks."
+  },
+  {
+   "id": "S2.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "It names the moved slots (top bit of each long axis and the b lowest bits of each axis), checks that what remains is q chunks, and counts at most D(b+1)=O(dK) single-bit moves at O(Tp) each (one pass, as stated earlier). The paper's exact listing order is omitted, but the count does not need it."
+  },
+  {
+   "id": "S2.2.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Reproduces the source and target chunk orders and the left-to-right scan with exchange at each position except the last. That gives at most Dq-1 exchanges, each O(TpK^tau) by the chunk interchange even for nonadjacent chunks."
+  },
+  {
+   "id": "S2.2.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "\"Since DqK<=dl=O(p), the total is O(Tp DqK^tau)=O(Tp pK^{tau-1})\" matches the paper's estimate."
+  },
+  {
+   "id": "S2.2.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the selected bit's offset (h-b) mod K in each of the D chunks of equal index",
+    "the complete address set [P]x[2^K]^D x[S] with P S 2^{DK}=M seen by the layer",
+    "the record-count bound log2(2M)<=(C_l+1)p=C_M p",
+    "the round header E and its uniform length bound |E|<=C_desc p, which the proposition requires"
+   ],
+   "note": "The page gives only the structural reason (\"the selected bit has the same offset in the D consecutive chunks of equal rank, so one layer performs it\") and multiplies the per-round cost by the number of rounds. It does not check the proposition's hypotheses, which is what the paper's passage does."
+  },
+  {
+   "id": "S2.2.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the mechanism: temporarily move the bit just before the polynomial suffix, then a buffered pairwise scan writing half-sums and half-differences",
+    "the width argument: after s<=D individual H_0 factors the values are exact dyadics on the 2^{-(p+s)} grid, so p+D+O(1)=O(p) bits suffice without truncating between axes, and Q_p is applied once at the end of the round"
+   ],
+   "note": "The count is right (\"at most D<=d bits individually, each in O(Tp) ... at most b+1<=K such rounds, so they cost O(TpdK)\"). The page drops the exact-width argument, which is what lets a prefix round have only one truncation."
+  },
+  {
+   "id": "S2.2.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the opposite direction: J_E^{-1} comes first, preserves the disk grid, and the layer returns Q_p(H J_E^{-1} z) directly",
+    "prefix rounds have the same one-truncation form by their exact evaluation"
+   ],
+   "note": "Gives the paper's reason for the forward case: Q_p is odd and acts componentwise, and J_E is a signed coefficient permutation, so J_E Q_p(Hz)=Q_p(J_E Hz). The other two cases are not addressed."
+  },
+  {
+   "id": "S2.2.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "disk preservation by the contraction and by truncation (||Q_p z||<=||z||)"
+   ],
+   "note": "Contraction plus one truncation of less than sqrt2 2^{-p} per round, layout isometries, and zero initial error give sqrt2 l 2^{-p}, as in the paper."
+  },
+  {
+   "id": "S2.2.9",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "\"(L B F^- L^{-1}) L = L B F^-\" and \"L^{-1}(L F^+ B^{-1} L^{-1}) = F^+ B^{-1} L^{-1}\", with the reason that arithmetic on named slots after L is conjugation by L. Matches the paper."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "The transform has $\\ell$ rounds, and each round applies the two-point averaging and differencing step to one address bit of every axis.",
+   "problem": "Short axes have only l-1 address bits. The first round (named position h=l-1) acts on the long axes only, so not every round touches every axis. The paper processes h=l-1 \"on the long axes, if there are any\"."
+  },
+  {
+   "severity": "minor",
+   "quote": "Every later round is then a single layer.",
+   "problem": "Only the qK chunk rounds are single layers. Up to b+1 rounds on prefix slots process their bits individually, as the page itself says later and as the paper does."
+  },
+  {
+   "severity": "minor",
+   "quote": "There are $qK$ rounds on chunk bits and $b+1$ on prefix bits, $\\ell$ in all.",
+   "problem": "This holds only when at least one axis is long. If all axes are short, there are b prefix rounds and l-1 rounds in total. The paper says \"at most b+1\" prefix rounds and \"at most l rounds\"; the page's later \"the l rounds\" in the error section has the same imprecision."
+  },
+  {
+   "severity": "minor",
+   "quote": "Here $K^{\\tau-1}<1$ and $d^{\\lambda'}<d$ are the savings over $D\\ell$ passes.",
+   "problem": "The lemma permits K=1 (1<=K=floor(d^c)), and then K^{tau-1}=1. The strict inequality needs K>=2."
+  }
+ ],
+ "motivation_given": true
+}

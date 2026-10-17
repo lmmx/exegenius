@@ -1,0 +1,8 @@
+{"page": "P17",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "A fixed rational linear combination of the controls, reduced modulo $Q$, qualifies.",
+   "problem": "The page leaves out the hypothesis that the rational coefficients have denominators prime to $q$. Without it, the combination cannot be reduced modulo $Q=q^b$. Lemma lem:ordered-affine-streams (paper lines 557-568) fixes 'finitely many rational coefficients whose denominators are prime to $q$' before saying such a combination, 'specialized modulo $Q$', qualifies. Lines 623-626 then compute these reductions with the extended Euclidean algorithm."}
+ ],
+ "motivation_given": false}

@@ -1,0 +1,265 @@
+{
+ "page": "P30",
+ "items": [
+  {
+   "id": "step",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "p = Theta(log n) (the paper's p = 6 ceil(log_2 n)), needed for O(Tp p^{1-kappa}) = O(n (log n)^{1-kappa}); the page states only V = Tp = Theta(n)"
+   ],
+   "note": "The page normalizes by V, tabulates the seven dominant powers with their margins, justifies each row, disposes of setup and repair, and adds up to O(n(lg n)^{1-kappa}) with kappa = 2^{-182}, following the paper's 'complete time bound' subsection. It also explains why g_2 is the least margin."
+  },
+  {
+   "id": "S6.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the two absorbed rows: final scaling and rounding (p^delta, including the final products by S and the 2^gamma source scaling) and input, padding, carries and output (1)",
+    "that a fixed number of repeated transforms and convolutions is folded into the constants",
+    "twists and scalar pointwise products, which the paper places in the chirp row"
+   ],
+   "note": "The page lists d = Theta(p^eps), K = Theta(p^{eps c}), ell = Theta(p^{1-eps}), alpha = Theta(p^{1/4+eps/2}) and tabulates each of the seven costs with its power and margin g_i, matching Table tab:costs and eq:margin-list. It works out d^2 ell^tau = p^{2eps} p^{(1-eps)tau} and log(rp) = O(p^{1-eps}) from r <= 2^{O(p/d)}; the other powers are direct substitution."
+  },
+  {
+   "id": "S6.1.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The table row 'Prefix moves | dK | eps(1+c) | g_1=1-eps(1+c)' follows from d = Theta(p^eps) and K = Theta(p^{eps c}), both given just above. The bullet adds that these are 'O(dK) linear scans of cost O(V) each', and the substitution line gives g_1 > 1/2."
+  },
+  {
+   "id": "S6.1.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The row 'Chunk exchanges | pK^{tau-1} | 1-eps c(1-tau) | g_2=eps c(1-tau)' follows from K = Theta(p^{eps c}). The page then computes g_2 = 2^{-75}2^{-56}2^{-50} = 2^{-181} and names it the smallest margin."
+  },
+  {
+   "id": "S6.1.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The row 'Layer rounds | ell d^{lambda'} | 1-eps(1-lambda')' follows from ell = Theta(p^{1-eps}) and d = Theta(p^eps), both on the page. g_3 = 2^{-75}2^{-54} = 2^{-129} is computed."
+  },
+  {
+   "id": "S6.1.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "that the d^2 term is absorbed by d^2 ell^tau (the paper's 'Here d^2 is absorbed by d^2 ell^tau')"
+   ],
+   "note": "The page gives the row d^2(1+ell^tau) with power tau+eps(2-tau) and writes 'Here d^2 ell^tau = p^{2eps}p^{(1-eps)tau}', which is the paper's computation. g_4 > 2^{-51} is given in the substitution line."
+  },
+  {
+   "id": "S6.1.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page gives alpha = Theta(p^{1/4+eps/2}) with the sizes and the row dp^{1/2+delta}alpha with power 3/4+delta+3eps/2 and margin g_5 = 1/4-delta-3eps/2. g_5 > 1/8 is given in the substitution line."
+  },
+  {
+   "id": "S6.1.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "twists and scalar pointwise products, which the paper's row ('Chirps, twists and scalar products') also covers"
+   ],
+   "note": "The row 'Chirps | dp^delta | eps+delta | g_6 = 1-delta-eps' follows from d = Theta(p^eps). g_6 > 1/2 is given in the substitution line."
+  },
+  {
+   "id": "S6.1.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The row 'Products | log(rp) | 1-eps | g_7 = eps' is justified by 'log(rp) = O(p^{1-eps}) because r is at most 2^{O(p/d)}', which agrees with the paper's r = 2^{Theta(p^{1-eps})} and its O(p^{1-eps}+log p) = O(p^{1-eps})."
+  },
+  {
+   "id": "S6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "With eps = 2^{-75}, c = 2^{-56}, delta = 1/16, 1-tau = 2^{-50}, 1-lambda' = 2^{-54} (these match eq:fixed-parameters), the page substitutes 'g_2 = 2^{-75}2^{-56}2^{-50} = 2^{-181}, g_3 = 2^{-75}2^{-54} = 2^{-129}' and gives the remaining bounds, all of which check. It concludes min g_i = 2^{-181} = 2 kappa, and later explains the slack for log p factors."
+  },
+  {
+   "id": "S6.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page lists the parameters and substitutes 'g_1>1/2, g_2 = 2^{-75}2^{-56}2^{-50} = 2^{-181}, g_3 = 2^{-75}2^{-54} = 2^{-129}', showing the products for g_2 and g_3. All three values check."
+  },
+  {
+   "id": "S6.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page gives 'g_4>2^{-51}, g_5>1/8, g_6>1/2 and g_7 = 2^{-75}' by substitution into the tabulated formulas. Like the paper ('Direct substitution gives'), it does not write out the arithmetic, but the formulas and parameter values are on the page and each bound checks."
+  },
+  {
+   "id": "S6.2.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'so the smallest margin is 2^{-181} = 2kappa' follows from the list. The final paragraph explains that the slack pays for fixed powers of log p ('Half the smallest margin pays for logarithms and half remains as the saving')."
+  },
+  {
+   "id": "S6.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "axis exposure and restoration in Gaussian resampling (the O(d^2) moves the paper charges to this row); the page credits the O(d^2) moves only to the CRT map and omits the d CRT rotations at O(dV)",
+    "the unequal-width mechanism for an axis move (peel one excess bit, swap the equal-width parts, restore the bit), which appears only inside the citation",
+    "generating the exponentials, which the paper counts in the O(dp^{1+delta}) chirp cost",
+    "that the O(rp)-bit ring products call the established multiplier, not the improved algorithm being built (the page says only 'These calls have length o(n)')"
+   ],
+   "note": "The page combines O(p/K) exchanges (because d ell = O(p)) at O(VK^tau) each into O(pK^{tau-1}), and at most ell rounds at O(Vd^{lambda'}). It gives O(d^2) moves at O(V(1+ell^tau)) each, sums T/t_i lines at O(t_i p^{3/2+delta} alpha) to O(dTp^{3/2+delta} alpha), and counts T/r records with four O(rp)-bit products for O(Tp log(rp)), all as in the paper."
+  },
+  {
+   "id": "S6.3.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Each chunk exchange costs O(VK^tau) by [Fast address-chunk interchange]' applies the linked chunk-swap lemma with width K, which is the paper's own justification. The assignment asks the page to link that result, not derive it again."
+  },
+  {
+   "id": "S6.3.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page has 'it needs O(p/K) exchanges' because the layout moves the 'd ell = O(p) address bits' in width-K chunks, and then 'the normalized total is O(p/K)K^tau = O(pK^{tau-1})', as in the paper."
+  },
+  {
+   "id": "S6.3.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the mechanism for an axis move: widths are ell or ell-1, so peel the single excess bit, swap the equal-width parts by the chunk-swap lemma, and restore the bit; on the page this appears only inside the citation",
+    "axis exposure and restoration in Gaussian resampling, which is where the paper's cost section places these O(d^2) moves; the page credits them only to the CRT map",
+    "the d CRT rotations at O(dV)"
+   ],
+   "note": "The page asserts 'needs O(d^2) adjacent axis moves. Each costs O(V(1+ell^tau))' and supports it only with a citation. It does not show why one move costs O(V(1+ell^tau))."
+  },
+  {
+   "id": "S6.3.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'axis i of length t_i has at most T/t_i lines, each costing O(t_i p^{3/2+delta}alpha), totalling O(dTp^{3/2+delta}alpha)' is the paper's sum over the d axes."
+  },
+  {
+   "id": "S6.3.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The table's Cost/V column gives dp^{1/2+delta}alpha, which is O(dTp^{3/2+delta}alpha) divided by V = Tp. Its power follows from the stated alpha = Theta(p^{1/4+eps/2}) and d = Theta(p^eps)."
+  },
+  {
+   "id": "S6.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "generating the exponentials, which the paper includes in the O(dp^{1+delta}) per-entry chirp cost"
+   ],
+   "note": "The page supplies the ingredients: numerators of O(p) bits that 'sum d terms', and the established O(N log 2N) multiplier, giving O(dp^{1+delta}) per entry since log p = O(p^delta). The paper argues the same way."
+  },
+  {
+   "id": "S6.3.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "that these O(rp)-bit products call the established multiplier and not the improved algorithm being constructed; the page says only 'These calls have length o(n)'"
+   ],
+   "note": "'There are T/r ring-product records, each needing four products on O(rp) bits after Signed packing ... The total is O(Tp log(rp))' matches the paper's count."
+  },
+  {
+   "id": "S6.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "each visit has volume O(V), and the one-call sorting cost O(V_call d p 2^{-K}), both used to sum the repair costs over the p^A visits",
+    "extraction and reinsertion scans are already counted in the node overhead"
+   ],
+   "note": "The page follows the paper: at most p^A visits at p^C setup each give p^{A+C} = o(Tp); per-record and per-line setup O(Tp^{A+C}/r) and O(dTp^C/r) are o(Tp) because r exceeds every power of p; the exceptional stream has length O(V_call d 2^{-K}), so sorting costs 'O(Vp^{O(1)}2^{-K}) = o(V)'. Global setup and prime search are stated as o(V), as the paper does ('as proved earlier')."
+  },
+  {
+   "id": "S6.4.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page defines a visit, notes constant branching, depth O(log p) and polynomially many rounds and groups, and fixes A and C so that 'The setup costs at most p^{A+C} = o(Tp)', as in the paper."
+  },
+  {
+   "id": "S6.4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page gives the bad fraction O(d2^{-K}), records of Theta(rp) bits and an O(p)-bit key for each exceptional record. From these it obtains 'O((V_call/rp) d2^{-K}(rp+p)) = O(V_call d2^{-K})', which is the paper's computation."
+  },
+  {
+   "id": "S6.4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "each visit has volume O(V), and the one-call cost O(V_call d p 2^{-K}), both used to sum over the p^A visits"
+   ],
+   "note": "'Stable bit sorting scans it O(p) times, so over at most p^A visits repair costs O(Vp^{O(1)}2^{-K}) = o(V), because 2^{-K} beats every power of p' follows the paper; K = Theta(p^{eps c}) is given earlier on the page."
+  },
+  {
+   "id": "S6.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "p = Theta(log n), needed for the last equality O(Tp p^{1-kappa}) = O(n(log n)^{1-kappa})"
+   ],
+   "note": "The page shows 'p^{1-2kappa}p^{kappa} = p^{1-kappa}' using the fact that a fixed power of log p is at most p^kappa eventually. It totals O(Tp p^{1-kappa}), then handles small n with a cutoff and schoolbook multiplication, enlarging the constant, and uses lg n = max{ceil(log_2 n), 1}, as in the paper."
+  },
+  {
+   "id": "S6.5.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Each of the seven powers is at most p^{1-2kappa}' follows from the margin list and min g_i = 2^{-181} = 2kappa, both shown earlier on the page."
+  },
+  {
+   "id": "S6.5.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'a fixed power of log p is at most p^kappa for large p, since it grows more slowly than any positive power of p' states the paper's fact and gives the reason."
+  },
+  {
+   "id": "S6.5.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "p = Theta(log n) (p = 6 ceil(log_2 n)), needed for the final equality"
+   ],
+   "note": "The page writes 'p^{1-2kappa}p^kappa = p^{1-kappa}' and concludes 'O(Tp p^{1-kappa}) = O(n(log n)^{1-kappa})', using V = Tp = Theta(n)."
+  },
+  {
+   "id": "S6.5.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page fixes a cutoff 'past all the size, precision, margin and layout conditions' and uses schoolbook multiplication below it. 'only finitely many lengths lie there, so their running times are bounded by one constant', as in the paper."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "The permutations of [Gaussian resampling](gaussian-resampling.md) are never executed, since they cancel ([Retained permutation cancellation](retained-permutations.md)), so no row charges them.",
+   "problem": "In the paper only the source permutation R cancels, across the forward transforms, the pointwise product and the opposite-sign transform (Lemma lem:chirp-permutation). The target permutation Q does not cancel: Bluestein's chirp identity carries out its frequency change without applying Q as a separate permutation. The conclusion that no row charges them is right; the reason given for Q is wrong."
+  },
+  {
+   "severity": "minor",
+   "quote": "an exchange acts on chunks of only $K=\\Theta(p^{\\epsilon c})$ bits and saves a factor $K^{-(1-\\tau)}=p^{-\\epsilon c(1-\\tau)}$ against a full pass",
+   "problem": "One exchange costs O(VK^tau), more than a full pass O(V). The saving K^{1-tau} (multiplier K^{-(1-tau)}) is measured against moving the K bits with K plain passes, O(VK); over all O(p/K) exchanges that gives pK^{tau-1} against p. 'Against a full pass' names the wrong baseline."
+  },
+  {
+   "severity": "minor",
+   "quote": "With $\\lg n=\\max\\{\\lceil\\log_2n\\rceil,1\\}$, within a constant factor of $\\log n$ and at least $1$",
+   "problem": "At n = 1, log n = 0 while lg n = 1, so lg n is within a constant factor of log n only for n >= 2. That gap is the reason for the max with 1. The paper does not make this claim; it states the bound directly with lg n."
+  }
+ ],
+ "motivation_given": true
+}

@@ -1,0 +1,120 @@
+{
+  "wiki": "W1",
+  "steps": [
+    {
+      "id": "C1",
+      "verdict": "reconstructed",
+      "pages": ["exchange-network.md"],
+      "reason_given": true,
+      "note": "States h=100, v=binom(h,3)=161700, banks X_a,Y_a indexed by a in T^3, N=v^3, m=h^3=10^6 (paper 653-660); builds the forward invocation with gather/scatter/copy/injection, the three stages forward/inverse/forward giving (x,y)->(x,y+x)->(-y,y+x)->(-y,x), i.e. (X_a,Y_a)->(-Y_a,X_a), with every scratch wire restored for arbitrary initial values (matches Lemma at 728-765), and the wire counts W_b, W_c (777-782). Reason: the page calls it the finite building block of the later tape procedures, and its Where-this-fits box spells out the plan (network -> frames -> rank per edge -> s<Wm -> recurrence)."
+    },
+    {
+      "id": "C2",
+      "verdict": "reconstructed",
+      "pages": ["array-frames.md"],
+      "reason_given": true,
+      "note": "Gives frames D_v per source/gate/sink, the same D_v on all incidences of a gate, edge operator D_v D_u^{-1}, the invariant, the commutation G(D_v g_1,...)=D_v G(g_1,...), the implemented operator D_out S_Omega D_in^{-1}, and the telescoping to endpoint frames on each route including scratch roles (paper 793-825). Section 'What the free frames are for' says an edge costs whatever applying D_v D_u^{-1} costs, so interior frames are chosen to make edges cheap, and points to the labels page and the recurrence."
+    },
+    {
+      "id": "C3",
+      "verdict": "reconstructed",
+      "pages": ["subspace-labels.md", "tensor-product-of-spaces.md"],
+      "reason_given": true,
+      "note": "Labels are nondegenerate subspaces of F (x) F (x) F of dimension m (bit: Q^h with form x.y-(1/9)(x.1)(y.1); complex: F_2^h), terminal labels table, stage transitions via [G|E], the per-time label table for centre/side/X/Y wires, and 'every arrow is an inclusion except centre 3->4, which drops P(x)F(x)Q of dimension h' (matches 856-1010 and Lemma 997-1010). Reason: 'the labelling chooses the frames ... so that a network ... costs s<Wm smaller calls, the saving the recursion needs' and 'to save, the labels must confine all loss to one small edge'."
+    },
+    {
+      "id": "C4",
+      "verdict": "reconstructed",
+      "pages": ["subspace-labels.md"],
+      "reason_given": true,
+      "note": "For nondegenerate U in U', Pi_{U'}-Pi_U projects onto U' cap U^perp and has rank dim U'-dim U, negated on reversed edges; the exception is the first edge of each X_a, where the dimension change is zero but 2 Pi_{U_a} has rank one (paper 1156-1166). Reason given just before: each matrix gives a frame adding it times one address chunk to another, so an edge costs one smaller call per unit of rational rank, which turns call counting into dimension counting."
+    },
+    {
+      "id": "C5",
+      "verdict": "reconstructed",
+      "pages": ["subspace-labels.md", "rank-recurrence.md"],
+      "reason_given": true,
+      "note": "Source dimensions sum to N, sink dimensions to Wm-N, signed changes telescope at gates to Wm-2N, absolute changes Wm-2N+2L, L_b=I c_b h, L_c=I c_c h, and s_b=(W_b m-2N+2L_b)+N=W_b m-(N-2L_b) (paper 891-897, 997-1010, 1147-1153). rank-recurrence.md restates the budget intuitively (bank wires save 2N, shrinking edges cost 2L, the bit source sign adds one rank each). Reason: s is the number of smaller calls the recursion pays for."
+    },
+    {
+      "id": "C6",
+      "verdict": "reconstructed",
+      "pages": ["subspace-labels.md", "rank-recurrence.md"],
+      "reason_given": true,
+      "note": "L_b/N=3c_b h/v=100/539 and L_c/N=101/539, both below 1/2 (paper 1105-1110); deficit N-2L_b=(339/539)N>0 so s_b<W_b m (1167), with relative deficit 339/22587335000000 (1319-1324). rank-recurrence.md explains why strictness matters: with s=Wm the cost is proportional to Vf, no saving; the exponent log_m(s/W) is below 1 exactly when the deficit is positive."
+    },
+    {
+      "id": "C7",
+      "verdict": "reconstructed",
+      "pages": ["subspace-labels.md", "address-interchange.md"],
+      "reason_given": true,
+      "note": "subspace-labels.md: the negative source matrix -Pi_{U_a} makes every route's endpoint difference Id, the same shear on every role (Pi_{U_a^perp}+Pi_{U_a} from X_a to Y_a, Pi_F-0 elsewhere), matching 1169-1171. address-interchange.md states M_out(rho(w))-M_in(w)=I_m and derives f'_{rho(w)}=Phi_{I_m} f_w, so H<-H+D on every original row including scratch rows (1138-1145, 1519-1533). Reason: address-interchange.md says the interchange is D<-D-H, H<-H+D, D<-H-D and only the middle shear uses the circuit. The identity is split across two pages; subspace-labels.md does not itself say what the common shear is for."
+    },
+    {
+      "id": "C8",
+      "verdict": "reconstructed",
+      "pages": ["matrix-shear.md", "address-interchange.md", "rank-recurrence.md"],
+      "reason_given": true,
+      "note": "matrix-shear.md gives A=E_1 Pi E_2 with lower triangular E_1,E_2 and Pi having exactly a ones, the elimination proof, reduction mod q^b, triangular parts in O(V), and the one-interchange implementation of each H_i<-H_i+D_j, so exactly a interchanges plus O(V) (paper 1364-1447). address-interchange.md: each edge frame change Phi_{A_i} is a shear by A_i 'which is why an edge costs its rank', and 'the number of recursive calls is the sum of the edge ranks, exactly s' (1543). matrix-shear's Where-this-fits box ties it to the F_k recurrence."
+    },
+    {
+      "id": "C9",
+      "verdict": "reconstructed",
+      "pages": ["address-interchange.md", "rank-recurrence.md"],
+      "reason_given": true,
+      "note": "Role streams of volume V/W, node work O(V), F_0=O(1), F_k<=(s/W)F_{k-1}+O(1), geometric-sum case split c<=1 / c>1, F_k=O(e^tau) with e=m^k (paper 1497-1557); tau=1-2^{-50} justified from eta>20*2^{-50} and ln m<20 so m^{1-2^{-50}}>m(1-eta)=s/W (1319-1344). rank-recurrence.md gives the same recurrence as C(mf)<=(s/W)C(f)+O(1) and the explicit exponent. Reason: the O(V u^tau) interchange is one of the two power-saving tape procedures the main result rests on, and its users (transform layout, cost accounting) are linked."
+    }
+  ],
+  "links": [
+    {
+      "from": "C1",
+      "to": "C2",
+      "how": "linked",
+      "note": "exchange-network.md links array-frames.md in its Connections diagram and its 'Used by' list ('Frames on wire arrays extend Linear exchange network...'); its Where-this-fits box links only to rank-recurrence and main-result."
+    },
+    {
+      "from": "C2",
+      "to": "C3",
+      "how": "linked",
+      "note": "array-frames.md, section 'What the free frames are for', links 'Nested subspace labels and rank deficit' as the page that makes the frame choice; also in Connections and 'Used by'."
+    },
+    {
+      "from": "C3",
+      "to": "C4",
+      "how": "same page",
+      "note": "Both on subspace-labels.md: the label table and 3->4 loss, then the projection-difference rank argument."
+    },
+    {
+      "from": "C4",
+      "to": "C5",
+      "how": "same page",
+      "note": "subspace-labels.md: rank equals absolute dimension change except the N source edges, 'Hence s_b=(W_b m-2N+2L_b)+N'."
+    },
+    {
+      "from": "C5",
+      "to": "C6",
+      "how": "same page",
+      "note": "subspace-labels.md computes L_b/N=100/539, L_c/N=101/539 and the deficit N-2L_b=(339/539)N; rank-recurrence.md repeats both in 'Why s<Wm'."
+    },
+    {
+      "from": "C6",
+      "to": "C7",
+      "how": "same page",
+      "note": "subspace-labels.md states the endpoint difference Id right after s_b<W_b m. The shear's use (H<-H+D on every row) is on address-interchange.md, which subspace-labels.md does not link directly (reached via rank-recurrence.md)."
+    },
+    {
+      "from": "C7",
+      "to": "C8",
+      "how": "linked",
+      "note": "address-interchange.md states the endpoint identity and links matrix-shear.md ('The interchange performs each edge shear by Matrix shear by triangular factorization'), where E_1 Pi E_2 and the exactly-a-interchanges count live. From subspace-labels.md the path to matrix-shear.md is indirect, via rank-recurrence.md."
+    },
+    {
+      "from": "C8",
+      "to": "C9",
+      "how": "linked",
+      "note": "matrix-shear.md's Where-this-fits box (item 3, stating F_k<=(s/W)F_{k-1}+O(1)) and its Connections/'Used by' link address-interchange.md, which solves the recurrence; address-interchange.md itself carries both the s-calls conclusion and the recurrence."
+    }
+  ],
+  "breaks": [],
+  "summary": "Yes: W1 carries a reader from the fixed exchange network to the exponent. All nine steps are reconstructed with the paper's defining content and a stated purpose, and the four frames-and-rank-deficit pages chain into address-interchange.md and matrix-shear.md. No step breaks. The chain is thinnest at C7 to C8: the endpoint identity is first stated on subspace-labels.md without its use, and that page does not link forward to matrix-shear.md or address-interchange.md (the reader goes through rank-recurrence.md). Also, matrix-shear.md sits in Part 3, ahead of the network in reading order, so its role is clear only from its Where-this-fits box."
+}

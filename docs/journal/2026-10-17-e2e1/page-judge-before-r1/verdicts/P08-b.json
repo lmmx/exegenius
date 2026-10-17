@@ -1,0 +1,15 @@
+{"page": "P08",
+ "items": [
+  {"id": "S5.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page builds the twist map, checks well-definedness and the wrap sign, extends linewise with iota and D_pm, and states M_C = D_- iota^{-1} M_r(iota D_+ f, iota D_+ g) = f*g/T with a contraction proof. This follows the paper's Section 'Complex convolution by a coefficient twist' (lines 4298-4347)."},
+  {"id": "S5.4.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Definitional sub-step, given in full: 'Let zeta=e^{pi i/r}, so zeta^r=-1. Define the ring map Theta from C[x_d]/(x_d^r-1) to R_r by x_d -> zeta y'. R_r is introduced as the ring where y^r=-1, matching the paper's C[y]/(y^r+1)."},
+  {"id": "S5.4.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Well-definedness from (zeta y)^r=(-1)(-1)=1; diagonality from 'Theta(x_d^k)=zeta^k y^k'; isomorphism with inverse zeta^{-k}; sup-norm preservation 'since |zeta^{pm k}|=1'. All of these match the paper's lines 4308-4312."},
+  {"id": "S5.4.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Writes k+l=j+hr with h in {0,1}, derives zeta^{k+l}(-1)^h=zeta^j(zeta^r)^h(-1)^h=zeta^j, and concludes 'untwisting by zeta^{-j} restores it with the correct sign', as the paper does at lines 4313-4319. A correct r=2 worked example (zeta=i) is added."},
+  {"id": "S5.4.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Defines M=T/r, iota and D_pm, notes that iota D_+ applies Theta to every line with inverse D_- iota^{-1}, and that M_r convolves the first d-1 axes over R_r 'dividing by T' while * convolves all d axes. It then gives the composite formula and proves the contraction bound explicitly. The page, like the paper ('Consequently'), leaves implicit the final combination: a ring isomorphism applied linewise turns (d-1)-axis convolution over C[x_d]/(x_d^r-1) into (d-1)-axis convolution over R_r."}
+ ],
+ "errors": [],
+ "motivation_given": true}

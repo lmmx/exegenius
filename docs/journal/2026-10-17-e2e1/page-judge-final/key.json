@@ -1,0 +1,525 @@
+{
+ "P01": {
+  "page": "phase-twist",
+  "task": "0368-write-phase-twist",
+  "scored_ids": [
+   "S5.4.1",
+   "S5.4.2",
+   "S5.4.3",
+   "S5.4.4"
+  ]
+ },
+ "P02": {
+  "page": "ring-convolution",
+  "task": "0383-write-ring-convolution",
+  "scored_ids": [
+   "S3.2",
+   "S3.2.1",
+   "S3.2.2",
+   "S3.2.3",
+   "S3.2.4",
+   "S3.2.5",
+   "S3.2.6",
+   "S3.2.7",
+   "S3.2.8",
+   "S3.2.9",
+   "S3.2.10",
+   "S3.2.11",
+   "S3.2.12"
+  ]
+ },
+ "P03": {
+  "page": "hvdh-multiplier",
+  "task": "0161-write-hvdh-multiplier",
+  "scored_ids": []
+ },
+ "P04": {
+  "page": "precision-recovery",
+  "task": "0304-write-precision-recovery",
+  "scored_ids": [
+   "S5.7.1",
+   "S5.7.2",
+   "S5.7.3",
+   "S5.7.4",
+   "S5.7.5",
+   "S5.7.6",
+   "S5.7.7",
+   "S5.7.8",
+   "S5.7.9",
+   "S5.7.10",
+   "S5.7.11",
+   "S5.7.12",
+   "S5.7.13",
+   "S5.7.14",
+   "S5.7.15",
+   "S5.7.16",
+   "S5.7.17",
+   "S5.7.18",
+   "S5.7.19",
+   "S5.7.20"
+  ]
+ },
+ "P05": {
+  "page": "crt-map",
+  "task": "0374-write-crt-map",
+  "scored_ids": [
+   "S5.3.1",
+   "S5.3.2",
+   "S5.3.3",
+   "S5.3.4",
+   "S5.3.5",
+   "S5.3.6",
+   "S5.3.7"
+  ]
+ },
+ "P06": {
+  "page": "rank-recurrence",
+  "task": "0379-write-rank-recurrence",
+  "scored_ids": [
+   "S1.0",
+   "S1.4",
+   "S1.4.1",
+   "S1.4.2",
+   "S1.4.3",
+   "S1.4.4",
+   "S1.4.5"
+  ]
+ },
+ "P07": {
+  "page": "multiplication-algorithm",
+  "task": "0384-write-multiplication-algorithm",
+  "scored_ids": [
+   "S5.5",
+   "S5.5.1",
+   "S5.5.2",
+   "S5.5.3",
+   "S5.6",
+   "S5.6.1",
+   "S5.6.2",
+   "S5.6.3",
+   "S5.6.4",
+   "S5.6.5",
+   "S5.6.6",
+   "S5.6.7",
+   "S5.6.8"
+  ]
+ },
+ "P08": {
+  "page": "transform-layout",
+  "task": "0397-write-transform-layout",
+  "scored_ids": [
+   "S2.2",
+   "S2.2.1",
+   "S2.2.2",
+   "S2.2.3",
+   "S2.2.4",
+   "S2.2.5",
+   "S2.2.6",
+   "S2.2.7",
+   "S2.2.8",
+   "S2.2.9"
+  ]
+ },
+ "P09": {
+  "page": "address-interchange",
+  "task": "0380-write-address-interchange",
+  "scored_ids": [
+   "S1.5.2",
+   "S1.5.2.1",
+   "S1.5.2.2",
+   "S1.5.2.3",
+   "S1.5.2.4",
+   "S1.5.2.6",
+   "S1.5.3",
+   "S1.5.3.1",
+   "S1.5.3.2",
+   "S1.5.3.3",
+   "S1.5.3.4",
+   "S1.5.3.5",
+   "S1.5.3.6",
+   "S1.5.3.7",
+   "S1.5.3.8",
+   "S1.5.3.9",
+   "S1.5.3.10"
+  ]
+ },
+ "P10": {
+  "page": "phase-kernel",
+  "task": "0300-write-phase-kernel",
+  "scored_ids": []
+ },
+ "P11": {
+  "page": "frequency-order",
+  "task": "0160-write-frequency-order",
+  "scored_ids": [
+   "S2.1.1",
+   "S2.1.2",
+   "S2.1.3",
+   "S2.1.4",
+   "S2.1.5",
+   "S2.1.6",
+   "S2.1.7",
+   "S2.1.8",
+   "S2.1.9",
+   "S2.1.10",
+   "S2.1.11",
+   "S2.1.12"
+  ]
+ },
+ "P12": {
+  "page": "dft",
+  "task": "0369-write-dft",
+  "scored_ids": []
+ },
+ "P13": {
+  "page": "parameter-choice",
+  "task": "0377-write-parameter-choice",
+  "scored_ids": [
+   "S5.1.1",
+   "S5.1.2",
+   "S5.1.3",
+   "S5.1.4",
+   "S5.1.5",
+   "S5.1.6",
+   "S5.1.7",
+   "S5.1.8",
+   "S5.1.9",
+   "S5.1.10",
+   "S5.1.11",
+   "S5.1.12",
+   "S5.1.13",
+   "S5.1.14",
+   "S5.1.15",
+   "S5.1.16",
+   "S5.1.17",
+   "S5.1.18",
+   "S5.1.19",
+   "S5.1.20",
+   "S5.1.21"
+  ]
+ },
+ "P14": {
+  "page": "exchange-network",
+  "task": "0257-write-exchange-network",
+  "scored_ids": [
+   "S1.1.1",
+   "S1.1.2",
+   "S1.1.3",
+   "S1.1.5",
+   "S1.1.5.1",
+   "S1.1.5.2",
+   "S1.1.5.3",
+   "S1.1.5.4",
+   "S1.1.5.5",
+   "S1.1.5.6",
+   "S1.1.6"
+  ]
+ },
+ "P15": {
+  "page": "stream-ops",
+  "task": "0371-write-stream-ops",
+  "scored_ids": []
+ },
+ "P16": {
+  "page": "radix-digit-reduction",
+  "task": "0367-write-radix-digit-reduction",
+  "scored_ids": [
+   "S5.2.1",
+   "S5.2.2",
+   "S5.2.3"
+  ]
+ },
+ "P17": {
+  "page": "controlled-shifts",
+  "task": "0298-write-controlled-shifts",
+  "scored_ids": []
+ },
+ "P18": {
+  "page": "tensor-product-of-spaces",
+  "task": "0170-write-tensor-product-of-spaces",
+  "scored_ids": []
+ },
+ "P19": {
+  "page": "butterfly",
+  "task": "0370-write-butterfly",
+  "scored_ids": []
+ },
+ "P20": {
+  "page": "ring-y",
+  "task": "0364-write-ring-y",
+  "scored_ids": []
+ },
+ "P21": {
+  "page": "synthetic-transform",
+  "task": "0089-write-synthetic-transform",
+  "scored_ids": []
+ },
+ "P22": {
+  "page": "simultaneous-layer",
+  "task": "0381-write-simultaneous-layer",
+  "scored_ids": [
+   "S1.6.1",
+   "S1.6.2",
+   "S1.6.2.1",
+   "S1.6.2.2",
+   "S1.6.2.3",
+   "S1.6.2.4",
+   "S1.6.2.5",
+   "S1.6.2.6",
+   "S1.6.4",
+   "S1.6.4.1",
+   "S1.6.4.2",
+   "S1.6.4.3",
+   "S1.6.4.4",
+   "S1.6.4.5",
+   "S1.6.4.6",
+   "S1.6.4.7",
+   "S1.6.4.8",
+   "S1.6.4.9",
+   "S1.6.4.10",
+   "S1.6.4.11",
+   "S1.6.4.12",
+   "S1.6.4.13",
+   "S1.6.4.14",
+   "S1.6.4.15",
+   "S1.6.5",
+   "S1.6.5.1",
+   "S1.6.5.2",
+   "S1.6.5.3",
+   "S1.6.5.4",
+   "S1.6.5.5",
+   "S1.6.5.6",
+   "S1.6.5.7",
+   "S1.6.5.8",
+   "S1.6.6",
+   "S1.6.7"
+  ]
+ },
+ "P23": {
+  "page": "array-frames",
+  "task": "0365-write-array-frames",
+  "scored_ids": [
+   "S1.2.1",
+   "S1.2.2",
+   "S1.2.3",
+   "S1.2.4",
+   "S1.2.5"
+  ]
+ },
+ "P24": {
+  "page": "machine-model",
+  "task": "0009-write-machine-model",
+  "scored_ids": []
+ },
+ "P25": {
+  "page": "main-result",
+  "task": "0386-write-main-result",
+  "scored_ids": []
+ },
+ "P26": {
+  "page": "phase-frames",
+  "task": "0308-write-phase-frames",
+  "scored_ids": [
+   "S1.3.8.1",
+   "S1.3.8.2",
+   "S1.3.8.3",
+   "S1.3.8.4",
+   "S1.3.8.5",
+   "S1.3.8.6",
+   "S1.3.8.7",
+   "S1.3.8.8",
+   "S1.3.8.9",
+   "S1.3.8.10",
+   "S1.3.8.11"
+  ]
+ },
+ "P27": {
+  "page": "contraction-maps",
+  "task": "0264-write-contraction-maps",
+  "scored_ids": []
+ },
+ "P28": {
+  "page": "matrix-shear",
+  "task": "0299-write-matrix-shear",
+  "scored_ids": [
+   "S1.5.1.1",
+   "S1.5.1.2",
+   "S1.5.1.3",
+   "S1.5.1.4",
+   "S1.5.1.5",
+   "S1.5.1.6",
+   "S1.5.1.7",
+   "S1.5.1.8"
+  ]
+ },
+ "P29": {
+  "page": "subspace-labels",
+  "task": "0378-write-subspace-labels",
+  "scored_ids": [
+   "S1.3.1",
+   "S1.3.2",
+   "S1.3.3",
+   "S1.3.4",
+   "S1.3.5",
+   "S1.3.6",
+   "S1.3.6.1",
+   "S1.3.6.2",
+   "S1.3.6.3",
+   "S1.3.6.4",
+   "S1.3.6.5",
+   "S1.3.6.6",
+   "S1.3.6.7",
+   "S1.3.6.8",
+   "S1.3.6.9",
+   "S1.3.6.10",
+   "S1.3.6.11",
+   "S1.3.6.12",
+   "S1.3.6.13",
+   "S1.3.6.14",
+   "S1.3.9",
+   "S1.3.7",
+   "S1.3.7.1",
+   "S1.3.7.2",
+   "S1.3.7.3",
+   "S1.3.7.9",
+   "S1.3.7.4",
+   "S1.3.7.5",
+   "S1.3.7.6",
+   "S1.3.7.7",
+   "S1.3.7.8"
+  ]
+ },
+ "P30": {
+  "page": "cost-accounting",
+  "task": "0385-write-cost-accounting",
+  "scored_ids": [
+   "S6.1",
+   "S6.1.1",
+   "S6.1.2",
+   "S6.1.3",
+   "S6.1.4",
+   "S6.1.5",
+   "S6.1.6",
+   "S6.1.7",
+   "S6.2",
+   "S6.2.1",
+   "S6.2.2",
+   "S6.2.3",
+   "S6.3",
+   "S6.3.1",
+   "S6.3.2",
+   "S6.3.3",
+   "S6.3.4",
+   "S6.3.5",
+   "S6.3.6",
+   "S6.3.7",
+   "S6.4",
+   "S6.4.1",
+   "S6.4.2",
+   "S6.4.3",
+   "S6.5",
+   "S6.5.1",
+   "S6.5.2",
+   "S6.5.3",
+   "S6.5.4"
+  ]
+ },
+ "P31": {
+  "page": "multidim-transform",
+  "task": "0373-write-multidim-transform",
+  "scored_ids": []
+ },
+ "P32": {
+  "page": "chirp",
+  "task": "0396-write-chirp",
+  "scored_ids": [
+   "S4.3.1",
+   "S4.3.2",
+   "S4.3.3",
+   "S4.3.4"
+  ]
+ },
+ "P33": {
+  "page": "gaussian-resampling",
+  "task": "0375-write-gaussian-resampling",
+  "scored_ids": [
+   "S4.1.1",
+   "S4.1.2",
+   "S4.1.3",
+   "S4.1.4",
+   "S4.1.5",
+   "S4.1.5.1",
+   "S4.1.5.2",
+   "S4.1.5.3",
+   "S4.1.6",
+   "S4.1.7",
+   "S4.1.8"
+  ]
+ },
+ "P34": {
+  "page": "convolution",
+  "task": "0366-write-convolution",
+  "scored_ids": []
+ },
+ "P35": {
+  "page": "signed-packing",
+  "task": "0162-write-signed-packing",
+  "scored_ids": [
+   "S3.1.1",
+   "S3.1.2",
+   "S3.1.3",
+   "S3.1.4",
+   "S3.1.5",
+   "S3.1.6",
+   "S3.1.7",
+   "S3.1.8",
+   "S3.1.9"
+  ]
+ },
+ "P36": {
+  "page": "retained-permutations",
+  "task": "0376-write-retained-permutations",
+  "scored_ids": [
+   "S4.2",
+   "S4.2.1",
+   "S4.2.2",
+   "S4.2.3",
+   "S4.2.4",
+   "S4.4",
+   "S4.4.1",
+   "S4.4.2",
+   "S4.4.3",
+   "S4.4.4"
+  ]
+ },
+ "P37": {
+  "page": "conjecture",
+  "task": "0256-write-conjecture",
+  "scored_ids": []
+ },
+ "P38": {
+  "page": "packed-bit-addition",
+  "task": "0309-write-packed-bit-addition",
+  "scored_ids": [
+   "S1.6.3.1",
+   "S1.6.3.2",
+   "S1.6.3.3",
+   "S1.6.3.4",
+   "S1.6.3.5",
+   "S1.6.3.6",
+   "S1.6.3.7",
+   "S1.6.3.8",
+   "S1.6.3.9",
+   "S1.6.3.10",
+   "S1.6.3.11",
+   "S1.6.3.12",
+   "S1.6.3.13",
+   "S1.6.3.14"
+  ]
+ },
+ "P39": {
+  "page": "fixed-point",
+  "task": "0082-write-fixed-point",
+  "scored_ids": []
+ }
+}

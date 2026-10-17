@@ -1,0 +1,307 @@
+{"page": "P07",
+ "items": [
+  {"id": "S1.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+     "the case D ≤ q_0, in which every selected bit gets an individual C kernel at cost O(V log d)",
+     "the exponent conditions that turn the recurrence into O(d^{λ'}): max{τ,σ}<λ<1, τ(1+c/β)<λ, and max{λ,σ+β(1−σ)}<λ'<1"
+   ],
+   "note": "The page follows the paper's route in the same order: the rewrite H_0^{⊗D}=b^D S_D C^{⊗D} S_D, the phase-frame network with s children on streams of volume V/W, the guard width Δ, and one final truncation Q_p. The exactness and truncation parts are shown. The time bound O(Vd^{λ'}) depends on an unrolling that S1.6.4 asserts but does not show."},
+  {"id": "S1.6.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+     "the values a=(1+i)/2 and b=(1−i)/2 (and C=HSH), which the direct multiplication uses"
+   ],
+   "note": "The page asserts that the kernel 'satisfies $H_0=b\\,\\mathsf SC\\mathsf S,$ $C^2=X$ and $C^4=I$', with a citation and a link to the kernel page. It does not carry out the direct multiplication, and it does not give a or b."},
+  {"id": "S1.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+     "the residual basis v_ξ must be orthonormal: the paper proves the frame-change product for such a basis",
+     "C^{-1}=bI+aX=−iZCZ, from which the inverse-child identity (C^{-1})^{⊗f}=(−i)^f Z^{⊗f}C^{⊗f}Z^{⊗f} follows; the page asserts the identity without it",
+     "the basis of the count m(m−1)+3m: at most m−1 entries cleared per pivot, and reversing the elimination works because each row addition is an involution",
+     "s is the sum of the residual dimensions over the network's edges; this sum is what makes the count 'exactly s'",
+     "the source/sink Z_{a,f} signs, the scalar i^{27f} and the bank negation, which make every endpoint kernel forward and add no child"
+   ],
+   "note": "The page shows the conjugation P_Γ X_v P_Γ^{-1}=X_{Γv}. This turns the edge change into 'P_Γ(∏_ξ C_{1_ξ}^{η_ξ})P_Γ^{-1}', so each residual vector gives one child (C^{η_ξ})^{⊗f} on slot ξ, 'exactly s in all', as in the paper. The inverse-child identity and the row-addition count are asserted. Only 'a swap is three' is justified."},
+  {"id": "S1.6.2b",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+     "the tensor power of S=diag(1,i) over the selected bits is S_D; the step 'this gives' uses this without saying so",
+     "the unselected address bits are fixed, and the same phase multiplies every coefficient stored at an address"
+   ],
+   "note": "The page writes 'this gives $H_0^{\\otimes D}=b^D\\mathcal S_DC^{\\otimes D}\\mathcal S_D$', which means tensoring the one-coordinate identity. That one-line argument is the paper's own. The page adds the correct scalar b^D=(−i/2)^{⌊D/2⌋}b^{D mod 2} (b^2=−i/2) and notes that it is exact Gaussian dyadic."},
+  {"id": "S1.6.3b",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+     "the cost of one packed row addition from Packed selected-bit addition, O(V(L^τ+1)+MA_rect^3+δ_bad M A_rect(R+A_rect)), with L=(e/m)K≤eK address bits per slot",
+     "the extra repair terms are absorbed under that lemma's asymptotic hypotheses",
+     "the bound still holds after row padding and splitting, because every role stream keeps a complete suffix"
+   ],
+   "note": "The page says 'Their number is fixed, so the basis change and its inverse on $e$ axis chunks cost $O(V((eK)^\\tau+1))$'. It describes the packed addition only as 'cyclic shifts of whole chunk ranges plus a repair of exceptional addresses' and gives no per-addition cost. A fixed count alone does not give the (eK)^τ bound."},
+  {"id": "S1.6.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+     "the case D ≤ q_0 (individual kernels only, O(V log d)); the page's 'the first $q_0$ ... chunks get individual $C$ kernels' assumes D > q_0",
+     "R_row=2^{q_0K}≥W^{k_0} because K≥1 and q_0K≥k_0 log_2 W",
+     "the leaf bound F(e)=O(e) rests on individual kernels costing O(Ve); the node overhead also includes scalar gates, endpoint corrections and reassembly, at O(V)",
+     "the exponent conditions 0<τ<1, max{0,log_m(s/W)}≤σ<1, max{τ,σ}<λ<1, τ(1+c/β)<λ",
+     "at an internal node e≥d^β, so K≤d^c≤e^{c/β} and the overhead O(e^{τ(1+c/β)}+1)=O(e^λ)",
+     "the internal sum Ce^λ Σ_j (a/m^λ)^j=O(e^λ), which converges because a=s/W≤m^σ<m^λ",
+     "the leaf estimate O(a^j u)≤O(e^σ u^{1−σ}), via a^j≤m^{jσ}=(e/u)^σ, also valid for a<1 because σ≥0",
+     "D−q_0 is written in base m; the pieces have m^j chunks (internal e is a power of m), and there are at most (m−1)(1+⌊log_m d⌋) of them",
+     "the condition max{λ,σ+β(1−σ)}<λ'<1, which absorbs the log(2d) factor"
+   ],
+   "note": "The row machinery is derived: the index mod W, q_0, padding with 'fewer rows are added than the block holds, so the volume at most doubles', and divisibility by W^{⌈log_m d⌉−j}. The recurrence is derived too. The solution, however, is a single asserted sentence: 'internal levels sum geometrically, leaves add $O(e^\\sigma d^{\\beta(1-\\sigma)}),$ and $\\log d$ pieces give $O(d^{\\lambda'})$'. It has no λ, no conversion of (eK)^τ to O(e^λ), and no condition on λ', so O(Vd^{λ'}) is not shown to follow."},
+  {"id": "S1.6.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+     "the h=100 values (m=10^6 and the stated W, s) give m^{10}<B<m^{11}, hence ν=11 and C_1=20; the page leaves C_1=max{20,ϑ+3} unevaluated",
+     "the base of the dyadic induction: the inputs are disk-valued in 2^{-p}Z[i]; signs and multiplication by i preserve both bounds; the final shift by t is charged as t halvings",
+     "why there are at most 12W gates: each wire occurs in at most twelve scalar gates",
+     "the piece count is at most md only for sufficiently large sizes"
+   ],
+   "note": "The page follows the paper's chain, renaming A, B, ν to χ, Ψ, ϑ. First, '$24W^3+4s+4W+4$ is below $E$' using s<Wm. Next, χ(e)≤sχ(e/m)+E with leaves 8e, and sφ+E≤Ψφ. Then Ψ^{⌈log_m d⌉+1}≤Ψ^2 d^ϑ. Pieces, individual kernels and the ⌊D/2⌋+9 diagonal/b^D operations give a total below 128mΨ^2 d^{ϑ+3}≤Δ. Finally, the dyadic induction and εC_1<1 give an exact O(p) width."},
+  {"id": "S1.6.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page says 'Absolute row sums multiply under tensor products, so each row of $\\mathcal H=H_0^{\\otimes D}$ has absolute row sum one. Hence $\\mathcal H$ maps disk arrays to disk arrays'. This correctly justifies the row-sum fact that the paper only asserts. The rows of H_0 summing to 1/2+1/2 and the triangle-inequality step are left to the reader."},
+  {"id": "S1.6.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+     "the truncated numerators have magnitude at most 2^p, so the supplied width w≥p+2 holds them"
+   ],
+   "note": "The page gives the two facts the paper uses: truncation 'cannot increase a component's absolute value and changes it by less than $2^{-p}$'. From these it concludes that the disk is kept and the error is below √2·2^{-p}. That √2 is the modulus of a complex error whose two components are each below 2^{-p} is left implicit."},
+  {"id": "S1.6.2.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+     "(P_M f)(x)=f(M^{-1}x), the convention from which the identity is checked",
+     "M need not preserve the dot product: the identity uses only invertibility"
+   ],
+   "note": "The page says 'Let $\\Gamma$ be an invertible $\\mathbb F_2$-matrix ... Then $\\mathcal P_\\Gamma X_v\\mathcal P_\\Gamma^{-1}=X_{\\Gamma v}$' and cites it. The identity is not verified, and the page does not remark that only invertibility is used."},
+  {"id": "S1.6.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "From the conjugation, with Γ1_ξ=v_ξ, the page gets 'the edge change is $\\mathcal P_\\Gamma(\\prod_\\xi C_{\\mathbf 1_\\xi}^{\\eta_\\xi})\\mathcal P_\\Gamma^{-1}$'. It then applies 'Apply $\\mathcal P_\\Gamma^{-1},$ then $(C^{\\eta_\\xi})^{\\otimes f}$ to the $f$ bits of slot $\\xi,$ then $\\mathcal P_\\Gamma$: one child ... per residual vector', which is the paper's order and reasoning."},
+  {"id": "S1.6.2.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+     "C^{-1}=bI+aX=−iZCZ, whose f-fold tensor power gives the identity",
+     "the wrappers are address signs and constant fourth-root phases, and the rightmost phase is applied first"
+   ],
+   "note": "The page writes 'Negative powers add no child: $(C^{-1})^{\\otimes f}=(-i)^fZ^{\\otimes f}C^{\\otimes f}Z^{\\otimes f}$' without the one-coordinate identity C^{-1}=−iZCZ it comes from."},
+  {"id": "S1.6.2.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+     "at most m−1 other entries are cleared per pivot, giving the m(m−1) term",
+     "reversing the elimination gives Γ itself because each row addition is an involution",
+     "one row addition XORs corresponding selected bits x_{h,j}⊕x_{h',j} for every 0≤j<f"
+   ],
+   "note": "The page says 'Elimination writes $\\Gamma$ as at most $m(m-1)+3m$ row additions (a swap is three)'. This justifies only the 3m term. The page does say that each addition 'XORs selected bits of one slot into another'."},
+  {"id": "S1.6.2.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+     "s is the sum of the residual dimensions over the network's edges"
+   ],
+   "note": "The page gets one child per residual vector but simply asserts 'exactly $s$ in all'. It introduced s only as the network's 'smaller calls' and never identifies s with the summed residual dimensions."},
+  {"id": "S1.6.2.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+     "the source/sink Z_{a,f} signs, the scalar i^{27f} and the bank negation, which also add no child"
+   ],
+   "note": "Each child acts on 'the $f$ bits of slot $\\xi$', so on f=e/m axes. The inverse-child formula shows that a negative power costs one forward call plus diagonal wrappers ('Negative powers add no child'), as the paper argues. The endpoint corrections are not mentioned."},
+  {"id": "S1.6.4.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+     "one kernel: split by the selected bit, paired evaluation C(u,v)=((u+v+i(u−v))/2,(u+v−i(u−v))/2), merge, each O(V)"
+   ],
+   "note": "The O(Ve) cost of individual kernels is used implicitly: 'individual $C$ kernels, in $O(V\\log d)$' and the leaf case 'F(e)=O(e)'. The page never shows it."},
+  {"id": "S1.6.4.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+     "the packed lemma's bound for one row addition on slots of (e/m)K address bits",
+     "the scalar gates, endpoint corrections and reassembly cost a constant number of scans",
+     "per-record address and descriptor work is absorbed by the Θ(rp)-bit record length"
+   ],
+   "note": "The overhead O((eK)^τ+1) in the recurrence comes from the asserted cost of the basis change. Gates and corrections are not costed."},
+  {"id": "S1.6.4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "This is a definition. The page gives 'q_0=\\lceil\\log_2W\\rceil\\lceil\\log_m(2d)\\rceil' and uses k_0 inline as ⌈log_m d⌉. It motivates both by the need for 'the row count [to stay] divisible by $W$ through $\\lceil\\log_md\\rceil$ levels'."},
+  {"id": "S1.6.4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+     "R_row=2^{q_0K}≥W^{k_0} holds because K≥1 for large p and q_0K≥k_0 log_2 W; the page asserts 'range at least $W^{\\lceil\\log_md\\rceil}$'",
+     "the same number of zero rows is added within each preceding prefix"
+   ],
+   "note": "The doubling is derived: 'fewer rows are added than the block holds, so the volume at most doubles'. This is a correct reason that the paper leaves implicit. The range bound itself is asserted."},
+  {"id": "S1.6.4.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Padding to a multiple of W^{⌈log_m d⌉}, together with splitting rows by index mod W, gives 'the row count at depth $j$ divisible by $W^{\\lceil\\log_md\\rceil-j}$'. The paper's justification is equally brief."},
+  {"id": "S1.6.4.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+     "every role stream keeps the same remaining address shape, so pointwise gates read aligned records",
+     "scratch roles are supplied from existing rows, since the network allows arbitrary role values"
+   ],
+   "note": "The page says 'Rows go to the $W$ wire roles by index mod $W,$ so children have volume $V/W$ if the row count stays divisible by $W$'. This matches the paper's u=Wg+w split."},
+  {"id": "S1.6.4.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+     "σ≥0 (max{0,log_m(s/W)}≤σ)",
+     "λ with max{τ,σ}<λ<1",
+     "τ(1+c/β)<λ",
+     "the exponents can be chosen rational"
+   ],
+   "note": "Only '$s/W\\le m^\\sigma,$ $\\sigma<1$', '$(\\tau<1)$' and β=1/2 appear. λ and its conditions are absent."},
+  {"id": "S1.6.4.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+     "the leaf case F(e)=O(e) rests on the O(Ve) cost of individual kernels, which the page does not state"
+   ],
+   "note": "The recurrence is displayed with F as time divided by volume. It follows from the s children, their V/W volumes and the basis-change overhead shown earlier on the page, with recursion stopped at e<d^β."},
+  {"id": "S1.6.4.9",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page establishes s children and 'children have volume $V/W$', and defines F as 'time divided by volume'. The factor s/W follows. The product s(V/W)F(e/m)/V is left for the reader to form."},
+  {"id": "S1.6.4.10",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+     "K=⌊d^c⌋≤d^c≤e^{c/β} at internal nodes (e≥d^β)",
+     "overhead O(e^{τ(1+c/β)}+1)=O(e^λ)"
+   ],
+   "note": "The page never states K=⌊d^c⌋ or converts the (eK)^τ overhead into a power of e."},
+  {"id": "S1.6.4.11",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+     "a=s/W≤m^σ<m^λ (requires σ<λ)",
+     "the bound Ce^λ Σ_j (a/m^λ)^j=O(e^λ)"
+   ],
+   "note": "The page offers only 'As $s/W\\le m^\\sigma,$ $\\sigma<1,$ internal levels sum geometrically'. It does not say what the levels sum to, and the reason it gives is not the paper's condition (see errors)."},
+  {"id": "S1.6.4.12",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+     "the ratio a/m^λ<1",
+     "the internal contribution is O(e^λ)"
+   ],
+   "note": "The convergence is asserted as 'internal levels sum geometrically'. The ratio and the resulting O(e^λ) bound are missing."},
+  {"id": "S1.6.4.13",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+     "the leaf contribution after j levels is O(a^j u), with u=e/m^j<d^β",
+     "a^j≤m^{jσ}=(e/u)^σ, also valid for a<1 because σ≥0"
+   ],
+   "note": "The page asserts 'leaves add $O(e^\\sigma d^{\\beta(1-\\sigma)})$' without the chain O(a^j u)≤O(e^σ u^{1−σ})."},
+  {"id": "S1.6.4.14",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+     "D−q_0=Σ_j a_j m^j in base m with 0≤a_j<m",
+     "a_j pieces of m^j chunks each, so internal sizes are powers of m",
+     "at most (m−1)(1+⌊log_m d⌋) pieces"
+   ],
+   "note": "The page refers only to '$\\log d$ pieces' (and later 'at most $md$ pieces'). The base-m partition is not described."},
+  {"id": "S1.6.4.15",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+     "the sum O(log(2d)[d^λ+d^{σ+β(1−σ)}+1]), including the row preprocessing",
+     "the condition max{λ,σ+β(1−σ)}<λ'<1, whose strict inequality absorbs the logarithmic number of pieces"
+   ],
+   "note": "The page says '$\\log d$ pieces give $O(d^{\\lambda'})$' and quotes λ'=1−2^{-54}. It does not give the condition on λ' that makes the logarithm disappear."},
+  {"id": "S1.6.5.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "These are definitions, renamed B→Ψ and ν→ϑ. The page sets E=64(W+m+1)^3, which it shows bounds one invocation's operations, Ψ=s+E and 'ϑ=\\min\\{j\\ge1:m^j\\ge\\Psi\\}', as in the paper. It also gives C_0=128mΨ^2 and C_1=max{20,ϑ+3}."},
+  {"id": "S1.6.5.2",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+     "the h=100 values m=10^6 and the stated W and s",
+     "m^{10}<B<m^{11}, hence ν=11 and C_1=20",
+     "only exponent fourteen is needed"
+   ],
+   "note": "The page leaves C_1=max{20,ϑ+3} unevaluated and does not say that it equals 20 for the paper's network."},
+  {"id": "S1.6.5.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+     "why there are at most 12W gates: each wire is touched at most four times in each of three stages",
+     "each output term needs at most one halving and one addition, and a gate has at most W outputs",
+     "the 4 operations per inverse child: one parity sign, plus at most one sign change and one multiplication by i"
+   ],
+   "note": "The page says 'at most $12W$ gates, each taking at most $2W^2$ operations ...; inverse-child corrections take at most $4s,$ other corrections $4W+4.$ As $s<Wm,$ the total ... is below $E$'. This is the paper's count, with some of its reasons compressed."},
+  {"id": "S1.6.5.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+     "the eight leaf operations: sum, difference, multiplication of the difference by i, and two half-sums"
+   ],
+   "note": "The page says 'Chains concatenate the $s$ children; a leaf pair takes eight operations', which gives χ(e)≤sχ(e/m)+E and χ(e)≤8e, the paper's recurrence with s rather than s/W."},
+  {"id": "S1.6.5.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+     "the start 8e≤8d≤8dB at a leaf, and the count of at most ⌈log_m d⌉ internal levels (implicit in the exponent)"
+   ],
+   "note": "The page says '$s\\varphi+E\\le\\Psi\\varphi$ for any bound $\\varphi\\ge1,$ so $\\chi(e)\\le8d\\Psi^{\\lceil\\log_md\\rceil+1}$'. This is correct and matches the paper's 8dB^{k+1} with k≤⌈log_m d⌉."},
+  {"id": "S1.6.5.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page reproduces Ψ^{⌈log_m d⌉+1}≤Ψ^{log_m d+2}=Ψ^2 d^{log_m Ψ}≤Ψ^2 d^ϑ and χ(e)≤8Ψ^2 d^{ϑ+1}. The last step uses log_m Ψ≤ϑ, which holds by the definition of ϑ."},
+  {"id": "S1.6.5.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+     "the base case: input coefficients are disk-valued and lie in 2^{-p}Z[i]",
+     "signs and multiplication by i preserve both bounds",
+     "the final shift by t is charged as t halvings"
+   ],
+   "note": "The page gives the inductive reason, 'since addition at most doubles modulus and halving adds a denominator bit'. With the total chain bound ≤Δ from the previous paragraph, this yields the p+Δ fractional and Δ+3 integer-and-sign bits, as in the paper."},
+  {"id": "S1.6.5.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+     "addition, shifts, copying and phase changes then cost O(p) per coefficient"
+   ],
+   "note": "The page says 'As $d=\\Theta(p^\\epsilon)$ and $\\epsilon C_1<1,$ $\\Delta=o(p):$ the width is $O(p)$', the paper's argument."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "As $s/W\\le m^\\sigma,$ $\\sigma<1,$ internal levels sum geometrically",
+   "problem": "σ<1 is not the condition that makes the internal levels decay. The paper first bounds the node overhead O((eK)^τ+1) by O(e^λ), using K≤e^{c/β} and τ(1+c/β)<λ. The series then has ratio a/m^λ<1 because a≤m^σ<m^λ. With the overhead (eK)^τ as written on the page, the ratio would be a/m^τ, and this is not below 1 under the paper's choice τ=σ."},
+  {"severity": "minor",
+   "quote": "barely beats $D$ passes",
+   "problem": "The layer costs O(Vd^{λ'}), where d is the maximum number of axes, not D. It beats separate passes only when D is close to d (D>d^{λ'}). The saving is relative to the d≥D passes of the worst case, as in the paper's comparison with D≤d separate factors."}
+ ],
+ "motivation_given": true}

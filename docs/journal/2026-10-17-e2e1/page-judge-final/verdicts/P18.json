@@ -1,0 +1,11 @@
+{"page": "P18",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "The basis vectors $\\mathbf b\\otimes\\mathbf g_j$ of $A\\otimes C$ span $B\\otimes C$ and the vectors $\\mathbf p\\otimes\\mathbf g_j$ span $P\\otimes C$",
+   "problem": "The vectors $\\mathbf g_j$ were introduced as a basis of $G$, not of $C$; here they must be a basis of $C$, which the page never introduces. The argument is right once a basis of $C$ is named."},
+  {"severity": "minor",
+   "quote": "A form is nondegenerate when its Gram matrix (the matrix of pairings of basis vectors) is invertible, which is why dimensions must be finite.",
+   "problem": "Nondegeneracy (trivial radical) makes sense in any dimension; the Gram-matrix test is just the finite-dimensional form of it. Finiteness is actually needed for the splitting $A=B\\perp P$ and for the dimension counts. The paper simply works in finite-dimensional bilinear spaces ($F=\\mathbb Q^h$ or $\\mathbb F_2^h$, $\\mathcal F=F^{\\otimes3}$) and never ties finiteness to the definition."}
+ ],
+ "motivation_given": true}

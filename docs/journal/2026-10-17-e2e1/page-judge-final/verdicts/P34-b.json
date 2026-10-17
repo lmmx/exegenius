@@ -1,0 +1,8 @@
+{"page": "P34",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Executing such a permutation is a sort of data on a tape, costing time proportional to the line length times a logarithm of it",
+   "problem": "The paper (lines 3692-3693) gives each label-and-sort for P_t and P_s^{-1} a cost of O(tp log t) on a line of t entries of O(p) bits. That is an upper bound, and it includes the word length p. The page leaves out the factor p and says 'proportional', which suggests a tight cost. The point that matters, the extra logarithmic factor, is still right."}
+ ],
+ "motivation_given": true}

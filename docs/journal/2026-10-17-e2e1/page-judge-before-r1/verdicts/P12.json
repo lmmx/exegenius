@@ -1,0 +1,109 @@
+{
+ "page": "P12",
+ "items": [
+  {
+   "id": "S2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "hypotheses of the lemma: input disk grid arrays in the $w$-bit component format ($p+2\\le w\\le C_wp$), $K=\\lfloor d^c\\rfloor$ with $1\\le K\\le\\ell-1$, $d\\ge2$, $2\\le\\ell<p$, $p\\ge p_1$ and the fixed bands for $d$ and $r$",
+    "outputs are disk grid coefficients in the same component format",
+    "$L^{-1}$ costs the same as $L$, so the final restoration is charged in the bound"
+   ],
+   "note": "The page assembles the layout (prefix moves, chunk exchanges), the chunk and prefix rounds, the one-truncation-per-round error count and the exact operators, and its closing \\\"Both cost $O(Tp[dK+pK^{\\tau-1}+\\ell d^{\\lambda'}])$\\\" collects terms each derived above. It leaves out the round schedule ($h=\\ell-1$ on long axes, then $h=\\ell-2,\\dots,b$, then $h=b-1,\\dots,0$, so that axes in a round share $u_i=2^{h+1}$), the reverse schedule of the opposite procedure, and the disk and grid hypotheses."
+  },
+  {
+   "id": "S2.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "This is a definition and it is given in full: \\\"Call an axis long if it has $\\ell$ address bits and short if $\\ell-1$. Put $b=(\\ell-1)\\bmod K$ ... and $q=\\lfloor(\\ell-1)/K\\rfloor$ ... so $\\ell-1=qK+b$.\\\""
+  },
+  {
+   "id": "S2.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "each single-slot move costs $O(Tp)$ (the elementary single-bit moves); the page only says \\\"a pass costs $O(Tp)$\\\"",
+    "order of the list (top slots of long axes in increasing $i$, then $h=b-1,\\dots,0$ with $i$ increasing), with unlisted slots keeping their relative order"
+   ],
+   "note": "\\\"the top bit of each long axis and the $b$ lowest bits of each axis\\\" matches the paper's list, and gives at most $D+Db=D(b+1)$ slots, which is $O(dK)$ because $b<K$. Each move is a pass, so the cost $O(TpdK)$ follows."
+  },
+  {
+   "id": "S2.2.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "no exchange is made at the last target position, which is what gives $Dq-1$ rather than $Dq$"
+   ],
+   "note": "The page gives the paper's left-to-right scan (\\\"exchanging the chunk there with the required one if different\\\") and the cost $O(TpK^\\tau)$ per exchange from the chunk-interchange lemma, including for nonadjacent chunks. The $q$ remaining $K$-bit chunks per axis follow from $\\ell-1=qK+b$."
+  },
+  {
+   "id": "S2.2.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "\\\"Since $DqK\\le d\\ell=O(p)$, the exchanges cost $O(Tp\\,DqK^\\tau)=O(Tp\\,(DqK)K^{\\tau-1})=O(Tp\\,pK^{\\tau-1})$\\\" is the paper's computation, with the factoring step written out."
+  },
+  {
+   "id": "S2.2.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the selected bit's common offset is $(h-b)\\bmod K$",
+    "the layer sees the complete address set $[P]\\times[2^K]^D\\times[S]$ with $PS2^{DK}=M$ and $\\log_2(2M)\\le C_Mp$",
+    "the round header $\\mathcal E$ satisfies $|\\mathcal E|\\le C_{\\rm desc}p$, so one set of fixed layer constants covers every axis choice and round"
+   ],
+   "note": "The page gives the structural reason, \\\"A chunk round's selected bits share an offset in $D$ consecutive chunks, so one layer does it at cost $O(Tpd^{\\lambda'})$\\\", and sums over the $qK\\le\\ell$ rounds. It skips the paper's check of the proposition's remaining hypotheses (address set, record count, descriptor length)."
+  },
+  {
+   "id": "S2.2.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "a coefficient width of $p+D+O(1)=O(p)$ bits is enough without truncating between axes (exact dyadics on the $2^{-(p+s)}$ grid, still in the disk). This is what keeps each bit at $O(Tp)$ and allows one truncation per round",
+    "the per-bit mechanism: move the bit before the polynomial suffix, write half-sums and half-differences of adjacent pairs, then reverse the move"
+   ],
+   "note": "\\\"A prefix round handles at most $D$ bits individually at $O(Tp)$ each, so costs $O(Tpd)$; at most $b+1\\le K$ such rounds cost $O(TpdK)$\\\" follows the paper's count. The cost of $O(Tp)$ per bit is asserted, not justified."
+  },
+  {
+   "id": "S2.2.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "opposite direction: $J_E^{-1}$ comes first and preserves the disk grid, so the layer returns $Q_p(\\mathcal HJ_E^{-1}z)$ directly",
+    "prefix rounds also have one truncation, because they are evaluated exactly"
+   ],
+   "note": "The forward case follows the paper: $J_E$ is a signed coefficient permutation, and \\\"Truncation toward zero is odd and acts separately on each real and imaginary part, so ... $J_EQ_p(\\mathcal Hz)=Q_p(J_E\\mathcal Hz)$\\\". The opposite and prefix-round cases are covered only by the blanket \\\"Each round is ... one truncation $Q_p$\\\"."
+  },
+  {
+   "id": "S2.2.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "contraction and truncation preserve the disk, which gives the disk bound on outputs"
+   ],
+   "note": "This is the paper's argument: a contraction does not increase the error, each truncation adds less than $\\sqrt2\\,2^{-p}$, the layout permutations are isometries, and rounds starting from zero error give below $\\sqrt2\\,\\ell\\,2^{-p}$. The page writes \\\"the $\\ell$ rounds\\\" where the paper has \\\"at most $\\ell$\\\"."
+  },
+  {
+   "id": "S2.2.9",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "\\\"Arithmetic on named slots after $L$ is conjugated by it\\\", followed by $(LBF_{\\boldsymbol t}^-L^{-1})L=LBF_{\\boldsymbol t}^-$ and $L^{-1}(LF_{\\boldsymbol t}^+B^{-1}L^{-1})=F_{\\boldsymbol t}^+B^{-1}L^{-1}$, reproduces the paper's identification, with the order of moves and arithmetic stated for each direction."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "There are $b+1$ rounds on prefix slots and $qK$ on chunks, $\\ell$ in all.",
+   "problem": "The leading round at $h=\\ell-1$ happens only when some axis is long. If every axis is short, there are $b$ prefix rounds and $\\ell-1$ rounds in total. The paper says \\\"at most $b+1\\leq K$ rounds on prefix slots\\\" and \\\"at most $\\ell$ rounds\\\". The page's later \\\"the $\\ell$ rounds leave error below\\\" inherits this. The bounds are unaffected."
+  },
+  {
+   "severity": "minor",
+   "quote": "each round of a synthetic polynomial transform runs as one simultaneous butterfly layer instead of one pass per axis",
+   "problem": "Only the $qK$ chunk rounds run as one simultaneous layer. The up to $b+1$ rounds on prefix slots process each participating bit individually, as the page itself says later and as the paper's proof does."
+  }
+ ],
+ "motivation_given": true
+}

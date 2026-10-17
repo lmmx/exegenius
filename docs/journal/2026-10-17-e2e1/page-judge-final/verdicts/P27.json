@@ -1,0 +1,8 @@
+{"page": "P27",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Bilinear contraction applies to the normalized [Cyclic convolution](convolution.md) $f*g/T$, where $T$ counts all entries involved. A fixed output coefficient averages $T$ signed products of one entry of $f$ with one entry of $g$",
+   "problem": "The page does not pin down $T$ or say where the signs come from. In the paper (lines 3372-3383), the arrays take values in $\\mathcal R_r$ over $M$ cyclic addresses, and $T=rM$ is the number of scalar coefficients in one operand. The signs come from the negacyclic wrap in the polynomial index. \"All entries involved\" could be read as counting the entries of both operands, and a plain scalar cyclic convolution has no signed products. The bound $\\|f*g/T\\|\\le\\|f\\|\\|g\\|$ still holds."}
+ ],
+ "motivation_given": true}

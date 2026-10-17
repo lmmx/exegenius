@@ -1,0 +1,8 @@
+{"page": "P27",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "the normalized [Cyclic convolution](convolution.md) $f*g/T$, where $T$ counts all entries involved",
+   "problem": "T is left vague: read literally, 'all entries involved' could mean the entries of both operands (2T). In the paper T = rM is the number of scalar entries of one operand array: M cyclic addresses times r polynomial coefficients (paper lines 3376, 4337-4341). The bound that follows on the page is still correct."}
+ ],
+ "motivation_given": true}

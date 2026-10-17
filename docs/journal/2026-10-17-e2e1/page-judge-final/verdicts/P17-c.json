@@ -1,0 +1,11 @@
+{"page": "P17",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "A fixed rational linear combination of the controls, reduced modulo $Q$, qualifies.",
+   "problem": "The page never says that the coefficients' denominators must be prime to $q$, and without that, reducing a rational combination modulo $Q=q^b$ is undefined. Lemma ordered-affine-streams (paper lines 557-560, 623-627) fixes 'finitely many rational coefficients whose denominators are prime to $q$' and reduces them modulo $q^b$ by the extended Euclidean algorithm."},
+  {"severity": "minor",
+   "quote": "Negation sends block $y$ to block $Q-y$: it leaves block $0$ fixed",
+   "problem": "Negation sends $y$ to $-y \\bmod Q$. Taken literally, $y\\mapsto Q-y$ sends block $0$ to position $Q$, which is outside $[Q]$. The same sentence goes on to say block $0$ stays fixed, so the intended map is clear. The paper (line 606) states it only as 'leaves the block at zero fixed and reverses the order of the other $Q-1$ blocks'."}
+ ],
+ "motivation_given": false}

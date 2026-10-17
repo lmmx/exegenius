@@ -1,0 +1,25 @@
+{"page": "P11",
+ "items": [
+  {"id": "S5.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page proves that Phi is an isomorphism preserving cyclic convolution. It then builds the O(Tp d^2(1+ell^tau)) cost from the padding scans (O(Tp)), the d prefix-controlled shifts (O(dTp)) and the O(d^2) adjacent axis moves (O(V ell^tau) plus linear passes each), as the paper does at lines 4204-4292."},
+  {"id": "S5.3.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "This is a definition and the page gives it in full: \"$P_i=\\prod_{j<i}s_j$ ... and $\\mu_i=P_i^{-1}\\pmod{s_i}$\", after assuming pairwise coprime $s_i$. That hypothesis makes the inverse exist. Neither the page nor the paper spells out that P_i is coprime to s_i."},
+  {"id": "S5.3.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page shows why the relation is respected: \"Since $s_i\\mid S$, each $x_i^{\\mu_iS}=1$, so $\\Phi$ respects $x^S=1$\". This is the reason the paper's bare assertion rests on."},
+  {"id": "S5.3.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page argues that Phi(x^k)=1 iff s_i | mu_i k for all i. Since mu_i is a unit this means s_i | k, and pairwise coprimality then gives S | k. So x has order S and its S distinct powers exhaust the S target monomials, which is the paper's argument made explicit."},
+  {"id": "S5.3.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes k in mixed radix with 0<=a_j<s_j. It notes \"The axis-$i$ coordinate $b_i$ of $\\Phi(x^k)$ is $\\mu_ik\\bmod s_i$\" and reduces this to the paper's formula (eq:triangular-crt)."},
+  {"id": "S5.3.5", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page gives both of the paper's reasons: \"Terms with $j>i$ vanish modulo $s_i$, since $s_i$ divides $P_j$, and $\\mu_iP_i\\equiv1$ modulo $s_i$\"."},
+  {"id": "S5.3.6", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page notes that controls follow the target in storage order, so reversing the axis order puts them first. Updating i=d,...,1 then means \"no lower-index control has yet changed\". It also notes that each shift rotates [0,s_i) and fixes [s_i,t_i), so zero padding stays zero. The page does not give the paper's convention of using the identity when a lower-index control is invalid (line 4263-4264, outside the assigned passage); its zero-padding conclusion still holds."},
+  {"id": "S5.3.7", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page cites the O(V ell^tau) equal-width chunk interchange and gives the leading-bit trick for widths ell and ell-1 (a fixed number of linear passes). It then sums O(d^2) moves, shows that the shifts and scans are dominated, and treats the inverse (offsets subtracted for i=1,...,d, reorder back, delete padding). The O(d^2) count of adjacent moves is asserted, as in the paper."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "where $r=2^\\ell$ is the record length",
+   "problem": "In the paper r is the polynomial length, i.e. the largest axis length t_d=r with t_i in {r/2,r} (lines 4058-4066, 1788). It is not the length of the records being moved: the page itself says those records are \"each of $O(p)$ bits\". The rest of the page uses r correctly as a bound on t_i and as 2^ell."}
+ ],
+ "motivation_given": true}

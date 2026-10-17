@@ -1,0 +1,15 @@
+{"page": "P01",
+ "items": [
+  {"id": "S5.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page builds the twist, checks the wrap factor zeta^{k+l}(-1)^h = zeta^j, extends it linewise as iota D_+, and concludes M_C = D_- iota^{-1} M_r(iota D_+ f, iota D_+ g) = f*g/T, then shows it is a bilinear contraction. This follows the paper's 'Complex convolution by a coefficient twist' (lines 4298-4347)."},
+  {"id": "S5.4.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page sets zeta = e^{pi i/r} and notes zeta^r = -1. It defines Theta: C[x_d]/(x_d^r-1) -> R_r by x_d -> zeta y, with R_r = C[y]/(y^r+1) given in the opening section, as the paper does."},
+  {"id": "S5.4.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Well-definedness comes from (zeta y)^r = (-1)(-1) = 1. Diagonality comes from Theta(x_d^k) = zeta^k y^k, which gives the inverse by zeta^{-k}, and the page shows sup-norm preservation 'since |zeta^{pm k}| = 1'. The paper asserts that last point without a reason."},
+  {"id": "S5.4.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes k+l = j+hr with h in {0,1} and attributes zeta^{k+l} to the twist and (-1)^h to the negacyclic reduction. It gives the paper's identity and concludes that untwisting by zeta^{-j} recovers the cyclic coefficient. The r=2 example is correct: constant term f0g0+f1g1, y-coefficient i(f0g1+f1g0)."},
+  {"id": "S5.4.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page defines iota (lines read as polynomials, M = T/r records) and D_pm, says iota D_+ applies Theta to every line, and notes that M_r convolves the first d-1 axes over R_r 'dividing by T' while * convolves all d axes. It then gives the identity, matching the paper's 'Consequently'. It derives the contraction from M_r averaging rM signed scalar products and from D_pm and iota^{pm1} being isometries."}
+ ],
+ "errors": [],
+ "motivation_given": true}

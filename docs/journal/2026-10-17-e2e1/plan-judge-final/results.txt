@@ -1,0 +1,3 @@
+| Run | Plan | Judges | Central (majority) | Gate | C1-C9 | Each judge's central | Derived (median; each) | Faithful (median; each) | Major errors (each) |
+|---|---|---|---|---|---|---|---|---|---|
+| E2E1F | P01 | 3 | 9 | pass | RRRRRRRRR | [9, 9, 9] | 19; [19, 19, 19] | 19; [18, 19, 19] | [0, 0, 0] |

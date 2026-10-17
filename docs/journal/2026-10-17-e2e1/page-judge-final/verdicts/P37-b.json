@@ -1,0 +1,8 @@
+{"page": "P37",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "the time must fall below every constant multiple of $n\\log n$ along some inputs.",
+   "problem": "The quantity in question is the worst-case time T_A(n) over all inputs of length n, so what must fall below c n lg n (for every c>0) is the worst-case time at arbitrarily large input lengths n, not the time on 'some inputs'. The paper states the negation as one machine with liminf_{n->infinity} T_A(n)/(n lg n) = 0 (lines 384-385). Read literally, 'along some inputs' would let a machine that is fast only on particular inputs count as a counterexample."}
+ ],
+ "motivation_given": true}

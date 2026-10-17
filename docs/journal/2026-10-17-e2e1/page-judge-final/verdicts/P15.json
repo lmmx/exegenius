@@ -1,0 +1,14 @@
+{"page": "P15",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Throughout, $V$ is the volume of an array, the number of digits it stores, and $\\beta\\ge 2$ is the radix, the number of values one digit can take.",
+   "problem": "The paper (lines 449-457) defines the logical volume $V$ as the number of stored data bits (entries are bits unless a record width is given). The radix $q$ of Lemma elementary-streams refers to the digits of the address positions, not to stored data digits. Counting digits instead of bits changes $V$ only by a constant factor, so the $O(V)$ bounds survive, but the definition is not the paper's and it mixes up data digits with address digits."},
+  {"severity": "minor",
+   "quote": "In item 4 the array is indexed by $[P]\\times[R]\\times[B]$, where $P$ is the number of prefix values, $R$ is the number of rows",
+   "problem": "In the paper (lines 472-476, 502-505), $R$ is the range of the row field within one prefix, a row is the block $\\{p\\}\\times\\{r\\}\\times[B]$, and so there are $PR$ rows in all. The dealing is done 'within each prefix' by $r=Wg+w$, and the merge requires $W\\mid R$. The page leaves out 'within each prefix' and calls $R$ 'the number of rows', so 'when $W$ divides the number of rows' can be read as $W\\mid PR$. That condition is weaker, and under it the streams need not share the shape $[P]\\times[R/W]\\times[B]$."},
+  {"severity": "minor",
+   "quote": "The operations here are the baseline: each costs one pass, so they can be used a constant number of times but not once per level.",
+   "problem": "The paper proves each operation costs $O(V)$ because 'each stream is scanned a fixed number of times' (line 546-547). The digit-pair permutation, for example, splits into $q^2$ streams and reads them back. So each operation costs a constant number of passes, not exactly one. The conclusion (usable $O(1)$ times, not once per level) still holds."}
+ ],
+ "motivation_given": true}

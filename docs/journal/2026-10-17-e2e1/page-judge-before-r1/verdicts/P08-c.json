@@ -1,0 +1,15 @@
+{"page": "P08",
+ "items": [
+  {"id": "S5.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page sets up Theta, proves it is well defined, diagonal and norm-preserving, checks the wrap sign, extends Theta along each line as iota D_+, and displays M_C(f,g)=D_- iota^{-1} M_r(iota D_+ f, iota D_+ g)=f*g/T together with the contraction bound. This is the paper's argument (lines 4298-4347), and the r=2 worked example is correct."},
+  {"id": "S5.4.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "This is a definition and the page gives all of it: \"Let zeta=e^{pi i/r}, so zeta^r=-1. Define the ring map Theta from C[x_d]/(x_d^r-1) to R_r by x_d -> zeta y\". R_r is the ring modulo y^r+1, \"where y^r=-1\"."},
+  {"id": "S5.4.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Well-definedness rests on \"(zeta y)^r=(-1)(-1)=1\". Diagonality comes from \"Theta(x_d^k)=zeta^k y^k\", and the factor zeta^k is nonzero, so Theta is an isomorphism with inverse multiplying by zeta^{-k}. Norm preservation is justified by \"|zeta^{+-k}|=1\". This matches the paper's lines 4308-4312, with the reasons spelled out."},
+  {"id": "S5.4.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes k+l=j+hr with j<r and h in {0,1}, and derives zeta^{k+l}(-1)^h=zeta^j(zeta^r)^h(-1)^h=zeta^j, where negacyclic reduction contributes the (-1)^h. It concludes that the coefficient of y^j is zeta^j times the cyclic coefficient, so untwisting by zeta^{-j} restores it, as in paper lines 4313-4319. The page leaves 0<=k,l implicit."},
+  {"id": "S5.4.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page defines M=T/r, iota and D_+-, notes that iota D_+ applies Theta on each line with inverse D_- iota^{-1}, says M_r already divides by T, and says * runs over all d axes. It then displays the identity, which follows from these as in the paper's \"Consequently\". The step that Theta is multiplicative, so the twist commutes with convolution over the first d-1 axes, is left implicit, as it is in the paper. The contraction is derived in more detail than the paper gives: M_r is bounded via the paper's averaging of rM signed products (lines 3378-3387), and iota^{+-1} and D_+- are isometries."}
+ ],
+ "errors": [],
+ "motivation_given": true}

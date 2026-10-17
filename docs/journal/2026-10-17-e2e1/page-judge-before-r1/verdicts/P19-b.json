@@ -1,0 +1,15 @@
+{"page": "P19",
+ "items": [
+  {"id": "S4.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page states the identity $QF_{\\boldsymbol t}u=\\overline a\\cdot\\frac{a*(\\overline a\\cdot u)}{T}$ under the paper's hypothesis that every $t_i$ is even, and proves it as the paper does (Lemma chirp-permutation, lines 3911-3951): periodicity of $a$, then matching the coefficient of $u_{\\boldsymbol k}$ against that of $QF_{\\boldsymbol t}$, which it computes in 'Setting' from $(P_tv)_k=v_{-sk}$ and the normalized negative-sign transform."},
+  {"id": "S4.3.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The chirp is defined exactly as in the paper: 'Define the chirp $a_{\\boldsymbol j}=\\exp\\left(-\\pi i\\sum_{i=1}^d s_ij_i^2/t_i\\right)$', with $\\overline a$ its conjugate. It is a definition, so presenting it counts as deriving it."},
+  {"id": "S4.3.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes out the step the paper leaves implicit, $-\\pi i s_i\\frac{(j_i+t_i)^2-j_i^2}{t_i}=-\\pi i s_i(2j_i+t_i)$, and says it is an integral multiple of $2\\pi i$ 'because $t_i$ is even'. That is correct and is the paper's argument. It also explains why periodicity is needed: the convolution reads $a_{\\boldsymbol j-\\boldsymbol k}$ modulo $t_i$."},
+  {"id": "S4.3.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Using $(j_i-k_i)^2=j_i^2-2j_ik_i+k_i^2$, the page writes the exponent of $\\overline a_{\\boldsymbol j}a_{\\boldsymbol j-\\boldsymbol k}\\overline a_{\\boldsymbol k}$ as $\\sum_i\\frac{\\pi i s_i}{t_i}(j_i^2-(j_i^2-2j_ik_i+k_i^2)+k_i^2)$, 'where the squares cancel', which gives $\\frac1T\\exp(2\\pi i\\sum_is_ij_ik_i/t_i)$. The signs and the factor $1/T$ are correct. A $d=1$, $t_1=2$ check confirms it."},
+  {"id": "S4.3.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page does more than assert the match. In 'Setting' it computes the coefficient of $QF_{\\boldsymbol t}$: $Q$ places frequency $(-s_ij_i)_i$ at position $\\boldsymbol j$, and the normalized negative-sign transform then gives $\\frac1T\\exp(2\\pi i\\sum_i s_ij_ik_i/t_i)$. It then identifies this with the right-side coefficient, which agrees with the paper's $(P_tv)_k=v_{-sk}$ and $F_q$ with $e^{-2\\pi i jk/q}/q$."}
+ ],
+ "errors": [],
+ "motivation_given": true}

@@ -1,0 +1,14 @@
+{"page": "P15",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "$V$ is the volume of an array, the number of digits it stores",
+   "problem": "The paper (lines 455-456) defines the logical volume V as the number of stored data bits; the radix-q digits that the lemma operates on are address digits, implicit in position and not stored. The page itself later says \"$V=\\Theta(n)$ stored bits\", which contradicts its own definition."},
+  {"severity": "minor",
+   "quote": "$R$ is the number of rows (here $R$ is a row count, not the scalar ring)",
+   "problem": "In the paper (lines 472-475, 502-505) R is the range of the row field, so it counts rows per prefix; the array has PR rows in all, and the cyclic dealing is done \"within each prefix\", a phrase the page's item 4 leaves out. Read literally, the page's \"when $W$ divides the number of rows\" could mean W | PR, which is weaker than the paper's W | R and does not give streams of shape [P]x[R/W]x[B]."},
+  {"severity": "minor",
+   "quote": "they set the unit of cost, one pass, that those procedures must beat",
+   "problem": "The later procedures do not cost less than one pass. Interchange costs O(Vu^tau) and the butterfly layer costs O(Vd^{lambda'}), both more than O(V). What they beat is one pass per moved bit or per level, as the page's own later sentence says (\"in less than one pass per level\")."}
+ ],
+ "motivation_given": true}

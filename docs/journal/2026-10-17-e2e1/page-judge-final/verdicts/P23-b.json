@@ -1,0 +1,25 @@
+{"page": "P23",
+ "items": [
+  {"id": "S1.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page follows the paper's How: frames at sources, gates and sinks, edge operators D_vD_u^{-1}, the invariant checked at sources, along edges and across gates by R-linearity, giving D_out S_Omega D_in^{-1} and the endpoint-only route operator for every role. The route corollary itself rests on a single-path telescoping sketch (see S1.2.5)."},
+  {"id": "S1.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "This is a definition, and the page reproduces it in full: an invertible R-linear D_v on R^Omega at each source, gate and sink; 'All incidences of a gate use the same D_v'; the edge applies D_vD_u^{-1}; it also keeps the contrast that a frame mixes addresses within one array while a gate combines wires at one address. D_in and D_out are defined where they are used."},
+  {"id": "S1.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "At the sources the invariant holds by defining the logical input as g=D_in^{-1}f ('needs no preprocessing'). Along an edge the page writes out 'D_vD_u^{-1}D_u\\varphi=D_v\\varphi', which is the paper's edge step."},
+  {"id": "S1.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page gives the paper's identity sum_j c_jD_v\\varphi_j=D_v(sum_j c_j\\varphi_j), with c_j in R, from R-linearity of the common frame. It turns this into G(D_vg_1,...,D_vg_t)=D_vG(g_1,...,g_t) and concludes that the invariant continues to the sinks."},
+  {"id": "S1.2.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "With D_out defined, the identity follows 'therefore' from the invariant at the sinks, as in the paper. The step that the logical arrays at the sinks are S_Omega g is left implicit, exactly as the paper leaves it."},
+  {"id": "S1.2.5", "presence": "derived", "faithful": false,
+   "dropped": ["the route operator is the restriction of D_out S_Omega D_in^{-1} to role w when S_Omega is a signed role permutation; the page never makes this connection, so the sign epsilon_w and the cancellation of other roles' contributions are not shown"],
+   "note": "The paper reads the route operator off the identity ('In particular'). The page instead justifies it ('So ...') by telescoping the edge operators along one path 'from a source u through gates a and b to a sink v'. That path argument ignores the gates' scalar coefficients and the fact that pointwise gates mix wires, so a role's array travels along several paths. It cannot by itself produce epsilon_w or exclude other roles' contributions. The page's conclusion, including 'every role, scratch roles included', is still correct."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "On a route from a source $u$ through gates $a$ and $b$ to a sink $v$, the edges apply $D_aD_u^{-1}$, $D_bD_a^{-1}$ and $D_vD_b^{-1}$, whose product is $D_vD_u^{-1}$: the intermediate frames telescope away. So if the scalar network is a signed role permutation ... that route applies $\\varepsilon_wD_{\\mathrm{sink}(\\rho(w))}D_{\\mathrm{source}(w)}^{-1}$",
+   "problem": "The single-path product leaves out the scalar gate coefficients and treats a route as one chain of edges. In a network of mixing linear gates, such as the exchange network, a role's array reaches its sink along several paths, and contributions from other roles cancel only after summing. So the telescoping does not yield the sign epsilon_w or the signed-permutation form. The paper gets the route operator directly as the special case of D_out S_Omega D_in^{-1} with S_Omega a signed role permutation. The stated conclusion is correct."},
+  {"severity": "minor",
+   "quote": "it uses nested subspaces as frames, so that an edge costs one smaller call per unit of rank change",
+   "problem": "In the paper the subspaces are labels, not frames. The frames are invertible operators built from them (the shears Phi_{M_v}, with M_v built from label projections, or the phase operators C_U), and only the two labels on each edge are nested. The cost is one smaller call per unit of rational rank of the edge difference M_head - M_tail. That rank equals the change in label dimension except on the N negative source edges, where it is one while the dimension change is zero. So 'per unit of rank change' is imprecise."}
+ ],
+ "motivation_given": true}

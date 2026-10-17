@@ -1,0 +1,27 @@
+The tape layout reorders the address bits of an array so that each round of a [synthetic polynomial transform](synthetic-transform.md) on several axes runs as one [simultaneous butterfly layer](simultaneous-layer.md) instead of one pass per axis, which is where the transform's cost drops below the standard pass count.
+
+Write $\ell=\log_2 r$, the number of address bits of a long axis, and $D=d-1$, the number of transformed axes (not a chunk or a chunk count from the other pages). Axis $i$ has length $t_i\in\{2^{\ell-1},2^\ell\}$. $K$ is the chunk width in bits, and $\tau,\lambda'<1$ are the interchange and layer exponents. With $\boldsymbol t=(t_1,\dots,t_D)$, $F_{\boldsymbol t}^-$ is the forward transform on all $D$ axes and $F_{\boldsymbol t}^+$ its opposite. By [retained frequency order](frequency-order.md) the forward transform leaves its outputs in bit-reversed order, written $B$ here (the bit-reversal permutation on all axes), and the opposite transform consumes that order, so no reordering is executed.
+
+## Why a layout is needed
+
+[Fixed-point Gaussian dyadic records](fixed-point.md) use $\Theta(p)$ bits per coefficient, so the $T$ coefficients occupy $\Theta(Tp)$ bits and one pass of a tape machine over them costs $O(Tp)$. The transform has $\ell$ rounds, and each round applies the two-point averaging and differencing step to one address bit of every axis. Done axis by axis this is about $D\ell$ passes, and since $d\ell=O(p)$ that is $O(Tp\cdot p)$. The layer does a round on $D$ axes in $O(Tpd^{\lambda'})$ rather than $D$ passes, but it acts on the same bit of $D$ consecutive $K$-bit chunks. Axis-major storage does not provide this: the bits of different axes are far apart. The record permutation $L$, built below, moves them together once. Every later round is then a single layer <cite data-source="paper">we must place the selected bits of the participating axes at a common</cite>.
+
+## Building the layout
+
+Call an axis long if it has $\ell$ address bits and short if $\ell-1$. Put $b=(\ell-1)\bmod K$, the number of leftover low bits of an axis, and $q=\lfloor(\ell-1)/K\rfloor$, its number of whole chunks. Move to a prefix, one at a time, the top bit of each long axis and the $b$ lowest bits of each axis. What remains of each axis is exactly $q$ consecutive $K$-bit chunks. At most $D(b+1)=O(dK)$ bits move, so the moves cost $O(TpdK)$ <cite data-source="paper">listed slots, so the moves cost $O(TpdK)$.</cite>
+
+Label each chunk by its axis and its rank from the high end of the axis, so the first chunk of axis 2 is $(2,1)$. The chunks are stored as $(1,1),\dots,(1,q),(2,1),\dots,(D,q)$ and must become $(1,1),(2,1),\dots,(D,1),(1,2),\dots,(D,q)$, so that the chunks of equal rank in all axes are adjacent. Scan the target positions from left to right and, at each one except the last, exchange the chunk there with the required one if they differ. This is at most $Dq-1$ exchanges, each done by the [fast address-chunk interchange](address-interchange.md) in $O(TpK^\tau)$ even for nonadjacent chunks <cite data-source="paper">exchanges of width-$K$ address chunks, even when the chunks are</cite>. Since $DqK\le d\ell=O(p)$, the total is $O(Tp\,DqK^\tau)=O(Tp\,pK^{\tau-1})$. The prefix moves and exchanges define the record permutation $L$; recording them in reverse gives $L^{-1}$ at the same cost.
+
+## Running the rounds
+
+There are $qK$ rounds on chunk bits and $b+1$ on prefix bits, $\ell$ in all. In a chunk round the selected bit has the same offset in the $D$ consecutive chunks of equal rank, so one layer performs it. The cost is $O(Tpd^{\lambda'})$ per round and $O(Tp\ell d^{\lambda'})$ in total <cite data-source="paper">$O(Tpd^{\lambda'})$ per round and $O(Tp\ell d^{\lambda'})$ in total.</cite> A prefix round processes at most $D\le d$ bits individually, each in $O(Tp)$. There are at most $b+1\le K$ such rounds, so they cost $O(TpdK)$.
+
+Adding the three costs, the moves, exchanges and rounds give $O(Tp[dK+pK^{\tau-1}+\ell d^{\lambda'}])$. Here $K^{\tau-1}<1$ and $d^{\lambda'}<d$ are the savings over $D\ell$ passes.
+
+## Error
+
+Each round is the exact contraction $\mathcal H$ (which does not increase the norm of an error), the signed coefficient permutation $J_E$, and one truncation $Q_p$. Truncation toward zero is odd and acts separately on each real and imaginary part, so for the array $z$ entering the round $J_EQ_p(\mathcal Hz)=Q_p(J_E\mathcal Hz)$: the computed round equals one truncation after the exact round. That truncation moves each entry by less than $\sqrt2\,2^{-p}$, so by the triangle inequality each round adds less than $\sqrt2\,2^{-p}$ to the error. The permutations in $L$ are isometries and add none. Starting from zero error, the $\ell$ rounds leave error less than $\sqrt2\,\ell\,2^{-p}$ <cite data-source="paper">zero error, at most $\ell$ rounds therefore</cite>.
+
+## Which operator is computed
+
+Arithmetic executed on named slots after $L$ is the logical operation conjugated by $L$. The forward procedure first moves records by $L$ and then runs $BF_{\boldsymbol t}^-$, so its operator is $(LBF_{\boldsymbol t}^-L^{-1})L=LBF_{\boldsymbol t}^-$. The opposite procedure runs its arithmetic and then restores the order by $L^{-1}$, so its operator is $L^{-1}(LF_{\boldsymbol t}^+B^{-1}L^{-1})=F_{\boldsymbol t}^+B^{-1}L^{-1}$. Both therefore have error less than $\sqrt2\,\ell\,2^{-p}$ and cost $O(Tp[dK+pK^{\tau-1}+\ell d^{\lambda'}])$, including building and undoing the layout.

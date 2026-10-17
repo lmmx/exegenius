@@ -1,0 +1,133 @@
+{
+ "page": "P18",
+ "items": [
+  {
+   "id": "S1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page sets up the call at parameter $mf$ making $s$ calls at parameter $f$ on volume $V/W$, writes the interchange recurrence $\\mathcal C(mf)\\le\\frac{s}{W}\\mathcal C(f)+O(1)$ and solves it to $O(Vf^\\tau)$ by the paper's geometric-sum case split, and gives the layer recurrence, leaving its solution to the layer page. This matches eq. (swap-recurrence) and the layer recurrence in the paper."
+  },
+  {
+   "id": "S1.0",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "padding each prefix's row count to a multiple of $W$ (or a row field divisible by $W^k$), so that the $W$ role streams really have equal volume $V/W$"
+   ],
+   "note": "Derived from the mechanism: rows are dealt into $W$ role streams of volume $V/W$, and each edge's frame change costs 'one call at parameter $f$ on its stream per unit of rank', so 'the call makes $s$ calls at parameter $f$, each on volume $V/W$'. This is the paper's reasoning (Prop. power-interchange, 'The number of recursive calls is the sum of the edge ranks, exactly $s$')."
+  },
+  {
+   "id": "S1.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the exchange map $(X_a,Y_a)\\mapsto(-Y_a,X_a)$ on banks indexed by $a\\in\\mathcal T^3$",
+    "restoration of every scratch wire whatever its initial value"
+   ],
+   "note": "Only cited as 'a fixed bit or complex [exchange network](exchange-network.md)' with $W$ wires; what the network computes is not stated."
+  },
+  {
+   "id": "S1.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "one common frame on all incidences of a gate, which commutes with the pointwise gates",
+    "intermediate frames cancel, so a route from $w$ to $\\rho(w)$ applies only $D_{\\mathrm{sink}(\\rho(w))}D_{\\mathrm{source}(w)}^{-1}$ and its scalar sign"
+   ],
+   "note": "Cited as 'Each vertex carries a [frame](array-frames.md)', and the page mentions 'each route's endpoint frames'. The frame identity itself is not stated."
+  },
+  {
+   "id": "S1.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the exact loss ratios $L_{\\rm b}/N=100/539$, $L_{\\rm c}/N=101/539$ behind '$2L<N$'",
+    "nondegeneracy of the subspace labels"
+   ],
+   "note": "The page sketches the paper's telescoping count correctly: a baseline of $m$ per wire, a saving of $2N$ from the data banks' endpoints, $+N$ for the bit network's negative source projections and $+2L$ for shrinking edges. Para. 8 turns this into the deficits $(N-2L)/(Wm)$ and $(2N-2L)/(Wm)$. The inequality $2L<N$ is only asserted."
+  },
+  {
+   "id": "S1.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The full chain is given: $\\eta$ from the rank counts, both $\\eta$ above $20\\cdot2^{-50}$, $\\ln m<20$, and $m^{1-2^{-50}}>m(1-2^{-50}\\ln m)>m(1-20\\cdot2^{-50})>m(1-\\eta)=s/W$, so $\\tau=\\sigma=1-2^{-50}$ work for both networks. This follows the paper and adds the tangent-line justification."
+  },
+  {
+   "id": "S1.4.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Defines $\\eta=(Wm-s)/(Wm)$, reduces it by the rank counts to $(N-2L)/(Wm)$ (bit) and $(2N-2L)/(Wm)$ (complex), and quotes the exact values $339/22587335000000$ and $73/19906842167500$. I checked both against the paper's $W_{\\rm b},W_{\\rm c},s_{\\rm b},s_{\\rm c}$. The final arithmetic cannot be redone from the page, which never gives $W$ or $L$."
+  },
+  {
+   "id": "S1.4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Both exceed $20\\cdot2^{-50}\\approx1.8\\cdot10^{-14}$': the threshold is evaluated numerically, so comparing it with the explicit fractions ($\\approx1.5\\cdot10^{-11}$ and $3.7\\cdot10^{-12}$) is immediate."
+  },
+  {
+   "id": "S1.4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Since $m<2^{20}$, $\\ln m<20\\ln 2<20$', with $m=10^6$ given earlier on the page. This is the paper's step."
+  },
+  {
+   "id": "S1.4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page gives the chain $m\\exp(-2^{-50}\\ln m)>m(1-2^{-50}\\ln m)>m(1-20\\cdot2^{-50})>m(1-\\eta)$ 'as the exponential lies above its tangent at $0$', which justifies the paper's first strict inequality."
+  },
+  {
+   "id": "S1.4.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Hence $\\tau=\\sigma=1-2^{-50}$ gives $s/W<m^\\tau$ (bit) and $s/W<m^\\sigma$ (complex)'. This follows from the chain for either $\\eta$. Positivity of the exponent is left implicit."
+  },
+  {
+   "id": "S1.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "restriction of the recursion to widths $f=m^k$ in radix-$q$ digits with a row field divisible by $W^k$",
+    "the reduction to arbitrary $u$-bit chunks (Lemma chunk-swap) giving $O(Vu^\\tau)$",
+    "the XOR (shear) form of the intermediate steps and the two linear updates turning the shear into an interchange"
+   ],
+   "note": "The page derives the power-width interchange bound ('So an interchange costs $O(Vf^\\tau)$') from the recurrence, including the fixed-tape stack schedule, as in Prop. power-interchange. The general $u$-bit statement and its link are not on the page."
+  },
+  {
+   "id": "S1.6",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the operator: $H_0$ tensored over one bit of each of $D\\le d$ chunks of $K$ bits at a common offset, acting coefficientwise on polynomial records",
+    "exact evaluation followed by a single truncation $Q_p$",
+    "the leaf bound $e^\\sigma d^{\\beta(1-\\sigma)}$ and the condition $\\max\\{\\lambda,\\sigma+\\beta(1-\\sigma)\\}<\\lambda'$"
+   ],
+   "note": "The page gives the layer recurrence (matching the paper's $F(e)\\le(s/W)F(e/m)+O((eK)^\\tau+1)$, $F(e)=O(e)$ for $e<d^\\beta$) and says the layer page 'obtains cost $O(Vd^{\\lambda'})$ for a fixed $\\lambda'<1$'. It does not show the result."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "A call at parameter $mf$, with $m=10^6$ the label-space dimension, splits each chunk into $m$ slots of parameter $f$.",
+   "problem": "This is right for interchange, where each chunk of $e$ digits becomes $m$ fields of $e/m$ digits. For the layer, whose parameter counts selected axes, the paper splits the $e$ active chunks into $m$ slots of $e/m$ chunks each; no chunk is split ('Split it into $m$ consecutive slots, each containing $e/m$ chunks')."
+  },
+  {
+   "severity": "minor",
+   "quote": "frame changes are row additions costing $O(V((fK)^\\tau+1))$ at a node through chunk interchanges",
+   "problem": "The layer's frame changes are products of translation kernels $aI+bX_v$, and the $s$ recursive calls carry them out. In the paper, the $O(V((eK)^\\tau+1))$ node overhead covers the binary changes of basis (the row additions), their inverses, the scalar gates, the endpoint corrections and the reassembly of the banks. It is not the cost of the frame changes themselves."
+  },
+  {
+   "severity": "minor",
+   "quote": "So an interchange costs $O(Vf^\\tau)$",
+   "problem": "Unrolling '$\\log_m f$ levels' proves this only for $f=m^k$ radix-$q$ digits with a row field divisible by $W^k$, which is the hypothesis of Prop. power-interchange. The paper needs Lemma chunk-swap to reach arbitrary widths, and the page states the bound with no restriction."
+  }
+ ],
+ "motivation_given": true
+}

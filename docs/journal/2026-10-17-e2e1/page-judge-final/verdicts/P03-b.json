@@ -1,0 +1,17 @@
+{"page": "P03",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "The multiplier is not the source of the saving. It is called on two kinds of product.",
+   "problem": "The list of uses is incomplete. Besides the signed-packing ring products and the chirp products, the paper uses the established multiplier for the two final products by S in assembly ('The established integer multiplier performs the two products by $S$ in $O(p\\log p)$ time per entry', l. 4745) and for 'the shorter integer records' of the Gaussian-resampling section (l. 3536-3538). The twist and scalar pointwise products also use 'a fixed number of exact products on $O(p)$-bit component numerators' (l. 4395, 4897). No bound changes."},
+  {"severity": "minor",
+   "quote": "The second kind is the chirp numerators, which have $O(p)$ bits and are squared and multiplied directly",
+   "problem": "The chirp numerators are not themselves squared. Each one is computed modulo $2r$ as a sum of $d$ terms $s_i j_i^2(r/t_i)$, and the multiplier forms the squares $j_i^2$ and the products with $s_i$ (l. 4421-4427, 4891-4895). The numerators are the output of those products, not their input."},
+  {"severity": "minor",
+   "quote": "each call is an ordinary subroutine call on records of $O(rp)$ bits, fewer than the input, so it is not a call of the improved algorithm on a smaller input",
+   "problem": "This is a non sequitur: being shorter than the input does not stop a call from being a recursive call on a smaller input, which is exactly what a recursive call is. The paper's reason is that the calls go to a different, previously established algorithm: 'These calls use the previously established multiplier on records of length $O(rp)=o(n)$; they do not call the improved algorithm being constructed' (l. 4904-4906). The paper also gives the size as $o(n)$, which is stronger than 'fewer than the input'."},
+  {"severity": "minor",
+   "quote": "where $r$ is the record length and $p$ the number of fractional bits",
+   "problem": "$r=2^\\ell$ is the degree of the modulus $y^r+1$, i.e. the number of coefficients in a polynomial record. It is not the record's length in bits: the paper calls those records 'of length $O(rp)$' (l. 4905), and each packed integer has about $4pr$ bits (l. 3249). As written, 'record length' clashes with the paper's own use of the word."}
+ ],
+ "motivation_given": true}

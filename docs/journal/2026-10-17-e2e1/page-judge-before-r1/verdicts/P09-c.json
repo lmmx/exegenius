@@ -1,0 +1,23 @@
+{"page": "P09",
+ "items": [
+  {"id": "S1.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page follows the paper's How: it sets up frames, keeps the invariant 'stored array = D_v applied to the logical array' at sources, along edges and across gates, and arrives at D_out S_Omega D_in^{-1}. The route corollary (S1.2.5) is argued by telescoping along one path rather than as a special case of the identity; see that item."},
+  {"id": "S1.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "This is a definition, and the page gives it in full as the paper does: an invertible R-linear D_v on R^Omega at each source, gate and sink, 'All incidences of a gate use the same D_v', and an edge applies D_vD_u^{-1}. It also keeps the paper's contrast between a frame mixing addresses within one array and a gate combining wires at a fixed address."},
+  {"id": "S1.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "At sources the invariant holds by definition, using D_in = (+)_w D_source(w) and g = D_in^{-1} f 'which needs no preprocessing'. Along an edge the page writes out D_vD_u^{-1}D_u phi = D_v phi, which is the paper's argument made explicit."},
+  {"id": "S1.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page uses the common frame at the gate, gate outputs as R-combinations with c_j in R, and R-linearity: sum_j c_j D_v phi_j = D_v(sum_j c_j phi_j). From this it concludes G(D_vg_1,...,D_vg_t)=D_vG(g_1,...,g_t) and that the invariant reaches the sinks, exactly as the paper does."},
+  {"id": "S1.2.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page defines D_out = (+)_w D_sink(w) and concludes 'the implemented operator is therefore D_out S_Omega D_in^{-1}' from the invariant at the sinks and g = D_in^{-1} f. Like the paper, it leaves implicit that the logical arrays evolve under the plain pointwise network S_Omega."},
+  {"id": "S1.2.5", "presence": "derived", "faithful": false,
+   "dropped": ["the specialization of the identity D_out S_Omega D_in^{-1} to S_Omega acting as a signed permutation of whole arrays (input array of role w goes to eps_w times itself at role rho(w)), which is the paper's 'In particular' and the source of eps_w",
+               "the gates on the route combine several wires' arrays, so the route's operator is not just the product of edge operators along one path"],
+   "note": "The paper gets the route formula 'In particular' from the identity just displayed. The page instead telescopes the edge operators along one path ('the edges apply D_aD_u^{-1}, D_bD_a^{-1} and D_vD_b^{-1}, whose product is D_vD_u^{-1}') and then writes 'So ... applies eps_w D_sink(rho(w)) D_source(w)^{-1}'. This ignores what the gates do along the way and never says where eps_w comes from. The result is correct, and the page does state it 'for every role, scratch roles included'."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "On a route from a source $u$ through gates $a$ and $b$ to a sink $v$, the edges apply $D_aD_u^{-1}$, $D_bD_a^{-1}$ and $D_vD_b^{-1}$, whose product is $D_vD_u^{-1}$: the intermediate frames telescope away. So if the scalar network is a signed role permutation ... that route applies $\\varepsilon_wD_{\\mathrm{sink}(\\rho(w))}D_{\\mathrm{source}(w)}^{-1}$",
+   "problem": "Telescoping the edge operators along one path does not justify the 'So'. The gates on the path also mix in other wires' arrays and multiply by coefficients, and the sign eps_w comes from the net scalar map, not from the edges. The paper derives the route formula as a special case of D_out S_Omega D_in^{-1}: S_Omega sends role w's array to eps_w times itself at role rho(w). A path-sum version would also work if it noted that gate coefficients commute with the frames and sum to eps_w. The claim is correct and follows in one line from the identity the page displays."}
+ ],
+ "motivation_given": true}

@@ -1,0 +1,14 @@
+{"page": "P10",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "The kernel $C$ is obtained from the two-point step of [Butterflies and the fast transform](butterfly.md) by conjugating with $\\mathsf S$ and rescaling",
+   "problem": "The relation is $H_0=b\\,\\mathsf SC\\mathsf S$ (paper eq. phase-basic-identities, line 1827), with $\\mathsf S$ applied on both sides. That is not conjugation, which would be $\\mathsf SC\\mathsf S^{-1}$, and $\\mathsf S^{-1}=\\operatorname{diag}(1,-i)\\neq\\mathsf S$. Inverted, $C=2a\\,\\mathsf S^{-1}H_0\\mathsf S^{-1}$. The displayed formula is correct; only the word is wrong."},
+  {"severity": "minor",
+   "quote": "differs from the butterfly step only by phase factors",
+   "problem": "In $H_0=b\\,\\mathsf SC\\mathsf S$ the scalar $b=\\frac{1-i}{2}=e^{-i\\pi/4}/\\sqrt2$ has modulus $1/\\sqrt2$. $C=H\\mathsf SH$ is unitary while $H_0=H/\\sqrt2$ is not, so they differ by phases and also by a rescaling, as the page itself says later ('and rescaling')."},
+  {"severity": "minor",
+   "quote": "The coefficients $a$ and $b$ are Gaussian dyadic (real and imaginary parts are dyadic rationals), so $C$ and its inverse $C^{-1}=bI+aX$ are exact on fixed-point records.",
+   "problem": "Gaussian dyadic coefficients only mean that $C$ and $C^{-1}$ preserve arrays over $\\mathbb Z[i,1/2]$ (paper lines 1195-1198, 1830). Each application of $a$ or $b$ adds a fractional bit, so the result is not exact on a fixed $p$-bit record. The paper gets exactness by widening the format with guard bits whose growth it bounds by $\\lceil C_0d^{C_1}\\rceil=o(p)$, and then applies one final truncation $Q_p$ (lines 1803-1804, 2741-2750)."}
+ ],
+ "motivation_given": true}

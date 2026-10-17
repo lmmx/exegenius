@@ -1,0 +1,21 @@
+{"page": "P09",
+ "items": [
+  {"id": "S1.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page keeps the invariant 'stored array = D_v applied to the logical array' and checks it at sources, along edges (\"D_vD_u^{-1}D_u\\varphi=D_v\\varphi\") and across gates by R-linearity. It then concludes D_out S_Omega D_in^{-1} and the endpoint-only route operator, as the paper does at lines 785-825."},
+  {"id": "S1.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "This is a construction, and the page gives all of it: an invertible R-linear D_v on R^Omega at each source, gate and sink; frames mixing addresses within one array, set against gates combining wires at one address; the same D_v on all incidences of a gate; and an edge applying D_vD_u^{-1}."},
+  {"id": "S1.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page sets D_in = \\bigoplus_w D_source(w) and g = D_in^{-1}f, so the invariant holds at the sources by definition and needs no preprocessing. It shows the edge step explicitly: \"the stored array D_u\\varphi becomes D_vD_u^{-1}D_u\\varphi=D_v\\varphi\"."},
+  {"id": "S1.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Like the paper, the page uses the common frame at the gate and R-linearity, \"\\sum_j c_jD_v\\varphi_j=D_v(\\sum_j c_j\\varphi_j)\" with c_j in R, to get G(D_vg_1,...,D_vg_t)=D_vG(g_1,...,g_t), so the invariant reaches the sinks."},
+  {"id": "S1.2.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page defines D_out = \\bigoplus_w D_sink(w) and concludes \"the implemented operator is therefore D_out S_Omega D_in^{-1}\" from the invariant at the sinks, with g = D_in^{-1}f. This is the paper's own one-line deduction."},
+  {"id": "S1.2.5", "presence": "derived", "faithful": true, "dropped": ["the explicit specialization of D_out S_Omega D_in^{-1} to a signed role permutation, which is where the sign epsilon_w comes from"],
+   "note": "The page argues by telescoping the edge operators along a route (\"whose product is D_vD_u^{-1}: the intermediate frames telescope away\"). It does not take the special case of the identity it has just derived, as the paper does. The argument agrees with the plan's 'frames telescope along each route' and is sound once the gate coefficients are included. It keeps the paper's 'for every role, scratch roles included'."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "the edges apply $D_aD_u^{-1}$, $D_bD_a^{-1}$ and $D_vD_b^{-1}$, whose product is $D_vD_u^{-1}$: the intermediate frames telescope away. So if the scalar network is a signed role permutation ... that route applies $\\varepsilon_wD_{\\mathrm{sink}(\\rho(w))}D_{\\mathrm{source}(w)}^{-1}$",
+   "problem": "The product shown leaves out the gate actions between the edges. At gates a and b the route's array is combined with other wires' arrays, with scalar coefficients, so the edge product alone is not the route operator and does not produce the sign epsilon_w. A correct reading needs the frames to commute with the gates, with the scalar net coefficient (epsilon_w, or 0 for other sinks) collected in the middle. The paper gets this directly as the special case of D_out S_Omega D_in^{-1} (paper lines 813-822)."}
+ ],
+ "motivation_given": true}

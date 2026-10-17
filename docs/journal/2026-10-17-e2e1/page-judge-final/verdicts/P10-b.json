@@ -1,0 +1,14 @@
+{"page": "P10",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "a $2\\times 2$ matrix that squares to the bit flip and differs from the butterfly step only by phase factors",
+   "problem": "In $H_0=b\\,\\mathsf SC\\mathsf S$ the scalar $b=\\frac{1-i}{2}$ has modulus $1/\\sqrt2$, so $H_0$ and $C$ differ by phases and a rescaling by $1/\\sqrt2$, not by phase factors alone ($C$ is unitary and $H_0$ is not). The page itself later says 'and rescaling'."},
+  {"severity": "minor",
+   "quote": "The kernel $C$ is obtained from the two-point step of [Butterflies and the fast transform](butterfly.md) by conjugating with $\\mathsf S$ and rescaling",
+   "problem": "$\\mathsf S C\\mathsf S$ is not a conjugation, since $\\mathsf S^{-1}=\\operatorname{diag}(1,-i)\\ne\\mathsf S$; recovering $C$ from $H_0$ gives $C=b^{-1}\\mathsf S^{-1}H_0\\mathsf S^{-1}$. The paper (eq. phase-basic-identities, l. 1827) just states $H_0=b\\mathsf SC\\mathsf S$ by direct multiplication, which the displayed identity on the page gets right."},
+  {"severity": "minor",
+   "quote": "The coefficients $a$ and $b$ are Gaussian dyadic (real and imaginary parts are dyadic rationals), so $C$ and its inverse $C^{-1}=bI+aX$ are exact on fixed-point records.",
+   "problem": "Multiplying by $a$ or $b$ halves the value, so a record with a fixed number of fractional bits needs one more bit for $C$ to be exact. The paper says that $\\mathcal C_U$ and its inverse preserve arrays over $\\mathbb Z[i,1/2]$ (l. 1196-1197), and that intermediate values are exact Gaussian dyadics with a single truncation $Q_p$ at the end of the layer (l. 111-113, 1937-1940). It does not say they are exact on fixed-width fixed-point records."}
+ ],
+ "motivation_given": true}

@@ -1,0 +1,11 @@
+{"page": "P20",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "In the variant called decimation in frequency, each stage pairs the first-half entries with the second-half entries",
+   "problem": "Read literally this has every stage use the same pairing of the whole length-t axis. In the paper (lines 2832-2837) only the first level pairs z_k with z_{k+t/2}. Later levels apply the length-t/2 procedure separately within each branch, so each stage pairs the first and second halves of each current block."},
+  {"severity": "minor",
+   "quote": "a way of storing a list of complex numbers so that multiplying by a root of unity costs only a signed rotation of the list",
+   "problem": "This holds only for roots of unity that are powers of y, such as the transform roots omega_t = y^{2r/t}. Multiplying by a scalar complex root of unity in R_r is ordinary coefficientwise arithmetic. The paper (lines 82-84, 2782-2784) speaks only of multiplication by y^a, and the page's own later sections say the same."}
+ ],
+ "motivation_given": true}

@@ -1,0 +1,11 @@
+{"page": "P34",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Executing such a permutation is a sort of data on a tape, costing time proportional to the line length times a logarithm of it",
+   "problem": "The paper (lines 3692-3693) gives each label-and-sort operation as O(tp log t), an upper bound for a line of t records of O(p) bits each. The page leaves out the precision factor p and turns the O-bound into 'proportional to'."},
+  {"severity": "minor",
+   "quote": "The middle transform has its output relabelled, which is a single use with nothing to cancel against.",
+   "problem": "Q is not used once. It occurs in every transform of the convolution chain, since RF_s = 2^gamma B_0 Q F_t A (eq. no-sort-tensor) appears in both forward transforms and, conjugated, in the opposite one. Q cannot cancel the way R does because the linewise map B_0 = D'J'C sits between Q and the pointwise product, and B_0 does not commute with coordinate permutations. The paper simply absorbs Q into the chirp convolution (eq. permuted-chirp) and gives no 'single use' reason."}
+ ],
+ "motivation_given": true}

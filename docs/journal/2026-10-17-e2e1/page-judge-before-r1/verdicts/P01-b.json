@@ -1,0 +1,274 @@
+{
+ "page": "P01",
+ "items": [
+  {
+   "id": "S1.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The bit count is fully derived: 's_b=(W_b m-2N+2L_b)+N=W_b m-(N-2L_b)<W_b m'. The page uses L/N<1/2 for this. The complex count s_c=W_c m-2N+2L_c<W_c m is stated with a link to Binary phase frames, as the assignment asks."
+  },
+  {
+   "id": "S1.3.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page writes the form as x.y-(1/9)(sum x)(sum y), shows it is nondegenerate (all-ones vector scaled by -91/9, zero-sum vectors fixed) and gets <t_S,t_S'>=|S∩S'|-1 from 'integer dot product |S∩S'| and entry sum 3'. Over F_2 it correctly uses |S∩S'| mod 2 and checks that the self-norm is 2 or 1 and that neighbours are orthogonal in both definitions."
+  },
+  {
+   "id": "S1.3.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page sums the terminal labels explicitly: 'Source dimensions total N and sink dimensions Nm+N(m-1)+(W-2N)m=Wm-N'."
+  },
+  {
+   "id": "S1.3.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'A wire enters and leaves each gate with that gate's label, so its signed changes telescope to sink minus source dimension; over all wires they total Wm-2N.' It then adds 2L to get the absolute sum, matching the paper."
+  },
+  {
+   "id": "S1.3.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page defines A, P, B=P^⊥∩A and K (the paper's Q). It splits A⊗F into four orthogonal pieces to identify (P⊗<t>)^⊥ with B'=(B⊗F)⊥(P⊗t^⊥), with A'=A⊗F and P'=P⊗<t>, and checks the stage-1 start (U_a, 0, with B=0) and the stage-3 end (F, U_a^⊥)."
+  },
+  {
+   "id": "S1.3.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the labels follow the physical banks: stage 2 runs the inverse schedule with the logical banks exchanged, and side wires still join neighbours because the relation is symmetric"
+   ],
+   "note": "The centre-wire label sequence 0→B⊗F(1)→A⊗F(3)→B⊗F(4)→A⊗F(6)→F, together with the splitting A=B⊥P, shows the single return dropping P⊗F of dimension h. The page never says the X/Y banks are physical rather than logical, which matters at stage 2."
+  },
+  {
+   "id": "S1.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the per-edge orthogonal residuals and their dimensions ((a-1)(h-1), h-1, (a-1)h, a-1, (a-1)(h-1)+1, h-2, 1, ah(f-1), with a=h^{j-1}, f=h^{3-j})",
+    "for the binary label space, every nonzero residual is nondegenerate and nonalternating and so has an orthonormal basis (S1.3.6.13-14)"
+   ],
+   "note": "The page lists the label of every wire type at each time and says 'every arrow is an inclusion except centre 3→4', justifying the delicate side 2→5 by t_X⊥t_Y. It then counts L=Ich from I=3v^2 invocations. The residual table is not given, and the orthonormal-basis claim of the lemma is missing entirely."
+  },
+  {
+   "id": "S1.3.6.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the per-edge residual table",
+    "the parameters a=dim A=h^{j-1} and f=h^{3-j} used for the residual dimensions"
+   ],
+   "note": "The page derives L=Ich from the label sequence: 'Each of the I=3v^2 invocations (v^2 per stage) has one such edge per centre wire, so the losses are L_b=Ic_b h'. It never tabulates the residuals or introduces a and f."
+  },
+  {
+   "id": "S1.3.6.2",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "X in→2 residual B⊗t_X^⊥ of dimension (a-1)(h-1)",
+    "X 2→3 residual P⊗t_X^⊥ of dimension h-1"
+   ],
+   "note": "The page lists the X labels 'A⊗<t_X>→(B⊗F)⊥(P⊗<t_X>) (2)→A⊗F (3,6,7)', which shows that 3→6 and 6→7 add nothing, and asserts the inclusions. It never names the residuals or gives their dimensions."
+  },
+  {
+   "id": "S1.3.6.3",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "Y 0→1 residual B⊗t_Y^⊥ of dimension (a-1)(h-1)",
+    "Y 4→5 residual P⊗t_Y^⊥ of dimension h-1"
+   ],
+   "note": "The Y labels 'B⊗<t_Y> (0)→B⊗F (1,4)→(B⊗F)⊥(P⊗t_Y^⊥) (5)' are on the page, so in→0 and 1→4 visibly add nothing. The residuals and their dimensions are not given."
+  },
+  {
+   "id": "S1.3.6.4",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "centre source→1 residual B⊗F of dimension (a-1)h"
+   ],
+   "note": "The page shows '0→B⊗F (1)' on the centre wire, but it never names this as the residual or gives its dimension (a-1)h. That needs dim B=a-1, which the page does not state."
+  },
+  {
+   "id": "S1.3.6.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "centre 1→3 and 4→6 also have residual P⊗F (of dimension h, increasing)"
+   ],
+   "note": "'every arrow is an inclusion except centre 3→4, dropping P⊗F of dimension h'. This follows from the labels A⊗F(3)→B⊗F(4) and the splitting A=B⊥P. The matching increasing residuals on 1→3 and 4→6 are not named."
+  },
+  {
+   "id": "S1.3.6.6",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "side source→0 residual B⊗<t_Y> of dimension a-1",
+    "side 0→2 residual (B⊗t_Y^⊥)⊥(P⊗<t_X>) of dimension (a-1)(h-1)+1"
+   ],
+   "note": "The side labels '0→B⊗<t_Y> (0)→(B⊗F)⊥(P⊗<t_X>) (2)' are on the page, with the inclusion asserted. The residuals and their dimensions are not."
+  },
+  {
+   "id": "S1.3.6.7",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "side 2→5 residual P⊗<t_X,t_Y>^⊥ of dimension h-2",
+    "side 5→7 residual P⊗<t_Y> of dimension 1"
+   ],
+   "note": "The page proves the inclusion for side 2→5 (see S1.3.6.9) but never computes the complement <t_X,t_Y>^⊥ or its dimension h-2, or the 5→7 residual."
+  },
+  {
+   "id": "S1.3.6.8",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "scratch last→sink residual (A⊗F)⊗Q^⊥ of dimension ah(f-1), with Q^⊥ taken in the whole future tensor space"
+   ],
+   "note": "The centre and side lines end 'A⊗F (6)→F' and 'A⊗F (7)→F', with K suppressed, so the enlargement to F is shown as an inclusion. The residual and its dimension are not given."
+  },
+  {
+   "id": "S1.3.6.9",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'side 2→5 needs <t_X>⊂t_Y^⊥, true as t_X⊥t_Y'. The neighbour orthogonality was derived earlier, so this matches the paper's argument."
+  },
+  {
+   "id": "S1.3.6.10",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'The same splitting shows every arrow is an inclusion except centre 3→4, dropping P⊗F of dimension h'. This rests on the four-piece decomposition from A=B⊥P and F=<t>⊥t^⊥, as in the paper, and the page also checks that stage 1 starts and stage 3 ends at the terminal labels."
+  },
+  {
+   "id": "S1.3.6.11",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'A wire enters and leaves each gate with that gate's label, so its signed changes telescope to sink minus source dimension; over all wires they total Wm-2N'. The source and sink totals are computed explicitly."
+  },
+  {
+   "id": "S1.3.6.12",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page derives 'If decreasing edges lose L dimensions, absolute changes total Wm-2N+2L' and gets L=Ic h from one decreasing edge of loss h per centre wire per invocation."
+  },
+  {
+   "id": "S1.3.6.13",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "over F_2 every nonzero residual is nondegenerate and contains a norm-one vector (coordinate units outside small supports, tensored), hence is nonalternating"
+   ],
+   "note": "The page has no discussion of residuals over F_2 being nonalternating."
+  },
+  {
+   "id": "S1.3.6.14",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "every nondegenerate nonalternating binary symmetric space has an orthonormal basis (split off unit lines, absorb alternating planes via w+a, w+b, w+a+b)"
+   ],
+   "note": "The orthonormal basis of binary residuals, which the complex phase interface needs, is not on the page."
+  },
+  {
+   "id": "S1.3.9",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'L_b/N=3c_b h/v=30000/161700=100/539; likewise L_c/N=30300/161700=101/539. Both are below 1/2.' This arithmetic is correct."
+  },
+  {
+   "id": "S1.3.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page assigns projections, with -Π_{U_a} at the X_a sources. It shows Π_V-Π_U has rank dim V-dim U (identity on V∩U^⊥, zero on U⊥V^⊥), identifies the N exceptional edges 2Π_{U_a} of rank one, checks the endpoint differences equal Id, and gets s_b=W_b m-N+2L_b<W_b m, citing the paper's numerical value."
+  },
+  {
+   "id": "S1.3.7.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The construction is given in full: 'A vertex labelled U gets the projection Π_U onto U along U^⊥, except sources: −Π_{U_a} at X_a, else 0.'"
+  },
+  {
+   "id": "S1.3.7.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Endpoint differences (Π_{U_a^⊥}+Π_{U_a} from source X_a to sink Y_a, else Id−0) all equal Id'. The routing X_a→Y_a is implicit rather than named as ρ, but the identity is checked on every role."
+  },
+  {
+   "id": "S1.3.7.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'s_b=(W_b m−2N+2L_b)+N=W_b m−(N−2L_b)'. This combines the absolute dimension sum with the N extra rank-one source edges."
+  },
+  {
+   "id": "S1.3.7.9",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "The numerical value 177176569088785861287000000 appears only inside the cited paper passage. It is not computed on the page, though it is correct."
+  },
+  {
+   "id": "S1.3.7.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'For U⊂V, Π_V−Π_U (identity on V∩U^⊥, zero on U⊥V^⊥) has rank dim V−dim U, as does its negative.' Nondegeneracy of the labels, which the paper names here, is implicit in the page's definition of Π_U along U^⊥."
+  },
+  {
+   "id": "S1.3.7.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Only X_a's first edge differs'. Every other vertex carries Π of its label, the zero sources having label 0, so the N exceptions are exactly the X_a source edges."
+  },
+  {
+   "id": "S1.3.7.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'at stage 1 its first gate has label U_a, so 2Π_{U_a} has rank one where the dimension change is zero'. The page established B=0 at stage 1 earlier."
+  },
+  {
+   "id": "S1.3.7.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'The deficit W_b m−s_b=N−2L_b=339/539 N is positive because L_b/N<1/2'. The arithmetic is correct."
+  },
+  {
+   "id": "S1.3.7.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "For X_a the page gives Π_{U_a^⊥}+Π_{U_a}=Id; for all other roles it gives 'Id−0'. This matches the paper."
+  },
+  {
+   "id": "S1.3.8",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "The page states only the result s_c=W_c m-2N+2L_c<W_c m, with a link to Binary phase frames. The assignment places this derivation on that page."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "nested along every edge, whose dimension changes count each edge's *smaller calls*",
+   "problem": "In the bit network the smaller calls are counted by the rational rank of the matrix differences, not by the dimension changes. On the N first edges of the X_a wires the dimension change is zero but the rank is one, so s_b exceeds the sum of absolute dimension changes by N. The page itself corrects this later ('s_b=(W_b m-2N+2L_b)+N'); the paper counts calls as the rank of the edge differences."
+  }
+ ],
+ "motivation_given": true
+}

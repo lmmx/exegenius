@@ -1,0 +1,13 @@
+{"page": "P21",
+ "items": [
+  {"id": "S5.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes both inputs as radix-2^b polynomials with q digits, shows the product degree 2q-2 is below S so the cyclic convolution modulo x^S-1 equals the ordinary product, and bounds c_j by q(2^b-1)^2<2^{3b}. It uses the paper's parameters (b=ceil(log2 n), 4n/b<=T<8n/b, T/2<S<T), matching lines 4055-4145 and 4183-4193."},
+  {"id": "S5.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes u and v as sums of q=ceil(n/b) digits in [0,2^b), padded with leading zeros, and argues 'Each digit polynomial has degree at most q-1, so the product polynomial has degree at most 2q-2', which is the paper's claim with its one-line reason."},
+  {"id": "S5.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Each link of 2q-2<2n/b<=T/2<S is justified: 'q<n/b+1 and so 2q-2<2n/b', '2n/b<=T/2 because T>=4n/b', and T/2<S from the parameter choice. The page then explains that x^S=1 folds x^j onto x^{j mod S}, so no exponent at most 2q-2<S folds. This is faithful to the paper's 'no nonzero wraparound'."},
+  {"id": "S5.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page argues 'Each c_j is a sum of at most q products u_iv_k, each between 0 and (2^b-1)^2', which gives 0<=c_j<=q(2^b-1)^2, then uses q<=n<=2^b to bound this below 2^b*2^{2b}=2^{3b}, exactly as in eq. (capacity) of the paper."}
+ ],
+ "errors": [],
+ "motivation_given": true}

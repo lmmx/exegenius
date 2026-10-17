@@ -1,0 +1,63 @@
+{
+ "page": "P23",
+ "items": [
+  {
+   "id": "S1.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page builds the invariant at sources, along edges and across gates and concludes the network applies $D_{\\rm out}\\,\\mathsf S_\\Omega\\,D_{\\rm in}^{-1}$, as the paper does (lines 787-825). The one weak spot is the route corollary: its stated reason is a single-path telescoping (see S1.2.5)."
+  },
+  {
+   "id": "S1.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "This is a definition, and the page gives all of it: an invertible $R$-linear $D_v$ on $R^\\Omega$ at each source, gate and sink, the same $D_v$ on all incidences of a gate, and $D_vD_u^{-1}$ on an edge. It also keeps the paper's contrast that a frame mixes addresses within one array while a gate combines wires at a fixed address."
+  },
+  {
+   "id": "S1.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "At the sources the invariant holds by definition via $g=D_{\\rm in}^{-1}f$ ('needs no preprocessing'). Along an edge the page shows it explicitly: 'the stored array $D_u\\varphi$ becomes $D_vD_u^{-1}D_u\\varphi=D_v\\varphi$', matching paper lines 804-809."
+  },
+  {
+   "id": "S1.2.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page uses the common frame at the gate and $R$-linearity, $\\sum_j c_jD_v\\varphi_j=D_v(\\sum_j c_j\\varphi_j)$, to get $G(D_vg_1,\\dots,D_vg_t)=D_vG(g_1,\\dots,g_t)$, and so carries the invariant to the sinks. This is exactly the paper's argument (lines 809-813)."
+  },
+  {
+   "id": "S1.2.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page defines $D_{\\rm out}=\\bigoplus_w D_{\\mathrm{sink}(w)}$ and reads off $D_{\\rm out}\\,\\mathsf S_\\Omega\\,D_{\\rm in}^{-1}$ from the invariant at the sources and at the sinks ('therefore'), as the paper does. It does not write out the composition $f\\mapsto D_{\\rm in}^{-1}f\\mapsto \\mathsf S_\\Omega D_{\\rm in}^{-1}f\\mapsto D_{\\rm out}\\mathsf S_\\Omega D_{\\rm in}^{-1}f$, but neither does the paper."
+  },
+  {
+   "id": "S1.2.5",
+   "presence": "derived",
+   "faithful": false,
+   "dropped": [
+    "the route formula as the special case of $D_{\\rm out}\\,\\mathsf S_\\Omega\\,D_{\\rm in}^{-1}$ when $\\mathsf S_\\Omega$ is a signed permutation of the role arrays (the paper's 'In particular')",
+    "the gates' scalar coefficients, and the sum over all paths from $\\mathrm{source}(w)$ to $\\mathrm{sink}(\\rho(w))$, which is what produces $\\varepsilon_w$ and cancels the cross terms"
+   ],
+   "note": "The page's stated reason is the product of edge operators along one path 'from a source $u$ through gates $a$ and $b$ to a sink $v$', followed by 'So ... that route applies $\\varepsilon_wD_{\\mathrm{sink}(\\rho(w))}D_{\\mathrm{source}(w)}^{-1}$'. That argument leaves out what the gates do and assumes a route is a single path, so it does not yield the sign $\\varepsilon_w$. The paper instead specializes the identity just derived. The conclusion is correct, and the page states it for all roles, scratch included."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "On a route from a source $u$ through gates $a$ and $b$ to a sink $v$, the edges apply $D_aD_u^{-1}$, $D_bD_a^{-1}$ and $D_vD_b^{-1}$, whose product is $D_vD_u^{-1}$: the intermediate frames telescope away. So if the scalar network is a signed role permutation ... that route applies $\\varepsilon_wD_{\\mathrm{sink}(\\rho(w))}D_{\\mathrm{source}(w)}^{-1}$",
+   "problem": "This treats a route as a single chain of edges and ignores the gates. In a signed role permutation built from gates such as $y\\gets y+x$, $x\\gets x-y$, an input travels along many paths that the gates combine. Along each path the operator is (product of gate coefficients)$\\cdot D_vD_u^{-1}$. Summing over paths gives the scalar entry, $\\varepsilon_w$ or $0$, so the sign and the cancellation come from the scalar network, not from the edge product. The paper (lines 818-822) gets the route operator as the special case of $D_{\\rm out}\\,\\mathsf S_\\Omega\\,D_{\\rm in}^{-1}$ with $\\mathsf S_\\Omega$ a signed permutation. The claim is right and follows from the page's own displayed identity."
+  },
+  {
+   "severity": "minor",
+   "quote": "it uses nested subspaces as frames",
+   "problem": "In the paper the subspaces are labels, and a frame is the invertible operator built from a label: $D_v=\\mathcal C_{U_v}$ at a vertex with label $U_v$ in the complex network (lines 1204-1206). On each edge one label contains the other (line 850). So the subspaces determine the frames; they are not the frames."
+  }
+ ],
+ "motivation_given": true
+}

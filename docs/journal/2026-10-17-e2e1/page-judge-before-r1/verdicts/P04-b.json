@@ -1,0 +1,186 @@
+{
+ "page": "P04",
+ "items": [
+  {
+   "id": "S5.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the dimension-exponent inequalities epsilon<1/12, epsilon(2-tau)<1-tau, 3/4+delta+3epsilon/2<1, epsilon(1+c)<1, epsilon+delta<1 (only epsilon C_1<1 is checked)",
+    "0<delta<1/8 and p>100 among the resampling-lemma hypotheses",
+    "the consequences r exceeds every fixed power of p, K/log p -> infinity, l/K -> infinity, and the superpolynomial growth of r supplying the setup condition of the tensor-resampling lemma"
+   ],
+   "note": "The page fixes every constant and size, checks the layer inequalities by exact arithmetic, derives the comparison constants and the prime-interval, density and separation bounds in the paper's order; the prime search and the 'not advice' claim are only asserted, and the dimension-exponent inequalities of the paper are not checked."
+  },
+  {
+   "id": "S5.1.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "A choice of constants: the page gives tau=sigma=1-2^{-50}, beta=1/2, delta=1/16 exactly and explains each role (chunk-interchange cost exponent, recursion growth bound, d^beta cutoff, resampling-cost slack), matching the paper."
+  },
+  {
+   "id": "S5.1.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "lambda=1-2^{-52} and c=2^{-56} are given exactly, with lambda as the per-node overhead exponent and c as the address-chunk-width exponent, as in the paper's layer recurrence."
+  },
+  {
+   "id": "S5.1.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "lambda'=1-2^{-54} is given exactly and identified as the exponent of the layer cost O(Vd^{lambda'})."
+  },
+  {
+   "id": "S5.1.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "C_1=20, epsilon=2^{-75}, kappa=2^{-182} are given exactly; C_1 and epsilon get their roles (guard-bit exponent, axis-count exponent), while kappa's role as the saved exponent is not stated on this page."
+  },
+  {
+   "id": "S5.1.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page lists the layer proposition's hypotheses correctly and computes \"(1-2^{-50})(1+2^{-55})=1-31\\cdot2^{-55}-2^{-105}\" against \"lambda=1-8\\cdot2^{-55}\", which is correct; max{tau,sigma}<lambda then follows from tau<tau(1+c/beta)."
+  },
+  {
+   "id": "S5.1.6",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the computation 1-2^{-50}+2^{-51}=1-2^{-51}",
+    "the paper's reason for the strict lambda<lambda' (it absorbs the logarithmic number of groups in the base-m partition)"
+   ],
+   "note": "The page repeats \"Also sigma+beta(1-sigma)=1-2^{-51}<lambda<lambda'<1\" without the one-line arithmetic, unlike the neighbouring tau(1+c/beta) check; the claim is correct."
+  },
+  {
+   "id": "S5.1.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The definitions b=ceil(log_2 n), p=6b, d=floor(b^epsilon) are given exactly, with their roles (digit width, precision, axis count)."
+  },
+  {
+   "id": "S5.1.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "K=floor(d^c) is given and identified as the address-chunk width in bits, matching the layer proposition's K."
+  },
+  {
+   "id": "S5.1.9",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "T is the power of two in [4n/b,8n/b), and the page deduces \"Tp in [24n,48n)\" from p=6b, which is correct."
+  },
+  {
+   "id": "S5.1.10",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page explains why the count is in [0,d): \"since l rounds up\". It also explains why some axis has length r, matching the paper's 'integer in [0,d), so at least one axis has length r'."
+  },
+  {
+   "id": "S5.1.11",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The product is shown: \"r^d/2^{d l-log_2T}=T\". Together with the existence of an axis of length r, this gives the three properties."
+  },
+  {
+   "id": "S5.1.12",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page derives b/2<=log_2T<=b from 2^{b-1}<n<=2^b, then p^epsilon/12<=d<=p^epsilon and p/(12d)<=l<=p/(3d) using d<=b. It matches each to the lemmas' hypotheses (d bounds, r bounds, dl<=C_l p), so the constants follow, more fully than the paper. K=Theta(p^{epsilon c}) is left as immediate."
+  },
+  {
+   "id": "S5.1.13",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "alpha=ceil((12d^2b)^{1/4}) is given exactly and identified as the Gaussian parameter of resampling."
+  },
+  {
+   "id": "S5.1.14",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "gamma=2d alpha^2 (the exponent of the scale 2^gamma of the tensor interface) and eta=1/(4d) (the least relative gap of s_i below t_i) are given exactly with correct roles."
+  },
+  {
+   "id": "S5.1.15",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page uses \"ceil(A)<=2A for real A>=1 and 8sqrt12<28\", which gives gamma<=8sqrt12 d^2 sqrt b<28d^2 sqrt b, as in the paper. The remaining steps (d<=b^epsilon, 2epsilon<=1/6, the alpha bounds) are immediate and left implicit, as in the paper."
+  },
+  {
+   "id": "S5.1.16",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "d>=2 for large n, hence 0<eta<1/4 (the lemma's hypothesis on eta is never verified)",
+    "log is the natural logarithm"
+   ],
+   "note": "The page shows log x>8d via \"log(r/2)/d=Theta(p^{1-2epsilon})\" and that the count exceeds d via \"x>8d^2 log x, as log(8d^2 log x)=Theta(log p)=o(log x)\", following the paper. It never checks the lemma's hypothesis eta<1/4."
+  },
+  {
+   "id": "S5.1.17",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the condition eta<1/4 under which (1-eta)r/2<(1-2eta)r"
+   ],
+   "note": "The page shows the two intervals are disjoint and lie above 2. Each holds more than d primes, so distinct odd primes can be chosen, and gcd(s_i,t_i)=1 because t_i is a power of two, as in the paper."
+  },
+  {
+   "id": "S5.1.18",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page multiplies the lower bounds (1-2eta=1-1/(2d)) and justifies the strict Bernoulli step: \"(1-1/(2d))^d>1-d/(2d)\" for d>=2. This is correct and follows the paper."
+  },
+  {
+   "id": "S5.1.19",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "From S/T>1/2 and s_i<t_i, it follows that T/2<S<T, as in the paper."
+  },
+  {
+   "id": "S5.1.20",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the chain T<8n/b<2^{6b}=2^p behind T<2^p",
+    "d>=2, needed for 3db>=6b"
+   ],
+   "note": "The page derives t_i/s_i>=1/(1-eta), hence theta_i>eta, hence alpha^4 theta_i>3db>=p, which is the lemma's hypothesis theta>p/alpha^4. t_i<=r<=T<2^p is asserted without the paper's chain through 8n/b."
+  },
+  {
+   "id": "S5.1.21",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the count of O(r) candidates times O(sqrt r) trial divisors with poly(p) arithmetic and a list of at most d primes, giving O(dr^{3/2}poly(p))",
+    "the logarithm O(log p+log r)=O(log p+p/d)=o(p)",
+    "the binary search with exact comparisons (e.g. d^{2^{75}}<=b) that computes d, K and the other fixed rational powers, and the remaining setup costing poly(p), which is why the parameters are machine-generated rather than advice"
+   ],
+   "note": "The page asserts \"Trial division costs dr^{3/2}poly(p), with logarithm o(p)\". It then repeats the sub-step's own sentence. Neither the cost bound, nor its o(p) logarithm, nor the 'not advice' claim is shown."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "contains at least $\\eta x/(2\\log x)$ primes",
+   "problem": "The page never says that log is the natural logarithm, and it writes log_2 elsewhere. The paper states 'Here log is the natural logarithm'. That is what makes x>e^{2/eta} equivalent to the page's \"log x>8d=2/eta\"."
+  }
+ ],
+ "motivation_given": true
+}

@@ -1,0 +1,8 @@
+{"page": "P15",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "dividing every cost by $V=Tp=\\Theta(n)$, the number of stored bits, where $T$ counts coefficients and $p$, of order $\\lg n$, is the precision in bits of each",
+   "problem": "V=Tp is not the number of stored bits. The paper (Section 'The complete time bound', lines 4810-4812) puts V=Tp and says the fixed-width coefficient formats use Theta(p) bits per coefficient, so a full padded array has Theta(V) stored bits. V is proportional to the stored volume, not equal to it. The normalization and the bound are unaffected."}
+ ],
+ "motivation_given": true}

@@ -1,0 +1,11 @@
+{"page": "P37",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "the time must fall below every constant multiple of $n\\log n$ along some inputs",
+   "problem": "The page never says the running time is worst-case, and it states the negation as falling below c n log n 'along some inputs'. Read literally, that is a per-input condition that any machine meets trivially, for example one that handles x=0 in O(n) steps. The paper (lines 381-385) uses the worst-case time T_A(n) and requires liminf_{n->inf} T_A(n)/(n lg n) = 0, which means falling below every c n lg n at arbitrarily large input lengths n, worst case over all inputs of that length. The page's later phrase 'not merely along a subsequence' shows a sequence of lengths was meant."},
+  {"severity": "minor",
+   "quote": "which tends to zero for all large $n$, not merely along a subsequence",
+   "problem": "A limit does not hold 'for all large n'. The point is that the ratio tends to zero as n -> infinity through all input lengths, which is a limit and not just a liminf. The paper says (line 386) the power saving 'gives a limit of zero through all input lengths, which is a stronger conclusion.'"}
+ ],
+ "motivation_given": true}

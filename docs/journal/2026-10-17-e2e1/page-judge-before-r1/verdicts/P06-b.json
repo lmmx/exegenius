@@ -1,0 +1,17 @@
+{"page": "P06",
+ "items": [],
+ "errors": [
+  {"severity": "major",
+   "quote": "So each rearrangement must cost one pass, not one pass per level.",
+   "problem": "This conclusion does not follow and misstates the paper's requirement. The paper (lines 90-97) says only that one scan per level already costs Theta(n log n), so 'we therefore need savings in both movement and arithmetic'. Its interchange procedure for u-bit fields costs O(V u^tau) with tau<1, which is more than one pass but less than one pass per address bit; it does not cost a single pass. The page's claim that a rearrangement 'must' cost one pass is false. Its heading 'Why passes must be linear' also gets the point backwards: linear passes are what is too expensive when one is spent per level."},
+  {"severity": "minor",
+   "quote": "Throughout, $V$ is the volume of an array, the number of digits it stores",
+   "problem": "The paper defines the logical volume V as the number of stored data bits (line 455; 'stored bit volume', line 93), not the number of radix digits. For a fixed radix the two differ only by a constant factor, so O(V) is unaffected."},
+  {"severity": "minor",
+   "quote": "Permuting the pair of values at two chosen digit positions, adjacent or not.",
+   "problem": "The paper's operation is 'any fixed permutation of the pair of digit values', meaning an arbitrary fixed permutation of [q]x[q] applied to the two digits (line 496). Together with the gloss 'swapping two digits', the page's wording reads as merely exchanging the two values, which is a special case."},
+  {"severity": "minor",
+   "quote": "Dealing whole rows cyclically into $W$ streams ... In item 4 the array is indexed by $[P]\\times[R]\\times[B]$, where $P$ is the number of prefix values, $R$ is the number of rows",
+   "problem": "The paper splits rows cyclically 'within each prefix' (line 502), sending row r=Wg+w at each prefix to stream w. R is the range of the row index inside one prefix, so the array holds PR rows in total. The page leaves out 'within each prefix' and calls R 'the number of rows', which also allows the wrong reading in which rows are dealt across prefix boundaries."}
+ ],
+ "motivation_given": true}

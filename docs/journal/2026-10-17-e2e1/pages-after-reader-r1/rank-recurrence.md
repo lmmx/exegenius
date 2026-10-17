@@ -1,0 +1,29 @@
+Recursive power saving is the recurrence that makes both tape procedures, the interchange of two address chunks and the simultaneous butterfly layer, cost the stream volume times a power below one of their parameter.
+
+A call acts on a stream of volume $V$ and has a parameter $f$ (a number here, not an array): the digits per interchanged chunk, or the selected axes of a layer. The branching factor is the fixed label-space dimension $m=h^3=10^6$ of the [exchange network](exchange-network.md); the argument needs only $s/W<m$. A call at parameter $mf$ cuts each chunk into $m$ slots of parameter $f$, one per coordinate of the label space. The call deals its rows into $W$ streams of volume $V/W$, one per wire of the bit or complex network, and runs each gate pointwise. Each vertex carries a [frame](array-frames.md), a reversible re-encoding of a wire's array; since a route applies only its two endpoint frames, the network applies the intended operation to every row, and the only recursive work is changing frame along each edge. An edge's frame change costs one call at parameter $f$ on that wire's stream per unit of rank: in the bit network, via a [matrix shear](matrix-shear.md), one interchange of a pair of slots; in the complex network, one layer of [two-point kernels](phase-kernel.md) on a slot. Summing over edges, the call makes $s$ calls at parameter $f$, each on volume $V/W$, where $s$ is the total rank of the edge changes.
+
+## Why $s<Wm$
+
+The recursion gets the strict inequality $s<Wm$ from [Nested subspace labels and rank deficit](subspace-labels.md), which gives each vertex a subspace of the label space, nested along each edge, and charges an edge its dimension change. Every route must change frame in all $m$ dimensions, so if every wire climbed from dimension $0$ to $m$ the total would be exactly $Wm$, which, as shown below, saves nothing. The bank wires escape: $X_a$ starts on a line and $Y_a$ stops on a subspace of dimension $m-1$, saving $2N$ in all. Against this, the $L$ dimensions lost on shrinking edges must be regained, costing $2L$, and a sign at each bit-network source $X_a$ adds one rank. Hence $s_{\rm b}=W_{\rm b}m-(N-2L_{\rm b})$ and $s_{\rm c}=W_{\rm c}m-(2N-2L_{\rm c})$, both below $Wm$ because $L_{\rm b}/N=100/539$ and $L_{\rm c}/N=101/539$ are below $1/2$ <cite data-source="paper">\frac{L_{\rm b}}{N}=\frac{100}{539}</cite>.
+
+## The recurrence
+
+Let $\mathcal C(f)$ be the time per unit volume of a call at parameter $f$: its running time divided by its stream's volume. The children cost $s(V/W)\mathcal C(f)$, which per unit of the parent's volume is $(s/W)\mathcal C(f)$ <cite data-source="paper">After dividing cost by volume, multiplying the parameter by $m$ increases the recursive contribution by $s/W<m$.</cite> For interchange, the node's other work (splitting, merging, gates, triangular updates, parking idle streams on a stack tape) is a fixed number of linear passes ([stream operations](stream-ops.md)), and a single digit swaps in linear time:
+
+$$\mathcal C(mf)\le\frac{s}{W}\mathcal C(f)+O(1),\qquad \mathcal C(1)=O(1)$$
+
+Unrolling $\log_m f$ levels, depth $j$ (the number of levels below the top call, not a stage number) contributes $(s/W)^j$, so $\mathcal C(f)=O\big(\sum_{j=0}^{\log_m f}(s/W)^j\big)$.
+
+The deepest term is $(s/W)^{\log_m f}=f^{\log_m(s/W)}$; for $s/W>1$ the geometric sum is a constant times it, and for $s/W\le1$ it is $O(\log f)$. If $s=Wm$, depth $j$ contributes $m^j$, the sum is about $f$, and the cost is proportional to $Vf$: no saving. Write $s/W=m(1-\eta)$, with $\eta$ here the relative deficit $(Wm-s)/(Wm)$, not the prime distance of [Parameter and prime-length choice](parameter-choice.md). The exponent $\log_m(s/W)=1+\log_m(1-\eta)$ is below $1$ exactly when $\eta>0$, and $\eta$ is fixed with the network. So any fixed $\tau<1$ with $s/W<m^\tau$ gives $\mathcal C(f)=O(f^\tau)$, and an interchange costs $O(Vf^\tau)$ <cite data-source="paper">The chunks can be interchanged in $O(Ve^\tau)$ time</cite>.
+
+The layer's recurrence differs in two ways: its frame changes are binary changes of basis, done by chunk interchanges at cost $O(V((fK)^\tau+1))$ per node, with $K$ the bits per address chunk, and recursion stops below $d^\beta$ axes, applying the remaining kernels singly:
+
+$$\mathcal C(f)\le\frac{s}{W}\mathcal C(f/m)+O((fK)^\tau+1),\qquad \mathcal C(f)=O(f)\quad(f<d^\beta)$$
+
+With $s/W<m^\sigma$ for a fixed $\sigma<1$, the overheads again sum geometrically, and the [simultaneous butterfly layer](simultaneous-layer.md) costs $O(Vd^{\lambda'})$ for a fixed $\lambda'<1$ <cite data-source="paper">\max\{\lambda,\sigma+\beta(1-\sigma)\}<\lambda'<1.</cite>
+
+## An explicit exponent
+
+Later pages need an explicit rational exponent in place of $\log_m(s/W)$. By the rank counts, the bit network's $\eta$ is $(N-2L_{\rm b})/(W_{\rm b}m)$, which with $W_{\rm b}=\frac{22587335}{539}N$ wires is $339/22587335000000\approx1.5\cdot10^{-11}$; the complex network's, $(2N-2L_{\rm c})/(W_{\rm c}m)$, is $73/19906842167500\approx3.7\cdot10^{-12}$ <cite data-source="paper">=\frac{73}{19906842167500}</cite>. Both exceed $20\cdot2^{-50}\approx1.8\cdot10^{-14}$, by a factor over $200$. Since $m=10^6<2^{20}$ and $\ln 2<1$, $\ln m<20$; as the exponential lies above its tangent at $0$, $m^{1-2^{-50}}=m\exp(-2^{-50}\ln m)>m(1-2^{-50}\ln m)>m(1-20\cdot2^{-50})>m(1-\eta)=s/W$ for either network. Hence $\tau=\sigma=1-2^{-50}$ gives $s_{\rm b}/W_{\rm b}<m^\tau$ and $s_{\rm c}/W_{\rm c}<m^\sigma$, with $0<\tau=\sigma<1$. The gap $2^{-50}$ is a choice: the chain needs only $20\cdot2^{-50}<\eta$, and a power of two keeps the exponent simple.
+
+The saving is tiny because only the $2N$ bank wires save, among about $41906N$ bit-network wires each charged about $m$; yet any positive deficit gives a power saving.

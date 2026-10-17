@@ -1,0 +1,111 @@
+{
+ "page": "P17",
+ "items": [
+  {
+   "id": "S4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "complex conjugation of input and output turns the algorithm for $RF_{\\boldsymbol s}$ into one for $RF_{\\boldsymbol s}^+$ (preserving the disk grid, norm and error), which is how the opposite transform is also computed without executing $R$",
+    "explicit composition of the tensor identity with the chirp identity, showing that $RF_{\\boldsymbol s}u$ is what the pipeline computes"
+   ],
+   "note": "The page keeps $R$ and $Q$ in $RF_{\\boldsymbol s}=2^\\gamma\\mathcal B_0QF_{\\boldsymbol t}\\mathcal A$, cites the chirp identity for absorbing $Q$, and proves that $R$ cancels, matching the paper. It never says how $RF_{\\boldsymbol s}^+$ is itself obtained without a sort."
+  },
+  {
+   "id": "S4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "one-dimensional error bound $p^2$ per axis, from which $dp^2$ follows",
+    "within one axis the exact map acts independently on lines, so the max-norm error stays below $p^2$ rather than adding over lines; the same argument gives the contraction property",
+    "handling of valid and invalid lines in the padded box (zeros outside $\\prod_i[0,s_i)$; invalid lines written as zeros; compression writes $s_i$ outputs then $t_i-s_i$ zeros)",
+    "per-axis line count $T/t_i$ times $O(t_ip^{3/2+\\delta}\\alpha)$",
+    "adjacent-interchange derivation of the exposure cost"
+   ],
+   "note": "The identity and the setup bound are derived, but the contraction property, the $dp^2$ error and the two cost bounds come with at most the remark 'Errors and times add over the $d$ passes'. The parts that are argued follow the paper."
+  },
+  {
+   "id": "S4.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "hypothesis that every pair $(s_i,t_i)$ satisfies the one-dimensional lemma with the same $p,\\alpha,\\delta$ (including $\\theta_i=t_i/s_i-1>p/\\alpha^4$); the page only says $t_i>s_i$ and 'with $p$, $\\alpha$, $\\delta$ as there' for one axis"
+   ],
+   "note": "'By the product rule the left sides combine to $RF_{\\boldsymbol s}$ and the right sides to $\\mathcal B_0QF_{\\boldsymbol t}\\mathcal A$ times $d$ factors $2^{2\\alpha^2}$' is a correct expansion of the paper's 'Tensoring ... proves', using the mixed-product rule stated earlier on the page."
+  },
+  {
+   "id": "S4.2.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "at most $T/t_i$ lines invoke the one-dimensional algorithm on axis $i$, each costing $O(t_ip^{3/2+\\delta}\\alpha)$, so each axis costs $O(Tp^{3/2+\\delta}\\alpha)$ and the sum over $i$ gives $O(dTp^{3/2+\\delta}\\alpha)$",
+    "initial padding $O(Tp)$ and scanning/zeroing the remaining lines $O(Tp)$ per axis, within the bound"
+   ],
+   "note": "The page says only 'Errors and times add over the $d$ passes: ... time $O(dTp^{3/2+\\delta}\\alpha)$'. It never shows the $O(Tp^{3/2+\\delta}\\alpha)$ cost of one pass, which the paper gets from the line count $T/t_i$."
+  },
+  {
+   "id": "S4.2.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "an axis is moved past its neighbour by interchanging $\\ell$-bit or $(\\ell-1)$-bit address fields; exposing and restoring one axis needs $O(d)$ adjacent interchanges, so $O(d^2)$ for all axes",
+    "each adjacent interchange costs $O(Tp(1+\\ell^\\tau))$ by the equal-width chunk-swap bound $O(Vu^\\tau)$",
+    "unequal widths ($t_i=r/2$ versus $r$): split off the leading bit, swap the equal-width pieces, and move the bit with the fixed-digit movement primitive",
+    "the interchanges are exact permutations of the padded box, so they change neither norms nor errors"
+   ],
+   "note": "The bound $O(Tp\\,d^2(1+\\ell^\\tau))$ is asserted with a citation of the lemma statement. None of the paper's adjacent-interchange argument appears."
+  },
+  {
+   "id": "S4.2.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'each tensor map invokes at most $\\sum_iT/t_i\\le 2dT/r$ lines ... totals $O(dTp^\\nu/r)$. Dividing by $Tp$ gives $O(dp^{\\nu-1}/r)\\to0$' follows the paper exactly, with $\\nu$ in place of $c$ and the growth assumptions on $r$ and $d$ stated."
+  },
+  {
+   "id": "S4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "conjugation of input and output converts an algorithm for $RF_{\\boldsymbol s}$ into one for $RF_{\\boldsymbol s}^+$, commuting with the real permutation $R$ and preserving the disk grid, norm and error bound"
+   ],
+   "note": "The identity $(RF_{\\boldsymbol s}^+)[(RF_{\\boldsymbol s}u)\\cdot(RF_{\\boldsymbol s}v)]=u*v/S^2$ is derived along the paper's chain (unit substitution, tensoring, commuting with pointwise products, normalizations). The conjugation remark that completes 'no source permutation is executed' for the opposite transform is missing."
+  },
+  {
+   "id": "S4.4.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page writes the sum $\\frac1q\\sum_w z_{\\beta w}e^{2\\pi i wj/q}$, substitutes $w'=\\beta w$ and identifies $(R_\\beta^{-1}F_q^+z)_j$. This is the paper's substitution $h=ck$ with renamed letters, and it is correct."
+  },
+  {
+   "id": "S4.4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Each $t_i$ is a unit modulo $s_i$, and $R$ applies $R_{t_i}$ on axis $i$, so tensoring gives $RF_{\\boldsymbol s}^+R=F_{\\boldsymbol s}^+$'. Coprimality comes from the page's earlier remark that $\\gcd(s_i,t_i)=1$ for odd $s_i$. The intermediate $F_{\\boldsymbol s}^+R=R^{-1}F_{\\boldsymbol s}^+$ is implicit."
+  },
+  {
+   "id": "S4.4.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "$F_{\\boldsymbol s}^+F_{\\boldsymbol s}=I/S$ is derived earlier on the page from orthogonality and the product rule. The normalized convolution rule $F_{\\boldsymbol s}(u*v)=S(F_{\\boldsymbol s}u)\\cdot(F_{\\boldsymbol s}v)$ is only asserted, as it is in the paper, so the sub-step as a whole is stated."
+  },
+  {
+   "id": "S4.4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'so this equals $\\frac1SF_{\\boldsymbol s}^+F_{\\boldsymbol s}(u*v)=u*v/S^2$' combines the two normalizations exactly as the paper does."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "That page gives linear contractions $A$, $B_0$ ($B_0$ is not the packing base) with $P_sF_s=2^{2\\alpha^2}B_0P_tF_tA$, computed in time $O(tp^{3/2+\\delta}\\alpha)$ without executing $P_s$ or $P_t$.",
+   "problem": "This reads as if $A$ and $B_0$ were computed exactly, under the hypothesis $t>s$ alone. In Lemma no-sort-resampling the algorithms are approximations $\\widetilde A,\\widetilde B_0$, each with error less than $p^2$, and they need $\\theta=t/s-1>p/\\alpha^4$, $2\\le\\alpha<\\sqrt p$, $t<2^p$, $p>100$. Because the per-axis $p^2$ is never stated, the later 'error below $dp^2$' has no basis on the page."
+  }
+ ],
+ "motivation_given": true
+}

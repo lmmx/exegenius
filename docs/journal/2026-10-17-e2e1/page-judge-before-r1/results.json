@@ -1,0 +1,655 @@
+{
+ "missing_verdicts": [],
+ "omitted": {},
+ "pages": {
+  "address-interchange": {
+   "pid": "P22",
+   "task": "0380-write-address-interchange",
+   "n": 17,
+   "faithful": [
+    17,
+    17,
+    17
+   ],
+   "derived": [
+    17,
+    17,
+    17
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    1,
+    2,
+    2
+   ],
+   "median_major": 0,
+   "median_faithful": 17,
+   "meets_standard": true
+  },
+  "array-frames": {
+   "pid": "P09",
+   "task": "0365-write-array-frames",
+   "n": 5,
+   "faithful": [
+    5,
+    5,
+    4
+   ],
+   "derived": [
+    5,
+    5,
+    5
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    1,
+    1,
+    1
+   ],
+   "median_major": 0,
+   "median_faithful": 5,
+   "meets_standard": true
+  },
+  "butterfly": {
+   "pid": "P14",
+   "task": "0370-write-butterfly",
+   "n": 0,
+   "faithful": [
+    0,
+    0,
+    0
+   ],
+   "derived": [
+    0,
+    0,
+    0
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    2,
+    1,
+    1
+   ],
+   "median_major": 0,
+   "median_faithful": 0,
+   "meets_standard": true
+  },
+  "chirp": {
+   "pid": "P19",
+   "task": "0372-write-chirp",
+   "n": 4,
+   "faithful": [
+    4,
+    4,
+    4
+   ],
+   "derived": [
+    4,
+    4,
+    4
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    1,
+    0,
+    1
+   ],
+   "median_major": 0,
+   "median_faithful": 4,
+   "meets_standard": true
+  },
+  "convolution": {
+   "pid": "P03",
+   "task": "0366-write-convolution",
+   "n": 0,
+   "faithful": [
+    0,
+    0,
+    0
+   ],
+   "derived": [
+    0,
+    0,
+    0
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    0,
+    0,
+    0
+   ],
+   "median_major": 0,
+   "median_faithful": 0,
+   "meets_standard": true
+  },
+  "cost-accounting": {
+   "pid": "P20",
+   "task": "0385-write-cost-accounting",
+   "n": 29,
+   "faithful": [
+    27,
+    28,
+    27
+   ],
+   "derived": [
+    27,
+    28,
+    27
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    4,
+    6,
+    3
+   ],
+   "median_major": 0,
+   "median_faithful": 27,
+   "meets_standard": true
+  },
+  "crt-map": {
+   "pid": "P11",
+   "task": "0374-write-crt-map",
+   "n": 7,
+   "faithful": [
+    7,
+    7,
+    7
+   ],
+   "derived": [
+    7,
+    7,
+    7
+   ],
+   "major": [
+    1,
+    0,
+    0
+   ],
+   "minor": [
+    0,
+    1,
+    1
+   ],
+   "median_major": 0,
+   "median_faithful": 7,
+   "meets_standard": true
+  },
+  "dft": {
+   "pid": "P13",
+   "task": "0369-write-dft",
+   "n": 0,
+   "faithful": [
+    0,
+    0,
+    0
+   ],
+   "derived": [
+    0,
+    0,
+    0
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    0,
+    0,
+    0
+   ],
+   "median_major": 0,
+   "median_faithful": 0,
+   "meets_standard": true
+  },
+  "gaussian-resampling": {
+   "pid": "P23",
+   "task": "0375-write-gaussian-resampling",
+   "n": 11,
+   "faithful": [
+    6,
+    4,
+    6
+   ],
+   "derived": [
+    6,
+    4,
+    6
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    2,
+    1,
+    3
+   ],
+   "median_major": 0,
+   "median_faithful": 6,
+   "meets_standard": false
+  },
+  "main-result": {
+   "pid": "P15",
+   "task": "0386-write-main-result",
+   "n": 0,
+   "faithful": [
+    0,
+    0,
+    0
+   ],
+   "derived": [
+    0,
+    0,
+    0
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    1,
+    0,
+    1
+   ],
+   "median_major": 0,
+   "median_faithful": 0,
+   "meets_standard": true
+  },
+  "multidim-transform": {
+   "pid": "P16",
+   "task": "0373-write-multidim-transform",
+   "n": 0,
+   "faithful": [
+    0,
+    0,
+    0
+   ],
+   "derived": [
+    0,
+    0,
+    0
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    3,
+    3,
+    3
+   ],
+   "median_major": 0,
+   "median_faithful": 0,
+   "meets_standard": true
+  },
+  "multiplication-algorithm": {
+   "pid": "P10",
+   "task": "0384-write-multiplication-algorithm",
+   "n": 13,
+   "faithful": [
+    13,
+    11,
+    10
+   ],
+   "derived": [
+    13,
+    11,
+    10
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    2,
+    1,
+    3
+   ],
+   "median_major": 0,
+   "median_faithful": 11,
+   "meets_standard": false
+  },
+  "parameter-choice": {
+   "pid": "P04",
+   "task": "0377-write-parameter-choice",
+   "n": 21,
+   "faithful": [
+    19,
+    19,
+    19
+   ],
+   "derived": [
+    19,
+    19,
+    19
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    0,
+    1,
+    1
+   ],
+   "median_major": 0,
+   "median_faithful": 19,
+   "meets_standard": true
+  },
+  "phase-twist": {
+   "pid": "P08",
+   "task": "0368-write-phase-twist",
+   "n": 4,
+   "faithful": [
+    4,
+    4,
+    4
+   ],
+   "derived": [
+    4,
+    4,
+    4
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    0,
+    0,
+    0
+   ],
+   "median_major": 0,
+   "median_faithful": 4,
+   "meets_standard": true
+  },
+  "radix-digit-reduction": {
+   "pid": "P21",
+   "task": "0367-write-radix-digit-reduction",
+   "n": 3,
+   "faithful": [
+    3,
+    3,
+    3
+   ],
+   "derived": [
+    3,
+    3,
+    3
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    0,
+    0,
+    0
+   ],
+   "median_major": 0,
+   "median_faithful": 3,
+   "meets_standard": true
+  },
+  "rank-recurrence": {
+   "pid": "P18",
+   "task": "0379-write-rank-recurrence",
+   "n": 7,
+   "faithful": [
+    5,
+    7,
+    6
+   ],
+   "derived": [
+    5,
+    7,
+    6
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    3,
+    3,
+    3
+   ],
+   "median_major": 0,
+   "median_faithful": 6,
+   "meets_standard": false
+  },
+  "retained-permutations": {
+   "pid": "P17",
+   "task": "0376-write-retained-permutations",
+   "n": 10,
+   "faithful": [
+    7,
+    8,
+    7
+   ],
+   "derived": [
+    7,
+    8,
+    7
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    2,
+    1,
+    1
+   ],
+   "median_major": 0,
+   "median_faithful": 7,
+   "meets_standard": false
+  },
+  "ring-convolution": {
+   "pid": "P05",
+   "task": "0383-write-ring-convolution",
+   "n": 13,
+   "faithful": [
+    11,
+    11,
+    11
+   ],
+   "derived": [
+    11,
+    11,
+    11
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    0,
+    1,
+    0
+   ],
+   "median_major": 0,
+   "median_faithful": 11,
+   "meets_standard": false
+  },
+  "ring-y": {
+   "pid": "P02",
+   "task": "0364-write-ring-y",
+   "n": 0,
+   "faithful": [
+    0,
+    0,
+    0
+   ],
+   "derived": [
+    0,
+    0,
+    0
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    0,
+    1,
+    1
+   ],
+   "median_major": 0,
+   "median_faithful": 0,
+   "meets_standard": true
+  },
+  "simultaneous-layer": {
+   "pid": "P07",
+   "task": "0381-write-simultaneous-layer",
+   "n": 35,
+   "faithful": [
+    20,
+    19,
+    20
+   ],
+   "derived": [
+    20,
+    19,
+    20
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    2,
+    2,
+    1
+   ],
+   "median_major": 0,
+   "median_faithful": 20,
+   "meets_standard": false
+  },
+  "stream-ops": {
+   "pid": "P06",
+   "task": "0371-write-stream-ops",
+   "n": 0,
+   "faithful": [
+    0,
+    0,
+    0
+   ],
+   "derived": [
+    0,
+    0,
+    0
+   ],
+   "major": [
+    1,
+    1,
+    1
+   ],
+   "minor": [
+    3,
+    3,
+    3
+   ],
+   "median_major": 1,
+   "median_faithful": 0,
+   "meets_standard": false
+  },
+  "subspace-labels": {
+   "pid": "P01",
+   "task": "0378-write-subspace-labels",
+   "n": 31,
+   "faithful": [
+    22,
+    22,
+    22
+   ],
+   "derived": [
+    22,
+    22,
+    22
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    1,
+    1,
+    1
+   ],
+   "median_major": 0,
+   "median_faithful": 22,
+   "meets_standard": false
+  },
+  "transform-layout": {
+   "pid": "P12",
+   "task": "0382-write-transform-layout",
+   "n": 10,
+   "faithful": [
+    10,
+    10,
+    10
+   ],
+   "derived": [
+    10,
+    10,
+    10
+   ],
+   "major": [
+    0,
+    0,
+    0
+   ],
+   "minor": [
+    2,
+    1,
+    1
+   ],
+   "median_major": 0,
+   "median_faithful": 10,
+   "meets_standard": true
+  }
+ },
+ "P4_pages_with_major_error": [
+  "stream-ops"
+ ],
+ "S1_meet_standard": "15 of 23 pages",
+ "S1_meet_standard_with_steps": "9 of 16"
+}

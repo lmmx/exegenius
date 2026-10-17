@@ -1,0 +1,8 @@
+{"page": "P21",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "multiplying a record by $y^s$ moves each coefficient up $s$ places and negates those that wrap past degree $r-1$",
+   "problem": "This rule holds only for 0 <= s <= r. The transform uses every exponent of y modulo 2r, including the negative ones in omega_t^{-jk}. For s in (r,2r) a coefficient that wraps twice keeps its sign. For negative s the coefficients move down and the ones that wrap below degree 0 are negated. The paper says only that multiplication by y^a, for any integer a, 'permutes the coefficients and changes some signs' (lines 2783-2784). The general rule is: coefficient k goes to (k+s) mod r with sign (-1)^{floor((k+s)/r)}. The r=4, y^2 example is correct."}
+ ],
+ "motivation_given": true}

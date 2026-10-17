@@ -1,0 +1,31 @@
+{"page": "P01",
+ "items": [
+  {"id": "S1.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page derives the bit count s_b=(W_b m-2N+2L_b)+N=W_b m-(N-2L_b)<W_b m from the label budget and L_b/N=100/539<1/2. It states s_c=W_c m-2N+2L_c<W_c m with a link to Binary phase frames, as the plan assigns. It also derives the striking feature, the relative deficit 339/22587335000000 ≈ 1.5·10^-11, from W_b=N(2+3z_b+1/539)."},
+  {"id": "S1.3.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Shows the form x·y-(1/9)(Σx_i)(Σy_i) is nondegenerate because its matrix 'fixes zero-sum vectors and scales the all-ones vector by 1-h/9=-91/9≠0'. It gets ⟨t_S,t_S'⟩=|S∩S'|-1 from 'integer dot product |S∩S'| and entry sum 3', and t_S·t_S'=|S∩S'| mod 2 over F_2, which gives norms 2 and 1 and orthogonal neighbours in both constructions. This matches the paper."},
+  {"id": "S1.3.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Computes the sink total explicitly, 'Nm+N(m-1)+(W-2N)m=Wm-N', from the terminal table. The source total N can be read off the same table: only X_a has a nonzero source label, the line U_a."},
+  {"id": "S1.3.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "'A wire enters and leaves each gate with that gate's label, so its signed changes telescope to sink minus source dimension; over all wires they total Wm-2N'. This is the paper's telescoping argument."},
+  {"id": "S1.3.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Splits A⊗F into four orthogonal pieces using A=B⊥P and F=⟨t⟩⊥t^⊥, and identifies the outgoing Y label as (P⊗⟨t_{a_j}⟩)^⊥=B' with A'=A⊗F and P'=P⊗⟨t_{a_j}⟩. It then checks that, with K=⟨t_{a_{j+1}}⟩⊗K', the outputs are stage j+1's inputs, and that stage 1 starts at U_a,0 (B=0) and stage 3 ends at 𝓕,U_a^⊥."},
+  {"id": "S1.3.5", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The per-wire label sequences with times (centre: B⊗F (1) → A⊗F (3) → B⊗F (4) → A⊗F (6)) encode the gate order and the central assignment, A⊗F on X and B⊗F on Y. From them the page shows 'every arrow is an inclusion except centre 3→4, dropping P⊗F of dimension h'. It does not mention that stage 2's inverse schedule touches the physical wires in the same order; the paper says this just outside the assigned passages."},
+  {"id": "S1.3.6", "presence": "derived", "faithful": true,
+   "dropped": ["the per-edge table of orthogonal residuals and their dimensions (e.g. side 0→2 residual (B⊗t_Y^⊥)⊥(P⊗⟨t_X⟩) of dimension (a-1)(h-1)+1; scratch last→sink residual (A⊗F)⊗Q^⊥ of dimension ah(f-1)), with a=h^(j-1), f=h^(3-j)",
+               "the binary-label part of the lemma: over F_2 every nonzero residual is nondegenerate and contains a norm-one vector, so it is nonalternating and has an orthonormal basis (split off unit lines, absorb alternating planes via w+a, w+b, w+a+b)"],
+   "note": "The page gives both labels of every edge and argues each inclusion by 'the same splitting', including side 2→5 via 't_X⊥t_Y'. It then counts L=Ic h (one loss of h per centre wire per invocation) and the absolute total Wm-2N+2L, following the paper's lemma. Two parts of the lemma are missing: the table of residual dimensions, and the orthonormal-basis conclusion that the phase-frame page relies on."},
+  {"id": "S1.3.7", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Assigns Π_U to each vertex with label U, -Π_{U_a} at the X_a sources and 0 at the other sources. It shows Π_V-Π_U is 'identity on V∩U^⊥, zero on U⊥V^⊥', so its rank is dim V-dim U, and handles the exceptional first X_a edge, 2Π_{U_a}, of rank one at stage 1. It checks that the endpoint differences all equal Id and gets s_b=(W_b m-2N+2L_b)+N<W_b m, as in the paper's proposition."},
+  {"id": "S1.3.8", "presence": "stated", "faithful": null, "dropped": [],
+   "note": "This sub-step is assigned to Binary phase frames. As instructed, the page states s_c=W_c m-2N+2L_c<W_c m and links that page."},
+  {"id": "S1.3.9", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "'L_b/N=3c_bh/v=30000/161700=100/539; likewise L_c/N=30300/161700=101/539', using I=3v^2 and N=v^3, and 'Both are below 1/2'. The arithmetic is correct."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "nested along every edge, whose dimension changes count each edge's *smaller calls*",
+   "problem": "In the bit network an edge's smaller calls are counted by the rational rank of its matrix difference. That rank equals the dimension change except on the N first edges of the X_a wires, where the difference 2P_{U_a} has rank one and the dimension change is zero (paper: 'The only exceptions are the N negative source projections'). The page corrects this later ('Only X_a's first edge differs'), but the opening sentence is inexact."}
+ ],
+ "motivation_given": true}

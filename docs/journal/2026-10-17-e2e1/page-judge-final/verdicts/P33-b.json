@@ -1,0 +1,148 @@
+{
+ "page": "P33",
+ "items": [
+  {
+   "id": "step",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "lower bound 2 <= s",
+    "the lemma's conclusion that inputs and outputs occur in increasing coordinate order, and that the constant is uniform in p, s, t, alpha",
+    "the negative Fourier sign convention that makes the right-hand permutation multiplication of the frequency by -s",
+    "the record-conversion and tape-movement accounting (S' window scans O(tp sqrt(p) alpha), the k-1 Neumann scans O((alpha^2+1)tp(1+sqrt(p)/alpha)) = O(tp sqrt(p) alpha), outer accumulation O(tp alpha^2)) that makes the quoted times hold on a multitape machine"
+   ],
+   "note": "The page builds the identity P_sF_s=2^{2alpha^2}B_0P_tF_tA from the imported Gaussian identity and the Neumann inverse, then assembles the approximations with errors below p^2 and time O(tp^{3/2+delta}alpha), following the paper. It drops the multitape bookkeeping that the paper uses to justify the time bound in its tape format."
+  },
+  {
+   "id": "S4.1.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "lower bound 2 <= s"
+   ],
+   "note": "This is a hypothesis, so there is nothing to derive. The page states it in full (\"Let s<t<2^p be coprime integers, where p>100 ... 2<=alpha<sqrt p ... Assume theta:=t/s-1>p/alpha^4\"), and fixes delta later. Only s>=2 is missing."
+  },
+  {
+   "id": "S4.1.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "This is a definition, given exactly as in the paper, \"(P_su)_j=u_{tj} and (P_tv)_k=v_{-sk}, with indices taken modulo s and t\". The page adds the paper's reason for not executing the permutations (the O(tp log t) sort)."
+  },
+  {
+   "id": "S4.1.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page asserts the result up front and then proves it in 'Exact construction': A=S' and B_0=D'J'C are contractions because ||C||=1, and the identity follows from the left inverse and the normalisation product, as in the paper."
+  },
+  {
+   "id": "S4.1.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "tie rule q_j = floor(tj/s + 1/2), ties rounded upward"
+   ],
+   "note": "The page defines S, T, q_j, beta_j, C, D and N=CTD as the paper does. It shows that the j-th summand of (Nu)_j is exactly u_j and gives a qualitative reason why the other terms are damped. Like the paper, it imports the numerical bound ||N-I||<2.01e^{-pi alpha^2 theta/2}<2^{-alpha^2 theta} from Harvey and van der Hoeven."
+  },
+  {
+   "id": "S4.1.4b",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "\"Since alpha^2<p and theta>p/alpha^4, alpha^2 theta>p/alpha^2>1, so ||N-I||<1/2\" reproduces the paper's chain, and adds the explicit series N^{-1}=sum_i(-1)^i(N-I)^i. That series is correct."
+  },
+  {
+   "id": "S4.1.4c",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The normalisations S'=S/2, J'=N^{-1}/2 and D'=2^{-(2alpha^2-2)}D are given exactly. The norm bounds 3/4, 7/8 and 1 are imported, as in the paper, which takes them from the proof of Proposition 4.7(i). The page then shows that A and B_0 are contractions via ||C||=1."
+  },
+  {
+   "id": "S4.1.4d",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "invertibility of the diagonal map D (used when writing D^{-1})"
+   ],
+   "note": "\"As CT=ND^{-1}, the map DN^{-1}C is a left inverse of T. Applying it to the identity gives DN^{-1}CP_tF_tS=P_sF_s\". With the product 2^{-(2alpha^2-2)}2^{-1}2^{-1}=2^{-2alpha^2}, this gives B_0P_tF_tA=2^{-2alpha^2}P_sF_s, matching the paper."
+  },
+  {
+   "id": "S4.1.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the cited routines take and give coordinates in increasing order, and every output is in the disk grid",
+    "the sources, Lemmas 4.8, 4.9 and 4.12 of Harvey and van der Hoeven"
+   ],
+   "note": "The page only asserts the table (\"Harvey and van der Hoeven's algorithms give approximations ... with errors 16p, 3p^2/4, 4 and times ...\"). The values are correct. The paper also only quotes them, but the page drops the ordered-coordinate property that makes these 'ordered numerical maps'."
+  },
+  {
+   "id": "S4.1.5.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "The page quotes the error 16p and time O(tp^{3/2+delta}alpha) for S~' correctly, without derivation (the paper also quotes it)."
+  },
+  {
+   "id": "S4.1.5.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "The page quotes the error 3p^2/4 and time O(tp^{3/2+delta}alpha) for J~' correctly, and describes the Neumann evaluation later. The guarantee itself is only quoted."
+  },
+  {
+   "id": "S4.1.5.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "The page quotes the error 4 and time O(tp^{1+delta}) for D~' correctly, without derivation."
+  },
+  {
+   "id": "S4.1.6",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "q_0=0, q_{s-1}<t and q_{j+1}>q_j, which make the selection an ordered subsequence",
+    "the forward scan over the t input records that copies a record when the coordinate counter equals the next q_j",
+    "the incremental index generation: t=hs+rho, tj=sf_j+e_j, q_j=f_j+1_{2e_j>=s}, carry c_j=1_{e_j+rho>=s}, counters of O(p) bits",
+    "the division for h and rho in O((log t)^2)=O(tp), and the scan and counter cost O(tp)"
+   ],
+   "note": "\"The selection C picks an ordered subsequence (since t/s>1), and the indices are generated in order with O(p) work each. So C takes O(tp) time with zero error\" restates the paper's conclusions. The page asserts the O(p)-per-index generation without its counter scheme, and never mentions the scan over the t records, which is where the O(tp) cost comes from."
+  },
+  {
+   "id": "S4.1.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the rule that composing approximations adds their errors because each exact map is a contraction (the page only alludes to it)"
+   ],
+   "note": "The page assembles A~=S~' and B~_0=D~'J~'C (C exact), so the errors are 16p<p^2 and 4+3p^2/4<p^2 for p>100, and the times sum to O(tp^{3/2+delta}alpha), as in the paper."
+  },
+  {
+   "id": "S4.1.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "rounding of u/2 is toward zero in the real and imaginary parts (Lemma 4.12)",
+    "the error bound 2^p||E~z-Ez||<p/3 of Lemma 4.11",
+    "the record-size bound: k<=alpha^2+1<p+1, so the signed partial sums need p+ceil(log2(k+1))+O(1)=O(p) bits, and each E~ row accumulator needs O(p) bits with m=ceil(sqrt p/(2alpha))"
+   ],
+   "note": "The page sets E=N-I and K=ceil(p/(alpha^2 theta)), uses E~ mapping D_p^s into itself, starts from the rounding of u/2, and argues by induction that every iterate stays in D_p^s, giving J~'u=sum_{i<K}(-1)^i v~^{(i)}, as in the paper. It omits the bounds on the accumulator records."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "Let $s<t<2^p$ be coprime integers",
+   "problem": "The lemma assumes 2<=s<t<2^p. The lower bound s>=2 is dropped."
+  },
+  {
+   "severity": "minor",
+   "quote": "For each $j$ let $q_j$ be the integer nearest $tj/s$",
+   "problem": "The nearest integer is not unique when tj/s is a half-integer, which happens for j=s/2 when s is even, since t is then odd. The paper fixes q_j=floor(tj/s+1/2), with ties rounded upward."
+  }
+ ],
+ "motivation_given": true
+}

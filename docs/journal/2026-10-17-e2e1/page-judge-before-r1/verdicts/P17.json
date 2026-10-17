@@ -1,0 +1,130 @@
+{
+ "page": "P17",
+ "items": [
+  {
+   "id": "S4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "how the opposite transform $RF_{\\boldsymbol s}^+$ is computed without executing $R$: conjugate the input and output of the algorithm for $RF_{\\boldsymbol s}$ (conjugation flips the Fourier sign, commutes with the real permutation $R$, and preserves the grid, the norm and the error bound)"
+   ],
+   "note": "The page assembles the step: it tensors the resampling identity, cites the chirp page for absorbing $Q$ ('So $Q$ is part of a convolution of length $T$ and never executed'), and derives the cancellation of $R$. This follows the paper, but the page never says how $RF_{\\boldsymbol s}^+$ is itself computed without a permutation."
+  },
+  {
+   "id": "S4.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "error less than $p^2$ for the approximations $\\widetilde A$, $\\widetilde B_0$",
+    "hypothesis $\\theta=t/s-1>p/\\alpha^4$ (and $p>100$, $2\\le\\alpha<\\sqrt p$), left as 'with $p$, $\\alpha$, $\\delta$ as there'"
+   ],
+   "note": "Belongs to the Gaussian resampling page. It is correctly stated and linked here ('That page gives linear contractions $A$, $B_0$ ... with $P_sF_s=2^{2\\alpha^2}B_0P_tF_tA$'), but without the $p^2$ error bound that the page later relies on."
+  },
+  {
+   "id": "S4.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "contraction argument: each axis map acts independently on its lines (zero on invalid lines), so in the max norm its bound is the maximum over lines",
+    "per-axis error less than $p^2$ as the maximum of the line errors, before composing the $d$ axis maps",
+    "valid-set bookkeeping in the padded box: zero embedding outside $\\prod_i[0,s_i)$, zero lines written for invalid lines, and in compression $s_i$ outputs followed by $t_i-s_i$ zeros"
+   ],
+   "note": "Only the identity (S4.2.1) and setup negligibility (S4.2.4) are derived. 'Both $\\mathcal A$ and $\\mathcal B_0$ are contractions', the error bound $dp^2$ (only 'Errors and times add over the $d$ passes') and both cost bounds are asserted, not shown."
+  },
+  {
+   "id": "S4.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "hypothesis that all pairs $(s_i,t_i)$ use the same $p,\\alpha,\\delta$ (needed for $\\gamma=2d\\alpha^2$); it is only implicit"
+   ],
+   "note": "The page states the product rule $(\\bigotimes X_i)(\\bigotimes Y_i)=\\bigotimes X_iY_i$ and uses it: 'the left sides combine to $RF_{\\boldsymbol s}$ and the right sides to $\\mathcal B_0QF_{\\boldsymbol t}\\mathcal A$ times $d$ factors $2^{2\\alpha^2}$'. This is the paper's tensoring argument, with more detail."
+  },
+  {
+   "id": "S4.2.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "at most $T/t_i$ lines invoke the axis-$i$ algorithm, each costing $O(t_ip^{3/2+\\delta}\\alpha)$, so $\\sum_i(T/t_i)\\,O(t_ip^{3/2+\\delta}\\alpha)=O(dTp^{3/2+\\delta}\\alpha)$",
+    "initial padding $O(Tp)$ and scanning/zeroing $O(Tp)$ per axis, absorbed in the bound"
+   ],
+   "note": "'Errors and times add over the $d$ passes: ... time $O(dTp^{3/2+\\delta}\\alpha)$ with a constant independent of $d$' explains only the factor $d$. The per-axis line count $T/t_i$ that yields the factor $T$ is not given here."
+  },
+  {
+   "id": "S4.2.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "each adjacent interchange of two axis fields costs $O(Tp(1+\\ell^\\tau))$",
+    "equal-width fields use the chunk-swap bound $O(Vu^\\tau)$; unequal widths ($\\ell$ vs $\\ell-1$ bits, since $t_i\\in\\{r/2,r\\}$) need the leading bit split off and moved by the fixed-digit movement primitive",
+    "$O(d)$ adjacent interchanges to expose and restore one axis, hence $O(d^2)$ for all axes",
+    "the interchanges are exact permutations, so they change neither norms nor errors"
+   ],
+   "note": "The cost $O(Tp\\,d^2(1+\\ell^\\tau))$ is asserted with a citation ('exposing and restoring all lines of the padded box costs ...'). The adjacent-interchange cost and the $O(d^2)$ count that produce it are missing."
+  },
+  {
+   "id": "S4.2.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page follows the paper exactly: 'Since $t_i\\ge r/2$, each tensor map invokes at most $\\sum_iT/t_i\\le 2dT/r$ lines', setup $O(p^\\nu)$ per line totals $O(dTp^\\nu/r)$, and the ratio $O(dp^{\\nu-1}/r)\\to0$ when $r$ outgrows every power of $p$ and $d$ is polynomially bounded."
+  },
+  {
+   "id": "S4.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "Belongs to the chirp page. It is correctly stated with the even-$t_i$ hypothesis, the chirp $a_{\\boldsymbol j}$ and $QF_{\\boldsymbol t}u=\\overline a\\cdot(a*(\\overline a\\cdot u))/T$, and it is linked."
+  },
+  {
+   "id": "S4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "how the opposite transform $RF_{\\boldsymbol s}^+$ is computed without executing $R$ (conjugating the input and output of an algorithm for $RF_{\\boldsymbol s}$)"
+   ],
+   "note": "The identity $(RF_{\\boldsymbol s}^+)[(RF_{\\boldsymbol s}u)\\cdot(RF_{\\boldsymbol s}v)]=u*v/S^2$ is derived along the paper's route: the substitution in the Fourier sum, tensoring, commuting with pointwise products, then the convolution rule and $F^+F=I/S$."
+  },
+  {
+   "id": "S4.4.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Substituting $w'=\\beta w$ ... gives $\\frac1q\\sum_{w'}z_{w'}e^{2\\pi i w'\\beta^{-1}j/q}$, which is $(R_\\beta^{-1}F_q^+z)_j$': this is the paper's substitution $h=ck$, written out correctly for a unit $\\beta$."
+  },
+  {
+   "id": "S4.4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Each $t_i$ is a unit modulo $s_i$, and $R$ applies $R_{t_i}$ on axis $i$, so tensoring gives $RF_{\\boldsymbol s}^+R=F_{\\boldsymbol s}^+$'. The page skips the intermediate $F_{\\boldsymbol s}^+R=R^{-1}F_{\\boldsymbol s}^+$, but it is immediate."
+  },
+  {
+   "id": "S4.4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page derives $F_q^+F_q=I/q$ from orthogonality of characters and tensors it to $I/S$. Like the paper, it recalls the normalized convolution rule $F_{\\boldsymbol s}(u*v)=S(F_{\\boldsymbol s}u)\\cdot(F_{\\boldsymbol s}v)$ without proof."
+  },
+  {
+   "id": "S4.4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'so this equals $\\frac1SF_{\\boldsymbol s}^+F_{\\boldsymbol s}(u*v)=u*v/S^2$' combines the two normalizations exactly as the paper does."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "That page gives linear contractions $A$, $B_0$ ($B_0$ is not the packing base) with $P_sF_s=2^{2\\alpha^2}B_0P_tF_tA$, computed in time $O(tp^{3/2+\\delta}\\alpha)$ without executing $P_s$ or $P_t$.",
+   "problem": "The restatement of Lemma no-sort-resampling drops that the approximations $\\widetilde A,\\widetilde B_0$ have error less than $p^2$. The page later claims 'error below $dp^2$', and this per-axis bound is its only source, so it is never stated on the page."
+  },
+  {
+   "severity": "minor",
+   "quote": "Take $d$ axes with pairwise coprime prime lengths $s_i$ and power-of-two lengths $t_i>s_i$ (so $\\gcd(s_i,t_i)=1$ for odd $s_i$).",
+   "problem": "$\\gcd(s_i,t_i)=1$ is a hypothesis of the resampling lemma and is what makes $t_i$ a unit modulo $s_i$ in the cancellation. The page leaves the case $s_i=2$ open instead of requiring odd primes. The paper chooses distinct odd primes $s_i$, so every $\\gcd(s_i,t_i)=1$."
+  }
+ ],
+ "motivation_given": true
+}

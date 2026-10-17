@@ -1,0 +1,13 @@
+{"page": "P16",
+ "items": [
+  {"id": "S5.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page sets b, T, S with the paper's values (b=ceil(log2 n), 4n/b<=T<8n/b, T/2<S<T), writes the digit polynomials, gets degree 2q-2<2n/b<=T/2<S, and so no wraparound modulo x^S-1, and gets the bound c_j<=q(2^b-1)^2<2^{3b}. This is the paper's argument (lines 4183-4193), with each inequality spelled out."},
+  {"id": "S5.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Writes u=sum u_i 2^{bi} with q=ceil(n/b) digits 0<=u_i<2^b, padded with leading zeros, and evaluates at x=2^b. Then: \"Each digit polynomial has degree at most q-1, so the product polynomial has degree at most 2q-2.\""},
+  {"id": "S5.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Justifies each link in the chain: \"q<n/b+1 and so 2q-2<2n/b\", \"2n/b<=T/2 because T>=4n/b\", and T/2<S from the prime choice. Then it explains folding x^j onto x^{j mod S} and checks it with an example (q=3: S=5 safe, S=4 folds c_4 onto c_0)."},
+  {"id": "S5.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "\"Each c_j is a sum of at most q products u_iu'_k, each between 0 and (2^b-1)^2\" gives c_j<=q(2^b-1)^2. Then \"Since q<=n<=2^b, this is below 2^b*2^{2b}=2^{3b}\", which matches the paper's justification."}
+ ],
+ "errors": [],
+ "motivation_given": true}

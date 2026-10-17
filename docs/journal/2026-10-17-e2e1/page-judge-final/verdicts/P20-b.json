@@ -1,0 +1,11 @@
+{"page": "P20",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "a way of storing a list of complex numbers so that multiplying by a root of unity costs only a signed rotation of the list, with no arithmetic",
+   "problem": "Only the roots of unity that are powers of y (of order dividing 2r) act as signed shifts; multiplying by a general root of unity in R_r, such as the scalar e^{2 pi i/3}, needs actual complex multiplications. The paper (lines 82-84, 2782-2784) says only that powers of y serve as roots of unity and that multiplying by y^a permutes the coefficients and changes some signs. The page itself gets this right later ('powers of y available as roots of unity')."},
+  {"severity": "minor",
+   "quote": "In the variant called decimation in frequency, each stage pairs the first-half entries with the second-half entries",
+   "problem": "Only the first level pairs z_k with z_{k+t/2} across the whole axis. After that, the length-t/2 procedure is applied separately within each branch, so at later levels the pairing is between the first and second halves of each current branch, not of the whole list (paper lines 2832-2837, 2853-2855)."}
+ ],
+ "motivation_given": true}

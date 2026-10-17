@@ -1,0 +1,11 @@
+{"page": "P25",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "The remedy is to let one pass do the work of many levels, which needs cheaper movement and cheaper arithmetic together",
+   "problem": "Neither primitive does many levels in one pass. The paper's bounds are O(Vu^tau) for interchanging u address bits and O(Vd^{lambda'}) for a simultaneous layer on up to d chunks (paper lines 95-111). Both costs grow with the number of levels handled, only sublinearly (tau, lambda' < 1). The saving is fewer than u (or d) passes for u (or d) levels, not one pass."},
+  {"severity": "minor",
+   "quote": "The terms also carry fixed powers of $\\log p$, for example the $O(p\\log p)$ cost of multiplying two $p$-bit numbers, a normalized factor $\\log p$. Half the margin pays for them",
+   "problem": "In the paper the O(p log p)-per-entry products (for example the two final products by S) are an additive normalized cost O(log p)=O(p^delta). The table lists them separately, and the p^delta rows absorb them (lines 4827-4829, 4899-4900). They are not a log p factor on a dominant term that needs the kappa slack. The paper says only that the slack 'will cover any remaining fixed power of log p' (lines 4854-4855, 4983-4985), so the example misplaces where that slack is used. The conclusion p^{1-2kappa}(log p)^{O(1)} <= p^{1-kappa} still holds."}
+ ],
+ "motivation_given": true}
