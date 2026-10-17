@@ -1,0 +1,194 @@
+{
+ "missing": [],
+ "agreement": {
+  "items": 15,
+  "agree": 9,
+  "share": 0.6,
+  "kappa": 0.308
+ },
+ "disagreements": [
+  {
+   "row": "86",
+   "arm": "SI",
+   "original": 1,
+   "original_borderline": true,
+   "reviewer": 0,
+   "reviewer_borderline": true,
+   "original_reason": "Exact volume V/W per subcall needs the paper's row hypothesis (row field divisible by W^k, 1481-1483); the page drops it. Same as row 130, borderline for the same reason.",
+   "reviewer_reason": "The statement is the paper's own overview statement and is true of the recursion as the paper sets it up, where rows are supplied and padded once at the root so every split is exact. The divisibility hypothesis is a technical precondition the page leaves implicit; without it, padding at each level could make subcall volumes exceed V/W, so a strict reader can call the claim under-hypothesised. The note's complaint about why the parameter is a power of m is only exposition. Borderline."
+  },
+  {
+   "row": "130",
+   "arm": "SI",
+   "original": 1,
+   "original_borderline": true,
+   "reviewer": 0,
+   "reviewer_borderline": false,
+   "original_reason": "The paper's power-width bound assumes a row field preceding both chunks with length divisible by W^k (1475-1487); arbitrary widths and rows come later (Lemma chunk-swap, 1631-1660). The page drops the row hypothesis. Borderline: a simplification an explanation page might make, since rows are padded on the role-streams page.",
+   "reviewer_reason": "The quoted statement is explicitly restricted to u=m^k, so the objection that the recurrence covers only powers of m misreads it. The conclusion that interchanging such fields costs O(Vu^tau) is true in the paper without any row hypothesis (Lemma chunk-swap), and it follows from the page's own recurrence; the row field is a hypothesis of the paper's intermediate proposition, i.e. of how the recurrence is realized, not of the stated result. That the page does not mention the extension lemma is an exposition point."
+  },
+  {
+   "row": "131",
+   "arm": "SI",
+   "original": 1,
+   "original_borderline": false,
+   "reviewer": 0,
+   "reviewer_borderline": true,
+   "original_reason": "The page leaves eta>0 unrestricted, but lambda must also exceed tau(1+eta/vartheta) (which the page itself states) and be below 1; the paper chooses c so that tau(1+c/beta)<1 (2394-2399, 4021). Without that condition no admissible lambda need exist. A dropped hypothesis.",
+   "reviewer_reason": "The quoted claim is correct: lambda>log_m(s/W) is equivalent to m^lambda>s/W, i.e. ratio below 1. The other conditions on lambda are on the page (lambda>tau(1+eta/vartheta) at line 9, which implies lambda>tau; sigma<lambda at line 17). The real gap the note finds is elsewhere: the page never requires eta small enough that tau(1+eta/vartheta)<1, so these conditions together might admit no lambda<1. Because this sentence can be read as the page's full choice of lambda, the verdict is borderline."
+  },
+  {
+   "row": "177",
+   "arm": "SI",
+   "original": 1,
+   "original_borderline": false,
+   "reviewer": 0,
+   "reviewer_borderline": true,
+   "original_reason": "Same defect as row 273: the example drops the sign epsilon_w that the page and the paper (818-822) keep.",
+   "reviewer_reason": "The example illustrates the telescoping of frames ('however many gates'), and 'its operator' reads naturally as the endpoint (frame) operator D_nu I^{-1}=D_nu, which is how line 13 and the paper at 1279-1282 use the word, with the scalar sign treated separately. Read as the full route action of line 15, it would be -D_nu when eps_w=-1, so a strict reader can see a tension; that ambiguity in the word 'operator', which the paper shares, makes this borderline rather than a clear misstatement."
+  },
+  {
+   "row": "273",
+   "arm": "I",
+   "original": 1,
+   "original_borderline": false,
+   "reviewer": 0,
+   "reviewer_borderline": true,
+   "original_reason": "The page has just derived that a route applies epsilon_w D_sink D_source^{-1} (paper 818-822 keeps the sign). With source frame I and sink frame D_nu the operator is epsilon_w D_nu; 'its operator is D_nu' is false for sign -1.",
+   "reviewer_reason": "Same quoted statement as R04. The example concerns cancellation of intermediate frames, and 'its operator' as the sign-free endpoint operator D_nu is consistent with line 13 and with the paper's own usage at 1279-1282; it is wrong only if 'operator' is read as the full signed route action of line 15 with eps_w=-1. The note's mathematics is correct under that reading, so the verdict is borderline."
+  },
+  {
+   "row": "339",
+   "arm": "SI",
+   "original": 1,
+   "original_borderline": true,
+   "reviewer": 0,
+   "reviewer_borderline": true,
+   "original_reason": "Labels are subspaces of (Q^h)^{tensor 3}; t_S^perp is in Q^h. The paper's growth is P tensor <t_X> inside P tensor t_Y^perp (945-950, 1046-1058). As written the sentence is false. Borderline: the intended factor-level meaning is recoverable and the dimension count h-2 is right.",
+   "reviewer_reason": "The mathematics is right: on the exposed tensor factor, <t_T> lies in t_S^perp by orthogonality, and the growth from dimension 1 to h-1 adds h-2, which is also the dimension added in F because P and Q are lines. The page suppresses the line factors P and Q (as the paper itself suppresses Q at line 944), so the sentence is loosely typed with respect to its own definition of a label; whether that is an acceptable informal shorthand or a misstatement is a matter of judgement."
+  }
+ ],
+ "decoys": {
+  "D3": {
+   "id": "R02",
+   "genuine": 0,
+   "borderline": false
+  },
+  "D1": {
+   "id": "R08",
+   "genuine": 0,
+   "borderline": false
+  },
+  "D2": {
+   "id": "R10",
+   "genuine": 0,
+   "borderline": false
+  },
+  "D4": {
+   "id": "R12",
+   "genuine": 0,
+   "borderline": false
+  }
+ },
+ "decoys_accepted": 0,
+ "by_scheme": {
+  "original": {
+   "I": {
+    "alarms": 6,
+    "genuine": 3,
+    "false": 3,
+    "F_A": 0.5,
+    "meets_F_A": true
+   },
+   "SI": {
+    "alarms": 9,
+    "genuine": 8,
+    "false": 1,
+    "F_A": 0.167,
+    "meets_F_A": true
+   }
+  },
+  "original, borderline flipped": {
+   "I": {
+    "alarms": 6,
+    "genuine": 3,
+    "false": 3,
+    "F_A": 0.5,
+    "meets_F_A": true
+   },
+   "SI": {
+    "alarms": 9,
+    "genuine": 4,
+    "false": 5,
+    "F_A": 0.833,
+    "meets_F_A": false
+   }
+  },
+  "reviewer": {
+   "I": {
+    "alarms": 6,
+    "genuine": 2,
+    "false": 4,
+    "F_A": 0.667,
+    "meets_F_A": false
+   },
+   "SI": {
+    "alarms": 9,
+    "genuine": 3,
+    "false": 6,
+    "F_A": 1.0,
+    "meets_F_A": false
+   }
+  },
+  "reviewer, borderline flipped": {
+   "I": {
+    "alarms": 6,
+    "genuine": 3,
+    "false": 3,
+    "F_A": 0.5,
+    "meets_F_A": true
+   },
+   "SI": {
+    "alarms": 9,
+    "genuine": 6,
+    "false": 3,
+    "F_A": 0.5,
+    "meets_F_A": true
+   }
+  },
+  "both genuine (intersection)": {
+   "I": {
+    "alarms": 6,
+    "genuine": 2,
+    "false": 4,
+    "F_A": 0.667,
+    "meets_F_A": false
+   },
+   "SI": {
+    "alarms": 9,
+    "genuine": 3,
+    "false": 6,
+    "F_A": 1.0,
+    "meets_F_A": false
+   }
+  },
+  "either genuine (union)": {
+   "I": {
+    "alarms": 6,
+    "genuine": 3,
+    "false": 3,
+    "F_A": 0.5,
+    "meets_F_A": true
+   },
+   "SI": {
+    "alarms": 9,
+    "genuine": 8,
+    "false": 1,
+    "F_A": 0.167,
+    "meets_F_A": true
+   }
+  }
+ },
+ "outside_packet": [],
+ "reading": "R3: not met under the independent review; the recall/false-alarm trade-off is documented"
+}

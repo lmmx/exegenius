@@ -48,7 +48,7 @@ Limitations: One run per configuration; six pages of one paper; 28 page-detectab
 - **I** (1 runs)
 - **SI** (1 runs)
 
-Limitations: One run per arm; six pages of one paper; 13 source-only errors. The seeds and the adjudication are this session's; the adjudicator was effectively unblinded by content, since SI's notes cite the paper. SI's F_A pass rests on borderline adjudications: with them flipped, SI fails F_A. B on A1's variants reuses answers from 2026-10-15. Hand labels are one labeller's (this session's), blind to arm by masking but SI's notes may reveal it by content.
+Limitations: One run per arm; six pages of one paper; 13 source-only errors. The seeds and the adjudication are this session's; the adjudicator was effectively unblinded by content, since SI's notes cite the paper. B on A1's variants reuses answers from 2026-10-15. Hand labels are one labeller's (this session's), blind to arm by masking but SI's notes may reveal it by content. SI's F_A pass rests on the original, lenient adjudication: under an independent blind review it fails (3 of 9 alarms genuine).
 
 ### E1: Planner definition against general-purpose, Sonnet at high effort
 

@@ -1,8 +1,40 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-17 08:44 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-17 17:18 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
 
-## Update, 2026-10-17 13:31 UTC (read first)
+## Checkpoint, 2026-10-17 17:18 UTC (read first)
+
+**Quota:**
+- The author's reading at about 17:06: session 2% used (resets ~21:00), weekly 11% used.
+- Spent since: the alarm review 2.0 M cache read, plus this session's orchestration.
+- **W3 stage 1 waits for a further live reading,** as the author asked. The stage's allowance is 155 M, and it launches if the session window is at most ~25% used.
+
+**Done:**
+- **The A2 independent alarm review: R3.**
+  - The reviewer finds 3 of SI's 9 clean-page alarms genuine (F_A 1.00), with 0 of 4 decoys accepted.
+  - Agreement with the original adjudication is 9/15 (κ 0.31).
+  - **Effect:** SI's false-alarm reading does not hold under independent review. The trade-off is documented in `plans/A2.md`, and the policy ledger's audit row is updated. No default changed.
+- **J26 prepared (948b66c):** `tools/w3judge.py` (assignments, blinding with seed 20261047, the reading) and the nine assignments in `docs/journal/2026-10-17-w3-judge/`.
+- **W3 pre-launch check:**
+  - the binary is `exegenius` → `target/debug/exegenius`, sha256 c37a2b3d… (0.6.0);
+  - 24 prompts (15 Sonnet `high`, 9 Opus `xhigh`);
+  - no write task submitted yet.
+
+**Commits now go from the scratch clone** `scratchpad/rewrite` (author Louis Maddox). The main working copy is still on the pre-rewrite history until it is synced (`git fetch origin && git reset --hard origin/master`).
+
+**Next:**
+1. **On a live reading within the limit,** launch W3 stage 1: 24 runs from `scratchpad/w3-prompts.tsv` (description, model, effort, root, prompt word for word), in two foreground batches of 12.
+   - Check the binary's sha256 first.
+   - Do not rebuild the shared binary while W3 runs.
+2. Once all runs are accepted:
+   - `python3 -I calibration/tools/w3judge.py prep docs/journal/2026-10-17-w3-judge scratchpad/j26prompts`;
+   - then, on a fresh reading (session ≤ ~70%), 72 judges in four foreground batches;
+   - then `w3judge.py read`.
+3. **The author's decisions:**
+   - SI (adopt with the trade-off, or test a revised SOURCE text);
+   - writer routing, after W3.
+
+## Update, 2026-10-17 13:31 UTC
 
 **At the author's request:**
 - **Commit messages rewritten.** The Claude trailers were removed from 253 commits on `master`, PR #13's branch and two experiment branches. Trees, authors and dates are unchanged, and the commits are signed. **Commit IDs in the records are the old ones:** map them with `docs/journal/2026-10-17-history-rewrite.md`.

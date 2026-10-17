@@ -145,6 +145,11 @@
    "value": "one SI task called a nonexistent lowercase `bash` tool; no effect",
    "basis": "reported",
    "source": "docs/journal/2026-10-17-a2-run/answers/collect.json"
+  },
+  "independent_review": {
+   "value": "exploratory sensitivity analysis, fixed 08:40 and run 17:07 (one fresh Opus reviewer, masked notes, 4 decoys, no arm map). Reviewer: SI 3 of 9 clean-page alarms genuine (F_A 1.00 per clean page), I 2 of 6; 0 of 4 decoys accepted; agreement with the original adjudication 9 of 15, kappa 0.31, all six disagreements original-genuine/reviewer-not (five borderline). Reading R3: SI's false-alarm criterion is not met under the independent review; the trade-off is documented and adoption is the author's call. 2.0 M cache read",
+   "basis": "reported",
+   "source": "docs/journal/2026-10-17-a2-review/score.json; calibration/plans/A2.md (Independent review: result)"
   }
  },
  "deviations": [
@@ -168,8 +173,8 @@
  "limitations": [
   "One run per arm; six pages of one paper; 13 source-only errors.",
   "The seeds and the adjudication are this session's; the adjudicator was effectively unblinded by content, since SI's notes cite the paper.",
-  "SI's F_A pass rests on borderline adjudications: with them flipped, SI fails F_A.",
   "B on A1's variants reuses answers from 2026-10-15.",
-  "Hand labels are one labeller's (this session's), blind to arm by masking but SI's notes may reveal it by content."
+  "Hand labels are one labeller's (this session's), blind to arm by masking but SI's notes may reveal it by content.",
+  "SI's F_A pass rests on the original, lenient adjudication: under an independent blind review it fails (3 of 9 alarms genuine)."
  ]
 }
