@@ -1,54 +1,288 @@
-{"page": "P20",
+{
+ "page": "P20",
  "items": [
-  {"id": "S6",
+  {
+   "id": "S6",
    "presence": "derived",
    "faithful": true,
-   "dropped": ["p = Theta(log n) (paper: p = 6*ceil(log2 n)), needed to turn O(Tp p^{1-kappa}) into O(n (log n)^{1-kappa})"],
-   "note": "The page follows the paper's route: it divides each cost by V, tabulates the seven dominant powers, justifies each row from the lemmas, takes the minimum margin 2^{-181} = 2kappa, shows setup and repair are o(V), and absorbs log factors and small n. The final paragraph also explains why g_2 is the smallest margin."},
-  {"id": "S6.1",
+   "dropped": [
+    "p = Theta(log n) (paper: p = 6*ceil(log2 n)), needed to turn O(Tp p^{1-kappa}) into O(n (log n)^{1-kappa})"
+   ],
+   "note": "The page follows the paper's route: it divides each cost by V, tabulates the seven dominant powers, justifies each row from the lemmas, takes the minimum margin 2^{-181} = 2kappa, shows setup and repair are o(V), and absorbs log factors and small n. The final paragraph also explains why g_2 is the smallest margin."
+  },
+  {
+   "id": "S6.1",
    "presence": "derived",
    "faithful": true,
-   "dropped": ["the two absorbed rows: final scaling and rounding (p^delta) and input, padding, carries and output (1)", "twists and scalar products in the chirp row (the page labels it only 'Chirps')", "a fixed number of repeated transforms and convolutions is included in the constants"],
-   "note": "The table matches Table tab:costs row by row (cost/V, power of p) and adds the margin column g_i. The sizes d, K, l, alpha are given just before it, so each power can be read off, and the page shows the less obvious ones: 'd^2 l^tau = p^{2eps} p^{(1-eps)tau}' and 'log(rp) = O(p^{1-eps}) since r <= 2^{O(p/d)}'."},
-  {"id": "S6.2",
+   "dropped": [
+    "the two absorbed rows: final scaling and rounding (p^delta) and input, padding, carries and output (1)",
+    "twists and scalar products in the chirp row (the page labels it only 'Chirps')",
+    "a fixed number of repeated transforms and convolutions is included in the constants"
+   ],
+   "note": "The table matches Table tab:costs row by row (cost/V, power of p) and adds the margin column g_i. The sizes d, K, l, alpha are given just before it, so each power can be read off, and the page shows the less obvious ones: 'd^2 l^tau = p^{2eps} p^{(1-eps)tau}' and 'log(rp) = O(p^{1-eps}) since r <= 2^{O(p/d)}'."
+  },
+  {
+   "id": "S6.2",
    "presence": "derived",
    "faithful": true,
    "dropped": [],
-   "note": "The parameters eps=2^{-75}, c=2^{-56}, tau=1-2^{-50}, lambda'=1-2^{-54}, delta=1/16 are stated, and the substitution is shown for the binding rows ('g_2=2^{-75}2^{-56}2^{-50}=2^{-181}', 'g_3=2^{-75}2^{-54}=2^{-129}'). The remaining bounds are asserted, as in the paper, and all are correct; the page concludes that the minimum is 2^{-181} = 2kappa."},
-  {"id": "S6.3",
+   "note": "The parameters eps=2^{-75}, c=2^{-56}, tau=1-2^{-50}, lambda'=1-2^{-54}, delta=1/16 are stated, and the substitution is shown for the binding rows ('g_2=2^{-75}2^{-56}2^{-50}=2^{-181}', 'g_3=2^{-75}2^{-54}=2^{-129}'). The remaining bounds are asserted, as in the paper, and all are correct; the page concludes that the minimum is 2^{-181} = 2kappa."
+  },
+  {
+   "id": "S6.3",
    "presence": "derived",
    "faithful": true,
-   "dropped": ["'then generating the exponentials' as part of the O(dp^{1+delta}) chirp cost per entry, and the twist and scalar pointwise products that fit the same row", "the two final products by S at O(p log p) per entry (normalized O(p^delta), the final-scaling row)", "the d CRT rotations, which copy valid and invalid intervals in O(dV)", "the condition 'when widths differ by one' for peeling the excess bit"],
-   "note": "Each row is justified as in the paper: O(dK) scans; O(p/K) exchanges (since dl=O(p)), each O(VK^tau), giving O(pK^{tau-1}); at most l rounds at O(Vd^{lambda'}); O(d^2) axis moves at O(V(1+l^tau)); the sum over axes of T/t_i lines at O(t_i p^{3/2+delta} alpha); chirps at O(dp^{1+delta}) per entry; and T/r records with four O(rp)-bit products, O(Tp log(rp)) in total, using the established multiplier."},
-  {"id": "S6.4",
+   "dropped": [
+    "'then generating the exponentials' as part of the O(dp^{1+delta}) chirp cost per entry, and the twist and scalar pointwise products that fit the same row",
+    "the two final products by S at O(p log p) per entry (normalized O(p^delta), the final-scaling row)",
+    "the d CRT rotations, which copy valid and invalid intervals in O(dV)",
+    "the condition 'when widths differ by one' for peeling the excess bit"
+   ],
+   "note": "Each row is justified as in the paper: O(dK) scans; O(p/K) exchanges (since dl=O(p)), each O(VK^tau), giving O(pK^{tau-1}); at most l rounds at O(Vd^{lambda'}); O(d^2) axis moves at O(V(1+l^tau)); the sum over axes of T/t_i lines at O(t_i p^{3/2+delta} alpha); chirps at O(dp^{1+delta}) per entry; and T/r records with four O(rp)-bit products, O(Tp log(rp)) in total, using the established multiplier."
+  },
+  {
+   "id": "S6.4",
    "presence": "derived",
    "faithful": true,
-   "dropped": ["only a fixed number of tensor maps (needed for the per-line O(dTp^C/r) total)", "the O(T/r)-records count applies only to visits that process polynomial records; the one-bit-payload address swap is covered separately by the descriptor estimate (log(2V_0))^{O(1)} = O(V_j)", "global setup and prime search are only asserted to be o(V) (the paper also refers back to an earlier proof)"],
-   "note": "The page follows the paper: at most p^A visits, each with p^C setup, give p^{A+C} = o(Tp); per-record and per-line work is o(Tp) because r exceeds every power of p; and the exceptional stream has length O(V_call d 2^{-K}), takes O(p) sorting scans, and sums to O(V p^{O(1)} 2^{-K}) = o(V)."},
-  {"id": "S6.5",
+   "dropped": [
+    "only a fixed number of tensor maps (needed for the per-line O(dTp^C/r) total)",
+    "the O(T/r)-records count applies only to visits that process polynomial records; the one-bit-payload address swap is covered separately by the descriptor estimate (log(2V_0))^{O(1)} = O(V_j)",
+    "global setup and prime search are only asserted to be o(V) (the paper also refers back to an earlier proof)"
+   ],
+   "note": "The page follows the paper: at most p^A visits, each with p^C setup, give p^{A+C} = o(Tp); per-record and per-line work is o(Tp) because r exceeds every power of p; and the exceptional stream has length O(V_call d 2^{-K}), takes O(p) sorting scans, and sums to O(V p^{O(1)} 2^{-K}) = o(V)."
+  },
+  {
+   "id": "S6.5",
    "presence": "derived",
    "faithful": true,
-   "dropped": ["p = Theta(log n), which links O(Tp p^{1-kappa}) to O(n (log n)^{1-kappa})", "the cutoff must lie beyond all the size, precision, margin and layout conditions", "the definition lg n = max{ceil(log2 n), 1}, which makes the bound meaningful at n = 1"],
-   "note": "The page combines 'each of the seven powers is at most 1-2kappa' with 'any fixed power of log p is at most p^kappa eventually' to get O(Tp p^{1-kappa}), then absorbs the schoolbook range below a fixed cutoff into the constant, as in the paper."}
+   "dropped": [
+    "p = Theta(log n), which links O(Tp p^{1-kappa}) to O(n (log n)^{1-kappa})",
+    "the cutoff must lie beyond all the size, precision, margin and layout conditions",
+    "the definition lg n = max{ceil(log2 n), 1}, which makes the bound meaningful at n = 1"
+   ],
+   "note": "The page combines 'each of the seven powers is at most 1-2kappa' with 'any fixed power of log p is at most p^kappa eventually' to get O(Tp p^{1-kappa}), then absorbs the schoolbook range below a fixed cutoff into the constant, as in the paper."
+  },
+  {
+   "id": "S6.1.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The table row 'Prefix moves | dK | eps(1+c) | g_1=1-eps(1+c)' follows from d=Theta(p^eps) and K=Theta(p^{eps c}), both stated in the line before. The bullet 'O(dK) linear scans, each O(V)' justifies the normalized cost."
+  },
+  {
+   "id": "S6.1.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The row 'pK^{tau-1} | 1-eps c(1-tau) | g_2=eps c(1-tau)' follows from K=Theta(p^{eps c}). The value 'g_2=2^{-75}2^{-56}2^{-50}=2^{-181}' is computed later on the page."
+  },
+  {
+   "id": "S6.1.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The row 'l d^{lambda'} | 1-eps(1-lambda')' follows from l=Theta(p^{1-eps}) and d=Theta(p^eps). The page computes 'g_3=2^{-75}2^{-54}=2^{-129}'."
+  },
+  {
+   "id": "S6.1.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "that the d^2 term is absorbed by d^2 l^tau (only implied)"
+   ],
+   "note": "The page gives 'd^2 l^tau = p^{2eps} p^{(1-eps)tau}', which yields the power tau+eps(2-tau) and the margin g_4=1-tau-eps(2-tau)."
+  },
+  {
+   "id": "S6.1.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The row 'dp^{1/2+delta} alpha | 3/4+delta+3eps/2' follows from d=Theta(p^eps) and alpha=Theta(p^{1/4+eps/2}), both stated at the top of the page."
+  },
+  {
+   "id": "S6.1.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "twists and scalar products belong to this row (the page labels it only 'Chirps')"
+   ],
+   "note": "The row 'dp^delta | eps+delta | g_6=1-delta-eps' follows from d=Theta(p^eps)."
+  },
+  {
+   "id": "S6.1.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page writes 'log(rp)=O(p^{1-eps}) since r <= 2^{O(p/d)}'. With d=Theta(p^eps) this gives the power 1-eps and the margin g_7=eps, as in the paper's 'log(rp)=O(p^{1-eps}+log p)'."
+  },
+  {
+   "id": "S6.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page shows the substitution 'g_2=2^{-75}2^{-56}2^{-50}=2^{-181}, g_3=2^{-75}2^{-54}=2^{-129}'. g_1>1/2 is immediate from g_1=1-eps(1+c) with eps=2^{-75}."
+  },
+  {
+   "id": "S6.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Substitution gives ... g_4>2^{-51}, g_5>1/8, g_6>1/2 and g_7=2^{-75}': the margin formulas and parameter values are on the page, and the paper also only says 'direct substitution gives'. The arithmetic for g_4 = 2^{-50} - 2^{-75}(1+2^{-50}) is not written out."
+  },
+  {
+   "id": "S6.2.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'so the smallest margin is 2^{-181}=2kappa' follows from the list. The slack is explained later: 'any fixed power of log p is at most p^kappa eventually, which the margin 2kappa leaves room for'."
+  },
+  {
+   "id": "S6.3.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'each costing O(VK^tau) by [Fast address-chunk interchange]' applies the chunk-interchange lemma by link, as the assignment asks and as the paper cites Lemma chunk-swap."
+  },
+  {
+   "id": "S6.3.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'The layout needs O(p/K) chunk exchanges, as dl=O(p) ... The total is O(p/K)K^tau=O(pK^{tau-1})' matches the paper. The word 'total' should be 'normalized total' (listed as a minor error)."
+  },
+  {
+   "id": "S6.3.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the condition 'when widths differ by one' for peeling the excess bit",
+    "the d CRT rotations, which copy valid and invalid intervals in O(dV) time, and their offset setup O(dTp^C/r)=o(Tp)"
+   ],
+   "note": "The page states O(d^2) adjacent axis moves, each costing O(V(1+l^tau)) by peeling, exchanging the equal-width parts and restoring, as in the paper. It omits when the peeling applies."
+  },
+  {
+   "id": "S6.3.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'axis i has at most T/t_i lines of cost O(t_i p^{3/2+delta} alpha) each, totalling O(dTp^{3/2+delta} alpha)' is the paper's sum over the d axes."
+  },
+  {
+   "id": "S6.3.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Dividing O(dTp^{3/2+delta} alpha) by V=Tp gives the table's 'dp^{1/2+delta} alpha', and alpha=Theta(p^{1/4+eps/2}) is stated at the top. The division is implicit in the 'Cost/V' column."
+  },
+  {
+   "id": "S6.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "generating the exponentials is part of the O(dp^{1+delta}) cost per entry",
+    "the numerators are computed modulo 2r",
+    "twist and scalar pointwise products fit the same row"
+   ],
+   "note": "'A chirp numerator ... has O(p) bits and sums d terms. The [Established O(n log n) multiplier], at cost O(N log 2N) on N bits, computes their squares and products in O(dp^{1+delta}) per entry' follows the paper's reasoning."
+  },
+  {
+   "id": "S6.3.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'The T/r ring-product records each need four products on O(rp) bits ... by the established multiplier at length o(n). The total is O(Tp log(rp))' matches the paper, including the use of the established multiplier rather than the new algorithm."
+  },
+  {
+   "id": "S6.4.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the internal recursion of the established multiplier and the iterations of the Gaussian algorithms are already charged separately"
+   ],
+   "note": "The page defines a visit, notes constant branching, depth O(log p) and polynomially many rounds and groups, fixes the exponents A and C, and concludes 'The setup costs at most p^{A+C}=o(Tp)', as in the paper."
+  },
+  {
+   "id": "S6.4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page gives the bad fraction O(d2^{-K}), Theta(rp) payload bits per record and an O(p)-bit key per exceptional record, hence the length 'O(V_call/(rp) d2^{-K}(rp+p)) = O(V_call d2^{-K})', exactly as in the paper."
+  },
+  {
+   "id": "S6.4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "extraction and reinsertion scans are already in the node overhead",
+    "this is a deterministic worst-case bound"
+   ],
+   "note": "The page has O(p) sorting scans costing O(V_call dp2^{-K}), summed over p^A visits of volume O(V) to O(V p^{O(1)} 2^{-K}) = o(V). Its stated reason, 'K=Theta(p^{eps c}) beats every power of p', should refer to 2^K (listed as a minor error)."
+  },
+  {
+   "id": "S6.5.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Each of the seven powers is at most 1-2kappa' follows directly from the margin list and min g_i = 2kappa computed above."
+  },
+  {
+   "id": "S6.5.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "'any fixed power of log p is at most p^kappa eventually' is asserted without justification, as in the paper. It is a standard fact, but the page does not show it."
+  },
+  {
+   "id": "S6.5.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "p = Theta(log n) (p = 6*ceil(log2 n)), needed for Tp p^{1-kappa} = O(n (log n)^{1-kappa})"
+   ],
+   "note": "The page combines the two previous facts to get 'O(Tp p^{1-kappa})' and uses V=Tp=Theta(n). It never states how p relates to n."
+  },
+  {
+   "id": "S6.5.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the cutoff lies beyond all the size, precision, margin and layout conditions",
+    "lg n = max{ceil(log2 n), 1}"
+   ],
+   "note": "'Schoolbook multiplication below a fixed cutoff is absorbed', with the cited 'smaller lengths are included by enlarging the implicit constant', gives the paper's argument for small n."
+  }
  ],
  "errors": [
-  {"severity": "minor",
+  {
+   "severity": "minor",
    "quote": "the repair costs $O(Vp^{O(1)}2^{-K})=o(V)$, because $K=\\Theta(p^{\\epsilon c})$ beats every power of $p$",
-   "problem": "K = Theta(p^{eps c}) is itself a small power of p and does not beat every power of p. What exceeds every fixed power of p is 2^K, because K/log p -> infinity (the paper: K/log p -> infinity, and K = Theta(p^{eps c}) with eps c > 0)."},
-  {"severity": "minor",
+   "problem": "K = Theta(p^{eps c}) is itself a small power of p and does not beat every power of p. What exceeds every fixed power of p is 2^K, because K/log p -> infinity (the paper: K/log p -> infinity, and K = Theta(p^{eps c}) with eps c > 0)."
+  },
+  {
+   "severity": "minor",
    "quote": "each costing $O(VK^\\tau)$ by [Fast address-chunk interchange](address-interchange.md). The total is $O(p/K)K^\\tau=O(pK^{\\tau-1})$.",
-   "problem": "The total cost is O(V pK^{tau-1}). O(p/K)K^tau is the total after dividing by V; the paper says 'so the normalized total is'."},
-  {"severity": "minor",
+   "problem": "The total cost is O(V pK^{tau-1}). O(p/K)K^tau is the total after dividing by V; the paper says 'so the normalized total is'."
+  },
+  {
+   "severity": "minor",
    "quote": "Each move peels one excess bit, exchanges the equal-width parts and restores it",
-   "problem": "The paper peels a single excess bit only 'when widths differ by one'. Equal-width axis moves need no peeling."},
-  {"severity": "minor",
+   "problem": "The paper peels a single excess bit only 'when widths differ by one'. Equal-width axis moves need no peeling."
+  },
+  {
+   "severity": "minor",
    "quote": "A visit touches $O(T/r)$ records, so $O(p^C)$ address work per record sums to $O(Tp^{A+C}/r)$",
-   "problem": "The paper bounds the records by O(T/r) only 'at a layer or synthetic-transform visit that processes polynomial records'. The general address swap also covers one-bit payloads, which have no polynomial suffix; their descriptor work is bounded separately by (log(2V_0))^{O(1)} = O(V_j)."},
-  {"severity": "minor",
+   "problem": "The paper bounds the records by O(T/r) only 'at a layer or synthetic-transform visit that processes polynomial records'. The general address swap also covers one-bit payloads, which have no polynomial suffix; their descriptor work is bounded separately by (log(2V_0))^{O(1)} = O(V_j)."
+  },
+  {
+   "severity": "minor",
    "quote": "1-\\tau (an exchange saves only $K^{-(1-\\tau)}$)",
-   "problem": "An exchange costs O(VK^tau) instead of O(VK), so it saves a factor K^{1-tau}: its cost is multiplied by K^{-(1-tau)}. As written, the saving and the resulting cost factor are confused."},
-  {"severity": "minor",
+   "problem": "An exchange costs O(VK^tau) instead of O(VK), so it saves a factor K^{1-tau}: its cost is multiplied by K^{-(1-tau)}. As written, the saving and the resulting cost factor are confused."
+  },
+  {
+   "severity": "minor",
    "quote": "Let $V=Tp=\\Theta(n)$ be the volume, the number of stored bits of $T$ coefficients of $p$ bits",
-   "problem": "The paper's coefficient formats use Theta(p) bits per coefficient, so a padded array has Theta(V) stored bits. V = Tp is a normalization, not the exact number of stored bits."}
+   "problem": "The paper's coefficient formats use Theta(p) bits per coefficient, so a padded array has Theta(V) stored bits. V = Tp is a normalization, not the exact number of stored bits."
+  }
  ],
- "motivation_given": true}
+ "motivation_given": true
+}
