@@ -1,0 +1,255 @@
+{
+  "goals": [
+    {
+      "question": "State the main result of the wiki and summarise, in a few sentences, how the multiplication algorithm achieves it: what is the problem reduced to, and which two operations are made faster?",
+      "kind": "summary",
+      "key_points": [
+        {
+          "point": "A single fixed deterministic machine with a finite alphabet and a fixed number of tapes multiplies two n-bit numbers in time n times a power of lg n that is strictly less than 1, namely exponent 1 minus 2^-182",
+          "role": "claim"
+        },
+        {
+          "point": "The integer product is first turned into a convolution of short coefficients, which is then handled as a convolution over a polynomial ring modulo y^r+1 using transforms",
+          "role": "background"
+        },
+        {
+          "point": "The two costly ingredients, moving data between address layouts and applying butterfly layers, are replaced by procedures costing the volume times a sublinear power of the field width or number of chunks",
+          "role": "reason"
+        },
+        {
+          "point": "Because this beats n log n in the same model where the conjecture was posed, the optimality conjecture fails there",
+          "role": "conclusion"
+        }
+      ],
+      "pages": [
+        "main-theorem",
+        "nlogn-conjecture",
+        "radix-digit-reduction",
+        "ring-convolution-retained-order",
+        "fast-address-interchange",
+        "fast-butterfly-layers"
+      ]
+    },
+    {
+      "question": "Why does the paper bother to speed up address interchanges and butterfly layers specifically, rather than only using a smarter transform? Why would a faster algorithm have to attack exactly these two operations?",
+      "kind": "motivation",
+      "key_points": [
+        {
+          "point": "A transform-based multiplier has a number of levels proportional to the logarithm of the size, and each level touches all the stored bits",
+          "role": "background"
+        },
+        {
+          "point": "Each level involves rearranging data on the tapes plus arithmetic on pairs of entries, so the total is the volume times the number of levels, which is the n log n barrier",
+          "role": "reason"
+        },
+        {
+          "point": "Therefore the only way to lower the overall bound is to make both the per-level data movement and the per-level arithmetic cost less than a full pass over the data",
+          "role": "conclusion"
+        }
+      ],
+      "pages": [
+        "main-theorem",
+        "dft-fft",
+        "fixed-tape-model",
+        "address-fields",
+        "nlogn-conjecture"
+      ]
+    },
+    {
+      "question": "The recursion for the interchange and butterfly procedures gives a cost of volume times a power of the parameter that is below 1. Explain why the condition that the number of subcalls s is less than W times m is exactly what makes this work, and what goes wrong if it fails.",
+      "kind": "justification",
+      "key_points": [
+        {
+          "point": "Each call at parameter m times f spawns s subcalls, each on a stream of one W-th of the volume, so the cost per unit volume is multiplied by s/W per level of recursion",
+          "role": "claim"
+        },
+        {
+          "point": "The parameter grows by factor m per level, so the unrolled sum behaves like a geometric series whose ratio is (s/W) divided by m raised to the target exponent",
+          "role": "reason"
+        },
+        {
+          "point": "When s/W is strictly smaller than m, an exponent strictly below 1 can be chosen that makes this ratio less than 1, so the sum is dominated by a constant times the parameter to that power",
+          "role": "reason"
+        },
+        {
+          "point": "If s/W were at least m, no exponent below 1 would work and the recursion would give no saving over a linear-in-parameter cost",
+          "role": "conclusion"
+        }
+      ],
+      "pages": [
+        "recursive-power-saving",
+        "subset-intersection-construction",
+        "fast-address-interchange"
+      ]
+    },
+    {
+      "question": "Work an example: over the two-element field, take two fields (H, D) = (0, 1) and apply the three updates used to interchange them. Give the state after each update and explain which of the updates the finite linear network supplies and which are done separately.",
+      "kind": "example",
+      "key_points": [
+        {
+          "point": "Subtracting H from D leaves (0, 1), since D minus 0 is 1",
+          "role": "claim"
+        },
+        {
+          "point": "Adding D to H then gives (1, 1), the middle update being the shear performed by the network",
+          "role": "claim"
+        },
+        {
+          "point": "The final update, D replaced by H minus D, gives (1, 0), so the fields are swapped",
+          "role": "conclusion"
+        },
+        {
+          "point": "Only the middle shear is the expensive step done by the network; the first and last updates are cheap linear-time passes combining D with H",
+          "role": "reason"
+        }
+      ],
+      "pages": [
+        "fast-address-interchange",
+        "address-shear-factorization",
+        "address-fields"
+      ]
+    },
+    {
+      "question": "In the convolution routine, two inputs are each transformed, multiplied pointwise, and transformed back. Why does the algorithm not need to sort the transformed entries into natural frequency order in between, and what would go wrong if the two forward transforms used different orders?",
+      "kind": "structure",
+      "key_points": [
+        {
+          "point": "Both forward transforms store their entries under the same address permutation, so the entries at any one address correspond to the same frequency in both arrays",
+          "role": "claim"
+        },
+        {
+          "point": "Pointwise multiplication only combines entries sharing an address, so it commutes with the permutation and the result is just the permuted product of the true transforms",
+          "role": "reason"
+        },
+        {
+          "point": "The opposite transform is designed to read its input in that permuted layout, so the permutation is undone as part of it and no standalone sort is run",
+          "role": "conclusion"
+        },
+        {
+          "point": "With mismatched orders, entries of different frequencies would be multiplied together, giving a wrong convolution unless a sort fixed the alignment",
+          "role": "reason"
+        }
+      ],
+      "pages": [
+        "ring-convolution-retained-order",
+        "synthetic-transforms",
+        "dft-fft",
+        "convolution"
+      ]
+    },
+    {
+      "question": "Suppose a variant of the recursion used a network with W = 2 roles, fan-in factor m = 3, and s = 4 subcalls, versus another with W = 2, m = 2 and s = 5. For each, decide whether the power-saving argument applies and, if so, what range of exponents works.",
+      "kind": "transfer",
+      "key_points": [
+        {
+          "point": "For s = 4, W = 2, m = 3 the ratio s/W is 2, which is below m = 3, so the argument applies",
+          "role": "claim"
+        },
+        {
+          "point": "Any exponent strictly between log base 3 of 2 (about 0.63) and 1 makes the geometric ratio less than 1",
+          "role": "conclusion"
+        },
+        {
+          "point": "For s = 5, W = 2, m = 2 the ratio s/W is 2.5, which exceeds m = 2, so the recursion grows at least linearly in the parameter and no saving follows",
+          "role": "claim"
+        },
+        {
+          "point": "The decisive comparison is whether s/W is less than m, since this fixes whether a sub-linear exponent exists",
+          "role": "reason"
+        }
+      ],
+      "pages": [
+        "recursive-power-saving",
+        "subset-intersection-construction"
+      ]
+    },
+    {
+      "question": "Summarise in a few sentences how the main theorem gets below n log n: what two kinds of operation are sped up, what bounds they achieve, and how that yields a running time with the logarithmic factor lowered by a fixed power.",
+      "kind": "summary",
+      "key_points": [
+        {
+          "point": "Multiplication is reduced to a ring convolution that is evaluated with transforms, and the transform cost is dominated by moving data between address layouts and by applying butterfly layers.",
+          "role": "background"
+        },
+        {
+          "point": "The data-movement step (swapping two address fields) and the arithmetic step (several butterfly layers done together) are each made cheaper, with costs of V times a fixed power below 1 of the field width or chunk count.",
+          "role": "claim"
+        },
+        {
+          "point": "Both speedups come from a small fixed linear network whose recursion makes slightly fewer sub-calls than the work-splitting factor would suggest, so the per-unit-volume cost grows only as a power less than 1.",
+          "role": "reason"
+        },
+        {
+          "point": "Putting these in place of the per-level full scans lowers the whole running time to n times a power of lg n with exponent 1 minus a tiny fixed constant, beating n log n on the fixed-tape machine.",
+          "role": "conclusion"
+        }
+      ],
+      "pages": [
+        "main-theorem",
+        "fast-address-interchange",
+        "fast-butterfly-layers",
+        "recursive-power-saving",
+        "ring-convolution-retained-order",
+        "nlogn-conjecture"
+      ],
+      "held_out": true
+    },
+    {
+      "question": "Why does the argument concentrate on speeding up address rearrangements and butterfly layers, rather than, say, only on the pointwise products, in order to beat n log n?",
+      "kind": "motivation",
+      "key_points": [
+        {
+          "point": "A transform has about log n levels, and on a tape machine each level needs the whole stored array to be passed over again, which in itself costs n per level.",
+          "role": "background"
+        },
+        {
+          "point": "The pointwise product and other once-only steps are cheap relative to this, so the n log n total is driven by the repeated per-level movement and butterfly work.",
+          "role": "reason"
+        },
+        {
+          "point": "Hence any improvement must make both the rearrangement of data and the arithmetic of many levels cheaper than a full pass each; speeding only one of them would leave an n log n term.",
+          "role": "conclusion"
+        }
+      ],
+      "pages": [
+        "main-theorem",
+        "dft-fft",
+        "fixed-tape-model",
+        "address-fields",
+        "nlogn-conjecture"
+      ],
+      "held_out": true
+    },
+    {
+      "question": "The fast address interchange uses a network of XOR-type gates whose intermediate values are mixtures of the data, yet its end result must be a clean swap of two fields that is correct even when scratch rows start with arbitrary contents. Explain why this works.",
+      "kind": "justification",
+      "key_points": [
+        {
+          "point": "Over the two-element field, a swap of two quantities can be written as three successive subtract/add updates, so only a shear-type update has to be produced by the network.",
+          "role": "reason"
+        },
+        {
+          "point": "The network supplies the middle update, the shear, and two cheap linear passes that modify one field using the other supply the remaining steps.",
+          "role": "claim"
+        },
+        {
+          "point": "Scratch contents are removed by subtracting their starting value before the computation and adding the result back after it, then running the steps in reverse, so the starting junk cancels out.",
+          "role": "reason"
+        },
+        {
+          "point": "Consequently the overall map is an exact permutation of the data, not dependent on what the auxiliary registers began with.",
+          "role": "conclusion"
+        }
+      ],
+      "pages": [
+        "fast-address-interchange",
+        "address-shear-factorization",
+        "scratch-restoration"
+      ],
+      "held_out": true
+    }
+  ],
+  "round": 1,
+  "runs": [],
+  "baselines": []
+}

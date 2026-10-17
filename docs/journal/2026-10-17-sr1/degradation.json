@@ -1,0 +1,448 @@
+{
+ "rule": "per key point: the top-overlap paragraph on the goal's pages, plus any with overlap >= 0.35",
+ "goals": 9,
+ "key_points": 34,
+ "deletions": [
+  {
+   "page": "address-fields",
+   "paragraph": 0,
+   "text": "An address field is a contiguous block of address bits, and the choice of fields fixes how an array is laid out on a tape. The transform levels of the multiplication algorithm rearrange these fields, so the layout sets what each level costs.",
+   "overlap": [
+    0.38
+   ],
+   "key_points": [
+    "G7K0"
+   ]
+  },
+  {
+   "page": "address-fields",
+   "paragraph": 1,
+   "text": "An array is stored in tape order. Write $m$ for an item's position in tape order. The item at position $m$ sits in the $m$-th cell, and its address is $m$ written in binary. Write $u$ for the number of bits in one address field. Splitting the address bits into contiguous blocks of $u$ bits gives the address fields. An address is then a tuple of field values, and the set of all addresses is the Cartesian product of the fields' value sets.",
+   "overlap": [
+    0.29
+   ],
+   "key_points": [
+    "G3K2"
+   ]
+  },
+  {
+   "page": "address-fields",
+   "paragraph": 4,
+   "text": "Rearranging is not free. A layout's cost is measured in the [Fixed-tape machine model and stream operations](fixed-tape-model.md), where each step touches one cell per tape, so moving data is the cost to minimize. Write $V$ for the stored bit volume, the total number of bits the array holds. Each entry is a fixed-width coefficient of $\\Theta(\\log n)$ bits, and the padded array holds $\\Theta(n/\\log n)$ entries, so $V=\\Theta(n)$. Scanning all $\\Theta(n)$ stored bits at each of the $\\Theta(\\log n)$ levels costs $\\Theta(n\\log n)$ <cite data-source=\"paper\">$\\Theta(\\log n)$ transform levels already costs $\\Theta(n\\log n)$</cite>.\n",
+   "overlap": [
+    0.46,
+    0.5,
+    0.5,
+    0.18
+   ],
+   "key_points": [
+    "G1K0",
+    "G1K1",
+    "G7K0",
+    "G7K2"
+   ]
+  },
+  {
+   "page": "address-shear-factorization",
+   "paragraph": 0,
+   "text": "An address shear is a linear update of two vectors of address fields, and a lower-triangular factorization reduces it to interchanges and linear-cost updates. The address shear is the endpoint operator of the bit network, a [Finite linear network with roles and frames](linear-network-roles.md).",
+   "overlap": [
+    0.38
+   ],
+   "key_points": [
+    "G3K1"
+   ]
+  },
+  {
+   "page": "fast-address-interchange",
+   "paragraph": 4,
+   "text": "The network performs only the middle update, which is the costly one. The procedure is built from the [Address shear and lower-triangular factorization](address-shear-factorization.md): the network's endpoint operator is the shear $(H,D)\\mapsto(H+D,D)$ over $\\mathbb F_2$, with rank reduced by a lower-triangular factorization. Two further linear-cost address updates complete the interchange. Both change only $D$, each combining $D$ with the earlier field $H$ in linear time.",
+   "overlap": [
+    0.5,
+    0.5,
+    0.31,
+    0.4
+   ],
+   "key_points": [
+    "G3K1",
+    "G3K3",
+    "G8K0",
+    "G8K1"
+   ]
+  },
+  {
+   "page": "fast-address-interchange",
+   "paragraph": 5,
+   "text": "The cost bound follows from [Recursive power saving from s<Wm](recursive-power-saving.md). The network has $W$ roles, and each of its $s$ smaller calls acts on one role stream of volume $V/W$. For the bit network, $s<Wm$ <cite data-source=\"paper\">the total number $s$ of smaller calls satisfies $s<Wm$</cite>; the paper's proof computes $s$ as $Wm$ minus a positive constant fixed by the construction. Hence $s/W<m$. Since $m^\\tau\\to m$ as $\\tau\\to1$, fix $\\tau<1$ with $s/W<m^\\tau$.",
+   "overlap": [
+    0.5
+   ],
+   "key_points": [
+    "G3K0"
+   ]
+  },
+  {
+   "page": "fast-address-interchange",
+   "paragraph": 6,
+   "text": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level. A level-$k$ call makes $s$ calls at level $k-1$, each on volume $V/W$, plus $O(V)$ outside work whose normalized cost is at most $C$. Hence\n$$Q_0=O(1),\\qquad Q_k\\le \\frac{s}{W}\\,Q_{k-1}+C.$$\nUnrolling gives $Q_k\\le (s/W)^k Q_0+C\\sum_{j<k}(s/W)^j$. The first term is $O(m^{k\\tau})$ because $s/W<m^\\tau$. The geometric sum is also $O(m^{k\\tau})$: if $s/W\\le1$ it is at most $k$, and if $s/W>1$ it is $O((s/W)^k)$. Both are $O(m^{k\\tau})$, since $m\\ge2$. A field of $u=m^k$ bits therefore has $Q_k=O(u^\\tau)$, and the interchange costs $O(Vu^\\tau)$.",
+   "overlap": [
+    0.5,
+    0.25,
+    0.32
+   ],
+   "key_points": [
+    "G2K0",
+    "G2K1",
+    "G6K2"
+   ]
+  },
+  {
+   "page": "fast-address-interchange",
+   "paragraph": 7,
+   "text": "The final effect is an exact permutation, although the network uses only pointwise XOR gates, so its intermediate values are XOR combinations of data. Over $\\mathbb F_2$ each update is a pointwise XOR, since addition and subtraction are the same operation; after the first update $D$ holds the XOR of $D$ and $H$. The shear is applied to every row, including scratch rows with arbitrary contents. Exactness is secured by the [Restoring auxiliary scratch values](scratch-restoration.md) schedule, which subtracts the initial register value, computes, adds the result back, and reverses; the initial contents cancel, so the final permutation does not depend on them. <cite data-source=\"paper\">The final permutation is exact for arbitrary initial auxiliary values</cite>.\n",
+   "overlap": [
+    0.38,
+    0.4
+   ],
+   "key_points": [
+    "G3K1",
+    "G8K3"
+   ]
+  },
+  {
+   "page": "fast-butterfly-layers",
+   "paragraph": 9,
+   "text": "The fixed exponent $\\sigma=1-2^{-50}$ gives $\\Psi/W<m^{\\sigma}$, because $\\Psi/W$ is $m$ times one minus a tiny fraction. Here $\\sigma$ is this fixed exponent, which means something else on the recursive-power-saving page. For this network the source computes $\\frac{Wm-\\Psi}{Wm}=\\frac{73}{19906842167500}$, which exceeds $20\\cdot2^{-50}$ <cite data-source=\"paper\">Both exact deficits displayed above are greater than $20\\cdot2^{-50}$</cite>. Since $m<2^{20}$ gives $\\log m<20$,",
+   "overlap": [
+    0.35
+   ],
+   "key_points": [
+    "G6K3"
+   ]
+  },
+  {
+   "page": "fixed-tape-model",
+   "paragraph": 0,
+   "text": "A fixed-tape machine is the cost model in which the paper states its integer multiplication bound. Its cost is set by how data moves along the tapes, so the operations to minimize are scans, shifts and permutations of data.",
+   "overlap": [
+    0.25
+   ],
+   "key_points": [
+    "G1K2"
+   ]
+  },
+  {
+   "page": "main-theorem",
+   "paragraph": 0,
+   "text": "Here $n$ is the number of bits in each input and $\\kappa=2^{-182}$ is a fixed saving exponent. The main theorem is that one fixed deterministic Turing machine multiplies two $n$-bit integers in $O(n(\\lg n)^{1-\\kappa})$ time. It disproves the [n log n optimality conjecture](nlogn-conjecture.md) for this model.",
+   "overlap": [
+    0.44,
+    0.4
+   ],
+   "key_points": [
+    "G0K0",
+    "G0K3"
+   ]
+  },
+  {
+   "page": "main-theorem",
+   "paragraph": 1,
+   "text": "The machine uses a fixed finite alphabet and a fixed number of one-dimensional tapes, and computes the exact product for every $n\\ge1$ <cite data-source=\"paper\">There is one deterministic Turing machine $A$, with a fixed finite</cite>.",
+   "overlap": [
+    0.39
+   ],
+   "key_points": [
+    "G0K0"
+   ]
+  },
+  {
+   "page": "main-theorem",
+   "paragraph": 2,
+   "text": "[Reduction of integer product to digit convolution](radix-digit-reduction.md) turns the product into a convolution of short coefficients. The machine places its coefficient list by the [Chinese-remainder map to prime cyclic axes](crt-address-map.md). The machine computes its convolution by [Convolution with retained transform order and cancelled permutations](ring-convolution-retained-order.md). The machine recovers its coefficients by [Fixed-point precision and exact recovery](fixed-point-precision.md).",
+   "overlap": [
+    0.46
+   ],
+   "key_points": [
+    "G0K1"
+   ]
+  },
+  {
+   "page": "main-theorem",
+   "paragraph": 3,
+   "text": "The machine performs its address moves by [Fast interchange of address fields](fast-address-interchange.md). It performs its butterfly layers by [Fast simultaneous butterfly layers](fast-butterfly-layers.md). These cost $O(Vu^\\tau)$ and $O(Vd^{\\lambda'})$, where $V$ is the stored bit volume, $u$ the field width, $d$ the number of selected chunks, and $\\tau,\\lambda'<1$ fixed exponents. Here $u$ and $d$ are powers of $\\lg n$ with exponents below one.",
+   "overlap": [
+    0.38,
+    0.36
+   ],
+   "key_points": [
+    "G0K2",
+    "G6K1"
+   ]
+  },
+  {
+   "page": "main-theorem",
+   "paragraph": 5,
+   "text": "The logarithmic factor drops by the fixed power $\\kappa$ because $\\kappa$ is set by the smallest margin in the sources' cost table. Each row of that table is a power of $\\lg n$, up to a constant factor, with exponent one minus a margin. The smallest margin is $2^{-181}$ <cite data-source=\"paper\">Thus $\\min_i g_i=2^{-181}=2\\kappa$</cite>, which is $2\\kappa$, so the largest power is $(\\lg n)^{1-2\\kappa}$. A fixed power of $\\log\\lg n$ is at most $(\\lg n)^{\\kappa}$ for large $n$, so $(\\lg n)^{1-2\\kappa}$ times it is $O((\\lg n)^{1-\\kappa})$.",
+   "overlap": [
+    0.35
+   ],
+   "key_points": [
+    "G6K3"
+   ]
+  },
+  {
+   "page": "main-theorem",
+   "paragraph": 8,
+   "text": "Hence $\\Phi(f)\\le (s/W)\\Phi(f/m)+O(f^\\tau+1)$ with $\\Phi(1)=O(1)$, since the children cost $s(V/W)\\Phi(f/m)$ and dividing by $V$ gives $s/W$. Since $s/W<m$, some rational $\\tau<1$ gives $(s/W)/m^\\tau<1$; this is where $s<Wm$ is used. Dividing by $m^{k\\tau}$ gives $m^{-k\\tau}\\Phi(m^k)\\le \\frac{s/W}{m^\\tau}\\,m^{-(k-1)\\tau}\\Phi(m^{k-1})+O(1)$, since $f^\\tau+1\\le 2f^\\tau$. Unrolling gives a geometric sum with ratio $(s/W)/m^\\tau<1$, so $\\Phi(m^k)=O(m^{k\\tau})$. A field of $f$ radix-$q$ digits has $\\Theta(f)$ bits, because $q$ is fixed, so $f$ is proportional to $u$ and the interchange costs $O(Vu^\\tau)$. The butterfly layer uses a second fixed network, also with $s<Wm$, and runs the same recursion on the $d$ selected chunks, so it costs $O(Vd^{\\lambda'})$ once $\\lambda'$ exceeds two exponents. Nodes with at least $\\sqrt d$ active chunks have node overhead of $O(f^\\lambda)$ per unit volume, with $f\\le d$ and $\\lambda=1-2^{-52}$. Smaller nodes, the small-level leaves, cost $O(d^{\\sigma+(1-\\sigma)/2})$ with $\\sigma=1-2^{-50}$. So $\\lambda'$ must exceed $\\lambda$ and $\\sigma+(1-\\sigma)/2$, and $\\lambda'=1-2^{-54}$ does.\n",
+   "overlap": [
+    0.2
+   ],
+   "key_points": [
+    "G7K1"
+   ]
+  },
+  {
+   "page": "nlogn-conjecture",
+   "paragraph": 0,
+   "text": "The $n\\log n$ optimality conjecture is Schönhage and Strassen's proposal that $n\\log n$ is the optimal order of cost for multiplying two integers, where $n$ is the number of bits in each integer. It is the benchmark that a faster algorithm must beat.",
+   "overlap": [
+    0.4
+   ],
+   "key_points": [
+    "G0K3"
+   ]
+  },
+  {
+   "page": "nlogn-conjecture",
+   "paragraph": 1,
+   "text": "Costs are running times on a multitape Turing machine with a fixed, finite number of tapes. A cost has order $f(n)$ when it is $O(f(n))$, that is, at most a constant times $f(n)$ for all large $n$. \"Optimal\" means that no algorithm in this model runs in $o(n\\log n)$ time.",
+   "overlap": [
+    0.39,
+    0.35
+   ],
+   "key_points": [
+    "G0K0",
+    "G6K3"
+   ]
+  },
+  {
+   "page": "nlogn-conjecture",
+   "paragraph": 2,
+   "text": "Schönhage and Strassen's 1971 algorithm runs in $O(n\\log n\\log\\log n)$ time <cite data-source=\"paper\">two $n$-bit integers can be multiplied in $O(n\\log n\\log\\log n)$ time on a multitape Turing machine</cite>. Harvey and van der Hoeven reached $O(n\\log n)$ <cite data-source=\"paper\">Harvey and van der Hoeven reached the unconditional $O(n\\log n)$ upper bound</cite>. Their algorithm also runs on a multitape machine, so $O(n\\log n)$ is achievable in the model the conjecture is stated for, and the conjecture asks whether that cost can be beaten. The conjecture is posed against the chain of upper bounds traced in [Schönhage–Strassen to Harvey–van der Hoeven multiplication](ss-hh-background.md).",
+   "overlap": [
+    0.4
+   ],
+   "key_points": [
+    "G0K3"
+   ]
+  },
+  {
+   "page": "nlogn-conjecture",
+   "paragraph": 3,
+   "text": "The conjecture fails in the fixed-tape model used here. Let $A$ be the deterministic Turing machine of the paper's main theorem, with a fixed finite alphabet and a fixed finite number of one-dimensional tapes, so $A$ is one of the machines the conjecture quantifies over. Let $T_A(n)$ be its worst-case running time on pairs of $n$-bit inputs. Let $\\kappa=2^{-182}$ be a fixed positive constant. The paper proves <cite data-source=\"paper\">T_A(n)=O\\!\\left(n(\\lg n)^{1-\\kappa}\\right)</cite>, which has the power $1-\\kappa<1$ on the logarithm where the conjecture has power $1$. So $A$ runs in $o(n\\log n)$ time and the conjecture fails in this model. <cite data-source=\"paper\">The theorem refutes an eventual $\\Omega(n\\log n)$ lower bound for every fixed multiplication machine in this model</cite>.\n",
+   "overlap": [
+    0.56,
+    0.5,
+    0.4
+   ],
+   "key_points": [
+    "G0K0",
+    "G0K3",
+    "G6K3"
+   ]
+  },
+  {
+   "page": "radix-digit-reduction",
+   "paragraph": 3,
+   "text": "Here $x_j$ is the $j$th radix digit of $x$, and $y_j$ is the $j$th radix digit of $y$, with $0\\le x_j,y_j<2^b$. Splitting the inputs into radix digits reduces the integer product to a [convolution](convolution.md) of short integer coefficients.",
+   "overlap": [
+    0.38
+   ],
+   "key_points": [
+    "G0K1"
+   ]
+  },
+  {
+   "page": "recursive-power-saving",
+   "paragraph": 0,
+   "text": "Recursive power saving is the argument that a recursion's cost per bit can grow as a fixed power of its parameter, with exponent $\\lambda<1$ (this letter changes meaning here: on the tensor-product page $\\lambda$ is a scalar), which the main theorem needs.",
+   "overlap": [
+    0.42,
+    0.33
+   ],
+   "key_points": [
+    "G2K3",
+    "G5K2"
+   ]
+  },
+  {
+   "page": "recursive-power-saving",
+   "paragraph": 1,
+   "text": "Let $f$ be the parameter of a call (this letter changes meaning here: on the linear-network page $f$ is the logical array): the number of field digits for an address interchange (exchanging two disjoint address fields of $u$ bits), or the number of selected axes for a numerical layer (a butterfly layer on chosen axes of a polynomial-valued array). Here $m$ is the factor by which the parameter grows; this letter changes meaning from the subspace dimension of the prerequisite and from the tape position on the address-fields page. Let $s$ be the number of subcalls of one call. A recursive call at parameter $mf$ makes $s$ subcalls at parameter $f$, each on a stream of volume $V/W$. The recursion is built on the [Three-element subset intersection construction](subset-intersection-construction.md), which gives $s<Wm$ smaller calls.",
+   "overlap": [
+    0.5
+   ],
+   "key_points": [
+    "G2K0"
+   ]
+  },
+  {
+   "page": "recursive-power-saving",
+   "paragraph": 4,
+   "text": "The outside work is a fixed number of address-field row additions. An address interchange of $u$-bit fields costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed. <cite data-source=\"paper\">Its cost is $O(Vu^\\tau)$ for a fixed $\\tau<1$.</cite> Here $\\Omega$ is the bit count of one axis chunk, $d$ is the paper's axis-count parameter (this letter changes meaning from the DFT page), and $\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$. A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$. Since $\\vartheta=\\tfrac12$ is a fixed exponent and $f\\ge d^\\vartheta$ at an internal node, $d\\le f^{1/\\vartheta}$, so the outside work divided by $V$ is $O((f\\Omega)^\\tau+1)\\le O(f^{\\tau(1+\\eta/\\vartheta)}+1)$, which is $O(f^\\lambda)$ when $\\lambda>\\tau(1+\\eta/\\vartheta)$.",
+   "overlap": [
+    0.22,
+    0.36
+   ],
+   "key_points": [
+    "G5K3",
+    "G6K1"
+   ]
+  },
+  {
+   "page": "recursive-power-saving",
+   "paragraph": 7,
+   "text": "The saving exists because $s/W<m$. <cite data-source=\"paper\">This strict inequality is the source of the power saving.</cite> Taking $\\lambda$ with $\\log_m(s/W)<\\lambda<1$ makes the ratio below 1, so the internal sum is at most a constant times $f^\\lambda$.",
+   "overlap": [
+    0.5,
+    0.5,
+    0.25
+   ],
+   "key_points": [
+    "G2K2",
+    "G5K0",
+    "G5K1"
+   ]
+  },
+  {
+   "page": "ring-convolution-retained-order",
+   "paragraph": 0,
+   "text": "Convolution with retained transform order convolves two arrays over $\\mathbb C[y]/(y^r+1)$ by transforming each one, multiplying the transforms entry by entry, and transforming back, without sorting the frequency entries in between. It is the convolution that the fast tape layouts of the main result run on the remaining axes. This convolution computes its transforms by [Synthetic polynomial transforms](synthetic-transforms.md), which need only signed shifts, address rearrangements and butterflies.",
+   "overlap": [
+    0.56,
+    0.35
+   ],
+   "key_points": [
+    "G4K0",
+    "G6K0"
+   ]
+  },
+  {
+   "page": "ring-convolution-retained-order",
+   "paragraph": 3,
+   "text": "The forward transform $\\mathcal D$ sends an array to $(\\mathcal D\\phi)_m=\\sum_i\\omega^{mi}\\phi_i$, where $\\omega$ is the primitive $t$th root of unity of the ring and $m$ is the frequency index. Let $\\mathcal D^{+}$ be the opposite transform. Let $M$ be the known scalar fixed by the normalization of the transforms. Let $\\odot$ be the entrywise product of ring elements at the same address.",
+   "overlap": [
+    0.44
+   ],
+   "key_points": [
+    "G4K0"
+   ]
+  },
+  {
+   "page": "ring-convolution-retained-order",
+   "paragraph": 7,
+   "text": "Let $\\chi$ be the permutation of addresses that the layout of the forward transforms fixes: the entry for frequency $m$ is stored at address $\\chi(m)$, so the stored arrays are $\\chi\\mathcal{D}\\phi$ and $\\chi\\mathcal{D}\\psi$. The source also composes $\\chi$ with a fixed relabelling of frequencies; the argument needs only that both forward transforms use the same $\\chi$. Both forward transforms therefore use $\\chi$, so the two forward transforms keep the same frequency order through the pointwise product <cite data-source=\"paper\">retain the same frequency order through their pointwise product, and</cite>. Without this, the entry at frequency $m$ of $\\mathcal D\\phi$ would meet an entry of $\\mathcal D\\psi$ at a different frequency, and a sort would be needed to align them.",
+   "overlap": [
+    0.67,
+    0.36,
+    0.33
+   ],
+   "key_points": [
+    "G4K0",
+    "G4K1",
+    "G4K3"
+   ]
+  },
+  {
+   "page": "ring-convolution-retained-order",
+   "paragraph": 8,
+   "text": "Since $\\chi$ moves entries by address and each product entry uses only the two entries at its address, the product of the stored arrays equals $\\chi$ applied to the product of the transforms:",
+   "overlap": [
+    0.44
+   ],
+   "key_points": [
+    "G4K0"
+   ]
+  },
+  {
+   "page": "ring-convolution-retained-order",
+   "paragraph": 10,
+   "text": "The opposite transform takes the stored product and first applies $\\chi^{-1}$, so the $\\chi$ cancels and no sort is run. This is the step the source describes as the <cite data-source=\"paper\">opposite transform consumes that order</cite>:",
+   "overlap": [
+    0.31
+   ],
+   "key_points": [
+    "G4K2"
+   ]
+  },
+  {
+   "page": "scratch-restoration",
+   "paragraph": 2,
+   "text": "The data is also affected by the wire's contents, so $\\theta$ must be removed from it. Before the data is updated from the wire, the contribution of $\\theta$ is subtracted from the data, so that $\\theta$ cancels from the final data. The full schedule of writes and undo-writes then leaves every scratch wire unchanged <cite data-source=\"paper\">and restores every auxiliary value.</cite> The interchange built this way is exact for every starting value of $\\theta$. <cite data-source=\"paper\">The final permutation is exact for arbitrary initial auxiliary values.</cite>",
+   "overlap": [
+    0.39,
+    0.4
+   ],
+   "key_points": [
+    "G8K2",
+    "G8K3"
+   ]
+  }
+ ],
+ "sha256": {
+  "intact": {
+   "address-fields": "4ab170dab6c5903f67da2912ce42ec360ef53a1cf433d8e47da348a1c8b94b89",
+   "address-shear-factorization": "2378357e47b47d40b3b4b2689fd6a1bb0ae42be3c9817bdeb43286d45269cffc",
+   "bluestein-chirp": "b5c67b5ae5ec0e591762c7f03bc67708691cece3041a55675be306e2acf8f328",
+   "convolution": "ef5e0740735c57d65e11d7ba7af753ba61d6aa7504987d2f913f0089cdf26310",
+   "crt-address-map": "70cec9e20bf1ae137a91c489302f639f78e66c08aaad464600e60596d48d4931",
+   "dft-fft": "363cf8f7292aec44e8097092afc26dd5657adb911ba26efd95951a057a3c8b6e",
+   "fast-address-interchange": "3701b851589b08072597fb5e9fcebf1e58c6cba65df75928551d30a053d2531e",
+   "fast-butterfly-layers": "527f2890405af5f5a5ed8e17026bcf2ecef996c58fdc0eb915bb8701f14dfa31",
+   "fixed-point-precision": "b9d3749347dbcb5176ced120c8b2c6e2196ffef776391a9097cb1b06922b071b",
+   "fixed-tape-model": "ae20ad0ff2490df605195676848e47a99a905a62b81590720fe55c7899b8d0a2",
+   "gaussian-resampling": "f2cb4cec8fa01a660d36d7ffbeab36388211fa1e97255f3a5fac77be778a4609",
+   "linear-network-roles": "fbe9141eedd4cbe125236e55133abb94c3a00f78202f576670add64bd0807159",
+   "main-theorem": "ae89c8fb709153866495996166e6fe1d475c065e551e45e229f7340dcc6a878d",
+   "nlogn-conjecture": "139e582689ba4f0296979e607b8f18cd0af72a20973280eed00e708e79462107",
+   "phase-twist-convolution": "4be39e9d25103211efb715b5250c7893d169ecf3d61d11a0741548a8b0f04389",
+   "poly-ring-y-r": "77c6c273378b4cc2edb7112ad4f9e5f0f32dce646d5dbd85d6a67bc67cc8ed37",
+   "radix-digit-reduction": "b0b08b614f0b979a33e9c4a21be28bf1559b7d6c726310f7e1a77b16ed79f375",
+   "recursive-power-saving": "a3cc589032bc208b9f1c5dafe9c814f593beb3f393b570057ba989c26fa78ae1",
+   "ring-convolution-retained-order": "111feaa224f0c6e00c2437da864f835c141f661f1e98d01d782651553a871a0c",
+   "scratch-restoration": "f773505b3ee0b5124af78ef28638adf531a8e4bc0cbcf4c142b2826e2bff59e1",
+   "signed-packing": "a33d9cc6f064ac5722c5a03ff2c18d6cf9e9c348b49e9948a2361ff2edbe94cd",
+   "ss-hh-background": "aebdb3189e178dd349a02427cce0fda23ecd4b89d9ebe8afc1c5857adf4ce6f4",
+   "subset-intersection-construction": "6a05069dbeb00d6f299d6ac297e2ca8b33facb0eabe010ae793d93bc2b81dd62",
+   "synthetic-transforms": "6ebbe95f7fe08e097e91881806a5861f39eb42951292ae92a2bb727415c8852d",
+   "tensor-product-of-vector-spaces": "7435205d2569456159fc97f1656d2baddff483b5a281ad9c74074afa12d79b61"
+  },
+  "degraded": {
+   "address-fields": "d5164be50e4ab19cc1d70f3dd5cbd37a1e522c933bdbcbe8bf5e68af49ebffb1",
+   "address-shear-factorization": "0b4b10d3f48f65d3cfb029bc8cac8f56fa43c30459176de1515a882cd4641106",
+   "bluestein-chirp": "b5c67b5ae5ec0e591762c7f03bc67708691cece3041a55675be306e2acf8f328",
+   "convolution": "ef5e0740735c57d65e11d7ba7af753ba61d6aa7504987d2f913f0089cdf26310",
+   "crt-address-map": "70cec9e20bf1ae137a91c489302f639f78e66c08aaad464600e60596d48d4931",
+   "dft-fft": "363cf8f7292aec44e8097092afc26dd5657adb911ba26efd95951a057a3c8b6e",
+   "fast-address-interchange": "bc451364b42fdc4dded653fb56985c77964e5ad92d633d36cd3b7012f8200845",
+   "fast-butterfly-layers": "9124889c30c8c86c169cfc670738b5f37236d60c3d663a325a85c960655d9671",
+   "fixed-point-precision": "b9d3749347dbcb5176ced120c8b2c6e2196ffef776391a9097cb1b06922b071b",
+   "fixed-tape-model": "a406e92308cc7fd54c56b9c0f5fa1bd26b2f69aef45cb4ce98d63a687f1649c4",
+   "gaussian-resampling": "f2cb4cec8fa01a660d36d7ffbeab36388211fa1e97255f3a5fac77be778a4609",
+   "linear-network-roles": "fbe9141eedd4cbe125236e55133abb94c3a00f78202f576670add64bd0807159",
+   "main-theorem": "18321305e314ba70e82cfcea24dec8da73ab1b03b0ff9453de236dc07a566db5",
+   "nlogn-conjecture": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+   "phase-twist-convolution": "4be39e9d25103211efb715b5250c7893d169ecf3d61d11a0741548a8b0f04389",
+   "poly-ring-y-r": "77c6c273378b4cc2edb7112ad4f9e5f0f32dce646d5dbd85d6a67bc67cc8ed37",
+   "radix-digit-reduction": "b98baab211b9d2df8930f08db28b7adeb2ba5b9fb9a73e7a882fbc829ffdcd4c",
+   "recursive-power-saving": "e5c27f9ea516a18099c973efe8e987aa5b8df02eaf37976c9b67e07168287f40",
+   "ring-convolution-retained-order": "2ff1093e3d5672832f711003ef3278f5ea793dcb7901ad33803a70a0a3fee4c1",
+   "scratch-restoration": "06c4bce5b070e60478146475557d51124888cc3eef1bc3ca51f0052be4c5ae9e",
+   "signed-packing": "a33d9cc6f064ac5722c5a03ff2c18d6cf9e9c348b49e9948a2361ff2edbe94cd",
+   "ss-hh-background": "aebdb3189e178dd349a02427cce0fda23ecd4b89d9ebe8afc1c5857adf4ce6f4",
+   "subset-intersection-construction": "6a05069dbeb00d6f299d6ac297e2ca8b33facb0eabe010ae793d93bc2b81dd62",
+   "synthetic-transforms": "6ebbe95f7fe08e097e91881806a5861f39eb42951292ae92a2bb727415c8852d",
+   "tensor-product-of-vector-spaces": "7435205d2569456159fc97f1656d2baddff483b5a281ad9c74074afa12d79b61"
+  }
+ }
+}

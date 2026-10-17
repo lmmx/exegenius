@@ -72,3 +72,5 @@ Key points are pooled over goals and runs, with 80% Wilson intervals. The compar
 |---|---|
 | Probe | 2026-10-17 17:48 UTC: `next` on the extracted wiki issued the goals tasks (no model call) |
 | Preregistration | 2026-10-17 17:49 UTC, before any SR1 model call |
+| Goals | 0213 and 0214 accepted (9 goals: 6 repair, 3 held out; 34 key points) |
+| Degradation | 17:52 UTC, before any reader run: `tools/sr1degrade.py`, 31 paragraphs deleted on 11 pages (`docs/journal/2026-10-17-sr1/degradation.json`). The selection rule is operationalised mechanically (per key point, the top content-word-overlap paragraph on the goal's pages plus any with overlap ≥ 0.35), so that it is blind to reader outcomes. The nlogn-conjecture page is left empty. Both copies issue the same 27 tasks (18 read, 9 baseline), identical apart from the root |
