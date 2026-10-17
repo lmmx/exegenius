@@ -1,0 +1,223 @@
+{
+ "symbols": [
+  {
+   "symbol": "R",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $R$ be the number of fields in each vector, and let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields."
+   }
+  },
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $R$ be the number of fields in each vector, and let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields."
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $R$ be the number of fields in each vector, and let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields."
+   }
+  },
+  {
+   "symbol": "q",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $q$ is a fixed odd prime, the radix of the digits"
+   }
+  },
+  {
+   "symbol": "b",
+   "anchor": {
+    "kind": "here",
+    "quote": "$b$ is the number of radix-$q$ digits in each field"
+   }
+  },
+  {
+   "symbol": "\\mathbb Z",
+   "anchor": {
+    "kind": "background",
+    "note": "Integers and residues mod m: undergraduate discrete mathematics (modular arithmetic)."
+   }
+  },
+  {
+   "symbol": "\\mathbb Q",
+   "anchor": {
+    "kind": "background",
+    "note": "Standard notation for the rationals, covered by undergraduate mathematics."
+   }
+  },
+  {
+   "symbol": "M",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a rational $R\\times R$ matrix $M$, the shear by $M$ is"
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "A rational entry is written $\\mu/\\xi$, where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"
+   }
+  },
+  {
+   "symbol": "\\xi",
+   "anchor": {
+    "kind": "here",
+    "quote": "A rational entry is written $\\mu/\\xi$, where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"
+   }
+  },
+  {
+   "symbol": "\\operatorname{rank}",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\operatorname{rank}_{\\mathbb Q}M$ be the number of linearly independent rows of $M$."
+   }
+  },
+  {
+   "symbol": "\\Pi",
+   "anchor": {
+    "kind": "here",
+    "quote": "A partial permutation matrix $\\Pi$ is a 0-1 matrix with at most one 1 in each row and column"
+   }
+  },
+  {
+   "symbol": "F_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "Every rational $M$ factors as $M=F_1\\Pi F_2$, where $F_1$ and $F_2$ are lower-triangular rational matrices."
+   }
+  },
+  {
+   "symbol": "F_2",
+   "anchor": {
+    "kind": "here",
+    "quote": "Every rational $M$ factors as $M=F_1\\Pi F_2$, where $F_1$ and $F_2$ are lower-triangular rational matrices."
+   }
+  },
+  {
+   "symbol": "I",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "\\sigma",
+   "anchor": {
+    "kind": "here",
+    "quote": "For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$"
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."
+   }
+  },
+  {
+   "symbol": "\\zeta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation is covered by the reader profile."
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "The interchange count of the network is $s_{\\rm b}$, the sum of their ranks."
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $W_{\\rm b}$ is the number of wires, $N$ the number of negative source projections, and $L_{\\rm b}$ the total dimension lost on decreasing edges"
+   }
+  },
+  {
+   "symbol": "N",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $W_{\\rm b}$ is the number of wires, $N$ the number of negative source projections, and $L_{\\rm b}$ the total dimension lost on decreasing edges"
+   }
+  },
+  {
+   "symbol": "L_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $W_{\\rm b}$ is the number of wires, $N$ the number of negative source projections, and $L_{\\rm b}$ the total dimension lost on decreasing edges"
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "q avoids numerators and denominators",
+   "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used.",
+   "kind": "step",
+   "note": "Does not follow from the preceding sentence, which only requires q not to divide each denominator xi, and as stated it is false for zero entries (q divides 0). The page never says how the odd prime q is chosen. The paper (Lemma lem:matrix-shear, lines 1394-1420) chooses an odd prime avoiding every denominator in the finite table of factors and inverses and every numerator of a diagonal entry of an invertible factor (for example a prime exceeding all nonzero numerators and denominators), so that the triangular factors stay invertible mod q^b."
+  },
+  {
+   "term": "invertibility of F_1, F_2",
+   "quote": "where $F_1$ and $F_2$ are lower-triangular rational matrices",
+   "kind": "step",
+   "note": "Missing hypothesis: the paper's Lemma lem:lower-lower (line 1370) requires E_1, E_2 to be invertible lower-triangular matrices. The page later uses F_1^{-1} and F_2^{-1}, which need this; as written (any lower-triangular matrices) the factorization claim does not support those steps."
+  },
+  {
+   "term": "partial permutation has rank ones",
+   "quote": "and it has $\\operatorname{rank}_{\\mathbb Q}M$ ones",
+   "kind": "step",
+   "note": "Stated about every partial permutation matrix, which is false: a partial permutation matrix can have any number of ones. Only the Pi produced by the factorization of M has exactly rank M ones (paper line 1370-1372, Pi has exactly a entries equal to one). Also the page does not argue why elimination ends with exactly rank-many ones."
+  },
+  {
+   "term": "tape order needed for the additions",
+   "quote": "So the shear needs $\\operatorname{rank}_{\\mathbb Q}M$ interchanges plus $O(V)$ further work.",
+   "kind": "step",
+   "note": "The O(V) cost of the additions D_tau <- D_tau + H_sigma rests on a hypothesis the page never states: in the paper (lines 1396-1410, 1448-1452) every H_i lies before every D_j on tape, so the first and last updates target a later field controlled by an earlier field and run in linear time via the ordered-affine-streams lemma. The page does not say the fields are in tape order, and gives no cost argument for these two additions."
+  },
+  {
+   "term": "linear cost of triangular transformation",
+   "quote": "Update coordinates from last to first, so each becomes a fixed combination of earlier, still unchanged, coordinates.",
+   "kind": "step",
+   "note": "Linear time needs the coordinates to be stored in order on the tape so that earlier fields can be streamed while a later field is updated (paper lines 1425-1431, using Lemma ordered-affine-streams, descending physical order). The page does not state this layout assumption or what the cited cost result says about the machine; it also needs the diagonal entries to be units mod q^b, which the page's q-condition (see above) only covers if corrected."
+  },
+  {
+   "term": "rank budget formula",
+   "quote": "The network's rank budget, which counts dimension changes along its edges, gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$",
+   "kind": "step",
+   "note": "The formula is presented without derivation or citation, and the reader is not told what the bit network's edges, 'negative source projections' or 'decreasing edges' are, so N and L_b cannot be interpreted or checked. The page also says each edge 'carries such a matrix', while in the paper (lines 1142-1166, 1458-1466) matrices sit on gates and terminals and the edge matrix is the difference M_head - M_tail; the rank of that difference equals the dimension change except for the N source edges."
+  },
+  {
+   "term": "power saving from the recurrence",
+   "quote": "Per wire, the interchanges are fewer than $R$, which the recurrence turns into a saving of a power of the chunk width (the chunk length).",
+   "kind": "step",
+   "note": "No recurrence is given, and 'chunk width' is not defined. s_b < W_b R only says the average per wire is below R; a saving of a power needs a quantitative bound. The paper (lines 1321-1342) uses the explicit relative deficit eta_b = 339/22587335000000 > 20*2^-50 to obtain s_b/W_b < m^tau with tau = 1-2^-50. 'Fewer than R' alone does not yield that."
+  }
+ ]
+}

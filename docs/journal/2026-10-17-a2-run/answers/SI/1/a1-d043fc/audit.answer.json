@@ -1,0 +1,199 @@
+{
+ "symbols": [
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "let $V$ be the stored volume, the number of data units in the array"
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation and logarithm/exponential functions are covered by the reader profile (big-O, logarithms and exponentials)."
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."
+   }
+  },
+  {
+   "symbol": "\\leftarrow",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\leftarrow$ is assignment"
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\mu$ is its number of rows"
+   }
+  },
+  {
+   "symbol": "a",
+   "anchor": {
+    "kind": "here",
+    "quote": "of rank $a$ costs $a$ smaller calls"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-saving"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "role-streams"
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "$W=W_{\\rm b}$",
+    "note": "The subscript b is never explained; the reader is told only that it is the paper's explicit network, not what W_b (its wire count) or s_b (its rank sum) are."
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "$s=s_{\\rm b}$",
+    "note": "The subscript b is never explained; the value of s_b is not given."
+   }
+  },
+  {
+   "symbol": "F_d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange"
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $d$ is the recursion depth"
+   }
+  },
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with $\\lambda=s/W$"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$"
+   }
+  },
+  {
+   "symbol": "\\ln",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation and logarithm/exponential functions are covered by the reader profile (big-O, logarithms and exponentials)."
+   }
+  },
+  {
+   "symbol": "\\exp",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation and logarithm/exponential functions are covered by the reader profile (big-O, logarithms and exponentials)."
+   }
+  },
+  {
+   "symbol": "X",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "Y",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "x_S",
+   "anchor": {
+    "kind": "background",
+    "note": "Entries of the banks X and Y, scalars indexed by a triple S, as introduced for the subset network; the page uses them as already known."
+   }
+  },
+  {
+   "symbol": "y_S",
+   "anchor": {
+    "kind": "background",
+    "note": "Entries of the banks X and Y, scalars indexed by a triple S, as introduced for the subset network; the page uses them as already known."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "mu < 2^19 is false",
+   "quote": "Since $\\mu<2^{19}$, $\\ln\\mu<20$",
+   "kind": "step",
+   "note": "In the paper m = h^3 = 1000000 (line 656) and the bound used is m<2^{20} (line 1332); 1000000 > 2^19 = 524288, so mu<2^19 is false. The correct statement is mu<2^{20}, which still gives ln mu<20 (ln 2<1)."
+  },
+  {
+   "term": "forward invocation subtracts",
+   "quote": "a forward invocation from $X$ to $Y$ subtracts $x_S$ from $y_S$",
+   "kind": "step",
+   "note": "The paper's Lemma scalar-motifs (line 729-731) says a forward invocation changes y_S to y_S + x_S, i.e. it adds x_S to y_S. The page itself then identifies it with the shear H <- H+D, which adds, so 'subtracts' is inconsistent with the page and wrong. Also the paper's forward, inverse, forward schedule sends (X,Y) to (-Y,X), an exchange only in the bit construction."
+  },
+  {
+   "term": "shear as a forward invocation",
+   "quote": "The shear is such an invocation, with $D$ as $X$ and $H$ as $Y$, so it is exact for any initial auxiliary contents.",
+   "kind": "step",
+   "note": "The page never says how the scalar bank invocation (one scalar per triple S) becomes a shear of address fields H and D on arrays; in the paper this passes through frame identities and role streams applied to every row, including scratch roles. The identification is asserted, not derived."
+  },
+  {
+   "term": "why smaller calls have width mu^(d-1)",
+   "quote": "At depth $d$, the $s$ smaller calls are interchanges of width $\\mu^{d-1}$ on streams of volume $V/W$",
+   "kind": "step",
+   "note": "The page never says that H and D are each cut into mu consecutive sub-fields of width mu^(d-1) and that each vertex matrix acts on these mu sub-fields (paper line 1395-1406, 1531), so the reader cannot see why edge rank a gives a interchanges of exactly this width."
+  },
+  {
+   "term": "missing row-divisibility hypothesis",
+   "quote": "Each smaller call acts on one of the $W$ [wire streams](role-streams.md), each of volume $V/W$.",
+   "kind": "step",
+   "note": "The paper's Proposition power-interchange (line 1475-1486) needs a row field preceding both chunks whose length is divisible by W^k; this is what makes the W streams of equal shape at every depth. The page omits this hypothesis, and the arbitrary-width O(Vu^tau) claim needs padding of rows (Lemma chunk-swap, line 1631-1643), neither of which is mentioned."
+  }
+ ]
+}

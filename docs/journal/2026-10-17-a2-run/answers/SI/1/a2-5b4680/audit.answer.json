@@ -1,0 +1,134 @@
+{
+ "symbols": [
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"
+   }
+  },
+  {
+   "symbol": "\\mathbb F_2",
+   "anchor": {
+    "kind": "background",
+    "note": "The field of two elements (integers mod 2): modular arithmetic and basic algebraic structures in the undergraduate profile."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation is in the reader profile."
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited)."
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-power-saving"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-power-saving"
+   }
+  },
+  {
+   "symbol": "Q_k",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."
+   }
+  },
+  {
+   "symbol": "k",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."
+   }
+  },
+  {
+   "symbol": "C",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-power-saving"
+   }
+  },
+  {
+   "symbol": "j",
+   "anchor": {
+    "kind": "background",
+    "note": "Summation index in a finite geometric sum; summation and series are in the reader profile."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "ring is F_2",
+   "quote": "for the bit procedure this ring is $\\mathbb F_2$",
+   "kind": "step",
+   "note": "False for the address fields. The paper (lines 1127-1129, 1404-1406, 1495) takes the fields as radix-q digits, with H and D vectors over Z/q^b Z for a fixed odd prime q, and states the endpoint shear only 'over a common residue ring' (line 150). F_2 is the scalar field of the XOR network, not the ring of the address fields. The same error recurs in 'over $\\mathbb F_2$' for the endpoint shear and in 'Over $\\mathbb F_2$ each update is a pointwise XOR'; over Z/q^b the signs in the three updates matter."
+  },
+  {
+   "term": "order of H and D on tape",
+   "quote": "which lies after $D$ on the tape",
+   "kind": "step",
+   "note": "Reversed. The paper (lines 1403-1404, 1416-1417, 1539-1540) has every H field before every D field, and the first and last updates 'target the later group', so D is the later field and H lies before D. The linear cost depends on a later field being updated from an earlier one, so the stated order does not support the linear-time claim."
+  },
+  {
+   "term": "value of s",
+   "quote": "the paper's proof computes $s$ as $Wm/2$ minus a positive constant fixed by the construction",
+   "kind": "step",
+   "note": "Wrong. The paper (lines 1148-1152) gives s_b = W_b m - N + 2 L_b, with L_b/N = 100/539. So s is Wm minus the small positive deficit N - 2L_b, a relative deficit of about 1.5e-11 (line 1321). It is not Wm/2 minus a constant. With Wm/2 the inequality s/W<m would hold with a large margin, and the power saving would not need the exponent 1-2^-50 (line 1328)."
+  },
+  {
+   "term": "missing hypotheses",
+   "quote": "each of its $s$ smaller calls acts on one role stream of volume $V/W$",
+   "kind": "step",
+   "note": "Missing hypotheses. Proposition power-interchange (paper lines 1475-1488) needs width e = m^k and a row field before both chunks whose length is divisible by W^k, so that rows split evenly into W role streams of volume V/W at every level. The page never mentions the row field or the divisibility. The opening claim of an O(Vu^tau) swap for any two disjoint fields is also stronger than the power-width result proved here; arbitrary widths need the separate Lemma chunk-swap (line 1631)."
+  },
+  {
+   "term": "recursive calls at lower level",
+   "quote": "A level-$k$ call makes $s$ calls at level $k-1$",
+   "kind": "step",
+   "note": "The page never says how a level-k interchange of fields of m^k bits gives s interchanges of m^(k-1)-bit fields. It does not say that H and D are cut into m sub-fields, that each edge of the network applies a shear given by an m by m rational matrix, or that an edge of rank a costs exactly a half-width interchanges. 'Rank reduced by a lower-triangular factorization' gives no argument for this, so the reader cannot check the recurrence."
+  }
+ ]
+}

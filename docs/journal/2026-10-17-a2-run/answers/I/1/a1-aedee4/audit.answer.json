@@ -1,0 +1,288 @@
+{
+ "symbols": [
+  {
+   "symbol": "h",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$ (the letter $h$ changes meaning here)."
+   }
+  },
+  {
+   "symbol": "T",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a three-element subset $T$ of $[h]$, called a triple"
+   }
+  },
+  {
+   "symbol": "t_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "$t_T$ is its indicator vector"
+   }
+  },
+  {
+   "symbol": "\\mathcal T",
+   "anchor": {
+    "kind": "here",
+    "quote": "$\\mathcal T$ is the set of all triples"
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "here",
+    "quote": "Call two triples $T,S$ *neighbors*"
+   }
+  },
+  {
+   "symbol": "g_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each triple $T$ carries a value $g_T$."
+   }
+  },
+  {
+   "symbol": "\\mathbb F_2",
+   "anchor": {
+    "kind": "background",
+    "note": "The field of two elements, i.e. arithmetic mod 2; covered by the discrete mathematics (modular arithmetic) in the profile."
+   }
+  },
+  {
+   "symbol": "e",
+   "anchor": {
+    "kind": "here",
+    "quote": "on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "C_e",
+   "anchor": {
+    "kind": "here",
+    "quote": "on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "A_{ST}",
+   "anchor": {
+    "kind": "here",
+    "quote": "on an auxiliary wire $A_{ST}$ for each neighbor pair"
+   }
+  },
+  {
+   "symbol": "\\mathbb Q",
+   "anchor": {
+    "kind": "background",
+    "note": "The rational numbers, standard notation in undergraduate mathematics."
+   }
+  },
+  {
+   "symbol": "I",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "J",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $J$ is the all-one matrix"
+   }
+  },
+  {
+   "symbol": "\\langle t_T,t_S\\rangle",
+   "anchor": {
+    "kind": "here",
+    "quote": "gives $\\langle t_T,t_S\\rangle=|T\\cap S|-1$"
+   }
+  },
+  {
+   "symbol": "\\mathcal F",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$"
+   }
+  },
+  {
+   "symbol": "\\otimes",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "of dimension $D=h^3$ (the label space dimension)"
+   }
+  },
+  {
+   "symbol": "U",
+   "anchor": {
+    "kind": "here",
+    "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$."
+   }
+  },
+  {
+   "symbol": "\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "T_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "T_2",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "T_3",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "U_\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "the label $U_\\iota$ is the line spanned by"
+   }
+  },
+  {
+   "symbol": "\\perp",
+   "anchor": {
+    "kind": "background",
+    "note": "Orthogonality and orthogonal complements from introductory linear algebra (here taken with respect to the bilinear form)."
+   }
+  },
+  {
+   "symbol": "P_U",
+   "anchor": {
+    "kind": "here",
+    "quote": "the projection $P_U$ onto $U$ along $U^\\perp$"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "If $U\\subseteq V$, then",
+    "note": "V is never introduced; the reader must guess it is another label (nondegenerate subspace) containing U."
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$, the total rank over all edges, change meaning here."
+   }
+  },
+  {
+   "symbol": "N",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $N=\\binom h3^3$, the number of indices $\\iota$"
+   }
+  },
+  {
+   "symbol": "\\binom",
+   "anchor": {
+    "kind": "background",
+    "note": "Binomial coefficient, from discrete mathematics."
+   }
+  },
+  {
+   "symbol": "L",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $L$ be the total dimension lost on decreasing edges"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "so the paper's dimension $m$ is $D$"
+   }
+  },
+  {
+   "symbol": "\\cap",
+   "anchor": {
+    "kind": "background",
+    "note": "Set intersection, discrete mathematics."
+   }
+  },
+  {
+   "symbol": "\\sum",
+   "anchor": {
+    "kind": "background",
+    "note": "Summation notation, covered by the calculus and discrete mathematics in the profile."
+   }
+  },
+  {
+   "symbol": "\\dim",
+   "anchor": {
+    "kind": "background",
+    "note": "Dimension of a vector space, introductory linear algebra."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "nondegenerate subspace",
+   "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$.",
+   "kind": "term",
+   "note": "Nondegeneracy of a subspace with respect to an indefinite bilinear form (so that U and U^perp are complementary and the projection exists) is not covered by undergraduate linear algebra and is not explained or linked."
+  },
+  {
+   "term": "label growth along a side wire",
+   "quote": "a label containing $t_T$ may grow to $t_S^\\perp$",
+   "kind": "step",
+   "note": "Labels are subspaces of F=(Q^h)^{\u22973}, but t_T lies in Q^h, so 'a label containing t_T' and 'grow to t_S^perp' (dimension h-1, gain h-2) only make sense factor-wise in one tensor slot; the page never says this, nor which wire or tensor factor is meant."
+  },
+  {
+   "term": "invocations",
+   "quote": "Each of the $3\\binom h3^2$ invocations has $h$ central wires",
+   "kind": "step",
+   "note": "An invocation is never defined; why there are 3*C(h,3)^2 of them (a coordinate and the two other triples fixed?) and why each has h central wires is not shown."
+  },
+  {
+   "term": "loss of h per decreasing edge",
+   "quote": "each losing $h$ on a decreasing edge",
+   "kind": "step",
+   "note": "The page never says which edges decrease or why the loss is h; the only label change it gives is a gain of h-2, so h is unexplained and not obviously consistent with it. L and hence the bound s<WD rest on this."
+  },
+  {
+   "term": "signed total WD-2N",
+   "quote": "So the signed total is $WD-2N$.",
+   "kind": "step",
+   "note": "The count assumes exactly W sinks (one per role) with N of them of dimension D-1; the page never states that the number of sinks is W, so WD-N for sinks cannot be checked."
+  },
+  {
+   "term": "cited bound on smaller calls",
+   "quote": "The paper's decisive property is a bound on the number of smaller calls, (cited).",
+   "kind": "step",
+   "note": "The page does not state what the bound is (presumably s<Wm) or why s<WD gives the power saving, so the conclusion is not connected to the computation."
+  }
+ ]
+}

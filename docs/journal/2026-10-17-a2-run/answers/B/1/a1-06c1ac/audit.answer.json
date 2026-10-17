@@ -1,0 +1,33 @@
+{
+  "symbols": [
+    {"symbol": "\\lambda", "anchor": {"kind": "here", "quote": "with exponent $\\lambda<1$"}},
+    {"symbol": "f", "anchor": {"kind": "here", "quote": "Let $f$ be the parameter of a call"}},
+    {"symbol": "m", "anchor": {"kind": "here", "quote": "Here $m$ is the factor by which the parameter grows"}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "Let $s$ be the number of subcalls of one call."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "\\Phi", "anchor": {"kind": "here", "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."}},
+    {"symbol": "C", "anchor": {"kind": "here", "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "big-O notation from asymptotic analysis in the undergraduate CS profile"}},
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "An address interchange of $u$-bit fields costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed."}},
+    {"symbol": "\\Omega", "anchor": {"kind": "here", "quote": "Here $\\Omega$ is the bit count of one axis chunk"}},
+    {"symbol": "d", "anchor": {"kind": "here", "quote": "$d$ is the paper's axis-count parameter"}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "$\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"}},
+    {"symbol": "\\vartheta", "anchor": {"kind": "here", "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"}},
+    {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Let $\\nu$ count the levels of unrolling"}},
+    {"symbol": "\\sigma", "anchor": {"kind": "here", "quote": "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$."}},
+    {"symbol": "\\log", "anchor": {"kind": "background", "note": "logarithms with a base, covered by undergraduate discrete mathematics and asymptotic analysis"}},
+    {"symbol": "\\sum", "anchor": {"kind": "background", "note": "summation and series, covered by the calculus and discrete mathematics in the profile"}},
+    {"symbol": "\\max", "anchor": {"kind": "background", "note": "maximum of a set, standard undergraduate notation"}}
+  ],
+  "gaps": [
+    {"term": "outside work is row additions", "quote": "The outside work is a fixed number of address-field row additions.", "kind": "step", "note": "The page never states which construction does the call's own work or that it consists of a fixed number of row additions; this is a claim about the construction that is not given."},
+    {"term": "row addition cost", "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.", "kind": "step", "note": "Only the cost of an address interchange is cited; why a row addition costs O(V(u^tau+1)), and why u equals f times Omega, is not explained."},
+    {"term": "d bounded by a power of f", "quote": "$d\\le f^{1/\\vartheta}$", "kind": "step", "note": "Being a fixed exponent equal to 1/2 gives no reason why the axis-count d is at most f^2; the relation between d and the top-level parameter f is never stated."},
+    {"term": "both constraints on lambda", "quote": "Taking $\\lambda$ with $\\log_m(s/W)<\\lambda<1$", "kind": "step", "note": "Earlier lambda must also exceed tau(1+eta/vartheta); the page never says this is below 1 or that one lambda satisfies both conditions, so the claimed exponent below 1 is not shown to exist."},
+    {"term": "kernel", "quote": "Each leaf is handled by one kernel per chunk", "kind": "term", "note": "The kernel is never defined or linked, so the reader cannot see why a leaf costs O(f/m^nu)."},
+    {"term": "leaf bound by f^lambda", "quote": "the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$", "kind": "step", "note": "From d^vartheta at most f one only gets f^sigma times f^(1-sigma), that is f, not f^lambda; bounding by f^lambda needs d much smaller than f, which the page does not state."},
+    {"term": "numerical example", "quote": "the ratio is $\\tfrac{3/2}{2^{0.8}}\\approx1.16$", "kind": "step", "note": "2^0.8 is about 1.74, so the ratio is about 0.86, not 1.16; the stated value also contradicts the claim that lambda above 0.585 makes the ratio below 1."}
+  ]
+}

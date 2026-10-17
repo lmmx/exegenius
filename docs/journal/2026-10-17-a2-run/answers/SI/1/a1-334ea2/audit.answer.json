@@ -1,0 +1,37 @@
+{
+ "symbols": [
+  {"symbol": "R", "anchor": {"kind": "here", "quote": "Let $R$ be the number of fields in each vector"}},
+  {"symbol": "H", "anchor": {"kind": "here", "quote": "let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+  {"symbol": "D", "anchor": {"kind": "here", "quote": "let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+  {"symbol": "q", "anchor": {"kind": "here", "quote": "Here $q$ is a fixed odd prime, the radix of the digits"}},
+  {"symbol": "b", "anchor": {"kind": "here", "quote": "$b$ is the number of radix-$q$ digits in each field"}},
+  {"symbol": "\\mathbb Z", "anchor": {"kind": "background", "note": "Integers and residues mod m, covered by discrete mathematics (modular arithmetic)."}},
+  {"symbol": "\\mathbb Q", "anchor": {"kind": "background", "note": "The rational numbers, standard notation in undergraduate discrete mathematics and linear algebra."}},
+  {"symbol": "M", "anchor": {"kind": "here", "quote": "For a rational $R\\times R$ matrix $M$, the shear by $M$ is"}},
+  {"symbol": "\\mu", "anchor": {"kind": "here", "quote": "where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"}},
+  {"symbol": "\\xi", "anchor": {"kind": "here", "quote": "where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"}},
+  {"symbol": "\\operatorname{rank}", "anchor": {"kind": "here", "quote": "Let $\\operatorname{rank}_{\\mathbb Q}M$ be the number of linearly independent rows of $M$."}},
+  {"symbol": "\\Pi", "anchor": {"kind": "here", "quote": "A partial permutation matrix $\\Pi$ is a 0-1 matrix"}},
+  {"symbol": "F_1", "anchor": {"kind": "here", "quote": "where $F_1$ and $F_2$ are invertible lower-triangular rational matrices"}},
+  {"symbol": "F_2", "anchor": {"kind": "here", "quote": "where $F_1$ and $F_2$ are invertible lower-triangular rational matrices"}},
+  {"symbol": "I", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+  {"symbol": "\\sigma", "anchor": {"kind": "here", "quote": "at row $\\sigma$ and column $\\tau$"}},
+  {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "at row $\\sigma$ and column $\\tau$"}},
+  {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "Let $\\eta$ be the content of $H_\\sigma$"}},
+  {"symbol": "\\zeta", "anchor": {"kind": "here", "quote": "and $\\zeta$ that of $D_\\tau$"}},
+  {"symbol": "V", "anchor": {"kind": "here", "quote": "where $V$ is the stored bit volume"}},
+  {"symbol": "s_{\\rm b}", "anchor": {"kind": "here", "quote": "The interchange count of the network is $s_{\\rm b}$, the sum of their ranks."}},
+  {"symbol": "W_{\\rm b}", "anchor": {"kind": "here", "quote": "where $W_{\\rm b}$ is the number of wires"}},
+  {"symbol": "N", "anchor": {"kind": "here", "quote": "$N$ the number of negative source projections"}},
+  {"symbol": "L_{\\rm b}", "anchor": {"kind": "here", "quote": "$L_{\\rm b}$ the total dimension lost on decreasing edges"}}
+ ],
+ "gaps": [
+  {"term": "wrong sign in interchange recipe", "quote": "then set $D_\\tau\\leftarrow D_\\tau-H_\\sigma$", "kind": "step", "note": "Starting from (eta, zeta): D becomes zeta+eta, the swap gives H = zeta+eta and D = eta, and D <- D - H then gives eta-(zeta+eta) = -zeta. So the recipe ends at (eta+zeta, -zeta), not (eta+zeta, zeta) as claimed. The last update must be D_tau <- H_sigma - D_tau (paper line 1420, 'D_j <- H_i - D_j'), which gives zeta."},
+  {"term": "interchange count 2 rank", "quote": "So the shear needs $2\\operatorname{rank}_{\\mathbb Q}M$ interchanges plus $O(V)$ further work.", "kind": "step", "note": "Inconsistent with the page, which says each update uses one interchange and Pi has rank_Q M ones, so the count is rank_Q M interchanges. The paper (Lemma matrix-shear, lines 1394-1411 and 1424-1442) states exactly a = rank interchanges, one per 1 of Pi. The factor 2 is wrong, and it also conflicts with the later claim that interchanges per wire are fewer than R."},
+  {"term": "choice of prime q", "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used.", "kind": "step", "note": "Does not follow from 'q must not divide xi', which only constrains denominators. The paper (lines 1411-1415) chooses q to avoid every denominator in the finite table and every numerator of a diagonal entry of an invertible factor (e.g. q larger than all nonzero numerators and denominators), so the triangular factors stay invertible mod q^b. The page never states this reason or that the choice is made once for the finite table."},
+  {"term": "missing hypothesis: H before D on tape", "quote": "Each update $H_\\sigma\\leftarrow H_\\sigma+D_\\tau$ takes one interchange of two equal fields and two additions", "kind": "step", "note": "The O(V) cost of the two additions, and the lower-triangular passes, rely on updating a later field from earlier ones in tape order. The paper's Lemma matrix-shear (line 1400) assumes every H_i comes before every D_j, so D_tau is a later field controlled by earlier H_sigma. The page never states this ordering hypothesis, so the reader cannot check that the two additions are linear-cost."},
+  {"term": "negative source projections", "quote": "$N$ the number of negative source projections", "kind": "term", "note": "Neither explained nor linked. The reader of the linked network page has no notion of projections, edge matrices carrying subspaces, or negative sources. The paper (lines 1145-1170) defines them through subspace projections on the bit network's edges."},
+  {"term": "rank budget formula", "quote": "gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$", "kind": "step", "note": "The reader is not told what matrix each edge carries or why its rank is a dimension change, so the formula, and what 'dimension lost on decreasing edges' means, cannot be checked. The page only attributes N>2L_b to the paper without stating why it holds (paper Proposition bit-motif-interface, lines 1138-1170)."},
+  {"term": "recurrence saving", "quote": "which the recurrence turns into a saving of a power of the chunk width (the chunk length)", "kind": "step", "note": "No recurrence is stated or linked, and chunk width is not defined on this page. The reader cannot see how fewer than R interchanges per wire yields a power saving; the paper (lines 1320-1342) derives s_b/W_b < m^tau separately via recursive analysis."}
+ ]
+}

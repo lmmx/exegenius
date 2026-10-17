@@ -1,0 +1,38 @@
+{
+  "symbols": [
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields"}},
+    {"symbol": "\\mathbb F_2", "anchor": {"kind": "here", "quote": "for the bit procedure this ring is $\\mathbb F_2$"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$"}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation is covered by the undergraduate asymptotic analysis in the reader profile."}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "s", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "m", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "Q_k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level"}},
+    {"symbol": "k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level"}},
+    {"symbol": "C", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "j", "anchor": {"kind": "background", "note": "Summation index in a finite geometric sum, covered by undergraduate discrete mathematics and series."}}
+  ],
+  "gaps": [
+    {
+      "term": "ring is F_2 instead of Z/q^b Z",
+      "quote": "for the bit procedure this ring is $\\mathbb F_2$",
+      "kind": "step",
+      "note": "The paper does not take the shear over F_2. Lemma matrix-shear and Proposition power-interchange (paper.tex lines 1395-1415, 1475-1490) work over Z/q^bZ for a fixed odd prime q, with chunks of e = m^k radix-q digits, not bits. Only the network gates are pointwise XOR (line 1139). Odd q is needed so the lower-triangular factors stay invertible. The same error is in 'the shear ... over $\\mathbb F_2$' and 'Over $\\mathbb F_2$ each update is a pointwise XOR', and the page also calls the fields m^k bits where the paper says m^k radix-q digits."
+    },
+    {
+      "term": "tau > 0 missing",
+      "quote": "Both are $O(m^{k\\tau})$, since $m\\ge2$.",
+      "kind": "step",
+      "note": "The page only says to fix tau<1, but the bound k = O(m^{k tau}) for the case s/W <= 1 needs tau>0, and m>=2 alone does not give it. The paper chooses tau in (0,1) (line 1478, and 0<tau<1 at line 1343). The hypothesis m>=2 is also never stated earlier on the page (paper line 1450)."
+    },
+    {
+      "term": "scope of the O(V u^tau) conclusion",
+      "quote": "A field of $u=m^k$ bits therefore has $Q_k=O(u^\\tau)$",
+      "kind": "step",
+      "note": "The recurrence proves the bound only for widths that are powers of m, and only when a row field preceding both chunks has length divisible by W^k (paper Proposition power-interchange, lines 1475-1487). The page states no such row hypothesis. The step from this case to arbitrary field widths u, as in the page's opening claim and the O(Vu^tau) bound, is Lemma chunk-swap (lines 1631-1660), which the page does not mention."
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+ "symbols": [
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with exponent $\\lambda<1$"
+   }
+  },
+  {
+   "symbol": "f",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $f$ be the parameter of a call"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $m$ is the factor by which the parameter grows"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$ be the number of subcalls of one call."
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "\\Phi",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."
+   }
+  },
+  {
+   "symbol": "C",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\tau<1$ is fixed"
+   }
+  },
+  {
+   "symbol": "\\Omega",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $\\Omega$ is the bit count of one axis chunk"
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "$d$ is the paper's axis-count parameter"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "and $\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"
+   }
+  },
+  {
+   "symbol": "\\vartheta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"
+   }
+  },
+  {
+   "symbol": "\\nu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\nu$ count the levels of unrolling"
+   }
+  },
+  {
+   "symbol": "\\sigma",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "Choose $\\sigma$ with",
+    "note": "Only a range is given for sigma; the page never says what it denotes (an auxiliary exponent between the saving exponent and lambda)."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation, covered by the undergraduate asymptotic analysis background."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "recurrence sign",
+   "quote": "\\Phi(mf)\\le\\frac{s}{W}\\Phi(f)-C(mf)^\\lambda",
+   "kind": "step",
+   "note": "The outside work is said to add cost, yet it is subtracted; a cost bound should add C(mf)^lambda, so the displayed inequality does not follow from the preceding text."
+  },
+  {
+   "term": "direction of lambda condition",
+   "quote": "Taking $\\lambda$ with $\\lambda<\\log_m(s/W)<1$ makes the ratio below 1",
+   "kind": "step",
+   "note": "The ratio (s/W)/m^lambda is below 1 only when lambda exceeds log_m(s/W), not when it is smaller; this contradicts the later sigma<lambda and the example (0.8>0.585)."
+  },
+  {
+   "term": "kernel",
+   "quote": "Each leaf is handled by one kernel per chunk, at cost $O(f/m^\\nu)$.",
+   "kind": "term",
+   "note": "The kernel, the leaf and the per-chunk handling are never defined, and why the cost is O(f/m^nu) is not given."
+  },
+  {
+   "term": "row addition cost",
+   "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.",
+   "kind": "step",
+   "note": "The page cites only the interchange cost and never explains why a row addition costs this or why the outside work is a fixed number of row additions."
+  },
+  {
+   "term": "u as chunk count",
+   "quote": "The leaves at depth $\\nu$ have $u=f/m^\\nu<d^\\vartheta$ chunks",
+   "kind": "step",
+   "note": "u was a field width in bits; here it silently becomes a number of chunks, and the leaf cost O((s/W)^nu u) is asserted without derivation."
+  },
+  {
+   "term": "leaf bound",
+   "quote": "the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$",
+   "kind": "step",
+   "note": "The final inequality to O(f^lambda) is not justified; with f only known to be at least about d^vartheta it does not follow from sigma<lambda alone."
+  }
+ ]
+}

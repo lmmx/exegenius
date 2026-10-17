@@ -1,0 +1,329 @@
+{
+ "symbols": [
+  {
+   "symbol": "h",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$"
+   }
+  },
+  {
+   "symbol": "[h]",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$"
+   }
+  },
+  {
+   "symbol": "T",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a three-element subset $T$ of $[h]$, called a triple"
+   }
+  },
+  {
+   "symbol": "t_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "$t_T$ is its indicator vector, and $\\mathcal T$ is the set of all triples"
+   }
+  },
+  {
+   "symbol": "\\mathcal T",
+   "anchor": {
+    "kind": "here",
+    "quote": "$t_T$ is its indicator vector, and $\\mathcal T$ is the set of all triples"
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "here",
+    "quote": "Call two triples $T,S$ *neighbors* when $|T\\cap S|=1$"
+   }
+  },
+  {
+   "symbol": "\\cap",
+   "anchor": {
+    "kind": "background",
+    "note": "Sets and intersections from discrete mathematics; |.| is set size."
+   }
+  },
+  {
+   "symbol": "g_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each triple $T$ carries a value $g_T$."
+   }
+  },
+  {
+   "symbol": "e",
+   "anchor": {
+    "kind": "here",
+    "quote": "gather puts the sum of the $g_T$ with $T\\ni e$ on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "C_e",
+   "anchor": {
+    "kind": "here",
+    "quote": "gather puts the sum of the $g_T$ with $T\\ni e$ on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "\\ni",
+   "anchor": {
+    "kind": "background",
+    "note": "Set membership from discrete mathematics."
+   }
+  },
+  {
+   "symbol": "\\sum",
+   "anchor": {
+    "kind": "background",
+    "note": "Summation, covered by the calculus and discrete mathematics background."
+   }
+  },
+  {
+   "symbol": "A_{ST}",
+   "anchor": {
+    "kind": "here",
+    "quote": "A copy of $g_T$ on an auxiliary wire $A_{ST}$ for each neighbor pair"
+   }
+  },
+  {
+   "symbol": "\\mathbb F_2",
+   "anchor": {
+    "kind": "background",
+    "note": "Integers mod 2, covered by modular arithmetic."
+   }
+  },
+  {
+   "symbol": "\\mathbb Q",
+   "anchor": {
+    "kind": "background",
+    "note": "The rational numbers, standard number system."
+   }
+  },
+  {
+   "symbol": "I",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "J",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $J$ is the all-one matrix"
+   }
+  },
+  {
+   "symbol": "\\langle t_T,t_S\\rangle",
+   "anchor": {
+    "kind": "background",
+    "note": "Bilinear form / inner product notation from introductory linear algebra (dot products)."
+   }
+  },
+  {
+   "symbol": "t_S",
+   "anchor": {
+    "kind": "here",
+    "quote": "gives $\\langle t_T,t_S\\rangle=|T\\cap S|-1$"
+   }
+  },
+  {
+   "symbol": "\\perp",
+   "anchor": {
+    "kind": "background",
+    "note": "Orthogonality and orthogonal complements from introductory linear algebra."
+   }
+  },
+  {
+   "symbol": "\\mathcal F",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$, a space built from the"
+   }
+  },
+  {
+   "symbol": "\\otimes",
+   "anchor": {
+    "kind": "background",
+    "note": "Tensor product, covered by the known concept Tensor product of vector spaces."
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "of dimension $D=h^3$ (the label space dimension)"
+   }
+  },
+  {
+   "symbol": "U",
+   "anchor": {
+    "kind": "here",
+    "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$."
+   }
+  },
+  {
+   "symbol": "\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "T_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "T_2",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "T_3",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "U_\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "the label $U_\\iota$ is the line spanned by"
+   }
+  },
+  {
+   "symbol": "P_U",
+   "anchor": {
+    "kind": "here",
+    "quote": "the projection $P_U$ onto $U$ along $U^\\perp$"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "If $U\\subseteq V$, then $P_V-P_U$",
+    "note": "V is never introduced; the reader is not told it is another label (or any subspace) containing U, and V on an earlier page meant stored bit volume."
+   }
+  },
+  {
+   "symbol": "\\subseteq",
+   "anchor": {
+    "kind": "background",
+    "note": "Subset notation from discrete mathematics."
+   }
+  },
+  {
+   "symbol": "\\oplus",
+   "anchor": {
+    "kind": "background",
+    "note": "Direct sum of subspaces from introductory linear algebra."
+   }
+  },
+  {
+   "symbol": "\\dim",
+   "anchor": {
+    "kind": "background",
+    "note": "Dimension of a vector space from introductory linear algebra."
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$, the total rank over all edges, change meaning here."
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "N",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $N=\\binom h3^3$, the number of indices $\\iota$"
+   }
+  },
+  {
+   "symbol": "\\binom h3",
+   "anchor": {
+    "kind": "background",
+    "note": "Binomial coefficient, covered by discrete mathematics."
+   }
+  },
+  {
+   "symbol": "L",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $L$ be the total dimension lost on decreasing edges"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "so the paper's dimension $m$ is $D$"
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "nondegenerate subspace",
+   "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$.",
+   "kind": "term",
+   "note": "Nondegeneracy of a subspace relative to a bilinear form is not defined, and the page never says how the form I-J/9 on Q^h extends to the tensor cube F. The projection along U-perp used later needs this, and an undergraduate linear algebra course does not cover it."
+  },
+  {
+   "term": "rank counts smaller calls",
+   "quote": "Each unit of rank costs one smaller call. (cited)",
+   "kind": "step",
+   "note": "The edge matrices, how total rank over edges is defined, and why one unit of rank means one recursive call are not explained. This is the central link between the linear algebra and the recursion."
+  },
+  {
+   "term": "side wire label growth",
+   "quote": "Along a side wire, a label containing $t_T$ may grow to $t_S^\\perp$, since $t_T\\perp t_S$, adding $h-2$ dimensions.",
+   "kind": "step",
+   "note": "Side wires are never defined. Labels are subspaces of F=(Q^h)^{\\otimes 3} but t_T lives in Q^h, so containment is unclear. Why the label may grow, and what t_S^perp means in F, is not said."
+  },
+  {
+   "term": "telescoping of signed label changes",
+   "quote": "Signed label changes telescope along each wire, and gate labels cancel.",
+   "kind": "step",
+   "note": "The page never says how each edge's matrix or signed change is defined or which labels the edges join, so the telescoping and cancellation cannot be checked."
+  },
+  {
+   "term": "signed total WD-2N",
+   "quote": "So the signed total is $WD-2N$.",
+   "kind": "step",
+   "note": "The page does not say how many sinks there are (W of them), which sinks receive the sources, or why the signed total is sinks minus sources."
+  },
+  {
+   "term": "value of L",
+   "quote": "Each of the $2\\binom h3^2$ invocations has $h$ central wires, each losing $h$ on a decreasing edge, so $L=3\\binom h3^2h^2$.",
+   "kind": "step",
+   "note": "Invocations are never defined. The count as stated gives 2*binom^2*h*h, not 3*binom^2*h^2, so the factor 3 does not follow."
+  },
+  {
+   "term": "decisive bound on smaller calls",
+   "quote": "The paper's decisive property is a bound on the number of smaller calls, (cited).",
+   "kind": "step",
+   "note": "The sentence does not say what the bound is or how s<WD yields it, so the role of the cited result is not given."
+  }
+ ]
+}

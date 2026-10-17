@@ -1,0 +1,183 @@
+{
+ "symbols": [
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."
+   }
+  },
+  {
+   "symbol": "\\leftarrow",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\leftarrow$ is assignment: the field on its left takes the value on its right"
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each vertex holds a rational $\\mu\\times\\mu$ matrix, where $\\mu$ is its number of rows."
+   }
+  },
+  {
+   "symbol": "a",
+   "anchor": {
+    "kind": "here",
+    "quote": "An edge matrix, the head's matrix minus the tail's, of rank $a$ costs $a$ smaller calls"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-saving"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "role-streams"
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$",
+    "note": "The page never says what W_b is or gives its value; it is only said to be the paper's value of W."
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "$s=s_{\\rm b}$",
+    "note": "The page never says what s_b is or gives its value; it is only said to be the paper's value of s."
+   }
+  },
+  {
+   "symbol": "F_d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with $\\lambda=s/W$"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$"
+   }
+  },
+  {
+   "symbol": "\\ln",
+   "anchor": {
+    "kind": "background",
+    "note": "Natural logarithm, covered by single-variable calculus."
+   }
+  },
+  {
+   "symbol": "\\exp",
+   "anchor": {
+    "kind": "background",
+    "note": "Exponential function, covered by single-variable calculus."
+   }
+  },
+  {
+   "symbol": "X",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "Y",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "x_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "subtracts $x_S$ from",
+    "note": "The page does not say what x_S denotes; earlier pages bind only X, Y, S, x and y separately."
+   }
+  },
+  {
+   "symbol": "y_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "from $y_S$",
+    "note": "The page does not say what y_S denotes; earlier pages bind only X, Y, S, x and y separately."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "sign mismatch between shear and forward invocation",
+   "quote": "The shear is such an invocation, with $D$ as $X$ and $H$ as $Y$",
+   "kind": "step",
+   "note": "A forward invocation subtracts x_S from y_S, so with D as X and H as Y it computes H <- H - D. The page defines the shear as H <- H + D. The sign is inconsistent; either the shear is H - D or the invocation adds, and the page does not reconcile them."
+  },
+  {
+   "term": "bound on mu",
+   "quote": "Since $\\mu<2^{19}$",
+   "kind": "step",
+   "note": "The page never gives the explicit network's mu, so the reader cannot check mu < 2^19. The conclusion ln mu < 20 and the later use of mu >= 2 rest on facts about the network that the page does not state."
+  }
+ ]
+}

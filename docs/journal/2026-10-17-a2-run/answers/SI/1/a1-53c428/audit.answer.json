@@ -1,0 +1,174 @@
+{
+ "symbols": [
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with exponent $\\lambda<1$"
+   }
+  },
+  {
+   "symbol": "f",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $f$ be the parameter of a call"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "here",
+    "quote": "exchanging two disjoint address fields of $u$ bits"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $m$ is the factor by which the parameter grows"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$ be the number of subcalls of one call."
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "\\Phi",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."
+   }
+  },
+  {
+   "symbol": "C",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\tau<1$ is fixed"
+   }
+  },
+  {
+   "symbol": "\\Omega",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $\\Omega$ is the bit count of one axis chunk"
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "$d$ is the paper's axis-count parameter"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "and $\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"
+   }
+  },
+  {
+   "symbol": "\\vartheta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"
+   }
+  },
+  {
+   "symbol": "\\nu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\nu$ count the levels of unrolling"
+   }
+  },
+  {
+   "symbol": "\\sigma",
+   "anchor": {
+    "kind": "here",
+    "quote": "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation is covered by the reader profile."
+   }
+  },
+  {
+   "symbol": "\\log",
+   "anchor": {
+    "kind": "background",
+    "note": "Logarithms are covered by the reader profile (undergraduate computer science)."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "sign of the recurrence",
+   "quote": "\\Phi(mf)\\le\\frac{s}{W}\\Phi(f)-C(mf)^\\lambda",
+   "kind": "step",
+   "note": "The own work is added to the subcall cost, not subtracted. The paper's recurrence (line 2405) is F(e) <= (s/W)F(e/m) + O((eK)^tau+1). With the minus sign the bound would be weaker than the sum that follows, and the geometric sum of internal costs would not arise."
+  },
+  {
+   "term": "direction of lambda bound",
+   "quote": "Taking $\\lambda$ with $\\lambda<\\log_m(s/W)<1$ makes the ratio below 1",
+   "kind": "step",
+   "note": "The ratio (s/W)/m^lambda is below 1 exactly when lambda > log_m(s/W). The page's inequality points the wrong way, and its own example uses lambda=0.8 > 0.585. Paper (lines 2397, 2416-2419): sigma >= log_m(s/W), sigma < lambda, so a <= m^sigma < m^lambda."
+  },
+  {
+   "term": "leaf cost bound by f^lambda",
+   "quote": "and the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$",
+   "kind": "step",
+   "note": "Not justified and false in general. With f close to d^vartheta, f^sigma d^{vartheta(1-sigma)} is about f, which exceeds f^lambda. The paper (lines 2425-2428) stops at O(e^sigma d^{beta(1-sigma)}) and absorbs it only in the final bound O(d^{lambda'}) with lambda' > sigma+beta(1-sigma) (lines 2437-2442), not as O(e^lambda)."
+  },
+  {
+   "term": "u used for bits and for chunks",
+   "quote": "The leaves at depth $\\nu$ have $u=f/m^\\nu<d^\\vartheta$ chunks",
+   "kind": "step",
+   "note": "Earlier on the page u is a field width in bits (u=f*Omega bits). Here u counts chunks, a different quantity, so the reader cannot tell which meaning u carries in the leaf cost O((s/W)^nu u)."
+  },
+  {
+   "term": "parameter d",
+   "quote": "$d$ is the paper's axis-count parameter",
+   "kind": "step",
+   "note": "The page does not say which axes d counts, how d relates to the call parameter f, or why internal nodes satisfy f >= d^vartheta; the reader has no access to the paper's definition (d=Theta(p^epsilon), line 1783)."
+  },
+  {
+   "term": "kernel per chunk",
+   "quote": "Each leaf is handled by one kernel per chunk, at cost $O(f/m^\\nu)$.",
+   "kind": "step",
+   "note": "Kernel is never defined on the page (in the paper, a selected-bit C kernel applied to one chunk, line 2262), nor why one costs O(1) per chunk so that a leaf costs O(f/m^nu)."
+  },
+  {
+   "term": "row addition cost",
+   "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.",
+   "kind": "step",
+   "note": "The page cites only the interchange cost O(Vu^tau) and never says how a row addition is built from or bounded by interchanges. In the paper this is Lemma packed-selected-bit-rectangle (line 2298), not stated here."
+  }
+ ]
+}

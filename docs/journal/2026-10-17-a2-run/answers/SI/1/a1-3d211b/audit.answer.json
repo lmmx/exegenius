@@ -1,0 +1,211 @@
+{
+ "symbols": [
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "big-O notation is covered by the reader profile (algorithms and complexity)."
+   }
+  },
+  {
+   "symbol": "\\leftarrow",
+   "anchor": {
+    "kind": "here",
+    "quote": "The updates are $D\\leftarrow D-H$, $H\\leftarrow H+D$, $D\\leftarrow H-D$, where $\\leftarrow$ is assignment: the field on its left takes the value on its right."
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each vertex holds a rational $\\mu\\times\\mu$ matrix, where $\\mu$ is its number of rows."
+   }
+  },
+  {
+   "symbol": "a",
+   "anchor": {
+    "kind": "here",
+    "quote": "An edge matrix, the head's matrix minus the tail's, of rank $a$ costs $a$ smaller calls"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-saving"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "role-streams"
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$"
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$"
+   }
+  },
+  {
+   "symbol": "F_d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "So $F_d\\le\\lambda F_{d-1}+O(1)$, with $\\lambda=s/W$"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$"
+   }
+  },
+  {
+   "symbol": "\\ln",
+   "anchor": {
+    "kind": "background",
+    "note": "logarithms and exponentials are covered by the reader profile (single-variable calculus)."
+   }
+  },
+  {
+   "symbol": "\\exp",
+   "anchor": {
+    "kind": "background",
+    "note": "logarithms and exponentials are covered by the reader profile (single-variable calculus)."
+   }
+  },
+  {
+   "symbol": "X",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "Y",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "x_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "The page does not say that x_S and y_S are the entries of banks X and Y at triple S, nor what S ranges over; no earlier page lists these symbols."
+   }
+  },
+  {
+   "symbol": "y_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "The page does not say that x_S and y_S are the entries of banks X and Y at triple S, nor what S ranges over; no earlier page lists these symbols."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "explicit deficit bound",
+   "quote": "$\\eta>20\\cdot2^{-40}$",
+   "kind": "step",
+   "note": "Wrong exponent. The paper (line 1331) says both exact deficits are greater than 20*2^{-50}, not 20*2^{-40}. The 2^{-40} bound is false for the paper's eta_b = 339/22587335000000, which is about 1.5e-11, below 20*2^{-40}, which is about 1.8e-11. It also does not give the 1-20*2^{-50} > 1-eta step used below, which needs eta > 20*2^{-50}."
+  },
+  {
+   "term": "direction of the exponential inequality",
+   "quote": "$\\mu^{-2^{-50}}=\\exp(-2^{-50}\\ln\\mu)<1-20\\cdot2^{-50}>1-\\eta$",
+   "kind": "step",
+   "note": "The first inequality points the wrong way. Since ln mu < 20, exp(-2^{-50} ln mu) > exp(-20*2^{-50}) > 1-20*2^{-50}, so the paper (lines 1334-1336) writes m^{1-2^{-50}} = m exp(-2^{-50} log m) > m(1-20*2^{-50}) > m(1-eta). As written, the chain exp(..) < 1-20*2^{-50} > 1-eta does not give mu^{-2^{-50}} > 1-eta, so lambda < mu^tau does not follow. The page also gives no reason for exp(-x) >= 1-x or for ln 2 < 1."
+  },
+  {
+   "term": "mu < 2^20",
+   "quote": "Since $\\mu<2^{20}$",
+   "kind": "step",
+   "note": "The page never says what mu is for the explicit network or why mu < 2^20 (the paper has m = h^3 = 1000000, line 653). It is not marked as cited. The reader cannot check it, and the whole choice tau = 1-2^{-50} depends on it."
+  },
+  {
+   "term": "linear time of outer updates",
+   "quote": "The outer two cost linear time.",
+   "kind": "step",
+   "note": "The page never says that H comes before D on the tape. Only then are D<-D-H and D<-H-D updates of a later field controlled by an earlier one (paper line 1539, citing the ordered-affine-streams lemma), which is what makes them linear. Without that hypothesis the reader cannot see why they are cheap."
+  },
+  {
+   "term": "width splitting by mu",
+   "quote": "the $s$ smaller calls are interchanges of width $\\mu^{d-1}$",
+   "kind": "step",
+   "note": "The page never says that each width-mu^d chunk is cut into mu fields of width mu^{d-1}, that H and D are then vectors of mu fields, or that the shear H+MD for a mu x mu matrix M of rank a is done by exactly a interchanges of such fields (paper Lemma matrix-shear, line 1394, and line 1495). This link between the mu x mu vertex matrices and the width mu^d is why a rank-a edge costs a calls of width mu^{d-1}, and the page only asserts it."
+  },
+  {
+   "term": "scope of cited cost bound",
+   "quote": "swaps two disjoint, equal-width address fields of an array",
+   "kind": "step",
+   "note": "Stated more widely than the paper. Lemma chunk-swap (line 1631) covers an array whose addresses form a complete Cartesian product [P]x[2^u]x[G]x[2^u]x[B], with V = P*G*B*2^{2u}. The recursive argument on the page covers only power widths u = mu^d and also needs a row field of length divisible by W^d (Proposition power-interchange, line 1483). The page states neither hypothesis, nor the extra step that removes the width and row restrictions."
+  },
+  {
+   "term": "shear as an invocation of the bank network",
+   "quote": "The shear is such an invocation, with $D$ as $X$ and $H$ as $Y$",
+   "kind": "step",
+   "note": "Unexplained and not how the paper does it. The banks X, Y are banks of scalars x_S, y_S indexed by triples of the subset network, whereas H and D are address fields of an array. In the paper the shear H<-H+D is built by applying the address-shear frames Phi_M to the role streams, with M_out(rho(w)) - M_in(w) = I_m on every role (lines 1503-1530). Exactness for arbitrary auxiliary rows then comes from that frame identity, not from H and D being the banks. The page never says how the scalar-level lemma (paper line 729) carries over to arrays."
+  }
+ ]
+}

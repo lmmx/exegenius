@@ -1,0 +1,203 @@
+{
+ "symbols": [
+  {
+   "symbol": "R",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $R$ be the number of fields in each vector, and let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields."
+   }
+  },
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $R$ be the number of fields in each vector, and let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields."
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $R$ be the number of fields in each vector, and let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields."
+   }
+  },
+  {
+   "symbol": "q",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $q$ is a fixed odd prime, the radix of the digits, and $b$ is the number of radix-$q$ digits in each field, so a field holds a residue in $\\mathbb Z/q^b\\mathbb Z$."
+   }
+  },
+  {
+   "symbol": "b",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $q$ is a fixed odd prime, the radix of the digits, and $b$ is the number of radix-$q$ digits in each field, so a field holds a residue in $\\mathbb Z/q^b\\mathbb Z$."
+   }
+  },
+  {
+   "symbol": "\\mathbb Z",
+   "anchor": {
+    "kind": "background",
+    "note": "Integers; modular arithmetic Z/mZ is covered by discrete mathematics."
+   }
+  },
+  {
+   "symbol": "M",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a rational $R\\times R$ matrix $M$, the shear by $M$ is $(H,D)\\mapsto(H+MD,D)$."
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "A rational entry is written $\\mu/\\xi$, where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"
+   }
+  },
+  {
+   "symbol": "\\xi",
+   "anchor": {
+    "kind": "here",
+    "quote": "A rational entry is written $\\mu/\\xi$, where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"
+   }
+  },
+  {
+   "symbol": "\\mathbb Q",
+   "anchor": {
+    "kind": "background",
+    "note": "The rational numbers, standard in undergraduate mathematics."
+   }
+  },
+  {
+   "symbol": "\\Pi",
+   "anchor": {
+    "kind": "here",
+    "quote": "A partial permutation matrix $\\Pi$ is a 0-1 matrix with at most one 1 in each row and column"
+   }
+  },
+  {
+   "symbol": "F_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "Every rational $M$ factors as $M=F_1\\Pi F_2$, where $F_1$ and $F_2$ are invertible lower-triangular rational matrices."
+   }
+  },
+  {
+   "symbol": "F_2",
+   "anchor": {
+    "kind": "here",
+    "quote": "Every rational $M$ factors as $M=F_1\\Pi F_2$, where $F_1$ and $F_2$ are invertible lower-triangular rational matrices."
+   }
+  },
+  {
+   "symbol": "I",
+   "anchor": {
+    "kind": "background",
+    "note": "The identity matrix, from introductory linear algebra."
+   }
+  },
+  {
+   "symbol": "\\sigma",
+   "anchor": {
+    "kind": "here",
+    "quote": "For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$, update $H_\\sigma\\leftarrow H_\\sigma+D_\\tau$"
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$, update $H_\\sigma\\leftarrow H_\\sigma+D_\\tau$"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."
+   }
+  },
+  {
+   "symbol": "\\zeta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "The interchange count of the network is $s_{\\rm b}$, the sum of their ranks."
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $W_{\\rm b}$ is the number of wires, $N$ the number of negative source projections, and $L_{\\rm b}$ the total dimension lost on decreasing edges."
+   }
+  },
+  {
+   "symbol": "N",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $W_{\\rm b}$ is the number of wires, $N$ the number of negative source projections, and $L_{\\rm b}$ the total dimension lost on decreasing edges."
+   }
+  },
+  {
+   "symbol": "L_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $W_{\\rm b}$ is the number of wires, $N$ the number of negative source projections, and $L_{\\rm b}$ the total dimension lost on decreasing edges."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "pivot choice",
+   "quote": "pivot on the topmost nonzero row's rightmost entry",
+   "kind": "step",
+   "note": "The page says the rightmost entry of the topmost nonzero row, but that entry can be zero (e.g. row (1,0)), and a zero pivot cannot be used. The paper's proof of Lemma lower-lower (paper.tex lines 1376-1377) chooses the topmost nonzero row and its rightmost NONZERO entry. The page also gives only a one-line sketch of why the left and lower clearings are lower-triangular operations and leave one 1 per row and column."
+  },
+  {
+   "term": "choice of the prime q",
+   "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used.",
+   "kind": "step",
+   "note": "This does not follow from the preceding sentences, which only require q not to divide the denominators xi. The needed hypothesis is also different: the paper (Lemma matrix-shear proof, lines 1415-1418) takes q avoiding every denominator in the finite table of factors and inverses and every numerator of a diagonal entry of an invertible factor, so that the triangular factors stay invertible mod q^b (the page never says why F_1, F_2 stay invertible modulo q^b, nor that such a q exists). Avoiding all numerators and denominators is only a sufficient example in the paper."
+  },
+  {
+   "term": "linear cost of the two additions",
+   "quote": "So the shear needs $\\operatorname{rank}_{\\mathbb Q}M$ interchanges plus $O(V)$ further work.",
+   "kind": "step",
+   "note": "The O(V) bound for the additions D <- D + H and D <- H - D, and for the triangular passes, relies on the cited stream lemma (paper lemma ordered-affine-streams, lines 555-572; matrix-shear lemma lines 1398-1399, 1441), which needs the target field to follow its control fields: every H field must precede every D field on the tape. The page never states this tape-order hypothesis, so the reader cannot see why these additions are linear cost."
+  },
+  {
+   "term": "matrix carried by an edge",
+   "quote": "Each edge of the bit network carries such a matrix.",
+   "kind": "step",
+   "note": "The page never says what matrix an edge carries. In the paper (lines 1146-1150, 1461) it is the difference M_head - M_tail of the matrices assigned to the edge's two end vertices, not a matrix attached to the edge itself. The page does not describe the vertex matrices or the network's labels, so the reader cannot check that the ranks of these differences sum to s_b."
+  },
+  {
+   "term": "negative source projections",
+   "quote": "$N$ the number of negative source projections",
+   "kind": "term",
+   "note": "Neither explained nor linked. In the paper (lines 1117-1118, 1162-1165) these are the source matrices -P_{U_a} assigned to the sources X_a; each makes an edge matrix of rank one where the dimension change is zero. The page also never says what dimension is meant by 'dimension changes' or 'dimension lost' (dimensions of subspaces attached to vertices)."
+  },
+  {
+   "term": "recurrence and power saving",
+   "quote": "which the recurrence turns into a saving of a power of the chunk width",
+   "kind": "step",
+   "note": "The recurrence is neither stated nor linked here. The saving needs s_b/W_b < m^tau for a fixed rational tau in (0,1), which the paper derives from the exact rank deficit (lines 1319-1344, Proposition power-interchange lines 1475-1489, which also requires a row field of length divisible by W^k); 'fewer than R per wire' alone is not what is used, and the page does not show the passage from one to the other."
+  }
+ ]
+}

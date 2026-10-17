@@ -1,0 +1,218 @@
+{
+ "symbols": [
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."
+   }
+  },
+  {
+   "symbol": "\\leftarrow",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\leftarrow$ is assignment: the field on its left takes the value on its right"
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each vertex holds a rational $\\mu\\times\\mu$ matrix, where $\\mu$ is its number of rows."
+   }
+  },
+  {
+   "symbol": "a",
+   "anchor": {
+    "kind": "here",
+    "quote": "An edge matrix, the head's matrix minus the tail's, of rank $a$ costs $a$ smaller calls"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-saving"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "role-streams"
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)"
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)"
+   }
+  },
+  {
+   "symbol": "F_d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with $\\lambda=s/W$"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$"
+   }
+  },
+  {
+   "symbol": "\\ln",
+   "anchor": {
+    "kind": "background",
+    "note": "Natural logarithm is covered by calculus in the reader profile."
+   }
+  },
+  {
+   "symbol": "\\exp",
+   "anchor": {
+    "kind": "background",
+    "note": "The exponential function is covered by calculus in the reader profile."
+   }
+  },
+  {
+   "symbol": "X",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "Y",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "x_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "Page does not say what x_S denotes; only X is bound earlier, not the scalar x_S."
+   }
+  },
+  {
+   "symbol": "y_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "Page does not say what y_S denotes; only Y is bound earlier, not the scalar y_S."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation is in the reader profile."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "linear cost of outer updates",
+   "quote": "The outer two cost linear time.",
+   "kind": "step",
+   "note": "The page never says why D<-D-H and D<-H-D are linear time. The paper (lines 1433-1435, Lemma matrix-shear/Prop. power-interchange) gives the reason: these updates target the later group, controlled by the earlier one, so they can be done in one ordered pass. The page omits the hypothesis that H precedes D on the tape; without it the claim is unsupported."
+  },
+  {
+   "term": "width mu^d and mu x mu matrices",
+   "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange",
+   "kind": "step",
+   "note": "The page never says how a mu x mu vertex matrix relates to width mu^d: each chunk is split into mu consecutive fields of width mu^(d-1), the matrix acts on these mu fields, and the pivot pairs of those fields are the smaller interchanges (paper lines 1498-1500, 1527-1531). Without this the claim that the smaller calls have width mu^(d-1) cannot be checked."
+  },
+  {
+   "term": "off-by-one in sum bound",
+   "quote": "If $\\lambda\\le1$ the sum is at most $d$.",
+   "kind": "step",
+   "note": "The sum 1+lambda+...+lambda^d has d+1 terms, so for lambda<=1 it is at most d+1, not d (for d=0 it equals 1). The paper says at most k+1 (line 1556)."
+  },
+  {
+   "term": "value of mu",
+   "quote": "Since $\\mu<2^{20}$",
+   "kind": "step",
+   "note": "The page never gives the value of mu for the explicit network; the bound mu<2^20 comes from m=h^3=10^6 in the paper (line 1332 uses m<2^20, definition at line 654). The reader cannot check it."
+  },
+  {
+   "term": "mu at least 2",
+   "quote": "As $\\mu\\ge2$",
+   "kind": "step",
+   "note": "The hypothesis mu>=2 (paper: m,W>=2, line 1448) is never stated on the page, yet it is needed to absorb the d+1 and lambda^d terms into mu^(d tau)."
+  },
+  {
+   "term": "shear as a forward invocation",
+   "quote": "The shear is such an invocation, with $D$ as $X$ and $H$ as $Y$, so it is exact for any initial auxiliary contents.",
+   "kind": "step",
+   "note": "Inconsistent with the paper and with the page's own description. In the paper X and Y are banks of bit values on wires, and the forward invocation adds x_S to y_S pointwise over F_2 (Lemma scalar-motifs, lines 729-731). The address shear H<-H+D over Z/qZ is not that invocation: it is produced by applying the frame permutations Phi_{A_e} to each role stream and the endpoint identity M_out(rho(w)) - M_in(w) = I (lines 1534-1545), with scratch roles handled because their initial values are arbitrary. D and H are address fields, not the banks X and Y. The page's identification is wrong and gives no argument."
+  },
+  {
+   "term": "general width u",
+   "quote": "which for width $u=\\mu^d$ is $O(u^{\\tau})$ per unit volume",
+   "kind": "step",
+   "note": "The opening claims O(Vu^tau) for fields of u bits for any u, but the derivation covers only widths mu^d, and the paper also needs the row field length divisible by W^k (Proposition power-interchange, lines 1481-1485). Arbitrary u needs the base-mu decomposition, padding of rows, and conversion of binary fields to radix-q digits of Lemma chunk-swap (lines 1631-1735), none of which the page gives."
+  }
+ ]
+}

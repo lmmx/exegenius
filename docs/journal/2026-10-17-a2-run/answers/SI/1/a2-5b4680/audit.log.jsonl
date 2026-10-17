@@ -1,0 +1,3 @@
+{"at":1792220899005,"version":"0.6.0","event":"issued","task":"0213-audit-fast-address-interchange","kind":"audit","round":3}
+{"at":1792221524416,"version":"0.6.0","event":"submit","task":"0213-audit-fast-address-interchange","kind":"audit","attempt":1,"outcome":"rejected","message":"answer rejected:\n- `Q_0`: the quote must cover the symbol in the page's mathematics: \"Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level.\"\nCopy quotes exactly from the page, and use only the bindings listed in the task."}
+{"at":1792221528378,"version":"0.6.0","event":"submit","task":"0213-audit-fast-address-interchange","kind":"audit","attempt":2,"outcome":"accepted"}

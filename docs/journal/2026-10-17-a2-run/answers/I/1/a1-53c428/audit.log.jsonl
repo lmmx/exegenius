@@ -1,0 +1,4 @@
+{"at":1792220882085,"version":"0.6.0","event":"issued","task":"0213-audit-recursive-power-saving","kind":"audit","round":3}
+{"at":1792221673450,"version":"0.6.0","event":"submit","task":"0213-audit-recursive-power-saving","kind":"audit","attempt":1,"outcome":"error","message":"no answer yet: write it to exegenius/tasks/0213-audit-recursive-power-saving.answer.json"}
+{"at":1792221676865,"version":"0.6.0","event":"submit","task":"0213-audit-recursive-power-saving","kind":"audit","attempt":2,"outcome":"rejected","message":"answer rejected:\n- `\\log`: `Logarithms and floor/ceiling` is not a known concept whose name binds it\nCopy quotes exactly from the page, and use only the bindings listed in the task."}
+{"at":1792221680316,"version":"0.6.0","event":"submit","task":"0213-audit-recursive-power-saving","kind":"audit","attempt":3,"outcome":"accepted"}

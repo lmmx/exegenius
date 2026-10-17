@@ -1,0 +1,321 @@
+{
+ "symbols": [
+  {
+   "symbol": "h",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$ (the letter $h$ changes meaning here)."
+   }
+  },
+  {
+   "symbol": "[h]",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$ (the letter $h$ changes meaning here)."
+   }
+  },
+  {
+   "symbol": "T",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a three-element subset $T$ of $[h]$, called a triple"
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "here",
+    "quote": "Call two triples $T,S$ *neighbors* when $|T\\cap S|=1$."
+   }
+  },
+  {
+   "symbol": "t_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "$t_T$ is its indicator vector"
+   }
+  },
+  {
+   "symbol": "\\mathcal T",
+   "anchor": {
+    "kind": "here",
+    "quote": "$\\mathcal T$ is the set of all triples"
+   }
+  },
+  {
+   "symbol": "g_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each triple $T$ carries a value $g_T$."
+   }
+  },
+  {
+   "symbol": "e",
+   "anchor": {
+    "kind": "here",
+    "quote": "on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "C_e",
+   "anchor": {
+    "kind": "here",
+    "quote": "on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "A_{ST}",
+   "anchor": {
+    "kind": "here",
+    "quote": "on an auxiliary wire $A_{ST}$ for each neighbor pair"
+   }
+  },
+  {
+   "symbol": "\\mathbb F_2",
+   "anchor": {
+    "kind": "background",
+    "note": "The field of two elements, i.e. arithmetic mod 2, covered by modular arithmetic in discrete mathematics."
+   }
+  },
+  {
+   "symbol": "\\mathbb Q",
+   "anchor": {
+    "kind": "background",
+    "note": "The rational numbers, standard in an undergraduate degree."
+   }
+  },
+  {
+   "symbol": "I",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "J",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $J$ is the all-one matrix (the letter $J$ changes meaning here)"
+   }
+  },
+  {
+   "symbol": "\\langle t_T,t_S\\rangle",
+   "anchor": {
+    "kind": "here",
+    "quote": "gives $\\langle t_T,t_S\\rangle=|T\\cap S|-1$"
+   }
+  },
+  {
+   "symbol": "\\mathcal F",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$"
+   }
+  },
+  {
+   "symbol": "\\otimes",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$",
+    "note": "The tensor product symbol and tensor power are not defined on this page; only a link to another page, and no earlier page binds the symbol."
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "of dimension $D=h^3$ (the label space dimension)"
+   }
+  },
+  {
+   "symbol": "U",
+   "anchor": {
+    "kind": "here",
+    "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$."
+   }
+  },
+  {
+   "symbol": "\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "T_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "U_\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "the label $U_\\iota$ is the line spanned by"
+   }
+  },
+  {
+   "symbol": "\\perp",
+   "anchor": {
+    "kind": "background",
+    "note": "Orthogonality and orthogonal complement from introductory linear algebra."
+   }
+  },
+  {
+   "symbol": "P_U",
+   "anchor": {
+    "kind": "here",
+    "quote": "the projection $P_U$ onto $U$ along $U^\\perp$"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "If $U\\subseteq V$, then",
+    "note": "V is never said to be a label (nondegenerate subspace); it is a new generic subspace, unrelated to the stored bit volume V of an earlier page."
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$, the total rank over all edges, change meaning here."
+   }
+  },
+  {
+   "symbol": "N",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $N=\\binom h3^3$, the number of indices $\\iota$ (the letter $N$ changes meaning here)."
+   }
+  },
+  {
+   "symbol": "\\binom",
+   "anchor": {
+    "kind": "background",
+    "note": "Binomial coefficient from discrete mathematics."
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "L",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $L$ be the total dimension lost on decreasing edges (the letter $L$ changes meaning here)."
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "so the paper's dimension $m$ is $D$"
+   }
+  },
+  {
+   "symbol": "\\cap",
+   "anchor": {
+    "kind": "background",
+    "note": "Set intersection, discrete mathematics."
+   }
+  },
+  {
+   "symbol": "\\in",
+   "anchor": {
+    "kind": "background",
+    "note": "Set membership."
+   }
+  },
+  {
+   "symbol": "\\ni",
+   "anchor": {
+    "kind": "background",
+    "note": "Set membership, reversed."
+   }
+  },
+  {
+   "symbol": "\\subseteq",
+   "anchor": {
+    "kind": "background",
+    "note": "Subset notation."
+   }
+  },
+  {
+   "symbol": "\\oplus",
+   "anchor": {
+    "kind": "background",
+    "note": "Direct sum of subspaces, linear algebra."
+   }
+  },
+  {
+   "symbol": "\\sum",
+   "anchor": {
+    "kind": "background",
+    "note": "Summation notation."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "distinct triples orthogonal",
+   "quote": "distinct triples are orthogonal",
+   "kind": "step",
+   "note": "False as stated. The formula just given is <t_T,t_S>=|T cap S|-1, which is zero only when |T cap S|=1, i.e. for neighbors. Distinct triples meeting in 0 or 2 elements give -1 or 1. The paper (lines 864-870) says neighboring triple lines are orthogonal. The later 'since t_T perp t_S' also needs T,S neighbors."
+  },
+  {
+   "term": "2L>N",
+   "quote": "so $2L>N$ and $s<WD$",
+   "kind": "step",
+   "note": "Inequality reversed. L/N=100/539 gives 2L/N=200/539<1, so 2L<N, not 2L>N. s=WD-N+2L<WD holds exactly because 2L<N; 2L>N would give s>WD. The paper has L<N/2 (line 895) and deficit N-2L>0 (line 1167)."
+  },
+  {
+   "term": "nondegenerate subspace",
+   "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$.",
+   "kind": "term",
+   "note": "Nondegenerate subspace of a space with a bilinear form is not defined or linked, and is beyond dot products and orthogonality as taught. The page also gives a form only on Q^h and never says F carries the tensor-product form or that it is nondegenerate, yet needs it for U^perp, P_U and the decomposition U plus U^perp."
+  },
+  {
+   "term": "cost per unit of rank",
+   "quote": "Each unit of rank costs one smaller call. (cited)",
+   "kind": "step",
+   "note": "The cited claim is the bridge from matrix rank to recursive calls, which is the point of the construction, but the page does not say why a rank-r edge change needs r smaller calls (the paper does this via a shear and address interchange, around lines 1130-1136). The reader cannot check why rank is the cost."
+  },
+  {
+   "term": "first source edge rank",
+   "quote": "The first edge out of each source has matrix $2P_{U_\\iota}$, rank one, with no label change",
+   "kind": "step",
+   "note": "The page never says the first gate on the source of index iota has label exactly U_iota (stage 1, where the earlier tensor factor space B is 0), nor that an edge matrix is head matrix minus tail matrix. Only then is it P_U-(-P_U)=2P_U. The paper gives this at lines 1162-1166. The reader cannot derive the extra N."
+  },
+  {
+   "term": "terminal labels",
+   "quote": "Sources have dimension $1$, summing to $N$; sinks have dimension $D$, except the $N$ sinks that receive the sources",
+   "kind": "step",
+   "note": "The page never states the prescribed source and sink labels: X-sources U_iota, all other sources 0, X and scratch sinks F, Y sinks U_iota^perp. 'Sources have dimension 1' is true only for the N X-sources. The telescoping claim 'gate labels cancel' also rests on gate labels that are never given (paper lines 881-889, 975-988)."
+  },
+  {
+   "term": "loss h per central wire",
+   "quote": "Each of the $3\\binom h3^2$ invocations has $h$ central wires, each losing $h$ on a decreasing edge",
+   "kind": "step",
+   "note": "The page never describes the three stages, the invocation structure, the gate labels, or which edge decreases and why it loses h (the paper: central edge 3 to 4 loses P tensor F, dimension h, Lemma at lines 997-1010). The count 3 binom(h,3)^2 and the loss h cannot be checked from the page."
+  },
+  {
+   "term": "side wire label growth",
+   "quote": "Along a side wire, a label containing $t_T$ may grow to $t_S^\\perp$, since $t_T\\perp t_S$, adding $h-2$ dimensions.",
+   "kind": "step",
+   "note": "'Side wire' is never defined and the page does not say which labels sit on side wires. The step needs T,S neighbors, and the h-2 count holds only when the label is exactly the line of t_T (in the paper, the edge 2 to 5 residual P tensor <t_X,t_Y>^perp, lines 1038, 1056-1058). As worded for 'a label containing t_T' it is overstated."
+  },
+  {
+   "term": "decisive property",
+   "quote": "The paper's decisive property is a bound on the number of smaller calls, (cited).",
+   "kind": "step",
+   "note": "The page does not state the cited bound (s<Wm, paper lines 168 and 1152) or say how it gives a power saving in the recursion (s/W<m); it only says it is a bound."
+  }
+ ]
+}

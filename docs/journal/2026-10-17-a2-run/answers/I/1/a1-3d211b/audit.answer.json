@@ -1,0 +1,203 @@
+{
+ "symbols": [
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "let $V$ be the stored volume, the number of data units in the array"
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."
+   }
+  },
+  {
+   "symbol": "\\leftarrow",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\leftarrow$ is assignment"
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\mu$ is its number of rows"
+   }
+  },
+  {
+   "symbol": "\\times",
+   "anchor": {
+    "kind": "background",
+    "note": "Matrix dimensions, covered by undergraduate linear algebra."
+   }
+  },
+  {
+   "symbol": "a",
+   "anchor": {
+    "kind": "here",
+    "quote": "of rank $a$ costs $a$ smaller calls"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "so $s$ is the sum of these ranks"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "role-streams"
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "$W=W_{\\rm b}$",
+    "note": "The page never says what W_b is or gives its value; it only says the paper's explicit network has W equal to it."
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "$s=s_{\\rm b}$",
+    "note": "The page never says what s_b is or gives its value; it only says the paper's explicit network has s equal to it."
+   }
+  },
+  {
+   "symbol": "F_d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange"
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $d$ is the recursion depth"
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation is in the reader profile."
+   }
+  },
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with $\\lambda=s/W$"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$"
+   }
+  },
+  {
+   "symbol": "\\ln",
+   "anchor": {
+    "kind": "background",
+    "note": "Logarithms are covered by the calculus background."
+   }
+  },
+  {
+   "symbol": "\\exp",
+   "anchor": {
+    "kind": "background",
+    "note": "Exponentials are covered by the calculus background."
+   }
+  },
+  {
+   "symbol": "X",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "Y",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "x_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "The page does not say what x_S is; only the bank X on the subset-network page is described, and the page does not say how a bit-network shear has scalars indexed by triples."
+   }
+  },
+  {
+   "symbol": "y_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "The page does not say what y_S is; only the bank Y on the subset-network page is described."
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "inequality direction in the tau bound",
+   "quote": "\\exp(-2^{-50}\\ln\\mu)<1-20\\cdot2^{-50}>1-\\eta",
+   "kind": "step",
+   "note": "The first inequality is false and the chain does not give what is needed. Since exp(-x) >= 1-x and ln mu < 20, mu^{-2^{-50}} is greater than 1-20*2^{-50}, not less. Lambda < mu^tau needs mu^{-2^{-50}} > 1-eta, which follows from mu^{-2^{-50}} > 1-20*2^{-50} > 1-eta (as eta > 20*2^{-40} > 20*2^{-50}). A chain 'a < b > c' proves nothing about a versus c."
+  },
+  {
+   "term": "bound mu < 2^20",
+   "quote": "Since $\\mu<2^{20}$",
+   "kind": "step",
+   "note": "The page never gives mu for the explicit network (nor W_b, s_b), and does not cite this bound, so the reader cannot check that mu < 2^20."
+  },
+  {
+   "term": "forward-inverse-forward exchange",
+   "quote": "A forward, inverse, forward schedule of these invocations exchanges the two banks",
+   "kind": "step",
+   "note": "An inverse invocation is never defined on the page, and the claim is not tied to the three updates given earlier (D<-D-H, H<-H+D, D<-H-D), whose third update is not a forward or inverse invocation. Three shears y+=x, x-=y, y+=x give (-y, x), an exchange only up to sign, so 'exchanges the two banks' is stated more strongly than it holds unless the sign is handled as in the earlier schedule."
+  }
+ ]
+}

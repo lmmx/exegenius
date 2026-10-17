@@ -1,0 +1,223 @@
+{
+ "symbols": [
+  {
+   "symbol": "R",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $R$ be the number of fields in each vector, and let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields."
+   }
+  },
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $R$ be the number of fields in each vector, and let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields."
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $R$ be the number of fields in each vector, and let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields."
+   }
+  },
+  {
+   "symbol": "q",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $q$ is a fixed prime, which may be taken to be $2$, the radix of the digits"
+   }
+  },
+  {
+   "symbol": "b",
+   "anchor": {
+    "kind": "here",
+    "quote": "$b$ is the number of radix-$q$ digits in each field"
+   }
+  },
+  {
+   "symbol": "\\mathbb Z",
+   "anchor": {
+    "kind": "background",
+    "note": "Integers mod m: modular arithmetic and the standard notation Z/mZ in discrete mathematics."
+   }
+  },
+  {
+   "symbol": "M",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a rational $R\\times R$ matrix $M$, the shear by $M$ is $(H,D)\\mapsto(H+MD,D)$."
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"
+   }
+  },
+  {
+   "symbol": "\\xi",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"
+   }
+  },
+  {
+   "symbol": "\\operatorname{rank}_{\\mathbb Q}",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\operatorname{rank}_{\\mathbb Q}M$ be the number of linearly independent rows of $M$."
+   }
+  },
+  {
+   "symbol": "\\mathbb Q",
+   "anchor": {
+    "kind": "background",
+    "note": "Standard notation for the rational numbers, covered by undergraduate discrete mathematics and linear algebra."
+   }
+  },
+  {
+   "symbol": "\\Pi",
+   "anchor": {
+    "kind": "here",
+    "quote": "A partial permutation matrix $\\Pi$ is a 0-1 matrix with at most one 1 in each row and column"
+   }
+  },
+  {
+   "symbol": "F_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "Every rational $M$ factors as $M=F_1\\Pi F_2$, where $F_1$ and $F_2$ are invertible lower-triangular rational matrices."
+   }
+  },
+  {
+   "symbol": "F_2",
+   "anchor": {
+    "kind": "here",
+    "quote": "Every rational $M$ factors as $M=F_1\\Pi F_2$, where $F_1$ and $F_2$ are invertible lower-triangular rational matrices."
+   }
+  },
+  {
+   "symbol": "I",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "\\sigma",
+   "anchor": {
+    "kind": "here",
+    "quote": "For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$"
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."
+   }
+  },
+  {
+   "symbol": "\\zeta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation, covered by the reader profile (asymptotic analysis)."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "The interchange count of the network is $s_{\\rm b}$, the sum of their ranks."
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $W_{\\rm b}$ is the number of wires"
+   }
+  },
+  {
+   "symbol": "N",
+   "anchor": {
+    "kind": "here",
+    "quote": "$N$ the number of negative source projections"
+   }
+  },
+  {
+   "symbol": "L_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "$L_{\\rm b}$ the total dimension lost on decreasing edges"
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "q taken to be 2",
+   "quote": "which may be taken to be $2$",
+   "kind": "step",
+   "note": "False. The paper's Lemma (matrix-shear, paper.tex line 1396-1397) says there is a fixed ODD prime q chosen to avoid every denominator (and diagonal numerator) of the finitely many matrices; q is determined by those matrices and is generally not 2. Taking q=2 would also contradict the page's own requirement that q divide no numerator or denominator, since a matrix may have even entries."
+  },
+  {
+   "term": "q avoids all numerators and denominators",
+   "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used.",
+   "kind": "step",
+   "note": "Does not follow from the preceding sentence, which only requires q not to divide the denominators xi. The paper (lines 1411-1414) chooses an odd prime avoiding every denominator in the table of factors and inverses and every numerator of a diagonal entry of an invertible factor, so that the triangular factors stay invertible mod q^b. The page never says why numerators matter or that the prime is chosen after the finite matrix collection is fixed."
+  },
+  {
+   "term": "factorization cited without proof",
+   "quote": "The paper cites this factorization from earlier work without proof; elimination proves it",
+   "kind": "step",
+   "note": "Inconsistent with the paper: Lemma lower-lower (paper.tex lines 1364-1392) gives the elementary elimination proof itself, citing Grigor'ev only for the name (Bruhat factorization with reversed coordinate order, lines 1358-1362). The paper does not cite it without proof."
+  },
+  {
+   "term": "O(V) cost of triangular pass",
+   "quote": "A lower-triangular transformation costs $O(V)$ (cited)",
+   "kind": "step",
+   "note": "The page does not state the hypothesis the paper needs (lines 1425-1431, via the ordered-affine-streams lemma): the fields lie on tape in order with every H field before every D field, and coordinates are updated in descending physical order. 'Earlier' on the page is never tied to tape order, and the cited result's content (a stream operation updating a later field from earlier ones) is not stated, though it is what the page's argument rests on."
+  },
+  {
+   "term": "negative source projections",
+   "quote": "$N$ the number of negative source projections",
+   "kind": "term",
+   "note": "Not explained or linked. The reader knows networks with roles and source/sink nodes but not what a negative source projection is (paper lines 1162-1166: input sources whose first edge matrix is 2P_U, rank one although the dimension change is zero)."
+  },
+  {
+   "term": "rank budget formula",
+   "quote": "gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$",
+   "kind": "step",
+   "note": "The reader cannot check this from the page: 'rank budget', 'dimension changes along its edges' and 'dimension lost on decreasing edges' are never defined or derived, and the formula is not marked as cited. Also, the paper's dimension budget (eq. rank-budget-labels, line 1004) is sum of |dim changes| = Wm-2N+2L; the rank sum s_b = Wm-N+2L (lines 1148-1152) differs from it by N because each negative source projection has rank one with zero dimension change. Calling the dimension count 'gives' s_b skips that correction."
+  },
+  {
+   "term": "recurrence saving a power of chunk width",
+   "quote": "which the recurrence turns into a saving of a power of the chunk width",
+   "kind": "step",
+   "note": "The recurrence is never stated or linked, and chunk width is not defined here. The paper's saving needs the stronger fixed-gap bound s_b/W_b < m^tau with tau = 1-2^-50 (lines 1340-1342, from the explicit deficit at lines 1321-1345), not just s_b < W_b m; the page does not say how fewer than R interchanges per wire gives a power saving."
+  }
+ ]
+}

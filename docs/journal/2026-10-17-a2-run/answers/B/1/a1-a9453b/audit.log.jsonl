@@ -1,0 +1,3 @@
+{"at":1792027578535,"version":"0.6.0","event":"issued","task":"0213-audit-subset-intersection-construction","kind":"audit","round":3}
+{"at":1792041097919,"version":"0.6.0","event":"submit","task":"0213-audit-subset-intersection-construction","kind":"audit","attempt":1,"outcome":"rejected","message":"answer rejected:\n- `\\otimes`: `Tensor product of vector spaces` is not a known concept whose name binds it\n- `N`: the quote must cover the symbol in the page's mathematics: \"the number of indices $\\iota$\"\nCopy quotes exactly from the page, and use only the bindings listed in the task."}
+{"at":1792041102776,"version":"0.6.0","event":"submit","task":"0213-audit-subset-intersection-construction","kind":"audit","attempt":2,"outcome":"accepted"}

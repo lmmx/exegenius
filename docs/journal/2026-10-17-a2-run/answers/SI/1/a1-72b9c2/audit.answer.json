@@ -1,0 +1,168 @@
+{
+ "symbols": [
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "a recursion's cost per bit can grow as a fixed power of its parameter, with exponent $\\lambda<1$"
+   }
+  },
+  {
+   "symbol": "f",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $f$ be the parameter of a call"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $m$ is the factor by which the parameter grows"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$ be the number of subcalls of one call."
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "\\Phi",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."
+   }
+  },
+  {
+   "symbol": "C",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\tau<1$ is fixed"
+   }
+  },
+  {
+   "symbol": "\\Omega",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $\\Omega$ is the bit count of one axis chunk"
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "$d$ is the paper's axis-count parameter"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "and $\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"
+   }
+  },
+  {
+   "symbol": "\\vartheta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"
+   }
+  },
+  {
+   "symbol": "\\nu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\nu$ count the levels of unrolling"
+   }
+  },
+  {
+   "symbol": "\\sigma",
+   "anchor": {
+    "kind": "here",
+    "quote": "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation is covered by the reader profile (asymptotic analysis)."
+   }
+  },
+  {
+   "symbol": "\\log_m",
+   "anchor": {
+    "kind": "background",
+    "note": "Logarithms to a base are covered by the undergraduate computer science profile."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "kernel and chunk",
+   "quote": "Each leaf is handled by one kernel per chunk",
+   "kind": "term",
+   "note": "The reader is never told what a kernel is (in the paper, the individual selected-bit butterfly kernel C applied to one axis chunk, costing O(V) per kernel, paper lines 2208-2225) nor what a chunk is, so the leaf cost O(f/m^nu) cannot be checked."
+  },
+  {
+   "term": "row addition cost",
+   "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.",
+   "kind": "step",
+   "note": "The page gives no reason why a row addition costs this much, and its only cited bound is for an address interchange. In the paper (lines 2226 and 2295-2298) this bound comes from the packed-selected-bit-rectangle lemma, for a row addition on f selected bits (one per K-bit chunk) of whole slots, under that lemma's asymptotic hypotheses, not for adding two u-bit fields. The reader also cannot see why the outside work is only a fixed number of such additions."
+  },
+  {
+   "term": "existence of lambda",
+   "quote": "Taking $\\lambda$ with $\\log_m(s/W)<\\lambda<1$ makes the ratio below 1",
+   "kind": "step",
+   "note": "The choice of lambda also has to satisfy lambda > tau(1+eta/vartheta) from the outside-work bound, and lambda > tau, sigma. That is possible only if eta is small enough that tau(1+eta/vartheta)<1; the page says only that eta>0 is fixed. The paper (lines 2394-2399) requires max{tau,sigma}<lambda<1 and tau(1+c/beta)<lambda, so the page is missing the hypothesis on eta and the full list of conditions on lambda."
+  },
+  {
+   "term": "leaf bound too strong",
+   "quote": "the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$",
+   "kind": "step",
+   "note": "The inequality does not follow and is false in general. Since f can be as small as d^vartheta, f^sigma d^{vartheta(1-sigma)} can equal f, which exceeds f^lambda. The paper (lines 2423-2426) stops at O(e^sigma d^{beta(1-sigma)}) and in its final bound (lines 2437-2444) keeps the separate term d^{sigma+beta(1-sigma)}, which forces the weaker exponent lambda' > max{lambda, sigma+beta(1-sigma)}, not lambda."
+  },
+  {
+   "term": "meaning of u",
+   "quote": "The leaves at depth $\\nu$ have $u=f/m^\\nu<d^\\vartheta$ chunks",
+   "kind": "step",
+   "note": "Here u is a number of chunks, but earlier on the same page u is a bit width (address fields of u bits, and u=f Omega bits) and no change of meaning is announced. Reading u as a bit count would make u^tau and the leaf cost inconsistent."
+  },
+  {
+   "term": "subcall volume V/W",
+   "quote": "each on a stream of volume $V/W$",
+   "kind": "step",
+   "note": "The exact volume V/W requires the stream to be split into W role streams by a row field whose length is divisible by W^k (paper lines 1481-1483, 2316-2321). The page states no row hypothesis, and gives no reason why the parameter must be a power of m, so the claim is stated without a hypothesis it needs."
+  }
+ ]
+}

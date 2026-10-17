@@ -1,0 +1,59 @@
+{
+  "symbols": [
+    {"symbol": "\\lambda", "anchor": {"kind": "here", "quote": "with exponent $\\lambda<1$"}},
+    {"symbol": "f", "anchor": {"kind": "here", "quote": "Let $f$ be the parameter of a call"}},
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "m", "anchor": {"kind": "here", "quote": "Here $m$ is the factor by which the parameter grows"}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "Let $s$ be the number of subcalls of one call."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "\\Phi", "anchor": {"kind": "here", "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."}},
+    {"symbol": "C", "anchor": {"kind": "here", "quote": "Let $C$ be a constant such that"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation, covered by the undergraduate asymptotic analysis in the reader profile."}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "An address interchange of $u$-bit fields costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed."}},
+    {"symbol": "\\Omega", "anchor": {"kind": "here", "quote": "Here $\\Omega$ is the bit count of one axis chunk"}},
+    {"symbol": "d", "anchor": {"kind": "here", "quote": "$d$ is the paper's axis-count parameter"}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "$\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"}},
+    {"symbol": "\\vartheta", "anchor": {"kind": "here", "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"}},
+    {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Let $\\nu$ count the levels of unrolling"}},
+    {"symbol": "\\sigma", "anchor": {"kind": "here", "quote": "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$."}}
+  ],
+  "gaps": [
+    {
+      "term": "outside work is a fixed number of row additions",
+      "quote": "The outside work is a fixed number of address-field row additions.",
+      "kind": "step",
+      "note": "Asserted without saying what the call's own work consists of, how many row additions there are, or why that number is fixed. For the numerical-layer case (a butterfly layer on selected axes) nothing says the outside work is row additions at all. This claim is the entire basis of the bound C(mf)^lambda on the outside work."
+    },
+    {
+      "term": "row addition cost from interchange cost",
+      "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.",
+      "kind": "step",
+      "note": "The cited result is a cost bound for an address interchange, O(V u^tau). The page then states a bound for a row addition, including an extra +1, with no derivation or link between the two operations. It also does not say which result supplies tau<1, or why an interchange bound with fixed tau<1 is available for use inside a recursion whose goal is the interchange itself, or for numerical layers."
+    },
+    {
+      "term": "choice of lambda inconsistent",
+      "quote": "which is $O(f^\\lambda)$ when $\\lambda>\\tau(1+\\eta/\\vartheta)$",
+      "kind": "step",
+      "note": "The outside-work bound needs lambda > tau(1+eta/vartheta), but the later choice 'Taking lambda with log_m(s/W) < lambda < 1' only requires lambda above log_m(s/W). The page never requires lambda to satisfy both conditions. It also never states the hypothesis tau(1+eta/vartheta) < 1, which is needed for such a lambda<1 to exist. With vartheta=1/2 this is tau(1+2 eta)<1, which does not follow from tau<1 and eta>0 alone. The correct statement takes lambda > max{log_m(s/W), tau(1+eta/vartheta)} and assumes tau(1+eta/vartheta)<1."
+    },
+    {
+      "term": "kernel and chunk at a leaf",
+      "quote": "Each leaf is handled by one kernel per chunk, at cost $O(f/m^\\nu)$.",
+      "kind": "term",
+      "note": "'Kernel' and 'chunk' are never defined, and the page does not say what the leaf base-case algorithm is. Nothing explains why one kernel costs O(f/m^nu), or how the number of chunks relates to the parameter f/m^nu. The reader cannot check the later leaf cost."
+    },
+    {
+      "term": "u reused for number of chunks",
+      "quote": "The leaves at depth $\\nu$ have $u=f/m^\\nu<d^\\vartheta$ chunks",
+      "kind": "step",
+      "note": "Earlier on the page u is a field width in bits (and u=f*Omega for the row addition). Here u=f/m^nu is the parameter at the leaf, called a number of chunks. The letter is used for two different quantities in one argument without notice, and the page does not say why the parameter f/m^nu equals a number of chunks, nor why the leaf cost per unit weight is O(u). Also nu is both the summation index over levels and the stopping level."
+    },
+    {
+      "term": "leaf bound O(f^lambda)",
+      "quote": "and the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$",
+      "kind": "step",
+      "note": "The first bound is correct: (s/W)^nu u <= (f/u)^sigma u = f^sigma u^(1-sigma) < f^sigma d^(vartheta(1-sigma)). The second inequality is not justified. The page itself uses only d <= f^(1/vartheta), which gives d^(vartheta(1-sigma)) <= f^(1-sigma) and so only O(f), not O(f^lambda). The step holds only if d is treated as a constant, which contradicts the earlier substitution d <= f^(1/vartheta). Correct statement: the leaf cost is O(f^sigma d^(vartheta(1-sigma))), which is O(f^lambda) only under an extra assumption such as d^vartheta <= f^((lambda-sigma)/(1-sigma)) or d bounded."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+ "symbols": [
+  {"symbol":"\\lambda","anchor":{"kind":"here","quote":"with exponent $\\lambda<1$"}},
+  {"symbol":"f","anchor":{"kind":"here","quote":"Let $f$ be the parameter of a call"}},
+  {"symbol":"m","anchor":{"kind":"here","quote":"Here $m$ is the factor by which the parameter grows"}},
+  {"symbol":"s","anchor":{"kind":"here","quote":"Let $s$ be the number of subcalls of one call"}},
+  {"symbol":"W","anchor":{"kind":"page","page":"linear-network-roles"}},
+  {"symbol":"V","anchor":{"kind":"page","page":"address-fields"}},
+  {"symbol":"\\Phi","anchor":{"kind":"here","quote":"Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."}},
+  {"symbol":"C","anchor":{"kind":"here","quote":"Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"}},
+  {"symbol":"u","anchor":{"kind":"here","quote":"exchanging two disjoint address fields of $u$ bits"}},
+  {"symbol":"\\tau","anchor":{"kind":"here","quote":"where $\\tau<1$ is fixed"}},
+  {"symbol":"\\Omega","anchor":{"kind":"here","quote":"Here $\\Omega$ is the bit count of one axis chunk"}},
+  {"symbol":"d","anchor":{"kind":"here","quote":"$d$ is the paper's axis-count parameter"}},
+  {"symbol":"\\eta","anchor":{"kind":"here","quote":"$\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"}},
+  {"symbol":"\\vartheta","anchor":{"kind":"here","quote":"Since $\\vartheta=\\tfrac12$ is a fixed exponent"}},
+  {"symbol":"\\nu","anchor":{"kind":"here","quote":"Let $\\nu$ count the levels of unrolling"}},
+  {"symbol":"\\sigma","anchor":{"kind":"here","quote":"Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$"}},
+  {"symbol":"O","anchor":{"kind":"background","note":"Big-O notation, covered by the undergraduate asymptotic analysis in the reader profile."}}
+ ],
+ "gaps": [
+  {"term":"outside work as row additions","quote":"The outside work is a fixed number of address-field row additions.","kind":"step","note":"The page never says what a row of an address field is, why a call's own work consists of a fixed number of row additions, or why the cited interchange bound O(Vu^tau) gives the row-addition cost O(V(u^tau+1)) (the paper, around lines 2226-2300, uses a separate packed-selected-bit-rectangle lemma and a fixed binary change of basis for this). The reader cannot check this from the page."},
+  {"term":"kernel","quote":"Each leaf is handled by one kernel per chunk, at cost $O(f/m^\\nu)$.","kind":"term","note":"'Kernel' (the individual selected-bit kernel of the paper) and 'chunk' are not explained or linked, so the reader cannot see why a leaf costs O(f/m^nu) per unit volume."},
+  {"term":"d <= f^{1/vartheta}","quote":"$d\\le f^{1/\\vartheta}$","kind":"step","note":"Fixedness of the exponent does not give this. It holds only at internal nodes, where f >= d^vartheta (paper line 2413: 'At an internal node e >= d^beta, hence K <= d^c <= e^{c/beta}'). The hypothesis is missing here, and the page states the stopping rule only later."},
+  {"term":"leaf bound absorbed into f^lambda","quote":"and the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$","kind":"step","note":"The last inequality is not justified and is false in general. At a call that has internal levels, f >= d^vartheta, so f^sigma d^{vartheta(1-sigma)} only gives about f, not f^lambda with lambda<1. The paper (lines 2430-2435) stops at O(e^sigma d^{beta(1-sigma)}) and absorbs it only in the final bound O(d^{lambda'}) with lambda' > max{lambda, sigma+beta(1-sigma)} (lines 2455-2460), using e <= d."},
+  {"term":"numerical example","quote":"the ratio is $\\tfrac{3/2}{2^{0.8}}\\approx1.16$","kind":"step","note":"Arithmetic error: 2^0.8 is about 1.741, so the ratio is about 0.86, not 1.16. A value above 1 would also contradict the page's claim that any lambda > log_2(3/2) = 0.585 makes the ratio below 1."}
+ ]
+}

@@ -1,0 +1,28 @@
+{
+ "symbols": [
+  {"symbol":"W","anchor":{"kind":"here","quote":"Let $W$ be the number of roles."}},
+  {"symbol":"\\rho","anchor":{"kind":"here","quote":"Let $\\rho$ be the permutation of roles that it applies"}},
+  {"symbol":"w","anchor":{"kind":"here","quote":"an input at role $w$ leaves at output role $\\rho(w)$"}},
+  {"symbol":"\\varepsilon_w","anchor":{"kind":"here","quote":"with sign $\\varepsilon_w \\in \\{+1,-1\\}$"}},
+  {"symbol":"\\ell","anchor":{"kind":"here","quote":"row $\\ell$, the $\\ell$th row at a fixed prefix"}},
+  {"symbol":"\\bmod","anchor":{"kind":"background","note":"modular arithmetic (remainder) from the discrete mathematics in the profile"}},
+  {"symbol":"V","anchor":{"kind":"here","quote":"Let $V$ be the number of bits stored after padding."}},
+  {"symbol":"\\nu","anchor":{"kind":"here","quote":"Each source, gate and sink $\\nu$ carries"}},
+  {"symbol":"D_\\nu","anchor":{"kind":"here","quote":"carries an invertible linear operator $D_\\nu$ on arrays indexed by the common address set"}},
+  {"symbol":"f","anchor":{"kind":"here","quote":"when the logical array is $f$"}},
+  {"symbol":"\\alpha","anchor":{"kind":"here","quote":"Along an edge from node $\\alpha$ to node $\\beta$"}},
+  {"symbol":"\\beta","anchor":{"kind":"here","quote":"Along an edge from node $\\alpha$ to node $\\beta$"}},
+  {"symbol":"G","anchor":{"kind":"here","quote":"A pointwise linear gate $G$ combines"}},
+  {"symbol":"p","anchor":{"kind":"here","quote":"its $p$ input arrays $f_1,\\dots,f_p$"}},
+  {"symbol":"f_1","anchor":{"kind":"here","quote":"its $p$ input arrays $f_1,\\dots,f_p$"}},
+  {"symbol":"k","anchor":{"kind":"here","quote":"Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges"}},
+  {"symbol":"\\mathrm{source}","anchor":{"kind":"here","quote":"where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"}},
+  {"symbol":"\\mathrm{sink}","anchor":{"kind":"here","quote":"where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"}},
+  {"symbol":"I","anchor":{"kind":"here","quote":"Here $I$ is the identity operator"}}
+ ],
+ "gaps": [
+  {"term":"wrong correction sign","quote":"multiplying by $-\\varepsilon_w$ again removes the sign","kind":"step","note":"The forward route multiplies by eps_w, so cancelling it needs a factor eps_w (= 1/eps_w), not -eps_w. Multiplying eps_w by -eps_w gives -1, so the sign is not removed (it is introduced when eps_w=+1)."},
+  {"term":"cited endpoint operator for scratch roles","quote":"Every role keeps the endpoint operator (cited), auxiliary roles included.","kind":"step","note":"The page does not say what 'keeps the endpoint operator' states or why it applies. It also seems to conflict with the claim that every auxiliary value is restored: a scratch route applies D_sink D_source^{-1}, which is the identity only if the source and sink frames agree, and the page never states or justifies that."},
+  {"term":"example omits sign","quote":"its operator is $D_\\nu$, however many gates it passes through","kind":"step","note":"By the page's own result a route applies eps_w D_sink D_source^{-1}, so with source frame I the operator is eps_w D_nu. It equals D_nu only when the sign is +1 (as for a scratch role), which the example does not say."}
+ ]
+}

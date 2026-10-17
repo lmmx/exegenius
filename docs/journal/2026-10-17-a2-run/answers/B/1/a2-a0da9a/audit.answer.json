@@ -1,0 +1,26 @@
+{
+  "symbols": [
+    {"symbol": "W", "anchor": {"kind": "here", "quote": "Let $W$ be the number of roles."}},
+    {"symbol": "\\rho", "anchor": {"kind": "here", "quote": "Let $\\rho$ be the permutation of roles that it applies"}},
+    {"symbol": "w", "anchor": {"kind": "here", "quote": "an input at role $w$ leaves at output role"}},
+    {"symbol": "\\varepsilon_w", "anchor": {"kind": "here", "quote": "with sign $\\varepsilon_w \\in \\{+1,-1\\}$"}},
+    {"symbol": "\\ell", "anchor": {"kind": "here", "quote": "row $\\ell$, the $\\ell$th row at a fixed prefix"}},
+    {"symbol": "\\bmod", "anchor": {"kind": "background", "note": "Modular arithmetic (remainder) is covered by the discrete mathematics in the reader profile and the known concept Modular arithmetic."}},
+    {"symbol": "V", "anchor": {"kind": "here", "quote": "Let $V$ be the number of bits stored after padding."}},
+    {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator"}},
+    {"symbol": "D_\\nu", "anchor": {"kind": "here", "quote": "invertible linear operator $D_\\nu$ on arrays indexed by the common address set"}},
+    {"symbol": "f", "anchor": {"kind": "here", "quote": "when the logical array is $f$"}},
+    {"symbol": "\\alpha", "anchor": {"kind": "here", "quote": "Along an edge from node $\\alpha$ to node $\\beta$"}},
+    {"symbol": "\\beta", "anchor": {"kind": "here", "quote": "Along an edge from node $\\alpha$ to node $\\beta$"}},
+    {"symbol": "G", "anchor": {"kind": "here", "quote": "A pointwise linear gate $G$ combines its"}},
+    {"symbol": "p", "anchor": {"kind": "here", "quote": "combines its $p$ input arrays"}},
+    {"symbol": "k", "anchor": {"kind": "unbound", "quote": "Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges", "note": "k appears only as the last index of the route; the page never says what it counts (the earlier convolution page binds k as an output index, a different meaning)."}},
+    {"symbol": "I", "anchor": {"kind": "here", "quote": "Here $I$ is the identity operator"}},
+    {"symbol": "\\mathrm{source}", "anchor": {"kind": "here", "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"}},
+    {"symbol": "\\mathrm{sink}", "anchor": {"kind": "here", "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"}}
+  ],
+  "gaps": [
+    {"term": "scratch roles are fixed points with sign +1", "quote": "For a scratch role the construction has $\\rho(w)=w$ with sign $+1$ (cited)", "kind": "step", "note": "The page never states the construction or wiring of the network, so the reader cannot see why scratch roles return to themselves with sign +1; the citation is the only support and it stands in for how the network works."},
+    {"term": "every role keeps the endpoint operator", "quote": "Every role keeps the endpoint operator (cited), auxiliary roles included.", "kind": "step", "note": "The page does not say what 'keeps' means or what is concluded (what the composite of the exchange and its undoing applies to each role, or why auxiliary values are restored); the cited result's content and role are not explained."}
+  ]
+}

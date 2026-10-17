@@ -1,0 +1,557 @@
+{
+ "summary": {
+  "B": {
+   "tasks": 6,
+   "accepted": 6,
+   "never_accepted": 0,
+   "no_transcript": 0,
+   "contaminated": 0
+  },
+  "I": {
+   "tasks": 30,
+   "accepted": 30,
+   "never_accepted": 0,
+   "no_transcript": 0,
+   "contaminated": 0
+  },
+  "SI": {
+   "tasks": 30,
+   "accepted": 30,
+   "never_accepted": 0,
+   "no_transcript": 0,
+   "contaminated": 0
+  }
+ },
+ "tasks": [
+  {
+   "task": "A2B1 0213-audit-address-shear-factorization",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2B1 0213-audit-fast-address-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2B1 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2B1 0213-audit-recursive-power-saving",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2B1 0213-audit-subset-intersection-construction",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2B1 0235-audit-tape-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-address-shear-factorization",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-address-shear-factorization",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-address-shear-factorization",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-address-shear-factorization",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-fast-address-interchange",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-fast-address-interchange",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-fast-address-interchange",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-fast-address-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-recursive-power-saving",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-recursive-power-saving",
+   "accepted": true,
+   "submits": 3,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-recursive-power-saving",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-recursive-power-saving",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-subset-intersection-construction",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-subset-intersection-construction",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-subset-intersection-construction",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-subset-intersection-construction",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0235-audit-tape-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0235-audit-tape-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0235-audit-tape-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0235-audit-tape-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-address-shear-factorization",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-fast-address-interchange",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-recursive-power-saving",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0213-audit-subset-intersection-construction",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2I1 0235-audit-tape-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-address-shear-factorization",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-address-shear-factorization",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-address-shear-factorization",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-address-shear-factorization",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-fast-address-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-fast-address-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-fast-address-interchange",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-fast-address-interchange",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-recursive-power-saving",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-recursive-power-saving",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-recursive-power-saving",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-recursive-power-saving",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-subset-intersection-construction",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-subset-intersection-construction",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-subset-intersection-construction",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-subset-intersection-construction",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0235-audit-tape-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0235-audit-tape-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0235-audit-tape-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0235-audit-tape-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-address-shear-factorization",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-fast-address-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": [
+    "bash"
+   ]
+  },
+  {
+   "task": "A2SI1 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-recursive-power-saving",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0213-audit-subset-intersection-construction",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A2SI1 0235-audit-tape-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  }
+ ]
+}

@@ -1,0 +1,177 @@
+{
+ "symbols": [
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with exponent $\\lambda<1$"
+   }
+  },
+  {
+   "symbol": "f",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $f$ be the parameter of a call"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $m$ is the factor by which the parameter grows"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$ be the number of subcalls of one call."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "\\Phi",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."
+   }
+  },
+  {
+   "symbol": "C",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed"
+   }
+  },
+  {
+   "symbol": "\\Omega",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $\\Omega$ is the bit count of one axis chunk"
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "$d$ is the paper's axis-count parameter"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "$\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"
+   }
+  },
+  {
+   "symbol": "\\vartheta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"
+   }
+  },
+  {
+   "symbol": "\\nu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\nu$ count the levels of unrolling"
+   }
+  },
+  {
+   "symbol": "\\sigma",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "Choose $\\sigma$ with",
+    "note": "sigma is introduced only by a range of allowed values; the page never says what it denotes (an auxiliary exponent for bounding the leaves)."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "big-O notation is covered by the profile"
+   }
+  },
+  {
+   "symbol": "\\log",
+   "anchor": {
+    "kind": "background",
+    "note": "logarithms are covered by undergraduate discrete mathematics"
+   }
+  },
+  {
+   "symbol": "\\sum",
+   "anchor": {
+    "kind": "background",
+    "note": "summation and geometric series are covered by the calculus/discrete mathematics in the profile"
+   }
+  },
+  {
+   "symbol": "\\max",
+   "anchor": {
+    "kind": "background",
+    "note": "maximum of two numbers is standard notation"
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "row addition cost",
+   "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.",
+   "kind": "step",
+   "note": "Only the cost of an interchange is cited; the page never says how a row addition is built from interchanges or why it costs this, nor why the call's outside work is a fixed number of row additions."
+  },
+  {
+   "term": "kernel",
+   "quote": "Each leaf is handled by one kernel per chunk",
+   "kind": "term",
+   "note": "A kernel is never defined or linked, so the reader cannot tell what handles a leaf or why it costs O(f/m^nu)."
+  },
+  {
+   "term": "saving requires s/W>m",
+   "quote": "The saving exists because $s/W>m$.",
+   "kind": "step",
+   "note": "This contradicts the earlier s<Wm (so s/W<m) and the example s/W=3/2<m=2; the cited claim's content and role are not stated, and the reader cannot reconcile it with the condition used next."
+  },
+  {
+   "term": "sum bound for every lambda",
+   "quote": "so the internal sum is at most a constant times $f^\\lambda$ for every $\\lambda>0$.",
+   "kind": "step",
+   "note": "The ratio is below 1 only for lambda>log_m(s/W), so the claim for every lambda>0 contradicts the condition just stated; the reader cannot check it."
+  },
+  {
+   "term": "leaf bound to f^lambda",
+   "quote": "$O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$",
+   "kind": "step",
+   "note": "From d^theta <= f only f^sigma d^{theta(1-sigma)} <= f follows, not f^lambda; the page does not say why the d factor can be absorbed into f^{lambda-sigma}."
+  }
+ ]
+}

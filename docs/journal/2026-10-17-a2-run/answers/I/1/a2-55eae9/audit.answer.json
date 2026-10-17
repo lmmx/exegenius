@@ -1,0 +1,28 @@
+{
+  "symbols": [
+    {"symbol": "\\lambda", "anchor": {"kind": "here", "quote": "with exponent $\\lambda<1$"}},
+    {"symbol": "f", "anchor": {"kind": "here", "quote": "Let $f$ be the parameter of a call"}},
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "m", "anchor": {"kind": "here", "quote": "Here $m=2$ is the factor by which the parameter grows"}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "Let $s$ be the number of subcalls of one call."}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "\\Phi", "anchor": {"kind": "here", "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."}},
+    {"symbol": "C", "anchor": {"kind": "here", "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation, covered by the reader profile and listed as a known concept."}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "An address interchange of $u$-bit fields costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed."}},
+    {"symbol": "\\Omega", "anchor": {"kind": "here", "quote": "Here $\\Omega$ is the bit count of one axis chunk"}},
+    {"symbol": "d", "anchor": {"kind": "here", "quote": "$d$ is the paper's axis-count parameter"}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "$\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"}},
+    {"symbol": "\\vartheta", "anchor": {"kind": "here", "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"}},
+    {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Let $\\nu$ count the levels of unrolling"}},
+    {"symbol": "\\sigma", "anchor": {"kind": "unbound", "quote": "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$.", "note": "The page only gives a range for sigma and never says what it denotes; the reader must infer it is an auxiliary exponent bounding (s/W)^nu by m^(nu sigma)."}}
+  ],
+  "gaps": [
+    {"term": "row addition cost", "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.", "kind": "step", "note": "The cited result bounds the cost of an address interchange, not of a row addition. The page never says how a row addition reduces to interchanges or why its cost is O(V(u^tau+1)), so the reader cannot check this."},
+    {"term": "kernel", "quote": "Each leaf is handled by one kernel per chunk, at cost $O(f/m^\\nu)$.", "kind": "term", "note": "The leaf 'kernel' is never defined or linked, so the reader does not know what it does or why it costs O(f/m^nu) per unit volume."},
+    {"term": "missing hypothesis on lambda", "quote": "which is $O(f^\\lambda)$ when $\\lambda>\\tau(1+\\eta/\\vartheta)$", "kind": "step", "note": "The page later takes lambda with log_m(s/W)<lambda<1 and uses the same lambda for the outside-work bound. Such a lambda exists only if tau(1+eta/vartheta)<1, i.e. tau(1+2 eta)<1. The page states only tau<1 and eta>0, so this hypothesis is missing."},
+    {"term": "meaning of u changes", "quote": "have $u=f/m^\\nu<d^\\vartheta$ chunks", "kind": "step", "note": "Earlier on the page u is a number of bits (fields of u=f Omega bits, matching the address-fields page). Here u counts chunks, with no notice that the letter changes meaning. The two uses are inconsistent."},
+    {"term": "leaf bound to f^lambda", "quote": "and the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$.", "kind": "step", "note": "The inequality does not follow from f>=d^vartheta, the only relation between f and d. It needs d^(vartheta(1-sigma)) <= f^(lambda-sigma), i.e. f >= d^(vartheta(1-sigma)/(lambda-sigma)), which is a stronger condition because (1-sigma)/(lambda-sigma)>1. Otherwise the bound carries a factor depending on d, and f^sigma d^(vartheta(1-sigma)) can be as large as f. The hypothesis is missing."}
+  ]
+}

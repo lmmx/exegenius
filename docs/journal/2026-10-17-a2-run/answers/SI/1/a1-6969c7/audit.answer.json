@@ -1,0 +1,29 @@
+{
+ "symbols": [
+  {"symbol": "\\Phi", "anchor": {"kind": "here", "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."}},
+  {"symbol": "f", "anchor": {"kind": "here", "quote": "Let $f$ be the parameter of a call"}},
+  {"symbol": "m", "anchor": {"kind": "here", "quote": "Here $m$ is the factor by which the parameter grows"}},
+  {"symbol": "s", "anchor": {"kind": "here", "quote": "Let $s$ be the number of subcalls of one call."}},
+  {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+  {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+  {"symbol": "C", "anchor": {"kind": "here", "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"}},
+  {"symbol": "\\lambda", "anchor": {"kind": "here", "quote": "with exponent $\\lambda<1$"}},
+  {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+  {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "An address interchange of $u$-bit fields costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed."}},
+  {"symbol": "\\Omega", "anchor": {"kind": "here", "quote": "Here $\\Omega$ is the bit count of one axis chunk"}},
+  {"symbol": "d", "anchor": {"kind": "here", "quote": "$d$ is the paper's axis-count parameter"}},
+  {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "and $\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"}},
+  {"symbol": "\\vartheta", "anchor": {"kind": "here", "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"}},
+  {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Let $\\nu$ count the levels of unrolling"}},
+  {"symbol": "\\sigma", "anchor": {"kind": "here", "quote": "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$."}},
+  {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation is a known concept."}},
+  {"symbol": "\\sum", "anchor": {"kind": "background", "note": "Summation notation, covered by the series and convergence background."}}
+ ],
+ "gaps": [
+  {"term": "direction of the inequality between s/W and m", "quote": "The saving exists because $s/W>m$.", "kind": "step", "note": "False and inconsistent with the page itself, which says the construction gives $s<Wm$, i.e. $s/W<m$, and whose next sentence and example (3/2 < 2) need $s/W<m$ so that $\\log_m(s/W)<1$. The paper states $s<Wm$ and that the strict inequality $s/W<m$ is the source of the power saving (paper.tex lines 168-175, 1468, 2239). The correct statement is $s/W<m$."},
+  {"term": "internal sum bound for every lambda", "quote": "so the internal sum is at most a constant times $f^\\lambda$ for every $\\lambda>0$", "kind": "step", "note": "Stated too widely. The geometric series converges only when the ratio is below 1, i.e. $\\lambda>\\log_m(s/W)$, and the outside-work bound also needs $\\lambda>\\tau(1+\\eta/\\vartheta)$. The paper takes $\\max\\{\\tau,\\sigma\\}<\\lambda<1$ with $\\tau(1+c/\\beta)<\\lambda$ (paper.tex lines 2400-2420), not every $\\lambda>0$."},
+  {"term": "leaf cost bounded by f^lambda", "quote": "and the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$", "kind": "step", "note": "Not justified and false in general: with $f=d^\\vartheta$ the left side is $d^\\vartheta=f$, which exceeds $f^\\lambda$ since $\\lambda<1$. The paper only bounds the leaves by $O(e^\\sigma d^{\\beta(1-\\sigma)})$ and absorbs them into the final exponent $\\lambda'>\\sigma+\\beta(1-\\sigma)$ (paper.tex lines 2427-2437, 2452-2457), not into $e^\\lambda$."},
+  {"term": "row addition cost from interchange cost", "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.", "kind": "step", "note": "The page never says what an address-field row addition is, why the outside work is a fixed number of them, or how its cost follows from the cited interchange cost $O(Vu^\\tau)$. In the paper this comes from a fixed binary change of basis written as elementary row additions, each done by a separate lemma (paper.tex lines 2208-2232, 2290-2300)."},
+  {"term": "kernel", "quote": "Each leaf is handled by one kernel per chunk, at cost $O(f/m^\\nu)$.", "kind": "term", "note": "The page never says what a kernel is (in the paper, the two-point selected-bit kernel applied individually to one chunk, costing O(V) per kernel, paper.tex lines 2253-2284), so the reader cannot check the leaf cost."}
+ ]
+}

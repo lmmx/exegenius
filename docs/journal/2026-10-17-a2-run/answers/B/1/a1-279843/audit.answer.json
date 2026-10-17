@@ -1,0 +1,19 @@
+{
+ "symbols": [
+  {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+  {"symbol": "H", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields"}},
+  {"symbol": "D", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields"}},
+  {"symbol": "\\mathbb F_2", "anchor": {"kind": "here", "quote": "for the bit procedure this ring is $\\mathbb F_2$, where subtraction and addition coincide"}},
+  {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited)."}},
+  {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+  {"symbol": "O", "anchor": {"kind": "background", "note": "big-O notation is covered by the reader profile (asymptotic analysis)"}},
+  {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+  {"symbol": "s", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+  {"symbol": "m", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+  {"symbol": "Q_k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits"}},
+  {"symbol": "k", "anchor": {"kind": "here", "quote": "where $k$ is the recursion level"}},
+  {"symbol": "C", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+  {"symbol": "j", "anchor": {"kind": "background", "note": "summation index in a sum over j<k; summation notation is covered by discrete mathematics and series"}}
+ ],
+ "gaps": []
+}

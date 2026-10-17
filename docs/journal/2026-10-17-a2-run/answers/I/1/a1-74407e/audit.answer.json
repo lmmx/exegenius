@@ -1,0 +1,69 @@
+{
+  "symbols": [
+    {"symbol": "R", "anchor": {"kind": "here", "quote": "Let $R$ be the number of fields in each vector"}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+    {"symbol": "q", "anchor": {"kind": "here", "quote": "Here $q$ is a fixed odd prime, the radix of the digits"}},
+    {"symbol": "b", "anchor": {"kind": "here", "quote": "and $b$ is the number of radix-$q$ digits in each field"}},
+    {"symbol": "\\mathbb Z", "anchor": {"kind": "background", "note": "Integers and the residue ring Z/mZ are covered by discrete mathematics (modular arithmetic) and the known concept Modular arithmetic."}},
+    {"symbol": "\\mathbb Q", "anchor": {"kind": "background", "note": "The rational numbers are standard notation covered by undergraduate discrete mathematics and linear algebra."}},
+    {"symbol": "M", "anchor": {"kind": "here", "quote": "For a rational $R\\times R$ matrix $M$, the shear by $M$ is $(H,D)\\mapsto(H+MD,D)$."}},
+    {"symbol": "\\mu", "anchor": {"kind": "here", "quote": "where $\\mu$ is its integer numerator"}},
+    {"symbol": "\\xi", "anchor": {"kind": "here", "quote": "and $\\xi$ its integer denominator"}},
+    {"symbol": "\\operatorname{rank}_{\\mathbb Q}", "anchor": {"kind": "here", "quote": "Let $\\operatorname{rank}_{\\mathbb Q}M$ be the number of linearly independent rows of $M$."}},
+    {"symbol": "\\Pi", "anchor": {"kind": "here", "quote": "A partial permutation matrix $\\Pi$ is a 0-1 matrix with at most one 1 in each row and column"}},
+    {"symbol": "F_1", "anchor": {"kind": "here", "quote": "where $F_1$ and $F_2$ are invertible lower-triangular rational matrices"}},
+    {"symbol": "F_2", "anchor": {"kind": "here", "quote": "where $F_1$ and $F_2$ are invertible lower-triangular rational matrices"}},
+    {"symbol": "I", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "\\sigma", "anchor": {"kind": "here", "quote": "at row $\\sigma$ and column $\\tau$"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "at row $\\sigma$ and column $\\tau$"}},
+    {"symbol": "H_\\sigma", "anchor": {"kind": "here", "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."}},
+    {"symbol": "D_\\tau", "anchor": {"kind": "here", "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."}},
+    {"symbol": "\\zeta", "anchor": {"kind": "here", "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation is covered by the reader profile (asymptotic analysis)."}},
+    {"symbol": "V", "anchor": {"kind": "here", "quote": "where $V$ is the stored bit volume"}},
+    {"symbol": "s_{\\rm b}", "anchor": {"kind": "here", "quote": "The interchange count of the network is $s_{\\rm b}$, the sum of their ranks."}},
+    {"symbol": "W_{\\rm b}", "anchor": {"kind": "here", "quote": "where $W_{\\rm b}$ is the number of wires"}},
+    {"symbol": "N", "anchor": {"kind": "here", "quote": "$N$ the number of negative source projections"}},
+    {"symbol": "L_{\\rm b}", "anchor": {"kind": "here", "quote": "$L_{\\rm b}$ the total dimension lost on decreasing edges"}}
+  ],
+  "gaps": [
+    {
+      "term": "q avoids all numerators and denominators",
+      "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used.",
+      "kind": "step",
+      "note": "This does not follow from the preceding sentences, which only require q not to divide the denominators of the entries of M. Nothing requires q to avoid numerators of M (an entry q/1 is fine). The matrices actually used include F_1, F_2 and their inverses, whose entries come from elimination on M. Their denominators can be divisible by q, because pivots can contain q, even when M's entries are fine. It is an extra hypothesis (choose q large relative to the finitely many matrices), not a consequence, and the page never states it as one."
+    },
+    {
+      "term": "linear cost of a lower-triangular pass",
+      "quote": "The coefficients come from the finitely many matrices, not from $V$, and $R$ is fixed, so each pass is linear.",
+      "kind": "step",
+      "note": "The coefficients act on fields as residues mu*xi^{-1} mod q^b, and xi^{-1} mod q^b is a b-digit number that depends on the field width b. The page does not say how multiplying a b-digit field by such a coefficient and adding takes time linear in the field size. That needs a constant-multiplication and constant-division digit-by-digit argument, and 'fixed coefficients' alone does not give it."
+    },
+    {
+      "term": "negative source projections",
+      "quote": "$N$ the number of negative source projections",
+      "kind": "term",
+      "note": "The page neither explains nor links 'negative source projections', and a reader with this background does not know the term."
+    },
+    {
+      "term": "rank budget identity",
+      "quote": "The network's rank budget, which counts dimension changes along its edges, gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$",
+      "kind": "step",
+      "note": "The identity s_b = W_b R - N + 2 L_b is asserted without derivation. 'Rank budget', 'dimension lost on decreasing edges' and the edge matrices are not defined, so the reader cannot see why the sum of ranks of the edge matrices equals this expression."
+    },
+    {
+      "term": "per-wire bound overstated",
+      "quote": "Per wire, the interchanges are fewer than $R$",
+      "kind": "step",
+      "note": "What is shown is s_b < W_b R, a bound on the total over all wires. It gives fewer than R interchanges per wire only on average, not for each wire. The correct statement is that the interchanges number fewer than R per wire on average."
+    },
+    {
+      "term": "recurrence and chunk width",
+      "quote": "which the recurrence turns into a saving of a power of the chunk width (the chunk length)",
+      "kind": "step",
+      "note": "The page never introduces the recurrence or the chunk width, and it links no page for them. The reader cannot check how fewer than R interchanges per wire becomes a power saving in the chunk width."
+    }
+  ]
+}

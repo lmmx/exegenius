@@ -1,0 +1,50 @@
+{
+ "symbols": [
+  {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+  {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+  {"symbol": "H", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+  {"symbol": "D", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+  {"symbol": "\\mathbb F_2", "anchor": {"kind": "background", "note": "The two-element ring of integers mod 2, covered by modular arithmetic in the reader's discrete mathematics."}},
+  {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited)."}},
+  {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation is in the reader profile (asymptotic analysis)."}},
+  {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+  {"symbol": "s", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+  {"symbol": "m", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+  {"symbol": "Q_k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+  {"symbol": "k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+  {"symbol": "C", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+  {"symbol": "j", "anchor": {"kind": "background", "note": "Summation index in a finite geometric sum, covered by series and summation in the reader's calculus."}}
+ ],
+ "gaps": [
+  {
+   "term": "ring is F_2 (should be Z/q^b Z, q odd prime)",
+   "quote": "for the bit procedure this ring is $\\mathbb F_2$, where subtraction and addition coincide",
+   "kind": "step",
+   "note": "False. The paper's address fields range over Z/q^b Z for a fixed odd prime q (Lemma matrix-shear, lines 1397-1404; Proposition power-interchange, lines 1482-1484, radix-q digits, with bit arrays padded to radix q at lines 1721-1734). q must be odd and avoid the denominators of the rational factorization, so addition and subtraction do not coincide and the three updates D-H, H+D, H-D are genuinely different. F_2 appears in the paper (line 1129) only as the linearity of the address permutation on array entries. The fields are also q-ary digit fields, not 'm^k bits'. The page's later XOR remarks and 'over F_2' endpoint shear inherit this error."
+  },
+  {
+   "term": "update as XOR of D and H",
+   "quote": "after the first update $D$ holds the XOR of $D$ and $H$",
+   "kind": "step",
+   "note": "Inconsistent with the construction: the updates are modular additions and subtractions on Z/q^b Z field values (paper lines 1535-1541), not XORs of D and H. The XOR gates in the paper (line 1139) act pointwise on array bits inside the network, after the address frames have been applied; they are not the field updates. The page's own three-update table with F_2 conflates the two."
+  },
+  {
+   "term": "bound s<W",
+   "quote": "For the bit network, $s<W$ (cited)",
+   "kind": "step",
+   "note": "Wrong cited bound. The paper states s<Wm (eq. finite-shear-contract, line 1468; s_b < W_b m at line 1152; intro line 168). The page's own next sentences ('Wm minus a positive constant', 'Hence s/W<m') use s<Wm, so s<W contradicts them (it would give s/W<1, a stronger and false claim)."
+  },
+  {
+   "term": "k = O(m^{k tau}) needs tau>0",
+   "quote": "Both are $O(m^{k\\tau})$, since $m\\ge2$.",
+   "kind": "step",
+   "note": "Missing hypothesis. Bounding k (case s/W<=1) by O(m^{k tau}) needs m^tau>1, i.e. tau>0, but the page only says 'fix tau<1'. The paper chooses tau in (0,1) (Proposition power-interchange, line 1481; also line 1555-1556). m>=2 alone does not suffice."
+  },
+  {
+   "term": "from u=m^k to arbitrary u",
+   "quote": "A field of $u=m^k$ bits therefore has $Q_k=O(u^\\tau)$, and the interchange costs $O(Vu^\\tau)$.",
+   "kind": "step",
+   "note": "Stated more widely than derived. The recurrence covers only widths u=m^k, and only when the row field before both chunks has length divisible by W^k (Proposition power-interchange, lines 1482-1485). The O(Vu^tau) bound for arbitrary u (as in the opening sentence) is Lemma chunk-swap (lines 1631-1643) and needs a further argument the page omits: splitting the width into base-m pieces, padding rows to a multiple of W^k, and padding bit ranges to radix q (lines 1650-1734)."
+  }
+ ]
+}

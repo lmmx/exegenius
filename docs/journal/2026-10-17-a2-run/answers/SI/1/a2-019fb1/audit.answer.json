@@ -1,0 +1,308 @@
+{
+ "symbols": [
+  {
+   "symbol": "[h]",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set"
+   }
+  },
+  {
+   "symbol": "h",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set"
+   }
+  },
+  {
+   "symbol": "T",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a three-element subset $T$ of $[h]$, called a triple"
+   }
+  },
+  {
+   "symbol": "t_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "$t_T$ is its indicator vector"
+   }
+  },
+  {
+   "symbol": "\\mathcal T",
+   "anchor": {
+    "kind": "here",
+    "quote": "$\\mathcal T$ is the set of all triples"
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "here",
+    "quote": "Call two triples $T,S$ *neighbors* when $|T\\cap S|=1$."
+   }
+  },
+  {
+   "symbol": "g_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each triple $T$ carries a value $g_T$."
+   }
+  },
+  {
+   "symbol": "e",
+   "anchor": {
+    "kind": "here",
+    "quote": "on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "C_e",
+   "anchor": {
+    "kind": "here",
+    "quote": "on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "A_{ST}",
+   "anchor": {
+    "kind": "here",
+    "quote": "A copy of $g_T$ on an auxiliary wire $A_{ST}$ for each neighbor pair"
+   }
+  },
+  {
+   "symbol": "\\mathbb F_2",
+   "anchor": {
+    "kind": "background",
+    "note": "the two-element field, i.e. arithmetic mod 2, covered by modular arithmetic in discrete mathematics"
+   }
+  },
+  {
+   "symbol": "\\cap",
+   "anchor": {
+    "kind": "background",
+    "note": "set intersection, discrete mathematics"
+   }
+  },
+  {
+   "symbol": "\\ni",
+   "anchor": {
+    "kind": "background",
+    "note": "set membership notation, discrete mathematics"
+   }
+  },
+  {
+   "symbol": "\\in",
+   "anchor": {
+    "kind": "background",
+    "note": "set membership, discrete mathematics"
+   }
+  },
+  {
+   "symbol": "\\sum",
+   "anchor": {
+    "kind": "background",
+    "note": "summation notation, covered by series and summation in calculus and discrete mathematics"
+   }
+  },
+  {
+   "symbol": "\\mathbb Q",
+   "anchor": {
+    "kind": "background",
+    "note": "the rational numbers, standard number-system notation"
+   }
+  },
+  {
+   "symbol": "I",
+   "anchor": {
+    "kind": "background",
+    "note": "identity matrix, introductory linear algebra"
+   }
+  },
+  {
+   "symbol": "J",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $J$ is the all-one matrix"
+   }
+  },
+  {
+   "symbol": "\\langle t_T,t_S\\rangle",
+   "anchor": {
+    "kind": "background",
+    "note": "value of a bilinear form (generalised dot product), introductory linear algebra"
+   }
+  },
+  {
+   "symbol": "\\perp",
+   "anchor": {
+    "kind": "background",
+    "note": "orthogonality and orthogonal complement, introductory linear algebra"
+   }
+  },
+  {
+   "symbol": "\\otimes",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$, a space built from the"
+   }
+  },
+  {
+   "symbol": "\\mathcal F",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$, a space built from the"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "of dimension $D=h^3$ (the label space dimension)"
+   }
+  },
+  {
+   "symbol": "U",
+   "anchor": {
+    "kind": "here",
+    "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$."
+   }
+  },
+  {
+   "symbol": "\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "T_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "U_\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "the label $U_\\iota$ is the line spanned by"
+   }
+  },
+  {
+   "symbol": "P_U",
+   "anchor": {
+    "kind": "here",
+    "quote": "the projection $P_U$ onto $U$ along $U^\\perp$"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "If $U\\subseteq V$, then $P_V-P_U$ is the identity on $V\\cap U^\\perp$"
+   }
+  },
+  {
+   "symbol": "\\subseteq",
+   "anchor": {
+    "kind": "background",
+    "note": "subset notation, discrete mathematics"
+   }
+  },
+  {
+   "symbol": "\\oplus",
+   "anchor": {
+    "kind": "background",
+    "note": "direct sum of subspaces, linear algebra"
+   }
+  },
+  {
+   "symbol": "\\dim",
+   "anchor": {
+    "kind": "background",
+    "note": "dimension of a vector space, linear algebra"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$, the total rank over all edges, change meaning here."
+   }
+  },
+  {
+   "symbol": "N",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $N=\\binom h3^3$, the number of indices $\\iota$"
+   }
+  },
+  {
+   "symbol": "\\binom",
+   "anchor": {
+    "kind": "background",
+    "note": "binomial coefficient, discrete mathematics"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "L",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $L$ be the total dimension lost on decreasing edges"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "so the paper's dimension $m$ is $D$"
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "scratch wire never restored",
+   "quote": "never removed from $A_{ST}$ afterwards (no undo-copy step)",
+   "kind": "step",
+   "note": "False. The paper's schedule (eq:motif-schedule, paper.tex lines 713-726) ends with row 6 'undo gather' and row 7 'undo copy', and Lemma scalar-motifs (lines 728-739, 764) says every auxiliary value is restored. The copy on A_ST is undone; the cancellation works for arbitrary initial scratch values, not because it is left in place."
+  },
+  {
+   "term": "h=100 attributed to Alon",
+   "quote": "with $h=100$, as in Alon's construction that the paper specializes",
+   "kind": "step",
+   "note": "The paper (lines 872-874) says its degree-one intersection formulas specialize Alon's construction to the prime 2 with the ground-set size changed to h=100. So h=100 is not Alon's value; it is the paper's change."
+  },
+  {
+   "term": "nondegenerate subspace",
+   "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$.",
+   "kind": "term",
+   "note": "The page never says what nondegenerate means for the indefinite form I-J/9 (U meets its orthogonal complement only in 0, so projection along U^perp exists), nor what the form on the tensor space is, nor why the lines and the spaces t_S^perp are nondegenerate. Undergraduate linear algebra does not cover this."
+  },
+  {
+   "term": "invocations and central wires",
+   "quote": "Each of the $3\\binom h3^2$ invocations has $h$ central wires, each losing $h$ on a decreasing edge",
+   "kind": "step",
+   "note": "The page never defines invocation (three stages, each with C(h,3)^2 independent runs), the gate labels along a wire, or why each central wire has exactly one decreasing edge of loss h. The count L cannot be checked from the page."
+  },
+  {
+   "term": "rank of an edge",
+   "quote": "Let $s$, the total rank over all edges, change meaning here. Each unit of rank costs one smaller call. (cited)",
+   "kind": "step",
+   "note": "The page never says that an edge's matrix is the difference of the head's and tail's matrices, which is what 'rank' refers to. It also never says why one rank unit costs one smaller call, so this cited claim stands in for how the construction works."
+  },
+  {
+   "term": "decisive property left unstated",
+   "quote": "The paper's decisive property is a bound on the number of smaller calls, (cited).",
+   "kind": "step",
+   "note": "The sentence is cut short. It does not say what the bound is (s<Wm, the number of smaller calls is below the number of wires times m) or how it is used in the recursion."
+  }
+ ]
+}

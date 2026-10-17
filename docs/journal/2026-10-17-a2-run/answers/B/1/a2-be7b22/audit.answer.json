@@ -1,0 +1,202 @@
+{
+ "symbols": [
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."
+   }
+  },
+  {
+   "symbol": "\\leftarrow",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\leftarrow$ is assignment: the field on its left takes the value on its right"
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\mu$ is the number of central wires in one invocation"
+   }
+  },
+  {
+   "symbol": "a",
+   "anchor": {
+    "kind": "here",
+    "quote": "An edge matrix, the head's matrix minus the tail's, of rank $a$ costs $a$ smaller calls"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-saving"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "role-streams"
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$",
+    "note": "The subscript b is never explained; the value of W for the explicit network is not given."
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$",
+    "note": "The subscript b is never explained; the value of s for the explicit network is not given."
+   }
+  },
+  {
+   "symbol": "F_d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $d$ is the recursion depth"
+   }
+  },
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with $\\lambda=s/W$"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$"
+   }
+  },
+  {
+   "symbol": "\\ln",
+   "anchor": {
+    "kind": "background",
+    "note": "Natural logarithm, covered by the calculus and logarithm background."
+   }
+  },
+  {
+   "symbol": "\\exp",
+   "anchor": {
+    "kind": "background",
+    "note": "Exponential function, covered by the calculus and exponential background."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation is in the reader profile."
+   }
+  },
+  {
+   "symbol": "X",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "Y",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "x_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "The page never says what x_S and y_S denote (entries of banks X and Y indexed by a triple S); it only appears in the cited invocation."
+   }
+  },
+  {
+   "symbol": "y_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "The page never says what x_S and y_S denote (entries of banks X and Y indexed by a triple S); it only appears in the cited invocation."
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "central wires",
+   "quote": "the number of central wires in one invocation",
+   "kind": "term",
+   "note": "The page never says which wires of the network are central, nor how an invocation has a number of them; the linear network concept only covers wires, banks and forward invocation."
+  },
+  {
+   "term": "outer two updates cost linear time",
+   "quote": "The outer two cost linear time.",
+   "kind": "step",
+   "note": "No argument is given, and it is unclear linear in what: linear in the volume V or in Vu bits, which would exceed the claimed O(Vu^tau) budget."
+  },
+  {
+   "term": "bound on mu",
+   "quote": "Since $\\mu<2^{20}$",
+   "kind": "step",
+   "note": "The bound mu < 2^20 for the explicit network is neither derived nor cited, yet the choice of tau and the final inequality depend on it."
+  },
+  {
+   "term": "restoration device and inverse invocation",
+   "quote": "by a restoration device the paper introduces as new, returns every auxiliary wire to its starting value (cited)",
+   "kind": "step",
+   "note": "The inverse invocation and the restoration device are not explained, so the reader cannot see how a forward, inverse, forward schedule exchanges the banks or restores the auxiliary wires; the claim stands in for how the exchange works."
+  }
+ ]
+}

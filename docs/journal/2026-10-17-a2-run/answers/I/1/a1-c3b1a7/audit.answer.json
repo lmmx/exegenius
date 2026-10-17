@@ -1,0 +1,32 @@
+{
+  "symbols": [
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields"}},
+    {"symbol": "\\mathbb F_2", "anchor": {"kind": "background", "note": "The two-element ring of residues mod 2, covered by modular arithmetic and basic rings in the profile."}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation, covered by asymptotic analysis in the profile."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "s", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "m", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "Q_k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits"}},
+    {"symbol": "k", "anchor": {"kind": "here", "quote": "where $k$ is the recursion level"}},
+    {"symbol": "C", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "j", "anchor": {"kind": "background", "note": "Summation index in a geometric sum, covered by the series and summation material in the profile."}}
+  ],
+  "gaps": [
+    {
+      "term": "direction of inequality for choosing tau",
+      "quote": "fix $\\tau<1$ with $s/W>m^\\tau$",
+      "kind": "step",
+      "note": "Wrong direction. The page later uses s/W<m^tau (the first unrolled term is O(m^{k tau}) 'because s/W<m^tau'), and the recursion only gives exponent tau when s/W<m^tau. Since s/W<m and m^tau->m as tau->1, one can choose tau<1 with s/W<m^tau. The stated s/W>m^tau contradicts the later use and would not give the O(u^tau) bound."
+    },
+    {
+      "term": "geometric sum bounded by m^{k tau}",
+      "quote": "Both are $O(m^{k\\tau})$, since $m\\ge2$.",
+      "kind": "step",
+      "note": "Bounding k (the s/W<=1 case) by O(m^{k tau}) needs tau>0, which the page never states (it only says tau<1), and m>=2 is not given where m is introduced. The hypothesis 0<tau<1 and m>=2 should be stated."
+    }
+  ]
+}

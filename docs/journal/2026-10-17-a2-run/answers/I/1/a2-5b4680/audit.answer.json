@@ -1,0 +1,32 @@
+{
+  "symbols": [
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "\\mathbb F_2", "anchor": {"kind": "here", "quote": "for the bit procedure this ring is $\\mathbb F_2$, where subtraction and addition coincide"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited)."}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation is covered by the reader profile."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "s", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "m", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "Q_k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+    {"symbol": "k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+    {"symbol": "C", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "j", "anchor": {"kind": "background", "note": "Summation index in a geometric sum; discrete mathematics and series are covered by the reader profile."}}
+  ],
+  "gaps": [
+    {
+      "term": "H lies after D on the tape",
+      "quote": "Both change only $D$, each combining $D$ with $H$, which lies after $D$ on the tape, in linear time.",
+      "kind": "step",
+      "note": "The page never says the two fields are arranged with H after D (it only says they are disjoint contiguous fields), nor why combining D with a field located elsewhere on the tape takes linear time on a fixed-tape machine. The claim that the two outer updates are cheap is asserted without support."
+    },
+    {
+      "term": "m>=2 and tau>0 for the sum bound",
+      "quote": "Both are $O(m^{k\\tau})$, since $m\\ge2$.",
+      "kind": "step",
+      "note": "The bound k = O(m^{k tau}) in the case s/W<=1 needs tau>0 as well as m>=2, and the page states neither hypothesis (it only says tau<1 and m is a growth factor). The correct statement is that k <= m^{k tau}/const requires m>=2 and tau>0."
+    }
+  ]
+}

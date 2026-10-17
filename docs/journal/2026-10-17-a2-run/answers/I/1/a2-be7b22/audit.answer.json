@@ -1,0 +1,201 @@
+{
+ "symbols": [
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation is a known concept and in the reader profile."
+   }
+  },
+  {
+   "symbol": "\\leftarrow",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\leftarrow$ is assignment: the field on its left takes the value on its right."
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each vertex holds a rational $\\mu\\times\\mu$ matrix, where $\\mu$ is the number of central wires in one invocation."
+   }
+  },
+  {
+   "symbol": "a",
+   "anchor": {
+    "kind": "here",
+    "quote": "of rank $a$ costs $a$ smaller calls"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-saving"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "role-streams"
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)",
+    "note": "Never defined; the reader is not told what W_b is or its value."
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)",
+    "note": "Never defined; the reader is not told what s_b is or its value."
+   }
+  },
+  {
+   "symbol": "F_d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "So $F_d\\le\\lambda F_{d-1}+O(1)$, with $\\lambda=s/W$, and unrolling gives $F_d=O(1+\\lambda+\\cdots+\\lambda^d)$."
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$, so $\\lambda=\\mu(1-\\eta)$."
+   }
+  },
+  {
+   "symbol": "\\ln",
+   "anchor": {
+    "kind": "background",
+    "note": "Natural logarithm is a known concept (Logarithm and exponential function) and covered by the calculus in the profile."
+   }
+  },
+  {
+   "symbol": "\\exp",
+   "anchor": {
+    "kind": "background",
+    "note": "Exponential function is a known concept (Logarithm and exponential function) and covered by the calculus in the profile."
+   }
+  },
+  {
+   "symbol": "X",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "Y",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "x_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "The page does not say what x_S and y_S are (entries of banks X and Y indexed by S); the earlier page binds X, Y and S but not these entries."
+   }
+  },
+  {
+   "symbol": "y_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "The page does not say what x_S and y_S are (entries of banks X and Y indexed by S); the earlier page binds X, Y and S but not these entries."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "central wires",
+   "quote": "where $\\mu$ is the number of central wires in one invocation",
+   "kind": "term",
+   "note": "The page never says what the central wires of an invocation are, as opposed to other wires; the linear-network concept covers wires and banks but not a central/auxiliary distinction."
+  },
+  {
+   "term": "auxiliary wires",
+   "quote": "returns every auxiliary wire to its starting value (cited)",
+   "kind": "term",
+   "note": "Auxiliary values and wires are never explained: what they hold, where they come from, or why they need restoring."
+  },
+  {
+   "term": "mu < 2^20 and mu >= 2",
+   "quote": "Since $\\mu<2^{20}$",
+   "kind": "step",
+   "note": "The page never states or cites that the explicit network has mu < 2^20 (nor mu >= 2, used later as 'As $\\mu\\ge2$'); the whole choice of tau = 1 - 2^{-50} rests on these unstated facts about the network."
+  },
+  {
+   "term": "inverse invocation / bank exchange",
+   "quote": "A forward, inverse, forward schedule of these invocations exchanges the two banks",
+   "kind": "step",
+   "note": "An inverse invocation is not defined. Two forward invocations X to Y with an inverse X to Y would just cancel, so inverse must mean the reverse direction, and with plain additions the three steps give a signed swap, not the exchange of the three updates D<-D-H, H<-H+D, D<-H-D. The page does not say how this schedule relates to those three updates or to the recursion."
+  },
+  {
+   "term": "restoration device",
+   "quote": "by a restoration device the paper introduces as new, returns every auxiliary wire to its starting value (cited)",
+   "kind": "step",
+   "note": "The cited device stands in for how the exactness of the exchange is obtained; the page does not say what the device is, how it restores auxiliary wires, or why it works where used."
+  }
+ ]
+}

@@ -1,0 +1,253 @@
+{
+ "symbols": [
+  {
+   "symbol": "[h]",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set"
+   }
+  },
+  {
+   "symbol": "h",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$"
+   }
+  },
+  {
+   "symbol": "T",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a three-element subset $T$ of $[h]$, called a triple"
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "here",
+    "quote": "Call two triples $T,S$ *neighbors* when"
+   }
+  },
+  {
+   "symbol": "t_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "$t_T$ is its indicator vector"
+   }
+  },
+  {
+   "symbol": "\\mathcal T",
+   "anchor": {
+    "kind": "here",
+    "quote": "$\\mathcal T$ is the set of all triples"
+   }
+  },
+  {
+   "symbol": "g_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each triple $T$ carries a value $g_T$."
+   }
+  },
+  {
+   "symbol": "\\mathbb F_2",
+   "anchor": {
+    "kind": "background",
+    "note": "Integers mod 2 / field of two elements, covered by modular arithmetic and basic algebraic structures."
+   }
+  },
+  {
+   "symbol": "e",
+   "anchor": {
+    "kind": "here",
+    "quote": "on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "C_e",
+   "anchor": {
+    "kind": "here",
+    "quote": "on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "A_{ST}",
+   "anchor": {
+    "kind": "here",
+    "quote": "on an auxiliary wire $A_{ST}$ for each neighbor pair"
+   }
+  },
+  {
+   "symbol": "\\mathbb Q",
+   "anchor": {
+    "kind": "background",
+    "note": "Rational numbers, standard undergraduate notation."
+   }
+  },
+  {
+   "symbol": "I",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "J",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $J$ is the all-one matrix"
+   }
+  },
+  {
+   "symbol": "\\perp",
+   "anchor": {
+    "kind": "background",
+    "note": "Orthogonality from introductory linear algebra (dot products, orthogonality)."
+   }
+  },
+  {
+   "symbol": "\\otimes",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$",
+    "note": "The symbol is not explained on this page; only a link to the tensor product page is given."
+   }
+  },
+  {
+   "symbol": "\\mathcal F",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$, a space built from the"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "of dimension $D=h^3$ (the label space dimension)"
+   }
+  },
+  {
+   "symbol": "U",
+   "anchor": {
+    "kind": "here",
+    "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$."
+   }
+  },
+  {
+   "symbol": "\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "T_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "U_\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "the label $U_\\iota$ is the line spanned by"
+   }
+  },
+  {
+   "symbol": "P_U",
+   "anchor": {
+    "kind": "here",
+    "quote": "the projection $P_U$ onto $U$ along $U^\\perp$"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "If $U\\subseteq V$",
+    "note": "V is never introduced; the reader must guess it is another label."
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$, the total rank over all edges, change meaning here."
+   }
+  },
+  {
+   "symbol": "N",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $N=\\binom h3^3$, the number of indices $\\iota$"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "L",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $L$ be the total dimension lost on decreasing edges"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "so the paper's dimension $m$ is $D$"
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "nondegenerate subspace",
+   "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$.",
+   "kind": "term",
+   "note": "Nondegeneracy with respect to the bilinear form is never defined; the reader has not met it and it is needed for the projection along U-perp."
+  },
+  {
+   "term": "label growth by h-2",
+   "quote": "adding $h-2$ dimensions",
+   "kind": "step",
+   "note": "The page does not show why the dimension grows by exactly h-2 when a label goes to t_S-perp."
+  },
+  {
+   "term": "signed total WD-2N",
+   "quote": "So the signed total is $WD-2N$.",
+   "kind": "step",
+   "note": "The reader cannot see how W sinks, the sign conventions and the telescoping give WD-2N."
+  },
+  {
+   "term": "invocation count and L",
+   "quote": "Each of the $3\\binom h3^2$ invocations has $h$ central wires",
+   "kind": "step",
+   "note": "The page never says what the invocations are or why there are 3 binom(h,3)^2 of them."
+  },
+  {
+   "term": "absolute values add 2L",
+   "quote": "Absolute values add $2L$.",
+   "kind": "step",
+   "note": "Why switching to absolute values adds exactly 2L is not explained."
+  },
+  {
+   "term": "first edge out of a source",
+   "quote": "The first edge out of each source has matrix $2P_{U_\\iota}$, rank one, with no label change",
+   "kind": "step",
+   "note": "The matrix 2P is stated without derivation, though sources were given -P."
+  },
+  {
+   "term": "decisive property",
+   "quote": "The paper's decisive property is a bound on the number of smaller calls, (cited).",
+   "kind": "step",
+   "note": "The page does not state what the bound is or how s<WD yields it."
+  }
+ ]
+}

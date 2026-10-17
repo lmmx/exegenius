@@ -1,0 +1,27 @@
+{
+  "symbols": [
+    {"symbol": "W", "anchor": {"kind": "here", "quote": "Let $W$ be the number of roles."}},
+    {"symbol": "\\rho", "anchor": {"kind": "here", "quote": "Let $\\rho$ be the permutation of roles that it applies: an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$."}},
+    {"symbol": "w", "anchor": {"kind": "here", "quote": "Let $\\rho$ be the permutation of roles that it applies: an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$."}},
+    {"symbol": "\\varepsilon_w", "anchor": {"kind": "here", "quote": "Let $\\rho$ be the permutation of roles that it applies: an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$."}},
+    {"symbol": "\\ell", "anchor": {"kind": "here", "quote": "row $\\ell$, the $\\ell$th row at a fixed prefix"}},
+    {"symbol": "V", "anchor": {"kind": "here", "quote": "Let $V$ be the number of bits stored after padding."}},
+    {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$ on arrays indexed by the common address set, its *frame*."}},
+    {"symbol": "D_\\nu", "anchor": {"kind": "here", "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$ on arrays indexed by the common address set, its *frame*."}},
+    {"symbol": "f", "anchor": {"kind": "here", "quote": "The stored array at $\\nu$ is $D_\\nu f$ when the logical array is $f$."}},
+    {"symbol": "\\alpha", "anchor": {"kind": "here", "quote": "Along an edge from node $\\alpha$ to node $\\beta$ the stored array changes by $D_\\beta D_\\alpha^{-1}$."}},
+    {"symbol": "\\beta", "anchor": {"kind": "here", "quote": "Along an edge from node $\\alpha$ to node $\\beta$ the stored array changes by $D_\\beta D_\\alpha^{-1}$."}},
+    {"symbol": "G", "anchor": {"kind": "here", "quote": "A pointwise linear gate $G$ combines its $p$ input arrays $f_1,\\dots,f_p$ at each address with fixed scalar coefficients."}},
+    {"symbol": "p", "anchor": {"kind": "here", "quote": "A pointwise linear gate $G$ combines its $p$ input arrays $f_1,\\dots,f_p$ at each address with fixed scalar coefficients."}},
+    {"symbol": "f_1", "anchor": {"kind": "here", "quote": "A pointwise linear gate $G$ combines its $p$ input arrays $f_1,\\dots,f_p$ at each address with fixed scalar coefficients."}},
+    {"symbol": "\\alpha_0", "anchor": {"kind": "here", "quote": "Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges"}},
+    {"symbol": "k", "anchor": {"kind": "here", "quote": "Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges"}},
+    {"symbol": "\\mathrm{source}", "anchor": {"kind": "here", "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"}},
+    {"symbol": "\\mathrm{sink}", "anchor": {"kind": "here", "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"}},
+    {"symbol": "I", "anchor": {"kind": "here", "quote": "Here $I$ is the identity operator, which leaves every array unchanged."}}
+  ],
+  "gaps": [
+    {"term": "undoing the exchange", "kind": "step", "quote": "Undoing the exchange moves each output back to its input role, and multiplying by $-\\varepsilon_w$ again removes the sign.", "note": "The page never says what 'undoing the exchange' is (a second pass, an inverse network?) nor how it combines with the route operator, so the reader cannot check that it restores values."},
+    {"term": "every role keeps the endpoint operator", "kind": "step", "quote": "Every role keeps the endpoint operator (cited), auxiliary roles included.", "note": "This cited claim carries the page's conclusion (restoration of auxiliary values) but the page does not say what it states or why it holds given rho(w)=w and sign +1 'in the construction', which is never defined; the reader cannot derive that scratch values are restored."}
+  ]
+}

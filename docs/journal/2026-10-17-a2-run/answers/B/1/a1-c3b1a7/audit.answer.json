@@ -1,0 +1,32 @@
+{
+  "symbols": [
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "\\mathbb F_2", "anchor": {"kind": "background", "note": "the two-element ring of residues mod 2, covered by modular arithmetic and binary representation in the undergraduate CS profile"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited)."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "big-O notation is in the reader profile"}},
+    {"symbol": "Q_k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+    {"symbol": "k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+    {"symbol": "m", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "s", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "C", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "j", "anchor": {"kind": "background", "note": "summation index in a geometric sum, covered by series and summation in the profile"}}
+  ],
+  "gaps": [
+    {
+      "term": "choice of tau with s/W > m^tau",
+      "quote": "fix $\\tau<1$ with $s/W>m^\\tau$",
+      "kind": "step",
+      "note": "The page fixes tau so that s/W is greater than m^tau, but the unrolling step later needs and states s/W < m^tau. The two directions contradict, so the reader cannot check that the first term is O(m^{k tau})."
+    },
+    {
+      "term": "m at least 2 and tau positive",
+      "quote": "Both are $O(m^{k\\tau})$, since $m\\ge2$.",
+      "kind": "step",
+      "note": "The page never says why m is at least 2, and never says tau is positive. Bounding k, or a constant times (s/W)^k, by a constant times m^{k tau} needs both, so the reader cannot check this."
+    }
+  ]
+}

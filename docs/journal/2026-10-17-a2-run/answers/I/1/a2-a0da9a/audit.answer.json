@@ -1,0 +1,35 @@
+{
+  "symbols": [
+    {"symbol": "W", "anchor": {"kind": "here", "quote": "Let $W$ be the number of roles."}},
+    {"symbol": "\\rho", "anchor": {"kind": "here", "quote": "Let $\\rho$ be the permutation of roles that it applies"}},
+    {"symbol": "w", "anchor": {"kind": "here", "quote": "an input at role $w$ leaves at output role"}},
+    {"symbol": "\\varepsilon_w", "anchor": {"kind": "here", "quote": "with sign $\\varepsilon_w \\in \\{+1,-1\\}$"}},
+    {"symbol": "\\ell", "anchor": {"kind": "here", "quote": "row $\\ell$, the $\\ell$th row at a fixed prefix"}},
+    {"symbol": "V", "anchor": {"kind": "here", "quote": "Let $V$ be the number of bits stored after padding."}},
+    {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Each source, gate and sink $\\nu$ carries"}},
+    {"symbol": "D_\\nu", "anchor": {"kind": "here", "quote": "carries an invertible linear operator $D_\\nu$"}},
+    {"symbol": "f", "anchor": {"kind": "here", "quote": "when the logical array is $f$"}},
+    {"symbol": "G", "anchor": {"kind": "here", "quote": "A pointwise linear gate $G$ combines its"}},
+    {"symbol": "p", "anchor": {"kind": "here", "quote": "combines its $p$ input arrays"}},
+    {"symbol": "\\alpha", "anchor": {"kind": "here", "quote": "Along an edge from node $\\alpha$ to node $\\beta$"}},
+    {"symbol": "\\beta", "anchor": {"kind": "here", "quote": "Along an edge from node $\\alpha$ to node $\\beta$"}},
+    {"symbol": "k", "anchor": {"kind": "unbound", "quote": "Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges", "note": "k appears only as the last index of the route; the page never says it counts the edges of the route. The earlier page binding k is the output index of a convolution, a different meaning."}},
+    {"symbol": "\\mathrm{source}", "anchor": {"kind": "here", "quote": "$\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"}},
+    {"symbol": "\\mathrm{sink}", "anchor": {"kind": "here", "quote": "$\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"}},
+    {"symbol": "I", "anchor": {"kind": "here", "quote": "Here $I$ is the identity operator, which leaves every array unchanged."}}
+  ],
+  "gaps": [
+    {
+      "term": "scratch roles restored without correction",
+      "quote": "For a scratch role the construction has $\\rho(w)=w$ with sign $+1$ (cited), so the undoing needs no correction there.",
+      "kind": "step",
+      "note": "With rho(w)=w and sign +1 the route still applies D_sink(w) D_source(w)^{-1} by the page's own formula. That is the identity only if the sink and source frames of that role are equal, which the page never states. The page also never says what 'the undoing' is (which network, which frames), so the claim that every auxiliary value is restored does not follow from what is given. The correct statement needs the source and sink frames of a scratch role to coincide, or the undoing to apply the inverse operator."
+    },
+    {
+      "term": "every role keeps the endpoint operator",
+      "quote": "Every role keeps the endpoint operator (cited), auxiliary roles included.",
+      "kind": "step",
+      "note": "The citation stands in for the page's own concept and the page does not say what is meant by 'keeps' or why it applies to auxiliary roles. It is also in tension with the claim that auxiliary values are restored, since the endpoint operator D_sink D_source^{-1} is not shown to be the identity for them."
+    }
+  ]
+}

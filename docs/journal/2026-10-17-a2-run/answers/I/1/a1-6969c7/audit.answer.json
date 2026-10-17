@@ -1,0 +1,167 @@
+{
+ "symbols": [
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with exponent $\\lambda<1$"
+   }
+  },
+  {
+   "symbol": "f",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $f$ be the parameter of a call"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $m$ is the factor by which the parameter grows"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$ be the number of subcalls of one call."
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "\\Phi",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."
+   }
+  },
+  {
+   "symbol": "C",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\tau<1$ is fixed"
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation, covered by the undergraduate asymptotic analysis background."
+   }
+  },
+  {
+   "symbol": "\\Omega",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $\\Omega$ is the bit count of one axis chunk"
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "$d$ is the paper's axis-count parameter"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "and $\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"
+   }
+  },
+  {
+   "symbol": "\\vartheta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"
+   }
+  },
+  {
+   "symbol": "\\nu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\nu$ count the levels of unrolling"
+   }
+  },
+  {
+   "symbol": "\\sigma",
+   "anchor": {
+    "kind": "here",
+    "quote": "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "s/W>m",
+   "quote": "The saving exists because $s/W>m$.",
+   "kind": "step",
+   "note": "Contradicts the page's own statement that the construction gives $s<Wm$ (so $s/W<m$). Only $s/W<m$ makes $\\log_m(s/W)<1$, so a $\\lambda<1$ with $\\lambda>\\log_m(s/W)$ exists, and the worked example ($s/W=3/2<m=2$) also has $s/W<m$. It should read $s/W<m$. The citation also gives no account of why."
+  },
+  {
+   "term": "for every lambda",
+   "quote": "so the internal sum is at most a constant times $f^\\lambda$ for every $\\lambda>0$.",
+   "kind": "step",
+   "note": "Overstated. The geometric sum converges only when the ratio $(s/W)/m^\\lambda$ is below 1, i.e. $\\lambda>\\log_m(s/W)$ (and $\\lambda<1$); for smaller $\\lambda$ the ratio is at least 1 and the sum is not bounded by a constant. Correct: for every $\\lambda$ with $\\log_m(s/W)<\\lambda<1$."
+  },
+  {
+   "term": "choice of lambda misses outside-work condition",
+   "quote": "Taking $\\lambda$ with $\\log_m(s/W)<\\lambda<1$ makes the ratio below 1",
+   "kind": "step",
+   "note": "The outside-work bound $C(mf)^\\lambda$ was only shown to hold when $\\lambda>\\tau(1+\\eta/\\vartheta)$, yet the final choice of $\\lambda$ ignores it. A valid $\\lambda$ must exceed both $\\log_m(s/W)$ and $\\tau(1+\\eta/\\vartheta)$ and be below 1, which needs the missing hypothesis $\\tau(1+\\eta/\\vartheta)<1$ (small enough $\\eta$); $\\tau<1$ alone does not give it."
+  },
+  {
+   "term": "leaf cost bound",
+   "quote": "and the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$.",
+   "kind": "step",
+   "note": "The last inequality is not justified. The page only gives $f\\ge d^\\vartheta$ at internal nodes, which yields $d^{\\vartheta(1-\\sigma)}\\le f^{1-\\sigma}$ and so only $O(f)$. To reach $O(f^\\lambda)$ one needs $d^{\\vartheta(1-\\sigma)}\\le f^{\\lambda-\\sigma}$, i.e. $f\\ge d^{\\vartheta(1-\\sigma)/(\\lambda-\\sigma)}$, or $d$ treated as a constant factor; neither is stated."
+  },
+  {
+   "term": "u reused for chunk count",
+   "quote": "have $u=f/m^\\nu<d^\\vartheta$ chunks",
+   "kind": "step",
+   "note": "$u$ was the bit width of an address field (earlier page and earlier in this page, $u=f\\Omega$ bits), but here it is the number of chunks at a leaf; the page does not announce the change. The leaf cost $O((s/W)^\\nu u)$ also assumes a per-chunk kernel cost per unit volume that is never stated."
+  },
+  {
+   "term": "kernel",
+   "quote": "Each leaf is handled by one kernel per chunk, at cost $O(f/m^\\nu)$.",
+   "kind": "term",
+   "note": "\"Kernel\" is never defined or linked, and the claim that a leaf costs $O(f/m^\\nu)$ (per unit volume) is asserted without saying what the kernel does or why it is linear in the number of chunks."
+  },
+  {
+   "term": "row addition cost",
+   "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.",
+   "kind": "step",
+   "note": "The page cites only the cost of an address interchange, $O(Vu^\\tau)$, and then asserts the cost of a row addition without saying how a row addition is carried out with interchanges or why it adds only $O(V)$."
+  }
+ ]
+}

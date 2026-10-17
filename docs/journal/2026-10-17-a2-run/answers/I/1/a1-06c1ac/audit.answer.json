@@ -1,0 +1,180 @@
+{
+ "symbols": [
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with exponent $\\lambda<1$"
+   }
+  },
+  {
+   "symbol": "f",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $f$ be the parameter of a call"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $m$ is the factor by which the parameter grows"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$ be the number of subcalls of one call."
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "\\Phi",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."
+   }
+  },
+  {
+   "symbol": "C",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "An address interchange of $u$-bit fields costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed."
+   }
+  },
+  {
+   "symbol": "\\Omega",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $\\Omega$ is the bit count of one axis chunk"
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "$d$ is the paper's axis-count parameter"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "$\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"
+   }
+  },
+  {
+   "symbol": "\\vartheta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"
+   }
+  },
+  {
+   "symbol": "\\nu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\nu$ count the levels of unrolling"
+   }
+  },
+  {
+   "symbol": "\\sigma",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "Choose $\\sigma$ with",
+    "note": "sigma is only given a range; the page never says what it denotes (an auxiliary exponent bounding log_m(s/W) from above); earlier pages use sigma for other things."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation is covered by the reader profile."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "axis chunk, d and the bound on Omega",
+   "quote": "$d$ is the paper's axis-count parameter",
+   "kind": "term",
+   "note": "The page never says what d counts, what an axis chunk is, or why the chunk bit count satisfies Omega <= d^eta; the reader is only referred to the paper. The later 'one kernel per chunk' is likewise undefined."
+  },
+  {
+   "term": "kernel",
+   "quote": "Each leaf is handled by one kernel per chunk",
+   "kind": "term",
+   "note": "'Kernel' is not a known concept and is not explained; neither is why a leaf costs O(f/m^nu)."
+  },
+  {
+   "term": "s<Wm with m a growth factor",
+   "quote": "which gives $s<Wm$ smaller calls",
+   "kind": "step",
+   "note": "The linked page proves s<Wm with m the dimension of the fixed space; here m is the factor by which the parameter grows. The page never says these coincide, so the claim cannot be checked."
+  },
+  {
+   "term": "row addition cost",
+   "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.",
+   "kind": "step",
+   "note": "Only the cost of an interchange is cited; the cost of a row addition, including the +1 term, and that the outside work is a fixed number of row additions, are asserted without derivation."
+  },
+  {
+   "term": "d <= f^{1/vartheta}",
+   "quote": "$d\\le f^{1/\\vartheta}$",
+   "kind": "step",
+   "note": "Fixing vartheta=1/2 gives no relation between d and f; 'Since' is a non sequitur. The bound d<=f^2 is an extra hypothesis that is never stated or justified."
+  },
+  {
+   "term": "lambda range nonempty",
+   "quote": "which is $O(f^\\lambda)$ when $\\lambda>\\tau(1+\\eta/\\vartheta)$",
+   "kind": "step",
+   "note": "Combined with lambda<1 this needs tau(1+eta/vartheta)<1, i.e. eta small enough (with vartheta=1/2, eta<(1/tau-1)/2). The page only says eta>0 is fixed, so a hypothesis on eta is missing; also the lambda choice must exceed log_m(s/W) too."
+  },
+  {
+   "term": "u reused as number of chunks",
+   "quote": "have $u=f/m^\\nu<d^\\vartheta$ chunks",
+   "kind": "step",
+   "note": "u was just the bit width of an address field, u=f*Omega; here u=f/m^nu is a chunk count. The same letter has two incompatible meanings within the page, with no notice."
+  },
+  {
+   "term": "leaf cost bound",
+   "quote": "$O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$",
+   "kind": "step",
+   "note": "Does not follow from what is given. The only relation between d and f is d<=f^{1/vartheta}, which gives d^{vartheta(1-sigma)}<=f^{1-sigma}, hence a bound O(f), not O(f^lambda). One needs d^vartheta <= f^{(lambda-sigma)/(1-sigma)}, a stronger hypothesis on d that is not stated."
+  },
+  {
+   "term": "example ratio",
+   "quote": "$\\tfrac{3/2}{2^{0.8}}\\approx1.16$",
+   "kind": "step",
+   "note": "Arithmetic error: 1.5/2^0.8 = 1.5/1.741 ≈ 0.86, not 1.16 (1.16 is the reciprocal 2^0.8/1.5). The ratio must be below 1 for lambda=0.8>0.585, as the preceding paragraph requires; the stated value contradicts it."
+  }
+ ]
+}

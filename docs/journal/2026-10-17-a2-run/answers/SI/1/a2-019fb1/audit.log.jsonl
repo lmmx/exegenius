@@ -1,0 +1,3 @@
+{"at":1792220900198,"version":"0.6.0","event":"issued","task":"0213-audit-subset-intersection-construction","kind":"audit","round":3}
+{"at":1792221519387,"version":"0.6.0","event":"submit","task":"0213-audit-subset-intersection-construction","kind":"audit","attempt":1,"outcome":"rejected","message":"answer rejected:\n- `\\otimes`: `Tensor product of vector spaces` is not a known concept whose name binds it\nCopy quotes exactly from the page, and use only the bindings listed in the task."}
+{"at":1792221524435,"version":"0.6.0","event":"submit","task":"0213-audit-subset-intersection-construction","kind":"audit","attempt":2,"outcome":"accepted"}

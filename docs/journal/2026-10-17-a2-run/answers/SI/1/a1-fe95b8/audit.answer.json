@@ -1,0 +1,56 @@
+{
+  "symbols": [
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "u", "anchor": {"kind": "here", "quote": "so each field is a block of $u$ contiguous bits"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited)."}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation is covered by the reader profile and is a known concept."}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "D", "anchor": {"kind": "page", "page": "address-shear-factorization"}},
+    {"symbol": "\\mathbb F_2", "anchor": {"kind": "background", "note": "The field of integers mod 2, covered by modular arithmetic and binary representation in the reader profile."}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "s", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "m", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "k", "anchor": {"kind": "here", "quote": "where $k$ is the recursion level"}},
+    {"symbol": "Q_k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits"}},
+    {"symbol": "C", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "j", "anchor": {"kind": "background", "note": "Summation index of a finite sum, covered by summation in the reader profile."}}
+  ],
+  "gaps": [
+    {
+      "term": "unrolled recurrence has wrong sign",
+      "quote": "Q_k\\le (s/W)^k Q_0-C\\sum_{j<k}(s/W)^j",
+      "kind": "step",
+      "note": "Unrolling Q_k <= (s/W)Q_{k-1} + C gives Q_k <= (s/W)^k Q_0 + C*sum_{j<k}(s/W)^j, with a plus sign, because C is added at every level. The page's minus sign is wrong and would make the bound no larger than the first term, so the later claim that the geometric sum also needs bounding would be pointless. The paper (line 1556-1560, eq. swap-recurrence) bounds the sum of a^j for j=0..k, all with positive sign."
+    },
+    {
+      "term": "geometric sum bound",
+      "quote": "The geometric sum is also $O(m^{k\\tau})$, since it is $O((s/W)^k)$.",
+      "kind": "step",
+      "note": "The sum of a^j for j<k is O(a^k) only when a=s/W>1. For a<1 it is bounded by a constant (not O(a^k), which tends to 0) and for a=1 it equals k. The page gives no case split, and s/W>1 is never established. The paper (lines 1560-1563) treats the cases separately: if a<=1 the sum is at most k+1=O(m^{k tau}); if a>1 it is O(a^k)."
+    },
+    {
+      "term": "since m>=2",
+      "quote": "Both are $O(m^{k\\tau})$, since $m\\ge2$.",
+      "kind": "step",
+      "note": "The page never states m>=2 (the paper fixes integers m,W>=2 at line 1463), and it does not say how m>=2 gives either bound. It is only needed for k+1=O(m^{k tau}) in the case s/W<=1, which the page does not treat."
+    },
+    {
+      "term": "ring F_2 for the bit procedure",
+      "quote": "for the bit procedure this ring is $\\mathbb F_2$",
+      "kind": "step",
+      "note": "In the paper the fields are vectors over Z/q^b Z for a fixed odd prime q (Lemma matrix-shear, line 1415-1417; Proposition power-interchange, line 1496, with fields of radix-q digits), and the shear is (H,D) -> (H+AD,D) over that ring. It is not F_2, and since q is odd, addition and subtraction do not coincide. The binary array is only handled by padding to radix-q ranges at the end of the proof of Lemma chunk-swap (lines 1717-1735). The claim about the network's endpoint operator being a shear over F_2 is the same mismatch."
+    },
+    {
+      "term": "updates are XOR",
+      "quote": "Over $\\mathbb F_2$ each update is a pointwise XOR, since addition and subtraction are the same operation",
+      "kind": "step",
+      "note": "The three updates D<-D-H, H<-H+D, D<-H-D are carried out over Z/q^b Z with q an odd prime (paper lines 1415-1417, 1535-1540), so they are not XORs and after the first update D holds D-H mod q^b, not the XOR of D and H. Only the circuit's gates are pointwise XOR gates (paper line 1139); the address updates are not, so the page conflates the two."
+    },
+    {
+      "term": "general field width and row hypothesis",
+      "quote": "A field of $u=m^k$ bits therefore has $Q_k=O(u^\\tau)$, and the interchange costs $O(Vu^\\tau)$.",
+      "kind": "step",
+      "note": "The recursion only treats widths that are powers of m, and splitting rows into W role streams at each of k levels needs a row field before both chunks whose length is divisible by W^k (paper Proposition power-interchange, lines 1475-1487; the widths there count radix-q digits, not bits). The page states neither hypothesis. Passing from u=m^k to an arbitrary width u (the paper's Lemma chunk-swap, lines 1631-1735, which pads rows, writes the width in base m, and handles high digits separately) is not mentioned, yet the page concludes O(Vu^tau) for a field of u bits."
+    }
+  ]
+}

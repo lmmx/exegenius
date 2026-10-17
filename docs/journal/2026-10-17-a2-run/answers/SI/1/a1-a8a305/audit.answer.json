@@ -1,0 +1,185 @@
+{
+ "symbols": [
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $W$ be the number of roles."
+   }
+  },
+  {
+   "symbol": "\\rho",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\rho$ be the permutation of roles that it applies"
+   }
+  },
+  {
+   "symbol": "w",
+   "anchor": {
+    "kind": "here",
+    "quote": "an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$"
+   }
+  },
+  {
+   "symbol": "\\varepsilon_w",
+   "anchor": {
+    "kind": "here",
+    "quote": "an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$"
+   }
+  },
+  {
+   "symbol": "\\ell",
+   "anchor": {
+    "kind": "here",
+    "quote": "row $\\ell$, the $\\ell$th row at a fixed prefix"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $V$ be the number of bits stored after padding."
+   }
+  },
+  {
+   "symbol": "\\nu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$"
+   }
+  },
+  {
+   "symbol": "D_\\nu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$ on arrays indexed by the common address set, its *frame*"
+   }
+  },
+  {
+   "symbol": "f",
+   "anchor": {
+    "kind": "here",
+    "quote": "The stored array at $\\nu$ is $D_\\nu f$ when the logical array is $f$."
+   }
+  },
+  {
+   "symbol": "\\alpha",
+   "anchor": {
+    "kind": "here",
+    "quote": "Along an edge from node $\\alpha$ to node $\\beta$"
+   }
+  },
+  {
+   "symbol": "\\beta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Along an edge from node $\\alpha$ to node $\\beta$"
+   }
+  },
+  {
+   "symbol": "G",
+   "anchor": {
+    "kind": "here",
+    "quote": "A pointwise linear gate $G$ combines its $p$ input arrays $f_1,\\dots,f_p$"
+   }
+  },
+  {
+   "symbol": "p",
+   "anchor": {
+    "kind": "here",
+    "quote": "A pointwise linear gate $G$ combines its $p$ input arrays $f_1,\\dots,f_p$"
+   }
+  },
+  {
+   "symbol": "f_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "A pointwise linear gate $G$ combines its $p$ input arrays $f_1,\\dots,f_p$"
+   }
+  },
+  {
+   "symbol": "f_p",
+   "anchor": {
+    "kind": "here",
+    "quote": "A pointwise linear gate $G$ combines its $p$ input arrays $f_1,\\dots,f_p$"
+   }
+  },
+  {
+   "symbol": "\\alpha_0",
+   "anchor": {
+    "kind": "here",
+    "quote": "Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges"
+   }
+  },
+  {
+   "symbol": "\\alpha_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges"
+   }
+  },
+  {
+   "symbol": "\\alpha_k",
+   "anchor": {
+    "kind": "here",
+    "quote": "Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges"
+   }
+  },
+  {
+   "symbol": "k",
+   "anchor": {
+    "kind": "here",
+    "quote": "Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges"
+   }
+  },
+  {
+   "symbol": "\\alpha_{k-1}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the operators telescope: $(D_{\\alpha_k}D_{\\alpha_{k-1}}^{-1})\\cdots(D_{\\alpha_1}D_{\\alpha_0}^{-1})=D_{\\alpha_k}D_{\\alpha_0}^{-1}$"
+   }
+  },
+  {
+   "symbol": "\\mathrm{source}",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"
+   }
+  },
+  {
+   "symbol": "\\mathrm{sink}",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"
+   }
+  },
+  {
+   "symbol": "I",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $I$ is the identity operator, which leaves every array unchanged."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "sign correction",
+   "quote": "multiplying by $-\\varepsilon_w$ again removes the sign",
+   "kind": "step",
+   "note": "Wrong sign. The route multiplies the array by eps_w in {+1,-1}; to remove it one multiplies by eps_w again (eps_w^2=1), not by -eps_w, which would leave a factor -1 on every role with eps_w=+1. It also contradicts the next claim that scratch roles (sign +1) need no correction. The paper (lines 1312-1313) only negates the outputs that carry the minus sign, i.e. multiplies by eps_w."
+  },
+  {
+   "term": "common address set",
+   "quote": "on arrays indexed by the common address set",
+   "kind": "step",
+   "note": "The page never says which address set is common or why all roles have the same one; the paper (lines 126-128) says all role streams have the same local address set (same remaining shape after the cyclic row split). The row split is not tied to this set."
+  },
+  {
+   "term": "frames pass through gates",
+   "quote": "The frame $D_\\nu$ of the gate is linear and the coefficients are scalars",
+   "kind": "step",
+   "note": "The identity needs every input and output wire of the gate to use the same frame D_nu (paper line 135: all incidences of one gate have the same frame). The page never states this hypothesis, nor that the scalar coefficients commute with D_nu (R-linearity), so the displayed identity is not justified as written."
+  }
+ ]
+}

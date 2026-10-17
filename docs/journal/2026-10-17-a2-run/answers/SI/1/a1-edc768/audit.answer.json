@@ -1,0 +1,27 @@
+{
+ "symbols": [
+  {"symbol":"W","anchor":{"kind":"here","quote":"Let $W$ be the number of roles."}},
+  {"symbol":"\\rho","anchor":{"kind":"here","quote":"Let $\\rho$ be the permutation of roles that it applies"}},
+  {"symbol":"\\varepsilon_w","anchor":{"kind":"here","quote":"with sign $\\varepsilon_w \\in \\{+1,-1\\}$"}},
+  {"symbol":"w","anchor":{"kind":"here","quote":"an input at role $w$ leaves at output role"}},
+  {"symbol":"\\ell","anchor":{"kind":"here","quote":"row $\\ell$, the $\\ell$th row at a fixed prefix"}},
+  {"symbol":"V","anchor":{"kind":"here","quote":"Let $V$ be the number of bits stored after padding."}},
+  {"symbol":"\\nu","anchor":{"kind":"here","quote":"Each source, gate and sink $\\nu$ carries an invertible linear operator"}},
+  {"symbol":"D_\\nu","anchor":{"kind":"here","quote":"carries an invertible linear operator $D_\\nu$ on arrays indexed by the common address set, its *frame*."}},
+  {"symbol":"f","anchor":{"kind":"here","quote":"The stored array at $\\nu$ is $D_\\nu f$ when the logical array is $f$."}},
+  {"symbol":"G","anchor":{"kind":"here","quote":"A pointwise linear gate $G$ combines its $p$ input arrays"}},
+  {"symbol":"p","anchor":{"kind":"here","quote":"A pointwise linear gate $G$ combines its $p$ input arrays"}},
+  {"symbol":"\\alpha","anchor":{"kind":"here","quote":"Along an edge from node $\\alpha$ to node $\\beta$"}},
+  {"symbol":"\\beta","anchor":{"kind":"here","quote":"Along an edge from node $\\alpha$ to node $\\beta$"}},
+  {"symbol":"k","anchor":{"kind":"here","quote":"Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges"}},
+  {"symbol":"I","anchor":{"kind":"here","quote":"Here $I$ is the identity operator, which leaves every array unchanged."}},
+  {"symbol":"\\mathrm{source}","anchor":{"kind":"here","quote":"where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"}},
+  {"symbol":"\\mathrm{sink}","anchor":{"kind":"here","quote":"where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"}}
+ ],
+ "gaps": [
+  {"term":"bits per role stream","quote":"Each role stream then holds $V/(2W)$ bits (cited).","kind":"step","note":"Wrong constant. Rows are dealt cyclically to W roles and V counts all stored bits, so each role stream holds V/W bits, not V/(2W). The paper (line 127-128) says: 'All role streams have the same local address set and each contains $V/W$ bits.' Also the factor 2 is never explained."},
+  {"term":"frames pass through every gate","quote":"Frames therefore pass through every gate, linear or not.","kind":"step","note":"Overstated and contradicts the preceding derivation, which uses linearity of the frame and fixed scalar coefficients of a pointwise linear gate. The common frame commutes only with pointwise linear gates (paper line 137: 'At a pointwise linear gate G, the common frame commutes with the gate'; line 812 uses R-linearity). For a nonlinear gate the identity fails."},
+  {"term":"route operator omits sign","quote":"its operator is $D_\\nu$, however many gates it passes through.","kind":"step","note":"The page just said the route applies eps_w D_sink D_source^{-1}. With source frame I and sink frame D_nu the operator is eps_w D_nu, equal to D_nu only when the sign is +1 (as for scratch roles). The paper (line 144-146) gives the scalar sign together with the endpoint operator."},
+  {"term":"source and sink nodes, gates, edges","quote":"Each source, gate and sink $\\nu$ carries an invertible linear operator","kind":"term","note":"The page never says what the nodes of the network are: that each wire starts at a source, passes through gates in time order, and ends at a sink, with edges between consecutive nodes, nor that the gates are fixed linear maps on several wires. The reader cannot tell what a route, source(w) or sink(w) is, or why a gate has one frame for all its wires."}
+ ]
+}

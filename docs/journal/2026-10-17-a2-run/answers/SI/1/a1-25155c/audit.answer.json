@@ -1,0 +1,72 @@
+{
+  "symbols": [
+    {"symbol": "R", "anchor": {"kind": "here", "quote": "Let $R$ be the number of fields in each vector, and let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields."}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Let $R$ be the number of fields in each vector, and let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields."}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Let $R$ be the number of fields in each vector, and let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields."}},
+    {"symbol": "q", "anchor": {"kind": "here", "quote": "Here $q$ is a fixed odd prime, the radix of the digits, and $b$ is the number of radix-$q$ digits in each field, so a field holds a residue in $\\mathbb Z/q^b\\mathbb Z$."}},
+    {"symbol": "b", "anchor": {"kind": "here", "quote": "Here $q$ is a fixed odd prime, the radix of the digits, and $b$ is the number of radix-$q$ digits in each field, so a field holds a residue in $\\mathbb Z/q^b\\mathbb Z$."}},
+    {"symbol": "\\mathbb Z", "anchor": {"kind": "background", "note": "The integers and residues mod m, covered by discrete mathematics (modular arithmetic)."}},
+    {"symbol": "\\mathbb Q", "anchor": {"kind": "background", "note": "The rational numbers, standard notation from undergraduate discrete mathematics and linear algebra."}},
+    {"symbol": "M", "anchor": {"kind": "here", "quote": "For a rational $R\\times R$ matrix $M$, the shear by $M$ is $(H,D)\\mapsto(H+MD,D)$."}},
+    {"symbol": "\\mu", "anchor": {"kind": "here", "quote": "A rational entry is written $\\mu/\\xi$, where $\\mu$ is its integer numerator and $\\xi$ its integer denominator, and $q$ must not divide $\\xi$."}},
+    {"symbol": "\\xi", "anchor": {"kind": "here", "quote": "A rational entry is written $\\mu/\\xi$, where $\\mu$ is its integer numerator and $\\xi$ its integer denominator, and $q$ must not divide $\\xi$."}},
+    {"symbol": "\\Pi", "anchor": {"kind": "here", "quote": "A partial permutation matrix $\\Pi$ is a 0-1 matrix with at most one 1 in each row and column, and it has $\\operatorname{rank}_{\\mathbb Q}M$ ones."}},
+    {"symbol": "F_1", "anchor": {"kind": "here", "quote": "Every rational $M$ factors as $M=F_1\\Pi F_2$, where $F_1$ and $F_2$ are invertible lower-triangular rational matrices."}},
+    {"symbol": "F_2", "anchor": {"kind": "here", "quote": "Every rational $M$ factors as $M=F_1\\Pi F_2$, where $F_1$ and $F_2$ are invertible lower-triangular rational matrices."}},
+    {"symbol": "I", "anchor": {"kind": "background", "note": "The identity matrix, standard notation from introductory linear algebra (matrices and inverses)."}},
+    {"symbol": "\\sigma", "anchor": {"kind": "here", "quote": "For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$, update $H_\\sigma\\leftarrow H_\\sigma+D_\\tau$, using the transformed $D$."}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$, update $H_\\sigma\\leftarrow H_\\sigma+D_\\tau$, using the transformed $D$."}},
+    {"symbol": "\\eta", "anchor": {"kind": "here", "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."}},
+    {"symbol": "\\zeta", "anchor": {"kind": "here", "quote": "Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation, covered by the reader's asymptotic analysis background."}},
+    {"symbol": "s_{\\rm b}", "anchor": {"kind": "here", "quote": "The interchange count of the network is $s_{\\rm b}$, the sum of their ranks."}},
+    {"symbol": "W_{\\rm b}", "anchor": {"kind": "here", "quote": "The network's rank budget, which counts dimension changes along its edges, gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$, where $W_{\\rm b}$ is the number of wires, $N$ the number of negative source projections, and $L_{\\rm b}$ the total dimension lost on decreasing edges."}},
+    {"symbol": "N", "anchor": {"kind": "here", "quote": "The network's rank budget, which counts dimension changes along its edges, gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$, where $W_{\\rm b}$ is the number of wires, $N$ the number of negative source projections, and $L_{\\rm b}$ the total dimension lost on decreasing edges."}},
+    {"symbol": "L_{\\rm b}", "anchor": {"kind": "here", "quote": "The network's rank budget, which counts dimension changes along its edges, gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$, where $W_{\\rm b}$ is the number of wires, $N$ the number of negative source projections, and $L_{\\rm b}$ the total dimension lost on decreasing edges."}}
+  ],
+  "gaps": [
+    {
+      "term": "inequality direction N<2L_b",
+      "quote": "The paper shows $N<2L_{\\rm b}$, so $s_{\\rm b}<W_{\\rm b}R$.",
+      "kind": "step",
+      "note": "The inequality is reversed and the conclusion does not follow. With s_b = W_b R - N + 2L_b, s_b < W_b R holds exactly when N > 2L_b; N < 2L_b would give s_b > W_b R. The paper (lines 1107-1109, L_b/N = 100/539 < 1/2; line 1167, 'Its deficit from W_b m is N-2L_b>0') shows N > 2L_b. Correct statement: the paper shows N>2L_b, so s_b<W_b R."
+    },
+    {
+      "term": "any invertible linear transformation costs O(V)",
+      "quote": "Any invertible linear transformation of $H$ or $D$ costs $O(V)$ (cited)",
+      "kind": "step",
+      "note": "Overstated. The paper (Lemma matrix-shear proof, lines 1425-1430) only claims that a lower triangular transformation of H or D costs O(V), via updating coordinates in descending physical order using earlier coordinates. The page's own justification ('Update coordinates from last to first, so each becomes a fixed combination of earlier ... coordinates') works only for lower-triangular maps, not arbitrary invertible ones. It also needs the diagonal entries to be units mod q^b. The page also does not say what the cited result states beyond the cost."
+    },
+    {
+      "term": "tape order of H before D",
+      "quote": "set $D_\\tau\\leftarrow D_\\tau+H_\\sigma$",
+      "kind": "step",
+      "note": "The linear-cost claim for these updates needs every H field to come before every D field in tape order, so each update writes a later field from an earlier one. The paper's Lemma matrix-shear (lines 1394-1410) assumes 'every H_i before every D_j' and notes (around line 1444) that the first and last updates 'target a later field controlled by an earlier field'. The page never states this hypothesis, so the reader cannot check that the additions are O(V) work."
+    },
+    {
+      "term": "q avoids numerators",
+      "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used.",
+      "kind": "step",
+      "note": "Does not follow from the preceding sentences, which only require q not to divide denominators so that mu*xi^{-1} makes sense mod q^b. The paper (lines 1415-1421) chooses q to avoid every denominator in the finite table and every numerator of a diagonal entry of an invertible factor, so the triangular factors stay invertible mod q^b. The page does not say why numerators matter, and it states the condition for all numerators, which is wider than the paper requires."
+    },
+    {
+      "term": "rank budget identity",
+      "quote": "The network's rank budget, which counts dimension changes along its edges",
+      "kind": "step",
+      "note": "The identity s_b = W_b R - N + 2L_b is asserted without the construction behind it. The page never says which matrix sits on each edge (a difference of projection matrices at the head and tail vertices, with rank equal to the dimension change), what dimension labels the vertices carry, or why decreasing edges contribute 2L_b. The reader cannot check the formula from what the page gives."
+    },
+    {
+      "term": "negative source projections",
+      "quote": "the number of negative source projections",
+      "kind": "term",
+      "note": "The page does not explain what a negative source projection is (a source matrix -P_U assigned to an input node, per the paper's rational matrix interface), and the linear-network page covers only sources and sinks of a route, not projections or edge matrices. 'Dimension lost on decreasing edges' is likewise unexplained."
+    },
+    {
+      "term": "the recurrence",
+      "quote": "which the recurrence turns into a saving of a power of the chunk width",
+      "kind": "step",
+      "note": "The page refers to 'the recurrence' without stating it. The paper (lines 1536-1560, equation swap-recurrence) uses F_0=O(1), F_k <= (s/W)F_{k-1}+O(1), whose geometric sum gives time O(V e^tau) for chunk length e=m^k when s/W < m^tau. The reader cannot see how 'fewer than R interchanges per wire' yields a power saving."
+    }
+  ]
+}

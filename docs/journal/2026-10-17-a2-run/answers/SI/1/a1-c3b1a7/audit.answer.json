@@ -1,0 +1,24 @@
+{
+ "symbols": [
+  {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+  {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+  {"symbol": "H", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+  {"symbol": "D", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+  {"symbol": "\\mathbb F_2", "anchor": {"kind": "background", "note": "The integers mod 2 (modular arithmetic, binary/XOR); covered by the undergraduate discrete mathematics background."}},
+  {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited)."}},
+  {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation is covered by the reader profile."}},
+  {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+  {"symbol": "s", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+  {"symbol": "m", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+  {"symbol": "Q_k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+  {"symbol": "k", "anchor": {"kind": "here", "quote": "where $k$ is the recursion level"}},
+  {"symbol": "C", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+  {"symbol": "j", "anchor": {"kind": "background", "note": "Summation index in a finite geometric sum; covered by the profile's series and summation background."}}
+ ],
+ "gaps": [
+  {"term": "direction of the inequality for tau", "quote": "fix $\\tau<1$ with $s/W>m^\\tau$", "kind": "step", "note": "Wrong direction and inconsistent with the page's own later use ('because $s/W<m^\\tau$') and with the geometric-sum argument. The paper (Proposition power-interchange, paper.tex line 1480) chooses a rational tau in (0,1) with s/W < m^tau; since s/W < m and m^tau -> m, such tau exists. With s/W > m^tau the recurrence would give a worse exponent."},
+  {"term": "s<Wm for every linear network", "quote": "For every linear network, $s<Wm$ (cited)", "kind": "step", "note": "Stated more widely than the paper. In the paper s<Wm is a required condition on the circuit data (eq. finite-shear-contract, line 1468), not a property of every network; it is proved only for the specific bit network (Proposition bit-motif-interface, lines 1138-1152, with s_b = W_b m - N + 2L_b < W_b m, deficit N-2L_b>0). The page should say 'for the bit network built in the paper'."},
+  {"term": "ring F_2 versus odd-prime residue ring", "quote": "over $\\mathbb F_2$, with rank reduced", "kind": "step", "note": "The paper's shear and its factorization act on address fields over Z/q^b Z for a fixed odd prime q, with fields of radix-q digits (Lemma matrix-shear, lines 1395-1407; Proposition power-interchange, lines 1475-1487). The F_2 setting is only for the scalar values of the bit network (line 685). So the page's claims that the ring is F_2, that 'subtraction and addition coincide' and that the shear is over F_2 are not what the paper proves: for odd q, D-H and D+H differ, and field width is counted in radix-q digits, not bits."},
+  {"term": "missing hypotheses on the cost bound", "quote": "A field of $u=m^k$ bits therefore has $Q_k=O(u^\\tau)$", "kind": "step", "note": "The paper's bound (Proposition power-interchange, lines 1475-1487) needs the width to be m^k, a row field preceding both chunks with length divisible by W^k (so each of the k levels can split rows into W role streams of volume V/W), and a fixed circuit satisfying s<Wm. The page states none of these and presents the bound for any disjoint fields of an array. Arbitrary widths and row counts are only obtained afterwards by padding (Lemma chunk-swap, lines 1631-1643)."}
+ ]
+}

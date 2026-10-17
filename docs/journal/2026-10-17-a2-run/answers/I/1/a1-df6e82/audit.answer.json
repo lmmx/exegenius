@@ -1,0 +1,202 @@
+{
+ "symbols": [
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation is in the reader profile."
+   }
+  },
+  {
+   "symbol": "\\leftarrow",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\leftarrow$ is assignment: the field on its left takes the value on its right."
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each vertex holds a rational $\\mu\\times\\mu$ matrix, where $\\mu$ is its number of rows."
+   }
+  },
+  {
+   "symbol": "a",
+   "anchor": {
+    "kind": "here",
+    "quote": "An edge matrix, the head's matrix minus the tail's, of rank $a$ costs $a$ smaller calls"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-saving"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "role-streams"
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)",
+    "note": "The subscripted b is never explained and the value of W_b is never given."
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)",
+    "note": "The subscripted b is never explained and the value of s_b is never given."
+   }
+  },
+  {
+   "symbol": "F_d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "So $F_d\\le\\lambda F_{d-1}+O(1)$, with $\\lambda=s/W$"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$, so $\\lambda=\\mu(1-\\eta)$."
+   }
+  },
+  {
+   "symbol": "\\ln",
+   "anchor": {
+    "kind": "background",
+    "note": "Logarithms and exponentials are covered by the single-variable calculus in the reader profile."
+   }
+  },
+  {
+   "symbol": "\\exp",
+   "anchor": {
+    "kind": "background",
+    "note": "Logarithms and exponentials are covered by the single-variable calculus in the reader profile."
+   }
+  },
+  {
+   "symbol": "X",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "Y",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "x_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "The page does not say what x_S and y_S denote (the entries of banks X and Y indexed by S); the listed earlier bindings cover only X, Y and S."
+   }
+  },
+  {
+   "symbol": "y_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "The page does not say what x_S and y_S denote (the entries of banks X and Y indexed by S); the listed earlier bindings cover only X, Y and S."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "outer two updates cost linear time",
+   "quote": "The outer two cost linear time.",
+   "kind": "step",
+   "note": "Unsupported and inconsistent with the page. D<-D-H is the same kind of address shear as the middle update H<-H+D (with the roles of the fields swapped and a sign changed), and the page says the shear needs the whole network and recursion to reach O(V u^tau). If the outer two were plain linear passes, so would the shear be. The page never says why these two are cheaper."
+  },
+  {
+   "term": "bound mu < 2^20",
+   "quote": "Since $\\mu<2^{20}$, $\\ln\\mu<20$",
+   "kind": "step",
+   "note": "The page never says where mu<2^20 comes from. Neither the value of mu for the explicit network nor W_b, s_b is given, and the cited eta bound does not supply it. The reader cannot check this hypothesis, which the choice tau=1-2^{-50} depends on."
+  },
+  {
+   "term": "auxiliary values",
+   "quote": "For any initial auxiliary values",
+   "kind": "term",
+   "note": "Auxiliary values and auxiliary wires are not explained or linked. The reader knows wires, banks and forward invocation, but not which wires are auxiliary."
+  },
+  {
+   "term": "forward, inverse, forward schedule",
+   "quote": "A forward, inverse, forward schedule of these invocations exchanges the two banks",
+   "kind": "step",
+   "note": "An inverse invocation is never defined, and the cited claim is not tied to the interchange as the page has described it. The page reduces the interchange to three field updates of which only the middle one is a network shear, and this paragraph instead says a forward, inverse, forward schedule exchanges the two banks. Its role and how it matches those updates are not said."
+  }
+ ]
+}

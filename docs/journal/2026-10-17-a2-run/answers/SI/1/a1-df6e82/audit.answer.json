@@ -1,0 +1,200 @@
+{
+ "symbols": [
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."
+   }
+  },
+  {
+   "symbol": "\\leftarrow",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\leftarrow$ is assignment"
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each vertex holds a rational $\\mu\\times\\mu$ matrix, where $\\mu$ is its number of rows."
+   }
+  },
+  {
+   "symbol": "a",
+   "anchor": {
+    "kind": "here",
+    "quote": "An edge matrix, the head's matrix minus the tail's, of rank $a$ costs $a$ smaller calls"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-saving"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "role-streams"
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$"
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$"
+   }
+  },
+  {
+   "symbol": "F_d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with $\\lambda=s/W$"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$"
+   }
+  },
+  {
+   "symbol": "X",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "Y",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "x_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "The page never says what x_S denotes (an entry of bank X indexed by S); the earlier page binds X and S but not x_S."
+   }
+  },
+  {
+   "symbol": "y_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "The page never says what y_S denotes (an entry of bank Y indexed by S)."
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation, covered by the profile"
+   }
+  },
+  {
+   "symbol": "\\ln",
+   "anchor": {
+    "kind": "background",
+    "note": "natural logarithm, covered by the calculus background"
+   }
+  },
+  {
+   "symbol": "\\exp",
+   "anchor": {
+    "kind": "background",
+    "note": "exponential function, covered by the calculus background"
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "shear as a bank invocation",
+   "quote": "The shear is such an invocation, with $D$ as $X$ and $H$ as $Y$",
+   "kind": "step",
+   "note": "The cited fact is about scalar banks x_S, y_S indexed by triples S (paper lines 729-737, Lemma scalar-motifs), where a forward invocation sends y_S to y_S+x_S. The shear H <- H+D is an address permutation of fields of an array, not an addition of bank scalars. The page never says how D and H are identified with the banks X and Y; in the paper the shear is obtained by applying Phi_M to role streams and merging (lines 1495-1534), and exactness for arbitrary scratch rows follows from that. Also the exchange of banks is only (X,Y) -> (-Y,X) in general, and an exact exchange only in the bit construction (line 735-738), which the page does not state."
+  },
+  {
+   "term": "mu < 2^20",
+   "quote": "Since $\\mu<2^{20}$, $\\ln\\mu<20$",
+   "kind": "step",
+   "note": "The page never says what mu is for the explicit network (paper line 656: m = 1000000), so the bound mu < 2^20 is unsupported and not marked cited; the step to ln mu < 20 also uses ln 2 < 1 (paper line 1332), which is not stated."
+  },
+  {
+   "term": "outer updates are linear",
+   "quote": "The outer two cost linear time.",
+   "kind": "step",
+   "note": "No reason is given why D <- D-H and D <- H-D take linear time on a tape. The paper (line 1539-1541) relies on the ordered affine stream lemma: they update a later field from an earlier field in one pass. The page does not state or cite this."
+  },
+  {
+   "term": "recurrence overhead",
+   "quote": "Splitting, merging and gates are a fixed number of linear passes, $O(1)$ per unit volume.",
+   "kind": "step",
+   "note": "The recurrence F_d <= lambda F_{d-1} + O(1) also needs the cost of scheduling the s recursive calls on a fixed number of tapes (parking stack, descriptor stack) to be O(V) at each node; the paper proves this separately (lines 1560-1620). The page omits it, so the recurrence is not justified from what is given."
+  }
+ ]
+}

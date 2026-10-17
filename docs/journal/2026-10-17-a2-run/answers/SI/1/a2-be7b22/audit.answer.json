@@ -1,0 +1,204 @@
+{
+ "symbols": [
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "here",
+    "quote": "each of $u$ bits"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "let $V$ be the stored volume, the number of data units in the array"
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."
+   }
+  },
+  {
+   "symbol": "\\leftarrow",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\leftarrow$ is assignment"
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\mu$ is the number of central wires in one invocation"
+   }
+  },
+  {
+   "symbol": "a",
+   "anchor": {
+    "kind": "here",
+    "quote": "of rank $a$"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-saving"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "role-streams"
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$"
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$"
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $d$ is the recursion depth"
+   }
+  },
+  {
+   "symbol": "F_d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange"
+   }
+  },
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with $\\lambda=s/W$"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$"
+   }
+  },
+  {
+   "symbol": "X",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "Y",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "x_S",
+   "anchor": {
+    "kind": "background",
+    "note": "entries of the banks X and Y of the subset-intersection network, a known concept (scalars x_S, y_S per triple S)"
+   }
+  },
+  {
+   "symbol": "y_S",
+   "anchor": {
+    "kind": "background",
+    "note": "entries of the banks X and Y of the subset-intersection network, a known concept (scalars x_S, y_S per triple S)"
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "big-O notation, covered by the reader profile"
+   }
+  },
+  {
+   "symbol": "\\ln",
+   "anchor": {
+    "kind": "background",
+    "note": "logarithm and exponential, covered by the single-variable calculus in the profile"
+   }
+  },
+  {
+   "symbol": "\\exp",
+   "anchor": {
+    "kind": "background",
+    "note": "logarithm and exponential, covered by the single-variable calculus in the profile"
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "wrong definition of mu",
+   "quote": "where $\\mu$ is the number of central wires in one invocation",
+   "kind": "step",
+   "note": "False. In the paper (line 656) m = h^3 = 1000000 is the matrix dimension, i.e. the number of address fields per chunk (line 1089-1093: H, D are vectors of m fields). The number of central wires per invocation is c_b = 100 (line 775), and the central wires are not what sets the matrix size. The bound s < W m and the later 'mu < 2^20' only make sense for m = 10^6."
+  },
+  {
+   "term": "mu < 2^20 unsupported",
+   "quote": "Since $\\mu<2^{20}$, $\\ln\\mu<20$",
+   "kind": "step",
+   "note": "The page never gives the value of mu (and its stated meaning, central-wire count, would give 100), so the reader cannot check mu < 2^20; it is not marked cited. The paper (lines 656, 1332) uses m = 10^6 < 2^20."
+  },
+  {
+   "term": "restoration device credited as new",
+   "quote": "by a restoration device the paper introduces as new",
+   "kind": "step",
+   "note": "Misattribution. The paper (lines 708-711) says the cancellation of arbitrary initial scratch values is a linear instance of the restoration construction for transparent computation of Buhrman, Cleve, Koucky, Loff and Speelman, not a device it introduces. Also the paper's lemma (line 729-737) gives (X,Y) -> (-Y,X), which is an exchange only in the bit (F_2) construction."
+  },
+  {
+   "term": "shear as a bank invocation",
+   "quote": "The shear is such an invocation, with $D$ as $X$ and $H$ as $Y$, so it is exact for any initial auxiliary contents.",
+   "kind": "step",
+   "note": "Not what the paper does and not checkable from the page. The lemma about forward invocations concerns scalar banks x_S, y_S; in the paper (lines 1495-1535) the shear H<-H+D on arrays is obtained by assigning frames Phi_M to each role stream and edge, applying Phi_{A_e} on each edge, with the endpoint identity M_out(rho(w)) - M_in(w) = I_m on every role. The page never says how a bank invocation turns into an address shear on arrays."
+  },
+  {
+   "term": "missing hypotheses of the width bound",
+   "quote": "At depth $d$, the $s$ smaller calls are interchanges of width $\\mu^{d-1}$ on streams of volume $V/W$",
+   "kind": "step",
+   "note": "The paper's Proposition (line 1475-1490) needs fields over a fixed prime radix q, widths that are powers m^k of m measured in radix-q digits, and a row field before both chunks of length divisible by W^k so that the row split into W streams can be repeated d times. The page omits all of these, mixes width in bits (u) with width in digits (mu^d), and never explains how arbitrary u is reached from powers of mu (paper Lemma, lines 1631-1740: padding rows and base-m decomposition), so the claimed O(V u^tau) for arbitrary u does not follow from the recursion shown."
+  }
+ ]
+}

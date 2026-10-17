@@ -1,0 +1,25 @@
+{
+  "symbols": [
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "\\mathbb F_2", "anchor": {"kind": "here", "quote": "for the bit procedure this ring is $\\mathbb F_2$, where subtraction and addition coincide"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited)."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "s", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "m", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "Q_k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits"}},
+    {"symbol": "k", "anchor": {"kind": "here", "quote": "where $k$ is the recursion level"}},
+    {"symbol": "C", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "j", "anchor": {"kind": "background", "note": "Summation index in a finite geometric sum, covered by discrete mathematics and series in the undergraduate profile."}}
+  ],
+  "gaps": [
+    {
+      "term": "tau must be positive",
+      "quote": "since $m\\ge2$",
+      "kind": "step",
+      "note": "The bound k = O(m^{k tau}) holds only if tau > 0. The page only says to fix tau < 1 with s/W < m^tau; when s/W <= 1 that allows tau <= 0, and then m^{k tau} does not grow and the sum bound of k fails. The page needs to require 0 < tau < 1; m >= 2 alone does not give the claim."
+    }
+  ]
+}

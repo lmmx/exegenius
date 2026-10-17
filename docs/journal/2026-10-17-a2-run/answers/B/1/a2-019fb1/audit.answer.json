@@ -1,0 +1,295 @@
+{
+ "symbols": [
+  {
+   "symbol": "h",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$"
+   }
+  },
+  {
+   "symbol": "T",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a three-element subset $T$ of $[h]$, called a triple"
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "here",
+    "quote": "Call two triples $T,S$ *neighbors* when"
+   }
+  },
+  {
+   "symbol": "t_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "$t_T$ is its indicator vector"
+   }
+  },
+  {
+   "symbol": "\\mathcal T",
+   "anchor": {
+    "kind": "here",
+    "quote": "$\\mathcal T$ is the set of all triples"
+   }
+  },
+  {
+   "symbol": "g_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each triple $T$ carries a value $g_T$."
+   }
+  },
+  {
+   "symbol": "\\mathbb F_2",
+   "anchor": {
+    "kind": "background",
+    "note": "Field of two elements, modular arithmetic mod 2 from discrete mathematics."
+   }
+  },
+  {
+   "symbol": "\\ni",
+   "anchor": {
+    "kind": "background",
+    "note": "Set membership notation."
+   }
+  },
+  {
+   "symbol": "\\in",
+   "anchor": {
+    "kind": "background",
+    "note": "Set membership notation."
+   }
+  },
+  {
+   "symbol": "\\cap",
+   "anchor": {
+    "kind": "background",
+    "note": "Set intersection, discrete mathematics."
+   }
+  },
+  {
+   "symbol": "e",
+   "anchor": {
+    "kind": "here",
+    "quote": "a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "C_e",
+   "anchor": {
+    "kind": "here",
+    "quote": "a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "A_{ST}",
+   "anchor": {
+    "kind": "here",
+    "quote": "an auxiliary wire $A_{ST}$ for each neighbor pair"
+   }
+  },
+  {
+   "symbol": "\\mathbb Q",
+   "anchor": {
+    "kind": "background",
+    "note": "Rational numbers, standard."
+   }
+  },
+  {
+   "symbol": "I",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "J",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $J$ is the all-one matrix"
+   }
+  },
+  {
+   "symbol": "\\mathcal F",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$"
+   }
+  },
+  {
+   "symbol": "\\otimes",
+   "anchor": {
+    "kind": "background",
+    "note": "Tensor product notation; tensor product of vector spaces is a known concept."
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "of dimension $D=h^3$"
+   }
+  },
+  {
+   "symbol": "U",
+   "anchor": {
+    "kind": "here",
+    "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$."
+   }
+  },
+  {
+   "symbol": "\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "T_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "T_2",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "T_3",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "U_\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "the label $U_\\iota$ is the line spanned by"
+   }
+  },
+  {
+   "symbol": "\\perp",
+   "anchor": {
+    "kind": "background",
+    "note": "Orthogonality and orthogonal complement from introductory linear algebra."
+   }
+  },
+  {
+   "symbol": "P_U",
+   "anchor": {
+    "kind": "here",
+    "quote": "the projection $P_U$ onto $U$ along $U^\\perp$"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "If $U\\subseteq V$",
+    "note": "Never said what V denotes (presumably another label, a subspace); earlier V is a bit volume."
+   }
+  },
+  {
+   "symbol": "\\subseteq",
+   "anchor": {
+    "kind": "background",
+    "note": "Subset notation."
+   }
+  },
+  {
+   "symbol": "\\oplus",
+   "anchor": {
+    "kind": "background",
+    "note": "Direct sum of subspaces, linear algebra."
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$, the total rank over all edges, change meaning here."
+   }
+  },
+  {
+   "symbol": "N",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $N=\\binom h3^3$, the number of indices $\\iota$"
+   }
+  },
+  {
+   "symbol": "\\binom",
+   "anchor": {
+    "kind": "background",
+    "note": "Binomial coefficient, discrete mathematics."
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "L",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $L$ be the total dimension lost on decreasing edges"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's dimension $m$ is $D$"
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "nondegenerate subspace",
+   "quote": "nondegenerate subspace",
+   "kind": "term",
+   "note": "Nondegenerate for the indefinite form I-J/9 is never defined or linked; needed for projection along U^perp."
+  },
+  {
+   "term": "label growth to t_S^perp",
+   "quote": "may grow to $t_S^\\perp$",
+   "kind": "step",
+   "note": "Labels are subspaces of F, but t_S^perp lives in Q^h; why the label grows and why this adds h-2 dimensions is not shown."
+  },
+  {
+   "term": "signed total WD-2N",
+   "quote": "So the signed total is $WD-2N$.",
+   "kind": "step",
+   "note": "The network's edges, gates and number of sinks and signs are not given, so the WD-2N total cannot be checked."
+  },
+  {
+   "term": "loss L",
+   "quote": "each losing $h$ on a decreasing edge",
+   "kind": "step",
+   "note": "Invocations, central wires and decreasing edges are not defined, so the count 3 C(h,3)^2 h^2 cannot be checked."
+  },
+  {
+   "term": "absolute values add 2L",
+   "quote": "Absolute values add $2L$.",
+   "kind": "step",
+   "note": "Why absolute values add 2L and why the first source edge has matrix 2P of rank one is not derived."
+  },
+  {
+   "term": "decisive bound",
+   "quote": "The paper's decisive property is a bound on the number of smaller calls, (cited).",
+   "kind": "step",
+   "note": "The cited bound is not stated, nor how s<WD yields it."
+  }
+ ]
+}

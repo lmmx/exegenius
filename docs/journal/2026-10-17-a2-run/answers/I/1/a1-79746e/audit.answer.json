@@ -1,0 +1,32 @@
+{
+  "symbols": [
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "\\mathbb F_2", "anchor": {"kind": "here", "quote": "for the bit procedure this ring is $\\mathbb F_2$, where subtraction and addition coincide"}},
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited)."}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation is a known concept."}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "s", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "m", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "C", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "Q_k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+    {"symbol": "k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+    {"symbol": "j", "anchor": {"kind": "background", "note": "Summation index of a geometric sum; summation and series are covered by the calculus background."}}
+  ],
+  "gaps": [
+    {
+      "term": "s<W contradicts s<Wm",
+      "quote": "For the bit network, $s<W$ (cited)",
+      "kind": "step",
+      "note": "The page then says s is Wm minus a positive constant and concludes s/W<m, and the linked page is 'Recursive power saving from s<Wm'. So the cited hypothesis should be s<Wm. As written, s<W is inconsistent with s = Wm minus a constant and with 'Hence s/W<m' (s<W would give s/W<1), and it also makes the later case s/W>1 impossible."
+    },
+    {
+      "term": "m>=2 and tau>0 assumed",
+      "quote": "Both are $O(m^{k\\tau})$, since $m\\ge2$.",
+      "kind": "step",
+      "note": "The page never states that m>=2 (m is only a growth factor). The case s/W<=1 needs k=O(m^{k tau}), which also requires tau>0 (so that m^tau>1), but tau is only chosen below 1 and close to 1, and positivity is not stated. The constant in the geometric-sum bound for s/W>1 also depends on s/W. The hypotheses m>=2 and 0<tau<1 should be stated."
+    }
+  ]
+}
