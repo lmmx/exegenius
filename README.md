@@ -76,7 +76,8 @@ exegenius submit <id>     checks the answer; rejects it with exact errors, or ap
 
 Tasks in a batch are independent, so the agent can hand each to a parallel subagent.
 Audit tasks go to fresh subagents: the auditor stands in for a reader who has not seen the
-sources or the other pages.
+other pages, and checks the page's mathematics against the sources, which it reads. Its task
+file names the source files; it reads nothing else.
 
 | Task | The agent | exegenius checks and applies |
 |---|---|---|
@@ -84,7 +85,7 @@ sources or the other pages.
 | background | says what the reader profile covers for these sources: reads the sources for what they use without explaining, and decides which of it a reader at the profile's level has been taught; gives a summary of the subjects and how far into each, and the known concepts the sources rely on | a summary; known concepts only where the graph has none, so a planned page is never made known; the summary is shown with the profile in every later task, and audits drop terms naming the known concepts |
 | argument | reconstructs the plan of the sources' argument as a tree of steps: each step to show a claim has a method, a motivation (stated by the sources, recoverable from them, or supplied) and sub-steps; each step to infer quotes the sources; each page presents one step or is a concept some step relies on | the root shows the target on the target page; infer steps quote the sources word for word, in depth-first order unless marked out of order; explicit motivations quote the sources; hypotheses are known or earlier pages; every page is used |
 | write | writes one page body, in reading order, for the reader's next uncertainty: the argument step, motivations and neighbouring pages are material to choose from, not items to cover; given the paragraph of the sources around each evidence quote; lists the symbols the page binds, each with the sentence that says what it denotes, and for each prerequisite page a relation: a predicate ("is reduced to") and the sentence that states it | no links to anything that is not a page; each bound symbol in the page's mathematics, its quote on the page, covering the symbol and not in a sentence after the one where it is first used (a "where" clause, or the sentence after a displayed formula, is in time); a relation for every prerequisite page, its sentence on the page, linking or naming the prerequisite and containing the predicate's words; at most 350 words of prose (mathematics and citations not counted) for a first draft, and a rewrite at most a quarter longer than the page it replaces, with no letter in its mathematics that the previous version did not use unless a binding covers it, and no symbol dropped that a later page's latest audit takes from this page; a rewrite whose notes are all about letters or unsupported citations (after the audit rounds, unaudited) adds no sentence, beyond rewordings, without a noted or newly bound letter or a citation mark; no citation mark the sentence needs to be complete (after "that", "as", "states" or a colon); adds title, prerequisites, used-by and sources from the graph |
-| audit | told exactly what the reader knows at that page, lists what would stop them at that point (a cited result is followable if the page says what it states and why it applies, but a citation does not stand in for how the page's own concept works, and references to the documents are not terms), and accounts for every symbol in the page's mathematics: bound on the page, on an earlier page, in a known concept's name, by the reader's background, or unbound | every quote is on the page and holds its symbol; every named page or concept binds the symbol; every symbol the writer bound is accounted for; drops terms the reader knows; turns the rest into prerequisite edges, candidate concepts or rewrite notes |
+| audit | told exactly what the reader knows at that page, lists what would stop them at that point (a cited result is followable if the page says what it states and why it applies, but a citation does not stand in for how the page's own concept works, and references to the documents are not terms), and accounts for every symbol in the page's mathematics: bound on the page, on an earlier page, in a known concept's name, by the reader's background, or unbound; checks every definition, hypothesis, step, value and conclusion against the page and the sources it reads, and reports as a step a claim that is false, inconsistent, overstated, missing a hypothesis it needs or credited wrongly, giving the source's line (a correct simplification, or a precondition left to another page or the source, is not an error) | every quote is on the page and holds its symbol; every named page or concept binds the symbol; every symbol the writer bound is accounted for; drops terms the reader knows; turns the rest into prerequisite edges, candidate concepts or rewrite notes |
 | extend | resolves the candidate concepts audits found into existing or new concepts, or lists a term to be explained in a sentence where it is used | same checks as extract; at most half as many new concepts the reader does not know as pages the round audited (at least one); adds the edges and queues the pages for rewriting |
 | outline | groups the final pages into parts, folds minor terminology pages into a glossary, and writes the front page overview and part intros | every page in exactly one part or the glossary, the target not in the glossary, no page in a part before one of its prerequisites, links only to pages |
 | support | for each citation mark on a page, labels whether its quotation supports the claim it follows: supported, partial, unsupported or contradicted, judged from the quotation alone; the first page checked is labelled by a second, independent judge | every mark labelled once, a reason for every label but supported; unsupported and contradicted marks become rewrite notes; a page is checked at most twice |
@@ -236,7 +237,13 @@ jq -c 'select(.kind == "extract" and .outcome == "accepted") | .coverage[].secti
 
 ## Simulated readers
 
-Once the wiki is written, exegenius plays it as a game against simulated readers. A goals
+Simulated readers are **off by default** (`[simulation] rounds = 0`). In the calibration
+programme's one test of them (SR1, `calibration/plans/SR1.md`), readers' coverage rose with the
+wiki, but it fell by less than the preregistered bar when the paragraphs carrying the answers
+were deleted, and their stuck points fell on intact pages as often as on gutted ones. They stay
+available: set `rounds` above 0 to run them.
+
+Once the wiki is written, exegenius can play it as a game against simulated readers. A goals
 task writes 3 to 6 goal questions with key points, of kinds taken from an assessment model of
 proof comprehension (Mejía-Ramos et al.) and from the argument plan's motivations. A second
 goals task, which does not see the first, writes 1 to 3 held-out goals: readers answer them
@@ -278,7 +285,7 @@ than their control's are listed as the wiki's key steps.
 
 ```toml
 [simulation]
-rounds = 2     # 0 turns it off
+rounds = 2     # 0, the default, turns it off
 budget = 15    # most pages per reader per goal
 nonce = true
 ablations = 0  # top sentences to hide, each with a control, after the last round

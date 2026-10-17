@@ -23,7 +23,8 @@ and writing it asks for, task by task, until it reports done.
    simulated readers, and `exegenius-task` for the rest. `exegenius init` writes all three to
    `.claude/agents/`, each with its model and the only tools it may use. Audit tasks must
    each go to a fresh subagent that has seen nothing else: the auditor stands in for a
-   reader who has not read the sources or the other pages. Do not do audits yourself.
+   reader who has not read the other pages, and checks the page against the sources its
+   task file names. Do not do audits yourself.
 4. When every task in the batch is accepted, go back to step 1. Keep no tally of your own:
    each time a subagent finishes, run `exegenius next`, which lists the tasks still
    pending, and start a subagent for any pending task none is working on. End your turn
@@ -38,14 +39,15 @@ and writing it asks for, task by task, until it reports done.
    into parts, fold minor pages into a glossary, write the front page) and, if a page
    reuses a letter an earlier page bound, the overloads task (judge whether each reused
    letter keeps its meaning), as one batch of independent tasks.
-6. Then come the simulated readers: a goals task, then rounds of read and baseline tasks
+6. Then, only if `[simulation] rounds` is above 0 in `exegenius.toml` (it is 0 by default),
+   come the simulated readers: a goals task, then rounds of read and baseline tasks
    (each read task explores the wiki with `exegenius read` and `exegenius search`), grade
    tasks, and rewrites of the pages readers got stuck on. Every read, baseline and grade
    task needs its own fresh subagent, `exegenius-reader` for read and baseline tasks.
    Never do them yourself: you have seen the sources and pages.
 7. When `exegenius next` prints `done`, the wiki is in `docs/` with a `zensical.toml`, and
-   the simulated readers' results are in `exegenius/report.md`. Run `exegenius status`
-   and report it.
+   the report (with the simulated readers' results, if they ran) is in
+   `exegenius/report.md`. Run `exegenius status` and report it.
 8. If the user wants the wiki online, run `exegenius init --vercel`: it adds `vercel.json`
    and `.gitignore` entries, so a GitHub repository of this folder imported into Vercel
    builds and deploys the site on every push.
@@ -62,5 +64,5 @@ and writing it asks for, task by task, until it reports done.
   its own directory (`exegenius/tasks/<task id>/`). Do not edit anything else under
   `exegenius/` or `docs/` by hand.
 - Without subagents, do the tasks yourself one at a time, and do each audit task using only
-  its task file.
+  its task file and the sources it names.
 - `exegenius status` shows progress at any point; `exegenius plan` shows the reading order.

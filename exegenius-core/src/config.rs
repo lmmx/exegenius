@@ -34,7 +34,8 @@ pub struct Config {
     pub stop_early: bool,
     pub reader: Reader,
     pub sources: Vec<SourceSpec>,
-    /// Simulated readers run once the wiki is written.
+    /// Simulated readers, run once the wiki is written if `[simulation] rounds` is above 0
+    /// (off by default).
     #[serde(default)]
     pub simulation: Simulation,
     /// Further reader profiles for the simulation, beside `reader`.
@@ -136,7 +137,7 @@ pub enum Visibility {
 #[serde(deny_unknown_fields)]
 pub struct Simulation {
     /// Rounds of simulated reading: each round but the last is followed by repairs.
-    /// 0 turns the simulation off.
+    /// 0, the default, turns the simulation off.
     #[serde(default = "default_simulation_rounds")]
     pub rounds: u32,
     /// Most pages a simulated reader may open for one goal.
@@ -162,8 +163,12 @@ impl Default for Simulation {
     }
 }
 
+/// Off by default: in the calibration programme's one test (SR1, `calibration/plans/SR1.md`)
+/// simulated readers' coverage did not fall clearly enough when the wiki stopped saying what
+/// they were asked, and their stuck points did not locate what was missing. They stay
+/// available with `rounds` set above 0.
 fn default_simulation_rounds() -> u32 {
-    2
+    0
 }
 
 fn default_budget() -> u32 {
@@ -289,8 +294,9 @@ path = "sources/paper.txt"
 
 # Simulated readers, run once the wiki is written: each tries to answer goal questions
 # using only the wiki, and what they get stuck on is repaired before the next round.
+# They are off by default; set rounds above 0 to run them.
 # [simulation]
-# rounds = 2      # 0 turns the simulation off
+# rounds = 0      # 0 (the default) turns the simulation off; 2 runs two rounds
 # budget = 15     # most pages a reader may open per goal
 # nonce = true    # invented names for the concepts the wiki teaches
 # ablations = 0   # pivotal sentences to hide, each with a control, after the last round
@@ -343,6 +349,20 @@ mod tests {
         )
         .unwrap();
         assert_eq!(config.rounds, 3);
+    }
+
+    #[test]
+    fn simulation_is_off_by_default() {
+        let base =
+            "target = \"t\"\n[reader]\nknows = \"k\"\n[[sources]]\nid = \"a\"\npath = \"a.txt\"\n";
+        let config: Config = toml::from_str(base).unwrap();
+        assert_eq!(config.simulation.rounds, 0);
+        let config: Config = toml::from_str(&format!("{base}[simulation]\nbudget = 5\n")).unwrap();
+        assert_eq!(config.simulation.rounds, 0);
+        let config: Config = toml::from_str(&format!("{base}[simulation]\nrounds = 2\n")).unwrap();
+        assert_eq!(config.simulation.rounds, 2);
+        let template: Config = toml::from_str(TEMPLATE).unwrap();
+        assert_eq!(template.simulation.rounds, 0);
     }
 
     #[test]
