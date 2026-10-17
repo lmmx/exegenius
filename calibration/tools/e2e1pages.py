@@ -2,7 +2,7 @@
 
 usage:
   python3 -I e2e1pages.py prep PROJECT JUDGE_DIR PROMPT_DIR SEED [--pages DIR] [--only ID,ID]
-  python3 -I e2e1pages.py read JUDGE_DIR [--json OUT.json]
+  python3 -I e2e1pages.py read JUDGE_DIR [--verdicts SUBDIR] [--json OUT.json]
 
 `prep` judges every page a write task wrote. Each page's text is PROJECT/exegenius/pages/<id>.md
 (or DIR/<id>.md with --pages, for the snapshot taken when the audit rounds ended). Its assignment
@@ -21,6 +21,9 @@ J24's, unchanged apart from its paths.
 `read` scores the verdicts per page: faithful and derived over the scored ids, and major and
 minor errors, per judge and by median. A page meets the page standard when its median major
 errors are 0 and, if it has n scored ids, its median faithful count is at least ceil(0.9 n).
+`omitted` lists, per verdict, the scored ids it has no item for (plans/E2E1.md, 22:58: such a verdict
+goes back once to its judge for the missing items). `--verdicts verdicts-first` scores the verdicts
+as first written.
 """
 import argparse
 import json
@@ -107,20 +110,24 @@ def prep(project, jdir, pdir, seed, pages_dir=None, only=None):
           f"{3 * len(key)} prompts -> {pdir}")
 
 
-def read(jdir):
+def read(jdir, vsub="verdicts"):
     jdir = pathlib.Path(jdir)
     key = json.loads((jdir / "key.json").read_text())
-    pages, missing = {}, []
+    pages, missing, omitted = {}, [], {}
     for pid, k in key.items():
         ids = k["scored_ids"]
         c = {"pid": pid, "task": k["task"], "n": len(ids), "faithful": [], "derived": [], "major": [], "minor": []}
         for s in ("", "-b", "-c"):
-            f = jdir / "verdicts" / f"{pid}{s}.json"
+            f = jdir / vsub / f"{pid}{s}.json"
+            if not f.exists() and vsub != "verdicts":
+                f = jdir / "verdicts" / f"{pid}{s}.json"
             if not f.exists():
                 missing.append(f.name)
                 continue
             v = json.loads(f.read_text())
             items = {i.get("id"): i for i in v.get("items", [])}
+            if [i for i in ids if i not in items]:
+                omitted[f.name] = [i for i in ids if i not in items]
             c["faithful"].append(sum(items.get(i, {}).get("faithful") is True for i in ids))
             c["derived"].append(sum(items.get(i, {}).get("presence") == "derived" for i in ids))
             c["major"].append(sum(e.get("severity") == "major" for e in v.get("errors", [])))
@@ -133,7 +140,7 @@ def read(jdir):
         pages[k["page"]] = c
     judged = [c for c in pages.values() if c["major"]]
     with_steps = [c for c in judged if c["n"]]
-    return {"missing_verdicts": sorted(missing), "pages": dict(sorted(pages.items())),
+    return {"missing_verdicts": sorted(missing), "omitted": omitted, "pages": dict(sorted(pages.items())),
             "P4_pages_with_major_error": sorted(p for p, c in pages.items() if c.get("median_major", 0) > 0),
             "S1_meet_standard": f"{sum(c['meets_standard'] for c in judged)} of {len(judged)} pages",
             "S1_meet_standard_with_steps": f"{sum(c['meets_standard'] for c in with_steps)} of {len(with_steps)}"}
@@ -151,12 +158,13 @@ def main():
     p.add_argument("--only")
     r = sub.add_parser("read")
     r.add_argument("jdir")
+    r.add_argument("--verdicts", default="verdicts")
     r.add_argument("--json")
     a = ap.parse_args()
     if a.cmd == "prep":
         prep(a.project, a.jdir, a.pdir, a.seed, a.pages, set(a.only.split(",")) if a.only else None)
     else:
-        out = read(a.jdir)
+        out = read(a.jdir, a.verdicts)
         text = json.dumps(out, indent=1)
         if a.json:
             pathlib.Path(a.json).write_text(text + "\n")
