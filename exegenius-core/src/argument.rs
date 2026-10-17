@@ -284,6 +284,20 @@ readers every reconstructed motivation, since the sources will not.
 - `from`: the concepts a step relies on, as ids: known concepts, or pages that come before \
 the step's page in the reading order below. A step's page is its own `page` or the nearest \
 ancestor's.
+- The key step: the step the target result turns on, the construction or estimate that \
+gives the result its strength (where a saving, a bound or a surprise comes from). A reader \
+who follows only one derivation should follow this one. Develop it with `show` steps down \
+to the reasoning the sources give for it, each sub-step quoting where the sources carry it \
+out, rather than stopping at an `infer` step that quotes its result. Where a sub-step \
+concludes from a count, a bound or an equality, state the identity, lemma or definition \
+that makes it hold, and every case the sources treat as an exception to it. Where the \
+sources carry out a construction or estimate in more than one variant, develop each variant \
+the target result uses; where a sub-step concludes a bound on an error, a size or a depth, \
+state the recurrence or chain of estimates that produces the bound. Define each parameter \
+and constant the target result's statement or derivation fixes (a size, a count, a \
+threshold) with the value the sources give it, at the step that first uses it; where the \
+sources establish a sub-step case by case or by a table, give every case and what it \
+contributes.
 - `salient`: for a step whose claim has a feature a reader would find striking (a symmetry, \
 a uniformity across cases, a surprising value or bound), that feature. A proof explains a \
 result only relative to such a feature (Lange), so its page is asked to explain why the \
