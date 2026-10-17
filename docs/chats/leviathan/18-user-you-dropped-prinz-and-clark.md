@@ -1,0 +1,1 @@
+I am not seeing you link to Jack Clark's piece nor mention the prinz thing! I told you to incorporate all four of these, you are just stopping early! Please I beg read my prompts above again. there were multiple components here. you are dropping them

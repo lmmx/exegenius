@@ -1,0 +1,1 @@
+ok, and what shall i do with this? make a fresh claude code session to mine this article for similarities and resonance with the idea?
