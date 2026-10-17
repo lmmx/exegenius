@@ -1,0 +1,11 @@
+The Schönhage–Strassen optimality conjecture is the claim that $n\log n$ is the best possible order of growth for the time to multiply two integers, where $n$ is the number of bits in each; it is the statement that the main result of this wiki disproves.
+
+In 1971 Schönhage and Strassen gave a multiplication algorithm running in $O(n\log n\log\log n)$ time, and proposed $n\log n$ as the optimal order of growth <cite data-source="paper">and proposed $n\log n$ as the optimal order of growth</cite>. This is a lower-bound statement, not a claim about one algorithm: for every multiplication machine there are a constant $c>0$ and a threshold such that the machine needs at least $c\,n\log n$ steps whenever $n$ exceeds the threshold. Both may depend on the machine, but not on $n$.
+
+The conjecture is stated for the [Fixed finite-tape machine model](machine-model.md): a multitape Turing machine with a fixed alphabet and a fixed number of one-dimensional tapes. Running time is counted in steps of such a machine, so a counterexample must be a machine of this kind; a speedup with, say, random access to memory would not refute it.
+
+Refuting a "for every machine, for all large $n$" statement needs only one machine for which no constant $c>0$ works. Beating $n\log n\log\log n$ is not enough; the time must fall below every constant multiple of $n\log n$ along some inputs.
+
+For decades the gap between $n\log n\log\log n$ and $n\log n$ was the open part. After a sequence of improvements, Harvey and van der Hoeven reached an $O(n\log n)$ bound that holds without any unproved assumption <cite data-source="paper">Harvey and van der Hoeven reached the unconditional $O(n\log n)$ upper</cite>. That matches the conjectured order, so the best known algorithms were consistent with the conjecture.
+
+The main result gives the required machine. Its running time is $O(n(\lg n)^{1-\kappa})$, where $\kappa>0$ is a fixed constant, the amount by which the exponent of the logarithm is lowered. Its time divided by $n\lg n$ is at most a constant times $(\lg n)^{-\kappa}$, which tends to zero for all large $n$, not merely along a subsequence. This is stronger than the refutation needs. The conjecture is therefore false in this model, although the saving is tiny because $\kappa$ is extremely small.
