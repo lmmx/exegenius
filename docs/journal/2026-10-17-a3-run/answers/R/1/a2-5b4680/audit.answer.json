@@ -1,0 +1,128 @@
+{
+ "symbols": [
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear-factorization"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear-factorization"
+   }
+  },
+  {
+   "symbol": "\\mathbb F_2",
+   "anchor": {
+    "kind": "here",
+    "quote": "for the bit procedure this ring is $\\mathbb F_2$, where subtraction and addition coincide"
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited)."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "big-O notation, covered by the undergraduate asymptotic analysis background"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-power-saving"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-power-saving"
+   }
+  },
+  {
+   "symbol": "Q_k",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."
+   }
+  },
+  {
+   "symbol": "k",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $k$ is the recursion level"
+   }
+  },
+  {
+   "symbol": "C",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-power-saving"
+   }
+  },
+  {
+   "symbol": "j",
+   "anchor": {
+    "kind": "background",
+    "note": "summation index in a finite geometric sum, covered by series and summation in the discrete mathematics and calculus background"
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "H lies after D on the tape",
+   "quote": "each combining $D$ with $H$, which lies after $D$ on the tape, in linear time",
+   "kind": "step",
+   "note": "Wrong order. The paper (Lemma matrix-shear, line ~1397: 'every H_i before every D_j'; line ~1518: 'The other two updates target the later group and have linear cost'; line ~1432: 'target a later field controlled by an earlier field') has H before D on the tape. The two linear-cost updates change the later field D using the earlier field H, which is what makes them linear-time. The page's 'after' contradicts the shear convention and breaks the stated reason for linear cost."
+  },
+  {
+   "term": "value of s",
+   "quote": "the paper's proof computes $s$ as $Wm/2$ minus a positive constant fixed by the construction",
+   "kind": "step",
+   "note": "Wrong value. The paper (Proposition bit-motif-interface, lines ~1148-1152) has s_b = W_b m - N + 2L_b, with deficit N - 2L_b > 0 from W_b m, so s is Wm minus a positive constant, not Wm/2 minus a constant. The relative deficit is tiny (eta_b = 339/22587335000000, line ~1321). Wm/2 would also be inconsistent with the page's own need for s/W to be close to m (so that tau is close to 1)."
+  },
+  {
+   "term": "ring is F_2",
+   "quote": "for the bit procedure this ring is $\\mathbb F_2$, where subtraction and addition coincide",
+   "kind": "step",
+   "note": "Misstates the ring. In the paper (Lemma matrix-shear, lines ~1396-1405, and Proposition power-interchange, line ~1494) the fields H, D range over [q^b] and the shear and the three updates are over Z/q^b Z for a fixed odd prime q chosen to avoid denominators of the rational matrices. Over an odd modulus subtraction and addition do not coincide, so the three updates D-H, H+D, H-D do not collapse to XORs of the address fields. XOR is only the gate applied pointwise to the stored bits of the role streams. The later claim that 'each update is a pointwise XOR' on the fields is therefore not what the paper states."
+  },
+  {
+   "term": "volume V/W per role stream",
+   "quote": "each of its $s$ smaller calls acts on one role stream of volume $V/W$",
+   "kind": "step",
+   "note": "Missing hypothesis. The paper (Proposition power-interchange, lines ~1486-1487 and the proof at ~1500-1510) obtains W role streams of volume V/W only by splitting whole rows cyclically, and requires a row field preceding both chunks whose length is divisible by W^k (rows are padded in Lemma chunk-swap, lines ~1672-1690). The page never mentions rows or this divisibility condition, and it states the V/W reduction and the final O(Vu^tau) bound for all arrays without it."
+  }
+ ]
+}

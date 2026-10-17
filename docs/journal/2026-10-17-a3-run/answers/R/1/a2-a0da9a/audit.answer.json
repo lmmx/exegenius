@@ -1,0 +1,28 @@
+{
+ "symbols": [
+  {"symbol": "W", "anchor": {"kind": "here", "quote": "Let $W$ be the number of roles."}},
+  {"symbol": "\\rho", "anchor": {"kind": "here", "quote": "Let $\\rho$ be the permutation of roles that it applies"}},
+  {"symbol": "w", "anchor": {"kind": "here", "quote": "an input at role $w$ leaves at output role"}},
+  {"symbol": "\\varepsilon_w", "anchor": {"kind": "here", "quote": "with sign $\\varepsilon_w \\in \\{+1,-1\\}$"}},
+  {"symbol": "\\ell", "anchor": {"kind": "here", "quote": "row $\\ell$, the $\\ell$th row at a fixed prefix"}},
+  {"symbol": "\\bmod", "anchor": {"kind": "background", "note": "Modular arithmetic (remainder), covered by discrete mathematics in the undergraduate CS profile."}},
+  {"symbol": "V", "anchor": {"kind": "here", "quote": "Let $V$ be the number of bits stored after padding."}},
+  {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator"}},
+  {"symbol": "D_\\nu", "anchor": {"kind": "here", "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$"}},
+  {"symbol": "f", "anchor": {"kind": "here", "quote": "The stored array at $\\nu$ is $D_\\nu f$ when the logical array is $f$."}},
+  {"symbol": "\\alpha", "anchor": {"kind": "here", "quote": "Along an edge from node $\\alpha$ to node $\\beta$"}},
+  {"symbol": "\\beta", "anchor": {"kind": "here", "quote": "Along an edge from node $\\alpha$ to node $\\beta$"}},
+  {"symbol": "G", "anchor": {"kind": "here", "quote": "A pointwise linear gate $G$ combines"}},
+  {"symbol": "p", "anchor": {"kind": "here", "quote": "combines its $p$ input arrays"}},
+  {"symbol": "k", "anchor": {"kind": "unbound", "quote": "Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges", "note": "k appears only as the last index in a list; the page never says what it counts (the number of edges of the route)."}},
+  {"symbol": "\\mathrm{source}", "anchor": {"kind": "here", "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"}},
+  {"symbol": "\\mathrm{sink}", "anchor": {"kind": "here", "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"}},
+  {"symbol": "I", "anchor": {"kind": "here", "quote": "Here $I$ is the identity operator, which leaves every array unchanged."}}
+ ],
+ "gaps": [
+  {"term": "one and the same network", "quote": "Every fixed-tape procedure of the argument comes from one and the same network", "kind": "step", "note": "False. The paper (line 114) says 'Each procedure arises from its own fixed linear network that exchanges two banks of values'; each procedure has its own network, not one shared network."},
+  {"term": "intermediate frames fixed to identity", "quote": "so the paper fixes every intermediate frame to the identity", "kind": "step", "note": "Wrong and does not follow. The telescoping holds for any intermediate frames, so it cannot force them to be the identity. The paper (lines 155-156, 824-825) says the intermediate frames are chosen to make each edge change inexpensive (implementable by smaller calls to the same procedure), once the endpoint frames are fixed."},
+  {"term": "source, gate, sink, edge, route", "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$ on arrays indexed by the common address set", "kind": "term", "note": "The page never says what sources, sinks, nodes, edges and routes of the network are (the paper: the vertices on a wire are its source, the gates touching it in time order, and its sink; edges join consecutive vertices), nor what the common address set is. The reader has no picture of the graph the frames are attached to."},
+  {"term": "route operator via telescoping", "quote": "By the telescoping, the route applies", "kind": "step", "note": "Telescoping only shows that a chain of edge operators along one wire collapses. A route from input role w to output role rho(w) passes through gates that combine several wires, so the endpoint-only conclusion needs the gate-commuting identity applied to the whole network and the convention that the supplied physical input has logical interpretation D_source^{-1} applied (paper lines 141-142, 816-822). The page states neither the whole-network operator nor this input convention."}
+ ]
+}

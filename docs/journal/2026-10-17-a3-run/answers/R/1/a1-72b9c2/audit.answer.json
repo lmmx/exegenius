@@ -1,0 +1,24 @@
+{
+ "symbols": [
+  {"symbol":"\\lambda","anchor":{"kind":"here","quote":"with exponent $\\lambda<1$ (this letter changes meaning here: on the tensor-product page $\\lambda$ is a scalar)"}},
+  {"symbol":"f","anchor":{"kind":"here","quote":"Let $f$ be the parameter of a call"}},
+  {"symbol":"u","anchor":{"kind":"page","page":"address-fields"}},
+  {"symbol":"m","anchor":{"kind":"here","quote":"Here $m$ is the factor by which the parameter grows"}},
+  {"symbol":"s","anchor":{"kind":"here","quote":"Let $s$ be the number of subcalls of one call."}},
+  {"symbol":"V","anchor":{"kind":"page","page":"address-fields"}},
+  {"symbol":"W","anchor":{"kind":"page","page":"linear-network-roles"}},
+  {"symbol":"\\Phi","anchor":{"kind":"here","quote":"Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."}},
+  {"symbol":"C","anchor":{"kind":"here","quote":"Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"}},
+  {"symbol":"O","anchor":{"kind":"background","note":"Big-O notation is covered by the undergraduate asymptotic analysis in the reader profile."}},
+  {"symbol":"\\tau","anchor":{"kind":"here","quote":"An address interchange of $u$-bit fields costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed."}},
+  {"symbol":"\\Omega","anchor":{"kind":"here","quote":"Here $\\Omega$ is the bit count of one axis chunk"}},
+  {"symbol":"d","anchor":{"kind":"here","quote":"$d$ is the paper's axis-count parameter"}},
+  {"symbol":"\\eta","anchor":{"kind":"here","quote":"$\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"}},
+  {"symbol":"\\vartheta","anchor":{"kind":"here","quote":"Since $\\vartheta=\\tfrac12$ is a fixed exponent"}},
+  {"symbol":"\\nu","anchor":{"kind":"here","quote":"Let $\\nu$ count the levels of unrolling"}},
+  {"symbol":"\\sigma","anchor":{"kind":"unbound","quote":"Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$.","note":"The page only gives a range for sigma and never says what it denotes (an auxiliary exponent bounding the weight); earlier pages bind sigma to unrelated things."}}
+ ],
+ "gaps": [
+  {"term":"leaf cost bounded by f^lambda","quote":"$O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$","kind":"step","note":"Not justified and in general false. The computation gives only O(f^sigma u^{1-sigma}) <= O(f^sigma d^{vartheta(1-sigma)}); this is <= f^lambda only if f >= d^{vartheta(1-sigma)/(lambda-sigma)}, which is much larger than the internal-node threshold f >= d^vartheta (at f about d^vartheta it exceeds f^lambda). The paper (lines 2420-2430) stops at O(e^sigma d^{beta(1-sigma)}) and keeps it as a separate term, d^{sigma+beta(1-sigma)}, in the final bound with the larger exponent lambda' > max{lambda, sigma+beta(1-sigma)} (lines 2440-2450), so the page's conclusion is stronger than the paper's."}
+ ]
+}

@@ -1,0 +1,3 @@
+{"at":1792259654585,"version":"0.6.0","event":"issued","task":"0213-audit-subset-intersection-construction","kind":"audit","round":3}
+{"at":1792260809834,"version":"0.6.0","event":"submit","task":"0213-audit-subset-intersection-construction","kind":"audit","attempt":1,"outcome":"rejected","message":"answer rejected:\n- `N`: the quote must cover the symbol in the page's mathematics: \"the number of indices $\\iota$\"\nCopy quotes exactly from the page, and use only the bindings listed in the task."}
+{"at":1792260813348,"version":"0.6.0","event":"submit","task":"0213-audit-subset-intersection-construction","kind":"audit","attempt":2,"outcome":"accepted"}

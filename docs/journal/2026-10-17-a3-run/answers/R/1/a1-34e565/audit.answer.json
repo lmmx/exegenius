@@ -1,0 +1,35 @@
+{
+ "symbols": [
+  {"symbol":"R","anchor":{"kind":"here","quote":"Let $R$ be the number of fields in each vector"}},
+  {"symbol":"H","anchor":{"kind":"here","quote":"let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+  {"symbol":"D","anchor":{"kind":"here","quote":"let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+  {"symbol":"q","anchor":{"kind":"here","quote":"Here $q$ is a fixed odd prime, the radix of the digits"}},
+  {"symbol":"b","anchor":{"kind":"here","quote":"$b$ is the number of radix-$q$ digits in each field"}},
+  {"symbol":"\\mathbb Z","anchor":{"kind":"background","note":"Integers and residues mod m: modular arithmetic in the discrete mathematics of the profile."}},
+  {"symbol":"\\mathbb Q","anchor":{"kind":"background","note":"The rationals, standard notation from undergraduate mathematics."}},
+  {"symbol":"M","anchor":{"kind":"here","quote":"For a rational $R\\times R$ matrix $M$, the shear by $M$ is"}},
+  {"symbol":"\\mu","anchor":{"kind":"here","quote":"where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"}},
+  {"symbol":"\\xi","anchor":{"kind":"here","quote":"where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"}},
+  {"symbol":"\\operatorname{rank}_{\\mathbb Q}","anchor":{"kind":"here","quote":"Let $\\operatorname{rank}_{\\mathbb Q}M$ be the number of linearly independent rows of $M$."}},
+  {"symbol":"\\Pi","anchor":{"kind":"here","quote":"A partial permutation matrix $\\Pi$ is a 0-1 matrix with at most one 1 in each row and column"}},
+  {"symbol":"F_1","anchor":{"kind":"here","quote":"where $F_1$ and $F_2$ are lower-triangular rational matrices"}},
+  {"symbol":"F_2","anchor":{"kind":"here","quote":"where $F_1$ and $F_2$ are lower-triangular rational matrices"}},
+  {"symbol":"I","anchor":{"kind":"background","note":"Identity matrix, from introductory linear algebra (matrices, inverses)."}},
+  {"symbol":"\\sigma","anchor":{"kind":"here","quote":"at row $\\sigma$ and column $\\tau$"}},
+  {"symbol":"\\tau","anchor":{"kind":"here","quote":"at row $\\sigma$ and column $\\tau$"}},
+  {"symbol":"\\eta","anchor":{"kind":"here","quote":"Let $\\eta$ be the content of $H_\\sigma$"}},
+  {"symbol":"\\zeta","anchor":{"kind":"here","quote":"$\\zeta$ that of $D_\\tau$"}},
+  {"symbol":"V","anchor":{"kind":"page","page":"address-fields"}},
+  {"symbol":"s_{\\rm b}","anchor":{"kind":"here","quote":"The interchange count of the network is $s_{\\rm b}$, the sum of their ranks."}},
+  {"symbol":"W_{\\rm b}","anchor":{"kind":"here","quote":"where $W_{\\rm b}$ is the number of wires"}},
+  {"symbol":"N","anchor":{"kind":"here","quote":"$N$ the number of negative source projections"}},
+  {"symbol":"L_{\\rm b}","anchor":{"kind":"here","quote":"$L_{\\rm b}$ the total dimension lost on decreasing edges"}}
+ ],
+ "gaps": [
+  {"term":"factorization needs invertible factors","quote":"Every rational $M$ factors as $M=F_1\\Pi F_2$, where $F_1$ and $F_2$ are lower-triangular rational matrices.","kind":"step","note":"The page then uses F_1^{-1} and F_2^{-1}, which exist only if the factors are invertible, but lower-triangular alone does not give that (a zero diagonal entry is allowed). Paper Lemma lower-lower (line 1364-1371) requires E_1,E_2 to be invertible lower triangular."},
+  {"term":"choice of q","quote":"So $q$ divides no numerator or denominator of the finitely many matrices used.","kind":"step","note":"This does not follow from 'q must not divide xi' for each entry being read; it is a separate choice of q. The paper (Lemma matrix-shear proof, around line 1415-1420) picks q odd avoiding every denominator in the table of factors and inverses and the numerators of the diagonal entries of the invertible factors (for example q larger than all nonzero numerators and denominators), done once independent of b. The page never says how such a fixed q is found or why it makes the factors invertible mod q^b."},
+  {"term":"negative source projections","quote":"$N$ the number of negative source projections","kind":"term","note":"Wires, source projections, decreasing edges and dimension changes belong to the construction of the bit network; the page gives no definition and the linked page does not supply them here, so the reader cannot tell what N or L_b count."},
+  {"term":"rank budget identity","quote":"gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$","kind":"step","note":"The identity and the inequality N>2L_b are only cited; the page does not say what edge matrices are or why their ranks equal the dimension changes (paper lines 1148-1167), so the reader cannot check that s_b<W_bR."},
+  {"term":"recurrence saving","quote":"which the recurrence turns into a saving of a power of the chunk width (the chunk length)","kind":"step","note":"The recurrence and chunk width are not defined or linked on this page; the paper only has s_b < W_b m (an average over wires, not fewer than R per wire) and defers the saving to its recurrence section, so the reader cannot follow the conclusion."}
+ ]
+}

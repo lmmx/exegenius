@@ -1,0 +1,30 @@
+{
+ "symbols": [
+  {"symbol":"\\lambda","anchor":{"kind":"here","quote":"with exponent $\\lambda<1$"}},
+  {"symbol":"f","anchor":{"kind":"here","quote":"Let $f$ be the parameter of a call"}},
+  {"symbol":"m","anchor":{"kind":"here","quote":"Here $m$ is the factor by which the parameter grows"}},
+  {"symbol":"s","anchor":{"kind":"here","quote":"Let $s$ be the number of subcalls of one call."}},
+  {"symbol":"W","anchor":{"kind":"page","page":"linear-network-roles"}},
+  {"symbol":"V","anchor":{"kind":"page","page":"address-fields"}},
+  {"symbol":"\\Phi","anchor":{"kind":"here","quote":"Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."}},
+  {"symbol":"C","anchor":{"kind":"here","quote":"Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"}},
+  {"symbol":"u","anchor":{"kind":"page","page":"address-fields"}},
+  {"symbol":"\\tau","anchor":{"kind":"here","quote":"An address interchange of $u$-bit fields costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed."}},
+  {"symbol":"\\Omega","anchor":{"kind":"here","quote":"Here $\\Omega$ is the bit count of one axis chunk"}},
+  {"symbol":"d","anchor":{"kind":"here","quote":"$d$ is the paper's axis-count parameter"}},
+  {"symbol":"\\eta","anchor":{"kind":"here","quote":"and $\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"}},
+  {"symbol":"\\vartheta","anchor":{"kind":"here","quote":"Since $\\vartheta=\\tfrac12$ is a fixed exponent"}},
+  {"symbol":"\\nu","anchor":{"kind":"here","quote":"Let $\\nu$ count the levels of unrolling"}},
+  {"symbol":"\\sigma","anchor":{"kind":"unbound","quote":"Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$.","note":"Only a range is given; the page never says that sigma is an auxiliary exponent bounding the weight (s/W)^nu by m^(nu sigma). Earlier pages bind sigma to other things (row of a one, last-axis exponent)."}},
+  {"symbol":"O","anchor":{"kind":"background","note":"Big-O notation, covered by the undergraduate asymptotic analysis background (the letter O also names the odd sub-transform on the DFT page, but here it is asymptotic)."}},
+  {"symbol":"\\sum","anchor":{"kind":"background","note":"Summation notation and geometric series, covered by the calculus and discrete mathematics background."}}
+ ],
+ "gaps": [
+  {"term":"example ratio","quote":"the ratio is $\\tfrac{3/2}{2^{0.8}}\\approx1.16$","kind":"step","note":"Wrong value: 2^0.8 is about 1.741, so (3/2)/2^0.8 is about 0.861, not 1.16 (1.16 is its reciprocal). It must be below 1, as the page says for any lambda > log_m(s/W) ~ 0.585; 1.16 would contradict that and the convergence claim."},
+  {"term":"leaf cost bounded by f^lambda","quote":"the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$","kind":"step","note":"Does not follow. With d^vartheta <= f only, f^sigma d^{vartheta(1-sigma)} can be as large as f, which exceeds f^lambda (e.g. f near d^vartheta gives d^{vartheta(1-sigma)} vs d^{vartheta(lambda-sigma)}). The paper (lines 2423-2444) only bounds the leaves by O(e^sigma d^{beta(1-sigma)}) and absorbs them in the final exponent lambda' > max{lambda, sigma+beta(1-sigma)}, so the overall bound is O(d^lambda'), not O(f^lambda)."},
+  {"term":"d <= f^{1/vartheta}","quote":"Since $\\vartheta=\\tfrac12$ is a fixed exponent, $d\\le f^{1/\\vartheta}$","kind":"step","note":"Being a fixed exponent does not give this inequality. It holds only at internal nodes, where f >= d^vartheta (paper line 2413), and that stopping rule is introduced only in the next paragraph. The hypothesis is missing at the point of use."},
+  {"term":"u used for two meanings","quote":"The leaves at depth $\\nu$ have $u=f/m^\\nu<d^\\vartheta$ chunks","kind":"step","note":"Here u counts chunks, whereas earlier on the same page u is a number of bits of a field (u = f Omega bits) and it is the field width of the address-fields page. The page flags other letter changes but not this one, so the reader cannot tell the two uses apart."},
+  {"term":"kernel","quote":"Each leaf is handled by one kernel per chunk","kind":"term","note":"Kernel is never defined on the page or in the reader's known concepts. In the paper it is the individual selected-bit C kernel (a 2x2 butterfly on one address bit), costing O(V) per kernel; the reader cannot see why the leaf cost is O(f/m^nu)."},
+  {"term":"outside work is row additions","quote":"The outside work is a fixed number of address-field row additions.","kind":"step","note":"The page asserts that the outside work (changes of basis, scalar gates, corrections, reassembly) reduces to a fixed number of row additions and that a row addition costs O(V(u^tau+1)), but it only cites the cost of an interchange. Neither why the count is fixed nor why a row addition has the same cost is given (the paper derives these at lines 2268-2290 from the fixed network and a separate lemma)."}
+ ]
+}

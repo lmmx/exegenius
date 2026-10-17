@@ -1,0 +1,44 @@
+{
+  "symbols": [
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "\\mathbb F_2", "anchor": {"kind": "here", "quote": "for the bit procedure this ring is $\\mathbb F_2$, where subtraction and addition coincide"}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$ (cited)."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "big-O notation is covered by the reader profile"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "s", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "m", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "Q_k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+    {"symbol": "k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+    {"symbol": "C", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "j", "anchor": {"kind": "background", "note": "summation index of a geometric sum, covered by the discrete mathematics and series in the reader profile"}}
+  ],
+  "gaps": [
+    {
+      "term": "s<W misstated",
+      "quote": "For the bit network, $s<W$ (cited)",
+      "kind": "step",
+      "note": "The paper's bit network satisfies s_b < W_b m (Proposition bit-motif-interface, paper line 1148 to 1151; contract s<Wm at line 1468; intro line 168), not s<W. The page itself then says s is Wm minus a positive constant and concludes s/W<m, and later treats the case s/W>1, all of which contradict s<W (which would force s/W<1). The correct cited statement is s<Wm."
+    },
+    {
+      "term": "ring is F_2",
+      "quote": "for the bit procedure this ring is $\\mathbb F_2$, where subtraction and addition coincide",
+      "kind": "step",
+      "note": "In the paper the shear and the interchange act on fields of digits over Z/q^b Z for a fixed odd prime q chosen to avoid denominators of the rational factorization matrices (Lemma matrix-shear, paper lines 1394 to 1423; Proposition power-interchange, line 1478). Only the scalar gates of the bit network are over F_2. In an odd-characteristic residue ring subtraction and addition do not coincide, so the three updates D-H, H+D, H-D are genuine modular additions and subtractions, not XORs. The page also states the shear is 'over $\\mathbb F_2$', which the paper does not."
+    },
+    {
+      "term": "updates are XORs",
+      "quote": "Over $\\mathbb F_2$ each update is a pointwise XOR, since addition and subtraction are the same operation; after the first update $D$ holds the XOR of $D$ and $H$.",
+      "kind": "step",
+      "note": "The address updates D<-D-H, H<-H+D, D<-H-D are over Z/q^b Z with q an odd prime (paper lines 1404 to 1406, 1535 to 1541), where they are not XORs. What is pointwise XOR in the paper are the bit gates of the network (line 1139) acting on the data; the XOR combinations of intermediate data arise from that, not from the address updates being over F_2."
+    },
+    {
+      "term": "tau positivity missing",
+      "quote": "Both are $O(m^{k\\tau})$, since $m\\ge2$.",
+      "kind": "step",
+      "note": "Bounding the sum by k (case s/W<=1) as O(m^{k tau}) needs m^tau>1, i.e. tau>0, not just m>=2; the page only says to fix tau<1 with s/W<m^tau, which a nonpositive tau could satisfy when s/W is small. The paper chooses tau in (0,1) (Proposition power-interchange, line 1481). The page also never states m>=2 (paper line 1451)."
+    }
+  ]
+}

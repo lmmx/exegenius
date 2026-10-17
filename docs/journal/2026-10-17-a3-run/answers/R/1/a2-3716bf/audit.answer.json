@@ -1,0 +1,35 @@
+{
+ "symbols": [
+  {"symbol":"R","anchor":{"kind":"here","quote":"Let $R$ be the number of fields in each vector"}},
+  {"symbol":"H","anchor":{"kind":"here","quote":"let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+  {"symbol":"D","anchor":{"kind":"here","quote":"let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+  {"symbol":"q","anchor":{"kind":"here","quote":"Here $q$ is a fixed prime, which may be taken to be $2$, the radix of the digits"}},
+  {"symbol":"b","anchor":{"kind":"here","quote":"and $b$ is the number of radix-$q$ digits in each field"}},
+  {"symbol":"\\mathbb Z","anchor":{"kind":"background","note":"Integers and residues mod m (modular arithmetic) from the discrete mathematics in the profile."}},
+  {"symbol":"M","anchor":{"kind":"here","quote":"For a rational $R\\times R$ matrix $M$, the shear by $M$ is"}},
+  {"symbol":"\\mu","anchor":{"kind":"here","quote":"A rational entry is written $\\mu/\\xi$, where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"}},
+  {"symbol":"\\xi","anchor":{"kind":"here","quote":"A rational entry is written $\\mu/\\xi$, where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"}},
+  {"symbol":"\\mathbb Q","anchor":{"kind":"background","note":"The rationals, standard notation from undergraduate mathematics."}},
+  {"symbol":"\\operatorname{rank}_{\\mathbb Q}","anchor":{"kind":"here","quote":"Let $\\operatorname{rank}_{\\mathbb Q}M$ be the number of linearly independent rows of $M$."}},
+  {"symbol":"\\Pi","anchor":{"kind":"here","quote":"A partial permutation matrix $\\Pi$ is a 0-1 matrix with at most one 1 in each row and column"}},
+  {"symbol":"F_1","anchor":{"kind":"here","quote":"where $F_1$ and $F_2$ are invertible lower-triangular rational matrices"}},
+  {"symbol":"F_2","anchor":{"kind":"here","quote":"where $F_1$ and $F_2$ are invertible lower-triangular rational matrices"}},
+  {"symbol":"I","anchor":{"kind":"background","note":"Identity matrix, from introductory linear algebra in the profile."}},
+  {"symbol":"\\sigma","anchor":{"kind":"here","quote":"For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$"}},
+  {"symbol":"\\tau","anchor":{"kind":"here","quote":"For each 1 in $\\Pi$, at row $\\sigma$ and column $\\tau$"}},
+  {"symbol":"\\eta","anchor":{"kind":"here","quote":"Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."}},
+  {"symbol":"\\zeta","anchor":{"kind":"here","quote":"Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."}},
+  {"symbol":"V","anchor":{"kind":"here","quote":"where $V$ is the stored bit volume"}},
+  {"symbol":"s_{\\rm b}","anchor":{"kind":"here","quote":"The interchange count of the network is $s_{\\rm b}$, the sum of their ranks."}},
+  {"symbol":"W_{\\rm b}","anchor":{"kind":"here","quote":"where $W_{\\rm b}$ is the number of wires"}},
+  {"symbol":"N","anchor":{"kind":"here","quote":"$N$ the number of negative source projections"}},
+  {"symbol":"L_{\\rm b}","anchor":{"kind":"here","quote":"$L_{\\rm b}$ the total dimension lost on decreasing edges"}}
+ ],
+ "gaps": [
+  {"term":"q may be 2","quote":"which may be taken to be $2$","kind":"step","note":"Wrong. The paper (Lemma matrix-shear, line 1396-1397) requires a fixed ODD prime q, and the bit network's edge matrix 2P_{U_a} (line 1164) has numerator 2, so q=2 would divide a numerator and the factors would not stay invertible mod q. q must avoid all denominators and diagonal numerators of the matrices, so it cannot be taken to be 2."},
+  {"term":"q divides no numerator","quote":"So $q$ divides no numerator or denominator of the finitely many matrices used.","kind":"step","note":"Does not follow from the previous sentence, which only requires q not to divide denominators. Also false as stated, since a zero entry has numerator 0, which q divides. The paper (lines 1411-1413) requires q to avoid every denominator and every numerator of a diagonal entry of an invertible factor, so that the triangular factors stay invertible mod q; the page never gives this reason."},
+  {"term":"paper cites factorization without proof","quote":"The paper cites this factorization from earlier work without proof","kind":"step","note":"Inconsistent with the paper: Lemma lower-lower (lines 1364-1392) states the factorization and gives its elementary elimination proof; Grigor'ev is credited only for the Bruhat factorization it is adapted from (line 1360-1362). The paper proves it, not merely cites it."},
+  {"term":"negative source projections, rank budget","quote":"gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$","kind":"term","note":"The reader is not told what a negative source projection, a decreasing edge or the dimension lost on one is, nor what the rank budget counts, so the identity and the inequality N>2L_b cannot be interpreted. The citation lets them check, but the page does not say what these objects are or why the inequality holds."},
+  {"term":"recurrence and chunk width","quote":"which the recurrence turns into a saving of a power of the chunk width (the chunk length)","kind":"step","note":"No recurrence is stated on this page, and chunk width and the recursion in which the interchanges are called recursively are not defined, so the reader cannot see how fewer than R interchanges per wire gives a power saving."}
+ ]
+}

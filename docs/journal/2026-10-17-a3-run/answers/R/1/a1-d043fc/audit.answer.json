@@ -1,0 +1,194 @@
+{
+ "symbols": [
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."
+   }
+  },
+  {
+   "symbol": "\\leftarrow",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\leftarrow$ is assignment: the field on its left takes the value on its right."
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each vertex holds a rational $\\mu\\times\\mu$ matrix, where $\\mu$ is its number of rows."
+   }
+  },
+  {
+   "symbol": "a",
+   "anchor": {
+    "kind": "here",
+    "quote": "An edge matrix, the head's matrix minus the tail's, of rank $a$ costs $a$ smaller calls, so $s$ is the sum of these ranks."
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-saving"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "role-streams"
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)"
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)"
+   }
+  },
+  {
+   "symbol": "F_d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with $\\lambda=s/W$"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$, so $\\lambda=\\mu(1-\\eta)$."
+   }
+  },
+  {
+   "symbol": "\\ln",
+   "anchor": {
+    "kind": "background",
+    "note": "natural logarithm, covered by calculus (logarithms and exponentials)"
+   }
+  },
+  {
+   "symbol": "\\exp",
+   "anchor": {
+    "kind": "background",
+    "note": "exponential function, covered by calculus (logarithms and exponentials)"
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "big-O notation is in the reader profile"
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "X",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "Y",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "x_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "subtracts $x_S$ from $y_S$",
+    "note": "The page never says what x_S and y_S denote (the entries of banks X and Y indexed by triple S); only the banks X and Y are bound earlier."
+   }
+  },
+  {
+   "symbol": "y_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "subtracts $x_S$ from $y_S$",
+    "note": "The page never says what x_S and y_S denote (the entries of banks X and Y indexed by triple S); only the banks X and Y are bound earlier."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "bound on mu",
+   "quote": "Since $\\mu<2^{19}$, $\\ln\\mu<20$",
+   "kind": "step",
+   "note": "The paper has m=h^3=1000000 (line 656), which is greater than 2^19=524288, so mu<2^19 is false. The paper (line 1332) states m<2^20 (with log 2<1, so log m<20). The conclusion ln mu<20 still holds, but the stated premise is wrong; correct is mu<2^20."
+  },
+  {
+   "term": "forward invocation sign",
+   "quote": "a forward invocation from $X$ to $Y$ subtracts $x_S$ from $y_S$ and changes no other value (cited)",
+   "kind": "step",
+   "note": "The paper's Lemma (lines 729-730) says a forward invocation changes y_S to y_S+x_S, i.e. it adds x_S to y_S; the inverse schedule is the one that subtracts. Subtracting also contradicts the page's next sentence, since the shear H<-H+D adds D to H."
+  },
+  {
+   "term": "outer updates linear time",
+   "quote": "The outer two take linear time.",
+   "kind": "step",
+   "note": "The page does not say why D<-D-H and D<-H-D cost only linear time. The reason (paper Section on tape interchange) is that they update the later field using the earlier field in tape order, which a single scan can do; the reader is not given this and cannot check it."
+  }
+ ]
+}

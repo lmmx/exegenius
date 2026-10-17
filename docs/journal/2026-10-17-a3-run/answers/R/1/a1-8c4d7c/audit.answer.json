@@ -1,0 +1,38 @@
+{
+ "symbols": [
+  {"symbol":"h","anchor":{"kind":"here","quote":"Let $[h]=\\{1,\\dots,h\\}$ be the ground set"}},
+  {"symbol":"T","anchor":{"kind":"here","quote":"For a three-element subset $T$ of $[h]$, called a triple"}},
+  {"symbol":"S","anchor":{"kind":"here","quote":"Call two triples $T,S$ *neighbors* when $|T\\cap S|=1$."}},
+  {"symbol":"\\mathcal T","anchor":{"kind":"here","quote":"$\\mathcal T$ is the set of all triples"}},
+  {"symbol":"t_T","anchor":{"kind":"here","quote":"$t_T$ is its indicator vector"}},
+  {"symbol":"g_T","anchor":{"kind":"here","quote":"Each triple $T$ carries a value $g_T$."}},
+  {"symbol":"e","anchor":{"kind":"here","quote":"on a central wire $C_e$ for each element $e$"}},
+  {"symbol":"C_e","anchor":{"kind":"here","quote":"on a central wire $C_e$ for each element $e$"}},
+  {"symbol":"A_{ST}","anchor":{"kind":"here","quote":"on an auxiliary wire $A_{ST}$ for each neighbor pair"}},
+  {"symbol":"\\mathbb F_2","anchor":{"kind":"background","note":"The field of two elements, integers mod 2; covered by the modular arithmetic of the discrete mathematics in the profile."}},
+  {"symbol":"\\mathbb Q","anchor":{"kind":"background","note":"The rational numbers, standard notation covered by the undergraduate mathematics in the profile."}},
+  {"symbol":"I","anchor":{"kind":"page","page":"linear-network-roles"}},
+  {"symbol":"J","anchor":{"kind":"here","quote":"where $J$ is the all-one matrix"}},
+  {"symbol":"\\mathcal F","anchor":{"kind":"here","quote":"Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$, a space built from the"}},
+  {"symbol":"D","anchor":{"kind":"here","quote":"of dimension $D=h^3$ (the label space dimension)"}},
+  {"symbol":"U","anchor":{"kind":"here","quote":"A label $U$ is a nondegenerate subspace of $\\mathcal F$."}},
+  {"symbol":"\\iota","anchor":{"kind":"here","quote":"For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"}},
+  {"symbol":"T_1","anchor":{"kind":"here","quote":"For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"}},
+  {"symbol":"T_2","anchor":{"kind":"here","quote":"For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"}},
+  {"symbol":"T_3","anchor":{"kind":"here","quote":"For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"}},
+  {"symbol":"U_\\iota","anchor":{"kind":"here","quote":"the label $U_\\iota$ is the line spanned by"}},
+  {"symbol":"P_U","anchor":{"kind":"here","quote":"the projection $P_U$ onto $U$ along $U^\\perp$"}},
+  {"symbol":"V","anchor":{"kind":"unbound","quote":"If $U\\subseteq V$","note":"The page never says what V denotes (presumably another label); the earlier page binds V as a stored bit volume, which is a different meaning."}},
+  {"symbol":"s","anchor":{"kind":"here","quote":"Let $s$, the total rank over all edges, change meaning here."}},
+  {"symbol":"N","anchor":{"kind":"here","quote":"Let $N=\\binom h3^3$, the number of indices $\\iota$"}},
+  {"symbol":"W","anchor":{"kind":"page","page":"linear-network-roles"}},
+  {"symbol":"L","anchor":{"kind":"here","quote":"Let $L$ be the total dimension lost on decreasing edges"}},
+  {"symbol":"m","anchor":{"kind":"here","quote":"so the paper's dimension $m$ is $D$"}}
+ ],
+ "gaps": [
+  {"term":"number of invocations","quote":"Each of the $2\\binom h3^2$ invocations","kind":"step","note":"Wrong count and inconsistent with the page's own result: with 2*binom(h,3)^2 invocations, each having h central wires losing h, the loss would be 2*binom(h,3)^2*h^2, not the stated L=3*binom(h,3)^2*h^2 (which is what gives 100/539). The paper (line 676) has I=3v^2 invocations, v=binom(h,3): three stages, v^2 invocations each; L=Ich (line 1003). The page also never says where the invocations come from."},
+  {"term":"loss h on each central wire","quote":"each losing $h$ on a decreasing edge","kind":"step","note":"The page never says which edges decrease, why only the central wires do, or why each loses exactly h. In the paper (Lemma lem:motif-residuals, around lines 1000-1070) the only decreasing edge is the central-wire edge from time 3 to 4, losing P tensor F of dimension h, which rests on the stage labels and gate schedule the page does not give."},
+  {"term":"first source edge matrix 2P","quote":"The first edge out of each source has matrix $2P_{U_\\iota}$, rank one, with no label change","kind":"step","note":"The page does not say what label the first gate after a source has, so the reader cannot check that it is U_iota (giving P - (-P) = 2P, with zero label-dimension change). The paper (line 1164) gets this from the stage-1 labels, which the page omits."},
+  {"term":"bound on smaller calls","quote":"The paper's decisive property is a bound on the number of smaller calls, (cited).","kind":"step","note":"A cited result whose content and role the page does not state: it gives no bound, does not say what a smaller call is, and does not say how s<WD yields the recursive saving."}
+ ]
+}

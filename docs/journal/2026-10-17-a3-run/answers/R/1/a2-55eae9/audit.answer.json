@@ -1,0 +1,28 @@
+{
+"symbols": [
+{"symbol":"\\lambda","anchor":{"kind":"here","quote":"a recursion's cost per bit can grow as a fixed power of its parameter, with exponent $\\lambda<1$"}},
+{"symbol":"f","anchor":{"kind":"here","quote":"Let $f$ be the parameter of a call"}},
+{"symbol":"u","anchor":{"kind":"page","page":"address-fields"}},
+{"symbol":"m","anchor":{"kind":"here","quote":"Here $m=2$ is the factor by which the parameter grows"}},
+{"symbol":"s","anchor":{"kind":"here","quote":"Let $s$ be the number of subcalls of one call."}},
+{"symbol":"V","anchor":{"kind":"page","page":"address-fields"}},
+{"symbol":"W","anchor":{"kind":"page","page":"linear-network-roles"}},
+{"symbol":"\\Phi","anchor":{"kind":"here","quote":"Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."}},
+{"symbol":"C","anchor":{"kind":"here","quote":"Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"}},
+{"symbol":"O","anchor":{"kind":"background","note":"Big-O notation is covered by the reader profile (asymptotic analysis)."}},
+{"symbol":"\\tau","anchor":{"kind":"here","quote":"An address interchange of $u$-bit fields costs $O(Vu^\\tau)$, where $\\tau<1$ is fixed."}},
+{"symbol":"\\Omega","anchor":{"kind":"here","quote":"Here $\\Omega$ is the bit count of one axis chunk"}},
+{"symbol":"d","anchor":{"kind":"here","quote":"$d$ is the paper's axis-count parameter"}},
+{"symbol":"\\eta","anchor":{"kind":"here","quote":"$\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"}},
+{"symbol":"\\vartheta","anchor":{"kind":"here","quote":"Since $\\vartheta=\\tfrac12$ is a fixed exponent"}},
+{"symbol":"\\nu","anchor":{"kind":"here","quote":"Let $\\nu$ count the levels of unrolling"}},
+{"symbol":"\\sigma","anchor":{"kind":"unbound","quote":"Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$.","note":"The page only gives a range for sigma and never says what it denotes (an auxiliary exponent with (s/W)^nu <= m^(nu sigma)); no earlier page binds it with this meaning."}}
+],
+"gaps": [
+{"term":"division-only claim","quote":"which only the paper's later division algorithm needs, not its main multiplication theorem","kind":"step","note":"False. The recursion with exponent lambda<1 and the resulting d^{lambda'} layer bound are used in the main multiplication algorithm: the paper's introduction says the cost O(V d^{lambda'}) is for 'the layouts used in the multiplication algorithm' (lines 93-99), the power saving gives the O(n(lg n)^{1-kappa}) bound of Theorem 1 (line 386, section at line 2393), and the exponents tau, sigma, lambda, lambda' are fixed for the multiplication proof (line 4010). The division section (line 4996) only reuses them."},
+{"term":"m=2","quote":"Here $m=2$ is the factor by which the parameter grows","kind":"step","note":"The paper does not fix m=2. m is the dimension of the fixed binary label space of the network (line 2237), the parameter grows by that factor m, and the construction needs a large m (m=1,000,000 at line 2470; requires s<Wm with fixed m,W>=2 at line 1468). The page's own subset-intersection network is not available for m=2; only the later example uses m=2 as an illustration."},
+{"term":"leaf cost bound","quote":"$O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$","kind":"step","note":"Does not follow. The leaf bound f^sigma d^{vartheta(1-sigma)} is not at most f^lambda: since only sigma<lambda is assumed and f can be as large as d, it is d^{sigma+vartheta(1-sigma)}, which can exceed d^lambda (e.g. vartheta=1/2, sigma=0.79, lambda=0.8 gives 0.895>0.8). The paper (lines 2425-2426, 2437-2445) keeps the leaf term as O(e^sigma d^{beta(1-sigma)}) and absorbs it only in the final bound O(d^{lambda'}) with lambda' > max{lambda, sigma+beta(1-sigma)}."},
+{"term":"kernel","quote":"Each leaf is handled by one kernel per chunk, at cost $O(f/m^\\nu)$.","kind":"term","note":"The page never says what a kernel is (the paper's individual selected-bit C butterfly kernel applied to one chunk, line 2260 ff.), nor why one kernel costs O(1) per bit of volume so that a leaf costs O(f/m^nu) per unit volume."},
+{"term":"row additions","quote":"The outside work is a fixed number of address-field row additions.","kind":"step","note":"The page does not say what a row addition is or why the node's outside work (changes of basis, gates, corrections) is a fixed number of them. Its stated cost O(V(u^tau+1)) is not derived from the interchange cost O(Vu^tau) given just before; it comes from a separate lemma of the paper (lines 2004-2010, 2226) with extra hypotheses."}
+]
+}

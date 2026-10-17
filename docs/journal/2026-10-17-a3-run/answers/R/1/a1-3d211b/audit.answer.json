@@ -1,0 +1,194 @@
+{
+ "symbols": [
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "page",
+    "page": "address-shear"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation is covered by the reader profile."
+   }
+  },
+  {
+   "symbol": "\\leftarrow",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\leftarrow$ is assignment: the field on its left takes the value on its right."
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each vertex holds a rational $\\mu\\times\\mu$ matrix, where $\\mu$ is its number of rows."
+   }
+  },
+  {
+   "symbol": "\\times",
+   "anchor": {
+    "kind": "background",
+    "note": "Multiplication sign in the size of a matrix; matrices are covered by undergraduate linear algebra."
+   }
+  },
+  {
+   "symbol": "a",
+   "anchor": {
+    "kind": "here",
+    "quote": "An edge matrix, the head's matrix minus the tail's, of rank $a$ costs $a$ smaller calls, so $s$ is the sum of these ranks."
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-saving"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "role-streams"
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$"
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$"
+   }
+  },
+  {
+   "symbol": "F_d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with $\\lambda=s/W$"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$, so $\\lambda=\\mu(1-\\eta)$."
+   }
+  },
+  {
+   "symbol": "\\ln",
+   "anchor": {
+    "kind": "background",
+    "note": "Logarithms and exponentials are covered by the single-variable calculus in the reader profile."
+   }
+  },
+  {
+   "symbol": "\\exp",
+   "anchor": {
+    "kind": "background",
+    "note": "Logarithms and exponentials are covered by the single-variable calculus in the reader profile."
+   }
+  },
+  {
+   "symbol": "X",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "Y",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "x_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "The page never says that x_S and y_S are the scalars of banks X and Y indexed by triple S; the subset-network page binds X and Y only, not these entries."
+   }
+  },
+  {
+   "symbol": "y_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "The page never says that x_S and y_S are the scalars of banks X and Y indexed by triple S; the subset-network page binds X and Y only, not these entries."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "wrong deficit constant",
+   "quote": "$\\eta>20\\cdot2^{-40}$",
+   "kind": "step",
+   "note": "The paper (line 1331) states both deficits are greater than 20*2^{-50}, not 20*2^{-40}. With 2^{-40} the claim is stronger than the paper and false: eta_b = 339/22587335000000 is about 1.5e-11, while 20*2^{-40} is about 1.8e-11. The later step 1-20*2^{-50} > 1-eta also only needs 2^{-50}."
+  },
+  {
+   "term": "inequality direction",
+   "quote": "<1-20\\cdot2^{-50}>1-\\eta",
+   "kind": "step",
+   "note": "The chain says exp(-2^{-50} ln mu) < 1-20*2^{-50}, which is the wrong direction and is false (exp(-x) > 1-x, and ln mu < 20 gives exp(-2^{-50} ln mu) > exp(-20*2^{-50}) > 1-20*2^{-50}). The paper (lines 1334-1336) has m^{1-2^{-50}} = m exp(...) > m(1-20*2^{-50}) > m(1-eta). The chain with < then > also proves nothing about mu^{-2^{-50}} versus 1-eta; it should read > 1-20*2^{-50} > 1-eta."
+  },
+  {
+   "term": "value of mu",
+   "quote": "Since $\\mu<2^{20}$, $\\ln\\mu<20$",
+   "kind": "step",
+   "note": "The page never gives the matrix size mu of the explicit network, so the reader cannot check mu<2^20. The paper has m=h^3=1000000 (line 656), which is below 2^20. The step ln mu<20 also uses ln 2<1, which is not said."
+  }
+ ]
+}

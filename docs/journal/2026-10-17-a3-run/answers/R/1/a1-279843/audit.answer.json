@@ -1,0 +1,50 @@
+{
+  "symbols": [
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "H", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "D", "anchor": {"kind": "here", "quote": "Write $H$ and $D$ for the two fields, each viewed as a vector of entries over a common residue ring"}},
+    {"symbol": "\\mathbb F_2", "anchor": {"kind": "background", "note": "Integers mod 2 (modular arithmetic and residue rings); addition is XOR."}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "Here $\\tau$, the fixed exponent below 1 in the cost, is the exponent in $O(Vu^\\tau)$"}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation from asymptotic analysis in the reader profile."}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "s", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "m", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "Q_k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+    {"symbol": "k", "anchor": {"kind": "here", "quote": "Let $Q_k$ bound the time per unit of volume for interchanging fields of $m^k$ bits, where $k$ is the recursion level."}},
+    {"symbol": "C", "anchor": {"kind": "page", "page": "recursive-power-saving"}},
+    {"symbol": "j", "anchor": {"kind": "background", "note": "Summation index of a sum, covered by series and summation in the reader profile."}}
+  ],
+  "gaps": [
+    {
+      "term": "ring of the address shear",
+      "quote": "for the bit procedure this ring is $\\mathbb F_2$, where subtraction and addition coincide",
+      "kind": "step",
+      "note": "Wrong ring. The paper's shear (H,D) -> (H+D,D) acts on address fields over Z/q^b Z for a fixed odd prime q (Lemma matrix-shear, paper.tex lines 1395-1404; Proposition power-interchange, lines 1481-1483, uses radix-q digits). The F_2 scalars (line 689) are the data bits of the XOR network, not the address ring. With q odd, subtraction and addition do not coincide, so the three updates are not XORs and the page's F_2 example does not describe the construction."
+    },
+    {
+      "term": "address updates as XOR",
+      "quote": "Over $\\mathbb F_2$ each update is a pointwise XOR, since addition and subtraction are the same operation",
+      "kind": "step",
+      "note": "The three updates D<-D-H, H<-H+D, D<-H-D are address permutations over Z/q^b Z with q an odd prime (paper.tex lines 1395-1404, 1425-1445, 1535-1545), not pointwise XORs of F_2 vectors. Only the gates of the network on the data bits are XORs (Proposition bit-motif-interface, line 1139). The page conflates the two."
+    },
+    {
+      "term": "linear cost of the outer updates",
+      "quote": "each combining $D$ with the earlier field $H$ in linear time",
+      "kind": "step",
+      "note": "The page gives no reason these updates take O(V) tape time when H and D are far apart with spectator fields between them. The paper gets it from Lemma ordered-affine-streams (a later field updated from earlier fields, line 556 and line 1357), which the page never states, so this reader cannot check the claim."
+    },
+    {
+      "term": "recursive calls at level k-1",
+      "quote": "A level-$k$ call makes $s$ calls at level $k-1$, each on volume $V/W$",
+      "kind": "step",
+      "note": "The page never says that a width m^k field is split into m subfields of width m^(k-1) (vectors H, D of m entries), nor that each unit of rank of an edge matrix costs one interchange of such subfields. Without that construction (paper.tex lines 1495-1497, 1506-1510) the reader cannot see why the sub-calls are at level k-1."
+    },
+    {
+      "term": "scope of the cost bound",
+      "quote": "A field of $u=m^k$ bits therefore has $Q_k=O(u^\\tau)$, and the interchange costs $O(Vu^\\tau)$.",
+      "kind": "step",
+      "note": "Missing hypotheses. The paper's Proposition power-interchange (lines 1476-1487) requires width exactly a power m^k and a row field before both chunks whose length is divisible by W^k. The recursion needs enough rows to split into W role streams at every level. The page omits the row condition. Arbitrary widths u need a separate lemma (Lemma chunk-swap, line 1632) with padding, not this recurrence."
+    }
+  ]
+}

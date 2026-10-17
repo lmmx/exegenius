@@ -1,0 +1,29 @@
+{
+ "symbols": [
+  {"symbol":"W","anchor":{"kind":"here","quote":"Let $W$ be the number of roles."}},
+  {"symbol":"\\rho","anchor":{"kind":"here","quote":"Let $\\rho$ be the permutation of roles that it applies"}},
+  {"symbol":"w","anchor":{"kind":"here","quote":"an input at role $w$ leaves at output role $\\rho(w)$"}},
+  {"symbol":"\\varepsilon_w","anchor":{"kind":"here","quote":"with sign $\\varepsilon_w \\in \\{+1,-1\\}$"}},
+  {"symbol":"\\ell","anchor":{"kind":"here","quote":"row $\\ell$, the $\\ell$th row at a fixed prefix"}},
+  {"symbol":"\\bmod","anchor":{"kind":"background","note":"Modular arithmetic (remainder) is covered by undergraduate discrete mathematics and the known concept Modular arithmetic."}},
+  {"symbol":"V","anchor":{"kind":"here","quote":"Let $V$ be the number of bits stored after padding."}},
+  {"symbol":"\\nu","anchor":{"kind":"here","quote":"Each source, gate and sink $\\nu$ carries a linear operator $D_\\nu$"}},
+  {"symbol":"D_\\nu","anchor":{"kind":"here","quote":"Each source, gate and sink $\\nu$ carries a linear operator $D_\\nu$ on arrays indexed by the common address set, its *frame*."}},
+  {"symbol":"f","anchor":{"kind":"here","quote":"The stored array at $\\nu$ is $D_\\nu f$ when the logical array is $f$."}},
+  {"symbol":"\\alpha","anchor":{"kind":"here","quote":"Along an edge from node $\\alpha$ to node $\\beta$"}},
+  {"symbol":"\\beta","anchor":{"kind":"here","quote":"Along an edge from node $\\alpha$ to node $\\beta$"}},
+  {"symbol":"G","anchor":{"kind":"here","quote":"A pointwise linear gate $G$ combines its $p$ input arrays"}},
+  {"symbol":"p","anchor":{"kind":"here","quote":"A pointwise linear gate $G$ combines its $p$ input arrays"}},
+  {"symbol":"f_1","anchor":{"kind":"here","quote":"its $p$ input arrays $f_1,\\dots,f_p$"}},
+  {"symbol":"k","anchor":{"kind":"unbound","quote":"Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges","note":"Only used as the last subscript of the route; the page never says what k counts (the number of edges, with k+1 nodes). It is also unrelated to the output index k bound on the convolution page."}},
+  {"symbol":"\\mathrm{source}","anchor":{"kind":"here","quote":"where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"}},
+  {"symbol":"\\mathrm{sink}","anchor":{"kind":"here","quote":"where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"}},
+  {"symbol":"I","anchor":{"kind":"here","quote":"Here $I$ is the identity operator, which leaves every array unchanged."}}
+ ],
+ "gaps": [
+  {"term":"telescoping endpoint","quote":"=D_{\\alpha_k}D_{\\alpha_1}^{-1}","kind":"step","note":"Wrong. In the product (D_{a_k}D_{a_{k-1}}^{-1})...(D_{a_1}D_{a_0}^{-1}) everything cancels except D_{a_k} on the left and D_{a_0}^{-1} on the right, so the result is D_{a_k}D_{a_0}^{-1}, not D_{a_k}D_{a_1}^{-1}. The page's own next paragraph uses the source frame D_source(w)^{-1} (the first node), and the paper (lines 143-145) has sink and source endpoints."},
+  {"term":"source inverse in route operator","quote":"By the telescoping, the route applies","kind":"step","note":"The reader is not told why the route operator has the source frame inverse applied: the page never says that the supplied physical input f is read as the logical array D_in^{-1} f (paper lines 141-142, 797-798), so the stored array at the source is f and not D_source(w) f. Without this the telescoped product is not the operator applied to the supplied input."},
+  {"term":"frame invertibility","quote":"carries a linear operator $D_\\nu$ on arrays indexed by the common address set","kind":"step","note":"The page uses D_alpha^{-1} and D_source^{-1} but never states that frames are invertible (paper line 133 and 793: invertible linear operator), nor that all incidences of one gate use the same frame; the commuting identity and the edge operator need both."},
+  {"term":"example omits sign","quote":"if a route has source frame $I$ and sink frame $D_\\nu$, its operator is $D_\\nu$","kind":"step","note":"Inconsistent with the page's own formula: a route applies epsilon_w D_sink D_source^{-1}, so with source frame I and sink frame D_nu the route operator is epsilon_w D_nu. It equals D_nu only after the sign is undone, i.e. the endpoint operator (paper lines 819-822)."}
+ ]
+}

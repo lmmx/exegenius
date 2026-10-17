@@ -1,0 +1,35 @@
+{
+ "symbols": [
+  {"symbol":"R","anchor":{"kind":"here","quote":"Let $R$ be the number of fields in each vector"}},
+  {"symbol":"H","anchor":{"kind":"here","quote":"let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+  {"symbol":"D","anchor":{"kind":"here","quote":"let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+  {"symbol":"q","anchor":{"kind":"here","quote":"Here $q$ is a fixed odd prime, the radix of the digits"}},
+  {"symbol":"b","anchor":{"kind":"here","quote":"and $b$ is the number of radix-$q$ digits in each field"}},
+  {"symbol":"\\mathbb Z/q^b\\mathbb Z","anchor":{"kind":"background","note":"Residues modulo q^b: modular arithmetic and the integers, covered by the discrete mathematics in the profile."}},
+  {"symbol":"M","anchor":{"kind":"here","quote":"For a rational $R\\times R$ matrix $M$, the shear by $M$ is $(H,D)\\mapsto(H+MD,D)$."}},
+  {"symbol":"\\mu","anchor":{"kind":"here","quote":"where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"}},
+  {"symbol":"\\xi","anchor":{"kind":"here","quote":"where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"}},
+  {"symbol":"\\mathbb Q","anchor":{"kind":"background","note":"The rational numbers, standard notation covered by the undergraduate mathematics in the profile."}},
+  {"symbol":"\\operatorname{rank}_{\\mathbb Q}","anchor":{"kind":"here","quote":"Let $\\operatorname{rank}_{\\mathbb Q}M$ be the number of linearly independent rows of $M$."}},
+  {"symbol":"\\Pi","anchor":{"kind":"here","quote":"A partial permutation matrix $\\Pi$ is a 0-1 matrix with at most one 1 in each row and column"}},
+  {"symbol":"F_1","anchor":{"kind":"here","quote":"where $F_1$ and $F_2$ are invertible lower-triangular rational matrices"}},
+  {"symbol":"F_2","anchor":{"kind":"here","quote":"where $F_1$ and $F_2$ are invertible lower-triangular rational matrices"}},
+  {"symbol":"I","anchor":{"kind":"page","page":"linear-network-roles"}},
+  {"symbol":"\\sigma","anchor":{"kind":"here","quote":"at row $\\sigma$ and column $\\tau$"}},
+  {"symbol":"\\tau","anchor":{"kind":"here","quote":"at row $\\sigma$ and column $\\tau$"}},
+  {"symbol":"\\eta","anchor":{"kind":"here","quote":"Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."}},
+  {"symbol":"\\zeta","anchor":{"kind":"here","quote":"Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."}},
+  {"symbol":"V","anchor":{"kind":"page","page":"address-fields"}},
+  {"symbol":"s_{\\rm b}","anchor":{"kind":"here","quote":"The interchange count of the network is $s_{\\rm b}$, the sum of their ranks."}},
+  {"symbol":"W_{\\rm b}","anchor":{"kind":"here","quote":"where $W_{\\rm b}$ is the number of wires"}},
+  {"symbol":"N","anchor":{"kind":"here","quote":"$N$ the number of negative source projections"}},
+  {"symbol":"L_{\\rm b}","anchor":{"kind":"here","quote":"$L_{\\rm b}$ the total dimension lost on decreasing edges"}}
+ ],
+ "gaps": [
+  {"term":"q avoids all numerators","quote":"So $q$ divides no numerator or denominator of the finitely many matrices used.","kind":"step","note":"Does not follow from the preceding sentence, which only requires q not to divide the denominators xi. The paper (Lemma matrix-shear, around line 1417) requires a fixed odd prime avoiding every denominator in the table of factorizations and the numerators of diagonal entries of the invertible factors; avoiding all numerators and denominators is only a sufficient example choice. The page also never says which finite collection of matrices is meant or why such a q exists, so the reader cannot see why q can be fixed independent of b."},
+  {"term":"missing field-order hypothesis","quote":"So the shear needs $\\operatorname{rank}_{\\mathbb Q}M$ interchanges plus $O(V)$ further work.","kind":"step","note":"The paper's Lemma matrix-shear (line 1394) assumes every H field comes before every D field in tape order, which is what makes D_tau <- D_tau + H_sigma an update of a later field by an earlier one, doable in linear time. The page omits this layout hypothesis and the O(V) bound for the two additions is not justified without it."},
+  {"term":"negative source projections","quote":"$N$ the number of negative source projections","kind":"term","note":"Nowhere explained or linked; the reader cannot tell what a negative source projection of the bit network is, nor what the bit network's wires, edges and dimensions are beyond the general network page."},
+  {"term":"rank budget identity","quote":"gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$","kind":"step","note":"The identity is stated with no derivation and the page does not say how edge ranks relate to dimension changes, why each negative source projection contributes as it does, or what labels and edge matrices the bit network has. The reader cannot check it from the page; the paper derives it in Proposition bit-motif-interface (line 1139) from Lemma motif-residuals."},
+  {"term":"power saving from the recurrence","quote":"which the recurrence turns into a saving of a power of the chunk width (the chunk length)","kind":"step","note":"The page never states the recurrence or what chunk width means here. Fewer than R interchanges per wire (s_b < W_b R) is not by itself a power saving; the paper (lines 1321-1345) needs the explicit bound s_b/W_b < m^tau with tau = 1 - 2^{-50} < 1 derived from the relative deficit, which the page does not give."}
+ ]
+}

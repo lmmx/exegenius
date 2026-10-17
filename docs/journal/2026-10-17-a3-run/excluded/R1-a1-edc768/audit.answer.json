@@ -1,0 +1,158 @@
+{
+ "symbols": [
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $W$ be the number of roles."
+   }
+  },
+  {
+   "symbol": "\\rho",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\rho$ be the permutation of roles that it applies: an input at role $w$ leaves at output role $\\rho(w)$ with sign $\\varepsilon_w \\in \\{+1,-1\\}$."
+   }
+  },
+  {
+   "symbol": "w",
+   "anchor": {
+    "kind": "here",
+    "quote": "an input at role $w$ leaves at output role $\\rho(w)$"
+   }
+  },
+  {
+   "symbol": "\\varepsilon_w",
+   "anchor": {
+    "kind": "here",
+    "quote": "with sign $\\varepsilon_w \\in \\{+1,-1\\}$"
+   }
+  },
+  {
+   "symbol": "\\ell",
+   "anchor": {
+    "kind": "here",
+    "quote": "row $\\ell$, the $\\ell$th row at a fixed prefix"
+   }
+  },
+  {
+   "symbol": "\\bmod",
+   "anchor": {
+    "kind": "background",
+    "note": "remainder operation from discrete mathematics (modular arithmetic) in the undergraduate CS profile"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $V$ be the number of bits stored after padding."
+   }
+  },
+  {
+   "symbol": "\\nu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$"
+   }
+  },
+  {
+   "symbol": "D_\\nu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$ on arrays indexed by the common address set, its *frame*."
+   }
+  },
+  {
+   "symbol": "f",
+   "anchor": {
+    "kind": "here",
+    "quote": "The stored array at $\\nu$ is $D_\\nu f$ when the logical array is $f$."
+   }
+  },
+  {
+   "symbol": "\\alpha",
+   "anchor": {
+    "kind": "here",
+    "quote": "Along an edge from node $\\alpha$ to node $\\beta$"
+   }
+  },
+  {
+   "symbol": "\\beta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Along an edge from node $\\alpha$ to node $\\beta$"
+   }
+  },
+  {
+   "symbol": "G",
+   "anchor": {
+    "kind": "here",
+    "quote": "A pointwise linear gate $G$ combines its $p$ input arrays"
+   }
+  },
+  {
+   "symbol": "p",
+   "anchor": {
+    "kind": "here",
+    "quote": "A pointwise linear gate $G$ combines its $p$ input arrays $f_1,\\dots,f_p$"
+   }
+  },
+  {
+   "symbol": "f_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "its $p$ input arrays $f_1,\\dots,f_p$ at each address"
+   }
+  },
+  {
+   "symbol": "\\alpha_0",
+   "anchor": {
+    "kind": "here",
+    "quote": "Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges"
+   }
+  },
+  {
+   "symbol": "k",
+   "anchor": {
+    "kind": "here",
+    "quote": "Along a route $\\alpha_0,\\alpha_1,\\dots,\\alpha_k$ of edges"
+   }
+  },
+  {
+   "symbol": "\\mathrm{source}",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"
+   }
+  },
+  {
+   "symbol": "\\mathrm{sink}",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\mathrm{source}(w)$ and $\\mathrm{sink}(\\rho(w))$ are the first and last nodes of that route"
+   }
+  },
+  {
+   "symbol": "I",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $I$ is the identity operator, which leaves every array unchanged."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "bits per role stream",
+   "quote": "Each role stream then holds $V/(2W)$ bits (cited).",
+   "kind": "step",
+   "note": "Wrong constant. The paper (lines 125-129) says all role streams contain V/W bits, and the proof of the row-splitting lemma (about line 525) says each stream has volume V/W. The V bits are split equally among W roles, so each holds V/W, not V/(2W). The page also does not derive the count."
+  },
+  {
+   "term": "frames pass through nonlinear gates",
+   "quote": "Frames therefore pass through every gate, linear or not.",
+   "kind": "step",
+   "note": "Overstated and false. The identity G(D f_1,...,D f_p)=D G(f_1,...,f_p) was shown only for pointwise linear gates, and it uses linearity of G. The paper (lines 137-139 and 810-813) states that the common frame commutes with a pointwise linear gate only. A nonlinear gate need not commute with a frame, which mixes addresses."
+  }
+ ]
+}

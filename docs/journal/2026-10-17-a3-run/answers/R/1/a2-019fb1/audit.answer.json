@@ -1,0 +1,324 @@
+{
+ "symbols": [
+  {
+   "symbol": "[h]",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$"
+   }
+  },
+  {
+   "symbol": "h",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$"
+   }
+  },
+  {
+   "symbol": "T",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a three-element subset $T$ of $[h]$, called a triple"
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "here",
+    "quote": "Call two triples $T,S$ *neighbors*"
+   }
+  },
+  {
+   "symbol": "t_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "$t_T$ is its indicator vector"
+   }
+  },
+  {
+   "symbol": "\\mathcal T",
+   "anchor": {
+    "kind": "here",
+    "quote": "$\\mathcal T$ is the set of all triples"
+   }
+  },
+  {
+   "symbol": "g_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each triple $T$ carries a value $g_T$."
+   }
+  },
+  {
+   "symbol": "e",
+   "anchor": {
+    "kind": "here",
+    "quote": "on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "C_e",
+   "anchor": {
+    "kind": "here",
+    "quote": "on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "\\mathbb F_2",
+   "anchor": {
+    "kind": "background",
+    "note": "The integers mod 2; the reader knows modular arithmetic, and the page reads coefficients 'mod 2'."
+   }
+  },
+  {
+   "symbol": "A_{ST}",
+   "anchor": {
+    "kind": "here",
+    "quote": "an auxiliary wire $A_{ST}$ for each neighbor pair"
+   }
+  },
+  {
+   "symbol": "\\mathbb Q",
+   "anchor": {
+    "kind": "background",
+    "note": "The rational numbers, standard notation."
+   }
+  },
+  {
+   "symbol": "I",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "J",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $J$ is the all-one matrix"
+   }
+  },
+  {
+   "symbol": "\\langle t_T,t_S\\rangle",
+   "anchor": {
+    "kind": "background",
+    "note": "Inner-product notation for a bilinear form x^T M y; covered by introductory linear algebra (dot products, matrices)."
+   }
+  },
+  {
+   "symbol": "\\mathcal F",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$"
+   }
+  },
+  {
+   "symbol": "\\otimes",
+   "anchor": {
+    "kind": "background",
+    "note": "Tensor product of vector spaces, a known concept whose page is linked in the text."
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "of dimension $D=h^3$ (the label space dimension)"
+   }
+  },
+  {
+   "symbol": "U",
+   "anchor": {
+    "kind": "here",
+    "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$."
+   }
+  },
+  {
+   "symbol": "\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "T_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "T_2",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "T_3",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "U_\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "the label $U_\\iota$ is the line spanned by"
+   }
+  },
+  {
+   "symbol": "\\perp",
+   "anchor": {
+    "kind": "background",
+    "note": "Orthogonality and orthogonal complement, covered by introductory linear algebra."
+   }
+  },
+  {
+   "symbol": "P_U",
+   "anchor": {
+    "kind": "here",
+    "quote": "Give each gate or sink with label $U$ the projection $P_U$ onto $U$ along $U^\\perp$, and the source of index $\\iota$ the matrix $-P_{U_\\iota}$."
+   }
+  },
+  {
+   "symbol": "P_{U_\\iota}",
+   "anchor": {
+    "kind": "here",
+    "quote": "Give each gate or sink with label $U$ the projection $P_U$ onto $U$ along $U^\\perp$, and the source of index $\\iota$ the matrix $-P_{U_\\iota}$."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "If $U\\subseteq V$, then $P_V-P_U$ is the identity on $V\\cap U^\\perp$",
+    "note": "V is never said to be a label or what it denotes; the reader must guess it is any label containing U (an earlier page binds V to a stored bit volume, a different meaning)."
+   }
+  },
+  {
+   "symbol": "P_V",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "If $U\\subseteq V$, then $P_V-P_U$ is the identity on $V\\cap U^\\perp$",
+    "note": "Depends on V, which is never defined."
+   }
+  },
+  {
+   "symbol": "\\dim",
+   "anchor": {
+    "kind": "background",
+    "note": "Dimension of a vector space, introductory linear algebra."
+   }
+  },
+  {
+   "symbol": "\\oplus",
+   "anchor": {
+    "kind": "background",
+    "note": "Direct sum of subspaces, introductory linear algebra."
+   }
+  },
+  {
+   "symbol": "\\cap",
+   "anchor": {
+    "kind": "background",
+    "note": "Set intersection, discrete mathematics."
+   }
+  },
+  {
+   "symbol": "\\subseteq",
+   "anchor": {
+    "kind": "background",
+    "note": "Subset relation, discrete mathematics."
+   }
+  },
+  {
+   "symbol": "\\binom",
+   "anchor": {
+    "kind": "background",
+    "note": "Binomial coefficient, discrete mathematics."
+   }
+  },
+  {
+   "symbol": "\\sum",
+   "anchor": {
+    "kind": "background",
+    "note": "Summation notation."
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$, the total rank over all edges, change meaning here."
+   }
+  },
+  {
+   "symbol": "N",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $N=\\binom h3^3$, the number of indices $\\iota$"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "L",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $L$ be the total dimension lost on decreasing edges"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $\\mathcal F$ is the fixed space, so the paper's dimension $m$ is $D$."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "nondegenerate subspace",
+   "kind": "term",
+   "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$.",
+   "note": "Nondegenerate is never explained or linked. The reader knows dot products but not what it means for a subspace to be nondegenerate for a non-standard bilinear form (the form restricted to it has trivial radical), why this is what makes the projection P_U onto U along U^perp exist, nor why a triple line is nondegenerate (<t_T,t_T>=2 nonzero)."
+  },
+  {
+   "term": "cost of rank in smaller calls",
+   "kind": "step",
+   "quote": "Each unit of rank costs one smaller call.",
+   "note": "Cited with no explanation of why: the page never says what a smaller call is, how an edge's matrix change is carried out on arrays of tape data (the shear/interchange of address fields), or why a rank-r matrix difference costs r calls. This is the link that turns the rank sum s into the recursion's cost, and is the page's own concept, so a citation does not make it followable."
+  },
+  {
+   "term": "decreasing edges and their loss",
+   "kind": "step",
+   "quote": "each losing $h$ on a decreasing edge",
+   "note": "The page never gives the gate labels or the schedule, so the reader cannot check that the only decreasing edges are one per central wire and each loses exactly h (the paper shows this in its label table and Lemma on residuals, lines 1006-1070). Without it, L and the whole count s are unsupported."
+  },
+  {
+   "term": "auxiliary wires never restored",
+   "kind": "step",
+   "quote": "never removed from $A_{ST}$ afterwards (no undo-copy step)",
+   "note": "False. The paper's schedule (lines 700-730, eq. motif-schedule) has row 6 'undo gather' and row 7 'undo copy', and also rows 0 and 1 that subtract the effect of old scratch values; the construction restores every auxiliary value and works for arbitrary initial scratch values (Lemma scalar-motifs). The page's description, with copies left on A_ST, leaves the auxiliary wires changed and contradicts the page's own 'fixed network ... makes few enough smaller calls' with restored scratch."
+  },
+  {
+   "term": "h=100 as in Alon",
+   "kind": "step",
+   "quote": "as in Alon's construction that the paper specializes",
+   "note": "The paper (line 872-875) says it specializes Alon's construction to the prime 2 'with the ground-set size changed to h=100'; h=100 is the paper's own choice, not Alon's. The page states it as if Alon's construction used h=100."
+  },
+  {
+   "term": "decisive property",
+   "kind": "step",
+   "quote": "The paper's decisive property is a bound on the number of smaller calls",
+   "note": "Cited, but the page does not say which bound or how it follows: the bound is s<WD, i.e. the number of calls per network is less than the full WD, giving the saving of a power. The content and role of the cited claim are unstated."
+  }
+ ]
+}

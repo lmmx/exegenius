@@ -1,0 +1,3 @@
+{"at":1792259651082,"version":"0.6.0","event":"issued","task":"0213-audit-fast-address-interchange","kind":"audit","round":3}
+{"at":1792260801909,"version":"0.6.0","event":"submit","task":"0213-audit-fast-address-interchange","kind":"audit","attempt":1,"outcome":"rejected","message":"answer rejected:\n- quote not found on the page: \"For every linear network, $s<Wm$ (cited).\"\nCopy quotes exactly from the page, and use only the bindings listed in the task."}
+{"at":1792260807025,"version":"0.6.0","event":"submit","task":"0213-audit-fast-address-interchange","kind":"audit","attempt":2,"outcome":"accepted"}

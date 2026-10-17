@@ -1,0 +1,255 @@
+{
+ "summary": {
+  "R": {
+   "tasks": 30,
+   "accepted": 30,
+   "never_accepted": 0,
+   "no_transcript": 0,
+   "contaminated": 1
+  }
+ },
+ "tasks": [
+  {
+   "task": "A3R1 0213-audit-address-shear-factorization",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-address-shear-factorization",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-address-shear-factorization",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-address-shear-factorization",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-fast-address-interchange",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-fast-address-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-fast-address-interchange",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-fast-address-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": true,
+   "other_paths": [
+    "/tmp/claude-0/ans.py"
+   ],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-recursive-power-saving",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-recursive-power-saving",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-recursive-power-saving",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-recursive-power-saving",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-subset-intersection-construction",
+   "accepted": true,
+   "submits": 3,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-subset-intersection-construction",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-subset-intersection-construction",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-subset-intersection-construction",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0235-audit-tape-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0235-audit-tape-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0235-audit-tape-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0235-audit-tape-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-address-shear-factorization",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-fast-address-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-recursive-power-saving",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0213-audit-subset-intersection-construction",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R1 0235-audit-tape-interchange",
+   "accepted": true,
+   "submits": 2,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  }
+ ]
+}

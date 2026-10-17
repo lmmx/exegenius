@@ -1,0 +1,47 @@
+{
+  "symbols": [
+    {"symbol": "\\lambda", "anchor": {"kind": "here", "quote": "with exponent $\\lambda<1$"}},
+    {"symbol": "f", "anchor": {"kind": "here", "quote": "Let $f$ be the parameter of a call"}},
+    {"symbol": "u", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "m", "anchor": {"kind": "here", "quote": "Here $m$ is the factor by which the parameter grows"}},
+    {"symbol": "s", "anchor": {"kind": "here", "quote": "Let $s$ be the number of subcalls of one call."}},
+    {"symbol": "V", "anchor": {"kind": "page", "page": "address-fields"}},
+    {"symbol": "W", "anchor": {"kind": "page", "page": "linear-network-roles"}},
+    {"symbol": "\\Phi", "anchor": {"kind": "here", "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."}},
+    {"symbol": "C", "anchor": {"kind": "here", "quote": "Let $C$ be a constant such that the call's own outside work is at most"}},
+    {"symbol": "O", "anchor": {"kind": "background", "note": "Big-O notation, covered by the undergraduate asymptotic analysis in the reader profile."}},
+    {"symbol": "\\tau", "anchor": {"kind": "here", "quote": "where $\\tau<1$ is fixed"}},
+    {"symbol": "\\Omega", "anchor": {"kind": "here", "quote": "Here $\\Omega$ is the bit count of one axis chunk"}},
+    {"symbol": "d", "anchor": {"kind": "here", "quote": "$d$ is the paper's axis-count parameter"}},
+    {"symbol": "\\eta", "anchor": {"kind": "unbound", "quote": "and $\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$", "note": "Only given as a fixed positive number with a bound on Omega; the page never says it is an exponent relating chunk size to d. The earlier-page meanings of eta (wrap flag, coefficient position) differ and the change is not flagged."}},
+    {"symbol": "\\vartheta", "anchor": {"kind": "here", "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"}},
+    {"symbol": "\\nu", "anchor": {"kind": "here", "quote": "Let $\\nu$ count the levels of unrolling"}},
+    {"symbol": "\\sigma", "anchor": {"kind": "unbound", "quote": "Choose $\\sigma$ with", "note": "Only a range for sigma is given; the page never says what it denotes (an exponent bounding the weight (s/W)^nu by m^(nu sigma)). Earlier-page meanings of sigma differ."}}
+  ],
+  "gaps": [
+    {
+      "term": "sign of the recurrence",
+      "quote": "$$\\Phi(mf)\\le\\frac{s}{W}\\Phi(f)-C(mf)^\\lambda.$$",
+      "kind": "step",
+      "note": "The outside work must be added, not subtracted: the paper's recurrence is F(e) <= (s/W)F(e/m) + O((eK)^tau+1) (paper.tex, Unrolling the recurrence, around line 2380). With a minus sign the bound is not the cost recurrence, and it contradicts the later sum of positive internal costs C f^lambda sum (...)^nu."
+    },
+    {
+      "term": "direction of the bound on lambda",
+      "quote": "Taking $\\lambda$ with $\\lambda<\\log_m(s/W)<1$ makes the ratio below 1",
+      "kind": "step",
+      "note": "The ratio (s/W)/m^lambda is below 1 exactly when lambda > log_m(s/W), not <. The paper uses a<=m^sigma<m^lambda (a=s/W) with lambda>sigma>=log_m(s/W). The page's own example (lambda=0.8 > 0.585) and its later 'sigma < lambda' with sigma >= log_m(s/W) use the correct direction."
+    },
+    {
+      "term": "leaf cost bounded by f^lambda",
+      "quote": "and the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$",
+      "kind": "step",
+      "note": "Not true in general: leaves have f/m^nu < d^vartheta, and at f near d^vartheta the quantity f^sigma d^{vartheta(1-sigma)} is about f, which exceeds f^lambda. The paper (around lines 2400-2420) only gets O(e^sigma d^{beta(1-sigma)}) and carries it into the final bound d^{sigma+beta(1-sigma)} (hence lambda' > max{lambda, sigma+beta(1-sigma)}), not O(e^lambda)."
+    },
+    {
+      "term": "kernel",
+      "quote": "Each leaf is handled by one kernel per chunk, at cost $O(f/m^\\nu)$.",
+      "kind": "term",
+      "note": "The page never says what a kernel is (in the paper, the 2-input butterfly-like C map applied individually on one selected bit/chunk, costing O(V) each). The reader has no way to see why f/m^nu chunks cost O(f/m^nu) per unit volume."
+    }
+  ]
+}

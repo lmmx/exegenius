@@ -1,0 +1,279 @@
+{
+ "symbols": [
+  {
+   "symbol": "h",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$ (the letter $h$ changes meaning here)."
+   }
+  },
+  {
+   "symbol": "[h]",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$ (the letter $h$ changes meaning here)."
+   }
+  },
+  {
+   "symbol": "T",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a three-element subset $T$ of $[h]$, called a triple, $t_T$ is its indicator vector, and $\\mathcal T$ is the set of all triples."
+   }
+  },
+  {
+   "symbol": "t_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a three-element subset $T$ of $[h]$, called a triple, $t_T$ is its indicator vector, and $\\mathcal T$ is the set of all triples."
+   }
+  },
+  {
+   "symbol": "\\mathcal T",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a three-element subset $T$ of $[h]$, called a triple, $t_T$ is its indicator vector, and $\\mathcal T$ is the set of all triples."
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "here",
+    "quote": "Two triples $T,S$ are called *neighbors* when $|T\\cap S|=1$."
+   }
+  },
+  {
+   "symbol": "g_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each triple $T$ carries a value $g_T$."
+   }
+  },
+  {
+   "symbol": "e",
+   "anchor": {
+    "kind": "here",
+    "quote": "gather puts the sum of the $g_T$ with $T\\ni e$ on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "C_e",
+   "anchor": {
+    "kind": "here",
+    "quote": "gather puts the sum of the $g_T$ with $T\\ni e$ on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "A_{ST}",
+   "anchor": {
+    "kind": "here",
+    "quote": "A copy of $g_T$ on an auxiliary wire $A_{ST}$ for each neighbor pair"
+   }
+  },
+  {
+   "symbol": "\\mathbb F_2",
+   "anchor": {
+    "kind": "background",
+    "note": "Modular arithmetic (arithmetic mod 2) in the discrete mathematics background."
+   }
+  },
+  {
+   "symbol": "\\mathbb Q",
+   "anchor": {
+    "kind": "background",
+    "note": "Rational numbers, standard in the undergraduate background."
+   }
+  },
+  {
+   "symbol": "I",
+   "anchor": {
+    "kind": "background",
+    "note": "Identity matrix from introductory linear algebra."
+   }
+  },
+  {
+   "symbol": "J",
+   "anchor": {
+    "kind": "here",
+    "quote": "the bilinear form with matrix $I-J/9$, where $J$ is the all-one matrix"
+   }
+  },
+  {
+   "symbol": "\\mathcal F",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$, a space built from the [Tensor product of vector spaces](tensor-product-of-vector-spaces.md) of three copies of $\\mathbb Q^h$, of dimension $D=h^3$ (the label space dimension)."
+   }
+  },
+  {
+   "symbol": "\\otimes",
+   "anchor": {
+    "kind": "background",
+    "note": "Tensor product of vector spaces, a known concept (and linked on the page)."
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "of dimension $D=h^3$ (the label space dimension)"
+   }
+  },
+  {
+   "symbol": "U",
+   "anchor": {
+    "kind": "here",
+    "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$."
+   }
+  },
+  {
+   "symbol": "\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$, the label $U_\\iota$ is the line spanned by $t_{T_1}\\otimes t_{T_2}\\otimes t_{T_3}$."
+   }
+  },
+  {
+   "symbol": "T_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$, the label $U_\\iota$ is the line spanned by $t_{T_1}\\otimes t_{T_2}\\otimes t_{T_3}$."
+   }
+  },
+  {
+   "symbol": "T_2",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$, the label $U_\\iota$ is the line spanned by $t_{T_1}\\otimes t_{T_2}\\otimes t_{T_3}$."
+   }
+  },
+  {
+   "symbol": "T_3",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$, the label $U_\\iota$ is the line spanned by $t_{T_1}\\otimes t_{T_2}\\otimes t_{T_3}$."
+   }
+  },
+  {
+   "symbol": "U_\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$, the label $U_\\iota$ is the line spanned by $t_{T_1}\\otimes t_{T_2}\\otimes t_{T_3}$."
+   }
+  },
+  {
+   "symbol": "\\perp",
+   "anchor": {
+    "kind": "background",
+    "note": "Orthogonality and orthogonal complements from introductory linear algebra (dot products, orthogonality)."
+   }
+  },
+  {
+   "symbol": "P_U",
+   "anchor": {
+    "kind": "here",
+    "quote": "Give each gate or sink with label $U$ the projection $P_U$ onto $U$ along $U^\\perp$"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "For any labels $U,V$, $P_V-P_U$ is the identity on $V\\cap U^\\perp$ and zero on $U\\oplus V^\\perp$, so its rank is $\\dim V-\\dim U$."
+   }
+  },
+  {
+   "symbol": "\\oplus",
+   "anchor": {
+    "kind": "background",
+    "note": "Direct sum of subspaces, introductory linear algebra."
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$, the total rank over all edges, change meaning here."
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "N",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $N=\\binom h3^3$, the number of indices $\\iota$ (the letter $N$ changes meaning here)."
+   }
+  },
+  {
+   "symbol": "\\binom",
+   "anchor": {
+    "kind": "background",
+    "note": "Binomial coefficients, discrete mathematics."
+   }
+  },
+  {
+   "symbol": "L",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $L$ be the total dimension lost on decreasing edges (the letter $L$ changes meaning here)."
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $\\mathcal F$ is the fixed space, so the paper's dimension $m$ is $D$."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "projection difference for arbitrary labels",
+   "quote": "For any labels $U,V$, $P_V-P_U$ is the identity on $V\\cap U^\\perp$ and zero on $U\\oplus V^\\perp$, so its rank is $\\dim V-\\dim U$.",
+   "kind": "step",
+   "note": "Missing hypothesis: this holds only when U is contained in V (paper line 1158, 'For $U\\subset V$ nondegenerate'). For arbitrary labels P_V-P_U need not be the identity on V\u2229U^perp, nor have rank dim V - dim U (e.g. two different lines U,V give rank 1 or 2 but dim V - dim U = 0). Correct: for U \u2282 V; reversing the edge negates the matrix, rank unchanged."
+  },
+  {
+   "term": "nondegenerate subspace",
+   "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$.",
+   "kind": "term",
+   "note": "The page never says what nondegenerate means for a subspace relative to the bilinear form (form restricted to U is nondegenerate, so U and U^perp split the space); the reader needs this for P_U to exist."
+  },
+  {
+   "term": "cost of rank",
+   "quote": "Each unit of rank costs one smaller call. (cited)",
+   "kind": "step",
+   "note": "The page never says what a smaller call is or why a unit of matrix rank on an edge costs one such call (in the paper, the edge change is implemented by one smaller interchange per unit of rational rank, via the tape shear). The cited claim stands in for how the construction's cost works and is not explained."
+  },
+  {
+   "term": "sources and sinks labels",
+   "quote": "Sources have dimension $1$, summing to $N$; sinks have dimension $D$, except the $N$ sinks that receive the sources, which have label $U_\\iota^\\perp$ and dimension $D-1$.",
+   "kind": "step",
+   "note": "The page never states the terminal labels (source label U_iota for the source of index iota, zero for others; sink label the whole space, except U_iota^perp for the sinks receiving the sources, and which roles those are), nor that the wire count W counts all roles, so the reader cannot check these dimension sums."
+  },
+  {
+   "term": "loss on decreasing edges",
+   "quote": "Each of the $3\\binom h3^2$ invocations has $h$ central wires, each losing $h$ on a decreasing edge, so $L=3\\binom h3^2h^2$.",
+   "kind": "step",
+   "note": "The page never defines invocations (three stages, each of binom(h,3)^2 independent invocations), central wires, or which edge loses dimension h and why no other edge decreases (paper's lemma, lines 1000-1010 and 1117-ish 'L=Ich')."
+  },
+  {
+   "term": "first edge out of a source",
+   "quote": "The first edge out of each source has matrix $2P_{U_\\iota}$, rank one, with no label change",
+   "kind": "step",
+   "note": "The page does not say that the first gate on the source's wire has label exactly U_iota (true at stage 1 where B=0), which is what makes the edge matrix P_U-(-P_U)=2P_U with no label change; the reader cannot check it."
+  },
+  {
+   "term": "decisive property",
+   "quote": "The paper's decisive property is a bound on the number of smaller calls, (cited).",
+   "kind": "step",
+   "note": "The sentence does not state the property: the bound it refers to (s < W m, from 2L < N) and its role in the recursion are never said."
+  }
+ ]
+}

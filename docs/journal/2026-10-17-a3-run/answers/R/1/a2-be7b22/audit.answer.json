@@ -1,0 +1,206 @@
+{
+ "symbols": [
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits, and let $V$ be the stored volume, the number of data units in the array."
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation, covered by the reader profile."
+   }
+  },
+  {
+   "symbol": "\\leftarrow",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\leftarrow$ is assignment: the field on its left takes the value on its right"
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\mu$ is the number of central wires in one invocation"
+   }
+  },
+  {
+   "symbol": "a",
+   "anchor": {
+    "kind": "here",
+    "quote": "of rank $a$ costs $a$ smaller calls"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "page",
+    "page": "recursive-saving"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "role-streams"
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$"
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$"
+   }
+  },
+  {
+   "symbol": "F_d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with $\\lambda=s/W$"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$"
+   }
+  },
+  {
+   "symbol": "\\ln",
+   "anchor": {
+    "kind": "background",
+    "note": "Natural logarithm, covered by the logarithms in the reader profile."
+   }
+  },
+  {
+   "symbol": "\\exp",
+   "anchor": {
+    "kind": "background",
+    "note": "Exponential function, covered by the logarithms and exponentials in the reader profile."
+   }
+  },
+  {
+   "symbol": "X",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "Y",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "x_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "The page does not say that x_S and y_S are the entries of banks X and Y indexed by a triple S; the listed binding covers only X, Y and S."
+   }
+  },
+  {
+   "symbol": "y_S",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "adds $x_S$ into $y_S$",
+    "note": "The page does not say that x_S and y_S are the entries of banks X and Y indexed by a triple S; the listed binding covers only X, Y and S."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "mu is not the number of central wires",
+   "quote": "where $\\mu$ is the number of central wires in one invocation",
+   "kind": "step",
+   "note": "Wrong definition. In the paper the matrices are m x m with m=h^3=1000000 (line 656), while the number of central wires per invocation is c_b=100 (line 775). The size of the matrices is not the central-wire count; mu should be the matrix size (m)."
+  },
+  {
+   "term": "mu < 2^20 unjustified",
+   "quote": "Since $\\mu<2^{20}$, $\\ln\\mu<20$",
+   "kind": "step",
+   "note": "The page never gives the value of mu for the explicit network (the paper has m=h^3=10^6, line 656, and uses m<2^20 at line 1333). With mu described as a number of central wires, the reader cannot check this bound."
+  },
+  {
+   "term": "outer updates linear time",
+   "quote": "The outer two cost linear time.",
+   "kind": "step",
+   "note": "The page gives no reason why D<-D-H and D<-H-D, with H and D multi-bit fields on tape, take linear time. The paper (line 1540) says these update the later field from the earlier one and cites its ordered-affine-streams lemma; the page neither states nor links this."
+  },
+  {
+   "term": "shear as a bank invocation",
+   "quote": "The shear is such an invocation, with $D$ as $X$ and $H$ as $Y$, so it is exact for any initial auxiliary contents.",
+   "kind": "step",
+   "note": "The banks X, Y are sets of wire roles whose scalars are combined by gates. H and D are address fields of the array. In the paper the shear H<-H+D arises from the frame identity (sink minus source matrix equals the identity, lines 1495-1520) applied to every role stream, not by identifying D with X and H with Y. The page also blends the exchange of banks (X,Y) by the forward, inverse, forward schedule with the exchange of fields H, D done by the three updates, and gives no argument for the identification."
+  },
+  {
+   "term": "restoration device credited as new",
+   "quote": "by a restoration device the paper introduces as new",
+   "kind": "step",
+   "note": "Misattributed. The paper (lines 354-360, 708-710) says its scratch schedule is a linear instance of the restoration construction for transparent computation of Buhrman, Cleve, Koucky, Loff and Speelman, Section 3, not a new device. Also, Lemma scalar-motifs gives (X,Y) -> (-Y,X), which is the exchange only in the bit construction."
+  }
+ ]
+}

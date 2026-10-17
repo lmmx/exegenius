@@ -1,0 +1,150 @@
+{
+ "symbols": [
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with exponent $\\lambda<1$"
+   }
+  },
+  {
+   "symbol": "f",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $f$ be the parameter of a call"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $m$ is the factor by which the parameter grows"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$ be the number of subcalls of one call."
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "page",
+    "page": "address-fields"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "\\Phi",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\Phi(f)$ be the cost of a call divided by the volume $V$ it works on."
+   }
+  },
+  {
+   "symbol": "C",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$"
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation is covered by the reader profile (asymptotic analysis)."
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\tau<1$ is fixed"
+   }
+  },
+  {
+   "symbol": "\\Omega",
+   "anchor": {
+    "kind": "here",
+    "quote": "Here $\\Omega$ is the bit count of one axis chunk"
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "$d$ is the paper's axis-count parameter"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "$\\eta>0$ is fixed, with $\\Omega\\le d^\\eta$"
+   }
+  },
+  {
+   "symbol": "\\vartheta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Since $\\vartheta=\\tfrac12$ is a fixed exponent"
+   }
+  },
+  {
+   "symbol": "\\nu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\nu$ count the levels of unrolling"
+   }
+  },
+  {
+   "symbol": "\\sigma",
+   "anchor": {
+    "kind": "unbound",
+    "quote": "Choose $\\sigma$ with",
+    "note": "The page only gives a range for sigma and never says what it denotes (an intermediate exponent between log_m(s/W) and lambda); earlier pages bind sigma to a row or an exponent of x, which does not apply."
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "direction of s/W versus m",
+   "quote": "The saving exists because $s/W>m$.",
+   "kind": "step",
+   "note": "False and inconsistent with the page: the page itself says the construction gives s<Wm, i.e. s/W<m, and the next sentence needs log_m(s/W)<1. The saving exists because s/W<m (paper lines 168, 1468, 2239). The inequality is reversed."
+  },
+  {
+   "term": "internal sum for every lambda",
+   "quote": "so the internal sum is at most a constant times $f^\\lambda$ for every $\\lambda>0$",
+   "kind": "step",
+   "note": "Overstated: the geometric series converges (ratio below 1) only when lambda>log_m(s/W), and the page also needs lambda>tau(1+eta/vartheta) and lambda<1. For small lambda the ratio exceeds 1 and the sum is not O(f^lambda). The paper (line 2416) uses a<m^lambda, i.e. only lambda in the stated range."
+  },
+  {
+   "term": "leaf cost bounded by f^lambda",
+   "quote": "and the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$",
+   "kind": "step",
+   "note": "Does not follow: with f>=d^vartheta one only gets f^sigma d^{vartheta(1-sigma)} <= f, and for f near d^vartheta the factor d^{vartheta(1-sigma)} is about f^{1-sigma}, which exceeds f^{lambda-sigma} since lambda<1. So the bound is not O(f^lambda). The paper (lines 2421-2442) keeps the leaf bound as O(e^sigma d^{beta(1-sigma)}) and only afterwards combines pieces into O(d^{lambda'}) with lambda'>sigma+beta(1-sigma)."
+  },
+  {
+   "term": "kernel",
+   "quote": "Each leaf is handled by one kernel per chunk, at cost $O(f/m^\\nu)$.",
+   "kind": "term",
+   "note": "The page never says what a kernel is (the paper's individual selected-bit C kernel applied to one chunk), nor why one kernel costs O(1) per chunk per unit volume, so the reader cannot check the leaf cost."
+  }
+ ]
+}

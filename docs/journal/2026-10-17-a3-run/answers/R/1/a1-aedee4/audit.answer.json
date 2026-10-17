@@ -1,0 +1,296 @@
+{
+ "symbols": [
+  {
+   "symbol": "[h]",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$"
+   }
+  },
+  {
+   "symbol": "h",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $[h]=\\{1,\\dots,h\\}$ be the ground set, with $h=100$"
+   }
+  },
+  {
+   "symbol": "T",
+   "anchor": {
+    "kind": "here",
+    "quote": "For a three-element subset $T$ of $[h]$, called a triple"
+   }
+  },
+  {
+   "symbol": "S",
+   "anchor": {
+    "kind": "here",
+    "quote": "Call two triples $T,S$ *neighbors* when $|T\\cap S|=1$."
+   }
+  },
+  {
+   "symbol": "t_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "called a triple, $t_T$ is its indicator vector"
+   }
+  },
+  {
+   "symbol": "\\mathcal T",
+   "anchor": {
+    "kind": "here",
+    "quote": "$\\mathcal T$ is the set of all triples"
+   }
+  },
+  {
+   "symbol": "g_T",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each triple $T$ carries a value $g_T$."
+   }
+  },
+  {
+   "symbol": "\\mathbb F_2",
+   "anchor": {
+    "kind": "background",
+    "note": "The field of two elements, i.e. arithmetic mod 2 (modular arithmetic, binary representation, basic rings)."
+   }
+  },
+  {
+   "symbol": "e",
+   "anchor": {
+    "kind": "here",
+    "quote": "on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "C_e",
+   "anchor": {
+    "kind": "here",
+    "quote": "on a central wire $C_e$ for each element $e$"
+   }
+  },
+  {
+   "symbol": "A_{ST}",
+   "anchor": {
+    "kind": "here",
+    "quote": "on an auxiliary wire $A_{ST}$ for each neighbor pair"
+   }
+  },
+  {
+   "symbol": "\\sum",
+   "anchor": {
+    "kind": "background",
+    "note": "Summation notation from discrete mathematics and series."
+   }
+  },
+  {
+   "symbol": "\\in",
+   "anchor": {
+    "kind": "background",
+    "note": "Set membership, standard discrete mathematics."
+   }
+  },
+  {
+   "symbol": "\\ni",
+   "anchor": {
+    "kind": "background",
+    "note": "Reversed set membership (T contains e), standard discrete mathematics."
+   }
+  },
+  {
+   "symbol": "\\cap",
+   "anchor": {
+    "kind": "background",
+    "note": "Set intersection, standard discrete mathematics."
+   }
+  },
+  {
+   "symbol": "\\mathbb Q",
+   "anchor": {
+    "kind": "background",
+    "note": "The rational numbers, standard discrete mathematics and linear algebra."
+   }
+  },
+  {
+   "symbol": "I",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "J",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $J$ is the all-one matrix"
+   }
+  },
+  {
+   "symbol": "\\langle t_T,t_S\\rangle",
+   "anchor": {
+    "kind": "here",
+    "quote": "gives $\\langle t_T,t_S\\rangle=|T\\cap S|-1$"
+   }
+  },
+  {
+   "symbol": "\\mathcal F",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$"
+   }
+  },
+  {
+   "symbol": "\\otimes",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $\\mathcal F=(\\mathbb Q^h)^{\\otimes 3}$, a space built from the [Tensor product of vector spaces](tensor-product-of-vector-spaces.md)"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "of dimension $D=h^3$ (the label space dimension)"
+   }
+  },
+  {
+   "symbol": "U",
+   "anchor": {
+    "kind": "here",
+    "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$."
+   }
+  },
+  {
+   "symbol": "\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "T_1",
+   "anchor": {
+    "kind": "here",
+    "quote": "For an index $\\iota=(T_1,T_2,T_3)\\in\\mathcal T^3$"
+   }
+  },
+  {
+   "symbol": "U_\\iota",
+   "anchor": {
+    "kind": "here",
+    "quote": "the label $U_\\iota$ is the line spanned by"
+   }
+  },
+  {
+   "symbol": "\\perp",
+   "anchor": {
+    "kind": "background",
+    "note": "Orthogonality and orthogonal complements, introductory linear algebra (dot products, orthogonality)."
+   }
+  },
+  {
+   "symbol": "P_U",
+   "anchor": {
+    "kind": "here",
+    "quote": "the projection $P_U$ onto $U$ along $U^\\perp$"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "If $U\\subseteq V$, then $P_V-P_U$"
+   }
+  },
+  {
+   "symbol": "\\subseteq",
+   "anchor": {
+    "kind": "background",
+    "note": "Subset relation, standard discrete mathematics."
+   }
+  },
+  {
+   "symbol": "\\oplus",
+   "anchor": {
+    "kind": "background",
+    "note": "Direct sum of subspaces, introductory linear algebra."
+   }
+  },
+  {
+   "symbol": "\\dim",
+   "anchor": {
+    "kind": "background",
+    "note": "Dimension of a vector space, introductory linear algebra."
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $s$, the total rank over all edges, change meaning here."
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "linear-network-roles"
+   }
+  },
+  {
+   "symbol": "N",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $N=\\binom h3^3$, the number of indices $\\iota$"
+   }
+  },
+  {
+   "symbol": "\\binom",
+   "anchor": {
+    "kind": "background",
+    "note": "Binomial coefficient, standard discrete mathematics."
+   }
+  },
+  {
+   "symbol": "L",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $L$ be the total dimension lost on decreasing edges"
+   }
+  },
+  {
+   "symbol": "m",
+   "anchor": {
+    "kind": "here",
+    "quote": "so the paper's dimension $m$ is $D$"
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "nondegenerate subspace and orthogonal complement in F",
+   "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$.",
+   "kind": "term",
+   "note": "The page never says what nondegenerate means for a subspace, nor that F carries the tensor-product bilinear form, nor what U^perp means (it is orthogonal complement under that form, not the dot product). The projection P_U along U^perp and the dimensions D-1 of U^perp exist only because the lines are nondegenerate (self-pairing 2^3, nonzero), which the page does not state."
+  },
+  {
+   "term": "side-wire label growth",
+   "quote": "Along a side wire, a label containing $t_T$ may grow to $t_S^\\perp$, since $t_T\\perp t_S$, adding $h-2$ dimensions.",
+   "kind": "step",
+   "note": "Labels are subspaces of F=(Q^h)^{tensor 3}, but t_S^perp lies in Q^h and t_T is not a label of F; the paper (lines 945-955, 1048-1055) applies this only to the P tensor factor (P x <t_X> inside P x t_Y^perp), with other factors suppressed. The page gives no assignment of labels to the gates, so the reader cannot see how this relates to the labels U_iota."
+  },
+  {
+   "term": "only central wires decrease, with loss h",
+   "quote": "each losing $h$ on a decreasing edge",
+   "kind": "step",
+   "note": "Which edges decrease and why each central wire loses exactly h dimensions depends on the paper's gate-label table (lines 971-990) and the residual table (lines 1010-1035), neither of which the page gives. The reader cannot check that no other edge decreases, so L=3 binom(h,3)^2 h^2 is asserted without support."
+  },
+  {
+   "term": "decisive property left unstated",
+   "quote": "The paper's decisive property is a bound on the number of smaller calls, (cited).",
+   "kind": "step",
+   "note": "The page does not say what bound is stated, nor how s<WD yields it, so a cited result is left with no content or role. It should state the property (the rank sum s_b = W_b m - N + 2L_b < W_b m, with each unit of rank costing one smaller interchange, paper line 1139)."
+  }
+ ]
+}

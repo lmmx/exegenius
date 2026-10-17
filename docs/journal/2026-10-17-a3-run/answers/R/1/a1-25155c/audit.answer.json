@@ -1,0 +1,36 @@
+{
+ "symbols": [
+  {"symbol":"R","anchor":{"kind":"here","quote":"Let $R$ be the number of fields in each vector"}},
+  {"symbol":"H","anchor":{"kind":"here","quote":"let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+  {"symbol":"D","anchor":{"kind":"here","quote":"let $H=(H_1,\\ldots,H_R)$ and $D=(D_1,\\ldots,D_R)$ be two vectors of address fields"}},
+  {"symbol":"q","anchor":{"kind":"here","quote":"Here $q$ is a fixed odd prime, the radix of the digits"}},
+  {"symbol":"b","anchor":{"kind":"here","quote":"and $b$ is the number of radix-$q$ digits in each field"}},
+  {"symbol":"\\mathbb Z","anchor":{"kind":"background","note":"Integers and residues modulo m, covered by discrete mathematics (modular arithmetic) in the profile."}},
+  {"symbol":"M","anchor":{"kind":"here","quote":"For a rational $R\\times R$ matrix $M$, the shear by $M$ is"}},
+  {"symbol":"\\mu","anchor":{"kind":"here","quote":"where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"}},
+  {"symbol":"\\xi","anchor":{"kind":"here","quote":"where $\\mu$ is its integer numerator and $\\xi$ its integer denominator"}},
+  {"symbol":"\\mathbb Q","anchor":{"kind":"background","note":"The rational numbers, standard notation covered by undergraduate mathematics."}},
+  {"symbol":"\\operatorname{rank}","anchor":{"kind":"here","quote":"Let $\\operatorname{rank}_{\\mathbb Q}M$ be the number of linearly independent rows of $M$"}},
+  {"symbol":"\\Pi","anchor":{"kind":"here","quote":"A partial permutation matrix $\\Pi$ is a 0-1 matrix"}},
+  {"symbol":"F_1","anchor":{"kind":"here","quote":"where $F_1$ and $F_2$ are invertible lower-triangular rational matrices"}},
+  {"symbol":"F_2","anchor":{"kind":"here","quote":"where $F_1$ and $F_2$ are invertible lower-triangular rational matrices"}},
+  {"symbol":"I","anchor":{"kind":"background","note":"Identity matrix, covered by introductory linear algebra."}},
+  {"symbol":"\\sigma","anchor":{"kind":"here","quote":"at row $\\sigma$ and column $\\tau$"}},
+  {"symbol":"\\tau","anchor":{"kind":"here","quote":"at row $\\sigma$ and column $\\tau$"}},
+  {"symbol":"\\eta","anchor":{"kind":"here","quote":"Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."}},
+  {"symbol":"\\zeta","anchor":{"kind":"here","quote":"Let $\\eta$ be the content of $H_\\sigma$ and $\\zeta$ that of $D_\\tau$."}},
+  {"symbol":"O","anchor":{"kind":"background","note":"Big-O notation, covered by asymptotic analysis."}},
+  {"symbol":"V","anchor":{"kind":"page","page":"address-fields"}},
+  {"symbol":"s_{\\rm b}","anchor":{"kind":"here","quote":"The interchange count of the network is $s_{\\rm b}$, the sum of their ranks."}},
+  {"symbol":"W_{\\rm b}","anchor":{"kind":"here","quote":"where $W_{\\rm b}$ is the number of wires"}},
+  {"symbol":"N","anchor":{"kind":"here","quote":"$N$ the number of negative source projections"}},
+  {"symbol":"L_{\\rm b}","anchor":{"kind":"here","quote":"$L_{\\rm b}$ the total dimension lost on decreasing edges"}}
+ ],
+ "gaps": [
+  {"term":"invertible linear transformation costs O(V)","quote":"Any invertible linear transformation of $H$ or $D$ costs $O(V)$ (cited)","kind":"step","note":"Stated too widely. Only lower-triangular invertible transformations cost O(V), because they update coordinates from last to first using earlier unchanged coordinates (the page's own justification). A general invertible matrix has no such order. Paper, Lemma matrix-shear proof (line 1425): 'A lower triangular transformation of H, or of D, costs O(V)'."},
+  {"term":"N < 2L_b","quote":"The paper shows $N<2L_{\\rm b}$, so $s_{\\rm b}<W_{\\rm b}R$.","kind":"step","note":"Inequality direction is wrong. From s_b = W_b R - N + 2L_b, s_b < W_b R requires N > 2L_b; N < 2L_b would give s_b > W_b R. The paper says 'Its deficit from W_b m is N-2L_b>0' (line 1176), so N > 2L_b."},
+  {"term":"q divides no numerator","quote":"So $q$ divides no numerator or denominator of the finitely many matrices used.","kind":"step","note":"Does not follow from 'q must not divide xi', which only constrains denominators. The paper (lines 1411-1415) avoids every denominator and the numerators of diagonal entries of invertible factors (e.g. a prime exceeding all nonzero numerators and denominators); a zero numerator is divisible by every q."},
+  {"term":"bit network","quote":"Each edge of the bit network carries such a matrix.","kind":"term","note":"The bit network, its wires, edges and the matrix on each edge are never defined on this page; the linked page covers only generic networks with roles and frames."},
+  {"term":"rank budget","quote":"The network's rank budget, which counts dimension changes along its edges, gives $s_{\\rm b}=W_{\\rm b}R-N+2L_{\\rm b}$","kind":"step","note":"The formula is asserted with no derivation or statement of why it holds. Negative source projections and decreasing edges are never explained, so the reader cannot check the formula or see why s_b is the sum of edge ranks."}
+ ]
+}

@@ -1,0 +1,191 @@
+{
+ "symbols": [
+  {
+   "symbol": "H",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"
+   }
+  },
+  {
+   "symbol": "D",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"
+   }
+  },
+  {
+   "symbol": "u",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $H$ and $D$ be the two fields, each of $u$ bits"
+   }
+  },
+  {
+   "symbol": "V",
+   "anchor": {
+    "kind": "here",
+    "quote": "let $V$ be the stored volume, the number of data units in the array"
+   }
+  },
+  {
+   "symbol": "\\tau",
+   "anchor": {
+    "kind": "here",
+    "quote": "The exponent $\\tau$ is a fixed number below 1 that sets the saving."
+   }
+  },
+  {
+   "symbol": "O",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation and logarithm/exponential functions are covered by the undergraduate CS profile (asymptotics, logarithms and exponentials)."
+   }
+  },
+  {
+   "symbol": "\\leftarrow",
+   "anchor": {
+    "kind": "here",
+    "quote": "where $\\leftarrow$ is assignment: the field on its left takes the value on its right"
+   }
+  },
+  {
+   "symbol": "\\mu",
+   "anchor": {
+    "kind": "here",
+    "quote": "Each vertex holds a rational $\\mu\\times\\mu$ matrix, where $\\mu$ is its number of rows."
+   }
+  },
+  {
+   "symbol": "a",
+   "anchor": {
+    "kind": "here",
+    "quote": "An edge matrix, the head's matrix minus the tail's, of rank $a$ costs $a$ smaller calls"
+   }
+  },
+  {
+   "symbol": "s",
+   "anchor": {
+    "kind": "here",
+    "quote": "so $s$ is the sum of these ranks"
+   }
+  },
+  {
+   "symbol": "W",
+   "anchor": {
+    "kind": "page",
+    "page": "role-streams"
+   }
+  },
+  {
+   "symbol": "W_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)"
+   }
+  },
+  {
+   "symbol": "s_{\\rm b}",
+   "anchor": {
+    "kind": "here",
+    "quote": "the paper's explicit network has $W=W_{\\rm b}$ and $s=s_{\\rm b}$ (cited)"
+   }
+  },
+  {
+   "symbol": "F_d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "d",
+   "anchor": {
+    "kind": "here",
+    "quote": "Let $F_d$ be the time per unit volume of a width-$\\mu^d$ interchange, where $d$ is the recursion depth."
+   }
+  },
+  {
+   "symbol": "\\lambda",
+   "anchor": {
+    "kind": "here",
+    "quote": "with $\\lambda=s/W$"
+   }
+  },
+  {
+   "symbol": "\\eta",
+   "anchor": {
+    "kind": "here",
+    "quote": "Write $\\eta=(W\\mu-s)/(W\\mu)$"
+   }
+  },
+  {
+   "symbol": "\\ln",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation and logarithm/exponential functions are covered by the undergraduate CS profile (asymptotics, logarithms and exponentials)."
+   }
+  },
+  {
+   "symbol": "\\exp",
+   "anchor": {
+    "kind": "background",
+    "note": "Big-O notation and logarithm/exponential functions are covered by the undergraduate CS profile (asymptotics, logarithms and exponentials)."
+   }
+  },
+  {
+   "symbol": "X",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "Y",
+   "anchor": {
+    "kind": "page",
+    "page": "subset-network"
+   }
+  },
+  {
+   "symbol": "x_S",
+   "anchor": {
+    "kind": "here",
+    "quote": "adds $x_S$ into $y_S$"
+   }
+  },
+  {
+   "symbol": "y_S",
+   "anchor": {
+    "kind": "here",
+    "quote": "adds $x_S$ into $y_S$"
+   }
+  }
+ ],
+ "gaps": [
+  {
+   "term": "sum bound when lambda <= 1",
+   "quote": "If $\\lambda\\le1$ the sum is at most $d$.",
+   "kind": "step",
+   "note": "The sum 1+lambda+...+lambda^d has d+1 terms, each at most 1, so it is at most d+1, not d (at lambda=1 it equals d+1 > d). The paper (paper.tex lines 1555-1556) says 'at most k+1'. The conclusion O(mu^{d tau}) still holds, but the stated bound is wrong."
+  },
+  {
+   "term": "linear cost of outer two updates",
+   "quote": "The outer two cost linear time.",
+   "kind": "step",
+   "note": "The page never says that field D comes after H in tape order. The linear-time claim holds only because the outer updates change the later field using the earlier one (paper.tex lines 1347-1352 and 1520-1523, 'The other two updates target the later group'; Lemma matrix-shear needs every H_i before every D_j). Without this hypothesis the claim is unsupported."
+  },
+  {
+   "term": "mu < 2^20",
+   "quote": "Since $\\mu<2^{20}$, $\\ln\\mu<20$",
+   "kind": "step",
+   "note": "The page never gives the value or a bound for mu for the explicit network and does not mark this as cited. The reader cannot check mu<2^20. The paper states it as a fact about the fixed network (paper.tex line 1333, 'Since m<2^20')."
+  },
+  {
+   "term": "enough rows for splitting into streams",
+   "quote": "Each smaller call acts on one of the $W$ [wire streams](role-streams.md), each of volume $V/W$.",
+   "kind": "step",
+   "note": "The split into W streams of volume V/W, repeated at every depth, needs a row field preceding both chunks whose length is divisible by W^k (Proposition power-interchange, paper.tex lines 1481-1485). The page states no such hypothesis and presents the recursion for any array, so the recursion analysis is missing a hypothesis. The paper removes it by padding in the arbitrary-width lemma (lines 1631-1735), which the page does not mention."
+  }
+ ]
+}

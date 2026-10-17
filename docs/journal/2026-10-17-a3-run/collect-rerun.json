@@ -1,0 +1,195 @@
+{
+ "summary": {
+  "R": {
+   "tasks": 30,
+   "accepted": 1,
+   "never_accepted": 29,
+   "no_transcript": 29,
+   "contaminated": 0
+  }
+ },
+ "tasks": [
+  {
+   "task": "A3R2 0213-audit-address-shear-factorization",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-address-shear-factorization",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-address-shear-factorization",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-address-shear-factorization",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-fast-address-interchange",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-fast-address-interchange",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-fast-address-interchange",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-fast-address-interchange",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-linear-network-roles",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-linear-network-roles",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-linear-network-roles",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-linear-network-roles",
+   "accepted": true,
+   "submits": 1,
+   "contaminated": false,
+   "other_paths": [],
+   "other_tools": []
+  },
+  {
+   "task": "A3R2 0213-audit-recursive-power-saving",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-recursive-power-saving",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-recursive-power-saving",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-recursive-power-saving",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-subset-intersection-construction",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-subset-intersection-construction",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-subset-intersection-construction",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-subset-intersection-construction",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0235-audit-tape-interchange",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0235-audit-tape-interchange",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0235-audit-tape-interchange",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0235-audit-tape-interchange",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-address-shear-factorization",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-fast-address-interchange",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-linear-network-roles",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-recursive-power-saving",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0213-audit-subset-intersection-construction",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  },
+  {
+   "task": "A3R2 0235-audit-tape-interchange",
+   "accepted": false,
+   "submits": 0,
+   "transcript": null
+  }
+ ]
+}
