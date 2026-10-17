@@ -1,0 +1,81 @@
+{
+ "by_classifier": {
+  "hand": [
+   "44",
+   "48",
+   "79",
+   "104"
+  ],
+  "hand-flip": [
+   "44",
+   "71",
+   "79",
+   "118"
+  ],
+  "asserts": []
+ },
+ "items": [
+  {
+   "row": "44",
+   "code": "a1-df6e82",
+   "page": "tape-interchange",
+   "quote": "which for width $u=\\mu^d$ is $O(u^{\\tau})$ per unit volume",
+   "note": "The recursion splits into W role streams at every level, which needs a row field divisible by W^d (paper line 1483, Proposition power-interchange). The page omits this hypothesis; the paper reaches arbitrary widths and shapes only after padding rows (Lemma at line 1631). As stated, the recursion for width mu^d is claimed for any array.",
+   "classifiers": [
+    "hand",
+    "hand-flip"
+   ]
+  },
+  {
+   "row": "48",
+   "code": "a1-74407e",
+   "page": "address-shear-factorization",
+   "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used.",
+   "note": "Does not follow from the preceding sentence, which only requires q not to divide the denominators xi. The paper (Lemma matrix-shear, around line 1417) requires a fixed odd prime avoiding every denominator in the table of factorizations and the numerators of diagonal entries of the invertible factors; avoiding all numerators and denominators is only a sufficient example choice. The page also never says which finite collection of matrices is meant or why such a q exists, so the reader cannot see why q can be fixed independent of b.",
+   "classifiers": [
+    "hand"
+   ]
+  },
+  {
+   "row": "71",
+   "code": "a1-1c92b8",
+   "page": "linear-network-roles",
+   "quote": "Take an input role $w$ and its route to output role $\\rho(w)$, carrying sign $\\varepsilon_w \\in \\{+1,-1\\}$.",
+   "note": "Gates combine several wires, so a single route with a sign is not defined for an arbitrary network. It holds only because the scalar network as a whole is a signed permutation of roles; the paper (lines 816-823) derives the route formula from the whole-network identity D_out S D_in^{-1}, which the page never states. The page does not say the scalar network is a signed role permutation.",
+   "classifiers": [
+    "hand-flip"
+   ]
+  },
+  {
+   "row": "79",
+   "code": "a1-279843",
+   "page": "fast-address-interchange",
+   "quote": "A field of $u=m^k$ bits therefore has $Q_k=O(u^\\tau)$, and the interchange costs $O(Vu^\\tau)$.",
+   "note": "Missing hypotheses. The paper's Proposition power-interchange (lines 1476-1487) requires width exactly a power m^k and a row field before both chunks whose length is divisible by W^k. The recursion needs enough rows to split into W role streams at every level. The page omits the row condition. Arbitrary widths u need a separate lemma (Lemma chunk-swap, line 1632) with padding, not this recurrence.",
+   "classifiers": [
+    "hand",
+    "hand-flip"
+   ]
+  },
+  {
+   "row": "104",
+   "code": "a1-aedee4",
+   "page": "subset-intersection-construction",
+   "quote": "Along a side wire, a label containing $t_T$ may grow to $t_S^\\perp$, since $t_T\\perp t_S$, adding $h-2$ dimensions.",
+   "note": "Labels are subspaces of F=(Q^h)^{tensor 3}, but t_S^perp lies in Q^h and t_T is not a label of F; the paper (lines 945-955, 1048-1055) applies this only to the P tensor factor (P x <t_X> inside P x t_Y^perp), with other factors suppressed. The page gives no assignment of labels to the gates, so the reader cannot see how this relates to the labels U_iota.",
+   "classifiers": [
+    "hand"
+   ]
+  },
+  {
+   "row": "118",
+   "code": "a1-74407e",
+   "page": "address-shear-factorization",
+   "quote": "So the shear needs $\\operatorname{rank}_{\\mathbb Q}M$ interchanges plus $O(V)$ further work.",
+   "note": "The paper's Lemma matrix-shear (line 1394) assumes every H field comes before every D field in tape order, which is what makes D_tau <- D_tau + H_sigma an update of a later field by an earlier one, doable in linear time. The page omits this layout hypothesis and the O(V) bound for the two additions is not justified without it.",
+   "classifiers": [
+    "hand-flip"
+   ]
+  }
+ ]
+}
