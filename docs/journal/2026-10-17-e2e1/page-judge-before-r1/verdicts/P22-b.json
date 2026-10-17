@@ -1,0 +1,277 @@
+{
+ "page": "P22",
+ "items": [
+  {
+   "id": "S1.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "handling of the bounded set of small widths e by individual digit interchanges",
+    "fixed-tape depth-first schedule (parking stack) and descriptor cost, only asserted as O(V)",
+    "B=1 / one-bit payloads explicitly allowed"
+   ],
+   "note": "The page follows the paper's route: reduce the swap to the shear H<-H+D, run the bit network on W role streams with frames Phi_M, charge rank(A_e) smaller interchanges per edge, solve F_k<=(s/W)F_{k-1}+O(1), then remove the width and row restrictions with high-digit rows, base-m pieces and binary padding."
+  },
+  {
+   "id": "S1.5.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the O(V) further work (triangular operations) that accompanies the a interchanges"
+   ],
+   "note": "Correctly cited from the matrix-shear page, as assigned: \"if $A_i$ has rank $a$, then $\\Phi_{A_i}$ costs $a$ interchanges of $b$-digit fields\"; the O(V) triangular work is not mentioned."
+  },
+  {
+   "id": "S1.5.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "base case k=0 by the single-digit operation (F_0=O(1) is asserted without reason)",
+    "q must also avoid the denominators of the vertex matrices M",
+    "the fixed-tape schedule of the s recursive calls"
+   ],
+   "note": "Shear reduction, role-stream split, frame bookkeeping, s calls on volume V/W and the recurrence with its solution are all on the page in the paper's order."
+  },
+  {
+   "id": "S1.5.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "\"Cut it into $m$ fields of $b=e/m$ digits, so $H,D$ become vectors over $\\mathbb Z/q^b\\mathbb Z$\", with the shear H<-H+D singled out as the step needing the circuit."
+  },
+  {
+   "id": "S1.5.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the split is done within each prefix preceding the row field",
+    "the streams keep the same remaining shape, including the full ranges of H and D"
+   ],
+   "note": "\"row $Wx+w-1$ goes to stream $w$ as row $x$\" matches the paper's r=Wg+(w-1) up to renaming."
+  },
+  {
+   "id": "S1.5.2.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Follows from the hypothesis that the row count is divisible by W^k: \"Each stream has volume $V/W$ and row count divisible by $W^{k-1}$\"; the page leaves implicit that this is what lets the smaller calls satisfy the hypothesis at level k-1."
+  },
+  {
+   "id": "S1.5.2.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "gates executed pointwise at matching addresses of their role streams"
+   ],
+   "note": "\"The interchange performs each edge shear by Matrix shear ... so there are exactly $s$ smaller calls\"; the recursion is implied by \"smaller calls\" and the recurrence."
+  },
+  {
+   "id": "S1.5.2.5a",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the row split supplies the common address set needed by the frame identity"
+   ],
+   "note": "Gives Phi_{M'}Phi_M=Phi_{M'+M}, frame Phi_M at a vertex, edge change Phi_{M'-M}=Phi_{A_i}, and that a common address permutation commutes with pointwise gates, as the paper does."
+  },
+  {
+   "id": "S1.5.2.5b",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "\"Read wire $w$'s input $f_w$ as the logical array $\\Phi_{-M_{\\mathrm{in}(w)}}f_w$. By the composition rule and the contract, the output is ... $=\\Phi_{I_m}f_w$\", matching the paper."
+  },
+  {
+   "id": "S1.5.2.5c",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the merge rule: row g of output role rho(w) returns to original row Wg+(w-1) within the same prefix",
+    "rows assigned to scratch roles, whose initial values were arbitrary, also get H<-H+D"
+   ],
+   "note": "Only \"Merging rows back undoes $\\rho$, giving $H\\gets H+D$ on every original row\"; the merge map that makes this true is not given, and the scratch-row case is omitted."
+  },
+  {
+   "id": "S1.5.2.5d",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page traces (H,D) -> (H,D-H) -> (D,D-H) -> (D,H), which is correct, and notes only the middle shear uses the circuit."
+  },
+  {
+   "id": "S1.5.2.5e",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "From rank a costing a interchanges and s=sum rank A_i: \"so there are exactly $s$ smaller calls\", each \"on volume $V/W$\"."
+  },
+  {
+   "id": "S1.5.2.5g",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "F_0=O(1) from the single-digit operation of the elementary-stream lemma",
+    "F_k is a uniform bound over all shapes"
+   ],
+   "note": "s calls of volume V/W plus O(V) give F_k<=(s/W)F_{k-1}+O(1); the base case is asserted without its reason."
+  },
+  {
+   "id": "S1.5.2.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Unrolls to a geometric sum and splits into the cases s/W<=1 and s/W>1, as the paper does."
+  },
+  {
+   "id": "S1.5.2.6.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "\"Unrolled over the recursion levels $j$ ..., $F_k=O(\\sum_{j=0}^k (s/W)^j)$\"."
+  },
+  {
+   "id": "S1.5.2.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "\"If $s/W\\le1$ this is at most $k+1=O(m^{k\\tau})$\"; the reason that each term is at most 1 is left to the reader but is immediate."
+  },
+  {
+   "id": "S1.5.2.6.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "\"otherwise it is $O((s/W)^k)$, below $m^{k\\tau}$\"; the geometric-series closed form is not written, but the page uses s/W<m^tau correctly."
+  },
+  {
+   "id": "S1.5.2.6.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "\"So $F_k=O(e^\\tau)$\" with e=m^k."
+  },
+  {
+   "id": "S1.5.2.5f",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "triangular operations of the matrix shear and the two linear updates are part of the O(V)",
+    "reason: a fixed number of operations, and the s parking-stack pushes/pops/copies each move O(V) symbols at the parent",
+    "temporary storage is not counted in the factor s/W"
+   ],
+   "note": "Only \"splitting, merging, gates and scheduling cost $O(V)$ here\"; the page gives no reason the scheduling of the s calls on fixed tapes is O(V) at the node."
+  },
+  {
+   "id": "S1.5.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "bounded set of small e handled by e individual digit interchanges",
+    "descriptor and piece-list cost O(V)",
+    "padded volume increase below q^2, a fixed factor",
+    "padding preserves the order of the existing entries"
+   ],
+   "note": "High-digit rows, padding to a multiple of W^{k'}, base-m pieces, the geometric sum and binary padding are all presented, with rho renamed nu and k renamed k'."
+  },
+  {
+   "id": "S1.5.3.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "B=1 (one-bit payloads) allowed",
+    "shape integers are part of the input and their processing and cleanup are included in the time"
+   ],
+   "note": "The page states the target (p,h,g,d,z)->(p,d,g,h,z) in O(Vu^tau) and derives it through the rest of the page."
+  },
+  {
+   "id": "S1.5.3.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "\"put $k'=\\lceil\\log_m e\\rceil$, the number of levels needed\"."
+  },
+  {
+   "id": "S1.5.3.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "widths e that are not large enough are handled by individual digit interchanges"
+   ],
+   "note": "nu=ceil(k' log W/(2 log q)) gives q^{2nu}>=W^{k'}, with 1<=nu<e and nu=O(log 2e) for large e, as in the paper."
+  },
+  {
+   "id": "S1.5.3.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "cost O(V nu) of exchanging and joining the high parts (only the reversal's cost is given)"
+   ],
+   "note": "\"$(h^+,h^-,g,d^+,d^-)$ becomes $(d^+,h^+,h^-,g,d^-)$\" is correct."
+  },
+  {
+   "id": "S1.5.3.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "\"$d^+,h^+$ form a row field of range $\\Lambda=q^{2\\nu}\\ge W^{k'}$ before both remaining chunks\"."
+  },
+  {
+   "id": "S1.5.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "padding is done separately within each preceding prefix",
+    "Lambda' is divisible by each needed W^j"
+   ],
+   "note": "Lambda'=W^{k'}ceil(Lambda/W^{k'})<2Lambda, and volume below 2V, as in the paper."
+  },
+  {
+   "id": "S1.5.3.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the pieces are interchanged by the power-width proposition, all on the same row field of length Lambda', which is divisible by each W^j",
+    "each call preserves the row address, so genuine and padded rows are not mixed"
+   ],
+   "note": "Base-m expansion with a_j pieces of width m^j and \"Interchange corresponding pieces\"; that the power-width hypotheses hold is left implicit."
+  },
+  {
+   "id": "S1.5.3.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "\"$O(V)\\sum_ja_jm^{j\\tau}\\le O(V)\\,m\\sum_jm^{j\\tau}=O(Ve^\\tau)$\"."
+  },
+  {
+   "id": "S1.5.3.9",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Uses a_j<m and m^{k'}<me, as the paper does."
+  },
+  {
+   "id": "S1.5.3.10",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the volume increase from padding is less than q^2, a fixed factor",
+    "padding preserves the order of existing entries (radix-q order of [q^e] is numerical order) and the interchange preserves the valid set",
+    "invalid entries are set to zero"
+   ],
+   "note": "\"pad $[2^u]$ to $[q^e]$ ... Since $e=O(u)$ the cost is $O(Vu^\\tau)$\"; without the fixed-factor volume increase, the step from padded volume to V is unjustified."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "since $m^{k'}<me$ makes $\\sum_jm^{j\\tau}$ a geometric sum",
+   "problem": "The sum is geometric with ratio m^tau whatever the value of k'. What m^{k'}<me does is bound its largest term, m^{k'tau}<(me)^tau=O(e^tau). The paper says the inequalities make it 'a geometric sum of the stated order'."
+  },
+  {
+   "severity": "minor",
+   "quote": "if $A_i$ has rank $a$, then $\\Phi_{A_i}$ costs $a$ interchanges of $b$-digit fields ... splitting, merging, gates and scheduling cost $O(V)$ here",
+   "problem": "The matrix-shear lemma gives a interchanges plus O(V) further work (triangular operations). The page's list of O(V) costs leaves out those triangular operations, which the paper counts in the O(1) term: 'Splitting, merging, gates, and triangular operations have total cost O(V)'."
+  }
+ ],
+ "motivation_given": false
+}
