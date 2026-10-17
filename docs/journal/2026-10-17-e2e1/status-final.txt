@@ -1,0 +1,51 @@
+target: main-result (Power-saving integer multiplication)
+reader, for these sources: The reader is a computer science undergraduate: they have taken discrete mathematics, an algorithms course (asymptotics, divide and conquer, schoolbook and Karatsuba multiplication, sorting), a first linear algebra course (vector spaces, subspaces, dimension, rank, matrices as linear maps, inverses, triangular matrices, orthogonality, bilinear forms at a basic level), calculus, elementary number theory (primes, gcd, modular arithmetic) and basic machine-level binary representation (XOR, two's complement). They have seen Turing machines with tapes only at an introductory level. They have not been taught the discrete Fourier transform or FFT as such, abstract algebra beyond basic definitions (quotient rings, finite fields as a theory), tensor products, numerical error analysis, or the specific literature on fast integer multiplication.
+concepts: 63 (24 known to the reader); pages: 39 written of 39 planned
+source coverage of the concept graph's quotes (where the quotes fall, not whether the proof is covered):
+  paper: 72 quotes, 72 located (1 occur more than once and are placed at the first); lines 32–4854 of 5361; 33 in the first tenth
+  top-level sections with a quote: 10 of 13: (front matter) (1), §1 Introduction (30), §2 The machine model and elementary streams (4), §3 Two finite networks with a rank saving (4), §4 Faster interchange of address chunks (3), §5 Fast simultaneous synthetic butterfly layers (5), §6 Synthetic transforms and their tape layout (6), §7 Exact normalized polynomial products (4), §8 Resampling with the permutations left in the transform (5), §9 Exact integer multiplication and its cost (10)
+  theorem-like statements in sections with no quote: 6 of 23
+  `convolution` is named in the heading of §9.3 An explicit cyclic-convolution layout but quoted only in §7.1 The normalized convolution interface
+  `exchange-network` is named in the heading of §1.6 The finite-network ingredients but quoted only in §1.2 Linear networks and the recursive saving; §3.1 Scalar operations and restored auxiliary values
+  `subspace-labels` is named in the heading of §3 Two finite networks with a rank saving but quoted only in §1.2 Linear networks and the recursive saving
+  `simultaneous-layer` is named in the heading of §5.1 Phase frames for a simultaneous butterfly layer but quoted only in §1.1 The two tape operations; §5.4 An explicit guard-width bound
+source coverage of the argument's quotes (where the quotes fall, not whether the proof is covered):
+  paper: 321 quotes, 321 located (0 occur more than once and are placed at the first); lines 76–4991 of 5361; 6 in the first tenth
+  top-level sections with a quote: 8 of 13: §1 Introduction (6), §3 Two finite networks with a rank saving (69), §4 Faster interchange of address chunks (34), §5 Fast simultaneous synthetic butterfly layers (49), §6 Synthetic transforms and their tape layout (23), §7 Exact normalized polynomial products (21), §8 Resampling with the permutations left in the transform (26), §9 Exact integer multiplication and its cost (93)
+  theorem-like statements in sections with no quote: 6 of 23
+  `S1.1` is named in the heading of §1.6 The finite-network ingredients but quoted only in §1.2 Linear networks and the recursive saving; §3 Two finite networks with a rank saving; §3.1 Scalar operations and restored auxiliary values
+audit round 1: 194 gaps over 37 pages (per page: term 0.4, step 2.4, symbol 2.5)
+audit round 2: 53 gaps over 39 pages (per page: term 0.1, step 0.9, symbol 0.4)
+  on the 37 pages also audited in round 1: term 13 -> 2 (2 new), step 88 -> 32 (32 new), symbol 93 -> 16 (15 new)
+audit round 3: 56 gaps over 36 pages (per page: term 0.1, step 0.8, symbol 0.7)
+  on the 36 pages also audited in round 2: term 2 -> 3 (3 new), step 34 -> 28 (28 new), symbol 17 -> 25 (22 new)
+steps inside reasoning a rewrite added for an earlier step, sent back to be cited or cut: 7
+audit rounds stopped early: after audit round 3, step and symbol gaps on the 36 pages also audited in round 2 went from 51 to 48, not to half or fewer (the gaps may still have been falling) (5 steps sent back to be cited or cut not counted)
+the last audit round's 56 gaps are left on the pages, since no audit would check rewrites for them; their notes were dropped when the rounds ended, so raising `rounds` now does not fix them: set `rounds` higher before a run to have them fixed
+candidate concepts: 0; pages queued for rewriting: 0
+outline: 8 parts, 0 pages in the glossary
+relations: 76 of 77 prerequisite edges between pages
+symbols: 370 bound on pages; letters with two meanings: 246 confirmed, 138 left unjudged after the last overloads round
+citation support: 186 marks judged: 71 supported, 100 partial, 15 unsupported, 0 contradicted
+  a second judge agreed on 3 of 3 marks
+simulated readers: 9 goals, 3 of them held out
+  round 1: 18 runs; key points covered: 94% on repair goals, 83% on held-out goals
+  round 2: 18 runs; key points covered: 100% on repair goals, 83% on held-out goals
+  baseline (no wiki): 11% of key points
+run log (/home/user/e2e-run/exegenius/log.jsonl):
+  extract: 1 handed out, 1 accepted (1 at the first submit), 0 rejected submits
+  background: 1 handed out, 1 accepted (1 at the first submit), 0 rejected submits
+  argument: 2 handed out, 2 accepted (1 at the first submit), 1 rejected submits
+  write: 166 handed out, 166 accepted (15 at the first submit), 285 rejected submits, 9 submits not checked
+  audit: 112 handed out, 112 accepted (40 at the first submit), 77 rejected submits, 2 submits not checked
+  extend: 2 handed out, 2 accepted (2 at the first submit), 0 rejected submits
+  outline: 1 handed out, 1 accepted (1 at the first submit), 0 rejected submits
+  overloads: 2 handed out, 2 accepted (2 at the first submit), 0 rejected submits
+  support: 63 handed out, 63 accepted (63 at the first submit), 0 rejected submits
+  goals: 2 handed out, 2 accepted (2 at the first submit), 0 rejected submits
+  read: 36 handed out, 36 accepted (26 at the first submit), 10 rejected submits
+  baseline: 9 handed out, 9 accepted (8 at the first submit), 1 rejected submits
+  grade: 18 handed out, 18 accepted (18 at the first submit), 0 rejected submits
+  attribute: 18 handed out, 18 accepted (16 at the first submit), 2 rejected submits
+tasks handed out: 433 (433 accepted, 0 pending); audit rounds over
+state: done (docs/ and zensical.toml are built)
