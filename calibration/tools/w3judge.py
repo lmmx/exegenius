@@ -104,7 +104,9 @@ def prep(jdir, pdir):
     (jdir / "pages").mkdir(parents=True, exist_ok=True)
     (jdir / "verdicts").mkdir(exist_ok=True)
     pdir.mkdir(parents=True, exist_ok=True)
-    tpl = (J24 / "judge-prompt.md").read_text().replace(str(J24), str(jdir))
+    # J24's prompt names its directory as it was in the main working copy; both spellings are replaced
+    tpl = (J24 / "judge-prompt.md").read_text().replace("/home/user/exegenius/docs/journal/2026-10-14-w2b-writer/judge",
+                                                       str(jdir)).replace(str(J24), str(jdir))
     assert str(jdir) in tpl and "ASSIGNMENT" in tpl
     (jdir / "judge-prompt.md").write_text(tpl)
     key = {}
