@@ -18,12 +18,20 @@
 //!
 //! An auditor that notices nothing therefore no longer passes a page by saying nothing
 //! about its symbols.
+//!
+//! The auditor also checks the page's mathematics against the sources it explains, which it
+//! reads: a page can misstate a result consistently, so that nothing on the page shows the
+//! error. Those misstatements are reported as steps, and become rewrite notes like any other
+//! step. The fidelity, source and error paragraphs of [`audit_instructions`] are the text the
+//! calibration programme tested (`calibration/plans/A3.md`, arm R).
 
 use std::collections::{HashMap, HashSet};
+use std::path::Path;
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
+use crate::config::SourceSpec;
 use crate::error::{Error, Result, read_json, write_json};
 use crate::graph::{Candidate, Graph, TermIndex};
 use crate::plan::Plan;
@@ -175,7 +183,142 @@ pub fn added(previous: &str, body: &str) -> Vec<String> {
         .collect()
 }
 
-pub const AUDIT_INSTRUCTIONS: &str = "\
+/// The audit's instructions, which name the sources the auditor checks the page against. With
+/// one source they are the text calibrated in A3 (`calibration/plans/A3.md`): against
+/// planted errors, the audit then named 13 of 13 errors only the source shows and 25 of 28
+/// that the page shows, where the audit that read the page alone named 0 and 14, at about
+/// 0.5 false alarms per clean page (an independent blind review). With several sources, the
+/// same paragraphs speak of the sources in the plural.
+pub fn audit_instructions(sources: &[SourceSpec]) -> String {
+    let paths: Vec<&Path> = sources.iter().map(|s| s.path.as_path()).collect();
+    let words = Words::of(&paths);
+    let mut text = AUDIT_INSTRUCTIONS.replacen(
+        AUDIT_RESTRICTION,
+        &format!(
+            "Use only this task file and {} at {}: do not read other pages or any other file.",
+            words.the_sources,
+            listed(&paths, |p| format!("`{}`", p.display()))
+        ),
+        1,
+    );
+    let checks = format!(
+        "{FIDELITY}{}{}",
+        source_paragraph(&paths, &words),
+        error_paragraph(&words)
+    );
+    text = text.replacen(QUOTES, &format!("{checks}{QUOTES}"), 1);
+    text
+}
+
+/// How the instructions name the sources: "the paper" for one, as calibrated, and "the
+/// sources" for several.
+struct Words {
+    the_sources: &'static str,
+    sources_possessive: &'static str,
+    a_source_possessive: &'static str,
+}
+
+impl Words {
+    fn of(paths: &[&Path]) -> Self {
+        if paths.len() == 1 {
+            Words {
+                the_sources: "the paper",
+                sources_possessive: "the paper's",
+                a_source_possessive: "the paper's",
+            }
+        } else {
+            Words {
+                the_sources: "the sources",
+                sources_possessive: "the sources'",
+                a_source_possessive: "a source's",
+            }
+        }
+    }
+}
+
+/// `a`, `a and b`, `a, b and c`.
+fn listed(paths: &[&Path], show: impl Fn(&Path) -> String) -> String {
+    let items: Vec<String> = paths.iter().map(|p| show(p)).collect();
+    match items.split_last() {
+        None => String::new(),
+        Some((last, [])) => last.clone(),
+        Some((last, rest)) => format!("{} and {last}", rest.join(", ")),
+    }
+}
+
+/// The format a source is written in, from its extension, as the auditor is told it.
+fn format_of(path: &Path) -> Option<&'static str> {
+    match path.extension()?.to_str()?.to_ascii_lowercase().as_str() {
+        "tex" => Some("LaTeX"),
+        "md" | "markdown" => Some("Markdown"),
+        "txt" => Some("plain text"),
+        _ => None,
+    }
+}
+
+const AUDIT_RESTRICTION: &str =
+    "Use only this task file: do not read the sources, other pages or any other file.";
+
+const QUOTES: &str = "Copy each quote from the page exactly";
+
+const FIDELITY: &str = "\
+Fidelity: also check that the page's mathematics is right, and report what is wrong even where \
+this reader could follow it. For each claim that states a definition, a hypothesis, a step of a \
+proof, a value or a conclusion, work out what it assumes and what it concludes, and check it \
+against everything this task file gives: the page's definitions, its other claims and its \
+quotations. Report as a `step` any claim that is false, inconsistent with another statement on \
+the page, stated more strongly or more widely than what supports it, or missing a hypothesis it \
+needs. Quote the claim, and say in the note what is wrong and what the correct statement \
+is.\n\n";
+
+fn source_paragraph(paths: &[&Path], words: &Words) -> String {
+    let at = listed(paths, |p| match format_of(p) {
+        Some(f) => format!("`{}` ({f})", p.display()),
+        None => format!("`{}`", p.display()),
+    });
+    let (head, files, line) = if paths.len() == 1 {
+        (
+            format!("The source: the paper this page explains is at {at}."),
+            "the file",
+            "the paper's line number",
+        )
+    } else {
+        (
+            format!("The sources: the documents this page explains are at {at}."),
+            "the files",
+            "the source's path and line number",
+        )
+    };
+    format!(
+        "{head} For each such claim, also find the passage of {the} that states, defines or \
+         proves it (search {files} for the claim's terms and symbols, then read the passage \
+         around each match) and compare: every hypothesis present, the same scope and \
+         quantifiers, the same constants, signs, exponents and inequality directions, a \
+         conclusion no stronger than {possessive}, and the right result, lemma or author \
+         credited. Report any mismatch as a `step` in the same way, and give {line} in the \
+         note.\n\n",
+        the = words.the_sources,
+        possessive = words.sources_possessive,
+    )
+}
+
+fn error_paragraph(words: &Words) -> String {
+    format!(
+        "What counts as an error: report a claim as wrong only if, as this page states it, it \
+         is false; inconsistent with the page; stated more strongly or more widely than what \
+         supports it; missing a hypothesis without which it is false; given a wrong value, \
+         sign, exponent, constant, quantifier or credit; or presented as following from \
+         something it does not follow from. Do not report a correct statement as wrong because \
+         it is informal, abbreviated or simplified, uses a word in {own} own sense, or leaves a \
+         technical precondition to another page or to {the}. If {own} own summary of the same \
+         step states it the same way, it is not an error.\n\n",
+        own = words.a_source_possessive,
+        the = words.the_sources,
+    )
+}
+
+/// The audit's instructions without the source checks; [`audit_instructions`] adds them.
+const AUDIT_INSTRUCTIONS: &str = "\
 Audit one page of an explanatory wiki on behalf of a specific reader. Use only this task \
 file: do not read the sources, other pages or any other file.
 
@@ -1027,5 +1170,86 @@ mod tests {
             // The rewrite answering these notes adds sentences one below the deepest step.
             assert_eq!(g.note_depth["p"], 3);
         }
+    }
+
+    fn source(path: &str) -> SourceSpec {
+        SourceSpec {
+            id: path.into(),
+            path: path.into(),
+            title: None,
+            url: None,
+        }
+    }
+
+    /// The text calibrated in A3 (`calibration/plans/A3.md`; `calibration/tools/a2setup.py`
+    /// and `a3setup.py`): changing it means the audit is no longer the configuration the
+    /// calibration report recommends.
+    #[test]
+    fn one_source_gives_the_calibrated_audit() {
+        let text = audit_instructions(&[source("sources/paper.tex")]);
+        let restriction = "Use only this task file and the paper at `sources/paper.tex`: do not \
+                           read other pages or any other file.";
+        let checks = "Fidelity: also check that the page's mathematics is right, and report \
+what is wrong even where this reader could follow it. For each claim that states a definition, a \
+hypothesis, a step of a proof, a value or a conclusion, work out what it assumes and what it \
+concludes, and check it against everything this task file gives: the page's definitions, its \
+other claims and its quotations. Report as a `step` any claim that is false, inconsistent with \
+another statement on the page, stated more strongly or more widely than what supports it, or \
+missing a hypothesis it needs. Quote the claim, and say in the note what is wrong and what the \
+correct statement is.
+
+The source: the paper this page explains is at `sources/paper.tex` (LaTeX). For each such claim, \
+also find the passage of the paper that states, defines or proves it (search the file for the \
+claim's terms and symbols, then read the passage around each match) and compare: every \
+hypothesis present, the same scope and quantifiers, the same constants, signs, exponents and \
+inequality directions, a conclusion no stronger than the paper's, and the right result, lemma or \
+author credited. Report any mismatch as a `step` in the same way, and give the paper's line \
+number in the note.
+
+What counts as an error: report a claim as wrong only if, as this page states it, it is false; \
+inconsistent with the page; stated more strongly or more widely than what supports it; missing a \
+hypothesis without which it is false; given a wrong value, sign, exponent, constant, quantifier \
+or credit; or presented as following from something it does not follow from. Do not report a \
+correct statement as wrong because it is informal, abbreviated or simplified, uses a word in the \
+paper's own sense, or leaves a technical precondition to another page or to the paper. If the \
+paper's own summary of the same step states it the same way, it is not an error.
+
+";
+        let expected = AUDIT_INSTRUCTIONS
+            .replacen(AUDIT_RESTRICTION, restriction, 1)
+            .replacen(QUOTES, &format!("{checks}{QUOTES}"), 1);
+        assert_eq!(text, expected);
+        assert!(!text.contains("do not read the sources"));
+        assert_eq!(text.matches(QUOTES).count(), 1);
+    }
+
+    #[test]
+    fn several_sources_are_named_in_the_plural() {
+        let text = audit_instructions(&[
+            source("sources/paper.tex"),
+            source("sources/notes.md"),
+            source("sources/errata"),
+        ]);
+        assert!(text.contains(
+            "Use only this task file and the sources at `sources/paper.tex`, `sources/notes.md` \
+             and `sources/errata`: do not read other pages or any other file."
+        ));
+        assert!(text.contains(
+            "The sources: the documents this page explains are at `sources/paper.tex` (LaTeX), \
+             `sources/notes.md` (Markdown) and `sources/errata`."
+        ));
+        assert!(text.contains("give the source's path and line number in the note"));
+        assert!(text.contains("uses a word in a source's own sense"));
+        for singular in [
+            "the paper's",
+            "the paper at",
+            "the paper this page",
+            "the passage of the paper",
+        ] {
+            assert!(!text.contains(singular), "{singular}");
+        }
+        let fidelity = text.find("Fidelity:").unwrap();
+        let what_counts = text.find("What counts as an error").unwrap();
+        assert!(fidelity < what_counts && what_counts < text.find(QUOTES).unwrap());
     }
 }

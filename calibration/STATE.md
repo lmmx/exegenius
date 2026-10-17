@@ -1,8 +1,25 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-17 18:36 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-17 20:12 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
 
-## Checkpoint, 2026-10-17 18:36 UTC: the programme is concluded (read first)
+## Update, 2026-10-17 20:12 UTC: simulated readers stay on; PR #14 is audit-only (read first)
+
+- **The author reconsidered the simulated-reader change** (about 20:05). Simulated readers stay on by default (`rounds = 2`): they are part of the intended architecture, and SR1 was inconclusive, not negative. SR1's results and limitations stay on record, with effectiveness marked unvalidated (`policy.md`, `plans/SR1.md`).
+- **PR #14 is revised to the audit change only.** The default and its docs are reverted to `master` in a new commit, with no history rewritten. The PR is **not merged**: the author asked to hold it. Earlier, the classifier blocked a local merge ("Merge Without Review").
+- **The shared binary** is rebuilt from the revised head, so it carries the audit change and the original simulation default.
+- **The author is deciding on PRs #9, #10 and #12;** do not merge or close them without approval.
+
+## Update, 2026-10-17 19:56 UTC: the approved changes are implemented
+
+- **The author approved** (about 19:45) adopting the refined audit and setting `[simulation] rounds = 0` by default, with simulated readers available on request.
+- **Implementation:** 7bc391f on `wiki-explanation-reader-sim-v8dqtr` (from `master`), for review as a PR. It is verified:
+  - tests, fmt and clippy are clean;
+  - `tools/a3verify.py` finds the built binary's audit tasks byte-identical to A3's 30;
+  - `init` writes `rounds = 0`.
+- **The main working copy** `/home/user/exegenius` is synced to the rewritten `master` (18901bc). It had no uncommitted, untracked or stashed work, and its tree matched rewritten commit 2f4b3dd. The old history is kept as the local branch `backup/pre-rewrite-master`. The working copy is now on the implementation branch.
+- **The shared binary** (`/usr/local/bin/exegenius` → `target/debug/exegenius`) is rebuilt from the implementation branch's head. No process or agent was using it, and every experiment had concluded and been recorded. Until the PR merges, the binary is ahead of `master` by exactly 7bc391f.
+
+## Checkpoint, 2026-10-17 18:36 UTC: the programme is concluded
 
 **The deliverable:** `policy.md`, "Final configuration report": one row per task, with model, effort, prompt, routing, cost, evidence strength, mathematical fidelity, status and limitations. No default has been changed.
 

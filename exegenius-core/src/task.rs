@@ -37,7 +37,7 @@ use crate::aha::{
     ATTRIBUTE_INSTRUCTIONS, AttributeAnswer, apply_attribution, attribute_task, to_attribute,
 };
 use crate::argument::{ARGUMENT_INSTRUCTIONS, ArgumentAnswer, apply_argument, argument_task};
-use crate::audit::{AUDIT_INSTRUCTIONS, AuditAnswer, apply_audit, audit_task, record};
+use crate::audit::{AuditAnswer, apply_audit, audit_instructions, audit_task, record};
 use crate::background::{
     BACKGROUND_INSTRUCTIONS, BackgroundAnswer, apply_background, background_task,
 };
@@ -742,6 +742,7 @@ pub fn next(project: &Project) -> Result<Next> {
             state.done = true;
             continue;
         }
+        let instructions = audit_instructions(&project.config.sources);
         let mut items = Vec::new();
         for (i, page) in plan.order.iter().enumerate() {
             let body = project.page_body(page)?.unwrap_or_default();
@@ -753,7 +754,7 @@ pub fn next(project: &Project) -> Result<Next> {
                         page: page.clone(),
                         input: input_hash,
                     },
-                    AUDIT_INSTRUCTIONS,
+                    instructions.as_str(),
                     input,
                 ));
             }
