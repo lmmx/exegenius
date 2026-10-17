@@ -1,6 +1,6 @@
 Matrix shear by triangular factorization adds a fixed rational matrix times one group of fields to another group while spending only as many field interchanges as the matrix has rank.
 
-Let $H=(H_1,\dots,H_m)$ and $D=(D_1,\dots,D_m)$ be two groups of fields, $H$ before $D$, where $m$ is the number of fields in each group ($m$ counts fields here; it is not an output index). Let $A$ be a rational $m\times m$ matrix and $a$ its rank ($a$ is the rank here, not the offset added to a field). Each field is a residue modulo $q^b$, where $q$ is a fixed odd prime and $b$ is the number of base-$q$ digits per field. The shear is $(H,D)\mapsto(H+AD,D)$. For $A$ in a fixed finite set, it can be performed with exactly $a$ interchanges of $b$-digit fields and $O(V)$ further work <cite data-source="paper">can be performed with exactly $a$ interchanges of pairs of $b$-digit</cite>. Lower triangular changes of coordinates are cheap, so all the rank of $A$ is pushed into a partial permutation.
+Let $H=(H_1,\dots,H_m)$ and $D=(D_1,\dots,D_m)$ be two groups of fields, $H$ before $D$, where $m$ is the number of fields in each group ($m$ counts fields here; it is not an output index). Let $A$ be a rational $m\times m$ matrix. Here $q$ is a fixed odd prime, the base of the digits, not a sequence length. Here $b$ is the number of base-$q$ digits in one field, not the lowest bit of an index. Each field is a residue modulo $q^b$. Here $a$ is the rank of $A$, not an offset added to a field. The shear is $(H,D)\mapsto(H+AD,D)$. For $A$ in a fixed finite set, it can be performed with exactly $a$ interchanges of $b$-digit fields and $O(V)$ further work <cite data-source="paper">can be performed with exactly $a$ interchanges of pairs of $b$-digit</cite>. Lower triangular changes of coordinates are cheap, so all the rank of $A$ is pushed into a partial permutation.
 
 ## Factoring
 
@@ -12,7 +12,7 @@ Choose the factorization of every matrix in the finite set once and for all, and
 
 ## Triangular parts
 
-Each lower triangular transformation of $H$ or of $D$ is carried out by [controlled shifts and rational scalings](controlled-shifts.md). Update coordinates in descending physical order. Coordinate $i$ becomes its diagonal unit times itself plus a fixed combination of earlier coordinates, which still hold their original values. With $m$ fixed, this costs $O(V)$. Inverses are also lower triangular.
+Each lower triangular transformation of $H$ or of $D$ is carried out by [Controlled shifts and rational scalings](controlled-shifts.md). Update coordinates in descending physical order. Coordinate $i$ becomes its diagonal unit times itself plus a fixed combination of earlier coordinates, which still hold their original values. With $m$ fixed, this costs $O(V)$. Inverses are also lower triangular.
 
 ## Shearing
 

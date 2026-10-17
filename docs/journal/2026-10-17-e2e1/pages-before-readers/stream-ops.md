@@ -1,6 +1,6 @@
 Elementary stream operations are linear-time scans of an array stored on tape in lexicographic order; they are the data-movement primitives from which the later procedures for interchanging address fields are assembled.
 
-Throughout, $V$ is the volume of an array, the number of radix-$q$ digits it stores, and $q\ge 2$ is the radix, the number of values one digit can take. Here $q$ is a radix, not a sequence length as on the discrete Fourier transform and cyclic convolution pages.
+Throughout, $V$ is the volume of an array, the number of digits it stores, and $\beta\ge 2$ is the radix, the number of values one digit can take. Here $\beta$ is a radix, not a sequence length as on the discrete Fourier transform and cyclic convolution pages.
 
 ## Why passes must be linear
 
@@ -21,4 +21,4 @@ The bounds include setting up counters and returning the work tapes to their ini
 
 ## Splitting
 
-The idea behind splitting is a stable partition. A head scanning the array tracks its position with a counter and copies each entry onto the tape belonging to the value of the chosen digit, preserving order within each tape. Reading the $q$ tapes one after another lists the entries grouped by that digit, with the remaining digits still in their original order, which is exactly that digit moved to the front. For example, with digits $(a,b,c)$ and $b$ chosen, the stream for each value $j$ of $b$ holds the entries $(a,j,c)$ in their original order, and concatenating the streams gives the order $(j,a,c)$.
+The idea behind splitting is a stable partition. A head scanning the array tracks its position with a counter and copies each entry onto the tape belonging to the value of the chosen digit, preserving order within each tape. Reading the $\beta$ tapes one after another lists the entries grouped by that digit, with the remaining digits still in their original order, which is exactly that digit moved to the front. For example, with digits $(a,b,c)$ and $b$ chosen, the stream for each value $j$ of $b$ holds the entries $(a,j,c)$ in their original order, and concatenating the streams gives the order $(j,a,c)$.

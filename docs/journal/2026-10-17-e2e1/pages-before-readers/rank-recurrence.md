@@ -4,17 +4,17 @@ A call acts on a stream of volume $V$ and has a parameter $f$ (a number here, no
 
 The recursion gets its strict inequality $s<Wm$ from [Nested subspace labels and rank deficit](subspace-labels.md): an edge costs the dimension change of its nested labels, and each route's endpoint frames differ by all $m$ dimensions, so a wire climbing from $0$ to $m$ costs $m$. One data bank's $N$ wires start on a line and the other's stop one dimension short, saving $2N$; the bit network spends $N$ on extra source ranks, and shrinking edges, losing $L$ dimensions in all, cost back $2L<N$.
 
-Let $F(f)$ be the time per unit volume at parameter $f$ (this $F$ is a time, not the one-factor label space or the tensor-product base space $F$ of earlier pages). The children cost $s(V/W)F(f)$, so multiplying the parameter by $m$ multiplies the recursive cost per unit volume by $s/W$, less than $m$ <cite data-source="paper">After dividing cost by volume, multiplying the parameter by $m$ increases the recursive contribution by $s/W<m$.</cite>
+Let $\mathcal C(f)$ be the time per unit volume at parameter $f$: the running time of a call at parameter $f$, divided by the volume of its stream. The children cost $s(V/W)\mathcal C(f)$, so multiplying the parameter by $m$ multiplies the recursive cost per unit volume by $s/W$, less than $m$ <cite data-source="paper">After dividing cost by volume, multiplying the parameter by $m$ increases the recursive contribution by $s/W<m$.</cite>
 
 For interchange, the node's other work is $O(V)$. Splitting into streams and merging are linear passes ([stream operations](stream-ops.md)); each of the fixed number of gates makes one pointwise pass, and each edge's triangular factors are linear-time field updates. All depths reuse one fixed set of tapes: before each child call, the $W-1$ idle streams are pushed onto a stack tape and the active one copied to the child's input; afterwards the result is copied back and the idle streams popped. Each push, pop or copy scans $O(V)$ cells, never an ancestor's parked data, since the stack head stays at the top; with $s$ fixed, this totals $O(V)$. A single digit swaps in linear time:
 
-$$F(mf)\le\frac{s}{W}F(f)+O(1),\qquad F(1)=O(1).$$
+$$\mathcal C(mf)\le\frac{s}{W}\mathcal C(f)+O(1),\qquad \mathcal C(1)=O(1)$$
 
-Unrolling $\log_m f$ levels, depth $j$ (here counting recursion levels, not the stage number of [Nested subspace labels and rank deficit](subspace-labels.md)) contributes $(s/W)^j$, so $F(f)=O\big(\sum_{j=0}^{\log_m f}(s/W)^j\big)$. If $s/W<m^\tau$ with fixed $\tau<1$, this is $O(f^\tau)$: for $s/W\le1$ it has $1+\log_m f$ terms of at most $1$; otherwise its last term, below $m^{\tau\log_m f}=f^\tau$, dominates. So an interchange costs $O(Vf^\tau)$ <cite data-source="paper">The chunks can be interchanged in $O(Ve^\tau)$ time</cite>.
+Here $j$ means the recursion depth, the number of levels below the top call, not the stage number as on [Nested subspace labels and rank deficit](subspace-labels.md): unrolling $\log_m f$ levels, depth $j$ contributes $(s/W)^j$, so $\mathcal C(f)=O\big(\sum_{j=0}^{\log_m f}(s/W)^j\big)$. If $s/W<m^\tau$ with fixed $\tau<1$, this is $O(f^\tau)$: for $s/W\le1$ it has $1+\log_m f$ terms of at most $1$; otherwise its last term, below $m^{\tau\log_m f}=f^\tau$, dominates. So an interchange costs $O(Vf^\tau)$ <cite data-source="paper">The chunks can be interchanged in $O(Ve^\tau)$ time</cite>.
 
 The layer's recurrence differs in two ways: frame changes are row additions costing $O(V((fK)^\tau+1))$ at a node through chunk interchanges, and recursion stops below $d^\beta$ axes, applying the remaining two-point kernels singly:
 
-$$F(f)\le\frac{s}{W}F(f/m)+O((fK)^\tau+1),\qquad F(f)=O(f)\quad(f<d^\beta).$$
+$$\mathcal C(f)\le\frac{s}{W}\mathcal C(f/m)+O((fK)^\tau+1),\qquad \mathcal C(f)=O(f)\quad(f<d^\beta)$$
 
 With $s/W\le m^\sigma$ for a fixed $\sigma<1$, the overheads again sum geometrically, and the [simultaneous butterfly layer](simultaneous-layer.md) page obtains cost $O(Vd^{\lambda'})$ for a fixed $\lambda'<1$ <cite data-source="paper">\max\{\lambda,\sigma+\beta(1-\sigma)\}<\lambda'<1.</cite>
 
