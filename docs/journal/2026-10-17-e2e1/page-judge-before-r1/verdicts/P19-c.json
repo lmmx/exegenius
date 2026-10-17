@@ -1,0 +1,18 @@
+{"page": "P19",
+ "items": [
+  {"id": "S4.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page states QF_t u = a-bar . (a*(a-bar . u))/T under the hypothesis that every t_i is even, and proves it the way the paper does: first periodicity, then the coefficient of u_k by expanding (j-k)^2, then matching that coefficient with the one in QF_t, which the Setting computes from (P_t v)_k = v_{-sk}. It also says the permutation 'needs no separate step', so Q is never executed."},
+  {"id": "S4.3.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "This is a definition, and the page gives it exactly as the paper does: 'Define the chirp a_j = exp(-pi i sum_i s_i j_i^2/t_i)', with a-bar its conjugate. Nothing more needs deriving."},
+  {"id": "S4.3.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page computes the change '-pi i s_i((j_i+t_i)^2-j_i^2)/t_i = -pi i s_i(2j_i+t_i)' and says it is an integral multiple of 2 pi i 'because t_i is even', which is the paper's argument with the evenness hypothesis made explicit. It also says why periodicity matters: the convolution reads a_{j-k} modulo t_i."},
+  {"id": "S4.3.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page reads off the coefficient (1/T) a-bar_j a_{j-k} a-bar_k from the convolution. It then expands the exponent as sum_i (pi i s_i/t_i)(j_i^2-(j_i^2-2j_ik_i+k_i^2)+k_i^2) and observes 'the squares cancel'. This correctly gives (1/T) exp(2 pi i sum s_i j_i k_i/t_i)."},
+  {"id": "S4.3.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "In the Setting, the page writes F_t with its 1/T normalization and negative sign, and defines Q by 'position j holds the entry of frequency (-s_i j_i)_i'. From these it derives the coefficient (1/T) exp(2 pi i sum s_i j_i k_i/t_i), then matches it with the coefficient from S4.3.3, as the paper does."}
+ ],
+ "errors": [
+  {"severity": "minor", "quote": "The permuted transform is thus reduced to one [Cyclic convolution](convolution.md) of length $T$ between two pointwise phase multiplications.",
+   "problem": "The convolution is d-dimensional, on the product of the cyclic groups Z/t_1 x ... x Z/t_d, which has T entries. The paper says '$*$ denotes cyclic convolution on the product of the coordinate groups'. The t_i are powers of two, so that product is not Z/T, and 'of length T' suggests a one-dimensional cyclic convolution. The page's own derivation reduces indices modulo each t_i, so the argument is unaffected. The assignment uses the same wording."}
+ ],
+ "motivation_given": true}

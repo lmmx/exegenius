@@ -1,0 +1,14 @@
+{"page": "P16",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "$$(F_{\\boldsymbol q}u)_k=\\frac1{\\prod_i q_i}\\sum_j u_j\\,e^{-2\\pi i\\sum_i j_ik_i/q_i}.$$",
+   "problem": "The letter i is the imaginary unit and also the axis index bound by the inner sum in the same exponent (the page set i as the axis index just before). The formula is otherwise right for the paper's normalization (F_q u)_k=(1/q)\\sum_j u_j e^{-2\\pi i jk/q} (lines 3506-3510), tensored over axes."},
+  {"severity": "minor",
+   "quote": "This bound needs power-of-two lengths, so it does not apply directly to the prime lengths $s_i$ of the integer product; the identity below supplies power-of-two transforms instead.",
+   "problem": "An O(q log q) operation count does not need power-of-two lengths. Prime lengths reach it too, for example by Bluestein chirps, which the argument itself uses. Only the radix-2 butterfly needs a power of two. The paper's reason for resampling is different: 'The transform lengths needed for the integer product are pairwise coprime, whereas the synthetic transforms use powers of two. Gaussian resampling connects these two shapes' (lines 3499-3501)."},
+  {"severity": "minor",
+   "quote": "Fixed-point algorithms approximate each with error less than $p^2$",
+   "problem": "The page never gives the unit of error. In the paper, an approximation has error E when 2^p||\\tilde L u - Lu|| < E (lines 3529-3531), so the absolute error is less than p^2 2^{-p}. Read as an absolute bound, 'less than p^2' (and 'less than dp^2' later) says nothing about values of norm at most 1."}
+ ],
+ "motivation_given": true}

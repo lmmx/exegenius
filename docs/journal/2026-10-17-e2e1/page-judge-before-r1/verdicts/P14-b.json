@@ -1,0 +1,8 @@
+{"page": "P14",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "it computes the [Discrete Fourier transform](dft.md) of an array in $\\log_2 t$ layers instead of $t^2$ operations",
+   "problem": "Compares a count of layers with a count of operations. The direct sum costs about t^2 operations, and the layered procedure costs O(t log t) operations (t/2 butterflies and t/2 twiddles in each of log_2 t layers), as the page itself says later. Paper (lines 88-91, 2877) counts log_2 t levels, each scanning the whole array."}
+ ],
+ "motivation_given": true}

@@ -1,0 +1,8 @@
+{"page": "P15",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "dividing every cost by $V=Tp=\\Theta(n)$, the number of stored bits, where $T$ counts coefficients and $p$, of order $\\lg n$, is the precision in bits of each",
+   "problem": "Tp is not exactly the number of stored bits. The paper (lines 4810-4812) sets V=Tp only as the normalizer and says the fixed-width coefficient formats use Theta(p) bits per coefficient, so a full padded array has Theta(V) stored bits. The page's figure is right only up to a constant factor; the bound does not change."}
+ ],
+ "motivation_given": true}

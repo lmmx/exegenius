@@ -1,0 +1,25 @@
+{"page": "P11",
+ "items": [
+  {"id": "S5.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page proves Phi is an isomorphism that preserves cyclic convolution, gives the triangular coordinate formula, implements it by prefix-controlled shifts in descending axis order after reversing the axes, and totals the cost from the chunk interchange: 'reordering dominates the O(dTp) shifts and O(Tp) scans'. This follows the paper (lines 4195-4296)."},
+  {"id": "S5.3.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Both definitions appear in full: 'Let P_i=prod_{j<i}s_j ... and mu_i=P_i^{-1} (mod s_i)'. The page does not say why P_i is invertible mod s_i, but that follows from the pairwise coprimality it stated, and the paper does not spell it out either."},
+  {"id": "S5.3.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page gives the reason the paper leaves implicit: 'Since s_i | S, each x_i^{mu_i S}=1, so Phi respects x^S=1 and defines an algebra map.' This is correct."},
+  {"id": "S5.3.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Kernel argument: 'Phi(x^k)=1 exactly when s_i | mu_i k for every i'. Because mu_i is a unit this gives s_i | k, and coprimality then gives S | k, so x maps to an element of order S. Its S powers then exhaust the S target monomials. This expands the paper's sentence correctly."},
+  {"id": "S5.3.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes k in mixed radix with 0<=a_j<s_j, notes that b_i=mu_i k mod s_i, and reduces this to b_i=a_i+mu_i sum_{j<i}a_jP_j (mod s_i). This matches eq. (triangular-crt)."},
+  {"id": "S5.3.5", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "'Terms with j>i vanish modulo s_i, since s_i divides P_j, and mu_iP_i = 1 modulo s_i.' This is exactly the paper's justification, with the divisibility reason made explicit."},
+  {"id": "S5.3.6", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page explains that in the original order the controls follow the target, that reversing the axes puts them first, and that updating i=d,...,1 leaves the lower-index controls unchanged. It also says each update rotates [0,s_i) and fixes [s_i,t_i), 'so zero padding stays zero'. It omits the paper's convention of using the identity when a lower-index control is invalid (line 4263), but that is outside this sub-step's passage and is not needed for zero preservation."},
+  {"id": "S5.3.7", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Equal-width interchange costs O(V l^tau). Axes of unequal width ('l or l-1') are handled by moving the leading bit aside and adding a fixed number of linear passes, and reversal takes O(d^2) moves, for a total of O(Tp d^2(1+l^tau)) including the inverse and padding. 'restore the bit' is looser than the paper's 'put the leading bit at its new position', and the O(d^2) count is stated rather than shown, as it is in the paper."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "where $r=2^\\ell$ is the record length, so $\\ell$ is the number of address bits of an axis of length $r$",
+   "problem": "On this page a record is an O(p)-bit coefficient record ('each of O(p) bits'), so calling r 'the record length' conflicts with the page's own usage. The paper defines r=2^{ceil((log_2 T)/d)} as the axis-length parameter with t_i in {r/2,r} and l=log_2 r (lines 4058-4063). r is a record length only for the later polynomial records of R_r. The derivation never uses this description, so the argument is unaffected."}
+ ],
+ "motivation_given": true}

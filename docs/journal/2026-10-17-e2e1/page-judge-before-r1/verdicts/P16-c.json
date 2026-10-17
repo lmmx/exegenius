@@ -1,0 +1,14 @@
+{"page": "P16",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "This bound needs power-of-two lengths, so it does not apply directly to the prime lengths $s_i$ of the integer product",
+   "problem": "This overstates the point. Only the radix-2 butterfly recursion needs power-of-two lengths. An O(q log q) operation count also exists for prime lengths (Bluestein or Rader), and the paper itself uses Bluestein chirps. The paper gives a different reason for the power-of-two lengths: the synthetic transforms use them (lines 3499-3500), with powers of y in R[y]/(y^r+1), r a power of two, serving as the roots of unity (lines 80-86)."},
+  {"severity": "minor",
+   "quote": "$$(F_{\\boldsymbol q}u)_k=\\frac1{\\prod_i q_i}\\sum_j u_j\\,e^{-2\\pi i\\sum_i j_ik_i/q_i}.$$",
+   "problem": "The symbol i is both the imaginary unit and the axis summation index in the same exponent, after the page has set i as the axis index (1 <= i <= d). The formula is otherwise correct for the paper's normalization (F_q u)_k = (1/q) sum_j u_j e^{-2 pi i jk/q} (line 3508), tensored over the axes."},
+  {"severity": "minor",
+   "quote": "The one-dimensional lemma of [Gaussian resampling](gaussian-resampling.md) treats coprime $s_i<t_i$, with $t_i$ a power of two sufficiently larger than $s_i$.",
+   "problem": "The paper's Lemma (lem:no-sort-resampling, lines 3550-3553) does not require t to be a power of two; powers of two come in only when it is applied. Its quantitative hypotheses, theta = t/s - 1 > p/alpha^4 together with 2 <= s < t < 2^p and p > 100, are replaced by the vague 'sufficiently larger', and p > 100 is never stated."}
+ ],
+ "motivation_given": true}

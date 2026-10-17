@@ -1,0 +1,218 @@
+{
+ "page": "P10",
+ "items": [
+  {
+   "id": "S5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "why carry propagation of the rounded coefficients yields exactly the 2n-bit product (the page only says 'rounding is exact')"
+   ],
+   "note": "The page lays out the whole chain: digits, Phi, two source transforms, pointwise product, opposite transform, scalings by S and 2^{2b+4}S, rounding, Phi^{-1} and carries. It derives that the exact counterpart is the integer digit convolution, and cites the bound below 1/2 from the precision page, as the assignment asks."
+  },
+  {
+   "id": "S5.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "d=floor(b^epsilon)",
+    "K=floor(d^c)",
+    "T a power of two in [4n/b,8n/b)",
+    "r=2^{ceil(log2 T/d)}",
+    "t_i in {r/2,r} with t_d=r",
+    "s_i in ((1-2eta)t_i,(1-eta)t_i]"
+   ],
+   "note": "The page gives b=ceil(log2 n), p=6b, s_i distinct odd primes with product S, and t_i powers of two with product T, and links the parameter page. The remaining parameter values are not given."
+  },
+  {
+   "id": "S5.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "degree bound 2q-2<2n/b<=T/2<S (no wraparound)",
+    "coefficient bound c_j<=q(2^b-1)^2<2^{3b}"
+   ],
+   "note": "'Each input splits into q=ceil(n/b) radix-2^b digits a_j, and the product is their convolution modulo x^S-1', with a link. The no-wraparound and coefficient bounds are missing, and the second is what justifies the (3b+1)-bit words of step 5."
+  },
+  {
+   "id": "S5.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "definition x -> prod_i x_i^{mu_i}",
+    "that Phi is a ring isomorphism preserving cyclic convolution (used implicitly when 'Phi^{-1} then returns the integer digit convolution')",
+    "cost O(Tp d^2(1+l^tau))"
+   ],
+   "note": "The page only says 'The convolution is placed on the prime axes by the Chinese-remainder address map Phi', with a link."
+  },
+  {
+   "id": "S5.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "zeta=e^{pi i/r} and the map Theta: x_d -> zeta y",
+    "M_C(f,g)=D_- iota^{-1} M_r(iota D_+ f, iota D_+ g)"
+   ],
+   "note": "The page states 'M_C(f,g)=f*g/T ... computed through the Phase twist and Convolution from the retained transform layout', which is the result, linked. The twist itself is not given."
+  },
+  {
+   "id": "S5.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "gamma=2d alpha^2",
+    "that RF_s=2^gamma B_0 Q F_t A is the tensor-resampling identity (eq. no-sort-tensor) rather than a consequence of replacing routines by exact maps",
+    "the norm hypotheses (target norm <=.6, source norm <=.5)"
+   ],
+   "note": "The page evaluates QF_t by the chirp identity (phase, convolution with a, phase), gives the computed version with tilde-a and Q_p, and composes it with A, B_0 and 2^gamma. Its exact counterpart matches the paper."
+  },
+  {
+   "id": "S5.5.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "hypothesis: x is a disk-grid target tensor of norm at most .6",
+    "||x||<=.6 implies ||x_0||<=.6, the smaller operand the computed convolution requires"
+   ],
+   "note": "'It forms the operand x_0=Q_p(conj(tilde a).x) after the first phase', presented as the computed counterpart of the first phase conj(a).x in QF_t x=conj(a).M_C(a,conj(a).x). The norm conditions are omitted."
+  },
+  {
+   "id": "S5.5.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "||tilde a - a||_inf < 2*2^{-p}",
+    "the explicit statement that replacing approximations by exact maps returns QF_t x"
+   ],
+   "note": "y_0=tilde M_C(tilde a,x_0) and tilde C(x)=Q_p(conj(tilde a).y_0) are given as the computed convolution and second phase of the chirp identity, which is how the paper does it. The kernel's approximation bound is not given."
+  },
+  {
+   "id": "S5.5.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "gamma=2d alpha^2",
+    "citation of the tensor-resampling identity RF_s=2^gamma B_0 Q F_t A for the second equality",
+    "the linewise approximations of A and B_0, and the omission of truncations in the exact counterpart",
+    "source input norm at most .5"
+   ],
+   "note": "'Its exact counterpart replaces each numerical routine by the exact map it approximates, so F=2^gamma B_0 QF_t A=RF_s'. The first equality follows. The second is asserted with no pointer to the resampling identity that gives it. The opposite-sign procedure is correctly derived: R is real and conjugation flips the sign, giving RF_s^+."
+  },
+  {
+   "id": "S5.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "input encoding as grid numerator a_j 2^{p-b-2} with nonnegative exponent because p=6b",
+    "truncation toward zero of each real and imaginary part",
+    "rounding of real parts into signed (3b+1)-bit words, zero at padded addresses",
+    "padded layout of Phi and its removal by Phi^{-1}"
+   ],
+   "note": "The six steps are listed in the paper's order, and the paragraph on the two scalings derives that steps 2-5 have exact counterpart 2^{2b+4}(u*v). Several implementation details that the error page relies on are left out."
+  },
+  {
+   "id": "S5.6.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "grid numerator a_j 2^{p-b-2} in a signed w_c-bit real word plus a zero imaginary word",
+    "exponent p-b-2 nonnegative because p=6b, so the value is an exact grid value"
+   ],
+   "note": "'Digit a_j is stored as the grid value a_j2^{-b-2}, so inputs have norm below 1/4, and the digits are padded with zero records to length S'. The norm consequence is right. Why the value is exactly representable (p=6b) is not shown."
+  },
+  {
+   "id": "S5.6.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "'with its padded layout'",
+    "u,v are exact p-bit grid values of norm less than 1/4"
+   ],
+   "note": "'Apply Phi to obtain source arrays u,v' is stated with no further justification."
+  },
+  {
+   "id": "S5.6.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "F-tilde's hypothesis of source norm <=.5, met by norm <1/4"
+   ],
+   "note": "Step 2 applies the procedure defined above, whose exact counterpart RF_s u is then used in the normalization paragraph."
+  },
+  {
+   "id": "S5.6.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "exact complex product before truncation",
+    "truncation toward zero of each real and imaginary part",
+    "w_c-bit component format"
+   ],
+   "note": "'Multiply corresponding coefficients and truncate to p fractional bits'. The exact counterpart (RF_s u).(RF_s v)=R(F_s u.F_s v) is used in the normalization paragraph ('Permutations commute with pointwise products'). The direction of truncation is omitted."
+  },
+  {
+   "id": "S5.6.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "exact multiplication of grid numerators by S, keeping denominator 2^p (width w_c+b)"
+   ],
+   "note": "'Compute F^+(z) and multiply by S, obtaining tilde w, which approximates the exact array w=(u*v)/S', with the value of w derived in the following paragraph."
+  },
+  {
+   "id": "S5.6.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "rounding applies to the real values",
+    "signed (3b+1)-bit words at valid addresses, zero words at padded addresses",
+    "Phi^{-1} removes the address padding",
+    "width w_c+4b+4"
+   ],
+   "note": "'Multiply by 2^{2b+4}S, round to the nearest integers, and apply Phi^{-1}'. The page derives that this gives 2^{2b+4}(u*v), and that the factor 2^{2b+4} cancels the 2^{-2b-4} carried by u*v."
+  },
+  {
+   "id": "S5.6.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "bits written least significant first, then reversed to output most significant first"
+   ],
+   "note": "'Propagate radix-2^b carries in increasing coefficient order and output exactly 2n bits' is listed only. The paper also defers its justification to the precision subsection."
+  },
+  {
+   "id": "S5.6.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "This follows the paper's proof of eq. source-permutation-cancel: F_s(u*v)=S F_s u.F_s v and F_s^+F_s=I/S give (u*v)/S^2. RF_s^+R=F_s^+ and the commuting of permutations with pointwise products remove R. The first scale gives w=(u*v)/S and the second gives 2^{2b+4}(u*v)."
+  },
+  {
+   "id": "S5.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "carry propagation yields the exact binary product"
+   ],
+   "note": "'Exactness is shown by [Error tracking and exact recovery]: the error on these coefficients is below 1/2, so rounding is exact', linked as assigned."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "The computed source transform $\\widetilde{\\mathscr F}$ applies the [Gaussian resampling](gaussian-resampling.md) map $\\mathcal A$, then $\\widetilde{\\mathscr C}$, then the output map $\\mathcal B_0$",
+   "problem": "The computed procedure applies the linewise disk-grid approximations of A and B_0, each with error below dp^2. It does not apply the exact maps, which appear only in the exact counterpart (paper lines 4456-4461). The next sentence ('replaces each numerical routine by the exact map') assumes these approximations exist."
+  },
+  {
+   "severity": "minor",
+   "quote": "Steps 2 to 4 have exact counterpart $(u*v)/S^2$, and after the scale in step 4 it is $w$.",
+   "problem": "Step 4 includes the scaling by S, so steps 2-4 as a whole have exact counterpart w=(u*v)/S. The paper says (u*v)/S^2 is the exact counterpart 'after the three transforms', before the first scale."
+  },
+  {
+   "severity": "minor",
+   "quote": "Its exact counterpart $\\mathscr F$ replaces each numerical routine by the exact map it approximates, so $\\mathscr F=2^\\gamma\\mathcal B_0QF_{\\boldsymbol t}\\mathcal A=RF_{\\boldsymbol s}$",
+   "problem": "The 'so' covers only the first equality. The equality with RF_s is the tensor-resampling identity (eq. no-sort-tensor, with gamma=2d alpha^2), which the page neither states nor cites as the source."
+  }
+ ],
+ "motivation_given": true
+}

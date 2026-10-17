@@ -1,0 +1,14 @@
+{"page": "P16",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "$$(F_{\\boldsymbol q}u)_k=\\frac1{\\prod_i q_i}\\sum_j u_j\\,e^{-2\\pi i\\sum_i j_ik_i/q_i}.$$",
+   "problem": "The letter i is both the imaginary unit and the axis index of the inner sum in one exponent. The page defined i as the axis index just before. The formula itself (negative sign, normalization 1/prod q_i) matches the paper's F_q (lines 3506-3510) tensored over the axes; only the notation clashes."},
+  {"severity": "minor",
+   "quote": "This bound needs power-of-two lengths, so it does not apply directly to the prime lengths $s_i$ of the integer product; the identity below supplies power-of-two transforms instead.",
+   "problem": "An O(q log q) operation count holds for every length q, for example through Bluestein's chirp, which the paper itself uses for the prime lengths. Only the radix-2 butterfly recursion needs powers of two. The paper's reason for power-of-two lengths is different: the synthetic transforms modulo y^r+1, with r a power of two, use powers of y as roots of unity, so multiplying by a root is a signed shift (lines 80-86). In the paper's words, 'the synthetic transforms use powers of two' (lines 3499-3500)."},
+  {"severity": "minor",
+   "quote": "For operators $G_i$ on sequences of length $q_i$, the tensor product $\\bigotimes_i G_i$ applies each $G_i$ to every line along axis $i$.",
+   "problem": "The tensor product is defined only for maps from length q_i to the same length q_i. The page then applies it to A_i: C^{s_i} -> C^{t_i} and B_{0,i}: C^{t_i} -> C^{s_i}, which change the line length; in the paper the array shape changes from pass to pass inside the padded box (lines 3838-3855). The mixed-product rule the page uses still holds for these rectangular maps, so the argument is unaffected."}
+ ],
+ "motivation_given": true}

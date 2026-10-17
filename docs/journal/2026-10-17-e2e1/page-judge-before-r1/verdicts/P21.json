@@ -1,0 +1,9 @@
+{"page": "P21",
+ "items": [
+  {"id": "S5.2", "presence": "derived", "faithful": true, "dropped": [], "note": "The page writes both inputs in radix 2^b with q digits, bounds the product degree by 2q-2 < 2n/b <= T/2 < S, concludes that reduction modulo x^S-1 folds nothing, and bounds every c_j by q(2^b-1)^2 < 2^{3b}. Each link uses the paper's parameters (b = ceil(log2 n), 4n/b <= T < 8n/b, T/2 < S < T)."},
+  {"id": "S5.2.1", "presence": "derived", "faithful": true, "dropped": [], "note": "It writes u = sum u_i 2^{bi} and v = sum v_k 2^{bk} with 0 <= u_i, v_k < 2^b and q = ceil(n/b) digits each, then notes 'Each digit polynomial has degree at most q-1, so the product polynomial has degree at most 2q-2', matching the paper."},
+  {"id": "S5.2.2", "presence": "derived", "faithful": true, "dropped": [], "note": "It justifies each inequality: 'q<n/b+1 and so 2q-2<2n/b', '2n/b <= T/2 because T >= 4n/b', and T/2<S. It then explains that exponents j <= 2q-2 < S do not fold under x^S=1, and gives a correct small example (q=3, S=5 safe, S=4 folds c_4 onto c_0)."},
+  {"id": "S5.2.3", "presence": "derived", "faithful": true, "dropped": [], "note": "'Each c_j is a sum of at most q products u_iv_k, each between 0 and (2^b-1)^2', so 0 <= c_j <= q(2^b-1)^2, and 'Since q <= n <= 2^b, this is below 2^b*2^{2b}=2^{3b}'. This is the paper's bound and the paper's reason, including the stated q <= n <= 2^b."}
+ ],
+ "errors": [],
+ "motivation_given": true}

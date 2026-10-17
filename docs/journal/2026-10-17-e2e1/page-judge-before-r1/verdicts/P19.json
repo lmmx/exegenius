@@ -1,0 +1,18 @@
+{"page": "P19",
+ "items": [
+  {"id": "S4.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page states the identity $QF_{\\boldsymbol t}u=\\overline a\\cdot\\frac{a*(\\overline a\\cdot u)}{T}$ under the paper's hypothesis 'When every $t_i$ is even' and proves it as the paper does: periodicity of $a$, the coefficient of $u_{\\boldsymbol k}$ on the right, and a match with the coefficient of $QF_{\\boldsymbol t}$ computed from $(P_tv)_k=v_{-sk}$ and the normalized negative-sign transform."},
+  {"id": "S4.3.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "This is a definition, and the page gives it exactly as the paper does: '$a_{\\boldsymbol j}=\\exp\\left(-\\pi i\\sum_{i=1}^d s_ij_i^2/t_i\\right)$, a phase quadratic in the index', with $\\overline a$ its conjugate. Since nothing can be derived for a definition, I count it as fully present."},
+  {"id": "S4.3.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page works out the change in the exponent, '$-\\pi i s_i\\frac{(j_i+t_i)^2-j_i^2}{t_i}=-\\pi i s_i(2j_i+t_i)$', and says it is an integral multiple of $2\\pi i$ 'because $t_i$ is even' ($s_i$ is an integer). It also gives the reason periodicity matters: the convolution reads $a_{\\boldsymbol j-\\boldsymbol k}$ modulo $t_i$."},
+  {"id": "S4.3.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page expands with '$(j_i-k_i)^2=j_i^2-2j_ik_i+k_i^2$' and writes the combined exponent as $\\sum_i\\frac{\\pi i s_i}{t_i}(j_i^2-(j_i^2-2j_ik_i+k_i^2)+k_i^2)$. The signs are right and this reduces to $2\\pi i s_ij_ik_i/t_i$, matching the paper's displayed coefficient."},
+  {"id": "S4.3.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "In its Setting section the page defines $F_{\\boldsymbol t}$ with $\\frac1T$ and $\\exp(-2\\pi i\\sum_i k_if_i/t_i)$, and $Q$ as 'position $\\boldsymbol j$ holds the entry of frequency $(-s_ij_i)_i$'. Substituting $f_i=-s_ij_i$ gives the coefficient $\\frac1T\\exp(2\\pi i\\sum_i s_ij_ik_i/t_i)$, which the page matches, as the paper does."}
+ ],
+ "errors": [
+  {"severity": "minor", "quote": "The permuted transform is thus reduced to one [Cyclic convolution](convolution.md) of length $T$ between two pointwise phase multiplications.",
+   "problem": "The convolution is $d$-dimensional, on $\\prod_i\\mathbb Z/t_i\\mathbb Z$ with $T$ entries. The paper calls it 'cyclic convolution on the product of the coordinate groups', and the page itself takes indices modulo each $t_i$. It is not a one-dimensional cyclic convolution of length $T$, and since the $t_i$ are powers of two the two groups are not isomorphic when $d>1$."}
+ ],
+ "motivation_given": true}

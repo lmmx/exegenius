@@ -1,0 +1,11 @@
+{"page": "P14",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "it computes the [Discrete Fourier transform](dft.md) of an array in $\\log_2 t$ layers instead of $t^2$ operations",
+   "problem": "Compares a count of layers with a count of operations. The fair comparison is $O(t\\log t)$ operations (log_2 t layers of t/2 butterflies and t/2 twiddles) against $t^2$, which the page itself states later in 'for $O(t\\log t)$ operations in all'."},
+  {"severity": "minor",
+   "quote": "let $\\omega_t=e^{2\\pi i/t}$. The transform is $(F_tz)_m=\\frac1t\\sum_j z_j\\omega_t^{-jm}$",
+   "problem": "The paper's transform (lines 2798-2803) is the synthetic $F_t^-$ over $\\mathcal R_r=\\mathbb C[y]/(y^r+1)$ with $\\omega_t=y^{2r/t}$ for a power of two $t$ dividing $2r$, and that is the one the dependent pages use. The page derives only the complex case and never says the derivation carries over. It does carry over, since it uses only $\\omega_t^{t/2}=-1$ (here $y^r=-1$) and $\\omega_t^2=\\omega_{t/2}$. With the complex root, though, the twiddle multiplications are not the 'signed shifts' the opening paragraph mentions."}
+ ],
+ "motivation_given": true}
