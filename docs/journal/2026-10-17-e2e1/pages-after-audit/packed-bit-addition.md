@@ -1,0 +1,26 @@
+Packed selected-bit addition XORs selected bits of an address chunk $x$ into chunk $y$, restoring a scratch chunk $z$, using shifts of whole chunks plus a repair of few exceptional addresses; the [simultaneous butterfly layer](simultaneous-layer.md) needs it for its binary changes of basis.
+
+For a control bit $c$ and integers $u,w$, $c[P]$ is $c$ if $P$ holds, else $0$. Perform in order
+$$\begin{array}{llll}
+(1)\ u\leftarrow u-c[w\bmod2=0] & (2)\ w\leftarrow w-c[u\bmod2=0] & (3)\ u\leftarrow u+c[w\bmod2=0] & (4)\ w\leftarrow w+c[u\bmod2=0]\\
+(5)\ w\leftarrow w+c[u\bmod2=1] & (6)\ u\leftarrow u+c[w\bmod2=1] & (7)\ w\leftarrow w-c[u\bmod2=1] & (8)\ u\leftarrow u-c[w\bmod2=1]
+\end{array}$$
+For $c=1$, substituting the four parity pairs shows lines 1 to 4 permute the parities of $(u,w)$ by $(00\ 01\ 10)$ and lines 5 to 8 by $(01\ 10\ 11)$, composing to $(00\ 10)(01\ 11)$. So $(u',w')=(u+c(1-2(u\bmod2)),w)$: $u$ flips parity iff $c=1$, quotients by two persist, $w$ is restored. Each variable moves at most four.
+
+Each address holds an $R$-bit record (not the scalar ring) and three chunks $x,y,z$ of $L=fK$ bits, with $K\ge6$ the segment spacing and $f$ the number of selected bits; other coordinates are spectators. Let $M$ count addresses, $V=MR$, and $A_{\rm rect}=\lceil\log_2(2V)\rceil$ bound counter lengths. Selected positions are $j_i=\rho+iK$, $0\le i<f$, $0\le\rho<K$; the goal is $y_{j_i}\leftarrow y_{j_i}\oplus x_{j_i}$.
+
+Omit $j_{f-1}$, XORed last by a linear scan. For $0\le i<f-1$ the $K$ bits of $y$ from $j_i$ form a disjoint segment of value $u_i=2g_i+a_i$, and those of $z$ one of value $w_i=2h_i+b_i$, with bits $a_i,b_i$ and guard values $g_i,h_i\in\{0,\dots,2^{K-1}-1\}$, written $g$ for either. The control is $c_i=x_{j_i}$. Line (1) on all segments at once is
+$$y\leftarrow y-\sum_{i=0}^{f-2}2^{j_i}[x_{j_i}=1][z_{j_i}=0]\pmod{2^L},$$
+a cyclic shift of the whole chunk $y$ by an offset independent of $y$, hence a bijection of addresses. The others vary sign, parity or roles. Let $S_0$ compose the eight.
+
+Let $\mathcal B$, the exceptional addresses, be those where some guard fails $10\le g\le2^{K-1}-11$. Off $\mathcal B$ each segment lies in $[20,2^K-21]$, so displacement eight stays in $[0,2^K-1]$: no carry or borrow between segments, so $S_0$ equals the ideal map $T_0$ doing the XORs at $j_0,\dots,j_{f-2}$.
+
+Ten values are excluded at each end, twenty per guard <cite data-source="paper">There are exactly twenty excluded values for each guard in</cite>. At fixed spectator coordinates $y$ and $z$ range over all $2^L$ values, so each guard takes every value equally often and a fraction $20/2^{K-1}$ fail it. A union bound over the $2(f-1)$ guards gives $|\mathcal B|\le\delta_{\rm bad}M$, $\delta_{\rm bad}=\min\{1,80(f-1)2^{-K}\}$.
+
+$T_0$ preserves guards, hence $\mathcal B$; bijections agreeing off $\mathcal B$ give $S_0(\mathcal B^c)=T_0(\mathcal B^c)=\mathcal B^c$ and $S_0(\mathcal B)=\mathcal B$. After $S_0$, the record at $q$ came from $S_0^{-1}(q)$ and belongs at $q'=T_0S_0^{-1}(q)$, which fixes $\mathcal B^c$ and permutes $\mathcal B$.
+
+Scan, counting each record's rank (stream index); dividing by the fixed field lengths gives the values of $x,y,z$ and their strides (records per unit step). Extract the records of $\mathcal B$ and compute $q'$ by undoing the eight shifts in reverse, then applying the XORs directly. The destination's rank is the current rank plus, per chunk, the signed value change times the stride. Attach it as a key; mark the vacated place, a hole. Stable radix sort touches only extracted records. As $q'$ permutes $\mathcal B$, keys are distinct and equal the holes' ranks, so one scan refilling holes in order applies $T_0$. Counters have $O(A_{\rm rect})$ bits and schoolbook operations cost $O(A_{\rm rect}^2)$ each, over $f\le A_{\rm rect}$ positions: $O(A_{\rm rect}^3)$ per record.
+
+A rotation needs its target after its controls: swap it rightmost, rotate, undo the swap. That is at most sixteen swaps and eight rotations <cite data-source="paper">There are at most sixteen swaps and eight rotations in $S_0$.</cite>. It rotates chunks by [Controlled shifts and rational scalings](controlled-shifts.md) in $O(V)$ time and swaps by [Fast address-chunk interchange](address-interchange.md) in $O(VL^\tau)$, for $\tau<1$.
+
+Movement costs $O(V(L^\tau+1))$, scans $O(MA_{\rm rect}^3+V)$, and radix passes $O(|\mathcal B|A_{\rm rect}(R+A_{\rm rect}))$, so the time is $O(V(L^\tau+1)+MA_{\rm rect}^3+\delta_{\rm bad}MA_{\rm rect}(R+A_{\rm rect}))$ <cite data-source="paper">With $\delta_{\rm bad}=\min\{1,80(f-1)2^{-K}\}$, its time is</cite>. Per $V$ the extra terms are $A_{\rm rect}^3/R$ and $80(f-1)2^{-K}A_{\rm rect}(1+A_{\rm rect}/R)$, both tending to zero when $A_{\rm rect}=O(p)$, $R$ exceeds every polynomial in $p$, $f\le d\le p$, $K/\log p\to\infty$; the cost is $O(V(L^\tau+1))$.
