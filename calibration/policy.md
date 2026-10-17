@@ -10,7 +10,7 @@
 
 **Its authority:** nothing here changes a pipeline default. A row marked "proposed" goes to the author. Only the author changes defaults.
 
-## Calibration status: the policy in force (11:08 UTC, 2026-10-15)
+## Calibration status: the policy in force (11:08 UTC, 2026-10-15; rows updated 2026-10-17, 07:41 UTC)
 
 **The bar (the author, about 11:00):** a task is calibrated only when it has both a defensible configuration and adequate evidence that it preserves the mathematics. A best-tested configuration is not enough on its own. Defaults change only with the author's approval. Every row rests on one paper.
 
@@ -20,14 +20,14 @@
 | Background | Sonnet `high`, `master` | accepted: no alternative tested, and no sign it limits a decision | indirect for planning (the same ceiling plans); none for writing | **for planning only** | its effect on writing is unmeasured. Check against the reader profile, with no model, if pages point here |
 | Argument planning | Sonnet `high` with the combined instruction. **`master` still has the older instruction** | final for this paper, once the instruction is merged | strong: the rubric's ceiling and the central gate, blind, on several extractions | **yes for this paper, after the merge** | the merge: **PR #13** (built and tested in isolation on 2026-10-17; not merged), then a second document |
 | Writing | Sonnet `high`; Opus `xhigh` on 0015 and 0016 in this wiki | provisional | Sonnet failed on a hard key-step page in 1 of 2 runs; Opus met the standard on both hard pages | **no** | W3 as amended on 2026-10-17: a second Sonnet run per key-step page and fidelity rule R2 (`plans/W3.md`) |
-| Fidelity auditing | as `master` (the writer configuration) | **unresolved** | none of Haiku `high`, Sonnet `high` and Opus `xhigh` meets the standard; all miss the same errors | **no** | a task redesign, not a model choice: A2, source-aware and structured (prepared on 2026-10-17, `plans/A2.md`); A1b, the support instruction (`plans/A1b-draft.md`), only if A2 leaves the support check's misses open |
+| Fidelity auditing | as `master` (the writer configuration) | **a task change proposed (A2, 07:39 UTC, 2026-10-17), not adopted** | **A2 (one run, preregistered): the source-aware structured audit (SI, Sonnet `high`) meets the audit standard.** It caught 13/13 source-only errors and 26/28 page errors, with F_sham 0/18 and adjudicated F_A 0.17 per clean page. **The F_A pass is fragile:** 0.83 with borderline adjudications flipped (row 2). The current audit (B) reaches R_page 0.50, exactly at the bar, under hand labels, and catches 0 of 13 source-only errors. Best tested: SI; proven adequate: SI, at one run with a fragile false-alarm reading | **no** | the author's decision on the task change: the audit text, plus auditors reading `sources/paper.tex`, a CLI change, at ~3.2× the audit's cache read. Before adopting it, an independent blind adjudication of the 15 clean-page alarms (~3–6 M; `plans/A2.md`, Stage 2). If SI is adopted, A1b (the support instruction) is not needed: SI's audit caught the generalisation errors the support check misses (4/4) |
 | Simulated readers | `master` | unmeasured | none | **no** | after writing is settled |
 | Judging (the instrument) | Opus; the primary rubric below the ceiling, K3 pairwise above | validated | K3 passed its preregistered criteria | **yes, as an instrument** | — |
 
 **Decisions for the author, kept separate:**
 1. **The planning-instruction merge:** a default change, reviewed on its own (`proposals/argument-instruction.md`). It does not block any experiment.
 2. **Measurement validity:** a general rule for when the `ASSERTS` classifier may score audit notes, for future experiments only (`plans/A1b-draft.md`). A1's preregistered result stays primary.
-3. **Auditor evidence:** whether auditors get the source. A2 tests it before any adoption.
+3. **Auditor evidence:** whether auditors get the source. **A2 (07:39) supports it:** SI is outcome row 1 (`plans/A2.md`). The adoption, a CLI change to the audit text and source access, is the author's. The recommended check before it is an independent blind adjudication of SI's clean-page alarms.
 4. **W3:** launch on a meter reading, and whether to add a second Sonnet run per key-step page (`plans/W3.md`, option). Then the writer default.
 
 ## Gap review (2026-10-17, 07:04 UTC): what existing evidence closes, and what needs an experiment
@@ -40,12 +40,12 @@
 | Background | the configuration for planning (the 2026-10-15 audit: 8 runs, all feeding ceiling plans) | nothing now. If W3's pages show over- or under-explanation, check the concept lists against the reader profile (no model) first | a model comparison: no sign it limits a decision |
 | Argument planning | the configuration and the instruction, for this paper (E9–E11, S6). The instruction is now a tested, reviewable change (PR #13) | nothing on this paper | more model comparisons: E11 found no advantage above the ceiling |
 | Writing | Sonnet `high` is not adequate on hard key-step pages (one major error in two runs on 0015); Opus met the standard there | **W3 (amended):** does Sonnet fail the fidelity standard often enough on key-step pages for routing to pay? | a 23-page Opus rollout without W3 |
-| Fidelity auditing | no model choice fixes it (A1: three models, the same misses) | **A2:** does a source-aware structured audit catch errors only the source reveals? | A1 stage 2 (cannot change the verdict); more model comparisons on the current tasks |
+| Fidelity auditing | no model choice fixes the current tasks (A1). **A2 (07:39): a source-aware structured audit does, at this scale** (row 1): source-only 13/13 against 0/13, page errors 26/28 against 14/28 | **only the false-alarm reading is open:** an independent blind adjudication of SI's 9 clean-page alarms (~3–6 M, judge-only), and a second SI run on the clean pages only if that leaves F_A near its bound | A1 stage 2; A1b, if SI is adopted; SI on Opus `xhigh` (Sonnet already meets the standard); a full second run of I and SI (the recall differences cannot plausibly reverse) |
 | Simulated readers | nothing: unmeasured | a small comparison, once writing is settled; its decision is how much reader feedback to trust | anything before writing is settled |
 | Judging | the instrument (K3; K2) | nothing decision-critical | Sonnet pairwise judging (a cost saving only) |
 
 **The order the evidence supports:**
-1. **A2:** detecting consequential errors is what makes every other row trustworthy.
+1. ~~**A2**~~: run and read at 07:39 on 2026-10-17 (row 1). What remains is the independent adjudication, which is cheap and judge-only, and the author's adoption decision.
 2. **W3, amended:** the one writer decision still open.
 3. **Simulated readers:** after writing.
 
@@ -80,6 +80,16 @@ Nothing here changes a production default; the author decides those. Every row r
 4. **A2, the source-aware structured audit** (`plans/A2-draft.md`, a design). It can say whether auditing is fixable by giving auditors the source. It needs 12 source-only seeds, written by hand, and an isolated binary before preregistration.
 
 **A1 stage 2 is deferred,** with the author's direction at 09:24 ("Don't run it merely because a threshold was narrowly triggered"). It cannot change the auditing verdict: adequacy needs support recall ≥ 0.70, and all three models miss the same 4 of 10 errors. Its preregistered trigger stays on record, and its copies are kept.
+
+**Update, 2026-10-17 07:39 UTC (A2; the ledger above is kept as written on 2026-10-15):**
+- **Fidelity auditing now has a candidate configuration:** Sonnet `high` with the SI audit text, and the auditor reading `sources/paper.tex` (`tools/a2setup.py`, FIDELITY and SOURCE).
+  - **Best tested:** SI.
+  - **Proven adequate:** SI met the preregistered audit standard in one run, with R_src 13/13, R_page 26/28, F_sham 0/18 and adjudicated F_A 0.17.
+  - **The false-alarm reading is fragile:** 0.83 per clean page with the borderline adjudications flipped.
+  - **Cost:** ~0.42 M cache read per audit, against 0.13 M now.
+- **A second justified prompt change is now proposed:** the SI audit text, by A2's preregistered outcome row 1. It needs a CLI change, both to the audit task's text and to its file restriction. Adopting it is the author's decision, and the recommended step before it is an independent blind adjudication of SI's clean-page alarms.
+- **The support check (R_S 0.60) is not retested.** If SI is adopted, its misses stop being the limiting gap: SI's audit caught 4/4 generalisation errors. So A1b is not needed.
+- **A finding beyond auditing:** the six production pages A1 treated as clean carry at least 8 distinct genuine misstatements, all caught by SI, that the current audit never raised. Most are dropped hypotheses (τ > 0, the row hypothesis, a smallness condition on η). The others are a dropped sign, a mistyped label, a non sequitur and an imprecise pivot rule. **The writer row's fidelity evidence (W2, W2b, W3) comes from source-reading Opus judges, not from the audit, so it is not affected.**
 
 ## The table (one paper, `paper.tex`, unless stated)
 

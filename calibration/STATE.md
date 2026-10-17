@@ -1,8 +1,40 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-17 07:09 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-17 07:41 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
 
-## Checkpoint, 2026-10-17 07:09 UTC (new week; read first)
+## Checkpoint, 2026-10-17 07:41 UTC (read first)
+
+**Quota:**
+- The last reading is the author's: about 4% used at about 06:44.
+- Since then, at 07:37, 89.3 M cache read was measured: A2 runs 18.0 M, seed reviews 2.9 M, this session 68.4 M. These are counts, not a reading.
+- **No model call is launched until the author gives a new reading.**
+- A2 itself was launched on the 06:44 reading, not a fresh one. That is a recorded deviation (`plans/A2.md`, `budget.md`).
+
+**Done since 07:09:**
+- **A2 preregistered (07:14), run (66/66, 0 contaminated), labelled blind (433 rows, committed 07:28), adjudicated blind (07:33) and read (07:39).** Everything is in `plans/A2.md`, Result, and `docs/journal/2026-10-17-a2-run/`.
+  - **Outcome row 1.** SI (Sonnet `high`, the FIDELITY and SOURCE text, reading the paper) caught 13/13 source-only and 26/28 page errors. F_sham was 0/18, and adjudicated F_A 0.17.
+  - **The false-alarm reading is fragile:** row 2 with borderline adjudications flipped (F_A 0.83) or with raw F_A.
+  - **Cost:** 0.42 M cache read per SI audit, against 0.13 M for the current audit.
+  - **The stage-2 condition is met by the letter.** The recommendation is an independent blind adjudication first.
+- **Registry:** `registry/specs/A2.json`, the record, and INDEX rebuilt.
+- **Policy:** the auditing rows updated, plus an update note under the decision ledger. The SI audit text is now a proposed task change, for the author to decide.
+
+**Next, in order (each needs a new meter reading):**
+1. **The A2 independent adjudication (~3–6 M, judge-only).**
+   - A fresh Opus subagent gets the 15 items in `adjudication-items.json`, with notes masked by `mask_notes.py`.
+   - It also gets the six clean pages in `docs/journal/2026-10-17-a2-design/pages/` and `sources/paper.tex`, plus the adjudication rule from `adjudication.json` (`rule`).
+   - It is given no arm map and none of this session's verdicts.
+   - Report SI's and I's F_A under its verdicts beside the primary. It is a sensitivity analysis, so preregister its reading first: SI passes if at least 6 of its 9 alarms are genuine.
+2. **W3, amended (~80–175 M).**
+   - 24 runs from `docs/journal/2026-10-15-w3-setup/prompts.tsv` plus the WS2 rows (`scratchpad/w3-prompts.tsv`, 24 rows; copies in `scratchpad/e6/W3{WS,WO,WS2}P*`).
+   - Then J26 (72 judgements); read by the primary table and R2.
+3. **The author's decisions:**
+   - PR #13 (merge);
+   - the SI audit change (a CLI change to the audit text and file restriction);
+   - the general classifier rule (A2 adds evidence: `ASSERTS` agreement 0.79 overall, 0.75 on SI's notes);
+   - the writer default, after W3.
+
+## Checkpoint, 2026-10-17 07:09 UTC (new week)
 
 **Quota:** the author's reading is about 4% used (session), at about 06:44 on 2026-10-17, at the start of a new weekly allowance. Model calls since: two independent seed reviews (Opus subagents). Check the meter again before A2's or W3's runs.
 

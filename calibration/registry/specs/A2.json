@@ -1,0 +1,175 @@
+{
+ "id": "A2",
+ "title": "Source-aware structured audit: the current audit (B), a fidelity instruction (I), and the instruction with the paper (SI), Sonnet high, on seeded pages with source-only errors",
+ "kind": "screening",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "fidelity auditing: 30 audit tasks per arm (A1's 6 clean and 18 seeded variants plus 6 new variants with 2 source-only errors each), 48 planted errors (13 source-only, 28 page-detectable, 7 quote-only) and 18 shams",
+ "question": "Does a structured fidelity instruction, with or without the paper, catch errors the current audit cannot, at an acceptable false-alarm rate?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "exegenius 0.6.0 (target/debug/exegenius sha256 c37a2b3d…caee8), as A1; arm texts inserted by calibration/tools/a2setup.py (sha256 d56d5edf…)"
+ },
+ "evidence": {
+  "path": "docs/journal/2026-10-17-a2-run"
+ },
+ "protocol": "general-purpose subagents launched from the development session, up to 20 at a time, from prompts.tsv (calibration/plans/A2.md, Arms)",
+ "preregistration": "calibration/plans/A2.md (preregistered 07:14 UTC, 2026-10-17, before any run)",
+ "journal": "docs/journal/2026-10-17-a2-run/README.md",
+ "comparison": "the preregistered audit standard (R_page, F_A, F_sham; R_src for SI) and, between arms, recall on source plus quote errors with 80% Wilson intervals (beyond noise: no overlap)",
+ "arms": {
+  "B": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "task_prompt": "the audit task as written by exegenius 0.6.0 (target/debug/exegenius, sha256 c37a2b3d…caee8) in a project copy with one page variant; unchanged. The 6 new variants only: A1 stage 1's AS answers (2026-10-15, same binary and configuration) serve as B on A1's 24 variants"
+   },
+   "runs": [
+    "A2B1"
+   ]
+  },
+  "I": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "task_prompt": "the audit task as written by exegenius 0.6.0 (target/debug/exegenius, sha256 c37a2b3d…caee8) in a project copy with one page variant, plus the FIDELITY paragraph (calibration/tools/a2setup.py)"
+   },
+   "runs": [
+    "A2I1"
+   ]
+  },
+  "SI": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "task_prompt": "the audit task as written by exegenius 0.6.0 (target/debug/exegenius, sha256 c37a2b3d…caee8) in a project copy with one page variant, plus FIDELITY and SOURCE paragraphs, and the restriction widened to allow sources/paper.tex (calibration/tools/a2setup.py)"
+   },
+   "runs": [
+    "A2SI1"
+   ]
+  }
+ },
+ "runs_extra": {
+  "A2B1": {
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "high"
+    ],
+    "basis": "measured",
+    "source": "the development session's subagent transcripts and their meta files (6 of 6 new tasks; A1 AS for the other 24); not preserved on a branch"
+   }
+  },
+  "A2I1": {
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "high"
+    ],
+    "basis": "measured",
+    "source": "the development session's subagent transcripts and their meta files (30 of 30 tasks); not preserved on a branch"
+   }
+  },
+  "A2SI1": {
+   "observed_config": {
+    "agent_types": [
+     "general-purpose"
+    ],
+    "models": [
+     "claude-sonnet-5-5"
+    ],
+    "efforts": [
+     "high"
+    ],
+    "basis": "measured",
+    "source": "the development session's subagent transcripts and their meta files (30 of 30 tasks); not preserved on a branch"
+   }
+  }
+ },
+ "reported": {
+  "primary_preregistered": {
+   "value": "hand labels, adjudicated F_A. R_src: B 0/13, I 2/13 = 0.15, SI 13/13 = 1.00 [0.89, 1.00]. R_page: B 14/28 = 0.50 [0.38, 0.62], I 23/28 = 0.82 [0.71, 0.90], SI 26/28 = 0.93 [0.84, 0.97]. R_quote: B 0/7, I 1/7, SI 3/7. F_A (per clean page, adjudicated): B 0, I 3/6 = 0.50, SI 1/6 = 0.17; raw: B 0, I 1.00, SI 1.50. F_sham 0/18 in every arm. Source plus quote recall: B 0/20 [0, 0.08], I 3/20 [0.08, 0.28], SI 16/20 = 0.80 [0.67, 0.89]. Outcome row 1: SI meets the standard, R_src included, and is beyond noise above B on source plus quote recall",
+   "basis": "reported",
+   "source": "calibration/plans/A2.md (Result); docs/journal/2026-10-17-a2-run/A2-reading.json"
+  },
+  "adjudication": {
+   "value": "15 clean-page asserting gaps outside native defects, judged against the paper before the arm map was read: 11 genuine (10 of the 15 verdicts borderline). By arm after unblinding: I 3 of 6 genuine, SI 8 of 9",
+   "basis": "reported",
+   "source": "docs/journal/2026-10-17-a2-run/adjudication.json"
+  },
+  "sensitivity": {
+   "value": "not preregistered. Borderline adjudications flipped: SI F_A 5/6 = 0.83, row 2. F_A raw: row 2. ASSERTS in place of hand labels: row 1 (SI R_src 11/13, R_page 19/28). Hand labels with borderlines flipped: row 1 (I then fails F_A)",
+   "basis": "reported",
+   "source": "docs/journal/2026-10-17-a2-run/A2-reading.json"
+  },
+  "classifier_agreement": {
+   "value": "ASSERTS against the hand labels: B 0.872, I 0.788, SI 0.747, all 0.794 (A1's 0.80 bar is not met overall); ASSERTS recall of asserting notes 0.49. Intra-rater: B's 96 notes on A1 variants got the same label as in A1 in 96 of 96 (same labeller, identical text)",
+   "basis": "reported",
+   "source": "docs/journal/2026-10-17-a2-run/hand.txt"
+  },
+  "stage_2": {
+   "value": "the preregistered necessary condition holds by the letter (I's F_A is at its threshold, 0.50; SI's F_sham is exactly 0.10 from its threshold), so a second run of I and SI may be proposed; the session recommends an independent blind adjudication first. Not launched",
+   "basis": "reported",
+   "source": "calibration/plans/A2.md"
+  },
+  "runs_cache_read_tokens": {
+   "value": "18.0 M for 66 tasks (342 calls): B 0.78 M (0.13 per task), I 4.67 M (0.16), SI 12.56 M (0.42); cache write 3.02 M. Orchestration since launch 38.2 M (development session)",
+   "basis": "reported",
+   "source": "the subagent transcripts, usage records deduplicated by message id (spend.py row 'A2 (auditing)')"
+  },
+  "source_reads": {
+   "value": "SI 30 of 30 tasks read sources/paper.tex (131 calls); B and I none. No contaminated task",
+   "basis": "reported",
+   "source": "docs/journal/2026-10-17-a2-run/answers/collect.json"
+  },
+  "stray_tools": {
+   "value": "one SI task called a nonexistent lowercase `bash` tool; no effect",
+   "basis": "reported",
+   "source": "docs/journal/2026-10-17-a2-run/answers/collect.json"
+  }
+ },
+ "deviations": [
+  {
+   "kind": "analysis",
+   "what": "tools/plant_labels.py was changed after preregistration to read the TSV files with csv.QUOTE_NONE: the default reader stripped a leading quote mark from one note and failed to match it. A1's hand rescoring is identical after the fix"
+  },
+  {
+   "kind": "measurement",
+   "what": "the labelling rule gained two clarifications during labelling, before agreement or unblinding (a stated paper contradiction is 1; when a missing hypothesis is 1); nine rows were revised for consistency under it before the labels were committed"
+  },
+  {
+   "kind": "analysis",
+   "what": "the stage-2 condition's 'within 0.10' is met exactly by SI's F_sham (0 against 0.10) and fully by I's F_A (at 0.50); reported both ways and put to the author"
+  },
+  {
+   "kind": "budget",
+   "what": "the runs were launched on the author's 06:44 meter reading (about 4% used, the start of a new week) with 32.5 M measured since, not on a fresh reading taken just before launch as budget.md had said"
+  }
+ ],
+ "limitations": [
+  "One run per arm; six pages of one paper; 13 source-only errors.",
+  "The seeds and the adjudication are this session's; the adjudicator was effectively unblinded by content, since SI's notes cite the paper.",
+  "SI's F_A pass rests on borderline adjudications: with them flipped, SI fails F_A.",
+  "B on A1's variants reuses answers from 2026-10-15.",
+  "Hand labels are one labeller's (this session's), blind to arm by masking but SI's notes may reveal it by content."
+ ]
+}
