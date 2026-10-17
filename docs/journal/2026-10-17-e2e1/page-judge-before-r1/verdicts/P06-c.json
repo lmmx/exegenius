@@ -1,0 +1,17 @@
+{"page": "P06",
+ "items": [],
+ "errors": [
+  {"severity": "major",
+   "quote": "Scanning an array of $\\Theta(n)$ stored bits at each of $\\Theta(\\log n)$ transform levels therefore already costs $\\Theta(n)\\cdot\\Theta(\\log n)=\\Theta(n\\log n)$, the bound to be beaten. So each rearrangement must cost one pass, not one pass per level.",
+   "problem": "The conclusion does not follow and misstates the requirement. In the paper (lines 88-116) the Theta(n log n) cost of one scan per level is the reason sublinear-per-level savings in both movement and arithmetic are needed. These are supplied by the u-bit field interchange in O(V u^tau) time and the simultaneous butterfly layer in O(V d^{lambda'}) time, not by one pass per rearrangement. Section 2 (lines 438-441) separates moving one fixed-radix digit, which takes a bounded number of scans, from interchanging fields whose numbers of digits grow, which costs more than one pass. On either reading the page's sentence is wrong: one pass per per-level rearrangement still totals Theta(n log n), and one pass per multi-level rearrangement is stronger than anything the paper achieves."},
+  {"severity": "minor",
+   "quote": "Throughout, $V$ is the volume of an array, the number of digits it stores",
+   "problem": "The paper (line 455) defines the logical volume V as the number of stored data bits; work tapes and duplicate streams are not counted. For a fixed radix, counting digits instead of bits changes V only by a constant factor, so the O(V) bounds are unaffected, but the definition differs."},
+  {"severity": "minor",
+   "quote": "Permuting the pair of values at two chosen digit positions, adjacent or not.",
+   "problem": "The paper's item 1 (lines 496-497) is 'any fixed permutation of the pair of digit values at two specified radix-q positions': an arbitrary fixed permutation of the q^2 value pairs, realized by splitting into q^2 streams. The page's wording, together with its gloss 'swapping two digits', reads as a mere exchange of the two values. That is narrower than the lemma states."},
+  {"severity": "minor",
+   "quote": "Dealing whole rows cyclically into $W$ streams, where $W$ is the fixed number of streams, and, when $W$ divides the number of rows, merging the streams",
+   "problem": "The paper (lines 502-505, 522-526) deals the rows cyclically within each prefix: the row index is r = Wg + w and the row goes to stream w. Each stream then has address set [P]x[R/W]x[B] when W divides R. The page leaves out 'within each prefix', so a reader could take the dealing to be cyclic in the global row count. That differs from the paper's dealing when W does not divide R."}
+ ],
+ "motivation_given": true}

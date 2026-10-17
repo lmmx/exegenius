@@ -1,0 +1,17 @@
+{"page": "P06",
+ "items": [],
+ "errors": [
+  {"severity": "major",
+   "quote": "Scanning an array of $\\Theta(n)$ stored bits at each of $\\Theta(\\log n)$ transform levels therefore already costs $\\Theta(n)\\cdot\\Theta(\\log n)=\\Theta(n\\log n)$, the bound to be beaten. So each rearrangement must cost one pass, not one pass per level.",
+   "problem": "The conclusion misstates the cost requirement. The paper (lines 90-97) concludes only that 'we therefore need savings in both movement and arithmetic', and the procedure it supplies interchanges two $u$-bit address fields in $O(Vu^\\tau)$ time with $\\tau<1$. That is more than one pass, though less than the $u$ passes a level-by-level approach would need. The paper never requires a rearrangement to cost a single $O(V)$ pass, and its own interchange does not. The section heading 'Why passes must be linear' also mixes up the machine fact (one scan costs $O(V)$) with the reason faster rearrangements are needed: linear passes, one per level, are exactly what gives $\\Theta(n\\log n)$."},
+  {"severity": "minor",
+   "quote": "Throughout, $V$ is the volume of an array, the number of digits it stores",
+   "problem": "The paper (line 455) defines the logical volume $V$ as the number of stored data bits, not digits. The page itself says 'stored bits' two paragraphs later ('occupy $V=\\Theta(n)$ stored bits'). For a fixed radix the two differ only by a constant factor, so the $O(V)$ bounds are unaffected."},
+  {"severity": "minor",
+   "quote": "Permuting the pair of values at two chosen digit positions, adjacent or not.",
+   "problem": "The paper's item 1 (lines 496-497) is 'any fixed permutation of the pair of digit values at two specified radix-$q$ positions', meaning any fixed bijection of $[q]^2$ applied to the digit pair. The page's wording, together with the gloss 'swapping two digits', reads as only interchanging the two values. Later shear steps need the general form, for example maps of the kind $(a,b)\\mapsto(a,a+b)$."},
+  {"severity": "minor",
+   "quote": "Dealing whole rows cyclically into $W$ streams ... and, when $W$ divides the number of rows, merging ... where $P$ is the number of prefix values, $R$ is the number of rows",
+   "problem": "The paper (lines 502-505, 522-525) deals rows cyclically within each prefix: row $r=Wg+w$ of each prefix goes to stream $w$. $R$ is the range of the row field, the number of rows per prefix, and the divisibility condition is $W\\mid R$. The page leaves out 'within each prefix' and calls $R$ 'the number of rows', when the array has $PR$ rows in total. Dealing globally, without $W\\mid R$, would assign rows to different streams."}
+ ],
+ "motivation_given": true}

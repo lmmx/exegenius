@@ -1,0 +1,28 @@
+{"page": "P01",
+ "items": [
+  {"id": "S1.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The bit count is fully derived: 's_b=(W_b m-2N+2L_b)+N=W_b m-(N-2L_b)<W_b m'. The page uses L/N<1/2 for this. The complex count s_c=W_c m-2N+2L_c<W_c m is stated with a link to Binary phase frames, as the assignment asks."},
+  {"id": "S1.3.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes the form as x.y-(1/9)(sum x)(sum y), shows it is nondegenerate (all-ones vector scaled by -91/9, zero-sum vectors fixed) and gets <t_S,t_S'>=|S∩S'|-1 from 'integer dot product |S∩S'| and entry sum 3'. Over F_2 it correctly uses |S∩S'| mod 2 and checks that the self-norm is 2 or 1 and that neighbours are orthogonal in both definitions."},
+  {"id": "S1.3.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page sums the terminal labels explicitly: 'Source dimensions total N and sink dimensions Nm+N(m-1)+(W-2N)m=Wm-N'."},
+  {"id": "S1.3.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "'A wire enters and leaves each gate with that gate's label, so its signed changes telescope to sink minus source dimension; over all wires they total Wm-2N.' It then adds 2L to get the absolute sum, matching the paper."},
+  {"id": "S1.3.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page defines A, P, B=P^⊥∩A and K (the paper's Q). It splits A⊗F into four orthogonal pieces to identify (P⊗<t>)^⊥ with B'=(B⊗F)⊥(P⊗t^⊥), with A'=A⊗F and P'=P⊗<t>, and checks the stage-1 start (U_a, 0, with B=0) and the stage-3 end (F, U_a^⊥)."},
+  {"id": "S1.3.5", "presence": "derived", "faithful": true, "dropped": ["the labels follow the physical banks: stage 2 runs the inverse schedule with the logical banks exchanged, and side wires still join neighbours because the relation is symmetric"],
+   "note": "The centre-wire label sequence 0→B⊗F(1)→A⊗F(3)→B⊗F(4)→A⊗F(6)→F, together with the splitting A=B⊥P, shows the single return dropping P⊗F of dimension h. The page never says the X/Y banks are physical rather than logical, which matters at stage 2."},
+  {"id": "S1.3.6", "presence": "derived", "faithful": true, "dropped": ["the per-edge orthogonal residuals and their dimensions ((a-1)(h-1), h-1, (a-1)h, a-1, (a-1)(h-1)+1, h-2, 1, ah(f-1), with a=h^{j-1}, f=h^{3-j})", "for the binary label space, every nonzero residual is nondegenerate and nonalternating and so has an orthonormal basis (S1.3.6.13-14)"],
+   "note": "The page lists the label of every wire type at each time and says 'every arrow is an inclusion except centre 3→4', justifying the delicate side 2→5 by t_X⊥t_Y. It then counts L=Ich from I=3v^2 invocations. The residual table is not given, and the orthonormal-basis claim of the lemma is missing entirely."},
+  {"id": "S1.3.9", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "'L_b/N=3c_b h/v=30000/161700=100/539; likewise L_c/N=30300/161700=101/539. Both are below 1/2.' This arithmetic is correct."},
+  {"id": "S1.3.7", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page assigns projections, with -Π_{U_a} at the X_a sources. It shows Π_V-Π_U has rank dim V-dim U (identity on V∩U^⊥, zero on U⊥V^⊥), identifies the N exceptional edges 2Π_{U_a} of rank one, checks the endpoint differences equal Id, and gets s_b=W_b m-N+2L_b<W_b m, citing the paper's numerical value."},
+  {"id": "S1.3.8", "presence": "stated", "faithful": null, "dropped": [],
+   "note": "The page states only the result s_c=W_c m-2N+2L_c<W_c m, with a link to Binary phase frames. The assignment places this derivation on that page."}
+ ],
+ "errors": [
+  {"severity": "minor", "quote": "nested along every edge, whose dimension changes count each edge's *smaller calls*",
+   "problem": "In the bit network the smaller calls are counted by the rational rank of the matrix differences, not by the dimension changes. On the N first edges of the X_a wires the dimension change is zero but the rank is one, so s_b exceeds the sum of absolute dimension changes by N. The page itself corrects this later ('s_b=(W_b m-2N+2L_b)+N'); the paper counts calls as the rank of the edge differences."}
+ ],
+ "motivation_given": true}

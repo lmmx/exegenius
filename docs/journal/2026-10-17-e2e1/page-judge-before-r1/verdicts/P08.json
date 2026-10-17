@@ -1,0 +1,15 @@
+{"page": "P08",
+ "items": [
+  {"id": "S5.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page builds Theta, shows it is a diagonal isomorphism by zeta^k, checks the wrap sign, extends it linewise as iota D_+ with inverse D_- iota^{-1}, and arrives at M_C(f,g)=D_- iota^{-1} M_r(iota D_+ f, iota D_+ g)=f*g/T with the contraction bound. This follows the paper's sequence (lines 4298-4347)."},
+  {"id": "S5.4.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "This is a definition, and the page sets it up completely: \"Let zeta=e^{pi i/r}, so zeta^r=-1. Define the ring map Theta from C[x_d]/(x_d^r-1) to R_r by x_d -> zeta y\". R_r is identified as the ring where y^r=-1."},
+  {"id": "S5.4.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Well-definedness comes from (zeta y)^r=(-1)(-1)=1, with both factors explained (zeta^r=-1, y^r=-1). Diagonality comes from Theta(x_d^k)=zeta^k y^k, and invertibility from zeta^k != 0 with inverse zeta^{-k}. The sup norm is preserved \"since |zeta^{+-k}|=1\". The page leaves the range 0<=k<r of the bases implicit, which is harmless."},
+  {"id": "S5.4.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes k+l=j+hr with h in {0,1}, attributes zeta^{k+l} to the twist and (-1)^h to the negacyclic reduction, and simplifies to zeta^j. It concludes that the y^j coefficient is zeta^j times the cyclic coefficient, so untwisting by zeta^{-j} restores it. The r=2 example (zeta=i, products f0g0+f1g1 and i(f0g1+f1g0)) checks out correctly."},
+  {"id": "S5.4.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page has every ingredient the paper uses: M=T/r lines, iota, D_+-, iota D_+ applying Theta linewise, M_r convolving the first d-1 axes over R_r with the division by T, and * over all d axes. It then gives the identity, as the paper does (\"Consequently\"). One point stays implicit, as it does in the paper: the coefficientwise ring isomorphism commutes with convolution over the first d-1 axes. The contraction is derived explicitly via ||M_C(f,g)||=||M_r(iota D_+ f, iota D_+ g)||<=||f|| ||g||, with the rM-term averaging bound for M_r matching paper lines 3376-3387."}
+ ],
+ "errors": [],
+ "motivation_given": true}
