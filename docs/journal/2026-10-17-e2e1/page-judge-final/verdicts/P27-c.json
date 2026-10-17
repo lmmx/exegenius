@@ -1,0 +1,14 @@
+{"page": "P27",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "they let the error analysis show that errors in the inputs of a transform or product do not grow in its output.",
+   "problem": "For a bilinear map this holds only when the operands are in the disk: the paper's bound (lines 4560-4565) is ||f'-f|| ||g'|| + ||f|| ||g'-g||, so the input errors are scaled by ||g'|| and ||f||, and they only add when all four operands are in the disk. The page does give this condition later, but the opening sentence states the claim without it."},
+  {"severity": "minor",
+   "quote": "the normalized [Cyclic convolution](convolution.md) $f*g/T$, where $T$ counts all entries involved.",
+   "problem": "T is not a count of 'all entries involved', which could mean the entries of both operands (2T). In the paper T = rM = prod_i t_i (lines 2955, 4321), the number of scalar entries in one array, which is also the number of products each output coefficient averages."},
+  {"severity": "minor",
+   "quote": "A fixed output coefficient averages $T$ signed products of one entry of $f$ with one entry of $g$",
+   "problem": "The page mixes two of the paper's maps. 'Signed products' describes the ring convolution M_r over R_r = C[y]/(y^r+1), where 'the negacyclic wrap supplies the sign' (lines 3378-3383). The page's f*g/T is the plain complex cyclic convolution M_C (lines 4338-4347), whose output terms all have sign +1. The bound still holds."}
+ ],
+ "motivation_given": true}

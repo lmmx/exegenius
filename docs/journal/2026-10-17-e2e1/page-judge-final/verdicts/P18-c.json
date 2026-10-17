@@ -1,0 +1,11 @@
+{"page": "P18",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "A form is nondegenerate when its Gram matrix (the matrix of pairings of basis vectors) is invertible, which is why dimensions must be finite.",
+   "problem": "Nondegeneracy (no nonzero vector orthogonal to the whole space) does not by itself require finite dimension; only the Gram-matrix criterion, and the splitting A = B ⊥ P for a nondegenerate subspace P, use finiteness. The causal clause is loose. The paper only works with finite-dimensional spaces (F = Q^h or F_2^h, lines 856-868) and gives no such reason."},
+  {"severity": "minor",
+   "quote": "The basis vectors $\\mathbf b\\otimes\\mathbf g_j$ of $A\\otimes C$ span $B\\otimes C$",
+   "problem": "The page defined $\\mathbf g_j$ as a basis of $G$, then uses it as a basis of $C$ without introducing it. A reader has to supply 'let $(\\mathbf g_j)$ be a basis of $C$'. The argument itself is right."}
+ ],
+ "motivation_given": true}

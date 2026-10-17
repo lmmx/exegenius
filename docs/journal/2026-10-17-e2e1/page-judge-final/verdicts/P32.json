@@ -1,0 +1,19 @@
+{"page": "P32",
+ "items": [
+  {"id": "step", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page states the identity $QF_{\\boldsymbol t}u=\\overline a\\cdot\\frac{a*(\\overline a\\cdot u)}{T}$ under the paper's hypothesis that every $t_i$ is even. It proves it the paper's way: periodicity of $a$, then expanding $(j_i-k_i)^2$ to match the coefficient of $u_{\\boldsymbol k}$ against that of $QF_{\\boldsymbol t}$, with $Q$ defined as reading frequency $(-s_ij_i)_i$, which matches $(P_tv)_k=v_{-sk}$."},
+  {"id": "S4.3.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "This is a definition, and the page gives it exactly: \"Define the chirp $a_{\\boldsymbol j}=\\exp\\left(-\\pi i\\sum_{i=1}^d s_ij_i^2/t_i\\right)$ and let $\\overline a$ be its complex conjugate\". This matches paper line 3916."},
+  {"id": "S4.3.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page computes $-\\pi i s_i\\frac{(j_i+t_i)^2-j_i^2}{t_i}=-\\pi i s_i(2j_i+t_i)$ and says it is a multiple of $2\\pi i$ \"because $t_i$ is even\", which gives period $t_i$. It also explains why periodicity is needed (the convolution reads $a$ modulo $t_i$). This is the paper's argument, with the even-$t_i$ hypothesis spelled out."},
+  {"id": "S4.3.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes the coefficient as $\\frac1T\\overline a_{\\boldsymbol j}a_{\\boldsymbol j-\\boldsymbol k}\\overline a_{\\boldsymbol k}$ and expands $(j_i-k_i)^2=j_i^2-2j_ik_i+k_i^2$. The exponent $\\sum_i\\frac{\\pi i s_i}{t_i}(j_i^2-(j_i^2-2j_ik_i+k_i^2)+k_i^2)$ is correct and reduces to $2\\pi i\\sum_is_ij_ik_i/t_i$, as in the paper. A $d=1$, $t_1=2$ example checks it correctly."},
+  {"id": "S4.3.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page defines $F_{\\boldsymbol t}$ with the negative sign and normalization $1/T$, and defines $Q$ as putting frequency $(-s_ij_i)_i$ at position $\\boldsymbol j$. It gives the resulting coefficient $\\frac1T\\exp(2\\pi i\\sum_is_ij_ik_i/t_i)$ and concludes that it matches \"because $Q$ reads frequency $(-s_ij_i)_i$ from the negative-sign transform\". The substitution $f_i=-s_ij_i$ is left implicit, as in the paper, but every ingredient is on the page."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Executing $Q$ means sorting data on tapes, which costs a logarithmic factor beyond a linear pass, the kind of factor the power saving removes.",
+   "problem": "The power saving removes a factor $(\\lg n)^{\\kappa}$ with $\\kappa=2^{-182}$, a tiny fractional power of the logarithm, not a full logarithmic factor. In the paper, the label-and-sort implementation of $P_t$ costs $O(tp\\log t)$ (line 3693). That full log factor would wipe out the saving; it is not the same kind of factor the saving removes."}
+ ],
+ "motivation_given": true}

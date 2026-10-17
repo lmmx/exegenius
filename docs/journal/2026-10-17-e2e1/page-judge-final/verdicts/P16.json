@@ -1,0 +1,13 @@
+{"page": "P16",
+ "items": [
+  {"id": "S5.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page sets up b, T, S with the paper's values (b=ceil(log2 n), power of two T in [4n/b,8n/b), T/2<S<T), writes the radix-2^b digit polynomials, and derives both the no-wraparound chain and the coefficient bound, as the paper does at lines 4183-4193."},
+  {"id": "S5.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Writes u and u' with q=ceil(n/b) digits 0<=u_i,u'_k<2^b (padding with leading zeros), defines c_j=sum_{i+k=j} u_i u'_k, and argues 'Each digit polynomial has degree at most q-1, so the product polynomial has degree at most 2q-2.'"},
+  {"id": "S5.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Justifies each link of 2q-2<2n/b<=T/2<S: 'q<n/b+1 and so 2q-2<2n/b', '2n/b<=T/2 because T>=4n/b, and T/2<S', then explains that x^S=1 folds x^j onto x^{j mod S} and nothing folds since j<=2q-2<S, with a correct q=3 example."},
+  {"id": "S5.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Shows c_j is a sum of at most q products each in [0,(2^b-1)^2], hence 0<=c_j<=q(2^b-1)^2, and uses q<=n<=2^b to get 'below 2^b*2^{2b}=2^{3b}', matching eq:capacity and its stated reason."}
+ ],
+ "errors": [],
+ "motivation_given": true}

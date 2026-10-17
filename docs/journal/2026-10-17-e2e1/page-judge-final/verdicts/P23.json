@@ -1,0 +1,24 @@
+{"page": "P23",
+ "items": [
+  {"id": "S1.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page sets up arrays over a finite address set with pointwise gates, assigns frames, maintains the invariant through sources, edges and gates, and concludes 'the implemented operator is therefore D_out S_Omega D_in^{-1}' and the per-route formula, as the paper does at lines 785-825."},
+  {"id": "S1.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The definition is given in full, as in the paper: 'assign an invertible R-linear operator D_v on R^Omega, called its frame', 'All incidences of a gate use the same D_v, and an edge from u to v applies D_vD_u^{-1}', together with the frame/gate distinction (frames mix addresses within one array, gates combine wires at one address)."},
+  {"id": "S1.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "At the sources the invariant holds by definition through g = D_in^{-1} f with 'no preprocessing'. Along an edge the page computes 'D_vD_u^{-1}D_u\\varphi = D_v\\varphi', which spells out the paper's 'changes D_u\\varphi to D_v\\varphi'."},
+  {"id": "S1.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page uses the common frame at the gate and R-linearity: '\\sum_j c_jD_v\\varphi_j = D_v(\\sum_j c_j\\varphi_j)', hence G(D_vg_1,...,D_vg_t) = D_vG(g_1,...,g_t), so the invariant continues to the sinks. This is the paper's argument."},
+  {"id": "S1.2.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "With D_in and D_out defined as direct sums of the source and sink frames over roles, and with the invariant carried from the sources (logical input D_in^{-1}f) to the sinks (stored array = D_out times the logical output), the page gets 'the implemented operator is therefore D_out S_Omega D_in^{-1}', exactly as the paper does."},
+  {"id": "S1.2.5", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page states the result with the sign and 'for every role, scratch roles included'. Its justification is a telescoping of the edge operators along one chain 'from a source u through gates a and b to a sink v'. This agrees with the plan's 'frames telescope along each route' and comes right after the common-frame identity, from which the paper gets the result 'in particular'. The chain picture leaves out the mixing at the gates (see the minor error)."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "On a route from a source u through gates a and b to a sink v, the edges apply D_aD_u^{-1}, D_bD_a^{-1} and D_vD_b^{-1}, whose product is D_vD_u^{-1}: the intermediate frames telescope away. So if the scalar network is a signed role permutation ... that route applies \\varepsilon_wD_{\\mathrm{sink}(\\rho(w))}D_{\\mathrm{source}(w)}^{-1}",
+   "problem": "The page treats a route as a single chain of edges and ignores what the gates on it do. In the network, the gates mix this wire's array with other wires' arrays, so the per-route formula with its sign epsilon_w does not follow from multiplying the edge operators along one path. The paper gets it 'in particular' by putting the signed permutation into D_out S_Omega D_in^{-1}. Summing over paths, with the scalar coefficients commuting with the frames, would also work. The conclusion is correct and the identity is on the page just above, but the 'So' rests on the incomplete chain picture."},
+  {"severity": "minor",
+   "quote": "it uses nested subspaces as frames, so that an edge costs one smaller call per unit of rank change",
+   "problem": "A subspace is not a frame. In the paper the frames are invertible operators built from subspace labels: D_v = Phi_{M_v} with M_v a projection P_U (bit case), or D_v = C_U (binary phase case). The nesting U subset V holds along edges, whose cost is the rank of the edge difference."}
+ ],
+ "motivation_given": true}

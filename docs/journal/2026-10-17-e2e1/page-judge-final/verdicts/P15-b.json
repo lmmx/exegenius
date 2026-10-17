@@ -1,0 +1,20 @@
+{"page": "P15",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Throughout, $V$ is the volume of an array, the number of digits it stores",
+   "problem": "The paper (Sec. 3.1, lines 455-456) defines the logical volume $V$ as the number of stored data bits, not digits. The page itself later says 'V=\\Theta(n) stored bits'. For a fixed radix the two differ only by a constant factor, so the O(V) bounds are unaffected."},
+  {"severity": "minor",
+   "quote": "they set the unit of cost, one pass, that those procedures must beat",
+   "problem": "Read literally, this says the later procedures cost less than one pass. They do not: the interchange costs $O(Vu^\\tau)$ and the butterfly layer costs $O(Vd^{\\lambda'})$, both more than $O(V)$. What they beat is one pass per level (per address bit moved or per butterfly level), which the page states correctly later ('in less than one pass per level')."},
+  {"severity": "minor",
+   "quote": "The operations here are the baseline: each costs one pass",
+   "problem": "Each operation costs $O(V)$, which is a bounded number of scans, not one pass. Item 1, for example, splits into $q^2$ streams and then merges them. The paper (line 439) says a fixed-radix digit move 'needs a bounded number of scans'."},
+  {"severity": "minor",
+   "quote": "Permuting the pair of values at two chosen digit positions, adjacent or not.",
+   "problem": "The lemma (item 1, lines 496-497) covers 'any fixed permutation of the pair of digit values': an arbitrary fixed permutation of $[q]^2$ applied to the two digits. The page's wording reads as exchanging the two values only, which is a special case."},
+  {"severity": "minor",
+   "quote": "$R$ is the number of rows (here $R$ is a row count, not the scalar ring)",
+   "problem": "In the paper $[R]$ is the range of the row field, so $R$ counts rows per prefix and the array has $PR$ rows in all. Item 4 deals rows cyclically within each prefix ($r=Wg+w$, row to stream $w$), and the merge condition is $W\\mid R$. The page's 'Dealing whole rows cyclically into $W$ streams' leaves out 'within each prefix'. Its 'when $W$ divides the number of rows' is correct only if 'number of rows' means $R$, not the total $PR$."}
+ ],
+ "motivation_given": true}

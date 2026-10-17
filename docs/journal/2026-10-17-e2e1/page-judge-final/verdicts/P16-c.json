@@ -1,0 +1,13 @@
+{"page": "P16",
+ "items": [
+  {"id": "S5.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page builds the digit polynomials, shows that the degree bound 2q-2<2n/b<=T/2<S rules out wraparound modulo x^S-1, and bounds the coefficients by q(2^b-1)^2<2^{3b}. This matches the paper's radix-digit passage (lines 4181-4193), and the parameters b, T and S agree with lines 4055-4145."},
+  {"id": "S5.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "It writes u=sum u_i 2^{bi} with q=ceil(n/b) digits 0<=u_i<2^b (padded with leading zeros), defines c_j=sum_{i+k=j}u_iu'_k, and argues 'Each digit polynomial has degree at most q-1, so the product polynomial has degree at most 2q-2.'"},
+  {"id": "S5.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Each link of the chain is justified: q<n/b+1 gives 2q-2<2n/b; T>=4n/b gives 2n/b<=T/2; and T/2<S comes from the parameter choice. It then explains that x^S=1 folds x^j onto x^{j mod S}, so nothing folds when every j<=2q-2<S. A correct q=3 example (S=5 safe, S=4 folds c_4 onto c_0) is included."},
+  {"id": "S5.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "'Each c_j is a sum of at most q products u_iu'_k, each between 0 and (2^b-1)^2', which gives 0<=c_j<=q(2^b-1)^2. Then q<=n<=2^b gives a bound below 2^b*2^{2b}=2^{3b}. This is exactly the paper's reasoning, and the hypothesis q<=n<=2^b is kept."}
+ ],
+ "errors": [],
+ "motivation_given": true}

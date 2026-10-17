@@ -1,0 +1,8 @@
+{"page": "P12",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Such fast algorithms deliver the outputs in a scrambled (bit-reversed) order.",
+   "problem": "This claims every fast power-of-two transform built from two-point steps returns its outputs in bit-reversed order. Some do not: an in-place decimation-in-time transform takes bit-reversed input and returns natural order, and a Stockham transform keeps natural order throughout. The paper's claim is narrower. Its decimation-in-frequency procedure (eq. synthetic-dif, lines 2832-2845) stores outputs in bit-reversed order, B_t F_t^-, and the reverse procedure computes F_t^+ B_t^{-1}."}
+ ],
+ "motivation_given": true}

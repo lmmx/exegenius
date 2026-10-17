@@ -1,0 +1,26 @@
+{"page": "P05",
+ "items": [
+  {"id": "S5.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page builds the whole step in order: Phi is an isomorphism, the coordinate formula is triangular, the padded axes are reversed, the controlled shifts run in descending order, and the costs are added up to 'O(Tp d^2(1+ell^tau))'. This follows the paper's Section on the explicit cyclic-convolution layout (lines 4195-4296)."},
+  {"id": "S5.3.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page defines P_i as the prefix product and mu_i = P_i^{-1} mod s_i, and justifies the inverse: 'It is invertible because P_i is coprime to s_i'. Since this is a definition, showing it is well defined is all the derivation it needs."},
+  {"id": "S5.3.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "'Since s_i | S, each x_i^{mu_i S}=1, so Phi respects x^S=1 and defines an algebra map.' This is a correct, explicit version of the paper's one-line claim."},
+  {"id": "S5.3.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page proves that x has order S through the kernel: 'Phi(x^k)=1 exactly when s_i | mu_i k ... as mu_i is a unit ... s_i | k ... pairwise coprime, S | k'. It then counts the S target monomials to get a bijection on bases, hence an isomorphism. These are the paper's two ingredients (mu_i a unit, s_i pairwise coprime), spelled out."},
+  {"id": "S5.3.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes k in mixed radix with 0<=a_j<s_j and notes b_i = mu_i k mod s_i. It then reduces this to the paper's formula (eq:triangular-crt). The worked example s=(3,5), k=4 -> (1,3) checks out: mu_2=2 and x_1^4 x_2^8 -> (1,3)."},
+  {"id": "S5.3.5", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "'Terms with j>i vanish modulo s_i, since s_i divides P_j, and mu_i P_i = 1 modulo s_i.' This gives the reason the paper gives (j>i terms divisible by s_i, mu_i P_i = 1), and the page applies it to mu_i k."},
+  {"id": "S5.3.6", "presence": "derived", "faithful": true,
+   "dropped": ["the case of an invalid lower-index control (a_j in [s_j,t_j) for some j<i), where the paper uses the identity", "the reason padding stays zero in general: each step is a bijection of the padded box that preserves the valid set V and its complement (identity on [s_i,t_i) alone covers only an invalid target coordinate)"],
+   "note": "The page explains that in the stored order the controls follow the target, reverses the axes to (a_1,...,a_d), and updates i=d,...,1, so 'none of its lower-index controls has yet changed'. It also gives the inverse correctly (subtractions for i=1,...,d). The zero-padding claim is justified only by 'identity on [s_i,t_i)': the paper's invalid-control case and its V-preservation argument are missing."},
+  {"id": "S5.3.7", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page states the equal-width chunk interchange cost O(VL^tau) with V=Tp, the widths ell or ell-1, and the leading-bit move for unequal widths ('adding a fixed number of linear passes'). It adds 'O(d^2) such moves' and 'shifts and scans cost only O(dTp)', which together give O(Tp d^2(1+ell^tau)), as in the paper."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "a power of two with $r/2\\le t_i\\le r$, where $r=2^\\ell$ and $\\ell$ is the number of address bits of an axis of length $r$",
+   "problem": "The definition of r and ell is circular, so r is never actually fixed. The paper first takes the power of two T in [4n/b,8n/b), then sets r=2^{ceil(log_2 T / d)} and ell=log_2 r, and chooses t_i in {r/2,r} with prod t_i = T. The page instead defines T afterwards as prod t_i."}
+ ],
+ "motivation_given": true}

@@ -1,0 +1,11 @@
+{"page": "P03",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "The multiplier is not the source of the saving. It is called on two kinds of product.",
+   "problem": "The list is incomplete. Besides the ring products through signed packing (Lemma lem:signed-ring-product, l.3211-3250) and the chirp-numerator squares and products (l.4425-4429, 4891-4895), the paper also uses the established multiplier for the two final products by S, which cost O(p log p) per entry (l.4745-4746, 4899-4900), and for 'the shorter integer records that occur below' in the Gaussian-resampling section (l.3536-3538). No bound and no part of the no-recursion argument changes, because all of these calls are on O(p)- or O(rp)-bit records."},
+  {"severity": "minor",
+   "quote": "each call is an ordinary subroutine call on records of O(rp) bits, fewer than the input, so it is not a call of the improved algorithm on a smaller input",
+   "problem": "The inference is muddled. Calls on inputs smaller than n are exactly what a recursive call would look like, so the size bound is no reason the calls are not recursive. The paper's reason is that the calls go to the previously established Harvey-van der Hoeven multiplier, an independent subroutine (l.3214, l.328-329, l.4904-4906: 'use the previously established multiplier on records of length O(rp)=o(n); they do not call the improved algorithm being constructed'). The o(n) size is only stated alongside that reason."}
+ ],
+ "motivation_given": true}

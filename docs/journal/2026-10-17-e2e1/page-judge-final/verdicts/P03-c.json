@@ -1,0 +1,14 @@
+{"page": "P03",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "The multiplier is not the source of the saving. It is called on two kinds of product.",
+   "problem": "The count of uses is incomplete. Besides the ring products through signed packing and the chirp-phase squares and products, the paper also uses the established multiplier for the two final products by S in assembly: 'The established integer multiplier performs the two products by $S$ in $O(p\\log p)$ time per entry' (lines 4745-4746). It also mentions a fixed number of exact products on $O(p)$-bit numerators for the twist and scalar pointwise products (lines 4896-4898). The page's role is unaffected, but 'two kinds' is not what the paper has."},
+  {"severity": "minor",
+   "quote": "each call is an ordinary subroutine call on records of $O(rp)$ bits, fewer than the input, so it is not a call of the improved algorithm on a smaller input",
+   "problem": "The 'so' does not follow: a call on a shorter input is exactly what a recursive call would be, so the size of the input cannot show that there is no recursion. The paper gives two separate facts: the calls go to a different algorithm, the previously established multiplier, and its records have length $O(rp)=o(n)$. It says 'they do not call the improved algorithm being constructed' (lines 4904-4906; also lines 328-329). That is because the subroutine is the Harvey-van der Hoeven algorithm, not because its records are shorter."},
+  {"severity": "minor",
+   "quote": "The second kind is the chirp numerators, which have $O(p)$ bits and are squared and multiplied directly",
+   "problem": "The numerators themselves are not squared. The paper computes each phase numerator modulo $2r$ as a sum of $d$ terms $s_i j_i^2(r/t_i)$ (lines 4421-4427, 4891-4893). The multiplier computes the $d$ squares $j_i^2$ and the products with $s_i$, and the page leaves out this sum-of-$d$-terms construction."}
+ ],
+ "motivation_given": true}

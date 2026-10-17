@@ -1,0 +1,8 @@
+{"page": "P12",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Such fast algorithms deliver the outputs in a scrambled (bit-reversed) order.",
+   "problem": "Overgeneralized: not every O(q log q) power-of-two algorithm leaves its outputs bit-reversed (e.g. decimation in time with reordered input, or autosort variants give natural order). The paper's claim is specific: its in-place decimation-in-frequency recursion (eq. synthetic-dif, lines 2840-2870) writes (F_t^- z)_j to slot rev_a(j), i.e. it computes B_t F_t^-."}
+ ],
+ "motivation_given": true}

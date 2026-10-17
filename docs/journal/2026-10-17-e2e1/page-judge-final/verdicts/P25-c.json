@@ -1,0 +1,11 @@
+{"page": "P25",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "The chunk is only a tiny power $K=p^{\\epsilon c}$ of $p$",
+   "problem": "Stated as an equality, but the paper sets $K=\\lfloor d^c\\rfloor$ with $d=\\lfloor b^\\epsilon\\rfloor$, $p=6b$, and only has $K=\\Theta(p^{\\epsilon c})$ (eq. sizes, line 4070). The page itself wrote $K=\\lfloor d^{c}\\rfloor$ and $d=\\Theta(p^{\\epsilon})$ a paragraph earlier. The exponent of the margin is unaffected."},
+  {"severity": "minor",
+   "quote": "The terms also carry fixed powers of $\\log p$, for example the $O(p\\log p)$ cost of multiplying two $p$-bit numbers, a normalized factor $\\log p$. Half the margin pays for them",
+   "problem": "The example is in the wrong place. In the paper the $O(p\\log p)$-per-entry products by $S$ are a separate additive cost, normalized to $O(\\log p)=O(p^\\delta)$ and listed in their own row of Table tab:costs ('Final scaling and rounding ... absorbed above', lines 4899-4900, 4829). They are not a $\\log p$ factor on a dominant power $p^{1-2\\kappa}$, and they do not need the $p^\\kappa$ slack. The paper only says the slack 'will cover any remaining fixed power of $\\log p$' (lines 4854-4855, 4984). The final bound is unaffected."}
+ ],
+ "motivation_given": true}

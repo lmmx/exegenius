@@ -1,0 +1,8 @@
+{"page": "P21",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "multiplying a record by $y^s$ moves each coefficient up $s$ places and negates those that wrap past degree $r-1$",
+   "problem": "The rule holds only for 0 <= s < r. The page then uses exponents up to 2r-1 and negative ones (omega_t^{-jk}). For r <= s < 2r, a coefficient a_k with k+s >= 2r wraps twice and keeps its sign, though the stated rule would negate it. The paper says only that multiplication by y^a, for any integer a, 'permutes the coefficients and changes some signs' (line 2783-2784), and that is all the contraction argument needs."}
+ ],
+ "motivation_given": true}

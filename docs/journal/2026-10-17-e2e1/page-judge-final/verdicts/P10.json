@@ -1,0 +1,14 @@
+{"page": "P10",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "The kernel $C$ is obtained from the two-point step of [Butterflies and the fast transform](butterfly.md) by conjugating with $\\mathsf S$ and rescaling",
+   "problem": "The identity H_0 = b S C S multiplies by S on both sides; it is not a conjugation (that would be S C S^{-1}, and S^{-1} = diag(1,-i) differs from S). Inverting gives C = b^{-1} S^{-1} H_0 S^{-1}. The paper states only the identity H_0 = b S C S, obtained 'by direct multiplication' (eq. phase-basic-identities, lines 1826-1828)."},
+  {"severity": "minor",
+   "quote": "differs from the butterfly step only by phase factors",
+   "problem": "H_0 = b S C S also involves the scalar b = (1-i)/2, which has modulus 1/sqrt(2). So it is a rescaling as well as a phase, not 'only phase factors'. The page itself says 'and rescaling' later. The paper's identity is H_0 = b S C S."},
+  {"severity": "minor",
+   "quote": "so $C$ and its inverse $C^{-1}=bI+aX$ are exact on fixed-point records",
+   "problem": "Gaussian dyadic coefficients make C and C^{-1} exact over Z[i,1/2], but each application halves values and adds a fractional bit, so the result does not stay within a fixed p-bit record. The paper says 'These identities use only Gaussian dyadic coefficients' and that the layer is 'exact up to its prescribed final truncation' (lines 1830, 1937-1940), with intermediate values exact Gaussian dyadics."}
+ ],
+ "motivation_given": true}

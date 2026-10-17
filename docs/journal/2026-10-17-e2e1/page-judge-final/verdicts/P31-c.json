@@ -1,0 +1,17 @@
+{"page": "P31",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Each line transform is computed by the [Butterflies and the fast transform](butterfly.md) in $O(t_i\\log t_i)$ operations. ... This bound needs power-of-two lengths, so it does not apply directly to the prime lengths $s_i$ of the integer product",
+   "problem": "An O(n log n) DFT does not in itself need power-of-two lengths (Bluestein chirps, which the paper itself uses, give it for any length). What needs powers of two in the paper is the radix-two butterfly over R_r = C[y]/(y^r+1), where the roots of unity are powers of y (lines 2769-2784, 3499-3500). The paper also never computes the complex F_t by direct complex butterflies or uses an O(T log T) operation count: F_t is turned into a convolution and computed by synthetic transforms over R_r, and costs are tape costs."},
+  {"severity": "minor",
+   "quote": "$$(F_{\\boldsymbol q}u)_k=\\frac1{\\prod_i q_i}\\sum_j u_j\\,e^{-2\\pi i\\sum_i j_ik_i/q_i}.$$",
+   "problem": "The letter i is both the axis index being summed and the imaginary unit in the same exponent. The formula is otherwise correct and matches the paper's normalization (F_q u)_k = (1/q) sum_j u_j e^{-2 pi i jk/q} (line 3508), tensored over the axes."},
+  {"severity": "minor",
+   "quote": "Fixed-point algorithms approximate each with error less than $p^2$ ... the $d$ passes give error less than $dp^2$",
+   "problem": "The page never says what unit the error is measured in. In the paper an approximation has error E when 2^p ||L~u - Lu|| < E (line 3531), so the absolute error is below p^2 2^{-p} (respectively d p^2 2^{-p}), not p^2."},
+  {"severity": "minor",
+   "quote": "treats coprime $s_i<t_i$, with $t_i$ a power of two sufficiently larger than $s_i$",
+   "problem": "The paper's hypotheses are replaced by \"sufficiently larger\". Lemma lem:no-sort-resampling requires theta = t/s - 1 > p/alpha^4, together with p > 100 and 2 <= s < t < 2^p (lines 3550-3553). It does not require t to be a power of two; that comes from where it is applied."}
+ ],
+ "motivation_given": true}

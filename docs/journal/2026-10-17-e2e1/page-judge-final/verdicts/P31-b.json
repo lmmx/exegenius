@@ -1,0 +1,14 @@
+{"page": "P31",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "This bound needs power-of-two lengths, so it does not apply directly to the prime lengths $s_i$ of the integer product",
+   "problem": "An O(q log q) operation count holds for every length q (Bluestein or Rader reductions), so the bound itself does not need power-of-two lengths; only the radix-two butterfly recursion does. The paper gives a different reason for resampling: 'The transform lengths needed for the integer product are pairwise coprime, whereas the synthetic transforms use powers of two' (lines 3499-3500)."},
+  {"severity": "minor",
+   "quote": "The one-dimensional lemma of [Gaussian resampling](gaussian-resampling.md) treats coprime $s_i<t_i$, with $t_i$ a power of two sufficiently larger than $s_i$.",
+   "problem": "The lemma (lines 3550-3553) does not require t to be a power of two. Its hypotheses are integers p>100, 2<=s<t<2^p, gcd(s,t)=1 and the quantitative gap theta=t/s-1>p/alpha^4. The page replaces the gap with 'sufficiently larger' and leaves out p>100 and t_i<2^p."},
+  {"severity": "minor",
+   "quote": "$$(F_{\\boldsymbol q}u)_k=\\frac1{\\prod_i q_i}\\sum_j u_j\\,e^{-2\\pi i\\sum_i j_ik_i/q_i}.$$",
+   "problem": "The same symbol i stands for the axis index of the inner sum and for the imaginary unit in one exponent, so the formula is ambiguous as written. The formula itself is correct: with the paper's normalization (F_q u)_k=(1/q) sum_j u_j e^{-2 pi i jk/q} (line 3508), the tensor product gives exactly this expression."}
+ ],
+ "motivation_given": true}

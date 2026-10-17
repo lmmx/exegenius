@@ -1,0 +1,14 @@
+{"page": "P25",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "The remedy is to let one pass do the work of many levels",
+   "problem": "Neither primitive does several levels in one pass. The chunk interchange costs O(Vu^tau) for u address bits, and the simultaneous layer costs O(Vd^{lambda'}) for d axes (paper lines 95-111). That is a sublinear number of passes per group of levels, not a single pass."},
+  {"severity": "minor",
+   "quote": "The chunk is only a tiny power $K=p^{\\epsilon c}$ of $p$",
+   "problem": "The paper defines K = floor(d^c) with d = floor(b^epsilon), so K = Theta(p^{epsilon c}) (eq:sizes, line 4070), not exactly p^{epsilon c}. The page itself gave K = floor(d^c) and d = Theta(p^epsilon) a few lines earlier."},
+  {"severity": "minor",
+   "quote": "The terms also carry fixed powers of $\\log p$, for example the $O(p\\log p)$ cost of multiplying two $p$-bit numbers, a normalized factor $\\log p$. Half the margin pays for them",
+   "problem": "In the paper the O(p log p) per-entry products (the two final products by S) form their own term, with normalized cost O(log p) = O(p^delta), listed in the 'final scaling' row as 'absorbed above' (lines 4829, 4899-4900). They are not a log p factor on a dominant term paid for by the kappa slack. The paper says only that the slack covers 'any remaining fixed power of log p' (lines 4854-4855, 4984). The page's conclusion still holds; only the example is misattributed."}
+ ],
+ "motivation_given": true}

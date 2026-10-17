@@ -1,0 +1,19 @@
+{"page": "P32",
+ "items": [
+  {"id": "S4.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page states QF_t u = a-bar . (a*(a-bar . u))/T for even t_i and proves it the way the paper does: it checks periodicity, expands the coefficient of u_k with (j-k)^2 = j^2-2jk+k^2, and matches it to the coefficient of QF_t, where Q reads frequency (-s_i j_i)_i. It also explains why the identity is needed, which the assignment asked for: the sort for Q is avoided, and 'the factor s_i in the chirp is what encodes Q'."},
+  {"id": "S4.3.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page gives the chirp exactly as the paper defines it, 'a_j = exp(-pi i sum_{i=1}^d s_i j_i^2/t_i)', with a-bar as its conjugate. This is a definition, so there is nothing further to derive."},
+  {"id": "S4.3.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page does the computation the paper leaves implicit: -pi i s_i((j_i+t_i)^2-j_i^2)/t_i = -pi i s_i(2j_i+t_i). It concludes 'an integral multiple of 2 pi i because t_i is even, so a has period t_i in coordinate i', and it motivates the step by noting that the convolution reads a modulo t_i."},
+  {"id": "S4.3.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes the coefficient as (1/T) a-bar_j a_{j-k} a-bar_k and expands (j_i-k_i)^2. The exponent sum_i (pi i s_i/t_i)(j_i^2-(j_i^2-2j_ik_i+k_i^2)+k_i^2) has the correct signs and gives (1/T) exp(2 pi i sum s_i j_i k_i/t_i), as in the paper. The last cancellation to 2j_ik_i is left implicit but is immediate."},
+  {"id": "S4.3.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page defines F_t with the negative-sign kernel and the normalization 1/T, and defines Q as putting the frequency (-s_ij_i)_i at position j. From these it gets the QF_t coefficient (1/T) exp(2 pi i sum s_i j_i k_i/t_i) and matches it: 'Q reads frequency (-s_ij_i)_i from the negative-sign transform'. Its d=1, t=2, s=1 check (a_1=-i, coefficient -1) is correct."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Executing $Q$ means sorting data on tapes, which costs a logarithmic factor beyond a linear pass, the kind of factor the power saving removes.",
+   "problem": "The power saving removes only a factor (lg n)^kappa with kappa = 2^{-182}, not a logarithmic factor. The paper charges a label-and-sort for P_t at O(tp log t), a full log factor, and that would swamp the saving. The wording suggests the saving is a full log factor."}
+ ],
+ "motivation_given": true}

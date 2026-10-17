@@ -1,0 +1,14 @@
+{"page": "P18",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "A form is nondegenerate when its Gram matrix (the matrix of pairings of basis vectors) is invertible, which is why dimensions must be finite.",
+   "problem": "The causal link is reversed: nondegeneracy (trivial radical) makes sense in any dimension; it is the Gram-matrix criterion that needs finite dimension. The paper simply works with finite-dimensional spaces (F = Q^h or F_2^h, label space F^{\\otimes 3} of dimension m) and never derives finiteness from the definition of nondegeneracy."},
+  {"severity": "minor",
+   "quote": "The basis vectors $\\mathbf b\\otimes\\mathbf g_j$ of $A\\otimes C$ span $B\\otimes C$ and the vectors $\\mathbf p\\otimes\\mathbf g_j$ span $P\\otimes C$",
+   "problem": "Notation slip: $(\\mathbf g_j)$ was introduced as a basis of $G$, but here it must be a basis of $C$; no basis of $C$ is introduced. The argument (giving $A\\otimes C=(B\\otimes C)\\perp(P\\otimes C)$, as in the paper's $A\\otimes F=(B\\otimes F)\\perp(P\\otimes F)$) is otherwise correct."},
+  {"severity": "minor",
+   "quote": "so a stage with no factors contributes a factor $1$.",
+   "problem": "Imprecise: no stage has no factors. In the paper the empty tensor product is used for $A=F^{\\otimes(j-1)}$ at stage 1 (so $\\dim A=1$, $P=A$ and hence $B=P^\\perp=0$) and for $Q\\subset F^{\\otimes(3-j)}$ at stage 3. The page omits the consequence $B=0$ at stage 1 that the paper draws from this convention."}
+ ],
+ "motivation_given": true}

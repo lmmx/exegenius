@@ -1,0 +1,13 @@
+{"page": "P01",
+ "items": [
+  {"id": "S5.4.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The setup is given in full: \"Let $\\zeta=e^{\\pi i/r}$, so $\\zeta^r=-1$. Define $\\Theta:\\mathbb C[x_d]/(x_d^r-1)\\to\\mathcal R_r$ by $x_d\\mapsto\\zeta y$\", and $\\mathcal R_r=\\mathbb C[y]/(y^r+1)$ is defined in the opening paragraph, as in paper lines 4302-4307."},
+  {"id": "S5.4.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page gives well-definedness from \"$(\\zeta y)^r=(-1)(-1)=1$\" (with $\\zeta^r=-1$ shown just before), gets diagonality from \"$\\Theta(x_d^k)=\\zeta^k y^k$\", concludes isomorphism with inverse $\\zeta^{-k}$, and gets sup-norm preservation from \"$|\\zeta^{\\pm k}|=1$\". This matches paper lines 4308-4312 and supplies the norm reason the paper leaves implicit."},
+  {"id": "S5.4.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes $k+l=j+hr$ with $h\\in\\{0,1\\}$. It explains that the twist contributes $\\zeta^{k+l}$ and negacyclic reduction contributes $(-1)^h$, displays $\\zeta^{k+l}(-1)^h=\\zeta^j(\\zeta^r)^h(-1)^h=\\zeta^j$, and concludes that untwisting by $\\zeta^{-j}$ recovers the cyclic coefficient, as in paper lines 4313-4320. The worked $r=2$ example (constant term $f_0g_0+f_1g_1$, $y$-coefficient $i(f_0g_1+f_1g_0)$) is correct."},
+  {"id": "S5.4.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page defines $M=T/r$, $\\iota$ and $D_\\pm$, notes that $\\iota D_+$ applies $\\Theta$ linewise with inverse $D_-\\iota^{-1}$, says $\\mathcal M_r$ convolves the first $d-1$ axes dividing by $T$, and gives the identity $=f*g/T$, following paper lines 4321-4347. The contraction is shown explicitly: $\\mathcal M_r$ averages $rM$ signed products (paper 3378-3387), and the isometries give $\\|\\mathcal M_{\\mathbb C}(f,g)\\|\\le\\|f\\|\\|g\\|$. The equality itself is linked to the ring isomorphism only implicitly, through the opening remark that convolution along the last axis is multiplication in $\\mathbb C[x_d]/(x_d^r-1)$. That is about as much as the paper's own \"Consequently\"."}
+ ],
+ "errors": [],
+ "motivation_given": true}

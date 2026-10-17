@@ -1,0 +1,8 @@
+{"page": "P19",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "butterflies compute the [Discrete Fourier transform](dft.md) of $z$ in $\\log_2 t$ layers. The transform is $(F_tz)_m=\\frac1t\\sum_{j=0}^{t-1} z_j\\omega_t^{-jm}$, where $\\omega_t=e^{2\\pi i/t}$ ... multiplies the two differences by $1$ and $\\omega_4^{-1}=-i$",
+   "problem": "The page sets the butterfly recursion over complex numbers with $\\omega_t=e^{2\\pi i/t}$. In the paper (lines 2796-2845) the butterfly procedure computes the synthetic transform $F_t^-$ over $\\mathcal R_r=\\mathbb C[y]/(y^r+1)$ with $\\omega_t=y^{2r/t}$ for $t\\mid 2r$, so each twiddle $\\omega_t^{-k}$ is a signed shift and $\\omega_4^{-1}=y^{-r/2}$, not $-i$. The derivation still holds, because it uses only $\\omega_t^{t/2}=-1$ and $\\omega_t^2=\\omega_{t/2}$, and both are true for $y^{2r/t}$. But the page never makes this connection, even though its second paragraph speaks of signed shifts. The complex formula does match the paper's separate $F_q$ (line 3508)."}
+ ],
+ "motivation_given": true}

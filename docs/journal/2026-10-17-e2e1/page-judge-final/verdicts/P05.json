@@ -1,0 +1,25 @@
+{"page": "P05",
+ "items": [
+  {"id": "S5.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page proves that Phi is an isomorphism, derives the triangular coordinate formula, explains the descending-order prefix-controlled shifts with padding left fixed, and totals O(d^2) charged axis moves into O(Tp d^2(1+l^tau)). This follows the paper's section on the cyclic-convolution layout."},
+  {"id": "S5.3.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page defines P_i as the prefix product and mu_i = P_i^{-1} mod s_i, and justifies that the inverse exists: \"It is invertible because $P_i$ is coprime to $s_i$\" (from pairwise coprimality, stated earlier). This matches the paper, which gives no justification."},
+  {"id": "S5.3.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "\"Since $s_i\\mid S$, each $x_i^{\\mu_iS}=1$, so $\\Phi$ respects $x^S=1$\" correctly shows Phi(x)^S = 1, which the paper only asserts."},
+  {"id": "S5.3.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page shows Phi(x^k)=1 iff s_i | mu_i k for all i, iff s_i | k (mu_i a unit), iff S | k (pairwise coprime). So x has image of order S, and its S distinct powers exhaust the S target monomials, giving an isomorphism. This is the paper's reasoning written out."},
+  {"id": "S5.3.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes k in mixed radix, notes that b_i = mu_i k mod s_i, and reduces this to the paper's formula. The worked example s=(3,5), k=4 -> (1,3) checks out. The padding scan in the same passage is given, but its scan order (a_d outermost, a_1 innermost) and why valid addresses receive the records in order are left implicit."},
+  {"id": "S5.3.5", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "\"Terms with $j>i$ vanish modulo $s_i$, since $s_i$ divides $P_j$, and $\\mu_iP_i\\equiv1$ modulo $s_i$\": both facts are applied to mu_i k to get the formula, as in the paper."},
+  {"id": "S5.3.6", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page reorders to (a_1,...,a_d) so that controls precede targets, updates i=d,...,1 \"so the offset is computed from the original digits\", and rotates [0,s_i) while fixing [s_i,t_i) \"so zero padding stays zero\", all as in the paper. It leaves out the paper's identity case when a lower-index control is invalid, which lies outside this sub-step's passage and changes nothing, since those records are zero."},
+  {"id": "S5.3.7", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page states that the equal-width chunk interchange costs O(VL^tau) with V=Tp, describes the leading-bit move for unequal widths (\"adding a fixed number of linear passes\"), uses O(d^2) moves to reverse the axes, adds O(dTp) for the shifts and scans, and arrives at O(Tp d^2(1+l^tau)), matching the paper."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "The map is implemented by these shifts, each of linear cost by [Controlled shifts and rational scalings](controlled-shifts.md), which includes computing the offsets.",
+   "problem": "The controlled-shift lemma (Lemma lem:ordered-affine-streams) covers a full target modulus Q=q^b whose offset is prepared in b^{O(1)} time. Here the shift acts on the valid interval [0,s_i) inside the padded [0,t_i), and each offset costs poly(p). The paper bounds offset preparation separately: at most T/t_i control prefixes give O(dTp^C/r)=o(Tp), since t_i >= r/2 and r exceeds every fixed power of p. The linear-cost conclusion holds, but this citation does not by itself justify the offset cost."}
+ ],
+ "motivation_given": true}

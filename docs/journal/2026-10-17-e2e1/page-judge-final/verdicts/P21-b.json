@@ -1,0 +1,8 @@
+{"page": "P21",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "multiplying a record by $y^s$ moves each coefficient up $s$ places and negates those that wrap past degree $r-1$",
+   "problem": "This is exact only for 0 <= s < r. The roots used include y^{2rj/t} with exponents up to 2r and negative exponents (F_t^- uses omega_t^{-jk}). For r < s < 2r a coefficient can wrap twice and keep its sign, and for negative s coefficients wrap below degree 0. The paper (lines 2783-2784) says only that multiplication by y^a, for any integer a, permutes the coefficients and changes some signs. A careful reader would first reduce s mod 2r and use y^r = -1; the conclusion that it is a signed permutation, and so an isometry, still holds."}
+ ],
+ "motivation_given": true}

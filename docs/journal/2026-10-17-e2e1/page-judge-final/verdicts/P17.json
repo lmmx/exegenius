@@ -1,0 +1,11 @@
+{"page": "P17",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "A fixed rational linear combination of the controls, reduced modulo $Q$, qualifies.",
+   "problem": "The page drops the lemma's hypothesis that the rational coefficients have denominators prime to $q$ (paper, Lemma ordered-affine-streams: 'finitely many rational coefficients whose denominators are prime to $q$'). Without it the reduction modulo $Q=q^b$ is undefined; the phrase 'reduced modulo $Q$' only implicitly presupposes it."},
+  {"severity": "minor",
+   "quote": "Negation sends block $y$ to block $Q-y$: it leaves block $0$ fixed",
+   "problem": "Literally, $y=0$ is sent to $Q$, which is not a position in $[Q]$; the map is $y\\mapsto -y \\bmod Q$. The next clause, which matches the paper ('Negation leaves the block at zero fixed and reverses the order of the other $Q-1$ blocks'), makes the intended reading clear."}
+ ],
+ "motivation_given": false}

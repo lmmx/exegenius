@@ -1,0 +1,8 @@
+{"page": "P12",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Such fast algorithms deliver the outputs in a scrambled (bit-reversed) order.",
+   "problem": "Overgeneralized. Bit-reversed output comes from the specific in-place decimation-in-frequency procedure the paper uses (it computes B_t F_t^-). Fast power-of-two algorithms in general do not all produce it: in-place decimation in time takes bit-reversed input and gives natural-order output, and autosort variants give natural order throughout. The claim should be limited to the decimation-in-frequency procedure."}
+ ],
+ "motivation_given": true}

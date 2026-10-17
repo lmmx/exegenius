@@ -1,0 +1,122 @@
+{
+ "page": "P22",
+ "items": [
+  {
+   "id": "S1.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "parameter family $K=\\lfloor d^c\\rfloor$, $r=2^{\\Theta(p/d)}$ (record scans absorb polynomial address work; $K/\\log p\\to\\infty$ keeps the exceptional set small)",
+    "common selected offset $\\rho$ in every chunk"
+   ],
+   "note": "The page carries the whole step: the rewrite $H_0^{\\otimes D}=b^D\\mathcal S_DC^{\\otimes D}\\mathcal S_D$, the network with $s$ children on $V/W$ streams, the unrolled recurrence giving $O(Vd^{\\lambda'})$, the exact guard width and the single truncation $Q_p$, and it explains the 'barely below' feature through $s/W$ being barely below $m$."
+  },
+  {
+   "id": "S1.6.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "values $a=\\frac{1+i}{2}$, $b=\\frac{1-i}{2}$ (and $C=H\\mathsf SH$), without which the identities cannot be checked",
+    "the direct multiplication itself"
+   ],
+   "note": "The page asserts 'satisfies $H_0=b\\,\\mathsf SC\\mathsf S$, $C^2=X$ and $C^4=I$' with a citation and a link to the kernel page; $a,b$ are never given, so nothing is shown to follow."
+  },
+  {
+   "id": "S1.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the residual basis $v_\\xi$ is orthonormal (the frame-change product formula uses this; only $M$ need not preserve the dot product)",
+    "why the count is $m(m-1)+3m$: at most $m-1$ clears per pivot, each row swap three additions, reversal valid because row additions are involutions",
+    "source/sink $Z_{a,f}$ signs, the scalar $i^{27f}$ and bank negation turn endpoint kernels forward and add no child",
+    "the Proposition then gives $C^{\\otimes e}$ on every role, including roles with arbitrary initial scratch",
+    "$C^{-1}=-iZCZ$, the source of the inverse-child formula"
+   ],
+   "note": "The page follows the paper: conjugation $\\mathcal P_\\Gamma X_v\\mathcal P_\\Gamma^{-1}=X_{\\Gamma v}$ moves the residual vectors to coordinates, giving 'one child on $f=e/m$ axes per residual vector, exactly $s$ children in all', and the inverse-child identity avoids extra calls. The row-addition count is stated without its reason, and the endpoint corrections are left out."
+  },
+  {
+   "id": "S1.6.2b",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "$b^2=-i/2$, which gives the closed form of $b^D$"
+   ],
+   "note": "'Applying the identity on every selected bit gives $H_0^{\\otimes D}=b^D\\mathcal S_DC^{\\otimes D}\\mathcal S_D$', with $\\mathcal S_D$ defined by the phase $i^{x_1+\\dots+x_D}$ and the exactness of $b^D$ explained. This is the same tensoring argument as the paper."
+  },
+  {
+   "id": "S1.6.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the time bound $O(V(L^\\tau+1)+MA_{\\rm rect}^3+\\delta_{\\rm bad}MA_{\\rm rect}(R+A_{\\rm rect}))$"
+   ],
+   "note": "This step is derived on another page, as the assignment directs. The page states the mechanism ('eight cyclic shifts of whole chunk ranges plus a repair of a bounded set of exceptional addresses') and links it, but gives no cost."
+  },
+  {
+   "id": "S1.6.3b",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "per-row-addition cost $O(V(L^\\tau+1))$ from the packed lemma, with slot width $L=fK\\le eK$",
+    "the asymptotic hypotheses under which the lemma's extra terms ($MA_{\\rm rect}^3$, exceptional-set repair) are $O(V)$",
+    "$\\tau$ (the chunk-swap exponent) is never introduced on the page"
+   ],
+   "note": "'As their number is fixed, the complete binary change of basis ... cost $O(V((eK)^\\tau+1))$' gives only the fixed count. The cost of one packed addition, where $(eK)^\\tau$ comes from, never appears, so the bound is asserted."
+  },
+  {
+   "id": "S1.6.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "$k_0=\\lceil\\log_m d\\rceil$, $R_{\\rm row}=2^{q_0K}\\ge W^{k_0}$, padding to a multiple of $W^{k_0}$ (why padding at most doubles), divisibility by $W^{k_0-j}$ at depth $j$ (the page says only 'divisible by $W$')",
+    "case $D\\le q_0$ handled entirely by individual kernels",
+    "condition $\\tau(1+c/\\beta)<\\lambda$",
+    "$\\sigma\\ge0$ (covers $s/W<1$)",
+    "node overhead also includes scalar gates, endpoint corrections and bank reassembly at constant scans"
+   ],
+   "note": "The page sets up $\\Xi(e)\\le\\frac sW\\Xi(e/m)+O((eK)^\\tau+1)$ with leaves $O(e)$ below $d^\\beta$, uses $K\\le e^{c/\\beta}$, sums internal nodes geometrically and bounds leaves by $e^\\sigma(e/m^j)^{1-\\sigma}\\le e^\\sigma d^{\\beta(1-\\sigma)}$, then combines the base-$m$ pieces, all as in the paper. The row-index bookkeeping is only sketched."
+  },
+  {
+   "id": "S1.6.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the $h=100$ values of $m,W,s$ giving $m^{10}<B<m^{11}$, $\\nu=11$, $C_1=20$",
+    "origin of $24W^3$ (at most $12W$ gates, each $\\le2W^2$ operations)",
+    "contents of 'the pieces and other operations': piece count $\\le md$ giving $8mB^2d^{\\nu+2}$, $\\le8d$ for individual kernels, $t+9$ for outer phases and $b^D$ (shift charged as $t$ halvings)",
+    "intermediate step $B^{\\log_md+2}=B^2d^{\\log_mB}\\le B^2d^\\nu$",
+    "signs and multiplication by $i$ preserve both bounds"
+   ],
+   "note": "The depth recurrence $\\chi(e)\\le s\\chi(e/m)+E$, $\\chi\\le8e$ at leaves, the step $s\\varphi+E\\le\\Psi\\varphi$ giving $8\\Psi^2d^{\\vartheta+1}$, the induction 'lies in $2^{-(p+\\ell)}\\mathbb Z[i]$ with modulus at most $2^\\ell$' and $\\Delta=o(p)$ from $\\epsilon C_1<1$ follow the paper, under renamed symbols ($\\chi,\\Psi,\\vartheta$ for $A,B,\\nu$). The final total below $128m\\Psi^2d^{\\vartheta+3}$ is asserted."
+  },
+  {
+   "id": "S1.6.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'A row of $\\mathcal H$ consists of all products of $D$ entries of $H_0$ ... absolute row sum is $(\\tfrac12+\\tfrac12)^D=1$', then the triangle inequality. This is correct and justifies the row-sum claim the paper only asserts."
+  },
+  {
+   "id": "S1.6.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "truncated numerators have magnitude at most $2^p$, so they fit the supplied width $w$"
+   ],
+   "note": "Truncation toward zero cannot increase either component, so it keeps the disk, and each component changes by less than $2^{-p}$, giving the $\\sqrt2\\,2^{-p}$ bound, exactly the paper's argument."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "the overhead is $O(e^{\\tau(1+c/\\beta)}+1)=O(e^\\lambda)$ for a fixed $\\lambda<1$ above $\\sigma$ and $\\tau$",
+   "problem": "Requiring $\\lambda$ above $\\sigma$ and $\\tau$ does not give the equality, since $\\tau(1+c/\\beta)>\\tau$. The paper requires $\\tau(1+c/\\beta)<\\lambda$, which also forces $c$ small enough that $\\tau(1+c/\\beta)<1$."
+  },
+  {
+   "severity": "minor",
+   "quote": "A chain passes through all $s$ children, not $s/W$ of them",
+   "problem": "The paper does not claim that every chain passes through all $s$ children. To get a conservative upper bound it concatenates all scalar gates and all $s$ calls of an invocation. The $1/W$ in the time recurrence came from the smaller stream volumes, not from a smaller number of children."
+  }
+ ],
+ "motivation_given": true
+}
