@@ -79,7 +79,8 @@ No further experiment is planned. Inconclusive results are recorded as such, wit
 5. **The `ASSERTS` classifier:** no rule proposed. Its agreement with hand labels fell to 0.76 in A3.
 
 **What is not validated, stated plainly:**
-- **Every row rests on one paper.** No row is a general default without a second document, which only the author can supply.
+- **Every row rests on one paper.** No row is a general default without a second document, which only the author can supply (issue #19).
+- **No complete wiki has been run with the final configuration.** Every row tests one stage on its own, so nothing here shows the stages work together (issue #18).
 - **Writing is not shown adequate on key-step pages by either model.** The configuration is the status quo because W3's rule says so, not because it passes.
 - **Recall figures are on planted errors** in six pages, not proof against every real error.
 - **Simulated readers' effectiveness is unvalidated.** They stay on by default by the author's decision, as part of the intended design. SR1 neither showed them useful nor showed them useless, so their coverage scores and the repairs their stuck points drive should be read as unvalidated signals.

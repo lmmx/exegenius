@@ -8,6 +8,7 @@ A reusable programme for finding, for a given kind of document, task and require
 | **Evaluation Registry** | the evidence: one record per experiment, built mechanically from git refs (run logs, transcripts, verdicts), with every value's basis (measured, estimated, reported, unavailable) | `registry/` (`schema.md`, `specs/`, `experiments/`, `judging.json`, `INDEX.md`) |
 | **Budget** | the cumulative record of cost and value: usage-meter readings supplied by the author, measured spend per experiment split into runs and judging (`tools/spend.py`), and what each experiment settled, used to size and choose the next experiment | `budget.md` |
 | **Capability Map** | the conclusions: which configurations meet which calibre, for which document class, at what cost, with what uncertainty, at which versions | `capability-map.md` |
+| **Capability landscape** | every pipeline stage against every model and effort tested, as one table with a note and evidence link per cell (issue #16); generated from `landscape.json` by `tools/landscape.py` | `landscape.md` |
 | **Explanatory Fidelity Evaluation** | the research track for levels 3 and 4: does the wiki carry a reader along the proof plan's paths, and does the reader come away understanding? | `fidelity/README.md` |
 | **Rubrics** | per-document rubrics for the central chain of reasoning, preregistered | `rubrics/` |
 | **Plans** | each experiment's preregistered question, arms, measures and decision rules, committed before its outputs exist | `plans/` |
