@@ -1,0 +1,141 @@
+{
+ "rule": "plans/A2.md: an asserting gap on a clean page outside a native defect is checked against the paper before the arm map is read; a genuine misstatement (false as stated, a step that does not follow, or a hypothesis the paper requires dropped) is a genuine find, excluded from F_A. Borderline verdicts are flipped as a sensitivity analysis.",
+ "paper_sha256": "6d2b6d00dc3422ddb3ef0b2b36f2f204c42fba8f843f25bf41197530ee384ad0",
+ "items": [
+  {
+   "row": "94",
+   "page": "fast-address-interchange",
+   "quote": "Both are $O(m^{k\\tau})$, since $m\\ge2$.",
+   "note": "The page only says to fix tau<1, but the bound k = O(m^{k tau}) for the case s/W <= 1 needs tau>0, and m>=2 alone does not give it. The paper chooses tau in (0,1) (line 1478, and 0<tau<1 at line 1343). The hypothesis m>=2 is also never stated earlier on the page (paper line 1450).",
+   "genuine": 1,
+   "borderline": true,
+   "reason": "The paper takes tau in (0,1) (1343, 1478); the page fixes only tau<1, and 'k = O(m^{k tau})' in its s/W<=1 branch is false for tau<=0. A dropped hypothesis the paper states. Borderline: for the paper's network s/W>1, so any admissible tau is positive."
+  },
+  {
+   "row": "131",
+   "page": "recursive-power-saving",
+   "quote": "Taking $\\lambda$ with $\\log_m(s/W)<\\lambda<1$ makes the ratio below 1",
+   "note": "The choice of lambda also has to satisfy lambda > tau(1+eta/vartheta) from the outside-work bound, and lambda > tau, sigma. That is possible only if eta is small enough that tau(1+eta/vartheta)<1; the page says only that eta>0 is fixed. The paper (lines 2394-2399) requires max{tau,sigma}<lambda<1 and tau(1+c/beta)<lambda, so the page is missing the hypothesis on eta and the full list of conditions on lambda.",
+   "genuine": 1,
+   "borderline": false,
+   "reason": "The page leaves eta>0 unrestricted, but lambda must also exceed tau(1+eta/vartheta) (which the page itself states) and be below 1; the paper chooses c so that tau(1+c/beta)<1 (2394-2399, 4021). Without that condition no admissible lambda need exist. A dropped hypothesis."
+  },
+  {
+   "row": "130",
+   "page": "fast-address-interchange",
+   "quote": "A field of $u=m^k$ bits therefore has $Q_k=O(u^\\tau)$",
+   "note": "The recurrence proves the bound only for widths that are powers of m, and only when a row field preceding both chunks has length divisible by W^k (paper Proposition power-interchange, lines 1475-1487). The page states no such row hypothesis. The step from this case to arbitrary field widths u, as in the page's opening claim and the O(Vu^tau) bound, is Lemma chunk-swap (lines 1631-1660), which the page does not mention.",
+   "genuine": 1,
+   "borderline": true,
+   "reason": "The paper's power-width bound assumes a row field preceding both chunks with length divisible by W^k (1475-1487); arbitrary widths and rows come later (Lemma chunk-swap, 1631-1660). The page drops the row hypothesis. Borderline: a simplification an explanation page might make, since rows are padded on the role-streams page."
+  },
+  {
+   "row": "339",
+   "page": "subset-intersection-construction",
+   "quote": "a label containing $t_T$ may grow to $t_S^\\perp$, since $t_T\\perp t_S$, adding $h-2$ dimensions",
+   "note": "Mis-typed: labels are subspaces of F=(Q^h)^{tensor 3}, while t_T and t_S^perp live in Q^h. In the paper the growth is P tensor <t_X> inside P tensor t_Y^perp, and the added dimension h-2 is that of P tensor <t_X,t_Y>^perp, with P a line. Containment of <t_T> in t_S^perp is what orthogonality gives, but the statement as written is not about labels. Paper lines 945-950 and 1048-1056.",
+   "genuine": 1,
+   "borderline": true,
+   "reason": "Labels are subspaces of (Q^h)^{tensor 3}; t_S^perp is in Q^h. The paper's growth is P tensor <t_X> inside P tensor t_Y^perp (945-950, 1046-1058). As written the sentence is false. Borderline: the intended factor-level meaning is recoverable and the dimension count h-2 is right."
+  },
+  {
+   "row": "273",
+   "page": "linear-network-roles",
+   "quote": "its operator is $D_\\nu$, however many gates it passes through",
+   "note": "The page just derived that a route applies epsilon_w D_sink D_source^{-1}. With source frame I and sink frame D_nu the operator is epsilon_w D_nu, not D_nu; the example is correct only for sign +1 (for instance a scratch role).",
+   "genuine": 1,
+   "borderline": false,
+   "reason": "The page has just derived that a route applies epsilon_w D_sink D_source^{-1} (paper 818-822 keeps the sign). With source frame I and sink frame D_nu the operator is epsilon_w D_nu; 'its operator is D_nu' is false for sign -1."
+  },
+  {
+   "row": "156",
+   "page": "address-shear-factorization",
+   "quote": "Per wire, the interchanges are fewer than $R$",
+   "note": "What is shown is s_b < W_b R, a bound on the total over all wires. It gives fewer than R interchanges per wire only on average, not for each wire. The correct statement is that the interchanges number fewer than R per wire on average.",
+   "genuine": 0,
+   "borderline": true,
+   "reason": "'Per wire, the interchanges are fewer than R' follows the total bound s_b < W_b R and reads naturally as a ratio (interchanges per wire), which is what the paper uses (s/W < m). Not a misstatement. Borderline: 'per wire' could be read as 'for each wire'."
+  },
+  {
+   "row": "177",
+   "page": "linear-network-roles",
+   "quote": "if a route has source frame $I$ and sink frame $D_\\nu$, its operator is $D_\\nu$, however many gates it passes through.",
+   "note": "By the page's own formula the route applies epsilon_w D_sink D_source^{-1}, which is -D_nu when epsilon_w = -1. The operator is D_nu only for sign +1 or after the sign has been undone, as the page says two paragraphs earlier. The paper (lines 818-822) keeps the sign in the route operator.",
+   "genuine": 1,
+   "borderline": false,
+   "reason": "Same defect as row 273: the example drops the sign epsilon_w that the page and the paper (818-822) keep."
+  },
+  {
+   "row": "54",
+   "page": "address-shear-factorization",
+   "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used.",
+   "note": "This does not follow from the preceding sentences, which only require q not to divide the denominators of the entries of M. Nothing requires q to avoid numerators of M (an entry q/1 is fine). The matrices actually used include F_1, F_2 and their inverses, whose entries come from elimination on M. Their denominators can be divisible by q, because pivots can contain q, even when M's entries are fine. It is an extra hypothesis (choose q large relative to the finitely many matrices), not a consequence, and the page never states it as one.",
+   "genuine": 1,
+   "borderline": true,
+   "reason": "'So q divides no numerator or denominator' does not follow from 'q must not divide xi', which concerns M's denominators only; in the paper it is a choice of q (avoid every denominator of the table of factors and inverses and every diagonal numerator, 1415-1418; 'a prime exceeding all numerators and denominators suffices'). Genuine as a non sequitur. Borderline: the content is the paper's own sufficient choice."
+  },
+  {
+   "row": "86",
+   "page": "recursive-power-saving",
+   "quote": "each on a stream of volume $V/W$",
+   "note": "The exact volume V/W requires the stream to be split into W role streams by a row field whose length is divisible by W^k (paper lines 1481-1483, 2316-2321). The page states no row hypothesis, and gives no reason why the parameter must be a power of m, so the claim is stated without a hypothesis it needs.",
+   "genuine": 1,
+   "borderline": true,
+   "reason": "Exact volume V/W per subcall needs the paper's row hypothesis (row field divisible by W^k, 1481-1483); the page drops it. Same as row 130, borderline for the same reason."
+  },
+  {
+   "row": "324",
+   "page": "tape-interchange",
+   "quote": "The outer two cost linear time.",
+   "note": "Unsupported and inconsistent with the page. D<-D-H is the same kind of address shear as the middle update H<-H+D (with the roles of the fields swapped and a sign changed), and the page says the shear needs the whole network and recursion to reach O(V u^tau). If the outer two were plain linear passes, so would the shear be. The page never says why these two are cheaper.",
+   "genuine": 0,
+   "borderline": false,
+   "reason": "False alarm. The paper: 'The first and last updates target a later field controlled by an earlier field' (1441-1442); with H before D, updating D from H streams in linear time, while the middle update (an earlier field from a later one) is the costly shear. 'The outer two cost linear time' is true; the asymmetry is the tape order. At most a followability gap (the page does not say why)."
+  },
+  {
+   "row": "313",
+   "page": "address-shear-factorization",
+   "quote": "pivot on the topmost nonzero row's rightmost entry",
+   "note": "The page says the rightmost entry of the topmost nonzero row, but that entry can be zero (e.g. row (1,0)), and a zero pivot cannot be used. The paper's proof of Lemma lower-lower (paper.tex lines 1376-1377) chooses the topmost nonzero row and its rightmost NONZERO entry. The page also gives only a one-line sketch of why the left and lower clearings are lower-triangular operations and leave one 1 per row and column.",
+   "genuine": 1,
+   "borderline": false,
+   "reason": "The paper pivots on the topmost nonzero row's rightmost NONZERO entry (1376-1377). The page's 'rightmost entry' can be zero (row (1,0)), and the recipe then fails."
+  },
+  {
+   "row": "42",
+   "page": "recursive-power-saving",
+   "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.",
+   "note": "The page gives no reason why a row addition costs this much, and its only cited bound is for an address interchange. In the paper (lines 2226 and 2295-2298) this bound comes from the packed-selected-bit-rectangle lemma, for a row addition on f selected bits (one per K-bit chunk) of whole slots, under that lemma's asymptotic hypotheses, not for adding two u-bit fields. The reader also cannot see why the outside work is only a fixed number of such additions.",
+   "genuine": 0,
+   "borderline": true,
+   "reason": "The paper gives exactly this bound for a row addition on a slot of (e/m)K address bits via Lemma packed-selected-bit-rectangle, O(V((eK)^tau+1)) (2224-2226, 2295-2298); the page's u = f Omega is the same bit count. The note's claim that the bound is for a different operation is wrong; the rest is a followability gap. Borderline: the page drops the lemma's asymptotic hypotheses (2224)."
+  },
+  {
+   "row": "204",
+   "page": "linear-network-roles",
+   "quote": "Every role keeps the endpoint operator (cited), auxiliary roles included.",
+   "note": "This conflicts with the opening claim that the network 'restores every auxiliary value it uses': if an auxiliary role keeps a nontrivial endpoint operator D_sink D_source^{-1}, its value is not restored. The statement needs the hypothesis that source and sink frames of auxiliary roles coincide, or the opening should say values are restored only up to the endpoint operator. The cited claim's content and role are not explained.",
+   "genuine": 0,
+   "borderline": true,
+   "reason": "'Every role keeps the endpoint operator, auxiliary roles included' is the paper's statement (821-822). The opening's 'restores every auxiliary value' is the scalar-level property (each scratch input to its own output with sign +1), which the page also states. Read at the right level there is no contradiction; the page does not separate the levels clearly (a followability gap). Borderline: the opening, read at the array level, is false."
+  },
+  {
+   "row": "357",
+   "page": "fast-address-interchange",
+   "quote": "since $m\\ge2$",
+   "note": "The bound k = O(m^{k tau}) holds only if tau > 0. The page only says to fix tau < 1 with s/W < m^tau; when s/W <= 1 that allows tau <= 0, and then m^{k tau} does not grow and the sum bound of k fails. The page needs to require 0 < tau < 1; m >= 2 alone does not give the claim.",
+   "genuine": 1,
+   "borderline": true,
+   "reason": "Same defect as row 94 (tau>0 needed for k = O(m^{k tau})); borderline for the same reason."
+  },
+  {
+   "row": "124",
+   "page": "address-shear-factorization",
+   "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used.",
+   "note": "This does not follow from the preceding sentences, which only require q not to divide the denominators xi. The needed hypothesis is also different: the paper (Lemma matrix-shear proof, lines 1415-1418) takes q avoiding every denominator in the finite table of factors and inverses and every numerator of a diagonal entry of an invertible factor, so that the triangular factors stay invertible mod q^b (the page never says why F_1, F_2 stay invertible modulo q^b, nor that such a q exists). Avoiding all numerators and denominators is only a sufficient example in the paper.",
+   "genuine": 1,
+   "borderline": true,
+   "reason": "Same sentence as row 54: a non sequitur, and the note states the paper's actual condition on q (1415-1418). Borderline as row 54."
+  }
+ ]
+}

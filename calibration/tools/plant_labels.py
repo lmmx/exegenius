@@ -39,9 +39,10 @@ def main():
     p.add_argument("--json")
     args = p.parse_args()
     plant = load_plant()
-    notes = list(csv.DictReader(open(args.notes), delimiter="\t"))
+    # QUOTE_NONE: plant.py writes the notes unquoted, and a quote or note may begin with '"'.
+    notes = list(csv.DictReader(open(args.notes), delimiter="\t", quoting=csv.QUOTE_NONE))
     blind = json.loads(pathlib.Path(args.notes + ".unblind.json").read_text())
-    labels = {r["row"]: r for r in csv.DictReader(open(args.labels), delimiter="\t")}
+    labels = {r["row"]: r for r in csv.DictReader(open(args.labels), delimiter="\t", quoting=csv.QUOTE_NONE)}
     hand, agree = {}, {}
     for n in notes:
         config, run = blind[n["row"]]
