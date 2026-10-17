@@ -1,0 +1,5 @@
+description: A3 ALARM REVIEW 2
+subagent_type: general-purpose
+model: opus
+prompt: prompt.txt, word for word (A2's review prompt with the packet path changed)
+runs: the one rerun (the first reviewer wrote a helper script outside its packet); its verdicts are primary

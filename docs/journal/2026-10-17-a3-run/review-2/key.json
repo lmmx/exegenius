@@ -1,0 +1,47 @@
+{
+ "seed": 20261017,
+ "packet": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/a3-review-2",
+ "ids": {
+  "R01": {
+   "decoy": "D4",
+   "why": "D - (D - H) = H in every ring; the note's characteristic condition is wrong"
+  },
+  "R02": {
+   "decoy": "D1",
+   "why": "1.5 / 2^0.8 = 1.5 / 1.741 = 0.862; the note inverts the ratio"
+  },
+  "R03": {
+   "row": "71"
+  },
+  "R04": {
+   "row": "79"
+  },
+  "R05": {
+   "decoy": "D3",
+   "why": "the page defines iota = (T_1,T_2,T_3) in T^3, an ordered triple, so there are binom(h,3)^3 indices"
+  },
+  "R06": {
+   "row": "118"
+  },
+  "R07": {
+   "row": "48"
+  },
+  "R08": {
+   "decoy": "D2",
+   "why": "operators compose right to left: the first edge's factor is rightmost, as the page writes it, and adjacent factors cancel with no commutation"
+  },
+  "R09": {
+   "row": "44"
+  },
+  "R10": {
+   "row": "104"
+  }
+ },
+ "sha256": {
+  "alarms.json": "4cb5514b85ee54ea018815d0a938dfb3d9b2fa490c626d65e1e75821e491c492",
+  "labels.tsv": "00271180af464832aeafd95d9b4fa7c6193481cd8b01e8135af671326dbc97e0",
+  "items.json": "836ffaf3330af9772c5ab862b86f53935de9df0dba0339e9f003f489ddae03b2",
+  "task.md": "11ec03884582f10a99fd85fda3f8cf1f91daef0703af81d7d338f7c16cfa4ff2",
+  "paper.tex": "6d2b6d00dc3422ddb3ef0b2b36f2f204c42fba8f843f25bf41197530ee384ad0"
+ }
+}

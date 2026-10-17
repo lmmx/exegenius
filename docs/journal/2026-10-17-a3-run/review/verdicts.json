@@ -1,0 +1,84 @@
+{
+ "items": [
+  {
+   "id": "R01",
+   "verdict": "not_genuine",
+   "confidence": "clear",
+   "page_evidence": "fast-address-interchange.md line 5-7: updates D<-D-H, H<-H+D, D<-H-D take (H,D) to (H,D-H), (D,D-H), (D,H), 'since H+(D-H)=D and D-(D-H)=H'.",
+   "paper_evidence": "Lines 1493-1495 write the chunks as vectors H,D over Z/q^bZ (q an odd prime, Lemma 1394-1408); lines 1535-1541 perform D<-D-H, H<-H+D, D<-H-D componentwise over that ring and state the transformation sends (H,D) to (D,H). Nothing restricts this step to F_2.",
+   "reason": "D-(D-H)=D-D+H=H holds in every abelian group, so the identity is valid over any residue ring, not only in characteristic 2; the note's mathematics is wrong. The paper itself uses the three-update swap over Z/q^bZ with q odd, so the claim that the source states it only for F_2 is also false. (The page's separate remark that the bit procedure's ring is F_2 is inaccurate, but it is not the quoted identity and does not affect it.)"
+  },
+  {
+   "id": "R02",
+   "verdict": "not_genuine",
+   "confidence": "clear",
+   "page_evidence": "recursive-power-saving.md line 19: m=2, s=3, W=2, s/W=3/2, log_2(3/2)~0.585; 'For lambda=0.8 the ratio is (3/2)/2^{0.8}~0.86'. Line 15 requires log_m(s/W)<lambda<1 so the ratio is below 1.",
+   "paper_evidence": "Lines 2394-2419: with a=s/W<=m^sigma<m^lambda the internal costs sum to C e^lambda sum_j (a/m^lambda)^j=O(e^lambda), i.e. the ratio a/m^lambda is below 1; lines 170-175 state s/W<m is the source of the saving.",
+   "reason": "2^{0.8}=1.7411, so (3/2)/2^{0.8}=0.8615, which the page correctly gives as about 0.86; the note's 1.16 is the reciprocal 1.7411/1.5. The ratio is below 1, consistent with log_2(1.5)~0.585<0.8, so there is no arithmetic error or inconsistency."
+  },
+  {
+   "id": "R03",
+   "verdict": "not_genuine",
+   "confidence": "clear",
+   "page_evidence": "linear-network-roles.md line 5: 'Let rho be the permutation of roles that it [the scalar network] applies: an input at role w leaves at output role rho(w) with sign epsilon_w'. Lines 9-11 state the frame invariant (stored array D_nu f) and that frames pass through pointwise gates; line 15 is the quoted sentence.",
+   "paper_evidence": "Lines 809-825 prove the invariant and the whole-network identity D_out S_Omega D_in^{-1}; lines 818-822: 'if the scalar network is a signed role permutation that sends input role w to output role rho(w) with scalar sign epsilon_w, that route applies epsilon_w D_sink(rho(w)) D_source(w)^{-1}'. Lines 1272-1277 and Lemma 728-741 give that the scalar network is such a signed permutation.",
+   "reason": "The page does state, on line 5, that the scalar network applies a signed permutation rho of roles with signs epsilon_w, so the note misreads the page. With that stated, 'its route to rho(w) carrying sign epsilon_w' is exactly the paper's own usage at lines 818-822. That the page attributes the formula to telescoping rather than displaying D_out S D_in^{-1} is at most a gap in justification, and the frame invariant on lines 9-11 supports it."
+  },
+  {
+   "id": "R04",
+   "verdict": "not_genuine",
+   "confidence": "borderline",
+   "page_evidence": "fast-address-interchange.md line 13: Q_k bounds the time per unit volume for interchanging fields of m^k bits; 'A level-k call makes s calls at level k-1, each on volume V/W'. Line 15 unrolls Q_k<=(s/W)Q_{k-1}+C and concludes the quoted sentence. No row-count condition is stated on this page (linear-network-roles.md line 7 mentions padding rows to a multiple of W).",
+   "paper_evidence": "Prop. 1475-1489 (power-width interchange) assumes e=m^k radix-q digits and 'a row field preceding both chunks has length divisible by W^k' (lines 1483-1484); the split at lines 1497-1502 leaves row count divisible by W^{k-1}; recurrence 1549-1557. Line 1627: 'We have proved the fast operation for power widths with enough rows.' Lemma 1631-1645 (arbitrary-width interchange) then gives O(Vu^tau) for an arbitrary bit array with u-bit chunks, supplying rows from high digits and padding (lines 1675-1700, 1721-1734).",
+   "reason": "The quoted bound itself is true and is established by the paper for every array with u-bit fields (Lemma at 1631-1645), so it is neither false nor wider than what the paper proves. It also follows from the recurrence the page has already stated. The missing row condition (row count divisible by W^k) is a real gap, but it sits in the earlier sentence that asserts each level splits into s calls on volume V/W, not in the quoted conclusion. Borderline, because the 'therefore' ties the bound to a recursion that by itself covers only arrays with enough rows."
+  },
+  {
+   "id": "R05",
+   "verdict": "not_genuine",
+   "confidence": "clear",
+   "page_evidence": "subset-intersection-construction.md line 7: 'For an index iota=(T_1,T_2,T_3) in T^3' (an ordered triple); line 11: N=binom(h,3)^3; line 16: L/N=3h^2/binom(h,3)=100/539 with L=3 binom(h,3)^2 h^2.",
+   "paper_evidence": "Lines 654-660: v=binom(h,3)=161700, N=v^3=4227952113000000, banks indexed by a=(a_1,a_2,a_3) in T^3. Lines 1065-1069: L_b/N=100/539.",
+   "reason": "Indices are ordered elements of T^3, both on the page and in the paper, so their number is binom(h,3)^3; the paper never treats them as unordered sets. binom(binom(h,3),3) would also contradict the paper's exact ratio L/N=100/539, which holds only with N=v^3. The note's correction is wrong."
+  },
+  {
+   "id": "R06",
+   "verdict": "genuine",
+   "confidence": "borderline",
+   "page_evidence": "address-shear-factorization.md line 3 introduces H and D only as 'two vectors of address fields', with no tape order between them; line 13 implements H_sigma<-H_sigma+D_tau by D_tau<-D_tau+H_sigma, swap, D_tau<-H_sigma-D_tau and concludes 'So the shear needs rank_Q M interchanges plus O(V) further work.' The page never says the two additions cost O(V) or why.",
+   "paper_evidence": "Lemma 1394-1408 assumes the fields are ordered 'with every H_i before every D_j' (lines 1399-1400); the proof (lines 1436-1442) notes 'The first and last updates target a later field controlled by an earlier field', which is what lets Lemma 552-567 (a target field following its controls is updated in O(V)) apply. Lines 1356-1359: linear-time updates go in the direction 'later field using earlier fields'.",
+   "reason": "The quote adds the claim that the two additions in the swap trick fit in O(V). That holds only when H_sigma precedes D_tau, which is exactly the layout hypothesis the paper's lemma assumes and the page omits, so as stated the claim is wider than what the paper establishes. The note's account of the hypothesis and its role is accurate. Borderline, because in another layout the same bound can be recovered by a different procedure (updating H directly when it follows D, by the lemma at 552-567), and a sibling page calls H the earlier field."
+  },
+  {
+   "id": "R07",
+   "verdict": "genuine",
+   "confidence": "clear",
+   "page_evidence": "address-shear-factorization.md line 3: q is 'a fixed odd prime'; line 5: entries mu/xi with 'q must not divide xi', acting as mu xi^{-1} mod q^b, then 'So q divides no numerator or denominator of the finitely many matrices used.'",
+   "paper_evidence": "Lemma proof lines 1413-1423: 'Choose an odd prime avoiding every denominator in the table and every numerator of a diagonal entry of an invertible factor. For example, a prime exceeding the absolute values of all its nonzero numerators and denominators suffices.' Lemma 555-567 requires numerators prime to q only for coefficients used as units. Prop. 1478-1480 takes q 'as in' that lemma, also avoiding the denominators of the vertex matrices M.",
+   "reason": "From 'q must not divide xi' and the action mu xi^{-1} nothing follows about numerators, so the 'So' sentence is a non sequitur, case (b). Moreover, what the paper requires (avoiding denominators and the diagonal numerators of the triangular factors) differs from what is asserted; avoiding every numerator is only the paper's sufficient example choice. The note's first part holds. Its second part (the page does not name the finite collection or say why q exists) is only a complaint about missing explanation."
+  },
+  {
+   "id": "R08",
+   "verdict": "not_genuine",
+   "confidence": "clear",
+   "page_evidence": "linear-network-roles.md line 9: along an edge from alpha to beta the stored array changes by D_beta D_alpha^{-1}; line 13 writes the route operator as (D_{alpha_k}D_{alpha_{k-1}}^{-1})...(D_{alpha_1}D_{alpha_0}^{-1})=D_{alpha_k}D_{alpha_0}^{-1}.",
+   "paper_evidence": "Lines 797-798: on an edge from u to v apply D_v D_u^{-1}; lines 136-146 and 809-825: the intermediate frames cancel and a route applies D_sink(rho(w)) D_source(w)^{-1}.",
+   "reason": "Operators compose right to left, so the first edge's change D_{alpha_1}D_{alpha_0}^{-1} acts first by being the rightmost factor, exactly as written. Adjacent factors D_{alpha_{i+1}}D_{alpha_i}^{-1} D_{alpha_i}D_{alpha_{i-1}}^{-1} cancel with no commutativity needed, giving D_{alpha_k}D_{alpha_0}^{-1}. The note reverses the composition convention."
+  },
+  {
+   "id": "R09",
+   "verdict": "not_genuine",
+   "confidence": "borderline",
+   "page_evidence": "tape-interchange.md line 3: the interchange of u-bit fields costs O(Vu^tau); line 9: F_d is the time per unit volume of a width-mu^d interchange, 'the s smaller calls are interchanges of width mu^{d-1} on streams of volume V/W', F_d<=lambda F_{d-1}+O(1); line 11 concludes the quoted bound. No row-count condition is stated.",
+   "paper_evidence": "Prop. 1475-1489 requires a row field of length divisible by W^k (lines 1483-1484); split 1497-1502; recurrence 1549-1557; line 1627 'power widths with enough rows'. Lemma 1631-1645 gives O(Vu^tau) for arbitrary arrays and widths, using high digits as rows plus zero-row padding (lines 1675-1700, 1721-1734).",
+   "reason": "The quoted bound, O(u^tau) per unit volume for an interchange of width u=mu^d, is true for any array: the paper's arbitrary-width lemma proves it, so the statement is not wider than what the paper establishes. It also follows from the recurrence stated just before it. The omitted divisibility of the row count by W^d is needed for that recurrence (the earlier sentence about splitting into W streams), so the gap is in the justification rather than in the quoted conclusion. Borderline for the same reason as R04: the conclusion is presented as an output of the recursion alone."
+  },
+  {
+   "id": "R10",
+   "verdict": "not_genuine",
+   "confidence": "borderline",
+   "page_evidence": "subset-intersection-construction.md line 7: labels are nondegenerate subspaces of F=(Q^h)^{tensor 3}, neighbors satisfy t_T perp t_S, and 'Along a side wire, a label containing t_T may grow to t_S^perp, since t_T perp t_S, adding h-2 dimensions.'",
+   "paper_evidence": "Lines 940-953: suppressing the line Q, on a side wire 'the remaining component passes through P tensor <t_X> in P tensor t_Y^perp in P tensor F. The first inclusion is possible because t_X perp t_Y.' P (line 902) and Q are lines. Lines 1038 and 1048-1058: the side edge 2->5 has residual P tensor <t_X,t_Y>^perp of dimension h-2, the label growing from (B tensor F) perp (P tensor <t_X>) to (B tensor F) perp (P tensor t_Y^perp).",
+   "reason": "Read literally, the sentence mixes vectors of Q^h with labels in F. But it is the paper's own tensor-factor statement with the one-dimensional factors P and Q and the common summand B tensor F suppressed, as the paper itself suppresses Q. The mechanism (orthogonality allows <t_T> in t_S^perp) and the count of h-2 added dimensions match the paper exactly, so this is a legitimate informal simplification rather than a misstatement. The note's other complaint, that no gate labels are given, is only about missing explanation."
+  }
+ ]
+}

@@ -1,0 +1,21 @@
+== R  (gaps per page 4.4, missing answers 30, submits {'submits': 48, 'rejected': 18, 'never_accepted': 0})
+  audit_named_page                     24/28    0.857  80% [0.753, 0.922]
+  audit_located_page                   25/28    0.893  80% [0.795, 0.947]
+  clean_site_located                    4/28    0.143  80% [0.078, 0.247]
+  clean_site_asserted                   1/28    0.036  80% [0.011, 0.112]
+  audit_exact_of_named                 23/24    0.958  80% [0.87, 0.987]
+  fa_clean_asserted                     4/6     0.667  80% [0.409, 0.852]
+  fa_sham_asserted                      0/18      0.0  80% [0.0, 0.084]
+  fa_seeded_spurious                    8/24    0.333  80% [0.224, 0.464]
+  native_asserted                       3/6       0.5  80% [0.268, 0.732]
+  union_caught                         27/35    0.771  80% [0.67, 0.849]
+  audit_named_quote                     3/7     0.429  80% [0.226, 0.658]
+  audit_named_source                   13/13      1.0  80% [0.888, 1.0]
+  audit_named_type:cases                2/3     0.667  80% [0.321, 0.894]
+  audit_named_type:constant             5/5       1.0  80% [0.753, 1.0]
+  audit_named_type:generalisation       4/4       1.0  80% [0.709, 1.0]
+  audit_named_type:hypothesis           2/5       0.4  80% [0.18, 0.67]
+  audit_named_type:inequality           6/6       1.0  80% [0.785, 1.0]
+  audit_named_type:sign                 5/5       1.0  80% [0.753, 1.0]
+R {'rows': 132, 'agree': 105, 'hand_1': 67, 'asserts_1': 40, 'both_1': 40, 'share': 0.795, 'asserts_recall': 0.597}
+all {'rows': 132, 'agree': 105, 'hand_1': 67, 'asserts_1': 40, 'both_1': 40, 'share': 0.795, 'asserts_recall': 0.597}

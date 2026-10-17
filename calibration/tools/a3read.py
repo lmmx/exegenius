@@ -13,7 +13,7 @@ labels.tsv. The key is A2's (docs/journal/2026-10-17-a2-design/key.json).
 and ASSERTS, and writes RUN_DIR/alarms.json: the union, so that every classifier's F_A can be
 decided by the reviewer.
 
-`build` writes the reviewer's packet exactly as A2's review did (`a2review.py`: the same task text,
+`build` (with --record NAME for a rerun's record directory, default `review`) writes the reviewer's packet exactly as A2's review did (`a2review.py`: the same task text,
 note masking, the four decoys and the seed), with A3's alarms in place of A2's, and RUN_DIR/review/
 key.json (id -> alarm row or decoy). The reviewer sees no arm, no label and no key.
 
@@ -118,10 +118,10 @@ def cmd_items(run):
     print(f"{len(items)} clean-page alarms (union) -> {pathlib.Path(run, 'alarms.json')}")
 
 
-def cmd_build(run, packet):
+def cmd_build(run, packet, record_name="review"):
     a2r = load("a2review")
     run, packet = pathlib.Path(run), pathlib.Path(packet)
-    record = run / "review"
+    record = run / record_name
     if packet.exists():
         shutil.rmtree(packet)
     (packet / "pages").mkdir(parents=True)
@@ -162,10 +162,10 @@ def cmd_build(run, packet):
     print(f"{len(items)} items ({len(alarms)} alarms, {len(a2r.DECOYS)} decoys) -> {packet}; key -> {record / 'key.json'}")
 
 
-def cmd_read(run, verdicts, transcript=None):
+def cmd_read(run, verdicts, transcript=None, record_name="review"):
     a2r = load("a2review")
     run = pathlib.Path(run)
-    rkey = json.loads((run / "review/key.json").read_text())
+    rkey = json.loads((run / record_name / "key.json").read_text())
     assert a2r.sha(run / "alarms.json") == rkey["sha256"]["alarms.json"], "alarms.json changed after the packet"
     alarms = json.loads((run / "alarms.json").read_text())
     got = {v["id"]: v for v in json.loads(pathlib.Path(verdicts).read_text())["items"]}
@@ -236,15 +236,16 @@ def main():
     sub = p.add_subparsers(dest="cmd", required=True)
     a = sub.add_parser("items"); a.add_argument("--run", required=True)
     b = sub.add_parser("build"); b.add_argument("--run", required=True); b.add_argument("packet")
+    b.add_argument("--record", default="review")
     c = sub.add_parser("read"); c.add_argument("--run", required=True); c.add_argument("verdicts")
-    c.add_argument("--transcript"); c.add_argument("--json")
+    c.add_argument("--transcript"); c.add_argument("--json"); c.add_argument("--record", default="review")
     x = p.parse_args()
     if x.cmd == "items":
         cmd_items(x.run)
     elif x.cmd == "build":
-        cmd_build(x.run, x.packet)
+        cmd_build(x.run, x.packet, x.record)
     else:
-        out = cmd_read(x.run, x.verdicts, x.transcript)
+        out = cmd_read(x.run, x.verdicts, x.transcript, x.record)
         text = json.dumps(out, indent=1, ensure_ascii=False)
         if x.json:
             pathlib.Path(x.json).write_text(text + "\n")

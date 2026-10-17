@@ -1,0 +1,274 @@
+{
+ "missing": [],
+ "decoys": {
+  "D4": {
+   "id": "R01",
+   "genuine": false,
+   "borderline": false
+  },
+  "D1": {
+   "id": "R02",
+   "genuine": false,
+   "borderline": false
+  },
+  "D3": {
+   "id": "R05",
+   "genuine": false,
+   "borderline": false
+  },
+  "D2": {
+   "id": "R08",
+   "genuine": false,
+   "borderline": false
+  }
+ },
+ "decoys_accepted": 0,
+ "verdicts": {
+  "71": {
+   "id": "R03",
+   "genuine": false,
+   "borderline": false,
+   "reason": "The page does state, on line 5, that the scalar network applies a signed permutation rho of roles with signs epsilon_w, so the note misreads the page. With that stated, 'its route to rho(w) carrying sign epsilon_w' is exactly the paper's own usage at lines 818-822. That the page attributes the formula to telescoping rather than displaying D_out S D_in^{-1} is at most a gap in justification, and the frame invariant on lines 9-11 supports it."
+  },
+  "79": {
+   "id": "R04",
+   "genuine": false,
+   "borderline": true,
+   "reason": "The quoted bound itself is true and is established by the paper for every array with u-bit fields (Lemma at 1631-1645), so it is neither false nor wider than what the paper proves. It also follows from the recurrence the page has already stated. The missing row condition (row count divisible by W^k) is a real gap, but it sits in the earlier sentence that asserts each level splits into s calls on volume V/W, not in the quoted conclusion. Borderline, because the 'therefore' ties the bound to a recursion that by itself covers only arrays with enough rows."
+  },
+  "118": {
+   "id": "R06",
+   "genuine": true,
+   "borderline": true,
+   "reason": "The quote adds the claim that the two additions in the swap trick fit in O(V). That holds only when H_sigma precedes D_tau, which is exactly the layout hypothesis the paper's lemma assumes and the page omits, so as stated the claim is wider than what the paper establishes. The note's account of the hypothesis and its role is accurate. Borderline, because in another layout the same bound can be recovered by a different procedure (updating H directly when it follows D, by the lemma at 552-567), and a sibling page calls H the earlier field."
+  },
+  "48": {
+   "id": "R07",
+   "genuine": true,
+   "borderline": false,
+   "reason": "From 'q must not divide xi' and the action mu xi^{-1} nothing follows about numerators, so the 'So' sentence is a non sequitur, case (b). Moreover, what the paper requires (avoiding denominators and the diagonal numerators of the triangular factors) differs from what is asserted; avoiding every numerator is only the paper's sufficient example choice. The note's first part holds. Its second part (the page does not name the finite collection or say why q exists) is only a complaint about missing explanation."
+  },
+  "44": {
+   "id": "R09",
+   "genuine": false,
+   "borderline": true,
+   "reason": "The quoted bound, O(u^tau) per unit volume for an interchange of width u=mu^d, is true for any array: the paper's arbitrary-width lemma proves it, so the statement is not wider than what the paper establishes. It also follows from the recurrence stated just before it. The omitted divisibility of the row count by W^d is needed for that recurrence (the earlier sentence about splitting into W streams), so the gap is in the justification rather than in the quoted conclusion. Borderline for the same reason as R04: the conclusion is presented as an output of the recursion alone."
+  },
+  "104": {
+   "id": "R10",
+   "genuine": false,
+   "borderline": true,
+   "reason": "Read literally, the sentence mixes vectors of Q^h with labels in F. But it is the paper's own tensor-factor statement with the one-dimensional factors P and Q and the common summand B tensor F suppressed, as the paper itself suppresses Q. The mechanism (orthogonality allows <t_T> in t_S^perp) and the count of h-2 added dimensions match the paper exactly, so this is a legitimate informal simplification rather than a misstatement. The note's other complaint, that no gate labels are given, is only about missing explanation."
+  }
+ },
+ "classifiers": {
+  "hand": {
+   "R_src": {
+    "k": 13,
+    "n": 13,
+    "rate": 1.0,
+    "ci80": [
+     0.888,
+     1.0
+    ]
+   },
+   "R_page": {
+    "k": 25,
+    "n": 28,
+    "rate": 0.893,
+    "ci80": [
+     0.795,
+     0.947
+    ]
+   },
+   "R_quote": {
+    "k": 3,
+    "n": 7,
+    "rate": 0.429,
+    "ci80": [
+     0.226,
+     0.658
+    ]
+   },
+   "F_sham": {
+    "k": 0,
+    "n": 18,
+    "rate": 0.0,
+    "ci80": [
+     0.0,
+     0.084
+    ]
+   },
+   "clean_alarms": [
+    "44",
+    "48",
+    "79",
+    "104"
+   ],
+   "genuine": [
+    "48"
+   ],
+   "F_A": {
+    "k": 3,
+    "pages": 6,
+    "rate": 0.5
+   },
+   "F_A_reviewer_borderline_flipped": {
+    "k": 0,
+    "rate": 0.0
+   },
+   "F_A_raw": {
+    "k": 4,
+    "rate": 0.667
+   },
+   "reading": {
+    "row": 1,
+    "recommendation": "R is the recommended audit configuration (a proposed default change, for the author)",
+    "detail": {
+     "R_page>=0.50 & lb>=0.35": true,
+     "R_src>=0.50": true,
+     "F_A<=0.5 (no decoy accepted)": true,
+     "F_sham<=0.10": true
+    }
+   }
+  },
+  "asserts": {
+   "R_src": {
+    "k": 10,
+    "n": 13,
+    "rate": 0.769,
+    "ci80": [
+     0.595,
+     0.883
+    ]
+   },
+   "R_page": {
+    "k": 18,
+    "n": 28,
+    "rate": 0.643,
+    "ci80": [
+     0.522,
+     0.748
+    ]
+   },
+   "R_quote": {
+    "k": 3,
+    "n": 7,
+    "rate": 0.429,
+    "ci80": [
+     0.226,
+     0.658
+    ]
+   },
+   "F_sham": {
+    "k": 0,
+    "n": 18,
+    "rate": 0.0,
+    "ci80": [
+     0.0,
+     0.084
+    ]
+   },
+   "clean_alarms": [],
+   "genuine": [],
+   "F_A": {
+    "k": 0,
+    "pages": 6,
+    "rate": 0.0
+   },
+   "F_A_reviewer_borderline_flipped": {
+    "k": 0,
+    "rate": 0.0
+   },
+   "F_A_raw": {
+    "k": 0,
+    "rate": 0.0
+   },
+   "reading": {
+    "row": 1,
+    "recommendation": "R is the recommended audit configuration (a proposed default change, for the author)",
+    "detail": {
+     "R_page>=0.50 & lb>=0.35": true,
+     "R_src>=0.50": true,
+     "F_A<=0.5 (no decoy accepted)": true,
+     "F_sham<=0.10": true
+    }
+   }
+  },
+  "hand-flip": {
+   "R_src": {
+    "k": 13,
+    "n": 13,
+    "rate": 1.0,
+    "ci80": [
+     0.888,
+     1.0
+    ]
+   },
+   "R_page": {
+    "k": 24,
+    "n": 28,
+    "rate": 0.857,
+    "ci80": [
+     0.753,
+     0.922
+    ]
+   },
+   "R_quote": {
+    "k": 3,
+    "n": 7,
+    "rate": 0.429,
+    "ci80": [
+     0.226,
+     0.658
+    ]
+   },
+   "F_sham": {
+    "k": 0,
+    "n": 18,
+    "rate": 0.0,
+    "ci80": [
+     0.0,
+     0.084
+    ]
+   },
+   "clean_alarms": [
+    "44",
+    "71",
+    "79",
+    "118"
+   ],
+   "genuine": [
+    "118"
+   ],
+   "F_A": {
+    "k": 3,
+    "pages": 6,
+    "rate": 0.5
+   },
+   "F_A_reviewer_borderline_flipped": {
+    "k": 2,
+    "rate": 0.333
+   },
+   "F_A_raw": {
+    "k": 4,
+    "rate": 0.667
+   },
+   "reading": {
+    "row": 1,
+    "recommendation": "R is the recommended audit configuration (a proposed default change, for the author)",
+    "detail": {
+     "R_page>=0.50 & lb>=0.35": true,
+     "R_src>=0.50": true,
+     "F_A<=0.5 (no decoy accepted)": true,
+     "F_sham<=0.10": true
+    }
+   }
+  }
+ },
+ "outside_packet": [
+  "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/a3-work",
+  "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/a3-work/write_verdicts.py"
+ ],
+ "status": "contaminated: rerun the reviewer once in a fresh packet"
+}
