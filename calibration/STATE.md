@@ -1,8 +1,45 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-17 17:18 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-17 18:36 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
 
-## Checkpoint, 2026-10-17 17:18 UTC (read first)
+## Checkpoint, 2026-10-17 18:36 UTC: the programme is concluded (read first)
+
+**The deliverable:** `policy.md`, "Final configuration report": one row per task, with model, effort, prompt, routing, cost, evidence strength, mathematical fidelity, status and limitations. No default has been changed.
+
+**What concluded today, after the author's mandate** (each preregistered before its model calls):
+
+| Item | Result | Decision |
+|---|---|---|
+| **W3** (writing; `plans/W3.md`) | k = 2 of 6 (page-specific); R2 inconclusive. Sonnet met the standard on 4/12 key-step page-runs, Opus on 4/6; the failures are underived steps, not errors (1 major in 24) | status quo: Sonnet `high`, Opus at 0015/0016 |
+| **SR1** (simulated readers; `plans/SR1.md`) | lift 0.735, sensitivity 0.147 against 0.15: row 3, inconclusive. The baseline is an instructed refusal; stuck points do not locate deleted content | **proposed:** `rounds = 0` by default |
+| **A3** (one audit refinement; `plans/A3.md`) | row 1: R_src 13/13, R_page 25/28, F_sham 0/18, F_A 0.50 by two agreeing independent reviewers (0 decoys), exactly at the bound | **proposed:** adopt R (the audit text plus source access) |
+
+**Decisions for the author** (`policy.md`, final report):
+1. Adopt R as the audit.
+2. Turn simulated readers off by default.
+3. No writer change.
+4. Rebuild the shared binary from `master` (operational).
+5. No classifier rule.
+
+**Quota:**
+- **The five-hour limit:** status "allowed" at 18:10 UTC; it resets at 21:30 UTC (`get_session` rate_limit_info).
+- **Measured since the author's 17:38 reading** (cache read):
+
+| Item | Spend |
+|---|---|
+| W3 runs | 38.4 M |
+| J26 | 33.0 M |
+| SR1 | 37.9 M |
+| A3 runs | 12.2 M |
+| A3 reviews | 2.9 M |
+| Orchestration | ~83 M |
+
+**Open items, none needing a model call:**
+- **The main working copy** `/home/user/exegenius` is on the pre-rewrite history. Sync it with `git fetch origin && git reset --hard origin/master`; the classifier blocked this session from doing it. Commits go from `scratchpad/rewrite`, as Louis Maddox, with no trailers.
+- **Six stray sessions** that SR1's Haiku readers created (17:55–17:59 UTC) are archived. One ran a single turn with no task.
+- **PRs #9 and #10** are untouched, as instructed.
+
+## Checkpoint, 2026-10-17 17:18 UTC
 
 **Quota:**
 - The author's reading at about 17:06: session 2% used (resets ~21:00), weekly 11% used.

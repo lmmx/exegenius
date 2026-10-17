@@ -10,7 +10,67 @@
 
 **Its authority:** nothing here changes a pipeline default. A row marked "proposed" goes to the author. Only the author changes defaults.
 
-## Calibration ledger, current (2026-10-17 08:43 UTC; audit row updated 17:16 after the independent review): the one table to read
+## Final configuration report (2026-10-17, end of the calibration programme): the one table to read
+
+**Status:** this concludes the programme the author set on 2026-10-17. All three open items are now closed:
+- W3 (writing) is concluded;
+- auditing is resolved from A2, its independent review and one narrow refinement (A3);
+- simulated readers had one bounded experiment (SR1).
+
+No further experiment is planned. Inconclusive results are recorded as such, with a conservative configuration.
+
+**This table supersedes the dated tables below,** which are kept as records.
+
+**Nothing here changes a default.** The labels in the Status column mean:
+- **proposed:** goes to the author.
+- **provisional:** the best configuration measured, but not shown to meet its fidelity standard.
+- **calibrated:** a defensible configuration with evidence that it preserves the mathematics.
+
+**Scope:** every row rests on one paper (`paper.tex`, 5,361 lines) and `master` as built (exegenius 0.6.0). Cost is measured cache read per task and is never converted to quota.
+
+| Task | Model / effort | Prompt | Routing | Cost (cache read, measured) | Evidence strength | Mathematical fidelity | Status | Limitations |
+|---|---|---|---|---|---|---|---|---|
+| **Extraction** (`extract`) | Sonnet / `high` | `master`'s task | none | small (the cheaper alternatives would save ~1 M per wiki) | moderate: 34 extractions, judge-free (EX1), plus downstream plans | indirect: every extraction tested fed plans judged 19/19 faithful against the paper (E9–E11) | **calibrated, for this paper** | one paper; no direct fidelity measure of the extraction itself |
+| **Background** (`background`) | Sonnet / `high` | `master`'s task | none | small | weak to moderate: 8 runs, all feeding ceiling plans | for planning only, indirectly. Concept lists vary (median overlap 0.67) | **calibrated for planning only; provisional for writing** | its effect on the written pages is unmeasured. W3's pages show no sign that background limits them: the writers' gap is derivation, not level |
+| **Argument planning** (`argument`, `extend`) | Sonnet / `high` | **the combined instruction** (PR #13, merged cd92445) | none | 3–5 M per run | **strong for this paper:** three blind Opus judges, preregistered (E9–E11, S2, S3, S6) | **19/19 faithful and 9/9 central on every extraction tested.** Opus `xhigh` is not shown better above the ceiling (E11, p = 0.69). Effort above `high` buys nothing | **calibrated, for this paper** | one paper. The shared debug binary predates the merge; rebuilding it from `master` is an operational step (the author) |
+| **Writing** (`write`) | Sonnet / `high`; Opus / `xhigh` on 0015 and 0016 in this wiki | `master`'s task | **the 0015/0016 exception only** (the author's, on W2b's direct evidence); **no key-step rollout** | Sonnet ~1.3 M per page; Opus ~2.1 M (W3 means: ~1.7×; 2–3× on W2b's hard pages) | moderate: W2, W2b and W3 (6 new key-step pages, 3 controls, 24 page-runs, 72 blind Opus judgements, preregistered) | **not adequate on key-step pages.** Sonnet `high` met the fidelity standard on 4 of 12 key-step page-runs (W3), Opus `xhigh` on 4 of 6. The failures are **pages that leave assigned steps underived**, not wrong mathematics: 1 major error in 24 W3 page-runs. Opus's advantage is page-specific (k = 2 of 6: large on 0036, 18 of 19 steps against 4; clear on 0018; none on 0021, 0031, 0033; Sonnet ahead on 0032) | **provisional:** the status quo, by W3's preregistered matrix (k = 2–4 with R2 inconclusive) | the standard is strict at 18 steps, and no writer met it on 0031 or 0032. Two cells have one outlying judge. W3 cannot say which pages need Opus in advance |
+| **Fidelity audit** (`audit`) | Sonnet / `high` | **proposed: the R text:** A2's SI text (FIDELITY + SOURCE) plus REFINE (`tools/a3setup.py`), with the auditor reading `sources/paper.tex`. Production today is the page-only audit (B) | none | R 0.39 M per audit; B 0.13 M. R costs ~3× B: ~+9 M per audit round on a 35-page wiki, an estimate | moderate: A2 and A3 (planted errors on six pages, one run per arm, preregistered). F_A was decided by two independent blind reviews, which agree on 10/10 verdicts and accepted 0 of 4 decoys | **R meets the audit standard at this scale (A3, row 1).** It names 13/13 errors only the paper reveals (B 0/13) and 25/28 page errors (B 14/28), with 0/18 sham alarms. Its false alarms are 0.50 per clean page by the independent reviewer, **exactly at the bound.** Its remaining false alarms are true statements whose page omits a hypothesis or condenses a step. **B is not adequate:** it misses every error that only the paper reveals | **proposed:** a CLI change and a default, for the author. Adequate at this scale; fragile on false alarms | F_A rests on four alarms on six pages and sits at its bound. REFINE was written after seeing A2's rejected alarms, so the pass shows it fixes the observed failure, not that it generalises. Recall is on planted errors only, in one paper |
+| **Support check** (`support`) | Sonnet / `high` | `master`'s task | none | 0.14–0.24 M per task | moderate for "the task is the limit" (A1: the same misses for all three models) | **not adequate:** support recall 0.60 against 0.70 (A1); it misses both generalisation errors | **provisional**, unchanged | the support task cannot see generalisation errors. **If R is adopted, this matters less:** R named 4/4 generalisation errors in A3 (and SI 4/4 in A2), so a support-instruction experiment (A1b) is not needed |
+| **Simulated readers** (`simulation`) | readers and baselines Haiku / `high`; goals and grading Sonnet / `high` | `master`'s tasks | **proposed: off by default (`rounds = 0`), available on request** (a default change, for the author) | one round on a 25-page wiki: ~19 M (SR1), i.e. ~37 M at the template's default `rounds = 2` (an estimate) | weak: one bounded experiment (SR1, preregistered) | **unvalidated.** Coverage rises with the wiki (lift 0.74), but the baseline is an instructed refusal, so lift does not test prior knowledge. Deleting the key paragraphs lowered coverage by 0.147, against the 0.15 bar (row 3, inconclusive). Stuck points occur on intact and degraded pages alike (148 against 142), so they do not locate missing content | **proposed off by default** | one wiki, one round, one reader profile; the readers ran as general-purpose agents (production's reader has fewer tools) |
+| **Judging** (the instrument) | Opus, no effort set; three judges per page; pairwise (K3) above the planning ceiling | J22's page judge; the primary rubric | — | page judgement 0.46 M (J26), 0.43–0.54 M (J22, J24); primary ~4.8 M; pairwise ~5.7 M | strong for its purpose (K3 passed its preregistered criteria; K2) | not applicable (the instrument) | **calibrated, as an instrument** | J26 shows occasional single-judge outliers (2 of 24 cells), which three judges and medians absorb |
+| **Automatic note scoring** (`ASSERTS`, a tool) | — | — | — | none | moderate (A1, A2, A3) | agreement with hand labels 0.885 (A1), 0.794 (A2), **0.758 (A3)**; it finds 45–56% of asserting notes | **not for primary measures**; hand labels stay primary | one labeller (this session) throughout |
+
+**Cost of this final phase** (measured since the author's 17:38 UTC reading, cache read):
+- W3 runs 38.4 M and J26 33.0 M;
+- SR1 37.9 M;
+- A3 runs 9.6 M and its two reviews 2.9 M;
+- this session's orchestration ~83 M by 18:34 UTC.
+
+**Decisions for the author, kept separate (none is bundled with another):**
+1. **The audit (recommended: adopt R).**
+   - The change: the audit task's text (SI + REFINE) and auditors reading `sources/paper.tex`. It is a CLI change, at ~3× the audit's cost per page.
+   - What it buys: every planted error that only the paper reveals is caught (13/13 against 0/13), with page-error recall from 0.50 to 0.89.
+   - What it costs: about one rewrite of a correct but condensed statement every two pages, by the independent reviewer's count.
+   - If not adopted, the pipeline's audit cannot see source-only errors at all.
+2. **Simulated readers (proposed: off by default).**
+   - The change: `[simulation] rounds = 0` in the template, with the simulation available on request.
+   - The saving: ~19 M per round on a 25-page wiki.
+   - The basis: SR1's inconclusive result (row 3), whose preregistered conservative choice this is.
+3. **Writing (no change proposed).**
+   - Sonnet `high` stays the writer; the Opus exception at 0015/0016 stays, unless the author withdraws it.
+   - An option, not a proposal: Opus on long, many-step key-step pages. W3 shows large gains on some such pages (0036) but none on others (0031, 0032), so the pages cannot be picked in advance on this evidence.
+4. **The shared binary (operational, not a default).**
+   - Rebuild `target/debug/exegenius` from `master`, so that runs use PR #13's planning instruction.
+   - The main working copy at `/home/user/exegenius` is still on the pre-rewrite history. It needs `git fetch origin && git reset --hard origin/master` first, which this session's permission classifier blocked.
+5. **The `ASSERTS` classifier:** no rule proposed. Its agreement with hand labels fell to 0.76 in A3.
+
+**What is not validated, stated plainly:**
+- **Every row rests on one paper.** No row is a general default without a second document, which only the author can supply.
+- **Writing is not shown adequate on key-step pages by either model.** The configuration is the status quo because W3's rule says so, not because it passes.
+- **Recall figures are on planted errors** in six pages, not proof against every real error.
+- **Simulated readers' signal is unvalidated.** The proposal to turn them off is the conservative reading of an inconclusive result, not evidence that they are useless.
+
+## Calibration ledger (2026-10-17 08:43 UTC; audit row updated 17:16): superseded by the final configuration report above, kept as a record
 
 **How to read it:**
 - **"Best tested"** is the best configuration among those compared.

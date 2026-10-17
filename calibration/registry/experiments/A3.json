@@ -1,0 +1,113 @@
+{
+ "id": "A3",
+ "title": "One narrow refinement of the source-aware audit: SI plus a paragraph on what counts as an error (arm R), Sonnet high, on A2's seeded pages",
+ "kind": "screening",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "fidelity auditing: A2's 30 audit tasks (6 clean, 24 seeded variants; 48 planted errors: 13 source-only, 28 page-detectable, 7 quote-only; 18 shams), one arm",
+ "question": "Does one paragraph defining what counts as an error cut SI's false alarms to the standard without losing recall?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "exegenius 0.6.0 (target/debug/exegenius sha256 c37a2b3d\u2026caee8); arm text inserted by calibration/tools/a3setup.py (sha256 d7534174\u2026)"
+ },
+ "evidence": {
+  "path": "docs/journal/2026-10-17-a3-run"
+ },
+ "protocol": "general-purpose subagents from the development session, up to 20 at a time, prompts word for word (calibration/plans/A3.md)",
+ "preregistration": "calibration/plans/A3.md (preregistered 17:55 UTC, 2026-10-17, before any A3 model call)",
+ "journal": "calibration/plans/A3.md (Result)",
+ "comparison": "A2's audit standard with F_A decided by an independent blind reviewer (A2's review protocol); A2's B and SI as comparators, not rerun",
+ "arms": {
+  "R": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "task_prompt": "A2's SI task (FIDELITY + SOURCE, sources/paper.tex allowed) plus the REFINE paragraph (calibration/tools/a3setup.py)"
+   },
+   "runs": [
+    "A3R1"
+   ]
+  }
+ },
+ "reported": {
+  "primary_preregistered": {
+   "value": "hand labels: R_src 13/13, R_page 25/28 = 0.89 [0.80, 0.95], R_quote 3/7, F_sham 0/18; clean-page alarms 4, of which the independent reviewer finds 1 genuine: F_A 3/6 = 0.50; 0 of 4 decoys accepted. Row 1: R recommended (a proposed default change, for the author)",
+   "basis": "reported",
+   "source": "docs/journal/2026-10-17-a3-run/A3-reading.json"
+  },
+  "sensitivity": {
+   "value": "row 1 under ASSERTS (no clean-page alarm) and under hand labels with borderlines flipped (F_A 0.50). F_A is exactly at its bound",
+   "basis": "reported",
+   "source": "docs/journal/2026-10-17-a3-run/A3-reading.json"
+  },
+  "reviews": {
+   "value": "two independent Opus reviews (the first wrote a helper outside its packet; rerun once, primary) agree on 10 of 10 verdicts",
+   "basis": "reported",
+   "source": "docs/journal/2026-10-17-a3-run/review, review-2"
+  },
+  "classifier_agreement": {
+   "value": "ASSERTS against hand labels 0.758 (100/132); ASSERTS recall of asserting notes 0.56",
+   "basis": "reported",
+   "source": "docs/journal/2026-10-17-a3-run/hand.txt"
+  },
+  "cache_read_tokens": {
+   "value": "runs 12.2 M for 31 tasks (0.39 M per audit); reviews 2.9 M (two)",
+   "basis": "reported",
+   "source": "spend.py rows 'A3 (auditing)' and 'A3 alarm review'"
+  }
+ },
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "one audit task (a1-edc768) wrote a helper script outside its copy; rerun once in a fresh copy, the original kept in excluded/"
+  },
+  {
+   "kind": "protocol",
+   "what": "the first reviewer wrote a helper script outside its packet; rerun once in a fresh packet, decided before any second verdict"
+  }
+ ],
+ "limitations": [
+  "One run, six clean pages of one paper: F_A rests on four alarms and is exactly at its bound.",
+  "REFINE was written after seeing A2's rejected alarms, so the pass shows it fixes the observed failure, not that it generalises.",
+  "The labeller knew the arm (one arm); F_A is the independent reviewer's."
+ ],
+ "built": {
+  "by": "calibration/tools/registry.py",
+  "wiki_commit": null
+ },
+ "orchestrator_observed": {
+  "value": null,
+  "basis": "unavailable",
+  "note": "no main transcript at the evidence commit"
+ },
+ "runs": [
+  {
+   "id": "A3R1",
+   "arm": "R",
+   "planning_seconds": {
+    "value": null,
+    "basis": "unavailable",
+    "note": "no run log at the evidence ref"
+   },
+   "subagents": [],
+   "observed_config": {
+    "value": null,
+    "basis": "unavailable",
+    "note": "no transcripts for this run in the evidence"
+   },
+   "matches_arm": null,
+   "quality": []
+  }
+ ],
+ "arm_summary": {
+  "R": {
+   "runs": 1,
+   "planning_seconds": null
+  }
+ }
+}
