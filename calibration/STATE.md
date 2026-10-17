@@ -2,7 +2,15 @@
 
 **Updated:** 2026-10-17 08:44 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
 
-## Checkpoint, 2026-10-17 08:44 UTC (read first)
+## Update, 2026-10-17 13:31 UTC (read first)
+
+**At the author's request:**
+- **Commit messages rewritten.** The Claude trailers were removed from 253 commits on `master`, PR #13's branch and two experiment branches. Trees, authors and dates are unchanged, and the commits are signed. **Commit IDs in the records are the old ones:** map them with `docs/journal/2026-10-17-history-rewrite.md`.
+- **PR #13 merged** (cd92445), so the planning instruction is on `master`.
+- **The shared binary is not rebuilt** (`target/debug/exegenius`, sha256 c37a2b3d…, which W3's runs call), and stays as it is until W3's runs are done.
+- **No model call made.** The next steps below are unchanged.
+
+## Checkpoint, 2026-10-17 08:44 UTC
 
 **Quota:**
 - No new reading since the author's ~4% at about 06:44, which is now stale.
