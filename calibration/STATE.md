@@ -1,8 +1,21 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-17 20:20 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-17 20:32 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
 
-## Checkpoint, 2026-10-17 20:20 UTC: calibration and implementation complete (read first)
+## Update, 2026-10-17 20:32 UTC: closing records completed; open work is in issues (read first)
+
+- **Open work lives in GitHub issues, not in this file.**
+  - **#18:** a complete wiki run with the final configuration and simulated readers on, the next validation milestone.
+  - **#19:** a second document, blocked on the author's choice.
+  - **#16:** the capability landscape. View B is done (`landscape.md`); views A, C, D and E remain.
+  - **Research:** #11, #15 and #17.
+- **The closing records the programme's end had missed:**
+  - `docs/journal/2026-10-17-calibration-conclusion.md`;
+  - `capability-map.md`, now covering every stage;
+  - `RUNBOOK.md`, marked concluded with a closing checklist.
+- **What calibration did not establish:** end-to-end reliability, and generality beyond `paper.tex`.
+
+## Checkpoint, 2026-10-17 20:20 UTC: calibration and implementation complete
 
 - **Implemented and merged:** PR #14 was squash-merged as 86937b1. The audit now checks pages against the sources (the calibrated A3 text), and simulated readers stay on by default (`rounds = 2`).
 - **Verified on merged `master`:**

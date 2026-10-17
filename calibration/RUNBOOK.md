@@ -2,6 +2,16 @@
 
 **What it is:** the operating document for the calibration programme. A session resuming this work, or the author returning to it, should be able to act from this file without the conversation. It is maintained: the queue below is updated as items finish.
 
+**Status (2026-10-17): the calibration programme is concluded on `paper.tex`.**
+- **The final per-stage configuration** is in `policy.md` ("Final configuration report"). The source-aware audit is in production (#14).
+- **The evidence:** `capability-map.md` per stage, and `landscape.md` as one table (#16).
+- **Open work is tracked in GitHub issues, not in this file's queue,** which is kept below as a record. The validation still outstanding:
+  - **#18:** a full wiki run with the final configuration and simulated readers on. It tests whether the calibrated stages work together, which no experiment here has shown.
+  - **#19:** a second document. It tests whether any result transfers beyond `paper.tex`.
+  - **#16:** the capability landscape's remaining views.
+  - **Research:** #11, #15 and #17.
+- **Calibration established per-stage results on one paper only.** It does not establish end-to-end reliability, or generality.
+
 **Its authority:** adopted on 2026-10-14 at the author's request. The author wants the development session to own routine research coordination, plan ahead, and stop asking for approval of steps this policy covers. The author keeps the decisions listed under "Escalate".
 
 ## 1. What the session does without asking
@@ -84,8 +94,8 @@
 | 4d | **E10** (`plans/E10.md`) | does the combined instruction beat E7 where the E8 sentence alone tied (F3, F5, F6), and how much does it vary? | E8b not supported, E9 closes C1 | ~140 M | **supported** 23:45: Y 19, 19, 19 against W 15, 15, 17 (faithful); central 9/9 everywhere; repeat 19 against 19; no major errors. **Proposal to the author:** adopt the combined instruction (branch `141026-exp-params-cases`) for the argument task. The author decides; nothing is merged |
 | 5 | **FB1 pilot** (`plans/FB1.md`, "The pilot") | does Fable at `high` beat the incumbent on F8? | S4 outcome "improves but not ceiling" (against Opus `max`), or "does not improve" (against Opus `xhigh`). Not if S4 reaches the ceiling | run unknown (placeholder 6–16 M) + ~30 M judging | **done** 15:21. Run 3.96 M; checklist screen ~2.5 M. Fable 17, 16 against Opus `max` 20, 21: below. No primary judging; no further Fable spend |
 | 6 | Markers tightened (L2, P2, P3, S4) | the judge-free cross-check | now; free | 0 | **done** 14:31: fitted agreement 0.836 → 0.905 on K1 plans (optimistic, since these were used to tighten); J8 hold-out AUC 0.774 → 0.794 |
-| 7 | **Second document** | do the model and instruction effects generalise? | **needs the author to supply a document** (§2) | onboarding: reference set, central rubric and checklist, about 20–40 M of analysis; then a screen | blocked |
-| 8 | Full wiki from the best plans, with simulated readers on | does reconstruction survive the writers, and do readers reach the key step? | needs the author (§2) | large (writers and auditors) | blocked |
+| 7 | **Second document** | do the model and instruction effects generalise? | **needs the author to supply a document** (§2) | onboarding: reference set, central rubric and checklist, about 20–40 M of analysis; then a screen | **open: issue #19** (blocked on the author's choice of document) |
+| 8 | Full wiki from the best plans, with simulated readers on | does reconstruction survive the writers, and do readers reach the key step? | needs the author (§2) | large (writers and auditors) | **open: issue #18** (needs a preregistered success measure and the author's go-ahead on cost) |
 
 **Branches after S4** (its table, applied here):
 - **Reaches the ceiling:**
@@ -129,7 +139,15 @@ The general default additionally needs the second document.
 ## 7. Stopping conditions
 
 - Each plan stops at its own stopping rule. The queue stops when it is empty, when every remaining item is blocked on the author, or when the usage safety threshold is reached with no reading.
-- At a stop, the session updates this file's queue, the budget and the capability map, and reports once, briefly: what finished, what it decided, and what is blocked and on what.
+- **At a stop, the session completes this checklist,** then reports once, briefly: what finished, what it decided, and what is blocked and on what.
+  - [ ] `STATE.md`: a dated checkpoint at the top.
+  - [ ] This file: the queue's statuses, or the status block at the top.
+  - [ ] `budget.md`: the measured spend.
+  - [ ] `capability-map.md`, and `landscape.json` re-rendered with `tools/landscape.py` (its `--check` must pass).
+  - [ ] `policy.md`: the affected rows.
+  - [ ] `docs/journal/`: a dated entry, in `docs/JOURNAL.md`'s format, for what concluded.
+  - [ ] **A GitHub issue for every open item,** checked against the open issues first so none is duplicated. A file's queue or a closing summary is not a tracker.
+- *Added 2026-10-17:* the programme's close missed the journal entry, the capability map and this queue until the author asked. The checklist exists so that does not recur.
 
 ## 8. Resuming
 
@@ -164,6 +182,17 @@ The general default additionally needs the second document.
 | P4 | **K3:** a discriminating measure above the ceiling | whether a stronger planner is better above the ceiling | pairwise preference judging, validated against known orderings (E7 vs E8 plans) with order swapped. Only needed if a decision turns on Opus against Sonnet at the ceiling. **Validated 00:15, 2026-10-15** (`plans/K3.md`); its use is **E11** (`plans/E11.md`), preregistered 00:19, launched on a meter reading or after the next reset |
 | P5 | **W2:** a stage-isolated writer experiment | the writer's model and effort | a fixed plan and a fixed subset of pages; page fidelity and simulated readers. **Needs the author** (writer runs) |
 | P6 | Second document | generality of every row | **needs the author to supply the document** |
+
+**Outcome (2026-10-17):**
+- P0–P5 are done:
+  - P0: E10;
+  - P1: S6;
+  - P2: A1, followed by A2 and A3;
+  - P3: EX1;
+  - P4: K3 and E11;
+  - P5: W2, followed by W2b and W3.
+- P6 is open as issue #19.
+- Results are in `policy.md`, `capability-map.md` and `landscape.md`.
 
 **The cost of the research process itself** (the review's other point):
 - The development session read 708 M from cache over the day, almost all of it before a compaction, when each call re-read 600–670 k tokens. Since the 18:30 reset it has read 53 M, about 17% of that window's measured total.

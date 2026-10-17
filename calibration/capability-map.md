@@ -6,12 +6,12 @@
 
 **Scope:** each entry holds only for the versions it names. It is flagged for recalibration when a model, effort semantics, definition, task prompt, reference, rubric or judge changes (`PROTOCOL.md` §8).
 
-**Status: preliminary.**
-- one document;
-- one task stage;
-- one model family;
-- the reference set and calibre thresholds are unvalidated drafts;
-- the thresholds were written after E1's results had been seen.
+**Status (2026-10-17): every pipeline stage has been calibrated on one paper; the map is still preliminary in scope.**
+- **Stages:** one document, with every pipeline stage tested on its own. "All pipeline stages on this paper" below summarises them; `landscape.md` sets them out as one table (#16).
+- **Not shown:**
+  - whether the stages work together (no complete wiki run with the final configuration, #18);
+  - whether any result transfers to another document (#19).
+- **The planning section below** is the detailed calibre record for one stage. Its reference set and calibre thresholds are unvalidated drafts, and the thresholds were written after E1's results had been seen.
 
 ## Planning on a frontier mathematics paper
 
@@ -107,7 +107,25 @@ E1-P4 has held at 6 from J6 on, but J6's second judge gave it 8. *Corrected 2026
    - **E9: a second sentence** (each fixed parameter's value, and every case of a case-by-case step) closes C1. On F2, F4 and F8, every judgement finds 9/9 central steps and 19/19 core results faithful, with plans no longer (`docs/journal/2026-10-14-e8b-e9.md`).
    - **The candidate is now the combined instruction.** E10 tests it against E7 where E8 alone tied.
    - **Fable at `high` (FB1 pilot, F8, E7 instructions):** below Opus `max` on the checklist (17, 16 against 20, 21). No further Fable spend on this task.
-5. **Writers, auditors and support checks:** no evidence yet. They dominate a full run's cost.
+5. **Writers, auditors and support checks:** *answered since,* in "All pipeline stages on this paper" below. On planning itself:
+   - the combined instruction (E9, E10) brings Sonnet `high` to 19/19 faithful and 9/9 central;
+   - Opus `xhigh` is not better above that ceiling (E11);
+   - Sonnet `medium` and Haiku `high` fall below it (S6).
+
+## All pipeline stages on this paper (2026-10-17)
+
+These are per-stage results on `paper.tex`. Each stage was tested on its own, against its own standard; no result here comes from a complete wiki run (#18). The model × effort detail behind each row is in `landscape.md`, and the decisions in `policy.md`.
+
+| Stage | Configuration in production | Meets its standard? | Evidence | Strength |
+|---|---|---|---|---|
+| Extraction | Sonnet `high` | **yes, indirectly:** every extraction tested fed plans judged 19/19 faithful. Opus `high` is as deep at higher cost; Sonnet `medium`, Opus `medium` and Haiku `high` are shallower | EX1 (34 extractions, judge-free); E9–E11 | moderate |
+| Background | Sonnet `high` | **for planning only, indirectly;** its effect on writing is unmeasured | the 2026-10-15 background audit (8 runs) | weak to moderate |
+| Argument planning | Sonnet `high`, combined instruction | **yes:** 19/19 faithful and 9/9 central on every extraction tested | E9, E10, E11, S6 | strong for this paper |
+| Writing | Sonnet `high`; Opus `xhigh` on pages 0015 and 0016 of this wiki | **no, on key-step pages:** Sonnet meets the page standard on 4 of 12 key-step page-runs, Opus on 4 of 6. The failures are underived steps, not wrong mathematics (1 major error in 24 page-runs). Opus is better on 2 of 6 new key-step pages | W2, W2b, W3 (24 page-runs, 72 judgements) | moderate |
+| Fidelity audit | Sonnet `high`, source-aware text (#14) | **yes, at the bound:** 13/13 source-only and 25/28 page errors, 0/18 shams, 0.50 false alarms per clean page (independent review). The page-only audit catches no source-only error | A1, A2, A3 (planted errors on six pages, one run per arm) | moderate; fragile on false alarms |
+| Support check | Sonnet `high` | **no:** recall 0.60 against 0.70 for every model tested. The source-aware audit catches the generalisation errors it misses (4/4) | A1, A2, A3 | moderate |
+| Simulated readers | Haiku `high` readers, Sonnet `high` grading; on by default (the author's decision) | **unvalidated:** coverage drop 0.147 against a 0.15 bar when key paragraphs were deleted (inconclusive); the baseline is an instructed refusal; stuck points are not shown to locate missing content | SR1 (one bounded experiment) | weak |
+| Judging (the instrument) | Opus, three judges; pairwise above the planning ceiling | **validated as an instrument** (K3); Sonnet agrees with Opus on the checklist (K2, 0.979) | K2, K3 | strong for its purpose |
 
 ## Other document classes
 
