@@ -1,0 +1,118 @@
+{
+ "items": [
+  {
+   "id": "R01",
+   "page": "linear-network-roles",
+   "quote": "Every role keeps the endpoint operator (cited), auxiliary roles included.",
+   "note": "This conflicts with the opening claim that the network 'restores every auxiliary value it uses': if an auxiliary role keeps a nontrivial endpoint operator D_sink D_source^{-1}, its value is not restored. The statement needs the hypothesis that source and sink frames of auxiliary roles coincide, or the opening should say values are restored only up to the endpoint operator. The cited claim's content and role are not explained."
+  },
+  {
+   "id": "R02",
+   "page": "subset-intersection-construction",
+   "quote": "Let $N=\\binom h3^3$, the number of indices $\\iota$",
+   "note": "Miscount. An index iota = (T_1,T_2,T_3) is a choice of three triples, which the source treats as a set, so the number of indices is binom(binom(h,3),3), not binom(h,3)^3. The signed total WD-2N and the deficit computed from it change accordingly."
+  },
+  {
+   "id": "R03",
+   "page": "fast-address-interchange",
+   "quote": "A field of $u=m^k$ bits therefore has $Q_k=O(u^\\tau)$",
+   "note": "The recurrence proves the bound only for widths that are powers of m, and only when a row field preceding both chunks has length divisible by W^k. The page states no such row hypothesis. The step from this case to arbitrary field widths u, as in the page's opening claim and the O(Vu^tau) bound, is a lemma, which the page does not mention."
+  },
+  {
+   "id": "R04",
+   "page": "linear-network-roles",
+   "quote": "if a route has source frame $I$ and sink frame $D_\\nu$, its operator is $D_\\nu$, however many gates it passes through.",
+   "note": "By the page's own formula the route applies epsilon_w D_sink D_source^{-1}, which is -D_nu when epsilon_w = -1. The operator is D_nu only for sign +1 or after the sign has been undone, as the page says two paragraphs earlier. The source keeps the sign in the route operator."
+  },
+  {
+   "id": "R05",
+   "page": "subset-intersection-construction",
+   "quote": "a label containing $t_T$ may grow to $t_S^\\perp$, since $t_T\\perp t_S$, adding $h-2$ dimensions",
+   "note": "Mis-typed: labels are subspaces of F=(Q^h)^{tensor 3}, while t_T and t_S^perp live in Q^h. In the source the growth is P tensor <t_X> inside P tensor t_Y^perp, and the added dimension h-2 is that of P tensor <t_X,t_Y>^perp, with P a line. Containment of <t_T> in t_S^perp is what orthogonality gives, but the statement as written is not about labels."
+  },
+  {
+   "id": "R06",
+   "page": "fast-address-interchange",
+   "quote": "since $m\\ge2$",
+   "note": "The bound k = O(m^{k tau}) holds only if tau > 0. The page only says to fix tau < 1 with s/W < m^tau; when s/W <= 1 that allows tau <= 0, and then m^{k tau} does not grow and the sum bound of k fails. The page needs to require 0 < tau < 1; m >= 2 alone does not give the claim."
+  },
+  {
+   "id": "R07",
+   "page": "linear-network-roles",
+   "quote": "its operator is $D_\\nu$, however many gates it passes through",
+   "note": "The page just derived that a route applies epsilon_w D_sink D_source^{-1}. With source frame I and sink frame D_nu the operator is epsilon_w D_nu, not D_nu; the example is correct only for sign +1 (for instance a scratch role)."
+  },
+  {
+   "id": "R08",
+   "page": "recursive-power-saving",
+   "quote": "For $\\lambda=0.8$ the ratio is $\\tfrac{3/2}{2^{0.8}}\\approx0.86$.",
+   "note": "Arithmetic error: 2^{0.8} is about 1.74, so (3/2)/2^{0.8} is about 1.16, not 0.86. The example's ratio is then above 1, which contradicts the sentence before it: with log_2(3/2) about 0.585 < 0.8, the choice lambda = 0.8 should make the ratio below 1, so the numbers as given are inconsistent."
+  },
+  {
+   "id": "R09",
+   "page": "tape-interchange",
+   "quote": "The outer two cost linear time.",
+   "note": "Unsupported and inconsistent with the page. D<-D-H is the same kind of address shear as the middle update H<-H+D (with the roles of the fields swapped and a sign changed), and the page says the shear needs the whole network and recursion to reach O(V u^tau). If the outer two were plain linear passes, so would the shear be. The page never says why these two are cheaper."
+  },
+  {
+   "id": "R10",
+   "page": "linear-network-roles",
+   "quote": "$(D_{\\alpha_k}D_{\\alpha_{k-1}}^{-1})\\cdots(D_{\\alpha_1}D_{\\alpha_0}^{-1})=D_{\\alpha_k}D_{\\alpha_0}^{-1}$",
+   "note": "The product is composed in the wrong order. The first edge's change D_{alpha_1}D_{alpha_0}^{-1} acts first, so the route applies (D_{alpha_1}D_{alpha_0}^{-1})...(D_{alpha_k}D_{alpha_{k-1}}^{-1}), and in that order adjacent factors do not cancel. The telescoping to the endpoint operator then holds only if the frames commute, a hypothesis the page does not state."
+  },
+  {
+   "id": "R11",
+   "page": "recursive-power-saving",
+   "quote": "A row addition on fields of $u=f\\Omega$ bits costs $O(V(u^\\tau+1))$.",
+   "note": "The page gives no reason why a row addition costs this much, and its only cited bound is for an address interchange. In the source this bound comes from the packed-selected-bit-rectangle lemma, for a row addition on f selected bits (one per K-bit chunk) of whole slots, under that lemma's asymptotic hypotheses, not for adding two u-bit fields. The reader also cannot see why the outside work is only a fixed number of such additions."
+  },
+  {
+   "id": "R12",
+   "page": "fast-address-interchange",
+   "quote": "since $H+(D-H)=D$ and $D-(D-H)=H$",
+   "note": "The identity D-(D-H)=H is used for a general residue ring, but over Z/q^bZ the third update maps (D, D-H) to (D, D-(D-H)), which equals H only when 2H = 0, that is in characteristic 2. The source states this step for F_2 only; the page drops that hypothesis."
+  },
+  {
+   "id": "R13",
+   "page": "address-shear-factorization",
+   "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used.",
+   "note": "This does not follow from the preceding sentences, which only require q not to divide the denominators of the entries of M. Nothing requires q to avoid numerators of M (an entry q/1 is fine). The matrices actually used include F_1, F_2 and their inverses, whose entries come from elimination on M. Their denominators can be divisible by q, because pivots can contain q, even when M's entries are fine. It is an extra hypothesis (choose q large relative to the finitely many matrices), not a consequence, and the page never states it as one."
+  },
+  {
+   "id": "R14",
+   "page": "recursive-power-saving",
+   "quote": "Taking $\\lambda$ with $\\log_m(s/W)<\\lambda<1$ makes the ratio below 1",
+   "note": "The choice of lambda also has to satisfy lambda > tau(1+eta/vartheta) from the outside-work bound, and lambda > tau, sigma. That is possible only if eta is small enough that tau(1+eta/vartheta)<1; the page says only that eta>0 is fixed. The source requires max{tau,sigma}<lambda<1 and tau(1+c/beta)<lambda, so the page is missing the hypothesis on eta and the full list of conditions on lambda."
+  },
+  {
+   "id": "R15",
+   "page": "address-shear-factorization",
+   "quote": "pivot on the topmost nonzero row's rightmost entry",
+   "note": "The page says the rightmost entry of the topmost nonzero row, but that entry can be zero (e.g. row (1,0)), and a zero pivot cannot be used. The source's proof of a lemma chooses the topmost nonzero row and its rightmost NONZERO entry. The page also gives only a one-line sketch of why the left and lower clearings are lower-triangular operations and leave one 1 per row and column."
+  },
+  {
+   "id": "R16",
+   "page": "address-shear-factorization",
+   "quote": "Per wire, the interchanges are fewer than $R$",
+   "note": "What is shown is s_b < W_b R, a bound on the total over all wires. It gives fewer than R interchanges per wire only on average, not for each wire. The correct statement is that the interchanges number fewer than R per wire on average."
+  },
+  {
+   "id": "R17",
+   "page": "address-shear-factorization",
+   "quote": "So $q$ divides no numerator or denominator of the finitely many matrices used.",
+   "note": "This does not follow from the preceding sentences, which only require q not to divide the denominators xi. The needed hypothesis is also different: the source takes q avoiding every denominator in the finite table of factors and inverses and every numerator of a diagonal entry of an invertible factor, so that the triangular factors stay invertible mod q^b (the page never says why F_1, F_2 stay invertible modulo q^b, nor that such a q exists). Avoiding all numerators and denominators is only a sufficient example in the source."
+  },
+  {
+   "id": "R18",
+   "page": "fast-address-interchange",
+   "quote": "Both are $O(m^{k\\tau})$, since $m\\ge2$.",
+   "note": "The page only says to fix tau<1, but the bound k = O(m^{k tau}) for the case s/W <= 1 needs tau>0, and m>=2 alone does not give it. The source chooses tau in (0,1) (and 0<tau<1). The hypothesis m>=2 is also never stated earlier on the page."
+  },
+  {
+   "id": "R19",
+   "page": "recursive-power-saving",
+   "quote": "each on a stream of volume $V/W$",
+   "note": "The exact volume V/W requires the stream to be split into W role streams by a row field whose length is divisible by W^k. The page states no row hypothesis, and gives no reason why the parameter must be a power of m, so the claim is stated without a hypothesis it needs."
+  }
+ ]
+}

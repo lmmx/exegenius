@@ -1,0 +1,80 @@
+{
+ "seed": 20261017,
+ "packet": "/tmp/claude-0/-home-user/979e8242-2c77-5242-991d-0bed1baea8dd/scratchpad/a2-review",
+ "ids": {
+  "R01": {
+   "row": "204"
+  },
+  "R02": {
+   "decoy": "D3",
+   "why": "the page defines iota = (T_1,T_2,T_3) in T^3, an ordered triple, so there are binom(h,3)^3 indices"
+  },
+  "R03": {
+   "row": "130"
+  },
+  "R04": {
+   "row": "177"
+  },
+  "R05": {
+   "row": "339"
+  },
+  "R06": {
+   "row": "357"
+  },
+  "R07": {
+   "row": "273"
+  },
+  "R08": {
+   "decoy": "D1",
+   "why": "1.5 / 2^0.8 = 1.5 / 1.741 = 0.862; the note inverts the ratio"
+  },
+  "R09": {
+   "row": "324"
+  },
+  "R10": {
+   "decoy": "D2",
+   "why": "operators compose right to left: the first edge's factor is rightmost, as the page writes it, and adjacent factors cancel with no commutation"
+  },
+  "R11": {
+   "row": "42"
+  },
+  "R12": {
+   "decoy": "D4",
+   "why": "D - (D - H) = H in every ring; the note's characteristic condition is wrong"
+  },
+  "R13": {
+   "row": "54"
+  },
+  "R14": {
+   "row": "131"
+  },
+  "R15": {
+   "row": "313"
+  },
+  "R16": {
+   "row": "156"
+  },
+  "R17": {
+   "row": "124"
+  },
+  "R18": {
+   "row": "94"
+  },
+  "R19": {
+   "row": "86"
+  }
+ },
+ "sha256": {
+  "adjudication.json": "c99cdd140b006797769feac4794aee5601ea485c46805cdcd859b5b2a565b702",
+  "adjudication-items.unblind.json": "8990a765e2ccb984f3b5b05db83b2b8295adc9e0a890a16624c0e45e6a58453f",
+  "items.json": "f115bea3d8af08c33c63dea9a4a6b3cec65f298ce208671cea5cc45584c68839",
+  "task.md": "5797d973be23a30cd41c869cbfc97e86042918e446d6ab759cad13e781a19ad4",
+  "paper.tex": "6d2b6d00dc3422ddb3ef0b2b36f2f204c42fba8f843f25bf41197530ee384ad0",
+  "pages/address-shear-factorization.md": "2378357e47b47d40b3b4b2689fd6a1bb0ae42be3c9817bdeb43286d45269cffc",
+  "pages/fast-address-interchange.md": "3701b851589b08072597fb5e9fcebf1e58c6cba65df75928551d30a053d2531e",
+  "pages/linear-network-roles.md": "fbe9141eedd4cbe125236e55133abb94c3a00f78202f576670add64bd0807159",
+  "pages/recursive-power-saving.md": "a3cc589032bc208b9f1c5dafe9c814f593beb3f393b570057ba989c26fa78ae1",
+  "pages/subset-intersection-construction.md": "6a05069dbeb00d6f299d6ac297e2ca8b33facb0eabe010ae793d93bc2b81dd62",
+  "pages/tape-interchange.md": "cbe516e7586e577b85a82bb111605f59e522a125be805f054b19f1683e3cf938"
+ }
+}

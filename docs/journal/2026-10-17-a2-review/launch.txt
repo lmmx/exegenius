@@ -1,0 +1,5 @@
+description: A2 ALARM REVIEW 1
+subagent_type: general-purpose
+model: opus
+prompt: prompt.txt, word for word
+runs: one; one rerun only if a verdict is missing or the reviewer reads outside the packet
