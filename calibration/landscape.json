@@ -1,0 +1,432 @@
+{
+ "title": "Capability landscape, view B: which configuration is good at which task",
+ "as_of": "2026-10-17",
+ "scope": [
+  "One paper: `paper.tex` (Integer multiplication below n log n, 5,361 lines). Nothing here is shown to transfer to another document (#19).",
+  "Each task was tested on its own. No complete wiki has been run with the final configuration (#18), so nothing here shows the stages work together.",
+  "Most comparisons are screens: one or a few runs per configuration. The notes give the counts."
+ ],
+ "configs": [
+  {
+   "id": "haiku-high",
+   "label": "Haiku `high`"
+  },
+  {
+   "id": "sonnet-medium",
+   "label": "Sonnet `medium`"
+  },
+  {
+   "id": "sonnet-high",
+   "label": "Sonnet `high`"
+  },
+  {
+   "id": "sonnet-xhigh",
+   "label": "Sonnet `xhigh`"
+  },
+  {
+   "id": "sonnet-max",
+   "label": "Sonnet `max`"
+  },
+  {
+   "id": "opus-medium",
+   "label": "Opus `medium`"
+  },
+  {
+   "id": "opus-high",
+   "label": "Opus `high`"
+  },
+  {
+   "id": "opus-xhigh",
+   "label": "Opus `xhigh`"
+  },
+  {
+   "id": "opus-max",
+   "label": "Opus `max`"
+  },
+  {
+   "id": "fable-high",
+   "label": "Fable `high`"
+  }
+ ],
+ "statuses": {
+  "meets": [
+   "✅",
+   "meets the task's standard"
+  ],
+  "comparable": [
+   "≈",
+   "comparable to the chosen configuration, not chosen for cost"
+  ],
+  "reference": [
+   "●",
+   "the reference the row's comparisons are made against"
+  ],
+  "better": [
+   "▲",
+   "better than the row's reference"
+  ],
+  "mixed": [
+   "◐",
+   "mixed (better on some inputs, not others) or best tested but not adequate"
+  ],
+  "below": [
+   "✗",
+   "below the standard or the row's reference"
+  ],
+  "unvalidated": [
+   "?",
+   "run, but the measure itself is not validated"
+  ]
+ },
+ "evidence": {
+  "EX1": "../docs/journal/2026-10-14-x1-extraction-evidence",
+  "BG": "../docs/journal/2026-10-15-background-audit.md",
+  "E1": "registry/specs/E1.json",
+  "E3": "plans/E3.md",
+  "E5": "plans/E5.md",
+  "S1": "plans/S1.md",
+  "E7": "plans/E7.md",
+  "S2": "plans/S2.md",
+  "S3": "plans/S3.md",
+  "S4": "plans/S4.md",
+  "S5": "plans/S5.md",
+  "FB1": "plans/FB1.md",
+  "E9": "plans/E9.md",
+  "E10": "plans/E10.md",
+  "E11": "plans/E11.md",
+  "S6": "plans/S6.md",
+  "W2": "plans/W2.md",
+  "W2b": "plans/W2b.md",
+  "W3": "plans/W3.md",
+  "A1": "plans/A1.md",
+  "A2": "plans/A2.md",
+  "A3": "plans/A3.md",
+  "SR1": "plans/SR1.md"
+ },
+ "tasks": [
+  {
+   "id": "extract",
+   "label": "Extraction",
+   "standard": "depth of the extraction (judge-free), and the quality of the plans built on it",
+   "cells": {
+    "sonnet-high": {
+     "status": "meets",
+     "production": true,
+     "note": "as deep as any tested; every extraction tested fed plans judged 19/19 faithful",
+     "evidence": [
+      "EX1",
+      "E9",
+      "E10"
+     ]
+    },
+    "opus-high": {
+     "status": "comparable",
+     "note": "as deep as Sonnet `high`, at higher cost",
+     "evidence": [
+      "EX1"
+     ]
+    },
+    "sonnet-medium": {
+     "status": "below",
+     "note": "skims: 4 of 5 first attempts sent back by the coverage check; quotes 11 results against 23.5",
+     "evidence": [
+      "EX1"
+     ]
+    },
+    "opus-medium": {
+     "status": "below",
+     "note": "shallower",
+     "evidence": [
+      "EX1"
+     ]
+    },
+    "haiku-high": {
+     "status": "below",
+     "note": "shallower",
+     "evidence": [
+      "EX1"
+     ]
+    }
+   }
+  },
+  {
+   "id": "background",
+   "label": "Background",
+   "standard": "the reader profile and known concepts, judged by the plans built on them",
+   "cells": {
+    "sonnet-high": {
+     "status": "meets",
+     "production": true,
+     "note": "for planning only: every run fed ceiling plans; concept lists vary between runs (median overlap 0.67); its effect on writing is unmeasured",
+     "evidence": [
+      "BG"
+     ]
+    }
+   }
+  },
+  {
+   "id": "argument-final",
+   "label": "Argument planning (final: combined instruction)",
+   "standard": "three blind Opus judges: core results faithful (of 19) and central steps (of 9)",
+   "cells": {
+    "sonnet-high": {
+     "status": "meets",
+     "production": true,
+     "note": "19/19 faithful and 9/9 central on every extraction tested",
+     "evidence": [
+      "E9",
+      "E10"
+     ]
+    },
+    "opus-xhigh": {
+     "status": "comparable",
+     "note": "also at the ceiling; not better above it (pairwise: Opus favoured on 2 extractions, Sonnet on 2, 2 tied; p = 0.69)",
+     "evidence": [
+      "E11"
+     ]
+    },
+    "sonnet-medium": {
+     "status": "below",
+     "note": "falls below the ceiling",
+     "evidence": [
+      "S6"
+     ]
+    },
+    "haiku-high": {
+     "status": "below",
+     "note": "falls below the ceiling",
+     "evidence": [
+      "S6"
+     ]
+    }
+   }
+  },
+  {
+   "id": "argument-e7",
+   "label": "Argument planning (earlier key-step instruction, superseded)",
+   "standard": "faithful core results (of 19), majority of three judges; one run per extraction",
+   "cells": {
+    "sonnet-high": {
+     "status": "reference",
+     "note": "central gate 8/8; faithful 15, 7 and 7 on extractions F1, F4 and F8",
+     "evidence": [
+      "E7",
+      "S2",
+      "S3"
+     ]
+    },
+    "opus-xhigh": {
+     "status": "better",
+     "note": "+3, +6 and +9 faithful over Sonnet `high` on F1, F4 and F8; the cheapest configuration that improved",
+     "evidence": [
+      "S2",
+      "S3"
+     ]
+    },
+    "opus-max": {
+     "status": "better",
+     "note": "faithful 19 on F1; +1 over Opus `xhigh` on F8, within Opus `xhigh`'s own run-to-run difference, at 5× the cache read",
+     "evidence": [
+      "S2",
+      "S4",
+      "S5"
+     ]
+    },
+    "sonnet-max": {
+     "status": "better",
+     "note": "faithful 18 on F1, at about 25 M cache read",
+     "evidence": [
+      "S2"
+     ]
+    },
+    "sonnet-xhigh": {
+     "status": "below",
+     "note": "loses 2 faithful on F1",
+     "evidence": [
+      "S2"
+     ]
+    },
+    "opus-high": {
+     "status": "mixed",
+     "note": "uneven: faithful 14 and 9 on F4 and F8 (Opus `xhigh`: 13 and 16)",
+     "evidence": [
+      "S3"
+     ]
+    },
+    "fable-high": {
+     "status": "below",
+     "note": "below Opus `max` on the checklist (17 and 16 against 20 and 21); one pilot",
+     "evidence": [
+      "FB1"
+     ]
+    }
+   }
+  },
+  {
+   "id": "argument-original",
+   "label": "Argument planning (original instruction, superseded)",
+   "standard": "calibres: Overview (≥ 17 of 19 stated), Research (the central-derivation gate)",
+   "cells": {
+    "sonnet-high": {
+     "status": "reference",
+     "note": "Overview 10/10; Research 0/5",
+     "evidence": [
+      "E1",
+      "E3"
+     ]
+    },
+    "sonnet-medium": {
+     "status": "below",
+     "note": "Overview 1/26",
+     "evidence": [
+      "E3"
+     ]
+    },
+    "opus-medium": {
+     "status": "mixed",
+     "note": "Overview 5/5, Research 0/5 in five fresh plans (1/2 in an earlier two-run screen); derives less than Sonnet `high`",
+     "evidence": [
+      "E5",
+      "S1"
+     ]
+    },
+    "opus-high": {
+     "status": "mixed",
+     "note": "Overview 2/2, Research 1/2 (a two-run screen)",
+     "evidence": [
+      "S1"
+     ]
+    },
+    "haiku-high": {
+     "status": "below",
+     "note": "Overview 0/2 (a two-run screen)",
+     "evidence": [
+      "S1"
+     ]
+    }
+   }
+  },
+  {
+   "id": "write",
+   "label": "Writing",
+   "standard": "page judge, three blind Opus judges: ≥ 90% of the page's steps derived faithfully and no major error",
+   "cells": {
+    "sonnet-high": {
+     "status": "below",
+     "production": true,
+     "note": "not adequate on key-step pages: meets the standard on 4 of 12 key-step page-runs; a major error in 1 of 2 runs on page 0015; adequate on the easier page 0014. The gap is underived steps, not wrong mathematics (1 major error in 24 page-runs)",
+     "evidence": [
+      "W2",
+      "W2b",
+      "W3"
+     ]
+    },
+    "opus-xhigh": {
+     "status": "mixed",
+     "production": true,
+     "note": "best tested, not adequate: meets the standard on 4 of 6 new key-step pages, and on 0015 and 0016; better than Sonnet on 2 of 6 new key-step pages (large on 0036), tied on 3, worse on 1. In production only on pages 0015 and 0016 of this wiki",
+     "evidence": [
+      "W2b",
+      "W3"
+     ]
+    },
+    "haiku-high": {
+     "status": "below",
+     "note": "below on the hard page",
+     "evidence": [
+      "W2"
+     ]
+    },
+    "sonnet-medium": {
+     "status": "below",
+     "note": "below on the hard page",
+     "evidence": [
+      "W2"
+     ]
+    }
+   }
+  },
+  {
+   "id": "audit",
+   "label": "Fidelity audit",
+   "standard": "planted errors on six pages: page-error recall ≥ 0.50, source-only recall ≥ 0.50, false alarms ≤ 0.5 per clean page, sham alarms ≤ 0.10",
+   "cells": {
+    "sonnet-high": {
+     "status": "meets",
+     "production": true,
+     "note": "with the source-aware text: 13/13 source-only and 25/28 page errors, 0/18 shams, false alarms 0.50 per clean page by an independent review, exactly at the bound. With the old page-only text: 0/13 source-only, 14/28 page errors",
+     "evidence": [
+      "A2",
+      "A3"
+     ]
+    },
+    "haiku-high": {
+     "status": "below",
+     "note": "page-only text only: page-error recall 0.46 (0.64 under hand labels, a sensitivity analysis); the source-aware text is untested",
+     "evidence": [
+      "A1"
+     ]
+    },
+    "opus-xhigh": {
+     "status": "below",
+     "note": "page-only text only: page-error recall 0.39 (0.71 under hand labels, a sensitivity analysis); the source-aware text is untested",
+     "evidence": [
+      "A1"
+     ]
+    }
+   }
+  },
+  {
+   "id": "support",
+   "label": "Support check",
+   "standard": "planted unsupported citations: support recall ≥ 0.70",
+   "cells": {
+    "sonnet-high": {
+     "status": "below",
+     "production": true,
+     "note": "0.60; misses both generalisation errors (the source-aware audit catches them: 4/4)",
+     "evidence": [
+      "A1",
+      "A3"
+     ]
+    },
+    "haiku-high": {
+     "status": "below",
+     "note": "0.60, the same misses",
+     "evidence": [
+      "A1"
+     ]
+    },
+    "opus-xhigh": {
+     "status": "below",
+     "note": "0.60, the same misses",
+     "evidence": [
+      "A1"
+     ]
+    }
+   }
+  },
+  {
+   "id": "simulation",
+   "label": "Simulated readers",
+   "standard": "reader coverage against a no-wiki baseline, and its drop when key paragraphs are deleted",
+   "cells": {
+    "haiku-high": {
+     "status": "unvalidated",
+     "production": true,
+     "note": "coverage rises with the wiki (lift 0.74), but the baseline is an instructed refusal; deleting key paragraphs lowered coverage by 0.147 against a 0.15 bar (inconclusive); stuck points are not shown to locate missing content. On by default by the author's decision; grading on Sonnet `high`",
+     "evidence": [
+      "SR1"
+     ]
+    }
+   }
+  }
+ ],
+ "not_yet": [
+  "View A, model × effort plots: one line per model across effort levels, per task.",
+  "View C, quality against cost: measured cache read per task against each configuration's result.",
+  "View D, pipeline capability map: where in the pipeline each capability comes from.",
+  "View E, evidence explorer: from each cell to its runs, judgements and failures.",
+  "Updating `capability-map.md`'s calibre tables mechanically from the registry, instead of by hand."
+ ]
+}
