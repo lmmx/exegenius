@@ -10,6 +10,40 @@
 
 **Its authority:** nothing here changes a pipeline default. A row marked "proposed" goes to the author. Only the author changes defaults.
 
+## Calibration ledger, current (2026-10-17 08:43 UTC): the one table to read
+
+**How to read it:**
+- **"Best tested"** is the best configuration among those compared.
+- **"Adequate"** means shown to meet the task's fidelity standard. Being best tested does not make a configuration adequate.
+- **"Calibrated"** requires both a defensible configuration and evidence that it preserves the mathematics.
+- **Scope:** every row rests on one paper (`paper.tex`). Production means `master` as built today (exegenius 0.6.0).
+
+**Earlier tables:** the sections after this one are dated records, kept as written; this table supersedes them where they differ.
+
+| Task | Recommended: model / effort / prompt | Production today | Routing | Cost (cache read, measured) | Best among tested | Adequate against the fidelity standard? | Evidence strength | Calibrated? | Unresolved, and what closes it |
+|---|---|---|---|---|---|---|---|---|---|
+| **Extraction** (`extract`) | Sonnet / `high` / `master`'s task | the same | none | small; a cheaper model would save ~1 M per wiki (EX1) | Sonnet `high` ≈ Opus `high` in depth, at lower cost; Sonnet `medium`, Opus `medium` and Haiku `high` are shallower (EX1) | **yes for its downstream use, indirectly:** every extraction tested fed plans judged 19/19 faithful against the paper (E9–E11) | moderate: 34 extractions, judge-free, plus downstream plans | **yes, for this paper** | a second document. No experiment on this paper |
+| **Background** (`background`) | Sonnet / `high` / `master`'s task | the same | none | small (a short task) | not compared | **for planning only, indirectly:** the same ceiling plans. The concept lists vary between runs (median overlap 0.67) | weak to moderate | **for planning only** | its effect on writing is unmeasured. A model-free check against the reader profile comes first, if W3's pages show over- or under-explanation |
+| **Argument planning** (`argument`, `extend`) | Sonnet / `high` / **the combined instruction** (PR #13, e4618b4, 14 lines) | **without** the combined instruction (PR #13 not merged) | none | 3–5 M per run | Sonnet `high` with the instruction = Opus `xhigh` above the ceiling (E11, p = 0.69). Sonnet `medium` and Haiku `high` fall below (S6). Effort above `high` buys nothing (S2, S3) | **yes:** 19/19 faithful and 9/9 central on every extraction tested (E9, E10); three blind Opus judges, preregistered | **strong for this paper** | **yes for this paper, once PR #13 is merged**; production is not yet the calibrated configuration | (1) the author's merge of PR #13; (2) a second document |
+| **Writing** (`write`) | Sonnet / `high` / `master`'s task; Opus / `xhigh` on 0015 and 0016 in this wiki | the same (the exception is the author's, this wiki only) | provisional: Opus `xhigh` on 0015 and 0016 only | Sonnet 0.34–4.06 M per page; Opus 1.92–8.13 M (2–3× Sonnet on hard pages) | Opus `xhigh` beats Sonnet `high` on the two hard key-step pages (W2b); they tie on 0014; Haiku `high` and Sonnet `medium` fall below (W2) | **Sonnet `high`: not shown adequate on hard key-step pages** (a major error in 1 of 2 runs on 0015). Opus `xhigh` met the standard on 0015 and 0016. Standard: the page judge's derived items faithful, no major error | weak to moderate: 3 pages | **no** | **W3, amended** (preregistered and ready; ~65–210 M in two meter-gated stages; `plans/W3.md`, Launch readiness). Its outcome matrix says which routing each result supports |
+| **Fidelity audit** (`audit`) | **proposed:** Sonnet / `high` / the SI text (FIDELITY + SOURCE, `tools/a2setup.py`), with the auditor reading `sources/paper.tex` | Sonnet `high`, the page-only audit (B) | none | B 0.13 M per audit; **SI 0.42 M (3.2×)** | **SI.** On A2's planted errors: source-only 13/13 (B 0/13, I 2/13), page errors 26/28 (B 14/28), shams 0/18 for all | **SI met the preregistered standard in one run (A2 row 1), but the false-alarm reading is fragile:** adjudicated F_A 0.17, or 0.83 with borderline verdicts flipped. **B is not adequate:** it catches no source-only error, and its page recall sits exactly at the bar (0.50). Recall here is on planted errors; it is not proof against every real error | moderate for the recall gap (large and consistent); weak for false alarms (6 clean pages, one adjudicator) | **no** | (1) **the independent alarm review** (prepared, ~2–6 M; `plans/A2.md`), the next model call once the meter allows; (2) the author's decision on the CLI change (audit text and source access) |
+| **Support check** (`support`) | no change | Sonnet `high`, `master`'s task | none | 0.14–0.24 M per task | no ranking (A1: same misses for all three models) | **no:** support recall 0.60 against 0.70 for every model (A1); both generalisation errors missed | moderate for "the task is the limit" | **no** | **if SI is adopted, its misses stop being the limiting gap:** SI's audit caught 4/4 generalisation errors. A1b only if SI is not adopted |
+| **Simulated readers** | not set | `master` | none | not measured | not compared | not measured | none | **no** | after writing is settled; a small comparison whose decision is how much reader feedback to trust |
+| **Judging** (the instrument) | Opus; the primary rubric below the ceiling, pairwise (K3) above it; J22's page judge for pages | — | — | 0.43–0.54 M per page judgement; ~4.8 M primary, ~5.7 M pairwise | K2: Sonnet agrees with Opus on the checklist (0.979) | K3 passed all four preregistered criteria | strong for its purpose | **yes, as an instrument** | Sonnet pairwise judging (a cost saving only) |
+| **Automatic note scoring** (`ASSERTS`, a measurement tool) | **not for primary measures:** hand labels | — | — | none | — | agreement with hand labels 0.885 (A1), **0.794 (A2; 0.747 on SI's notes)**. It finds 45–49% of asserting notes | moderate (two experiments) | **no** | a general classifier rule is **not justified** by this evidence. Hand labels stay primary in audit experiments |
+
+**Decisions for the author, kept separate (none is bundled with another):**
+1. **PR #13**, the planning instruction:
+   - Tests passed in isolation (3 + 79 + 15; clippy and fmt clean).
+   - It is open, mergeable, with no reviews or comments. The repository has no CI, so the local tests are the only automated check.
+   - Since the PR's base, `master` has changed only docs.
+   - **Remaining concerns:**
+     - the tests check the code, not the instruction's effect; the evidence for that is E9–E11, on one paper;
+     - merging does not by itself touch any experiment, but the shared binary (`target/debug/exegenius`, which W3's runs call for `submit`) should not be rebuilt from the merged `master` while W3 runs.
+2. **The audit change** (SI): after the independent alarm review.
+3. **The writer routing**: after W3.
+4. **The classifier rule**: not proposed; A2's 0.79 agreement does not support one.
+
 ## Calibration status: the policy in force (11:08 UTC, 2026-10-15; rows updated 2026-10-17, 07:41 UTC)
 
 **The bar (the author, about 11:00):** a task is calibrated only when it has both a defensible configuration and adequate evidence that it preserves the mathematics. A best-tested configuration is not enough on its own. Defaults change only with the author's approval. Every row rests on one paper.

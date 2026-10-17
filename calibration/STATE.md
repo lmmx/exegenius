@@ -1,8 +1,34 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-17 07:41 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-17 08:44 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
 
-## Checkpoint, 2026-10-17 07:41 UTC (read first)
+## Checkpoint, 2026-10-17 08:44 UTC (read first)
+
+**Quota:**
+- No new reading since the author's ~4% at about 06:44, which is now stale.
+- **No model call has been made since A2's runs, and none is launched until the author gives a live reading** (session and, if possible, weekly). Token counts are not a substitute.
+
+**Done since 07:41 (model-free):**
+- **The A2 independent alarm review is prepared and fixed (08:40, d1ec6c1).**
+  - The packet is in the scratchpad's `a2-review/`: 15 masked alarms plus 4 decoys (R01–R19), the six clean pages and the paper. The record is in `docs/journal/2026-10-17-a2-review/`, and the scorer is `tools/a2review.py`.
+  - The reading is fixed in `plans/A2.md` as rows R1–R4. The original adjudication is immutable, and the scorer checks its sha256.
+- **W3 launch readiness (08:42, 757f9f1).**
+  - The executable is verified, and the cost re-estimated from measured components at ~65–210 M.
+  - Two stages, each with a meter reading before it: stage 1 (the 24 runs) needs the session window at most ~25% used, stage 2 (J26) at most ~70%.
+  - Outcome-to-decision matrix in `plans/W3.md`.
+- **PR #13:** open, mergeable, no reviews, no CI in the repository; `master` has changed only docs since its base.
+- **Policy:** a current calibration ledger heads `policy.md`. The older tables are kept as dated records.
+
+**Next, in order:**
+1. **With a live reading:** launch the alarm review.
+   - The subagent: `general-purpose`, model opus, description "A2 ALARM REVIEW 1", prompt `docs/journal/2026-10-17-a2-review/prompt.txt` word for word.
+   - Score: `python3 -I calibration/tools/a2review.py score docs/journal/2026-10-17-a2-review scratchpad/a2-review/verdicts.json --transcript <the subagent transcript> --json docs/journal/2026-10-17-a2-review/score.json`.
+   - Record the result in `plans/A2.md`, the policy ledger's audit row and the registry (`specs/A2.json`, `reported.independent_review`).
+2. **W3 stage 1, on a reading within its threshold:** 24 runs from `scratchpad/w3-prompts.tsv`, launched in two foreground batches. Re-check the shared binary's sha256 (c37a2b3d…) first.
+3. **W3 stage 2 (J26), on a fresh reading.** Then read W3 by the primary table and R2.
+4. **The author's decisions:** PR #13; SI adoption (after the review); writer routing (after W3).
+
+## Checkpoint, 2026-10-17 07:41 UTC
 
 **Quota:**
 - The last reading is the author's: about 4% used at about 06:44.
