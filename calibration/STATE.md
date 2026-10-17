@@ -1,8 +1,18 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-17 18:36 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-17 19:56 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
 
-## Checkpoint, 2026-10-17 18:36 UTC: the programme is concluded (read first)
+## Update, 2026-10-17 19:56 UTC: the approved changes are implemented (read first)
+
+- **The author approved** (about 19:45) adopting the refined audit and setting `[simulation] rounds = 0` by default, with simulated readers available on request.
+- **Implementation:** 7bc391f on `wiki-explanation-reader-sim-v8dqtr` (from `master`), for review as a PR. It is verified:
+  - tests, fmt and clippy are clean;
+  - `tools/a3verify.py` finds the built binary's audit tasks byte-identical to A3's 30;
+  - `init` writes `rounds = 0`.
+- **The main working copy** `/home/user/exegenius` is synced to the rewritten `master` (18901bc). It had no uncommitted, untracked or stashed work, and its tree matched rewritten commit 2f4b3dd. The old history is kept as the local branch `backup/pre-rewrite-master`. The working copy is now on the implementation branch.
+- **The shared binary** (`/usr/local/bin/exegenius` → `target/debug/exegenius`) is rebuilt from the implementation branch's head. No process or agent was using it, and every experiment had concluded and been recorded. Until the PR merges, the binary is ahead of `master` by exactly 7bc391f.
+
+## Checkpoint, 2026-10-17 18:36 UTC: the programme is concluded
 
 **The deliverable:** `policy.md`, "Final configuration report": one row per task, with model, effort, prompt, routing, cost, evidence strength, mathematical fidelity, status and limitations. No default has been changed.
 
