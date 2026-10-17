@@ -1,0 +1,57 @@
+[
+  {
+    "seed": "ASF-S1",
+    "false_against_paper": true,
+    "paper_evidence": "1397: 'There is a fixed odd prime $q$ such that the following holds.'; 1415: 'Choose an odd prime avoiding every denominator in the table and every numerator of a diagonal entry of an invertible factor.'; 1716-1719: binary chunks are padded 'from $[2^u]$ to $[q^e]$', so the shear radix is explicitly not 2. With the bit network's form I-J/9, <t_T,t_T>=2 (form at line 858; projections P_U at 1116), so its projection matrices have even denominators and q=2 would violate the avoidance condition at 1415. Only nearby passage allowing any prime: Lemma ordered-affine-streams, 557 'Fix a prime $q$', which is a general controlled-shift lemma, not the shear lemma. Line 3036 'q=2' uses q for floor((l-1)/K), an unrelated quantity (3007).",
+    "page_detectable": false,
+    "page_reason": "The page only states that q avoids every numerator and denominator of 'the finitely many matrices used', and gives no entries for the bit-network edge matrices. Its only explicit example (M, F_1=I, Pi, F_2) has integer entries 0 and 1, which q=2 handles. The page's 'bit network' and 'radix of the digits' wording makes q=2 seem natural. A reader can call 'may be taken to be 2' unsupported, since the right q depends on matrices the page does not show, but cannot show it is false. The facts that would refute it (<t_T,t_T>=2 under I-J/9, the matrix 2P_U) appear only on the subset-intersection page.",
+    "revealed_by_quote": false,
+    "severity": "high",
+    "verdict": "accept",
+    "note": "Neither quotation ('A lower triangular transformation ... costs $O(V)$'; 'Its deficit from $W_{\\rm b}m$ is $N-2L_{\\rm b}>0$.') mentions the prime. This changes a hypothesis the specialization to Z/q^b depends on: the real matrices have 2-power denominators, so q=2 would break the lemma. Possible lenient reading: an auditor might connect 'radix of the digits' with the binary input chunks, or with Lemma 557's 'Fix a prime q', but the page explicitly makes q the prime of the shear over Z/q^b, so that reading does not rescue it. The same page carries a separate seed ('The paper cites this factorization from earlier work without proof', false given 1362 'We give its elementary elimination proof'); it does not interact with this seed."
+  },
+  {
+    "seed": "FAI-S2",
+    "false_against_paper": true,
+    "paper_evidence": "1399-1400: 'every field ranging over $[q^b]$, with every $H_i$ before every $D_j$'; 1539-1540: 'Only the middle shear uses the circuit.  The other two updates target the later group and have linear cost.'; 1441: 'The first and last updates target a later field controlled by an earlier field.'; 552-553 and 561: linear cost requires that the target 'follows its control fields'. Lemma chunk-swap (1641) has the order (p,h,g,d,z). No passage puts H after D.",
+    "page_detectable": false,
+    "page_reason": "The page never states the tape order of H and D. It never says why the two D-updates are linear while the middle shear is costly. It never states the principle that a linear update needs its target to follow its controls (that appears on the address-shear page as 'update coordinates from last to first'). The (H,D) notation is not a tape-order claim. So no contradiction or short derivation is available from this page.",
+    "revealed_by_quote": false,
+    "severity": "medium",
+    "verdict": "accept",
+    "note": "None of the quotations ('for a fixed $\\tau<1$', 's<Wm', 'The final permutation is exact ...') concerns field order. The seed reverses the layout hypothesis of Lemma matrix-shear and the very reason the D-updates are linear. The page's cost argument does not use the order, so medium rather than high. A reader who knows the address-shear page, or the general target-after-control principle, could suspect it, but that knowledge is off-page. No defensible reading of 'lies after D on the tape' was found. The same page carries a separate seed ('s as $Wm/2$ minus a positive constant'; the paper has s=Wm-N+2L, line 1151) that does not interact."
+  },
+  {
+    "seed": "LNR-S1",
+    "false_against_paper": true,
+    "paper_evidence": "822-825: 'the endpoint frames determine the array operator on each route; the intermediate frames can then be chosen to make each edge change inexpensive.'; 155-157: 'The intermediate frames are chosen so that every edge can be implemented by smaller calls'; 1116 and 1130: gate frames are $D_v=\\Phi_{M_v}$ with $M_v=P_U$ (projections onto labels); 1204: complex frame $D_v=\\mathcal C_U$; 1146-1152: $s_{\\rm b}=\\sum_e\\operatorname{rank}(M_{\\rm head}-M_{\\rm tail})$, which is nontrivial only because the gate matrices are not fixed. Only some vertices have identity frame: zero-label vertices (1287 'The zero label has frame I'; 1171 zero source matrix gives Phi_0=I). Not every intermediate frame does. With identity intermediate frames each wire would need rank-m changes in total, so s=Wm and no saving.",
+    "page_detectable": false,
+    "page_reason": "The page sets up general frames at sources, gates and sinks and proves the telescoping. It never says what the intermediate frames are for: no edge cost, ranks or labels appear on it. Its example ('source frame I and sink frame D_nu ... however many gates it passes through') fits identity intermediate frames. The only tell is weak: the page's proof that gate frames commute with gates (line 11) becomes trivial if all gate frames are I. That is redundancy, not a contradiction. The 'so' is a non sequitur, but it cannot be shown false from the page.",
+    "revealed_by_quote": false,
+    "severity": "high",
+    "verdict": "accept",
+    "note": "None of the quotations ('contains $V/W$ bits', 'each scratch input to its own output with sign $+1$', 'leaves the endpoint operator on every role array') states that intermediate frames are chosen nontrivially. The text that does ('The intermediate frames are chosen so that ...', line 155) comes right after the last quotation's source sentence but is not quoted. Possible lenient reading: an auditor might take 'fixes ... to the identity' to mean only that intermediate frames do not affect the route operator and may be ignored, which follows from 'cancel'. The words 'the paper fixes' make it a factual claim about the construction, and that claim is false. The same page carries a separate seed ('one and the same network', against 120 'Each procedure arises from its own fixed linear network') that does not interact."
+  },
+  {
+    "seed": "RPS-S2",
+    "false_against_paper": true,
+    "paper_evidence": "86-93: 'We therefore need savings in both movement and arithmetic. Two tape procedures supply them ... Its cost is $O(Vu^\\tau)$ for a fixed $\\tau<1$.' (introduced under Theorem thm:main, 57-66); 168-176: 'A recursive call at parameter $mf$ therefore uses $s$ calls ... This strict inequality is the source of the power saving.'; 1550-1557 and 1619: recurrence $F_k\\le(s/W)F_{k-1}+O(1)$ with $\\tau=1-2^{-50}$, feeding the multiplication cost. The division corollary (246-266) is derived from multiplication through Newton reductions ('Their multiplication costs are bounded by a geometric sum'), so it needs the saving only indirectly, through the main theorem. No passage says the main theorem does without it.",
+    "page_detectable": false,
+    "page_reason": "Apart from the seeded clause, the page never mentions the main theorem, multiplication or division. It describes the recursion for address interchanges and numerical butterfly layers in purely internal terms. A reader cannot derive which theorem uses it. A domain-savvy reader might find it implausible that interchange and butterfly costs matter only to a division algorithm, but that is outside knowledge, not a derivation from the page.",
+    "revealed_by_quote": false,
+    "severity": "medium",
+    "verdict": "accept",
+    "note": "The quotations ('Its cost is $O(Vu^\\tau)$ for a fixed $\\tau<1$.'; 'This strict inequality is the source of the power saving.') do not say what the saving is used for. This is a scope or dependency misstatement: the page's math is untouched, but it inverts the logical role of the page in the paper, which an auditor must report. A case can be made for high, since it denies that the main theorem depends on this argument. No defensible reading found. The paper does have a later division corollary, which makes the claim look plausible, but 'only ... not its main multiplication theorem' is false. The same page carries a separate seed ('$m=2$'; the paper has m=h^3=10^6, line 656) that does not interact."
+  },
+  {
+    "seed": "SIC-S1",
+    "false_against_paper": true,
+    "paper_evidence": "Schedule 709-724, row 7: 'undo copy & one gate per source'; 706-708: 'the next four introduce the source values and add their effect to the target; the last two restore the scratch values.'; 746-748: 'Rows 2 and 3 change them to $a+\\mathcal Vx,c+\\mathcal Gx$ ... Rows 6 and 7 restore $c,a$.'; 737 and 764: 'restores every auxiliary value' / 'Each invocation restores its own auxiliary wires.' The complex construction (695-697 'Copy is unchanged') has the same undo-copy row. No passage omits undo copy.",
+    "page_detectable": false,
+    "page_reason": "The page analyses only the net coefficient on the target S, which is the same whether or not A_ST is later cleared. It never states that auxiliary wires are restored, never mentions their arbitrary initial contents, and never lists the schedule. The rank count (sources dim 1, sinks dim D, L counted on central wires only) does not depend on an undo-copy gate as the page presents it. The restoration property appears on the linked linear-network and scratch-restoration pages, not this one.",
+    "revealed_by_quote": false,
+    "severity": "high",
+    "verdict": "accept",
+    "note": "None of the quotations ('An edge matrix of rank $a$ will require $a$ smaller interchanges.'; 'The loss ratios have the exact values'; 'smaller calls satisfies $s<Wm$') mentions copy or undo. Without undo copy, A_ST would end holding its initial value plus x_T. The network would then not restore auxiliary values, nor be the role permutation that Lemma scalar-motifs (726-738) and Prop bit-motif-interface (1138-1140) require, so a construction the argument depends on is broken. The parenthetical '(no undo-copy step)' is somewhat conspicuous but not refutable on the page. No defensible reading: it rules out reading 'never removed' as being about S. The same page carries a separate seed ('as in Alon's construction that the paper specializes') that does not interact."
+  }
+]

@@ -1,0 +1,42 @@
+[
+ {
+  "seed": "ASF-S1",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-3716bf.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-74407e.md",
+  "original_text": "Here $q$ is a fixed odd prime,",
+  "seeded_text": "Here $q$ is a fixed prime, which may be taken to be $2$,",
+  "paper_lines_claimed": "1397, 1415-1417"
+ },
+ {
+  "seed": "FAI-S2",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-5b4680.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-279843.md",
+  "original_text": "each combining $D$ with the earlier field $H$ in linear time",
+  "seeded_text": "each combining $D$ with $H$, which lies after $D$ on the tape, in linear time",
+  "paper_lines_claimed": "1400-1401"
+ },
+ {
+  "seed": "LNR-S1",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-a0da9a.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-1c92b8.md",
+  "original_text": "The intermediate frames cancel and the route applies only its endpoint operator.",
+  "seeded_text": "The intermediate frames cancel and the route applies only its endpoint operator, so the paper fixes every intermediate frame to the identity.",
+  "paper_lines_claimed": "149-150, 822-823, 1143-1146"
+ },
+ {
+  "seed": "RPS-S2",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-55eae9.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-72b9c2.md",
+  "original_text": "which the main theorem needs",
+  "seeded_text": "which only the paper's later division algorithm needs, not its main multiplication theorem",
+  "paper_lines_claimed": "57-66, 103-117, 168-180"
+ },
+ {
+  "seed": "SIC-S1",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-019fb1.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-aedee4.md",
+  "original_text": "injected back into $S$, adds",
+  "seeded_text": "injected back into $S$ and never removed from $A_{ST}$ afterwards (no undo-copy step), adds",
+  "paper_lines_claimed": "705-722, 744-750"
+ }
+]
