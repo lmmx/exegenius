@@ -14,7 +14,7 @@ answer. A task that read anything else is contaminated: excluded and rerun once,
 Prints, per configuration: tasks, accepted, never accepted, no transcript and contaminated, and
 writes ANSWERS_DIR/collect.json.
 
-It also collects A2 (plans/A2.md): descriptions `A2<arm><run> <task id>`. `--allow REL` adds a file
+It also collects A2 (plans/A2.md) and A3 (plans/A3.md, arm R): descriptions `A2<arm><run> <task id>`. `--allow REL` adds a file
 that reading does not count as contamination, relative to each copy's root (A2's SI arm reads
 `sources/paper.tex`, which its task allows).
 """
@@ -34,11 +34,11 @@ def transcripts(sub):
     matched by the copy's root path, which the prompt (the transcript's first user message) contains."""
     out = {}
     for meta in pathlib.Path(sub).glob("*.meta.json"):
-        if not json.loads(meta.read_text()).get("description", "").startswith(("A1A", "A2")):
+        if not json.loads(meta.read_text()).get("description", "").startswith(("A1A", "A2", "A3")):
             continue
         t = meta.with_suffix("").with_suffix(".jsonl")
         first = json.loads(open(t).readline()).get("message", {}).get("content", "")
-        m = re.search(r"(/\S*/A(?:1A[HSO]|2(?:B|I|SI))\d+/a[12]-[0-9a-f]+/(?:audit|support))/exegenius/tasks/", first if isinstance(first, str) else json.dumps(first))
+        m = re.search(r"(/\S*/A(?:1A[HSO]|2(?:B|I|SI)|3R)\d+/a[12]-[0-9a-f]+/(?:audit|support))/exegenius/tasks/", first if isinstance(first, str) else json.dumps(first))
         if m:
             out[m.group(1)] = t
     return out
@@ -76,7 +76,7 @@ def main():
         desc, model, effort, root, prompt = line.split("\t")
         root = pathlib.Path(root)
         cfg_run, tid = desc.split(" ")
-        cfg, run = re.match(r"^A[12]([A-Z]+?)(\d+)$", cfg_run).groups()
+        cfg, run = re.match(r"^A[123]([A-Z]+?)(\d+)$", cfg_run).groups()
         code, kind = root.parent.name, root.name
         log_path = root / "exegenius/log.jsonl"
         log = [json.loads(l) for l in log_path.read_text().splitlines() if l.strip()] if log_path.exists() else []
