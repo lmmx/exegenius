@@ -1,0 +1,583 @@
+{
+ "goals": 9,
+ "key_points": 34,
+ "held_out_goals": 3,
+ "primary": {
+  "C_int": {
+   "k": 57,
+   "n": 68,
+   "share": 0.838,
+   "wilson80": [
+    0.773,
+    0.887
+   ]
+  },
+  "C_deg": {
+   "k": 47,
+   "n": 68,
+   "share": 0.691,
+   "wilson80": [
+    0.616,
+    0.758
+   ]
+  },
+  "C_base": {
+   "k": 7,
+   "n": 68,
+   "share": 0.103,
+   "wilson80": [
+    0.065,
+    0.16
+   ]
+  },
+  "C_base_by_copy": {
+   "intact": {
+    "k": 3,
+    "n": 34,
+    "share": 0.088,
+    "wilson80": [
+     0.043,
+     0.171
+    ]
+   },
+   "degraded": {
+    "k": 4,
+    "n": 34,
+    "share": 0.118,
+    "wilson80": [
+     0.064,
+     0.207
+    ]
+   },
+   "difference (grading noise)": -0.03
+  },
+  "lift": 0.735,
+  "lift_newcombe80": [
+   0.649,
+   0.797
+  ],
+  "sensitivity": 0.147,
+  "sensitivity_newcombe80": [
+   0.054,
+   0.237
+  ]
+ },
+ "localisation": {
+  "k": 18,
+  "n": 18,
+  "share": 1.0,
+  "wilson80": [
+   0.916,
+   1.0
+  ],
+  "runs": [
+   {
+    "task": "0216-read-g1-reader-deep",
+    "opened_deleted": [
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "fixed-tape-model",
+     "main-theorem",
+     "radix-digit-reduction",
+     "recursive-power-saving"
+    ],
+    "stuck_on_deleted": [
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "fixed-tape-model",
+     "radix-digit-reduction"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0215-read-g1-reader-home",
+    "opened_deleted": [
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "fixed-tape-model",
+     "main-theorem",
+     "nlogn-conjecture",
+     "radix-digit-reduction",
+     "recursive-power-saving"
+    ],
+    "stuck_on_deleted": [
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "fixed-tape-model",
+     "main-theorem",
+     "nlogn-conjecture",
+     "recursive-power-saving"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0218-read-g2-reader-home",
+    "opened_deleted": [
+     "address-fields",
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "fixed-tape-model",
+     "main-theorem",
+     "nlogn-conjecture",
+     "recursive-power-saving"
+    ],
+    "stuck_on_deleted": [
+     "address-fields",
+     "fast-butterfly-layers",
+     "fixed-tape-model",
+     "recursive-power-saving"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0219-read-g2-reader-deep",
+    "opened_deleted": [
+     "address-fields",
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "fixed-tape-model",
+     "main-theorem",
+     "nlogn-conjecture",
+     "recursive-power-saving",
+     "ring-convolution-retained-order"
+    ],
+    "stuck_on_deleted": [
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "fixed-tape-model",
+     "nlogn-conjecture",
+     "recursive-power-saving",
+     "ring-convolution-retained-order"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0221-read-g3-reader-home",
+    "opened_deleted": [
+     "address-shear-factorization",
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "main-theorem",
+     "recursive-power-saving"
+    ],
+    "stuck_on_deleted": [
+     "address-shear-factorization",
+     "fast-butterfly-layers",
+     "recursive-power-saving"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0224-read-g4-reader-home",
+    "opened_deleted": [
+     "address-shear-factorization",
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "scratch-restoration"
+    ],
+    "stuck_on_deleted": [
+     "address-shear-factorization"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0222-read-g3-reader-deep",
+    "opened_deleted": [
+     "address-fields",
+     "address-shear-factorization",
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "recursive-power-saving",
+     "scratch-restoration"
+    ],
+    "stuck_on_deleted": [
+     "address-fields",
+     "address-shear-factorization",
+     "fast-butterfly-layers",
+     "recursive-power-saving"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0225-read-g4-reader-deep",
+    "opened_deleted": [
+     "address-shear-factorization",
+     "fast-address-interchange",
+     "fixed-tape-model",
+     "scratch-restoration"
+    ],
+    "stuck_on_deleted": [
+     "address-shear-factorization",
+     "fast-address-interchange",
+     "fixed-tape-model"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0228-read-g5-reader-deep",
+    "opened_deleted": [
+     "main-theorem",
+     "ring-convolution-retained-order"
+    ],
+    "stuck_on_deleted": [
+     "ring-convolution-retained-order"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0227-read-g5-reader-home",
+    "opened_deleted": [
+     "fast-butterfly-layers",
+     "ring-convolution-retained-order"
+    ],
+    "stuck_on_deleted": [
+     "ring-convolution-retained-order"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0230-read-g6-reader-home",
+    "opened_deleted": [
+     "address-shear-factorization",
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "main-theorem",
+     "recursive-power-saving"
+    ],
+    "stuck_on_deleted": [
+     "main-theorem",
+     "recursive-power-saving"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0236-read-g8-reader-home",
+    "opened_deleted": [
+     "address-fields",
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "fixed-tape-model",
+     "main-theorem",
+     "nlogn-conjecture",
+     "ring-convolution-retained-order"
+    ],
+    "stuck_on_deleted": [
+     "fast-butterfly-layers",
+     "fixed-tape-model",
+     "main-theorem"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0233-read-g7-reader-home",
+    "opened_deleted": [
+     "address-fields",
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "fixed-tape-model",
+     "main-theorem",
+     "recursive-power-saving",
+     "ring-convolution-retained-order"
+    ],
+    "stuck_on_deleted": [
+     "fast-butterfly-layers",
+     "main-theorem"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0231-read-g6-reader-deep",
+    "opened_deleted": [
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "main-theorem",
+     "recursive-power-saving"
+    ],
+    "stuck_on_deleted": [
+     "fast-butterfly-layers",
+     "main-theorem",
+     "recursive-power-saving"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0234-read-g7-reader-deep",
+    "opened_deleted": [
+     "address-fields",
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "fixed-tape-model",
+     "main-theorem",
+     "radix-digit-reduction",
+     "recursive-power-saving",
+     "ring-convolution-retained-order"
+    ],
+    "stuck_on_deleted": [
+     "fast-butterfly-layers",
+     "main-theorem"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0239-read-g9-reader-home",
+    "opened_deleted": [
+     "address-fields",
+     "address-shear-factorization",
+     "fast-address-interchange",
+     "scratch-restoration"
+    ],
+    "stuck_on_deleted": [
+     "address-shear-factorization",
+     "fast-address-interchange",
+     "scratch-restoration"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0240-read-g9-reader-deep",
+    "opened_deleted": [
+     "address-fields",
+     "address-shear-factorization",
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "fixed-tape-model",
+     "main-theorem",
+     "recursive-power-saving",
+     "scratch-restoration"
+    ],
+    "stuck_on_deleted": [
+     "address-shear-factorization",
+     "fast-address-interchange",
+     "scratch-restoration"
+    ],
+    "gave_up_on_deleted": false
+   },
+   {
+    "task": "0237-read-g8-reader-deep",
+    "opened_deleted": [
+     "address-fields",
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "fixed-tape-model",
+     "main-theorem",
+     "nlogn-conjecture",
+     "recursive-power-saving",
+     "ring-convolution-retained-order"
+    ],
+    "stuck_on_deleted": [
+     "fast-address-interchange",
+     "fast-butterfly-layers",
+     "fixed-tape-model",
+     "main-theorem",
+     "nlogn-conjecture",
+     "recursive-power-saving",
+     "ring-convolution-retained-order"
+    ],
+    "gave_up_on_deleted": false
+   }
+  ]
+ },
+ "row": 3,
+ "reading": "inconclusive: propose the simulation off by default, with its cost and unvalidated signal stated",
+ "exploratory": {
+  "intact_runs_stuck_on_the_deleted_pages": {
+   "k": 18,
+   "n": 18,
+   "share": 1.0,
+   "wilson80": [
+    0.916,
+    1.0
+   ]
+  }
+ },
+ "descriptive": {
+  "intact": {
+   "runs": 18,
+   "gave_up": 1,
+   "pages_opened_mean": 8.22,
+   "stuck_points": 148,
+   "runs_with_leaks": 2,
+   "wrong_points": 1,
+   "baseline_wrong_points": 2,
+   "repair_goals": {
+    "k": 45,
+    "n": 46,
+    "share": 0.978,
+    "wilson80": [
+     0.93,
+     0.993
+    ]
+   },
+   "held_out_goals": {
+    "k": 12,
+    "n": 22,
+    "share": 0.545,
+    "wilson80": [
+     0.411,
+     0.674
+    ]
+   },
+   "by_start": {
+    "home": {
+     "k": 29,
+     "n": 34,
+     "share": 0.853,
+     "wilson80": [
+      0.759,
+      0.914
+     ]
+    },
+    "deep": {
+     "k": 28,
+     "n": 34,
+     "share": 0.824,
+     "wilson80": [
+      0.725,
+      0.892
+     ]
+    }
+   },
+   "by_goal": {
+    "g1": [
+     4,
+     3,
+     "/4"
+    ],
+    "g2": [
+     3,
+     3,
+     "/3"
+    ],
+    "g3": [
+     4,
+     4,
+     "/4"
+    ],
+    "g4": [
+     4,
+     4,
+     "/4"
+    ],
+    "g5": [
+     4,
+     4,
+     "/4"
+    ],
+    "g6": [
+     4,
+     4,
+     "/4"
+    ],
+    "g7 (held out)": [
+     2,
+     4,
+     "/4"
+    ],
+    "g8 (held out)": [
+     1,
+     2,
+     "/3"
+    ],
+    "g9 (held out)": [
+     3,
+     0,
+     "/4"
+    ]
+   }
+  },
+  "degraded": {
+   "runs": 18,
+   "gave_up": 3,
+   "pages_opened_mean": 9.78,
+   "stuck_points": 142,
+   "runs_with_leaks": 3,
+   "wrong_points": 0,
+   "baseline_wrong_points": 0,
+   "repair_goals": {
+    "k": 42,
+    "n": 46,
+    "share": 0.913,
+    "wilson80": [
+     0.845,
+     0.953
+    ]
+   },
+   "held_out_goals": {
+    "k": 5,
+    "n": 22,
+    "share": 0.227,
+    "wilson80": [
+     0.134,
+     0.358
+    ]
+   },
+   "by_start": {
+    "home": {
+     "k": 24,
+     "n": 34,
+     "share": 0.706,
+     "wilson80": [
+      0.598,
+      0.795
+     ]
+    },
+    "deep": {
+     "k": 23,
+     "n": 34,
+     "share": 0.676,
+     "wilson80": [
+      0.568,
+      0.769
+     ]
+    }
+   },
+   "by_goal": {
+    "g1": [
+     4,
+     3,
+     "/4"
+    ],
+    "g2": [
+     3,
+     2,
+     "/3"
+    ],
+    "g3": [
+     4,
+     4,
+     "/4"
+    ],
+    "g4": [
+     4,
+     4,
+     "/4"
+    ],
+    "g5": [
+     3,
+     3,
+     "/4"
+    ],
+    "g6": [
+     4,
+     4,
+     "/4"
+    ],
+    "g7 (held out)": [
+     0,
+     0,
+     "/4"
+    ],
+    "g8 (held out)": [
+     1,
+     2,
+     "/3"
+    ],
+    "g9 (held out)": [
+     2,
+     0,
+     "/4"
+    ]
+   }
+  }
+ }
+}

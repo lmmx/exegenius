@@ -66,6 +66,47 @@ Key points are pooled over goals and runs, with 80% Wilson intervals. The compar
 - **The deletions are chosen by this session** from the goals, before any reader runs, by the stated rule.
 - **One round, one reader profile, one run per goal and starting point.**
 
+## Result (row 3: inconclusive)
+
+Read by `tools/sr1read.py` (`docs/journal/2026-10-17-sr1/reading.json`) once all 2 + 54 + 18 tasks were accepted: 9 goals, 34 key points, 18 reader runs and 9 baselines per copy.
+
+| Measure | Value | 80% interval |
+|---|---|---|
+| C_int | 57/68 = **0.838** | 0.773–0.887 |
+| C_deg | 47/68 = **0.691** | 0.616–0.758 |
+| C_base | 7/68 = 0.103 (intact copy 3/34, degraded 4/34; grading noise −0.03) | 0.065–0.160 |
+| Lift | **0.735** (row 1 needs ≥ 0.20) | 0.649–0.797 (Newcombe, descriptive) |
+| Sensitivity | **0.147** (row 1 needs ≥ 0.15) | 0.054–0.237 (Newcombe, descriptive) |
+| Localisation (secondary) | 18/18 | 0.916–1.000 |
+
+**Reading:**
+- **Row 3, inconclusive.** Lift passes row 1 easily. Sensitivity misses it by one key point in 68: row 1 needed C_deg ≤ 46/68. It is above row 2's 0.05, so the wiki is not shown irrelevant either.
+- **The row's recommendation stands:** propose the simulation off by default (`rounds = 0`), available on request, with its cost and unvalidated signal stated. That is a default change, for the author. Nothing is changed here, and no further reader experiment follows.
+
+**What the measures do and do not show** (exploratory; none of this changes the row):
+- **Lift does not answer the prior-knowledge threat.** The baseline task tells the reader to use only a stated background ("Everything else you know, the reader does not"). 15 of the 18 baseline answers decline ("the background does not cover this"). Lift therefore compares the wiki with an instructed refusal, not with what Haiku knows. In this design only sensitivity speaks to the threat the plan named.
+- **Sensitivity sits almost entirely in the held-out goals.**
+  - Repair goals: 45/46 → 42/46 (−0.07), near ceiling in both copies.
+  - Held-out goals: 12/22 → 5/22 (−0.32).
+  - Two explanations fit the repair goals' small drop, and neither was tested: the wiki states the key points more than once (74 of the 111 degraded citations still come from pages that lost paragraphs), or the grading is lenient.
+- **Stuck points do not localise deletions.** Localisation is 18/18, but intact runs record stuck points on the same pages at the same rate: 18/18 runs, 148 stuck points intact against 142 degraded. Readers record about eight stuck points a run whether the content is there or not. Row 1's stuck-point clause is moot under row 3, but this is evidence against using stuck points as repair notes.
+- **Descriptive (intact / degraded):**
+  - give-ups 1 / 3;
+  - mean distinct pages opened 8.2 / 9.8;
+  - runs whose answers name a real page (leaks) 2 / 3, mostly `nlogn-conjecture`;
+  - wrong points 1 / 0.
+  - Home and deep starts are within 0.03 of each other in both copies.
+
+**Cost** (`tools/spend.py`, subagents described `SR1 …`):
+- 74 subagents (Haiku readers and baselines, Sonnet goals and grades); 661 calls; 37.9 M cache read, 3.07 M cache write, ~120 k visible output.
+- One round on this 25-page wiki is about half of that, ~19 M cache read, with orchestration on top.
+- Within the 30–65 M estimate. Orchestration is not split by experiment.
+
+**Deviations:**
+1. **Readers and baselines ran as `general-purpose` subagents,** which have every tool, not as `exegenius-reader` (Read, Write, Bash). Some Haiku readers called session tools the task forbids. Six sessions were created between 17:55 and 17:59 UTC, plus one `read_documentation` and one `list_sessions` call. All six sessions are archived. One ran a single turn with no task (~61 k tokens, outside the spend counts); five never started. None touched the wiki copies, and the binary accepted every answer. Production's reader agent cannot make these calls.
+2. **The deletion rule** was operationalised mechanically before any reader run (recorded above). It removed 31 paragraphs and left `nlogn-conjecture` empty.
+3. **Localisation's "give-up on that page"** is read as a give-up whose last page has a deletion. No run gave up on a deleted page, so the choice does not matter.
+
 ## Ledger
 
 | Item | Status |
@@ -74,3 +115,5 @@ Key points are pooled over goals and runs, with 80% Wilson intervals. The compar
 | Preregistration | 2026-10-17 17:49 UTC, before any SR1 model call |
 | Goals | 0213 and 0214 accepted (9 goals: 6 repair, 3 held out; 34 key points) |
 | Degradation | 17:52 UTC, before any reader run: `tools/sr1degrade.py`, 31 paragraphs deleted on 11 pages (`docs/journal/2026-10-17-sr1/degradation.json`). The selection rule is operationalised mechanically (per key point, the top content-word-overlap paragraph on the goal's pages plus any with overlap ≥ 0.35), so that it is blind to reader outcomes. The nlogn-conjecture page is left empty. Both copies issue the same 27 tasks (18 read, 9 baseline), identical apart from the root |
+| Round | 17:53–18:03 UTC: 18 read and 9 baseline tasks per copy on Haiku `high`, then 9 grade tasks per copy on Sonnet `high` (separate graders per copy), all accepted; the stray session calls are deviation 1 |
+| Result | 18:12 UTC: `tools/sr1read.py` → **row 3, inconclusive** (lift 0.735, sensitivity 0.147 against 0.15). Recommendation: propose `rounds = 0` by default, for the author; not changed here |
