@@ -1,6 +1,6 @@
 """Collect A1's accepted answers into plant.py's layout, and check each task's isolation from its transcript.
 
-usage: python3 -I a1collect.py RUNS_DIR ANSWERS_DIR [--subagents DIR]
+usage: python3 -I a1collect.py RUNS_DIR ANSWERS_DIR [--subagents DIR] [--allow REL ...]
 
 RUNS_DIR is a1setup.py's output: copies under RUNS_DIR/A1<cfg><run>/<code>/<kind>/, and prompts.tsv.
 For each task in prompts.tsv, it copies into ANSWERS_DIR/<cfg>/<run>/<code>/ (plans/A1.md, "Collection"):
@@ -13,6 +13,10 @@ the copy's root path in its prompt, and lists every file the subagent read or to
 answer. A task that read anything else is contaminated: excluded and rerun once, in a fresh copy.
 Prints, per configuration: tasks, accepted, never accepted, no transcript and contaminated, and
 writes ANSWERS_DIR/collect.json.
+
+It also collects A2 (plans/A2.md): descriptions `A2<arm><run> <task id>`. `--allow REL` adds a file
+that reading does not count as contamination, relative to each copy's root (A2's SI arm reads
+`sources/paper.tex`, which its task allows).
 """
 import json
 import pathlib
@@ -30,11 +34,11 @@ def transcripts(sub):
     matched by the copy's root path, which the prompt (the transcript's first user message) contains."""
     out = {}
     for meta in pathlib.Path(sub).glob("*.meta.json"):
-        if not json.loads(meta.read_text()).get("description", "").startswith("A1A"):
+        if not json.loads(meta.read_text()).get("description", "").startswith(("A1A", "A2")):
             continue
         t = meta.with_suffix("").with_suffix(".jsonl")
         first = json.loads(open(t).readline()).get("message", {}).get("content", "")
-        m = re.search(r"(/\S*/A1A[HSO]\d+/a1-[0-9a-f]+/(?:audit|support))/exegenius/tasks/", first if isinstance(first, str) else json.dumps(first))
+        m = re.search(r"(/\S*/A(?:1A[HSO]|2(?:B|I|SI))\d+/a[12]-[0-9a-f]+/(?:audit|support))/exegenius/tasks/", first if isinstance(first, str) else json.dumps(first))
         if m:
             out[m.group(1)] = t
     return out
@@ -65,13 +69,14 @@ def touched(path):
 def main():
     runs, out = pathlib.Path(sys.argv[1]), pathlib.Path(sys.argv[2])
     sub = sys.argv[sys.argv.index("--subagents") + 1] if "--subagents" in sys.argv else None
+    allow = [sys.argv[i + 1] for i, a in enumerate(sys.argv) if a == "--allow"]
     tx = transcripts(sub) if sub else {}
     summary, rows = {}, []
     for line in (runs / "prompts.tsv").read_text().splitlines():
         desc, model, effort, root, prompt = line.split("\t")
         root = pathlib.Path(root)
         cfg_run, tid = desc.split(" ")
-        cfg, run = cfg_run[2:4], cfg_run[4:]
+        cfg, run = re.match(r"^A[12]([A-Z]+?)(\d+)$", cfg_run).groups()
         code, kind = root.parent.name, root.name
         log_path = root / "exegenius/log.jsonl"
         log = [json.loads(l) for l in log_path.read_text().splitlines() if l.strip()] if log_path.exists() else []
@@ -93,7 +98,8 @@ def main():
             else:
                 paths, other_tools = touched(t)
                 own = str(root / "exegenius/tasks")
-                extra = sorted(p for p in paths if p != str(root) and p != str(root / "exegenius") and not p.startswith(own))
+                allowed = {str(root), str(root / "exegenius")} | {str(root / a) for a in allow}
+                extra = sorted(p for p in paths if p not in allowed and not p.startswith(own))
                 row["contaminated"] = bool(extra)
                 row["other_paths"] = extra
                 row["other_tools"] = other_tools

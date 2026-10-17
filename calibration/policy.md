@@ -18,9 +18,9 @@
 |---|---|---|---|---|---|
 | Extraction | Sonnet `high`, `master` | final for this paper | indirect but sufficient for planning: every extraction tested led to ceiling plans | **yes, for this paper** | a second document |
 | Background | Sonnet `high`, `master` | accepted: no alternative tested, and no sign it limits a decision | indirect for planning (the same ceiling plans); none for writing | **for planning only** | its effect on writing is unmeasured. Check against the reader profile, with no model, if pages point here |
-| Argument planning | Sonnet `high` with the combined instruction. **`master` still has the older instruction** | final for this paper, once the instruction is merged | strong: the rubric's ceiling and the central gate, blind, on several extractions | **yes for this paper, after the merge** | the merge (`proposals/argument-instruction.md`), then a second document |
-| Writing | Sonnet `high`; Opus `xhigh` on 0015 and 0016 in this wiki | provisional | Sonnet failed on a hard key-step page in 1 of 2 runs; Opus met the standard on both hard pages | **no** | W3, read on both its primary table and its fidelity secondary (`plans/W3.md`) |
-| Fidelity auditing | as `master` (the writer configuration) | **unresolved** | none of Haiku `high`, Sonnet `high` and Opus `xhigh` meets the standard; all miss the same errors | **no** | a task redesign, not a model choice: A2, source-aware and structured (`plans/A2-draft.md`), and A1b, the support instruction (`plans/A1b-draft.md`) |
+| Argument planning | Sonnet `high` with the combined instruction. **`master` still has the older instruction** | final for this paper, once the instruction is merged | strong: the rubric's ceiling and the central gate, blind, on several extractions | **yes for this paper, after the merge** | the merge: **PR #13** (built and tested in isolation on 2026-10-17; not merged), then a second document |
+| Writing | Sonnet `high`; Opus `xhigh` on 0015 and 0016 in this wiki | provisional | Sonnet failed on a hard key-step page in 1 of 2 runs; Opus met the standard on both hard pages | **no** | W3 as amended on 2026-10-17: a second Sonnet run per key-step page and fidelity rule R2 (`plans/W3.md`) |
+| Fidelity auditing | as `master` (the writer configuration) | **unresolved** | none of Haiku `high`, Sonnet `high` and Opus `xhigh` meets the standard; all miss the same errors | **no** | a task redesign, not a model choice: A2, source-aware and structured (prepared on 2026-10-17, `plans/A2.md`); A1b, the support instruction (`plans/A1b-draft.md`), only if A2 leaves the support check's misses open |
 | Simulated readers | `master` | unmeasured | none | **no** | after writing is settled |
 | Judging (the instrument) | Opus; the primary rubric below the ceiling, K3 pairwise above | validated | K3 passed its preregistered criteria | **yes, as an instrument** | — |
 
@@ -29,6 +29,27 @@
 2. **Measurement validity:** a general rule for when the `ASSERTS` classifier may score audit notes, for future experiments only (`plans/A1b-draft.md`). A1's preregistered result stays primary.
 3. **Auditor evidence:** whether auditors get the source. A2 tests it before any adoption.
 4. **W3:** launch on a meter reading, and whether to add a second Sonnet run per key-step page (`plans/W3.md`, option). Then the writer default.
+
+## Gap review (2026-10-17, 07:04 UTC): what existing evidence closes, and what needs an experiment
+
+**The rule (the author, 2026-10-17):** run only experiments that can change a configuration decision.
+
+| Task | Closed by existing evidence | Genuinely needs an experiment | Not worth an experiment |
+|---|---|---|---|
+| Extraction | the configuration, for this paper (EX1; ceiling plans from every extraction) | nothing on this paper | a cheaper extractor: the saving is about 1 M per wiki. A second document is the only open item, and only the author can supply it |
+| Background | the configuration for planning (the 2026-10-15 audit: 8 runs, all feeding ceiling plans) | nothing now. If W3's pages show over- or under-explanation, check the concept lists against the reader profile (no model) first | a model comparison: no sign it limits a decision |
+| Argument planning | the configuration and the instruction, for this paper (E9–E11, S6). The instruction is now a tested, reviewable change (PR #13) | nothing on this paper | more model comparisons: E11 found no advantage above the ceiling |
+| Writing | Sonnet `high` is not adequate on hard key-step pages (one major error in two runs on 0015); Opus met the standard there | **W3 (amended):** does Sonnet fail the fidelity standard often enough on key-step pages for routing to pay? | a 23-page Opus rollout without W3 |
+| Fidelity auditing | no model choice fixes it (A1: three models, the same misses) | **A2:** does a source-aware structured audit catch errors only the source reveals? | A1 stage 2 (cannot change the verdict); more model comparisons on the current tasks |
+| Simulated readers | nothing: unmeasured | a small comparison, once writing is settled; its decision is how much reader feedback to trust | anything before writing is settled |
+| Judging | the instrument (K3; K2) | nothing decision-critical | Sonnet pairwise judging (a cost saving only) |
+
+**The order the evidence supports:**
+1. **A2:** detecting consequential errors is what makes every other row trustworthy.
+2. **W3, amended:** the one writer decision still open.
+3. **Simulated readers:** after writing.
+
+A1b (the support instruction) runs only if A2 leaves the support check's misses as the limiting gap.
 
 ## Decision ledger (2026-10-15, 09:26 UTC): the configuration to use for each task, and how far it is proven
 

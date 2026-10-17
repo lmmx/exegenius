@@ -1,0 +1,3 @@
+/usr/local/bin/exegenius -> /home/user/exegenius/target/debug/exegenius
+sha256 c37a2b3d58008d52edaa047cdda9fd2c1deb6b8cd9dec0c03ec54fcaa35caee8
+exegenius 0.6.0
