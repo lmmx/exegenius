@@ -1,0 +1,8 @@
+{"page": "P02",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "a way of storing a list of complex numbers so that multiplying by a root of unity costs only a signed rotation of the list, with no arithmetic",
+   "problem": "Only the roots of unity that are powers of y (the 2r-th roots y^a, such as omega_t = y^{2r/t}) act as signed shifts. The ring also contains scalar roots of unity, for example zeta = e^{pi i/r} used in the phase twist, and multiplying by those is a coefficientwise complex multiplication, not a shift. The paper (lines 82-84, 2782-2784) says 'Powers of y then serve as roots of unity ... multiplication by such a root is a signed shift'. The page itself narrows this correctly later ('Multiplying by y^a ...')."}
+ ],
+ "motivation_given": true}

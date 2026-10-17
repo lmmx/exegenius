@@ -1,0 +1,8 @@
+{"page": "P02",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "a way of storing a list of complex numbers so that multiplying by a root of unity costs only a signed rotation of the list, with no arithmetic",
+   "problem": "This holds only for the roots of unity that are powers of y (the 2r-th roots y^a, e.g. omega_t = y^{2r/t} for t | 2r); multiplying by a general root of unity in R_r, such as the complex scalar e^{2 pi i/3}, is not a signed shift. The paper restricts the claim to powers of y (lines 82-84, 2782-2784, 2798), as the page itself does later under 'Why this ring'."}
+ ],
+ "motivation_given": true}
