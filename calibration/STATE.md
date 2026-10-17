@@ -1,6 +1,34 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-15 11:08 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-17 07:09 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+
+## Checkpoint, 2026-10-17 07:09 UTC (new week; read first)
+
+**Quota:** the author's reading is about 4% used (session), at about 06:44 on 2026-10-17, at the start of a new weekly allowance. Model calls since: two independent seed reviews (Opus subagents). Check the meter again before A2's or W3's runs.
+
+**Done today (model-free unless stated):**
+- **Planning instruction:** built and tested in an isolated worktree and target directory (3 + 79 + 15 tests; clippy and fmt clean). It was fast-forward pushed to `wiki-explanation-reader-sim-v8dqtr` and opened as **PR #13**, not merged.
+  - The 10-15 denial is explained: that branch existed (PR #7, merged), so `-B` would have force-reset it.
+- **W3, amendment 2** (`plans/W3.md`; simulation in `docs/journal/2026-10-17-w3-design/`):
+  - The 10-15 fidelity secondary was unsafe. It cleared Sonnet 42–66% of the time when Sonnet fails 20–30% of page-runs.
+  - Added: a second Sonnet run on each key-step page (six WS2 copies are made) and rule R2. The primary is unchanged.
+  - W3 is now ~80–175 M.
+- **A2, prepared** (`plans/A2.md`; `docs/journal/2026-10-17-a2-design/`):
+  - 12 source-only seeds and the key (`tools/a2seed.py`).
+  - Arms B, I and SI (`tools/a2setup.py`), with the text check passing. 66 copies in `scratchpad/a2/runs/`, launch order in `scratchpad/a2/queue.tsv`.
+  - The collector allows `sources/paper.tex`; the masking tool is written.
+  - Independent review 1: 9 of 12 accepted. Five seeds were revised.
+- **Policy:** gap review added (`policy.md`); 4% reading recorded (`budget.md`).
+
+**Next, in order:**
+1. **A2 review 2:** read `scratchpad/a2/review2.json`. If any seed fails again, revise it and repeat; if all pass, record the key's sha256 and **preregister A2** (`plans/A2.md` ledger) before any A2 run.
+2. **A2 runs:** check the meter first, then launch the 66 tasks from `scratchpad/a2/queue.tsv`, up to 20 at a time (`general-purpose`, sonnet, high, prompts word for word).
+   - Collect: `a1collect.py scratchpad/a2/runs ANSWERS --subagents … --allow sources/paper.tex`.
+   - B's A1 variants: copy the AS answers from `docs/journal/2026-10-15-a1-stage1/answers/AS/1`.
+   - Score: `plant.py score --key docs/journal/2026-10-17-a2-design/key.json --notes`.
+   - Then mask (`mask_notes.py`), hand-label, commit the labels, rescore (`plant_labels.py`), adjudicate clean-page alarms, and read by A2's table.
+3. **W3 (amended):** after A2, on a meter reading. 24 runs from `docs/journal/2026-10-15-w3-setup/prompts.tsv`; prepare J26 (54 + 18 judgements); read by the primary table and R2.
+4. **The author's decisions:** PR #13; source access (after A2); the writer default (after W3).
 
 ## Update, 11:08 UTC (the author's note at about 11:00; no meter reading in it)
 

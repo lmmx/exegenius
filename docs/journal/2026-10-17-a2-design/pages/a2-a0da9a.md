@@ -1,6 +1,6 @@
 A *finite linear network with roles and frames* is a fixed wiring of linear steps that exchanges two banks of values with prescribed signs and restores every auxiliary value it uses. Every fixed-tape procedure of the argument comes from one and the same network, and this page explains how a network computes its result on an array.
 
-A wire's fixed place in the network is its *role*. Let $W$ be the number of roles. A *scratch* (auxiliary) role carries working values whose initial contents are zero; the other roles carry the exchanged values.
+A wire's fixed place in the network is its *role*. Let $W$ be the number of roles. A *scratch* (auxiliary) role carries working values whose initial contents are arbitrary; the other roles carry the exchanged values.
 
 The *scalar network* is the same wiring with each gate applied pointwise to matching addresses, so it acts on roles alone. Let $\rho$ be the permutation of roles that it applies: an input at role $w$ leaves at output role $\rho(w)$ with sign $\varepsilon_w \in \{+1,-1\}$.
 
@@ -10,7 +10,7 @@ Each source, gate and sink $\nu$ carries an invertible linear operator $D_\nu$ o
 
 A pointwise linear gate $G$ combines its $p$ input arrays $f_1,\dots,f_p$ at each address with fixed scalar coefficients. The frame $D_\nu$ of the gate is linear and the coefficients are scalars, so $$G(D_\nu f_1,\ldots,D_\nu f_p)=D_\nu G(f_1,\ldots,f_p).$$ Frames therefore pass through gates.
 
-Along a route $\alpha_0,\alpha_1,\dots,\alpha_k$ of edges, the operators telescope: $(D_{\alpha_k}D_{\alpha_{k-1}}^{-1})\cdots(D_{\alpha_1}D_{\alpha_0}^{-1})=D_{\alpha_k}D_{\alpha_0}^{-1}$. The intermediate frames cancel and the route applies only its endpoint operator.
+Along a route $\alpha_0,\alpha_1,\dots,\alpha_k$ of edges, the operators telescope: $(D_{\alpha_k}D_{\alpha_{k-1}}^{-1})\cdots(D_{\alpha_1}D_{\alpha_0}^{-1})=D_{\alpha_k}D_{\alpha_0}^{-1}$. The intermediate frames cancel and the route applies only its endpoint operator, so the paper fixes every intermediate frame to the identity.
 
 Take an input role $w$ and its route to output role $\rho(w)$, carrying sign $\varepsilon_w \in \{+1,-1\}$. By the telescoping, the route applies $\varepsilon_w D_{\mathrm{sink}(\rho(w))}D_{\mathrm{source}(w)}^{-1}$, where $\mathrm{source}(w)$ and $\mathrm{sink}(\rho(w))$ are the first and last nodes of that route. Undoing the exchange moves each output back to its input role, and multiplying by $\varepsilon_w$ again removes the sign. For a scratch role the construction has $\rho(w)=w$ with sign $+1$ <cite data-source="paper">each scratch input to its own output with sign $+1$</cite>, so the undoing needs no correction there. Every role keeps the endpoint operator <cite data-source="paper">leaves the endpoint operator on every role array</cite>, auxiliary roles included.
 

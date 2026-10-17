@@ -1,0 +1,98 @@
+[
+ {
+  "seed": "ASF-S1",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-3716bf.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-74407e.md",
+  "original_text": "Here $q$ is a fixed odd prime,",
+  "seeded_text": "Here $q$ is a fixed prime,",
+  "paper_lines_claimed": "1397, 1415-1417"
+ },
+ {
+  "seed": "ASF-S2",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-3716bf.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-74407e.md",
+  "original_text": "Elimination proves this:",
+  "seeded_text": "The paper cites this factorization from earlier work without proof; elimination proves it:",
+  "paper_lines_claimed": "1362-1392"
+ },
+ {
+  "seed": "FAI-S1",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-5b4680.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-279843.md",
+  "original_text": "computes $s$ as $Wm$ minus a positive constant",
+  "seeded_text": "computes $s$ as $Wm/2$ minus a positive constant",
+  "paper_lines_claimed": "1003-1010, 1319-1323"
+ },
+ {
+  "seed": "FAI-S2",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-5b4680.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-279843.md",
+  "original_text": "with the earlier field $H$",
+  "seeded_text": "with the later field $H$",
+  "paper_lines_claimed": "1400-1401"
+ },
+ {
+  "seed": "LNR-S1",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-a0da9a.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-1c92b8.md",
+  "original_text": "whose initial contents are arbitrary",
+  "seeded_text": "whose initial contents are zero",
+  "paper_lines_claimed": "690-692, 705-711, 726-733"
+ },
+ {
+  "seed": "LNR-S2",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-a0da9a.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-1c92b8.md",
+  "original_text": "Each fixed-tape procedure of the argument comes from one such network",
+  "seeded_text": "Every fixed-tape procedure of the argument comes from one and the same network",
+  "paper_lines_claimed": "120-121, 685-703"
+ },
+ {
+  "seed": "RPS-S1",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-55eae9.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-72b9c2.md",
+  "original_text": "Here $m$ is the factor by which the parameter grows",
+  "seeded_text": "Here $m=2$ is the factor by which the parameter grows",
+  "paper_lines_claimed": "655, 162-174"
+ },
+ {
+  "seed": "RPS-S2",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-55eae9.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-72b9c2.md",
+  "original_text": "or the number of selected axes for a numerical layer",
+  "seeded_text": "and also the number of field digits for a numerical layer",
+  "paper_lines_claimed": "172-173"
+ },
+ {
+  "seed": "SIC-S1",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-019fb1.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-aedee4.md",
+  "original_text": "injected back into $S$, adds",
+  "seeded_text": "injected back into $S$ and never cleared afterwards, adds",
+  "paper_lines_claimed": "705-722, 744-750"
+ },
+ {
+  "seed": "SIC-S2",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-019fb1.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-aedee4.md",
+  "original_text": "with $h=100$ (the letter",
+  "seeded_text": "with $h=100$, as in Alon's construction that the paper specializes (the letter",
+  "paper_lines_claimed": "872-874"
+ },
+ {
+  "seed": "TI-S1",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-be7b22.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-df6e82.md",
+  "original_text": "where $\\mu$ is its number of rows",
+  "seeded_text": "where $\\mu$ is the number of central wires in one invocation",
+  "paper_lines_claimed": "655, 760, 1119"
+ },
+ {
+  "seed": "TI-S2",
+  "seeded_page": "docs/journal/2026-10-17-a2-design/pages/a2-be7b22.md",
+  "clean_page": "docs/journal/2026-10-14-a1-audit-design/pages/a1-df6e82.md",
+  "original_text": "exchanges the two banks and returns every auxiliary wire to its starting value",
+  "seeded_text": "exchanges the two banks and, by a restoration device the paper introduces as new, returns every auxiliary wire to its starting value",
+  "paper_lines_claimed": "709-711"
+ }
+]

@@ -1,0 +1,134 @@
+[
+ {
+  "seed": "ASF-S1",
+  "false_against_paper": false,
+  "paper_evidence": "1397 'There is a fixed odd prime $q$'; 1415 'Choose an odd prime avoiding every denominator'. But the paper itself calls the same q just 'a prime' at 1478 ('let $q$ be a prime as in Lemma~\\ref{lem:matrix-shear}') and 1651 ('the fixed prime already chosen'). Oddness is also forced by denominator avoidance: the triple-tensor lines have <u_a,u_a>=2^3 (865: '<t_T,t_T>=2'), so the projections P_{U_a} (1117) carry denominators divisible by 2.",
+  "page_detectable": false,
+  "page_reason": "Nothing on the page fixes the parity of q, and the page never displays the network's projection matrices, so a reader could not show that q=2 is excluded.",
+  "revealed_by_quote": false,
+  "severity": "low",
+  "verdict": "reject",
+  "note": "The seeded sentence is still true: an odd prime is a prime, and the paper calls q 'a prime' elsewhere. It weakens the statement without misstating it, and the page's own condition that q divide no denominator already rules out q=2 for the paper's matrices. To make a real seed, assert something false, e.g. 'q is a fixed prime, which may be taken to be 2', or give a wrong constraint such as 'q must divide every denominator'."
+ },
+ {
+  "seed": "ASF-S2",
+  "false_against_paper": true,
+  "paper_evidence": "1359-1362 'The required factorization is the Bruhat factorization ... see Grigor'ev ... We give its elementary elimination proof in this order.' Lemma lem:lower-lower (1364-1373) has a full proof at 1375-1392 (pivot on the topmost nonzero row's rightmost entry, clear left by right multiplication, clear below by left multiplication). So the paper cites the earlier work and also proves the result.",
+  "page_detectable": false,
+  "page_reason": "The page does not say where the factorization comes from. The elimination sketch it gives could be either the wiki's own argument or the paper's. Neither quotation (the O(V) cost of a triangular transformation, the N-2L_b deficit) touches the factorization's provenance.",
+  "revealed_by_quote": false,
+  "severity": "low",
+  "verdict": "accept",
+  "note": "An attribution/provenance error only; the mathematics on the page is unchanged. It is valid because the clause 'without proof' is false (paper 1362, 1375-1392)."
+ },
+ {
+  "seed": "FAI-S1",
+  "false_against_paper": true,
+  "paper_evidence": "1151 's_b = W_b m - N + 2L_b'; 1167 'Its deficit from W_b m is N-2L_b>0'; 1321-1322 eta_b = (W_b m - s_b)/(W_b m) = 339/22587335000000. So s equals Wm minus a positive constant, not Wm/2 minus one. Grep finds no 'Wm/2' anywhere, and the complex count (1222, s_c = W_c m - 2N + 2L_c) is also of the form Wm minus a constant.",
+  "page_detectable": false,
+  "page_reason": "If s = Wm/2 - c, then s < Wm still holds, so the quoted bound 's<Wm' and the steps 'Hence s/W<m' and 'fix tau<1 with s/W<m^tau' all still go through. The page gives no wire count, no N, no L and no endpoint identity from which s could be estimated, and it states no explicit tau. The seeded value is consistent with everything a page-only reader sees.",
+  "revealed_by_quote": false,
+  "severity": "medium",
+  "verdict": "accept",
+  "note": "This hugely overstates the saving: the true relative deficit is about 1.5e-11, while the seed implies a deficit of 1/2. The page's own argument needs only s<Wm and survives, so I rate it medium; an auditor focused on the paper's explicit exponent could argue for high."
+ },
+ {
+  "seed": "FAI-S2",
+  "false_against_paper": true,
+  "paper_evidence": "1399-1400 'two ordered groups of fields ... with every $H_i$ before every $D_j$'; 1540 'The other two updates target the later group and have linear cost' (the target is D); 1357 'Lemma ordered-affine-streams updates a later field using earlier fields in linear time'; 1643 address (p,h,g,d,z), with h before d. So H is the earlier field and D the later one.",
+  "page_detectable": false,
+  "page_reason": "The page never states the physical order of H and D. It says only that they are 'two disjoint contiguous address fields', and the ordering requirement lives on linked pages. A reader cannot tell which field comes first.",
+  "revealed_by_quote": false,
+  "severity": "medium",
+  "verdict": "accept",
+  "note": "It gets wrong the tape order that justifies the linear cost: a later field is updated from earlier ones. A reader could take 'later field H' in a temporal sense (the H after the middle update), which might let an auditor pass it as wording. That reading fails for the first update D<-D-H, which uses the original H, but to remove the ambiguity consider 'with H, which lies after D on the tape'."
+ },
+ {
+  "seed": "LNR-S1",
+  "false_against_paper": true,
+  "paper_evidence": "684-685 'We call all these auxiliary wires scratch wires; their initial values may be arbitrary'; 709 'This cancellation of arbitrary initial scratch values'; 728-729 Lemma lem:scalar-motifs 'For arbitrary initial values of its auxiliary wires'; 1532-1533 'including rows assigned to scratch roles, whose initial values were arbitrary'.",
+  "page_detectable": true,
+  "page_reason": "The same page later says 'Distribute the rows cyclically: row l ... goes to role l mod W', with W the number of all roles, scratch roles included. So the scratch roles receive genuine rows of the input array, which are arbitrary data, not zero. The page also stresses that 'Every role keeps the endpoint operator ..., auxiliary roles included', which would be pointless for all-zero arrays. A careful reader sees that 'initial contents are zero' contradicts the row distribution.",
+  "revealed_by_quote": false,
+  "severity": "high",
+  "verdict": "reject",
+  "note": "Fails condition 2, because the cyclic distribution of array rows to all W roles (paragraph 4) contradicts zero-initialized scratch. The error would be high-severity if hidden, since arbitrary scratch contents are essential to the construction. Any claim on this page that restricts scratch contents runs into the same paragraph, so move this seed to a page that does not describe the row-to-role distribution."
+ },
+ {
+  "seed": "LNR-S2",
+  "false_against_paper": true,
+  "paper_evidence": "120 'Each procedure arises from its own fixed linear network'; 643 'We construct two fixed linear networks'; 648-649 'The first network uses bit values and rational subspaces; the second uses Gaussian dyadic values and binary subspaces'; 778-781 give different wire counts W_b and W_c.",
+  "page_detectable": false,
+  "page_reason": "The page discusses a generic network ('a network computes its result on an array'). It never mentions a bit network versus a complex network, different scalar domains or different wire counts. The quotations ('contains V/W bits', 'each scratch input to its own output with sign +1', 'leaves the endpoint operator on every role array') do not show that there are two networks.",
+  "revealed_by_quote": false,
+  "severity": "medium",
+  "verdict": "accept",
+  "note": "It gets the scope of the construction wrong (one network instead of two) without breaking the page's frame and telescoping argument. A side issue in the clean text: 'each fixed-tape procedure ... comes from one such network' is already overbroad, since many fixed-tape procedures in the paper (chunk moves, packed selected-bit additions) use no network. The seed is still a clear further falsehood."
+ },
+ {
+  "seed": "RPS-S1",
+  "false_against_paper": true,
+  "paper_evidence": "655-656 'h=100, ..., m=h^3=1000000'; 160 'subspaces of a fixed $m$-dimensional space'; 170-174 'A recursive call at parameter $mf$ ... multiplying the parameter by $m$ increases the recursive contribution by s/W<m'; 1867-1868 'take a group of e=mf consecutive axis chunks and divide it into m consecutive slots'. The growth factor is m = 10^6. The generic transfer proposition (1451, 'Fix integers m,W>=2') is instantiated with this m, so nothing supports m=2.",
+  "page_detectable": false,
+  "page_reason": "Every later formula (log_m(s/W), s/W<m, the leaf bound) holds for any m>=2. The worked example even uses m=2, which fits the seed. The page gives neither h nor the label-space dimension, so a reader cannot recover m=h^3.",
+  "revealed_by_quote": false,
+  "severity": "medium",
+  "verdict": "accept",
+  "note": "This is a wrong value for a key constant (2 instead of 10^6), with the page's argument intact; I rate it medium, borderline high. One minor tell: an example 'with m=2' becomes redundant once m=2 is fixed, but that does not show the claim is false."
+ },
+ {
+  "seed": "RPS-S2",
+  "false_against_paper": true,
+  "paper_evidence": "171-172 'The parameter counts field digits for address interchange and selected axes for a numerical layer'; 1904-1906 'Apply the finite network ... to a group of e=mf selected axes ... each on the f=e/m axes of one slot'; 1867-1868 'e=mf consecutive axis chunks ... m consecutive slots of f chunks'. For the numerical layer f counts axes (chunks), not field digits.",
+  "page_detectable": true,
+  "page_reason": "The page's own later analysis treats f as a count of axis chunks: 'Omega is the bit count of one axis chunk ... row addition on fields of u=f*Omega bits', 'f>=d^theta' with d the axis-count parameter, 'one kernel per chunk, at cost O(f/m^nu)', and 'The leaves at depth nu have u=f/m^nu<d^theta chunks'. A careful reader can infer that in the numerical setting f is the number of (selected) axis chunks, which conflicts with 'the number of field digits'. A reader could only reconcile the two by taking a 'field digit' to be an Omega-bit chunk, which is a strained reading. In addition, the repeated phrase 'the number of field digits ..., and also the number of field digits' draws attention.",
+  "revealed_by_quote": false,
+  "severity": "medium",
+  "verdict": "revise",
+  "note": "It is false against the paper, but borderline detectable on the page because the later paragraphs pin f down as an axis-chunk count. Options: put the falsehood somewhere the page cannot check (e.g. say the address-interchange parameter counts bits rather than digits), or seed a page whose later text does not count f in chunks. At minimum avoid the duplicated 'number of field digits' phrasing."
+ },
+ {
+  "seed": "SIC-S1",
+  "false_against_paper": true,
+  "paper_evidence": "705-708 'the last two [rows] restore the scratch values'; schedule row 7 'undo copy' (723); 748 'Rows 6 and 7 restore c,a'; 764 'Each invocation restores its own auxiliary wires'; 737 'restores every auxiliary value'. The copy of x_T on A_ST is subtracted again at time 7.",
+  "page_detectable": false,
+  "page_reason": "The page never mentions the undo-gather or undo-copy steps or the requirement that auxiliaries be restored. The link text 'Finite linear network with roles and frames' does not say so either, and the coefficient computation is unchanged whether or not the copy is later removed. The quotations (rank-a edge cost, the loss ratios, s<Wm) do not cover the schedule.",
+  "revealed_by_quote": false,
+  "severity": "medium",
+  "verdict": "accept",
+  "note": "It gets wrong the restoring schedule that makes the network a clean exchange, but the page's coefficient and counting argument still stands. Wording risk: the paper never zeroes a scratch wire (it restores an arbitrary initial value), so an auditor reading 'cleared' as 'reset to zero' might call the seed true. 'and never removed from A_ST afterwards (no undo-copy step)' would be unambiguous."
+ },
+ {
+  "seed": "SIC-S2",
+  "false_against_paper": true,
+  "paper_evidence": "872-874 'These degree-one intersection formulas specialize the construction described by Alon ... to the prime 2, with the ground-set size changed to h=100'; 340-341 'We change the ground-set size and express the second pairing through a rational bilinear form.' So h=100 is the paper's own change, not Alon's value.",
+  "page_detectable": false,
+  "page_reason": "Alon is mentioned nowhere else on the page, and the page carries no information about the original construction's parameters. h=100 itself is correct, so nothing on the page conflicts.",
+  "revealed_by_quote": false,
+  "severity": "low",
+  "verdict": "accept",
+  "note": "An attribution-only error. It is clean and valid."
+ },
+ {
+  "seed": "TI-S1",
+  "false_against_paper": true,
+  "paper_evidence": "1119 'These are fixed rational $m\\times m$ matrices' with 656 'm=h^3=1000000'; 775 'With c_b=100 and c_c=101 central wires per invocation'. The matrix size is m = 10^6, while there are 100 central wires per invocation, so mu is not the number of central wires.",
+  "page_detectable": false,
+  "page_reason": "The page never gives the number of central wires or the value of mu. Its only quantitative use of mu is 'mu<2^20', which holds for 100 as well as for 10^6. The quotation 's<Wm' identifies mu with the paper's m but gives m's value nowhere. 'Central wires' are not defined on the page, so the claim is unsupported but cannot be refuted.",
+  "revealed_by_quote": false,
+  "severity": "medium",
+  "verdict": "accept",
+  "note": "It mistakes the matrix dimension (h^3) for the number of central wires (h), a misstatement of the construction. The page's recurrence argument survives because it uses only mu<2^20 and s<W*mu."
+ },
+ {
+  "seed": "TI-S2",
+  "false_against_paper": true,
+  "paper_evidence": "709-711 'This cancellation of arbitrary initial scratch values is a linear instance of the restoration construction for transparent computation in Buhrman, Cleve, Koucky, Loff and Speelman'; 355-360 'Restoring scratch registers with arbitrary initial contents also has a precise precedent ... Our scratch schedule is the linear-readout version of that construction.'",
+  "page_detectable": false,
+  "page_reason": "The page names no prior work on restoration, and the quotation 'restores every auxiliary value' says nothing about novelty or attribution. A page-only reader cannot tell that the paper credits Buhrman et al.",
+  "revealed_by_quote": false,
+  "severity": "low",
+  "verdict": "accept",
+  "note": "An attribution-only error, valid as written. The paper does present the three-stage exchange and the subspace labels as its own requirements (366-369), but it explicitly credits the restoration of scratch values to earlier work, so 'introduces as new' is false."
+ }
+]

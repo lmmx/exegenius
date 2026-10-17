@@ -941,7 +941,7 @@
    "variant": "S",
    "kind": "seeded",
    "file": "pages/a2-3716bf.md",
-   "sha256": "51ee61cd14e24a996037842edf62cc1c0e7501b63f2db12f632969b88717fc57",
+   "sha256": "8648f95a80ea30a97fc9f0d4c8f096eca6072f5d29bde90dd7c3ce4b01448610",
    "errors": [
     "ASF-S1@a2-3716bf",
     "ASF-S2@a2-3716bf"
@@ -960,7 +960,7 @@
    "variant": "S",
    "kind": "seeded",
    "file": "pages/a2-5b4680.md",
-   "sha256": "b0014d4a1846c610db07a6954c4ccad3f1728cecd06761bf224209016f52a01d",
+   "sha256": "758943e34eb9000347908220105680cca818a6dd3e9a4fcde54cfab9da126b51",
    "errors": [
     "FAI-S1@a2-5b4680",
     "FAI-S2@a2-5b4680"
@@ -983,7 +983,7 @@
    "variant": "S",
    "kind": "seeded",
    "file": "pages/a2-a0da9a.md",
-   "sha256": "269139691e70e7f43875ab2814f911f634f5c53b6ec7507fa1e15b6719965723",
+   "sha256": "eed94f492352134cfa3725b4476e305cd768bf4df30297fe73d74f99a38653e2",
    "errors": [
     "LNR-S1@a2-a0da9a",
     "LNR-S2@a2-a0da9a"
@@ -1010,7 +1010,7 @@
    "variant": "S",
    "kind": "seeded",
    "file": "pages/a2-55eae9.md",
-   "sha256": "025d8ecf10816eae383d23098808db24df1101dff6712e90efffca73b42f2aa7",
+   "sha256": "cee5cf5cdf65800ab2eed840b3502624846870945d9493378d4bbb6b412e1182",
    "errors": [
     "RPS-S1@a2-55eae9",
     "RPS-S2@a2-55eae9"
@@ -1024,7 +1024,7 @@
    "variant": "S",
    "kind": "seeded",
    "file": "pages/a2-019fb1.md",
-   "sha256": "0e2fee5ff1c3c76f73305955c2aba54745e5b7f5211d3ea69ea09a760d5bff97",
+   "sha256": "6326949b42e4a6c81172cfbee593e79e9b17ed8e1537ca45e54b31af25179951",
    "errors": [
     "SIC-S1@a2-019fb1",
     "SIC-S2@a2-019fb1"
@@ -3416,24 +3416,24 @@
    "page": "address-shear-factorization",
    "variant": "S",
    "original": "Here $q$ is a fixed odd prime,",
-   "seeded": "Here $q$ is a fixed prime,",
+   "seeded": "Here $q$ is a fixed prime, which may be taken to be $2$,",
    "location": {
     "offset": 433,
     "line": 3,
     "audit_site": {
-     "text": "Here $q$ is a fixed prime,",
+     "text": "Here $q$ is a fixed prime, which may be taken to be $2$,",
      "span": [
       433,
-      459
+      489
      ],
-     "sentence": "Here $q$ is a fixed prime, the radix of the digits, and $b$ is the number of radix-$q$ digits in each field, so a field holds a residue in $\\mathbb Z/q^b\\mathbb Z$.",
+     "sentence": "Here $q$ is a fixed prime, which may be taken to be $2$, the radix of the digits, and $b$ is the number of radix-$q$ digits in each field, so a field holds a residue in $\\mathbb Z/q^b\\mathbb Z$.",
      "sentence_span": [
       433,
-      597
+      627
      ],
      "paragraph_span": [
       297,
-      653
+      683
      ]
     },
     "audit_site_clean": {
@@ -3460,13 +3460,14 @@
    "detectable_by": [
     "source"
    ],
-   "why": "the paper's prime is a fixed odd prime, chosen to avoid every denominator in the table of factors and every numerator of a diagonal entry of an invertible factor; the page drops 'odd'",
+   "why": "the paper requires a fixed odd prime, chosen to avoid every denominator in the table of factors and every numerator of a diagonal entry of an invertible factor; q = 2 is excluded. (A first draft only dropped 'odd'; rejected by the independent review because 'a prime' is still true and the paper says 'a prime' at 1478 and 1651)",
    "paper_lines": "1397, 1415-1417",
    "cues": [
     "odd prime",
     "q=2",
     "q = 2",
-    "q is odd",
+    "taken to be 2",
+    "taken to be $2$",
     "must be odd"
    ]
   },
@@ -3479,22 +3480,22 @@
    "original": "Elimination proves this:",
    "seeded": "The paper cites this factorization from earlier work without proof; elimination proves it:",
    "location": {
-    "offset": 1445,
+    "offset": 1475,
     "line": 7,
     "audit_site": {
      "text": "The paper cites this factorization from earlier work without proof; elimination proves it:",
      "span": [
-      1445,
-      1535
+      1475,
+      1565
      ],
      "sentence": "The paper cites this factorization from earlier work without proof; elimination proves it: pivot on the topmost nonzero row's rightmost entry, clear its left and lower entries by lower-triangular operations, and repeat on what remains.",
      "sentence_span": [
-      1445,
-      1680
+      1475,
+      1710
      ],
      "paragraph_span": [
-      1101,
-      1680
+      1131,
+      1710
      ]
     },
     "audit_site_clean": {
@@ -3540,22 +3541,22 @@
    "original": "computes $s$ as $Wm$ minus a positive constant",
    "seeded": "computes $s$ as $Wm/2$ minus a positive constant",
    "location": {
-    "offset": 1924,
+    "offset": 1943,
     "line": 11,
     "audit_site": {
      "text": "computes $s$ as $Wm/2$ minus a positive constant",
      "span": [
-      1798,
-      1846
+      1817,
+      1865
      ],
      "sentence": "For the bit network, $s<Wm$ (cited); the paper's proof computes $s$ as $Wm/2$ minus a positive constant fixed by the construction.",
      "sentence_span": [
-      1743,
-      1873
+      1762,
+      1892
      ],
      "paragraph_span": [
-      1550,
-      1955
+      1569,
+      1974
      ]
     },
     "audit_site_clean": {
@@ -3595,32 +3596,32 @@
    "code": "a2-5b4680",
    "page": "fast-address-interchange",
    "variant": "S",
-   "original": "with the earlier field $H$",
-   "seeded": "with the later field $H$",
+   "original": "each combining $D$ with the earlier field $H$ in linear time",
+   "seeded": "each combining $D$ with $H$, which lies after $D$ on the tape, in linear time",
    "location": {
-    "offset": 1554,
+    "offset": 1535,
     "line": 9,
     "audit_site": {
-     "text": "with the later field $H$",
+     "text": "each combining $D$ with $H$, which lies after $D$ on the tape, in linear time",
      "span": [
-      1508,
-      1532
+      1489,
+      1566
      ],
-     "sentence": "Both change only $D$, each combining $D$ with the later field $H$ in linear time.",
+     "sentence": "Both change only $D$, each combining $D$ with $H$, which lies after $D$ on the tape, in linear time.",
      "sentence_span": [
       1467,
-      1548
+      1567
      ],
      "paragraph_span": [
       1073,
-      1548
+      1567
      ]
     },
     "audit_site_clean": {
-     "text": "with the earlier field $H$",
+     "text": "each combining $D$ with the earlier field $H$ in linear time",
      "span": [
-      1508,
-      1534
+      1489,
+      1549
      ],
      "sentence": "Both change only $D$, each combining $D$ with the earlier field $H$ in linear time.",
      "sentence_span": [
@@ -3640,10 +3641,11 @@
    "detectable_by": [
     "source"
    ],
-   "why": "the matrix-shear lemma requires every H field before every D field; that order is what makes the D updates linear-cost",
+   "why": "the matrix-shear lemma requires every H field before every D field; that order is what makes the D updates linear-cost. (Reworded after the independent review: 'the later field H' could be read in time)",
    "paper_lines": "1400-1401",
    "cues": [
-    "later field",
+    "after $D$ on the tape",
+    "after D on the tape",
     "before every",
     "H before D",
     "H fields before",
@@ -3656,59 +3658,59 @@
    "code": "a2-a0da9a",
    "page": "linear-network-roles",
    "variant": "S",
-   "original": "whose initial contents are arbitrary",
-   "seeded": "whose initial contents are zero",
+   "original": "The intermediate frames cancel and the route applies only its endpoint operator.",
+   "seeded": "The intermediate frames cancel and the route applies only its endpoint operator, so the paper fixes every intermediate frame to the identity.",
    "location": {
-    "offset": 469,
-    "line": 3,
+    "offset": 2298,
+    "line": 13,
     "audit_site": {
-     "text": "whose initial contents are zero",
+     "text": "The intermediate frames cancel and the route applies only its endpoint operator, so the paper fixes every intermediate frame to the identity.",
      "span": [
-      469,
-      500
+      2253,
+      2394
      ],
-     "sentence": "A *scratch* (auxiliary) role carries working values whose initial contents are zero; the other roles carry the exchanged values.",
+     "sentence": "The intermediate frames cancel and the route applies only its endpoint operator, so the paper fixes every intermediate frame to the identity.",
      "sentence_span": [
-      417,
-      545
+      2253,
+      2394
      ],
      "paragraph_span": [
-      334,
-      545
+      2063,
+      2394
      ]
     },
     "audit_site_clean": {
-     "text": "whose initial contents are arbitrary",
+     "text": "The intermediate frames cancel and the route applies only its endpoint operator.",
      "span": [
-      460,
-      496
+      2244,
+      2324
      ],
-     "sentence": "A *scratch* (auxiliary) role carries working values whose initial contents are arbitrary; the other roles carry the exchanged values.",
+     "sentence": "The intermediate frames cancel and the route applies only its endpoint operator.",
      "sentence_span": [
-      408,
-      541
+      2244,
+      2324
      ],
      "paragraph_span": [
-      325,
-      541
+      2054,
+      2324
      ]
     },
     "linked": [],
     "support_mark": null,
     "support_mark_clean": null
    },
-   "type": "hypothesis",
+   "type": "conclusion",
    "detectable_by": [
     "source"
    ],
-   "why": "the scratch wires' initial values may be arbitrary, and the schedule cancels them; the construction does not assume zeroed scratch",
-   "paper_lines": "690-692, 705-711, 726-733",
+   "why": "the paper chooses the intermediate frames so that every edge change is inexpensive (implemented by smaller calls); they are not the identity. (Replaces a first seed, 'scratch contents start at zero', rejected by the independent review because the page's cyclic row distribution puts array data on the scratch roles)",
+   "paper_lines": "149-150, 822-823, 1143-1146",
    "cues": [
-    "initial contents are zero",
-    "are zero",
-    "arbitrary initial",
-    "initial contents",
-    "zeroed"
+    "identity",
+    "intermediate frames are chosen",
+    "chosen to make",
+    "inexpensive",
+    "smaller calls"
    ]
   },
   {
@@ -3782,22 +3784,22 @@
    "original": "Here $m$ is the factor by which the parameter grows",
    "seeded": "Here $m=2$ is the factor by which the parameter grows",
    "location": {
-    "offset": 613,
+    "offset": 670,
     "line": 3,
     "audit_site": {
      "text": "Here $m=2$ is the factor by which the parameter grows",
      "span": [
-      613,
-      666
+      670,
+      723
      ],
      "sentence": "Here $m=2$ is the factor by which the parameter grows; this letter changes meaning from the subspace dimension of the prerequisite and from the tape position on the address-fields page.",
      "sentence_span": [
-      613,
-      798
+      670,
+      855
      ],
      "paragraph_span": [
-      258,
-      1102
+      320,
+      1159
      ]
     },
     "audit_site_clean": {
@@ -3841,41 +3843,41 @@
    "code": "a2-55eae9",
    "page": "recursive-power-saving",
    "variant": "S",
-   "original": "or the number of selected axes for a numerical layer",
-   "seeded": "and also the number of field digits for a numerical layer",
+   "original": "which the main theorem needs",
+   "seeded": "which only the paper's later division algorithm needs, not its main multiplication theorem",
    "location": {
-    "offset": 490,
-    "line": 3,
+    "offset": 227,
+    "line": 1,
     "audit_site": {
-     "text": "and also the number of field digits for a numerical layer",
+     "text": "which only the paper's later division algorithm needs, not its main multiplication theorem",
      "span": [
-      490,
-      547
+      227,
+      317
      ],
-     "sentence": "Let $f$ be the parameter of a call (this letter changes meaning here: on the linear-network page $f$ is the logical array): the number of field digits for an address interchange (exchanging two disjoint address fields of $u$ bits), and also the number of field digits for a numerical layer (a butterfly layer on chosen axes of a polynomial-valued array).",
+     "sentence": "Recursive power saving is the argument that a recursion's cost per bit can grow as a fixed power of its parameter, with exponent $\\lambda<1$ (this letter changes meaning here: on the tensor-product page $\\lambda$ is a scalar), which only the paper's later division algorithm needs, not its main multiplication theorem.",
      "sentence_span": [
-      258,
-      612
+      0,
+      318
      ],
      "paragraph_span": [
-      258,
-      1102
+      0,
+      318
      ]
     },
     "audit_site_clean": {
-     "text": "or the number of selected axes for a numerical layer",
+     "text": "which the main theorem needs",
      "span": [
-      490,
-      542
+      227,
+      255
      ],
-     "sentence": "Let $f$ be the parameter of a call (this letter changes meaning here: on the linear-network page $f$ is the logical array): the number of field digits for an address interchange (exchanging two disjoint address fields of $u$ bits), or the number of selected axes for a numerical layer (a butterfly layer on chosen axes of a polynomial-valued array).",
+     "sentence": "Recursive power saving is the argument that a recursion's cost per bit can grow as a fixed power of its parameter, with exponent $\\lambda<1$ (this letter changes meaning here: on the tensor-product page $\\lambda$ is a scalar), which the main theorem needs.",
      "sentence_span": [
-      258,
-      607
+      0,
+      256
      ],
      "paragraph_span": [
-      258,
-      1095
+      0,
+      256
      ]
     },
     "linked": [],
@@ -3886,12 +3888,13 @@
    "detectable_by": [
     "source"
    ],
-   "why": "the parameter counts field digits for address interchange and selected axes for a numerical layer, not field digits for both",
-   "paper_lines": "172-173",
+   "why": "the power saving feeds the main multiplication theorem (Theorem thm:main) through the fast interchange and the numerical layers; division is a later consequence. (Replaces a first seed on the parameter's meaning, sent back by the independent review because the page's later chunk counting exposed it)",
+   "paper_lines": "57-66, 103-117, 168-180",
    "cues": [
-    "selected axes",
-    "number of axes",
-    "axes for a numerical"
+    "division",
+    "main theorem",
+    "multiplication theorem",
+    "main multiplication"
    ]
   },
   {
@@ -3901,24 +3904,24 @@
    "page": "subset-intersection-construction",
    "variant": "S",
    "original": "injected back into $S$, adds",
-   "seeded": "injected back into $S$ and never cleared afterwards, adds",
+   "seeded": "injected back into $S$ and never removed from $A_{ST}$ afterwards (no undo-copy step), adds",
    "location": {
     "offset": 966,
     "line": 5,
     "audit_site": {
-     "text": "injected back into $S$ and never cleared afterwards, adds",
+     "text": "injected back into $S$ and never removed from $A_{ST}$ afterwards (no undo-copy step), adds",
      "span": [
       966,
-      1023
+      1057
      ],
-     "sentence": "A copy of $g_T$ on an auxiliary wire $A_{ST}$ for each neighbor pair, injected back into $S$ and never cleared afterwards, adds $1$ exactly when $|S\\cap T|=1$.",
+     "sentence": "A copy of $g_T$ on an auxiliary wire $A_{ST}$ for each neighbor pair, injected back into $S$ and never removed from $A_{ST}$ afterwards (no undo-copy step), adds $1$ exactly when $|S\\cap T|=1$.",
      "sentence_span": [
       896,
-      1055
+      1089
      ],
      "paragraph_span": [
       651,
-      1176
+      1210
      ]
     },
     "audit_site_clean": {
@@ -3945,13 +3948,13 @@
    "detectable_by": [
     "source"
    ],
-   "why": "the schedule undoes the copy (row 7) and restores every auxiliary wire; the copies are cleared",
+   "why": "the schedule undoes the copy (row 7) and restores every auxiliary wire to its starting value. (Reworded after the independent review: 'never cleared' could be read as 'never reset to zero', which is true)",
    "paper_lines": "705-722, 744-750",
    "cues": [
-    "never cleared",
+    "never removed",
     "undo copy",
+    "undo-copy",
     "undoes the copy",
-    "cleared afterwards",
     "restores the auxiliary",
     "restores every auxiliary"
    ]

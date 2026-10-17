@@ -38,10 +38,12 @@ E = P.E
 # Written 2026-10-17 from paper.tex (sha256 6d2b6d00...); `why` gives the paper's lines.
 SEEDS = [
     E("ASF-S1", "address-shear-factorization", "hypothesis", ["source"],
-      r"Here $q$ is a fixed odd prime,", r"Here $q$ is a fixed prime,",
-      "the paper's prime is a fixed odd prime, chosen to avoid every denominator in the table of "
-      "factors and every numerator of a diagonal entry of an invertible factor; the page drops "
-      "'odd'", "1397, 1415-1417", ["odd prime", "q=2", "q = 2", "q is odd", "must be odd"]),
+      r"Here $q$ is a fixed odd prime,", r"Here $q$ is a fixed prime, which may be taken to be $2$,",
+      "the paper requires a fixed odd prime, chosen to avoid every denominator in the table of factors "
+      "and every numerator of a diagonal entry of an invertible factor; q = 2 is excluded. (A first "
+      "draft only dropped 'odd'; rejected by the independent review because 'a prime' is still true "
+      "and the paper says 'a prime' at 1478 and 1651)", "1397, 1415-1417",
+      ["odd prime", "q=2", "q = 2", "taken to be 2", "taken to be $2$", "must be odd"]),
     E("ASF-S2", "address-shear-factorization", "attribution", ["source"],
       r"Elimination proves this:",
       r"The paper cites this factorization from earlier work without proof; elimination proves it:",
@@ -54,14 +56,21 @@ SEEDS = [
       "s_b = W_b m - (N - 2L_b): the deficit is tiny (eta_b = 339/22587335000000), so s/W is just "
       "below m, not below m/2", "1003-1010, 1319-1323", ["Wm/2", "m/2"]),
     E("FAI-S2", "fast-address-interchange", "hypothesis", ["source"],
-      r"with the earlier field $H$", r"with the later field $H$",
+      r"each combining $D$ with the earlier field $H$ in linear time",
+      r"each combining $D$ with $H$, which lies after $D$ on the tape, in linear time",
       "the matrix-shear lemma requires every H field before every D field; that order is what makes "
-      "the D updates linear-cost", "1400-1401", ["later field", "before every", "H before D", "H fields before", "precede"]),
-    E("LNR-S1", "linear-network-roles", "hypothesis", ["source"],
-      r"whose initial contents are arbitrary", r"whose initial contents are zero",
-      "the scratch wires' initial values may be arbitrary, and the schedule cancels them; the "
-      "construction does not assume zeroed scratch", "690-692, 705-711, 726-733",
-      ["initial contents are zero", "are zero", "arbitrary initial", "initial contents", "zeroed"]),
+      "the D updates linear-cost. (Reworded after the independent review: 'the later field H' could "
+      "be read in time)", "1400-1401", ["after $D$ on the tape", "after D on the tape", "before every",
+                                        "H before D", "H fields before", "precede"]),
+    E("LNR-S1", "linear-network-roles", "conclusion", ["source"],
+      r"The intermediate frames cancel and the route applies only its endpoint operator.",
+      r"The intermediate frames cancel and the route applies only its endpoint operator, so the paper "
+      r"fixes every intermediate frame to the identity.",
+      "the paper chooses the intermediate frames so that every edge change is inexpensive (implemented "
+      "by smaller calls); they are not the identity. (Replaces a first seed, 'scratch contents start "
+      "at zero', rejected by the independent review because the page's cyclic row distribution puts "
+      "array data on the scratch roles)", "149-150, 822-823, 1143-1146",
+      ["identity", "intermediate frames are chosen", "chosen to make", "inexpensive", "smaller calls"]),
     E("LNR-S2", "linear-network-roles", "generalisation", ["source"],
       r"Each fixed-tape procedure of the argument comes from one such network",
       r"Every fixed-tape procedure of the argument comes from one and the same network",
@@ -70,10 +79,13 @@ SEEDS = [
       "120-121, 685-703", ["same network", "its own network", "own network", "two constructions",
                            "complex construction", "different network"]),
     E("SIC-S1", "subset-intersection-construction", "conclusion", ["source"],
-      r"injected back into $S$, adds", r"injected back into $S$ and never cleared afterwards, adds",
-      "the schedule undoes the copy (row 7) and restores every auxiliary wire; the copies are "
-      "cleared", "705-722, 744-750", ["never cleared", "undo copy", "undoes the copy", "cleared afterwards",
-                                           "restores the auxiliary", "restores every auxiliary"]),
+      r"injected back into $S$, adds",
+      r"injected back into $S$ and never removed from $A_{ST}$ afterwards (no undo-copy step), adds",
+      "the schedule undoes the copy (row 7) and restores every auxiliary wire to its starting value. "
+      "(Reworded after the independent review: 'never cleared' could be read as 'never reset to zero', "
+      "which is true)", "705-722, 744-750",
+      ["never removed", "undo copy", "undo-copy", "undoes the copy", "restores the auxiliary",
+       "restores every auxiliary"]),
     E("SIC-S2", "subset-intersection-construction", "attribution", ["source"],
       r"with $h=100$ (the letter",
       r"with $h=100$, as in Alon's construction that the paper specializes (the letter",
@@ -86,11 +98,13 @@ SEEDS = [
       "the growth factor is the fixed space's dimension m = h^3 = 1000000 (the example's m = 2 is "
       "only an illustration)", "655, 162-174", ["m=2", "m = 2", "10^6", "10^{6}", "1000000", "h^3"]),
     E("RPS-S2", "recursive-power-saving", "generalisation", ["source"],
-      r"or the number of selected axes for a numerical layer",
-      r"and also the number of field digits for a numerical layer",
-      "the parameter counts field digits for address interchange and selected axes for a "
-      "numerical layer, not field digits for both", "172-173",
-      ["selected axes", "number of axes", "axes for a numerical"]),
+      r"which the main theorem needs",
+      r"which only the paper's later division algorithm needs, not its main multiplication theorem",
+      "the power saving feeds the main multiplication theorem (Theorem thm:main) through the fast "
+      "interchange and the numerical layers; division is a later consequence. (Replaces a first seed "
+      "on the parameter's meaning, sent back by the independent review because the page's later "
+      "chunk counting exposed it)", "57-66, 103-117, 168-180",
+      ["division", "main theorem", "multiplication theorem", "main multiplication"]),
     E("TI-S1", "tape-interchange", "constant", ["source"],
       r"where $\mu$ is its number of rows", r"where $\mu$ is the number of central wires in one invocation",
       "the vertex matrices are fixed rational m x m matrices with m = h^3 = 1000000 (the fixed "
