@@ -1,0 +1,13 @@
+{"page": "P14",
+ "items": [
+  {"id": "step", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page gives the chirp formula for QF_t with a link to the page that derives it, then derives RF^+_s[(RF_s u).(RF_s v)] = (u*v)/S^2 by the same route as the paper's proof of Lemma chirp-permutation (lines 3953-3983): R passes through F^+_s, R commutes with pointwise products, then the two normalizations. R and Q match the tensored P_s, P_t of lines 3557 and 3806."},
+  {"id": "S7.1", "presence": "stated", "faithful": null, "dropped": ["a has period t_i in coordinate i (needed for a*(...) to be a cyclic convolution on the target grid; paper line 3919)"],
+   "note": "As assigned, the result is stated and linked rather than derived: 'QF_t w = ā·(a*(ā·w))/T, a_j = exp(-πi Σ s_i j_i^2/t_i)', which matches eq. permuted-chirp. Every t_i is even because the page takes t_i to be a power of two above s_i, but the page never says the chirp is periodic."},
+  {"id": "S7.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes out the substitution h=ck in full, noting that h 'runs over every residue modulo q once as k does', and gets (F^+_q R_c z)_j = (R_c^{-1}F^+_q z)_j. It applies this per coordinate with q=s_i, c=t_i, a unit because gcd(s_i,t_i)=1, to obtain F^+_s R = R^{-1}F^+_s and RF^+_s R = F^+_s, as in the paper. The s=3, t=8 example checks out: (RF_3^+R)_{j,h} = e^{2πi(2j)(2h)/3}/3 = e^{2πijh/3}/3."},
+  {"id": "S7.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page has 'R only moves entries, so (RF_s u)·(RF_s v)=R(F_s u·F_s v)', then RF^+_s R = F^+_s. It then uses F_s(u*v)=S(F_s u)·(F_s v) and F^+_s F_s = I/S to get (1/S)F^+_sF_s(u*v)=(u*v)/S^2, exactly as the paper does at lines 3963-3982. Both normalizations agree with the 1/q-normalized transforms at line 3508."}
+ ],
+ "errors": [],
+ "motivation_given": true}

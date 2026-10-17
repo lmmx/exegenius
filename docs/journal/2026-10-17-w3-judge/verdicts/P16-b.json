@@ -1,0 +1,210 @@
+{
+ "page": "P16",
+ "items": [
+  {
+   "id": "S6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "hypotheses p>100 and alpha>=2",
+    "inputs and outputs of the numerical maps occur in increasing coordinate order (the 'ordered numerical maps' of the step)",
+    "explicit one-dimensional time total O(tp^{3/2+delta}alpha) for A~ and B~_0"
+   ],
+   "note": "The page derives the one-dimensional identity and its tensor form, with error dp^2 and cost O(dTp^{3/2+delta}alpha), keeping P_s,P_t 'inside the formula, unexecuted'. The quoted numerical maps and the cost of C are asserted rather than shown, as in the sub-items below."
+  },
+  {
+   "id": "S6.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "hypotheses p>100 and alpha>=2",
+    "uniformity of the constant in p,s,t,alpha",
+    "inputs and outputs in increasing coordinate order",
+    "the remark that the negative Fourier sign makes the right-hand permutation multiplication by -s",
+    "total time O(tp^{3/2+delta}alpha) for A~ and B~_0 never stated as a sum"
+   ],
+   "note": "The exact identity P_sF_s=2^{2alpha^2}B_0P_tF_tA is derived step by step following the paper (left inverse D N^{-1} C, normalizations). The numerical part only quotes the error and time table and asserts C's cost."
+  },
+  {
+   "id": "S6.1.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "subscripts are taken modulo the vector length (tj mod s, -sk mod t); the page says only 'indices of u read modulo s' for the Gaussian maps"
+   ],
+   "note": "A definition, reproduced exactly: '(P_su)_j=u_{tj} and (P_tv)_k=v_{-sk} stay inside the formula, unexecuted'. I count a definition given in full as derived."
+  },
+  {
+   "id": "S6.1.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page ends the first part with 'B_0P_tF_tA=2^{-2alpha^2}P_sF_s, that is, P_sF_s=2^{2alpha^2}B_0P_tF_tA', with A and B_0 shown to be contractions, as in the paper."
+  },
+  {
+   "id": "S6.1.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Both Gaussian maps are defined with the paper's formulas. The page renames T as G (probably to avoid a clash with T=prod t_i), which is harmless."
+  },
+  {
+   "id": "S6.1.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "intermediate bound ||N-I||<2.01e^{-pi alpha^2 theta/2}",
+    "remark that the identity uses the negative-sign F_q, so the right-hand permutation multiplies the frequency by -s",
+    "explicit attribution of the norm estimate to HvdH Lemma 4.6 (the page says only 'the others are small')"
+   ],
+   "note": "As in the paper, the identity is cited from Harvey and van der Hoeven. The page builds q_j, beta_j, C, D and N=CGD and explains that 'D cancels the Gaussian weight at q_j', then gives ||N-I||<2^{-alpha^2 theta}. The paper's argument here is the same mix of construction and citation."
+  },
+  {
+   "id": "S6.1.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Since alpha^2theta>p/alpha^2>1, ||N-I||<1/2, so N is invertible by a Neumann series.' This matches the paper. The use of alpha^2<p and theta>p/alpha^4 is left implicit, but both hypotheses appear on the page."
+  },
+  {
+   "id": "S6.1.6",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "source of the norm bounds: the proof of Proposition 4.7(i) of Harvey and van der Hoeven"
+   ],
+   "note": "The normalizations are defined correctly, but 'their norms are below 3/4, 7/8, 1' is only asserted with a cite tag, and the external source is not named. The paper itself quotes these bounds."
+  },
+  {
+   "id": "S6.1.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the invertibility of the diagonal map D is used but not stated"
+   ],
+   "note": "'As CG=ND^{-1}, the map DN^{-1}C is a left inverse of G, and applying it to this identity gives DN^{-1}CP_tF_tS=P_sF_s'. A=S' and B_0=D'J'C are contractions 'as ||C||=1'. This is the paper's argument."
+  },
+  {
+   "id": "S6.1.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'The removed factors multiply to 2^{-(2alpha^2-2)}*1/2*1/2=2^{-2alpha^2}', which gives the identity as in the paper."
+  },
+  {
+   "id": "S6.1.9",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "citation to Lemmas 4.8, 4.9 and 4.12 of Harvey and van der Hoeven (the page says only 'by their algorithms')",
+    "their inputs and outputs are in increasing coordinate order"
+   ],
+   "note": "The page quotes the error and time table correctly (16p, 3p^2/4, 4; O(tp^{3/2+delta}alpha) twice, O(tp^{1+delta})), and nothing is shown. The paper also only quotes these values."
+  },
+  {
+   "id": "S6.1.10",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "q_0=0 and q_{s-1}<t",
+    "reason q_{j+1}>q_j (t/s>1)",
+    "counter invariant tj=sf_j+e_j, q_j=f_j+1_{2e_j>=s}, and the carry update with t=hs+rho",
+    "O(p) work per index and O((log t)^2)=O(tp) for the division"
+   ],
+   "note": "'Since q_{j+1}>q_j, C is a forward scan generating q_j by integer counters: cost O(tp), no error' asserts the result. The counter construction and the cost accounting that justify O(tp) are missing."
+  },
+  {
+   "id": "S6.1.11",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the rule that errors add under composition because the exact maps are contractions (C contributes zero)",
+    "hypothesis p>100, needed for 16p<p^2",
+    "statement that the costs add to O(tp^{3/2+delta}alpha)",
+    "the original construction B=P_s^{-1}D'J'CP_t with two label-and-sort steps each costing O(tp log t), which are avoided"
+   ],
+   "note": "The page gives A~=S~' and B~_0=D~'J~'C with 'errors below 16p<p^2 and 4+3p^2/4<p^2', which is the paper's choice and arithmetic. It never totals the time, and it does not say what the avoided sorts cost."
+  },
+  {
+   "id": "S6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "all axes use the same p, alpha, delta (implicit in 'as above')",
+    "unequal-width interchange handled by peeling a leading bit",
+    "interchanges are exact permutations and do not change norms or errors",
+    "growth assumptions: r grows faster than every polynomial in p and d is polynomially bounded in p"
+   ],
+   "note": "The tensor identity, the per-axis implementation, the dp^2 error, the cost sum and the O(Tpd^2(1+ell^tau)) layout cost all follow the paper. The last claim, about setup, is given without its growth hypothesis."
+  },
+  {
+   "id": "S6.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "gamma=2d alpha^2 as the product of d factors 2^{2alpha^2} (left implicit)"
+   ],
+   "note": "'The identity extends ... by tensoring', with R, Q, A, B_0 and gamma=2d alpha^2 named exactly. The paper's proof is the same single sentence."
+  },
+  {
+   "id": "S6.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the axis map acts independently on valid lines and is zero elsewhere, so taking the maximum over lines gives a contraction with error <p^2",
+    "composition adds errors (the error-composition rule)",
+    "compression writes s_i outputs followed by t_i-s_i zeros, and invalid lines are consumed without a call"
+   ],
+   "note": "The page describes expansion and compression on the zero-padded box and concludes 'Each axis map is a contraction with error below p^2, so d axes give error below dp^2'. The per-axis claim is asserted without the paper's max-over-lines reason."
+  },
+  {
+   "id": "S6.2.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "constant independent of d"
+   ],
+   "note": "'At most T/t_i lines call the one-dimensional algorithm on axis i, costing sum_i (T/t_i) O(t_ip^{3/2+delta}alpha)=O(dTp^{3/2+delta}alpha)', exactly as in the paper."
+  },
+  {
+   "id": "S6.2.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "unequal-width case: write the longer field as a leading bit plus ell-1 bits, swap the equal parts and move the bit with the elementary-stream lemma (the chunk-swap lemma covers only equal widths)",
+    "exposing AND restoring each axis",
+    "the interchanges are exact permutations, so norms and errors are unchanged",
+    "entries occupy O(p) bits in the full padded box"
+   ],
+   "note": "The page gives O(d) interchanges per axis at O(Tp(1+ell^tau)) each, O(d^2) in all, so O(Tpd^2(1+ell^tau)). It credits every interchange to 'fast address-chunk interchange' and never explains the peel-off step for unequal widths."
+  },
+  {
+   "id": "S6.2.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "growth assumptions: r grows faster than every polynomial in p and d is polynomially bounded in p",
+    "total O(dTp^c/r), whose ratio to Tp is O(dp^{c-1}/r)->0"
+   ],
+   "note": "'Since t_i>=r/2, at most 2dT/r lines occur, so polynomial setup per line is o(Tp)' gives the line count. It leaves out the superpolynomial growth of r, which is what makes the total o(Tp), so the conclusion is asserted, not shown."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "To invert $\\mathsf G$",
+   "problem": "G maps C^s to C^t with s<t, so it cannot be inverted. The paper builds only a left inverse, (D N^{-1} C)T=I. The page itself says 'left inverse' later in the paragraph."
+  },
+  {
+   "severity": "minor",
+   "quote": "gives errors below $16p<p^2$ and $4+3p^2/4<p^2$",
+   "problem": "These inequalities need p>16 and p>4 respectively. The page never states the paper's hypothesis p>100; p is introduced only as 'the precision in bits'."
+  },
+  {
+   "severity": "minor",
+   "quote": "Since $t_i\\ge r/2$, at most $2dT/r$ lines occur, so polynomial setup per line is $o(Tp)$.",
+   "problem": "Stated without its hypothesis. The paper's bound O(dTp^c/r)=o(Tp) needs r to grow faster than every polynomial in p and d to be polynomially bounded in p, so that O(dp^{c-1}/r)->0. Also, it is the total setup over all lines, not the setup per line, that is o(Tp)."
+  }
+ ],
+ "motivation_given": true
+}

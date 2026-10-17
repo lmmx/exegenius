@@ -1,0 +1,13 @@
+{"page": "P19",
+ "items": [
+  {"id": "S7", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page states the chirp identity for QF_t, linking the page that derives it, and notes that 'Q is never applied to the array'. It then derives F^+_s R = R^{-1}F^+_s, RF^+_s R = F^+_s, that R commutes with pointwise products, and the two normalizations, reaching (u*v)/S^2 as in Lemma chirp-permutation (paper lines 3911-3988)."},
+  {"id": "S7.1", "presence": "stated", "faithful": null, "dropped": ["the periodicity of a with period t_i in coordinate i (which uses t_i even)"],
+   "note": "Correctly stated and linked to bluestein-chirp.md as assigned: 'with a_j=exp(-pi i sum_i s_i j_i^2/t_i), QF_t u = abar.(a*(abar.u))/T'. The page does not mention that a is periodic with period t_i, which the sub-step includes."},
+  {"id": "S7.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes out the substitution h=ck in the Fourier sum, with the reason that h 'runs once over all residues because c is a unit', and gets (R_c^{-1}F_q^+z)_j. It then identifies R as 'the tensor product of the maps R_{t_i}' with t_i a unit mod s_i, which gives F^+_s R = R^{-1}F^+_s and RF^+_s R = F^+_s, as at paper lines 3953-3962. The q=5, c=3 example is correct."},
+  {"id": "S7.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page uses '(RF_s u).(RF_s v)=R(F_s u.F_s v)' and the identity just proved to reach F^+_s(F_s u.F_s v). With F_s(u*v)=S(F_s u).(F_s v) and F^+_s F_s = I/S it then obtains (1/S)F^+_s F_s(u*v) = (u*v)/S^2, exactly as at paper lines 3963-3983."}
+ ],
+ "errors": [],
+ "motivation_given": true}

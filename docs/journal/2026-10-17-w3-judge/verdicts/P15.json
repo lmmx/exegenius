@@ -1,0 +1,190 @@
+{
+ "page": "P15",
+ "items": [
+  {
+   "id": "S6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "negligibility of O(p^c) setup per line (at most 2dT/r lines)"
+   ],
+   "note": "The page builds the one-axis identity, tensors it to $RF_{\\boldsymbol s}=2^{\\gamma}\\mathcal B_0QF_{\\boldsymbol t}\\mathcal A$, and gets error below $dp^2$ and cost $O(dTp^{3/2+\\delta}\\alpha)$ along the paper's route. It keeps the permutations inside the identity ('Here both stay in the identity')."
+  },
+  {
+   "id": "S6.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "hypothesis $2\\le s$",
+    "constant uniform in $p,s,t,\\alpha$",
+    "negative-sign convention of $F_q$ that makes $P_t$ multiplication by $-s$"
+   ],
+   "note": "The 'One axis' section derives $P_sF_s=2^{2\\alpha^2}B_0P_tF_tA$ from the cited Gaussian identity using the left inverse $\\mathsf DN^{-1}\\mathsf G$. It quotes the HvdH numerical maps for errors $16p<p^2$ and $4+3p^2/4<p^2$, which matches the paper's proof."
+  },
+  {
+   "id": "S6.1.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "This is a definition. The page gives $(P_su)_j=u_{tj}$ and $(P_tv)_k=v_{-sk}$ exactly, and explains them as multiplying indices by $t$ mod $s$ and by $-s$ mod $t$."
+  },
+  {
+   "id": "S6.1.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page reaches '$P_sF_s=2^{2\\alpha^2}B_0P_tF_tA$' with $A=\\tfrac12\\mathsf S$ and $B_0=(2^{2-2\\alpha^2}\\mathsf D)(\\tfrac12N^{-1})\\mathsf G$, and argues that both are contractions."
+  },
+  {
+   "id": "S6.1.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "This is a definition and is reproduced correctly. The paper's $\\mathsf T$ is renamed $\\mathsf W$, and indices are written $u_{j\\bmod s}$, which matches the paper's convention that subscripts are taken mod $q$."
+  },
+  {
+   "id": "S6.1.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the identity relies on the negative Fourier sign in $F_q$, which is why the right-hand permutation multiplies by $-s$"
+   ],
+   "note": "The page constructs $N=\\mathsf G\\mathsf W\\mathsf D$ correctly. As in the paper, it cites HvdH for both '$\\mathsf WP_sF_s=P_tF_t\\mathsf S$' and '$\\|N-I\\|<2.01e^{-\\pi\\alpha^2\\theta/2}<2^{-\\alpha^2\\theta}$'."
+  },
+  {
+   "id": "S6.1.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Since $\\alpha^2<p<\\alpha^4\\theta$ gives $\\alpha^2\\theta>1$ and hence $\\|N-I\\|<1/2$ the Neumann series ... converges' is the paper's argument."
+  },
+  {
+   "id": "S6.1.6",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "The scaled factors $\\tfrac12\\mathsf S$, $\\tfrac12N^{-1}$ and $2^{2-2\\alpha^2}\\mathsf D$ appear on the page. Their norm bounds are cited from Prop. 4.7(i) ('norms below $3/4,\\ 7/8,\\ 1$'), which is also what the paper does, but the page does not say which bound belongs to which factor."
+  },
+  {
+   "id": "S6.1.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "$\\|C\\|=\\|\\mathsf G\\|=1$, which is needed for $B_0$ to be a contraction"
+   ],
+   "note": "'As $\\mathsf G\\mathsf W=N\\mathsf D^{-1}$ the map $\\mathsf DN^{-1}\\mathsf G$ is a left inverse of $\\mathsf W$', and applying it gives $P_sF_s=\\mathsf DN^{-1}\\mathsf GP_tF_t\\mathsf S$. The page then concludes that $A$ and $B_0$ are contractions from the three factor norms without mentioning the selector's norm."
+  },
+  {
+   "id": "S6.1.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Splitting $2^{-2\\alpha^2}=2^{-1}\\cdot2^{-1}\\cdot2^{2-2\\alpha^2}$' and assigning the pieces to $\\mathsf S$, $N^{-1}$ and $\\mathsf D$ gives the identity. This is the paper's normalization."
+  },
+  {
+   "id": "S6.1.9",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "The page cites Lemmas 4.8, 4.9 and 4.12 for errors '$16p,\\ 3p^2/4,\\ 4$' and time $O(tp^{3/2+\\delta}\\alpha)$. It does not give the smaller $O(tp^{1+\\delta})$ for $\\widetilde{\\mathsf D}'$, but that bound is subsumed."
+  },
+  {
+   "id": "S6.1.10",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "$q_0=0$ and the reason $q_{j+1}>q_j$ (because $t/s>1$)",
+    "generating $q_j$ in order with $O(p)$ work per index via $t=hs+\\rho$, $tj=sf_j+e_j$ and the carry $c_j$",
+    "division cost $O((\\log t)^2)=O(tp)$"
+   ],
+   "note": "'As $q_0<q_1<\\dots<q_{s-1}<t$ one forward scan applies $\\mathsf G$ exactly in time $O(tp)$' asserts the ordering without justifying it, and says nothing about how the indices $q_j$ are computed within $O(p)$ each."
+  },
+  {
+   "id": "S6.1.11",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "explicit composition $\\widetilde B_0=\\widetilde{\\mathsf D}'\\widetilde{\\mathsf J}'C$ (left implicit)",
+    "the $O(tp\\log t)$ cost of each avoided label-and-sort (the page says only 'a factor $\\log t$')"
+   ],
+   "note": "'Errors add along contractions, so the computed $\\widetilde A$ errs by $16p<p^2$ and $\\widetilde B_0$ by $4+3p^2/4<p^2$' follows the paper. The opening paragraph explains that the two sorts are avoided because the permutations stay in the identity."
+  },
+  {
+   "id": "S6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "same $p,\\alpha,\\delta$ on every axis (only implicit in 'meeting the hypotheses above')",
+    "each entry occupies $O(p)$ bits",
+    "setup per line negligible"
+   ],
+   "note": "The 'Many axes' section derives the tensor identity with $\\gamma=2d\\alpha^2$, the error $dp^2$, the cost $O(dTp^{3/2+\\delta}\\alpha)$ and the movement cost $O(Tpd^2(1+\\ell^\\tau))$."
+  },
+  {
+   "id": "S6.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Tensor products multiply factorwise, so tensoring ... combines the one-axis identities into $RF_{\\boldsymbol s}=2^{\\gamma}\\mathcal B_0QF_{\\boldsymbol t}\\mathcal A$, $\\gamma=2d\\alpha^2$', with $R,Q,\\mathcal A,\\mathcal B_0$ defined as in the paper."
+  },
+  {
+   "id": "S6.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "axis-map contraction and error $<p^2$ follow by taking the maximum over independent lines in the max norm",
+    "the evolving validity set ($[0,t_h)$ for processed axes, $[0,s_h)$ otherwise)",
+    "compressed lines are written as $s_i$ outputs followed by $t_i-s_i$ zeros, and invalid lines are consumed without a call"
+   ],
+   "note": "The page describes the axis-by-axis expansion with zeros on invalid lines. It then infers 'so $d$ axes err below $dp^2$' from the earlier 'Errors add along contractions', but it asserts the per-axis bound 'a contraction erring below $p^2$' without the max-over-lines reason."
+  },
+  {
+   "id": "S6.2.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "padding and zeroing cost $O(Tp)$ per axis, within the bound",
+    "constant independent of $d$"
+   ],
+   "note": "'Axis $i$ has at most $T/t_i$ lines' and the displayed sum $\\sum_i\\frac T{t_i}O(t_ip^{3/2+\\delta}\\alpha)=O(dTp^{3/2+\\delta}\\alpha)$ match the paper."
+  },
+  {
+   "id": "S6.2.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "unequal-width case: peel off the leading bit $e$ of the $\\ell$-bit field, swap the equal-width pieces, and move the bit with the elementary-stream primitive",
+    "interchanges are exact permutations, so they change neither norms nor errors"
+   ],
+   "note": "The page gets the cost $O(Tp(1+\\ell^\\tau))$ per interchange and $O(d)$ per axis, for $O(Tpd^2(1+\\ell^\\tau))$ in total. It handles '$\\ell$- or $(\\ell-1)$-bit fields' as a single chunk interchange, although the chunk-swap lemma requires equal widths."
+  },
+  {
+   "id": "S6.2.5",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "$t_i\\ge r/2$ gives at most $2dT/r$ lines",
+    "$O(p^c)$ setup per line totals $O(dTp^c/r)=o(Tp)$ since $r$ outgrows every polynomial in $p$"
+   ],
+   "note": "The page never discusses per-line setup cost or the number of lines relative to r."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "moving an axis past a neighbour is a [Fast address-chunk interchange](address-chunk-interchange.md) of $\\ell$- or $(\\ell-1)$-bit fields, costing $O(Tp(1+\\ell^\\tau))$",
+   "problem": "The chunk-swap lemma (Lemma chunk-swap) only interchanges fields of equal width $2^u\\times2^u$. For an $\\ell$-bit field next to an $(\\ell-1)$-bit field, the paper writes the longer field as a leading bit $e$ followed by $\\ell-1$ bits, swaps the equal-width pieces, and moves $e$ with Lemma elementary-streams. The cost is the same, but the page's description of the unequal case is wrong."
+  },
+  {
+   "severity": "minor",
+   "quote": "The factors have norms below $3/4,\\ 7/8,\\ 1$ ... with errors $16p,\\ 3p^2/4,\\ 4$ grid steps",
+   "problem": "The page never attaches these bounds to the factors. In the display just above, $B_0=(2^{2-2\\alpha^2}\\mathsf D)(\\tfrac12N^{-1})\\mathsf G$ lists the $\\mathsf D$ factor before $N^{-1}$, so reading in that order assigns them wrongly. The paper has $\\|\\mathsf S'\\|<3/4$, $\\|\\mathsf J'\\|<7/8$, $\\|\\mathsf D'\\|<1$, with errors $16p$ for $\\widetilde{\\mathsf S}'$, $3p^2/4$ for $\\widetilde{\\mathsf J}'$ and $4$ for $\\widetilde{\\mathsf D}'$."
+  },
+  {
+   "severity": "minor",
+   "quote": "so $A$ and $B_0$ are contractions",
+   "problem": "The conclusion is drawn from the three factor norms alone. $B_0$ also contains the selector $\\mathsf G$ ($C$ in the paper), and the paper uses $\\|C\\|=1$ explicitly for this step."
+  }
+ ],
+ "motivation_given": true
+}

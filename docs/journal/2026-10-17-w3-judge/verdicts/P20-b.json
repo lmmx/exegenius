@@ -1,0 +1,161 @@
+{
+ "page": "P20",
+ "items": [
+  {
+   "id": "S4.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the final two-bit XOR on $x_{j_{f-1}},y_{j_{f-1}}$ by the elementary-streams lemma in $O(V)$, which supplies the omitted top selected position",
+    "the case $f=1$, where $S_0,T_0$ are identities, $\\mathcal B$ is empty and that last step is the whole algorithm",
+    "hypothesis $K\\ge6$"
+   ],
+   "note": "The page assembles the paper's construction (eight shifts, guard set $\\mathcal B$, union bound, extraction-sort-reinsert, cost totals), but it sets the top position aside ('top position set aside') and never returns to it, so the procedure as written does not perform the XOR at $j_{f-1}$ that its opening sentence claims."
+  },
+  {
+   "id": "S4.6.2.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the action is on the corners of every quotient square $\\{2a,2a+1\\}\\times\\{2b,2b+1\\}$, and translation by $(2a,2b)$ does not change any predicate",
+    "for $c=0$ the operations do nothing"
+   ],
+   "note": "The eight operations are displayed correctly, but the page only says 'substituting the parity pairs of $(u,w)$ shows' the two cycles; no substitution is carried out, and the square/translation-invariance framing that makes the cycles well defined is left in the citation only."
+  },
+  {
+   "id": "S4.6.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page traces each corner through both cycles ('$00\\to01\\to10,$ $01\\to10\\to11,$ $10\\to00\\to00,$ $11\\to11\\to01$'), which is correct and gives $(00\\ 10)(01\\ 11)$."
+  },
+  {
+   "id": "S4.6.2.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "that the composite permutes the corners of the fixed quotient square, which is what gives 'both quotients by two are preserved'",
+    "the reason for the displacement bound: each coordinate is updated four times by at most one, so it moves at most four (eight being the weaker bound used)",
+    "$u\\bmod2\\in\\{0,1\\}$ also for negative $u$"
+   ],
+   "note": "'So $(u',w')=(u+c(1-2(u\\bmod2)),w)$' follows the paper's 'Consequently' from the composite, but the bound 'each coordinate moves by at most eight' is asserted without its reason."
+  },
+  {
+   "id": "S4.6.2.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "for $f>1$ the segments are disjoint and the highest one ends immediately below $j_{f-1}$"
+   ],
+   "note": "The notation $u_i=2g_i+a_i$, $w_i=2h_i+b_i$, the guard range and $c_i=x_{j_i}$ are given exactly as in the paper for $0\\le i<f-1$."
+  },
+  {
+   "id": "S4.6.2.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "for a line updating $z$, interchange $y$ and $z$ in the formula (half of the eight lines)",
+    "$S_0$ fixes the spectator coordinates"
+   ],
+   "note": "The shift formula and 'Its offset does not depend on the target, so each line is a bijection' match the paper; only the $y$-updating form is written."
+  },
+  {
+   "id": "S4.6.2.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the definition of $T_0$: it performs the XORs only at $j_0,\\dots,j_{f-2}$ and fixes all other coordinates",
+    "bits below $j_0$ and above the highest used segment are untouched; agreement holds inductively line by line"
+   ],
+   "note": "The guard interval gives segments in $[20,2^K-21]$ and displacement eight stays in $[0,2^K-1]$, as in the paper; the conclusion '$S_0$ agrees with the XOR permutation $T_0$' uses an undefined $T_0$."
+  },
+  {
+   "id": "S4.6.2.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the complete $y,z$ ranges give the same (uniform) guard distribution at each choice of spectator coordinates, which is why the union bound counts addresses",
+    "hypothesis $K\\ge6$ so that twenty values can be excluded from $2^{K-1}$"
+   ],
+   "note": "Twenty excluded values out of $2^{K-1}$ over $2(f-1)$ guards gives $80(f-1)2^{-K}$, correctly; the page asserts 'independently of record values' without the uniform-distribution reason."
+  },
+  {
+   "id": "S4.6.2.8",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "$T_0$ preserves all guard values and therefore preserves $\\mathcal B$",
+    "taking complements: $S_0(\\mathcal B^c)=T_0(\\mathcal B^c)=\\mathcal B^c$, $S_0(\\mathcal B)=\\mathcal B$"
+   ],
+   "note": "The page's reason 'bijections agreeing off $\\mathcal B$' does not by itself give the conclusion; the paper's key premise that $T_0$ preserves $\\mathcal B$ is missing."
+  },
+  {
+   "id": "S4.6.2.9",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the shift offset is computed from the two $L$-bit control values in $L^{O(1)}$ time without reading the target, absorbed by the $2^L$ target blocks per fiber, so the rotation is $O(V)$ including offsets",
+    "the swap is needed only if the target is not already rightmost"
+   ],
+   "note": "The swap / controlled shift / unswap scheme and the count of sixteen swaps and eight rotations follow the paper; the $O(V)$ for the controlled shift is asserted without the offset-cost argument."
+  },
+  {
+   "id": "S4.6.2.10",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the destination is $q'=T_0(S_0^{-1}(q))$, computed by reversing the eight modular additions and applying the XORs",
+    "the rank formula $\\operatorname{rank}(q')=\\operatorname{rank}(q)+\\sum_h(q'_h-q_h)\\sigma_h$",
+    "marking each extracted record's hole on a fixed track",
+    "keys are distinct and equal the holes because $T_0S_0^{-1}$ permutes $\\mathcal B$"
+   ],
+   "note": "The page asserts 'the keys are distinct and equal the marked holes' without saying what the destination map is or why the keys coincide with holes, which are never introduced."
+  },
+  {
+   "id": "S4.6.2.11",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "per-record $O(A^3)$ cost of rank division, schoolbook arithmetic and computing $q'$",
+    "at most $A$ radix passes each costing $O(|\\mathcal B|(R+A))$, skipped when the bank is empty",
+    "the $O(V)$ final two-bit XOR"
+   ],
+   "note": "The three cost terms are listed correctly but not justified."
+  },
+  {
+   "id": "S4.6.2.12",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "substitution of $|\\mathcal B|\\le\\delta_{\\rm bad}M$ with $\\delta_{\\rm bad}\\le80(f-1)2^{-K}$",
+    "the intermediate bound $O(p^2 2^{-K}(1+A/R))$",
+    "why each term is $o(1)$: $R/p^3\\to\\infty$, and $2^K$ outgrows every polynomial in $p$ because $K/\\log p\\to\\infty$"
+   ],
+   "note": "The divided bounds $A^3/R$ and $80(f-1)2^{-K}A(1+A/R)$ are correct, but 'they are $o(1)$' is asserted from the listed hypotheses without the computation."
+  },
+  {
+   "id": "S4.6.2.13",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the change of basis is a product of a fixed number of elementary row additions (Gaussian elimination; a row exchange is three additions)",
+    "each row addition is one call of the lemma with slot $h'$ as $x$, slot $h$ as $y$ and a third distinct slot as $z$ (fixed $m\\ge3$)",
+    "$L=(e/m)K\\le eK$ so $L^\\tau\\le(eK)^\\tau$"
+   ],
+   "note": "Only 'since slot width is $L=(e/m)K$' is offered; the reduction to a constant number of packed row additions is not mentioned."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "major",
+   "quote": "For $0\\le i<f-1$ (top position set aside) ... so no segment carries into the next and $S_0$ agrees with the XOR permutation $T_0.$ ... so this implements $T_0$ everywhere.",
+   "problem": "The page claims at the start that the procedure XORs at all selected positions, but its shifts sum only over $i\\le f-2$ and it never returns to the set-aside top position. The paper's $T_0$ performs the XORs only at $j_0,\\dots,j_{f-2}$, and a final two-bit XOR on $x_{j_{f-1}},y_{j_{f-1}}$ (elementary-streams lemma, $O(V)$) supplies the omitted position; for $f=1$ that step is the entire algorithm. As written, the page's procedure misses position $j_{f-1}$ and does nothing when $f=1$."
+  },
+  {
+   "severity": "minor",
+   "quote": "Since $T_0$ and $S_0$ are bijections agreeing off $\\mathcal B,$ $T_0S_0^{-1}$ fixes $\\mathcal B^c$ and permutes $\\mathcal B,$",
+   "problem": "Agreement off $\\mathcal B$ is not enough by itself. The paper also uses that $T_0$ preserves the guard values, hence $\\mathcal B$, so that $S_0(\\mathcal B^c)=T_0(\\mathcal B^c)=\\mathcal B^c$ and $S_0(\\mathcal B)=\\mathcal B$."
+  }
+ ],
+ "motivation_given": false
+}

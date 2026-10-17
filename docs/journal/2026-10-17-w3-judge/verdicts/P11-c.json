@@ -1,0 +1,129 @@
+{
+ "page": "P11",
+ "items": [
+  {
+   "id": "S4.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page follows the paper's route in order: the eight-line parity gadget, packed shifts S_0, guard set B with the union bound, the permutation argument, swaps plus controlled rotations, the radix-sort correction, the separate XOR at j_{f-1}, and the cost totals ending in O(V(L^tau+1))."
+  },
+  {
+   "id": "S4.6.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "It traces (0,0)->(-1,0)->(-1,0)->(0,0)->(0,1) under lines (1)-(4), which I checked, and reduces to a=b=0 because 'tests see only parities'. The other orbits and the (01 10 11) cycle of lines (5)-(8) are left as 'likewise', which matches the paper's 'by substituting'."
+  },
+  {
+   "id": "S4.6.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The composition is written out: '00->01->10, 01->10->11, 10->00, 11->01', which gives (00 10)(01 11). This is correct."
+  },
+  {
+   "id": "S4.6.2.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the convention that u mod 2 lies in {0,1} also for negative u"
+   ],
+   "note": "From 'the product (00 10)(01 11) moves corners horizontally' it reads off u'=u+c(1-2(u mod 2)), w'=w, notes that floor(u/2) and floor(w/2) are kept, and bounds the displacement by four, as the paper does (which then uses eight)."
+  },
+  {
+   "id": "S4.6.2.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "that the segments j_i..j_i+K-1 are disjoint and the highest ends immediately below j_{f-1}"
+   ],
+   "note": "It sets up u_i=2g_i+a_i with a_i=y_{j_i}, guard g_i<2^{K-1}, w_i=2h_i+b_i in z, and c_i=x_{j_i}, and sets j_{f-1} aside to be XORed separately. Disjointness is only implicit in the spacing K."
+  },
+  {
+   "id": "S4.6.2.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Each line is given as the single shift y <- y + eps*sum 2^{j_i}[x_{j_i}=1][z_{j_i}=beta] mod 2^L 'whose offset ignores y, so it is a bijection, as are lines updating z'. This matches the paper."
+  },
+  {
+   "id": "S4.6.2.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "that the bits below j_0 and above the highest used segment are untouched"
+   ],
+   "note": "It correctly turns guards in [10,2^{K-1}-11] into segments in [20,2^K-21], so 'moves <=8 never carry between segments and S_0=T_0' (scoped by 'Elsewhere'). The appeal to the eight-line result is implicit."
+  },
+  {
+   "id": "S4.6.2.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "It says 'Each guard excludes twenty of 2^{K-1} values, all equally frequent' and takes a union bound over 2(f-1) guards, giving delta=min{1,80(f-1)2^{-K}} 'for any records'. The arithmetic 2(f-1)*20/2^{K-1} is right."
+  },
+  {
+   "id": "S4.6.2.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "It argues 'T_0 keeps guards, so T_0(B)=B', and since both maps are bijections that agree on B^c, S_0(B)=B. So T_0S_0^{-1} fixes B^c and permutes B, which is the paper's argument in brief."
+  },
+  {
+   "id": "S4.6.2.9",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "that the offset is computed from the two L-bit controls in L^{O(1)} time and absorbed by the 2^L target blocks per fiber, which is what makes the rotation O(V)"
+   ],
+   "note": "Each rotation's target is 'swapped behind its controls and back' at O(VL^tau) and rotated by the controlled-shift lemma in O(V), using the target-independent offset shown earlier. Two swaps per line over eight lines gives the cited sixteen swaps and eight rotations."
+  },
+  {
+   "id": "S4.6.2.10",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the destination q'=T_0(S_0^{-1}(q)), computed by reversing the eight additions, and the rank formula rank(q)+sum (q'_h-q_h)sigma_h",
+    "that the keys are distinct",
+    "a stable LSB-first radix sort over the extracted records only, with the full stream held untouched"
+   ],
+   "note": "It covers extraction keyed by destination rank, radix sorting, and one reinsertion scan, justified by 'keys equal the vacated ranks', which follows from the permutation of B. How keys are computed and why they are distinct are left out."
+  },
+  {
+   "id": "S4.6.2.11",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "why each record costs O(A^3): schoolbook arithmetic on O(A_rect)-bit ranks and strides, and the reverse computation of q'"
+   ],
+   "note": "It gives movement O(V(L^tau+1)) from the swap and rotation counts, 'scans at O(A^3) per record cost O(MA^3+V)', and 'at most A radix passes cost O(|B|A(R+A))'. These match the paper; the per-record cost is asserted."
+  },
+  {
+   "id": "S4.6.2.12",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the intermediate bound O(p^2 2^{-K}(1+A/R)) for the second term"
+   ],
+   "note": "Dividing by V gives A^3/R and 80(f-1)2^{-K}A(1+A/R), both correct. It lists the hypotheses A=O(p), R/p^C->infinity, f<=p and K/log p->infinity that make them o(1), without spelling out the O(p^2 2^{-K}) step."
+  },
+  {
+   "id": "S4.6.2.13",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "m>=3, so that a third distinct slot can serve as z (with slot h' as x and slot h as y)"
+   ],
+   "note": "It writes a fixed invertible binary m x m matrix and its inverse as 'a fixed number of packed row additions' on slots of width L=(e/m)K<=eK, giving O(V((eK)^tau+1)). How the slots are assigned to x, y and z is not stated."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "With rank length $A=\\lceil\\log_2(2V)\\rceil,$",
+   "problem": "In the paper, A_rect=ceil(log2(2V)) bounds the bit length of every integer involved, such as stream positions, counters and strides. The destination-rank key is padded to ceil(log2 M)<=A_rect bits. Calling A the 'rank length' is loose, but the bounds are unaffected."
+  }
+ ],
+ "motivation_given": true
+}

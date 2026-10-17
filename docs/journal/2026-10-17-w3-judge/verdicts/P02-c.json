@@ -1,0 +1,18 @@
+{"page": "P02",
+ "items": [
+  {"id": "S8.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page covers all of the step: the digit polynomials, the degree count 2q-2<2n/b<=T/2<S with the no-wraparound argument written out (the assignment asked for this explicitly), and the coefficient bound q(2^b-1)^2<2^{3b} from q<=n<=2^b with b=ceil(log2 n). The part 2n/b<=T/2<S is cited from the parameter page, as the paper also takes it from its earlier choice of T and S."},
+  {"id": "S8.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes u=sum u_k 2^{bk}=U(2^b) with q=ceil(n/b) digits 'each between 0 and 2^b-1', and likewise v=V(2^b), so uv=(UV)(2^b) and c_j=sum_k u_k v_{j-k}. This matches the paper. The page does not say why q digits are enough (qb>=n), but that is obvious."},
+  {"id": "S8.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page shows deg UV<=2q-2 and gets 2q-2<2n/b 'Since q<n/b+1'. It then explains that reduction mod x^S-1 'only moves terms of degree S or more, and there are none', so with zero padding the cyclic and ordinary convolutions agree. It cites 2n/b<=T/2<S from the parameter choices, which in the paper come from T in [4n/b,8n/b) and S/T>1/2. The page does not repeat those ranges."},
+  {"id": "S8.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page explains that c_j is 'a sum of at most q products u_k v_{j-k}', each factor at most 2^b-1. With q<=n<=2^b this gives q(2^b-1)^2<2^b*2^{2b}=2^{3b}. Nonnegativity follows from the nonnegative digits. This matches eq. (capacity) and the reason the paper gives for it."}
+ ],
+ "errors": [
+  {"severity": "minor", "quote": "The coefficients are therefore integers of fewer than $3b$ bits",
+   "problem": "The bound c_j<2^{3b} gives at most 3b bits, not fewer than 3b. The paper says only that eq. (capacity) puts c_j in [0,2^{3b}), and stores it in a signed (3b+1)-bit word."},
+  {"severity": "minor", "quote": "This bound is what lets the later error analysis recover each $c_j$ exactly by rounding.",
+   "problem": "The page misstates what the bound is for. In the paper, rounding is exact because of the final error bound (eq. final-error) 448b 2^{-3b/4}<1/2, which rests on the input scaling and on ||w||<1/16, not on eq. (capacity). The paper uses eq. (capacity) to place the rounded coefficient in [0,2^{3b}) so it fits a (3b+1)-bit word, and in the carry bound."}
+ ],
+ "motivation_given": true}

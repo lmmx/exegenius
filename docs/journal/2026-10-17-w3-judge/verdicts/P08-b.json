@@ -1,0 +1,8 @@
+{"page": "P08",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Earlier fields, its *controls*, determine an offset $a\\in[Q]$. ... The update costs $O(V)$ whenever the offset takes $b^{O(1)}$ time to compute ..., as a fixed rational linear combination of the controls does.",
+   "problem": "The claim that a fixed rational linear combination of the controls is computable in $b^{O(1)}$ time drops the lemma's hypotheses (paper lines 557-568): a fixed number of control fields, each control used in an offset having $O(b)$ digits, and coefficient denominators prime to $q$ so that the combination can be 'specialized modulo $Q$'. Without these hypotheses the combination may be undefined mod $Q$ or cost more than $b^{O(1)}$ to prepare. The argument is unchanged once they are restored."}
+ ],
+ "motivation_given": true}

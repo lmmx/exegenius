@@ -1,0 +1,17 @@
+{"page": "P22",
+ "items": [
+  {"id": "S7", "presence": "derived", "faithful": true,
+   "dropped": ["how the opposite transform RF_s^+ is itself obtained without executing R: conjugating the input and output of the algorithm for RF_s, since conjugation flips the Fourier sign, commutes with the real permutation R, and preserves the disk grid and the norm (lemma's last clause)"],
+   "note": "The page quotes the chirp form of QF_t with a link and then derives (u*v)/S^2 through the unit-substitution identity, the commutation of R with pointwise products, and the two normalizations, as the paper's proof does. It does not give the conjugation remark that makes RF_s^+ available, yet it still claims \"Neither permutation is ever executed\"."},
+  {"id": "S7.1", "presence": "stated", "faithful": null,
+   "dropped": ["a has period t_i in coordinate i (uses t_i even), which is what makes a*(conj(a).u) a cyclic convolution on the product of the Z/t_i", "the definition of the target permutation, (P_{t_i}v)_k = v_{-s_i k}, which the chirp coefficient exp(2 pi i sum s_i j_i k_i/t_i)/T matches"],
+   "note": "The page states the result correctly, \"QF_t u = conj(a).(a*(conj(a).u))/T, a_j = exp(-pi i sum s_i j_i^2/t_i)\", and links the Bluestein page, as the assignment asks. It names Q = tensor of P_{t_i} without saying what P_{t_i} does."},
+  {"id": "S7.2", "presence": "derived", "faithful": true,
+   "dropped": [],
+   "note": "The page sets (R_c z)_j = z_{cj} for a unit c, writes the sum out in full, \"(1/q) sum_k z_{ck} e^{2 pi i kj/q} = (1/q) sum_h z_h e^{2 pi i h c^{-1} j/q} = (R_c^{-1} F_q^+ z)_j\", explains that h = ck permutes the residues, and tensors over R = tensor of R_{t_i} using that each t_i is a unit modulo s_i. This is the paper's argument, with one more intermediate step written out."},
+  {"id": "S7.3", "presence": "derived", "faithful": true,
+   "dropped": [],
+   "note": "The page has (RF_s u).(RF_s v) = R(F_s u . F_s v) because a coordinate permutation commutes with coordinatewise products. It then applies RF_s^+ R = F_s^+, and uses F_s(u*v) = S(F_s u)(F_s v) with F_s^+ F_s = I/S to reach (1/S) F_s^+ F_s(u*v) = (u*v)/S^2, exactly the paper's chain."}
+ ],
+ "errors": [],
+ "motivation_given": true}

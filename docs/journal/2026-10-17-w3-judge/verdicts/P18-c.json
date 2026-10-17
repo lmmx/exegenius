@@ -1,0 +1,244 @@
+{
+ "page": "P18",
+ "items": [
+  {
+   "id": "S5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the lemma's hypotheses ($d\\ge2$, $r=2^\\ell$ with $2\\le\\ell<p$, $d\\ell\\le C_\\ell p$, $1\\le K=\\lfloor d^c\\rfloor\\le\\ell-1$, $p+2\\le w\\le C_wp$, $p\\ge p_1$)",
+    "output width $w_M=w+\\log_2M$",
+    "disk-output condition when one operand has norm at most $\\rho$ and the bound is at most $1-\\rho$"
+   ],
+   "note": "The page assembles the method (two forward transforms kept in order $LB$, pointwise $P(x,y)=xy/r$, $\\mathcal T_+$, exact scaling by $M$), the error chain to $\\sqrt2\\,M(3\\ell+1)2^{-p}$ and the cost sum, in line with the paper; the parameter hypotheses are never stated."
+  },
+  {
+   "id": "S5.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "$\\omega_t=y^{2r/t}$ as a signed coefficient shift",
+    "the outputs are in bit-reversed order consumed by the opposite transform"
+   ],
+   "note": "Assigned to another page; the page links it and states the multi-axis consequences it uses ($F^+_{\\boldsymbol t}F^-_{\\boldsymbol t}=I/M$, rounds as butterfly then twiddle monomial, $\\mathcal T_+$ a contraction), which is what was asked."
+  },
+  {
+   "id": "S5.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "hypothesis $d\\ell\\le C_\\ell p$ (behind $(d-1)q=O(p/K)$ and the $O(p)$ widths)",
+    "hypothesis $K\\le\\ell-1$",
+    "why the layout helps: equal-offset bits of all axes lie in $D$ consecutive chunks of the same index, so each round sees $[P]\\times[2^K]^D\\times[S]$",
+    "the identification of the exact operators $LBF^-_{\\boldsymbol t}$ and $F^+_{\\boldsymbol t}B^{-1}L^{-1}$"
+   ],
+   "note": "Prefix move, chunk exchanges, round costs and the per-round truncation count are given and add up to the paper's cost and the error $\\sqrt2\\ell\\,2^{-p}$, but the prefix rounds and the fast-layer rounds are only asserted, and the page never says why the chunk reordering makes the fast layer applicable."
+  },
+  {
+   "id": "S5.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the prefix list's order (long-axis top slots first, then $h=b-1,\\dots,0$ in increasing $i$); empty second list when $b=0$"
+   ],
+   "note": "\\\"Put $b=(\\ell-1)\\bmod K$ and $q=\\lfloor(\\ell-1)/K\\rfloor$. Moving the top slot of every long axis and slots $h=b-1,\\dots,0$ of all axes to a prefix leaves each axis as $q$ consecutive $K$-bit chunks\\\" gives the construction at the paper's level of detail."
+  },
+  {
+   "id": "S5.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the count $D(b+1)$ of listed slots with $b+1\\le K$",
+    "cost $O(Tp)$ per slot move"
+   ],
+   "note": "\\\"at cost $O(TpdK)$ for the $O(dK)$ listed slots\\\" gives the paper's one-line reason, but leaves out the explicit count $D(b+1)$."
+  },
+  {
+   "id": "S5.2.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the left-to-right scan that exchanges the chunk in place with the required one (valid for nonadjacent chunks)",
+    "the reason $Dq=O(p/K)$: $q\\le\\ell/K$ and $d\\ell\\le C_\\ell p$",
+    "$L^{-1}$ from the reversed operations at the same cost"
+   ],
+   "note": "The page gives the exchange count $(d-1)q-1$, the per-exchange cost $O(TpK^\\tau)$ and the total $O(Tp\\,pK^{\\tau-1})$ via $(d-1)q=O(p/K)$, as the paper does; the exchange schedule and the hypothesis behind $Dq=O(p/K)$ are missing."
+  },
+  {
+   "id": "S5.2.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "$O(rp)$ work per pair and $O(Tp)$ per bit for moves and scans",
+    "exact dyadics on the $2^{-(p+s)}$ grid in the disk after $s\\le D$ factors, so width $p+D+O(1)=O(p)$ using $d\\ell=O(p)$",
+    "one $Q_p$ at the end of the round",
+    "in opposite rounds the inverse monomial comes first and preserves grid and disk",
+    "total $O(Tp\\,D(b+1))=O(TpdK)$"
+   ],
+   "note": "Only \\\"The first $b+1\\le K$ rounds process bits one at a time, exactly, costing $O(TpdK)$\\\"; the reason no truncation is needed between axes, and the width bound, are absent."
+  },
+  {
+   "id": "S5.2.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the selected bit has common offset $(h-b)\\bmod K$ in the $D$ consecutive chunks of index $j$",
+    "complete address set $[P]\\times[2^K]^D\\times[S]$ with $PS2^{DK}=M$ (the hypothesis of the simultaneous-layer proposition)",
+    "descriptor bound $|\\mathcal E|\\le C_{\\rm desc}p$"
+   ],
+   "note": "\\\"Each remaining round costs $O(Tpd^{\\lambda'})$ by the simultaneous layer\\\" cites the proposition without checking that its hypothesis, the complete address set, holds."
+  },
+  {
+   "id": "S5.2.6",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "$E=er+s$ with $0\\le s<r$",
+    "split before position $r-s$, swap the pieces, negate the moved tail, apply the sign $(-1)^e$",
+    "the inverse uses exponent $-E$"
+   ],
+   "note": "The page calls the twiddle \\\"a signed coefficient shift costing $O(rp)$ per record\\\" but does not give the split-and-merge procedure."
+  },
+  {
+   "id": "S5.2.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "truncation acts separately on each real and imaginary part",
+    "opposite direction: $J_E^{-1}$ first preserves the disk grid and the layer returns $Q_p(\\mathcal HJ_E^{-1}z)$ directly",
+    "prefix rounds have the same one-truncation form"
+   ],
+   "note": "\\\"Truncation $Q_p$ is odd and $J_E$ is a signed coefficient permutation, so $J_EQ_p(\\mathcal Hz)=Q_p(J_E\\mathcal Hz)$\\\" matches the paper's argument for forward rounds; the opposite-direction case is omitted."
+  },
+  {
+   "id": "S5.2.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the contraction does not increase the norm of the propagated error (stated only through the word \"contraction\")",
+    "contraction and truncation preserve the disk",
+    "start from zero error"
+   ],
+   "note": "From \\\"one truncation after an exact contraction\\\" with each truncation below $\\sqrt2\\,2^{-p}$, the page sums to $\\sqrt2\\ell\\,2^{-p}$ and notes layout permutations add none; disk preservation, used later, is not stated."
+  },
+  {
+   "id": "S5.2.9",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "$\\mathcal D_-=BF^-_{\\boldsymbol t}$, $\\mathcal D_+=F^+_{\\boldsymbol t}B^{-1}$",
+    "operations on named slots after $L$ are conjugated by $L$",
+    "$(L\\mathcal D_-L^{-1})L=LBF^-_{\\boldsymbol t}$ and $L^{-1}(L\\mathcal D_+L^{-1})=F^+_{\\boldsymbol t}B^{-1}L^{-1}$"
+   ],
+   "note": "The page asserts \\\"The forward output is stored in order $LB$\\\" and writes $\\mathcal T_+=F^+_{\\boldsymbol t}B^{-1}L^{-1}$ without the conjugation argument."
+  },
+  {
+   "id": "S5.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "per-product cost $O(rp\\log(rp))$",
+    "returns $Q_p(fg/r)$ as a disk grid polynomial with truncation error below $\\eta$"
+   ],
+   "note": "Assigned to another page; the page links \\\"signed packing\\\" for the pointwise products but does not state what it returns or its per-product cost."
+  },
+  {
+   "id": "S5.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "disk bounds on $u,\\widetilde v$ in the bilinear estimate",
+    "output width $w_M=w+\\log_2M$"
+   ],
+   "note": "Normalization, commutation $P(LBu,LBv)=LBP(u,v)$ and the error chain $2\\delta\\to2\\delta+\\eta\\to3\\delta+\\eta\\to M(3\\delta+\\eta)$ follow the paper's proof."
+  },
+  {
+   "id": "S5.4.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the counting: each of $M$ first addresses fixes one second address and each of $r$ first indices fixes one second index mod $r$, with the negacyclic sign",
+    "the inequality $\\|\\mathcal M_r(f,g)\\|_\\infty\\le\\|f\\|_\\infty\\|g\\|_\\infty$"
+   ],
+   "note": "\\\"Each output coefficient averages $rM$ signed scalar products, so $\\mathcal M_r$ is a bilinear contraction\\\" gives the inference but not why there are $rM$ such products."
+  },
+  {
+   "id": "S5.4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "explicit conclusion that $\\mathcal T_+$ applied to the product of stored outputs equals $F^+_{\\boldsymbol t}P(F^-_{\\boldsymbol t}f,F^-_{\\boldsymbol t}g)$"
+   ],
+   "note": "Both identities and the resulting normalization $MF^+_{\\boldsymbol t}((F^-f)(F^-g)/r)=(f*g)/(rM)$ are given, along with $P(LBu,LBv)=LBP(u,v)$, as in the paper."
+  },
+  {
+   "id": "S5.4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "$u,v,\\widetilde u,\\widetilde v$ are all disk arrays"
+   ],
+   "note": "The page sets $\\delta=\\sqrt2\\ell\\,2^{-p}$, $\\eta=\\sqrt2\\,2^{-p}$, and each forward error below $\\delta$ follows from its transform error bound."
+  },
+  {
+   "id": "S5.4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the splitting $P(\\widetilde u,\\widetilde v)-P(u,v)=P(\\widetilde u-u,\\widetilde v)+P(u,\\widetilde v-v)$",
+    "the disk bounds on $\\widetilde v$ and $u$ that make each term below $\\delta$",
+    "definitions $\\widetilde z=Q_p(P(\\widetilde u,\\widetilde v))$, $z_*=P(u,v)$",
+    "$\\widetilde z$ is a disk grid array (needed for the opposite transform's bound)"
+   ],
+   "note": "\\\"As $P$ is bilinear with $\\|P(x,y)\\|_\\infty\\le\\|x\\|_\\infty\\|y\\|_\\infty$, the pointwise product has error below $2\\delta$\\\" follows the paper's route, but without the disk bounds the $2\\delta$ does not follow."
+  },
+  {
+   "id": "S5.4.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the triangle inequality $\\|\\widetilde h-\\mathcal T_+\\widetilde z\\|+\\|\\mathcal T_+(\\widetilde z-z_*)\\|$",
+    "the opposite procedure's bound applies because $\\widetilde z$ is a disk grid array"
+   ],
+   "note": "The page reaches $3\\delta+\\eta$ by adding $\\delta$ to $2\\delta+\\eta$, which is the paper's chain, but words it as \\\"The contraction $\\mathcal T_+$ adds error below $\\delta$\\\" rather than splitting the error into the computed opposite transform's own error and the unamplified propagated error."
+  },
+  {
+   "id": "S5.4.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "returned width $w_M=w+\\log_2M$ (scale is a power of two)"
+   ],
+   "note": "\\\"Multiplying exactly by $M$ gives error less than $\\sqrt2\\,M(3\\ell+1)2^{-p}$\\\" is $M(3\\delta+\\eta)$ with the page's $\\delta,\\eta$."
+  },
+  {
+   "id": "S5.4.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "per-product cost $O(rp\\log(rp))$ and $M=T/r$",
+    "three transform costs",
+    "final exact scaling linear in $Tp$"
+   ],
+   "note": "\\\"There are $M$ pointwise products, costing $O(Tp\\log(rp))$, so the cost is ...\\\" matches the paper's total; the per-product cost behind it is left implicit."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "The first $b+1\\le K$ rounds process bits one at a time, exactly, costing $O(TpdK)$.",
+   "problem": "The rounds on prefix slots are not the first $b+1$. In the paper the round at $h=\\ell-1$ on the long axes comes first, then the $qK$ chunk rounds for $h=\\ell-2,\\dots,b$, and the bottom positions $h=b-1,\\dots,0$ come last (the opposite procedure runs this in reverse). The cost is unaffected, but the schedule is misdescribed."
+  },
+  {
+   "severity": "minor",
+   "quote": "The contraction $\\mathcal T_+$ adds error below $\\delta$, so $\\|\\widetilde h-\\mathcal T_+z_*\\|_\\infty<3\\delta+\\eta$.",
+   "problem": "The exact contraction $\\mathcal T_+$ adds no error. The paper's bound is $\\|\\widetilde h-\\mathcal T_+\\widetilde z\\|+\\|\\mathcal T_+(\\widetilde z-z_*)\\|$: the first term is the computed opposite procedure's own error ($<\\delta$), and the contraction keeps the propagated $2\\delta+\\eta$ from growing."
+  },
+  {
+   "severity": "minor",
+   "quote": "one truncation gives $\\|\\widetilde z-z_*\\|_\\infty<2\\delta+\\eta$",
+   "problem": "$\\widetilde z$, $z_*$ (and later $\\widetilde h$) are never defined on the page. The paper sets $\\widetilde z=Q_p(P(\\widetilde u,\\widetilde v))$, $z_*=P(u,v)$, and takes $\\widetilde h$ to be the returned opposite output."
+  }
+ ],
+ "motivation_given": false
+}

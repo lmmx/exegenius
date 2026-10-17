@@ -1,0 +1,14 @@
+{"page": "P06",
+ "items": [
+  {"id": "S8.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes the inputs as A(2^b), B(2^b) with q=ceil(n/b) digits in [0,2^b-1], so the product is C(2^b) with C=AB. Its worked example (181 = 5+6*8+2*8^2, b=3, q=3) is correct, and b=ceil(log2 n) matches the paper's parameter choice."},
+  {"id": "S8.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page gets deg C <= 2q-2 from the factor degrees, 2q-2<2n/b from q<n/b+1, 2n/b<=T/2 from T>=4n/b, and T/2<S from the prime choice, then explains that reduction mod x^S-1 'leaves C unchanged exactly when deg C<S'. That is the paper's chain with the omitted 'why' spelled out."},
+  {"id": "S8.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes c_j as a sum of at most q products of digits in [0,2^b-1] and closes with (2^b-1)^2<2^{2b} and q<=n<=2^b. It justifies each half ('q<=n because b>=1', 'n<=2^b because b=ceil(log2 n)'), as the paper does."}
+ ],
+ "errors": [
+  {"severity": "minor", "quote": "Each $c_j=\\sum_k a_k b_{j-k}$ is a sum of at most $q$ products of digits",
+   "problem": "The digits of B are written b_{j-k}, but b already names the digit width in bits (b=ceil(log2 n)), the parameter in 2^b and 2^{3b} in the same paragraph. The paper does not name the digits. The argument is unaffected."}
+ ],
+ "motivation_given": true}

@@ -1,0 +1,44 @@
+{
+ "page": "P22",
+ "items": [
+  {
+   "id": "S7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page turns $QF_{\\boldsymbol t}$ into the chirp convolution by citing the linked Bluestein page. It then derives $RF^+_{\\boldsymbol s}[(RF_{\\boldsymbol s}u)\\cdot(RF_{\\boldsymbol s}v)]=(u*v)/S^2$ in the paper's order (unit substitution, tensoring, commuting with pointwise products, the two normalizations), which matches the proof of Lemma chirp-permutation (paper lines 3938-3983)."
+  },
+  {
+   "id": "S7.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the periodicity of $a$ with period $t_i$ in coordinate $i$ (which is where $t_i$ even is used); the page says $t_i$ is even but never says $a$ is periodic",
+    "the definition of the target permutation $(P_{t_i}v)_k=v_{-s_ik}$, which gives the identity its meaning"
+   ],
+   "note": "Stated with a link to the Bluestein page, as the assignment asks: $QF_{\\boldsymbol t}u=\\overline a\\cdot\\frac{a*(\\overline a\\cdot u)}{T}$, with $a$ as in the paper (line 3917). It is not derived here, correctly, since another page derives it."
+  },
+  {
+   "id": "S7.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page writes out the sum $\\frac1q\\sum_k z_{ck}e^{2\\pi ikj/q}=\\frac1q\\sum_h z_he^{2\\pi ihc^{-1}j/q}=(R_c^{-1}F_q^+z)_j$, justifies the substitution ('which permutes the residues because $c$ is a unit'), identifies $R=\\bigotimes_iR_{t_i}$, and tensors to get $F^+_{\\boldsymbol s}R=R^{-1}F^+_{\\boldsymbol s}$ and $RF^+_{\\boldsymbol s}R=F^+_{\\boldsymbol s}$. All of this is correct and follows the paper (lines 3953-3962)."
+  },
+  {
+   "id": "S7.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page gives $(RF_{\\boldsymbol s}u)\\cdot(RF_{\\boldsymbol s}v)=R(F_{\\boldsymbol s}u\\cdot F_{\\boldsymbol s}v)$, then $RF^+_{\\boldsymbol s}[R(\\cdot)]=F^+_{\\boldsymbol s}(\\cdot)$ by the previous identity. Using $F_{\\boldsymbol s}(u*v)=S(F_{\\boldsymbol s}u)(F_{\\boldsymbol s}v)$ and $F^+_{\\boldsymbol s}F_{\\boldsymbol s}=I/S$, it gets $\\frac1SF^+_{\\boldsymbol s}F_{\\boldsymbol s}(u*v)=\\frac{u*v}{S^2}$, exactly as in the paper (lines 3963-3982)."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "The source permutation is $R=\\bigotimes_i P_{s_i}$ with $(P_{s_i}u)_j=u_{t_ij}$, and the target permutation is $Q=\\bigotimes_i P_{t_i}$.",
+   "problem": "The page defines $P_{s_i}$ but not $P_{t_i}$. By analogy a reader would take $(P_{t_i}v)_k=v_{s_ik}$. The paper defines $(P_tv)_k=v_{-sk}$ (line 3557), and that minus sign is what makes the chirp identity hold with the negative-sign $F_{\\boldsymbol t}$: '$Q$ reads frequency $(-s_ij_i)_i$ from the negative-sign transform' (line 3951)."
+  }
+ ],
+ "motivation_given": true
+}

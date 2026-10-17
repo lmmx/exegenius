@@ -1,0 +1,16 @@
+{"page": "P06",
+ "items": [
+  {"id": "S8.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page gives all three parts: digits as polynomials with C=AB evaluated at 2^b, the degree chain giving no wraparound, and the bound c_j<2^{3b}. It also explains the 'why' the assignment asked for: 'Convolution modulo x^S-1 replaces each x^j by x^{j mod S}, so it leaves C unchanged exactly when deg C<S.' This matches paper lines 4183-4193, with parameters from lines 4055-4058 and 4145."},
+  {"id": "S8.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page sets b=ceil(log_2 n) and q=ceil(n/b) as in the paper, and checks a worked example (181 = 5+6*8+2*8^2 with b=3, q=3). It then shows 'the inputs are A(2^b) and B(2^b), so their product is C(2^b) with C=AB', which is the reason the digit polynomials represent the product."},
+  {"id": "S8.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Each link of the chain is justified: deg A, deg B <= q-1 gives deg C <= 2q-2; 'q<n/b+1' gives 2q-2<2n/b; 'T>=4n/b' gives 2n/b<=T/2; and T/2<S comes from the parameter choice (paper line 4145). Together with the explanation of reduction mod x^S-1, this derives the no-wraparound conclusion."},
+  {"id": "S8.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page says c_j is 'a sum of at most q products of digits' with each digit in [0,2^b-1]. It closes the strict bound with (2^b-1)^2<2^{2b} and q<=n<=2^b, justified by 'q<=n because b>=1, and n<=2^b because b=ceil(log_2 n)'. This is the paper's reasoning in full."}
+ ],
+ "errors": [
+  {"severity": "minor", "quote": "Each $c_j=\\sum_k a_k b_{j-k}$ is a sum of at most $q$ products of digits",
+   "problem": "The digits a_k and b_k are never defined on the page, and naming the second input's digits b_k clashes with b, the digit width in bits used throughout (2^b, 3b). The paper writes no explicit convolution sum; a reader would rename the digits. The argument is unaffected."}
+ ],
+ "motivation_given": true}

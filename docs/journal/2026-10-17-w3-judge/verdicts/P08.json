@@ -1,0 +1,8 @@
+{"page": "P08",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "The update costs $O(V)$ whenever the offset takes $b^{O(1)}$ time to compute ..., as a fixed rational linear combination of the controls does.",
+   "problem": "The page drops hypotheses that Lemma ordered-affine-streams (paper lines 557-568) needs for the linear-combination case. The rational coefficients must have denominators prime to q, so that they specialize modulo Q. There must be a fixed number of controls, each with O(b) digits. Without these, a 'fixed rational linear combination' need not be defined mod Q or computable in b^{O(1)} time. The argument is unaffected once the hypotheses are restored."}
+ ],
+ "motivation_given": true}

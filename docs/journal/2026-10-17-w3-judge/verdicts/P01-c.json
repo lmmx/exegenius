@@ -1,0 +1,236 @@
+{
+ "page": "P01",
+ "items": [
+  {
+   "id": "S8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the O(Tp) cost beyond the layer costs"
+   ],
+   "note": "The page assembles the chain digits -> Phi -> Gaussian-resampled source transforms (chirp + twisted ring convolution) -> pointwise product -> opposite transform -> two rescalings -> rounding and carries, and explains why each reduction is needed (\\\"coprimality excludes power-of-two lengths, which fast transforms need\\\"). The cost claim O(Tp) is never mentioned."
+  },
+  {
+   "id": "S8.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "T a power of two in [4n/b,8n/b)",
+    "distinct odd primes s_i in ((1-2eta)t_i,(1-eta)t_i] with eta=1/(4d)",
+    "r=2^{ceil(log2 T/d)}, t_d=r"
+   ],
+   "note": "Linked to the parameter page; the page states b, p=6b, t_i in {r/2,r}, prime s_i<t_i and S in (T/2,T)."
+  },
+  {
+   "id": "S8.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "no wraparound since the degree 2q-2<T/2<S"
+   ],
+   "note": "Linked: \\\"reduces the product ... to a length-S cyclic convolution of digit sequences, giving the product's coefficients c_j<2^{3b}\\\"."
+  },
+  {
+   "id": "S8.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "Linked: Phi \\\"moves the convolution onto the prime axes\\\"; correct as a citation."
+  },
+  {
+   "id": "S8.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the twist x_d -> zeta y with zeta=e^{pi i/r}"
+   ],
+   "note": "Linked: M~_C \\\"twists the last axis into R_r\\\" with twiddles signed shifts, approximating (f*g)/T."
+  },
+  {
+   "id": "S8.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "input norm at most .5 and chirp input norm at most .6 (only implicit in the norm chain)"
+   ],
+   "note": "The page writes the full composite F~(u)=2^gamma B~_0 Q_p(conj(a~)·M~_C(a~,Q_p(conj(a~)·A~u))) after giving the resampling identity RF_s=2^gamma B_0 QF_t A, the chirp identity QF_t g = conj(a)·(a*(conj(a)·g))/T and M_C=(f*g)/T, so the exact counterpart RF_s u follows; matches the paper."
+  },
+  {
+   "id": "S8.5.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "chirp construction cost O(Tdp^{1+delta}) (O(p)-bit integers, O(p^{1+delta}) multiplication and exponential evaluation)"
+   ],
+   "note": "The page shows a_j=exp(-pi i sum s_i j_i^2/t_i)=e^{pi i N/r} with N=-sum s_i j_i^2(r/t_i) mod 2r, r/t_i in {1,2}, \\\"formed by the established multiplier\\\"; correct, but the cost accounting is dropped."
+  },
+  {
+   "id": "S8.5.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "kernel accuracy ||a~-a||_inf<2·2^{-p}",
+    "||x||<=.6 implies ||x_0||<=.6, supplying the smaller operand the computed convolution needs"
+   ],
+   "note": "The chirp transform appears inline as Q_p(conj(a~)·M~_C(a~,Q_p(conj(a~)·x))), with a~ in the kernel slot, and its exact counterpart is QF_t x by the stated chirp identity; same as the paper's x_0, y_0, C~(x)."
+  },
+  {
+   "id": "S8.5.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "input norm at most .5 hypothesis",
+    "storage in the padded power-of-two box with zeros outside the valid source coordinates"
+   ],
+   "note": "Order A~, chirp, B~_0, scale 2^gamma matches the paper, and \\\"exactly, it is RF_s u\\\" follows from the resampling identity given just before."
+  },
+  {
+   "id": "S8.5.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "conjugation preserves the disk grid and the norm, so the error bound carries over"
+   ],
+   "note": "\\\"Conjugation flips the Fourier sign and commutes with R, so F~^+(u)=conj(F~(conj u)) approximates RF^+_s u\\\" is the paper's reason."
+  },
+  {
+   "id": "S8.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page lists the scaled digits, Phi, z=Q_p(F~(u)·F~(v)), w~=S F~^+(z), Phi^{-1} round(2^{2b+4}S w~), carries, and explains the two scales via the cancellation identity."
+  },
+  {
+   "id": "S8.6.0",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "digits formed by reading each operand backward in b-bit groups, padding the final short group",
+    "reason the scaled value is an exact grid value: numerator a_j 2^{p-b-2} with p-b-2>=0 because p=6b",
+    "zero imaginary word",
+    "input-conversion cost O(n+Sp)=O(Tp)"
+   ],
+   "note": "\\\"stores each digit times 2^{-b-2} (exact, <1/4), pads to S entries\\\": exactness and the bound are asserted in parentheses without the reason p=6b, a_j<2^b."
+  },
+  {
+   "id": "S8.6.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "Phi applied with its padded layout"
+   ],
+   "note": "\\\"applies Phi, giving source arrays u,v\\\" from the scaled padded digit sequences, which carry norm <1/4."
+  },
+  {
+   "id": "S8.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "F~(u), F~(v) enter the formula for z, with F~ defined just before."
+  },
+  {
+   "id": "S8.6.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "truncation toward zero of each real and imaginary part"
+   ],
+   "note": "z=Q_p(F~(u)·F~(v)) with Q_p the p-fractional-bit truncation, as in step 3."
+  },
+  {
+   "id": "S8.6.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "w~=S F~^+(z), as in step 4."
+  },
+  {
+   "id": "S8.6.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "only the real parts are rounded, written as signed (3b+1)-bit words",
+    "Phi^{-1} removes the address padding"
+   ],
+   "note": "Phi^{-1} round(2^{2b+4}S w~) matches step 5."
+  },
+  {
+   "id": "S8.6.6",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "carries propagated in increasing coefficient order",
+    "output of exactly 2n bits, most significant first"
+   ],
+   "note": "Named only: \\\"then propagates base-2^b carries into 2n bits\\\"."
+  },
+  {
+   "id": "S8.6.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "\\\"exactly, RF^+_s[(RF_s u)·(RF_s v)]=(u*v)/S^2, so w~ approximates (u*v)/S and the last scale gives 2^{2b+4}(u*v), the digit convolution, since each digit carried 2^{-b-2}\\\" follows the paper's reasoning."
+  },
+  {
+   "id": "S8.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "opposite-sign procedure has the same error and disk guarantee",
+    "operand-norm conditions (chirp input <=.6, smaller convolution operand <=.7)"
+   ],
+   "note": "The page gives the principles the paper uses (contractions pass errors on, the bilinear bound ||f'-f|| ||g'||+||f|| ||g'-g||, phase products add <4) and the norm chain .5->.51->.701->.501, then the four bounds."
+  },
+  {
+   "id": "S8.7.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the exact scale M=T/r after the normalized synthetic transforms, which multiplies the error",
+    "each synthetic transform error <L (from sqrt2·l<L)",
+    "polynomial-product truncation error <2",
+    "output norm <.7+5TLh_p<.701 from an operand of norm <=.7"
+   ],
+   "note": "Only the arithmetic \\\"(T/r)(3L+2)<5TL\\\" and the label \\\"(three transforms, truncation)\\\" appear; nothing on the page says where L, 2 or the factor T/r come from."
+  },
+  {
+   "id": "S8.7.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "comparison made at the normalized M_r interface after its factor M",
+    "twisted operands keep norm <=.7 since a phase product does not increase norm"
+   ],
+   "note": "\\\"5TL+4+4+4<6TL\\\" (twists) combines E_ring with two input twists and one output untwist, each <4 by the stated phase-product bound, through the bilinear rule; matches the paper."
+  },
+  {
+   "id": "S8.7.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "kernel error ||a~-a||<2h_p",
+    "exact operands a and conj(a)·x lie in the disk because |a_j|=1"
+   ],
+   "note": "\\\"6TL+2+4+4<8TL\\\" (kernel, phases) combines the computed convolution with the two endpoint phases (<4 each); the kernel term 2 is never justified."
+  },
+  {
+   "id": "S8.7.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "each linewise Gaussian map has error <dp^2",
+    "RF_s is a contraction, giving output norm <=.5+E_s h_p<.501"
+   ],
+   "note": "\\\"2^gamma(2dp^2+8TL)<9·2^gamma TL\\\" (Gaussian maps, 2dp^2<TL) follows the paper's composition and scaling; the dp^2 component bound is not stated."
+  },
+  {
+   "id": "S8.8",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "Linked: the final error is at most 448b 2^{-3b/4}<1/2, so rounding recovers c_j."
+  }
+ ],
+ "errors": [],
+ "motivation_given": true
+}

@@ -1,0 +1,20 @@
+{"page": "P12",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "For example, with $p=2$ and exact value $z=0.8-0.6i$, $Q_2$ keeps $0.75-0.5i$. Both parts shrink in size and the error has modulus about $0.25$, below $\\sqrt2/4\\approx0.35$.",
+   "problem": "The truncation 0.75-0.5i is correct, but the error is (0.8-0.75)+i(-0.6+0.5) = 0.05-0.1i, so its modulus is sqrt(0.0125), about 0.112, not about 0.25. The conclusion that it is below sqrt2*2^{-2} still holds, so the illustration of the paper's bound (eq. transform-truncate, line 2791) survives once the number is fixed."},
+  {"severity": "minor",
+   "quote": "If its parts are also multiples of $2^{-p}$, it is a $p$-bit grid array.",
+   "problem": "In the paper (lines 2786-2788) a p-bit grid array only needs real and imaginary coefficient parts in 2^{-p}Z. It does not need to lie in the disk. 'Disk grid' is the combination of the two. The page makes grid arrays a special case of disk arrays, then later uses 'disk grid array' as if that were a separate notion."},
+  {"severity": "minor",
+   "quote": "They are computed exactly by appending fractional zero bits and a few guard bits, extra high and low bits that prevent overflow and loss.",
+   "problem": "The paper (Prop. at lines 2677-2680, proof lines 2741-2745) uses up to ceil(C_0 d^{C_1}) fractional guard bits and ceil(C_0 d^{C_1})+3 integer and sign bits. That count grows with d and is only o(p) because d <= b_d p^epsilon with epsilon C_1 < 1. It is not a fixed 'few'. The page's 'The width stays O(p)' is right."},
+  {"severity": "minor",
+   "quote": "The transforms in the following pages are built from additions, halvings and multiplications by $\\pm1,\\pm i$.",
+   "problem": "This matches the butterfly layer, whose phases a,b=(1±i)/2 reduce to these operations (lines 1815-1831, 1936-1940), and the signed y-shifts of the synthetic transform. It overreaches for the other dependent pages. Pointwise products multiply grid operands (signed packing, Q_p(fg/r)). Gaussian resampling multiplies by approximated twiddles, e.g. Q_p(theta~^+ . f) at line 4385. Those results are still Gaussian dyadics, but they are not built only from these operations."},
+  {"severity": "minor",
+   "quote": "The error bound is per layer and per coefficient, so later pages add up a fixed number of such terms.",
+   "problem": "The number of truncation terms is not fixed. In the convolution bound sqrt2*M(3*ell+1)*2^{-p} (lines 3397, 3458-3473) it is 3*ell+1, which grows with the layer count ell, and the total is then scaled by M. The terms can be added because the later layers are contractions. The page does not say this."}
+ ],
+ "motivation_given": true}

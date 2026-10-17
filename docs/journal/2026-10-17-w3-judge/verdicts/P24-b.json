@@ -1,0 +1,11 @@
+{"page": "P24",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "A fixed rational linear combination of the controls, reduced mod $Q$, qualifies",
+   "problem": "The hypothesis that the rational coefficients have denominators prime to q is dropped; without it the reduction mod Q = q^b is undefined. The paper's Lemma (Controlled shifts and fixed rational scalings, lines 557-568) fixes 'finitely many rational coefficients whose denominators are prime to $q$' before saying a fixed rational linear combination 'specialized modulo $Q$' qualifies."},
+  {"severity": "minor",
+   "quote": "Both costs are $O(V)$, as are signed combinations of these operations.",
+   "problem": "'Combinations' should be compositions, and the page never says which units are covered beyond positive integers c prime to q and their inverses. The paper (lines 558-560, 613-614) allows rational units whose numerator and denominator are both prime to q, and implements a signed rational unit as 'a composition of these integer multiplications, inverse multiplications, and possibly negation'."}
+ ],
+ "motivation_given": true}

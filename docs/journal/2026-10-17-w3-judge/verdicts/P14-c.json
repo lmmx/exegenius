@@ -1,0 +1,13 @@
+{"page": "P14",
+ "items": [
+  {"id": "S7", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page gets QF_t from the chirp identity (stated, with a link to its own page). It then derives $RF^+_{\\boldsymbol s}[(RF_{\\boldsymbol s}u)\\cdot(RF_{\\boldsymbol s}v)]=(u*v)/S^2$ in two moves, 'First, $R$ passes through $F^+_{\\boldsymbol s}$' and 'Second, $R$ only moves entries', exactly as in the proof of Lemma chirp-permutation (paper lines 3953-3983)."},
+  {"id": "S7.1", "presence": "stated", "faithful": null, "dropped": ["the chirp $a$ has period $t_i$ in coordinate $i$ (which needs every $t_i$ even; the page's 'power-of-two target length' gives evenness but never states the periodicity)"],
+   "note": "As the assignment asks, the page only states $QF_{\\boldsymbol t}w=\\overline a\\cdot\\frac{a*(\\overline a\\cdot w)}{T}$ with the right $a_{\\boldsymbol j}$ and links the Bluestein chirp page. Its remark that 'The factor $s_i$ in the chirp's exponent performs the frequency change of $Q$' agrees with the paper's coefficient computation."},
+  {"id": "S7.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes out the Fourier sum with the substitution $h=ck$ ('which runs over every residue modulo $q$ once as $k$ does') and reaches $(F^+_qz)_{c^{-1}j}=(R_c^{-1}F^+_qz)_j$. It applies this with $q=s_i$, $c=t_i$ (a unit since $\\gcd(s_i,t_i)=1$) on every coordinate to get $F^+_{\\boldsymbol s}R=R^{-1}F^+_{\\boldsymbol s}$, hence $RF^+_{\\boldsymbol s}R=F^+_{\\boldsymbol s}$, as in the paper. The worked example $s_1=3$, $t_1=8$ checks out: $R$ swaps entries 1 and 2, and $e^{2\\pi i(2j)(2h)/3}=e^{2\\pi ijh/3}$."},
+  {"id": "S7.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page notes that 'R only moves entries', so $R$ commutes with the pointwise product, and applies $RF^+_{\\boldsymbol s}R=F^+_{\\boldsymbol s}$. It then combines $F_{\\boldsymbol s}(u*v)=S(F_{\\boldsymbol s}u)\\cdot(F_{\\boldsymbol s}v)$ and $F^+_{\\boldsymbol s}F_{\\boldsymbol s}=I/S$ to get $\\frac1SF^+_{\\boldsymbol s}F_{\\boldsymbol s}(u*v)=\\frac{u*v}{S^2}$. These are the paper's steps and normalizations, and I checked both against the paper's 1/q-normalized $F_q$ and $F_q^+$."}
+ ],
+ "errors": [],
+ "motivation_given": true}

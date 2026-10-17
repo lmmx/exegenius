@@ -1,0 +1,13 @@
+{"page": "P23",
+ "items": [
+  {"id": "S8.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page assembles the whole step: digits in base 2^b, the degree chain 2q-2<2n/b<=T/2<S, and the coefficient bound. It also spells out why cyclic and ordinary convolution agree, as the assignment asked: \"If every i+k that occurs is below S, the congruence forces i+k=j\"."},
+  {"id": "S8.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "It gives b=ceil(log_2 n), q=ceil(n/b) blocks with 0<=u_i<2^b, U=u(2^b), and shows UV=c(2^b) with c_j=sum_{i+k=j}u_i v_k, which matches the paper's radix-digit polynomials."},
+  {"id": "S8.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Each link of the chain is justified: \"q<n/b+1 gives 2q-2<2n/b\", T>=4n/b gives 2n/b<=T/2, and T/2<S comes from the parameter choice. Reduction modulo x^S-1 is explained as collecting the terms with i+k congruent to j mod S, so there is no wraparound. This matches the paper."},
+  {"id": "S8.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "It says each c_j is a sum of at most q digit products, each in [0,(2^b-1)^2]. It justifies q<=n<=2^b \"because b>=1 and b>=log_2 n\" and concludes q(2^b-1)^2<2^b*2^{2b}=2^{3b}, which matches the paper's (eq:capacity)."}
+ ],
+ "errors": [],
+ "motivation_given": true}

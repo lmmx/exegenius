@@ -1,0 +1,17 @@
+{"page": "P12",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "For example, with $p=2$ and exact value $z=0.8-0.6i$, $Q_2$ keeps $0.75-0.5i$. Both parts shrink in size and the error has modulus about $0.25$, below $\\sqrt2/4\\approx0.35$.",
+   "problem": "Arithmetic slip in the worked example. The truncation 0.75-0.5i is right, but the error is 0.05-0.1i, whose modulus is sqrt(0.0125), about 0.112, not about 0.25 (0.25 is 2^{-p}, the bound for one part). The conclusion that the error is below sqrt2*2^{-2} still holds, so the bound (eq:transform-truncate, l.2790-2793) is unaffected."},
+  {"severity": "minor",
+   "quote": "The error bound is per layer and per coefficient, so later pages add up a fixed number of such terms.",
+   "problem": "The number of truncation terms is not fixed. Each synthetic transform has error below sqrt2*ell*2^{-p} with ell=log_2 r (l.2968, 2979-2980), and the convolution adds 3ell+1 such terms and then multiplies by M (l.3443-3473). Since ell=Theta(p^{1-epsilon}) (l.4071), the count grows with p. The correct reading is one term per layer, carried through contractions."},
+  {"severity": "minor",
+   "quote": "They are computed exactly by appending fractional zero bits and a few guard bits, extra high and low bits that prevent overflow and loss.",
+   "problem": "The paper's guard width is not 'a few' bits. It is ceil(C_0 d^{C_1}) with C_1=20 (l.2741-2744, 4548-4549), which grows with d=Theta(p^epsilon) and is o(p) only because epsilon*C_1<1. The page's next sentence ('The width stays O(p)') is correct."},
+  {"severity": "minor",
+   "quote": "An array whose coefficients all lie in the unit disk is a disk array, with norm at most one. If its parts are also multiples of $2^{-p}$, it is a $p$-bit grid array.",
+   "problem": "The wording makes 'p-bit grid array' depend on the disk condition. In the paper a p-bit grid array is any array whose real and imaginary coefficient parts lie in 2^{-p}Z, with no norm condition (l.2786-2788). An array that meets both conditions is a 'disk grid array', which is the term the page itself uses later."}
+ ],
+ "motivation_given": true}

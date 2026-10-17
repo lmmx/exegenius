@@ -1,0 +1,164 @@
+{
+ "page": "P05",
+ "items": [
+  {
+   "id": "S4.6.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "lemma hypotheses $K\\ge6$ and $0\\le\\rho<K$",
+    "the case $f=1$ ($S_0,T_0$ identities, $\\mathcal B$ empty, only the top-position step runs)",
+    "how the omitted top position $j_{f-1}$ is done (two-bit XOR by the elementary-streams lemma); the page only says 'Handle the top position apart in $O(V)$'"
+   ],
+   "note": "The page follows the paper's route: eight packed shifts, an exceptional set bounded by a union bound, correction by extraction and radix sort, then cost totals. The cost terms are added up to $O(V(L^\\tau+1))$. The weak points are listed under the sub-steps (S4.6.2.8, S4.6.2.11, S4.6.2.13)."
+  },
+  {
+   "id": "S4.6.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "translation by $(2a,2b)$ does not change any predicate (why checking four parity pairs covers every square)",
+    "case $c=0$: the operations do nothing"
+   ],
+   "note": "The page displays all eight operations exactly as the paper does and says 'substituting parity pairs of $(u,w)$ shows the first four updates cycle them as $(00\\ 01\\ 10)$ ... the last four as $(01\\ 10\\ 11)$'. That is the paper's own justification, and it can be checked from the display, but no individual trace is written out."
+  },
+  {
+   "id": "S4.6.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Explicit trace: '$00\\to01\\to10$, $10\\to00\\to00$, $01\\to10\\to11$, $11\\to11\\to01$'. All four are correct and give $(00\\ 10)(01\\ 11)$."
+  },
+  {
+   "id": "S4.6.2.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "$u\\bmod2\\in\\{0,1\\}$ also for negative $u$",
+    "reason for the displacement bound (each coordinate is updated four times by at most one, so the bound also holds for intermediate values that leave the quotient square)"
+   ],
+   "note": "'Hence $(u',w')=(u+c(1-2(u\\bmod2)),w)$' follows from the composed permutation inside each square. Quotient preservation and restoration of $w$ are stated correctly. 'each coordinate moving at most $8$' is true (the paper has four and uses eight), but the page gives no reason for it."
+  },
+  {
+   "id": "S4.6.2.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the highest segment ends immediately below $j_{f-1}$, which is why the top position is set aside and the used segments fit in the $L$-bit chunk"
+   ],
+   "note": "Setup as in the paper: 'For $0\\le i<f-1$, the $K$-bit segments from bit $j_i$ are disjoint; ... $u_i=2g_i+a_i$ and $w_i=2h_i+b_i$, with guard values $g_i,h_i<2^{K-1}$ and control $c_i=x_{j_i}$', with the top position handled separately."
+  },
+  {
+   "id": "S4.6.2.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "for a line updating $z$ (lines 2, 4, 5, 7), interchange $y$ and $z$ in the shift formula",
+    "$S_0$ fixes the spectator coordinates"
+   ],
+   "note": "The page gives the cyclic-shift formula and the bijection argument: 'Its offset ignores the target, so each line is a bijection; $S_0$ is their composition'. It only writes the $y$-updating form."
+  },
+  {
+   "id": "S4.6.2.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the induction over the eight packed additions (each one in turn agrees with the independent segment additions)",
+    "bits below $j_0$ and above the highest used segment are untouched",
+    "$T_0$ performs the XORs only at $j_0,\\ldots,j_{f-2}$ and fixes all other address coordinates; the agreement uses the result $(u',w')$"
+   ],
+   "note": "Interval arithmetic is correct: guards in $[10,2^{K-1}-11]$ give segments in $[20,2^K-21]$, and displacement $8$ stays in $[0,2^K-1]$, 'so no segment carries into the next and $S_0$ agrees with the ideal XOR permutation $T_0$'."
+  },
+  {
+   "id": "S4.6.2.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the full $y,z$ ranges give the same guard distribution in each spectator fiber, so the count is a fraction of addresses that does not depend on record values",
+    "$K\\ge6$ (so that $2^{K-1}\\ge20$ and the twenty excluded values are distinct)"
+   ],
+   "note": "'Each guard has $20$ excluded values among $2^{K-1}$, so the union bound over $2(f-1)$ guards gives ... $\\min\\{1,80(f-1)2^{-K}\\}$'. The arithmetic $2(f-1)\\cdot20/2^{K-1}=80(f-1)2^{-K}$ is correct."
+  },
+  {
+   "id": "S4.6.2.8",
+   "presence": "derived",
+   "faithful": false,
+   "dropped": [
+    "$T_0$ preserves all guard values and therefore preserves $\\mathcal B$",
+    "$S_0(\\mathcal B^c)=T_0(\\mathcal B^c)=\\mathcal B^c$ and $S_0(\\mathcal B)=\\mathcal B$"
+   ],
+   "note": "The page's reason, 'Since $T_0,S_0$ are bijections agreeing off $\\mathcal B$', does not give the conclusion by itself. It only shows that $T_0S_0^{-1}$ fixes $S_0(\\mathcal B^c)$. The paper's key premise, $T_0(\\mathcal B)=\\mathcal B$, is missing."
+  },
+  {
+   "id": "S4.6.2.9",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the shift offset is computed from the two current $L$-bit control values in $L^{O(1)}$ time without reading the target, and this work is absorbed by the $2^L$ target blocks in each fiber (needed for the $O(V)$ rotation)",
+    "the swap is done only if needed (the target may already be rightmost)"
+   ],
+   "note": "'Each rotation swaps its target to the rightmost position (width $L$, $O(VL^\\tau)$ ...), shifts in $O(V)$ ..., and swaps back; $S_0$ uses $\\le16$ swaps and $8$ rotations'. This matches the paper, and two swaps per rotation give the count of sixteen."
+  },
+  {
+   "id": "S4.6.2.10",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the destination of an exceptional record is $q'=T_0(S_0^{-1}(q))$, computed by reversing the eight shifts and then applying the XORs, and its rank is found from the chunk strides",
+    "holes are marked on a fixed track while the full stream is held",
+    "the radix sort is stable, least significant key bit first"
+   ],
+   "note": "'Extract the records of $\\mathcal B$ keyed by destination rank, radix-sort only them, and reinsert in one forward scan; the keys are distinct and equal the marked holes' ranks'. Distinctness rests on the permutation property stated just before, as in the paper."
+  },
+  {
+   "id": "S4.6.2.11",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "per-record cost $O(A^3)$ from schoolbook arithmetic on $O(A)$-bit integers (rank decoding, membership test, computing $T_0S_0^{-1}(q)$ with $f\\le L\\le A$)",
+    "at most $A$ radix passes, each over $|\\mathcal B|$ records with $R$ payload bits and an $A$-bit key",
+    "skip the radix passes when $\\mathcal B$ is empty"
+   ],
+   "note": "The movement total follows from the swap and rotation counts above. 'full scans $O(MA^3+V)$, radix passes $O(|\\mathcal B|A(R+A))$' are asserted with no reason."
+  },
+  {
+   "id": "S4.6.2.12",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the intermediate bound $O(p^22^{-K}(1+A/R))$ from $(f-1)A=O(p^2)$, and $p^22^{-K}\\to0$ because $K/\\log p\\to\\infty$",
+    "uniformity over the permitted lengths and payloads in the fixed family"
+   ],
+   "note": "The per-volume terms '$A^3/R$ and $80(f-1)2^{-K}A(1+A/R)$' are the correct division of the cost terms by $V=MR$, and the hypotheses are listed correctly. That both terms are $o(1)$ is asserted, but it is immediate from those hypotheses."
+  },
+  {
+   "id": "S4.6.2.13",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "an invertible $\\mathbb F_2$ matrix of fixed order $m\\ge3$ is a product of a fixed number of elementary row additions (a row exchange is three additions)",
+    "each row addition is one call of the lemma, with slot $h'$ as $x$, slot $h$ as $y$ and a third distinct slot as $z$",
+    "$L=eK/m\\le eK$, so $L^\\tau\\le(eK)^\\tau$, under the lemma's asymptotic hypotheses"
+   ],
+   "note": "The page gives only 'Slot width is $L=(e/m)K$, so change of basis and inverse cost $O(V((eK)^\\tau+1))$'. It never says the change of basis is a fixed number of packed row additions, which is the step that makes the bound follow."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "Since $T_0,S_0$ are bijections agreeing off $\\mathcal B$, $T_0S_0^{-1}$ fixes $\\mathcal B^c$ and permutes $\\mathcal B$.",
+   "problem": "As written, the inference does not hold. Two bijections that agree off $\\mathcal B$ only make $T_0S_0^{-1}$ fix $S_0(\\mathcal B^c)$, which need not equal $\\mathcal B^c$. The paper first notes that $T_0$ preserves all guard values, hence $T_0(\\mathcal B)=\\mathcal B$. That gives $S_0(\\mathcal B^c)=T_0(\\mathcal B^c)=\\mathcal B^c$ and $S_0(\\mathcal B)=\\mathcal B$."
+  },
+  {
+   "severity": "minor",
+   "quote": "Each line is, for all segments together, one cyclic shift (sign $\\varepsilon$, tested parity $b$) $$y\\leftarrow y+\\varepsilon\\sum_{i=0}^{f-2}2^{j_i}[x_{j_i}=1][z_{j_i}=b]\\pmod{2^L}$$",
+   "problem": "Four of the eight lines update $w$, that is chunk $z$, not $y$. For those lines the paper says to interchange $y$ and $z$ in the formula. As written, every line shifts $y$."
+  },
+  {
+   "severity": "minor",
+   "quote": "when $p$, the address-length parameter, satisfies $A=O(p)$",
+   "problem": "In the paper, $p$ is the parameter of the fixed asymptotic family ($p\\to\\infty$). In the application it is the working precision $p=6\\lceil\\log_2n\\rceil$, not an address length. The hypothesis $A=O(p)$ only bounds $A$ by $p$. The related phrase 'addresses have $A=\\lceil\\log_2(2V)\\rceil$ bits' is also loose: record addresses need $\\lceil\\log_2M\\rceil\\le A$ bits, and $A_{\\rm rect}$ is a bit-length bound."
+  }
+ ],
+ "motivation_given": true
+}

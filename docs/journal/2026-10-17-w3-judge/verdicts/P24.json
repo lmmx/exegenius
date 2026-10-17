@@ -1,0 +1,14 @@
+{"page": "P24",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "A fixed rational linear combination of the controls, reduced mod $Q$, qualifies",
+   "problem": "Drops the hypothesis of Lemma lem:ordered-affine-streams (paper lines 557-560, 623-627) that the rational coefficients have denominators prime to q; only then is the reduction modulo Q = q^b defined (and computable by extended Euclid in poly(b) time)."},
+  {"severity": "minor",
+   "quote": "Both costs are $O(V)$, as are signed combinations of these operations.",
+   "problem": "The paper (lines 612-614) says a signed rational unit is a composition of integer multiplications, inverse multiplications and possibly negation; 'signed combinations' suggests linear combinations, which is not meaningful for these permutations. The rational-unit case c/d (numerator and denominator prime to q) is only alluded to."},
+  {"severity": "minor",
+   "quote": "the address rearrangements of the main result ([Integer multiplication below n log n](main-theorem.md)) are built from such updates.",
+   "problem": "Overstates: the paper (lines 176-179, 4283-4288) implements the changes of numerical address coordinates by whole-chunk moves (axis swaps via the chunk-swap procedure) together with controlled shifts, plus a deterministic correction of exceptional addresses, not by controlled shifts alone."}
+ ],
+ "motivation_given": true}

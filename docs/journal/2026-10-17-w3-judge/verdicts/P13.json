@@ -1,0 +1,11 @@
+{"page": "P13",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "while $y^a\\ne1$ for $0<a<2r$, because $y^a$ is then plus or minus a monomial other than $1$",
+   "problem": "The reason given is wrong at a=r: there y^r=-1, which is minus the monomial 1, not plus or minus a monomial other than 1. The conclusion y^a != 1 still holds, since -1 != 1, so the claim that y has order 2r survives. The paper only needs y^r=-1 and that omega_t=y^{2r/t} for a power of two t dividing 2r (lines 2776-2798, 2823)."},
+  {"severity": "minor",
+   "quote": "[Signed packing of polynomial products](signed-packing.md) multiplies two elements exactly by integer multiplication",
+   "problem": "Too broad. Lemma lem:signed-ring-product (paper lines 3221-3231) applies only to disk-grid polynomials f,g. It computes the exact Gaussian-integer numerators of fg but returns the truncated, normalized Q_p(fg/r), with error less than sqrt2 2^{-p}. It is not an exact product of two arbitrary elements of R_r."}
+ ],
+ "motivation_given": true}

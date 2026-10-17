@@ -1,0 +1,13 @@
+{"page": "P23",
+ "items": [
+  {"id": "S8.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page sets up the digit polynomials, shows that cyclic and ordinary convolution agree when every i+k is below S, and proves the chain 2q-2<2n/b<=T/2<S and the bound c_j<2^{3b}. It also spells out the 'why' that the assignment says the paper leaves to the reader: 'If every i+k that occurs is below S, the congruence forces i+k=j, so cyclic and ordinary convolution agree.' This matches paper lines 4183-4193, with T and S taken from lines 4058 and 4145."},
+  {"id": "S8.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "With b=ceil(log2 n) and q=ceil(n/b) blocks, the page writes U=sum u_i 2^{bi}=u(2^b) with 0<=u_i<2^b, and shows UV=c(2^b) with c_j=sum_{i+k=j} u_i v_k. This agrees with paper line 4055 (b) and line 4184 (q)."},
+  {"id": "S8.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page justifies each link: 'q<n/b+1 gives 2q-2<2n/b, the choice of T gives 2n/b<=T/2, and T/2<S'. The last link is cited from the parameter choice (T/2<S<T, paper line 4145). It then shows that reduction modulo x^S-1 collects the terms with i+k congruent to j mod S, so no term wraps around. This is the paper's argument."},
+  {"id": "S8.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page argues that each c_j is 'a sum of at most q products u_iv_k, one for each i', each at most (2^b-1)^2. It justifies q<=n<=2^b by 'b>=1 and b>=log_2 n', then gets q(2^b-1)^2<2^b*2^{2b}=2^{3b}. This matches eq:capacity (paper lines 4190-4193)."}
+ ],
+ "errors": [],
+ "motivation_given": true}

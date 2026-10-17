@@ -1,0 +1,14 @@
+{"page": "P24",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "A fixed rational linear combination of the controls, reduced mod $Q$, qualifies",
+   "problem": "The page drops the hypothesis that the rational coefficients have denominators prime to q. Without it the combination cannot be reduced mod Q = q^b. Lemma lem:ordered-affine-streams (paper lines 557-560) fixes 'finitely many rational coefficients whose denominators are prime to q', and lines 623-626 compute the reductions by the extended Euclidean algorithm."},
+  {"severity": "minor",
+   "quote": "Both costs are $O(V)$, as are signed combinations of these operations.",
+   "problem": "'Combinations' should be compositions. The paper (lines 612-614) says that 'A signed rational unit is a composition of these integer multiplications, inverse multiplications, and possibly negation. Its description is fixed.' A linear combination of permutations is not a permutation, and the composition must be fixed, which is what keeps the cost O(V)."},
+  {"severity": "minor",
+   "quote": "the address rearrangements of the main result ([Integer multiplication below n log n](main-theorem.md)) are built from such updates.",
+   "problem": "This overstates the role of controlled shifts. The paper implements changes of numerical address coordinates 'by whole-chunk moves and controlled shifts, followed by a deterministic correction' (lines 177-179), and the CRT layout 'through triangular controlled shifts and charged axis moves' (lines 187-188). Address interchange of growing fields uses XOR combinations of streams (lines 440-442), not controlled shifts."}
+ ],
+ "motivation_given": true}

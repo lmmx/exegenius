@@ -1,0 +1,13 @@
+{"page": "P22",
+ "items": [
+  {"id": "S7", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The cancellation identity $RF^+_{\\boldsymbol s}[(RF_{\\boldsymbol s}u)\\cdot(RF_{\\boldsymbol s}v)]=(u*v)/S^2$ is derived in full and follows the proof of Lemma chirp-permutation (paper ll. 3953-3983). The chirp half (\"$Q$ is absorbed by the chirp convolution\") is stated and linked to the Bluestein page, as the assignment requires."},
+  {"id": "S7.1", "presence": "stated", "faithful": null, "dropped": ["$a$ has period $t_i$ in coordinate $i$ (paper l. 3919), needed for $a*(\\cdot)$ to be a cyclic convolution on the target box"],
+   "note": "The page states the chirp formula $QF_{\\boldsymbol t}u=\\overline a\\cdot\\frac{a*(\\overline a\\cdot u)}{T}$ with the correct $a$ and links bluestein-chirp.md, as instructed; it is not derived here. The hypothesis that every $t_i$ is even appears in the setup."},
+  {"id": "S7.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "It defines $(R_cz)_j=z_{cj}$ for a unit $c$, substitutes $h=ck$ (noting this permutes residues), and gets $(F_q^+R_cz)_j=\\frac1q\\sum_hz_he^{2\\pi ihc^{-1}j/q}=(R_c^{-1}F_q^+z)_j$, which is correct. It then identifies $R=\\bigotimes_iR_{t_i}$, uses that each $t_i$ is a unit mod $s_i$, and tensors to $F^+_{\\boldsymbol s}R=R^{-1}F^+_{\\boldsymbol s}$ and then $RF^+_{\\boldsymbol s}R=F^+_{\\boldsymbol s}$, exactly as in paper ll. 3953-3962."},
+  {"id": "S7.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "It uses the commutation of a coordinate permutation with coordinatewise products to get $R(F_{\\boldsymbol s}u\\cdot F_{\\boldsymbol s}v)$, applies $RF^+_{\\boldsymbol s}R=F^+_{\\boldsymbol s}$, and then uses $F_{\\boldsymbol s}(u*v)=S(F_{\\boldsymbol s}u)(F_{\\boldsymbol s}v)$ and $F^+_{\\boldsymbol s}F_{\\boldsymbol s}=I/S$ to reach $\\frac1SF^+_{\\boldsymbol s}F_{\\boldsymbol s}(u*v)=\\frac{u*v}{S^2}$. Both normalizations agree with the paper's $1/q$-normalized $F_q,F_q^+$ (ll. 3506-3511, 3973-3982)."}
+ ],
+ "errors": [],
+ "motivation_given": true}

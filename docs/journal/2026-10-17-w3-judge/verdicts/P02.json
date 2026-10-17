@@ -1,0 +1,18 @@
+{"page": "P02",
+ "items": [
+  {"id": "S8.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes the inputs as U(2^b), V(2^b), bounds the degree of UV by 2q-2<S, explains why reduction mod x^S-1 then moves no terms ('it only moves terms of degree S or more, and there are none'), and bounds c_j < 2^{3b}. This matches the paper's paragraph (lines 4181-4193) and spells out the cyclic = ordinary convolution point the assignment asked for."},
+  {"id": "S8.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Gives b = ceil(log2 n), q = ceil(n/b), digits in [0, 2^b-1], u = sum u_k 2^{bk} = U(2^b), and hence uv = (UV)(2^b) with c_j = sum_k u_k v_{j-k}. This matches the paper. It does not say explicitly that qb >= n is why q digits are enough, but the paper does not say so either."},
+  {"id": "S8.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Derives deg UV <= 2q-2 from deg U, deg V <= q-1, and 2q-2 < 2n/b from q < n/b+1. It then argues that no term has degree >= S, so the reduction mod x^S-1 is trivial and zero padding to length S lets the cyclic convolution compute the ordinary one. The page takes 2n/b <= T/2 < S from the parameter page instead of recalling T in [4n/b, 8n/b) and S/T > 1/2. The paper's passage also takes these inequalities from earlier, so nothing required is missing."},
+  {"id": "S8.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "'c_j is a sum of at most q products u_k v_{j-k}, and each factor is at most 2^b-1', so c_j <= q(2^b-1)^2, and q <= 2^b with (2^b-1)^2 < 2^{2b} gives < 2^{3b}. Nonnegativity follows from the nonnegative digits. This is the paper's reasoning."}
+ ],
+ "errors": [
+  {"severity": "minor", "quote": "The coefficients are therefore integers of fewer than $3b$ bits",
+   "problem": "From c_j < 2^{3b} it follows only that c_j has at most 3b bits. 'Fewer than 3b bits' would require c_j < 2^{3b-1}, which the page's bound does not give. The paper says (4) puts c_j in [0, 2^{3b}), so it fits in a signed (3b+1)-bit word."},
+  {"severity": "minor", "quote": "This bound is what lets the later error analysis recover each $c_j$ exactly by rounding.",
+   "problem": "This misattributes the role of the bound. In the paper, rounding is exact because the final error bound (eq:final-error) is below 1/2, and that bound comes from the input scaling and from ||w|| < 1/16. The capacity bound (4) is used afterwards, to place the rounded coefficient in [0, 2^{3b}) so that it fits in one signed (3b+1)-bit word (lines 4752-4754), and in the carry bound."}
+ ],
+ "motivation_given": true}

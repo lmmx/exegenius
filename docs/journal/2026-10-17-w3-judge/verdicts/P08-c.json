@@ -1,0 +1,8 @@
+{"page": "P08",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "The update costs $O(V)$ whenever the offset takes $b^{O(1)}$ time to compute ..., as a fixed rational linear combination of the controls does.",
+   "problem": "The 'in particular' claim needs hypotheses the page leaves out. Lemma lem:ordered-affine-streams (lines 557-568) requires the rational coefficients to have denominators prime to q, so that they specialize modulo Q at all. It also requires each control used in the offset to have O(b) digits; only then is the linear combination computable in b^{O(1)} time. As written, an arbitrary fixed rational combination of arbitrary controls is claimed to qualify."}
+ ],
+ "motivation_given": true}

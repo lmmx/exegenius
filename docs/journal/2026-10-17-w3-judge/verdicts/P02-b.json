@@ -1,0 +1,18 @@
+{"page": "P02",
+ "items": [
+  {"id": "S8.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page counts degrees, bounds the coefficients, and spells out why there is no wraparound, which the assignment left to the reader: 'Reduction modulo $x^S-1$ replaces $x^{S+m}$ by $x^m$, so it only moves terms of degree $S$ or more, and there are none.' This matches the paper's lines 4183-4193."},
+  {"id": "S8.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes $u=\\sum_{k<q}u_k2^{bk}=U(2^b)$ with digits in $[0,2^b-1]$ and $q=\\lceil n/b\\rceil$, and gets $uv=(UV)(2^b)$, which is the paper's radix-digit polynomial setup with $b=\\lceil\\log_2 n\\rceil$."},
+  {"id": "S8.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page derives $\\deg UV\\le2q-2$ and $2q-2<2n/b$ from $q<n/b+1$, and takes $2n/b\\le T/2<S$ from the parameter choices, as the paper's passage does. The page does not show where that comes from ($T\\in[4n/b,8n/b)$ and $S/T>(1-1/(2d))^d>1/2$), but the assigned passage does not show it either. The page's no-wraparound conclusion and its zero-padding remark are correct."},
+  {"id": "S8.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes $c_j$ as a sum of at most $q$ products of digits that are each at most $2^b-1$, and gets $q(2^b-1)^2<2^b\\cdot2^{2b}$ from $q\\le n\\le2^b$. This matches eq:capacity."}
+ ],
+ "errors": [
+  {"severity": "minor", "quote": "The coefficients are therefore integers of fewer than $3b$ bits",
+   "problem": "From $c_j<2^{3b}$ it only follows that $c_j$ has at most $3b$ bits, not fewer than $3b$. The paper says eq:capacity 'puts it in $[0,2^{3b})$' and stores it in a signed $(3b+1)$-bit word."},
+  {"severity": "minor", "quote": "This bound is what lets the later error analysis recover each $c_j$ exactly by rounding.",
+   "problem": "This credits the wrong fact. In the paper, exact recovery by rounding comes from the final error bound below 1/2 (eq:final-error, lines 4722-4731). The paper uses eq:capacity to fit the rounded coefficient into a signed $(3b+1)$-bit word (lines 4752-4754) and in the carry-propagation bounds (lines 4771-4783)."}
+ ],
+ "motivation_given": true}

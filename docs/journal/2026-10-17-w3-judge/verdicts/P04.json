@@ -1,0 +1,251 @@
+{
+ "page": "P04",
+ "items": [
+  {
+   "id": "S8",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the O(Tp) cost of the algorithm beyond the layer costs",
+    "why roots of unity in C[y]/(y^r+1) are signed shifts (y^r=-1, so y is a primitive 2r-th root of unity)",
+    "how the twisted ring convolution evaluates the chirp convolution on the last power-of-two axis"
+   ],
+   "note": "The page lists the reduction chain (digit convolution, Phi, Gaussian resampling, chirp, twist, ring convolution) by linking each page, e.g. 'Prime lengths defeat power-of-two transforms, so it computes its prime-length transforms by Gaussian resampling', but it never shows why each reduction lands in the shape the next tool needs, and it gives no cost."
+  },
+  {
+   "id": "S8.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the chirp identity QF_t u = conj(a).(a*(conj(a).u))/T (eq. permuted-chirp) together with M_C(f,g)=(f*g)/T",
+    "the tensor identity RF_s = 2^gamma B_0 QF_t A (eq. no-sort-tensor) as the reason the exact counterpart is RF_s",
+    "the input norm hypotheses (chirp input norm <= .6, source input norm <= .5) and ||x_0|| <= .6 as the smaller operand",
+    "the kernel error ||a~ - a|| < 2*2^{-p}",
+    "the chirp construction cost O(Tdp^{1+delta})"
+   ],
+   "note": "The formulas for the chirp transform, the source transform and the opposite-sign procedure all appear, but each exact counterpart is only asserted ('exact phases and convolution give QF_t x'; 'its exact counterpart is RF_s' with a cite) without the identities that make it true."
+  },
+  {
+   "id": "S8.5.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the chirp array a_j = exp(-pi i sum_i s_i j_i^2/t_i), which this integer encodes as exp(pi i N/r)",
+    "r/t_i in {1,2} and the O(p)-bit integers",
+    "the cost O(Tdp^{1+delta})"
+   ],
+   "note": "One sentence: 'Chirp phases -sum_i s_i j_i^2(r/t_i) mod 2r are computed with the established multiplier.' It does not say why this numerator modulo 2r gives the chirp entry, and it gives no cost."
+  },
+  {
+   "id": "S8.5.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the identity conj(a).M_C(a, conj(a).x) = QF_t x by eq. permuted-chirp",
+    "x_0 being the data operand (the smaller operand of norm <= .6)",
+    "the hypothesis ||x|| <= .6",
+    "the kernel error bound < 2*2^{-p}"
+   ],
+   "note": "The three arrays x_0, y_0 and C~(x) are copied correctly, with a~ named as the kernel, but 'exact phases and convolution give QF_t x' is asserted with no appeal to the chirp identity."
+  },
+  {
+   "id": "S8.5.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the tensor interface identity RF_s = 2^gamma B_0 QF_t A (eq. no-sort-tensor)",
+    "the linewise approximations to A and B_0 acting on the padded box with zeros outside the valid source coordinates",
+    "the input norm <= .5",
+    "the exact numerator scaling by 2^gamma and the sign-extension scan back to w_c bits"
+   ],
+   "note": "The order A, C~, B_0, then 2^gamma, is right. The equality with RF_s appears only as a cite of the paper's formula ('its exact counterpart is RF_s'), with no reason given."
+  },
+  {
+   "id": "S8.5.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "its exact counterpart RF_s^+",
+    "the justification by Lemma chirp-permutation (conjugating the input and output of an RF_s algorithm gives RF_s^+, since R is a real permutation and conj(F_q z) = F_q^+ conj(z))"
+   ],
+   "note": "'The opposite-sign version conjugates input and output: F~^+(z)=conj(F~(conj z))' is correct, but the page never says what it computes or why."
+  },
+  {
+   "id": "S8.6",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "truncation of the pointwise product to p fractional bits",
+    "rounding the real parts and writing signed (3b+1)-bit words at valid addresses, zeros at padded ones",
+    "output of exactly 2n bits",
+    "eq. source-permutation-cancel as the reason the three transforms give (u*v)/S^2"
+   ],
+   "note": "The six operations appear in order in one compressed paragraph, with the scale bookkeeping, but nothing shows why the pipeline yields the integer coefficient convolution."
+  },
+  {
+   "id": "S8.6.0",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "reading each operand backward in groups of b bits to get q digits a_0..a_{q-1}",
+    "the grid numerator a_j 2^{p-b-2}, whose exponent is nonnegative because p=6b",
+    "the zero imaginary word",
+    "appending S-q zero records",
+    "the cost O(n+Sp)=O(Tp)"
+   ],
+   "note": "Only 'It stores digits a_j2^{-b-2} exactly'. How the digits are formed and laid out is omitted."
+  },
+  {
+   "id": "S8.6.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "Phi applied with its padded layout",
+    "the reason the norm is below 1/4 (a_j <= 2^b-1, so a_j 2^{-b-2} < 1/4)",
+    "the values being exact p-bit grid values"
+   ],
+   "note": "'applies Phi to get u,v of norm below 1/4' asserts the result and does not explain the 1/4 bound."
+  },
+  {
+   "id": "S8.6.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "'It computes F~(u) and F~(v)' matches the paper's step 2. This procedural step has nothing further to derive."
+  },
+  {
+   "id": "S8.6.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "exact complex multiplication followed by truncation toward zero of each part to p fractional bits (z = Q_p(U~.V~))"
+   ],
+   "note": "'multiplies pointwise to z' leaves out the truncation that defines z and enters the later error estimate."
+  },
+  {
+   "id": "S8.6.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "exact numerator multiplication retaining the denominator 2^p (signed width w_c+b)"
+   ],
+   "note": "'computes F~^+(z) scaled by S' matches the paper's step 4 in substance."
+  },
+  {
+   "id": "S8.6.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "rounding the real parts to the nearest integers",
+    "signed (3b+1)-bit words at valid addresses and zero words at padded addresses",
+    "removal of the address padding by Phi^{-1}"
+   ],
+   "note": "'scales by 2^{2b+4}S, rounds, applies Phi^{-1}' gives the operations but not what is rounded or how the padding is removed."
+  },
+  {
+   "id": "S8.6.6",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "radix-2^b carries in increasing coefficient order",
+    "output of exactly 2n bits, most significant first"
+   ],
+   "note": "'propagates carries by Rounding and carry propagation' only names the step and links it."
+  },
+  {
+   "id": "S8.6.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "eq. source-permutation-cancel, (RF_s^+)[(RF_s u).(RF_s v)] = (u*v)/S^2, as the source of the S^2",
+    "that these are exact counterparts, not the computed arrays",
+    "that 2^{2b+4}(u*v) is the image under Phi of the integer coefficient convolution, because each input digit carries the factor 2^{-b-2}"
+   ],
+   "note": "'the three transforms leave (u*v)/S^2, the first scale gives (u*v)/S, the second 2^{2b+4}(u*v)' records the arithmetic of the scales, but the starting value (u*v)/S^2 is asserted without the cancellation identity. The page never says what the factor 2^{2b+4} undoes."
+  },
+  {
+   "id": "S8.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the bilinear contraction bound ||M(f',g')-M(f,g)|| <= ||f'-f|| ||g'|| + ||f|| ||g'-g||, valid when the operands are in the disk",
+    "the phase-product bound ||Q_p(e~ x)-ex|| < 4h_p and ||Q_p(e~ x)|| <= ||x||",
+    "the norm chain .5 -> .51 -> .7/.701 -> .501 that keeps every call in the disk"
+   ],
+   "note": "The principle 'inserting the exact contraction at each computed input adds errors' is stated and the four bounds are listed with cites. 'Norms stay inside the unit disk' is asserted with none of the norm margins."
+  },
+  {
+   "id": "S8.7.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "M = T/r",
+    "three transform errors plus the product truncation total < 3L+2 before the scale M",
+    "E_ring = M(3L+2) < 5TL",
+    "output norm < .7 + 5TL h_p < .701"
+   ],
+   "note": "'The ring convolution has error <5TL' is asserted. The inequality appears only inside a cite."
+  },
+  {
+   "id": "S8.7.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the term E_ring (< 5TL) in the sum, which the page's own prose omits",
+    "inserting the exact normalized M_r at iota f', iota g' and propagating the two input twist errors through bilinear contraction"
+   ],
+   "note": "'Twist errors 4+4+4 give <6TL' names the three twist contributions, but the sum that gives 6TL is E_ring+12, and E_ring appears only in the cited inequality."
+  },
+  {
+   "id": "S8.7.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the computed convolution error 6TL, the dominant term, which the prose omits",
+    "the exact operands a and conj(a).x being in the disk because |a_j|=1",
+    "identification of the exact result by eq. permuted-chirp"
+   ],
+   "note": "'Kernel error 2 and phases 4+4 give <8TL' leaves out the 6TL convolution term that makes up almost all of the bound. The full sum appears only in the cite."
+  },
+  {
+   "id": "S8.7.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "two resampling errors, total 2dp^2, not one dp^2",
+    "the chirp error 8TL",
+    "the condition 2dp^2 < TL used to reach 9*2^gamma TL",
+    "the norms .51 and .501 of the expansion and the scaled output"
+   ],
+   "note": "'Resampling errors dp^2 and scale 2^gamma give E_s=9*2^gamma TL' leaves out the dominant chirp term and the eventual inequality 2dp^2<TL, so 9*2^gamma TL cannot be reconstructed from the page."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "Chirp phases $-\\sum_i s_ij_i^2(r/t_i)\\bmod 2r$ are computed",
+   "problem": "This integer is the phase numerator, not the phase. The paper computes the numerator N modulo 2r, with chirp entry a_j = exp(pi i N/r) = exp(-pi i sum_i s_i j_i^2/t_i)."
+  },
+  {
+   "severity": "minor",
+   "quote": "Twist errors $4+4+4$ give $<6TL$ for the complex convolution",
+   "problem": "Three twist errors of 4 sum to 12, not about 6TL. The paper's bound is (E_ring+4+4+4)h_p < 6TL h_p, where the ring error E_ring < 5TL is the dominant term."
+  },
+  {
+   "severity": "minor",
+   "quote": "Kernel error $2$ and phases $4+4$ give $<8TL$ for the chirp transform",
+   "problem": "This leaves out the computed-convolution error 6TL. The paper has (6TL+2+4+4)h_p < 8TL h_p."
+  },
+  {
+   "severity": "minor",
+   "quote": "Resampling errors $dp^2$ and scale $2^\\gamma$ give $E_s=9\\cdot2^\\gamma TL$",
+   "problem": "The paper's error before the scale is 2dp^2+8TL: two resampling maps, each with error < dp^2, plus the chirp error 8TL. It reaches 9*2^gamma TL only by using 2dp^2 < TL. The page's list leaves out the chirp term and the condition."
+  },
+  {
+   "severity": "minor",
+   "quote": "the three transforms leave $(u*v)/S^2$",
+   "problem": "Only the exact counterpart of the three transforms equals (u*v)/S^2, by eq. source-permutation-cancel. The computed arrays only approximate it, and the error is controlled in the precision section."
+  }
+ ],
+ "motivation_given": true
+}

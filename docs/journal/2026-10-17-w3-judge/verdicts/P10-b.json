@@ -1,0 +1,8 @@
+{"page": "P10",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "shift the absolute numerator right past the guard bits and restore the sign",
+   "problem": "The page has just defined guard bits as both 'extra fractional bits for denominators' and 'extra integer bits for growth'. The right shift must be by the added fractional bits only. The paper (proof of the simultaneous-layer proposition, lines 2747-2750) says: 'shift its absolute numerator right by the number of added fractional bits, restore its sign, and write the result in w bits'. Shifting past the integer guard bits as well would discard significant bits. The leading integer guard bits are dropped only when the result (magnitude at most 2^p) is written back in w bits."}
+ ],
+ "motivation_given": true}

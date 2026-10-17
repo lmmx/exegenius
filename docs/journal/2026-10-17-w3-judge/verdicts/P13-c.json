@@ -1,0 +1,8 @@
+{"page": "P13",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "while $y^a\\ne1$ for $0<a<2r$, because $y^a$ is then plus or minus a monomial other than $1$.",
+   "problem": "The stated reason fails at a=r: y^r=-1 is minus the monomial 1, not plus or minus a monomial other than 1. The conclusion still holds, since -1 != 1 in C[y]/(y^r+1), but the case a=r needs its own one-line justification. The paper (lines 2798-2826) does not argue this way; it defines omega_t=y^{2r/t} for t a power of two dividing 2r and proves character cancellation directly, using y^{r j_0}=-1 and the absence of two-torsion."}
+ ],
+ "motivation_given": true}

@@ -1,0 +1,8 @@
+{"page": "P13",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "while $y^a\\ne1$ for $0<a<2r$, because $y^a$ is then plus or minus a monomial other than $1$",
+   "problem": "The stated reason fails at a=r: there y^r=-1 is minus the monomial 1, not plus or minus a monomial other than 1. The conclusion y^a != 1 still holds (for a=r because -1 != 1), so y does have order 2r, but the justification needs the case a=r handled separately. The paper itself only defines omega_t=y^{2r/t} and does not argue the order this way."}
+ ],
+ "motivation_given": true}

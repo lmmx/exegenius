@@ -1,0 +1,20 @@
+{"page": "P12",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "For example, with $p=2$ and exact value $z=0.8-0.6i$, $Q_2$ keeps $0.75-0.5i$. Both parts shrink in size and the error has modulus about $0.25$, below $\\sqrt2/4\\approx0.35$.",
+   "problem": "The truncation 0.75-0.5i is right, but the error is z-Q_2z = 0.05-0.1i, with modulus sqrt(0.0125), about 0.112, not about 0.25. The conclusion that it is below sqrt2*2^{-2} still holds, so the bound in eq. (transform-truncate) is unaffected."},
+  {"severity": "minor",
+   "quote": "An array whose coefficients all lie in the unit disk is a disk array, with norm at most one. If its parts are also multiples of $2^{-p}$, it is a $p$-bit grid array.",
+   "problem": "The page makes the disk condition part of the definition of a p-bit grid array. In the paper (lines 2786-2788) a p-bit grid array only needs its real and imaginary coefficient parts to lie in 2^{-p}Z, with no disk condition. An array meeting both conditions is a 'disk grid array'. The page uses that term itself later, so the argument is unaffected."},
+  {"severity": "minor",
+   "quote": "They are computed exactly by appending fractional zero bits and a few guard bits, extra high and low bits that prevent overflow and loss.",
+   "problem": "The guard width is not 'a few' bits. In the fast layer the paper uses up to ceil(C_0 d^{C_1}) extra fractional bits and ceil(C_0 d^{C_1})+3 integer and sign bits (Prop. simultaneous-layer, lines 2677-2680, 2741-2745). This number grows with d and is only o(p) because d <= b_d p^epsilon and epsilon*C_1 < 1. In the ring convolution the width is p+D+O(1) (line 3119). The page's own conclusion, that the width stays O(p), is correct."},
+  {"severity": "minor",
+   "quote": "The error bound is per layer and per coefficient, so later pages add up a fixed number of such terms.",
+   "problem": "The number of truncation terms is not fixed. It is the number of rounds or layers, ell, which grows with the transform length: the paper's bound is sqrt2*ell*2^{-p} (Lemma, line 2980) and sqrt2*M(3ell+1)2^{-p} for the convolution. The terms can simply be added only because each layer is a contraction that does not enlarge the earlier error (lines 3172-3177). The page does not state that."},
+  {"severity": "minor",
+   "quote": "The transforms in the following pages are built from additions, halvings and multiplications by $\\pm1,\\pm i$.",
+   "problem": "This is too broad. Later steps also multiply exactly by grid-valued phase factors, for example Q_p(theta~^+ . f) in the Gaussian resampling, where 'each phase product is computed exactly as a dyadic product before Q_p' (lines 4385-4394). The signed-packing step also forms exact polynomial products before Q_p(fg/r). Those results are still Gaussian dyadics, so the conclusion stands, but the list of operations is incomplete."}
+ ],
+ "motivation_given": true}

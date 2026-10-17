@@ -1,0 +1,208 @@
+{
+ "page": "P17",
+ "items": [
+  {
+   "id": "S5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page builds the convolution from the normalization identity, the retained-order product and the transform cost and error, and concludes cost O(Tp[dK+pK^{tau-1}+l d^{lambda'}+log(rp)]) and error below sqrt2 M(3l+1)2^{-p}, as the paper's proposition does."
+  },
+  {
+   "id": "S5.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "Stated with a link as the assignment asks: 'the forward and opposite transforms ... are contractions with F^+F^-=I/M, and B is their bit-reversed storage order'."
+  },
+  {
+   "id": "S5.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "L^{-1} is obtained by recording the inverse operations in reverse order at the same cost, so the opposite procedure's final restoration is charged"
+   ],
+   "note": "Prefix moves, chunk exchanges and layer rounds are costed in steps 1-3 and added up to 'A transform thus costs O(Tp[dK+pK^{tau-1}+l d^{lambda'}])', with the error bound sqrt2 l 2^{-p} from one truncation per round. This matches the lemma, but the page never says what restoring by L^{-1} costs."
+  },
+  {
+   "id": "S5.2.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Step 1 defines b=(l-1) mod K and q=floor((l-1)/K), moves 'the top bit of each length-2^l axis and bits b-1,...,0 of all axes' to the front, and notes that 'bits l-2,...,b remain as q chunks per axis', as in the paper."
+  },
+  {
+   "id": "S5.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the count D(b+1) is only an upper bound: short axes have no top slot, so there are (#long axes)+Db listed slots"
+   ],
+   "note": "'(d-1)(b+1)=O(dK) moves of cost O(Tp)' gives the O(TpdK) total by multiplication. The paper says 'at most D(b+1)'."
+  },
+  {
+   "id": "S5.2.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the left-to-right scan over target positions, with one exchange per position except the last (nonadjacent chunks allowed), which is what bounds the count by Dq-1"
+   ],
+   "note": "The page multiplies 'at most (d-1)q-1=O(p/K) exchanges' by 'O(TpK^tau) each' to get O(Tp pK^{tau-1}), as the paper does. The exchange count itself is asserted, not justified."
+  },
+  {
+   "id": "S5.2.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the layer sees the complete address set [P]x[2^K]^D x[S] (every combination of the bits before and after the chunk group occurs, record count PS2^{DK}=M), which the simultaneous-layer proposition needs",
+    "the round header E has length at most C_desc p uniformly over axis choices and rounds"
+   ],
+   "note": "'Bit h then lies at offset (h-b) mod K in equal-index chunks: one layer call per chunk round' at 'O(Tpd^{lambda'}) each' gives the l d^{lambda'} term. The page does not check the layer's hypotheses (complete address set, header bound)."
+  },
+  {
+   "id": "S5.2.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "each participating bit is processed individually at O(rp) per pair, i.e. O(Tp) per bit and O(TpD) per round",
+    "after s<=D individual H_0 factors the coefficients are exact dyadics on the 2^{-(p+s)} grid and still in the disk; temporary sums of modulus <=2 need O(1) extra integer bits",
+    "the combined monomial is completed exactly before the single Q_p",
+    "in opposite prefix rounds the inverse monomial comes first and preserves grid and disk"
+   ],
+   "note": "The page only asserts 'The at most b+1<=K front rounds cost O(TpdK) bit by bit, exact in p+d+O(1)=O(p) bits until one Q_p'. It does not say why that width suffices or where the per-round cost comes from."
+  },
+  {
+   "id": "S5.2.6",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "E=er+s with 0<=s<r: split before position r-s, put tail before head, negate the moved tail, apply (-1)^e",
+    "cost O(rp) per record; inverse twiddle uses exponent -E"
+   ],
+   "note": "The page calls y^E a 'signed coefficient shift' but never says how the monomial is applied or what it costs."
+  },
+  {
+   "id": "S5.2.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "opposite direction: J_E^{-1} comes first and preserves the disk grid, so the layer call returns Q_p(HJ_E^{-1}z) directly"
+   ],
+   "note": "'Truncation toward zero is odd per component and so commutes with the signed coefficient shift y^E: each round is an exact contraction then one truncation' is the paper's argument for forward rounds. The opposite rounds are not treated."
+  },
+  {
+   "id": "S5.2.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "a contraction does not increase the difference between computed and exact arrays, starting from zero error",
+    "each truncation adds less than sqrt2 2^{-p} (given only later, as eta)",
+    "layout permutations are isometries and add no error; contraction and truncation preserve the disk"
+   ],
+   "note": "'each round is an exact contraction then one truncation, so at most l rounds err by under sqrt2 l 2^{-p}' compresses the paper's induction. The per-step facts it uses are left implicit."
+  },
+  {
+   "id": "S5.2.9",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Relocating slots conjugates rounds by L, applied first or undone last' with (LBF^-L^{-1})L=LBF^- and L^{-1}(LF^+B^{-1}L^{-1})=F^+B^{-1}L^{-1} reproduces the paper's identification, with D_-=BF^- and D_+=F^+B^{-1}."
+  },
+  {
+   "id": "S5.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "Stated with a link as the assignment asks: 'pointwise products by Signed packing of polynomial products in O(rp log(rp)) per pair'."
+  },
+  {
+   "id": "S5.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "disk-output clause: if one operand has norm at most rho and the error bound is at most 1-rho, the returned array is a disk array (uses the contraction of M_r)"
+   ],
+   "note": "The page combines the normalization identity, the commutation P(LBu,LBv)=LBP(u,v) and the error chain to reach error below sqrt2 M(3l+1)2^{-p}, following the proposition. It omits the proposition's disk-margin conclusion."
+  },
+  {
+   "id": "S5.4.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "each output coefficient averages rM signed scalar products (the negacyclic wrap supplies the sign)",
+    "the contraction bound ||M_r(f,g)||_inf <= ||f||_inf ||g||_inf"
+   ],
+   "note": "Only the definition 'M_r(f,g)=(f*g)/T' appears. The page never states or shows that M_r is a bilinear contraction."
+  },
+  {
+   "id": "S5.4.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "From 'F^-(f*g)=M(F^-f)(F^-g)' and F^+F^-=I/M the page gets M_r(f,g)=M F^+ P(F^-f,F^-g), then uses P(LBF^-f,LBF^-g)=LB P(F^-f,F^-g) so the opposite procedure cancels the order, as the paper does."
+  },
+  {
+   "id": "S5.4.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Let delta=sqrt2 l 2^{-p} and eta=sqrt2 2^{-p} bound one transform's and one truncation's error' with u,v,u~,v~ 'in the disk' matches the paper's setup."
+  },
+  {
+   "id": "S5.4.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the coefficient bound ||P(x,y)||_inf <= ||x||_inf ||y||_inf from the signed-ring-product lemma; bilinearity alone does not give the norm inequality",
+    "z~=Q_p(P(u~,v~)) is a disk grid array by the product lemma"
+   ],
+   "note": "The displayed split ||u~-u|| ||v~|| + ||u|| ||v~-v|| < 2delta, followed by 'truncation adds eta', follows the paper. It credits the inequality to bilinearity alone."
+  },
+  {
+   "id": "S5.4.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the opposite procedure's error bound applies because z~ is a disk grid array"
+   ],
+   "note": "'The contractive opposite procedure keeps this and adds delta' is the paper's triangle-inequality split in words, reaching 3delta+eta."
+  },
+  {
+   "id": "S5.4.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the scale M=2^{m_M} is a power of two, so scaling is exact on the grid and the returned width is w_M=w+log_2 M"
+   ],
+   "note": "'exact scaling by M leaves error below M(3delta+eta)=sqrt2 M(3l+1)2^{-p}' is correct arithmetic. The output width is not mentioned."
+  },
+  {
+   "id": "S5.4.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "there are M=T/r pointwise products, so their total is O(Tp log(rp))",
+    "three transforms (two forward, one opposite) at the stated cost, plus the final scaling linear in Tp"
+   ],
+   "note": "'The total cost is O(Tp[...+log(rp)])' is asserted. The page gives the per-pair cost but does not count the M=T/r products or add up the three transforms."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "by $(d-1)(b+1)=O(dK)$ moves of cost $O(Tp)$",
+   "problem": "This is written as an exact count. The paper has 'at most D(b+1)' listed slots: short axes have no top slot, so the count is (#long axes)+Db. The O(dK) bound is unaffected."
+  },
+  {
+   "severity": "minor",
+   "quote": "bilinearity gives $$\\|P(\\tilde u,\\tilde v)-P(u,v)\\|_\\infty\\le\\|\\tilde u-u\\|_\\infty\\|\\tilde v\\|_\\infty+\\|u\\|_\\infty\\|\\tilde v-v\\|_\\infty<2\\delta,$$",
+   "problem": "Bilinearity gives only the decomposition P(u~-u,v~)+P(u,v~-v). The norm inequality also needs ||P(x,y)||_inf <= ||x||_inf ||y||_inf, which the paper takes from the coefficient bound of the signed-ring-product lemma."
+  },
+  {
+   "severity": "minor",
+   "quote": "The contractive opposite procedure keeps this and adds $\\delta$",
+   "problem": "The computed opposite procedure is not itself a contraction. The paper uses that the exact T_+=F^+B^{-1}L^{-1} is a contraction, and adds the procedure's own error bound applied to the disk grid array z~."
+  }
+ ],
+ "motivation_given": true
+}

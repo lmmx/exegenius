@@ -1,0 +1,13 @@
+{"page": "P14",
+ "items": [
+  {"id": "S7", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page states the chirp form of QF_t (linking the page that derives it, as assigned) and derives the cancellation identity RF^+_s[(RF_s u).(RF_s v)]=(u*v)/S^2 in the paper's order: RF^+_sR=F^+_s, R commutes with pointwise products, then the two normalizations. R and Q match P_s and P_t of Lemma tensor-resampling, and the conjugation remark for RF^+_s is the paper's."},
+  {"id": "S7.1", "presence": "stated", "faithful": null, "dropped": ["a has period t_i in coordinate i"],
+   "note": "As the assignment requires, the identity QF_t w = abar.(a*(abar.w))/T with a_j=exp(-pi i sum s_i j_i^2/t_i) is stated and linked to the Bluestein chirp page, not derived. The lemma's hypothesis that every t_i is even is implied by the page's 'power-of-two target length t_i', but the periodicity of a is not mentioned."},
+  {"id": "S7.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes out the substitution h=ck in full: '(F^+_qR_cz)_j=(1/q)sum z_{ck}e^{2pi ikj/q}=(1/q)sum z_h e^{2pi i h c^{-1}j/q}=(F^+_qz)_{c^{-1}j}=(R_c^{-1}F^+_qz)_j'. It notes that h runs over every residue once, takes q=s_i and c=t_i (a unit because gcd(s_i,t_i)=1), and tensors to get F^+_sR=R^{-1}F^+_s and RF^+_sR=F^+_s. The worked case s_1=3, t_1=8 is correct."},
+  {"id": "S7.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "From 'R only moves entries' the page gets (RF_su).(RF_sv)=R(F_su.F_sv), applies RF^+_sR=F^+_s, and then uses F_s(u*v)=S(F_su).(F_sv) and F^+_sF_s=I/S to reach (1/S)F^+_sF_s(u*v)=(u*v)/S^2. This is exactly the paper's chain."}
+ ],
+ "errors": [],
+ "motivation_given": true}

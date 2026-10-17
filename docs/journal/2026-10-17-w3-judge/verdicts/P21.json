@@ -1,0 +1,11 @@
+{"page": "P21",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Thus $y$ is a primitive $2r$-th root of unity in $\\mathcal R_r$. For a power of two $t$ dividing $2r$, $y^{2r/t}$ is a primitive $t$-th root, so a transform of length $t$ can use it as its twiddle factor.",
+   "problem": "The page infers usability as a transform root from multiplicative order alone. In a ring with zero divisors, order t does not by itself give the character cancellation needed for inversion. The paper (lines 2807-2826) notes that the ring has zero divisors and proves the sum of omega_t^{jk} = 0 for t not dividing j directly, using y^{r j_0} = -1 and the absence of two-torsion. The claim is true, but the page's 'so' skips this argument."},
+  {"severity": "minor",
+   "quote": "multiplying by them only rearranges coefficients",
+   "problem": "Multiplying by y^a also negates the wrapped coefficients. The paper says it 'permutes the coefficients and changes some signs' (lines 2783-2784), and the page itself says so later ('permutes the coefficients and changes some signs'). The opening sentence alone is imprecise."}
+ ],
+ "motivation_given": true}

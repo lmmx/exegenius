@@ -1,0 +1,16 @@
+{"page": "P23",
+ "items": [
+  {"id": "S8.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page builds the digit polynomials, proves 2q-2<2n/b<=T/2<S from q<n/b+1, T>=4n/b and T/2<S, and spells out why cyclic and ordinary convolution then agree (\"If every i+k that occurs is below S, the congruence forces i+k=j\"). It also derives the bound c_j<2^{3b}, matching paper lines 4183-4193."},
+  {"id": "S8.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page sets b=ceil(log2 n), cuts each input into q=ceil(n/b) b-bit digits 0<=u_i<2^b and writes U=u(2^b), V=v(2^b), so UV=c(2^b) with c_j=sum_{i+k=j}u_iv_k. This is the paper's radix-digit representation, made explicit."},
+  {"id": "S8.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "Each link of the chain gets its reason: \"i+k<=2q-2; q<n/b+1 gives 2q-2<2n/b, the choice of T gives 2n/b<=T/2, and T/2<S\". The page cites T in [4n/b,8n/b) and T/2<S<T from the paper, and it explains reduction modulo x^S-1 as folding indices modulo S, as the paper's chain requires."},
+  {"id": "S8.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "\"Each c_j is a sum of at most q products u_iv_k ... each product lies between 0 and (2^b-1)^2\", and q<=n<=2^b gets a justification (b>=1, b>=log2 n). Together these give 0<=c_j<=q(2^b-1)^2<2^b*2^{2b}=2^{3b}, which is the paper's eq:capacity with its stated reason."}
+ ],
+ "errors": [
+  {"severity": "minor", "quote": "Since $q\\le n\\le2^b$ (because $b\\ge1$ and $b\\ge\\log_2n$)",
+   "problem": "b>=1 holds only when n>=2, and the page never says so. The paper defines b=ceil(log2 n) and the other parameters only 'for sufficiently large n' (line 4053), and T/2<S also relies on d>=2, which holds only for large n. The page presents the definitions as if they held for every n."}
+ ],
+ "motivation_given": true}
