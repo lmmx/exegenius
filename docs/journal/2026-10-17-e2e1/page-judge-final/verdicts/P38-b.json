@@ -1,0 +1,162 @@
+{
+ "page": "P38",
+ "items": [
+  {
+   "id": "step",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the final two-bit XOR at x_{j_{f-1}}, y_{j_{f-1}} by the elementary-streams lemma in O(V), which supplies the omitted selected position",
+    "the case f=1, where S_0, T_0 are identities, B is empty and that last XOR is the whole algorithm"
+   ],
+   "note": "The page builds S_0 from eight packed shifts, bounds B, repairs it by extract-sort-reinsert and totals the cost, following the paper. But after 'Omit $j_{f-1}$ temporarily' it never comes back to that position, so the procedure as written does not perform the XOR at j_{f-1}."
+  },
+  {
+   "id": "S1.6.3.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the O(V) final XOR at j_{f-1} (absorbed in the bound)",
+    "preparation of the initial descriptor, covered by O(MA_rect^3)"
+   ],
+   "note": "'Adding the three costs and using $|\\mathcal B|\\le\\delta_{\\rm bad}M$' gives the stated bound from the movement, scan and radix costs, as the paper does."
+  },
+  {
+   "id": "S1.6.3.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the cycles act on the corners of every square {2a,2a+1}x{2b,2b+1}, because translation by (2a,2b) changes no predicate"
+   ],
+   "note": "The cycles and their composition are correct (I checked all four cases), and the page names the paper's method: 'substituting the four parity pairs shows'. It does not show the substitutions, and it leaves out translation invariance, framing the result only as a permutation of parities."
+  },
+  {
+   "id": "S1.6.3.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the square/translation-invariance argument that makes 'quotients by two persist' follow",
+    "u mod 2 in {0,1} also for negative u"
+   ],
+   "note": "'So $(u',w')=(u+c(1-2(u\\bmod2)),w)$' is read off the composition, as in the paper. Quotient preservation needs the in-square statement, which the page leaves out."
+  },
+  {
+   "id": "S1.6.3.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the highest segment ends immediately below j_{f-1}, so all segments lie inside the L-bit chunk (and the reason j_{f-1} is omitted)"
+   ],
+   "note": "The page sets up disjoint K-bit segments from j_i, with u_i=2g_i+a_i, w_i=2h_i+b_i and guards in {0,...,2^{K-1}-1}, matching the paper."
+  },
+  {
+   "id": "S1.6.3.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "S_0 fixes the spectator coordinates"
+   ],
+   "note": "The page writes line (1) as $y\\leftarrow y-\\sum 2^{j_i}[x_{j_i}=1][z_{j_i}=0]\\pmod{2^L}$, 'a cyclic shift of the whole chunk y by an offset independent of y, hence a bijection', and says the other lines vary sign, parity or roles. This is the paper's argument."
+  },
+  {
+   "id": "S1.6.3.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the induction over the eight lines (each packed addition agrees with the independent segment additions)",
+    "bits below j_0 and above the highest used segment are untouched, and T_0 fixes all other coordinates"
+   ],
+   "note": "The page derives 'Off B each segment lies in [20,2^K-21], so displacement eight stays in [0,2^K-1]: no carry or borrow', and from that S_0 = T_0, correctly. It compresses the induction."
+  },
+  {
+   "id": "S1.6.3.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "K>=6 (so 2^{K-1}>=32), which keeps the two excluded end ranges disjoint and the count exactly twenty"
+   ],
+   "note": "'Ten values are excluded at each end, twenty per guard' correctly counts {0..9} and {2^{K-1}-10..2^{K-1}-1}. K>=6 is stated on the page but not tied to this count."
+  },
+  {
+   "id": "S1.6.3.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'At fixed spectator coordinates y and z range over all 2^L values, so each guard takes every value equally often and a fraction 20/2^{K-1} fail it', and then the union bound over 2(f-1) guards. This follows the paper and spells it out more fully."
+  },
+  {
+   "id": "S1.6.3.9",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the cap at 1 (trivially |B|<=M)",
+    "the remark that no record value enters the count"
+   ],
+   "note": "$2(f-1)\\cdot20/2^{K-1}=80(f-1)2^{-K}$ follows directly from the previous sentence. The page leaves the arithmetic and the min with 1 implicit."
+  },
+  {
+   "id": "S1.6.3.10",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'T_0 preserves guards, hence B; bijections agreeing off B give S_0(B^c)=T_0(B^c)=B^c and S_0(B)=B', then T_0S_0^{-1} fixes B^c and permutes B. This is the paper's argument."
+  },
+  {
+   "id": "S1.6.3.11",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the rotation offset is computed from the two control values in L^{O(1)} time without reading the target, and that work is absorbed by the 2^L target blocks per fiber, which is what makes each rotation O(V)"
+   ],
+   "note": "'swap it rightmost, rotate, undo the swap' for each of eight lines gives at most sixteen swaps and eight rotations. Costs are O(V) per rotation and O(VL^tau) per swap, as in the paper."
+  },
+  {
+   "id": "S1.6.3.12",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "keys padded to ceil(log2 M)<=A_rect bits",
+    "binary radix sort, least significant key bit first, with the full stream held untouched",
+    "each reversed mask uses the current controls of that reversed line"
+   ],
+   "note": "The page extracts the B records, computes q' by reversing the shifts and applying the XORs, takes the destination rank as current rank plus signed value change times stride, and stable-sorts. 'keys are distinct and equal the holes' ranks' because the map permutes B. This matches the paper."
+  },
+  {
+   "id": "S1.6.3.13",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "preparation of the initial descriptor within O(MA_rect^3)"
+   ],
+   "note": "Movement O(V(L^tau+1)) follows from the page's count of 16 swaps at O(VL^tau) and 8 rotations at O(V). Scans O(MA_rect^3+V) follow from its 'O(A_rect^3) per record'. The page also cites the paper for both."
+  },
+  {
+   "id": "S1.6.3.14",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "the intermediate bound (f-1)A_rect=O(p^2), giving O(p^2 2^{-K}(1+A_rect/R))=o(1) because 2^{-K} is smaller than every power of p",
+    "A_rect^3/R->0 because A_rect=O(p) and R/p^3->infinity"
+   ],
+   "note": "'Per V the extra terms are ... both tending to zero when ...' restates the sub-step and its hypotheses without showing why each term vanishes. The paper at least gives the O(p^2 2^{-K}) step."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "major",
+   "quote": "Omit $j_{f-1}$ temporarily.",
+   "problem": "The page never returns to j_{f-1}. Its procedure ends with 'one scan refilling holes in order applies $T_0$', where T_0 does the XORs only at j_0,...,j_{f-2}, so the stated goal $y_{j_i}\\leftarrow y_{j_i}\\oplus x_{j_i}$ for $0\\le i<f$ is not met, and for f=1 the procedure does nothing. The paper finishes with a two-bit XOR on x_{j_{f-1}}, y_{j_{f-1}} by the elementary-streams lemma in O(V), and says that for f=1 this is the entire algorithm."
+  },
+  {
+   "severity": "minor",
+   "quote": "lines 1 to 4 permute the parities of $(u,w)$ by $(00\\ 01\\ 10)$ and lines 5 to 8 by $(01\\ 10\\ 11)$, composing to $(00\\ 10)(01\\ 11)$. So $(u',w')=(u+c(1-2(u\\bmod2)),w)$: ... quotients by two persist",
+   "problem": "A permutation of parities alone does not imply that the quotients by two are preserved. The paper says each cycle acts on the corners of every square {2a,2a+1}x{2b,2b+1} (translation by (2a,2b) changes no predicate), and that is what gives the formula."
+  },
+  {
+   "severity": "minor",
+   "quote": "As $q'$ permutes $\\mathcal B$, keys are distinct",
+   "problem": "q' is a single address. It is the map $T_0S_0^{-1}$ (q -> q') that permutes B, as the paper says."
+  }
+ ],
+ "motivation_given": true
+}

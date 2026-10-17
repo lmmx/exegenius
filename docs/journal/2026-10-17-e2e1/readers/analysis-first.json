@@ -1,0 +1,877 @@
+{
+ "R2": {
+  "deficient_units": 19,
+  "deficient_stuck": 145,
+  "deficient_rate": 7.631578947368421,
+  "sound_units": 59,
+  "sound_stuck": 139,
+  "sound_rate": 2.3559322033898304,
+  "ratio": 3.23930329420674,
+  "unjudged_stuck": {
+   "1:home": 3,
+   "2:home": 4
+  },
+  "units": [
+   {
+    "round": 1,
+    "page": "address-interchange",
+    "deficient": false,
+    "stuck": 10,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "array-frames",
+    "deficient": false,
+    "stuck": 3,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "butterfly",
+    "deficient": false,
+    "stuck": 2,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "chirp",
+    "deficient": false,
+    "stuck": 5,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "conjecture",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 1,
+    "page": "contraction-maps",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 1,
+    "page": "controlled-shifts",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 1,
+    "page": "convolution",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "cost-accounting",
+    "deficient": true,
+    "stuck": 10,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "crt-map",
+    "deficient": false,
+    "stuck": 7,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "dft",
+    "deficient": false,
+    "stuck": 1,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "exchange-network",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 1,
+    "page": "fixed-point",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 1,
+    "page": "frequency-order",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 1,
+    "page": "gaussian-resampling",
+    "deficient": true,
+    "stuck": 14,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "hvdh-multiplier",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 1,
+    "page": "machine-model",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 1,
+    "page": "main-result",
+    "deficient": false,
+    "stuck": 9,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "matrix-shear",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 1,
+    "page": "multidim-transform",
+    "deficient": false,
+    "stuck": 1,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "multiplication-algorithm",
+    "deficient": true,
+    "stuck": 15,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "packed-bit-addition",
+    "deficient": true,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 1,
+    "page": "parameter-choice",
+    "deficient": false,
+    "stuck": 4,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "phase-frames",
+    "deficient": true,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 1,
+    "page": "phase-kernel",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 1,
+    "page": "phase-twist",
+    "deficient": false,
+    "stuck": 1,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "precision-recovery",
+    "deficient": false,
+    "stuck": 3,
+    "judged_as": "final"
+   },
+   {
+    "round": 1,
+    "page": "radix-digit-reduction",
+    "deficient": false,
+    "stuck": 4,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "rank-recurrence",
+    "deficient": true,
+    "stuck": 25,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "retained-permutations",
+    "deficient": true,
+    "stuck": 5,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "ring-convolution",
+    "deficient": true,
+    "stuck": 2,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "ring-y",
+    "deficient": false,
+    "stuck": 1,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "signed-packing",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 1,
+    "page": "simultaneous-layer",
+    "deficient": true,
+    "stuck": 5,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "stream-ops",
+    "deficient": true,
+    "stuck": 1,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "subspace-labels",
+    "deficient": true,
+    "stuck": 14,
+    "judged_as": "before"
+   },
+   {
+    "round": 1,
+    "page": "synthetic-transform",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 1,
+    "page": "tensor-product-of-spaces",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 1,
+    "page": "transform-layout",
+    "deficient": false,
+    "stuck": 3,
+    "judged_as": "before"
+   },
+   {
+    "round": 2,
+    "page": "address-interchange",
+    "deficient": false,
+    "stuck": 9,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "array-frames",
+    "deficient": true,
+    "stuck": 2,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "butterfly",
+    "deficient": false,
+    "stuck": 4,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "chirp",
+    "deficient": false,
+    "stuck": 5,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "conjecture",
+    "deficient": false,
+    "stuck": 1,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "contraction-maps",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "controlled-shifts",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "convolution",
+    "deficient": false,
+    "stuck": 8,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "cost-accounting",
+    "deficient": true,
+    "stuck": 5,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "crt-map",
+    "deficient": false,
+    "stuck": 3,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "dft",
+    "deficient": false,
+    "stuck": 1,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "exchange-network",
+    "deficient": false,
+    "stuck": 1,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "fixed-point",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "frequency-order",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "gaussian-resampling",
+    "deficient": true,
+    "stuck": 15,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "hvdh-multiplier",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "machine-model",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "main-result",
+    "deficient": false,
+    "stuck": 4,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "matrix-shear",
+    "deficient": false,
+    "stuck": 2,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "multidim-transform",
+    "deficient": false,
+    "stuck": 1,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "multiplication-algorithm",
+    "deficient": false,
+    "stuck": 10,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "packed-bit-addition",
+    "deficient": true,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "parameter-choice",
+    "deficient": false,
+    "stuck": 4,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "phase-frames",
+    "deficient": true,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "phase-kernel",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "phase-twist",
+    "deficient": false,
+    "stuck": 2,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "precision-recovery",
+    "deficient": false,
+    "stuck": 6,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "radix-digit-reduction",
+    "deficient": false,
+    "stuck": 2,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "rank-recurrence",
+    "deficient": false,
+    "stuck": 16,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "retained-permutations",
+    "deficient": true,
+    "stuck": 4,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "ring-convolution",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "ring-y",
+    "deficient": false,
+    "stuck": 1,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "signed-packing",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "simultaneous-layer",
+    "deficient": true,
+    "stuck": 9,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "stream-ops",
+    "deficient": false,
+    "stuck": 4,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "subspace-labels",
+    "deficient": true,
+    "stuck": 19,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "synthetic-transform",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "tensor-product-of-spaces",
+    "deficient": false,
+    "stuck": 0,
+    "judged_as": "final"
+   },
+   {
+    "round": 2,
+    "page": "transform-layout",
+    "deficient": false,
+    "stuck": 1,
+    "judged_as": "final"
+   }
+  ],
+  "helped": true
+ },
+ "R3": {
+  "pages": 23,
+  "gain": 4,
+  "lose": 1,
+  "gain_major": 0,
+  "with_steps": 16,
+  "gain_with_steps": 4,
+  "meets_before": 14,
+  "meets_after": 17,
+  "rows": [
+   {
+    "page": "address-interchange",
+    "n": 17,
+    "faithful_before": 17,
+    "faithful_after": 17,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": true,
+    "meets_after": true,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "array-frames",
+    "n": 5,
+    "faithful_before": 5,
+    "faithful_after": 4,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": true,
+    "meets_after": false,
+    "gains": false,
+    "loses": true,
+    "gains_major": false
+   },
+   {
+    "page": "butterfly",
+    "n": 0,
+    "faithful_before": 0,
+    "faithful_after": 0,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": true,
+    "meets_after": true,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "chirp",
+    "n": 4,
+    "faithful_before": 4,
+    "faithful_after": 4,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": true,
+    "meets_after": true,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "convolution",
+    "n": 0,
+    "faithful_before": 0,
+    "faithful_after": 0,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": true,
+    "meets_after": true,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "cost-accounting",
+    "n": 29,
+    "faithful_before": 5,
+    "faithful_after": 5,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": false,
+    "meets_after": false,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "crt-map",
+    "n": 7,
+    "faithful_before": 7,
+    "faithful_after": 7,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": true,
+    "meets_after": true,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "dft",
+    "n": 0,
+    "faithful_before": 0,
+    "faithful_after": 0,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": true,
+    "meets_after": true,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "gaussian-resampling",
+    "n": 11,
+    "faithful_before": 6,
+    "faithful_after": 6,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": false,
+    "meets_after": false,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "main-result",
+    "n": 0,
+    "faithful_before": 0,
+    "faithful_after": 0,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": true,
+    "meets_after": true,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "multidim-transform",
+    "n": 0,
+    "faithful_before": 0,
+    "faithful_after": 0,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": true,
+    "meets_after": true,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "multiplication-algorithm",
+    "n": 13,
+    "faithful_before": 11,
+    "faithful_after": 13,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": false,
+    "meets_after": true,
+    "gains": true,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "parameter-choice",
+    "n": 21,
+    "faithful_before": 19,
+    "faithful_after": 21,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": true,
+    "meets_after": true,
+    "gains": true,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "phase-twist",
+    "n": 4,
+    "faithful_before": 4,
+    "faithful_after": 4,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": true,
+    "meets_after": true,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "radix-digit-reduction",
+    "n": 3,
+    "faithful_before": 3,
+    "faithful_after": 3,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": true,
+    "meets_after": true,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "rank-recurrence",
+    "n": 7,
+    "faithful_before": 6,
+    "faithful_after": 7,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": false,
+    "meets_after": true,
+    "gains": true,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "retained-permutations",
+    "n": 10,
+    "faithful_before": 7,
+    "faithful_after": 7,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": false,
+    "meets_after": false,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "ring-convolution",
+    "n": 13,
+    "faithful_before": 11,
+    "faithful_after": 12,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": false,
+    "meets_after": true,
+    "gains": true,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "ring-y",
+    "n": 0,
+    "faithful_before": 0,
+    "faithful_after": 0,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": true,
+    "meets_after": true,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "simultaneous-layer",
+    "n": 35,
+    "faithful_before": 5,
+    "faithful_after": 5,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": false,
+    "meets_after": false,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "stream-ops",
+    "n": 0,
+    "faithful_before": 0,
+    "faithful_after": 0,
+    "major_before": 1,
+    "major_after": 0,
+    "meets_before": false,
+    "meets_after": true,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "subspace-labels",
+    "n": 31,
+    "faithful_before": 8,
+    "faithful_after": 8,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": false,
+    "meets_after": false,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   },
+   {
+    "page": "transform-layout",
+    "n": 10,
+    "faithful_before": 10,
+    "faithful_after": 10,
+    "major_before": 0,
+    "major_after": 0,
+    "meets_before": true,
+    "meets_after": true,
+    "gains": false,
+    "loses": false,
+    "gains_major": false
+   }
+  ],
+  "helped": false,
+  "hurt": false
+ }
+}
