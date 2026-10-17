@@ -36,7 +36,7 @@ No further experiment is planned. Inconclusive results are recorded as such, wit
 | **Writing** (`write`) | Sonnet / `high`; Opus / `xhigh` on 0015 and 0016 in this wiki | `master`'s task | **the 0015/0016 exception only** (the author's, on W2b's direct evidence); **no key-step rollout** | Sonnet ~1.3 M per page; Opus ~2.1 M (W3 means: ~1.7×; 2–3× on W2b's hard pages) | moderate: W2, W2b and W3 (6 new key-step pages, 3 controls, 24 page-runs, 72 blind Opus judgements, preregistered) | **not adequate on key-step pages.** Sonnet `high` met the fidelity standard on 4 of 12 key-step page-runs (W3), Opus `xhigh` on 4 of 6. The failures are **pages that leave assigned steps underived**, not wrong mathematics: 1 major error in 24 W3 page-runs. Opus's advantage is page-specific (k = 2 of 6: large on 0036, 18 of 19 steps against 4; clear on 0018; none on 0021, 0031, 0033; Sonnet ahead on 0032) | **provisional:** the status quo, by W3's preregistered matrix (k = 2–4 with R2 inconclusive) | the standard is strict at 18 steps, and no writer met it on 0031 or 0032. Two cells have one outlying judge. W3 cannot say which pages need Opus in advance |
 | **Fidelity audit** (`audit`) | Sonnet / `high` | **the R text:** A2's SI text (FIDELITY + SOURCE) plus REFINE, with the auditor reading the sources its task names. **Implemented** in 7bc391f (`audit_instructions`); before it, production ran the page-only audit (B) | none | R 0.39 M per audit; B 0.13 M. R costs ~3× B: ~+9 M per audit round on a 35-page wiki, an estimate | moderate: A2 and A3 (planted errors on six pages, one run per arm, preregistered). F_A was decided by two independent blind reviews, which agree on 10/10 verdicts and accepted 0 of 4 decoys | **R meets the audit standard at this scale (A3, row 1).** It names 13/13 errors only the paper reveals (B 0/13) and 25/28 page errors (B 14/28), with 0/18 sham alarms. Its false alarms are 0.50 per clean page by the independent reviewer, **exactly at the bound.** Its remaining false alarms are true statements whose page omits a hypothesis or condenses a step. **B is not adequate:** it misses every error that only the paper reveals | **approved by the author and implemented (7bc391f).** Adequate at this scale; fragile on false alarms | F_A rests on four alarms on six pages and sits at its bound. REFINE was written after seeing A2's rejected alarms, so the pass shows it fixes the observed failure, not that it generalises. Recall is on planted errors only, in one paper |
 | **Support check** (`support`) | Sonnet / `high` | `master`'s task | none | 0.14–0.24 M per task | moderate for "the task is the limit" (A1: the same misses for all three models) | **not adequate:** support recall 0.60 against 0.70 (A1); it misses both generalisation errors | **provisional**, unchanged | the support task cannot see generalisation errors. **If R is adopted, this matters less:** R named 4/4 generalisation errors in A3 (and SI 4/4 in A2), so a support-instruction experiment (A1b) is not needed |
-| **Simulated readers** (`simulation`) | readers and baselines Haiku / `high`; goals and grading Sonnet / `high` | `master`'s tasks | **off by default (`rounds = 0`), available on request:** approved by the author and implemented (7bc391f) | one round on a 25-page wiki: ~19 M (SR1), i.e. ~37 M at the former default `rounds = 2` (an estimate) | weak: one bounded experiment (SR1, preregistered) | **unvalidated.** Coverage rises with the wiki (lift 0.74), but the baseline is an instructed refusal, so lift does not test prior knowledge. Deleting the key paragraphs lowered coverage by 0.147, against the 0.15 bar (row 3, inconclusive). Stuck points occur on intact and degraded pages alike (148 against 142), so they do not locate missing content | **off by default** (implemented) | one wiki, one round, one reader profile; the readers ran as general-purpose agents (production's reader has fewer tools) |
+| **Simulated readers** (`simulation`) | readers and baselines Haiku / `high`; goals and grading Sonnet / `high` | `master`'s tasks | **on by default (`rounds = 2`, unchanged):** the author's decision (2026-10-17, about 20:05). Simulated readers are part of exegenius's intended architecture, and SR1 was inconclusive, not negative. SR1's preregistered conservative proposal (off by default) is therefore **not adopted** | one round on a 25-page wiki: ~19 M (SR1), so ~37 M per wiki at the default `rounds = 2` (an estimate) | weak: one bounded experiment (SR1, preregistered) | **unvalidated.** Coverage rises with the wiki (lift 0.74), but the baseline is an instructed refusal, so lift does not test prior knowledge. Deleting the key paragraphs lowered coverage by 0.147, against the 0.15 bar (row 3, inconclusive: neither shown useful nor shown useless). Stuck points occur on intact and degraded pages alike (148 against 142), so they are not shown to locate missing content. The repairs they drive are therefore unvalidated too | **kept on by default; effectiveness unvalidated** | one wiki, one round, one reader profile, one run per goal and start. The readers ran as general-purpose agents, with more tools than production's `exegenius-reader`, so SR1 was not an exact test of the deployed workflow |
 | **Judging** (the instrument) | Opus, no effort set; three judges per page; pairwise (K3) above the planning ceiling | J22's page judge; the primary rubric | — | page judgement 0.46 M (J26), 0.43–0.54 M (J22, J24); primary ~4.8 M; pairwise ~5.7 M | strong for its purpose (K3 passed its preregistered criteria; K2) | not applicable (the instrument) | **calibrated, as an instrument** | J26 shows occasional single-judge outliers (2 of 24 cells), which three judges and medians absorb |
 | **Automatic note scoring** (`ASSERTS`, a tool) | — | — | — | none | moderate (A1, A2, A3) | agreement with hand labels 0.885 (A1), 0.794 (A2), **0.758 (A3)**; it finds 45–56% of asserting notes | **not for primary measures**; hand labels stay primary | one labeller (this session) throughout |
 
@@ -46,17 +46,17 @@ No further experiment is planned. Inconclusive results are recorded as such, wit
 - A3 runs 9.6 M and its two reviews 2.9 M;
 - this session's orchestration ~83 M by 18:34 UTC.
 
-**Implementation (2026-10-17, 19:54 UTC; the author approved decisions 1 and 2 at about 19:45):**
-- **Commit 7bc391f** on `wiki-explanation-reader-sim-v8dqtr`, restarted from `master`:
+**Implementation (2026-10-17; revised at about 20:10 UTC):**
+- **The author approved decision 1** at about 19:45. It is implemented on `wiki-explanation-reader-sim-v8dqtr` (PR #14, not merged):
   - `audit_instructions` gives the audit task the A3 text;
-  - `[simulation] rounds` now defaults to 0;
   - README, the skill and the task agent's audit rule are updated;
-  - tests pin the calibrated text and the default.
+  - a test pins the calibrated text.
+- **Decision 2 is withdrawn.** The author first approved turning simulated readers off by default, then reconsidered (about 20:05): they are a core part of exegenius's design, and SR1's 0.147 against 0.15 is inconclusive, not evidence for removing them. The default change (in 7bc391f) is reverted on the same branch, so PR #14 now changes only the audit; `[simulation] rounds` stays 2.
 - **Verified:**
   - fmt and clippy (`-D warnings`) are clean; 3 + 82 + 15 tests pass;
   - **`tools/a3verify.py`: the built binary writes A3's 30 audit tasks byte-identical to the ones A3 ran (project directory aside).** In the old page-only text none of the new paragraphs appear, so the comparison discriminates;
-  - `exegenius init` writes `rounds = 0`.
-- **Unchanged:** writer routing (Sonnet `high`, with the Opus exception at 0015/0016), agent models, audit rounds and every other default.
+  - after the revert, the code differs from `master` only in the audit (`audit.rs`, `task.rs`), and the docs only in what the auditor reads.
+- **Unchanged:** simulated readers (on, `rounds = 2`), writer routing (Sonnet `high`, with the Opus exception at 0015/0016), agent models, audit rounds and every other default.
 
 **Decisions for the author, kept separate (none is bundled with another):**
 1. **The audit (recommended: adopt R).**
@@ -64,10 +64,10 @@ No further experiment is planned. Inconclusive results are recorded as such, wit
    - What it buys: every planted error that only the paper reveals is caught (13/13 against 0/13), with page-error recall from 0.50 to 0.89.
    - What it costs: about one rewrite of a correct but condensed statement every two pages, by the independent reviewer's count.
    - If not adopted, the pipeline's audit cannot see source-only errors at all.
-2. **Simulated readers (proposed: off by default).**
-   - The change: `[simulation] rounds = 0` in the template, with the simulation available on request.
-   - The saving: ~19 M per round on a 25-page wiki.
-   - The basis: SR1's inconclusive result (row 3), whose preregistered conservative choice this is.
+2. **Simulated readers: decided, kept on by default** (the author, about 20:05; SR1's proposal to turn them off is not adopted).
+   - SR1 stays on record as inconclusive, with its limitations.
+   - Effectiveness remains unvalidated: the evidence neither shows that the readers' coverage tracks the wiki, nor that their stuck points locate what is missing.
+   - A better test would run production's `exegenius-reader` agent and use a baseline that measures what the reader model knows. It is not planned.
 3. **Writing (no change proposed).**
    - Sonnet `high` stays the writer; the Opus exception at 0015/0016 stays, unless the author withdraws it.
    - An option, not a proposal: Opus on long, many-step key-step pages. W3 shows large gains on some such pages (0036) but none on others (0031, 0032), so the pages cannot be picked in advance on this evidence.
@@ -80,7 +80,7 @@ No further experiment is planned. Inconclusive results are recorded as such, wit
 - **Every row rests on one paper.** No row is a general default without a second document, which only the author can supply.
 - **Writing is not shown adequate on key-step pages by either model.** The configuration is the status quo because W3's rule says so, not because it passes.
 - **Recall figures are on planted errors** in six pages, not proof against every real error.
-- **Simulated readers' signal is unvalidated.** The proposal to turn them off is the conservative reading of an inconclusive result, not evidence that they are useless.
+- **Simulated readers' effectiveness is unvalidated.** They stay on by default by the author's decision, as part of the intended design. SR1 neither showed them useful nor showed them useless, so their coverage scores and the repairs their stuck points drive should be read as unvalidated signals.
 
 ## Calibration ledger (2026-10-17 08:43 UTC; audit row updated 17:16): superseded by the final configuration report above, kept as a record
 

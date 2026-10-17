@@ -237,13 +237,7 @@ jq -c 'select(.kind == "extract" and .outcome == "accepted") | .coverage[].secti
 
 ## Simulated readers
 
-Simulated readers are **off by default** (`[simulation] rounds = 0`). In the calibration
-programme's one test of them (SR1, `calibration/plans/SR1.md`), readers' coverage rose with the
-wiki, but it fell by less than the preregistered bar when the paragraphs carrying the answers
-were deleted, and their stuck points fell on intact pages as often as on gutted ones. They stay
-available: set `rounds` above 0 to run them.
-
-Once the wiki is written, exegenius can play it as a game against simulated readers. A goals
+Once the wiki is written, exegenius plays it as a game against simulated readers. A goals
 task writes 3 to 6 goal questions with key points, of kinds taken from an assessment model of
 proof comprehension (Mejía-Ramos et al.) and from the argument plan's motivations. A second
 goals task, which does not see the first, writes 1 to 3 held-out goals: readers answer them
@@ -285,7 +279,7 @@ than their control's are listed as the wiki's key steps.
 
 ```toml
 [simulation]
-rounds = 2     # 0, the default, turns it off
+rounds = 2     # 0 turns it off
 budget = 15    # most pages per reader per goal
 nonce = true
 ablations = 0  # top sentences to hide, each with a control, after the last round
