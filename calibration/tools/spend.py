@@ -54,6 +54,7 @@ RULES = [  # (pattern on the description, experiment, role)
     (r"^A2(B|I|SI)\d+ ", "A2 (auditing)", "runs"),
     (r"^A2 SEED REVIEW", "A2 seed review", "design"),
     (r"^A2 ALARM REVIEW", "A2 alarm review", "judging"),
+    (r"^SR1 ", "SR1 (simulated readers)", "runs"),
     (r"^(A1|X1|K3) ", "design subagents", "design"),
     (r"^FB1F\d \d{4}-", "FB1", "runs"),
     (r"^W1 \d{4}-", "W1 (cancelled)", "runs"),
