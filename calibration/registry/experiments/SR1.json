@@ -1,0 +1,135 @@
+{
+ "id": "SR1",
+ "title": "Do simulated readers' scores depend on what the wiki says? Intact against degraded copies of a finished wiki, with a no-wiki baseline",
+ "kind": "controlled",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "simulated readers: one round on full-v0.6-latex-planner-handoff (25 pages): 9 goals (34 key points), 18 read and 9 baseline tasks per copy, graded per copy",
+ "question": "Does reader coverage rise with the wiki (lift over baseline) and fall when the key paragraphs are deleted (sensitivity)?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "exegenius 0.6.0 (target/debug/exegenius sha256 c37a2b3d\u2026caee8), not rebuilt during the run"
+ },
+ "evidence": {
+  "path": "docs/journal/2026-10-17-sr1"
+ },
+ "protocol": "general-purpose subagents from the development session: readers and baselines on Haiku high, goals and grades on Sonnet high (calibration/plans/SR1.md)",
+ "preregistration": "calibration/plans/SR1.md (preregistered 17:49 UTC, 2026-10-17, before any SR1 model call)",
+ "journal": "calibration/plans/SR1.md (Result)",
+ "comparison": "intact against degraded (sensitivity) and against the baseline (lift); fixed rows",
+ "arms": {
+  "intact": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-haiku-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "task_prompt": "the read and baseline tasks as rendered by exegenius 0.6.0; grade tasks on claude-sonnet-5-5 high"
+   },
+   "runs": [
+    "intact"
+   ]
+  },
+  "degraded": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-haiku-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "task_prompt": "as intact, on the copy with 31 key paragraphs deleted"
+   },
+   "runs": [
+    "degraded"
+   ]
+  }
+ },
+ "reported": {
+  "primary_preregistered": {
+   "value": "C_int 57/68 = 0.838, C_deg 47/68 = 0.691, C_base 7/68 = 0.103; lift 0.735, sensitivity 0.147 (row 1 needs 0.15). Row 3: inconclusive; propose rounds = 0 by default",
+   "basis": "reported",
+   "source": "docs/journal/2026-10-17-sr1/reading.json"
+  },
+  "exploratory": {
+   "value": "15 of 18 baseline answers decline by instruction, so lift does not test prior knowledge; sensitivity sits in the held-out goals (12/22 -> 5/22) not the repair goals (45/46 -> 42/46); stuck points occur on the deleted pages as often in the intact copy (18/18 runs; 148 vs 142 stuck points)",
+   "basis": "reported",
+   "source": "calibration/plans/SR1.md (Result)"
+  },
+  "cache_read_tokens": {
+   "value": "37.9 M for 74 subagents (661 calls); ~19 M per round per copy",
+   "basis": "reported",
+   "source": "spend.py row 'SR1 (simulated readers)'"
+  }
+ },
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "readers ran as general-purpose subagents (every tool), not exegenius-reader (Read, Write, Bash); some created 6 stray sessions (archived; one ran a turn with no task, ~61 k tokens, outside the spend counts)"
+  },
+  {
+   "kind": "measurement",
+   "what": "the deletion rule was operationalised mechanically (top content-word overlap per key point, plus overlap >= 0.35) before any reader run"
+  }
+ ],
+ "limitations": [
+  "One wiki of an older pipeline, one round, one reader profile, one run per goal and start.",
+  "The baseline is an instructed refusal, not a measure of what the reader model knows."
+ ],
+ "built": {
+  "by": "calibration/tools/registry.py",
+  "wiki_commit": null
+ },
+ "orchestrator_observed": {
+  "value": null,
+  "basis": "unavailable",
+  "note": "no main transcript at the evidence commit"
+ },
+ "runs": [
+  {
+   "id": "intact",
+   "arm": "intact",
+   "planning_seconds": {
+    "value": null,
+    "basis": "unavailable",
+    "note": "no run log at the evidence ref"
+   },
+   "subagents": [],
+   "observed_config": {
+    "value": null,
+    "basis": "unavailable",
+    "note": "no transcripts for this run in the evidence"
+   },
+   "matches_arm": null,
+   "quality": []
+  },
+  {
+   "id": "degraded",
+   "arm": "degraded",
+   "planning_seconds": {
+    "value": null,
+    "basis": "unavailable",
+    "note": "no run log at the evidence ref"
+   },
+   "subagents": [],
+   "observed_config": {
+    "value": null,
+    "basis": "unavailable",
+    "note": "no transcripts for this run in the evidence"
+   },
+   "matches_arm": null,
+   "quality": []
+  }
+ ],
+ "arm_summary": {
+  "intact": {
+   "runs": 1,
+   "planning_seconds": null
+  },
+  "degraded": {
+   "runs": 1,
+   "planning_seconds": null
+  }
+ }
+}

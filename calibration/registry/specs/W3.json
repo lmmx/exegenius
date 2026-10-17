@@ -1,0 +1,126 @@
+{
+ "id": "W3",
+ "title": "Does the Opus writer advantage generalise? Opus xhigh against Sonnet high (twice) on six new key-step pages and three controls",
+ "kind": "controlled",
+ "document": {
+  "name": "nlogn",
+  "title": "Integer multiplication below n log n (paper.tex)",
+  "class": "frontier mathematics paper, LaTeX, 5,361 lines"
+ },
+ "task": "exposition: write tasks for six key-step pages (0018, 0021, 0031, 0032, 0033, 0036) and three controls (0005, 0006, 0010), from E9F4Y's fixed plan; 24 page-runs judged by three blind Opus judges each (J26)",
+ "question": "Is Opus xhigh better than Sonnet high on key-step pages in general (k of 6), and does Sonnet high meet the fidelity standard there (rule R2)?",
+ "binary": {
+  "repo": "lmmx/exegenius",
+  "commit": "exegenius 0.6.0 (target/debug/exegenius sha256 c37a2b3d…caee8), not rebuilt during the run"
+ },
+ "evidence": {
+  "path": "docs/journal/2026-10-17-w3-run",
+  "planning_kinds": [
+   "write"
+  ]
+ },
+ "protocol": "general-purpose subagents launched from the development session, up to 20 at a time; judges by pointer prompt to J24's judge text (calibration/plans/W3.md)",
+ "preregistration": "calibration/plans/W3.md (preregistered 05:31 UTC, 2026-10-15; amendment 2 at 06:49 UTC, 2026-10-17; launch readiness 08:42; all before any run)",
+ "journal": "calibration/plans/W3.md (Result)",
+ "comparison": "W2b's per-page rule (WO against WS) on key-step pages; errors only on controls; rule R2 over 12 Sonnet and 6 Opus page-runs",
+ "arms": {
+  "WS": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "task_prompt": "the write task as rendered by exegenius 0.6.0 in a copy of E9F4Y's project"
+   },
+   "runs": [
+    "W3WSP0005",
+    "W3WSP0006",
+    "W3WSP0010",
+    "W3WSP0018",
+    "W3WSP0021",
+    "W3WSP0031",
+    "W3WSP0032",
+    "W3WSP0033",
+    "W3WSP0036"
+   ]
+  },
+  "WS2": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-sonnet-5-5",
+    "effort": "high",
+    "effort_passed": true,
+    "task_prompt": "as WS (a second run, key-step pages only)"
+   },
+   "runs": [
+    "W3WS2P0018",
+    "W3WS2P0021",
+    "W3WS2P0031",
+    "W3WS2P0032",
+    "W3WS2P0033",
+    "W3WS2P0036"
+   ]
+  },
+  "WO": {
+   "intended": {
+    "agent": "general-purpose",
+    "model_id": "claude-opus-5-5",
+    "effort": "xhigh",
+    "effort_passed": true,
+    "task_prompt": "as WS"
+   },
+   "runs": [
+    "W3WOP0005",
+    "W3WOP0006",
+    "W3WOP0010",
+    "W3WOP0018",
+    "W3WOP0021",
+    "W3WOP0031",
+    "W3WOP0032",
+    "W3WOP0033",
+    "W3WOP0036"
+   ]
+  }
+ },
+ "reported": {
+  "primary_preregistered": {
+   "value": "k = 2 (Opus better on 0018 and 0036; Sonnet on 0032; 3 tied); controls Opus 2 of 3. Row 3: page-specific, no rollout",
+   "basis": "reported",
+   "source": "docs/journal/2026-10-17-w3-judge/reading.json"
+  },
+  "R2": {
+   "value": "8 of 12 Sonnet page-runs fail the standard (0018, 0031, 0032, 0036, both runs); Opus fails on 0031 and 0032, so R2 is inconclusive",
+   "basis": "reported",
+   "source": "docs/journal/2026-10-17-w3-judge/reading.json"
+  },
+  "decision": {
+   "value": "status quo: Sonnet high writes, Opus xhigh on 0015/0016 in this wiki; no default change",
+   "basis": "reported",
+   "source": "calibration/plans/W3.md (launch-readiness matrix)"
+  },
+  "exploratory": {
+   "value": "faithful equals derived in every cell but one count: the gap is derivation, not error (1 major error in 24 page-runs, 0018 WS). On 0036 Sonnet derives medians 4 and 3 of 19 steps, Opus 18. Two cells have one outlying judge (0032 WO; 0036 WS2)",
+   "basis": "reported",
+   "source": "calibration/plans/W3.md (Result)"
+  },
+  "cache_read_tokens": {
+   "value": "runs 38.4 M (WO 19.2, WS 11.3, WS2 7.9); J26 33.0 M for 72 judgements",
+   "basis": "reported",
+   "source": "spend.py rows 'W3 (writing)' and 'J26'"
+  }
+ },
+ "deviations": [
+  {
+   "kind": "protocol",
+   "what": "J26 judges received a pointer prompt to J24's judge text (paths changed) rather than the pasted text"
+  },
+  {
+   "kind": "protocol",
+   "what": "stage 2 (J26) ran on the author's standing instruction and the five-hour limit's status 'allowed', not on a fresh meter reading"
+  }
+ ],
+ "limitations": [
+  "Six key-step pages and three controls of one paper; one Opus run and two Sonnet runs per key-step page.",
+  "The fidelity standard is strict at 18 steps (17 needed); judge disagreement is large on two cells."
+ ]
+}

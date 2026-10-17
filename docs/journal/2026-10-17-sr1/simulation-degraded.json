@@ -1,0 +1,2965 @@
+{
+  "goals": [
+    {
+      "question": "State the main result of the wiki and summarise, in a few sentences, how the multiplication algorithm achieves it: what is the problem reduced to, and which two operations are made faster?",
+      "kind": "summary",
+      "key_points": [
+        {
+          "point": "A single fixed deterministic machine with a finite alphabet and a fixed number of tapes multiplies two n-bit numbers in time n times a power of lg n that is strictly less than 1, namely exponent 1 minus 2^-182",
+          "role": "claim"
+        },
+        {
+          "point": "The integer product is first turned into a convolution of short coefficients, which is then handled as a convolution over a polynomial ring modulo y^r+1 using transforms",
+          "role": "background"
+        },
+        {
+          "point": "The two costly ingredients, moving data between address layouts and applying butterfly layers, are replaced by procedures costing the volume times a sublinear power of the field width or number of chunks",
+          "role": "reason"
+        },
+        {
+          "point": "Because this beats n log n in the same model where the conjecture was posed, the optimality conjecture fails there",
+          "role": "conclusion"
+        }
+      ],
+      "pages": [
+        "main-theorem",
+        "nlogn-conjecture",
+        "radix-digit-reduction",
+        "ring-convolution-retained-order",
+        "fast-address-interchange",
+        "fast-butterfly-layers"
+      ]
+    },
+    {
+      "question": "Why does the paper bother to speed up address interchanges and butterfly layers specifically, rather than only using a smarter transform? Why would a faster algorithm have to attack exactly these two operations?",
+      "kind": "motivation",
+      "key_points": [
+        {
+          "point": "A transform-based multiplier has a number of levels proportional to the logarithm of the size, and each level touches all the stored bits",
+          "role": "background"
+        },
+        {
+          "point": "Each level involves rearranging data on the tapes plus arithmetic on pairs of entries, so the total is the volume times the number of levels, which is the n log n barrier",
+          "role": "reason"
+        },
+        {
+          "point": "Therefore the only way to lower the overall bound is to make both the per-level data movement and the per-level arithmetic cost less than a full pass over the data",
+          "role": "conclusion"
+        }
+      ],
+      "pages": [
+        "main-theorem",
+        "dft-fft",
+        "fixed-tape-model",
+        "address-fields",
+        "nlogn-conjecture"
+      ]
+    },
+    {
+      "question": "The recursion for the interchange and butterfly procedures gives a cost of volume times a power of the parameter that is below 1. Explain why the condition that the number of subcalls s is less than W times m is exactly what makes this work, and what goes wrong if it fails.",
+      "kind": "justification",
+      "key_points": [
+        {
+          "point": "Each call at parameter m times f spawns s subcalls, each on a stream of one W-th of the volume, so the cost per unit volume is multiplied by s/W per level of recursion",
+          "role": "claim"
+        },
+        {
+          "point": "The parameter grows by factor m per level, so the unrolled sum behaves like a geometric series whose ratio is (s/W) divided by m raised to the target exponent",
+          "role": "reason"
+        },
+        {
+          "point": "When s/W is strictly smaller than m, an exponent strictly below 1 can be chosen that makes this ratio less than 1, so the sum is dominated by a constant times the parameter to that power",
+          "role": "reason"
+        },
+        {
+          "point": "If s/W were at least m, no exponent below 1 would work and the recursion would give no saving over a linear-in-parameter cost",
+          "role": "conclusion"
+        }
+      ],
+      "pages": [
+        "recursive-power-saving",
+        "subset-intersection-construction",
+        "fast-address-interchange"
+      ]
+    },
+    {
+      "question": "Work an example: over the two-element field, take two fields (H, D) = (0, 1) and apply the three updates used to interchange them. Give the state after each update and explain which of the updates the finite linear network supplies and which are done separately.",
+      "kind": "example",
+      "key_points": [
+        {
+          "point": "Subtracting H from D leaves (0, 1), since D minus 0 is 1",
+          "role": "claim"
+        },
+        {
+          "point": "Adding D to H then gives (1, 1), the middle update being the shear performed by the network",
+          "role": "claim"
+        },
+        {
+          "point": "The final update, D replaced by H minus D, gives (1, 0), so the fields are swapped",
+          "role": "conclusion"
+        },
+        {
+          "point": "Only the middle shear is the expensive step done by the network; the first and last updates are cheap linear-time passes combining D with H",
+          "role": "reason"
+        }
+      ],
+      "pages": [
+        "fast-address-interchange",
+        "address-shear-factorization",
+        "address-fields"
+      ]
+    },
+    {
+      "question": "In the convolution routine, two inputs are each transformed, multiplied pointwise, and transformed back. Why does the algorithm not need to sort the transformed entries into natural frequency order in between, and what would go wrong if the two forward transforms used different orders?",
+      "kind": "structure",
+      "key_points": [
+        {
+          "point": "Both forward transforms store their entries under the same address permutation, so the entries at any one address correspond to the same frequency in both arrays",
+          "role": "claim"
+        },
+        {
+          "point": "Pointwise multiplication only combines entries sharing an address, so it commutes with the permutation and the result is just the permuted product of the true transforms",
+          "role": "reason"
+        },
+        {
+          "point": "The opposite transform is designed to read its input in that permuted layout, so the permutation is undone as part of it and no standalone sort is run",
+          "role": "conclusion"
+        },
+        {
+          "point": "With mismatched orders, entries of different frequencies would be multiplied together, giving a wrong convolution unless a sort fixed the alignment",
+          "role": "reason"
+        }
+      ],
+      "pages": [
+        "ring-convolution-retained-order",
+        "synthetic-transforms",
+        "dft-fft",
+        "convolution"
+      ]
+    },
+    {
+      "question": "Suppose a variant of the recursion used a network with W = 2 roles, fan-in factor m = 3, and s = 4 subcalls, versus another with W = 2, m = 2 and s = 5. For each, decide whether the power-saving argument applies and, if so, what range of exponents works.",
+      "kind": "transfer",
+      "key_points": [
+        {
+          "point": "For s = 4, W = 2, m = 3 the ratio s/W is 2, which is below m = 3, so the argument applies",
+          "role": "claim"
+        },
+        {
+          "point": "Any exponent strictly between log base 3 of 2 (about 0.63) and 1 makes the geometric ratio less than 1",
+          "role": "conclusion"
+        },
+        {
+          "point": "For s = 5, W = 2, m = 2 the ratio s/W is 2.5, which exceeds m = 2, so the recursion grows at least linearly in the parameter and no saving follows",
+          "role": "claim"
+        },
+        {
+          "point": "The decisive comparison is whether s/W is less than m, since this fixes whether a sub-linear exponent exists",
+          "role": "reason"
+        }
+      ],
+      "pages": [
+        "recursive-power-saving",
+        "subset-intersection-construction"
+      ]
+    },
+    {
+      "question": "Summarise in a few sentences how the main theorem gets below n log n: what two kinds of operation are sped up, what bounds they achieve, and how that yields a running time with the logarithmic factor lowered by a fixed power.",
+      "kind": "summary",
+      "key_points": [
+        {
+          "point": "Multiplication is reduced to a ring convolution that is evaluated with transforms, and the transform cost is dominated by moving data between address layouts and by applying butterfly layers.",
+          "role": "background"
+        },
+        {
+          "point": "The data-movement step (swapping two address fields) and the arithmetic step (several butterfly layers done together) are each made cheaper, with costs of V times a fixed power below 1 of the field width or chunk count.",
+          "role": "claim"
+        },
+        {
+          "point": "Both speedups come from a small fixed linear network whose recursion makes slightly fewer sub-calls than the work-splitting factor would suggest, so the per-unit-volume cost grows only as a power less than 1.",
+          "role": "reason"
+        },
+        {
+          "point": "Putting these in place of the per-level full scans lowers the whole running time to n times a power of lg n with exponent 1 minus a tiny fixed constant, beating n log n on the fixed-tape machine.",
+          "role": "conclusion"
+        }
+      ],
+      "pages": [
+        "main-theorem",
+        "fast-address-interchange",
+        "fast-butterfly-layers",
+        "recursive-power-saving",
+        "ring-convolution-retained-order",
+        "nlogn-conjecture"
+      ],
+      "held_out": true
+    },
+    {
+      "question": "Why does the argument concentrate on speeding up address rearrangements and butterfly layers, rather than, say, only on the pointwise products, in order to beat n log n?",
+      "kind": "motivation",
+      "key_points": [
+        {
+          "point": "A transform has about log n levels, and on a tape machine each level needs the whole stored array to be passed over again, which in itself costs n per level.",
+          "role": "background"
+        },
+        {
+          "point": "The pointwise product and other once-only steps are cheap relative to this, so the n log n total is driven by the repeated per-level movement and butterfly work.",
+          "role": "reason"
+        },
+        {
+          "point": "Hence any improvement must make both the rearrangement of data and the arithmetic of many levels cheaper than a full pass each; speeding only one of them would leave an n log n term.",
+          "role": "conclusion"
+        }
+      ],
+      "pages": [
+        "main-theorem",
+        "dft-fft",
+        "fixed-tape-model",
+        "address-fields",
+        "nlogn-conjecture"
+      ],
+      "held_out": true
+    },
+    {
+      "question": "The fast address interchange uses a network of XOR-type gates whose intermediate values are mixtures of the data, yet its end result must be a clean swap of two fields that is correct even when scratch rows start with arbitrary contents. Explain why this works.",
+      "kind": "justification",
+      "key_points": [
+        {
+          "point": "Over the two-element field, a swap of two quantities can be written as three successive subtract/add updates, so only a shear-type update has to be produced by the network.",
+          "role": "reason"
+        },
+        {
+          "point": "The network supplies the middle update, the shear, and two cheap linear passes that modify one field using the other supply the remaining steps.",
+          "role": "claim"
+        },
+        {
+          "point": "Scratch contents are removed by subtracting their starting value before the computation and adding the result back after it, then running the steps in reverse, so the starting junk cancels out.",
+          "role": "reason"
+        },
+        {
+          "point": "Consequently the overall map is an exact permutation of the data, not dependent on what the auxiliary registers began with.",
+          "role": "conclusion"
+        }
+      ],
+      "pages": [
+        "fast-address-interchange",
+        "address-shear-factorization",
+        "scratch-restoration"
+      ],
+      "held_out": true
+    }
+  ],
+  "round": 1,
+  "runs": [
+    {
+      "task": "0216-read-g1-reader-deep",
+      "round": 1,
+      "goal": 0,
+      "persona": "reader",
+      "start": "main-theorem",
+      "outcome": "answered",
+      "path": [
+        "main-theorem",
+        "home",
+        "radix-digit-reduction",
+        "fast-address-interchange",
+        "fast-butterfly-layers",
+        "recursive-power-saving",
+        "fixed-tape-model",
+        "linear-network-roles",
+        "subset-intersection-construction"
+      ],
+      "searches": [],
+      "answer": "The main result is an integer multiplication algorithm for a deterministic fixed-tape Turing machine (the wiki's Fixed-tape machine model and stream operations) that multiplies two n-bit integers in O(n(lg n)^{1-kappa}) time, with kappa = 2^-182. The wiki says this disproves the n log n optimality conjecture in that model. The product is first reduced to a convolution: splitting each input into radix digits gives a convolution of short integer coefficients, and carry propagation then turns the coefficients into the digits of the product. The convolution is computed with transforms over polynomial rings, and the n log n cost comes from moving data and applying butterfly layers at each of the Theta(log n) transform levels. The two operations made faster are (1) address moves, done by the Fast interchange of address fields, which swaps two disjoint contiguous address fields in O(V u^tau) time with tau < 1, and (2) the simultaneous butterfly layer (Fast simultaneous butterfly layers), which applies one butterfly to a bit position across many address chunks at once in O(V d^{lambda'}) time with lambda' < 1. Both are built from one fixed linear network whose recursion has fewer than Wm child calls, which gives a fixed power saving.",
+      "citations": [
+        [
+          "home",
+          "It multiplies two $n$-bit integers in $O(n(\\lg n)^{1-\\kappa})$ time, where $\\kappa = 2^{-182}$."
+        ],
+        [
+          "home",
+          "Schönhage and Strassen proposed that $n \\log n$ is the optimal order of cost for multiplication, so the result disproves that conjecture in this model."
+        ],
+        [
+          "radix-digit-reduction",
+          "Splitting the inputs into radix digits reduces the integer product to a convolution of short integer coefficients."
+        ],
+        [
+          "radix-digit-reduction",
+          "is the convolution of the digit lists"
+        ],
+        [
+          "radix-digit-reduction",
+          "Carry propagation converts it."
+        ],
+        [
+          "home",
+          "reduce multiplication to ring convolution and speed up its address moves and butterfly layers"
+        ],
+        [
+          "home",
+          "is computed by synthetic transforms and packed polynomial products."
+        ],
+        [
+          "fast-address-interchange",
+          "Fast interchange of address fields is a fixed-tape procedure that swaps two disjoint contiguous address fields of an array"
+        ],
+        [
+          "fast-address-interchange",
+          "Two disjoint contiguous $u$-bit address fields can be interchanged in $O(Vu^\\tau)$ for a fixed $\\tau<1$"
+        ],
+        [
+          "fast-butterfly-layers",
+          "Fast simultaneous butterfly layers is a fixed-tape procedure that applies $H_0(u,v)=((u+v)/2,(u-v)/2)$ to one bit position in several address chunks at once."
+        ],
+        [
+          "fast-butterfly-layers",
+          "The layer costs $O(Vd^{\\lambda'})$ for a fixed exponent $\\lambda'<1$"
+        ],
+        [
+          "subset-intersection-construction",
+          "so $2L<N$ and $s<WD$."
+        ],
+        [
+          "recursive-power-saving",
+          "so the volume-normalized cost grows as a power, giving a fixed power saving."
+        ],
+        [
+          "main-theorem",
+          "The $n\\log n$ cost scans all $V$ stored bits at each of the $\\Theta(\\log n)$ transform levels, so cheaper moves and layers lower the whole bound."
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "fixed-tape-model",
+          "quote": "The machine has, each with its own head.",
+          "note": "The sentence is cut off, so I could not tell what the Fixed-tape machine model and stream operations machine consists of. The page header says multitape Turing machine, while the front page says deterministic fixed-tape Turing machine, and I could not tell whether these are the same model.",
+          "level": "symbol"
+        },
+        {
+          "page": "fixed-tape-model",
+          "quote": "The paper instead realizes the interchange by.",
+          "note": "The page says whole-field interchange is expensive on a tape, then stops before saying how it is realized instead. I could not see how the three-XOR swap becomes a sub-linear procedure.",
+          "level": "step"
+        },
+        {
+          "page": "fast-address-interchange",
+          "quote": "although the intermediate steps are XOR combinations.",
+          "note": "The page says the swap cost O(V u^tau) with tau < 1 and that it follows from the recursive power saving. I followed the three XOR updates, but I could not see why repeating them through the network gives a cost below linear in the field size.",
+          "level": "chain"
+        },
+        {
+          "page": "subset-intersection-construction",
+          "quote": "A label $U$ is a nondegenerate subspace",
+          "note": "Label, the tensor space of three copies of the ground space, and nondegenerate are new to me. The page also reuses letters: s, L, N and m change meaning, and the page says the paper's dimension m is D, which does not match the m of the recursion.",
+          "level": "symbol"
+        },
+        {
+          "page": "subset-intersection-construction",
+          "quote": "Each unit of rank costs one smaller call.",
+          "note": "The page counts the total rank of the projection differences and calls it the number of smaller calls. I could not see why a unit of rank corresponds to one recursive call, and the page ends before its decisive bound, which is cut off mid-sentence.",
+          "level": "step"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "reduce this group to $\\Psi$ child calls",
+          "note": "Psi is used as the number of child calls, and its bound Psi < Wm is assumed here. I could not connect this Psi to the s of the Three-element subset intersection construction page, which the front page and the power-saving page both use as the Wm bound.",
+          "level": "symbol"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "m^{1-2^{-50}}=m\\exp(-2^{-50}\\log m)",
+          "note": "The chain of inequalities gives a lower bound on Psi/W, but the page does not say why that inequality is the one needed. I did not check the constant 73/19906842167500, and I got past the line by accepting it.",
+          "level": "step"
+        },
+        {
+          "page": "home",
+          "quote": "Two fixed-tape procedures, an Fast interchange of address fields and a simultaneous butterfly layer, cost",
+          "note": "The front page says both costs come from one linear network and a power-saving recursion. I could not see how two per-procedure exponents below 1 combine into the overall O(n(lg n)^{1-kappa}) bound with kappa = 2^-182. The main-theorem page states the bound without the derivation, and I did not find that derivation in the pages I opened.",
+          "level": "chain"
+        },
+        {
+          "page": "radix-digit-reduction",
+          "quote": "Each $c_k$ is a sum of at most $q$ products, each at most $(2^b-1)^2$, so.",
+          "note": "The sentence stops at so. I supplied the missing conclusion myself, that the sum is below 2^{3b}, by checking the inequality by hand. I did not see it stated on the page.",
+          "level": "step"
+        }
+      ],
+      "reason": "Answered, with moderate confidence. The outline is consistent across the front page and the procedure pages I opened: reduction to convolution, and two sped-up operations, address-field swaps and simultaneous butterfly layers, both built from one linear network with a power-saving recursion. I did not see how the sub-linear costs and the final exponent follow. The Fixed-tape machine model and stream operations page is cut off before the mechanism, the Three-element subset intersection construction page is cut off before its counting bound, and the main-theorem page states the bound without a derivation. I opened 9 of the 15 pages allowed.",
+      "leaks": [
+        "nlogn-conjecture"
+      ],
+      "covered": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "wrong": [],
+      "key_idea": {
+        "page": "main-theorem",
+        "statement": "The n log n cost is the cost of scanning all stored bits at every transform level, so making the address moves and butterfly layers cheaper lowers the whole bound.",
+        "quote": "The $n\\log n$ cost scans all $V$ stored bits at each of the $\\Theta(\\log n)$ transform levels, so cheaper moves and layers lower the whole bound."
+      }
+    },
+    {
+      "task": "0215-read-g1-reader-home",
+      "round": 1,
+      "goal": 0,
+      "persona": "reader",
+      "start": "home",
+      "outcome": "answered",
+      "path": [
+        "home",
+        "main-theorem",
+        "radix-digit-reduction",
+        "fast-address-interchange",
+        "fast-butterfly-layers",
+        "convolution",
+        "dft-fft",
+        "recursive-power-saving",
+        "nlogn-conjecture",
+        "fixed-tape-model"
+      ],
+      "searches": [],
+      "answer": "The main result is an integer multiplication algorithm for a deterministic fixed-tape machine (the Fixed-tape machine model and stream operations model) that multiplies two n-bit integers in O(n(lg n)^(1-kappa)) time, with kappa = 2^-182. Schonhage and Strassen had proposed that n log n is the optimal cost, so the result disproves that conjecture in this model. The product is reduced to a convolution: splitting each input into radix digits turns the integer product into a convolution of short coefficients, and carry propagation then gives the exact product. The n log n cost comes from scanning all stored bits at each transform level, so making two operations cheaper lowers the whole bound: the address moves (the Fast interchange of address fields procedure, which swaps two address fields in O(V u^tau) for tau < 1) and the simultaneous butterfly layers (O(V d^lambda') for lambda' < 1). Both are built from one fixed linear network plus a recursion whose condition s < Wm gives a fixed power saving.",
+      "citations": [
+        [
+          "home",
+          "Splitting the inputs into radix digits reduces the integer product to a convolution of short integer coefficients."
+        ],
+        [
+          "home",
+          "An $n$-bit integer product is computed by a Fixed-tape machine model and stream operations in $O(n(\\lg n)^{1-\\kappa})$ time, $\\kappa=2^{-182}$."
+        ],
+        [
+          "home",
+          "reduce multiplication to ring convolution and speed up its address moves and butterfly layers"
+        ],
+        [
+          "main-theorem",
+          "The $n\\log n$ cost scans all $V$ stored bits at each of the $\\Theta(\\log n)$ transform levels, so cheaper moves and layers lower the whole bound."
+        ],
+        [
+          "fast-address-interchange",
+          "Fast interchange of address fields is a fixed-tape procedure that swaps two disjoint contiguous address fields of an array, and the multiplication construction uses it to speed up its address moves."
+        ],
+        [
+          "fast-butterfly-layers",
+          "A simultaneous layer of $H_0(u,v)=((u+v)/2,(u-v)/2)$ on selected address bits of polynomial-valued arrays costs $O(Vd^{\\lambda'})$ with $\\lambda'<1$, with a single truncation at the end."
+        ],
+        [
+          "dft-fft",
+          "The discrete Fourier transform (DFT) evaluates a coefficient list at powers of a root of unity, reducing"
+        ],
+        [
+          "recursive-power-saving",
+          "A recursive call at parameter $mf$ uses $s$ calls at parameter $f$ on streams of volume $V/W$, so the volume-normalized cost grows as a power, giving a fixed power saving."
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "main-theorem",
+          "quote": "so $s<Wm$ needs $N>2L$.",
+          "note": "The page gives s as Wm minus N plus 2L, but never says why s < Wm is the condition the power saving needs. The linear network with roles, and the terms N and L, are only named here; I did not open the pages that define them.",
+          "level": "chain"
+        },
+        {
+          "page": "fast-address-interchange",
+          "quote": "although the intermediate steps are XOR combinations.",
+          "note": "The three-update swap is checkable by hand, but nothing here shows why the cost is O(V u^tau) with tau below 1 rather than linear in u. I took the exponent on trust and assumed the recursion page explains it.",
+          "level": "chain"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "The phase identities for $\\Xi$ reduce this group to $\\Psi$ child calls",
+          "note": "I could not see which phase identities are meant, or why the group reduces to fewer than Wm child calls. I accepted the count, and the later inequality for Psi/W, on trust.",
+          "level": "step"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "Since $H_0=\\tfrac{1-i}{2}\\,\\Upsilon\\,\\Xi\\,\\Upsilon$ and [Tensor product of vector spacess](lis) respect products,",
+          "note": "I checked by hand that this factorization gives H_0, but I could not tell what it means for the Tensor product of vector spacess glossary entry to respect products, and I did not open that page. The tensor power notation was not explained for me.",
+          "level": "symbol"
+        },
+        {
+          "page": "recursive-power-saving",
+          "quote": "so the internal costs sum to",
+          "note": "The geometric sum stays bounded only if (s/W) divided by m to the lambda is below 1. The page never states that condition or where lambda below 1 comes from, beyond the choice of sigma.",
+          "level": "chain"
+        },
+        {
+          "page": "recursive-power-saving",
+          "quote": "which stop once $f/m^\\nu<d^\\vartheta$.",
+          "note": "The symbol vartheta is never defined on this page, and d is used with different meanings on other pages, so I could not decode the stopping rule.",
+          "level": "symbol"
+        },
+        {
+          "page": "fixed-tape-model",
+          "quote": "The machine has, each with its own head.",
+          "note": "The sentence is missing its object, so I could not tell what the Fixed-tape machine model and stream operations model's tapes and heads are. The front page calls the model a fixed-tape machine, and this page did not make the difference from a multitape machine clear to me.",
+          "level": "symbol"
+        },
+        {
+          "page": "fixed-tape-model",
+          "quote": "The paper instead realizes the interchange by.",
+          "note": "The sentence breaks off, so I cannot see how the interchange is realized on tapes. I guessed it is the three-XOR identity given in the next paragraph, which is only one step of it.",
+          "level": "step"
+        },
+        {
+          "page": "dft-fft",
+          "quote": "The paper's tape-level transform uses the same kinds of operation.",
+          "note": "The page says each transform level is one rearrangement plus one scan of butterflies, but does not connect that to the claim that each level costs a scan of all stored bits. So I could not see why the butterfly cost matters for the total bound.",
+          "level": "chain"
+        },
+        {
+          "page": "nlogn-conjecture",
+          "quote": "Assumes: Big-O notation, Multitape Turing machine.",
+          "note": "This page gives no statement of the n log n optimality conjecture. The only statement I found is the front page sentence about Schonhage and Strassen, so I could not tell this page's status as a definition, assumption or claim.",
+          "level": "statement"
+        }
+      ],
+      "reason": "Answered, with moderate confidence. The main result, the reduction to convolution with carry propagation, and the two operations made faster (address moves and butterfly layers) are all stated on pages I opened, and I could follow the three-update swap and the convolution argument. I could not follow why the linear network and the recursion give the sub-linear exponents, and I did not open the pages that define them. I opened 10 of the 15 allowed pages.",
+      "leaks": [
+        "nlogn-conjecture",
+        "fixed-tape-model",
+        "tensor-product-of-vector-spaces"
+      ],
+      "covered": [
+        0,
+        2,
+        3
+      ],
+      "wrong": [],
+      "key_idea": {
+        "page": "main-theorem",
+        "statement": "Every transform level scans all stored bits, so making address moves and butterfly layers cheaper lowers the whole n log n-style bound.",
+        "quote": "The $n\\log n$ cost scans all $V$ stored bits at each of the $\\Theta(\\log n)$ transform levels, so cheaper moves and layers lower the whole bound."
+      }
+    },
+    {
+      "task": "0218-read-g2-reader-home",
+      "round": 1,
+      "goal": 1,
+      "persona": "reader",
+      "start": "home",
+      "outcome": "answered",
+      "path": [
+        "home",
+        "main-theorem",
+        "fast-address-interchange",
+        "fast-butterfly-layers",
+        "synthetic-transforms",
+        "dft-fft",
+        "fixed-tape-model",
+        "address-fields",
+        "nlogn-conjecture",
+        "recursive-power-saving"
+      ],
+      "searches": [],
+      "answer": "The pages say the n log n cost is paid at every level of the transform, and the two operations are the work done at each level. The transform has Theta(log n) levels. Each level first rearranges addresses by interchanging two address fields (the Fast interchange of address fields procedure), so that partners are scanned together, and then runs one scan of butterflies (the simultaneous butterfly layer). The Fixed-tape machine model and stream operations model charges for data movement, and every level scans all stored bits. The total is therefore about V times log n, and making the moves and the butterfly layers cheaper at each level lowers that total. So a faster algorithm has to attack these two operations: they are the per-level cost of the transform. The pages I opened do not say why a smarter transform with fewer or cheaper levels is not the alternative. That part of the answer is my inference, not something the pages argue.",
+      "citations": [
+        [
+          "home",
+          "The n log n cost comes from moving data and applying butterflies at every transform level, so faster versions of exactly these operations lower the whole bound."
+        ],
+        [
+          "main-theorem",
+          "The $n\\log n$ cost scans all $V$ stored bits at each of the $\\Theta(\\log n)$ transform levels, so cheaper moves and layers lower the whole bound."
+        ],
+        [
+          "dft-fft",
+          "Each level is one rearrangement that makes partners $t$ and $t+h/2$ adjacent, then one scan of butterflies."
+        ],
+        [
+          "address-fields",
+          "so a level may first need an interchange of two disjoint address fields that brings its pair into the scanned position."
+        ],
+        [
+          "fixed-tape-model",
+          "Interchanging whole fields moves blocks across long distances, which is expensive because each step moves a head by one cell."
+        ],
+        [
+          "synthetic-transforms",
+          "Synthetic transforms are costed on a [Fixed-tape machine model and stream operations](tam), where the cost is data movement."
+        ],
+        [
+          "fast-butterfly-layers",
+          "The layer performs the butterfly rounds of [Synthetic polynomial transforms](seg), which otherwise needs one whole-array pass per butterfly."
+        ],
+        [
+          "fast-address-interchange",
+          "Two disjoint contiguous $u$-bit address fields can be interchanged in $O(Vu^\\tau)$ for a fixed $\\tau<1$, although the intermediate steps are XOR combinations."
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "home",
+          "quote": "so faster versions of exactly these operations lower the whole bound.",
+          "note": "The page names these two operations as the target but never compares them with a smarter transform, so why these two and not the transform itself is not explained.",
+          "level": "chain"
+        },
+        {
+          "page": "home",
+          "quote": "cost $O(Vu^\\tau)$ and $O(Vd^{\\lambda'})$ for fixed exponents below 1",
+          "note": "I could not see how the per-level cost V d^{lambda'}, with chunk bound d, becomes the (lg n)^{1-kappa} factor in the main bound. No page I opened says what d is set to. I took the link as given.",
+          "level": "chain"
+        },
+        {
+          "page": "dft-fft",
+          "quote": "With Discrete Fourier transform and butterflies, a block of size $h$ computes a transform with root $\\omega^{n/h}$ from two halves that are transforms with root $\\omega^{2n/h}$.",
+          "note": "Discrete Fourier transform and butterflies is used as the name of a recursive scheme that I could not decode. I took it to be the same halving as the parity split above, which is a guess.",
+          "level": "symbol"
+        },
+        {
+          "page": "fixed-tape-model",
+          "quote": "The paper instead realizes the interchange by.",
+          "note": "The sentence is cut off, so I could not tell how the paper does the interchange instead of moving whole fields. The page also has a garbled sentence, 'The machine has, each with its own head.'",
+          "level": "step"
+        },
+        {
+          "page": "address-fields",
+          "quote": "A [Fixed-tape machine model and stream operations](tam) combines two entries only when both are scanned together",
+          "note": "I took this as a rule of the model. The page does not say why it holds, so I got past it by guessing that it is part of the model's definition.",
+          "level": "statement"
+        },
+        {
+          "page": "synthetic-transforms",
+          "quote": "Synthetic transforms are costed on a [Fixed-tape machine model and stream operations](tam), where the cost is data movement.",
+          "note": "The butterflies here are signed shifts and ring sums, so I could not see why the cost is data movement and not arithmetic. I followed the claim without the reason.",
+          "level": "statement"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "$m^{1-2^{-50}}=m\\exp(-2^{-50}\\log m)",
+          "note": "The constants 2^{-50} and 73/19906842167500 appear without derivation on this page, and the claim Psi<Wm is not shown here. I took the bound on Psi/W as given.",
+          "level": "step"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "Here $d$ is the chunk bound, which means something else on the recursive-power-saving page.",
+          "note": "d is not defined on this page. The recursive-power-saving page uses d^{vartheta} as a bound with no definition of d that I could find in the parts I read.",
+          "level": "symbol"
+        },
+        {
+          "page": "recursive-power-saving",
+          "quote": "and the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$.",
+          "note": "This inequality needs d^{vartheta} to be at most f, which the page does not state, so I could not verify it.",
+          "level": "step"
+        }
+      ],
+      "reason": "Answered with moderate confidence after opening 10 of the 15 allowed pages. The front page and the main theorem page state directly that the n log n cost is a per-level scan of all stored bits covering moves and butterflies. The transform, address-field, Fixed-tape machine model and stream operations and simultaneous-layer pages support that. Not supported by the pages I read: why a smarter transform is not the alternative, and how the per-level saving with chunk bound d becomes the (lg n)^{1-kappa} total bound.",
+      "leaks": [],
+      "covered": [
+        0,
+        1,
+        2
+      ],
+      "wrong": [],
+      "key_idea": {
+        "page": "main-theorem",
+        "statement": "Each transform level costs a scan of all stored bits, so the total is about V log n, and making the moves and butterfly layers cheaper at each level lowers that total.",
+        "quote": "The $n\\log n$ cost scans all $V$ stored bits at each of the $\\Theta(\\log n)$ transform levels, so cheaper moves and layers lower the whole bound."
+      }
+    },
+    {
+      "task": "0219-read-g2-reader-deep",
+      "round": 1,
+      "goal": 1,
+      "persona": "reader",
+      "start": "main-theorem",
+      "outcome": "answered",
+      "path": [
+        "main-theorem",
+        "fast-address-interchange",
+        "fast-butterfly-layers",
+        "ring-convolution-retained-order",
+        "synthetic-transforms",
+        "fixed-tape-model",
+        "dft-fft",
+        "nlogn-conjecture",
+        "recursive-power-saving",
+        "home",
+        "address-fields"
+      ],
+      "searches": [],
+      "answer": "The paper speeds up these two operations because, in its tape model, they are what each transform level costs. Each level does one interchange of address fields, which brings the two entries a butterfly pairs into the scanned position, and then one scan of butterflies. The arithmetic in these transforms is cheap (signed shifts and additions), and the cost on the machine is data movement, so the moves and the butterfly layers are the expensive part. Every level scans all V stored bits and there are Theta(log n) levels, so the n log n cost is those moves and layers repeated at each level. Making exactly the interchange and the butterfly layer cheaper therefore lowers the cost of every level and so the whole bound. The pages do not argue explicitly why a smarter transform with the same level structure would not help; that step is my inference from the level structure.",
+      "citations": [
+        [
+          "main-theorem",
+          "The $n\\log n$ cost scans all $V$ stored bits at each of the $\\Theta(\\log n)$ transform levels, so cheaper moves and layers lower the whole bound."
+        ],
+        [
+          "address-fields",
+          "so a level may first need an interchange of two disjoint address fields that brings its pair into the scanned position."
+        ],
+        [
+          "dft-fft",
+          "Each level is one rearrangement that makes partners $t$ and $t+h/2$ adjacent, then one scan of butterflies."
+        ],
+        [
+          "synthetic-transforms",
+          "Synthetic transforms over the polynomial ring need only signed shifts, address rearrangements and butterflies."
+        ],
+        [
+          "synthetic-transforms",
+          "where the cost is data movement."
+        ],
+        [
+          "fixed-tape-model",
+          "Interchanging whole fields moves blocks across long distances, which is expensive because each step moves a head by one cell."
+        ],
+        [
+          "home",
+          "The n log n cost comes from moving data and applying butterflies at every transform level, so faster versions of exactly these operations lower the whole bound."
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "The phase identities for $\\Xi$ reduce this group to $\\Psi$ child calls",
+          "note": "Psi is used as the number of child calls and must be below Wm, but this page never defines it. I could not tell what it counts and took it as a given number below Wm.",
+          "level": "symbol"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "m^{1-2^{-50}}=m\\exp(-2^{-50}\\log m)",
+          "note": "The chain of inequalities that ends in Psi/W is not explained. I could not see how it is derived, so I accepted the bound without following it.",
+          "level": "step"
+        },
+        {
+          "page": "recursive-power-saving",
+          "quote": "The total rank over all edges, which counts the smaller calls;",
+          "note": "s is defined only by a pointer to the network page, and I could not tell what a total rank over edges is. So I could not check that s<Wm holds, which the power saving needs.",
+          "level": "symbol"
+        },
+        {
+          "page": "fast-address-interchange",
+          "quote": "although the intermediate steps are XOR combinations.",
+          "note": "I checked that the three XOR updates swap two fields. I could not see why doing this on blocks costs O(V u^tau) with tau<1, rather than the cost of moving fields that the Fixed-tape machine model and stream operations page describes.",
+          "level": "chain"
+        },
+        {
+          "page": "fixed-tape-model",
+          "quote": "The paper instead realizes the interchange by.",
+          "note": "The sentence is cut off, so the page never says how the interchange is realized. I could not see why the interchange is cheap.",
+          "level": "step"
+        },
+        {
+          "page": "ring-convolution-retained-order",
+          "quote": "With the normalization of the source,",
+          "note": "M is never defined on this page, and its value is only given by reference to a source I cannot open. I guessed that the scaling constants cancel, which is what the inverse identity needs.",
+          "level": "symbol"
+        },
+        {
+          "page": "nlogn-conjecture",
+          "quote": "Assumes: Big-O notation, Multitape Turing machine.",
+          "note": "This page gives assumptions but no statement, so I could not tell what the conjecture says from here. I took its content from the front page, which calls it the n log n optimality conjecture.",
+          "level": "statement"
+        },
+        {
+          "page": "home",
+          "quote": "The n log n cost comes from moving data and applying butterflies at every transform level, so faster versions of exactly these operations lower the whole bound.",
+          "note": "I followed that moves and layers are paid at every level, but no page says why a smarter transform with the same level structure would not also lower the bound. That step is my inference.",
+          "level": "chain"
+        }
+      ],
+      "reason": "Fairly confident. The mechanism is on the pages: each level is an address-field interchange plus one butterfly scan, arithmetic is cheap, cost is data movement, and every level scans all V bits. Not stated: why a smarter transform with the same level structure would not suffice, which is my inference. I opened 11 of the 15 allowed pages.",
+      "leaks": [
+        "nlogn-conjecture"
+      ],
+      "covered": [
+        0,
+        1
+      ],
+      "wrong": [],
+      "key_idea": {
+        "page": "address-fields",
+        "statement": "Each level of the transform pairs entries at addresses that differ in one bit, so before its butterfly scan it may first need an interchange of address fields to bring a pair into scanned position.",
+        "quote": "so a level may first need an interchange of two disjoint address fields that brings its pair into the scanned position."
+      }
+    },
+    {
+      "task": "0221-read-g3-reader-home",
+      "round": 1,
+      "goal": 2,
+      "persona": "reader",
+      "start": "home",
+      "outcome": "answered",
+      "path": [
+        "home",
+        "recursive-power-saving",
+        "fast-address-interchange",
+        "subset-intersection-construction",
+        "linear-network-roles",
+        "address-shear-factorization",
+        "fast-butterfly-layers",
+        "main-theorem",
+        "tensor-product-of-vector-spaces"
+      ],
+      "searches": [
+        {
+          "query": "power saving",
+          "found": [
+            "recursive-power-saving",
+            "fast-butterfly-layers",
+            "ss-hh-background",
+            "subset-intersection-construction",
+            "address-shear-factorization"
+          ]
+        },
+        {
+          "query": "Wm",
+          "found": [
+            "recursive-power-saving",
+            "fast-butterfly-layers",
+            "main-theorem",
+            "subset-intersection-construction",
+            "scratch-restoration"
+          ]
+        },
+        {
+          "query": "fails",
+          "found": []
+        },
+        {
+          "query": "exponent",
+          "found": [
+            "fast-butterfly-layers",
+            "fast-address-interchange",
+            "phase-twist-convolution",
+            "poly-ring-y-r",
+            "dft-fft"
+          ]
+        },
+        {
+          "query": "geometric",
+          "found": [
+            "fast-butterfly-layers"
+          ]
+        },
+        {
+          "query": "growth factor",
+          "found": [
+            "main-theorem"
+          ]
+        },
+        {
+          "query": "ratio",
+          "found": [
+            "address-shear-factorization",
+            "dft-fft",
+            "convolution",
+            "recursive-power-saving",
+            "fixed-point-precision"
+          ]
+        }
+      ],
+      "answer": "Let Φ(f) be the cost of a call divided by the volume V it works on. A call at parameter mf makes s child calls at parameter f, each on streams of volume V/W, so its subcalls contribute (s/W)Φ(f), and the call adds its own outside cost C(mf)^λ. Unrolling ν levels leaves weight (s/W)^ν at parameter f/m^ν, so the internal costs form a geometric series, C f^λ times the sum over ν of ((s/W)/m^λ)^ν. That series stays bounded only if s/W < m^λ for some λ below 1. The count on the Three-element subset intersection construction page gives s = Wm − N + 2L with N > 2L, so s < Wm, that is s/W < m. This is what provides room: there is a λ with log_m(s/W) < λ < 1, so the series converges and the leaves, where the parameter has fallen below d^ϑ, are paid for with an exponent σ in the same range. The result is a cost of V times a power of the parameter below 1, for both the interchange and the butterfly procedures. What goes wrong if s ≥ Wm is my inference from the same formula, not something any page I opened states: then log_m(s/W) ≥ 1, no λ below 1 gives s/W < m^λ, and each level multiplies the internal cost by at least m^(1−λ) > 1, so the sum no longer converges to a power below 1 and the saving is lost.",
+      "citations": [
+        [
+          "recursive-power-saving",
+          "A recursive call at parameter $mf$ uses $s$ calls at parameter $f$ on streams of volume $V/W$, so the volume-normalized cost grows as a power, giving a fixed power saving."
+        ],
+        [
+          "recursive-power-saving",
+          "The subcalls contribute $\\frac{s}{W}\\Phi(f)$."
+        ],
+        [
+          "recursive-power-saving",
+          "After $\\nu$ levels the weight is $(s/W)^\\nu$, so the internal costs sum to"
+        ],
+        [
+          "recursive-power-saving",
+          "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$."
+        ],
+        [
+          "main-theorem",
+          "so $s<Wm$ needs $N>2L$."
+        ],
+        [
+          "subset-intersection-construction",
+          "Now $L/N=3h^2/\\binom h3=100/539$, so $2L<N$ and $s<WD$."
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "subset-intersection-construction",
+          "quote": "Here $\\mathcal F$ is the fixed space, so the paper's dimension $m$ is $D$.",
+          "note": "The letter m is overloaded. Here m equals D = h^3 = 10^6, but on the recursion page m is the growth factor (its example uses m=2), and on the main-theorem page m is the number of fields per chunk. I could not tell which m the condition s<Wm uses.",
+          "level": "symbol"
+        },
+        {
+          "page": "subset-intersection-construction",
+          "quote": "So the signed total is $WD-2N$.",
+          "note": "The telescoping of signed label changes and the cancelling of gate labels are asserted, not shown, so I could not follow how the signed total comes out as WD-2N.",
+          "level": "step"
+        },
+        {
+          "page": "subset-intersection-construction",
+          "quote": "The paper's decisive property is a bound on the number of smaller calls,.",
+          "note": "The sentence is cut off after the comma, so I could not tell what property the page calls decisive.",
+          "level": "statement"
+        },
+        {
+          "page": "recursive-power-saving",
+          "quote": "which stop once $f/m^\\nu<d^\\vartheta$.",
+          "note": "The exponent vartheta is never defined on any page I opened, yet the leaf bound depends on it.",
+          "level": "symbol"
+        },
+        {
+          "page": "recursive-power-saving",
+          "quote": "and the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$.",
+          "note": "I accepted this last inequality without checking it. It needs a relation between d^vartheta and f that the page does not give.",
+          "level": "step"
+        },
+        {
+          "page": "address-shear-factorization",
+          "quote": "The paper shows $N>2L_{\\rm b}$, so $s_{\\rm b}<W_{\\rm b}R$.",
+          "note": "N > 2L is asserted for the bit network. The only derivation I saw is for the triple network on the Three-element subset intersection construction page, and I could not tell whether the two networks are the same one.",
+          "level": "statement"
+        },
+        {
+          "page": "address-shear-factorization",
+          "quote": "Per wire, the interchanges are fewer than $R$, which the recurrence turns into a saving of a power of the chunk width (the chunk length).",
+          "note": "This page does not show how fewer than R interchanges per wire becomes a power saving. I had to go to the recursion page to find that step.",
+          "level": "chain"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "$$m^{1-2^{-50}}=m\\exp(-2^{-50}\\log m)>m(1-20\\cdot2^{-50})",
+          "note": "This margin display is not explained. I could not tell why Psi/W falls below m^(1-2^-50), where the constant 73/19906842167500 comes from, or which exponent lambda it gives.",
+          "level": "step"
+        },
+        {
+          "page": "recursive-power-saving",
+          "quote": "so the volume-normalized cost grows as a power, giving a fixed power saving.",
+          "note": "No page I opened says what goes wrong when s is at least Wm, and a search for failure words found nothing. My account of the failure case comes from the same formula and is marked as inference in the answer.",
+          "level": "chain"
+        }
+      ],
+      "reason": "Answered with moderate confidence. The main argument is supported by quotes: a recursion with per-level ratio s/W and shrink factor m gives a geometric series that is a power below 1 exactly when s/W is below m^λ for some λ below 1, and s < Wm supplies that room. The account of what fails when s is at least Wm is my own inference from the same formula; no page I opened states it, and the answer says so. I also could not check the leaf inequality, since the exponent vartheta is undefined on the pages I opened. I opened 9 of the 15 allowed pages.",
+      "leaks": [],
+      "covered": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "wrong": [],
+      "key_idea": {
+        "page": "recursive-power-saving",
+        "statement": "Each level of the recursion multiplies the normalized cost by s/W while shrinking the parameter by m, so the total is a power saving below 1 when s/W is below m.",
+        "quote": "A recursive call at parameter $mf$ uses $s$ calls at parameter $f$ on streams of volume $V/W$, so the volume-normalized cost grows as a power, giving a fixed power saving."
+      }
+    },
+    {
+      "task": "0224-read-g4-reader-home",
+      "round": 1,
+      "goal": 3,
+      "persona": "reader",
+      "start": "home",
+      "outcome": "answered",
+      "path": [
+        "home",
+        "fast-address-interchange",
+        "address-shear-factorization",
+        "linear-network-roles",
+        "scratch-restoration",
+        "fast-butterfly-layers"
+      ],
+      "searches": [],
+      "answer": "Over F2 subtraction equals addition. Start with (H,D) = (0,1).\n\nUpdate 1, D <- D - H: D = 1 - 0 = 1, so the state is (H,D) = (0,1). It does not change, because H = 0.\n\nUpdate 2, H <- H + D: H = 0 + 1 = 1, so the state is (H,D) = (1,1).\n\nUpdate 3, D <- H - D: D = 1 - 1 = 0, so the state is (H,D) = (1,0), which is (D,H) of the starting pair.\n\nThe finite linear network supplies update 2, H <- H + D. That is the address shear (H,D) -> (H+MD, D) with M = 1: it changes H using D and leaves D fixed. Updates 1 and 3, D <- D - H and D <- H - D, are the two linear-cost updates, which are done separately as lower-triangular transformations costing O(V). The wiki never names which of the three updates the network gives, so this assignment is my inference from the form of the updates.",
+      "citations": [
+        [
+          "fast-address-interchange",
+          "Swapping takes three updates, applied componentwise:"
+        ],
+        [
+          "fast-address-interchange",
+          "$D\\leftarrow D-H,\\qquad H\\leftarrow H+D,\\qquad D\\leftarrow H-D.$"
+        ],
+        [
+          "fast-address-interchange",
+          "for the bit procedure this ring is $\\mathbb F_2$, where subtraction and addition coincide."
+        ],
+        [
+          "fast-address-interchange",
+          "Starting from $(H,D)$ they give $(H,D-H)$, then $(D,D-H)$, then $(D,H)$, since $H+(D-H)=D$ and $D-(D-H)=H$."
+        ],
+        [
+          "address-shear-factorization",
+          "For a rational $R\\times R$ matrix $M$, the shear by $M$ is $(H,D)\\mapsto(H+MD,D)$."
+        ],
+        [
+          "address-shear-factorization",
+          "A lower-triangular transformation costs $O(V)$, where $V$ is the stored bit volume."
+        ],
+        [
+          "address-shear-factorization",
+          "take the network's endpoint operator to be an address shear and finish with two linear-cost updates"
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "address-shear-factorization",
+          "quote": "take the network's endpoint operator to be an address shear and finish with two linear-cost updates",
+          "note": "The page says the shear is applied and two linear-cost updates finish the job, but it does not say which of the three swap updates is the shear, or whether the linear updates come before or after it. I assigned H <- H + D to the shear by matching form (the only update that changes H using D while D stays fixed). I got past this by inference, not from a stated claim.",
+          "level": "step"
+        },
+        {
+          "page": "address-shear-factorization",
+          "quote": "Each update $H_\\sigma\\leftarrow H_\\sigma+D_\\tau$ takes one interchange of two equal fields and two additions",
+          "note": "The shear's own update is described as three internal steps (add, swap, subtract), which has the same shape as the three swap updates on mod. I could not tell whether the network's single update H <- H + D is what the interchange does, or whether 'interchange' here means the same thing as the field swap on mod. I followed the steps but did not see why they lead to the swap.",
+          "level": "chain"
+        },
+        {
+          "page": "address-shear-factorization",
+          "quote": "So the shear needs $\\operatorname{rank}_{\\mathbb Q}M$ interchanges plus $O(V)$ further work.",
+          "note": "The rank count is stated for a general R x R matrix M. No page works the swap's case (one field, M = 1, rank 1, hence one interchange), so I had to infer that the swap fits R = 1.",
+          "level": "step"
+        },
+        {
+          "page": "address-shear-factorization",
+          "quote": "The endpoint operator of the bit network is the address shear",
+          "note": "'Endpoint operator' and 'bit network' are not defined on any page I opened. I took the bit network to be the fixed linear network described on rid, but the link between the two terms is not stated.",
+          "level": "symbol"
+        }
+      ],
+      "reason": "Answered. The states after each update are computed directly from the rule on mod and are high confidence. The assignment of the network's update (H <- H + D) against the two separate linear-cost updates is moderate confidence: the wiki names the shear and the two linear updates but never maps them onto the three updates for this example, so I made that mapping from the form of the updates. Pages opened: home, mod, fiv, rid, tef, niz.",
+      "leaks": [],
+      "covered": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "wrong": [],
+      "key_idea": {
+        "page": "fast-address-interchange",
+        "statement": "Two address fields are swapped by three componentwise linear updates, and applying them in order to (H,D) gives (D,H).",
+        "quote": "Starting from $(H,D)$ they give $(H,D-H)$, then $(D,D-H)$, then $(D,H)$, since $H+(D-H)=D$ and $D-(D-H)=H$."
+      }
+    },
+    {
+      "task": "0222-read-g3-reader-deep",
+      "round": 1,
+      "goal": 2,
+      "persona": "reader",
+      "start": "fast-address-interchange",
+      "outcome": "answered",
+      "path": [
+        "fast-address-interchange",
+        "recursive-power-saving",
+        "subset-intersection-construction",
+        "linear-network-roles",
+        "address-fields",
+        "tensor-product-of-vector-spaces",
+        "fast-butterfly-layers",
+        "address-shear-factorization",
+        "scratch-restoration"
+      ],
+      "searches": [
+        {
+          "query": "smaller calls",
+          "found": [
+            "subset-intersection-construction",
+            "recursive-power-saving",
+            "scratch-restoration",
+            "tensor-product-of-vector-spaces"
+          ]
+        },
+        {
+          "query": "butterfly",
+          "found": [
+            "synthetic-transforms",
+            "fast-butterfly-layers",
+            "poly-ring-y-r",
+            "dft-fft",
+            "linear-network-roles"
+          ]
+        },
+        {
+          "query": "power",
+          "found": [
+            "poly-ring-y-r",
+            "recursive-power-saving",
+            "synthetic-transforms",
+            "fast-butterfly-layers",
+            "ss-hh-background"
+          ]
+        },
+        {
+          "query": "geometric",
+          "found": [
+            "fast-butterfly-layers"
+          ]
+        },
+        {
+          "query": "saving",
+          "found": [
+            "recursive-power-saving",
+            "fast-butterfly-layers",
+            "ss-hh-background",
+            "address-shear-factorization",
+            "subset-intersection-construction"
+          ]
+        }
+      ],
+      "answer": "The condition s < Wm is exactly the condition under which the recursion's exponent can be chosen below 1. On the recursion page, a call at parameter mf makes s subcalls at parameter f, each on a stream of volume V/W, so each level multiplies the normalized cost by s/W while the call size is divided by m. Unrolling gives a geometric series with ratio (s/W)/m^lambda. The page then picks sigma with max{0, log_m(s/W)} <= sigma < lambda, which bounds the leaves by O(f^lambda). Such a sigma exists, and sigma < 1, exactly when log_m(s/W) < 1, that is s/W < m, that is s < Wm. So the saving exponent must lie strictly between log_m(s/W) and 1, and s < Wm is what makes that interval nonempty. Where s comes from: each unit of rank in the interchange is one smaller call, and the count is s = WD - N + 2L. Since 2L < N (L/N = 100/539 for h = 100), s < WD, and the paper's m is D. The Address shear and lower-triangular factorization page states the same bound per wire, that interchanges are fewer than R. The Fast simultaneous butterfly layers page uses it with an explicit choice of exponent, Psi/W < m^(1-2^-50). What goes wrong if s >= Wm (my inference from the recursion page's inequality, not stated on any page): then log_m(s/W) >= 1 > lambda, so no admissible sigma exists. The ratio (s/W)/m^lambda is at least m^(1-lambda) > 1, so the internal sum grows with depth instead of converging, and the leaves are no longer bounded by f^lambda. The cost then grows at least like volume times a power of the parameter that is 1 or more, so the interchange and butterfly procedures lose their power saving below linear.",
+      "citations": [
+        [
+          "address-shear-factorization",
+          "So the shear needs $\\operatorname{rank}_{\\mathbb Q}M$ interchanges plus $O(V)$ further work."
+        ],
+        [
+          "subset-intersection-construction",
+          "Each unit of rank costs one smaller call."
+        ],
+        [
+          "fast-butterfly-layers",
+          "each child costs $(V/W)\\,T(f)$"
+        ],
+        [
+          "recursive-power-saving",
+          "The subcalls contribute $\\frac{s}{W}\\Phi(f)$."
+        ],
+        [
+          "recursive-power-saving",
+          "After $\\nu$ levels the weight is $(s/W)^\\nu$, so the internal costs sum to"
+        ],
+        [
+          "recursive-power-saving",
+          "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$."
+        ],
+        [
+          "recursive-power-saving",
+          "Then $(s/W)^\\nu\\le m^{\\nu\\sigma}=(f/u)^\\sigma$, and the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$."
+        ],
+        [
+          "subset-intersection-construction",
+          "Now $L/N=3h^2/\\binom h3=100/539$, so $2L<N$ and $s<WD$."
+        ],
+        [
+          "subset-intersection-construction",
+          "Here $\\mathcal F$ is the fixed space, so the paper's dimension $m$ is $D$."
+        ],
+        [
+          "address-shear-factorization",
+          "Per wire, the interchanges are fewer than $R$, which the recurrence turns into a saving of a power of the chunk width (the chunk length)."
+        ],
+        [
+          "fast-butterfly-layers",
+          "The phase identities for $\\Xi$ reduce this group to $\\Psi$ child calls"
+        ],
+        [
+          "fast-butterfly-layers",
+          "m(1-20\\cdot2^{-50})"
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "recursive-power-saving",
+          "quote": "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$.",
+          "note": "I followed how sigma bounds the leaves, but the page's condition is on s/W against m^lambda. The title's s < Wm is not connected to it on this page. I had to work out myself that a usable sigma exists exactly when s/W < m, and the Fast simultaneous butterfly layers page confirms this only by using an explicit exponent.",
+          "level": "chain"
+        },
+        {
+          "page": "recursive-power-saving",
+          "quote": "which stop once $f/m^\\nu<d^\\vartheta$",
+          "note": "The symbols d and vartheta are not defined on this page. The Fast simultaneous butterfly layers page later calls d a chunk bound, and it is unclear whether d is fixed or varies with f.",
+          "level": "symbol"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "and its share is at most",
+          "note": "The leaf bound uses sigma, which is not defined on this page; I took it from the recursion page. I also could not tell whether sigma is the same sigma there.",
+          "level": "symbol"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "The phase identities for $\\Xi$ reduce this group to $\\Psi$ child calls",
+          "note": "The phase identities are never stated, and Psi is neither defined here nor identified with the smaller-call count s of the Three-element subset intersection construction page. I could not see why the child count is the same quantity that the s < Wm bound controls. I assumed Psi = s.",
+          "level": "step"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "m(1-20\\cdot2^{-50})",
+          "note": "The chain bounds Psi/W below m^(1-2^-50) through a numerical constant 73/19906842167500 that is never derived. I could not tell where this constant comes from or why this particular exponent is needed, beyond the sentence about the layer's exponent.",
+          "level": "statement"
+        },
+        {
+          "page": "address-shear-factorization",
+          "quote": "The paper shows $N>2L_{\\rm b}$, so $s_{\\rm b}<W_{\\rm b}R$.",
+          "note": "The paper is not in the wiki, so I could not tell whether N > 2L is proved here or assumed. The Three-element subset intersection construction page checks it only for h = 100.",
+          "level": "statement"
+        },
+        {
+          "page": "subset-intersection-construction",
+          "quote": "So the signed total is $WD-2N$.",
+          "note": "The page never says how many sinks there are or what their signs are, so I could not recount the signed total to WD - 2N.",
+          "level": "step"
+        },
+        {
+          "page": "subset-intersection-construction",
+          "quote": "Absolute values add $2L$.",
+          "note": "I could not see why taking absolute values adds exactly 2L, since the signs of the label changes are not explained.",
+          "level": "chain"
+        },
+        {
+          "page": "subset-intersection-construction",
+          "quote": "Here $\\mathcal F$ is the fixed space, so the paper's dimension $m$ is $D$.",
+          "note": "In the recursion, m is a slot count. This line identifies it with the label dimension D without saying why. The paragraph also ends mid-sentence with \"The paper's decisive property is a bound on the number of smaller calls,\", so the property the paper relies on is not stated.",
+          "level": "statement"
+        },
+        {
+          "page": "subset-intersection-construction",
+          "quote": "neighbors are orthogonal.",
+          "note": "I could check the arithmetic: the form gives <t_T, t_S> = |T∩S| - 1, which is 0 for neighbors. I could not see why orthogonality of neighbors is what makes the cancelling network work.",
+          "level": "chain"
+        },
+        {
+          "page": "linear-network-roles",
+          "quote": "The intermediate frames cancel and the route applies only its endpoint operator.",
+          "note": "I followed the telescoping algebra, but not why frames are attached to the nodes or why the endpoint operator is the one the exchange needs.",
+          "level": "chain"
+        },
+        {
+          "page": "address-fields",
+          "quote": "combines two entries only when both are scanned together",
+          "note": "The term Fixed-tape machine model and stream operations is an unfamiliar name for a machine. I did not open its page, so I cannot decode what it is or what scanning means in it.",
+          "level": "symbol"
+        }
+      ],
+      "reason": "Answered with moderate confidence. I opened 9 of the 15 allowed pages (mod, fus, rit, rid, vib, lis, niz, fiv, tef). The core chain is readable: subcall count s and volume V/W on the recursion page, the geometric series with a sigma chosen between log_m(s/W) and lambda, and the Three-element subset intersection construction count showing s < WD with m = D. The part on what goes wrong when s >= Wm is my own inference from the recursion page's inequality; no page states it. Two links are asserted rather than shown: Psi (child calls) equals s, and the paper's m equals D.",
+      "leaks": [],
+      "covered": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "wrong": [],
+      "key_idea": {
+        "page": "recursive-power-saving",
+        "statement": "Each recursion level multiplies the normalized cost by s/W while the call size shrinks by a factor m, so the costs form a geometric series that stays bounded only when s/W is below m raised to the saving exponent.",
+        "quote": "After $\\nu$ levels the weight is $(s/W)^\\nu$, so the internal costs sum to"
+      }
+    },
+    {
+      "task": "0225-read-g4-reader-deep",
+      "round": 1,
+      "goal": 3,
+      "persona": "reader",
+      "start": "fast-address-interchange",
+      "outcome": "answered",
+      "path": [
+        "fast-address-interchange",
+        "fixed-tape-model",
+        "linear-network-roles",
+        "address-shear-factorization",
+        "scratch-restoration"
+      ],
+      "searches": [
+        {
+          "query": "finite linear network",
+          "found": [
+            "linear-network-roles",
+            "address-shear-factorization",
+            "subset-intersection-construction",
+            "recursive-power-saving",
+            "fixed-tape-model"
+          ]
+        },
+        {
+          "query": "interchange",
+          "found": [
+            "address-shear-factorization",
+            "address-fields",
+            "fixed-tape-model",
+            "scratch-restoration",
+            "fast-address-interchange"
+          ]
+        },
+        {
+          "query": "updates",
+          "found": [
+            "address-shear-factorization",
+            "fast-address-interchange"
+          ]
+        },
+        {
+          "query": "linear-cost",
+          "found": [
+            "address-shear-factorization"
+          ]
+        },
+        {
+          "query": "F_2",
+          "found": [
+            "address-shear-factorization",
+            "fast-address-interchange",
+            "subset-intersection-construction"
+          ]
+        },
+        {
+          "query": "shear",
+          "found": [
+            "address-shear-factorization",
+            "fast-address-interchange"
+          ]
+        }
+      ],
+      "answer": "Start with (H,D) = (0,1) over F_2, where subtraction and addition coincide. Update 1, D <- D - H: D = 1 - 0 = 1, so the state is (H,D) = (0,1). Update 2, H <- H + D: H = 0 + 1 = 1, so the state is (H,D) = (1,1). Update 3, D <- H - D: D = 1 - 1 = 0, so the state is (H,D) = (1,0). The final state (1,0) is (D,H), so the two fields are interchanged. The finite linear network supplies update 2, H <- H + D, which is the address shear (H,D) -> (H+D,D) and is the network's endpoint operator. Updates 1 and 3, D <- D - H and D <- H - D, are the two linear-cost updates that are done separately.",
+      "citations": [
+        [
+          "fast-address-interchange",
+          "Starting from $(H,D)$ they give $(H,D-H)$, then $(D,D-H)$, then $(D,H)$, since $H+(D-H)=D$ and $D-(D-H)=H$."
+        ],
+        [
+          "address-shear-factorization",
+          "The endpoint operator of the bit network is the address shear $(H,D)\\mapsto(H+D,D)$ over a residue ring, with rank reduced by a lower-triangular factorization."
+        ],
+        [
+          "address-shear-factorization",
+          "take the network's endpoint operator to be an address shear and finish with two linear-cost updates"
+        ],
+        [
+          "fast-address-interchange",
+          "for the bit procedure this ring is $\\mathbb F_2$, where subtraction and addition coincide."
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "address-shear-factorization",
+          "quote": "take the network's endpoint operator to be an address shear and finish with two linear-cost updates",
+          "note": "The page does not say which two updates are the linear-cost ones. I inferred that the shear is update 2 (H <- H + D, which leaves D unchanged, so it has the shear form) and that updates 1 and 3 are the two linear-cost updates. No page I opened names them that way.",
+          "level": "step"
+        },
+        {
+          "page": "linear-network-roles",
+          "quote": "By the telescoping, the route applies $\\varepsilon_w D_{\\mathrm{sink}(\\rho(w))}D_{\\mathrm{source}(w)}^{-1}$",
+          "note": "I followed the telescoping of the frames along a route, but I could not see why the endpoint operator of a route gives the required exchange of H and D. The page is abstract and has no concrete H and D example.",
+          "level": "chain"
+        },
+        {
+          "page": "fast-address-interchange",
+          "quote": "build both procedures from one finite linear network and a recursion that saves a power",
+          "note": "The page says the network builds the procedure but does not say how a network yields a swap of fields. I only found the link to the shear on the Address shear and lower-triangular factorization page.",
+          "level": "chain"
+        },
+        {
+          "page": "fixed-tape-model",
+          "quote": "The paper instead realizes the interchange by.",
+          "note": "The sentence is cut off, so I could not tell what realizes the interchange.",
+          "level": "statement"
+        },
+        {
+          "page": "address-shear-factorization",
+          "quote": "Here $q$ is a fixed odd prime, the radix of the digits",
+          "note": "This conflicts with the Fast interchange of address fields page, which says the bit procedure works over F_2 (q = 2 is not odd). I could not tell whether the bit network runs over F_2 or over Z/q^b Z with odd q. I took F_2 from the Fast interchange of address fields page and did not resolve the conflict.",
+          "level": "statement"
+        },
+        {
+          "page": "address-shear-factorization",
+          "quote": "The paper shows $N>2L_{\\rm b}$, so $s_{\\rm b}<W_{\\rm b}R$.",
+          "note": "This is a result attributed to the paper and not shown on the page, so I could not tell whether it is a proved fact or an assumed claim. It is not needed for the answer.",
+          "level": "statement"
+        }
+      ],
+      "reason": "Fairly confident in the state sequence, which comes directly from the Fast interchange of address fields page. Less sure of the split between updates: the Address shear and lower-triangular factorization page says the endpoint operator is the shear (H,D) -> (H+D,D), which matches update 2 exactly, and says the rest are two linear-cost updates, but no page names updates 1 and 3 as those. I opened 5 of the 15 allowed pages.",
+      "leaks": [],
+      "covered": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "wrong": [],
+      "key_idea": {
+        "page": "address-shear-factorization",
+        "statement": "The bit network's endpoint operator is the address shear (H,D) -> (H+D,D), which is the middle of the three updates, with D left unchanged.",
+        "quote": "The endpoint operator of the bit network is the address shear $(H,D)\\mapsto(H+D,D)$ over a residue ring, with rank reduced by a lower-triangular factorization."
+      }
+    },
+    {
+      "task": "0228-read-g5-reader-deep",
+      "round": 1,
+      "goal": 4,
+      "persona": "reader",
+      "start": "ring-convolution-retained-order",
+      "outcome": "answered",
+      "path": [
+        "ring-convolution-retained-order",
+        "gaussian-resampling",
+        "dft-fft",
+        "synthetic-transforms",
+        "bluestein-chirp",
+        "signed-packing",
+        "linear-network-roles",
+        "fixed-point-precision",
+        "crt-address-map",
+        "main-theorem"
+      ],
+      "searches": [
+        {
+          "query": "frequency order",
+          "found": [
+            "synthetic-transforms",
+            "dft-fft",
+            "signed-packing"
+          ]
+        },
+        {
+          "query": "order",
+          "found": [
+            "fixed-tape-model",
+            "ss-hh-background",
+            "synthetic-transforms",
+            "dft-fft",
+            "linear-network-roles"
+          ]
+        },
+        {
+          "query": "pointwise",
+          "found": [
+            "linear-network-roles",
+            "fixed-point-precision",
+            "dft-fft",
+            "synthetic-transforms",
+            "signed-packing"
+          ]
+        },
+        {
+          "query": "inverse",
+          "found": [
+            "gaussian-resampling",
+            "ring-convolution-retained-order",
+            "tensor-product-of-vector-spaces"
+          ]
+        },
+        {
+          "query": "same",
+          "found": [
+            "radix-digit-reduction",
+            "dft-fft",
+            "ss-hh-background",
+            "linear-network-roles",
+            "scratch-restoration"
+          ]
+        },
+        {
+          "query": "natural",
+          "found": []
+        },
+        {
+          "query": "rearrangement",
+          "found": [
+            "poly-ring-y-r",
+            "dft-fft",
+            "synthetic-transforms",
+            "convolution",
+            "crt-address-map"
+          ]
+        },
+        {
+          "query": "sorted",
+          "found": []
+        },
+        {
+          "query": "permutation",
+          "found": [
+            "linear-network-roles",
+            "address-shear-factorization",
+            "fixed-point-precision"
+          ]
+        },
+        {
+          "query": "retained",
+          "found": [
+            "synthetic-transforms",
+            "signed-packing"
+          ]
+        },
+        {
+          "query": "reversed",
+          "found": [
+            "poly-ring-y-r"
+          ]
+        },
+        {
+          "query": "frequencies",
+          "found": [
+            "bluestein-chirp",
+            "ring-convolution-retained-order"
+          ]
+        },
+        {
+          "query": "coordinate",
+          "found": [
+            "poly-ring-y-r",
+            "phase-twist-convolution",
+            "address-shear-factorization",
+            "convolution",
+            "fixed-point-precision"
+          ]
+        }
+      ],
+      "answer": "Both forward transforms are computed in the same frequency order, so the pointwise product multiplies entry m of one transform by entry m of the other, and the product is the right one for the convolution (the transform identity C_m = A_m B_m on page ton). The page gop writes the reordering as a permutation chi applied to both transforms, and chi commutes with the pointwise product: (chi D phi) pointwise-times (chi D psi) equals chi applied to ((D phi) pointwise-times (D psi)). So the product can be left in the scrambled order, and one application of chi^{-1} before the opposite transform undoes it and recovers the convolution. The sort is therefore not needed between the transforms. If the two forward transforms used different orders, the pointwise product would pair entries that are not at the same frequency, so the identity above (which needs one chi on both factors) would not hold and the inverse transform would not give the convolution. The pages do not state this consequence; I inferred it from the same-index pairing on page ton. Confidence is moderate: the same-order mechanism is on the pages, but chi is never defined and the mismatch case is my inference.",
+      "citations": [
+        [
+          "ring-convolution-retained-order",
+          "For example, if $\\chi$ swaps two records, $\\chi^{-1}$ swaps them back before $\\mathcal{D}^{+}$ acts."
+        ],
+        [
+          "ring-convolution-retained-order",
+          "$(\\chi\\mathcal{D}\\phi)\\odot(\\chi\\mathcal{D}\\psi)=\\chi\\big((\\mathcal{D}\\phi)\\odot(\\mathcal{D}\\psi)\\big)$."
+        ],
+        [
+          "synthetic-transforms",
+          "use two forward transforms, a pointwise product and the opposite transform, with retained frequency order"
+        ],
+        [
+          "dft-fft",
+          "Since $\\omega^{km}=\\omega^{(i+l)m}$ and $l$ runs over all indices for fixed $i$, $C_m=\\sum_i a_i\\omega^{im}\\sum_l b_l\\omega^{lm}=A_mB_m$."
+        ],
+        [
+          "fixed-point-precision",
+          "The source's transforms also carry a coordinate permutation, which cancels from this product, so the identity holds for the transforms written here."
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "ring-convolution-retained-order",
+          "quote": "For example, if $\\chi$ swaps two records, $\\chi^{-1}$ swaps them back before $\\mathcal{D}^{+}$ acts.",
+          "note": "chi is never defined on the page. I could not tell what it is, whether it is the reordering the question asks about, or what 'records' means here.",
+          "level": "symbol"
+        },
+        {
+          "page": "ring-convolution-retained-order",
+          "quote": "$(\\chi\\mathcal{D}\\phi)\\odot(\\chi\\mathcal{D}\\psi)=\\chi\\big((\\mathcal{D}\\phi)\\odot(\\mathcal{D}\\psi)\\big)$.",
+          "note": "The identity is stated without a reason why a reordering commutes with a pointwise product, and the page does not say both transforms must use the same chi.",
+          "level": "step"
+        },
+        {
+          "page": "ring-convolution-retained-order",
+          "quote": "With the normalization of the source,",
+          "note": "D, D^+ and M are never defined on the page. I guessed that D is the forward transform and D^+ its opposite, from the wording on page seg.",
+          "level": "symbol"
+        },
+        {
+          "page": "synthetic-transforms",
+          "quote": "use two forward transforms, a pointwise product and the opposite transform, with retained frequency order",
+          "note": "'retained frequency order' is never explained. I could not tell whether the output is deliberately left in a permuted order, or why no sort is needed in between. Pages gop and mor do not say this either.",
+          "level": "chain"
+        },
+        {
+          "page": "dft-fft",
+          "quote": "The levels $h=2,4,\\dots,n$ leave $A_0,\\dots,A_{n-1}$ in order.",
+          "note": "This says the butterfly levels leave the transform in natural order. That seems to conflict with 'retained frequency order' on page seg, and I could not tell which order the convolution actually uses.",
+          "level": "statement"
+        },
+        {
+          "page": "fixed-point-precision",
+          "quote": "The source's transforms also carry a coordinate permutation, which cancels from this product",
+          "note": "I could not see why the permutation cancels. The page does not say that both transforms carry the same permutation, which is what the cancellation would need.",
+          "level": "step"
+        },
+        {
+          "page": "dft-fft",
+          "quote": "Since $\\omega^{km}=\\omega^{(i+l)m}$ and $l$ runs over all indices for fixed $i$, $C_m=\\sum_i a_i\\omega^{im}\\sum_l b_l\\omega^{lm}=A_mB_m$.",
+          "note": "The page shows that matching frequency index m pairs A_m with B_m. It does not say what goes wrong if the two lists are in different orders. The claim that a mismatch gives a wrong convolution is my inference, not on any page I opened.",
+          "level": "chain"
+        }
+      ],
+      "reason": "Answered with moderate confidence. The same-order mechanism (one reordering chi on both transforms, commuting with the pointwise product, undone by chi^{-1} before the opposite transform) is stated on pages gop and mor, but chi is never defined. The consequence of different orders is my inference from the same-index pairing on page ton, not a statement on any page. Pages opened: gop, roz, ton, seg, zod, gep, rid, mor, sad, dok (10 of 15).",
+      "leaks": [],
+      "covered": [
+        0,
+        1,
+        3
+      ],
+      "wrong": [],
+      "key_idea": {
+        "page": "ring-convolution-retained-order",
+        "statement": "Applying the same reordering chi to both forward transforms commutes with their pointwise product, so a single chi^{-1} before the opposite transform undoes the reordering and recovers the convolution.",
+        "quote": "$(\\chi\\mathcal{D}\\phi)\\odot(\\chi\\mathcal{D}\\psi)=\\chi\\big((\\mathcal{D}\\phi)\\odot(\\mathcal{D}\\psi)\\big)$."
+      }
+    },
+    {
+      "task": "0227-read-g5-reader-home",
+      "round": 1,
+      "goal": 4,
+      "persona": "reader",
+      "start": "home",
+      "outcome": "answered",
+      "path": [
+        "home",
+        "ring-convolution-retained-order",
+        "dft-fft",
+        "synthetic-transforms",
+        "fast-butterfly-layers",
+        "gaussian-resampling",
+        "fixed-point-precision",
+        "linear-network-roles",
+        "crt-address-map",
+        "bluestein-chirp",
+        "phase-twist-convolution"
+      ],
+      "searches": [
+        {
+          "query": "frequency order",
+          "found": [
+            "synthetic-transforms",
+            "dft-fft",
+            "signed-packing"
+          ]
+        },
+        {
+          "query": "chi",
+          "found": [
+            "ring-convolution-retained-order",
+            "fast-butterfly-layers",
+            "gaussian-resampling",
+            "fixed-tape-model",
+            "crt-address-map"
+          ]
+        },
+        {
+          "query": "interchange",
+          "found": [
+            "address-shear-factorization",
+            "address-fields",
+            "fixed-tape-model",
+            "scratch-restoration",
+            "fast-address-interchange"
+          ]
+        },
+        {
+          "query": "order",
+          "found": [
+            "fixed-tape-model",
+            "ss-hh-background",
+            "synthetic-transforms",
+            "dft-fft",
+            "linear-network-roles"
+          ]
+        },
+        {
+          "query": "natural",
+          "found": []
+        },
+        {
+          "query": "permutation",
+          "found": [
+            "linear-network-roles",
+            "address-shear-factorization",
+            "fixed-point-precision"
+          ]
+        },
+        {
+          "query": "reorder",
+          "found": [
+            "gaussian-resampling"
+          ]
+        },
+        {
+          "query": "records",
+          "found": [
+            "fast-butterfly-layers",
+            "phase-twist-convolution",
+            "signed-packing",
+            "ring-convolution-retained-order"
+          ]
+        },
+        {
+          "query": "pointwise",
+          "found": [
+            "linear-network-roles",
+            "fixed-point-precision",
+            "dft-fft",
+            "synthetic-transforms",
+            "signed-packing"
+          ]
+        },
+        {
+          "query": "retained",
+          "found": [
+            "synthetic-transforms",
+            "signed-packing"
+          ]
+        },
+        {
+          "query": "natural order",
+          "found": []
+        },
+        {
+          "query": "sort",
+          "found": []
+        }
+      ],
+      "answer": "Part 1 is answered from the pages. Part 2 is my own inference: no page I opened says it.\n\nFrom the pages: the two forward transforms are each passed through the same reordering chi, and the wiki's identity is (chi D phi) pointwise-times (chi D psi) = chi((D phi) pointwise-times (D psi)). So applying one common reordering to both factors commutes with the pointwise product: the product comes out already reordered by chi, and nothing has to be sorted in between. Only one chi^{-1} is needed, just before the opposite transform: D^+ chi^{-1}((chi D phi) pointwise-times (chi D psi)) = D^+((D phi) pointwise-times (D psi)), which the page gives as a known scalar multiple of the cyclic convolution. The wiki also says a coordinate permutation carried by the source's transforms cancels from this product. The ordinary transform's butterfly levels leave the output in order, so the reordering is a step the algorithm is free to skip.\n\nNot from the pages (my guess): if the two forward transforms used different orders, the pointwise product would multiply entries at different frequencies, so it would no longer be the matched product (D phi)_m (D psi)_m that the convolution identity needs, and the inverse would not return the convolution. No page I opened states this.",
+      "citations": [
+        [
+          "ring-convolution-retained-order",
+          "\\mathcal{D}^{+}\\chi^{-1}\\big((\\chi\\mathcal{D}\\phi)\\odot(\\chi\\mathcal{D}\\psi)\\big)=\\mathcal{D}^{+}\\big((\\mathcal{D}\\phi)\\odot(\\mathcal{D}\\psi)\\big)"
+        ],
+        [
+          "ring-convolution-retained-order",
+          "(\\chi\\mathcal{D}\\phi)\\odot(\\chi\\mathcal{D}\\psi)=\\chi\\big((\\mathcal{D}\\phi)\\odot(\\mathcal{D}\\psi)\\big)"
+        ],
+        [
+          "ring-convolution-retained-order",
+          "$\\chi^{-1}$ swaps them back before $\\mathcal{D}^{+}$ acts"
+        ],
+        [
+          "fixed-point-precision",
+          "The source's transforms also carry a coordinate permutation, which cancels from this product, so the identity holds for the transforms written here."
+        ],
+        [
+          "dft-fft",
+          "The levels $h=2,4,\\dots,n$ leave $A_0,\\dots,A_{n-1}$ in order."
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "home",
+          "quote": "use two forward transforms, a pointwise product and the opposite transform, with retained frequency order",
+          "note": "'Retained frequency order' is never defined. I guessed it means the output is left in the transform's own order rather than sorted back to natural order.",
+          "level": "symbol"
+        },
+        {
+          "page": "ring-convolution-retained-order",
+          "quote": "(\\chi\\mathcal{D}\\phi)\\odot(\\chi\\mathcal{D}\\psi)=\\chi\\big((\\mathcal{D}\\phi)\\odot(\\mathcal{D}\\psi)\\big)",
+          "note": "chi is never defined on any page I opened. I could not tell what reordering it is, or why its output counts as retained order rather than natural order.",
+          "level": "symbol"
+        },
+        {
+          "page": "ring-convolution-retained-order",
+          "quote": "With the normalization of the source,",
+          "note": "The normalization M and the opposite transform D^+ are not defined on this page. I took D^+ to be an opposite transform, as the Fixed-point precision and exact recovery page describes its own opposite transform, but I did not check that.",
+          "level": "symbol"
+        },
+        {
+          "page": "ring-convolution-retained-order",
+          "quote": "The second identity is the inverse relation that the normalization fixes, and the source checks it by expanding the finite sums.",
+          "note": "The inverse identity is asserted as checked in a source I cannot see. I accepted it without checking.",
+          "level": "statement"
+        },
+        {
+          "page": "ring-convolution-retained-order",
+          "quote": "For example, if $\\chi$ swaps two records, $\\chi^{-1}$ swaps them back before $\\mathcal{D}^{+}$ acts.",
+          "note": "The example speaks of 'two records', but no page says what a record is in this transform. I could not connect the example to the transform.",
+          "level": "beyond"
+        },
+        {
+          "page": "dft-fft",
+          "quote": "C_m=\\sum_i a_i\\omega^{im}\\sum_l b_l\\omega^{lm}=A_mB_m",
+          "note": "The pointwise rule is shown only when both transforms use the same frequency index m. The wiki never says what happens when the two transforms use different indexing, so the answer's second part is a guess.",
+          "level": "chain"
+        },
+        {
+          "page": "fixed-point-precision",
+          "quote": "The source's transforms also carry a coordinate permutation, which cancels from this product, so the identity holds for the transforms written here.",
+          "note": "The page says a permutation cancels but does not say why it cancels when both transforms share an order, nor what happens when they do not.",
+          "level": "chain"
+        }
+      ],
+      "reason": "Part 1 (why no sort is needed) is supported by the gop page's identity and its inverse step. Part 2 (what goes wrong with different orders) is not on any page I opened, so it is my inference. chi and the retained-order concept are never defined, so I cannot be sure what the reordering is. Confidence is high on the mechanism of part 1 and low on part 2.",
+      "leaks": [],
+      "covered": [
+        0,
+        1,
+        3
+      ],
+      "wrong": [],
+      "key_idea": {
+        "page": "ring-convolution-retained-order",
+        "statement": "Applying the same reordering to both forward transforms commutes with their pointwise product, so the reordering only has to be undone once, just before the opposite transform.",
+        "quote": "(\\chi\\mathcal{D}\\phi)\\odot(\\chi\\mathcal{D}\\psi)=\\chi\\big((\\mathcal{D}\\phi)\\odot(\\mathcal{D}\\psi)\\big)"
+      }
+    },
+    {
+      "task": "0230-read-g6-reader-home",
+      "round": 1,
+      "goal": 5,
+      "persona": "reader",
+      "start": "home",
+      "outcome": "answered",
+      "path": [
+        "home",
+        "recursive-power-saving",
+        "fast-address-interchange",
+        "subset-intersection-construction",
+        "address-shear-factorization",
+        "linear-network-roles",
+        "fast-butterfly-layers",
+        "main-theorem"
+      ],
+      "searches": [],
+      "answer": "Case 1 (W=2, m=3, s=4): s/W=2 and s=4 is below Wm=6, so the power-saving argument applies. The internal costs form a geometric series with ratio (s/W)/m^λ = 2/3^λ, and the choice of σ needs log_3 2 (about 0.631) ≤ σ < λ. So the saving works for exponents λ with about 0.631 < λ < 1. Case 2 (W=2, m=2, s=5): s/W=2.5 and s=5 is not below Wm=4, so the condition fails. Since log_2 2.5 (about 1.32) is above 1, no exponent below 1 makes the series converge, and the power-saving argument does not apply.",
+      "citations": [
+        [
+          "recursive-power-saving",
+          "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$."
+        ],
+        [
+          "recursive-power-saving",
+          "After $\\nu$ levels the weight is $(s/W)^\\nu$, so the internal costs sum to"
+        ],
+        [
+          "subset-intersection-construction",
+          "so that the total number $s$ of smaller calls satisfies $s<Wm$."
+        ],
+        [
+          "fast-butterfly-layers",
+          "Internal overheads form a geometric series, summing to $O(d^{\\lambda})$ with $\\lambda<1$."
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "recursive-power-saving",
+          "quote": "which stop once $f/m^\\nu<d^\\vartheta$",
+          "note": "The symbol vartheta is not defined on any page I opened, and d is described on the Fast simultaneous butterfly layers page as meaning something else. I could not decode the leaf-stopping rule.",
+          "level": "symbol"
+        },
+        {
+          "page": "recursive-power-saving",
+          "quote": "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$.",
+          "note": "I followed the step (s/W)^nu at most m^(nu sigma) from sigma at least log_m(s/W), but not why sigma must also be at least 0, or why the leaves then cost at most f^lambda.",
+          "level": "chain"
+        },
+        {
+          "page": "recursive-power-saving",
+          "quote": "After $\\nu$ levels the weight is $(s/W)^\\nu$, so the internal costs sum to",
+          "note": "I followed the sum, but the page never says the geometric series must converge. The needed condition (s/W)/m^lambda below 1 is my own inference, not stated here.",
+          "level": "chain"
+        },
+        {
+          "page": "recursive-power-saving",
+          "quote": "so the volume-normalized cost grows as a power, giving a fixed power saving.",
+          "note": "The page does not state the range of lambda or whether lambda must be below 1. I took the upper bound lambda below 1 from the Fast simultaneous butterfly layers symbol table and derived the range log_m(s/W) < lambda < 1 myself.",
+          "level": "statement"
+        },
+        {
+          "page": "subset-intersection-construction",
+          "quote": "Here $\\mathcal F$ is the fixed space, so the paper's dimension $m$ is $D$.",
+          "note": "I could not tell whether the question's fan-in factor m is the same m as the paper's dimension D. I assumed it is, based on the page title s<Wm.",
+          "level": "statement"
+        },
+        {
+          "page": "subset-intersection-construction",
+          "quote": "The paper's decisive property is a bound on the number of smaller calls,",
+          "note": "The sentence stops after the comma, so I could not tell which property is decisive, or whether s<Wm is necessary for the saving or only the condition the paper uses.",
+          "level": "statement"
+        },
+        {
+          "page": "main-theorem",
+          "quote": "where $m$ is the number of fields per chunk and $q$ is a fixed prime.",
+          "note": "Here m means fields per chunk, but the Recursive power saving page defines m as the growth factor of a call's parameter. I could not tell which meaning the question's fan-in factor m uses.",
+          "level": "symbol"
+        }
+      ],
+      "reason": "Answered with moderate confidence. The pages give the sum argument, the condition s<Wm, and a power-saving example. The range log_m(s/W) < lambda < 1 follows from these, but the pages do not state it directly. The upper bound lambda < 1 comes from another page's symbol table, and I could not confirm it for this recursion. Opened 8 pages: home, fus, mod, rit, fiv, rid, niz, dok.",
+      "leaks": [],
+      "covered": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "wrong": [],
+      "key_idea": {
+        "page": "recursive-power-saving",
+        "statement": "Each recursion level costs s/W times the work below it while the size shrinks by m, so the internal costs form a geometric series that converges, giving a power saving, when s/W is below m raised to the exponent.",
+        "quote": "A recursive call at parameter $mf$ uses $s$ calls at parameter $f$ on streams of volume $V/W$, so the volume-normalized cost grows as a power, giving a fixed power saving."
+      }
+    },
+    {
+      "task": "0236-read-g8-reader-home",
+      "round": 1,
+      "goal": 7,
+      "persona": "reader",
+      "start": "home",
+      "outcome": "answered",
+      "path": [
+        "home",
+        "nlogn-conjecture",
+        "fixed-tape-model",
+        "fast-butterfly-layers",
+        "fast-address-interchange",
+        "main-theorem",
+        "synthetic-transforms",
+        "dft-fft",
+        "ring-convolution-retained-order",
+        "address-fields",
+        "signed-packing",
+        "ss-hh-background"
+      ],
+      "searches": [],
+      "answer": "The pages give the reason on the main-theorem page: the n log n cost is a scan of all stored bits at each of the Theta(log n) transform levels, so making those address moves and butterfly layers cheaper lowers the whole bound. Each transform level is built from one address rearrangement followed by one scan of butterflies, so that is where the per-level cost sits. Pointwise products are not the target: the DFT reduces convolution to a pointwise product, and the pages then hand those products to the same method recursively, or to an ordinary O(n log n) multiplier used as a subroutine. The pages I opened do not show the sum of the level costs, nor how the pointwise-product subroutine cost stays within the bound, so the last step is my reading rather than something the pages verify.",
+      "citations": [
+        [
+          "main-theorem",
+          "The $n\\log n$ cost scans all $V$ stored bits at each of the $\\Theta(\\log n)$ transform levels, so cheaper moves and layers lower the whole bound."
+        ],
+        [
+          "dft-fft",
+          "Each level is one rearrangement that makes partners $t$ and $t+h/2$ adjacent, then one scan of butterflies."
+        ],
+        [
+          "dft-fft",
+          "$C_m=\\sum_i a_i\\omega^{im}\\sum_l b_l\\omega^{lm}=A_mB_m$."
+        ],
+        [
+          "ss-hh-background",
+          "The entrywise products are multiplied by the same method, recursively, and Schönhage and Strassen's paper proves the resulting bound."
+        ],
+        [
+          "signed-packing",
+          "an ordinary subroutine call that costs $O(n\\log n)$."
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "main-theorem",
+          "quote": "Let $\\Phi(f)$ be the time divided by $V$ at that level.",
+          "note": "The page defines the per-level cost Phi(f) and then stops before the level costs are summed, so I could not check the step from per-level cost to 'lower the whole bound'.",
+          "level": "chain"
+        },
+        {
+          "page": "signed-packing",
+          "quote": "an ordinary subroutine call that costs $O(n\\log n)$.",
+          "note": "The pointwise products are also paid for at O(n log n), through this subroutine. The page does not say how large those products are, so I could not see why they do not dominate the total, which is the core of the question.",
+          "level": "chain"
+        },
+        {
+          "page": "ss-hh-background",
+          "quote": "The entrywise products are multiplied by the same method, recursively, and Schönhage and Strassen's paper proves the resulting bound.",
+          "note": "I took the bound for the recursive products on trust, from an outside paper the page names but does not state. I got past this only by accepting it.",
+          "level": "statement"
+        },
+        {
+          "page": "fixed-tape-model",
+          "quote": "The paper instead realizes the interchange by.",
+          "note": "The sentence is cut off. The page does not say how an interchange of fields is carried out on tapes, which the level construction depends on.",
+          "level": "step"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "Here $d$ is the chunk bound, which means something else on the recursive-power-saving page.",
+          "note": "The letter d is redefined across pages. I could not tell which d the main bound uses, so I could not fix the size of the layer's cost.",
+          "level": "symbol"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "The layer takes $\\lambda'$ above $\\sigma+\\tfrac12(1-\\sigma)$.",
+          "note": "sigma is never defined on this page, so I could not tell where the exponent of the layer's cost comes from.",
+          "level": "symbol"
+        }
+      ],
+      "reason": "Answered with moderate confidence. The main-theorem page states the reason for focusing on these operations, but its cost accounting stops before the per-level costs are summed. The pointwise-product subroutine cost is not reconciled with the bound on the pages I opened. I used 12 of the 15 allowed page opens.",
+      "leaks": [],
+      "covered": [
+        0
+      ],
+      "wrong": [],
+      "key_idea": {
+        "page": "main-theorem",
+        "statement": "Cheaper address moves and butterfly layers lower the total cost, because the n log n bound scans every stored bit at each transform level.",
+        "quote": "The $n\\log n$ cost scans all $V$ stored bits at each of the $\\Theta(\\log n)$ transform levels, so cheaper moves and layers lower the whole bound."
+      }
+    },
+    {
+      "task": "0233-read-g7-reader-home",
+      "round": 1,
+      "goal": 6,
+      "persona": "reader",
+      "start": "home",
+      "outcome": "gave_up",
+      "path": [
+        "home",
+        "main-theorem",
+        "fast-address-interchange",
+        "recursive-power-saving",
+        "fast-butterfly-layers",
+        "synthetic-transforms",
+        "ring-convolution-retained-order",
+        "address-fields",
+        "fixed-tape-model",
+        "crt-address-map",
+        "ss-hh-background",
+        "dft-fft",
+        "fixed-point-precision"
+      ],
+      "searches": [
+        {
+          "query": "levels",
+          "found": [
+            "address-fields",
+            "synthetic-transforms",
+            "recursive-power-saving",
+            "fast-butterfly-layers",
+            "dft-fft"
+          ]
+        },
+        {
+          "query": "kappa",
+          "found": [
+            "nlogn-conjecture",
+            "radix-digit-reduction",
+            "fixed-tape-model",
+            "ss-hh-background",
+            "synthetic-transforms"
+          ]
+        },
+        {
+          "query": "chunk",
+          "found": [
+            "fast-butterfly-layers",
+            "main-theorem",
+            "address-shear-factorization",
+            "recursive-power-saving"
+          ]
+        },
+        {
+          "query": "levels",
+          "found": [
+            "address-fields",
+            "synthetic-transforms",
+            "recursive-power-saving",
+            "fast-butterfly-layers",
+            "dft-fft"
+          ]
+        },
+        {
+          "query": "power",
+          "found": [
+            "poly-ring-y-r",
+            "recursive-power-saving",
+            "synthetic-transforms",
+            "fast-butterfly-layers",
+            "ss-hh-background"
+          ]
+        }
+      ],
+      "answer": "",
+      "citations": [
+        [
+          "home",
+          "It multiplies two $n$-bit integers in $O(n(\\lg n)^{1-\\kappa})$ time, where $\\kappa = 2^{-182}$."
+        ],
+        [
+          "fast-address-interchange",
+          "Two disjoint contiguous $u$-bit address fields can be interchanged in $O(Vu^\\tau)$ for a fixed $\\tau<1$, although the intermediate steps are XOR combinations."
+        ],
+        [
+          "fast-butterfly-layers",
+          "The layer costs $O(Vd^{\\lambda'})$ for a fixed exponent $\\lambda'<1$, where $V$ is the stored bit volume."
+        ],
+        [
+          "recursive-power-saving",
+          "A recursive call at parameter $mf$ uses $s$ calls at parameter $f$ on streams of volume $V/W$, so the volume-normalized cost grows as a power, giving a fixed power saving."
+        ],
+        [
+          "main-theorem",
+          "Both procedures come from one fixed linear network with $W$ roles and $s$ child calls."
+        ],
+        [
+          "fixed-point-precision",
+          "The source sets $p=6b$, where $b=\\lceil\\log_2 n\\rceil$, so $n\\le 2^b$."
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "main-theorem",
+          "quote": "The $n\\log n$ cost scans all $V$ stored bits at each of the $\\Theta(\\log n)$ transform levels, so cheaper moves and layers lower the whole bound.",
+          "note": "I followed that cheaper moves and layers lower the bound, but I could not see why a fixed power saving per level, in the chunk parameter d, turns into a power of lg n on the whole running time. The page does not say what d or u equals in terms of n. mor gives a digit width b = ceil(log2 n), but no page I opened says the chunk count is b or Theta(log n).",
+          "level": "chain"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "Let $\\Delta$ be the number of selected address chunks, and let $d$ be an upper bound on $\\Delta$, so $\\Delta\\le d$.",
+          "note": "d is only an upper bound on the number of selected chunks. I could not tell what it is in terms of n, so I could not connect the layer's bound O(V d^lambda') to lg n. The page also says d means something else on the recursive-power-saving page.",
+          "level": "symbol"
+        },
+        {
+          "page": "home",
+          "quote": "where $\\kappa = 2^{-182}$.",
+          "note": "The exponent kappa = 2^-182 is stated as the value in the bound, but none of the pages I opened derives it or shows how it comes from the exponents tau and lambda'. I could not tell whether it is a proved constant or a chosen one.",
+          "level": "statement"
+        }
+      ],
+      "reason": "Gave up at the last step. I followed the two sped-up operations (interchanging two address fields in O(V u^tau) with tau < 1, and a simultaneous butterfly layer in O(V d^lambda') with lambda' < 1) and the recursion that gives a fixed power saving. No page I opened says how the chunk parameter d or the field width u is set to a power of lg n, or how that yields the exponent 1 - kappa with kappa = 2^-182, so the claim that the log factor is lowered by a fixed power is not supported by the pages. 13 of 15 pages opened.",
+      "leaks": [],
+      "covered": [],
+      "wrong": []
+    },
+    {
+      "task": "0231-read-g6-reader-deep",
+      "round": 1,
+      "goal": 5,
+      "persona": "reader",
+      "start": "recursive-power-saving",
+      "outcome": "answered",
+      "path": [
+        "recursive-power-saving",
+        "subset-intersection-construction",
+        "home",
+        "fast-address-interchange",
+        "fast-butterfly-layers",
+        "linear-network-roles",
+        "main-theorem",
+        "tensor-product-of-vector-spaces"
+      ],
+      "searches": [
+        {
+          "query": "fan-in",
+          "found": []
+        },
+        {
+          "query": "fan",
+          "found": []
+        },
+        {
+          "query": "Wm",
+          "found": [
+            "recursive-power-saving",
+            "fast-butterfly-layers",
+            "main-theorem",
+            "subset-intersection-construction",
+            "scratch-restoration"
+          ]
+        }
+      ],
+      "answer": "Case 1 (W=2, m=3, s=4): the power-saving argument applies. Here s=4 < Wm=6, equivalently s/W=2 < m=3. The argument needs a sigma with max{0, log_m(s/W)} <= sigma < lambda, and lambda must be below 1, so the usable range is lambda in (log_3 2, 1), about (0.631, 1), with sigma in [log_3 2, lambda). Case 2 (W=2, m=2, s=5): the power-saving argument does not apply. Here s=5 >= Wm=4, so s/W=2.5 > m=2 and log_2 2.5 is about 1.32, which is above 1. No sigma < lambda < 1 satisfies the requirement, so there is no exponent range.",
+      "citations": [
+        [
+          "recursive-power-saving",
+          "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$."
+        ],
+        [
+          "fast-butterfly-layers",
+          "The fixed exponent, below 1, of the power of the parameter that bounds the cost per bit."
+        ],
+        [
+          "subset-intersection-construction",
+          "so that the total number $s$ of smaller calls satisfies $s<Wm$."
+        ],
+        [
+          "main-theorem",
+          "For the bit network, $s$ equals $Wm$ minus $N$, the number of negative source projections, plus twice the lost label dimension $L$, so $s<Wm$ needs $N>2L$."
+        ],
+        [
+          "recursive-power-saving",
+          "A recursive call at parameter $mf$ uses $s$ calls at parameter $f$ on streams of volume $V/W$, so the volume-normalized cost grows as a power, giving a fixed power saving."
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "recursive-power-saving",
+          "quote": "Let $C$ be a constant such that the call's own outside work is at most $C(mf)^\\lambda$, so",
+          "note": "lambda is used here but not defined on this page. I could only fix it as the power exponent below 1 by reading the Fast simultaneous butterfly layers page.",
+          "level": "symbol"
+        },
+        {
+          "page": "recursive-power-saving",
+          "quote": "which stop once $f/m^\\nu<d^\\vartheta$",
+          "note": "d and vartheta are never defined on this page. The Fast simultaneous butterfly layers page says its d is a different quantity, so I could not tell what the leaf threshold is.",
+          "level": "symbol"
+        },
+        {
+          "page": "recursive-power-saving",
+          "quote": "so the internal costs sum to",
+          "note": "The page does not say the geometric series converges. That needs the ratio (s/W)/m^lambda to be below 1, which is never stated, so I could not see why the internal costs stay O(f^lambda). I got past this by inferring it from the worked example with s=3.",
+          "level": "chain"
+        },
+        {
+          "page": "recursive-power-saving",
+          "quote": "Choose $\\sigma$ with $\\max\\{0,\\log_m(s/W)\\}\\le\\sigma<\\lambda$.",
+          "note": "I followed the algebra for the leaves, but not why the lower bound on sigma is log_m(s/W) or why the upper bound is lambda. Nothing on the page says this range is what makes the argument apply, so I took it as the applicability condition.",
+          "level": "chain"
+        },
+        {
+          "page": "subset-intersection-construction",
+          "quote": "Each unit of rank costs one smaller call.",
+          "note": "This is asserted without argument. I could not tell whether the rank count is exactly the number of subcalls s that the recursion page uses.",
+          "level": "statement"
+        },
+        {
+          "page": "subset-intersection-construction",
+          "quote": "Here $\\mathcal F$ is the fixed space, so the paper's dimension $m$ is $D$.",
+          "note": "This sets m equal to D = h^3 = 10^6 in the paper, but the question's fan-in factor m is 2 or 3. The next sentence, 'The paper's decisive property is a bound on the number of smaller calls,.', ends without stating the bound, so I could not tell whether this m is the growth factor of the recursion page.",
+          "level": "statement"
+        },
+        {
+          "page": "subset-intersection-construction",
+          "quote": "So the signed total is $WD-2N$.",
+          "note": "The page says the signed label changes telescope and the gate labels cancel, but I could not follow how the source and sink dimensions combine to WD-2N. I went on trusting the formula.",
+          "level": "step"
+        },
+        {
+          "page": "subset-intersection-construction",
+          "quote": "Absolute values add $2L$.",
+          "note": "Why taking absolute values adds exactly 2L is not shown. I could not see which edges carry the sign change.",
+          "level": "step"
+        },
+        {
+          "page": "subset-intersection-construction",
+          "quote": "A label $U$ is a nondegenerate subspace of $\\mathcal F$.",
+          "note": "'Nondegenerate' is not defined on the page and is not in my background, so I could not decode it.",
+          "level": "symbol"
+        },
+        {
+          "page": "linear-network-roles",
+          "quote": "Undoing the exchange moves each output back to its input role, and multiplying by $\\varepsilon_w$ again removes the sign.",
+          "note": "I could not tell what the 'undoing' is: a second network, or only bookkeeping of the endpoint operator. I passed on it by guessing that it is bookkeeping.",
+          "level": "statement"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "m\\exp(-2^{-50}\\log m)>m(1-20\\cdot2^{-50})>m\\Bigl(1-\\tfrac{73}{19906842167500}\\Bigr)=\\frac{\\Psi}{W}",
+          "note": "This display has no prose. I could not tell whether Psi/W is being defined or bounded: the chain of '>' signs ends in an '=' that fixes Psi/W to a value just below m. The constants 20*2^-50 and 73/19906842167500 are not explained. I took the display as confirming Psi < Wm.",
+          "level": "statement"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "The phase identities for $\\Xi$ reduce this group to $\\Psi$ child calls, each computing $\\Xi^{\\otimes f}$ on one slot, with $\\Psi<Wm$.",
+          "note": "The page does not show how the phase identities produce Psi child calls, or how Psi relates to the subcall count s on the recursion page. I took Psi < Wm on trust.",
+          "level": "step"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "Internal overheads form a geometric series, summing to $O(d^{\\lambda})$ with $\\lambda<1$.",
+          "note": "The ratio of the series is not given, so I could not see that the sum converges or why lambda < 1 follows. This is the same convergence gap as on the recursion page.",
+          "level": "chain"
+        },
+        {
+          "page": "main-theorem",
+          "quote": "The factor by which the parameter of a call grows between a call and its recursive subcalls.",
+          "note": "The question calls m a fan-in factor. No page uses that term (a search for 'fan-in' finds nothing), so I had to map the question's m onto this growth factor, which is defined by the growth of the call parameter rather than by a fan-in count.",
+          "level": "symbol"
+        }
+      ],
+      "reason": "Answered with moderate confidence. The applicability test comes from the recursion page's condition max{0, log_m(s/W)} <= sigma < lambda together with lambda < 1 (defined on the Fast simultaneous butterfly layers page), and it agrees with the wiki's own criterion s < Wm (Three-element subset intersection construction and Integer multiplication in O(n(lg n)^{1-κ}) time pages). The wiki never states the general rule 'the argument applies iff s < Wm' for arbitrary W and m; I derived it. The wiki's bit-network value m = D = 10^6 conflicts with the question's m, so I treated the question's m as the growth factor. Several steps (geometric convergence, the Psi display, the signed-total formula) were taken on trust; see stuck.",
+      "leaks": [],
+      "covered": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "wrong": [],
+      "key_idea": {
+        "page": "recursive-power-saving",
+        "statement": "A recursion that grows the call parameter by a factor m, with s subcalls each on 1/W of the volume, saves a fixed power because the cost per unit volume then grows as a power of f.",
+        "quote": "A recursive call at parameter $mf$ uses $s$ calls at parameter $f$ on streams of volume $V/W$, so the volume-normalized cost grows as a power, giving a fixed power saving."
+      }
+    },
+    {
+      "task": "0234-read-g7-reader-deep",
+      "round": 1,
+      "goal": 6,
+      "persona": "reader",
+      "start": "main-theorem",
+      "outcome": "gave_up",
+      "path": [
+        "main-theorem",
+        "home",
+        "fast-address-interchange",
+        "fast-butterfly-layers",
+        "recursive-power-saving",
+        "address-fields",
+        "ss-hh-background",
+        "dft-fft",
+        "gaussian-resampling",
+        "fixed-tape-model",
+        "radix-digit-reduction",
+        "ring-convolution-retained-order",
+        "crt-address-map"
+      ],
+      "searches": [
+        {
+          "query": "levels",
+          "found": [
+            "address-fields",
+            "synthetic-transforms",
+            "recursive-power-saving",
+            "fast-butterfly-layers",
+            "dft-fft"
+          ]
+        },
+        {
+          "query": "lg",
+          "found": [
+            "ss-hh-background",
+            "gaussian-resampling",
+            "nlogn-conjecture",
+            "radix-digit-reduction",
+            "fixed-tape-model"
+          ]
+        },
+        {
+          "query": "sum",
+          "found": [
+            "radix-digit-reduction",
+            "fixed-point-precision",
+            "convolution",
+            "gaussian-resampling",
+            "phase-twist-convolution"
+          ]
+        },
+        {
+          "query": "levels per",
+          "found": [
+            "fast-butterfly-layers",
+            "main-theorem",
+            "dft-fft",
+            "recursive-power-saving"
+          ]
+        },
+        {
+          "query": "passes",
+          "found": [
+            "linear-network-roles"
+          ]
+        },
+        {
+          "query": "group",
+          "found": [
+            "fast-butterfly-layers"
+          ]
+        },
+        {
+          "query": "chunk",
+          "found": [
+            "fast-butterfly-layers",
+            "main-theorem",
+            "address-shear-factorization",
+            "recursive-power-saving"
+          ]
+        },
+        {
+          "query": "power",
+          "found": [
+            "poly-ring-y-r",
+            "recursive-power-saving",
+            "synthetic-transforms",
+            "fast-butterfly-layers",
+            "ss-hh-background"
+          ]
+        },
+        {
+          "query": "exponent",
+          "found": [
+            "fast-butterfly-layers",
+            "fast-address-interchange",
+            "phase-twist-convolution",
+            "poly-ring-y-r",
+            "dft-fft"
+          ]
+        },
+        {
+          "query": "levels log",
+          "found": [
+            "recursive-power-saving",
+            "fast-butterfly-layers",
+            "main-theorem"
+          ]
+        },
+        {
+          "query": "sofagap",
+          "found": [
+            "fixed-tape-model",
+            "synthetic-transforms",
+            "crt-address-map",
+            "address-fields",
+            "nlogn-conjecture"
+          ]
+        },
+        {
+          "query": "Theta",
+          "found": [
+            "signed-packing",
+            "gaussian-resampling",
+            "scratch-restoration",
+            "recursive-power-saving",
+            "main-theorem"
+          ]
+        },
+        {
+          "query": "log n",
+          "found": [
+            "fixed-point-precision",
+            "signed-packing",
+            "fast-butterfly-layers",
+            "ss-hh-background",
+            "gaussian-resampling"
+          ]
+        }
+      ],
+      "answer": "",
+      "citations": [
+        [
+          "fast-address-interchange",
+          "Two disjoint contiguous $u$-bit address fields can be interchanged in $O(Vu^\\tau)$ for a fixed $\\tau<1$"
+        ],
+        [
+          "fast-butterfly-layers",
+          "costs $O(Vd^{\\lambda'})$ with $\\lambda'<1$, with a single truncation at the end."
+        ],
+        [
+          "recursive-power-saving",
+          "A recursive call at parameter $mf$ uses $s$ calls at parameter $f$ on streams of volume $V/W$, so the volume-normalized cost grows as a power, giving a fixed power saving."
+        ],
+        [
+          "main-theorem",
+          "so cheaper moves and layers lower the whole bound."
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "main-theorem",
+          "quote": "so cheaper moves and layers lower the whole bound.",
+          "note": "The page says the cost has Theta(log n) levels and that cheaper moves and layers lower the total. It never says how the per-level costs V u^tau and V d^{lambda'} add up over the levels to a total with the log factor reduced by a fixed power. The page also stops after setting up f = m^k and Phi(f), with no final bound.",
+          "level": "chain"
+        },
+        {
+          "page": "dft-fft",
+          "quote": "Each level is one rearrangement that makes partners $t$ and $t+h/2$ adjacent, then one scan of butterflies.",
+          "note": "This tells me each transform level costs one address move plus one butterfly scan. Nothing says whether the levels are handled one at a time or grouped, or how many levels one simultaneous layer covers. So I could not connect the chunk bound d or the field width u to the number of levels, and could not see why the layer cost O(V d^{lambda'}) would beat one layer per level.",
+          "level": "chain"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "Here $d$ is the chunk bound, which means something else on the recursive-power-saving page.",
+          "note": "The letter d is defined here as an upper bound on the number of selected chunks, then the page says it means something else elsewhere, but it does not say what d is in the main argument, such as a function of n or of log n. The symbol d is the only link I have between the layer cost and the input size, so I could not decode what it stands for in the final bound.",
+          "level": "symbol"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "m^{1-2^{-50}}=m\\exp(-2^{-50}\\log m)",
+          "note": "The page asserts that the child-call count Psi is below Wm, and gives a chain of inequalities with the constant 2^{-50} and the fraction 73/19906842167500. I could not tell whether Psi < Wm is established here as a lemma, assumed, or only claimed, and I could not see where the constant 2^{-50} comes from.",
+          "level": "statement"
+        },
+        {
+          "page": "home",
+          "quote": "where $\\kappa = 2^{-182}$",
+          "note": "The exponent kappa = 2^{-182} appears in the target bound, but no page I opened derives it from the power-saving exponents lambda and lambda' or from the other constants. I could not connect this specific value to anything I know.",
+          "level": "beyond"
+        }
+      ],
+      "reason": "I could follow the two bounds and the power-saving mechanism behind them, but not how they give a running time with the log factor lowered by a fixed power. The pages say the n log n cost comes from Theta(log n) transform levels, and that each level is one address move plus one butterfly scan, so cheaper moves and layers should lower the bound. But no page I opened assigns the field width u or the chunk bound d a value per level, groups the levels into passes, or sums the per-level costs into n(lg n)^(1-kappa). The front page's exponent kappa = 2^{-182} is also never derived. The main-theorem page (dok) sets up f = m^k and Phi(f) and then stops before any total. I used 13 of the 15 allowed page opens. I did not guess the missing step.",
+      "leaks": [],
+      "covered": [],
+      "wrong": []
+    },
+    {
+      "task": "0239-read-g9-reader-home",
+      "round": 1,
+      "goal": 8,
+      "persona": "reader",
+      "start": "home",
+      "outcome": "answered",
+      "path": [
+        "home",
+        "fast-address-interchange",
+        "scratch-restoration",
+        "address-shear-factorization",
+        "linear-network-roles",
+        "subset-intersection-construction",
+        "tensor-product-of-vector-spaces",
+        "address-fields"
+      ],
+      "searches": [
+        {
+          "query": "scratch",
+          "found": [
+            "linear-network-roles",
+            "scratch-restoration",
+            "fixed-point-precision"
+          ]
+        },
+        {
+          "query": "restores arbitrary",
+          "found": [
+            "linear-network-roles"
+          ]
+        }
+      ],
+      "answer": "The Fast interchange of address fields swaps two fields with three updates: D <- D - H, then H <- H + D, then D <- H - D. Starting from (H,D) these give (H,D-H), then (D,D-H), then (D,H), because H+(D-H)=D and D-(D-H)=H. So the swap is clean for any values, including the intermediate mixtures. The network that carries this out, a Finite linear network with roles and frames, moves values along routes whose intermediate frames cancel, so each route only applies its start and end operators, and the mixtures in between never reach the output. The end effect of the bit network is the address shear (H,D) -> (H+D,D), which is built from interchanges and additions. Scratch wires start with arbitrary contents. The Restoring auxiliary scratch values move adds a value gamma computed from data and later subtracts the same gamma, so a scratch wire returns to its starting value theta, and the result does not depend on those starting contents. The pages do not directly show that every scratch wire's net operator is the identity; the restoration of scratch contents rests on the Restoring auxiliary scratch values move, and I connected that to the network by inference.",
+      "citations": [
+        [
+          "fast-address-interchange",
+          "Starting from $(H,D)$ they give $(H,D-H)$, then $(D,D-H)$, then $(D,H)$, since $H+(D-H)=D$ and $D-(D-H)=H$."
+        ],
+        [
+          "linear-network-roles",
+          "The intermediate frames cancel and the route applies only its endpoint operator."
+        ],
+        [
+          "address-shear-factorization",
+          "The endpoint operator of the bit network is the address shear"
+        ],
+        [
+          "linear-network-roles",
+          "A *scratch* (auxiliary) role carries working values whose initial contents are arbitrary"
+        ],
+        [
+          "scratch-restoration",
+          "Restoring auxiliary scratch values is a way to use spare wires as temporary storage while returning them to their starting contents, so that the result does not depend on those contents."
+        ],
+        [
+          "scratch-restoration",
+          "Later the same $\\gamma$ is subtracted again, and the wire holds $\\theta$ once more."
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "linear-network-roles",
+          "quote": "For a scratch role the construction has $\\rho(w)=w$ with sign $+1$, so the undoing needs no correction there.",
+          "note": "The page says scratch roles need no sign correction and that every role keeps its endpoint operator, but it does not say why a scratch role's net operator is the identity, which is what would return the scratch wire to its starting content. I could not follow that step from this page alone.",
+          "level": "step"
+        },
+        {
+          "page": "scratch-restoration",
+          "quote": "This works because $\\gamma$ is computed from data that the write leaves unchanged.",
+          "note": "I could not tell whether this is a proved fact or a remark. The add-then-subtract cancellation needs the same gamma both times, and the page does not show that the network's other gates leave the data unchanged.",
+          "level": "statement"
+        },
+        {
+          "page": "scratch-restoration",
+          "quote": "whose wires include the auxiliary registers.",
+          "note": "The page says the move is applied to a network with auxiliary registers, but does not say which gate computes gamma or where the pair of writes sits in the network. I could not connect the add-and-subtract move to the network's gates.",
+          "level": "chain"
+        },
+        {
+          "page": "address-shear-factorization",
+          "quote": "Each update $H_\\sigma\\leftarrow H_\\sigma+D_\\tau$ takes one interchange of two equal fields and two additions:",
+          "note": "This page treats each interchange as one step, but the interchanges are themselves smaller calls of the procedure. I got there only by inferring it from the 'one smaller call' sentence on the Three-element subset intersection construction page and the recursive-saving mention on the Fast interchange of address fields page. I did not see why these calls make the total cost work out.",
+          "level": "chain"
+        },
+        {
+          "page": "subset-intersection-construction",
+          "quote": "A copy of $g_T$ on an auxiliary wire $A_{ST}$ for each neighbor pair, injected back into $S$, adds $1$ exactly when $|S\\cap T|=1$.",
+          "note": "Here the auxiliary wires cancel through coefficient arithmetic, not through a starting value being restored. I could not tell whether this is the same mechanism as scratch restoration in the Fast interchange of address fields, or how it bears on arbitrary starting contents.",
+          "level": "chain"
+        },
+        {
+          "page": "fast-address-interchange",
+          "quote": "Swapping takes three updates, applied componentwise:",
+          "note": "The page gives the three updates but does not say how they come out of the network. I got past this by checking the algebra myself, not by following a link from the network.",
+          "level": "chain"
+        }
+      ],
+      "reason": "Answered with moderate confidence. The clean swap follows from the three updates and from the telescoping of frames along network routes. Scratch restoration rests on the Restoring auxiliary scratch values add-then-subtract move, but the pages do not explicitly show that a scratch wire's net operator is the identity or how that move sits inside the network. I used 8 of the 15 allowed page openings.",
+      "leaks": [],
+      "covered": [
+        0,
+        3
+      ],
+      "wrong": [],
+      "key_idea": {
+        "page": "linear-network-roles",
+        "statement": "Along a route through the network the intermediate frames telescope away, so the route's effect is fixed by its two endpoints and the mixtures in between do not reach the output.",
+        "quote": "The intermediate frames cancel and the route applies only its endpoint operator."
+      }
+    },
+    {
+      "task": "0240-read-g9-reader-deep",
+      "round": 1,
+      "goal": 8,
+      "persona": "reader",
+      "start": "fast-address-interchange",
+      "outcome": "gave_up",
+      "path": [
+        "fast-address-interchange",
+        "scratch-restoration",
+        "linear-network-roles",
+        "address-shear-factorization",
+        "subset-intersection-construction",
+        "fast-butterfly-layers",
+        "recursive-power-saving",
+        "address-fields",
+        "gaussian-resampling",
+        "fixed-tape-model",
+        "main-theorem",
+        "tensor-product-of-vector-spaces"
+      ],
+      "searches": [
+        {
+          "query": "scratch",
+          "found": [
+            "linear-network-roles",
+            "scratch-restoration",
+            "fixed-point-precision"
+          ]
+        },
+        {
+          "query": "fast dotudig",
+          "found": []
+        },
+        {
+          "query": "XOR",
+          "found": [
+            "fixed-tape-model",
+            "address-fields",
+            "scratch-restoration",
+            "address-shear-factorization",
+            "fast-address-interchange"
+          ]
+        },
+        {
+          "query": "arbitrary",
+          "found": [
+            "linear-network-roles",
+            "scratch-restoration"
+          ]
+        },
+        {
+          "query": "swap",
+          "found": [
+            "fast-address-interchange",
+            "ring-convolution-retained-order",
+            "fixed-tape-model",
+            "address-shear-factorization"
+          ]
+        },
+        {
+          "query": "identity",
+          "found": [
+            "gaussian-resampling",
+            "ring-convolution-retained-order",
+            "address-shear-factorization",
+            "fast-butterfly-layers",
+            "fixed-tape-model"
+          ]
+        },
+        {
+          "query": "auxiliary",
+          "found": [
+            "linear-network-roles",
+            "subset-intersection-construction",
+            "scratch-restoration",
+            "fixed-tape-model",
+            "address-fields"
+          ]
+        },
+        {
+          "query": "cancel",
+          "found": [
+            "linear-network-roles",
+            "subset-intersection-construction",
+            "phase-twist-convolution",
+            "radix-digit-reduction",
+            "fixed-tape-model"
+          ]
+        }
+      ],
+      "answer": "",
+      "citations": [],
+      "stuck": [
+        {
+          "page": "linear-network-roles",
+          "quote": "For a scratch role the construction has $\\rho(w)=w$ with sign $+1$, so the undoing needs no correction there. Every role keeps the endpoint operator, auxiliary roles included.",
+          "note": "The page reduces each role's result to the endpoint operator D_sink D_source^{-1}. For a scratch role this is what decides whether its arbitrary starting contents survive, so it has to be the identity. The page never says that scratch routes have source and sink frames equal, or that their endpoint is I. The identity I is introduced only in an example about a different route. I could not see why the scratch output is independent of its start.",
+          "level": "step"
+        },
+        {
+          "page": "scratch-restoration",
+          "quote": "This works because $\\gamma$ is computed from data that the write leaves unchanged.",
+          "note": "I followed the single write-then-subtract pair: a wire that gets +gamma and later -gamma returns to theta. The page does not say the network is made of such pairs, or that the gamma added and the gamma removed are the same across all the mixing gates. I could not connect this one-wire pattern to the whole network, which is linear and mixes scratch and data wires.",
+          "level": "chain"
+        },
+        {
+          "page": "address-shear-factorization",
+          "quote": "The endpoint operator of the bit network is the address shear $(H,D)\\mapsto(H+D,D)$ over a residue ring, with rank reduced by a lower-triangular factorization.",
+          "note": "The pages say the network's endpoint on the data is the shear (H,D) to (H+D,D), and that a swap takes three updates (D to D-H, H to H+D, D to H-D) that send (H,D) to (D,H). I checked that the three updates alone give the swap, for example (1,0) to (1,1), (0,1), (0,1) over F2. I could not see how the network's shear combines with these updates into the swap, or which of them the network performs.",
+          "level": "chain"
+        },
+        {
+          "page": "fast-address-interchange",
+          "quote": "Fast interchange of address fields is a fixed-tape procedure that swaps two disjoint contiguous address fields of an array",
+          "note": "The question's 'fast Fast interchange of address fields' is not a term any page I opened defines, and the search for 'fast Fast interchange of address fields' found nothing. I could not tell which procedure it names. The pages say both procedures come from one linear network, so I could not tell whether the network-based one is the swap on this page or a different procedure.",
+          "level": "symbol"
+        },
+        {
+          "page": "linear-network-roles",
+          "quote": "Each source, gate and sink $\\nu$ carries an invertible linear operator $D_\\nu$ on arrays indexed by the common address set",
+          "note": "The letter D is the frame operator D_nu on this page. On the Fast interchange of address fields and shear pages D is a vector of address fields. The same letter means two things, so I could not be sure which D the swap updates refer to.",
+          "level": "symbol"
+        }
+      ],
+      "reason": "I gave up. I opened 12 of the 15 pages allowed. The pages do explain three things: the route telescoping means that only each role's endpoint operator matters, the three updates (D to D-H, H to H+D, D to H-D) give the swap, and a write of gamma followed by its subtraction returns a scratch wire to its start. They do not show the two steps the question needs: that each scratch role's endpoint operator is the identity, so its arbitrary start drops out, and how the network's endpoint shear combines with the three updates into an exact swap. The question's phrase 'fast Fast interchange of address fields' does not match any defined term in the pages I read, so I could not confirm which procedure the question means. Because of these gaps I did not give an answer.",
+      "leaks": [],
+      "covered": [],
+      "wrong": []
+    },
+    {
+      "task": "0237-read-g8-reader-deep",
+      "round": 1,
+      "goal": 7,
+      "persona": "reader",
+      "start": "main-theorem",
+      "outcome": "answered",
+      "path": [
+        "main-theorem",
+        "fast-address-interchange",
+        "fast-butterfly-layers",
+        "nlogn-conjecture",
+        "synthetic-transforms",
+        "fixed-tape-model",
+        "ring-convolution-retained-order",
+        "signed-packing",
+        "ss-hh-background",
+        "recursive-power-saving",
+        "dft-fft",
+        "address-fields"
+      ],
+      "searches": [
+        {
+          "query": "pointwise",
+          "found": [
+            "linear-network-roles",
+            "fixed-point-precision",
+            "dft-fft",
+            "synthetic-transforms",
+            "signed-packing"
+          ]
+        },
+        {
+          "query": "passes",
+          "found": [
+            "linear-network-roles"
+          ]
+        }
+      ],
+      "answer": "The wiki puts the n log n cost in the transform, not in the pointwise products. Its transform has Θ(log n) levels, and each level is one address rearrangement followed by one scan of butterflies, with cost measured as data movement, so each level scans all stored bits. The pointwise products are one entrywise step per entry and are not repeated at each level. Making the moves and the layers cheaper therefore cuts the per-level cost, which is multiplied by the log n levels, so the whole bound drops. The pointwise products are not left out: they are multiplied again by the same method, recursively, so their cost is handled by the recursion rather than by a log n factor of their own. The pages state the levels and the recursion but never explicitly compare the two, so that last comparison is my inference.",
+      "citations": [
+        [
+          "main-theorem",
+          "The $n\\log n$ cost scans all $V$ stored bits at each of the $\\Theta(\\log n)$ transform levels, so cheaper moves and layers lower the whole bound."
+        ],
+        [
+          "dft-fft",
+          "Each level is one rearrangement that makes partners $t$ and $t+h/2$ adjacent, then one scan of butterflies."
+        ],
+        [
+          "dft-fft",
+          "$C_m=\\sum_i a_i\\omega^{im}\\sum_l b_l\\omega^{lm}=A_mB_m$."
+        ],
+        [
+          "fixed-tape-model",
+          "Interchanging whole fields moves blocks across long distances, which is expensive because each step moves a head by one cell."
+        ],
+        [
+          "ring-convolution-retained-order",
+          "polynomial products are packed into integers and multiplied by the ordinary $O(n\\log n)$ multiplier as a subroutine."
+        ]
+      ],
+      "stuck": [
+        {
+          "page": "main-theorem",
+          "quote": "For the bit network, $s$ equals $Wm$ minus $N$, the number of negative source projections, plus twice the lost label dimension $L$, so $s<Wm$ needs $N>2L$.",
+          "note": "I could not follow where the count s = Wm - N + 2L comes from. The lost-dimension page it depends on was not one I opened, so I took the count as given.",
+          "level": "step"
+        },
+        {
+          "page": "nlogn-conjecture",
+          "quote": "Relied on to show: An $n$-bit integer product is computed by a Fixed-tape machine model and stream operations in $O(n(\\lg n)^{1-\\kappa})$ time, $\\kappa=2^{-182}$.",
+          "note": "This page never says what The n log n optimality conjecture itself asserts. I could not tell whether it is a conjecture, a bound or a definition, although the front page says Integer multiplication in O(n(lg n)^{1-κ}) time disproves it.",
+          "level": "statement"
+        },
+        {
+          "page": "fast-address-interchange",
+          "quote": "each viewed as a vector of entries over a common residue ring",
+          "note": "The residue ring is not defined on this page, and it is abstract algebra beyond what I know. I went on by reading it as the ring of integers mod 2 for the bit case.",
+          "level": "symbol"
+        },
+        {
+          "page": "fast-address-interchange",
+          "quote": "Two disjoint contiguous $u$-bit address fields can be interchanged in $O(Vu^\\tau)$ for a fixed $\\tau<1$, although the intermediate steps are XOR combinations.",
+          "note": "I checked the three updates on the example and they work. The page does not say why three XOR updates cost u to the power tau rather than u; tau is only named as a fixed exponent.",
+          "level": "chain"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "The phase identities for $\\Xi$ reduce this group to $\\Psi$ child calls",
+          "note": "The phase identities are never stated, so I could not see how they reduce the group. Psi is used here before any definition.",
+          "level": "step"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "Since $H_0=\\tfrac{1-i}{2}\\,\\Upsilon\\,\\Xi\\,\\Upsilon$ and [Tensor product of vector spacess](lis) respect products,",
+          "note": "The claim that the linked Tensor product of vector spacess page gives respects products is one I did not check, since I did not open that page. I took it as given.",
+          "level": "statement"
+        },
+        {
+          "page": "fast-butterfly-layers",
+          "quote": "$$m^{1-2^{-50}}=m\\exp(-2^{-50}\\log m)>m(1-20\\cdot2^{-50})>m\\Bigl(1-\\tfrac{73}{19906842167500}\\Bigr)=\\frac{\\Psi}{W}.$$",
+          "note": "This chain of inequalities has no words around it. I could not see what it shows about the layer or why Psi/W is set to this value, so I skipped it.",
+          "level": "step"
+        },
+        {
+          "page": "recursive-power-saving",
+          "quote": "which stop once $f/m^\\nu<d^\\vartheta$",
+          "note": "vartheta is never defined on the pages I read, so I could not tell what the stopping threshold is.",
+          "level": "symbol"
+        },
+        {
+          "page": "recursive-power-saving",
+          "quote": "and the leaves cost $O(f^\\sigma d^{\\vartheta(1-\\sigma)})\\le O(f^\\lambda)$.",
+          "note": "I could not see why this is at most f to the lambda. That needs d to the power vartheta(1-sigma) at most f to the power lambda-sigma, and nothing on the page relates d and f here. I got past it by assuming it.",
+          "level": "step"
+        },
+        {
+          "page": "fixed-tape-model",
+          "quote": "The machine has, each with its own head.",
+          "note": "The sentence is cut off, so I could not tell what the machine has (tapes, presumably, by the next sentences).",
+          "level": "statement"
+        },
+        {
+          "page": "fixed-tape-model",
+          "quote": "The paper instead realizes the interchange by.",
+          "note": "The sentence ends before saying how the interchange is realized. This is the step the question depends on, and I could not see it. The vib page later says a level may need such an interchange, but not how it is done.",
+          "level": "step"
+        },
+        {
+          "page": "ring-convolution-retained-order",
+          "quote": "The second identity is the inverse relation that the normalization fixes, and the source checks it by expanding the finite sums.",
+          "note": "The symbols chi, D-plus and M are used without definition, and 'the source' is never identified. I could not tell whether these identities are proved here or only cited, so I took them as given.",
+          "level": "statement"
+        },
+        {
+          "page": "ring-convolution-retained-order",
+          "quote": "polynomial products are packed into integers and multiplied by the ordinary $O(n\\log n)$ multiplier as a subroutine.",
+          "note": "The entrywise products are themselves n log n multiplications through this call. The page does not say why this does not add another n log n on top of the transform levels, so I got past it by assuming the recursion absorbs it.",
+          "level": "chain"
+        },
+        {
+          "page": "ss-hh-background",
+          "quote": "The entrywise products are multiplied by the same method, recursively,",
+          "note": "The recursion is stated, but not how its cost enters the total. The bound is attributed to a paper I could not open, so I took it as given.",
+          "level": "chain"
+        },
+        {
+          "page": "dft-fft",
+          "quote": "Here the letter $A$ changes meaning from the machine $A$ of the earlier pages.",
+          "note": "The letter A is overloaded between the transform and the machine on earlier pages. I had to work out from context which A each use means.",
+          "level": "symbol"
+        }
+      ],
+      "reason": "Moderately sure of the core answer. The pages state that the n log n cost scans all stored bits at each of the transform levels, and that each level is one rearrangement plus one scan of butterflies. They also say the entrywise products are multiplied recursively. But they never directly compare the cost of the pointwise products with that of the levels, so that comparison is my inference. Opened 12 of 15 pages. I did not open the pages linked for the linear network, the lost dimension, or the Tensor product of vector spacess step, and I did not verify the power-saving constants or the layer's exactness, since the question did not need them.",
+      "leaks": [],
+      "covered": [
+        0,
+        1
+      ],
+      "wrong": [],
+      "key_idea": {
+        "page": "main-theorem",
+        "statement": "The n log n cost is paid at each of its Θ(log n) transform levels, each of which scans all stored bits, so cheaper moves and layers inside those levels lower the whole bound.",
+        "quote": "The $n\\log n$ cost scans all $V$ stored bits at each of the $\\Theta(\\log n)$ transform levels, so cheaper moves and layers lower the whole bound."
+      }
+    }
+  ],
+  "baselines": [
+    {
+      "task": "0217-baseline-g1-reader",
+      "goal": 0,
+      "answer": "The background does not cover this. The reader knows asymptotic analysis, basic Turing machines with several tapes, recurrences and schoolbook multiplication, but has not studied the FFT-based multiplication literature or tape-level data-movement algorithms. So the reader cannot state the wiki's main result, what the multiplication algorithm reduces the problem to, or which two operations it makes faster.",
+      "covered": [],
+      "wrong": []
+    },
+    {
+      "task": "0220-baseline-g2-reader",
+      "goal": 1,
+      "answer": "The background does not cover this question. The reader's background does not define \"Fast interchange of address fieldss\" or \"butterfly layers\", and it does not describe the paper, its speed-up, or any transform. The background mentions FFT-based multiplication only as literature the reader has not studied, so the reader has no basis for saying what these two operations are, why a paper would speed them up instead of using a smarter transform, or why a faster algorithm would have to target them. The reader can only say that these terms are unfamiliar and that the question cannot be answered from the background.",
+      "covered": [],
+      "wrong": []
+    },
+    {
+      "task": "0223-baseline-g3-reader",
+      "goal": 2,
+      "answer": "The background does not cover this question, so the reader cannot answer it. The question depends on terms the background never defines: the 'interchange' and 'butterfly' procedures, the quantities W, m, s and 'volume', and what 'the parameter' is. The background gives general tools (big-O notation, recurrences, multi-tape Turing machines, schoolbook multiplication), but it does not describe these procedures or the tape-level data-movement model they run in, and the claim that the cost is volume times a power of the parameter below 1 depends on those definitions. Without them, any explanation of why s < W*m makes the cost work, or of what fails when it does not, would be a guess about what the names stand for. To answer it, the reader would need the definitions of the two procedures, of W, m, s and volume, and the recursion they satisfy.",
+      "covered": [],
+      "wrong": []
+    },
+    {
+      "task": "0226-baseline-g4-reader",
+      "goal": 3,
+      "answer": "The background does not let me answer this. The question does not state the three updates that interchange H and D, and the background does not define a \"finite linear network\" or say which updates such a network supplies. I can state the starting point: over the two-element field the state is (H, D) = (0, 1). I cannot give the state after each update, because I do not know what the updates are, and I cannot say which updates the network supplies and which are done separately, because the network is not covered. The background does cover arithmetic modulo 2 and linear algebra over a field, so if the three updates were written out as explicit maps on (H, D), I could compute the states after each one. The role of the finite linear network is not covered.",
+      "covered": [],
+      "wrong": []
+    },
+    {
+      "task": "0229-baseline-g5-reader",
+      "goal": 4,
+      "answer": "The background does not cover the specific transform this convolution routine uses, its output order, or FFT-specific ordering conventions, so this answer gives only the general argument that the background supports.\n\nWhy sorting in between is not needed: write the forward transform, with whatever output order it produces, as the natural-order transform F followed by a fixed permutation P of the output positions, so the routine's output is P F x. A permutation of positions commutes with pointwise multiplication: permuting both vectors and then multiplying entry by entry gives the same result as multiplying and then permuting. So if both inputs are transformed with the same P, the pointwise product is P (F a . F b), where the dot denotes entrywise product, which is the permuted version of the natural-order product. The inverse transform is the inverse of the whole map, F^-1 P^-1, so it first undoes the permutation and then applies the inverse of F. The reordering therefore cancels between the forward and inverse transforms. An intermediate sort would be an extra pass over the data that does not change the result. How much that pass costs in practice is about data movement, which the background does not cover.\n\nWhat goes wrong with different orders: if the first input is transformed with P and the second with a different permutation Q, then entry i of the product multiplies the transform value at one position with the transform value at another. The product is then not the pointwise product of any pair of transforms, so the inverse transform does not return the convolution. A toy check with a two-point transform (sum and difference of the two entries, matrix [[1,1],[1,-1]], chosen for illustration and not the source's transform) shows this. For inputs (a0, a1) and (b0, b1), using the same order for both gives the cyclic convolution (a0 b0 + a1 b1, a0 b1 + a1 b0). Using (sum, difference) for one input and (difference, sum) for the other, and then inverting in natural order, gives (a0 b0 - a1 b1, a1 b0 - a0 b1), which is wrong. The two forward transforms must agree on the order. Any particular order works as long as the inverse is matched to it.\n\nNot covered by the background: which transform the source's convolution routine uses, why it produces the output order it does rather than natural order, and any claim about bit-reversal or other FFT-specific ordering. The reader cannot answer those parts from the background.",
+      "covered": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "wrong": []
+    },
+    {
+      "task": "0232-baseline-g6-reader",
+      "goal": 5,
+      "answer": "The background does not cover this question. The question refers to a recursion over a network with W roles, a fan-in factor m, and s subcalls, and to a power-saving argument with a range of exponents. The reader's background covers big-O notation, polynomials, complex numbers, basic multi-tape Turing machines, recurrences, and schoolbook multiplication, but it does not cover this recursion, this network construction, the power-saving argument, or the FFT-based multiplication literature the question seems to rely on. Without knowing how W, m, and s enter the argument, the reader cannot decide whether the power-saving argument applies to either variant (W = 2, m = 3, s = 4 or W = 2, m = 2, s = 5), and cannot say what range of exponents would work for either one.",
+      "covered": [],
+      "wrong": []
+    },
+    {
+      "task": "0235-baseline-g7-reader",
+      "goal": 6,
+      "answer": "The background does not cover this. The reader knows big-O notation, polynomials, complex numbers, multitape Turing machines, recurrences, and schoolbook multiplication, but has not studied the FFT-based multiplication literature or tape-level data-movement algorithms, and the background does not describe the main theorem, the two kinds of operation it speeds up, the bounds they achieve, or how they combine to lower the logarithmic factor. The reader therefore cannot say what the two operations are, what bounds they reach, or what running time results.",
+      "covered": [],
+      "wrong": []
+    },
+    {
+      "task": "0238-baseline-g8-reader",
+      "goal": 7,
+      "answer": "The background does not cover this question. It gives the reader big-O notation, polynomials, complex numbers, and basic multi-tape Turing machines, but it says the reader has not studied the FFT-based multiplication literature or tape-level data-movement algorithms. The question depends on an argument about speeding up address rearrangements and butterfly layers to beat n log n, and the background does not say what that argument is, why those steps are the bottleneck, or how they compare with the pointwise products. The reader cannot explain the choice without guessing, so this answer does not give a reason.",
+      "covered": [],
+      "wrong": []
+    },
+    {
+      "task": "0241-baseline-g9-reader",
+      "goal": 8,
+      "answer": "The background does not cover this. The question asks about the \"fast Fast interchange of address fields,\" a specific construction whose name, definition, XOR-type gate network, and scratch-row setup the reader has never seen; the background gives none of these. The reader's background (asymptotic analysis, modular arithmetic, primes, binary representation, linear algebra, calculus, and multi-tape Turing machines) does not include the FFT-based multiplication literature or tape-level data-movement algorithms, which is where a construction like this would be described. So the reader cannot say why the intermediate mixtures of the data cancel out, or why the final two-field swap comes out correct regardless of the initial contents of the scratch rows. Answering would require the definition of the Fast interchange of address fields and the layout of its gate network and scratch rows, which are not in the background.",
+      "covered": [],
+      "wrong": []
+    }
+  ],
+  "words": {
+    "1": {
+      "address-fields": 146,
+      "address-shear-factorization": 480,
+      "bluestein-chirp": 287,
+      "convolution": 239,
+      "crt-address-map": 411,
+      "dft-fft": 330,
+      "fast-address-interchange": 163,
+      "fast-butterfly-layers": 534,
+      "fixed-point-precision": 439,
+      "fixed-tape-model": 241,
+      "gaussian-resampling": 523,
+      "linear-network-roles": 482,
+      "main-theorem": 161,
+      "nlogn-conjecture": 0,
+      "phase-twist-convolution": 351,
+      "poly-ring-y-r": 404,
+      "radix-digit-reduction": 427,
+      "recursive-power-saving": 146,
+      "ring-convolution-retained-order": 185,
+      "scratch-restoration": 135,
+      "signed-packing": 386,
+      "ss-hh-background": 379,
+      "subset-intersection-construction": 499,
+      "synthetic-transforms": 319,
+      "tensor-product-of-vector-spaces": 296
+    }
+  }
+}
