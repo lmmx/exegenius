@@ -283,7 +283,7 @@
       "held_out": true
     }
   ],
-  "round": 1,
+  "round": 2,
   "runs": [
     {
       "task": "0334-read-g6-reader-home",
@@ -377,6 +377,16 @@
         2
       ],
       "wrong": [],
+      "support": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
       "key_idea": {
         "page": "retained-permutations",
         "statement": "Neither permutation is executed as a sort: the target permutation is absorbed into a chirp convolution, and the source permutation cancels because the opposite transform undoes its reordering.",
@@ -487,6 +497,24 @@
         3
       ],
       "wrong": [],
+      "support": [
+        [
+          0,
+          7
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          2
+        ]
+      ],
       "key_idea": {
         "page": "cost-accounting",
         "statement": "kappa is set by the chunk-exchange margin, the smallest of the seven margins; the cost must keep a 2 kappa margin so that the leftover fixed powers of log p, at most p^kappa, still leave a total of p^(1-kappa).",
@@ -607,6 +635,28 @@
         4
       ],
       "wrong": [],
+      "support": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          8
+        ]
+      ],
       "key_idea": {
         "page": "rank-recurrence",
         "statement": "Each call at parameter mf makes s smaller calls at parameter f on volume V/W, so its cost per unit volume is multiplied by s/W, which is below m; when s/W is below m^tau, the recursion gives cost O(f^tau) instead of anything of order f.",
@@ -733,6 +783,20 @@
         3
       ],
       "wrong": [],
+      "support": [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          6
+        ]
+      ],
       "key_idea": {
         "page": "rank-recurrence",
         "statement": "Each recursive call works on streams of 1/W of the volume and makes fewer than W times m smaller calls, so the cost per unit volume grows by less than a factor m when the parameter grows by a factor m; that leaves a power of the parameter below one as the total cost.",
@@ -843,6 +907,20 @@
         2
       ],
       "wrong": [],
+      "support": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          6
+        ]
+      ],
       "key_idea": {
         "page": "address-interchange",
         "statement": "Swapping two disjoint address chunks of u bits on a fixed set of tapes costs O(V u^tau) with tau = 1 - 2^-50, a power just below linear in the chunk width, so address movement gets a saving that is a power of the chunk width.",
@@ -972,6 +1050,24 @@
         3
       ],
       "wrong": [],
+      "support": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          8
+        ]
+      ],
       "key_idea": {
         "page": "stream-ops",
         "statement": "A standard transform on this tape model pays one full scan of the Theta(n) stored bits for each of its Theta(log n) butterfly layers, so the log factor can only shrink if the per-layer address movement and butterfly work cost less than a full pass.",
@@ -1105,6 +1201,20 @@
         3
       ],
       "wrong": [],
+      "support": [
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          6
+        ]
+      ],
       "key_idea": {
         "page": "retained-permutations",
         "statement": "The source and target coordinate permutations are never carried out: the target one becomes part of a chirp convolution, and the source one commutes through the transforms and cancels against itself, so the identity is kept as a formula rather than a sort.",
@@ -1245,6 +1355,24 @@
         3
       ],
       "wrong": [],
+      "support": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ]
+      ],
       "key_idea": {
         "page": "stream-ops",
         "statement": "On a fixed-tape machine a linear pass over the array costs time proportional to its stored bits, so a layered transform that scans once per layer costs n log n, and any saving must make the work per layer cheaper than a full pass.",
@@ -1359,6 +1487,20 @@
         2
       ],
       "wrong": [],
+      "support": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          3
+        ]
+      ],
       "key_idea": {
         "page": "rank-recurrence",
         "statement": "Both tape procedures cost a power below linear in their parameter, because each recursive level multiplies the cost per unit volume by s/W, which is less than m, so the total is a power of the parameter below one rather than linear.",
@@ -1545,6 +1687,28 @@
         4
       ],
       "wrong": [],
+      "support": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          4,
+          14
+        ]
+      ],
       "key_idea": {
         "page": "multiplication-algorithm",
         "statement": "Two integers are multiplied by splitting them into digits, placing the digit convolution on prime-length cyclic axes, computing it through power-of-two transforms by a chain of exact rewrites, and then rounding and carrying, with the accumulated error kept below 1/2.",
@@ -1681,6 +1845,24 @@
         3
       ],
       "wrong": [],
+      "support": [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ]
+      ],
       "key_idea": {
         "page": "cost-accounting",
         "statement": "kappa is half of the smallest margin g_2 = 2^-181: the seven dominant costs stay below p^(1-2*kappa), and the leftover kappa absorbs any power of log p, so the total is p^(1-kappa).",
@@ -1814,6 +1996,20 @@
         3
       ],
       "wrong": [],
+      "support": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          3,
+          11
+        ]
+      ],
       "key_idea": {
         "page": "multiplication-algorithm",
         "statement": "The exact product is the digit-sequence wrap-around product computed through transforms; each coefficient is off by less than one half, so rounding recovers the exact integer coefficients and carrying gives the exact binary product.",
@@ -1945,6 +2141,24 @@
         3
       ],
       "wrong": [],
+      "support": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          5
+        ]
+      ],
       "key_idea": {
         "page": "rank-recurrence",
         "statement": "A call at parameter mf makes s calls at parameter f, each on 1/W of the data, so the cost per unit of data at mf is at most s/W times the cost at f; when s/W is at most m^tau for a fixed tau below 1, the recursion costs a power f^tau per unit of data.",
@@ -2131,6 +2345,28 @@
         4
       ],
       "wrong": [],
+      "support": [
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          4,
+          17
+        ]
+      ],
       "key_idea": {
         "page": "multiplication-algorithm",
         "statement": "The integer product is cut into digits, turned into a wrap-around product of short coefficients, computed through transforms whose twiddle multiplications are cheap, and then rounded back to exact integers.",
@@ -2289,6 +2525,28 @@
         4
       ],
       "wrong": [],
+      "support": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          9
+        ]
+      ],
       "key_idea": {
         "page": "rank-recurrence",
         "statement": "Each recursion level multiplies the cost per unit volume by s/W, and since s/W is below m^tau with tau < 1, the unrolled geometric sum is only f^tau rather than linear in f.",
@@ -2490,6 +2748,24 @@
         3
       ],
       "wrong": [],
+      "support": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          14
+        ]
+      ],
       "key_idea": {
         "page": "main-result",
         "statement": "The power-of-log saving comes from making the two tape primitives cost the data volume times a power below one of their width, so every dominant cost term is a power of p below one.",
@@ -2623,6 +2899,24 @@
         3
       ],
       "wrong": [],
+      "support": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          10
+        ]
+      ],
       "key_idea": {
         "page": "rank-recurrence",
         "statement": "A call at parameter mf makes s smaller calls on streams of volume V/W, so the recursive cost per unit volume is multiplied by s/W, which is below m; this geometric recurrence gives a cost that is a power f^tau with tau < 1 once s/W < m^tau.",
@@ -2770,6 +3064,20 @@
         3
       ],
       "wrong": [],
+      "support": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          3,
+          9
+        ]
+      ],
       "key_idea": {
         "page": "dft",
         "statement": "Transforming a wrapped product turns it into a pointwise product of the two transforms, so the product can be recovered from two forward transforms, a pointwise product and an opposite transform, followed by a known scale factor.",
