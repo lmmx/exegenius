@@ -1,0 +1,8 @@
+{"page": "P37",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "Beating $n\\log n\\log\\log n$ is not enough; the time must fall below every constant multiple of $n\\log n$ along some inputs.",
+   "problem": "The negation concerns the worst-case running time T_A(n) as a function of the input length: the paper (lines 381-385) requires one machine with liminf_{n->infinity} T_A(n)/(n lg n) = 0, i.e. the worst case over all inputs of length n must fall below c n lg n for arbitrarily large n. 'Along some inputs' suggests that being fast on particular inputs suffices; it should read 'along infinitely many input lengths', with T_A(n) the worst case over inputs of that length (the page's own later 'not merely along a subsequence' shows this is what is meant). The page's lower-bound statement in paragraph 2 ('needs at least c n log n steps') likewise leaves the worst-case reading implicit."}
+ ],
+ "motivation_given": true}

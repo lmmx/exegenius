@@ -1,0 +1,145 @@
+{
+ "page": "P33",
+ "items": [
+  {
+   "id": "step",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "2 \\le s",
+    "inputs and outputs of \\widetilde A, \\widetilde B_0 occur in increasing coordinate order",
+    "the constant is uniform in p, s, t, alpha"
+   ],
+   "note": "The page builds the exact identity (Exact construction) and then the approximations with their errors and costs (Computing it), and it explains why P_s, P_t are kept unexecuted (\"carrying them out would sort t records ... costing about tp log t\"). It follows the paper's proof of Lemma no-sort-resampling."
+  },
+  {
+   "id": "S4.1.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "2 \\le s"
+   ],
+   "note": "The hypotheses are given in full (\"Let s<t<2^p be coprime integers, where p>100 ... 2\\le\\alpha<\\sqrt p. Assume \\theta:=t/s-1>p/\\alpha^4\"), except the lower bound s\\ge2. A hypothesis has nothing to derive, so stating it completely counts here."
+  },
+  {
+   "id": "S4.1.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The definitions (P_su)_j=u_{tj}, (P_tv)_k=v_{-sk} are given exactly, with indices modulo s and t, as in the paper."
+  },
+  {
+   "id": "S4.1.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "It is announced in the opening paragraph and obtained in the Exact construction section by the paper's route: A=S', B_0=D'J'C, the left inverse of T, and the product of the normalisations."
+  },
+  {
+   "id": "S4.1.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "tie rule q_j=\\lfloor tj/s+1/2\\rfloor (ties rounded upward)",
+    "the negative Fourier sign of F_q, which makes P_t multiply the frequency by -s in T P_sF_s=P_tF_t S"
+   ],
+   "note": "The page defines q_j, beta_j, C, D, N=CTD, shows that the diagonal summand is exactly u_j, and imports the bound from Harvey and van der Hoeven, which is all the paper does. Its explanation of the damping is offered as intuition, before \"The exact bound, proved by Harvey and van der Hoeven\"."
+  },
+  {
+   "id": "S4.1.4b",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The step is reproduced: \"Since \\alpha^2<p and \\theta>p/\\alpha^4, \\alpha^2\\theta>p/\\alpha^2>1, so \\|N-I\\|<1/2\", and the page adds the correct series N^{-1}=\\sum_i(-1)^i(N-I)^i."
+  },
+  {
+   "id": "S4.1.4c",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The scalings S'=S/2, J'=N^{-1}/2, D'=2^{-(2\\alpha^2-2)}D and the norm bounds 3/4, 7/8, 1 are imported as in the paper, though the page does not name the source (the proof of HvdH Proposition 4.7(i)). The contraction of A and B_0 follows from \\|C\\|=1, which the page states."
+  },
+  {
+   "id": "S4.1.4d",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "\"As CT=ND^{-1}, the map DN^{-1}C is a left inverse of T\". Applying it to the identity and multiplying the normalisations 2^{-(2\\alpha^2-2)}2^{-1}2^{-1}=2^{-2\\alpha^2} matches the paper. The invertibility of D is used implicitly through D^{-1}."
+  },
+  {
+   "id": "S4.1.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "outputs lie in the disk grid D_p and come in increasing coordinate order, which composing the maps needs"
+   ],
+   "note": "The page quotes the three guarantees row by row and composes them with the exact C, as the How asks. The paper also imports them, but names HvdH Lemmas 4.8, 4.9 and 4.12, which the page does not."
+  },
+  {
+   "id": "S4.1.5.1",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Error 16p and time O(tp^{3/2+\\delta}\\alpha) for \\widetilde S' are quoted correctly. Both the page and the paper import this guarantee."
+  },
+  {
+   "id": "S4.1.5.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Error 3p^2/4 and time O(tp^{3/2+\\delta}\\alpha) for \\widetilde J' are quoted correctly. Both the page and the paper import this guarantee."
+  },
+  {
+   "id": "S4.1.5.3",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "Error 4 and time O(tp^{1+\\delta}) for \\widetilde D' are quoted correctly. Both the page and the paper import this guarantee."
+  },
+  {
+   "id": "S4.1.6",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "q_0=0, q_{s-1}<t and q_{j+1}>q_j (the ordered-subsequence argument)",
+    "a forward scan that copies a record when the current coordinate equals the next q_j",
+    "the in-order index generator: t=hs+\\rho, tj=sf_j+e_j, q_j=f_j+1_{2e_j\\ge s}, carry c_j=1_{e_j+\\rho\\ge s}, with O(p)-bit counters",
+    "the cost count: division in O((\\log t)^2)=O(tp) plus an O(tp) scan"
+   ],
+   "note": "The page gives only \"since t/s>1\" and then asserts \"the indices are generated in order with O(p) work each. So C takes O(tp) time with zero error\". The paper's index recurrence and its cost count are missing."
+  },
+  {
+   "id": "S4.1.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the composition rule that errors add (insert the exact map at the computed input and use its contraction bound), with C contributing zero"
+   ],
+   "note": "The page takes \\widetilde A=\\widetilde S', \\widetilde B_0=\\widetilde D'\\widetilde J'C and gets 16p<p^2 and 4+3p^2/4<p^2 \"(as p>100)\", which is the paper's reasoning at the paper's level of detail. The page never says that errors add under composition."
+  },
+  {
+   "id": "S4.1.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the Lemma 4.11 accuracy 2^p\\|\\widetilde Ez-Ez\\|<p/3",
+    "rounding of u/2 toward zero (Lemma 4.12)",
+    "k\\le\\alpha^2+1<p+1, so signed partial sums need only O(p) bits"
+   ],
+   "note": "With E=N-I and K=\\lceil p/(\\alpha^2\\theta)\\rceil, the page uses Lemma 4.11's \\widetilde Ez\\in\\mathbb D_p^s and the induction from the rounded \\widetilde v^{(0)} to keep every iterate in \\mathbb D_p^s. It then evaluates \\sum_{i=0}^{K-1}(-1)^i\\widetilde v^{(i)}, as the paper does."
+  }
+ ],
+ "errors": [
+  {
+   "severity": "minor",
+   "quote": "For each $j$ let $q_j$ be the integer nearest $tj/s$",
+   "problem": "There is a tie when s is even and j=s/2: tj/s=t/2 is then a half-integer (t is odd), so the nearest integer is not unique. The paper fixes q_j=\\lfloor tj/s+1/2\\rfloor, with ties rounded upward, for 0\\le j<s."
+  },
+  {
+   "severity": "minor",
+   "quote": "An approximation $\\widetilde L$ of a contraction $L$ has error below a bound if $2^p\\|\\widetilde Lu-Lu\\|$ is less than it.",
+   "problem": "u is not quantified and no domain is given. The paper defines \\widetilde L:\\mathbb D_p^a\\to\\mathbb D_p^b and requires the bound for every input in \\mathbb D_p^a."
+  }
+ ],
+ "motivation_given": true
+}

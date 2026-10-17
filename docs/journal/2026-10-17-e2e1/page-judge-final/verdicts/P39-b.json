@@ -1,0 +1,8 @@
+{"page": "P39",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "The truncation $Q_p$ drops the bits below $2^{-p}$ in each real and imaginary part, returning the record to the $p$-bit grid, with error below $\\sqrt2\\,2^{-p}$ per complex coefficient.",
+   "problem": "The paper defines $Q_p$ as truncation of each real and imaginary part toward zero to $2^{-p}\\mathbb Z$ (lines 2658-2660, 2788-2792), which also gives $\\|Q_pz\\|_\\infty\\le\\|z\\|_\\infty$ and keeps the returned coefficients in the unit disk. The page says the components are two's-complement integers, and dropping low bits of a two's-complement integer rounds toward minus infinity, not toward zero. Floor rounding can push a negative component's magnitude up and take the coefficient out of the disk. The error bound $\\sqrt2\\,2^{-p}$ the page quotes is still correct."}
+ ],
+ "motivation_given": true}

@@ -1,0 +1,20 @@
+{"page": "P32",
+ "items": [
+  {"id": "S4.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page states the identity $QF_{\\boldsymbol t}u=\\overline a\\cdot\\frac{a*(\\overline a\\cdot u)}{T}$ under the hypothesis that every $t_i$ is even, with $F_{\\boldsymbol t}$ normalized by $1/T$ and using the negative sign, and $Q$ reading frequency $(-s_ij_i)_i$, all as in the paper (lines 3506-3511, 3557, 3911-3925). It then proves it the way the paper's proof does: periodicity, then the coefficient of $u_{\\boldsymbol k}$, then matching that coefficient with $QF_{\\boldsymbol t}$."},
+  {"id": "S4.3.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page defines the chirp exactly as the paper does: \"Define the chirp $a_{\\boldsymbol j}=\\exp\\left(-\\pi i\\sum_{i=1}^d s_ij_i^2/t_i\\right)$\". It also explains why the factor $s_i$ in the chirp encodes $Q$."},
+  {"id": "S4.3.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page computes the change explicitly, \"$-\\pi i s_i\\frac{(j_i+t_i)^2-j_i^2}{t_i}=-\\pi i s_i(2j_i+t_i)$, which is an integral multiple of $2\\pi i$ because $t_i$ is even\". This is correct and matches the paper. It also explains why periodicity is needed: the cyclic convolution reads $a$ modulo $t_i$."},
+  {"id": "S4.3.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page writes the coefficient as $\\frac1T\\overline a_{\\boldsymbol j}a_{\\boldsymbol j-\\boldsymbol k}\\overline a_{\\boldsymbol k}$, expands $(j_i-k_i)^2$, and gives the combined exponent $\\sum_i\\frac{\\pi i s_i}{t_i}(j_i^2-(j_i^2-2j_ik_i+k_i^2)+k_i^2)$, which simplifies to $2\\pi i\\sum_is_ij_ik_i/t_i$. The algebra and the signs are correct, and the result matches the paper's display (lines 3943-3949)."},
+  {"id": "S4.3.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The Setting gives $(F_{\\boldsymbol t}u)_{\\boldsymbol f}$ with the explicit negative-sign kernel and says $Q$ puts at position $\\boldsymbol j$ the entry of frequency $(-s_ij_i)_i$, which matches $(P_tv)_k=v_{-sk}$ in the paper. Substituting gives the stated coefficient $\\frac1T\\exp(2\\pi i\\sum_is_ij_ik_i/t_i)$. The page then matches the two coefficients, as the paper does."}
+ ],
+ "errors": [
+  {"severity": "minor", "quote": "The permuted transform is thus reduced to one [Cyclic convolution](convolution.md) of length $T$ between two pointwise phase multiplications.",
+   "problem": "The convolution is a $d$-dimensional cyclic convolution on $\\prod_i\\mathbb Z/t_i\\mathbb Z$ with $T$ entries. The paper calls it \"cyclic convolution on the product of the coordinate groups\" (lines 3907-3909). Because every $t_i$ is even, this group is not $\\mathbb Z/T\\mathbb Z$ when $d\\ge2$, so \"of length $T$\" wrongly suggests a one-dimensional length-$T$ convolution. The page's own derivation correctly reduces indices coordinatewise, modulo $t_i$."},
+  {"severity": "minor", "quote": "Executing $Q$ means sorting data on tapes, which costs a logarithmic factor beyond a linear pass, the kind of factor the power saving removes.",
+   "problem": "The power saving removes only a factor $(\\lg n)^{\\kappa}$ with $\\kappa=2^{-182}$, not a logarithmic factor. The real point is that a label-and-sort, which costs $O(tp\\log t)$ against a linear $O(tp)$ (paper lines 3692-3693), would add a full logarithmic overhead that the much smaller saving cannot absorb."}
+ ],
+ "motivation_given": true}

@@ -35,6 +35,62 @@
    "note": "The page follows the paper: conjugation $\\mathcal P_\\Gamma X_v\\mathcal P_\\Gamma^{-1}=X_{\\Gamma v}$ moves the residual vectors to coordinates, giving 'one child on $f=e/m$ axes per residual vector, exactly $s$ children in all', and the inverse-child identity avoids extra calls. The row-addition count is stated without its reason, and the endpoint corrections are left out."
   },
   {
+   "id": "S1.6.2.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "$(\\mathcal P_Mf)(x)=f(M^{-1}x)$ and $(X_vf)(x)=f(x+v)$, from which the identity is a one-line check",
+    "the identity uses only invertibility, so $M$ need not preserve the dot product"
+   ],
+   "note": "'Then $\\mathcal P_\\Gamma X_v\\mathcal P_\\Gamma^{-1}=X_{\\Gamma v}$' is cited, not checked. The page defines $\\mathcal P_\\Gamma$ only as '$x\\mapsto\\Gamma x$'. Its use (rewriting the edge change in coordinate directions) is correct."
+  },
+  {
+   "id": "S1.6.2.2",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Apply $\\mathcal P_\\Gamma^{-1}$ to every column, then $(C^{\\pm1})^{\\otimes f}$ to the $f$ bits of slot $\\xi$, then $\\mathcal P_\\Gamma$: one child on $f=e/m$ axes per residual vector' follows from the coordinate form of the edge change, acting columnwise as in the paper."
+  },
+  {
+   "id": "S1.6.2.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "$C^{-1}=-iZCZ$, from which the tensor identity follows",
+    "the wrappers are address signs and constant fourth-root phases, so they add no recursive calls"
+   ],
+   "note": "'$(C^{-1})^{\\otimes f}=(-i)^fZ^{\\otimes f}C^{\\otimes f}Z^{\\otimes f}$' is asserted. The one-kernel identity it comes from never appears on the page."
+  },
+  {
+   "id": "S1.6.2.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "at most $m-1$ entries cleared per pivot",
+    "each row swap is three row additions",
+    "reversing the elimination works because each row addition is an involution"
+   ],
+   "note": "'Gaussian elimination writes $\\Gamma$ as at most $m(m-1)+3m$ row additions' gives the count with no reason for it."
+  },
+  {
+   "id": "S1.6.2.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "explicit identification of $s$ as the sum of the edge residual dimensions of the network"
+   ],
+   "note": "With one child per residual vector, the page concludes 'exactly $s$ children in all', taking $s$ as the network's number of smaller calls. This is the paper's summing argument."
+  },
+  {
+   "id": "S1.6.2.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "source/sink $Z_{a,f}$ signs, the scalar $i^{27f}$ and bank negation, which also add no child"
+   ],
+   "note": "Each child acts on 'the $f$ bits of slot $\\xi$', and 'A negative power needs no extra child' is shown by the inverse-child identity. The endpoint corrections are not mentioned."
+  },
+  {
    "id": "S1.6.2b",
    "presence": "derived",
    "faithful": true,
@@ -77,6 +133,140 @@
    "note": "The page sets up $\\Xi(e)\\le\\frac sW\\Xi(e/m)+O((eK)^\\tau+1)$ with leaves $O(e)$ below $d^\\beta$, uses $K\\le e^{c/\\beta}$, sums internal nodes geometrically and bounds leaves by $e^\\sigma(e/m^j)^{1-\\sigma}\\le e^\\sigma d^{\\beta(1-\\sigma)}$, then combines the base-$m$ pieces, all as in the paper. The row-index bookkeeping is only sketched."
   },
   {
+   "id": "S1.6.4.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "split/merge at the selected bit in $O(V)$ and the paired arithmetic scan in $O(V)$ per kernel"
+   ],
+   "note": "'individual kernels (cost $O(Ve)$)' is asserted in a parenthesis."
+  },
+  {
+   "id": "S1.6.4.2",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "scalar gates, endpoint corrections and bank reassembly cost a constant number of scans",
+    "each slot has $(e/m)K$ address bits for the packed lemma",
+    "address and descriptor work absorbed by the $\\Theta(rp)$-bit records"
+   ],
+   "note": "The overhead term $O((eK)^\\tau+1)$ in the recurrence is taken from the basis-change cost, which is itself asserted. The other node costs are not accounted for."
+  },
+  {
+   "id": "S1.6.4.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "$k_0=\\lceil\\log_md\\rceil$"
+   ],
+   "note": "The page defines $q_0=\\lceil\\log_2W\\rceil\\lceil\\log_m(2d)\\rceil$ but never introduces $k_0$."
+  },
+  {
+   "id": "S1.6.4.4",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "$R_{\\rm row}=2^{q_0K}\\ge W^{k_0}$ (from $K\\ge1$ and $q_0K\\ge k_0\\log_2W$)",
+    "padding is to the next multiple of $W^{k_0}$"
+   ],
+   "note": "'serve as a row index padded with zero rows, which at most doubles the volume' gives the conclusion without the range bound that justifies it."
+  },
+  {
+   "id": "S1.6.4.5",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "divisibility by $W^{k_0-j}$ at every depth $j\\le k_0$, not just by $W$"
+   ],
+   "note": "Only a weakened form appears: 'To keep row counts divisible by $W$'. The depth-dependent divisibility is not stated."
+  },
+  {
+   "id": "S1.6.4.6",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "row index split $u=Wg+w$, with every role stream keeping the same remaining address shape"
+   ],
+   "note": "'The $s$ children run on streams of volume $V/W$, since rows are dealt to the $W$ wire roles' gives the paper's reason for the $1/W$ volume."
+  },
+  {
+   "id": "S1.6.4.7",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "$\\tau(1+c/\\beta)<\\lambda$",
+    "$\\sigma\\ge0$",
+    "$0<\\tau<1$ ($\\tau$ is never introduced)",
+    "rationality of the exponents"
+   ],
+   "note": "Only the conditions '$s/W\\le m^\\sigma$ for a fixed $\\sigma<1$' and '$\\lambda<1$ above $\\sigma$ and $\\tau$' appear, and the second is insufficient (see errors)."
+  },
+  {
+   "id": "S1.6.4.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page defines $\\Xi(e)$ as time per unit volume and obtains $\\Xi(e)\\le\\frac sW\\Xi(e/m)+O((eK)^\\tau+1)$ for $e\\ge d^\\beta$ and $\\Xi(e)=O(e)$ below, from the $V/W$ child volumes, the node overhead and the individual-kernel leaves, as in the paper."
+  },
+  {
+   "id": "S1.6.4.9",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'The $s$ children run on streams of volume $V/W$' directly gives the coefficient $s/W$ after normalizing by volume. The division is left implicit but immediate."
+  },
+  {
+   "id": "S1.6.4.10",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "$\\tau(1+c/\\beta)<\\lambda$ (replaced on the page by '$\\lambda$ above $\\sigma$ and $\\tau$')",
+    "$K=\\lfloor d^c\\rfloor$, the reason $K\\le d^c$"
+   ],
+   "note": "'At an internal node $e\\ge d^\\beta$, so $K\\le d^c\\le e^{c/\\beta}$ and the overhead is $O(e^{\\tau(1+c/\\beta)}+1)=O(e^\\lambda)$' follows the paper, but the stated condition on $\\lambda$ does not justify the last equality (minor error below)."
+  },
+  {
+   "id": "S1.6.4.11",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the explicit series $Ce^\\lambda\\sum_j(a/m^\\lambda)^j$, i.e. level $j$ contributes $(s/W)^j(e/m^j)^\\lambda$"
+   ],
+   "note": "'As $s/W<m^\\lambda$, the internal costs sum geometrically to $O(e^\\lambda)$' is the paper's argument in compressed form."
+  },
+  {
+   "id": "S1.6.4.12",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "The page gives the convergence reason, $s/W<m^\\lambda$, so the ratio is below one and the sum is $O(e^\\lambda)$, matching the paper."
+  },
+  {
+   "id": "S1.6.4.13",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the case $s/W<1$ covered by $\\sigma\\ge0$"
+   ],
+   "note": "'carries the factor $(s/W)^j\\le m^{j\\sigma}$, so leaves add at most $O(e^\\sigma(e/m^j)^{1-\\sigma})\\le O(e^\\sigma d^{\\beta(1-\\sigma)})$' reproduces the paper's inequality chain with $u=e/m^j$."
+  },
+  {
+   "id": "S1.6.4.14",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [],
+   "note": "'Writing $D-q_0$ in base $m$ cuts the other chunks into at most $(m-1)(1+\\lfloor\\log_md\\rfloor)$ pieces of $m^j$ chunks' matches the paper (digits below $m$, at most $1+\\lfloor\\log_md\\rfloor$ digits)."
+  },
+  {
+   "id": "S1.6.4.15",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "the case $D\\le q_0$ handled by individual kernels"
+   ],
+   "note": "'adding the pieces gives $O(\\log(2d)[d^\\lambda+d^{\\sigma+\\beta(1-\\sigma)}+1])=O(d^{\\lambda'})$ for any fixed $\\lambda'<1$ above $\\lambda$ and $\\sigma+\\beta(1-\\sigma)$', with the $O(V\\log d)$ preprocessing given earlier, as in the paper."
+  },
+  {
    "id": "S1.6.5",
    "presence": "derived",
    "faithful": true,
@@ -88,6 +278,81 @@
     "signs and multiplication by $i$ preserve both bounds"
    ],
    "note": "The depth recurrence $\\chi(e)\\le s\\chi(e/m)+E$, $\\chi\\le8e$ at leaves, the step $s\\varphi+E\\le\\Psi\\varphi$ giving $8\\Psi^2d^{\\vartheta+1}$, the induction 'lies in $2^{-(p+\\ell)}\\mathbb Z[i]$ with modulus at most $2^\\ell$' and $\\Delta=o(p)$ from $\\epsilon C_1<1$ follow the paper, under renamed symbols ($\\chi,\\Psi,\\vartheta$ for $A,B,\\nu$). The final total below $128m\\Psi^2d^{\\vartheta+3}$ is asserted."
+  },
+  {
+   "id": "S1.6.5.1",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [],
+   "note": "The definitions are given under renamed symbols: $E=64(W+m+1)^3$, $\\Psi=s+E$ for $B$, $\\vartheta=\\min\\{j\\ge1:m^j\\ge\\Psi\\}$ for $\\nu$, together with $C_0$ and $C_1$."
+  },
+  {
+   "id": "S1.6.5.2",
+   "presence": "absent",
+   "faithful": null,
+   "dropped": [
+    "$h=100$ values of $m,W,s$",
+    "$m^{10}<B<m^{11}$, $\\nu=11$, $C_1=20$",
+    "only exponent fourteen is needed"
+   ],
+   "note": "The page gives $C_1=\\max\\{20,\\vartheta+3\\}$ but never its value or the network constants."
+  },
+  {
+   "id": "S1.6.5.3",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "at most $12W$ gates, each at most $2W^2$ operations ($24W^3$)",
+    "at most $4s$ for child corrections",
+    "$4W+4$ for source, sink and bank corrections"
+   ],
+   "note": "'An invocation takes $24W^3+4s+4W+4$ operations, below $E$ ... since $s<Wm$' gives the comparison with its reason, but the count itself is asserted."
+  },
+  {
+   "id": "S1.6.5.4",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "eight operations per individual kernel, giving the leaf bound $8e$"
+   ],
+   "note": "The page gives the recurrence $\\chi(e)\\le s\\chi(e/m)+E$, with $s$ rather than $s/W$, as in the paper. The justification 'A chain passes through all $s$ children' misstates the paper's conservative concatenation (minor error below)."
+  },
+  {
+   "id": "S1.6.5.5",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "leaf start $8e\\le8d\\le8d\\Psi$"
+   ],
+   "note": "'$s\\varphi+E\\le\\Psi\\varphi$ for $\\varphi\\ge1$, so each of at most $\\lceil\\log_md\\rceil$ levels multiplies the bound by at most $\\Psi$' is the paper's step."
+  },
+  {
+   "id": "S1.6.5.6",
+   "presence": "stated",
+   "faithful": null,
+   "dropped": [
+    "$\\Psi^{k+1}\\le\\Psi^{\\log_md+2}=\\Psi^2d^{\\log_m\\Psi}\\le\\Psi^2d^\\vartheta$, using $\\Psi\\le m^\\vartheta$"
+   ],
+   "note": "'$\\chi(e)\\le8d\\Psi^{\\lceil\\log_md\\rceil+1}\\le8\\Psi^2d^{\\vartheta+1}$': the first inequality follows from the previous step, but the second is asserted without the exponent manipulation."
+  },
+  {
+   "id": "S1.6.5.7",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "signs and multiplication by $i$ preserve both bounds",
+    "the final shift by $t$ is charged as $t$ halvings"
+   ],
+   "note": "'A value after $\\ell$ operations lies in $2^{-(p+\\ell)}\\mathbb Z[i]$ with modulus at most $2^\\ell$ (addition doubles the modulus at most, halving adds a bit)' gives the paper's induction, and the reserved widths follow since the depth is at most $\\Delta$."
+  },
+  {
+   "id": "S1.6.5.8",
+   "presence": "derived",
+   "faithful": true,
+   "dropped": [
+    "consequence that additions, shifts, copying and phase changes cost $O(p)$ per coefficient"
+   ],
+   "note": "'As $d=\\Theta(p^\\epsilon)$ and $\\epsilon C_1<1$, $\\Delta=o(p)$, so the width is $O(p)$' is the paper's argument."
   },
   {
    "id": "S1.6.6",
