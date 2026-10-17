@@ -1,0 +1,11 @@
+{"page": "P39",
+ "items": [],
+ "errors": [
+  {"severity": "minor",
+   "quote": "The truncation $Q_p$ drops the bits below $2^{-p}$ in each real and imaginary part, returning the record to the $p$-bit grid",
+   "problem": "The page has just said the components are stored in two's complement, and dropping the low bits of a two's-complement word rounds toward minus infinity. The paper's $Q_p$ truncates toward zero to $2^{-p}\\mathbb Z$ (lines 2658-2660, 2788-2789). That direction is what gives $\\|Q_pz\\|_\\infty\\le\\|z\\|_\\infty$, and the paper uses this to keep the returned coefficients in the unit disk. The error bound $<\\sqrt2\\,2^{-p}$ holds for either rounding direction."},
+  {"severity": "minor",
+   "quote": "Let a value computed with $k$ operations in sequence since the layer began be said to have depth $k$.",
+   "problem": "\"$k$ operations in sequence since the layer began\" can be read as counting all the operations the machine has executed, in time order. The paper's depth instead counts the elementary operations on a dependency chain from an input coefficient to the value. It says explicitly that work on other coefficients lies on other chains \"even though the fixed-tape machine executes that work sequentially\" (lines 2481-2486). The page's own induction step (\"depths at most $k$ gives ... depth at most $k+1$\") holds only for chain depth."}
+ ],
+ "motivation_given": true}
