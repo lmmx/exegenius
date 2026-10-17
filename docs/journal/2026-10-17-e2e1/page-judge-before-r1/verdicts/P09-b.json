@@ -1,0 +1,21 @@
+{"page": "P09",
+ "items": [
+  {"id": "S1.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page sets up frames, maintains the invariant 'stored array = D_v applied to the logical array' at sources, along edges and across gates, concludes D_out S_Omega D_in^{-1}, and specializes to the signed role permutation, as the paper does at lines 785-825."},
+  {"id": "S1.2.1", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "This sub-step is a definition, and the page gives all of it: an invertible R-linear D_v on R^Omega at each source, gate and sink, 'All incidences of a gate use the same D_v', and an edge from u to v applying D_vD_u^{-1}'. It also contrasts frames, which mix addresses, with gates, which combine wires, as the paper does."},
+  {"id": "S1.2.2", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "At the sources the invariant holds through the definition g=D_in^{-1}f ('which needs no preprocessing'), and along an edge the page computes it explicitly: 'D_vD_u^{-1}D_u\\varphi=D_v\\varphi'. This matches the paper."},
+  {"id": "S1.2.3", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page gives R-linearity, sum_j c_jD_v\\varphi_j = D_v(sum_j c_j\\varphi_j), for each output combination, and concludes G(D_vg_1,...,D_vg_t)=D_vG(g_1,...,g_t), so the invariant reaches the sinks. This is the paper's argument and matches its Figure (fig:frame-compatibility)."},
+  {"id": "S1.2.4", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page defines D_out and concludes 'the implemented operator is therefore D_out S_Omega D_in^{-1}' from the invariant holding at the sinks together with g=D_in^{-1}f. Like the paper, it leaves the final composition (stored output = D_out S_Omega g) implicit, but that composition is immediate."},
+  {"id": "S1.2.5", "presence": "derived", "faithful": true, "dropped": [],
+   "note": "The page states the signed-permutation case with sign epsilon_w and 'for every role, scratch roles included', and motivates it by telescoping the edge operators along a route. The paper instead obtains it directly as a special case of the common-frame identity ('In particular'). The page's route computation leaves out the gate actions between the edges (see errors), but the conclusion also follows from the identity the page has just displayed."}
+ ],
+ "errors": [
+  {"severity": "minor",
+   "quote": "On a route from a source $u$ through gates $a$ and $b$ to a sink $v$, the edges apply $D_aD_u^{-1}$, $D_bD_a^{-1}$ and $D_vD_b^{-1}$, whose product is $D_vD_u^{-1}$: the intermediate frames telescope away. So if the scalar network is a signed role permutation ...",
+   "problem": "The telescoping multiplies only the edge operators and ignores the pointwise gates at a and b. Those gates sit between the edge changes and mix this wire with others; in the exchange network, for example, X<-X+Y means a role's array reaches rho(w) through several paths whose combination is a signed permutation only overall. The frames cancel because each gate commutes with its common frame (scalar coefficients commute with the R-linear D's). The paper does not argue route by route: it reads the route operator epsilon_w D_sink(rho(w)) D_source(w)^{-1} directly off D_out S_Omega D_in^{-1} with S_Omega a pointwise signed role permutation."}
+ ],
+ "motivation_given": true}
