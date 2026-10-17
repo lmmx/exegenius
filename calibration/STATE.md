@@ -1,8 +1,22 @@
 # Calibration programme: current state and next actions (for resuming without this session's context)
 
-**Updated:** 2026-10-17 20:12 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
+**Updated:** 2026-10-17 20:20 UTC. Read this file, then `RUNBOOK.md` §8 ("Resuming"), before acting. Times are UTC and taken from `date -u`.
 
-## Update, 2026-10-17 20:12 UTC: simulated readers stay on; PR #14 is audit-only (read first)
+## Checkpoint, 2026-10-17 20:20 UTC: calibration and implementation complete (read first)
+
+- **Implemented and merged:** PR #14 was squash-merged as 86937b1. The audit now checks pages against the sources (the calibrated A3 text), and simulated readers stay on by default (`rounds = 2`).
+- **Verified on merged `master`:**
+  - all tests pass;
+  - `tools/a3verify.py` finds 30/30 audit tasks identical to A3's;
+  - `init` writes `rounds = 2`;
+  - the shared binary (sha256 ba22a8b3…) matches the merged code, and `cargo build` makes no change.
+- **Local state:** the main working copy is on `master`, in sync with `origin`. Its old history is kept on the local branch `backup/pre-rewrite-master`.
+- **The research archives are merged:** #9 (Leviathan, with its follow-up outline), #10 (metrics-viz, with its follow-up outline) and #12 (pre-plan IR and PI).
+  - Their open research is tracked in issues #15, #16 and #17. #11 was already open and is linked from #17.
+  - `docs/chats/README.md` says where things go: conversations in `docs/chats/`, findings in `docs/journal/`, open research in issues, changes in PRs.
+- **Nothing is pending.** No experiment is planned, and a new model (Fable 5.5) would be a new candidate, not a reason to reopen the calibration.
+
+## Update, 2026-10-17 20:12 UTC: simulated readers stay on; PR #14 is audit-only
 
 - **The author reconsidered the simulated-reader change** (about 20:05). Simulated readers stay on by default (`rounds = 2`): they are part of the intended architecture, and SR1 was inconclusive, not negative. SR1's results and limitations stay on record, with effectiveness marked unvalidated (`policy.md`, `plans/SR1.md`).
 - **PR #14 is revised to the audit change only.** The default and its docs are reverted to `master` in a new commit, with no history rewritten. The PR is **not merged**: the author asked to hold it. Earlier, the classifier blocked a local merge ("Merge Without Review").
